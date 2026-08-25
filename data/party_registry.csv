@@ -1,15 +1,22 @@
 party_id,name_en,name_he,bloc,aliases,notes
-likud,Likud,הליכוד,netanyahu_bloc,Likud|HaLikud,
-shas,Shas,ש"ס,netanyahu_bloc,Shas,
+likud,Likud,הליכוד,netanyahu_bloc,HaLikud,absorbed New Hope for 2026 per Wikipedia event log
+shas,Shas,ש"ס,netanyahu_bloc,,
 utj,United Torah Judaism,יהדות התורה,netanyahu_bloc,UTJ|Yahadut HaTorah,
-otzma,Otzma Yehudit,עוצמה יהודית,netanyahu_bloc,Otzma Yehudit|Jewish Power,VERIFY: running alone or joint list with RZP in 2026
-rzp,Religious Zionist Party,הציונות הדתית,netanyahu_bloc,Religious Zionism|RZP|Smotrich,VERIFY: 2026 list configuration
-yesh_atid,Yesh Atid,יש עתיד,opposition_bloc,Yesh Atid|Lapid,
-bennett_2026,Bennett 2026,בנט 2026,opposition_bloc,Bennett|New Right,VERIFY: final registered list name
-democrats,The Democrats,הדמוקרטים,opposition_bloc,Labor|Meretz|The Democrats|Golan,Labor–Meretz merger (2024)
-national_unity,National Unity,המחנה הממלכתי,opposition_bloc,Blue and White|Gantz|State Camp,VERIFY: 2026 status and leadership
-eisenkot_list,Eisenkot list,רשימת אייזנקוט,opposition_bloc,Eisenkot,VERIFY: official party name for 2026
-yisrael_beytenu,Yisrael Beytenu,ישראל ביתנו,opposition_bloc,Israel Beiteinu|Liberman,
-raam,Ra'am,רע"ם,other,Ra'am|United Arab List|Mansour Abbas,
-hadash_taal,Hadash-Ta'al,חד"ש-תע"ל,other,Hadash|Ta'al|Odeh|Tibi,VERIFY: 2026 list configuration
-balad,Balad,בל"ד,other,Balad,below threshold in 2022; VERIFY 2026 status
+otzma,Otzma Yehudit,עוצמה יהודית,netanyahu_bloc,Otzma|Jewish Power,left govt but supports from outside per event log
+rzp,Religious Zionist Party,הציונות הדתית,netanyahu_bloc,Religious Zionism|RZP|Smotrich|Mafdal,merged with Jewish Home per event log
+together,Together,יחד,opposition_bloc,Together alliance,joint list: Yesh Atid + Bennett 2026 under Bennett
+yesh_atid,Yesh Atid,יש עתיד,opposition_bloc,Lapid,component of Together
+bennett_2026,Bennett 2026,בנט 2026,opposition_bloc,Bennett party|Bennett|New Right,component of Together
+yashar,Yashar,ישר,opposition_bloc,Eisenkot,Gadi Eisenkot's party after leaving National Unity
+democrats,The Democrats,הדמוקרטים,opposition_bloc,Dems|Golan,Labor-Meretz merger led by Yair Golan
+labor,Labor,העבודה,opposition_bloc,HaAvoda|Avoda,pre-merger; component of The Democrats from 2024
+meretz,Meretz,מרצ,opposition_bloc,,pre-merger; component of The Democrats from 2024
+blue_white,Blue and White,כחול לבן,opposition_bloc,Blue & White|National Unity|Gantz|State Camp,National Unity reverted to Blue and White name
+unity,Unity,אחדות,opposition_bloc,,Erdan + Edelstein party; VERIFY bloc assignment
+zionist_home,Zionist Home – The Reservists,הבית הציוני,opposition_bloc,Zionist Home|Hendel party|Reserv.|The Reservists,Hendel + Tropper; VERIFY bloc assignment
+new_hope,New Hope,תקווה חדשה,netanyahu_bloc,,split from National Unity; merged into Likud for 2026
+yisrael_beytenu,Yisrael Beytenu,ישראל ביתנו,opposition_bloc,Yisrael Beiteinu|Israel Beiteinu|Liberman,
+raam,Ra'am,רע"ם,other,United Arab List|Mansour Abbas,
+hadash_taal,Hadash-Ta'al,חד"ש-תע"ל,other,Hadash–Ta'al|Hadash –Ta'al|Hadash|Ta'al|Odeh|Tibi,in re-formed Joint List per event log
+balad,Balad,בל"ד,other,,in re-formed Joint List per event log
+winter,Winter,וינטר,unknown,,VERIFY: unidentified list appearing in poll tables

@@ -16,13 +16,21 @@ DATA_DIR = Path(__file__).resolve().parent.parent / "data"
 # in processed data.
 POLLSTER_ALIASES: dict[str, list[str]] = {
     "Lazar": ["Lazar Research", "Panels/Lazar", "Maariv/Lazar"],
-    "Midgam": ["Midgam Institute", "Migdam"],
+    "Midgam": ["Midgam Institute", "Migdam", "Midgam R&C"],
+    "Midgam Project": [],
+    "Midgam Project & StatNet": ["Midgam Project & Stat Net"],
     "Kantar": ["Kantar Institute", "Kan/Kantar"],
     "Maagar Mochot": ["Ma'agar Mochot", "Maagar Mohot"],
     "Direct Polls": ["DirectPolls", "Direct Polls Institute"],
     "Filber": ["Next Data/Filber", "Filber Institute"],
     "Tatika": ["Taktika", "Yossi Tatika"],
     "StatNet": ["Statnet", "Stat-Net"],
+    "Camil Fuchs": [],
+    "Panels Politics": ["Panels"],
+    "Smith Consulting": ["Smith"],
+    "Timor Group": [],
+    "TrendZone": [],
+    "Viterbi Center": [],
 }
 
 _pollster_lookup = {
