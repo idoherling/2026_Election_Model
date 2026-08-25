@@ -1,0 +1,14 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+*.egg-info/
+.ipynb_checkpoints/
+
+# Raw scrape cache — regenerable, sometimes large
+data/raw/
+
+# OS / editor
+.DS_Store
+.vscode/
+.idea/
