@@ -11,8 +11,10 @@ The pipeline, in order:
    normalized to one tidy format: one row per poll–party pair.
 2. **Party registry** (`data/party_registry.csv`) — canonical party IDs and bloc
    assignments across mergers, splits, and renames. Every poll row must join to this.
-3. **Aggregation** (planned) — weighted polling average: recency decay, sample size,
-   then pollster house effects estimated hierarchically.
+3. **Aggregation** (`src/polling_average.py`) — weighted average for the live
+   cycle: each pollster's latest poll, weighted by recency (14-day half-life)
+   and sample size; per-list snapshot plus a daily bloc-race series. House
+   effects estimated hierarchically are the next layer.
 4. **Seat simulation** (planned) — Monte Carlo over vote shares: 3.25% threshold
    survival → Bader–Ofer apportionment with surplus agreements → P(bloc ≥ 61).
 5. **Evaluation** (`src/backtest.py`) — final-poll averages vs official results
