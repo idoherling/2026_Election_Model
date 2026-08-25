@@ -12,17 +12,20 @@ The pipeline, in order:
 2. **Party registry** (`data/party_registry.csv`) — canonical party IDs and bloc
    assignments across mergers, splits, and renames. Every poll row must join to this.
 3. **Aggregation** (`src/polling_average.py`) — weighted average for the live
-   cycle: each pollster's latest poll, weighted by recency (14-day half-life)
-   and sample size; per-list snapshot plus a daily bloc-race series. House
-   effects estimated hierarchically are the next layer.
+   cycle: each pollster's latest poll, weighted by recency (half-life
+   sharpens toward election day), sample size, backtested accuracy, and a
+   correlation-group discount so related firms don't count twice; poll values
+   are trendline-adjusted to today's level before averaging.
 4. **Seat simulation** (`src/simulate.py`) — Monte Carlo over vote shares with
    correlated errors calibrated on the backtest (bloc swing, Arab/haredi
    family shocks, debut-list widening): 3.25% threshold survival → Bader–Ofer
    with surplus pairs → per-list seat distributions and P(bloc ≥ 61).
-5. **Evaluation** (`src/backtest.py`) — final-poll averages vs official results
-   per cycle (2009-2022), aggregated to the finest common partition of party
-   components; per-cycle MAE and a per-pollster scorecard seed. Calibration
-   and Brier scoring arrive with the simulation layer.
+5. **Evaluation** (`src/backtest.py`, `src/bias_audit.py`,
+   `src/validate_model.py`) — final-poll averages vs official results per
+   cycle (2009-2022); seven systematic-bias tests; and full-model
+   retro-validation: the entire pipeline rerun as-of each past election eve
+   with leave-one-cycle-out calibration (pooled 90% interval coverage ~96%,
+   bloc-majority Brier ~0.03).
 
 ## Layout
 

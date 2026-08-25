@@ -1,22 +1,33 @@
 """Weighted polling average for the live 2026 cycle.
 
-Method (v1, pre-house-effects): as of a given day, take each pollster's
-latest poll fielded within WINDOW days, weight it by recency (exponential
-decay, HALFLIFE-day half-life) and sample size (sqrt(n / 600), n capped,
-median-ish default when unreported), and average seats.
+Each pollster's latest poll in the window enters the average with weight
+    recency x sqrt(sample size) x accuracy x 1/sqrt(correlation-group size)
+where
+  * recency decay sharpens as election day nears (half-life days_out/4,
+    clamped to 5-14 days);
+  * accuracy comes from the backtest scorecard (backtest_pollsters.csv):
+    firms with a better final-poll record count more, gently (sqrt, clipped);
+    firms with no record are neutral. "Lazar" inherits the Panels Politics
+    record — same operation, two bylines (docs/pollsters.md);
+  * the correlation-group discount (data/pollster_meta.csv) stops related
+    firms — e.g. the two halves of the former Direct Polls — from counting
+    as independent voices.
+
+Poll values are trendline-adjusted before averaging: a stale poll is shifted
+by the consensus movement since its fieldwork, so it informs today's level
+rather than its own week's.
 
 Two aggregation spaces:
-  * per-list snapshot — polls and lists aggregated to the finest common
-    partition of list components (joint lists merge and split mid-cycle);
-  * daily bloc series — each poll reduced to Netanyahu-bloc /
-    anti-Netanyahu-bloc / Arab-party seat totals, which is immune to list
-    reconfigurations and is the headline number.
+  * per-list snapshot — the finest common partition of list components;
+  * daily bloc series — per-poll bloc totals, immune to list reconfigurations.
 
 Outputs:
     data/processed/average_2026_snapshot.csv   per-list average, today
     data/processed/average_2026_blocs.csv      daily bloc series
     output/figures/bloc_race_2026.png
 """
+
+from __future__ import annotations
 
 import numpy as np
 import pandas as pd
@@ -29,10 +40,14 @@ from backtest import (
 from normalize import load_party_registry
 from scrape_polls import PROCESSED_DIR
 
-HALFLIFE = 14  # days
-WINDOW = 45    # days a poll stays in the average
+HALFLIFE_RANGE = (5.0, 14.0)   # days; halflife = days_to_election / 4, clamped
+WINDOW = 45                    # days a poll stays in the average
+TREND_SPAN = 14                # days of rolling consensus for the trendline
 DEFAULT_N = 500
 CAP_N = 2000
+ELECTION_DAY_2026 = pd.Timestamp("2026-10-27")
+
+QUALITY_ALIAS = {"Lazar": "Panels Politics"}
 
 BLOC_NAME = {
     "netanyahu_bloc": "Netanyahu bloc",
@@ -46,17 +61,48 @@ BLOC_COLOR = {
     "Arab parties": "#1baf7a",
 }
 
+_QUALITY: dict[str, float] | None = None
+_GROUP: dict[str, str] | None = None
+
 
 def load_2026() -> pd.DataFrame:
     polls = pd.read_csv(PROCESSED_DIR / "polls.csv", parse_dates=["fieldwork_end"])
     return polls[(polls["cycle"] == "2026") & polls["sums_ok"]].copy()
 
 
-def poll_weights(meta: pd.DataFrame, asof: pd.Timestamp) -> pd.Series:
+def quality_map() -> dict[str, float]:
+    global _QUALITY
+    if _QUALITY is None:
+        try:
+            sc = pd.read_csv(PROCESSED_DIR / "backtest_pollsters.csv")
+            med = sc["mean_abs_error"].median()
+            q = (med / sc["mean_abs_error"]).pow(0.5).clip(0.7, 1.3)
+            _QUALITY = dict(zip(sc["pollster"], q.round(3)))
+        except FileNotFoundError:
+            _QUALITY = {}
+    return _QUALITY
+
+
+def group_map() -> dict[str, str]:
+    global _GROUP
+    if _GROUP is None:
+        try:
+            meta = pd.read_csv(PROCESSED_DIR.parent / "pollster_meta.csv")
+            _GROUP = dict(zip(meta["pollster"], meta["correlation_group"]))
+        except FileNotFoundError:
+            _GROUP = {}
+    return _GROUP
+
+
+def poll_weights(meta: pd.DataFrame, asof: pd.Timestamp,
+                 eday: pd.Timestamp | None = ELECTION_DAY_2026) -> pd.Series:
     """Weight for each pollster's latest poll in the window; 0 otherwise.
 
     meta: one row per poll_id with pollster, fieldwork_end, sample_size.
     """
+    days_out = max((eday - asof).days, 0) if eday is not None else 60
+    halflife = float(np.clip(days_out / 4.0, *HALFLIFE_RANGE))
+
     m = meta[
         (meta["fieldwork_end"] <= asof)
         & (meta["fieldwork_end"] > asof - pd.Timedelta(days=WINDOW))
@@ -64,10 +110,45 @@ def poll_weights(meta: pd.DataFrame, asof: pd.Timestamp) -> pd.Series:
     m = m.sort_values(["pollster", "fieldwork_end", "poll_id"],
                       ascending=[True, False, True])
     m = m.groupby("pollster").head(1).copy()
+
     age = (asof - m["fieldwork_end"]).dt.days
     n = m["sample_size"].fillna(DEFAULT_N).clip(upper=CAP_N)
-    w = 0.5 ** (age / HALFLIFE) * np.sqrt(n / 600.0)
+    w = 0.5 ** (age / halflife) * np.sqrt(n / 600.0)
+
+    qmap = quality_map()
+    w *= m["pollster"].map(lambda p: qmap.get(QUALITY_ALIAS.get(p, p), 1.0)).values
+    gmap = group_map()
+    groups = m["pollster"].map(lambda p: gmap.get(p, p))
+    w /= np.sqrt(groups.map(groups.value_counts()).values)
+
     return pd.Series(w.values, index=m["poll_id"].values)
+
+
+def trend_adjust(values: pd.DataFrame, dates: pd.Series,
+                 asof: pd.Timestamp) -> pd.DataFrame:
+    """Shift each poll's numbers by the consensus movement since its fieldwork.
+
+    values: poll_id x unit. The per-unit trend is a TREND_SPAN-day rolling
+    mean of the daily poll consensus; each poll gets (trend at asof - trend
+    at its date) added, so stale polls speak at today's level. Polls earlier
+    than the trend's reach are left unshifted.
+    """
+    out = values.copy()
+    d = dates.reindex(values.index)
+    for u in values.columns:
+        s = pd.Series(values[u].values, index=d.values).dropna()
+        if s.empty:
+            continue
+        daily = (s.groupby(level=0).mean().asfreq("D")
+                 .interpolate(limit_area="inside"))
+        trend = daily.rolling(TREND_SPAN, min_periods=3).mean().dropna()
+        if trend.empty:
+            continue
+        t_asof = trend.asof(min(asof, trend.index[-1]))
+        shifts = d.map(lambda t: t_asof - trend.asof(t)
+                       if t >= trend.index[0] else 0.0)
+        out[u] = values[u] + shifts.fillna(0.0)
+    return out
 
 
 def snapshot(polls: pd.DataFrame, asof: pd.Timestamp) -> pd.DataFrame:
@@ -82,15 +163,19 @@ def snapshot(polls: pd.DataFrame, asof: pd.Timestamp) -> pd.DataFrame:
     block_of = {comp: i for i, b in enumerate(blocks) for comp in b}
     live["block"] = live["party_id"].map(lambda p: block_of[p.split("+")[0]])
 
-    per_poll = live.pivot_table(index="block", columns="poll_id",
+    per_poll = live.pivot_table(index="poll_id", columns="block",
                                 values="seats", aggfunc="sum")
-    ww = w.reindex(per_poll.columns)
-    avg = (per_poll * ww).sum(axis=1, skipna=True) / per_poll.notna().mul(ww).sum(axis=1)
+    dates = live.drop_duplicates("poll_id").set_index("poll_id")["fieldwork_end"]
+    per_poll = trend_adjust(per_poll, dates, asof)
+
+    ww = w.reindex(per_poll.index)
+    avg = (per_poll.mul(ww, axis=0).sum(skipna=True)
+           / per_poll.notna().mul(ww, axis=0).sum())
 
     out = pd.DataFrame({
         "list": [short_name("+".join(sorted(blocks[b])), names) for b in avg.index],
         "avg_seats": avg.round(1).values,
-        "n_polls": per_poll.notna().sum(axis=1).values,
+        "n_polls": per_poll.notna().sum().values,
     }).sort_values("avg_seats", ascending=False)
     out["asof"] = asof.date().isoformat()
     return out
@@ -174,8 +259,8 @@ def main() -> None:
 
     snap = snapshot(polls, asof)
     snap.to_csv(PROCESSED_DIR / "average_2026_snapshot.csv", index=False)
-    print(f"Weighted average as of {asof.date()} "
-          f"(halflife {HALFLIFE}d, window {WINDOW}d):\n")
+    print(f"Weighted average as of {asof.date()} (quality- and "
+          f"group-weighted, trend-adjusted):\n")
     print(snap.to_string(index=False))
 
     series = daily_bloc_series(polls)

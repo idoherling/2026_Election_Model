@@ -1,15 +1,17 @@
 """Seat simulation: from corrected polling average to P(bloc >= 61).
 
 Pipeline per simulation draw:
-  1. start from the house-effect-corrected weighted average (block space of
-     the last 90 days), converted to vote shares — sub-threshold lists enter
-     at their polled vote percentages;
+  1. start from the house-effect-corrected, trend-adjusted weighted average
+     (block space of the last 90 days), converted to vote shares —
+     sub-threshold lists enter at their polled vote percentages;
   2. add correlated errors calibrated on the 2009-2022 backtest and bias
      audit: a bloc-level swing (t-distributed, sd from historical bloc
      errors), Arab and haredi family shocks (historical mean AND spread —
      polls have understated both in 6 of 8 cycles), and per-list noise,
-     widened x1.5 for debut lists;
-  3. apply the 3.25% threshold;
+     widened x1.5 for debut lists. All sds scale with time to election:
+     sqrt(1 + days_out / 25), anchored on the audit's finding that 3-6-week
+     averages miss ~1.5x worse than final-week ones;
+  3. apply the electoral threshold;
   4. allocate 120 seats by Bader-Ofer (D'Hondt) with surplus-vote pairs
      pooled when both partners pass;
   5. tally bloc outcomes.
@@ -18,6 +20,9 @@ The audit's largest-list understatement (-2.3 mean) is deliberately NOT
 applied as a deterministic correction — it stays inside the uncertainty.
 Surplus pairs are pre-filing assumptions; update SURPLUS_PAIRS when the
 real agreements are registered with the CEC.
+
+The core functions take explicit inputs so validate_model.py can rerun the
+identical pipeline as-of past elections.
 
 Outputs:
     data/processed/forecast_2026.csv     per-list seat distribution
@@ -35,7 +40,9 @@ from backtest import FIG_DIR, SURFACE, INK, INK_2, MUTED, GRID, BASELINE, merge_
 from bias_audit import FAMILY_OF
 from house_effects import LIST_WINDOW, deviations, eb_shrink
 from normalize import load_party_registry
-from polling_average import DEFAULT_N, CAP_N, poll_weights, load_2026
+from polling_average import (
+    ELECTION_DAY_2026, load_2026, poll_weights, trend_adjust,
+)
 from scrape_polls import PROCESSED_DIR
 
 N_SIMS = 20_000
@@ -67,14 +74,25 @@ SURPLUS_PAIRS = [
 BLOC_LABEL = {"netanyahu_bloc": "Netanyahu bloc",
               "opposition_bloc": "Anti-Netanyahu bloc", "other": "Arab parties"}
 BLUE = "#2a78d6"
-ORANGE = "#eb6834"
 
 
-def corrected_average():
-    """House-effect-corrected block averages keyed by component string."""
-    polls = load_2026()
-    asof = polls["fieldwork_end"].max()
+def uncertainty_scale(days_out: int) -> float:
+    return float(np.sqrt(1.0 + max(days_out, 0) / 25.0))
+
+
+def corrected_average(polls: pd.DataFrame | None = None,
+                      asof: pd.Timestamp | None = None,
+                      eday: pd.Timestamp | None = ELECTION_DAY_2026):
+    """House-effect-corrected, trend-adjusted block averages.
+
+    Returns (frame keyed by component string, asof).
+    """
+    if polls is None:
+        polls = load_2026()
+    if asof is None:
+        asof = polls["fieldwork_end"].max()
     recent = polls[(polls["fieldwork_end"] > asof - pd.Timedelta(days=LIST_WINDOW))
+                   & (polls["fieldwork_end"] <= asof)
                    & (polls["pollster"] != "Unattributed")].copy()
 
     blocks = merge_blocks(recent["party_id"].unique())
@@ -84,39 +102,46 @@ def corrected_average():
                               values="seats", aggfunc="sum").fillna(0)
     meta = recent[["poll_id", "pollster", "fieldwork_end", "sample_size"]]
     meta = meta.drop_duplicates("poll_id").set_index("poll_id")
+    units = [u for u in range(len(blocks)) if u in wide.columns]
     wide = meta.join(wide)
-    units = list(range(len(blocks)))
-    units = [u for u in units if u in wide.columns]
 
-    h = eb_shrink(deviations(wide, units), units).pivot(
-        index="pollster", columns="unit", values="house_effect")
+    dev = deviations(wide, units)
     adj = wide.copy()
-    adj[units] = wide[units] - h.reindex(wide["pollster"])[units].fillna(0).values
+    if not dev.empty:
+        h = eb_shrink(dev, units).pivot(
+            index="pollster", columns="unit", values="house_effect")
+        h = h.reindex(columns=units)
+        adj[units] = wide[units] - h.reindex(wide["pollster"])[units].fillna(0).values
+    adj[units] = trend_adjust(adj[units], meta["fieldwork_end"], asof)
 
     w = poll_weights(adj.reset_index()[["poll_id", "pollster",
-                                        "fieldwork_end", "sample_size"]], asof)
+                                        "fieldwork_end", "sample_size"]],
+                     asof, eday=eday)
     live = adj.loc[adj.index.isin(w.index)]
     ww = w.reindex(live.index)
     avg = live[units].mul(ww, axis=0).sum() / ww.sum()
 
-    # Polled vote_pct for sub-threshold lists, same window+weights.
     pct = recent[recent["vote_pct"].notna()]
     pct_by_unit = (pct[pct["poll_id"].isin(w.index)]
                    .groupby("unit")["vote_pct"].mean() / 100.0)
 
-    out = pd.DataFrame({
+    return pd.DataFrame({
         "components": ["+".join(sorted(blocks[u])) for u in avg.index],
         "avg_seats": avg.clip(lower=0).values,
         "polled_pct": pct_by_unit.reindex(avg.index).values,
-    })
-    return out, asof
+    }), asof
 
 
-def build_inputs():
+def build_inputs(polls: pd.DataFrame | None = None,
+                 asof: pd.Timestamp | None = None,
+                 eday: pd.Timestamp | None = ELECTION_DAY_2026,
+                 bloc_overrides: dict[str, str] | None = None,
+                 debut: set[str] = DEBUT):
     reg = load_party_registry()
     bloc_map = dict(zip(reg["party_id"], reg["bloc"]))
+    bloc_map.update(bloc_overrides or {})
     names = dict(zip(reg["party_id"], reg["name_en"]))
-    avg, asof = corrected_average()
+    avg, asof = corrected_average(polls, asof, eday)
 
     comps = [set(c.split("+")) for c in avg["components"]]
     avg["label"] = [short_name(c, names) for c in avg["components"]]
@@ -127,7 +152,7 @@ def build_inputs():
     ]
     fams = [[FAMILY_OF.get(c, "other") for c in comp] for comp in comps]
     avg["family"] = [max(set(f), key=f.count) for f in fams]
-    avg["debut"] = [bool(comp & DEBUT) for comp in comps]
+    avg["debut"] = [bool(comp & debut) for comp in comps]
 
     # Base vote shares: passers by seat share of the above-threshold pie,
     # sub-threshold lists by their polled percentages.
@@ -141,8 +166,7 @@ def build_inputs():
 
 def dhondt(votes: np.ndarray, seats: int) -> np.ndarray:
     """Seats per faction by highest averages (Bader-Ofer core)."""
-    n = len(votes)
-    alloc = np.zeros(n, dtype=int)
+    alloc = np.zeros(len(votes), dtype=int)
     quot = votes.astype(float).copy()
     for _ in range(seats):
         i = int(np.argmax(quot))
@@ -151,31 +175,34 @@ def dhondt(votes: np.ndarray, seats: int) -> np.ndarray:
     return alloc
 
 
-def simulate(avg: pd.DataFrame) -> np.ndarray:
-    rng = np.random.default_rng(SEED)
+def simulate_core(avg: pd.DataFrame, pairs: list[tuple[str, str]],
+                  threshold: float = THRESHOLD, scale: float = 1.0,
+                  bloc_swing_sd: float = BLOC_SWING_SD,
+                  family_shock: dict | None = None,
+                  n_sims: int = N_SIMS, seed: int = SEED) -> np.ndarray:
+    family_shock = FAMILY_SHOCK if family_shock is None else family_shock
+    rng = np.random.default_rng(seed)
     n_lists = len(avg)
     base = avg["share"].values
 
-    # Error draws, all in vote-share space (seats / 120).
-    swing = rng.standard_t(T_DF, N_SIMS) * BLOC_SWING_SD / 120.0
+    swing = rng.standard_t(T_DF, n_sims) * bloc_swing_sd * scale / 120.0
     fam_shock = {
-        f: (mu + rng.standard_t(T_DF, N_SIMS) * sd) / 120.0
-        for f, (mu, sd) in FAMILY_SHOCK.items()
+        f: (mu + rng.standard_t(T_DF, n_sims) * sd * scale) / 120.0
+        for f, (mu, sd) in family_shock.items()
     }
     sd_list = (LIST_SD_BASE + LIST_SD_SLOPE * avg["avg_seats"].values) / 120.0
-    sd_list = sd_list * np.where(avg["debut"].values, DEBUT_FACTOR, 1.0)
-    noise = rng.standard_normal((N_SIMS, n_lists)) * sd_list
+    sd_list = sd_list * np.where(avg["debut"].values, DEBUT_FACTOR, 1.0) * scale
+    noise = rng.standard_normal((n_sims, n_lists)) * sd_list
 
     is_nb = (avg["bloc"] == "netanyahu_bloc").values
-    shares = np.tile(base, (N_SIMS, 1))
-    # Bloc swing: shift between blocs, proportional to list size.
+    shares = np.tile(base, (n_sims, 1))
     w_nb = np.where(is_nb, base, 0.0)
     w_op = np.where(~is_nb, base, 0.0)
-    shares += swing[:, None] * (w_nb / w_nb.sum() - w_op / w_op.sum())
-    # Family shocks, proportional within family, offset from everyone else.
+    if w_nb.sum() > 0 and w_op.sum() > 0:
+        shares += swing[:, None] * (w_nb / w_nb.sum() - w_op / w_op.sum())
     for f, shock in fam_shock.items():
         in_f = (avg["family"] == f).values
-        if not in_f.any():
+        if not in_f.any() or in_f.all():
             continue
         w_f = np.where(in_f, base, 0.0)
         w_rest = np.where(~in_f, base, 0.0)
@@ -183,22 +210,21 @@ def simulate(avg: pd.DataFrame) -> np.ndarray:
     shares = np.clip(shares + noise, 0.0, None)
     shares /= shares.sum(axis=1, keepdims=True)
 
-    # Threshold, then Bader-Ofer with surplus pairs.
     comp_of = {c: i for i, cs in enumerate(avg["components"]) for c in cs.split("+")}
-    pairs = [(comp_of[a], comp_of[b]) for a, b in SURPLUS_PAIRS
-             if a in comp_of and b in comp_of]
+    pair_idx = [(comp_of[a], comp_of[b]) for a, b in pairs
+                if a in comp_of and b in comp_of
+                and comp_of[a] != comp_of[b]]
 
-    seats = np.zeros((N_SIMS, n_lists), dtype=int)
-    for s in range(N_SIMS):
+    seats = np.zeros((n_sims, n_lists), dtype=int)
+    for s in range(n_sims):
         sh = shares[s]
-        passed = sh >= THRESHOLD
+        passed = sh >= threshold
         if not passed.any():
             continue
         votes = np.where(passed, sh, 0.0)
-        # Pool pairs where both passed.
         faction_votes, faction_members = [], []
         used = set()
-        for a, b in pairs:
+        for a, b in pair_idx:
             if passed[a] and passed[b]:
                 faction_votes.append(votes[a] + votes[b])
                 faction_members.append([a, b])
@@ -220,7 +246,9 @@ def simulate(avg: pd.DataFrame) -> np.ndarray:
 
 def main() -> None:
     avg, asof = build_inputs()
-    seats = simulate(avg)
+    days_out = max((ELECTION_DAY_2026 - asof).days, 0)
+    scale = uncertainty_scale(days_out)
+    seats = simulate_core(avg, SURPLUS_PAIRS, scale=scale)
 
     dist = pd.DataFrame({
         "list": avg["label"], "bloc": avg["bloc"].map(BLOC_LABEL),
@@ -238,6 +266,7 @@ def main() -> None:
     anti = seats[:, (avg["bloc"] == "opposition_bloc").values].sum(axis=1)
     summary = pd.DataFrame([{
         "asof": asof.date().isoformat(), "n_sims": N_SIMS,
+        "days_to_election": days_out, "uncertainty_scale": round(scale, 2),
         "p_netanyahu_bloc_61": (nb >= 61).mean().round(3),
         "p_anti_bloc_61": (anti >= 61).mean().round(3),
         "p_neither": ((nb < 61) & (anti < 61)).mean().round(3),
@@ -246,7 +275,8 @@ def main() -> None:
     }])
     summary.to_csv(PROCESSED_DIR / "forecast_blocs.csv", index=False)
 
-    print(f"Forecast as of {asof.date()} ({N_SIMS:,} simulations)\n")
+    print(f"Forecast as of {asof.date()} ({N_SIMS:,} simulations, "
+          f"{days_out} days out, uncertainty x{scale:.2f})\n")
     print(dist.drop(columns="asof").to_string(index=False))
     s = summary.iloc[0]
     print(f"\nP(Netanyahu bloc >= 61) = {s['p_netanyahu_bloc_61']:.1%}")
