@@ -1,0 +1,105 @@
+pollster,unit,raw_mean,n_polls,house_effect,list
+Direct Polls,0,-0.34,9,-0.25,Blue and White
+Filber,0,-0.26,12,-0.21,Blue and White
+Kantar,0,-0.22,17,-0.19,Blue and White
+Lazar,0,-0.25,11,-0.2,Blue and White
+Maagar Mochot,0,0.0,3,0.0,Blue and White
+Midgam,0,-0.2,15,-0.17,Blue and White
+Midgam Project,0,-0.19,10,-0.15,Blue and White
+Tatika,0,1.23,13,0.99,Blue and White
+Direct Polls,1,0.78,9,0.74,The Democrats
+Filber,1,-0.26,12,-0.25,The Democrats
+Kantar,1,-0.56,17,-0.55,The Democrats
+Lazar,1,0.22,11,0.21,The Democrats
+Maagar Mochot,1,1.06,3,0.93,The Democrats
+Midgam,1,0.7,15,0.68,The Democrats
+Midgam Project,1,0.88,10,0.84,The Democrats
+Tatika,1,-1.97,13,-1.91,The Democrats
+Direct Polls,2,4.98,9,4.95,Likud
+Filber,2,9.1,12,9.05,Likud
+Kantar,2,-1.81,17,-1.81,Likud
+Lazar,2,-3.41,11,-3.39,Likud
+Maagar Mochot,2,-2.81,3,-2.76,Likud
+Midgam,2,-2.62,15,-2.61,Likud
+Midgam Project,2,-2.83,10,-2.82,Likud
+Tatika,2,-3.39,13,-3.38,Likud
+Direct Polls,3,-0.42,9,-0.38,Otzma Yehudit
+Filber,3,-1.0,12,-0.93,Otzma Yehudit
+Kantar,3,1.07,17,1.01,Otzma Yehudit
+Lazar,3,0.12,11,0.11,Otzma Yehudit
+Maagar Mochot,3,1.28,3,0.96,Otzma Yehudit
+Midgam,3,0.38,15,0.36,Otzma Yehudit
+Midgam Project,3,0.08,10,0.07,Otzma Yehudit
+Tatika,3,-0.77,13,-0.72,Otzma Yehudit
+Direct Polls,4,0.44,9,0.32,Religious Zionist Party
+Filber,4,0.93,12,0.73,Religious Zionist Party
+Kantar,4,-0.09,17,-0.07,Religious Zionist Party
+Lazar,4,-0.67,11,-0.52,Religious Zionist Party
+Maagar Mochot,4,-1.16,3,-0.55,Religious Zionist Party
+Midgam,4,-0.25,15,-0.2,Religious Zionist Party
+Midgam Project,4,0.21,10,0.16,Religious Zionist Party
+Tatika,4,-0.21,13,-0.17,Religious Zionist Party
+Direct Polls,5,0.2,9,0.19,Shas
+Filber,5,1.9,12,1.87,Shas
+Kantar,5,-0.75,17,-0.74,Shas
+Lazar,5,-0.97,11,-0.95,Shas
+Maagar Mochot,5,1.4,3,1.31,Shas
+Midgam,5,-0.64,15,-0.63,Shas
+Midgam Project,5,-1.0,10,-0.98,Shas
+Tatika,5,0.58,13,0.57,Shas
+Direct Polls,6,-4.72,9,-4.69,Together
+Filber,6,-6.5,12,-6.46,Together
+Kantar,6,1.64,17,1.63,Together
+Lazar,6,3.67,11,3.65,Together
+Maagar Mochot,6,3.2,3,3.13,Together
+Midgam,6,2.59,15,2.58,Together
+Midgam Project,6,1.02,10,1.02,Together
+Tatika,6,2.17,13,2.16,Together
+Direct Polls,7,0.35,9,0.28,United Torah Judaism
+Filber,7,-0.3,12,-0.26,United Torah Judaism
+Kantar,7,0.0,17,0.0,United Torah Judaism
+Lazar,7,-0.15,11,-0.12,United Torah Judaism
+Maagar Mochot,7,-0.6,3,-0.34,United Torah Judaism
+Midgam,7,-0.14,15,-0.12,United Torah Judaism
+Midgam Project,7,0.26,10,0.21,United Torah Judaism
+Tatika,7,0.22,13,0.19,United Torah Judaism
+Direct Polls,8,-1.25,9,-1.05,Yashar
+Filber,8,-1.19,12,-1.05,Yashar
+Kantar,8,0.1,17,0.09,Yashar
+Lazar,8,0.18,11,0.15,Yashar
+Maagar Mochot,8,-0.54,3,-0.35,Yashar
+Midgam,8,0.81,15,0.73,Yashar
+Midgam Project,8,-0.24,10,-0.2,Yashar
+Tatika,8,1.34,13,1.19,Yashar
+Direct Polls,9,-0.52,9,-0.51,Yisrael Beytenu
+Filber,9,-1.67,12,-1.62,Yisrael Beytenu
+Kantar,9,-0.13,17,-0.13,Yisrael Beytenu
+Lazar,9,0.69,11,0.67,Yisrael Beytenu
+Maagar Mochot,9,-0.46,3,-0.41,Yisrael Beytenu
+Midgam,9,-0.2,15,-0.2,Yisrael Beytenu
+Midgam Project,9,1.05,10,1.01,Yisrael Beytenu
+Tatika,9,1.2,13,1.18,Yisrael Beytenu
+Direct Polls,10,-0.86,9,-0.47,Zionist Home – The Reservists
+Filber,10,-0.83,12,-0.52,Zionist Home – The Reservists
+Kantar,10,0.47,17,0.33,Zionist Home – The Reservists
+Lazar,10,0.66,11,0.4,Zionist Home – The Reservists
+Maagar Mochot,10,0.36,3,0.11,Zionist Home – The Reservists
+Midgam,10,-0.03,15,-0.02,Zionist Home – The Reservists
+Midgam Project,10,0.91,10,0.52,Zionist Home – The Reservists
+Tatika,10,-0.45,13,-0.29,Zionist Home – The Reservists
+Direct Polls,11,1.37,9,1.21,Balad + Hadash-Ta'al + Ra'am
+Filber,11,0.09,12,0.08,Balad + Hadash-Ta'al + Ra'am
+Kantar,11,0.29,17,0.27,Balad + Hadash-Ta'al + Ra'am
+Lazar,11,-0.09,11,-0.08,Balad + Hadash-Ta'al + Ra'am
+Maagar Mochot,11,-1.74,3,-1.24,Balad + Hadash-Ta'al + Ra'am
+Midgam,11,-0.38,15,-0.36,Balad + Hadash-Ta'al + Ra'am
+Midgam Project,11,-0.15,10,-0.13,Balad + Hadash-Ta'al + Ra'am
+Tatika,11,0.04,13,0.04,Balad + Hadash-Ta'al + Ra'am
+Direct Polls,12,0.0,9,0.0,Unity
+Filber,12,0.0,12,0.0,Unity
+Kantar,12,0.0,17,0.0,Unity
+Lazar,12,0.0,11,0.0,Unity
+Maagar Mochot,12,0.0,3,0.0,Unity
+Midgam,12,0.0,15,0.0,Unity
+Midgam Project,12,0.0,10,0.0,Unity
+Tatika,12,0.0,13,0.0,Unity
