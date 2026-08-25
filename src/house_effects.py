@@ -18,6 +18,8 @@ Outputs:
     output/figures/house_effects_2026.png
 """
 
+from __future__ import annotations
+
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -37,14 +39,43 @@ SNAPSHOT_WINDOW = 45
 
 BLUE = "#2a78d6"
 ORANGE = "#eb6834"
+AQUA = "#1baf7a"
+
+# Era-specific bloc assignments for the pre-2019 party system, where the
+# modern registry blocs don't transfer (Kadima-era centre, Likud-Beytenu,
+# floating Liberman). The measured total pre-2019 is the right-religious
+# bloc, the closest era-consistent analogue of the Netanyahu bloc.
+CYCLE_BLOC_OVERRIDES: dict[str, dict[str, str]] = {
+    "2009": {
+        "yisrael_beytenu": "netanyahu_bloc", "kadima": "opposition_bloc",
+        "gil": "opposition_bloc", "greens": "opposition_bloc",
+    },
+    "2013": {
+        "yisrael_beytenu": "netanyahu_bloc", "kadima": "opposition_bloc",
+        "am_shalem": "netanyahu_bloc", "deri": "netanyahu_bloc",
+    },
+    "2015": {
+        "yisrael_beytenu": "netanyahu_bloc",
+        # Kahlon campaigned as uncommitted centre; counting Kulanu outside
+        # the right-religious total is the era convention.
+        "kulanu": "opposition_bloc",
+    },
+}
+OLD_BLOC_NAME = {
+    "netanyahu_bloc": "Right-religious bloc",
+    "opposition_bloc": "Centre-left bloc",
+    "other": "Arab parties",
+}
 
 
-def per_poll_values(polls: pd.DataFrame, value_space: str) -> pd.DataFrame:
+def per_poll_values(polls: pd.DataFrame, value_space: str,
+                    bloc_overrides: dict[str, str] | None = None) -> pd.DataFrame:
     """One row per poll: meta plus seat totals per bloc or per list-block."""
     polls = polls[polls["pollster"] != "Unattributed"].copy()
     if value_space == "bloc":
         reg = load_party_registry()
         bloc = dict(zip(reg["party_id"], reg["bloc"]))
+        bloc.update(bloc_overrides or {})
         polls["unit"] = polls["party_id"].map(lambda p: bloc_of_row(p, bloc))
     else:
         blocks = merge_blocks(polls["party_id"].unique())
@@ -99,13 +130,15 @@ def eb_shrink(dev: pd.DataFrame, units) -> pd.DataFrame:
 
 
 def bloc_effects(polls: pd.DataFrame, cycle: str) -> pd.DataFrame:
-    wide = per_poll_values(polls, "bloc")
-    units = [u for u in BLOC_NAME if u in wide.columns]
+    overrides = CYCLE_BLOC_OVERRIDES.get(cycle)
+    wide = per_poll_values(polls, "bloc", bloc_overrides=overrides)
+    name_map = OLD_BLOC_NAME if cycle in CYCLE_BLOC_OVERRIDES else BLOC_NAME
+    units = [u for u in name_map if u in wide.columns]
     dev = deviations(wide, units)
     if dev.empty:
         return pd.DataFrame()
     eff = eb_shrink(dev, units)
-    eff["unit"] = eff["unit"].map(BLOC_NAME)
+    eff["unit"] = eff["unit"].map(name_map)
     eff["cycle"] = cycle
     return eff
 
@@ -147,12 +180,17 @@ def plot(blocs: pd.DataFrame) -> None:
     past = blocs[(blocs["cycle"].isin(["2021", "2022"]))
                  & (blocs["unit"] == "Netanyahu bloc")]
     past = past.groupby("pollster")["house_effect"].mean()
+    old = blocs[blocs["unit"] == "Right-religious bloc"]
+    old = old.groupby("pollster")["house_effect"].mean()
 
     fig, ax = plt.subplots(figsize=(8.5, 4.8), dpi=200, facecolor=SURFACE)
     ax.set_facecolor(SURFACE)
     ys = range(len(cur))
     ax.axvline(0, color=BASELINE, lw=1.2, zorder=1)
     for y, row in zip(ys, cur.itertuples()):
+        if row.pollster in old.index:
+            ax.scatter(old[row.pollster], y, s=46, facecolors="none",
+                       edgecolors=AQUA, linewidths=1.6, zorder=2)
         if row.pollster in past.index:
             ax.scatter(past[row.pollster], y, s=46, facecolors="none",
                        edgecolors=ORANGE, linewidths=1.6, zorder=2)
@@ -174,6 +212,9 @@ def plot(blocs: pd.DataFrame) -> None:
         plt.Line2D([], [], marker="o", ls="", markerfacecolor="none",
                    markeredgecolor=ORANGE, markeredgewidth=1.6, ms=7,
                    label="2021-22 cycles (mean)"),
+        plt.Line2D([], [], marker="o", ls="", markerfacecolor="none",
+                   markeredgecolor=AQUA, markeredgewidth=1.6, ms=7,
+                   label="2009-15 cycles (right-religious bloc, mean)"),
     ]
     ax.legend(handles=handles, loc="upper left", frameon=False,
               fontsize=8, labelcolor=INK_2)
@@ -190,7 +231,7 @@ def main() -> None:
     all_polls = pd.read_csv(PROCESSED_DIR / "polls.csv",
                             parse_dates=["fieldwork_end"])
     frames = [bloc_effects(polls26, "2026")]
-    for cyc in ("2022", "2021", "2020", "2019s", "2019a"):
+    for cyc in ("2022", "2021", "2020", "2019s", "2019a", "2015", "2013", "2009"):
         sub = all_polls[(all_polls["cycle"] == cyc) & all_polls["sums_ok"]]
         frames.append(bloc_effects(sub, cyc))
     blocs = pd.concat([f for f in frames if not f.empty], ignore_index=True)
@@ -201,6 +242,16 @@ def main() -> None:
     print(nb26.sort_values("house_effect", ascending=False)
           [["pollster", "n_polls", "raw_mean", "house_effect"]]
           .to_string(index=False))
+
+    right = blocs[blocs["unit"].isin(["Netanyahu bloc", "Right-religious bloc"])]
+    persist = right.pivot(index="pollster", columns="cycle",
+                          values="house_effect")
+    persist = persist[[c for c in
+                       ("2009", "2013", "2015", "2019a", "2019s", "2020",
+                        "2021", "2022", "2026") if c in persist]]
+    persist = persist[persist["2026"].notna()].sort_values("2026")
+    print("\nRight/Netanyahu-bloc lean per cycle, firms active in 2026:")
+    print(persist.to_string())
 
     # List-level effects over the stable recent window, then the corrected
     # snapshot.
