@@ -15,8 +15,10 @@ The pipeline, in order:
    cycle: each pollster's latest poll, weighted by recency (14-day half-life)
    and sample size; per-list snapshot plus a daily bloc-race series. House
    effects estimated hierarchically are the next layer.
-4. **Seat simulation** (planned) — Monte Carlo over vote shares: 3.25% threshold
-   survival → Bader–Ofer apportionment with surplus agreements → P(bloc ≥ 61).
+4. **Seat simulation** (`src/simulate.py`) — Monte Carlo over vote shares with
+   correlated errors calibrated on the backtest (bloc swing, Arab/haredi
+   family shocks, debut-list widening): 3.25% threshold survival → Bader–Ofer
+   with surplus pairs → per-list seat distributions and P(bloc ≥ 61).
 5. **Evaluation** (`src/backtest.py`) — final-poll averages vs official results
    per cycle (2009-2022), aggregated to the finest common partition of party
    components; per-cycle MAE and a per-pollster scorecard seed. Calibration

@@ -1,0 +1,14 @@
+list,bloc,avg_input,mean,p05,p50,p95,p_pass,asof
+Yashar,Anti-Netanyahu bloc,24.6,25.5,19,25,32,1.0,2026-08-24
+Likud,Netanyahu bloc,24.5,25.4,20,25,31,1.0,2026-08-24
+Together,Anti-Netanyahu bloc,12.3,12.6,8,13,17,0.999,2026-08-24
+The Democrats,Anti-Netanyahu bloc,9.9,10.1,6,10,14,0.994,2026-08-24
+Balad + Hadash-Ta'al + Ra'am,Arab parties,10.8,9.9,6,10,14,0.992,2026-08-24
+Yisrael Beytenu,Anti-Netanyahu bloc,9.0,9.1,6,9,12,0.999,2026-08-24
+Otzma Yehudit,Netanyahu bloc,8.1,7.9,5,8,11,0.994,2026-08-24
+Shas,Netanyahu bloc,7.9,7.2,4,7,11,0.957,2026-08-24
+United Torah Judaism,Netanyahu bloc,7.8,7.1,4,7,10,0.951,2026-08-24
+Religious Zionist Party,Netanyahu bloc,5.0,4.1,0,5,7,0.767,2026-08-24
+Zionist Home – The Reservists,Anti-Netanyahu bloc,0.0,1.0,0,0,5,0.22,2026-08-24
+Unity,Anti-Netanyahu bloc,0.0,0.1,0,0,0,0.033,2026-08-24
+Blue and White,Anti-Netanyahu bloc,0.0,0.0,0,0,0,0.011,2026-08-24
