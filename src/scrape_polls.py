@@ -48,9 +48,15 @@ PAGES: dict[str, tuple[str, int, str]] = {
     "2020": (f"{WIKI}/Opinion_polling_for_the_2020_Israeli_legislative_election", 2020, "2020"),
     "2019s": (f"{WIKI}/Opinion_polling_for_the_September_2019_Israeli_legislative_election", 2019, "2019s"),
     "2019a": (f"{WIKI}/Opinion_polling_for_the_April_2019_Israeli_legislative_election", 2019, "2019a"),
+    "2015": (f"{WIKI}/Opinion_polling_for_the_2015_Israeli_legislative_election", 2015, "2015"),
+    "2013": (f"{WIKI}/Opinion_polling_for_the_2013_Israeli_legislative_election", 2013, "2013"),
+    "2009": (f"{WIKI}/Opinion_polling_for_the_2009_Israeli_legislative_election", 2009, "2009"),
 }
 
 ELECTION_DAY = {
+    "2009": "2009-02-10",
+    "2013": "2013-01-22",
+    "2015": "2015-03-17",
     "2019a": "2019-04-09",
     "2019s": "2019-09-17",
     "2020": "2020-03-02",
@@ -61,6 +67,8 @@ ELECTION_DAY = {
 
 # Official-result baseline rows, e.g. "April 2019 legislative election".
 RESULT_CYCLE = {
+    "2009 election results": "2009",
+    "2013 election results": "2013",
     "April 2019 legislative election": "2019a",
     "September 2019 legislative election": "2019s",
     "2020 legislative election": "2020",
@@ -72,10 +80,21 @@ RESULT_CYCLE = {
 PUBLISHER_ONLY = {
     "channel 2", "channel 10", "channel 13", "channel 22",
     "maariv", "news company", "ten news", "walla", "walla news",
+    # 2009-2015-era rows crediting only the outlet
+    "channel 1", "globes", "haaretz", "israel army radio (galatz)",
+    "israel radio", "reshet bet", "times of israel", "yedioth ahronoth",
+    "yisrael hayom", "knesset channel/nrg", "yisrael post/sof hashavua",
 }
 
-POLL_SECTION = re.compile(r"^(\d{4}|Polls|Seat projections|\d+(st|nd|rd|th) Knesset)$")
-META_LABELS = {"Fieldwork date", "Date", "Polling firm", "Publisher", "Sample size"}
+# "Contents" covers the 2015-page layout where the poll table is the first
+# element after the TOC, before any section heading.
+POLL_SECTION = re.compile(
+    r"^(\d{4}|Polls|Polling|By party|Contents|Seat projections|\d+(st|nd|rd|th) Knesset)$"
+)
+META_LABELS = {
+    "Fieldwork date", "Date", "Polling firm", "Poll", "Pollster", "Media",
+    "Publisher", "Sample size",
+}
 # Bloc totals (C/O = coalition/opposition, Netanyahu bloc), leads, residuals.
 NON_PARTY_LABELS = {
     "others", "other", "gov.", "opp.", "lead", "don't know", "none",
@@ -90,6 +109,10 @@ MONTHS = {
 FOOTNOTE = re.compile(r"\[[^\]]*\]")
 DATE_RE = re.compile(
     r"(?:\d{1,2}\s*[–—-]\s*)?(\d{1,2})\s+([A-Za-z]{3})[a-z]*(?:\s+(\d{4}))?"
+)
+# US-style "Feb 10, 2009" (the 2009-page format).
+DATE_US_RE = re.compile(
+    r"([A-Za-z]{3})[a-z]*\.?\s+(\d{1,2})(?:\s*[–—-]\s*\d{1,2})?,?\s*(\d{4})?"
 )
 PCT_RE = re.compile(r"\(?\s*(\d+(?:\.\d+)?)\s*%\s*\)?$")
 
@@ -186,13 +209,26 @@ def poll_tables(html: str):
 
 def parse_date(raw: str, default_year: int) -> pd.Timestamp | None:
     m = DATE_RE.search(str(raw))
-    if not m:
-        return None
-    day, mon, year = m.groups()
+    if m:
+        day, mon, year = m.groups()
+    else:
+        m = DATE_US_RE.search(str(raw))
+        if not m:
+            return None
+        mon, day, year = m.groups()
     mon_num = MONTHS.get(mon[:3].title())
     if not mon_num:
         return None
-    return pd.Timestamp(int(year) if year else default_year, mon_num, int(day))
+    y = int(year) if year else default_year
+    try:
+        return pd.Timestamp(y, mon_num, int(day))
+    except ValueError:
+        # 29 Feb parsed under a non-leap default year: the poll belongs to
+        # the leap year before (tables straddle New Year without repeating it).
+        try:
+            return pd.Timestamp(y - 1, mon_num, int(day))
+        except ValueError:
+            return None
 
 
 def parse_seats(text: str) -> tuple[int | None, float | None]:
@@ -233,7 +269,9 @@ def scrape() -> tuple[pd.DataFrame, pd.DataFrame]:
                 continue
             col_of = {l: i for i, l in enumerate(labels)}
             date_col = col_of.get("Fieldwork date", col_of.get("Date"))
-            firm_col = col_of.get("Polling firm")
+            firm_col = col_of.get(
+                "Polling firm", col_of.get("Poll", col_of.get("Pollster"))
+            )
             if date_col is None or firm_col is None:
                 continue
             party_cols = [
@@ -269,30 +307,39 @@ def scrape() -> tuple[pd.DataFrame, pd.DataFrame]:
                 if first_party is not None and firm_cell is first_party:
                     continue
                 pollster_raw = firm_cell.text
-                fieldwork_end = parse_date(date_cell.text, year_default)
-                if not pollster_raw or fieldwork_end is None:
+                if not pollster_raw:
                     continue
-                has_explicit_year = bool(re.search(r"\d{4}", date_cell.text))
-                if not has_explicit_year:
-                    while (
-                        prev_end is not None
-                        and fieldwork_end > prev_end + pd.Timedelta(days=14)
-                    ):
-                        fieldwork_end = fieldwork_end.replace(
-                            year=fieldwork_end.year - 1
-                        )
-                prev_end = fieldwork_end
                 key = pollster_raw.strip().casefold()
                 # Old pages label their own election's outcome "Election
-                # results"; 2026 pages name historical elections explicitly.
+                # results"; baseline rows name historical elections explicitly.
+                # Result rows often merge the date cell into the label, so
+                # detect them before date parsing and stamp election day.
                 result_cycle = RESULT_CYCLE.get(pollster_raw) or (
-                    cycle if key == "election results" else None
+                    cycle if key in ("election results", "final results") else None
                 )
                 is_result = result_cycle is not None
+                if is_result:
+                    fieldwork_end = pd.Timestamp(ELECTION_DAY[result_cycle])
+                else:
+                    fieldwork_end = parse_date(date_cell.text, year_default)
+                    if fieldwork_end is None:
+                        continue
+                    has_explicit_year = bool(re.search(r"\d{4}", date_cell.text))
+                    if not has_explicit_year:
+                        while (
+                            prev_end is not None
+                            and fieldwork_end > prev_end + pd.Timedelta(days=14)
+                        ):
+                            fieldwork_end = fieldwork_end.replace(
+                                year=fieldwork_end.year - 1
+                            )
+                    prev_end = fieldwork_end
                 if not is_result and RESULT_ROW.search(pollster_raw):
                     continue  # pre-election seats, municipal baselines etc.
                 if "exit poll" in key:
                     continue  # exit polls are a different data class
+                if key == "current composition":
+                    continue  # sitting-Knesset baseline row, not a poll
                 # Older pages pack "Firm/Publisher" into one cell (in either
                 # order); the first segment that canonicalizes is the firm.
                 pollster = pollster_raw
@@ -316,8 +363,9 @@ def scrape() -> tuple[pd.DataFrame, pd.DataFrame]:
                             unknown_pollsters.add(pollster_raw)
 
                 publisher = inline_publisher if not is_result else None
-                if "Publisher" in col_of and row[col_of["Publisher"]] is not None:
-                    publisher = row[col_of["Publisher"]].text or publisher
+                for pub_label in ("Publisher", "Media"):
+                    if pub_label in col_of and row[col_of[pub_label]] is not None:
+                        publisher = row[col_of[pub_label]].text or publisher
                 sample = None
                 if "Sample size" in col_of and row[col_of["Sample size"]] is not None:
                     sample = parse_sample(row[col_of["Sample size"]].text)
