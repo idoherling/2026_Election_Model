@@ -1,0 +1,16 @@
+pollster,principal,outlet_2026,fieldwork,correlation_group,active_2026,notes
+Midgam,Mano Geva,Channel 12,iPanel + phone,ipanel,true,Geva co-owns iPanel; Tzemach (ex-Dahaf) partner
+Lazar,Menachem Lazar,Maariv / 103FM / Knesset Channel,Panel4All,panel4all,true,same operation as Panels Politics
+Panels Politics,Menachem Lazar,Maariv / 103FM,Panel4All,panel4all,true,same operation as Lazar
+Kantar,Dudi Hasid,Kan 11 / Israel Hayom,Kantar infrastructure,phone_mixed,true,heir of Teleseker (TNS)
+Maagar Mochot,Yitzhak Katz,103FM / Arutz Sheva / Channel 16,mixed; StatNet Arab sample,phone_mixed,true,bottom of Paamon accuracy rankings
+Direct Polls,Zuriel Sharon,i24NEWS,SMS/cellular; undisclosed,sms_likud,true,founded 2019 with Shlomo Filber; ex-Channel 14
+Filber,Shlomo Filber (adviser),Channel 14,SMS-style; undisclosed,sms_likud,true,Next Data; owned via Channel 14 owners' rep
+Tatika,Yossi Tatika,Zman Yisrael,Adgenda panel,adgenda,true,founded March 2025
+Midgam Project,Ariel Ayalon,Channel 13 (HaMadad consortium),own panel,midgam_project,true,panel vendor; unrelated to Geva's Midgam
+Midgam Project & StatNet,Ayalon + Makladeh,Channel 13 (HaMadad consortium),own panel + Arab-sector fieldwork,midgam_project,true,
+StatNet,Yousef Makladeh,Dayan Center + subcontracting,Arab-society specialist,midgam_project,true,central Arab-sector node industry-wide
+Smith Consulting,Rafi Smith,Globes / JPost / Galey Israel,phone/mixed,phone_mixed,true,accuracy leader; ~zero lean in nine cycles
+TrendZone,unresolved (Provo),Israel Hayom,unclear,phone_mixed,true,principal unidentified
+Timor Group,Adi Timor,i24NEWS,unresolved,phone_mixed,true,thin public record
+Camil Fuchs,Camil Fuchs (d. 2024),legacy early-cycle rows,Midgam Project + StatNet,midgam_project,false,died April 2024; Ch13 stack continues as HaMadad
