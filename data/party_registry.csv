@@ -1,22 +1,50 @@
 party_id,name_en,name_he,bloc,aliases,notes
-likud,Likud,הליכוד,netanyahu_bloc,HaLikud,absorbed New Hope for 2026 per Wikipedia event log
+likud,Likud,הליכוד,netanyahu_bloc,HaLikud|Likud – Kulanu,absorbed Kulanu 2019 and New Hope 2026
 shas,Shas,ש"ס,netanyahu_bloc,,
 utj,United Torah Judaism,יהדות התורה,netanyahu_bloc,UTJ|Yahadut HaTorah,
-otzma,Otzma Yehudit,עוצמה יהודית,netanyahu_bloc,Otzma|Jewish Power,left govt but supports from outside per event log
-rzp,Religious Zionist Party,הציונות הדתית,netanyahu_bloc,Religious Zionism|RZP|Smotrich|Mafdal,merged with Jewish Home per event log
+otzma,Otzma Yehudit,עוצמה יהודית,netanyahu_bloc,Otzma|OY|Jewish Power,left govt but supports from outside per event log
+rzp,Religious Zionist Party,הציונות הדתית,netanyahu_bloc,Religious Zionism|Religious Zionist|RZP|RZ|RZP - OY|Smotrich|Mafdal,merged with Jewish Home per event log
 together,Together,יחד,opposition_bloc,Together alliance,joint list: Yesh Atid + Bennett 2026 under Bennett
 yesh_atid,Yesh Atid,יש עתיד,opposition_bloc,Lapid,component of Together
-bennett_2026,Bennett 2026,בנט 2026,opposition_bloc,Bennett party|Bennett|New Right,component of Together
-yashar,Yashar,ישר,opposition_bloc,Eisenkot,Gadi Eisenkot's party after leaving National Unity
+bennett_2026,Bennett 2026,בנט 2026,opposition_bloc,Bennett party|Bennett,component of Together
+new_right,New Right,הימין החדש,netanyahu_bloc,,Bennett-Shaked 2019 party; distinct from Bennett 2026
+yashar,Yashar,ישר,opposition_bloc,Eisenkot|Eizenkot,Gadi Eisenkot's party after leaving National Unity
 democrats,The Democrats,הדמוקרטים,opposition_bloc,Dems|Golan,Labor-Meretz merger led by Yair Golan
 labor,Labor,העבודה,opposition_bloc,HaAvoda|Avoda,pre-merger; component of The Democrats from 2024
 meretz,Meretz,מרצ,opposition_bloc,,pre-merger; component of The Democrats from 2024
-blue_white,Blue and White,כחול לבן,opposition_bloc,Blue & White|National Unity|Gantz|State Camp,National Unity reverted to Blue and White name
+blue_white,Blue and White,כחול לבן,opposition_bloc,Blue & White|B&W|National Unity|NUP / B&W – NH|Gantz|State Camp,spans the 2019-20 Gantz-Lapid alliance and the later National Unity lineage
 unity,Unity,אחדות,opposition_bloc,,Erdan + Edelstein party; VERIFY bloc assignment
 zionist_home,Zionist Home – The Reservists,הבית הציוני,opposition_bloc,Zionist Home|Hendel party|Reserv.|The Reservists,Hendel + Tropper; VERIFY bloc assignment
-new_hope,New Hope,תקווה חדשה,netanyahu_bloc,,split from National Unity; merged into Likud for 2026
-yisrael_beytenu,Yisrael Beytenu,ישראל ביתנו,opposition_bloc,Yisrael Beiteinu|Israel Beiteinu|Liberman,
+new_hope,New Hope,תקווה חדשה,netanyahu_bloc,Sa'ar|Tikva Hadasha,Sa'ar; split from National Unity; merged into Likud for 2026
+yisrael_beytenu,Yisrael Beytenu,ישראל ביתנו,opposition_bloc,Yisrael Beiteinu|Israel Beiteinu|YB|Liberman,
 raam,Ra'am,רע"ם,other,United Arab List|Mansour Abbas,
-hadash_taal,Hadash-Ta'al,חד"ש-תע"ל,other,Hadash–Ta'al|Hadash –Ta'al|Hadash|Ta'al|Odeh|Tibi,in re-formed Joint List per event log
+hadash_taal,Hadash-Ta'al,חד"ש-תע"ל,other,Hadash–Ta'al|Hadash –Ta'al|Hadash – Ta'al|Hadash|Ta'al|Odeh|Tibi,in re-formed Joint List per event log
 balad,Balad,בל"ד,other,,in re-formed Joint List per event log
 winter,Winter,וינטר,unknown,,VERIFY: unidentified list appearing in poll tables
+kulanu,Kulanu,כולנו,unknown,,Kahlon; 2015-2019; absorbed into Likud after Apr 2019
+zehut,Zehut,זהות,unknown,,Feiglin; 2019
+gesher,Gesher,גשר,unknown,Orly Levy,Orly Levy-Abekasis; 2019
+hatnuah,Hatnuah,התנועה,unknown,,Livni; pre-2019
+zionist_union,Zionist Union,המחנה הציוני,opposition_bloc,,Labor + Hatnuah alliance; 2015-2019
+joint_list,Joint List,הרשימה המשותפת,other,,single-column era of the Arab joint list
+jewish_home,The Jewish Home,הבית היהודי,netanyahu_bloc,Jewish Home|JH|UJH,
+labor_gesher_meretz,Labor-Gesher-Meretz,העבודה-גשר-מרצ,opposition_bloc,Emet,2020 alliance; Emet is its ballot-letter label
+urwp,Union of Right-Wing Parties,איחוד מפלגות הימין,netanyahu_bloc,URWP|JH – NU,2019 alliance
+yamina,Yamina,ימינה,unknown,JH / Yamina,Bennett-Shaked alliance 2019-2021
+national_union,National Union,האיחוד הלאומי,netanyahu_bloc,NU|Tkuma,
+hosen,Hosen L'Yisrael,חוסן לישראל,opposition_bloc,Hosen,Gantz's party pre-Blue & White
+telem,Telem,תל"ם,opposition_bloc,,Ya'alon
+hosen_telem,Hosen-Telem,חוסן-תל"ם,opposition_bloc,Hosen - Telem,
+yesh_atid_telem,Yesh Atid-Telem,יש עתיד-תל"ם,opposition_bloc,Yesh Atid -Telem,2020 alliance
+dem_union,Democratic Union,המחנה הדמוקרטי,opposition_bloc,Dem. Union,Meretz-led 2019s alliance
+labor_gesher,Labor-Gesher,העבודה-גשר,opposition_bloc,Labor- Gesher,2019s alliance
+labor_meretz,Labor-Meretz,העבודה-מרצ,opposition_bloc,Labor - Meretz,pre-2020 alliance label
+raam_balad,Ra'am-Balad,רע"ם-בל"ד,other,Ra'am – Balad,2019 alliance
+otzma_noam,Otzma Yehudit-Noam,עוצמה יהודית-נעם,netanyahu_bloc,Otzma Yehudit - Noam,
+zionist_spirit,Zionist Spirit,הרוח הציונית,unknown,Zionist Spirit/ Yamina,Shaked; 2022
+israelis,The Israelis,הישראלים,opposition_bloc,Israelis|Huldai,Huldai; 2021; did not run
+idp,Israel Democratic Party,מפלגה דמוקרטית ישראלית,opposition_bloc,IDP,Barak; 2019s; merged into Democratic Union
+nep,New Economic Party,המפלגה הכלכלית החדשה,unknown,NEP|New Economic,Zelekha; 2021
+tnufa,Tnufa,תנופה,unknown,,Hendel-Hauser vehicle
+derekh_eretz,Derekh Eretz,דרך ארץ,unknown,,Hendel-Hauser; 2020-2021
+greens,The Greens,הירוקים,unknown,Green,minor list in pre-2019 tables

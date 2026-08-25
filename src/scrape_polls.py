@@ -35,31 +35,52 @@ PROCESSED_DIR = Path(__file__).resolve().parent.parent / "data" / "processed"
 
 USER_AGENT = "IsraelElectionModel/0.1 (contact: idoherling98@gmail.com)"
 
-# page key -> (url, default year for dates without an explicit year)
-PAGES: dict[str, tuple[str, int]] = {
-    "2026_main": (
-        "https://en.wikipedia.org/wiki/Opinion_polling_for_the_2026_Israeli_legislative_election",
-        2026,
-    ),
-    "2026_2025": (
-        "https://en.wikipedia.org/wiki/2025_opinion_polling_for_the_2026_Israeli_legislative_election",
-        2025,
-    ),
-    "2026_2024": (
-        "https://en.wikipedia.org/wiki/2024_opinion_polling_for_the_2026_Israeli_legislative_election",
-        2024,
-    ),
-    "2026_2223": (
-        "https://en.wikipedia.org/wiki/2022%E2%80%932023_opinion_polling_for_the_2026_Israeli_legislative_election",
-        2023,
-    ),
+WIKI = "https://en.wikipedia.org/wiki"
+
+# page key -> (url, default year for dates without an explicit year, cycle)
+PAGES: dict[str, tuple[str, int, str]] = {
+    "2026_main": (f"{WIKI}/Opinion_polling_for_the_2026_Israeli_legislative_election", 2026, "2026"),
+    "2026_2025": (f"{WIKI}/2025_opinion_polling_for_the_2026_Israeli_legislative_election", 2025, "2026"),
+    "2026_2024": (f"{WIKI}/2024_opinion_polling_for_the_2026_Israeli_legislative_election", 2024, "2026"),
+    "2026_2223": (f"{WIKI}/2022%E2%80%932023_opinion_polling_for_the_2026_Israeli_legislative_election", 2023, "2026"),
+    "2022": (f"{WIKI}/Opinion_polling_for_the_2022_Israeli_legislative_election", 2022, "2022"),
+    "2021": (f"{WIKI}/Opinion_polling_for_the_2021_Israeli_legislative_election", 2021, "2021"),
+    "2020": (f"{WIKI}/Opinion_polling_for_the_2020_Israeli_legislative_election", 2020, "2020"),
+    "2019s": (f"{WIKI}/Opinion_polling_for_the_September_2019_Israeli_legislative_election", 2019, "2019s"),
+    "2019a": (f"{WIKI}/Opinion_polling_for_the_April_2019_Israeli_legislative_election", 2019, "2019a"),
 }
 
-CYCLE = "2026"
+ELECTION_DAY = {
+    "2019a": "2019-04-09",
+    "2019s": "2019-09-17",
+    "2020": "2020-03-02",
+    "2021": "2021-03-23",
+    "2022": "2022-11-01",
+    "2026": None,  # by 2026-10-27
+}
 
-POLL_SECTION = re.compile(r"^(\d{4}|Polls)$")
+# Official-result baseline rows, e.g. "April 2019 legislative election".
+RESULT_CYCLE = {
+    "April 2019 legislative election": "2019a",
+    "September 2019 legislative election": "2019s",
+    "2020 legislative election": "2020",
+    "2021 legislative election": "2021",
+    "2022 legislative election": "2022",
+}
+
+# Rows whose "Polling firm" is really just the publisher (old-page format).
+PUBLISHER_ONLY = {
+    "channel 2", "channel 10", "channel 13", "channel 22",
+    "maariv", "news company", "ten news", "walla", "walla news",
+}
+
+POLL_SECTION = re.compile(r"^(\d{4}|Polls|Seat projections|\d+(st|nd|rd|th) Knesset)$")
 META_LABELS = {"Fieldwork date", "Date", "Polling firm", "Publisher", "Sample size"}
-NON_PARTY_LABELS = {"Others", "Other", "Gov.", "Opp.", "Lead", "Don't know"}
+# Bloc totals (C/O = coalition/opposition, Netanyahu bloc), leads, residuals.
+NON_PARTY_LABELS = {
+    "others", "other", "gov.", "opp.", "lead", "don't know", "none",
+    "c", "o", "l", "r", "netanyahu",
+}
 RESULT_ROW = re.compile(r"election", re.I)
 
 MONTHS = {
@@ -192,26 +213,23 @@ def parse_sample(text: str) -> int | None:
     return int(digits) if digits else None
 
 
-def scrape() -> pd.DataFrame:
+def scrape() -> tuple[pd.DataFrame, pd.DataFrame]:
     lookup = party_lookup()
     unknown_parties: set[str] = set()
     unknown_pollsters: set[str] = set()
     rows = []
+    result_rows = []
 
-    for page_key, (url, default_year) in PAGES.items():
+    for page_key, (url, default_year, cycle) in PAGES.items():
         html = fetch(page_key, url)
         for table_i, (section, table_el) in enumerate(poll_tables(html)):
             grid = expand_grid(table_el)
             if not grid:
                 continue
             labels, body_start = column_labels(grid)
-            # Real seat tables have a Gov. column; quoted labels and
-            # "Don't know" mark hypothetical/percentage tables.
-            if (
-                "Gov." not in labels
-                or "Don't know" in labels
-                or any('"' in l for l in labels)
-            ):
+            # Quoted labels and "Don't know" mark hypothetical/percentage
+            # tables; real seat tables carry many party columns.
+            if "Don't know" in labels or any('"' in l for l in labels):
                 continue
             col_of = {l: i for i, l in enumerate(labels)}
             date_col = col_of.get("Fieldwork date", col_of.get("Date"))
@@ -221,8 +239,10 @@ def scrape() -> pd.DataFrame:
             party_cols = [
                 i
                 for i, l in enumerate(labels)
-                if l and l not in META_LABELS | NON_PARTY_LABELS
+                if l and l not in META_LABELS and l.casefold() not in NON_PARTY_LABELS
             ]
+            if len(party_cols) < 6:
+                continue
             # A year section heading dates its polls; the page default only
             # covers pages whose sections aren't years ("Polls").
             year_default = int(section) if section.isdigit() else default_year
@@ -230,6 +250,11 @@ def scrape() -> pd.DataFrame:
             # a date that jumps forward past the row above belongs to the
             # previous year (tables straddle New Year without repeating it).
             prev_end: pd.Timestamp | None = None
+            # Buffer the table so topical sub-tables (a few parties only,
+            # row sums nowhere near 120) can be dropped as a unit.
+            table_rows: list[dict] = []
+            table_result_rows: list[dict] = []
+            row_sums: list[tuple[int, int]] = []
 
             for r in range(body_start, len(grid)):
                 row = grid[r]
@@ -257,17 +282,42 @@ def scrape() -> pd.DataFrame:
                             year=fieldwork_end.year - 1
                         )
                 prev_end = fieldwork_end
-                if RESULT_ROW.search(pollster_raw):
-                    continue
-                try:
-                    pollster = canonical_pollster(pollster_raw)
-                except KeyError:
-                    unknown_pollsters.add(pollster_raw)
-                    pollster = pollster_raw
+                key = pollster_raw.strip().casefold()
+                # Old pages label their own election's outcome "Election
+                # results"; 2026 pages name historical elections explicitly.
+                result_cycle = RESULT_CYCLE.get(pollster_raw) or (
+                    cycle if key == "election results" else None
+                )
+                is_result = result_cycle is not None
+                if not is_result and RESULT_ROW.search(pollster_raw):
+                    continue  # pre-election seats, municipal baselines etc.
+                if "exit poll" in key:
+                    continue  # exit polls are a different data class
+                # Older pages pack "Firm/Publisher" into one cell (in either
+                # order); the first segment that canonicalizes is the firm.
+                pollster = pollster_raw
+                inline_publisher = None
+                if not is_result:
+                    segments = [s for s in re.split(r"\s*/\s*", pollster_raw) if s]
+                    for seg in segments:
+                        try:
+                            pollster = canonical_pollster(seg)
+                        except KeyError:
+                            continue
+                        inline_publisher = (
+                            "/".join(s for s in segments if s is not seg) or None
+                        )
+                        break
+                    else:
+                        if key in PUBLISHER_ONLY:
+                            pollster = "Unattributed"
+                            inline_publisher = pollster_raw
+                        else:
+                            unknown_pollsters.add(pollster_raw)
 
-                publisher = None
+                publisher = inline_publisher if not is_result else None
                 if "Publisher" in col_of and row[col_of["Publisher"]] is not None:
-                    publisher = row[col_of["Publisher"]].text or None
+                    publisher = row[col_of["Publisher"]].text or publisher
                 sample = None
                 if "Sample size" in col_of and row[col_of["Sample size"]] is not None:
                     sample = parse_sample(row[col_of["Sample size"]].text)
@@ -300,12 +350,28 @@ def scrape() -> pd.DataFrame:
 
                 if not parsed:
                     continue
+                if not is_result:
+                    row_sums.append(
+                        (sum(s for _, s, _ in parsed), len(parsed))
+                    )
                 for party_id, seats, pct in parsed:
-                    rows.append(
+                    if is_result:
+                        table_result_rows.append(
+                            {
+                                "cycle": result_cycle,
+                                "party_id": party_id,
+                                "seats": seats,
+                                "vote_pct": pct,
+                                "source_row": f"{page_key}:{table_i}:{r}",
+                            }
+                        )
+                        continue
+                    table_rows.append(
                         {
                             "page": page_key,
                             "section": section,
                             "source_row": f"{page_key}:{table_i}:{r}",
+                            "cycle": cycle,
                             "pollster": pollster,
                             "publisher": publisher,
                             "fieldwork_end": fieldwork_end,
@@ -316,12 +382,18 @@ def scrape() -> pd.DataFrame:
                         }
                     )
 
+            complete = sorted(s for s, n in row_sums if n >= 6)
+            median_sum = complete[len(complete) // 2] if complete else 120
+            if median_sum >= 100:
+                rows.extend(table_rows)
+                result_rows.extend(table_result_rows)
+
     polls = pd.DataFrame(rows)
     if unknown_pollsters:
         print(f"UNKNOWN POLLSTERS ({len(unknown_pollsters)}): {sorted(unknown_pollsters)}")
     if unknown_parties:
         print(f"UNKNOWN PARTIES ({len(unknown_parties)}): {sorted(unknown_parties)}")
-    return polls
+    return polls, pd.DataFrame(result_rows)
 
 
 def finalize(polls: pd.DataFrame) -> pd.DataFrame:
@@ -339,8 +411,22 @@ def finalize(polls: pd.DataFrame) -> pd.DataFrame:
     )
     polls = polls[polls["source_row"].isin(keep)].drop(columns="signature")
 
+    # A poll belongs to the cycle of the next election after its fieldwork,
+    # regardless of which page listed it (pages carry post-election rows).
+    boundaries = sorted(
+        (pd.Timestamp(day), cyc) for cyc, day in ELECTION_DAY.items() if day
+    )
+
+    def cycle_of(ts: pd.Timestamp) -> str:
+        for day, cyc in boundaries:
+            if ts <= day:
+                return cyc
+        return "2026"
+
+    polls["cycle"] = polls["fieldwork_end"].map(cycle_of)
+
     polls["poll_id"] = (
-        CYCLE
+        polls["cycle"]
         + "_"
         + polls["fieldwork_end"].dt.strftime("%Y%m%d")
         + "_"
@@ -356,8 +442,6 @@ def finalize(polls: pd.DataFrame) -> pd.DataFrame:
     polls.loc[needs_suffix, "poll_id"] = (
         polls.loc[needs_suffix, "poll_id"] + suffix[needs_suffix]
     )
-    polls["cycle"] = CYCLE
-
     seat_sums = polls.groupby("poll_id")["seats"].sum()
     polls["sums_ok"] = polls["poll_id"].map(seat_sums == 120)
 
@@ -376,10 +460,27 @@ def finalize(polls: pd.DataFrame) -> pd.DataFrame:
     return polls[order].sort_values(["fieldwork_end", "poll_id", "party_id"])
 
 
+def finalize_results(results: pd.DataFrame) -> pd.DataFrame:
+    """One official-result line per cycle: prefer the copy summing to 120."""
+    picked = []
+    for cyc, g in results.groupby("cycle"):
+        candidates = []
+        for src, rows_ in g.groupby("source_row"):
+            candidates.append((abs(rows_["seats"].sum() - 120), len(rows_), src))
+        best_src = min(candidates)[2]
+        picked.append(g[g["source_row"] == best_src])
+    out = pd.concat(picked, ignore_index=True)
+    sums = out.groupby("cycle")["seats"].sum()
+    print(f"results captured for cycles: {dict(sums)}")
+    return out.sort_values(["cycle", "party_id"])
+
+
 if __name__ == "__main__":
-    polls = finalize(scrape())
+    polls_raw, results_raw = scrape()
+    polls = finalize(polls_raw)
+    results = finalize_results(results_raw)
     PROCESSED_DIR.mkdir(parents=True, exist_ok=True)
-    out = PROCESSED_DIR / "polls.csv"
-    polls.to_csv(out, index=False)
-    print(f"wrote {out}")
+    polls.to_csv(PROCESSED_DIR / "polls.csv", index=False)
+    results.to_csv(PROCESSED_DIR / "results.csv", index=False)
+    print(f"wrote {PROCESSED_DIR / 'polls.csv'} and results.csv")
     sys.exit(0)

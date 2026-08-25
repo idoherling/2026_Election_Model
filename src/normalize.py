@@ -25,13 +25,34 @@ POLLSTER_ALIASES: dict[str, list[str]] = {
     "Filber": ["Next Data/Filber", "Filber Institute"],
     "Tatika": ["Taktika", "Yossi Tatika"],
     "StatNet": ["Statnet", "Stat-Net"],
-    "Camil Fuchs": [],
-    "Panels Politics": ["Panels"],
-    "Smith Consulting": ["Smith"],
+    "Camil Fuchs": ["Camile Fuchs"],
+    "Panels Politics": ["Panels", "Panel Politics"],
+    "Smith Consulting": ["Smith", "Smith Poll", "Jerusalem Post /Smith Poll"],
     "Timor Group": [],
     "TrendZone": [],
     "Viterbi Center": [],
+    # Firms of the 2015-2022 era
+    "Dialog": ["Old Dialog"],
+    "Geocartography": ["Geocartographia"],
+    "Teleseker": [],
+    "TNS": [],
+    "Shvakim Panorama": [],
+    "Miskar": [],
+    "Sarid": [],
+    "Number 10 Strategies": [],
 }
+
+# Midgam Project variants predate the "/" convention, so alias them here too.
+POLLSTER_ALIASES["Midgam Project"] += [
+    "Panel Project HaMidgam",
+    "Panel HaMidgam Project",
+    "Midgam & iPanel",
+    "Panel HaMidgam",
+]
+POLLSTER_ALIASES["Midgam Project & StatNet"] += [
+    "Panel Project HaMidgam & Statnet",
+    "Midgam Panel + Statnet",
+]
 
 _pollster_lookup = {
     alias.casefold(): canonical
