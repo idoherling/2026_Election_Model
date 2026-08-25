@@ -114,6 +114,18 @@ DATE_RE = re.compile(
 DATE_US_RE = re.compile(
     r"([A-Za-z]{3})[a-z]*\.?\s+(\d{1,2})(?:\s*[–—-]\s*\d{1,2})?,?\s*(\d{4})?"
 )
+# Trailing two-digit year after day-month ("19 Mar 20", "6-7 Aug 20").
+TWO_DIGIT_YEAR = re.compile(r"\b\d{1,2}\s+[A-Za-z]{3}[a-z]*\.?\s+(\d{2})\s*$")
+
+
+def explicit_year(raw: str) -> int | None:
+    m = re.search(r"\b(\d{4})\b", raw)
+    if m:
+        return int(m.group(1))
+    m = TWO_DIGIT_YEAR.search(raw)
+    if m:
+        return 2000 + int(m.group(1))
+    return None
 PCT_RE = re.compile(r"\(?\s*(\d+(?:\.\d+)?)\s*%\s*\)?$")
 
 
@@ -219,7 +231,8 @@ def parse_date(raw: str, default_year: int) -> pd.Timestamp | None:
     mon_num = MONTHS.get(mon[:3].title())
     if not mon_num:
         return None
-    y = int(year) if year else default_year
+    year_in_cell = explicit_year(str(raw))
+    y = year_in_cell if year_in_cell is not None else default_year
     try:
         return pd.Timestamp(y, mon_num, int(day))
     except ValueError:
@@ -319,13 +332,38 @@ def scrape() -> tuple[pd.DataFrame, pd.DataFrame]:
                 )
                 is_result = result_cycle is not None
                 if is_result:
+                    # A generically labeled "Election results" row identifies
+                    # its election by its own date when it carries one — old
+                    # pages' period tables end with the PREVIOUS election's
+                    # results under the same generic label.
+                    if RESULT_CYCLE.get(pollster_raw) is None:
+                        dated = parse_date(date_cell.text, year_default)
+                        if dated is not None:
+                            near = [
+                                c for c, d in ELECTION_DAY.items()
+                                if d and abs((pd.Timestamp(d) - dated).days) <= 10
+                            ]
+                            if not near:
+                                continue  # an election outside our range
+                            result_cycle = near[0]
                     fieldwork_end = pd.Timestamp(ELECTION_DAY[result_cycle])
                 else:
                     fieldwork_end = parse_date(date_cell.text, year_default)
                     if fieldwork_end is None:
                         continue
-                    has_explicit_year = bool(re.search(r"\d{4}", date_cell.text))
+                    has_explicit_year = explicit_year(date_cell.text) is not None
                     if not has_explicit_year:
+                        # No poll on a cycle's page is fielded after that
+                        # cycle's election day — this anchors period tables
+                        # whose newest row is from an earlier year (e.g. a
+                        # "23rd Knesset" table ending in December 2020 on
+                        # the 2021 page).
+                        page_eday = ELECTION_DAY.get(cycle)
+                        if page_eday is not None:
+                            while fieldwork_end > pd.Timestamp(page_eday):
+                                fieldwork_end = fieldwork_end.replace(
+                                    year=fieldwork_end.year - 1
+                                )
                         while (
                             prev_end is not None
                             and fieldwork_end > prev_end + pd.Timedelta(days=14)
@@ -514,7 +552,9 @@ def finalize_results(results: pd.DataFrame) -> pd.DataFrame:
     for cyc, g in results.groupby("cycle"):
         candidates = []
         for src, rows_ in g.groupby("source_row"):
-            candidates.append((abs(rows_["seats"].sum() - 120), len(rows_), src))
+            # Prefer the copy summing to 120, then the one with MORE party
+            # lines (baseline rows of the same election are often condensed).
+            candidates.append((abs(rows_["seats"].sum() - 120), -len(rows_), src))
         best_src = min(candidates)[2]
         picked.append(g[g["source_row"] == best_src])
     out = pd.concat(picked, ignore_index=True)

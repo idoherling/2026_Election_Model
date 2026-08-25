@@ -15,8 +15,10 @@ The pipeline, in order:
    then pollster house effects estimated hierarchically.
 4. **Seat simulation** (planned) — Monte Carlo over vote shares: 3.25% threshold
    survival → Bader–Ofer apportionment with surplus agreements → P(bloc ≥ 61).
-5. **Evaluation** (planned) — backtests against official CEC results per cycle;
-   calibration and Brier scores; the pollster scorecard.
+5. **Evaluation** (`src/backtest.py`) — final-poll averages vs official results
+   per cycle (2009-2022), aggregated to the finest common partition of party
+   components; per-cycle MAE and a per-pollster scorecard seed. Calibration
+   and Brier scoring arrive with the simulation layer.
 
 ## Layout
 
