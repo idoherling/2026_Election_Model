@@ -250,17 +250,23 @@ def main() -> None:
     scale = uncertainty_scale(days_out)
     seats = simulate_core(avg, SURPLUS_PAIRS, scale=scale)
 
+    is_max = seats == seats.max(axis=1, keepdims=True)
+    p_largest = (is_max / is_max.sum(axis=1, keepdims=True)).mean(axis=0)
     dist = pd.DataFrame({
         "list": avg["label"], "bloc": avg["bloc"].map(BLOC_LABEL),
+        "components": avg["components"],
         "avg_input": avg["avg_seats"].round(1),
         "mean": seats.mean(axis=0).round(1),
         "p05": np.percentile(seats, 5, axis=0).astype(int),
         "p50": np.percentile(seats, 50, axis=0).astype(int),
         "p95": np.percentile(seats, 95, axis=0).astype(int),
         "p_pass": (seats >= 4).mean(axis=0).round(3),
+        "p_largest": p_largest.round(3),
     }).sort_values("mean", ascending=False)
     dist["asof"] = asof.date().isoformat()
     dist.to_csv(PROCESSED_DIR / "forecast_2026.csv", index=False)
+    pd.DataFrame(seats, columns=avg["label"]).to_parquet(
+        PROCESSED_DIR / "forecast_draws.parquet")
 
     nb = seats[:, (avg["bloc"] == "netanyahu_bloc").values].sum(axis=1)
     anti = seats[:, (avg["bloc"] == "opposition_bloc").values].sum(axis=1)

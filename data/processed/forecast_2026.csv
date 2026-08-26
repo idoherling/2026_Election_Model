@@ -1,14 +1,14 @@
-list,bloc,avg_input,mean,p05,p50,p95,p_pass,asof
-Yashar,Anti-Netanyahu bloc,24.7,25.3,14,25,37,0.998,2026-08-24
-Likud,Netanyahu bloc,24.3,24.9,15,25,35,0.999,2026-08-24
-Together,Anti-Netanyahu bloc,12.2,12.2,4,12,21,0.954,2026-08-24
-Balad + Hadash-Ta'al + Ra'am,Arab parties,11.1,10.1,0,10,18,0.924,2026-08-24
-The Democrats,Anti-Netanyahu bloc,10.0,9.9,0,10,18,0.908,2026-08-24
-Yisrael Beytenu,Anti-Netanyahu bloc,8.9,8.8,0,9,14,0.947,2026-08-24
-Otzma Yehudit,Netanyahu bloc,8.3,7.8,0,8,13,0.912,2026-08-24
-Shas,Netanyahu bloc,7.8,6.9,0,7,13,0.82,2026-08-24
-United Torah Judaism,Netanyahu bloc,7.9,6.9,0,7,13,0.816,2026-08-24
-Religious Zionist Party,Netanyahu bloc,5.0,4.0,0,5,9,0.64,2026-08-24
-Zionist Home – The Reservists,Anti-Netanyahu bloc,0.0,1.9,0,0,7,0.334,2026-08-24
-Unity,Anti-Netanyahu bloc,0.0,0.8,0,0,6,0.16,2026-08-24
-Blue and White,Anti-Netanyahu bloc,0.0,0.5,0,0,4,0.104,2026-08-24
+list,bloc,components,avg_input,mean,p05,p50,p95,p_pass,p_largest,asof
+Yashar,Anti-Netanyahu bloc,yashar,24.7,25.3,14,25,37,0.998,0.509,2026-08-24
+Likud,Netanyahu bloc,likud,24.3,24.9,15,25,35,0.999,0.474,2026-08-24
+Together,Anti-Netanyahu bloc,together,12.2,12.2,4,12,21,0.954,0.009,2026-08-24
+Balad + Hadash-Ta'al + Ra'am,Arab parties,balad+hadash_taal+raam,11.1,10.1,0,10,18,0.924,0.004,2026-08-24
+The Democrats,Anti-Netanyahu bloc,democrats,10.0,9.9,0,10,18,0.908,0.003,2026-08-24
+Yisrael Beytenu,Anti-Netanyahu bloc,yisrael_beytenu,8.9,8.8,0,9,14,0.947,0.0,2026-08-24
+Otzma Yehudit,Netanyahu bloc,otzma,8.3,7.8,0,8,13,0.912,0.0,2026-08-24
+Shas,Netanyahu bloc,shas,7.8,6.9,0,7,13,0.82,0.0,2026-08-24
+United Torah Judaism,Netanyahu bloc,utj,7.9,6.9,0,7,13,0.816,0.0,2026-08-24
+Religious Zionist Party,Netanyahu bloc,rzp,5.0,4.0,0,5,9,0.64,0.0,2026-08-24
+Zionist Home – The Reservists,Anti-Netanyahu bloc,zionist_home,0.0,1.9,0,0,7,0.334,0.0,2026-08-24
+Unity,Anti-Netanyahu bloc,unity,0.0,0.8,0,0,6,0.16,0.0,2026-08-24
+Blue and White,Anti-Netanyahu bloc,blue_white,0.0,0.5,0,0,4,0.104,0.0,2026-08-24
