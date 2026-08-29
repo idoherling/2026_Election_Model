@@ -52,6 +52,23 @@ warnings.filterwarnings("ignore")
 
 WINDOW_DAYS = 240
 HOLDOUT_DAYS = 14
+# Non-uniform latent grid: weekly bins through the campaign, finer bins in
+# the final stretch — Israeli campaigns break late, and the harness showed a
+# weekly latent smooths away final-week movement the simple average catches.
+FINE_DAYS = 28
+FINE_STEP = 2
+
+
+def time_grid():
+    """Bin edges in days-relative-to-asof, and per-step dt in week units."""
+    edges = list(range(-WINDOW_DAYS, -FINE_DAYS, 7)) \
+        + list(range(-FINE_DAYS, 1, FINE_STEP))
+    if edges[-1] != 0:
+        edges.append(0)
+    edges = np.array(edges, dtype=float)
+    mids = (edges[:-1] + edges[1:]) / 2.0
+    dt_weeks = np.diff(mids) / 7.0
+    return edges, dt_weeks
 N_PROJ = 8_000          # posterior projection draws
 SEED = 20261027
 T_DF = 5
@@ -127,7 +144,10 @@ def prepare_data(polls: pd.DataFrame | None = None,
     if modern_remaps:
         obs = _merge_cec(obs, block_of, asof)
 
-    obs["week"] = ((obs["fieldwork_end"] - asof).dt.days + WINDOW_DAYS) // 7
+    edges, dt_weeks = time_grid()
+    obs["obs_day"] = (obs["fieldwork_end"] - asof).dt.days
+    obs["week"] = np.clip(np.digitize(obs["obs_day"], edges) - 1,
+                          0, len(edges) - 2)
     firms = sorted(obs["pollster"].unique())
     firm_ix = {f: i for i, f in enumerate(firms)}
     try:
@@ -145,19 +165,21 @@ def prepare_data(polls: pd.DataFrame | None = None,
     lb_ix = {b: i for i, b in enumerate(latent_blocks)}
     obs = obs[obs["block"].isin(latent_blocks)]
 
-    last_obs = obs.groupby("block")["week"].max()
+    last_obs_day = obs.groupby("block")["obs_day"].max()
     data = {
         "asof": asof,
         "blocks": blocks,
         "latent_blocks": latent_blocks,
-        "last_obs_week": last_obs.reindex(latent_blocks).values,
+        "last_obs_day": last_obs_day.reindex(latent_blocks).values,
+        "obs_day": obs["obs_day"].values.astype(int),
+        "dt_weeks": dt_weeks,
         "components": ["+".join(sorted(blocks[b])) for b in latent_blocks],
         "y": obs["share"].values,
         "week": obs["week"].values.astype(int),
         "block_i": obs["block"].map(lb_ix).values.astype(int),
         "firm_i": obs["pollster"].map(firm_ix).values.astype(int),
         "firm_group": firm_group,
-        "n_weeks": int(obs["week"].max()) + 1,
+        "n_weeks": len(edges) - 1,
         "firms": firms,
         "groups": groups,
         "n_polls": obs["poll_id"].nunique(),
@@ -238,7 +260,10 @@ def fit(data, draws=800, tune=800, holdout_mask=None):
         steps = pm.Normal("steps", 0, 1, shape=(W - 1, B - 1))
         z = pm.Deterministic(
             "z", pt.concatenate(
-                [z0[None, :], z0[None, :] + pt.cumsum(steps * tau, axis=0)],
+                [z0[None, :],
+                 z0[None, :] + pt.cumsum(
+                     steps * tau
+                     * np.sqrt(data["dt_weeks"])[:, None], axis=0)],
                 axis=0))
         shares = pm.Deterministic(
             "shares", pt.special.softmax(
@@ -252,8 +277,18 @@ def fit(data, draws=800, tune=800, holdout_mask=None):
         delta_c = pm.Deterministic("delta_c", delta - delta.mean(axis=0))
 
         s_obs = pm.HalfNormal("s_obs", 0.012, shape=B)
+        # Firm reliability: per-firm noise multipliers with priors from the
+        # results-graded accuracy scorecard — the information a within-cycle
+        # likelihood cannot see. A firm with a poor final-poll record enters
+        # with a wider prior noise; the 2026 data can still update it.
+        from polling_average import QUALITY_ALIAS, quality_map
+        q = np.array([quality_map().get(QUALITY_ALIAS.get(f, f), 1.0)
+                      for f in data["firms"]])
+        lam = pm.LogNormal("lam", mu=np.log(1.0 / q ** 2), sigma=0.25,
+                           shape=F)
         mu = shares[wk, bi] + delta_c[fi, bi]
-        pm.StudentT("y", nu=4, mu=mu, sigma=s_obs[bi] + 0.002, observed=y)
+        pm.StudentT("y", nu=4, mu=mu,
+                    sigma=(s_obs[bi] + 0.002) * lam[fi], observed=y)
 
         idata = pm.sample(draws=draws, tune=tune, chains=4, cores=4,
                           target_accept=0.92, random_seed=SEED,
@@ -317,7 +352,7 @@ def project(data, idata, rng, config="current", config_params=None):
     shares /= shares.sum(axis=1, keepdims=True)
 
     # Lists with no polls in their final weeks have left the race.
-    gone = data["last_obs_week"] < data["n_weeks"] - 1 - WITHDRAWN_WEEKS
+    gone = data["last_obs_day"] < -7 * WITHDRAWN_WEEKS
     if gone.any():
         shares[:, np.nonzero(gone)[0]] = 0.0
         shares /= shares.sum(axis=1, keepdims=True)
@@ -457,8 +492,7 @@ def main() -> None:
 
     # Holdout: refit without the last 14 days, predict them.
     cut = data["asof"] - pd.Timedelta(days=HOLDOUT_DAYS)
-    days = data["week"] * 7 - WINDOW_DAYS  # days relative to asof
-    holdout = days > -HOLDOUT_DAYS
+    holdout = data["obs_day"] > -HOLDOUT_DAYS
     if holdout.sum() >= 10:
         _, idata_h = fit(data, draws=500, tune=600, holdout_mask=holdout)
         post = idata_h.posterior

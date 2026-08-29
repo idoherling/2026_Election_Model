@@ -96,7 +96,7 @@ def project_cycle(data, idata, eday, threshold, pairs, params,
     shares = np.exp(z_f - z_f.max(axis=1, keepdims=True))
     shares /= shares.sum(axis=1, keepdims=True)
 
-    gone = data["last_obs_week"] < data["n_weeks"] - 1 - WITHDRAWN_WEEKS
+    gone = data["last_obs_day"] < -7 * WITHDRAWN_WEEKS
     if gone.any():
         shares[:, np.nonzero(gone)[0]] = 0.0
         shares /= shares.sum(axis=1, keepdims=True)

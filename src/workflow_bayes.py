@@ -67,8 +67,11 @@ def build_model(data, trend=True, house=False, groups=False, robust=False,
         if trend:
             tau = pm.HalfNormal("tau", 0.06, shape=B - 1)
             steps = pm.Normal("steps", 0, 1, shape=(W - 1, B - 1))
+            dt = np.sqrt(np.asarray(data.get("dt_weeks",
+                                             np.ones(W - 1))))[:, None]
             z = pt.concatenate(
-                [z0[None, :], z0[None, :] + pt.cumsum(steps * tau, axis=0)],
+                [z0[None, :],
+                 z0[None, :] + pt.cumsum(steps * tau * dt, axis=0)],
                 axis=0)
         else:
             z = pt.tile(z0[None, :], (W, 1))
