@@ -126,21 +126,7 @@ def prepare_data(polls: pd.DataFrame | None = None,
     block_of = {c: i for i, b in enumerate(blocks) for c in b}
     win["block"] = win["party_id"].map(lambda p: block_of[p.split("+")[0]])
 
-    # Implied vote share per row: seat rows share the above-threshold pie,
-    # "(x.y%)" rows are direct shares.
-    wasted = (win[win["seats"] == 0].assign(w=win["vote_pct"].fillna(0) / 100)
-              .groupby("poll_id")["w"].sum())
-    win["wasted"] = win["poll_id"].map(wasted).fillna(0.0)
-    seat_share = win["seats"] / 120.0 * (1.0 - win["wasted"] - 0.01)
-    pct_share = win["vote_pct"] / 100.0
-    win["share"] = np.where(win["seats"] > 0, seat_share, pct_share)
-    # One observation per poll x block: polls listing a joint list's
-    # components separately must contribute the SUM, not two half-sized
-    # observations.
-    obs = (win[win["share"].notna()]
-           .groupby(["poll_id", "block"], as_index=False)
-           .agg(share=("share", "sum"), pollster=("pollster", "first"),
-                fieldwork_end=("fieldwork_end", "first")))
+    obs = implied_share_obs(win)
     if modern_remaps:
         obs = _merge_cec(obs, block_of, asof)
 
@@ -195,6 +181,23 @@ def prepare_data(polls: pd.DataFrame | None = None,
         "n_polls": obs["poll_id"].nunique(),
     }
     return data
+
+
+def implied_share_obs(win: pd.DataFrame) -> pd.DataFrame:
+    """Implied vote share per poll x block: seat rows share the
+    above-threshold pie, "(x.y%)" rows are direct shares; component rows of
+    a joint list contribute the SUM."""
+    win = win.copy()
+    wasted = (win[win["seats"] == 0].assign(w=win["vote_pct"].fillna(0) / 100)
+              .groupby("poll_id")["w"].sum())
+    win["wasted"] = win["poll_id"].map(wasted).fillna(0.0)
+    seat_share = win["seats"] / 120.0 * (1.0 - win["wasted"] - 0.01)
+    pct_share = win["vote_pct"] / 100.0
+    win["share"] = np.where(win["seats"] > 0, seat_share, pct_share)
+    return (win[win["share"].notna()]
+            .groupby(["poll_id", "block"], as_index=False)
+            .agg(share=("share", "sum"), pollster=("pollster", "first"),
+                 fieldwork_end=("fieldwork_end", "first")))
 
 
 def _merge_cec(obs: pd.DataFrame, block_of: dict, asof) -> pd.DataFrame:
