@@ -77,13 +77,19 @@ BEHAVIOR = {
 # PM allocation WITHIN a winning coalition — rotations are the Israeli norm
 # (Bennett was PM with 7 seats in 2021). Probabilities are judgment,
 # conditioned on the coalition type; rows sum to 1.
+# Lapid is set to zero by editorial judgment: by taking the No. 2 slot in
+# Bennett's Together alliance he subordinated his rotation claim — the 2021
+# mechanism (Lapid gifting Bennett the first rotation from outside) cannot
+# repeat from inside Bennett's own list. Cromwell's-rule caveat noted: a
+# post-election faction split could resurrect a thin path (~0.2%); rounded
+# to zero at the owner's call.
 #           Eisenkot  Bennett  Liberman  Lapid  other
 PM_ALLOC = {
-    2: [0.74, 0.18, 0.04, 0.02, 0.02],   # centre coalition
-    3: [0.74, 0.18, 0.04, 0.02, 0.02],   # centre + Ra'am
-    4: [0.63, 0.30, 0.00, 0.02, 0.05],   # centre-haredi: right-cred PM helps,
+    2: [0.75, 0.19, 0.04, 0.00, 0.02],   # centre coalition
+    3: [0.75, 0.19, 0.04, 0.00, 0.02],   # centre + Ra'am
+    4: [0.64, 0.31, 0.00, 0.00, 0.05],   # centre-haredi: right-cred PM helps,
                                           # Liberman is a dealbreaker for haredim
-    5: [0.74, 0.18, 0.04, 0.02, 0.02],   # centre minority
+    5: [0.75, 0.19, 0.04, 0.00, 0.02],   # centre minority
     6: [0.35, 0.10, 0.05, 0.00, 0.50],   # unity: Likud successor/rotation heavy
 }
 PM_NAMES = ["Eisenkot", "Bennett", "Liberman", "Lapid",
