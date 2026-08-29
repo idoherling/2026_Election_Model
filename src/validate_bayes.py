@@ -183,7 +183,7 @@ def main() -> None:
     results = pd.read_csv(PROCESSED_DIR / "results.csv")
     rng = np.random.default_rng(SEED)
 
-    rows, covered_all = [], []
+    rows, covered_all, list_rows = [], [], []
     for cycle in ORDER:
         eday = pd.Timestamp(ELECTION_DAY[cycle])
         asof = eday - pd.Timedelta(days=1)
@@ -215,16 +215,23 @@ def main() -> None:
             else:
                 unmatched += r.seats
 
+        pred_mean = seats.mean(axis=0)
         p05 = np.percentile(seats, 5, axis=0)
         p95 = np.percentile(seats, 95, axis=0)
         active = (base >= 0.005) | (actual > 0)
         cov = ((actual >= p05) & (actual <= p95))[active]
         p_pass = (seats >= 1).mean(axis=0)
         brier = float(np.mean((p_pass[active] - (actual[active] > 0)) ** 2))
-        mae = float(np.abs(seats.mean(axis=0) - actual)[active].mean())
+        mae = float(np.abs(pred_mean - actual)[active].mean())
         nb_mask = blocs == "netanyahu_bloc"
         nb_sim = seats[:, nb_mask].sum(axis=1)
         nb_actual = int(actual[nb_mask].sum())
+        for i in np.nonzero(active)[0]:
+            list_rows.append({"cycle": cycle,
+                              "components": data["components"][i]
+                              if i < len(data["components"]) else "micro",
+                              "pred": float(pred_mean[i]),
+                              "actual": int(actual[i])})
         rows.append({
             "cycle": cycle, "n_lists": int(active.sum()),
             "coverage_90": round(float(cov.mean()), 2),
@@ -243,6 +250,8 @@ def main() -> None:
 
     out = pd.DataFrame(rows).set_index("cycle")
     out.to_csv(PROCESSED_DIR / "model_validation_bayes.csv")
+    pd.DataFrame(list_rows).to_csv(
+        PROCESSED_DIR / "model_validation_bayes_lists.csv", index=False)
     pooled = np.concatenate(covered_all)
     p61, hap = out["p_bloc_61"], out["bloc_61_happened"].astype(float)
     print("\n== BAYESIAN MODEL, eight-cycle grade ==")

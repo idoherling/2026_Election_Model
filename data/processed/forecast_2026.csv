@@ -1,14 +1,17 @@
 list,bloc,components,avg_input,mean,p05,p50,p95,p_pass,p_largest,asof
-Yashar,Anti-Netanyahu bloc,yashar,24.7,25.3,14,25,37,0.998,0.509,2026-08-24
-Likud,Netanyahu bloc,likud,24.3,24.9,15,25,35,0.999,0.474,2026-08-24
-Together,Anti-Netanyahu bloc,together,12.2,12.2,4,12,21,0.954,0.009,2026-08-24
-Balad + Hadash-Ta'al + Ra'am,Arab parties,balad+hadash_taal+raam,11.1,10.1,0,10,18,0.924,0.004,2026-08-24
-The Democrats,Anti-Netanyahu bloc,democrats,10.0,9.9,0,10,18,0.908,0.003,2026-08-24
-Yisrael Beytenu,Anti-Netanyahu bloc,yisrael_beytenu,8.9,8.8,0,9,14,0.947,0.0,2026-08-24
-Otzma Yehudit,Netanyahu bloc,otzma,8.3,7.8,0,8,13,0.912,0.0,2026-08-24
-Shas,Netanyahu bloc,shas,7.8,6.9,0,7,13,0.82,0.0,2026-08-24
-United Torah Judaism,Netanyahu bloc,utj,7.9,6.9,0,7,13,0.816,0.0,2026-08-24
-Religious Zionist Party,Netanyahu bloc,rzp,5.0,4.0,0,5,9,0.64,0.0,2026-08-24
-Zionist Home – The Reservists,Anti-Netanyahu bloc,zionist_home,0.0,1.9,0,0,7,0.334,0.0,2026-08-24
-Unity,Anti-Netanyahu bloc,unity,0.0,0.8,0,0,6,0.16,0.0,2026-08-24
-Blue and White,Anti-Netanyahu bloc,blue_white,0.0,0.5,0,0,4,0.104,0.0,2026-08-24
+Yashar,Anti-Netanyahu bloc,yashar,24.0,24.7,13,25,36,0.997,0.545,2026-08-27
+Likud,Netanyahu bloc,likud,23.0,23.5,13,23,34,0.998,0.433,2026-08-27
+Together,Anti-Netanyahu bloc,together,12.4,12.5,4,13,21,0.953,0.015,2026-08-27
+The Democrats,Anti-Netanyahu bloc,democrats,9.9,9.9,0,10,18,0.9,0.004,2026-08-27
+Shas,Netanyahu bloc,shas,8.2,8.9,0,9,16,0.899,0.001,2026-08-27
+United Torah Judaism,Netanyahu bloc,utj,7.7,8.2,0,8,15,0.876,0.001,2026-08-27
+Yisrael Beytenu,Anti-Netanyahu bloc,yisrael_beytenu,8.4,8.2,0,8,14,0.922,0.0,2026-08-27
+Otzma Yehudit,Netanyahu bloc,otzma,7.7,7.2,0,7,13,0.878,0.0,2026-08-27
+Joint List,Arab parties,joint_list,6.5,6.1,0,6,12,0.779,0.001,2026-08-27
+Ra'am,Arab parties,raam,4.9,4.0,0,5,10,0.613,0.0,2026-08-27
+Amcha Yisrael,,amcha_yisrael,3.7,2.3,0,0,7,0.405,0.0,2026-08-27
+Zionist Home – The Reservists,Anti-Netanyahu bloc,zionist_home,0.0,1.7,0,0,7,0.291,0.0,2026-08-27
+Religious Zionist Party,Netanyahu bloc,rzp,2.7,1.4,0,0,6,0.254,0.0,2026-08-27
+Unity,Anti-Netanyahu bloc,unity,0.0,0.8,0,0,6,0.142,0.0,2026-08-27
+Blue and White,Anti-Netanyahu bloc,blue_white,0.0,0.4,0,0,4,0.086,0.0,2026-08-27
+Balad + Hadash-Ta'al,Arab parties,balad+hadash_taal,1.2,0.4,0,0,4,0.08,0.0,2026-08-27

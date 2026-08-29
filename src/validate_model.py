@@ -69,7 +69,7 @@ def main() -> None:
     results = pd.read_csv(PROCESSED_DIR / "results.csv")
     fam = pd.read_csv(PROCESSED_DIR / "bias_family.csv", index_col=0)
 
-    rows, matched_all = [], []
+    rows, matched_all, list_rows = [], [], []
     for cycle in ORDER:
         eday = pd.Timestamp(ELECTION_DAY[cycle])
         asof = eday - pd.Timedelta(days=1)
@@ -112,6 +112,12 @@ def main() -> None:
         nb_mask = (avg["bloc"] == "netanyahu_bloc").values
         nb_sim = seats[:, nb_mask].sum(axis=1)
         nb_actual = int(actual[nb_mask].sum())
+        for i in np.nonzero(active)[0]:
+            list_rows.append({
+                "cycle": cycle, "components": avg["components"].iloc[i],
+                "pred": float(seats.mean(axis=0)[i]),
+                "actual": int(actual[i]),
+            })
         rows.append({
             "cycle": cycle, "n_lists": int(active.sum()),
             "coverage_90": round(float(covered.mean()), 2),
@@ -126,6 +132,8 @@ def main() -> None:
 
     out = pd.DataFrame(rows).set_index("cycle")
     out.to_csv(PROCESSED_DIR / "model_validation.csv")
+    pd.DataFrame(list_rows).to_csv(
+        PROCESSED_DIR / "model_validation_lists.csv", index=False)
     print("Model retro-validation, final-eve forecasts "
           f"({N_SIMS:,} sims/cycle, leave-one-cycle-out calibration):\n")
     print(out.to_string())

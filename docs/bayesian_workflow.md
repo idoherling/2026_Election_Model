@@ -146,6 +146,31 @@ fit.
   identified improvement is finer time resolution (or an ensemble center)
   in the final stretch.
 
+### Rounds four to six: the final-stretch investigation
+
+  The remaining point-accuracy gap (Bayesian 1.66-1.67 vs simple 1.42) was
+  attacked with four gated experiments, all rejected — and the rejections
+  are the finding:
+
+  1. **Fine time grid** (weekly → 2-day bins in the final month, proper
+     √dt scaling): harness unchanged. Time resolution was not the cause;
+     the √dt discretization is kept as a correctness fix.
+  2. **Firm-reliability priors** (accuracy-scorecard priors on per-firm
+     observation noise): MAE 1.67 → 1.66. Not the cause.
+  3. **Comparability audit**: the two harnesses grade different list sets;
+     restricted to identical sets the simple pipeline holds (1.45). Not a
+     grading artifact.
+  4. **Ensemble test** on matched per-list predictions across all eight
+     cycles: error correlation **0.93**, blend curve monotone into the pure
+     simple center. No diversification exists to harvest.
+
+  Conclusion, now evidence-forced rather than assumed: a random-walk
+  smoother's endpoint is structurally shrunk toward the recent past, and
+  since both models drink from the same polls, nothing blends it away. The
+  published object (`official_forecast.py`) therefore assigns each
+  instrument its validated job: **simple pipeline centers, Bayesian
+  distributions and probabilities, registration-mixture blocs.**
+
 ### Round three: the party-anchored error decomposition
 
   All projection shocks were re-derived from one sequential decomposition
