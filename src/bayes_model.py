@@ -60,6 +60,14 @@ T_DF = 5
 BLOC_SWING_SD = 3.5
 FAMILY_SHOCK = {"arab": (-0.7, 1.2), "haredi": (-1.0, 1.6)}
 
+# Per-list election-day shock (seats): the residual error of final polls
+# about individual lists beyond bloc/family error, from the backtest.
+# Validation without it under-covered badly (75.7% on a 90% target).
+LIST_SHOCK_BASE = 1.0
+LIST_SHOCK_SLOPE = 0.05
+# A list with no polls in its final weeks has left the race by election day.
+WITHDRAWN_WEEKS = 5
+
 # Prior-only micro-lists: (share mean, share sd) from their electoral history.
 MICRO_PRIORS = {
     "zehut": (0.012, 0.007),   # 2.74% in Apr 2019, dormant since
@@ -68,20 +76,31 @@ MICRO_PRIORS = {
 }
 
 
-def prepare_data():
-    polls = load_2026()
+def prepare_data(polls: pd.DataFrame | None = None,
+                 asof: pd.Timestamp | None = None,
+                 modern_remaps: bool = True):
+    """Build the model's data dict; parameterized so the validation harness
+    can rebuild any past cycle's window (modern_remaps encodes 2026-only
+    list identities — in earlier eras Ra'am really was inside the Joint
+    List, so those rules must not apply)."""
+    if polls is None:
+        polls = load_2026()
     polls = polls[polls["pollster"] != "Unattributed"].copy()
-    # Ra'am separate from the Joint List: joint_list == hadash_taal+balad,
-    # and polls merging raam into a wider Arab composite are dropped.
-    polls.loc[polls["party_id"] == "joint_list", "party_id"] = "balad+hadash_taal"
-    # Together IS Yesh Atid + Bennett 2026: one entity across the merger, so
-    # pre-merger component polls and post-merger joint polls share a block.
-    polls.loc[polls["party_id"] == "together", "party_id"] = "bennett_2026+yesh_atid"
-    bad = polls[polls["party_id"].str.contains(r"raam.*\+|\+.*raam")]["poll_id"]
-    polls = polls[~polls["poll_id"].isin(set(bad))]
+    if modern_remaps:
+        # Ra'am separate from the Joint List: joint_list == hadash_taal+balad,
+        # and polls merging raam into a wider Arab composite are dropped.
+        polls.loc[polls["party_id"] == "joint_list", "party_id"] = "balad+hadash_taal"
+        # Together IS Yesh Atid + Bennett 2026: one entity across the merger,
+        # so pre-merger component polls and post-merger joint polls share a
+        # block.
+        polls.loc[polls["party_id"] == "together", "party_id"] = "bennett_2026+yesh_atid"
+        bad = polls[polls["party_id"].str.contains(r"raam.*\+|\+.*raam")]["poll_id"]
+        polls = polls[~polls["poll_id"].isin(set(bad))]
 
-    asof = polls["fieldwork_end"].max()
-    win = polls[polls["fieldwork_end"] > asof - pd.Timedelta(days=WINDOW_DAYS)].copy()
+    if asof is None:
+        asof = polls["fieldwork_end"].max()
+    win = polls[(polls["fieldwork_end"] > asof - pd.Timedelta(days=WINDOW_DAYS))
+                & (polls["fieldwork_end"] <= asof)].copy()
 
     blocks = merge_blocks(win["party_id"].unique())
     block_of = {c: i for i, b in enumerate(blocks) for c in b}
@@ -121,10 +140,12 @@ def prepare_data():
     lb_ix = {b: i for i, b in enumerate(latent_blocks)}
     obs = obs[obs["block"].isin(latent_blocks)]
 
+    last_obs = obs.groupby("block")["week"].max()
     data = {
         "asof": asof,
         "blocks": blocks,
         "latent_blocks": latent_blocks,
+        "last_obs_week": last_obs.reindex(latent_blocks).values,
         "components": ["+".join(sorted(blocks[b])) for b in latent_blocks],
         "y": obs["share"].values,
         "week": obs["week"].values.astype(int),
@@ -233,6 +254,20 @@ def project(data, idata, rng):
     z_e = z_last + np.sqrt(weeks_ahead) * tau * rng.standard_normal(z_last.shape)
     z_full = np.concatenate([z_e, np.zeros((N_PROJ, 1))], axis=1)
     shares = np.exp(z_full - z_full.max(axis=1, keepdims=True))
+    shares /= shares.sum(axis=1, keepdims=True)
+
+    # Lists with no polls in their final weeks have left the race.
+    gone = data["last_obs_week"] < data["n_weeks"] - 1 - WITHDRAWN_WEEKS
+    if gone.any():
+        shares[:, np.nonzero(gone)[0]] = 0.0
+        shares /= shares.sum(axis=1, keepdims=True)
+
+    # Per-list election-day shock: residual final-poll error beyond
+    # bloc/family components, calibrated on the backtest.
+    base0 = shares.mean(axis=0)
+    sd_list = (LIST_SHOCK_BASE + LIST_SHOCK_SLOPE * base0 * 120) / 120.0
+    shares = np.clip(
+        shares + rng.standard_normal(shares.shape) * sd_list, 0, None)
     shares /= shares.sum(axis=1, keepdims=True)
 
     labels = [short_name(c, names) for c in data["components"]]
