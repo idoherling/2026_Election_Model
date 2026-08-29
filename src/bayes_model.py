@@ -165,6 +165,15 @@ def prepare_data(polls: pd.DataFrame | None = None,
     lb_ix = {b: i for i, b in enumerate(latent_blocks)}
     obs = obs[obs["block"].isin(latent_blocks)]
 
+    try:
+        fil = pd.read_csv(PROCESSED_DIR / "cec_filings.csv",
+                          dtype={"ref": str})
+        umap = dict(zip("cec" + fil["ref"], fil["undecided_pct"] / 100.0))
+        uvals = obs["poll_id"].map(umap)
+        u_c = (uvals - uvals.mean()).fillna(0.0).values
+    except FileNotFoundError:
+        u_c = np.zeros(len(obs))
+
     last_obs_day = obs.groupby("block")["obs_day"].max()
     data = {
         "asof": asof,
@@ -172,6 +181,7 @@ def prepare_data(polls: pd.DataFrame | None = None,
         "latent_blocks": latent_blocks,
         "last_obs_day": last_obs_day.reindex(latent_blocks).values,
         "obs_day": obs["obs_day"].values.astype(int),
+        "u_c": u_c,
         "dt_weeks": dt_weeks,
         "components": ["+".join(sorted(blocks[b])) for b in latent_blocks],
         "y": obs["share"].values,
@@ -246,6 +256,7 @@ def fit(data, draws=800, tune=800, holdout_mask=None):
     keep = slice(None) if holdout_mask is None else ~holdout_mask
     y, wk = data["y"][keep], data["week"][keep]
     bi, fi = data["block_i"][keep], data["firm_i"][keep]
+    u_c = np.asarray(data.get("u_c", np.zeros(len(data["y"]))))[keep]
 
     # Empirical ALR start point for faster convergence.
     first = pd.DataFrame({"b": data["block_i"], "y": data["y"],
@@ -286,9 +297,14 @@ def fit(data, draws=800, tune=800, holdout_mask=None):
                       for f in data["firms"]])
         lam = pm.LogNormal("lam", mu=np.log(1.0 / q ** 2), sigma=0.25,
                            shape=F)
+        # Undecided-share effect on informativeness: a filing-reported
+        # undecided share above the field average widens that poll's noise
+        # by an ESTIMATED factor (beta_u -> 0 if undecideds don't matter).
+        beta_u = pm.HalfNormal("beta_u", 3.0)
         mu = shares[wk, bi] + delta_c[fi, bi]
         pm.StudentT("y", nu=4, mu=mu,
-                    sigma=(s_obs[bi] + 0.002) * lam[fi], observed=y)
+                    sigma=(s_obs[bi] + 0.002) * lam[fi]
+                    * pt.exp(beta_u * u_c), observed=y)
 
         idata = pm.sample(draws=draws, tune=tune, chains=4, cores=4,
                           target_accept=0.92, random_seed=SEED,
@@ -417,6 +433,13 @@ def project(data, idata, rng, config="current", config_params=None):
         if raam is not None:
             shares = shares - boost * (w / w.sum())
             shares[:, raam] = shares[:, raam] + boost
+    elif config == "arab_turnout":
+        # Differential-turnout dial: scale Arab-family shares by a factor
+        # calibrated on the 2021->2022 turnout swing (44.6% -> 53.2% moved
+        # the Arab lists' national share by ~+24%; +/-12% spans the range).
+        fct = cp.get("factor", 1.0)
+        in_a = fams == "arab"
+        shares[:, in_a] = shares[:, in_a] * fct
     if config != "current":
         shares = np.clip(shares, 0, None)
         shares /= shares.sum(axis=1, keepdims=True)
@@ -509,6 +532,12 @@ def main() -> None:
 
     model, idata = fit(data)
     diagnostics(idata)
+    if "beta_u" in idata.posterior:
+        bu = idata.posterior["beta_u"].values.ravel()
+        print(f"undecided coefficient beta_u: mean {bu.mean():.2f}, "
+              f"90% CI [{np.percentile(bu, 5):.2f}, "
+              f"{np.percentile(bu, 95):.2f}]  "
+              f"(x{np.exp(bu.mean() * 0.05):.2f} noise per +5pp undecided)")
     posterior_predictive_check(data, idata)
 
     seats, labels, blocs = project(data, idata, rng)

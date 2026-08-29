@@ -133,6 +133,23 @@ def parse_pdf(path: Path):
             m = PCT.search(ln)
             if m:
                 meta["undecided_pct"] = float(m.group(1))
+        # Sample composition (sector coverage), where the filing reports it.
+        if "חרדי" in ln and "haredi_sample_pct" not in meta:
+            m = PCT.search(ln)
+            if m and float(m.group(1)) <= 25:
+                meta["haredi_sample_pct"] = float(m.group(1))
+        if "מוסלמי" in ln and "arab_muslim_sample_pct" not in meta:
+            m = PCT.search(ln)
+            if m and float(m.group(1)) <= 25:
+                meta["arab_muslim_sample_pct"] = float(m.group(1))
+        if "נוצרי" in ln and "ערבי" in ln and "arab_christian_sample_pct" not in meta:
+            m = PCT.search(ln)
+            if m and float(m.group(1)) <= 10:
+                meta["arab_christian_sample_pct"] = float(m.group(1))
+        if "דרוזי" in ln and "druze_sample_pct" not in meta:
+            m = PCT.search(ln)
+            if m and float(m.group(1)) <= 10:
+                meta["druze_sample_pct"] = float(m.group(1))
 
     # Party lines: a known keyword + a percentage; keep the FIRST match per
     # party (the main vote-intention table precedes crosstabs).

@@ -1,0 +1,4 @@
+scenario,factor,arab_seats_mean,p_jl_passes,p_raam_passes,p_nb_61,p_anti_61,p_neither
+low_turnout,0.88,7.4,0.711,0.483,0.118,0.312,0.57
+central,1.0,9.0,0.777,0.57,0.1,0.277,0.623
+high_turnout,1.12,10.4,0.824,0.638,0.088,0.245,0.667
