@@ -1,0 +1,5 @@
+model,elpd_loo,p_loo,divergences,median_abs_resid_seats
+M0_static,5269.4,15.6,0,0.85
+M1_trend,6348.5,156.9,0,0.72
+M2_house,7721.8,358.2,0,0.43
+M3_full,8086.8,335.3,0,0.37

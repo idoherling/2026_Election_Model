@@ -12,3 +12,4 @@ data/raw/
 .DS_Store
 .vscode/
 .idea/
+data/processed/m3_idata.nc
