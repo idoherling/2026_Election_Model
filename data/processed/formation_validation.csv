@@ -1,0 +1,9 @@
+cycle,realized,p_realized_shipped,p_pm_side_shipped,log_score_shipped,p_realized_with_defection,p_pm_side_with_defection,log_score_with_defection
+2009,nb,1.0,1.0,0.0,1.0,1.0,0.0
+2013,nb,1.0,1.0,0.0,1.0,1.0,0.0
+2015,nb_king,0.346,0.346,-1.06,0.346,0.481,-1.06
+2019a,repeat,0.385,0.385,-0.95,0.255,0.255,-1.37
+2019s,repeat,0.409,0.409,-0.89,0.27,0.27,-1.31
+2020,defect,0.0,0.35,-6.91,0.136,0.486,-2.0
+2021,centre_raam_king,0.195,0.512,-1.64,0.195,0.512,-1.64
+2022,nb,1.0,1.0,0.0,1.0,1.0,0.0

@@ -24,8 +24,11 @@ Formation order per draw (who can actually assemble 61 first):
     3. centre + Ra'am inside                               -> centre + Ra'am
     4. centre + haredi defection                           -> centre-haredi
     5. centre minority with outside support (Ra'am/JL)     -> minority govt
-    6. unity: centre + Likud without Netanyahu             -> unity govt
-    7. nothing reaches 61                                  -> repeat election
+    6. a centre list breaks its pledge and joins Netanyahu -> pledge-break
+       (graded in validate_formation.py: without this branch the tree gave
+       the realized 2020 outcome probability zero)
+    7. unity: centre + Likud without Netanyahu             -> unity govt
+    8. nothing reaches 61                                  -> repeat election
 
 Outputs:
     data/processed/government_formation.csv     outcome probabilities
@@ -63,6 +66,12 @@ BEHAVIOR = {
     "jl_supports": 0.25,
     "haredi_defect": 0.30,
     "likud_sans_bibi": 0.15,
+    # The branch the formation grading exposed (P(2020)=0 without it): a
+    # centre list joins a Netanyahu-led government. Historical base rate
+    # among feasible cases 1/3 (2020 yes; 2019a/2019s no); tempered to 0.12
+    # for 2026, where all four centre parties were founded on never-Bibi —
+    # as was Gantz's in 2019, which is why it isn't zero.
+    "centre_defects": 0.12,
 }
 
 # PM allocation WITHIN a winning coalition — rotations are the Israeli norm
@@ -70,18 +79,19 @@ BEHAVIOR = {
 # conditioned on the coalition type; rows sum to 1.
 #           Eisenkot  Bennett  Liberman  Lapid  other
 PM_ALLOC = {
-    1: [0.74, 0.18, 0.04, 0.02, 0.02],   # centre coalition
-    2: [0.74, 0.18, 0.04, 0.02, 0.02],   # centre + Ra'am
-    3: [0.63, 0.30, 0.00, 0.02, 0.05],   # centre-haredi: right-cred PM helps,
+    2: [0.74, 0.18, 0.04, 0.02, 0.02],   # centre coalition
+    3: [0.74, 0.18, 0.04, 0.02, 0.02],   # centre + Ra'am
+    4: [0.63, 0.30, 0.00, 0.02, 0.05],   # centre-haredi: right-cred PM helps,
                                           # Liberman is a dealbreaker for haredim
-    4: [0.74, 0.18, 0.04, 0.02, 0.02],   # centre minority
-    5: [0.35, 0.10, 0.05, 0.00, 0.50],   # unity: Likud successor/rotation heavy
+    5: [0.74, 0.18, 0.04, 0.02, 0.02],   # centre minority
+    6: [0.35, 0.10, 0.05, 0.00, 0.50],   # unity: Likud successor/rotation heavy
 }
 PM_NAMES = ["Eisenkot", "Bennett", "Liberman", "Lapid",
             "rotation / Likud successor"]
 
 OUTCOMES = [
     "Netanyahu coalition",
+    "Netanyahu-led with centre defector (pledge-break)",
     "Centre coalition (own majority)",
     "Centre + Ra'am",
     "Centre-haredi coalition",
@@ -111,7 +121,7 @@ def simulate_formation(draws: pd.DataFrame, behavior: dict, seed=SEED):
     yashar = draws["Yashar"].values
     together = draws["Bennett 2026 + Yesh Atid"].values
 
-    u = rng.random((n, 6))
+    u = rng.random((n, 7))
     amcha_side = np.select(
         [u[:, 0] < behavior["amcha_right"],
          u[:, 0] < behavior["amcha_right"] + behavior["amcha_center"]],
@@ -125,18 +135,24 @@ def simulate_formation(draws: pd.DataFrame, behavior: dict, seed=SEED):
     nb = nb_core + np.where(amcha_side == 1, amcha, 0)
     ce = centre + np.where(amcha_side == 2, amcha, 0)
 
-    outcome = np.full(n, 6)  # default: repeat election
-    outcome[np.where((ce + draws["Likud"].values >= 61) & sans_bibi)] = 5
+    outcome = np.full(n, 7)  # default: repeat election (last index)
+    outcome[np.where((ce + draws["Likud"].values >= 61) & sans_bibi)] = 6
+    # pledge-break: some centre list can close Netanyahu's gap and does
+    centre_seats = draws[CENTRE].values
+    gap = (61 - nb)[:, None]
+    feasible = ((centre_seats >= gap) & (gap > 0)).any(axis=1)
+    outcome[np.where((u[:, 6] < behavior["centre_defects"]) & feasible)] = 1
     support = (np.where(raam_supports & ~raam_joins, raam, 0)
                + np.where(jl_supports, jl, 0))
-    outcome[np.where(ce + support >= 61)] = 4
-    outcome[np.where((ce + haredi >= 61) & haredi_defect)] = 3
-    outcome[np.where((ce + raam >= 61) & raam_joins)] = 2
-    outcome[np.where(ce >= 61)] = 1
+    outcome[np.where(ce + support >= 61)] = 5
+    outcome[np.where((ce + haredi >= 61) & haredi_defect)] = 4
+    outcome[np.where((ce + raam >= 61) & raam_joins)] = 3
+    outcome[np.where(ce >= 61)] = 2
     outcome[np.where(nb >= 61)] = 0
 
     pm = np.full(n, "none (repeat election)", dtype=object)
     pm[outcome == 0] = "Netanyahu"
+    pm[outcome == 1] = "Netanyahu"
     u_pm = rng.random(n)
     for oc, alloc in PM_ALLOC.items():
         mask = outcome == oc
@@ -145,7 +161,7 @@ def simulate_formation(draws: pd.DataFrame, behavior: dict, seed=SEED):
         pm[mask] = np.array(PM_NAMES)[np.minimum(pick, len(PM_NAMES) - 1)]
     # In coalitions where Together outweighs Yashar, the rotation flips:
     # Bennett leads and Eisenkot is the junior partner.
-    flip = (together > yashar) & np.isin(outcome, [1, 2, 3, 4])
+    flip = (together > yashar) & np.isin(outcome, [2, 3, 4, 5])
     pm = np.where(flip & (pm == "Eisenkot"), "Bennett",
                   np.where(flip & (pm == "Bennett"), "Eisenkot", pm))
     return outcome, pm
@@ -181,7 +197,7 @@ def main() -> None:
                 "haredi_defect": hd, "amcha_right": ar,
                 "p_netanyahu_pm": round(float((pm_s == "Netanyahu").mean()), 3),
                 "p_eisenkot_pm": round(float((pm_s == "Eisenkot").mean()), 3),
-                "p_repeat_election": round(float((oc == 6).mean()), 3),
+                "p_repeat_election": round(float((oc == 7).mean()), 3),
             })
     sens = pd.DataFrame(rows)
     sens.to_csv(PROCESSED_DIR / "government_sensitivity.csv", index=False)
@@ -198,6 +214,7 @@ def plot(table: pd.DataFrame, pm_probs: pd.Series) -> None:
     NEUTRAL = "#898781"
     color = {
         "Netanyahu coalition": BLUE,
+        "Netanyahu-led with centre defector (pledge-break)": BLUE,
         "Unity govt (Likud without Netanyahu)": NEUTRAL,
         "No government -> repeat election": NEUTRAL,
     }
