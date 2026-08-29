@@ -23,16 +23,14 @@ import warnings
 import numpy as np
 import pandas as pd
 
-from bayes_model import (
-    LIST_SHOCK_BASE, LIST_SHOCK_SLOPE, SEED, T_DF, WITHDRAWN_WEEKS, fit,
-    prepare_data,
-)
+from bayes_model import SEED, T_DF, WITHDRAWN_WEEKS, fit, prepare_data
+from error_decomposition import decompose
 from bias_audit import FAMILY_OF
 from normalize import load_party_registry
 from scrape_polls import ELECTION_DAY, PROCESSED_DIR
 from simulate import THRESHOLD, dhondt
 from validate_model import (
-    CYCLE_THRESHOLD, ORDER, PAST_PAIRS, VAL_BLOC_OVERRIDES, loo_calibration,
+    CYCLE_THRESHOLD, ORDER, PAST_PAIRS, VAL_BLOC_OVERRIDES,
 )
 
 warnings.filterwarnings("ignore")
@@ -80,8 +78,9 @@ def apply_decomp(polls: pd.DataFrame, cycle: str) -> pd.DataFrame:
     return polls
 
 
-def project_cycle(data, idata, eday, threshold, pairs, swing_sd, shocks,
+def project_cycle(data, idata, eday, threshold, pairs, params,
                   bloc_overrides, rng):
+    swing_sd, shocks = params["bloc_sd"], params["family"]
     reg = load_party_registry()
     bloc_map = dict(zip(reg["party_id"], reg["bloc"]))
     bloc_map.update(bloc_overrides or {})
@@ -102,7 +101,8 @@ def project_cycle(data, idata, eday, threshold, pairs, swing_sd, shocks,
         shares[:, np.nonzero(gone)[0]] = 0.0
         shares /= shares.sum(axis=1, keepdims=True)
     base0 = shares.mean(axis=0)
-    sd_list = (LIST_SHOCK_BASE + LIST_SHOCK_SLOPE * base0 * 120) / 120.0
+    sd_list = (params["resid_base"]
+               + params["resid_slope"] * base0 * 120) / 120.0
     shares = np.clip(
         shares + rng.standard_normal(shares.shape) * sd_list, 0, None)
     shares /= shares.sum(axis=1, keepdims=True)
@@ -125,9 +125,22 @@ def project_cycle(data, idata, eday, threshold, pairs, swing_sd, shocks,
         in_f = fams == f
         if not in_f.any() or in_f.all():
             continue
-        sk = (mu_f + rng.standard_t(T_DF, N_PROJ) * sd_f) / 120.0
+        sk = (-mu_f + rng.standard_t(T_DF, N_PROJ) * sd_f) / 120.0
         w_f, w_r = np.where(in_f, base, 0), np.where(~in_f, base, 0)
         shares = shares + sk[:, None] * (w_f / w_f.sum() - w_r / w_r.sum())
+
+    # Party anchors (error-space means, negated to shift simulated truth).
+    likud_col = next((i for i, cp in enumerate(comps) if "likud" in cp), None)
+    non_likud = [i for i in range(len(comps)) if i != likud_col]
+    leader_col = non_likud[int(np.argmax(base[non_likud]))] if non_likud else None
+    for col, mu in ((likud_col, params["anchors"]["likud"]),
+                    (leader_col, params["anchors"]["leader"])):
+        if col is None:
+            continue
+        onehot = np.zeros(len(comps))
+        onehot[col] = 1.0
+        w_r = np.where(onehot == 0, base, 0)
+        shares = shares + (-mu / 120.0) * (onehot - w_r / w_r.sum())
     shares = np.clip(shares, 0, None)
     shares /= shares.sum(axis=1, keepdims=True)
 
@@ -168,7 +181,6 @@ def main() -> None:
     polls = pd.read_csv(PROCESSED_DIR / "polls.csv",
                         parse_dates=["fieldwork_end"])
     results = pd.read_csv(PROCESSED_DIR / "results.csv")
-    fam = pd.read_csv(PROCESSED_DIR / "bias_family.csv", index_col=0)
     rng = np.random.default_rng(SEED)
 
     rows, covered_all = [], []
@@ -184,10 +196,10 @@ def main() -> None:
                   f"{data['n_weeks']} weeks — fitting...")
             _, idata = fit(data, draws=600, tune=600)
             div = int(idata.sample_stats["diverging"].sum())
-            swing_sd, shocks = loo_calibration(fam, cycle)
+            params = decompose(exclude_cycle=cycle)
             seats, blocs, base, comp_of = project_cycle(
                 data, idata, eday, CYCLE_THRESHOLD.get(cycle, THRESHOLD),
-                PAST_PAIRS[cycle], swing_sd, shocks,
+                PAST_PAIRS[cycle], params,
                 VAL_BLOC_OVERRIDES.get(cycle), rng)
         except Exception as e:
             print(f"[{cycle}] FAILED: {e}")

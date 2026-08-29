@@ -186,8 +186,9 @@ def simulate_core(avg: pd.DataFrame, pairs: list[tuple[str, str]],
     base = avg["share"].values
 
     swing = rng.standard_t(T_DF, n_sims) * bloc_swing_sd * scale / 120.0
+    # Means are in error space (polled - actual); truth = polled - error.
     fam_shock = {
-        f: (mu + rng.standard_t(T_DF, n_sims) * sd * scale) / 120.0
+        f: (-mu + rng.standard_t(T_DF, n_sims) * sd * scale) / 120.0
         for f, (mu, sd) in family_shock.items()
     }
     sd_list = (LIST_SD_BASE + LIST_SD_SLOPE * avg["avg_seats"].values) / 120.0

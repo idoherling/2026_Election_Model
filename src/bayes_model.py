@@ -56,15 +56,18 @@ N_PROJ = 8_000          # posterior projection draws
 SEED = 20261027
 T_DF = 5
 
-# Industry-level shocks the polls cannot identify (seats; backtest-derived).
-BLOC_SWING_SD = 3.5
-FAMILY_SHOCK = {"arab": (-0.7, 1.2), "haredi": (-1.0, 1.6)}
+# All election-day shocks come from the sequential decomposition of the
+# eight-cycle error record (error_decomposition.py), so no component is
+# double-counted. Means are in ERROR space (polled - actual): the projection
+# applies the NEGATED mean, since simulated truth = polled - error.
+from error_decomposition import decompose as _decompose
 
-# Per-list election-day shock (seats): the residual error of final polls
-# about individual lists beyond bloc/family error, from the backtest.
-# Validation without it under-covered badly (75.7% on a 90% target).
-LIST_SHOCK_BASE = 1.0
-LIST_SHOCK_SLOPE = 0.05
+_P = _decompose()
+BLOC_SWING_SD = _P["bloc_sd"]
+FAMILY_SHOCK = _P["family"]        # {family: (error mean, sd)} in seats
+ANCHORS = _P["anchors"]            # {"likud": .., "leader": ..} error means
+LIST_SHOCK_BASE = _P["resid_base"]
+LIST_SHOCK_SLOPE = _P["resid_slope"]
 # A list with no polls in its final weeks has left the race by election day.
 WITHDRAWN_WEEKS = 5
 
@@ -303,9 +306,23 @@ def project(data, idata, rng):
         in_f = fams == f
         if not in_f.any():
             continue
-        shock = (mu_f + rng.standard_t(T_DF, N_PROJ) * sd_f) / 120.0
+        shock = (-mu_f + rng.standard_t(T_DF, N_PROJ) * sd_f) / 120.0
         w_f, w_r = np.where(in_f, base, 0), np.where(~in_f, base, 0)
         shares = shares + shock[:, None] * (w_f / w_f.sum() - w_r / w_r.sum())
+
+    # Party anchors: deterministic truth-shifts for Likud and the poll
+    # leader (their variance already lives in the residual shock).
+    likud_col = next((i for i, cp in enumerate(comps) if "likud" in cp), None)
+    non_likud = [i for i in range(len(comps)) if i != likud_col]
+    leader_col = non_likud[int(np.argmax(base[non_likud]))] if non_likud else None
+    for col, mu in ((likud_col, ANCHORS["likud"]),
+                    (leader_col, ANCHORS["leader"])):
+        if col is None:
+            continue
+        onehot = np.zeros(len(comps))
+        onehot[col] = 1.0
+        w_r = np.where(onehot == 0, base, 0)
+        shares = shares + (-mu / 120.0) * (onehot - w_r / w_r.sum())
     shares = np.clip(shares, 0, None)
     shares /= shares.sum(axis=1, keepdims=True)
 
