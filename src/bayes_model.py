@@ -290,8 +290,15 @@ def posterior_predictive_check(data, idata):
           f"95% predictive band")
 
 
-def project(data, idata, rng):
-    """Election-day seat draws: RW forward + industry shocks + micro-lists."""
+def project(data, idata, rng, config="current", config_params=None):
+    """Election-day seat draws: RW forward + industry shocks + micro-lists.
+
+    config reshapes the list structure before shocks and threshold:
+      "balad_splits"  Balad leaves the Joint List at its scenario-polled
+                      standalone share; "segalovitz" adds a new
+                      centre-aligned list at its scenario-polled size
+                      (parameters from arab_scenarios.py).
+    """
     reg = load_party_registry()
     bloc_map = dict(zip(reg["party_id"], reg["bloc"]))
     names = dict(zip(reg["party_id"], reg["name_en"]))
@@ -345,6 +352,34 @@ def project(data, idata, rng):
     fams = np.array([max([FAMILY_OF.get(c, "other") for c in comp],
                          key=[FAMILY_OF.get(c, "other") for c in comp].count)
                      for comp in comps])
+
+    # Configuration scenarios (registration-deadline what-ifs).
+    cp = config_params or {}
+    if config == "balad_splits":
+        jl = next((i for i, c in enumerate(comps) if "hadash_taal" in c), None)
+        if jl is not None:
+            split = cp.get("balad_alone_pct", 1.8) / 100.0
+            take = np.minimum(shares[:, jl], split)
+            shares = np.concatenate([shares, take[:, None]], axis=1)
+            shares[:, jl] = shares[:, jl] - take
+            comps.append({"balad"})
+            labels.append("Balad (alone)")
+            blocs = np.append(blocs, "other")
+            fams = np.append(fams, "arab")
+    elif config == "segalovitz":
+        seg = cp.get("segalovitz_seats_mean", 4.0) / 120.0
+        centre = blocs == "opposition_bloc"
+        w = np.where(centre, shares.mean(axis=0), 0.0)
+        shares = shares - seg * (w / w.sum())
+        shares = np.concatenate(
+            [shares, np.full((shares.shape[0], 1), seg)], axis=1)
+        comps.append({"segalovitz"})
+        labels.append("Segalovitz list")
+        blocs = np.append(blocs, "opposition_bloc")
+        fams = np.append(fams, "other")
+    if config != "current":
+        shares = np.clip(shares, 0, None)
+        shares /= shares.sum(axis=1, keepdims=True)
 
     # Industry shocks (unidentifiable from polls).
     base = shares.mean(axis=0)

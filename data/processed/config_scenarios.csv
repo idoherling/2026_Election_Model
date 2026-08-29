@@ -1,0 +1,4 @@
+config,p_nb_61,p_anti_61,p_neither,nb_mean,p_joint_list_passes
+current,0.093,0.252,0.654,49.8,0.824
+balad_splits,0.131,0.325,0.544,51.3,0.408
+segalovitz,0.138,0.198,0.664,51.2,0.824
