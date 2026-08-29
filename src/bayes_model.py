@@ -1,0 +1,383 @@
+"""Full Bayesian forecast: latent-trend state-space model over the poll data.
+
+The model (Jackman/Linzer lineage, adapted to Israel):
+
+  latent   z_w  (weeks x lists-1, additive-log-ratio space)
+           z_w = z_{w-1} + tau_b * eps_w          random-walk trend,
+                                                  innovation ESTIMATED
+  house    delta_{f,b} ~ N(gamma_{g(f),b}, sigma_f)   firm effects nested in
+           gamma_{g,b} ~ N(0, sigma_g)                correlation groups
+  obs      y_{p,b} ~ StudentT(4, softmax(z_{w(p)})_b + delta_{f(p),b}, s_b)
+                                                  fat-tailed, noise ESTIMATED
+
+This replaces the weighted average, trendline adjustment, house-effect
+shrinkage, and the days-remaining scale in one joint posterior: forecast
+uncertainty is the random walk run forward to election day. What polls can
+NEVER identify — how wrong the whole industry is together — enters at
+projection with the backtest-calibrated industry shocks (bloc swing, Arab
+and haredi family errors), exactly as in the simple model.
+
+Micro-lists that no pollster carries as a column (Zehut, Noam, NEP, and any
+polled-at-zero list) join at projection from historical priors, so the
+forecast covers the entire registered party space.
+
+Ra'am is modeled separately from the Joint List throughout; the few polls
+that merged them into one composite are excluded.
+
+Workflow: prior predictive sanity -> NUTS -> convergence diagnostics ->
+posterior predictive coverage -> 14-day holdout check -> projection through
+threshold + Bader-Ofer -> comparison against the simple model.
+
+Outputs:
+    data/processed/bayes_forecast_2026.csv    per-list seat distribution
+    data/processed/bayes_forecast_blocs.csv   bloc probabilities
+    data/processed/bayes_draws.parquet        election-day seat draws
+"""
+
+from __future__ import annotations
+
+import warnings
+
+import numpy as np
+import pandas as pd
+
+from backtest import merge_blocks, short_name
+from bias_audit import FAMILY_OF
+from normalize import load_party_registry
+from polling_average import ELECTION_DAY_2026, load_2026
+from scrape_polls import PROCESSED_DIR
+from simulate import BLOC_LABEL, SURPLUS_PAIRS, THRESHOLD, dhondt
+
+warnings.filterwarnings("ignore")
+
+WINDOW_DAYS = 240
+HOLDOUT_DAYS = 14
+N_PROJ = 8_000          # posterior projection draws
+SEED = 20261027
+T_DF = 5
+
+# Industry-level shocks the polls cannot identify (seats; backtest-derived).
+BLOC_SWING_SD = 3.5
+FAMILY_SHOCK = {"arab": (-0.7, 1.2), "haredi": (-1.0, 1.6)}
+
+# Prior-only micro-lists: (share mean, share sd) from their electoral history.
+MICRO_PRIORS = {
+    "zehut": (0.012, 0.007),   # 2.74% in Apr 2019, dormant since
+    "noam": (0.007, 0.004),    # never cleared 1% alone
+    "nep": (0.008, 0.005),     # ~1% in 2021
+}
+
+
+def prepare_data():
+    polls = load_2026()
+    polls = polls[polls["pollster"] != "Unattributed"].copy()
+    # Ra'am separate from the Joint List: joint_list == hadash_taal+balad,
+    # and polls merging raam into a wider Arab composite are dropped.
+    polls.loc[polls["party_id"] == "joint_list", "party_id"] = "balad+hadash_taal"
+    # Together IS Yesh Atid + Bennett 2026: one entity across the merger, so
+    # pre-merger component polls and post-merger joint polls share a block.
+    polls.loc[polls["party_id"] == "together", "party_id"] = "bennett_2026+yesh_atid"
+    bad = polls[polls["party_id"].str.contains(r"raam.*\+|\+.*raam")]["poll_id"]
+    polls = polls[~polls["poll_id"].isin(set(bad))]
+
+    asof = polls["fieldwork_end"].max()
+    win = polls[polls["fieldwork_end"] > asof - pd.Timedelta(days=WINDOW_DAYS)].copy()
+
+    blocks = merge_blocks(win["party_id"].unique())
+    block_of = {c: i for i, b in enumerate(blocks) for c in b}
+    win["block"] = win["party_id"].map(lambda p: block_of[p.split("+")[0]])
+
+    # Implied vote share per row: seat rows share the above-threshold pie,
+    # "(x.y%)" rows are direct shares.
+    wasted = (win[win["seats"] == 0].assign(w=win["vote_pct"].fillna(0) / 100)
+              .groupby("poll_id")["w"].sum())
+    win["wasted"] = win["poll_id"].map(wasted).fillna(0.0)
+    seat_share = win["seats"] / 120.0 * (1.0 - win["wasted"] - 0.01)
+    pct_share = win["vote_pct"] / 100.0
+    win["share"] = np.where(win["seats"] > 0, seat_share, pct_share)
+    # One observation per poll x block: polls listing a joint list's
+    # components separately must contribute the SUM, not two half-sized
+    # observations.
+    obs = (win[win["share"].notna()]
+           .groupby(["poll_id", "block"], as_index=False)
+           .agg(share=("share", "sum"), pollster=("pollster", "first"),
+                fieldwork_end=("fieldwork_end", "first")))
+
+    obs["week"] = ((obs["fieldwork_end"] - asof).dt.days + WINDOW_DAYS) // 7
+    firms = sorted(obs["pollster"].unique())
+    firm_ix = {f: i for i, f in enumerate(firms)}
+    try:
+        meta = pd.read_csv(PROCESSED_DIR.parent / "pollster_meta.csv")
+        gmap = dict(zip(meta["pollster"], meta["correlation_group"]))
+    except FileNotFoundError:
+        gmap = {}
+    groups = sorted({gmap.get(f, f) for f in firms})
+    group_ix = {g: i for i, g in enumerate(groups)}
+    firm_group = np.array([group_ix[gmap.get(f, f)] for f in firms])
+
+    # Latent lists: blocks with real data; the rest become micro-lists.
+    counts = obs.groupby("block")["share"].count()
+    latent_blocks = sorted(counts[counts >= 5].index)
+    lb_ix = {b: i for i, b in enumerate(latent_blocks)}
+    obs = obs[obs["block"].isin(latent_blocks)]
+
+    data = {
+        "asof": asof,
+        "blocks": blocks,
+        "latent_blocks": latent_blocks,
+        "components": ["+".join(sorted(blocks[b])) for b in latent_blocks],
+        "y": obs["share"].values,
+        "week": obs["week"].values.astype(int),
+        "block_i": obs["block"].map(lb_ix).values.astype(int),
+        "firm_i": obs["pollster"].map(firm_ix).values.astype(int),
+        "firm_group": firm_group,
+        "n_weeks": int(obs["week"].max()) + 1,
+        "firms": firms,
+        "groups": groups,
+        "n_polls": obs["poll_id"].nunique(),
+    }
+    return data
+
+
+def fit(data, draws=800, tune=800, holdout_mask=None):
+    import pymc as pm
+    import pytensor.tensor as pt
+
+    B = len(data["latent_blocks"])
+    W = data["n_weeks"]
+    F = len(data["firms"])
+    G = len(data["groups"])
+    keep = slice(None) if holdout_mask is None else ~holdout_mask
+    y, wk = data["y"][keep], data["week"][keep]
+    bi, fi = data["block_i"][keep], data["firm_i"][keep]
+
+    # Empirical ALR start point for faster convergence.
+    first = pd.DataFrame({"b": data["block_i"], "y": data["y"],
+                          "w": data["week"]})
+    early = first[first["w"] <= 8].groupby("b")["y"].mean()
+    early = early.reindex(range(B)).fillna(0.01).clip(lower=0.004)
+    mu0 = np.log(early.values[:-1] / early.values[-1])
+
+    with pm.Model() as model:
+        z0 = pm.Normal("z0", mu=mu0, sigma=0.5, shape=B - 1)
+        tau = pm.HalfNormal("tau", 0.06, shape=B - 1)
+        steps = pm.Normal("steps", 0, 1, shape=(W - 1, B - 1))
+        z = pm.Deterministic(
+            "z", pt.concatenate(
+                [z0[None, :], z0[None, :] + pt.cumsum(steps * tau, axis=0)],
+                axis=0))
+        shares = pm.Deterministic(
+            "shares", pt.special.softmax(
+                pt.concatenate([z, pt.zeros((W, 1))], axis=1), axis=1))
+
+        sigma_g = pm.HalfNormal("sigma_g", 0.015)
+        sigma_f = pm.HalfNormal("sigma_f", 0.008)
+        gamma = pm.Normal("gamma", 0, sigma_g, shape=(G, B))
+        delta = pm.Normal("delta", gamma[data["firm_group"]], sigma_f,
+                          shape=(F, B))
+        delta_c = pm.Deterministic("delta_c", delta - delta.mean(axis=0))
+
+        s_obs = pm.HalfNormal("s_obs", 0.012, shape=B)
+        mu = shares[wk, bi] + delta_c[fi, bi]
+        pm.StudentT("y", nu=4, mu=mu, sigma=s_obs[bi] + 0.002, observed=y)
+
+        idata = pm.sample(draws=draws, tune=tune, chains=4, cores=4,
+                          target_accept=0.92, random_seed=SEED,
+                          progressbar=False,
+                          compute_convergence_checks=False)
+    return model, idata
+
+
+def diagnostics(idata):
+    import arviz as az
+    div = int(idata.sample_stats["diverging"].sum())
+    summ = az.summary(idata, var_names=["tau", "sigma_g", "sigma_f", "s_obs"],
+                      kind="diagnostics")
+    rhat = float(summ["r_hat"].max())
+    ess = float(summ["ess_bulk"].min())
+    print(f"diagnostics: {div} divergences | max r_hat {rhat:.3f} | "
+          f"min bulk ESS {ess:.0f}")
+    return div, rhat, ess
+
+
+def posterior_predictive_check(data, idata):
+    post = idata.posterior
+    shares = post["shares"].values.reshape(-1, *post["shares"].shape[2:])
+    delta = post["delta_c"].values.reshape(-1, *post["delta_c"].shape[2:])
+    s_obs = post["s_obs"].values.reshape(-1, post["s_obs"].shape[-1])
+    idx = np.random.default_rng(0).choice(len(shares), 500, replace=False)
+    mu = shares[idx][:, data["week"], data["block_i"]] \
+        + delta[idx][:, data["firm_i"], data["block_i"]]
+    sd = s_obs[idx][:, data["block_i"]] + 0.002
+    lo = np.percentile(mu - 1.96 * sd, 2.5, axis=0)
+    hi = np.percentile(mu + 1.96 * sd, 97.5, axis=0)
+    cover = ((data["y"] >= lo) & (data["y"] <= hi)).mean()
+    print(f"posterior predictive: {cover:.1%} of poll observations inside "
+          f"95% predictive band")
+
+
+def project(data, idata, rng):
+    """Election-day seat draws: RW forward + industry shocks + micro-lists."""
+    reg = load_party_registry()
+    bloc_map = dict(zip(reg["party_id"], reg["bloc"]))
+    names = dict(zip(reg["party_id"], reg["name_en"]))
+
+    post = idata.posterior
+    z_last = post["z"].values[:, :, -1, :].reshape(-1, post["z"].shape[-1])
+    tau = post["tau"].values.reshape(-1, post["tau"].shape[-1])
+    n_post = len(z_last)
+    take = rng.choice(n_post, N_PROJ, replace=True)
+    z_last, tau = z_last[take], tau[take]
+
+    weeks_ahead = max((ELECTION_DAY_2026 - data["asof"]).days, 0) / 7.0
+    z_e = z_last + np.sqrt(weeks_ahead) * tau * rng.standard_normal(z_last.shape)
+    z_full = np.concatenate([z_e, np.zeros((N_PROJ, 1))], axis=1)
+    shares = np.exp(z_full - z_full.max(axis=1, keepdims=True))
+    shares /= shares.sum(axis=1, keepdims=True)
+
+    labels = [short_name(c, names) for c in data["components"]]
+    comps = [set(c.split("+")) for c in data["components"]]
+
+    # Micro-lists from priors, carved out of the modeled pie.
+    micro_names, micro_draws = [], []
+    for pid, (m, s) in MICRO_PRIORS.items():
+        micro_names.append(names.get(pid, pid))
+        comps.append({pid})
+        micro_draws.append(np.clip(rng.normal(m, s, N_PROJ), 0, None))
+    micro = np.column_stack(micro_draws)
+    shares = np.concatenate([shares * (1 - micro.sum(axis=1, keepdims=True)),
+                             micro], axis=1)
+    labels += micro_names
+
+    blocs = []
+    for comp in comps:
+        bs = {bloc_map.get(c, "other") for c in comp}
+        blocs.append(bs.pop() if len(bs) == 1 else "other")
+    blocs = np.array(blocs)
+    fams = np.array([max([FAMILY_OF.get(c, "other") for c in comp],
+                         key=[FAMILY_OF.get(c, "other") for c in comp].count)
+                     for comp in comps])
+
+    # Industry shocks (unidentifiable from polls).
+    base = shares.mean(axis=0)
+    is_nb = blocs == "netanyahu_bloc"
+    swing = rng.standard_t(T_DF, N_PROJ) * BLOC_SWING_SD / 120.0
+    w_nb, w_op = np.where(is_nb, base, 0), np.where(~is_nb, base, 0)
+    shares = shares + swing[:, None] * (w_nb / w_nb.sum() - w_op / w_op.sum())
+    for f, (mu_f, sd_f) in FAMILY_SHOCK.items():
+        in_f = fams == f
+        if not in_f.any():
+            continue
+        shock = (mu_f + rng.standard_t(T_DF, N_PROJ) * sd_f) / 120.0
+        w_f, w_r = np.where(in_f, base, 0), np.where(~in_f, base, 0)
+        shares = shares + shock[:, None] * (w_f / w_f.sum() - w_r / w_r.sum())
+    shares = np.clip(shares, 0, None)
+    shares /= shares.sum(axis=1, keepdims=True)
+
+    comp_of = {c: i for i, cs in enumerate(comps) for c in cs}
+    pairs = [(comp_of[a], comp_of[b]) for a, b in SURPLUS_PAIRS
+             if a in comp_of and b in comp_of and comp_of[a] != comp_of[b]]
+
+    seats = np.zeros((N_PROJ, shares.shape[1]), dtype=int)
+    for i in range(N_PROJ):
+        sh = shares[i]
+        passed = sh >= THRESHOLD
+        if not passed.any():
+            continue
+        votes = np.where(passed, sh, 0.0)
+        fvotes, fmembers, used = [], [], set()
+        for a, b in pairs:
+            if passed[a] and passed[b]:
+                fvotes.append(votes[a] + votes[b])
+                fmembers.append([a, b])
+                used |= {a, b}
+        for j in np.nonzero(passed)[0]:
+            if j not in used:
+                fvotes.append(votes[j])
+                fmembers.append([int(j)])
+        alloc = dhondt(np.array(fvotes), 120)
+        for members, k in zip(fmembers, alloc):
+            if len(members) == 1:
+                seats[i, members[0]] = k
+            else:
+                a, b = members
+                inner = dhondt(np.array([votes[a], votes[b]]), int(k))
+                seats[i, a], seats[i, b] = int(inner[0]), int(inner[1])
+    return seats, labels, blocs
+
+
+def main() -> None:
+    rng = np.random.default_rng(SEED)
+    data = prepare_data()
+    print(f"data: {data['n_polls']} polls, {len(data['y'])} observations, "
+          f"{len(data['latent_blocks'])} lists, {data['n_weeks']} weeks, "
+          f"{len(data['firms'])} firms in {len(data['groups'])} groups")
+
+    # Holdout: refit without the last 14 days, predict them.
+    cut = data["asof"] - pd.Timedelta(days=HOLDOUT_DAYS)
+    days = data["week"] * 7 - WINDOW_DAYS  # days relative to asof
+    holdout = days > -HOLDOUT_DAYS
+    if holdout.sum() >= 10:
+        _, idata_h = fit(data, draws=500, tune=600, holdout_mask=holdout)
+        post = idata_h.posterior
+        sh = post["shares"].values.reshape(-1, *post["shares"].shape[2:])
+        wk_last = min(int(data["week"][~holdout].max()),
+                      sh.shape[1] - 1)
+        pred = sh[:, wk_last, :]  # frozen at last fitted week
+        y_h = data["y"][holdout]
+        b_h = data["block_i"][holdout]
+        err = np.abs(np.median(pred, axis=0)[b_h] - y_h) * 120
+        print(f"holdout ({int(holdout.sum())} obs, last {HOLDOUT_DAYS}d): "
+              f"median |error| {np.median(err):.2f} seats "
+              f"(no-update prediction)")
+
+    model, idata = fit(data)
+    diagnostics(idata)
+    posterior_predictive_check(data, idata)
+
+    seats, labels, blocs = project(data, idata, rng)
+    is_max = seats == seats.max(axis=1, keepdims=True)
+    p_largest = (is_max / is_max.sum(axis=1, keepdims=True)).mean(axis=0)
+
+    dist = pd.DataFrame({
+        "list": labels,
+        "bloc": [BLOC_LABEL.get(b, b) for b in blocs],
+        "mean": seats.mean(axis=0).round(1),
+        "p05": np.percentile(seats, 5, axis=0).astype(int),
+        "p50": np.percentile(seats, 50, axis=0).astype(int),
+        "p95": np.percentile(seats, 95, axis=0).astype(int),
+        "p_pass": (seats >= 4).mean(axis=0).round(3),
+        "p_largest": p_largest.round(3),
+    }).sort_values("mean", ascending=False)
+    dist["asof"] = data["asof"].date().isoformat()
+    dist.to_csv(PROCESSED_DIR / "bayes_forecast_2026.csv", index=False)
+    pd.DataFrame(seats, columns=labels).to_parquet(
+        PROCESSED_DIR / "bayes_draws.parquet")
+
+    nb = seats[:, blocs == "netanyahu_bloc"].sum(axis=1)
+    anti = seats[:, blocs == "opposition_bloc"].sum(axis=1)
+    summary = pd.DataFrame([{
+        "asof": data["asof"].date().isoformat(), "n_proj": N_PROJ,
+        "p_netanyahu_bloc_61": (nb >= 61).mean().round(3),
+        "p_anti_bloc_61": (anti >= 61).mean().round(3),
+        "p_neither": ((nb < 61) & (anti < 61)).mean().round(3),
+        "nb_mean": nb.mean().round(1),
+        "nb_p05": int(np.percentile(nb, 5)),
+        "nb_p95": int(np.percentile(nb, 95)),
+    }])
+    summary.to_csv(PROCESSED_DIR / "bayes_forecast_blocs.csv", index=False)
+
+    print(f"\nBayesian forecast as of {data['asof'].date()}:\n")
+    print(dist.drop(columns="asof").to_string(index=False))
+    s = summary.iloc[0]
+    print(f"\nP(Netanyahu bloc >= 61) = {s['p_netanyahu_bloc_61']:.1%}   "
+          f"P(anti bloc >= 61) = {s['p_anti_bloc_61']:.1%}   "
+          f"P(neither) = {s['p_neither']:.1%}")
+    print(f"Netanyahu bloc mean {s['nb_mean']}, 90% interval "
+          f"[{s['nb_p05']}, {s['nb_p95']}]")
+    print("\nwrote bayes_forecast_2026.csv, bayes_forecast_blocs.csv, "
+          "bayes_draws.parquet")
+
+
+if __name__ == "__main__":
+    main()

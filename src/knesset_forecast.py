@@ -28,11 +28,18 @@ BLOC_COLOR = {
     "Anti-Netanyahu bloc": "#eb6834",
     "Arab parties": "#1baf7a",
 }
+NEUTRAL = "#898781"  # lists with no bloc assignment
+
+
+def bloc_color(b: str) -> str:
+    return BLOC_COLOR.get(b, NEUTRAL)
 # Seating order, left to right, by political convention.
 SPECTRUM = [
-    "Balad + Hadash-Ta'al + Ra'am", "The Democrats", "Together", "Yashar",
+    "Balad + Hadash-Ta'al + Ra'am", "Balad + Hadash-Ta'al", "Ra'am",
+    "The Democrats", "Together", "Bennett 2026 + Yesh Atid", "Yashar",
     "Blue and White", "Zionist Home – The Reservists", "Unity",
-    "Yisrael Beytenu", "Likud", "Religious Zionist Party", "Otzma Yehudit",
+    "New Economic Party", "Yisrael Beytenu", "Likud",
+    "Religious Zionist Party", "Otzma Yehudit", "Zehut", "Noam",
     "Shas", "United Torah Judaism",
 ]
 
@@ -69,9 +76,12 @@ def hemicycle_positions(n: int = 120, rows: int = 5):
     return pts
 
 
-def main() -> None:
-    draws = pd.read_parquet(PROCESSED_DIR / "forecast_draws.parquet")
-    dist = pd.read_csv(PROCESSED_DIR / "forecast_2026.csv")
+def main(draws_file: str = "forecast_draws.parquet",
+         dist_file: str = "forecast_2026.csv",
+         out_name: str = "knesset_2026.png",
+         title_note: str = "") -> None:
+    draws = pd.read_parquet(PROCESSED_DIR / draws_file)
+    dist = pd.read_csv(PROCESSED_DIR / dist_file)
     asof = dist["asof"].iloc[0]
     bloc = dict(zip(dist["list"], dist["bloc"]))
     stats = dist.set_index("list")
@@ -101,7 +111,7 @@ def main() -> None:
     pts = hemicycle_positions()
     colors, i = [], 0
     for l in seating:
-        colors += [BLOC_COLOR[bloc[l]]] * int(comp[l])
+        colors += [bloc_color(bloc[l])] * int(comp[l])
     for (a, r), c in zip(pts, colors):
         axh.scatter(r * np.cos(a), r * np.sin(a), s=52, color=c,
                     linewidths=0)
@@ -117,7 +127,7 @@ def main() -> None:
              fontsize=13, color=INK, fontweight="bold")
     axh.text(0, -0.24, "anti-Netanyahu bloc · Arab parties · Netanyahu bloc "
              "(central scenario)", ha="center", fontsize=8, color=MUTED)
-    axh.set_title(f"Knesset 26 forecast — as of {asof}",
+    axh.set_title(f"Knesset 26 forecast{title_note} — as of {asof}",
                   fontsize=13, color=INK, loc="left", pad=8)
 
     # Per-list probability strips.
@@ -127,7 +137,7 @@ def main() -> None:
              if stats.loc[l, "mean"] > 0.2 or stats.loc[l, "p_pass"] > 0.05]
     xmax = int(max(np.percentile(draws[l], 99) for l in shown)) + 1
     for y, l in enumerate(shown):
-        c = BLOC_COLOR[bloc[l]]
+        c = bloc_color(bloc[l])
         probs = np.bincount(draws[l], minlength=xmax + 1)[: xmax + 1] / len(draws)
         pmax = probs.max()
         for s_val in np.nonzero(probs)[0]:
@@ -157,10 +167,14 @@ def main() -> None:
     axs.set_xlabel("Seats — shade is probability; line is the 90% interval, "
                    "dot the mean", fontsize=9, color=INK_2)
 
-    fig.savefig(FIG_DIR / "knesset_2026.png", facecolor=SURFACE,
-                bbox_inches="tight")
-    print(f"\nwrote {FIG_DIR / 'knesset_2026.png'}")
+    fig.savefig(FIG_DIR / out_name, facecolor=SURFACE, bbox_inches="tight")
+    print(f"\nwrote {FIG_DIR / out_name}")
 
 
 if __name__ == "__main__":
-    main()
+    import sys
+    if len(sys.argv) > 1 and sys.argv[1] == "bayes":
+        main("bayes_draws.parquet", "bayes_forecast_2026.csv",
+             "knesset_2026_bayes.png", " (Bayesian model)")
+    else:
+        main()
