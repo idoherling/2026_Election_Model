@@ -124,6 +124,8 @@ def prepare_data(polls: pd.DataFrame | None = None,
            .groupby(["poll_id", "block"], as_index=False)
            .agg(share=("share", "sum"), pollster=("pollster", "first"),
                 fieldwork_end=("fieldwork_end", "first")))
+    if modern_remaps:
+        obs = _merge_cec(obs, block_of, asof)
 
     obs["week"] = ((obs["fieldwork_end"] - asof).dt.days + WINDOW_DAYS) // 7
     firms = sorted(obs["pollster"].unique())
@@ -161,6 +163,54 @@ def prepare_data(polls: pd.DataFrame | None = None,
         "n_polls": obs["poll_id"].nunique(),
     }
     return data
+
+
+def _merge_cec(obs: pd.DataFrame, block_of: dict, asof) -> pd.DataFrame:
+    """Swap in CEC-filed RAW percentages where available.
+
+    Filings (scrape_cec.py) carry each list's raw support share, including
+    sub-threshold lists — strictly better observations than inverting
+    published seat tables. Only filings whose parsed distribution sums to
+    90-105% are trusted; each one displaces the matching seat-derived poll
+    (same pollster within 3 days) to avoid double counting. Unmatched
+    filings (polls absent from the public tables) enter as new polls.
+    """
+    try:
+        pcts = pd.read_csv(PROCESSED_DIR / "cec_party_pcts.csv",
+                           parse_dates=["fieldwork_end"], dtype={"ref": str})
+    except FileNotFoundError:
+        return obs
+    sums = pcts.groupby("ref")["raw_pct"].sum()
+    good = set(sums[(sums >= 90) & (sums <= 105)].index)
+    pcts = pcts[pcts["ref"].isin(good)
+                & (pcts["fieldwork_end"] <= asof)].copy()
+    if pcts.empty:
+        return obs
+
+    remap = {"together": "bennett_2026"}
+    rows, displaced = [], set()
+    for ref, g in pcts.groupby("ref"):
+        pollster = g["pollster"].iloc[0]
+        fw = g["fieldwork_end"].iloc[0]
+        near = obs[(obs["pollster"] == pollster)
+                   & ((obs["fieldwork_end"] - fw).dt.days.abs() <= 3)]
+        displaced |= set(near["poll_id"])
+        for r in g.itertuples():
+            comp = remap.get(r.party_id, r.party_id).split("+")[0]
+            if comp not in block_of:
+                continue
+            rows.append({"poll_id": f"cec{ref}", "block": block_of[comp],
+                         "share": r.raw_pct / 100.0, "pollster": pollster,
+                         "fieldwork_end": fw})
+    cec_obs = pd.DataFrame(rows).groupby(
+        ["poll_id", "block"], as_index=False).agg(
+        share=("share", "sum"), pollster=("pollster", "first"),
+        fieldwork_end=("fieldwork_end", "first"))
+    kept = obs[~obs["poll_id"].isin(displaced)]
+    print(f"CEC filings merged: {cec_obs['poll_id'].nunique()} filings "
+          f"({len(cec_obs)} obs) displacing {len(displaced)} table-derived "
+          f"polls")
+    return pd.concat([kept, cec_obs], ignore_index=True)
 
 
 def fit(data, draws=800, tune=800, holdout_mask=None):
