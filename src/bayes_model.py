@@ -355,7 +355,13 @@ def project(data, idata, rng, config="current", config_params=None):
 
     # Configuration scenarios (registration-deadline what-ifs).
     cp = config_params or {}
-    if config == "balad_splits":
+    if config == "mixture":
+        from registration_scenarios import apply_registration_events
+        shares, comps, labels, blocs, fams, events = \
+            apply_registration_events(shares, comps, labels, blocs, fams,
+                                      rng, cp)
+        project.last_events = events
+    elif config == "balad_splits":
         jl = next((i for i, c in enumerate(comps) if "hadash_taal" in c), None)
         if jl is not None:
             split = cp.get("balad_alone_pct", 1.8) / 100.0

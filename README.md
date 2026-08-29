@@ -20,7 +20,12 @@ The pipeline, in order:
    correlated errors calibrated on the backtest (bloc swing, Arab/haredi
    family shocks, debut-list widening): 3.25% threshold survival → Bader–Ofer
    with surplus pairs → per-list seat distributions and P(bloc ≥ 61).
-5. **Evaluation** (`src/backtest.py`, `src/bias_audit.py`,
+5. **Registration mixture** (`src/registration_scenarios.py`) — the headline
+   forecast is a mixture over list-registration scenarios (Balad split, RZP
+   merges, centre folds, new entries), each with a precedent-based prior and
+   transfer rule, sampled per draw; on filing day the `RESOLVED` dict
+   collapses the mixture to the true configuration (scheduled refit).
+6. **Evaluation** (`src/backtest.py`, `src/bias_audit.py`,
    `src/validate_model.py`) — final-poll averages vs official results per
    cycle (2009-2022); seven systematic-bias tests; and full-model
    retro-validation: the entire pipeline rerun as-of each past election eve
