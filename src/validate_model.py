@@ -74,7 +74,8 @@ def main() -> None:
         eday = pd.Timestamp(ELECTION_DAY[cycle])
         asof = eday - pd.Timedelta(days=1)
         cyc_polls = polls[(polls["cycle"] == cycle) & polls["sums_ok"]]
-        swing_sd, shocks = loo_calibration(fam, cycle)
+        from error_decomposition import decompose
+        params = decompose(exclude_cycle=cycle)
 
         avg, _ = build_inputs(cyc_polls, asof, eday=eday,
                               bloc_overrides=VAL_BLOC_OVERRIDES.get(cycle),
@@ -82,7 +83,8 @@ def main() -> None:
         seats = simulate_core(
             avg, PAST_PAIRS[cycle],
             threshold=CYCLE_THRESHOLD.get(cycle, 0.0325),
-            scale=1.0, bloc_swing_sd=swing_sd, family_shock=shocks,
+            scale=1.0, bloc_swing_sd=params["bloc_sd"],
+            family_shock=params["family"], anchors=None,
             n_sims=N_SIMS,
         )
 

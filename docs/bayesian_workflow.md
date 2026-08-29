@@ -146,6 +146,27 @@ fit.
   identified improvement is finer time resolution (or an ensemble center)
   in the final stretch.
 
+### Round three: the party-anchored error decomposition
+
+  All projection shocks were re-derived from one sequential decomposition
+  of the eight-cycle error record (`error_decomposition.py`): bloc swing
+  (sd 3.36) → family totals (haredi −1.35 ± 1.77, Arab −0.32 ± 1.45) →
+  party anchors (Likud **−2.30**, seat-leader **−1.74** — polls understate
+  both, stably across every leave-one-out fold) → residual
+  (1.83 + 0.044·seats). This exposed and fixed a sign bug: shock means are
+  in error space (polled − actual), so simulated truth must subtract them;
+  the old code added them.
+
+  Verdict, leave-one-cycle-out on the harness: the anchors **improved the
+  Bayesian model on every point metric** (MAE 1.95 → 1.67, threshold
+  Brier 0.071 → 0.063, coverage 97.3%) but **hurt the simple pipeline**
+  (MAE 1.42 → 1.52) — its final-window average already chases the
+  late-leader movement, so anchoring it double-corrects. Final validated
+  configuration: anchors ON in the Bayesian projection, OFF in the simple
+  pipeline; both calibrated from the same decomposition. Standing scores:
+  simple MAE 1.42 / coverage 95.0% / bloc Brier 0.031; Bayesian MAE 1.67 /
+  coverage 97.3% / bloc Brier 0.036.
+
 ## 6. Sensitivity of the headline number
 
 The industry-shock priors are the one part of the projection the 2026 data

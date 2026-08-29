@@ -16,8 +16,11 @@ Pipeline per simulation draw:
      pooled when both partners pass;
   5. tally bloc outcomes.
 
-The audit's largest-list understatement (-2.3 mean) is deliberately NOT
-applied as a deterministic correction — it stays inside the uncertainty.
+Party anchors (the audit's Likud/seat-leader understatement) are available
+in simulate_core but OFF for this pipeline by validated choice: the
+final-window average already absorbs the late-leader movement, and adding
+anchors double-corrected (harness MAE 1.42 -> 1.52). The Bayesian
+projection, whose smoothed latent genuinely misses it, applies them.
 Surplus pairs are pre-filing assumptions; update SURPLUS_PAIRS when the
 real agreements are registered with the CEC.
 
@@ -50,12 +53,14 @@ SEED = 20261027
 THRESHOLD = 0.0325
 T_DF = 5  # fat tails, per the backtest's outlier cycles
 
-# Calibration (seats), from bias_family.csv / backtest_blocks.csv:
-BLOC_SWING_SD = 3.5          # sd of right+haredi total error across cycles
-FAMILY_SHOCK = {             # (mean, sd) of family signed error, seats
-    "arab": (-0.7, 1.2),
-    "haredi": (-1.0, 1.6),
-}
+# Election-day shocks from the sequential error decomposition (means in
+# error space: polled - actual; the simulator negates them).
+from error_decomposition import decompose as _decompose
+
+_P = _decompose()
+BLOC_SWING_SD = _P["bloc_sd"]
+FAMILY_SHOCK = _P["family"]
+ANCHORS = _P["anchors"]
 LIST_SD_BASE = 1.0           # idiosyncratic per-list sd, seats
 LIST_SD_SLOPE = 0.05         # + per polled seat
 DEBUT_FACTOR = 1.5           # audit: debut lists ~50% harder to poll
@@ -179,6 +184,7 @@ def simulate_core(avg: pd.DataFrame, pairs: list[tuple[str, str]],
                   threshold: float = THRESHOLD, scale: float = 1.0,
                   bloc_swing_sd: float = BLOC_SWING_SD,
                   family_shock: dict | None = None,
+                  anchors: dict | None = None,
                   n_sims: int = N_SIMS, seed: int = SEED) -> np.ndarray:
     family_shock = FAMILY_SHOCK if family_shock is None else family_shock
     rng = np.random.default_rng(seed)
@@ -208,6 +214,23 @@ def simulate_core(avg: pd.DataFrame, pairs: list[tuple[str, str]],
         w_f = np.where(in_f, base, 0.0)
         w_rest = np.where(~in_f, base, 0.0)
         shares += shock[:, None] * (w_f / w_f.sum() - w_rest / w_rest.sum())
+
+    # Party anchors: deterministic truth-shifts for the Likud-containing
+    # list and the poll leader (error-space means, negated).
+    if anchors:
+        comps_list = [set(c.split("+")) for c in avg["components"]]
+        likud_col = next((i for i, cp in enumerate(comps_list)
+                          if "likud" in cp), None)
+        non_lk = [i for i in range(len(comps_list)) if i != likud_col]
+        leader_col = non_lk[int(np.argmax(base[non_lk]))] if non_lk else None
+        for col, mu in ((likud_col, anchors["likud"]),
+                        (leader_col, anchors["leader"])):
+            if col is None:
+                continue
+            onehot = np.zeros(len(comps_list))
+            onehot[col] = 1.0
+            w_r = np.where(onehot == 0, base, 0.0)
+            shares = shares + (-mu / 120.0) * (onehot - w_r / w_r.sum())
     shares = np.clip(shares + noise, 0.0, None)
     shares /= shares.sum(axis=1, keepdims=True)
 
