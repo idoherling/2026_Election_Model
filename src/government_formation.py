@@ -64,6 +64,21 @@ BEHAVIOR = {
     "likud_sans_bibi": 0.15,
 }
 
+# PM allocation WITHIN a winning coalition — rotations are the Israeli norm
+# (Bennett was PM with 7 seats in 2021). Probabilities are judgment,
+# conditioned on the coalition type; rows sum to 1.
+#           Eisenkot  Bennett  Liberman  Lapid  other
+PM_ALLOC = {
+    1: [0.74, 0.18, 0.04, 0.02, 0.02],   # centre coalition
+    2: [0.74, 0.18, 0.04, 0.02, 0.02],   # centre + Ra'am
+    3: [0.63, 0.30, 0.00, 0.02, 0.05],   # centre-haredi: right-cred PM helps,
+                                          # Liberman is a dealbreaker for haredim
+    4: [0.74, 0.18, 0.04, 0.02, 0.02],   # centre minority
+    5: [0.35, 0.10, 0.05, 0.00, 0.50],   # unity: Likud successor/rotation heavy
+}
+PM_NAMES = ["Eisenkot", "Bennett", "Liberman", "Lapid",
+            "rotation / Likud successor"]
+
 OUTCOMES = [
     "Netanyahu coalition",
     "Centre coalition (own majority)",
@@ -119,11 +134,19 @@ def simulate_formation(draws: pd.DataFrame, behavior: dict, seed=SEED):
     outcome[np.where(ce >= 61)] = 1
     outcome[np.where(nb >= 61)] = 0
 
-    pm = np.where(outcome == 0, "Netanyahu",
-                  np.where(outcome == 6, "none (repeat election)",
-                           np.where(outcome == 5, "rotation / Likud successor",
-                                    np.where(yashar >= together,
-                                             "Eisenkot", "Bennett"))))
+    pm = np.full(n, "none (repeat election)", dtype=object)
+    pm[outcome == 0] = "Netanyahu"
+    u_pm = rng.random(n)
+    for oc, alloc in PM_ALLOC.items():
+        mask = outcome == oc
+        cum = np.cumsum(alloc)
+        pick = np.searchsorted(cum, u_pm[mask], side="right")
+        pm[mask] = np.array(PM_NAMES)[np.minimum(pick, len(PM_NAMES) - 1)]
+    # In coalitions where Together outweighs Yashar, the rotation flips:
+    # Bennett leads and Eisenkot is the junior partner.
+    flip = (together > yashar) & np.isin(outcome, [1, 2, 3, 4])
+    pm = np.where(flip & (pm == "Eisenkot"), "Bennett",
+                  np.where(flip & (pm == "Bennett"), "Eisenkot", pm))
     return outcome, pm
 
 
