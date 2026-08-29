@@ -1,7 +1,7 @@
 """Registration-deadline scenario module: the forecast as a MIXTURE.
 
-Final lists are filed with the CEC ~47 days before the election
-(mid-September). Until then, a forecast conditional on today's list
+Final lists are filed with the CEC at the beginning of September
+(~47 days before the October 27 vote). Until then, a forecast conditional on today's list
 structure understates uncertainty in exactly the dimension that decides
 Israeli elections. This module samples registration events PER DRAW, so the
 published forecast is a mixture over configurations, and every event's
@@ -9,11 +9,11 @@ marginal effect is read off the same simulations.
 
 Events, priors, and precedents (all priors are stated judgment):
 
-  balad_splits        0.45  Balad left the Joint List at the 2022 deadline,
-                            and the three-way reunion COLLAPSED on 2026-08-09
-                            (Tibi rejected the slate order; JPost 905009) —
-                            reunification is open only until the deadline.
-                            Standalone share 2.2% (18 scenario polls).
+  balad_splits        0.10  The three-way Joint List deal was SIGNED on
+                            2026-08-19 (Tibi accepted the framework after the
+                            Aug 9 collapse; ToI/Haaretz) — residual risk of a
+                            pre-filing fracture only. Standalone share 2.2%
+                            (18 scenario polls) if it does fracture.
                             KNOWN LIMIT: a Ta'al-alone split is not
                             representable while hadash_taal is one registry
                             unit; this event covers the Balad dimension only.
@@ -64,7 +64,7 @@ warnings.filterwarnings("ignore")
 SEED = 20261027
 
 PRIORS = {
-    "balad_splits": 0.45,
+    "balad_splits": 0.10,
     "rzp_alone": 0.30, "rzp_merge_otzma": 0.45,
     "rzp_merge_likud": 0.15, "rzp_withdraws": 0.10,
     "zionist_home_folds": 0.55,
