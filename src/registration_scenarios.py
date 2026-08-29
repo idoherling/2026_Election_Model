@@ -9,9 +9,14 @@ marginal effect is read off the same simulations.
 
 Events, priors, and precedents (all priors are stated judgment):
 
-  balad_splits        0.30  Balad left the Joint List at the 2022 deadline;
-                            stayed in 2019s-2021. Standalone share 2.2%
-                            (mean of 18 scenario polls, arab_scenarios.py).
+  balad_splits        0.45  Balad left the Joint List at the 2022 deadline,
+                            and the three-way reunion COLLAPSED on 2026-08-09
+                            (Tibi rejected the slate order; JPost 905009) —
+                            reunification is open only until the deadline.
+                            Standalone share 2.2% (18 scenario polls).
+                            KNOWN LIMIT: a Ta'al-alone split is not
+                            representable while hadash_taal is one registry
+                            unit; this event covers the Balad dimension only.
   rzp_fate                  RZP polls ~3.3%, the classic forced-merge zone:
     alone             0.30
     merge_otzma       0.45  the 2022 Netanyahu-brokered RZP-OY precedent
@@ -23,8 +28,12 @@ Events, priors, and precedents (all priors are stated judgment):
   blue_white_folds    0.65  ~1% list; absorber Yashar (Gantz-legacy voters)
   unity_folds         0.70  Erdan/Edelstein are Likud provenance — their
                             voters transfer RIGHT (absorber Likud)
-  segalovitz_enters   0.15  polled as a hypothetical; size from scenario
-                            polls (default 4 seats), carved from the centre
+  segalovitz_joins_raam 0.55  Yoav Segalovitz (ex-Yesh Atid) negotiating the
+                            No. 2 slot on Ra'am's slate — he has already left
+                            Yesh Atid and talks are public (ToI/i24, Aug
+                            2026). Effect: Ra'am gains the pairwise-measured
+                            scenario-poll boost, carved from the centre bloc
+                            (his crossover voters), NOT a new list.
 
 Transfer rules: a bloc-internal merge retains 90% of combined support
 (URWP/RZP-OY pattern); a fold-and-endorse transfers 55-65% to the absorber
@@ -55,13 +64,13 @@ warnings.filterwarnings("ignore")
 SEED = 20261027
 
 PRIORS = {
-    "balad_splits": 0.30,
+    "balad_splits": 0.45,
     "rzp_alone": 0.30, "rzp_merge_otzma": 0.45,
     "rzp_merge_likud": 0.15, "rzp_withdraws": 0.10,
     "zionist_home_folds": 0.55,
     "blue_white_folds": 0.65,
     "unity_folds": 0.70,
-    "segalovitz_enters": 0.15,
+    "segalovitz_joins_raam": 0.55,
 }
 MERGE_RETENTION = 0.90
 FOLD_TRANSFER = {"zionist_home": ("yashar", 0.60),
@@ -94,19 +103,17 @@ def apply_registration_events(shares, comps, labels, blocs, fams, rng,
 
     events = {}
 
-    # Segalovitz entry (carved proportionally from the centre bloc).
-    seg_on = bern("segalovitz_enters")
-    seg_share = cp.get("segalovitz_seats_mean", 4.0) / 120.0
+    # Segalovitz joins Ra'am's slate: Ra'am gains his crossover voters,
+    # carved proportionally from the centre bloc. No new list is created.
+    seg_on = bern("segalovitz_joins_raam")
+    boost = cp.get("segalovitz_boost_seats", 1.3) / 120.0
+    raam = _col(comps, "raam")
     centre = blocs == "opposition_bloc"
     w = np.where(centre, shares.mean(axis=0), 0.0)
-    carve = seg_on[:, None] * seg_share * (w / w.sum())
-    shares = np.concatenate(
-        [shares - carve, np.where(seg_on, seg_share, 0.0)[:, None]], axis=1)
-    comps.append({"segalovitz"})
-    labels.append("Segalovitz list")
-    blocs = np.append(blocs, "opposition_bloc")
-    fams = np.append(fams, "other")
-    events["segalovitz_enters"] = seg_on
+    if raam is not None:
+        shares = shares - seg_on[:, None] * boost * (w / w.sum())
+        shares[:, raam] += np.where(seg_on, boost, 0.0)
+    events["segalovitz_joins_raam"] = seg_on
 
     # Balad splits from the Joint List.
     jl = _col(comps, "hadash_taal")
@@ -168,7 +175,20 @@ def main() -> None:
         scen = pd.read_csv(PROCESSED_DIR / "arab_scenarios.csv")
         balad = scen[scen["list"].str.fullmatch("Balad")
                      & scen["below_pct"].notna()]["below_pct"].mean()
-        params = {"balad_alone_pct": float(balad)}
+        joint = scen[(scen["list"] == "Ra'am+Segalovitz")
+                     & scen["seats"].notna()]
+        base = scen[(scen["scenario"] == "baseline")
+                    & (scen["list"] == "Ra'am") & scen["seats"].notna()]
+        base_map = base.groupby(["pollster", "fieldwork_end"])["seats"].mean()
+        boosts = [r.seats - base_map[(r.pollster, r.fieldwork_end)]
+                  for r in joint.itertuples()
+                  if (r.pollster, r.fieldwork_end) in base_map.index]
+        params = {"balad_alone_pct": float(balad),
+                  "segalovitz_boost_seats": (float(np.mean(boosts))
+                                             if boosts else 1.3)}
+        print(f"scenario params: balad alone {params['balad_alone_pct']:.1f}%"
+              f" | Ra'am+Segalovitz boost {params['segalovitz_boost_seats']:+.1f}"
+              f" seats ({len(boosts)} poll pairs)")
     except FileNotFoundError:
         params = {}
 

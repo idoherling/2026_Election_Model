@@ -373,16 +373,15 @@ def project(data, idata, rng, config="current", config_params=None):
             blocs = np.append(blocs, "other")
             fams = np.append(fams, "arab")
     elif config == "segalovitz":
-        seg = cp.get("segalovitz_seats_mean", 4.0) / 120.0
+        # Segalovitz joins Ra'am's slate: Ra'am gains crossover votes carved
+        # from the centre bloc (no new list).
+        boost = cp.get("segalovitz_boost_seats", 1.3) / 120.0
+        raam = next((i for i, c in enumerate(comps) if "raam" in c), None)
         centre = blocs == "opposition_bloc"
         w = np.where(centre, shares.mean(axis=0), 0.0)
-        shares = shares - seg * (w / w.sum())
-        shares = np.concatenate(
-            [shares, np.full((shares.shape[0], 1), seg)], axis=1)
-        comps.append({"segalovitz"})
-        labels.append("Segalovitz list")
-        blocs = np.append(blocs, "opposition_bloc")
-        fams = np.append(fams, "other")
+        if raam is not None:
+            shares = shares - boost * (w / w.sum())
+            shares[:, raam] = shares[:, raam] + boost
     if config != "current":
         shares = np.clip(shares, 0, None)
         shares /= shares.sum(axis=1, keepdims=True)

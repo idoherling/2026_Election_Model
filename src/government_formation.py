@@ -57,7 +57,8 @@ AMCHA = "Amcha Yisrael"
 BEHAVIOR = {
     "amcha_right": 0.35,    # unknown-alignment prior: right / centre / kingmaker-neither
     "amcha_center": 0.35,
-    "raam_joins": 0.50,
+    "raam_joins": 0.55,  # Segalovitz-on-the-slate talks are explicitly about
+                         # making Ra'am a viable coalition partner (Aug 2026)
     "raam_supports": 0.40,  # if not joining
     "jl_supports": 0.25,
     "haredi_defect": 0.30,
