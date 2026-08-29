@@ -120,10 +120,31 @@ fit.
   0.71 vs simple pipeline 1.09 seats median error.**
 * Posterior predictive: ~98% of poll observations inside the 95% predictive
   band (slightly conservative).
-* The ultimate judge — the eight-cycle retro-validation harness
-  (`validate_model.py`) — currently grades the simple pipeline (96% interval
-  coverage, bloc Brier 0.03); wiring the Bayesian core into it is the
-  outstanding validation step.
+* **The eight-cycle retro-validation** (`validate_bayes.py`): the Bayesian
+  model refit as-of each past election eve, projected through that era's
+  threshold and surplus pairs, graded identically to the simple pipeline.
+  Round one FAILED (75.7% coverage vs the 90% target) and forced three
+  fixes: a per-list election-day shock the projection had omitted,
+  era-correct alliance identities for the historical windows, and
+  withdrawal of lists unpolled in their final weeks. Round two, honest
+  verdict:
+
+  | Metric (8 cycles pooled) | Bayesian | Simple pipeline |
+  |---|---|---|
+  | 90% interval coverage | 93.6% | 95.9% |
+  | bloc-majority Brier | 0.029 | 0.029 |
+  | threshold Brier | 0.071 | **0.050** |
+  | seat MAE | 1.95 | **1.55** |
+
+  The Bayesian model matches on calibration and wins the live 14-day
+  holdout, but the simple final-window average produces sharper
+  election-eve point estimates in 7 of 8 historical cycles — most likely
+  because its 5-day-half-life final window tracks last-week movement that
+  a weekly-smoothed latent partially averages away. Recorded conclusion:
+  the Bayesian model owns structure and uncertainty; the simple pipeline's
+  election-eve central estimates remain the point-accuracy benchmark; the
+  identified improvement is finer time resolution (or an ensemble center)
+  in the final stretch.
 
 ## 6. Sensitivity of the headline number
 
