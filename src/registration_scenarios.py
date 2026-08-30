@@ -1,7 +1,7 @@
 """Registration-deadline scenario module: the forecast as a MIXTURE.
 
-Final lists are filed with the CEC at the beginning of September
-(~47 days before the October 27 vote). Until then, a forecast conditional on today's list
+Final lists are filed with the CEC on September 9, 2026 (CONFIRMED);
+surplus-vote agreements register separately by October 16. Until then, a forecast conditional on today's list
 structure understates uncertainty in exactly the dimension that decides
 Israeli elections. This module samples registration events PER DRAW, so the
 published forecast is a mixture over configurations, and every event's
@@ -17,17 +17,19 @@ Events, priors, and precedents (all priors are stated judgment):
                             KNOWN LIMIT: a Ta'al-alone split is not
                             representable while hadash_taal is one registry
                             unit; this event covers the Balad dimension only.
-  rzp_fate                  RZP polls ~3.3%, the classic forced-merge zone:
-    alone             0.30
-    merge_otzma       0.45  the 2022 Netanyahu-brokered RZP-OY precedent
-    merge_likud       0.15  the New-Hope-into-Likud 2026 precedent
-    withdraws         0.10
-  zionist_home_folds  0.55  2-3% lists usually fold by the deadline (The
-                            Israelis 2021, Derekh Eretz); absorber Yashar
-                            (ex-military centre-right affinity)
-  blue_white_folds    0.65  ~1% list; absorber Yashar (Gantz-legacy voters)
-  unity_folds         0.70  Erdan/Edelstein are Likud provenance — their
-                            voters transfer RIGHT (absorber Likud)
+  rzp_fate                  RZP polls ~3.3%. Aug 28-30 reporting: Ben Gvir
+                            refused a merger "final and absolute"; Netanyahu
+                            approved 4 reserved Likud slots for a technical
+                            absorption ("most likely scenario", Ynet):
+    alone             0.35  (includes the rumored Smotrich-Feiglin micro-merger)
+    merge_otzma       0.05  effectively dead per Otzma's refusal
+    merge_likud       0.45  the reported modal outcome
+    withdraws         0.15
+  zionist_home_folds  0.70  Ynet deadline roundup: centre micro-lists "likely
+                            won't submit lists"; absorber Yashar
+  blue_white_folds    0.75  B&W at 1.8%; Gantz retirement talk reported
+  unity_folds         0.80  Erdan "will seek an alliance rather than run to
+                            the end"; voters are Likud provenance
   segalovitz_joins_raam 0.55  Yoav Segalovitz (ex-Yesh Atid) negotiating the
                             No. 2 slot on Ra'am's slate — he has already left
                             Yesh Atid and talks are public (ToI/i24, Aug
@@ -65,12 +67,19 @@ SEED = 20261027
 
 PRIORS = {
     "balad_splits": 0.10,
-    "rzp_alone": 0.30, "rzp_merge_otzma": 0.45,
-    "rzp_merge_likud": 0.15, "rzp_withdraws": 0.10,
-    "zionist_home_folds": 0.55,
-    "blue_white_folds": 0.65,
-    "unity_folds": 0.70,
-    "segalovitz_joins_raam": 0.55,
+    # Aug 28-30 news: Ben Gvir's refusal of an RZP merger is "final and
+    # absolute"; the Likud technical bloc (4 reserved slots approved) is
+    # reported as the modal outcome; Smotrich-Feiglin talks are the rumor
+    # lane inside "alone".
+    "rzp_alone": 0.35, "rzp_merge_otzma": 0.05,
+    "rzp_merge_likud": 0.45, "rzp_withdraws": 0.15,
+    # Ynet deadline roundup: the centre micro-lists "likely won't submit
+    # lists unless mergers create viable pathways".
+    "zionist_home_folds": 0.70,
+    "blue_white_folds": 0.75,
+    "unity_folds": 0.80,
+    # Talks confirmed ongoing Aug 26, obstacles called "immense"; leaning yes.
+    "segalovitz_joins_raam": 0.50,
 }
 MERGE_RETENTION = 0.90
 FOLD_TRANSFER = {"zionist_home": ("yashar", 0.60),

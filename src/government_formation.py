@@ -58,14 +58,26 @@ RAAM = "Ra'am"
 AMCHA = "Amcha Yisrael"
 
 BEHAVIOR = {
-    "amcha_right": 0.35,    # unknown-alignment prior: right / centre / kingmaker-neither
-    "amcha_center": 0.35,
-    "raam_joins": 0.55,  # Segalovitz-on-the-slate talks are explicitly about
-                         # making Ra'am a viable coalition partner (Aug 2026)
-    "raam_supports": 0.40,  # if not joining
-    "jl_supports": 0.25,
-    "haredi_defect": 0.30,
-    "likud_sans_bibi": 0.15,
+    # Ofer Winter (Aug 27): Amcha is "part of the right-wing camp... we
+    # will only recommend him [Netanyahu]"; anti-Eisenkot. Pledge stated
+    # but judged soft by analysts -> not 1.0.
+    "amcha_right": 0.80,
+    "amcha_center": 0.02,
+    # Both bloc leaders now rule out Ra'am INSIDE (Bennett post-Oct 7;
+    # Eisenkot rejected Abbas's statehood remarks) while Eisenkot builds
+    # the outside-support minority mechanism (ToI Aug 23).
+    "raam_joins": 0.25,
+    "raam_supports": 0.45,
+    # JL chair Jabareen "did not rule out" a safety net (INN, late Aug).
+    "jl_supports": 0.40,
+    # Split haredi defection: Deri re-locked Shas ("We support Netanyahu,
+    # period"); UTJ/Degel broke with Netanyahu over the draft law, met
+    # Eisenkot positively in secret (Ch12), and Agudat says "whoever
+    # delivers a draft law" - but Eisenkot vows no draft compromise.
+    "shas_defects": 0.08,
+    "utj_defects": 0.35,
+    # No credible Likud heir emerged from the primary (Haaretz Jul 12).
+    "likud_sans_bibi": 0.10,
     # The branch the formation grading exposed (P(2020)=0 without it): a
     # centre list joins a Netanyahu-led government. Historical base rate
     # among feasible cases 1/3 (2020 yes; 2019a/2019s no); tempered to 0.12
@@ -135,7 +147,8 @@ def simulate_formation(draws: pd.DataFrame, behavior: dict, seed=SEED):
     raam_joins = u[:, 1] < behavior["raam_joins"]
     raam_supports = u[:, 2] < behavior["raam_supports"]
     jl_supports = u[:, 3] < behavior["jl_supports"]
-    haredi_defect = u[:, 4] < behavior["haredi_defect"]
+    shas_on = u[:, 4] < behavior["shas_defects"]
+    utj_on = rng.random(n) < behavior["utj_defects"]
     sans_bibi = u[:, 5] < behavior["likud_sans_bibi"]
 
     nb = nb_core + np.where(amcha_side == 1, amcha, 0)
@@ -148,10 +161,17 @@ def simulate_formation(draws: pd.DataFrame, behavior: dict, seed=SEED):
     gap = (61 - nb)[:, None]
     feasible = ((centre_seats >= gap) & (gap > 0)).any(axis=1)
     outcome[np.where((u[:, 6] < behavior["centre_defects"]) & feasible)] = 1
-    support = (np.where(raam_supports & ~raam_joins, raam, 0)
-               + np.where(jl_supports, jl, 0))
-    outcome[np.where(ce + support >= 61)] = 5
-    outcome[np.where((ce + haredi >= 61) & haredi_defect)] = 4
+    yb = draws["Yisrael Beytenu"].values
+    abstaining = (np.where(raam_supports & ~raam_joins, raam, 0)
+                  + np.where(jl_supports, jl, 0))
+    present = 120 - abstaining
+    outcome[np.where((abstaining > 0)
+                     & (ce - yb > present / 2))] = 5
+    defecting_haredi = (np.where(shas_on, draws["Shas"].values, 0)
+                        + np.where(utj_on,
+                                   draws["United Torah Judaism"].values, 0))
+    outcome[np.where((ce + defecting_haredi >= 61)
+                     & (defecting_haredi > 0))] = 4
     outcome[np.where((ce + raam >= 61) & raam_joins)] = 3
     outcome[np.where(ce >= 61)] = 2
     outcome[np.where(nb >= 61)] = 0

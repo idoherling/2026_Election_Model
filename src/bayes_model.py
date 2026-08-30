@@ -70,6 +70,13 @@ def time_grid():
     dt_weeks = np.diff(mids) / 7.0
     return edges, dt_weeks
 N_PROJ = 8_000          # posterior projection draws
+# Forward event-risk multiplier on the bloc swing (Aug 30 macro sweep):
+# two incumbent-controlled escalation dials (Lebanon, Turkey/Syria), a
+# sanctions "D-Day", trial resumption Sept 8, ~30% undecided among
+# first-time voters, and an unprecedented count of threshold-straddling
+# lists. Forward-looking judgment, NOT applied in the historical harness
+# (validate_bayes has its own projection where election-eve scale is 1).
+EVENT_RISK = 1.2
 SEED = 20261027
 T_DF = 5
 
@@ -450,7 +457,7 @@ def project(data, idata, rng, config="current", config_params=None):
     # Industry shocks (unidentifiable from polls).
     base = shares.mean(axis=0)
     is_nb = blocs == "netanyahu_bloc"
-    swing = rng.standard_t(T_DF, N_PROJ) * BLOC_SWING_SD / 120.0
+    swing = rng.standard_t(T_DF, N_PROJ) * BLOC_SWING_SD * EVENT_RISK / 120.0
     w_nb, w_op = np.where(is_nb, base, 0), np.where(~is_nb, base, 0)
     shares = shares + swing[:, None] * (w_nb / w_nb.sum() - w_op / w_op.sum())
     for f, (mu_f, sd_f) in FAMILY_SHOCK.items():
