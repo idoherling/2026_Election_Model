@@ -13,8 +13,10 @@ Behavioral assumptions (BEHAVIOR, drawn independently per simulation):
                                  confidence-and-supply
     jl_supports                  Joint List outside support to block a
                                  Netanyahu government (2019-20 precedent)
-    haredi_defect                Shas+UTJ cross to a centre government once
-                                 the Netanyahu path is arithmetically dead
+    shas_defects / utj_defects   each haredi party separately crosses to a
+                                 centre government once the Netanyahu path
+                                 is arithmetically dead (UTJ transactional
+                                 per the draft-law channel; Shas locked in)
     likud_sans_bibi              Likud ditches Netanyahu for a unity
                                  government as a last resort
 
@@ -58,26 +60,48 @@ RAAM = "Ra'am"
 AMCHA = "Amcha Yisrael"
 
 BEHAVIOR = {
-    # Ofer Winter (Aug 27): Amcha is "part of the right-wing camp... we
-    # will only recommend him [Netanyahu]"; anti-Eisenkot. Pledge stated
-    # but judged soft by analysts -> not 1.0.
-    "amcha_right": 0.80,
-    "amcha_center": 0.02,
-    # Both bloc leaders now rule out Ra'am INSIDE (Bennett post-Oct 7;
-    # Eisenkot rejected Abbas's statehood remarks) while Eisenkot builds
-    # the outside-support minority mechanism (ToI Aug 23).
-    "raam_joins": 0.25,
-    "raam_supports": 0.45,
-    # JL chair Jabareen "did not rule out" a safety net (INN, late Aug).
-    "jl_supports": 0.40,
+    # Ofer Winter (Aug 27): "we will only recommend him [Netanyahu]" —
+    # public, repeated, cheap to honor at the President's Residence
+    # (JPost/Haaretz Aug 27); analysts doubt everything after that stage.
+    "amcha_right": 0.87,
+    # Winter deep-dive (Aug 30): the promotion-saga grudge is against
+    # EISENKOT, not Liberman — Winter served as Liberman's military
+    # secretary, Liberman publicly defends him (Srugim Aug 28), and Winter
+    # vowed "I will do everything I can to prevent [Eisenkot's government]
+    # from being formed" (INN Aug 27). So amcha_center is CONDITIONAL in
+    # simulate_formation: it applies only in draws where Together outranks
+    # Yashar (a Bennett-led centre government); under an Eisenkot-led one
+    # Amcha's join probability is floored near zero (AMCHA_JOIN_EISENKOT).
+    "amcha_center": 0.30,
+    # Segalovitz deal effectively signed (Maariv Aug 5: agreement in
+    # principle; slot #2 reserved at the Aug 22 primaries). Eisenkot's camp
+    # published Ra'am-shaped entry conditions (Walla Aug 16) but every
+    # Jewish party still pledges no Arab party INSIDE at the outset —
+    # entry is modeled as post-formation expansion, hence joins < supports.
+    "raam_joins": 0.35,
+    "raam_supports": 0.55,
+    # JL revived with Jabareen #1/Tibi #2 (ToI late Aug); Hadash-led list
+    # likelier to abstain constructively than Balad-led; Tibi placated.
+    "jl_supports": 0.45,
     # Split haredi defection: Deri re-locked Shas ("We support Netanyahu,
     # period"); UTJ/Degel broke with Netanyahu over the draft law, met
     # Eisenkot positively in secret (Ch12), and Agudat says "whoever
     # delivers a draft law" - but Eisenkot vows no draft compromise.
     "shas_defects": 0.08,
     "utj_defects": 0.35,
-    # No credible Likud heir emerged from the primary (Haaretz Jul 12).
-    "likud_sans_bibi": 0.10,
+    # No credible Likud heir emerged from the primary (Haaretz Jul 12),
+    # but Herzog is actively advancing a plea-deal exit ramp (NYT/JNS) and
+    # told MKs he'll push a unity government "at any cost" (ToI) — the
+    # president is a formation actor, not a notary.
+    "likud_sans_bibi": 0.15,
+    # Eisenkot has made the 58-59-seat minority government explicit
+    # doctrine (ToI Aug 23); Liberman's stated veto ("no minority
+    # government, no safety net", N12) is the binding constraint. He
+    # relents in a minority of draws — under Herzog's unity-at-any-cost
+    # pressure and with the alternative being Netanyahu VI or a sixth
+    # election, vetoes of this kind have folded before (his own 2020
+    # abstention precedent).
+    "liberman_minority_ok": 0.25,
     # The branch the formation grading exposed (P(2020)=0 without it): a
     # centre list joins a Netanyahu-led government. Historical base rate
     # among feasible cases 1/3 (2020 yes; 2019a/2019s no); tempered to 0.12
@@ -107,6 +131,11 @@ PM_ALLOC = {
 PM_NAMES = ["Eisenkot", "Bennett", "Liberman", "Lapid",
             "rotation / Likud successor"]
 
+# P(Amcha joins an Eisenkot-led centre government) — floored, not zeroed:
+# Winter's vendetta is personal and public, but coalitions have bought
+# stranger conversions (Cromwell caveat).
+AMCHA_JOIN_EISENKOT = 0.03
+
 OUTCOMES = [
     "Netanyahu coalition",
     "Netanyahu-led with centre defector (pledge-break)",
@@ -120,7 +149,12 @@ OUTCOMES = [
 
 
 def load_draws():
-    d = pd.read_parquet(PROCESSED_DIR / "bayes_draws.parquet")
+    # Prefer the registration-mixture draws (they carry the RZP-Zehut
+    # pass/fail and centre-fold events); fall back to the baseline draws.
+    mix = PROCESSED_DIR / "mixture_draws.parquet"
+    src = mix if mix.exists() else PROCESSED_DIR / "bayes_draws.parquet"
+    d = pd.read_parquet(src)
+    print(f"formation input: {src.name} ({len(d)} draws)")
     for col in NB_CORE + CENTRE + [JOINT_LIST, RAAM, AMCHA]:
         if col not in d.columns:
             d[col] = 0
@@ -140,9 +174,15 @@ def simulate_formation(draws: pd.DataFrame, behavior: dict, seed=SEED):
     together = draws["Bennett 2026 + Yesh Atid"].values
 
     u = rng.random((n, 7))
+    # Winter's centre-join probability is conditional on WHO would lead:
+    # near-zero under Eisenkot (sworn enemy), meaningful under a
+    # Bennett-led government (Together > Yashar draws).
+    amcha_center_eff = np.where(together > yashar,
+                                behavior["amcha_center"],
+                                AMCHA_JOIN_EISENKOT)
     amcha_side = np.select(
         [u[:, 0] < behavior["amcha_right"],
-         u[:, 0] < behavior["amcha_right"] + behavior["amcha_center"]],
+         u[:, 0] < behavior["amcha_right"] + amcha_center_eff],
         [1, 2], default=0)  # 1 right, 2 centre, 0 neither
     raam_joins = u[:, 1] < behavior["raam_joins"]
     raam_supports = u[:, 2] < behavior["raam_supports"]
@@ -165,8 +205,10 @@ def simulate_formation(draws: pd.DataFrame, behavior: dict, seed=SEED):
     abstaining = (np.where(raam_supports & ~raam_joins, raam, 0)
                   + np.where(jl_supports, jl, 0))
     present = 120 - abstaining
+    lib_ok = rng.random(n) < behavior["liberman_minority_ok"]
+    minority_ce = np.where(lib_ok, ce, ce - yb)
     outcome[np.where((abstaining > 0)
-                     & (ce - yb > present / 2))] = 5
+                     & (minority_ce > present / 2))] = 5
     defecting_haredi = (np.where(shas_on, draws["Shas"].values, 0)
                         + np.where(utj_on,
                                    draws["United Torah Judaism"].values, 0))
@@ -214,20 +256,20 @@ def main() -> None:
 
     # Sensitivity: the two assumptions with the most leverage.
     rows = []
-    for hd in (0.1, 0.3, 0.5):
-        for ar in (0.15, 0.35, 0.55):
-            b = dict(BEHAVIOR, haredi_defect=hd, amcha_right=ar,
+    for ud in (0.15, 0.35, 0.55):
+        for ar in (0.60, 0.80, 0.95):
+            b = dict(BEHAVIOR, utj_defects=ud, amcha_right=ar,
                      amcha_center=min(0.9 - ar, 0.35))
             oc, pm_s = simulate_formation(draws, b)
             rows.append({
-                "haredi_defect": hd, "amcha_right": ar,
+                "utj_defects": ud, "amcha_right": ar,
                 "p_netanyahu_pm": round(float((pm_s == "Netanyahu").mean()), 3),
                 "p_eisenkot_pm": round(float((pm_s == "Eisenkot").mean()), 3),
                 "p_repeat_election": round(float((oc == 7).mean()), 3),
             })
     sens = pd.DataFrame(rows)
     sens.to_csv(PROCESSED_DIR / "government_sensitivity.csv", index=False)
-    print("\nSensitivity (haredi defection x Amcha alignment):")
+    print("\nSensitivity (UTJ defection x Amcha alignment):")
     print(sens.to_string(index=False))
 
     plot(table, pm_probs)

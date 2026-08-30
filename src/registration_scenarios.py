@@ -17,25 +17,26 @@ Events, priors, and precedents (all priors are stated judgment):
                             KNOWN LIMIT: a Ta'al-alone split is not
                             representable while hadash_taal is one registry
                             unit; this event covers the Balad dimension only.
-  rzp_fate                  RZP polls ~3.3%. Aug 28-30 reporting: Ben Gvir
-                            refused a merger "final and absolute"; Netanyahu
-                            approved 4 reserved Likud slots for a technical
-                            absorption ("most likely scenario", Ynet):
-    alone             0.35  (includes the rumored Smotrich-Feiglin micro-merger)
-    merge_otzma       0.05  effectively dead per Otzma's refusal
-    merge_likud       0.45  the reported modal outcome
-    withdraws         0.15
-  zionist_home_folds  0.70  Ynet deadline roundup: centre micro-lists "likely
-                            won't submit lists"; absorber Yashar
-  blue_white_folds    0.75  B&W at 1.8%; Gantz retirement talk reported
-  unity_folds         0.80  Erdan "will seek an alliance rather than run to
-                            the end"; voters are Likud provenance
-  segalovitz_joins_raam 0.55  Yoav Segalovitz (ex-Yesh Atid) negotiating the
-                            No. 2 slot on Ra'am's slate — he has already left
-                            Yesh Atid and talks are public (ToI/i24, Aug
-                            2026). Effect: Ra'am gains the pairwise-measured
-                            scenario-poll boost, carved from the centre bloc
-                            (his crossover voters), NOT a new list.
+  rzp_fate                  RZP polls ~3.3%. Aug 30 deep dive: two live,
+                            mutually exclusive rescue tracks:
+    alone             0.13  post-primaries purity posture, both tracks die
+    merge_otzma       0.02  "final and absolute" refusal
+    merge_likud       0.38  technical absorption, Ynet's "most likely"
+    merge_zehut       0.32  Smotrich-Feiglin technical bloc, advanced talks
+                            (Feiglin #2 + slots 8,10); combined list faces
+                            the threshold itself (~75% pass rate in draws)
+    withdraws         0.15  Feiglin-2019-style paid exit
+  zionist_home_folds  0.45  ZH-Reservists is the strongest micro; Tropper's
+                            pre-agreed fallback is folding into Yashar
+  blue_white_folds    0.65  Gantz MK ultimatum vs his slot-#1 demand
+  unity_folds         0.85  Erdan won't run to the end at 0.8%
+  centre_union_files  0.12  Erdan-Gantz(-Zelicha) union files as one list
+                            instead of folding (usually still sub-threshold)
+  segalovitz_joins_raam 0.80  agreement in principle signed Aug 5 (Maariv);
+                            slot #2 reserved at Ra'am's primaries; both
+                            sides burned their boats. Effect: Ra'am gains
+                            the pairwise-measured scenario-poll boost,
+                            carved from the centre bloc, NOT a new list.
 
 Transfer rules: a bloc-internal merge retains 90% of combined support
 (URWP/RZP-OY pattern); a fold-and-endorse transfers 55-65% to the absorber
@@ -67,24 +68,48 @@ SEED = 20261027
 
 PRIORS = {
     "balad_splits": 0.10,
-    # Aug 28-30 news: Ben Gvir's refusal of an RZP merger is "final and
-    # absolute"; the Likud technical bloc (4 reserved slots approved) is
-    # reported as the modal outcome; Smotrich-Feiglin talks are the rumor
-    # lane inside "alone".
-    "rzp_alone": 0.35, "rzp_merge_otzma": 0.05,
-    "rzp_merge_likud": 0.45, "rzp_withdraws": 0.15,
-    # Ynet deadline roundup: the centre micro-lists "likely won't submit
-    # lists unless mergers create viable pathways".
-    "zionist_home_folds": 0.70,
-    "blue_white_folds": 0.75,
-    "unity_folds": 0.80,
-    # Talks confirmed ongoing Aug 26, obstacles called "immense"; leaning yes.
-    "segalovitz_joins_raam": 0.50,
+    # Aug 30 deep dive: Smotrich-Feiglin technical bloc CONFIRMED in
+    # advanced talks (Feiglin #2, Zehut slots 8+10; Amit Segal/Ch12, both
+    # parties confirm; Netanyahu blessing "in principle") — a live branch,
+    # not a rumor lane. Likud technical absorption remains Ynet's "most
+    # likely". The two tracks are substitutes. Otzma merger "final and
+    # absolute" dead.
+    "rzp_alone": 0.13, "rzp_merge_otzma": 0.02,
+    "rzp_merge_likud": 0.38, "rzp_merge_zehut": 0.32,
+    "rzp_withdraws": 0.15,
+    # Centre desk (Aug 30): ZH-Reservists is the strongest micro (2.0-2.9%,
+    # crossed once) with a pre-agreed Tropper fallback of folding into
+    # Yashar (Kan 11 via Maariv Jul 7) -> files ~0.55.
+    "zionist_home_folds": 0.45,
+    # Gantz's MKs threaten to walk rather than "burn votes"; 48% of the
+    # public says retire; but his #1 demand blocks the mergers.
+    "blue_white_folds": 0.65,
+    # Correspondent consensus: Erdan won't run to the end at 0.8% (Kipa
+    # Aug 29).
+    "unity_folds": 0.85,
+    # Erdan-Gantz working teams + Erdan-Zelicha "one political force"
+    # track (Israel Hayom Aug 29): a union FILES instead of folding.
+    # Ch13 (Aug 26) tested even Gantz+Erdan+Shaked merged and it still
+    # missed 3.25% - the union mostly burns votes anyway.
+    "centre_union_files": 0.12,
+    # Maariv (Aug 5): agreement in principle SIGNED; slot #2 structurally
+    # reserved at Ra'am's Aug 22 primaries; both sides burned their boats
+    # (he resigned the Knesset; Abbas ran primaries with #2 vacated).
+    # Residual: the recognition-formula double-speak spiral (Abbas's
+    # Aug 26 Arabic post).
+    "segalovitz_joins_raam": 0.80,
 }
 MERGE_RETENTION = 0.90
-FOLD_TRANSFER = {"zionist_home": ("yashar", 0.60),
-                 "blue_white": ("yashar", 0.50),
-                 "unity": ("likud", 0.55)}
+# Fold redistribution vectors (centre desk, Aug 30): named absorbers get
+# explicit shares; the remainder scatters proportionally (renormalization).
+# Unity's voters are ex-Likud but have LEFT the Likud orbit - only ~20%
+# return; Erdan/Edelstein/Shaked voters split toward Together and YB.
+FOLD_TRANSFER = {
+    "zionist_home": [("yashar", 0.75)],
+    "blue_white": [("yashar", 0.45), ("bennett_2026", 0.15)],
+    "unity": [("bennett_2026", 0.25), ("yisrael_beytenu", 0.20),
+              ("likud", 0.20), ("yashar", 0.15)],
+}
 # Set on filing day to collapse the mixture, e.g.
 # RESOLVED = {"balad_splits": False, "rzp_fate": "merge_otzma", ...}
 RESOLVED: dict = {}
@@ -137,10 +162,14 @@ def apply_registration_events(shares, comps, labels, blocs, fams, rng,
     fams = np.append(fams, "arab")
     events["balad_splits"] = split_on
 
-    # RZP's fate (categorical).
+    # RZP's fate (categorical). merge_zehut = the Smotrich-Feiglin
+    # technical bloc: RZP absorbs Zehut's share and the combined list
+    # faces the threshold on its own (~4.3-5.0% nominal, retention
+    # haircut applied -> passes in roughly three-quarters of draws).
     rzp = _col(comps, "rzp")
     otzma = _col(comps, "otzma")
     likud = _col(comps, "likud")
+    zehut = _col(comps, "zehut")
     if "rzp_fate" in RESOLVED:
         fate = np.full(n, RESOLVED["rzp_fate"], dtype=object)
     else:
@@ -148,26 +177,51 @@ def apply_registration_events(shares, comps, labels, blocs, fams, rng,
         cut1 = p["rzp_alone"]
         cut2 = cut1 + p["rzp_merge_otzma"]
         cut3 = cut2 + p["rzp_merge_likud"]
-        fate = np.select([u < cut1, u < cut2, u < cut3],
-                         ["alone", "merge_otzma", "merge_likud"],
+        cut4 = cut3 + p["rzp_merge_zehut"]
+        fate = np.select([u < cut1, u < cut2, u < cut3, u < cut4],
+                         ["alone", "merge_otzma", "merge_likud",
+                          "merge_zehut"],
                          default="withdraws")
     if rzp is not None:
         m_o = fate == "merge_otzma"
         shares[m_o, otzma] += MERGE_RETENTION * shares[m_o, rzp]
         m_l = fate == "merge_likud"
         shares[m_l, likud] += MERGE_RETENTION * shares[m_l, rzp]
+        if zehut is not None:
+            m_z = fate == "merge_zehut"
+            shares[m_z, rzp] += MERGE_RETENTION * shares[m_z, zehut]
+            shares[m_z, zehut] = 0.0
         gone = m_o | m_l | (fate == "withdraws")
         shares[gone, rzp] = 0.0
     events["rzp_fate"] = fate
 
-    # Sub-threshold centre lists folding into absorbers.
-    for pid, (absorber, transfer) in FOLD_TRANSFER.items():
+    # Centre union (Erdan-Gantz[-Zelicha] "one political force"): B&W and
+    # Unity file as ONE list under the B&W line instead of folding.
+    # Retention haircut per merger norm; the combined ~2.6-3.1% still
+    # usually misses 3.25% (Ch13 tested the merger and it failed).
+    union_on = bern("centre_union_files")
+    bw = _col(comps, "blue_white")
+    un = _col(comps, "unity")
+    if bw is not None and un is not None:
+        shares[union_on, bw] = MERGE_RETENTION * (
+            shares[union_on, bw] + shares[union_on, un])
+        shares[union_on, un] = 0.0
+    events["centre_union_files"] = union_on
+
+    # Sub-threshold centre lists folding into absorbers (suppressed for
+    # B&W/Unity in union draws — the union already consumed them).
+    for pid, dests in FOLD_TRANSFER.items():
         src = _col(comps, pid)
-        dst = _col(comps, absorber)
-        if src is None or dst is None:
+        if src is None:
             continue
         on = bern(f"{pid}_folds")
-        shares[on, dst] += transfer * shares[on, src]
+        if pid in ("blue_white", "unity"):
+            on = on & ~union_on
+        for absorber, transfer in dests:
+            dst = _col(comps, absorber)
+            if dst is None:
+                continue
+            shares[on, dst] += transfer * shares[on, src]
         shares[on, src] = 0.0
         events[f"{pid}_folds"] = on
 
@@ -226,6 +280,10 @@ def main() -> None:
         "p_pass": (seats >= 4).mean(axis=0).round(3),
     }).sort_values("mean", ascending=False)
     dist.to_csv(PROCESSED_DIR / "bayes_forecast_mixture.csv", index=False)
+    # Feed the formation layer the same mixture draws, so registration
+    # events (RZP-Zehut pass/fail, centre folds) flow into coalition math.
+    pd.DataFrame(seats, columns=labels).to_parquet(
+        PROCESSED_DIR / "mixture_draws.parquet")
 
     summary = pd.DataFrame([{
         "p_nb_61": round(float((nb >= 61).mean()), 3),
