@@ -83,17 +83,30 @@ BEHAVIOR = {
     # JL revived with Jabareen #1/Tibi #2 (ToI late Aug); Hadash-led list
     # likelier to abstain constructively than Balad-led; Tibi placated.
     "jl_supports": 0.45,
-    # Split haredi defection: Deri re-locked Shas ("We support Netanyahu,
-    # period"); UTJ/Degel broke with Netanyahu over the draft law, met
-    # Eisenkot positively in secret (Ch12), and Agudat says "whoever
-    # delivers a draft law" - but Eisenkot vows no draft compromise.
-    "shas_defects": 0.08,
-    "utj_defects": 0.35,
+    # Split haredi defection, institution-derived (Aug 31 desk):
+    # Shas — crossing now needs one psak from Yitzhak Yosef (newly
+    # empowered, privately called Eisenkot "a warm Jew who can be
+    # trusted"; the 1992 Ovadia precedent proves the mechanism), but the
+    # centre's shared anti-exemption identity leaves no deal space ->
+    # 0.10. UTJ — a full signature needs BOTH Moetzes incl. Gur; the
+    # likelier form is a Degel-only partial (2004-06 Agudah-alone
+    # precedent). Full-equivalent blend: 0.15 full + 0.22 partial x 1/2.
+    "shas_defects": 0.10,
+    "utj_defects": 0.26,
+    # Liberman's haredi veto is his electoral identity since 2019
+    # ("not a millimeter"); he relents on sitting WITH haredim only
+    # rarely -> the centre-haredi branch must clear 61 without YB unless
+    # this fires.
+    "liberman_haredi_ok": 0.20,
     # No credible Likud heir emerged from the primary (Haaretz Jul 12),
     # but Herzog is actively advancing a plea-deal exit ramp (NYT/JNS) and
-    # told MKs he'll push a unity government "at any cost" (ToI) — the
-    # president is a formation actor, not a notary.
-    "likud_sans_bibi": 0.15,
+    # told MKs he'll push a unity government "at any cost" (ToI). Base
+    # rates: unity resolved ~half of historical deadlocks (1984/1988/
+    # 2020), and the institutions desk puts P(Netanyahu accepts exit |
+    # post-election dead-end) at 0.35 — tempered here because 2026's
+    # cleavage is personalized on Netanyahu (the condition under which
+    # unity failed in Sept 2019).
+    "likud_sans_bibi": 0.18,
     # Eisenkot has made the 58-59-seat minority government explicit
     # doctrine (ToI Aug 23); Liberman's stated veto ("no minority
     # government, no safety net", N12) is the binding constraint. He
@@ -212,8 +225,12 @@ def simulate_formation(draws: pd.DataFrame, behavior: dict, seed=SEED):
     defecting_haredi = (np.where(shas_on, draws["Shas"].values, 0)
                         + np.where(utj_on,
                                    draws["United Torah Judaism"].values, 0))
-    outcome[np.where((ce + defecting_haredi >= 61)
-                     & (defecting_haredi > 0))] = 4
+    # Liberman won't sit WITH haredim (identity veto, ~0.80 held): the
+    # centre-haredi coalition is either centre-minus-YB + haredim, or
+    # needs his rare relent.
+    lib_haredi = rng.random(n) < behavior["liberman_haredi_ok"]
+    ch_seats = np.where(lib_haredi, ce, ce - yb) + defecting_haredi
+    outcome[np.where((ch_seats >= 61) & (defecting_haredi > 0))] = 4
     outcome[np.where((ce + raam >= 61) & raam_joins)] = 3
     outcome[np.where(ce >= 61)] = 2
     outcome[np.where(nb >= 61)] = 0

@@ -19,13 +19,14 @@ Events, priors, and precedents (all priors are stated judgment):
                             unit; this event covers the Balad dimension only.
   rzp_fate                  RZP polls ~3.3%. Aug 30 deep dive: two live,
                             mutually exclusive rescue tracks:
-    alone             0.13  post-primaries purity posture, both tracks die
-    merge_otzma       0.02  "final and absolute" refusal
-    merge_likud       0.38  technical absorption, Ynet's "most likely"
-    merge_zehut       0.32  Smotrich-Feiglin technical bloc, advanced talks
+    alone             0.12  post-primaries purity posture, both tracks die
+    merge_otzma       0.08  "final and absolute" refusal — but Netanyahu
+                            forced this exact merger in 2021 and 2022
+    merge_likud       0.36  technical absorption, Ynet's "most likely"
+    merge_zehut       0.31  Smotrich-Feiglin technical bloc, advanced talks
                             (Feiglin #2 + slots 8,10); combined list faces
                             the threshold itself (~75% pass rate in draws)
-    withdraws         0.15  Feiglin-2019-style paid exit
+    withdraws         0.13  Feiglin-2019-style paid exit
   zionist_home_folds  0.45  ZH-Reservists is the strongest micro; Tropper's
                             pre-agreed fallback is folding into Yashar
   blue_white_folds    0.65  Gantz MK ultimatum vs his slot-#1 demand
@@ -74,9 +75,15 @@ PRIORS = {
     # not a rumor lane. Likud technical absorption remains Ynet's "most
     # likely". The two tracks are substitutes. Otzma merger "final and
     # absolute" dead.
-    "rzp_alone": 0.13, "rzp_merge_otzma": 0.02,
-    "rzp_merge_likud": 0.38, "rzp_merge_zehut": 0.32,
-    "rzp_withdraws": 0.15,
+    # merge_otzma nudged up from 0.02: the institutions desk warns never
+    # to fully trust a "final and absolute" refusal before the deadline —
+    # Netanyahu personally forced this exact merger in 2021 AND 2022 —
+    # though this cycle Ben Gvir is above threshold and bleeding to
+    # Winter, so the historical enforcement mechanism (mutual threshold
+    # fear) is absent.
+    "rzp_alone": 0.12, "rzp_merge_otzma": 0.08,
+    "rzp_merge_likud": 0.36, "rzp_merge_zehut": 0.31,
+    "rzp_withdraws": 0.13,
     # Centre desk (Aug 30): ZH-Reservists is the strongest micro (2.0-2.9%,
     # crossed once) with a pre-agreed Tropper fallback of folding into
     # Yashar (Kan 11 via Maariv Jul 7) -> files ~0.55.

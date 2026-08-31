@@ -80,6 +80,22 @@ EVENT_RISK = 1.2
 SEED = 20261027
 T_DF = 5
 
+# First-cycle de-novo lists carry wider final-poll error: measured on the
+# own 9-cycle DB, new-list final-30d sd 2.83 vs 2.14 established (D-60
+# window: 3.98 vs 2.93) -> ~1.35x. Mean fade is NOT significant (+0.1
+# final / +1.1 D-60, two-sided tails: New Right +7.4 over-polled but
+# Yesh Atid 2013 -7.9 UNDER-polled), so variance only, no drift.
+NEW_LIST_MULT = 1.35
+NEW_LIST_IDS = {"yashar", "amcha_yisrael", "zionist_home", "unity"}
+
+# Gevalt coupling: Likud's final-days surges are paid by its own bloc's
+# satellites, near 1:1 (2015: Likud +8.4 final-poll beat, Jewish Home -4,
+# Yachad dead; 2019a: Likud +6.7, New Right/Zehut dead). The Likud anchor
+# carries the MEAN of this record; this term adds the negative
+# correlation, so satellite threshold deaths co-occur with Likud surges.
+GEVALT_SD = 2.0            # seats, zero-sum Likud <-> NB satellites
+GEVALT_SAT_IDS = {"otzma", "rzp", "amcha_yisrael", "zehut", "noam"}
+
 # All election-day shocks come from the sequential decomposition of the
 # eight-cycle error record (error_decomposition.py), so no component is
 # double-counted. Means are in ERROR space (polled - actual): the projection
@@ -387,6 +403,9 @@ def project(data, idata, rng, config="current", config_params=None):
     # bloc/family components, calibrated on the backtest.
     base0 = shares.mean(axis=0)
     sd_list = (LIST_SHOCK_BASE + LIST_SHOCK_SLOPE * base0 * 120) / 120.0
+    comps0 = [set(c.split("+")) for c in data["components"]]
+    is_new = np.array([bool(cs & NEW_LIST_IDS) for cs in comps0])
+    sd_list = np.where(is_new, sd_list * NEW_LIST_MULT, sd_list)
     shares = np.clip(
         shares + rng.standard_normal(shares.shape) * sd_list, 0, None)
     shares /= shares.sum(axis=1, keepdims=True)
@@ -481,6 +500,16 @@ def project(data, idata, rng, config="current", config_params=None):
         onehot[col] = 1.0
         w_r = np.where(onehot == 0, base, 0)
         shares = shares + (-mu / 120.0) * (onehot - w_r / w_r.sum())
+
+    # Gevalt coupling: zero-sum transfer between Likud and its bloc's
+    # satellites, proportional to satellite size (see GEVALT_SD note).
+    sat = np.array([bool(cs & GEVALT_SAT_IDS) for cs in comps])
+    if likud_col is not None and sat.any():
+        onehot = np.zeros(len(comps))
+        onehot[likud_col] = 1.0
+        w_s = np.where(sat, base, 0)
+        g = rng.standard_normal(N_PROJ) * GEVALT_SD / 120.0
+        shares = shares + g[:, None] * (onehot - w_s / w_s.sum())
     shares = np.clip(shares, 0, None)
     shares /= shares.sum(axis=1, keepdims=True)
 
