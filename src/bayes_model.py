@@ -570,6 +570,8 @@ def main() -> None:
               f"(no-update prediction)")
 
     model, idata = fit(data)
+    import arviz as az
+    az.to_netcdf(idata, PROCESSED_DIR / "m3_idata.nc")  # shared with mixture
     diagnostics(idata)
     if "beta_u" in idata.posterior:
         bu = idata.posterior["beta_u"].values.ravel()
