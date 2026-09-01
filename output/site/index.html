@@ -232,9 +232,11 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
     <div class="legend"><span><i class="sw" style="background:var(--ink);width:12px;height:3px;border-radius:2px"></i>90% interval</span>
     <span><i class="sw hollow"></i>below threshold in central projection</span></div>
     <p class="note" style="margin-top:8px">Ballot letters are the parties' registered CEC letters
-    (מחל, שס, ג, ל, עם, ום, ט, כן, פה, אמת…); lists too new to own letters carry a provisional
-    combination<span class="mono">*</span> until the Central Elections Committee assigns real ones
-    at registration on September 9.</p>
+    where owned (מחל, שס, ג, ל, עם, ום, ט, כן; Together via Yesh Atid's פה; the Democrats via
+    Labor's אמת). Lists too new to own letters carry a provisional combination<span class="mono">*</span>
+    built only from unreserved letter-strings, until the CEC assigns real ones at registration on
+    September 9 — individual characters may legally repeat across lists (מ serves מחל, אמת and עם
+    alike), but a reserved string belongs to its party alone.</p>
   </div>
 </div></section>
 
@@ -454,10 +456,10 @@ const BLOC = {"Likud":"nb","Shas":"nb","United Torah Judaism":"nb","Otzma Yehudi
 // Ballot letters (otiyot): registered CEC letters where a party owns
 // them; for new lists (marked *) a realistic unused combination is shown
 // provisionally until the CEC assigns real ones at registration.
-const HEB = {"Likud":"מחל","Yashar":"ישר","Bennett 2026 + Yesh Atid":"פה","The Democrats":"אמת",
- "Yisrael Beytenu":"ל","Shas":"שס","United Torah Judaism":"ג","Otzma Yehudit":"נץ",
- "Balad + Hadash-Ta'al":"ום","Ra'am":"עם","Amcha Yisrael":"עז","Religious Zionist Party":"ט",
- "Zionist Home – The Reservists":"מגן","Blue and White":"כן","Unity":"אח","Zehut":"ז","Noam":"נע",
+const HEB = {"Likud":"מחל","Yashar":"יר","Bennett 2026 + Yesh Atid":"פה","The Democrats":"אמת",
+ "Yisrael Beytenu":"ל","Shas":"שס","United Torah Judaism":"ג","Otzma Yehudit":"עצ",
+ "Balad + Hadash-Ta'al":"ום","Ra'am":"עם","Amcha Yisrael":"נר","Religious Zionist Party":"ט",
+ "Zionist Home – The Reservists":"בר","Blue and White":"כן","Unity":"אח","Zehut":"ז","Noam":"נע",
  "New Economic Party":"כל"};
 const HEB_PROV = new Set(["Yashar","Amcha Yisrael","Zionist Home – The Reservists","Unity",
  "New Economic Party","Noam","Otzma Yehudit"]);
