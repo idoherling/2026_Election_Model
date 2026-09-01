@@ -97,7 +97,7 @@ section h2{font-size:clamp(24px,3.4vw,34px);font-weight:700;margin:6px 0 10px}
 .ivl .r{display:contents;cursor:default}
 .ivl .nm{font-size:14.5px;font-weight:600;padding:5px 0;display:flex;align-items:center;gap:9px;min-width:0}
 .ivl .nm .t{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.petek{flex:none;width:30px;height:22px;border-radius:3px;background:var(--card);
+.petek{flex:none;min-width:30px;padding:0 3px;height:22px;border-radius:3px;background:var(--card);
   border:1px solid var(--line2);box-shadow:0 1px 0 rgba(20,24,30,.08);
   display:inline-flex;align-items:center;justify-content:center;
   font-family:"Frank Ruhl Libre",serif;font-weight:700;font-size:12.5px;line-height:1}
@@ -231,6 +231,10 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
     <div class="axisrow"><div></div><div class="axis" id="ivlAxis"></div><div></div></div>
     <div class="legend"><span><i class="sw" style="background:var(--ink);width:12px;height:3px;border-radius:2px"></i>90% interval</span>
     <span><i class="sw hollow"></i>below threshold in central projection</span></div>
+    <p class="note" style="margin-top:8px">Ballot letters are the parties' registered CEC letters
+    (מחל, שס, ג, ל, עם, ום, ט, כן, פה, אמת…); lists too new to own letters carry a provisional
+    combination<span class="mono">*</span> until the Central Elections Committee assigns real ones
+    at registration on September 9.</p>
   </div>
 </div></section>
 
@@ -447,11 +451,17 @@ const BLOC = {"Likud":"nb","Shas":"nb","United Torah Judaism":"nb","Otzma Yehudi
  "Yashar":"anti","Bennett 2026 + Yesh Atid":"anti","The Democrats":"anti","Yisrael Beytenu":"anti",
  "Zionist Home – The Reservists":"anti","Blue and White":"anti","Unity":"anti","New Economic Party":"anti",
  "Balad + Hadash-Ta'al":"arab","Ra'am":"arab","Balad (alone)":"arab"};
-const HEB = {"Likud":"מחל","Yashar":"ישר","Bennett 2026 + Yesh Atid":"בי","The Democrats":"ד",
- "Yisrael Beytenu":"ל","Shas":"שס","United Torah Judaism":"ג","Otzma Yehudit":"ט",
- "Balad + Hadash-Ta'al":"ום","Ra'am":"עם","Amcha Yisrael":"ע","Religious Zionist Party":"רצ",
- "Zionist Home – The Reservists":"בר","Blue and White":"כח","Unity":"אח","Zehut":"ז","Noam":"נ",
+// Ballot letters (otiyot): registered CEC letters where a party owns
+// them; for new lists (marked *) a realistic unused combination is shown
+// provisionally until the CEC assigns real ones at registration.
+const HEB = {"Likud":"מחל","Yashar":"ישר","Bennett 2026 + Yesh Atid":"פה","The Democrats":"אמת",
+ "Yisrael Beytenu":"ל","Shas":"שס","United Torah Judaism":"ג","Otzma Yehudit":"נץ",
+ "Balad + Hadash-Ta'al":"ום","Ra'am":"עם","Amcha Yisrael":"עז","Religious Zionist Party":"ט",
+ "Zionist Home – The Reservists":"מגן","Blue and White":"כן","Unity":"אח","Zehut":"ז","Noam":"נע",
  "New Economic Party":"כל"};
+const HEB_PROV = new Set(["Yashar","Amcha Yisrael","Zionist Home – The Reservists","Unity",
+ "New Economic Party","Noam","Otzma Yehudit"]);
+const heb = n => (HEB[n]||"") + (HEB_PROV.has(n) ? "<i style=\"font-style:normal;font-size:9px;vertical-align:top\">*</i>" : "");
 const SHORT = {"Bennett 2026 + Yesh Atid":"Together (Bennett–Lapid)","Balad + Hadash-Ta'al":"Joint List",
  "Zionist Home – The Reservists":"Zionist Home–Reservists","Religious Zionist Party":"Religious Zionism",
  "United Torah Judaism":"UTJ"};
@@ -549,7 +559,7 @@ function hideTip(){ tip.style.opacity = 0; }
     grp.forEach(p=>{
       const dead = p.seats===0, st = dead ? "--pc:var(--dead)" : pc(p.name);
       html += `<div class="r" data-p="${p.name}" tabindex="0">
-        <div class="nm"><span class="petek${dead?" dead":""}" style="${pc(p.name)}">${HEB[p.name]||""}</span><span class="t">${nm(p.name)}</span></div>
+        <div class="nm"><span class="petek${dead?" dead":""}" style="${pc(p.name)}">${heb(p.name)}</span><span class="t">${nm(p.name)}</span></div>
         <div class="trackwrap">
           ${[0,10,20,30].map(g=>`<span class="gridline" style="left:${X(g)}%"></span>`).join("")}
           <span class="band" style="${st};left:${X(p.lo)}%;width:${Math.max(X(p.hi-p.lo),1.4)}%"></span>
@@ -575,7 +585,7 @@ function hideTip(){ tip.style.opacity = 0; }
     .sort((a,b)=>b.p_pass-a.p_pass);
   $("#thr").innerHTML = zone.map(p=>`<div class="row">
     <div class="nm" style="display:flex;gap:9px;align-items:center;font-weight:600;font-size:14.5px">
-      <span class="petek" style="${pc(p.name)}">${HEB[p.name]||""}</span>${nm(p.name)}</div>
+      <span class="petek" style="${pc(p.name)}">${heb(p.name)}</span>${nm(p.name)}</div>
     <div class="bar"><i style="${pc(p.name)};width:${p.p_pass*100}%"></i></div>
     <div class="pct">${pct(p.p_pass)}</div></div>`).join("");
 })();
@@ -631,7 +641,7 @@ renderBlocHist("anti");
   const partiesForChips = D.parties.filter(p=>p.hi>0 && colIdx[p.name]!=null);
   const chipBox = $("#chips");
   chipBox.innerHTML = partiesForChips.map(p=>`<button class="chip" data-p="${p.name}" aria-pressed="false">
-    <span class="petek${p.seats===0?" dead":""}" style="${pc(p.name)}">${HEB[p.name]||""}</span>${nm(p.name)}
+    <span class="petek${p.seats===0?" dead":""}" style="${pc(p.name)}">${heb(p.name)}</span>${nm(p.name)}
     <span class="mono">${p.seats}</span></button>`).join("");
   const PRESETS = [
     ["Netanyahu bloc", ["Likud","Shas","United Torah Judaism","Otzma Yehudit","Amcha Yisrael","Religious Zionist Party"]],
