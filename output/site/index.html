@@ -16,19 +16,21 @@
 :root{
   --paper:#f5f3ee; --card:#f5f3ee; --ink:#141412; --ink2:#3a3835; --muted:#6f6b64;
   --line:#141412; --line2:#141412; --dead:#a09c93;
-  --accent:#e0311a; --blue:#1d56a5; --hit:#14141210;
-  --shadow:none; --field:#e0311a; --field-ink:#f5f3ee;
+  --accent:#0038b8; --blue:#1d56a5; --hit:#14141210;
+  --bloc-nb:#123a6d; --bloc-anti:#2e7fc2; --bloc-arab:#1a7a44;
+  --shadow:none; --field:#0038b8; --field-ink:#f5f3ee;
   --p-likud:#225A9E; --p-yashar:#2b8fd4; --p-together:#149a44;
   --p-dems:#2A38D7; --p-yb:#4d7fb8; --p-shas:#141412; --p-utj:#003366;
-  --p-otzma:#e0311a; --p-rzp:#214785; --p-raam:#15793D; --p-jl:#c32b35;
+  --p-otzma:#e03e00; --p-rzp:#214785; --p-raam:#15793D; --p-jl:#c32b35;
   --p-zh:#0080B9; --p-bw:#0a94dd; --p-amcha:#6b7331; --p-unity:#8a867d;
 }
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
     --paper:#101010; --card:#101010; --ink:#f2efe8; --ink2:#c9c5bc; --muted:#8f8b82;
     --line:#f2efe8; --line2:#f2efe8; --dead:#5c594f;
-    --accent:#ff4b2e; --blue:#6b9fe8; --hit:#f2efe814;
-    --field:#e0311a; --field-ink:#f5f3ee;
+    --accent:#5b8ded; --blue:#6b9fe8; --hit:#f2efe814;
+    --bloc-nb:#4a7fc4; --bloc-anti:#7fc0f2; --bloc-arab:#3aa268;
+    --field:#0038b8; --field-ink:#f5f3ee;
     --p-likud:#4d82c8; --p-yashar:#62B9F2; --p-together:#2ec46a;
     --p-dems:#6470e8; --p-yb:#9AC0E2; --p-shas:#e8e5de; --p-utj:#4677a8;
     --p-otzma:#ff6a33; --p-rzp:#5c85c0; --p-raam:#34a05e; --p-jl:#e25563;
@@ -38,8 +40,9 @@
 :root[data-theme="dark"]{
   --paper:#101010; --card:#101010; --ink:#f2efe8; --ink2:#c9c5bc; --muted:#8f8b82;
   --line:#f2efe8; --line2:#f2efe8; --dead:#5c594f;
-  --accent:#ff4b2e; --blue:#6b9fe8; --hit:#f2efe814;
-  --field:#e0311a; --field-ink:#f5f3ee;
+  --accent:#5b8ded; --blue:#6b9fe8; --hit:#f2efe814;
+    --bloc-nb:#4a7fc4; --bloc-anti:#7fc0f2; --bloc-arab:#3aa268;
+  --field:#0038b8; --field-ink:#f5f3ee;
   --p-likud:#4d82c8; --p-yashar:#62B9F2; --p-together:#2ec46a;
   --p-dems:#6470e8; --p-yb:#9AC0E2; --p-shas:#e8e5de; --p-utj:#4677a8;
   --p-otzma:#ff6a33; --p-rzp:#5c85c0; --p-raam:#34a05e; --p-jl:#e25563;
@@ -96,7 +99,8 @@ a{color:var(--ink);text-decoration-color:var(--accent);text-decoration-thickness
 .tile .k{font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.16em;color:var(--ink2)}
 .tile .v{font-family:"IBM Plex Sans",sans-serif;font-weight:700;font-size:52px;line-height:1;
   margin-top:8px;letter-spacing:-.03em;font-variant-numeric:tabular-nums;color:var(--ink)}
-.tile.anti .v{color:var(--accent)}
+.tile.anti .v{color:var(--bloc-anti)}
+.tile.nb .v{color:var(--bloc-nb)}
 .tile .s{font-size:12.5px;color:var(--muted);margin-top:4px}
 figure{margin:0}
 figcaption,.note{font-size:13.5px;color:var(--muted);line-height:1.55;max-width:72ch}
@@ -254,7 +258,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
 <nav class="nav" aria-label="Sections"><div class="wrap">
   <a href="#seats">Seats</a><a href="#threshold">The knife-edges</a><a href="#blocdist">Bloc math</a>
   <a href="#builder">Coalition builder</a><a href="#formation">Formation &amp; PM</a>
-  <a href="#scenarios">Scenarios</a><a href="#ground">Ground game</a><a href="#method">Methodology</a><a href="#validation">Track record</a>
+  <a href="#ground">Ground game</a><a href="#method">Methodology</a><a href="#validation">Track record</a>
 </div></nav>
 
 <div class="hero"><div class="wrap">
@@ -272,7 +276,10 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
     <div class="tile dead"><div class="k">Deadlock</div><div class="v" id="tNeither"></div><div class="s">neither side at 61; the formation fight decides</div></div>
   </div>
   <figure class="card" style="padding:26px 22px 14px">
-    <svg id="hemi" viewBox="0 -16 720 322" role="img" aria-label="Hemicycle of 120 projected Knesset seats" style="width:100%;height:auto;display:block"></svg>
+    <div id="hemiBlocs" style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;
+      font:700 11px 'IBM Plex Mono',monospace;letter-spacing:.14em;color:var(--ink2);
+      border-bottom:1px solid var(--hit);padding-bottom:10px;margin-bottom:6px"></div>
+    <svg id="hemi" viewBox="0 -6 720 312" role="img" aria-label="Hemicycle of 120 projected Knesset seats" style="width:100%;height:auto;display:block"></svg>
     <div class="legend" id="hemiLegend"></div>
     <figcaption style="margin-top:10px">Central seat allocation (largest-remainder over lists with P(pass) ≥ 50%),
     grouped by camp — brackets mark the blocs; Arab-list seats are drawn as rings. Each list keeps its
@@ -351,18 +358,6 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
       assumptions. Lapid is held at zero by editorial judgment: taking the No. 2 slot in
       Bennett's list subordinated his rotation claim.</p></div>
   </div>
-</div></section>
-
-<section id="scenarios"><div class="wrap">
-  <p class="eyebrow">Scenario board</p>
-  <h2>September 9 decides the shape of the race</h2>
-  <p class="lede">Lists close on September 9. Until then the forecast averages over the open
-  questions, each sampled per simulation. The table reads off what each event would do to
-  Netanyahu's majority odds.</p>
-  <div class="card tblwrap"><table id="scen">
-    <thead><tr><th>Event</th><th>Outcome</th><th class="num">Prior</th><th class="num">Majority odds if so</th><th class="num">NB seats</th></tr></thead>
-    <tbody></tbody>
-  </table></div>
 </div></section>
 
 <section id="ground"><div class="wrap">
@@ -622,6 +617,7 @@ function hideTip(){ tip.style.opacity = 0; }
       : `<circle cx="${q.x.toFixed(1)}" cy="${q.y.toFixed(1)}" r="7.2"
          fill="var(--p-${PVAR[p.name]||"unity"})" data-p="${p.name}"/>`; }});
   // bloc brackets: arcs outside the outer row spanning each camp's seats
+  const blocCounts = {};
   const seatAngle = i => Math.PI * (1 - i/(N-1));   // approx angular position
   let start = 0;
   const R = outer + 16;
@@ -631,17 +627,18 @@ function hideTip(){ tip.style.opacity = 0; }
     const a0 = Math.PI - Math.PI*(start+0.5)/N, a1 = Math.PI - Math.PI*(start+cnt-0.5)/N;
     const x0 = cx+R*Math.cos(a0), y0 = cy-R*Math.sin(a0);
     const x1 = cx+R*Math.cos(a1), y1 = cy-R*Math.sin(a1);
-    const mid = (a0+a1)/2, lx = cx+(R+13)*Math.cos(mid), ly = cy-(R+13)*Math.sin(mid);
     html += `<path d="M ${x0.toFixed(1)} ${y0.toFixed(1)} A ${R} ${R} 0 0 1 ${x1.toFixed(1)} ${y1.toFixed(1)}"
-       fill="none" stroke="var(--line2)" stroke-width="2.5"/>
-      <text x="${lx.toFixed(1)}" y="${ly.toFixed(1)}" text-anchor="middle"
-       style="font:700 10.5px 'IBM Plex Mono';letter-spacing:.14em;fill:var(--ink2)">${BLOC_NAME[b].toUpperCase()} · ${cnt}</text>`;
+       fill="none" stroke="var(--bloc-${b})" stroke-width="3"/>`;
+    blocCounts[b] = cnt;
     start += cnt;
   });
-  html += `<text x="${cx}" y="200" text-anchor="middle"
-     style="font:700 48px 'IBM Plex Sans',sans-serif;fill:var(--ink)">120</text>
-   <text x="${cx}" y="222" text-anchor="middle">seats · 3.25% threshold</text>`;
+  html += `<text x="${cx}" y="244" text-anchor="middle"
+     style="font:700 42px 'IBM Plex Sans',sans-serif;fill:var(--ink)">120</text>
+   <text x="${cx}" y="267" text-anchor="middle">seats · 3.25% threshold</text>`;
   svg.innerHTML = html;
+  const strip = document.getElementById("hemiBlocs");
+  if (strip) strip.innerHTML = ["anti","arab","nb"].map(b =>
+    `<span><i style="display:inline-block;width:10px;height:10px;background:var(--bloc-${b});margin-right:7px;vertical-align:-1px"></i>${BLOC_NAME[b].toUpperCase()} · ${blocCounts[b]||0}</span>`).join("");
   svg.addEventListener("pointermove", ev => { const t = ev.target;
     if (t.dataset && t.dataset.p){ const p = D.parties.find(x=>x.name===t.dataset.p);
       showTip(ev, `<b>${nm(p.name)}</b> · ${BLOC_NAME[BLOC[p.name]]}<br><span class="mono">${p.seats} seats · 90% [${p.lo}–${p.hi}] · pass ${pct(p.p_pass)}</span>`);
@@ -660,7 +657,7 @@ function hideTip(){ tip.style.opacity = 0; }
     const grp = D.parties.filter(p=>p.hi>0 && BLOC[p.name]===bloc);
     if (!grp.length) return;
     const tot = grp.reduce((a,p)=>a+p.seats,0);
-    html += `<div class="blochead">${BLOC_NAME[bloc]} · ${tot} seats</div>`;
+    html += `<div class="blochead"><i class="sw" style="background:var(--bloc-${bloc==="arab"?"arab":bloc});width:10px;height:10px;display:inline-block;margin-right:8px;vertical-align:-1px"></i>${BLOC_NAME[bloc]} · ${tot} seats</div>`;
     grp.forEach(p=>{
       const dead = p.seats===0, st = dead ? "--pc:var(--dead)" : pc(p.name);
       html += `<div class="r" data-p="${p.name}" tabindex="0">
@@ -731,7 +728,7 @@ function drawHist(svgSel, data, color, h, capSel, label){
 }
 let blocSums = {nb: sums(NBCOLS), anti: sums(ANTICOLS)};
 function renderBlocHist(which){
-  drawHist("#hist", blocSums[which], "accent", 260, "#histCap",
+  drawHist("#hist", blocSums[which], which==="nb"?"bloc-nb":"bloc-anti", 260, "#histCap",
     which==="nb" ? "Netanyahu bloc" : "Anti-Netanyahu bloc (without Arab lists)");
   $("#segNb").setAttribute("aria-pressed", which==="nb");
   $("#segAnti").setAttribute("aria-pressed", which==="anti");
@@ -791,33 +788,14 @@ renderBlocHist("anti");
   const mx = f[0].p;
   $("#outc").innerHTML = f.map(o=>`<div class="row">
     <div><div class="lab">${o.o.replace("->","→")}</div><div class="sub">${SUB[o.o]||""}</div></div>
-    <div class="bar"><i style="width:${o.p/mx*100}%${o.o.includes("repeat")?";--pc:var(--dead)":""}"></i></div>
+    <div class="bar"><i style="width:${o.p/mx*100}%;--pc:${o.o.includes("Netanyahu c")||o.o.includes("pledge")?"var(--bloc-nb)":o.o.includes("repeat")?"var(--dead)":o.o.includes("Unity")?"var(--ink2)":"var(--bloc-anti)"}"></i></div>
     <div class="pct mono" style="text-align:right;font-size:13.5px">${pct(o.p)}</div></div>`).join("");
   const pmx = D.pm[0][1];
   $("#pm").innerHTML = D.pm.map(([n,p,lo,hi])=>`<div class="row">
     <div class="lab">${n}</div>
-    <div class="bar" style="overflow:visible"><i style="width:${p/pmx*100}%${n.includes("repeat")?";--pc:var(--dead)":""}"></i>${
+    <div class="bar" style="overflow:visible"><i style="width:${p/pmx*100}%;--pc:${n.includes("repeat")?"var(--dead)":n.includes("Netanyahu")||n.includes("Likud successor")?"var(--bloc-nb)":"var(--bloc-anti)"}"></i>${
       lo!=null?`<span style="position:absolute;top:4px;height:4px;border-radius:2px;background:var(--ink2);opacity:.55;left:${lo/pmx*100}%;width:${Math.max((hi-lo)/pmx*100,1)}%"></span>`:""}</div>
     <div class="pct mono" style="text-align:right;font-size:13.5px">${pct(p)}</div></div>`).join("");
-})();
-
-/* ---- scenario board ---- */
-(function(){
-  const NAME = {segalovitz_joins_raam:"Segalovitz joins Ra'am's slate — OFFICIAL Sept 1",
-    balad_splits:"Joint List fractures before filing",
-    rzp_fate:"Religious Zionism's fate",
-    centre_union_files:"Erdan–Gantz union files as one list",
-    zionist_home_folds:"Zionist Home–Reservists folds into Yashar",
-    blue_white_folds:"Blue & White folds",
-    unity_folds:"Unity (Erdan) folds"};
-  const OUT = {True:"happens", False:"does not", withdraws:"withdraws (paid exit)",
-    alone:"runs alone", merge_otzma:"merges with Otzma", merge_likud:"absorbed into Likud",
-    merge_zehut:"technical bloc with Feiglin's Zehut"};
-  $("#scen tbody").innerHTML = D.events.map(e=>`<tr>
-    <td>${NAME[e.e]||e.e}</td><td>${OUT[e.o]||e.o}</td>
-    <td class="mono">${pct(e.p)}</td>
-    <td class="mono" style="color:${e.nb61>D.blocs.nb?"var(--nb)":"inherit"}">${pct(e.nb61)}</td>
-    <td class="mono">${e.nbm.toFixed(1)}</td></tr>`).join("");
 })();
 
 /* ---- ground game ---- */
