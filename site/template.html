@@ -935,11 +935,11 @@ function hideTip(){ tip.style.opacity = 0; }
 (function(){
   if (!D.sub || !D.sub.length) return;
   const t = HEB_MODE ? {
-    h: 'עמודת ה"אחרים", בפירוט מלא',
-    note: 'הרשימות שהסוקרים מקבצים תחת "אחרים". התמיכה נמדדת מפירוטי ההערות של הסוקרים המפרסמים אחוזים מלאים (לזר, מדגם, פילבר, דיירקט פולס); הפס מציג את המרחק מאחוז החסימה של 3.25%. כל הרשימות האלה נכללות בכל סימולציה — כקול מבוזבז, אלא אם יחצו את הסף. זהות אינה מופיעה כאן: מאז המיזוג הרשמי תמיכתה (כ־1.6%) נספרת בתוך שורת הציונות הדתית–זהות, ורישומה גם כאן היה סופר את אותם בוחרים פעמיים.',
+    h: 'המפלגות הקטנות',
+    note: 'התמיכה במפלגות הקטנות נמדדת מפירוטי ההערות של הסוקרים המפרסמים אחוזים מלאים (לזר, מדגם, פילבר, דיירקט פולס); הפס מציג את המרחק מאחוז החסימה של 3.25%. כל המפלגות האלה נכללות בכל סימולציה — כקול מבוזבז, אלא אם יחצו את הסף. זהות אינה מופיעה כאן: מאז המיזוג הרשמי תמיכתה (כ־1.6%) נספרת בתוך שורת הציונות הדתית–זהות, ורישומה גם כאן היה סופר את אותם בוחרים פעמיים.',
   } : {
-    h: 'The "Others" column, fully itemized',
-    note: 'The lists pollsters fold into an "Others" column. Support is measured from the itemized footnotes of the firms that publish full percentages (Lazar, Midgam, Filber, Direct Polls); each bar shows distance to the 3.25% threshold. Every one of these lists is carried in every simulation — as wasted votes unless it crosses. Zehut is not listed here: since the official merger its ≈1.6% support is counted inside the Religious Zionism\u2013Zehut row, and listing it again would count the same voters twice.',
+    h: 'The small parties',
+    note: 'Support for the small parties is measured from the itemized footnotes of the firms that publish full percentages (Lazar, Midgam, Filber, Direct Polls); each bar shows distance to the 3.25% threshold. Every one of these parties is carried in every simulation — as wasted votes unless it crosses. Zehut is not listed here: since the official merger its ≈1.6% support is counted inside the Religious Zionism\u2013Zehut row, and listing it again would count the same voters twice.',
   };
   $("#thr").insertAdjacentHTML("afterend",
     `<div style="margin-top:26px;border-top:2px solid var(--ink);padding-top:14px">

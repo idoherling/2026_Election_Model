@@ -244,7 +244,8 @@ MICRO_PRIORS = {
     "nep": (0.013, 0.004),             # 1.0-1.7% under Others, Aug 2026
     "haredi_public": (0.013, 0.004),   # 1.2-1.5% Jul-Aug 2026 (Midgam 31 Aug: 1.2%)
     "israel_first": (0.004, 0.003),    # 0.3-0.6% Aug 2026 (Lazar/Direct Polls)
-    "fiery_youth": (0.004, 0.003),     # 0.4% Lazar 27 Aug
+    # fiery_youth REMOVED (owner ruling, Sept 1): not running — Muchtar
+    # is leading Likud's youth campaign.
     "fourth_quarter": (0.002, 0.002),  # 0.5% once (18 Jun); not itemized since
     "el_dagel": (0.002, 0.002),        # 0.4% once (18 Jun); not itemized since
 }
