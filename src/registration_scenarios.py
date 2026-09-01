@@ -292,7 +292,12 @@ def main() -> None:
     events = project.last_events  # attached by the mixture branch
 
     nb = seats[:, blocs == "netanyahu_bloc"].sum(axis=1)
+    # Segalovitz's own seat (Ra'am slot #2) is a centre vote: count it
+    # toward the anti-bloc 61 whenever Ra'am wins at least 2 seats.
     anti = seats[:, blocs == "opposition_bloc"].sum(axis=1)
+    _ri = next((i for i, l in enumerate(labels) if l == "Ra'am"), None)
+    if _ri is not None:
+        anti = anti + (seats[:, _ri] >= 2).astype(int)
 
     dist = pd.DataFrame({
         "list": labels,

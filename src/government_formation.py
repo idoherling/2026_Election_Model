@@ -245,7 +245,13 @@ def simulate_formation(draws: pd.DataFrame, behavior: dict, seed=SEED,
     sans_bibi = u[:, 5] < behavior["likud_sans_bibi"]
 
     nb = nb_core + np.where(amcha_side == 1, amcha, 0)
-    ce = centre + np.where(amcha_side == 2, amcha, 0)
+    # Segalovitz's own seat (Ra'am slot #2, deal official Sept 1) is a
+    # centre vote: it counts toward the centre's 61 whenever Ra'am wins
+    # at least 2 seats, and Ra'am-as-party contributes the remainder in
+    # the joins/supports branches (no double count).
+    seg = (raam >= 2).astype(int)
+    ce = centre + np.where(amcha_side == 2, amcha, 0) + seg
+    raam = raam - seg
 
     outcome = np.full(n, 7)  # default: repeat election (last index)
     outcome[np.where((ce + draws["Likud"].values >= 61) & sans_bibi)] = 6
