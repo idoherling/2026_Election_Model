@@ -141,6 +141,17 @@ GEVALT_SAT_IDS = {"otzma", "rzp", "amcha_yisrael", "zehut", "noam"}
 # to 0.5 for n=4 transitions before use in the projection.
 KALPI_FAMILY_RHO = 0.5
 
+# Kalpi capacity constraints - administrative-data truncation of the
+# posterior's physically impossible tails (audited 2026-09-01: each
+# clipped ~1.5% of draws). Arab lists cannot jointly exceed what the
+# Arab sector can cast: 839k eligible x 72% max turnout (max observed
+# 64.8% + buffer) / 78% measured locality concentration ~= 16.3% of the
+# vote. Shas+UTJ jointly cannot fall below the haredi demographic floor:
+# 304k sector eligible x 74% turnout / 55% own-sector vote share, with
+# a 0.8 leakage buffer ~= 6.7%.
+KALPI_ARAB_CAP = 0.163      # joint arab-family share ceiling
+KALPI_HAREDI_FLOOR = 0.066  # joint Shas+UTJ share floor
+
 LOYAL_SD = {
     "shas": 1.5,             # measured 0.92, worst downside ever -0.4
     "utj": 1.3,              # measured 0.74
@@ -625,6 +636,22 @@ def project(data, idata, rng, config="current", config_params=None):
         act = v.std() * 120.0
         if act > tgt:
             shares[:, col] = v.mean() + (v - v.mean()) * (tgt / act)
+    # Kalpi capacity truncation: clip draws that exceed what the sector
+    # geography can physically cast (see KALPI_ARAB_CAP/HAREDI_FLOOR).
+    arab_cols = np.array([f == "arab" for f in fams])
+    har_cols = np.array([cs in ({"shas"}, {"utj"}) for cs in comps])
+    if arab_cols.any():
+        tot = shares[:, arab_cols].sum(axis=1)
+        over = tot > KALPI_ARAB_CAP
+        if over.any():
+            shares[np.ix_(over, arab_cols)] *= (
+                KALPI_ARAB_CAP / tot[over])[:, None]
+    if har_cols.any():
+        tot = shares[:, har_cols].sum(axis=1)
+        under = (tot > 0) & (tot < KALPI_HAREDI_FLOOR)
+        if under.any():
+            shares[np.ix_(under, har_cols)] *= (
+                KALPI_HAREDI_FLOOR / tot[under])[:, None]
     shares = np.clip(shares, 0, None)
     shares /= shares.sum(axis=1, keepdims=True)
 
