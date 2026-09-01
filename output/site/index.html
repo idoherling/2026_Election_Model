@@ -931,20 +931,11 @@ renderBlocHist("anti");
 
 /* ---- formation + PM ---- */
 (function(){
-  const SUB = {"Netanyahu rightist coalition":"the bloc reaches 61, with Amcha if aligned",
-   "Netanyahu + centrist defector coalition":"the Gantz-2020 branch",
-   "Change coalition (without Ra'am)":"the camp reaches 61 on its own; Segalovitz's seat included",
-   "Change coalition with Amcha":"the camp is short alone and Winter closes the gap - a Bennett-led scenario",
-   "Change coalition with a haredi party":"needs a Yosef psak or a Degel split, and 61 without Liberman",
-   "Centre minority backed by the Joint List":"Eisenkot's doctrine: sworn in by plurality with the Joint List abstaining",
-   "Unity government (Likud without Netanyahu)":"the Herzog plea-deal exit ramp",
-   "Repeat election":"neither side assembles 61; Israel votes again",
-   "Change coalition with Ra'am":"the camp is short alone and Ra'am joins outright - the Segalovitz bridge"};
-  const OC = o => HEB_MODE ? (HE_MISC.OUTCOME[o] || o) : o.replace("->","→");
+    const OC = o => HEB_MODE ? (HE_MISC.OUTCOME[o] || o) : o.replace("->","→");
   const f = [...D.formation].sort((a,b)=>b.p-a.p);
   const mx = f[0].p;
   $("#outc").innerHTML = f.map(o=>`<div class="row">
-    <div><div class="lab">${OC(o.o)}</div><div class="sub">${HEB_MODE?"":(SUB[o.o]||"")}</div></div>
+    <div class="lab">${OC(o.o)}</div>
     <div class="bar"><i style="width:${o.p/mx*100}%;--pc:${o.o.includes("Repeat")?"var(--dead)":o.o.includes("Unity")?"var(--ink2)":o.o.startsWith("Netanyahu")?"var(--bloc-nb)":"var(--bloc-anti)"}"></i></div>
     <div class="pct mono" style="text-align:right;font-size:13.5px">${pct(o.p)}</div></div>`).join("");
   const pmx = D.pm[0][1];
