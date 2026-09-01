@@ -285,11 +285,12 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
   <div class="cover">
     <div class="cover-meta"><span>Forecast No. 1</span><span>26th Knesset</span><span>Election · 27 Oct 2026</span></div>
     <div class="cover-year">26</div>
-    <h1>A dead-even race that only one side can win outright.</h1>
+    <h1>Forecast for the 26th Knesset election.</h1>
   </div>
-  <p class="standfirst">Yashar and Likud are tied at 26 seats, but the arithmetic underneath is not
-  symmetric. The anti-Netanyahu camp has more paths to 61, and after an Eisenkot-led government the
-  most likely single outcome is that <em>no one</em> forms a government at all.</p>
+  <p class="standfirst">A probabilistic forecast of Israel's election on October 27, 2026: seats,
+  coalition arithmetic, and government formation. Built from over 700 published polls, official
+  results at polling-station level, and an explicit formation model; updated as new polls and
+  filings arrive. Methodology and track record are in the technical annex.</p>
   <div class="tiles">
     <div class="tile anti"><div class="k">Anti-Netanyahu majority</div><div class="v" id="tAnti"></div><div class="s">chance the camp reaches 61 without Arab-party seats</div></div>
     <div class="tile nb"><div class="k">Netanyahu majority</div><div class="v" id="tNb"></div><div class="s">chance his bloc reaches 61 · mean <span class="mono" id="tNbMean"></span> seats</div></div>
@@ -586,7 +587,7 @@ const HE_PARTY = {"Likud":"הליכוד","Yashar":"ישר","Bennett 2026 + Yesh 
 const HE_STATIC = {
  "The Knesset Model":"מודל הכנסת",
  "A pre-registered forecast of Israel's 2026 election":"תחזית רשומה־מראש לבחירות 2026",
- "A dead-even race that only one side can win outright.":"מרוץ צמוד שרק צד אחד יכול להכריע בו.",
+ "Forecast for the 26th Knesset election.":"תחזית לבחירות לכנסת ה־26.",
  "Anti-Netanyahu majority":"רוב למחנה נגד נתניהו",
  "Netanyahu majority":"רוב לגוש נתניהו",
  "Deadlock":"מבוי סתום",
@@ -617,7 +618,7 @@ const HE_STATIC = {
  "Technical annex — methodology & track record":"נספח טכני — מתודולוגיה וביצועי עבר",
  "← Back to the forecast":"→ חזרה לתחזית"};
 const HE_LEDE = {
- "standfirst":"ישר והליכוד שקולים על 26 מנדטים, אבל החשבון שמתחת אינו סימטרי. למחנה נגד נתניהו יש יותר מסלולים ל־61, ואחרי ממשלה בראשות אייזנקוט התרחיש הסביר ביותר הוא ש<em>אף אחד</em> לא מרכיב ממשלה.",
+ "standfirst":"תחזית הסתברותית לבחירות ב־27 באוקטובר 2026: מושבים, חשבון קואליציוני והרכבת ממשלה. מבוססת על יותר מ־700 סקרים שפורסמו, תוצאות רשמיות ברמת הקלפי ומודל הרכבה מפורש; מתעדכנת עם כל סקר והגשה חדשים. המתודולוגיה וביצועי העבר בנספח הטכני.",
  "seats":"כל נקודה היא התחזית. כל רצועה מכילה 90% מהסימולציות, כולל התנודה עד יום הבחירות. נקודות חלולות נמצאות היום מתחת לאחוז החסימה.",
  "threshold":"כ־8% מהקולות נמצאים כיום מתחת לאחוז החסימה של 3.25%. כל רשימה שנופלת מוסרת את מושביה לשורדות. ב־2022 החשבון הזה הפך תיקו כמעט מלא לרוב של 64.",
  "blocdist":"8,000 מערכות בחירות מדומות; 2,500 מוצגות. הקו על 61 הוא הקו שקובע.",
