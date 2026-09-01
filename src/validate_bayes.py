@@ -141,6 +141,18 @@ def project_cycle(data, idata, eday, threshold, pairs, params,
         onehot[col] = 1.0
         w_r = np.where(onehot == 0, base, 0)
         shares = shares + (-mu / 120.0) * (onehot - w_r / w_r.sum())
+
+    # Loyal-electorate calibration, mirrored from bayes_model.LOYAL_SD:
+    # standalone captive-base lists are shrunk to their measured total sd.
+    from bayes_model import LOYAL_SD
+    for pid, tgt in LOYAL_SD.items():
+        col = next((i for i, cs in enumerate(comps) if cs == {pid}), None)
+        if col is None:
+            continue
+        v = shares[:, col]
+        act = v.std() * 120.0
+        if act > tgt:
+            shares[:, col] = v.mean() + (v - v.mean()) * (tgt / act)
     shares = np.clip(shares, 0, None)
     shares /= shares.sum(axis=1, keepdims=True)
 

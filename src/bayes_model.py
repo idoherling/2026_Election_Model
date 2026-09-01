@@ -96,6 +96,22 @@ NEW_LIST_IDS = {"yashar", "amcha_yisrael", "zionist_home", "unity"}
 GEVALT_SD = 2.0            # seats, zero-sum Likud <-> NB satellites
 GEVALT_SAT_IDS = {"otzma", "rzp", "amcha_yisrael", "zehut", "noam"}
 
+# Loyal-electorate volatility calibration (2026-09-01 audit). The pooled
+# per-list shock is right on average but wrong for sect-based veteran
+# lists with captive electorates: measured D-60 -> result error sd over
+# 7 cycles is Shas 0.92 (worst downside ever -0.4: it BEAT its polls
+# every cycle), UTJ 0.74 (worst +1.3), YB-standalone 1.71 (worst +1.2)
+# - yet the pooled machinery gave them total sd ~3.3 and 6-9%
+# sub-threshold probability for events that have never happened.
+# After all shocks, each list below is shrunk around its own center to
+# the target TOTAL sd (measured history x ~1.5 novelty buffer: the
+# draft-arrest crisis, the Eisenkot masorti raid, and the Haredi Public
+# burn are genuinely new downside channels, so we do not calibrate all
+# the way down to the historical record). Applied only to exact
+# standalone lists - a joint list (e.g. Likud-Beytenu 2013) keeps the
+# pooled width.
+LOYAL_SD = {"shas": 1.5, "utj": 1.3, "yisrael_beytenu": 2.2}
+
 # All election-day shocks come from the sequential decomposition of the
 # eight-cycle error record (error_decomposition.py), so no component is
 # double-counted. Means are in ERROR space (polled - actual): the projection
@@ -510,6 +526,17 @@ def project(data, idata, rng, config="current", config_params=None):
         w_s = np.where(sat, base, 0)
         g = rng.standard_normal(N_PROJ) * GEVALT_SD / 120.0
         shares = shares + g[:, None] * (onehot - w_s / w_s.sum())
+
+    # Loyal-electorate calibration: shrink each captive-base list's
+    # draws around its own center to the measured target sd (LOYAL_SD).
+    for pid, tgt in LOYAL_SD.items():
+        col = next((i for i, cs in enumerate(comps) if cs == {pid}), None)
+        if col is None:
+            continue
+        v = shares[:, col]
+        act = v.std() * 120.0
+        if act > tgt:
+            shares[:, col] = v.mean() + (v - v.mean()) * (tgt / act)
     shares = np.clip(shares, 0, None)
     shares /= shares.sum(axis=1, keepdims=True)
 

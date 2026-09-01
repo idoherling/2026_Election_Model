@@ -1,17 +1,17 @@
 list,bloc,mean,p05,p50,p95,p_pass,p_largest,asof
-Likud,Netanyahu bloc,25.2,17,25,33,1.0,0.511,2026-08-31
-Yashar,Anti-Netanyahu bloc,24.9,16,25,35,1.0,0.486,2026-08-31
-Bennett 2026 + Yesh Atid,Anti-Netanyahu bloc,12.1,6,12,18,0.992,0.002,2026-08-31
-The Democrats,Anti-Netanyahu bloc,9.3,5,9,14,0.976,0.0,2026-08-31
-United Torah Judaism,Netanyahu bloc,7.9,0,8,13,0.92,0.0,2026-08-31
-Yisrael Beytenu,Anti-Netanyahu bloc,7.8,0,8,12,0.932,0.0,2026-08-31
-Shas,Netanyahu bloc,7.6,0,8,13,0.902,0.0,2026-08-31
+Likud,Netanyahu bloc,25.1,17,25,33,1.0,0.51,2026-08-31
+Yashar,Anti-Netanyahu bloc,24.8,16,25,34,1.0,0.487,2026-08-31
+Bennett 2026 + Yesh Atid,Anti-Netanyahu bloc,12.0,6,12,18,0.992,0.002,2026-08-31
+The Democrats,Anti-Netanyahu bloc,9.2,5,9,14,0.975,0.0,2026-08-31
+United Torah Judaism,Netanyahu bloc,8.1,6,8,11,0.994,0.0,2026-08-31
+Shas,Netanyahu bloc,7.9,5,8,11,0.984,0.0,2026-08-31
+Yisrael Beytenu,Anti-Netanyahu bloc,7.8,0,8,12,0.942,0.0,2026-08-31
 Otzma Yehudit,Netanyahu bloc,6.6,0,7,12,0.864,0.0,2026-08-31
-Balad + Hadash-Ta'al,Arab parties,6.0,0,6,11,0.81,0.0,2026-08-31
-Amcha Yisrael,Netanyahu bloc,3.9,0,4,11,0.522,0.001,2026-08-31
-Ra'am,Arab parties,3.4,0,4,8,0.571,0.0,2026-08-31
-Religious Zionist Party,Netanyahu bloc,2.7,0,0,8,0.472,0.0,2026-08-31
-Zionist Home – The Reservists,Anti-Netanyahu bloc,1.5,0,0,7,0.267,0.0,2026-08-31
+Balad + Hadash-Ta'al,Arab parties,5.9,0,6,11,0.81,0.0,2026-08-31
+Amcha Yisrael,Netanyahu bloc,3.8,0,4,11,0.521,0.001,2026-08-31
+Ra'am,Arab parties,3.4,0,4,8,0.57,0.0,2026-08-31
+Religious Zionist Party,Netanyahu bloc,2.7,0,0,8,0.471,0.0,2026-08-31
+Zionist Home – The Reservists,Anti-Netanyahu bloc,1.5,0,0,7,0.266,0.0,2026-08-31
 Unity,Anti-Netanyahu bloc,0.6,0,0,5,0.11,0.0,2026-08-31
 Blue and White,Anti-Netanyahu bloc,0.4,0,0,4,0.085,0.0,2026-08-31
 Zehut,unknown,0.0,0,0,0,0.002,0.0,2026-08-31

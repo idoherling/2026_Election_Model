@@ -122,3 +122,22 @@ now correlate correctly with Likud upside. Not harness-validated
 - Weather: late-Oct rain is low-probability; Arab-sector turnout is the
   weather-sensitive margin. No parameter; watch the forecast in the final
   week.
+
+## 7. Addendum (2026-09-01): the loyal-electorate audit
+
+Owner audit request: Shas/UTJ/YB sub-threshold probabilities (6–10%) priced
+events that have never happened. Measured on our own DB (D-60 window,
+2013 excluded for YB's joint list): Shas err sd 0.92 (worst downside ever
+−0.4 — it BEAT its D-60 polls in all 7 cycles), UTJ 0.74 (worst +1.3),
+YB 1.71 (worst +1.2) — vs model totals ~3.3 from the pooled residual +
+haredi family shock + t-tails, a triple-count for captive electorates.
+Fix: `LOYAL_SD = {shas 1.5, utj 1.3, yisrael_beytenu 2.2}` — post-shock
+shrink of each standalone list's draws to its measured total sd × ~1.5
+novelty buffer (draft-arrest crisis, Eisenkot masorti raid, Haredi Public
+burn are genuinely new channels; and the record is 7 cycles, not a law).
+Joint lists keep pooled width (exact-set match). Mirrored into the
+validation harness. Result: Shas pass 0.91→0.99, UTJ 0.92→1.00, YB
+0.94→0.95; both blocs' majority odds tightened and P(neither) rose to
+0.53 (fewer haredi-collapse fantasies in either tail). Caveat noted:
+LOYAL_SD derives from the same record the harness scores — floors, not
+fitted parameters.
