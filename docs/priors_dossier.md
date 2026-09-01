@@ -173,3 +173,34 @@ intervals/pass for the published table (was baseline - inconsistent).
 Headline after this round: P(NB>=61) 19.9 / P(anti>=61) 24.7 /
 P(neither) 55.4; PM: Eisenkot 31.4 / repeat 30.0 / Netanyahu 24.0.
 Deadlock and Eisenkot are now statistically tied for modal outcome.
+
+## 9. Addendum (2026-09-01c): the kalpi layer
+
+Owner directive: MRP/kalpi-level modeling. Built src/kalpi_model.py on
+official per-locality CEC results (expc.csv, media21-25.bechirot.gov.il;
+per-kalpi expb.csv downloaded for the election-night engine), 1,221
+localities x 5 cycles, letters->lineages hand-mapped and ASSERTED
+against national totals at load. Products:
+- Sector clustering from vote profiles: sizes (eligible) centre_left
+  2.47M / mixed 1.83M / secular_right 1.21M / arab 839k / haredi 304k /
+  RZ 128k; measured 2022 turnout haredi .758, arab .538, RZ .756 -
+  independently confirms the sociology desk's numbers.
+- Family-sum swing decomposition (lineage-stable across list-structure
+  changes) + LOTO validation. NEGATIVE RESULT recorded: sector swings
+  do not transfer across transitions (uniform 1.20pp vs sector 1.31pp
+  locality MAE) - uniform-swing-given-national is the locality baseline;
+  the sector layer earns its keep via correlations and capacity, not
+  point swings.
+- Cross-sector tide correlation: haredi<->arab +0.92 (n=4 transitions,
+  both turnout-machine sectors) -> KALPI_FAMILY_RHO=0.5 (shrunk) now
+  correlates the projection's haredi/arab family shocks (previously
+  independent). Headline effect small: P(neither) 55.4->54.6.
+- Poststratification of the 2026 forecast to sectors
+  (kalpi_poststrat_2026.csv) with lineage weights from the measured
+  vote-flow research; passes capacity checks (Arab-sector implied seats
+  ~8.6 vs ~11 turnout capacity).
+- Election-night foundation: kalpi-level files + locality panel +
+  sector map stored for the October engine.
+True respondent-level MRP remains blocked on microdata (pollsters do
+not publish crosstab microdata); the kalpi substrate is the honest
+ecological equivalent.

@@ -136,6 +136,11 @@ GEVALT_SAT_IDS = {"otzma", "rzp", "amcha_yisrael", "zehut", "noam"}
 # Democrats (lineage sd includes the two-list threshold deaths the
 # merger removed), Together (within buffer), Otzma/RZP (match), Ra'am
 # (n=2, turnout risk real), new lists (NEW_LIST_MULT owns them).
+# Kalpi layer (src/kalpi_model.py): the haredi<->arab family tides
+# measured +0.92 correlated over the 2019-2022 locality panel; shrunk
+# to 0.5 for n=4 transitions before use in the projection.
+KALPI_FAMILY_RHO = 0.5
+
 LOYAL_SD = {
     "shas": 1.5,             # measured 0.92, worst downside ever -0.4
     "utj": 1.3,              # measured 0.74
@@ -536,11 +541,23 @@ def project(data, idata, rng, config="current", config_params=None):
     swing = rng.standard_t(T_DF, N_PROJ) * BLOC_SWING_SD * EVENT_RISK / 120.0
     w_nb, w_op = np.where(is_nb, base, 0), np.where(~is_nb, base, 0)
     shares = shares + swing[:, None] * (w_nb / w_nb.sum() - w_op / w_op.sum())
-    for f, (mu_f, sd_f) in FAMILY_SHOCK.items():
+    # Family shocks with kalpi-measured correlation: the haredi and Arab
+    # sector tides correlated +0.92 across the 2019-2022 locality panel
+    # (both are turnout-machine sectors) - shrunk hard to rho=0.5 for
+    # n=4 transitions. Correlated t draws via a shared chi-square mixer.
+    fam_names = [f for f in FAMILY_SHOCK if (fams == f).any()]
+    rho = KALPI_FAMILY_RHO if len(fam_names) == 2 else 0.0
+    cov = np.array([[1.0, rho], [rho, 1.0]]) if rho else np.eye(
+        max(len(fam_names), 1))
+    z = rng.multivariate_normal(np.zeros(len(fam_names)),
+                                cov[:len(fam_names), :len(fam_names)],
+                                size=N_PROJ)
+    mix = np.sqrt(rng.chisquare(T_DF, N_PROJ) / T_DF)
+    tdraws = z / mix[:, None]
+    for k, f in enumerate(fam_names):
+        mu_f, sd_f = FAMILY_SHOCK[f]
         in_f = fams == f
-        if not in_f.any():
-            continue
-        shock = (-mu_f + rng.standard_t(T_DF, N_PROJ) * sd_f) / 120.0
+        shock = (-mu_f + tdraws[:, k] * sd_f) / 120.0
         w_f, w_r = np.where(in_f, base, 0), np.where(~in_f, base, 0)
         shares = shares + shock[:, None] * (w_f / w_f.sum() - w_r / w_r.sum())
 

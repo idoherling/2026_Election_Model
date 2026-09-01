@@ -1,0 +1,6 @@
+,haredi,arab,religious_zionist,secular_right,centre_left
+haredi,1.0,0.92,-0.74,0.49,-0.82
+arab,0.92,1.0,-0.9,0.73,-0.94
+religious_zionist,-0.74,-0.9,1.0,-0.95,0.75
+secular_right,0.49,0.73,-0.95,1.0,-0.58
+centre_left,-0.82,-0.94,0.75,-0.58,1.0
