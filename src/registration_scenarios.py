@@ -119,7 +119,12 @@ FOLD_TRANSFER = {
 }
 # Set on filing day to collapse the mixture, e.g.
 # RESOLVED = {"balad_splits": False, "rzp_fate": "merge_otzma", ...}
-RESOLVED: dict = {}
+# 2026-09-01: Segalovitz-Ra'am deal announced as OFFICIAL — the event is
+# resolved True. The +0.4-seat scenario boost stays for now because the
+# poll stream predates the announcement; ZERO IT at the Sept 9 refit,
+# when post-announcement polls price the joint slate directly (keeping
+# both would double-count).
+RESOLVED: dict = {"segalovitz_joins_raam": True}
 
 
 def _col(comps, component):

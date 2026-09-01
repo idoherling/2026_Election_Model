@@ -73,13 +73,15 @@ BEHAVIOR = {
     # Yashar (a Bennett-led centre government); under an Eisenkot-led one
     # Amcha's join probability is floored near zero (AMCHA_JOIN_EISENKOT).
     "amcha_center": 0.30,
-    # Segalovitz deal effectively signed (Maariv Aug 5: agreement in
-    # principle; slot #2 reserved at the Aug 22 primaries). Eisenkot's camp
-    # published Ra'am-shaped entry conditions (Walla Aug 16) but every
-    # Jewish party still pledges no Arab party INSIDE at the outset —
-    # entry is modeled as post-formation expansion, hence joins < supports.
-    "raam_joins": 0.35,
-    "raam_supports": 0.55,
+    # Segalovitz-Ra'am deal OFFICIAL as of 2026-09-01 — the previous
+    # values were deal-probability-weighted blends (P(deal)~0.8); with
+    # the deal certain they unweight to the conditional-on-deal levels.
+    # Eisenkot's camp published Ra'am-shaped entry conditions (Walla
+    # Aug 16) but every Jewish party still pledges no Arab party INSIDE
+    # at the outset — entry is modeled as post-formation expansion,
+    # hence joins < supports.
+    "raam_joins": 0.40,
+    "raam_supports": 0.60,
     # JL revived with Jabareen #1/Tibi #2 (ToI late Aug); Hadash-led list
     # likelier to abstain constructively than Balad-led; Tibi placated.
     "jl_supports": 0.45,
