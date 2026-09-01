@@ -141,3 +141,35 @@ validation harness. Result: Shas pass 0.91→0.99, UTJ 0.92→1.00, YB
 0.53 (fewer haredi-collapse fantasies in either tail). Caveat noted:
 LOYAL_SD derives from the same record the harness scores — floors, not
 fitted parameters.
+
+## 8. Addendum (2026-09-01b): full-board volatility + the certainty layer
+
+Extension of the loyal-electorate audit to every list, two new evidence
+sources: (a) lineage/analog D-60 measurement per list; (b) the
+vote-certainty polling record (JPPI Jul/Aug waves; Midgam certainty +
+waverer split; the N12 Likudnikim panel; Winter sourcing).
+
+Lineage targets added: likud 4.8 (measured 3.53 - the mixture was
+double-counting structural variance already present in historical D-60
+windows), balad+hadash_taal 3.1 (measured 2.30), yashar 4.2 (owner's
+analog-class suggestion: Blue & White in its prime, sd 2.76, mean -2.3
+under-polled - the upside mean is already the leader anchor). Left at
+pooled with reasons: Democrats (lineage sd includes two-list threshold
+deaths the merger removed), Together width (but see below), Otzma/RZP
+(match), Ra'am (n=2).
+
+Certainty layer (measured): SOFT_LIST_MULT together x1.25 (47% locked,
+ten straight weeks bleeding to Yashar); CENTRE_CHURN zero-sum
+yashar<->together 1.5 / yashar<->democrats 0.8 (change-bloc internal
+wavering measures 3x the NB bloc's: 4.0% vs 1.3% of the electorate;
+parts move, bloc holds); AMCHA_FADE -1.5 seats returned to measured
+sources (likud .5/otzma .25/rzp .25) - the right-flank leader-vehicle
+class over-polled at D-60 by +4.2 (5 of 6 cycles), and Winter's list is
+the softest on the board (38% locked, 40% of base unattached a month
+ago). Result: Amcha central 2.4, pass 0.36 - exactly the historical
+pass rate for 4-seat new lists. official_forecast now uses MIXTURE
+intervals/pass for the published table (was baseline - inconsistent).
+
+Headline after this round: P(NB>=61) 19.9 / P(anti>=61) 24.7 /
+P(neither) 55.4; PM: Eisenkot 31.4 / repeat 30.0 / Netanyahu 24.0.
+Deadlock and Eisenkot are now statistically tied for modal outcome.

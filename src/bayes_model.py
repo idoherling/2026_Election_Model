@@ -88,6 +88,28 @@ T_DF = 5
 NEW_LIST_MULT = 1.35
 NEW_LIST_IDS = {"yashar", "amcha_yisrael", "zionist_home", "unity"}
 
+# Vote-certainty layer (2026-09-01 desk; measured, not judgment):
+# - Together is the softest major list (47% of its voters locked per the
+#   JPPI/Midgam certainty series; ten consecutive weekly seat losses to
+#   Yashar) -> widen its residual shock.
+SOFT_LIST_MULT = {"bennett_2026": 1.25}
+# - Within-bloc churn in the change bloc measures ~3x the Netanyahu
+#   bloc's (Midgam Jul 27: 4.0% vs 1.3% of the electorate wavering
+#   within-bloc). Zero-sum exchanges keep the bloc total stable while
+#   the parts move - historically bloc error < sum-of-parts implies
+#   exactly this covariance.
+CENTRE_CHURN = [("yashar", "bennett_2026", 1.5),
+                ("yashar", "democrats", 0.8)]
+# - Amcha fade: the right-flank leader-vehicle reference class (Jewish
+#   Home '13/'15, New Right '19a, Yamina '19s/'20/'21) over-polled at
+#   D-60 by +4.2 seats on average, 5 of 6 cycles positive (the gevalt
+#   squeeze); Winter's list is the softest on the board (38% locked,
+#   40% of his base unattached a month ago). Scaled to his ~4-seat
+#   size: -1.5 seats, returned to his measured sources (N12 Aug 27:
+#   30% Likud / 15% RZ / 15% Otzma of inflow).
+AMCHA_FADE = 1.5
+AMCHA_FADE_TO = {"likud": 0.5, "otzma": 0.25, "rzp": 0.25}
+
 # Gevalt coupling: Likud's final-days surges are paid by its own bloc's
 # satellites, near 1:1 (2015: Likud +8.4 final-poll beat, Jewish Home -4,
 # Yachad dead; 2019a: Likud +6.7, New Right/Zehut dead). The Likud anchor
@@ -104,13 +126,29 @@ GEVALT_SAT_IDS = {"otzma", "rzp", "amcha_yisrael", "zehut", "noam"}
 # - yet the pooled machinery gave them total sd ~3.3 and 6-9%
 # sub-threshold probability for events that have never happened.
 # After all shocks, each list below is shrunk around its own center to
-# the target TOTAL sd (measured history x ~1.5 novelty buffer: the
-# draft-arrest crisis, the Eisenkot masorti raid, and the Haredi Public
-# burn are genuinely new downside channels, so we do not calibrate all
-# the way down to the historical record). Applied only to exact
-# standalone lists - a joint list (e.g. Likud-Beytenu 2013) keeps the
-# pooled width.
-LOYAL_SD = {"shas": 1.5, "utj": 1.3, "yisrael_beytenu": 2.2}
+# the target TOTAL sd (measured lineage history x a 1.35-1.5 novelty
+# buffer; the record already contains filing-day structural resolutions,
+# since historical D-60 windows sat near list-closure dates just as
+# 2026's does). Applied only on an exact component-set match, so a
+# joint list outside its lineage (e.g. Likud-Beytenu 2013) keeps the
+# pooled width. Audited 2026-09-01; full table in docs/priors_dossier.md
+# section 7. Lists NOT here were checked and left at pooled width:
+# Democrats (lineage sd includes the two-list threshold deaths the
+# merger removed), Together (within buffer), Otzma/RZP (match), Ra'am
+# (n=2, turnout risk real), new lists (NEW_LIST_MULT owns them).
+LOYAL_SD = {
+    "shas": 1.5,             # measured 0.92, worst downside ever -0.4
+    "utj": 1.3,              # measured 0.74
+    "yisrael_beytenu": 2.2,  # measured 1.71 standalone
+    "likud": 4.8,            # measured 3.53 x 1.35
+    "balad+hadash_taal": 3.1,  # measured 2.30 x 1.35
+    # Analog lineage (owner's reference-class suggestion): Blue & White
+    # in its prime is Yashar's sociological twin - a new general-led
+    # security-centrist mega-list. B&W D-60 errs -4.1/+1.6/-4.4
+    # (sd 2.76, mean -2.3: UNDER-polled - the upside mean is already
+    # carried by the leader anchor). 2.76 x 1.5:
+    "yashar": 4.2,
+}
 
 # All election-day shocks come from the sequential decomposition of the
 # eight-cycle error record (error_decomposition.py), so no component is
@@ -422,6 +460,9 @@ def project(data, idata, rng, config="current", config_params=None):
     comps0 = [set(c.split("+")) for c in data["components"]]
     is_new = np.array([bool(cs & NEW_LIST_IDS) for cs in comps0])
     sd_list = np.where(is_new, sd_list * NEW_LIST_MULT, sd_list)
+    for pid, m in SOFT_LIST_MULT.items():
+        soft = np.array([pid in cs for cs in comps0])
+        sd_list = np.where(soft, sd_list * m, sd_list)
     shares = np.clip(
         shares + rng.standard_normal(shares.shape) * sd_list, 0, None)
     shares /= shares.sum(axis=1, keepdims=True)
@@ -527,10 +568,40 @@ def project(data, idata, rng, config="current", config_params=None):
         g = rng.standard_normal(N_PROJ) * GEVALT_SD / 120.0
         shares = shares + g[:, None] * (onehot - w_s / w_s.sum())
 
+    # Centre churn: zero-sum within-bloc exchanges (measured 3x the NB
+    # bloc's internal wavering) - parts move, bloc total holds.
+    def _c(pid):
+        return next((i for i, cs in enumerate(comps) if pid in cs), None)
+    for a, b, sd in CENTRE_CHURN:
+        ca, cb = _c(a), _c(b)
+        if ca is None or cb is None:
+            continue
+        g = rng.standard_normal(N_PROJ) * sd / 120.0
+        shares[:, ca] += g
+        shares[:, cb] -= g
+
+    # Amcha fade: reference-class D-60 over-polling, returned to sources.
+    am = next((i for i, cs in enumerate(comps) if cs == {"amcha_yisrael"}),
+              None)
+    if am is not None:
+        f = AMCHA_FADE / 120.0
+        shares[:, am] -= f
+        lk = _c("likud")
+        for pid, w in AMCHA_FADE_TO.items():
+            c = _c(pid)
+            if c is None:
+                c = lk
+            # a list absorbed/withdrawn in this draw can't receive votes
+            alive = shares[:, c] > 0
+            shares[alive, c] += f * w
+            if lk is not None and (~alive).any():
+                shares[~alive, lk] += f * w
+
     # Loyal-electorate calibration: shrink each captive-base list's
     # draws around its own center to the measured target sd (LOYAL_SD).
     for pid, tgt in LOYAL_SD.items():
-        col = next((i for i, cs in enumerate(comps) if cs == {pid}), None)
+        want = set(pid.split("+"))
+        col = next((i for i, cs in enumerate(comps) if cs == want), None)
         if col is None:
             continue
         v = shares[:, col]

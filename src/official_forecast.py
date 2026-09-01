@@ -29,6 +29,19 @@ def main() -> None:
     bayes = pd.read_csv(PROCESSED_DIR / "bayes_forecast_2026.csv")
     mix = pd.read_csv(PROCESSED_DIR / "mixture_blocs.csv").iloc[0]
 
+    # The MIXTURE is the published distribution: its intervals and pass
+    # probabilities (which price the registration scenarios) displace the
+    # baseline projection's wherever a list matches.
+    try:
+        mdist = pd.read_csv(PROCESSED_DIR / "bayes_forecast_mixture.csv")
+        mmap = {r.list: r for r in mdist.itertuples()}
+        for col in ("p05", "p95", "p_pass"):
+            bayes[col] = bayes.apply(
+                lambda r: getattr(mmap[r["list"]], col)
+                if r["list"] in mmap else r[col], axis=1)
+    except FileNotFoundError:
+        pass
+
     # Match by component overlap (partitions differ slightly across models).
     def comps(x):
         return set(str(x).split("+"))

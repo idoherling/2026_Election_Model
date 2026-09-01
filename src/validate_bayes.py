@@ -146,7 +146,8 @@ def project_cycle(data, idata, eday, threshold, pairs, params,
     # standalone captive-base lists are shrunk to their measured total sd.
     from bayes_model import LOYAL_SD
     for pid, tgt in LOYAL_SD.items():
-        col = next((i for i, cs in enumerate(comps) if cs == {pid}), None)
+        want = set(pid.split("+"))
+        col = next((i for i, cs in enumerate(comps) if cs == want), None)
         if col is None:
             continue
         v = shares[:, col]
