@@ -1,0 +1,1263 @@
+<meta charset="utf-8">
+<title>The Knesset Model</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="A pre-registered probabilistic forecast of Israel's October 27, 2026 Knesset election: seat distributions, coalition arithmetic, and government-formation odds from a Bayesian model of 1,857 polls and official polling-station results.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="The Knesset Model">
+<meta property="og:description" content="A pre-registered probabilistic forecast of Israel's October 27, 2026 Knesset election: seats, coalition arithmetic, and government-formation odds.">
+<meta property="og:locale" content="en_IL">
+<meta property="og:locale:alternate" content="he_IL">
+<meta name="twitter:card" content="summary">
+<meta name="theme-color" content="#161512">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23f4f1ec'/%3E%3Crect width='64' height='10' fill='%23161512'/%3E%3Cpath d='M10 56a22 22 0 0 1 44 0z' fill='%230038b8'/%3E%3C/svg%3E">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"The Knesset Model","description":"Pre-registered probabilistic forecast of Israel's 2026 Knesset election","inLanguage":["en","he"],"author":{"@type":"Person","name":"Ido Herling"}}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Sans+Hebrew:wght@500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+/* ============================================================
+   Design system: mid-century American corporate modernism.
+   References: Paul Rand (IBM, Cummins, Westinghouse annual
+   reports), Chermayeff & Geismar (Chase 1961, Burlington, SEI),
+   Arnold Saks (Colt 1968), George Tscherny, Lester Beall.
+   Grammar: flat color fields, one vermillion, heavy black rules,
+   square corners, grotesque type, monumental numerals.
+   ============================================================ */
+:root{
+  --paper:#f5f3ee; --card:#f5f3ee; --ink:#141412; --ink2:#3a3835; --muted:#6f6b64;
+  --line:#141412; --line2:#141412; --dead:#a09c93;
+  --accent:#0038b8; --blue:#1d56a5; --hit:#14141210;
+  --bloc-nb:#123a6d; --bloc-anti:#2e7fc2; --bloc-arab:#1a7a44;
+  --shadow:none; --field:#0038b8; --field-ink:#f5f3ee;
+  --p-likud:#225A9E; --p-yashar:#2b8fd4; --p-together:#149a44;
+  --p-dems:#2A38D7; --p-yb:#4d7fb8; --p-shas:#141412; --p-utj:#003366;
+  --p-otzma:#e03e00; --p-rzp:#214785; --p-raam:#15793D; --p-jl:#c32b35;
+  --p-zh:#0080B9; --p-bw:#0a94dd; --p-amcha:#6b7331; --p-unity:#8a867d;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#101010; --card:#101010; --ink:#f2efe8; --ink2:#c9c5bc; --muted:#8f8b82;
+    --line:#f2efe8; --line2:#f2efe8; --dead:#5c594f;
+    --accent:#5b8ded; --blue:#6b9fe8; --hit:#f2efe814;
+    --bloc-nb:#4a7fc4; --bloc-anti:#7fc0f2; --bloc-arab:#3aa268;
+    --field:#0038b8; --field-ink:#f5f3ee;
+    --p-likud:#4d82c8; --p-yashar:#62B9F2; --p-together:#2ec46a;
+    --p-dems:#6470e8; --p-yb:#9AC0E2; --p-shas:#e8e5de; --p-utj:#4677a8;
+    --p-otzma:#ff6a33; --p-rzp:#5c85c0; --p-raam:#34a05e; --p-jl:#e25563;
+    --p-zh:#33a3d4; --p-bw:#0DAAFF; --p-amcha:#9aa14b; --p-unity:#9aa196;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#101010; --card:#101010; --ink:#f2efe8; --ink2:#c9c5bc; --muted:#8f8b82;
+  --line:#f2efe8; --line2:#f2efe8; --dead:#5c594f;
+  --accent:#5b8ded; --blue:#6b9fe8; --hit:#f2efe814;
+    --bloc-nb:#4a7fc4; --bloc-anti:#7fc0f2; --bloc-arab:#3aa268;
+  --field:#0038b8; --field-ink:#f5f3ee;
+  --p-likud:#4d82c8; --p-yashar:#62B9F2; --p-together:#2ec46a;
+  --p-dems:#6470e8; --p-yb:#9AC0E2; --p-shas:#e8e5de; --p-utj:#4677a8;
+  --p-otzma:#ff6a33; --p-rzp:#5c85c0; --p-raam:#34a05e; --p-jl:#e25563;
+  --p-zh:#33a3d4; --p-bw:#0DAAFF; --p-amcha:#9aa14b; --p-unity:#9aa196;
+}
+*{box-sizing:border-box}
+html[dir="rtl"] body{font-family:"IBM Plex Sans Hebrew","IBM Plex Sans",sans-serif}
+html[dir="rtl"] h1,html[dir="rtl"] h2,html[dir="rtl"] h3{font-family:"IBM Plex Sans Hebrew","IBM Plex Sans",sans-serif;letter-spacing:0}
+html[dir="rtl"] .mono,html[dir="rtl"] .val,html[dir="rtl"] .pct,
+html[dir="rtl"] .axis,html[dir="rtl"] .eq{direction:ltr;unicode-bidi:isolate}
+html[dir="rtl"] .dateline{text-align:left}
+html[dir="rtl"] .chapter ul{padding-left:0;padding-right:22px}
+html[dir="rtl"] #hemiBlocs{direction:ltr}
+html[dir="rtl"] .trackwrap,html[dir="rtl"] .bar,html[dir="rtl"] .he .cell{direction:ltr}
+html[dir="rtl"] .eyebrow{letter-spacing:.02em}
+html[dir="rtl"] .brand small,html[dir="rtl"] .nav a,html[dir="rtl"] .tile .k,
+html[dir="rtl"] .blochead,html[dir="rtl"] th{letter-spacing:.02em}
+body{margin:0;background:var(--paper);color:var(--ink);
+  font:400 16.5px/1.6 "IBM Plex Sans","Helvetica Neue",Arial,sans-serif;
+  -webkit-font-smoothing:antialiased}
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+h1,h2,h3{font-family:"IBM Plex Sans","Helvetica Neue",Arial,sans-serif;
+  line-height:1.04;letter-spacing:-.015em;text-wrap:balance;margin:0}
+.mono{font-family:"IBM Plex Mono",ui-monospace,monospace;font-variant-numeric:tabular-nums}
+a{color:var(--ink);text-decoration-color:var(--accent);text-decoration-thickness:2px;text-underline-offset:3px}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+
+/* masthead — report cover head */
+.masthead{border-top:14px solid var(--ink);border-bottom:3px solid var(--ink);padding:20px 0 16px}
+.masthead .wrap{display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:10px}
+.brand{font-weight:700;font-size:22px;letter-spacing:-.01em;text-transform:uppercase}
+.brand small{font-weight:500;font-size:11px;color:var(--ink2);
+  text-transform:uppercase;letter-spacing:.22em;display:block;margin-top:4px}
+.dateline{font-family:"IBM Plex Mono",monospace;font-size:11.5px;color:var(--ink2);
+  text-align:right;text-transform:uppercase;letter-spacing:.06em}
+.dateline b{color:var(--ink);font-weight:600}
+
+/* nav — index strip */
+.nav{position:sticky;top:0;z-index:40;background:var(--paper);border-bottom:2px solid var(--ink);
+  overflow-x:auto;white-space:nowrap}
+.nav .wrap{display:flex;gap:0;padding:0 24px}
+.nav a{display:inline-block;padding:11px 13px;font-size:12px;font-weight:600;color:var(--ink);
+  text-decoration:none;letter-spacing:.1em;text-transform:uppercase;border-bottom:4px solid transparent}
+.nav a:hover{border-bottom-color:var(--accent)}
+
+/* hero — the cover */
+.hero{padding:0 0 8px}
+.cover{background:var(--field);color:var(--field-ink);margin:0 -24px;
+  padding:52px 24px 44px;position:relative;overflow:hidden}
+@media(min-width:1128px){.cover{margin:0}}
+.cover-meta{display:flex;gap:26px;flex-wrap:wrap;font-family:"IBM Plex Mono",monospace;
+  font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;margin-bottom:26px}
+.cover-year{position:absolute;right:-8px;bottom:-56px;font-weight:700;
+  font-size:clamp(180px,30vw,340px);line-height:1;letter-spacing:-.05em;
+  color:var(--field-ink);opacity:.18;user-select:none;pointer-events:none;
+  font-variant-numeric:tabular-nums}
+.hero h1{font-size:clamp(36px,5.8vw,64px);font-weight:700;max-width:17ch;
+  letter-spacing:-.025em;position:relative}
+.hero .standfirst{max-width:60ch;color:var(--ink2);font-size:18px;line-height:1.55;margin:26px 0 4px}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:0;
+  margin:30px 0 8px;border:3px solid var(--ink)}
+.tile{background:var(--card);border-right:3px solid var(--ink);padding:16px 18px 14px;box-shadow:none}
+.tile:last-child{border-right:0}
+@media(max-width:700px){.tile{border-right:0;border-bottom:3px solid var(--ink)}.tile:last-child{border-bottom:0}}
+.tile .k{font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.16em;color:var(--ink2)}
+.tile .v{font-family:"IBM Plex Sans",sans-serif;font-weight:700;font-size:52px;line-height:1;
+  margin-top:8px;letter-spacing:-.03em;font-variant-numeric:tabular-nums;color:var(--ink)}
+.tile.anti .v{color:var(--bloc-anti)}
+.tile.nb .v{color:var(--bloc-nb)}
+.tile .s{font-size:12.5px;color:var(--muted);margin-top:4px}
+.tile .v2{display:flex;align-items:baseline;gap:10px;margin-top:5px}
+.tile .v2 b{font-family:"IBM Plex Sans",sans-serif;font-weight:700;font-size:25px;
+  line-height:1.05;font-variant-numeric:tabular-nums}
+.tile.anti .v2 b{color:var(--bloc-anti)}
+.tile .v2 small{font-size:11px;color:var(--muted);font-weight:600}
+figure{margin:0}
+figcaption,.note{font-size:13.5px;color:var(--muted);line-height:1.55;max-width:72ch}
+.legend{display:flex;gap:16px 20px;flex-wrap:wrap;font-size:12.5px;color:var(--ink2);margin:12px 0 0}
+.legend span{display:inline-flex;align-items:center;gap:7px}
+.sw{width:11px;height:11px;display:inline-block}
+.sw.hollow{background:transparent;border:2px solid var(--dead)}
+
+/* sections — report chapters */
+section{padding:52px 0 8px}
+.eyebrow{font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--ink);display:flex;align-items:center;gap:9px}
+.eyebrow::before{content:"";width:11px;height:11px;background:var(--accent);flex:none}
+section h2{font-size:clamp(26px,3.8vw,40px);font-weight:700;margin:10px 0 12px;letter-spacing:-.02em}
+.lede{max-width:64ch;color:var(--ink2);margin:0 0 24px;line-height:1.65}
+.card{background:var(--card);border:2px solid var(--ink);border-radius:0;padding:24px;box-shadow:none}
+.sheet{border-top:2px solid var(--ink);padding:20px 0 4px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+@media(max-width:820px){.grid2{grid-template-columns:1fr}}
+
+/* interval chart */
+.ivl{display:grid;grid-template-columns:minmax(150px,220px) 1fr 88px;gap:0 14px;align-items:center}
+.ivl .r{display:contents;cursor:default}
+.ivl .nm{font-size:14px;font-weight:600;padding:5px 0;display:flex;align-items:center;gap:9px;min-width:0}
+.ivl .nm .t{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.petek{flex:none;min-width:30px;padding:0 4px;height:22px;background:var(--paper);
+  border:2px solid var(--ink);display:inline-flex;align-items:center;justify-content:center;
+  font-family:"IBM Plex Sans Hebrew","IBM Plex Sans",sans-serif;font-weight:700;font-size:12px;line-height:1}
+.petek{color:var(--pc,var(--muted));border-bottom:5px solid var(--pc,var(--dead))}
+.petek.dead{color:var(--muted)}
+.trackwrap{position:relative;height:26px}
+.track{position:absolute;inset:11px 0;background:var(--hit)}
+.band{position:absolute;top:9px;height:8px;opacity:.4;background:var(--pc,var(--dead))}
+.dot{position:absolute;top:6px;width:14px;height:14px;border:2px solid var(--paper);
+  transform:translateX(-50%);background:var(--pc,var(--dead))}
+.dot.dead{background:var(--paper);border:2px solid var(--pc,var(--dead))}
+.blochead{grid-column:1/-1;font-size:11px;font-weight:700;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--ink);padding:16px 0 5px;border-bottom:2px solid var(--ink)}
+.blochead:first-child{padding-top:0}
+.ivl .val{font-family:"IBM Plex Mono",monospace;font-size:13.5px;font-variant-numeric:tabular-nums;
+  text-align:right;color:var(--ink2)}
+.ivl .val b{color:var(--ink);font-weight:600}
+.gridline{position:absolute;top:0;bottom:0;width:1px;background:var(--ink);opacity:.15}
+.axisrow{display:grid;grid-template-columns:minmax(150px,220px) 1fr 88px;gap:0 14px}
+.axis{position:relative;height:20px;font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--muted)}
+.axis span{position:absolute;transform:translateX(-50%)}
+
+/* threshold bars */
+.thr .row{display:grid;grid-template-columns:minmax(150px,230px) 1fr 64px;gap:14px;align-items:center;padding:6px 0}
+.bar{height:14px;background:var(--hit);position:relative;overflow:hidden}
+.bar i{position:absolute;inset:0 auto 0 0;background:var(--pc,var(--accent))}
+.thr .pct{font-family:"IBM Plex Mono",monospace;font-size:13px;text-align:right;color:var(--ink2)}
+
+/* histogram + builder */
+svg text{font-family:"IBM Plex Mono",monospace;fill:var(--muted);font-size:11.5px}
+.seg{display:inline-flex;border:2px solid var(--ink)}
+.seg button{border:0;background:var(--paper);color:var(--ink);font:600 12.5px "IBM Plex Sans";
+  padding:8px 16px;cursor:pointer;text-transform:uppercase;letter-spacing:.08em}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+.chips{display:flex;flex-wrap:wrap;gap:10px;margin:16px 0}
+.chip{display:inline-flex;align-items:center;gap:8px;border:2px solid var(--ink);
+  background:var(--paper);padding:7px 12px 7px 8px;cursor:pointer;
+  font:600 13.5px "IBM Plex Sans";color:var(--ink2)}
+.chip .mono{font-size:13px;color:var(--muted)}
+.chip[aria-pressed="true"]{color:var(--paper);background:var(--ink)}
+.chip[aria-pressed="true"] .mono{color:var(--paper)}
+.chip[aria-pressed="true"] .petek{border-color:var(--paper)}
+.presets{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:6px}
+.presets button{border:2px solid var(--ink);background:transparent;color:var(--ink);
+  font:600 11.5px "IBM Plex Sans";letter-spacing:.06em;text-transform:uppercase;
+  padding:6px 12px;cursor:pointer}
+.presets button:hover{background:var(--accent);border-color:var(--accent);color:var(--field-ink)}
+.readout{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:0;
+  margin-top:18px;border:3px solid var(--ink)}
+.readout .tile .v{font-size:38px}
+.readout .tile.anti .v{color:var(--ink)}
+
+/* outcome bars */
+.outc .row{display:grid;grid-template-columns:minmax(140px,300px) 1fr 56px;gap:14px;align-items:center;padding:7px 0}
+.outc .lab{font-size:14px;font-weight:600;line-height:1.3}
+.outc .sub{font-size:13px;color:var(--muted);font-weight:400;line-height:1.45}
+
+/* house effects */
+.he .row{display:grid;grid-template-columns:170px 1fr 56px;gap:12px;align-items:center;padding:4px 0;font-size:13px}
+.he .cell{position:relative;height:14px}
+.he .zero{position:absolute;left:50%;top:-3px;bottom:-3px;width:2px;background:var(--ink)}
+.he i{display:block}
+
+/* two pages: report vs technical annex (view routing) */
+body[data-view="report"] .pg-method{display:none}
+body[data-view="method"] .pg-report{display:none}
+.annexhead{display:none}
+body[data-view="method"] .annexhead{display:block;padding:34px 0 0}
+.annexhead .wrap>div{border:2px solid var(--ink);padding:18px 22px;display:flex;
+  justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:10px}
+.annexhead b{font-size:20px;letter-spacing:-.01em;text-transform:uppercase}
+.annexhead a{font-weight:700;font-size:13px}
+
+/* readability: contents strip, collapsible chapters, scrollspy, btt */
+.contents{border:2px solid var(--ink);margin:0 0 30px;padding:16px 20px 14px}
+.contents .ct{font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;margin-bottom:10px}
+.contents ol{margin:0;padding:0;list-style:none;columns:2;column-gap:36px}
+@media(max-width:640px){.contents ol{columns:1}}
+.contents li{break-inside:avoid;border-bottom:1px solid var(--hit);padding:5px 0}
+.contents a{display:flex;gap:12px;align-items:baseline;text-decoration:none;font-size:14px;font-weight:600}
+.contents a:hover{color:var(--accent)}
+.contents a .fol{font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--muted);font-weight:600;min-width:20px}
+.chapter > h3{cursor:pointer;user-select:none}
+.chapter > h3:hover{color:var(--accent)}
+.chapter > h3 .tgl{margin-inline-start:auto;font-family:"IBM Plex Mono",monospace;font-size:20px;font-weight:500;color:var(--muted)}
+.chapter.closed .chbody{display:none}
+.chbody{padding-top:2px}
+.nav a.active{background:var(--ink);color:var(--paper)}
+#btt{position:fixed;right:18px;bottom:18px;width:46px;height:46px;border:0;background:var(--ink);
+  color:var(--paper);font:700 20px "IBM Plex Sans";cursor:pointer;display:none;z-index:60}
+#btt.show{display:block}
+#btt:hover{background:var(--accent)}
+@media(max-width:640px){
+  .he .row{grid-template-columns:104px 1fr 46px;font-size:12px;gap:8px}
+  .ivl,.axisrow{grid-template-columns:minmax(112px,150px) 1fr 72px;gap:0 8px}
+  .thr .row{grid-template-columns:minmax(112px,160px) 1fr 52px;gap:8px}
+}
+
+/* methodology — numbered chapters, report folios */
+.chapters{counter-reset:ch}
+.chapter{border-top:2px solid var(--ink);padding:34px 0 10px}
+.chapter h3{font-size:21px;font-weight:700;display:flex;gap:16px;align-items:baseline;letter-spacing:-.01em}
+.chapter h3::before{counter-increment:ch;content:counter(ch,decimal-leading-zero);
+  font-family:"IBM Plex Sans",sans-serif;font-size:30px;font-weight:700;color:var(--accent);
+  letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.chapter p{max-width:68ch;color:var(--ink2);line-height:1.68}
+.chapter p b,.chapter li b{color:var(--ink)}
+.chapter ul{max-width:70ch;color:var(--ink2);padding-left:22px}
+.chapter li{margin:6px 0}
+.eq{font-family:"IBM Plex Mono",monospace;font-size:13.5px;background:var(--hit);
+  border-left:4px solid var(--ink);padding:14px 18px;margin:14px 0;
+  overflow-x:auto;color:var(--ink);line-height:1.9}
+.eq i{color:var(--accent);font-style:normal}
+table{border-collapse:collapse;width:100%;font-size:14px}
+.tblwrap{overflow-x:auto}
+th{font-size:11px;text-transform:uppercase;letter-spacing:.12em;color:var(--ink);
+  text-align:left;font-weight:700;padding:8px 12px 6px;border-bottom:3px solid var(--ink)}
+td{padding:9px 12px;border-bottom:1px solid var(--ink)}
+tbody tr:hover td{background:var(--hit)}
+td.mono,th.num{text-align:right}
+.tag{display:inline-block;font:600 10.5px "IBM Plex Sans";text-transform:uppercase;
+  letter-spacing:.1em;border:1.5px solid var(--ink);padding:2px 7px;color:var(--ink)}
+
+/* tooltip */
+#tip{position:fixed;z-index:99;pointer-events:none;background:var(--ink);color:var(--paper);
+  font:600 12.5px "IBM Plex Sans";padding:8px 12px;opacity:0;transition:opacity .12s;max-width:260px}
+#tip .mono{font-weight:500}
+@media (prefers-reduced-motion: reduce){*{transition:none !important;animation:none !important}}
+footer{border-top:14px solid var(--ink);margin-top:60px;padding:26px 0 48px;
+  font-size:12.5px;color:var(--muted)}
+footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+</style>
+
+
+<header class="masthead"><div class="wrap">
+  <div class="brand">The Knesset Model<small>A pre-registered forecast of Israel's 2026 election</small></div>
+  <div style="display:flex;align-items:center;gap:18px">
+    <button id="langbtn" style="border:2px solid var(--ink);background:transparent;color:var(--ink);
+      font:700 12px 'IBM Plex Sans Hebrew','IBM Plex Sans';padding:7px 14px;cursor:pointer;letter-spacing:.06em"></button>
+    <button id="themebtn" style="border:2px solid var(--ink);background:transparent;color:var(--ink);
+      font:700 12px 'IBM Plex Sans Hebrew','IBM Plex Sans';padding:7px 14px;cursor:pointer;letter-spacing:.06em"></button>
+    <div class="dateline" id="dateline">Forecast as of <b class="mono" id="asof"></b><br>Election: Tuesday, <b>October 27, 2026</b> · <span class="mono" id="tminus"></span> days out</div>
+  </div>
+</div></header>
+
+<nav class="nav" aria-label="Sections"><div class="wrap" id="navwrap"></div></nav>
+
+<div class="hero pg-report"><div class="wrap">
+  <div class="cover">
+    <div class="cover-meta"><span>Forecast No. 1</span><span>26th Knesset</span><span>Election · 27 Oct 2026</span></div>
+    <div class="cover-year">26</div>
+    <h1>Forecast for the 26th Knesset election.</h1>
+  </div>
+  <p class="standfirst">A probabilistic forecast of Israel's election on October 27, 2026: seats,
+  coalition arithmetic, and government formation. Built from over 700 published polls, official
+  results at polling-station level, and an explicit formation model; updated as new polls and
+  filings arrive. Methodology and track record are in the technical annex.</p>
+  <div class="tiles">
+    <div class="tile anti"><div class="k">Change-bloc majority</div>
+      <div class="v2"><b class="mono" id="tAnti"></b><small>without Arab seats</small></div>
+      <div class="v2"><b class="mono" id="tAntiRaam"></b><small>with Ra'am</small></div>
+      <div class="s">Segalovitz's own seat counted in both</div></div>
+    <div class="tile nb"><div class="k">Netanyahu majority</div><div class="v" id="tNb"></div><div class="s">his bloc reaches 61 · mean <span class="mono" id="tNbMean"></span> seats</div></div>
+    <div class="tile dead"><div class="k">Deadlock</div><div class="v" id="tNeither"></div><div class="s">no majority for either side, counting Ra'am with the change bloc</div></div>
+  </div>
+  <figure class="card" style="padding:26px 22px 14px">
+    <div id="hemiBlocs" style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;
+      font:700 11px 'IBM Plex Mono',monospace;letter-spacing:.14em;color:var(--ink2);
+      border-bottom:1px solid var(--hit);padding-bottom:10px;margin-bottom:6px"></div>
+    <svg id="hemi" viewBox="0 -6 720 312" role="img" aria-label="Hemicycle of 120 projected Knesset seats" style="width:100%;height:auto;display:block"></svg>
+    <div class="legend" id="hemiLegend"></div>
+    <figcaption style="margin-top:10px">Central seat allocation (largest-remainder over lists with P(pass) ≥ 50%),
+    grouped by camp — brackets mark the blocs; Arab-list seats are drawn as rings. Each list keeps its
+    conventional polling-chart color. Hover any seat.</figcaption>
+  </figure>
+</div></div>
+
+<section id="seats" class="pg-report"><div class="wrap">
+  <p class="eyebrow">Seat forecast</p>
+  <h2>Every list, with its uncertainty attached</h2>
+  <p class="lede">Each dot is the forecast. Each band holds 90% of the simulations, drift to
+  election day included. Hollow dots sit below the 3.25% threshold today.</p>
+  <div class="sheet">
+    <div class="ivl" id="ivl"></div>
+    <div class="axisrow"><div></div><div class="axis" id="ivlAxis"></div><div></div></div>
+    <div class="legend"><span><i class="sw" style="background:var(--ink);width:12px;height:3px"></i>90% interval</span>
+    <span><i class="sw hollow"></i>below threshold in central projection</span></div>
+    <p class="note" style="margin-top:8px">Chips show each list's registered CEC ballot letters.
+    Starred letters are provisional for new lists until registration closes on September 9.</p>
+  </div>
+</div></section>
+
+<section id="threshold" class="pg-report"><div class="wrap">
+  <p class="eyebrow">The knife-edges</p>
+  <h2 id="thrH2">Five lists live or die at 3.25%</h2>
+  <p class="lede">About 8% of the vote currently sits below the 3.25% threshold. Every list that
+  misses hands its seats to the survivors. In 2022 that arithmetic turned a near-even vote into a
+  64-seat majority.</p>
+  <div class="sheet thr" id="thr"></div>
+</div></section>
+
+<section id="blocdist" class="pg-report"><div class="wrap">
+  <p class="eyebrow">Bloc math</p>
+  <h2>The full distribution, not just the mean</h2>
+  <p class="lede">8,000 simulated elections; 2,500 shown. The line at 61 is the one that matters.</p>
+  <div class="card">
+    <div class="seg" role="group" aria-label="Bloc selector">
+      <button id="segNb" aria-pressed="false">Netanyahu bloc</button>
+      <button id="segAnti" aria-pressed="true">Anti bloc</button>
+    </div>
+    <svg id="hist" viewBox="0 0 940 260" role="img" aria-label="Distribution of simulated bloc seat totals" style="width:100%;height:auto;display:block;margin-top:12px"></svg>
+    <figcaption id="histCap" style="margin-top:6px"></figcaption>
+  </div>
+</div></section>
+
+<section id="builder" class="pg-report"><div class="wrap">
+  <p class="eyebrow">Interactive</p>
+  <h2>Build a coalition</h2>
+  <p class="lede">Pick parties. The answer comes from the same simulated elections, so the
+  correlations count: when Amcha misses the threshold, Likud tends to surge, and your total
+  feels both.</p>
+  <div class="card">
+    <div class="presets" id="presets"></div>
+    <div class="chips" id="chips"></div>
+    <div class="readout">
+      <div class="tile"><div class="k">Expected seats</div><div class="v" id="cbMean">0</div><div class="s">mean over simulations</div></div>
+      <div class="tile"><div class="k">P(≥ 61 seats)</div><div class="v" id="cbP61">—</div><div class="s">true joint probability</div></div>
+      <div class="tile"><div class="k">90% range</div><div class="v" id="cbRange" style="font-size:24px">—</div><div class="s">5th–95th percentile</div></div>
+    </div>
+    <svg id="cbHist" viewBox="0 0 940 130" role="img" aria-label="Seat distribution of the selected coalition" style="width:100%;height:auto;display:block;margin-top:14px"></svg>
+    <p class="note">Totals include threshold outcomes and Bader–Ofer allocation. This is arithmetic,
+    not politics; the formation model below prices the politics.</p>
+  </div>
+</div></section>
+
+<section id="formation" class="pg-report"><div class="wrap">
+  <p class="eyebrow">After the vote</p>
+  <h2>Who forms a government, and who is Prime Minister</h2>
+  <p class="lede">Every simulated Knesset runs through a coalition-formation tree. Its assumptions
+  come from institutional history: who signs for each party, which pledges break, and at what
+  price. Rotation deals are priced inside each winning coalition.</p>
+  <div class="grid2">
+    <div class="card outc"><h3 style="font-size:18px;margin-bottom:12px">Formation outcome</h3><div id="outc"></div></div>
+    <div class="card outc"><h3 style="font-size:18px;margin-bottom:12px">Next Prime Minister</h3><div id="pm"></div>
+      <p class="note" style="margin-top:12px">Whiskers are 90% intervals over the model's own
+      assumptions.</p></div>
+  </div>
+</div></section>
+
+<section id="ground" class="pg-report"><div class="wrap">
+  <p class="eyebrow">The ground game</p>
+  <h2>Where the seats actually live</h2>
+  <p class="lede">The forecast poststratified through the polling-station record: official
+  per-locality results for 2019–2022 cluster Israel's localities into political sectors, and each
+  2026 list's projected seats are allocated to the sectors it draws from via measured voter-flow
+  lineages. Turnout per sector is measured from the same administrative data — this is what makes
+  a national number physically checkable: a list cannot take more of a sector's votes than that
+  sector casts.</p>
+  <div class="sheet" id="ground-rows"></div>
+</div></section>
+
+<div class="annexhead"><div class="wrap"><div>
+  <b>Technical annex — methodology &amp; track record</b>
+  <a href="#" id="backToReport">← Back to the forecast</a>
+</div></div></div>
+
+<section id="pollsters" class="pg-method"><div class="wrap">
+  <p class="eyebrow">The polling industry</p>
+  <h2>Two polling worlds, one model</h2>
+  <p class="lede">Israeli pollsters disagree by up to ten seats on the bloc totals. The model
+  estimates each firm's lean (its <b>house effect</b> on the Netanyahu bloc, in seats, measured
+  leave-own-pollster-out) and each firm's historical accuracy, and weights accordingly. Firms with
+  shared ownership or methodology are modeled as correlated voices, not independent ones.</p>
+  <div class="sheet he" id="he"></div>
+</div></section>
+
+<section id="method" class="pg-method"><div class="wrap">
+  <p class="eyebrow">Methodology</p>
+  <h2>The statistical machinery, end to end</h2>
+  <p class="lede">The pipeline below is a genuine sequence — each stage consumes the last. All
+  code-derived parameters are measured on nine election cycles (2009–2022) with leave-one-cycle-out
+  discipline; all judgment parameters are stated, cited, and stress-tested.</p>
+  <div class="chapters">
+
+  <div class="chapter"><h3>The poll database</h3>
+    <p><b>1,857 polls, 22,681 list-level observations, nine cycles (2009–2026)</b>, scraped from
+    the Wikipedia polling archives with a purpose-built parser (grid/colspan handling, two-digit
+    years, US-style dates, result-row detection), then reconciled against a canonical
+    <b>party registry</b> that tracks every list's mergers, splits, and bloc identity across 17
+    years — so "Yamina 2021" and "New Right 2019" resolve to comparable objects. For the 2026
+    cycle, the raw poll PDFs that pollsters must legally file with the Central Elections Committee
+    are scraped directly from gov.il (19 filings so far); where a CEC filing matches a published
+    poll, the legal filing's raw vote shares displace the seat-derived numbers.</p></div>
+
+  <div class="chapter"><h3>House effects and firm reliability</h3>
+    <p>Each firm's bloc lean is estimated <b>leave-own-pollster-out</b> against the
+    contemporaneous average of all other firms, with empirical-Bayes shrinkage for small samples.
+    Firms with common ownership or lineage — the two halves of the former Filber/Direct Polls
+    operation, Lazar/Panels Politics — share a <b>correlation group</b>: their errors are modeled
+    as one voice, so five agreeing polls from one polling family never masquerade as five
+    independent confirmations. Accuracy scorecards from eight graded cycles set each firm's
+    precision prior.</p></div>
+
+  <div class="chapter"><h3>The Bayesian state-space model</h3>
+    <p>The production model is a latent-trajectory model fitted with NUTS (PyMC). Each list's true
+    support follows a random walk in log-ratio space on a non-uniform time grid — weekly bins,
+    tightening to 2-day bins in the final month — and the projection's forward uncertainty follows
+    a <b>measured volatility calendar</b>: the list-formation window (D-36–77) moves 1.3–1.5
+    seats/week in the historical record, the final five weeks only 0.6–0.75, so intervals tighten
+    automatically once lists close on September 9. (Poll herding was measured — final-week
+    dispersion runs ~0.88× mid-campaign — and deliberately not double-counted: the election-day
+    shocks are fitted on final-poll errors that already contain it.)</p>
+    <div class="eq">
+      z<sub>t</sub> = z<sub>t−1</sub> + √Δt · τ · ε<sub>t</sub>&nbsp;&nbsp;&nbsp;&nbsp;<i>latent support, ALR space</i><br>
+      y<sub>p,ℓ</sub> ~ StudentT(4, softmax(z<sub>t(p)</sub>)<sub>ℓ</sub> + β<sub>g(p)</sub> + δ<sub>f(p)</sub>, σ<sub>p</sub>)&nbsp;&nbsp;&nbsp;&nbsp;<i>poll observation</i><br>
+      σ<sub>p</sub> = s<sub>obs</sub> / √λ<sub>f(p)</sub> · exp(β<sub>u</sub> · u<sub>p</sub>)&nbsp;&nbsp;&nbsp;&nbsp;<i>noise scales with firm record + undecideds</i>
+    </div>
+    <p>House effects β nest within pollster correlation groups; firm weights λ carry LogNormal
+    priors centered on each firm's historical accuracy; β<sub>u</sub> is an <b>estimated</b>
+    coefficient letting reported undecided shares widen a poll's noise (posterior: ×1.01 noise per
+    +5pp undecided). The current fit: 0 divergences, r̂ ≤ 1.02, and a live holdout — refit without
+    the last 14 days — predicting the held-out polls with <b>0.72 seats median error</b>.</p></div>
+
+  <div class="chapter"><h3>The error decomposition</h3>
+    <p>Polls miss elections in structured ways. A sequential decomposition of the eight graded
+    cycles (each estimated leave-one-cycle-out, so no cycle grades itself) splits final-poll error
+    into orthogonal layers, which become the projection's shocks — nothing is double-counted:</p>
+    <ul>
+      <li><b>Bloc swing</b> — sd 3.36 seats, the correlated right/left error (t-distributed, df 5), scaled ×1.2 this cycle for elevated event risk;</li>
+      <li><b>Sector shocks</b> — haredi lists underpolled by 1.35 ± 1.77 seats; Arab lists −0.32 ± 1.45 (a turnout error, not a bias);</li>
+      <li><b>Anchors</b> — Likud beats its polls by 2.30 seats on average (the "gevalt" record: +8.4 in 2015, +6.7 in April 2019, ≈0 elsewhere); the poll-leading party underperforms by 1.74;</li>
+      <li><b>Residual per-list shock</b> — 1.83 + 0.044·seats, with a ×1.35 multiplier for first-cycle lists (measured: new parties' final polls are unbiased but 35% noisier) and a loyal-electorate calibration for sect-based veteran lists — Shas has never missed its final polls downward by more than half a seat in eight cycles, so Shas, UTJ and Yisrael Beytenu are shrunk to their measured historical volatility (×1.5 novelty buffer) instead of the pooled width;</li>
+      <li><b>Measured undecided break</b> — the 2026 undecided pool (12% of the electorate) leans
+      55/16 toward a non-Netanyahu candidate (N12/Midgam), a sign reversal of the historical
+      late-break; applied at half weight (~1.6 seats, sd equal to the mean) toward the
+      opposition bloc, with the fragility disclosed: the lean rests on ~60 respondents and is
+      remeasured as new certainty polling arrives;</li>
+      <li><b>Gevalt coupling</b> — a zero-sum transfer (sd 2.0 seats) between Likud and its own bloc's satellites, so satellite threshold deaths co-occur with Likud surges, as they did in 2015 and 2019.</li>
+    </ul></div>
+
+  <div class="chapter"><h3>The kalpi substrate</h3>
+    <p>Beneath the national numbers sits the polling-station record: official CEC results for
+    every locality in the five elections 2019–2022, matched to party lineages through each
+    cycle's ballot letters (verified against national totals, so a wrong letter cannot silently
+    poison the panel). Localities cluster into political sectors by their own vote profiles —
+    Israeli electoral geography is segregated enough that the profiles recover the sectors almost
+    exactly, along with their measured turnout (haredi 76%, Arab 54%, religious-Zionist 76%).
+    Three products feed the forecast: a <b>poststratification table</b> allocating each 2026
+    list's projected seats to the sectors it draws from — and enforced <b>capacity truncation</b>
+    of the posterior: simulations where the Arab lists jointly exceed what Arab-sector turnout can
+    physically cast (~16.3% of the vote), or where Shas+UTJ fall below the haredi demographic
+    floor (~6.7%), are clipped to the feasible boundary (each pruned ~1.5% of draws); a measured <b>+0.92 correlation
+    between the haredi and Arab sector tides</b> (both turnout-machine sectors), shrunk to 0.5
+    for four observed transitions and wired into the projection's family shocks, which were
+    previously drawn independently; and the locality baseline for the election-night engine.
+    One honest negative result is recorded alongside: sector-level swings do <em>not</em>
+    transfer across election pairs (leave-one-out: uniform national swing predicts localities
+    at 1.20pp mean error, adding historical sector swings gives 1.31pp) — each cycle's sector
+    story is its own, so the sector layer informs correlations and capacity, not point swings.
+    The lineage weights are additionally calibrated against the measured kalpi-level voter-transition
+    matrices of the open-source <a href="https://kolot-nodedim.netlify.app/" rel="noopener">Kolot
+    Nodedim</a> project (constrained convex estimation over ~7,000 matched stations per election
+    pair, R² 0.89 for 2021→2022), whose per-party Dirichlet-α cohesion estimates independently
+    reproduce this model's loyal-electorate ordering — and whose overdispersion measurements
+    (a 340-voter kalpi behaves like only 30–120 independent draws) will power the election-night
+    engine's noise model in October.</p></div>
+
+  <div class="chapter"><h3>Threshold and Bader–Ofer</h3>
+    <p>Each simulated vote share vector passes the 3.25% threshold test, then seats are allocated
+    by the actual Israeli method: <b>Bader–Ofer</b> (d'Hondt over remainders), with signed
+    surplus-vote agreements treated as joint lists at the remainder stage — worth a measured
+    +0.5 to +0.9 expected seats per pair. Threshold failures redistribute their votes to survivors,
+    which is how a bloc can lose the vote and win the Knesset.</p></div>
+
+  <div class="chapter"><h3>The registration mixture</h3>
+    <p>Until lists close on September 9, the forecast samples <b>registration events per
+    simulation</b>: the centre micro-list folds and the Erdan–Gantz union tail, each with
+    sourced transfer vectors. Resolved events collapse out of the mixture as they happen: Segalovitz joining Ra'am
+    became official on September 1, and the Smotrich–Feiglin (RZP–Zehut) technical bloc on
+    September 2 — both are now certainties in every draw. The published forecast is the mixture; each
+    event's marginal effect is read off the same draws (see the scenario board above). On filing
+    day the mixture collapses to the real configuration and the model refits.</p></div>
+
+  <div class="chapter"><h3>The formation tree</h3>
+    <p>Seats are not power. Every simulated Knesset runs through an explicit formation sequence —
+    Netanyahu bloc first, then centre majority, centre+Ra'am, haredi defection, minority-with-
+    abstentions, pledge-break, unity, repeat election — with behavioral parameters derived from
+    institutional research: who actually signs for each party (Shas's Council, UTJ's two rebbes'
+    councils, Ra'am's post-Shura independence), each leader's revealed record at past forks
+    (Liberman's flips, Bennett's 2021 pledge-break, Gantz's 2020), and historical base rates
+    (repeat election followed 2 of 4 deadlocked formations; unity resolved half of them; no
+    minority government has ever been sworn in from day one). Winter's Amcha is coded as an
+    <b>anti-Eisenkot hard edge</b>, not a generic right-bloc member: it can join a Bennett-led
+    centre government but essentially never an Eisenkot-led one.</p></div>
+
+  <div class="chapter"><h3>The PM allocation</h3>
+    <p>Within each winning coalition, the premiership is allocated with rotation-aware
+    probabilities (Bennett was PM with 7 seats in 2021 — largest-party logic is not Israeli
+    logic), flipping when Together outpolls Yashar in a draw. This layer was graded against the
+    eight real formation outcomes since 2009: average log-loss −0.92, and it assigns the realized
+    outcome the highest probability in five of eight cycles.</p></div>
+
+  <div class="chapter"><h3>Expert priors, documented</h3>
+    <p>Every judgment number traces to a written dossier compiled from six research desks:
+    coalition-formation base rates 1992–2022, the complete Israeli polling-error record 1996–2022,
+    party institutions and leader biographies, electoral sociology and vote flows, prediction
+    markets and fundamentals, and final-stretch campaign dynamics. Where the desks disagreed with
+    the model, the model moved; where the market disagrees with the model (Polymarket prices
+    Eisenkot-as-PM at ~50%; we say 33%), the dossier records why we hold: the market's own
+    hung-parliament and government-by-December markets are inconsistent with its headline number.</p></div>
+
+  <div class="chapter" id="validation"><h3>Validation: the model grades itself</h3>
+    <p>Every layer is gated on an eight-cycle backtest (2013–2022, leave-one-cycle-out; 2009 seeds
+    the priors). The harness re-runs the full pipeline as of each election eve and scores it against
+    the real result. Changes that failed the harness were rejected and documented — including a
+    final-stretch dynamics module and a hierarchical multi-cycle fit that stays research-only.</p>
+    <div class="tblwrap"><table>
+      <thead><tr><th>Metric (8-cycle backtest)</th><th class="num">Simple pipeline</th><th class="num">Bayesian model</th></tr></thead>
+      <tbody id="valTbl"></tbody>
+    </table></div>
+    <p class="note" style="margin-top:10px">The two models divide labor: the simple weighted
+    pipeline sets central seats (better point accuracy); the Bayesian model owns every interval and
+    probability (better calibration, and it wins the live 2026 holdout 0.80 vs 1.09 median seats).
+    Blending was tested and rejected — their errors correlate at 0.93, so a blend buys nothing.</p></div>
+
+  </div>
+</div></section>
+
+<footer><div class="wrap">
+  <div>The Knesset Model · pre-registered public forecast · methodology frozen before election day<br>
+  Poll data: Wikipedia archives + CEC legal filings · Fit: PyMC/NUTS · All parameters cited in the repository</div>
+  <div style="text-align:right">Built by Ido Herling<br><span class="mono" id="foot-asof"></span></div>
+</div></footer>
+
+<button id="btt" aria-label="Back to top" title="Back to top">↑</button>
+<div id="tip" role="status"></div>
+
+<script>
+const D = __SITE_DATA__;
+/* ---- bilingual layer ---- */
+const LANG = (()=>{ try { return localStorage.getItem("klang") || "en"; } catch(e){ return "en"; } })();
+const HEB_MODE = LANG === "he";
+document.documentElement.lang = HEB_MODE ? "he" : "en";
+if (HEB_MODE){ document.documentElement.dir = "rtl"; }
+const HE_PARTY = {"Likud":"הליכוד","Yashar":"ישר","Bennett 2026 + Yesh Atid":"ביחד (בנט–לפיד)",
+ "The Democrats":"הדמוקרטים","Yisrael Beytenu":"ישראל ביתנו","Shas":"ש״ס",
+ "United Torah Judaism":"יהדות התורה","Otzma Yehudit":"עוצמה יהודית",
+ "Religious Zionist Party":"הציונות הדתית–זהות","Ra'am":"רע״ם",
+ "Balad + Hadash-Ta'al":"הרשימה המשותפת","Balad (alone)":"בל״ד",
+ "Zionist Home – The Reservists":"הבית הציוני–המילואימניקים","Blue and White":"כחול לבן",
+ "Unity":"האחדות","Zehut":"זהות","Noam":"נעם","New Economic Party":"כלכלה חדשה",
+ "Amcha Yisrael":"עמך ישראל","The Haredi Public":"הציבור החרדי",
+ "Israel First":"ישראל ראשונה","Fiery Youth":"צעירים בוערים",
+ "The Fourth Quarter":"הרבע הרביעי","El HaDegel":"אל הדגל"};
+const HE_STATIC = {
+ "The Knesset Model":"מודל הכנסת",
+ "A pre-registered forecast of Israel's 2026 election":"תחזית רשומה־מראש לבחירות 2026",
+ "Forecast for the 26th Knesset election.":"תחזית לבחירות לכנסת ה־26.",
+ "Change-bloc majority":"רוב למחנה השינוי",
+ "without Arab seats":"בלי מושבים ערביים","with Ra'am":"עם רע״ם",
+ "Netanyahu majority":"רוב לגוש נתניהו",
+ "Deadlock":"מבוי סתום",
+ "Seat forecast":"תחזית המושבים",
+ "Every list, with its uncertainty attached":"כל רשימה, עם אי־הוודאות שלה",
+ "The knife-edges":"על הסף",
+ "Five lists live or die at 3.25%":"חמש רשימות חיות או מתות על 3.25%",
+ "Bloc math":"חשבון הגושים",
+ "The full distribution, not just the mean":"ההתפלגות המלאה, לא רק הממוצע",
+ "Interactive":"אינטראקטיבי",
+ "Build a coalition":"הרכיבו קואליציה",
+ "After the vote":"אחרי הבחירות",
+ "Who forms a government, and who is Prime Minister":"מי מרכיב ממשלה, ומי ראש הממשלה",
+ "The ground game":"משחק הקרקע",
+ "Where the seats actually live":"איפה המושבים באמת גרים",
+ "The polling industry":"תעשיית הסקרים",
+ "Two polling worlds, one model":"שני עולמות סקרים, מודל אחד",
+ "Methodology":"מתודולוגיה",
+ "The statistical machinery, end to end":"המכונה הסטטיסטית, מקצה לקצה",
+ "Formation outcome":"תוצאת ההרכבה",
+ "Next Prime Minister":"ראש הממשלה הבא",
+ "Expected seats":"מושבים צפויים",
+ "P(≥ 61 seats)":"סיכוי ל־61 ומעלה",
+ "90% range":"טווח 90%",
+ "Netanyahu bloc":"גוש נתניהו",
+ "Anti bloc":"המחנה נגד",
+ "Contents":"תוכן העניינים",
+ "Technical annex — methodology & track record":"נספח טכני — מתודולוגיה וביצועי עבר",
+ "← Back to the forecast":"→ חזרה לתחזית"};
+const HE_LEDE = {
+ "standfirst":"תחזית הסתברותית לבחירות ב־27 באוקטובר 2026: מושבים, חשבון קואליציוני והרכבת ממשלה. מבוססת על יותר מ־700 סקרים שפורסמו, תוצאות רשמיות ברמת הקלפי ומודל הרכבה מפורש; מתעדכנת עם כל סקר והגשה חדשים. המתודולוגיה וביצועי העבר בנספח הטכני.",
+ "seats":"כל נקודה היא התחזית. כל רצועה מכילה 90% מהסימולציות, כולל התנודה עד יום הבחירות. נקודות חלולות נמצאות היום מתחת לאחוז החסימה.",
+ "threshold":"כ־8% מהקולות נמצאים כיום מתחת לאחוז החסימה של 3.25%. כל רשימה שנופלת מוסרת את מושביה לשורדות. ב־2022 החשבון הזה הפך תיקו כמעט מלא לרוב של 64.",
+ "blocdist":"8,000 מערכות בחירות מדומות; 2,500 מוצגות. הקו על 61 הוא הקו שקובע.",
+ "builder":"בחרו מפלגות. התשובה מגיעה מאותן סימולציות, כך שהמתאמים נספרים: כשעמך ישראל נופלת מאחוז החסימה, הליכוד נוטה לזנק, והסכום שלכם מרגיש את שניהם.",
+ "formation":"כל כנסת מדומה עוברת דרך עץ הרכבה קואליציוני. ההנחות מגיעות מההיסטוריה המוסדית: מי חותם בשם כל מפלגה, אילו הבטחות נשברות, ובאיזה מחיר. עסקאות רוטציה מתומחרות בתוך כל קואליציה מנצחת.",
+ "ground":"תוצאות רשמיות לכל יישוב, 2019 עד 2022, ממיינות את ישראל למגזרים פוליטיים. המושבים החזויים של כל רשימה מוקצים למגזרים שבהם גרים בוחריה. מספר ארצי חייב להיות בר־הצבעה בשטח.",
+ "pollsters":"סוקרים ישראלים חלוקים בעד עשרה מנדטים על סך הגושים. המודל מודד את הנטייה של כל מכון ומשקלל את דיוקו; מכונים בבעלות משותפת נספרים כקול אחד, לא שניים.",
+ "method":"הצינור הוא רצף; כל שלב צורך את קודמו. פרמטרים נמדדים על תשע מערכות בחירות, תמיד בהשמטת־מחזור. פרמטרים שיפוטיים מוצהרים, ממוסמכים ונבחנים בלחץ."};
+const HE_MISC = {
+ "OUTCOME": {"Netanyahu rightist coalition":"קואליציה ימנית של נתניהו",
+  "Netanyahu + centrist defector coalition":"נתניהו + עריק מהמרכז",
+  "Change coalition (without Ra'am)":"קואליציית שינוי (בלי רע״ם)",
+  "Change coalition with Amcha":"קואליציית שינוי עם עמך ישראל",
+  "Change coalition with a haredi party":"קואליציית שינוי עם מפלגה חרדית",
+  "Centre minority backed by the Joint List":"ממשלת מיעוט בתמיכת הרשימה המשותפת",
+  "Unity government (Likud without Netanyahu)":"ממשלת אחדות (הליכוד בלי נתניהו)",
+  "Repeat election":"בחירות חוזרות",
+  "Change coalition with Ra'am":"קואליציית שינוי עם רע״ם"},
+ "PM": {"Eisenkot":"אייזנקוט","Netanyahu":"נתניהו","Bennett":"בנט","Liberman":"ליברמן",
+  "No one — repeat election":"אף אחד — בחירות חוזרות",
+  "Rotation / Likud successor":"רוטציה / יורש בליכוד"},
+ "SECTOR": {"Centre-left localities":"יישובי מרכז–שמאל","Mixed cities":"ערים מעורבות",
+  "Secular-right localities":"יישובי ימין חילוני","Arab localities":"יישובים ערביים",
+  "Haredi localities":"יישובים חרדיים","Religious-Zionist localities":"יישובי הציונות הדתית",
+  "Russian-speaking localities":"יישובים דוברי רוסית"},
+ "BLOC": {"anti":"המחנה נגד נתניהו","arab":"הרשימות הערביות","nb":"גוש נתניהו"}};
+const HE_FIRM = {"Lazar":"לזר","Midgam":"מדגם","Tatika":"טטיקה","Midgam Project":"פרויקט המדגם",
+ "Camil Fuchs":"קמיל פוקס","Kantar":"קנטאר","Maagar Mochot":"מאגר מוחות",
+ "Panels Politics":"פאנלס פוליטיקס","Direct Polls":"דיירקט פולס","Filber":"פילבר"};
+const HE_CH = [
+ {t:"מאגר הסקרים", b:`<p><b>1,857 סקרים, 22,681 תצפיות ברמת הרשימה, תשע מערכות בחירות (2009–2026)</b>, שנאספו מארכיוני הסקרים של ויקיפדיה באמצעות מפענח ייעודי (טיפול בטבלאות ממוזגות, שנים דו־ספרתיות, תאריכים בפורמט אמריקאי, זיהוי שורות תוצאה), והוצלבו מול <b>מרשם מפלגות</b> קנוני העוקב אחר כל מיזוג, פיצול וזהות גושית של כל רשימה לאורך 17 שנים — כך ש"ימינה 2021" ו"הימין החדש 2019" נפתרים לאובייקטים ברי־השוואה. עבור מחזור 2026 נאספים ישירות מ־gov.il קובצי הסקרים הגולמיים שהמכונים מחויבים בחוק להגיש לוועדת הבחירות המרכזית (19 הגשות עד כה); כאשר הגשה לוועדה תואמת סקר שפורסם, נתוני ההצבעה הגולמיים מן ההגשה החוקית מחליפים את המספרים הנגזרים ממנדטים.</p>`},
+ {t:"אפקטי בית ואמינות המכונים", b:`<p>הנטייה הגושית של כל מכון נאמדת בשיטת <b>השמטת־הסוקר־עצמו</b> מול הממוצע בן־הזמן של כל שאר המכונים, עם כיווץ אמפירי־בייסיאני למדגמים קטנים. מכונים בעלי בעלות או שושלת משותפת — שני חצאיה של פירמת פילבר/דיירקט פולס לשעבר, לזר/פאנלס פוליטיקס — חולקים <b>קבוצת מתאם</b>: השגיאות שלהם ממודלות כקול אחד, כך שחמישה סקרים מסכימים ממשפחת סקרים אחת לעולם אינם מתחזים לחמישה אישושים בלתי־תלויים. כרטיסי דיוק משמונה מערכות בחירות מדורגות קובעים את פריור הדיוק של כל מכון.</p>`},
+ {t:"מודל מרחב־המצבים הבייסיאני", b:`<p>מודל הייצור הוא מודל מסלול חבוי המותאם ב־NUTS&rlm; (PyMC). התמיכה האמיתית של כל רשימה מתנהלת כהילוך מקרי במרחב יחסי־לוג על גבי רשת זמן לא־אחידה — פחים שבועיים, המתהדקים לפחים של יומיים בחודש האחרון — ואי־הוודאות קדימה של ההיטל עוקבת אחר <b>לוח תנודתיות מדוד</b>: חלון גיבוש הרשימות (36–77 ימים לפני הבחירות) זז 1.3–1.5 מנדטים לשבוע ברשומה ההיסטורית, חמשת השבועות האחרונים רק 0.6–0.75, ולכן הרווחים מתהדקים אוטומטית עם סגירת הרשימות ב־9 בספטמבר. (עדריות סקרים נמדדה — פיזור השבוע האחרון עומד על כ־0.88 מפיזור אמצע הקמפיין — ובמכוון לא נספרה פעמיים: זעזועי יום הבחירות מותאמים על שגיאות הסקרים הסופיים, שכבר מכילות אותה.)</p>
+    <div class="eq">
+      z<sub>t</sub> = z<sub>t−1</sub> + √Δt · τ · ε<sub>t</sub>&nbsp;&nbsp;&nbsp;&nbsp;<i>תמיכה חבויה, מרחב ALR</i><br>
+      y<sub>p,ℓ</sub> ~ StudentT(4, softmax(z<sub>t(p)</sub>)<sub>ℓ</sub> + β<sub>g(p)</sub> + δ<sub>f(p)</sub>, σ<sub>p</sub>)&nbsp;&nbsp;&nbsp;&nbsp;<i>תצפית סקר</i><br>
+      σ<sub>p</sub> = s<sub>obs</sub> / √λ<sub>f(p)</sub> · exp(β<sub>u</sub> · u<sub>p</sub>)&nbsp;&nbsp;&nbsp;&nbsp;<i>הרעש גדל עם רקורד המכון והמתלבטים</i>
+    </div>
+    <p>אפקטי הבית β מקוננים בתוך קבוצות המתאם של המכונים; משקלי המכונים λ נושאים פריורים לוג־נורמליים המרוכזים סביב הדיוק ההיסטורי של כל מכון; β<sub>u</sub> הוא מקדם <b>נאמד</b> המאפשר לשיעור המתלבטים המדווח להרחיב את רעש הסקר (פוסטריור: פי 1.01 רעש לכל &lrm;+5 נק׳ מתלבטים). ההתאמה הנוכחית: 0 דיברגנציות, r̂ ≤ 1.02, ומבחן חוץ־מדגם חי — התאמה מחדש ללא 14 הימים האחרונים — החוזה את הסקרים שהוחזקו בחוץ עם <b>שגיאה חציונית של 0.72 מנדטים</b>.</p>`},
+ {t:"פירוק השגיאות", b:`<p>סקרים מחטיאים בחירות בדרכים בעלות מבנה. פירוק סדרתי של שמונה מערכות הבחירות המדורגות (כל אחת נאמדת בהשמטת־מחזור, כך שאף מחזור אינו מדרג את עצמו) מפצל את שגיאת הסקרים הסופיים לשכבות אורתוגונליות, שהופכות לזעזועי ההיטל — דבר אינו נספר פעמיים:</p>
+    <ul>
+      <li><b>תנודת גוש</b> — ס״ת 3.36 מנדטים, שגיאת הימין/שמאל המתואמת (התפלגות t עם 5 דרגות חופש), מוכפלת ב־1.2 במחזור הזה בשל סיכון אירועים מוגבר;</li>
+      <li><b>זעזועי מגזר</b> — רשימות חרדיות נחסרות בסקרים ב־1.35 ± 1.77 מנדטים; רשימות ערביות &lrm;−0.32 ± 1.45 (שגיאת השתתפות, לא הטיה);</li>
+      <li><b>עוגנים</b> — הליכוד מכה את סקריו ב־2.30 מנדטים בממוצע (רקורד ה"גֶוַואלד": &lrm;+8.4 ב־2015, &lrm;+6.7 באפריל 2019, ≈0 בשאר); המפלגה המובילה בסקרים מפגרת אחריהם ב־1.74;</li>
+      <li><b>זעזוע שיורי לרשימה</b> — 1.83 + 0.044·מנדטים, עם מכפיל ×1.35 לרשימות במחזור ראשון (נמדד: סקריהן הסופיים של מפלגות חדשות אינם מוטים אך רועשים ב־35% יותר) וכיול אלקטורט־נאמן לרשימות ותיקות מגזריות — ש״ס מעולם לא החטיאה את סקריה הסופיים כלפי מטה ביותר מחצי מנדט בשמונה מחזורים, ולכן ש״ס, יהדות התורה וישראל ביתנו מכווצות לתנודתיות ההיסטורית המדודה שלהן (חיץ חדשנות ×1.5) במקום לרוחב המאוחד;</li>
+      <li><b>שבירת מתלבטים מדודה</b> — מאגר המתלבטים של 2026 (12% מן הבוחרים) נוטה 55/16 לעבר מועמד שאינו נתניהו (N12/מדגם), היפוך סימן של השבירה המאוחרת ההיסטורית; מיושמת בחצי משקל (כ־1.6 מנדטים, ס״ת השווה לממוצע) לעבר מחנה השינוי, עם גילוי מלא של השבריריות: הנטייה נשענת על כ־60 משיבים ונמדדת מחדש עם כל סקר ודאות חדש;</li>
+      <li><b>צימוד הגוואלד</b> — העברה בסכום אפס (ס״ת 2.0 מנדטים) בין הליכוד ללווייני הגוש שלו, כך שמיתות סף של לוויינים מתרחשות יחד עם זינוקי ליכוד, כפי שקרה ב־2015 וב־2019.</li>
+    </ul>`},
+ {t:"תשתית הקלפיות", b:`<p>מתחת למספרים הארציים שוכנת רשומת הקלפיות: תוצאות רשמיות של ועדת הבחירות לכל יישוב בחמש מערכות הבחירות 2019–2022, מותאמות לשושלות המפלגות דרך אותיות הקלפי של כל מחזור (מאומתות מול הסיכומים הארציים, כך שאות שגויה אינה יכולה להרעיל את הפאנל בשקט). היישובים מתקבצים למגזרים פוליטיים לפי פרופילי ההצבעה שלהם עצמם — הגאוגרפיה האלקטורלית הישראלית מופרדת דיה כדי שהפרופילים ישחזרו את המגזרים כמעט במדויק, יחד עם ההשתתפות המדודה שלהם (חרדים 76%, ערבים 54%, ציונות דתית 76%). שלושה תוצרים מזינים את התחזית: <b>טבלת פוסט־סטרטיפיקציה</b> המקצה את מנדטיה החזויים של כל רשימת 2026 למגזרים שמהם היא שואבת — ודרכה <b>קיטום קיבולת</b> של הפוסטריור: סימולציות שבהן הרשימות הערביות חורגות יחד ממה שהשתתפות המגזר הערבי מסוגלת פיזית להטיל (כ־16.3% מהקולות), או שבהן ש״ס+יהדות התורה נופלות מתחת לרצפה הדמוגרפית החרדית (כ־6.7%), נחתכות אל הגבול האפשרי (כל תנאי גזם כ־1.5% מהדגימות); <b>מתאם מדוד של &lrm;+0.92 בין גאויות המגזר החרדי והערבי</b> (שניהם מגזרי מכונת־השתתפות), המכווץ ל־0.5 בשל ארבעה מעברים נצפים בלבד ומחווט אל זעזועי המשפחה של ההיטל, שנדגמו קודם לכן באופן בלתי־תלוי; ובסיס היישובים למנוע ליל הבחירות. תוצאה שלילית כנה מתועדת לצדם: תנודות ברמת המגזר <em>אינן</em> עוברות בין זוגות בחירות (השמטת־מחזור: תנודה ארצית אחידה חוזה יישובים בשגיאה ממוצעת של 1.20 נק׳, והוספת תנודות מגזר היסטוריות נותנת 1.31) — סיפור המגזר של כל מחזור הוא שלו בלבד, ולכן שכבת המגזרים מזינה מתאמים וקיבולת, לא תנודות נקודתיות. משקלי השושלות מכוילים בנוסף מול מטריצות מעבר־הקולות המדודות ברמת הקלפי של פרויקט הקוד הפתוח <a href="https://kolot-nodedim.netlify.app/" rel="noopener">קולות נודדים</a> (אמידה קמורה מאולצת על כ־7,000 קלפיות מותאמות לכל זוג בחירות, R²&rlm; 0.89 עבור 2021→2022), שאומדני הלכידות שלו לכל מפלגה משחזרים באופן בלתי־תלוי את סדר האלקטורטים הנאמנים של המודל הזה — ושמדידות פיזור־היתר שלו (קלפי של 340 מצביעים מתנהגת כ־30–120 הגרלות בלתי־תלויות בלבד) יניעו את מודל הרעש של מנוע ליל הבחירות באוקטובר.</p>`},
+ {t:"אחוז החסימה ובדר–עופר", b:`<p>כל וקטור קולות מדומה עובר את מבחן אחוז החסימה של 3.25%, ואז המנדטים מוקצים בשיטה הישראלית האמיתית: <b>בדר–עופר</b> (ד'הונדט על עודפים), כאשר הסכמי עודפים חתומים מטופלים כרשימות משותפות בשלב העודפים — שווי מדוד של &lrm;+0.5 עד &lrm;+0.9 מנדטים צפויים לכל זוג. קולותיהן של רשימות שנפלו מתחלקים מחדש בין השורדות — וכך גוש יכול להפסיד בקולות ולנצח בכנסת.</p>`},
+ {t:"תערובת אירועי ההרשמה", b:`<p>עד סגירת הרשימות ב־9 בספטמבר, התחזית דוגמת <b>אירועי הרשמה בכל סימולציה</b>: קיפולי המיקרו־רשימות במרכז וזנב האיחוד ארדן–גנץ, כל אחד עם וקטורי העברה ממוסמכים. אירועים שהוכרעו קורסים החוצה מן התערובת עם התרחשותם: הצטרפות סגלוביץ׳ לרע״ם הפכה רשמית ב־1 בספטמבר, והגוש הטכני סמוטריץ׳–פייגלין (הציונות הדתית–זהות) ב־2 בספטמבר — שניהם כעת ודאויות בכל דגימה. התחזית המתפרסמת היא התערובת; ההשפעה השולית של כל אירוע נקראת מאותן דגימות עצמן. ביום ההגשה התערובת קורסת אל התצורה האמיתית והמודל מותאם מחדש.</p>`},
+ {t:"עץ ההרכבה", b:`<p>מנדטים אינם כוח. כל כנסת מדומה עוברת רצף הרכבה מפורש — גוש נתניהו תחילה, אחר כך רוב מרכז, מרכז+רע״ם, עריקה חרדית, מיעוט בהימנעויות, הפרת התחייבות, אחדות, בחירות חוזרות — עם פרמטרים התנהגותיים הנגזרים ממחקר מוסדי: מי באמת חותם בשם כל מפלגה (מועצת חכמי התורה של ש״ס, שתי המועצות של יהדות התורה, עצמאותה של רע״ם שלאחר ביטול וטו השורא), הרקורד הנגלה של כל מנהיג בצמתים קודמים (התהפוכות של ליברמן, הפרת ההתחייבות של בנט ב־2021, גנץ ב־2020), ושיעורי בסיס היסטוריים (בחירות חוזרות באו אחרי 2 מתוך 4 מבואות סתומים; אחדות פתרה את מחציתם; שום ממשלת מיעוט מעולם לא הושבעה מיומה הראשון). עמך ישראל של וינטר מקודדת כ<b>קשיחות אנטי־אייזנקוט</b>, לא כחברת גוש ימין גנרית: היא יכולה להצטרף לממשלת מרכז בראשות בנט, אך כמעט לעולם לא לממשלה בראשות אייזנקוט.</p>`},
+ {t:"הקצאת ראשות הממשלה", b:`<p>בתוך כל קואליציה מנצחת, ראשות הממשלה מוקצית בהסתברויות מודעות־רוטציה (בנט היה ראש ממשלה עם 7 מנדטים ב־2021 — היגיון "המפלגה הגדולה" אינו היגיון ישראלי), המתהפכות כאשר ביחד עוקפת את ישר בדגימה. השכבה הזאת נבחנה מול שמונה תוצאות ההרכבה האמיתיות מאז 2009: לוג־לוס ממוצע &lrm;−0.92, והיא מעניקה לתוצאה שהתממשה את ההסתברות הגבוהה ביותר בחמישה משמונה מחזורים.</p>`},
+ {t:"פריורים של מומחים, מתועדים", b:`<p>כל מספר שיפוטי מתחקה אל דוסייה כתוב שחובר משישה שולחנות מחקר: שיעורי בסיס של הרכבת קואליציות 1992–2022, רשומת שגיאות הסקרים הישראלית המלאה 1996–2022, מוסדות מפלגתיים וביוגרפיות מנהיגים, סוציולוגיה אלקטורלית וזרימות קולות, שוקי חיזוי ויסודות מבניים, ודינמיקת הישורת האחרונה. היכן שהשולחנות חלקו על המודל — המודל זז; היכן שהשוק חולק על המודל (פולימרקט מתמחר את אייזנקוט כראש הממשלה בכ־50%; אנחנו אומרים 33%), הדוסייה מתעד מדוע אנו עומדים על שלנו: שוקי הפרלמנט־התלוי והממשלה־עד־דצמבר של אותו שוק עצמו אינם עקביים עם מספר הכותרת שלו.</p>`},
+ {t:"אימות: המודל בוחן את עצמו", b:`<p>כל שכבה מותנית במבחן־עבר של שמונה מחזורים (2013–2022, בהשמטת־מחזור; 2009 זורע את הפריורים). המתקן מריץ מחדש את הצינור המלא כפי שהיה ערב כל מערכת בחירות ומדרג אותו מול התוצאה האמיתית. שינויים שנכשלו במבחן נדחו ותועדו — ובהם מודול דינמיקת ישורת אחרונה והתאמה היררכית רב־מחזורית שנותרו מחקריים בלבד.</p>
+    <div class="tblwrap"><table>
+      <thead><tr><th>מדד (מבחן־עבר, 8 מחזורים)</th><th class="num">הצינור הפשוט</th><th class="num">המודל הבייסיאני</th></tr></thead>
+      <tbody id="valTbl"></tbody>
+    </table></div>
+    <p class="note" style="margin-top:10px">שני המודלים מחלקים ביניהם את העבודה: הצינור המשוקלל הפשוט קובע את המנדטים המרכזיים (דיוק נקודתי טוב יותר); המודל הבייסיאני מחזיק בכל רווח והסתברות (כיול טוב יותר, והוא מנצח במבחן החי של 2026: 0.80 מול 1.09 מנדטים חציוניים). מיזוג נבחן ונדחה — השגיאות מתואמות ב־0.93, ולכן מיזוג אינו קונה דבר.</p>`}];
+
+function trStatic(){
+  if (!HEB_MODE) return;
+  const walk = sel => document.querySelectorAll(sel).forEach(el => {
+    const k = el.textContent.trim().replace(/\s+/g," ");
+    if (HE_STATIC[k]) el.textContent = HE_STATIC[k];
+  });
+  ["h1","h2","h3",".eyebrow",".tile .k",".tile .v2 small",".brand small",".contents .ct",
+   ".annexhead b",".annexhead a",".seg button"].forEach(walk);
+  document.querySelector(".brand").childNodes[0].textContent = HE_STATIC["The Knesset Model"];
+  const SF = document.querySelector(".standfirst"); if (SF) SF.innerHTML = HE_LEDE.standfirst;
+  const LK = {seats:"seats",threshold:"threshold",blocdist:"blocdist",builder:"builder",
+              formation:"formation",ground:"ground",pollsters:"pollsters",method:"method"};
+  for (const id in LK){ const el = document.querySelector("#"+id+" .lede");
+    if (el && HE_LEDE[id]) el.innerHTML = HE_LEDE[id]; }
+  const dl = document.getElementById("dateline");
+  dl.innerHTML = 'התחזית נכונה ל־<b class="mono" id="asof"></b><br>הבחירות: יום שלישי, <b>27 באוקטובר 2026</b> · בעוד <span class="mono" id="tminus"></span> ימים';
+  document.querySelectorAll(".hero .tile .s").forEach((el,i)=>{
+    el.innerHTML = [ 'מושבו של סגלוביץ׳ נספר בשניהם',
+      'הגוש מגיע ל־61 · ממוצע <span class="mono" id="tNbMean"></span> מושבים',
+      'אין רוב לאף צד, כשרע״ם נספרת עם מחנה השינוי'][i] || el.innerHTML; });
+  document.querySelectorAll(".chapters .chapter").forEach((ch, i) => {
+    const c = HE_CH[i]; if (!c) return;
+    const h = ch.querySelector("h3"); h.textContent = c.t;
+    [...ch.children].forEach(n => { if (n !== h) n.remove(); });
+    h.insertAdjacentHTML("afterend", c.b);
+  });
+  const ft = document.querySelector("footer .wrap");
+  if (ft) ft.innerHTML = '<div>מודל הכנסת · תחזית ציבורית רשומה־מראש · המתודולוגיה הוקפאה לפני יום הבחירות<br>נתוני סקרים: ארכיוני ויקיפדיה + הגשות לוועדת הבחירות המרכזית · התאמה: PyMC/NUTS · כל הפרמטרים ממוסמכים במאגר</div>'
+    + '<div style="text-align:left">נבנה על ידי עידו הרלינג<br><span class="mono" id="foot-asof"></span></div>';
+  // the rewrites above recreated these spans - refill from the data
+  document.getElementById("asof").textContent = D.asof;
+  document.getElementById("tminus").textContent =
+    Math.round((new Date("2026-10-27") - new Date(D.asof)) / 864e5);
+  const nbm = document.getElementById("tNbMean");
+  if (nbm) nbm.textContent = D.blocs.nb_mean.toFixed(1);
+  const fa = document.getElementById("foot-asof");
+  if (fa) fa.textContent = "נתונים נכונים ל־" + D.asof;
+  const ARIA = {hemi:"חצי־גורן של 120 מושבי הכנסת החזויים",
+    hist:"התפלגות סכומי המושבים הגושיים בסימולציות",
+    cbHist:"התפלגות המושבים של הקואליציה שנבחרה"};
+  for (const id in ARIA){ const el = document.getElementById(id);
+    if (el) el.setAttribute("aria-label", ARIA[id]); }
+}
+
+const $ = s => document.querySelector(s);
+const BLOC = {"Likud":"nb","Shas":"nb","United Torah Judaism":"nb","Otzma Yehudit":"nb",
+ "Religious Zionist Party":"nb","Amcha Yisrael":"nb","Noam":"nb","Zehut":"nb",
+ "The Haredi Public":"nb",
+ "Yashar":"anti","Bennett 2026 + Yesh Atid":"anti","The Democrats":"anti","Yisrael Beytenu":"anti",
+ "Zionist Home – The Reservists":"anti","Blue and White":"anti","Unity":"anti","New Economic Party":"anti",
+ "Balad + Hadash-Ta'al":"arab","Ra'am":"arab","Balad (alone)":"arab"};
+// Ballot letters (otiyot): registered CEC letters where a party owns
+// them; for new lists (marked *) a realistic unused combination is shown
+// provisionally until the CEC assigns real ones at registration.
+const HEB = {"Likud":"מחל","Yashar":"יר","Bennett 2026 + Yesh Atid":"פה","The Democrats":"אמת",
+ "Yisrael Beytenu":"ל","Shas":"שס","United Torah Judaism":"ג","Otzma Yehudit":"עצ",
+ "Balad + Hadash-Ta'al":"ום","Ra'am":"עם","Amcha Yisrael":"נר","Religious Zionist Party":"ט",
+ "Zionist Home – The Reservists":"בר","Blue and White":"כן","Unity":"אח","Zehut":"ז","Noam":"נע",
+ "New Economic Party":"כל"};
+const HEB_PROV = new Set(["Yashar","Amcha Yisrael","Zionist Home – The Reservists","Unity",
+ "New Economic Party","Noam","Otzma Yehudit"]);
+const heb = n => (HEB[n]||"") + (HEB_PROV.has(n) ? "<i style=\"font-style:normal;font-size:9px;vertical-align:top\">*</i>" : "");
+const SHORT = {"Bennett 2026 + Yesh Atid":"Together (Bennett–Lapid)","Balad + Hadash-Ta'al":"Joint List",
+ "Zionist Home – The Reservists":"Zionist Home–Reservists","Religious Zionist Party":"Religious Zionism–Zehut",
+ "United Torah Judaism":"UTJ"};
+const nm = n => HEB_MODE ? (HE_PARTY[n] || n) : (SHORT[n] || n);
+const PVAR = {"Likud":"likud","Yashar":"yashar","Bennett 2026 + Yesh Atid":"together",
+ "The Democrats":"dems","Yisrael Beytenu":"yb","Shas":"shas","United Torah Judaism":"utj",
+ "Otzma Yehudit":"otzma","Religious Zionist Party":"rzp","Ra'am":"raam",
+ "Balad + Hadash-Ta'al":"jl","Balad (alone)":"jl","Zionist Home – The Reservists":"zh",
+ "Blue and White":"bw","Amcha Yisrael":"amcha","Unity":"unity"};
+const pc = n => PVAR[n] ? `--pc:var(--p-${PVAR[n]})` : "--pc:var(--dead)";
+const BLOC_NAME = HEB_MODE ? HE_MISC.BLOC : {anti:"Anti-Netanyahu bloc", arab:"Arab lists", nb:"Netanyahu bloc"};
+const css = v => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+const pct = x => (x*100).toFixed(1).replace(/\.0$/,"") + "%";
+
+/* header */
+$("#asof").textContent = D.asof; $("#foot-asof").textContent = "data as of " + D.asof;
+$("#tminus").textContent = Math.round((new Date("2026-10-27") - new Date(D.asof)) / 864e5);
+$("#tNb").textContent = pct(D.blocs.nb); $("#tAnti").textContent = pct(D.blocs.anti);
+$("#tAntiRaam").textContent = pct(D.blocs.antiRaam);
+$("#tNeither").textContent = pct(D.blocs.neither); $("#tNbMean").textContent = D.blocs.nb_mean.toFixed(1);
+
+/* language toggle + static translation */
+trStatic();
+(function(){
+  const b = document.getElementById("langbtn");
+  b.textContent = HEB_MODE ? "English" : "עברית";
+  b.addEventListener("click", () => {
+    try { localStorage.setItem("klang", HEB_MODE ? "en" : "he"); } catch(e){}
+    location.reload();
+  });
+  // theme toggle: explicit light/dark, persisted; no reload needed
+  // (every color on the page resolves through the theme tokens)
+  const tb = document.getElementById("themebtn");
+  const effective = () => document.documentElement.dataset.theme
+    || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+  const label = () => { tb.textContent = effective() === "dark"
+    ? (HEB_MODE ? "מצב בהיר" : "Light") : (HEB_MODE ? "מצב כהה" : "Dark"); };
+  try { const saved = localStorage.getItem("ktheme");
+    if (saved === "light" || saved === "dark")
+      document.documentElement.dataset.theme = saved; } catch(e){}
+  label();
+  tb.addEventListener("click", () => {
+    const next = effective() === "dark" ? "light" : "dark";
+    document.documentElement.dataset.theme = next;
+    document.documentElement.style.colorScheme = next;
+    try { localStorage.setItem("ktheme", next); } catch(e){}
+    label();
+  });
+})();
+
+/* tooltip */
+const tip = $("#tip");
+function showTip(ev, html){ tip.innerHTML = html; tip.style.opacity = 1;
+  const x = Math.min(ev.clientX + 14, innerWidth - 280); tip.style.left = x + "px";
+  tip.style.top = (ev.clientY + 16) + "px"; }
+function hideTip(){ tip.style.opacity = 0; }
+
+/* ---- hemicycle ---- */
+(function(){
+  const seated = D.parties.filter(p => p.seats > 0);
+  const order = ["anti","arab","nb"];
+  seated.sort((a,b)=>{ const d = order.indexOf(BLOC[a.name]) - order.indexOf(BLOC[b.name]);
+    return d !== 0 ? d : b.seats - a.seats; });
+  const rows = 5, inner = 108, outer = 268, cx = 360, cy = 288, N = 120;
+  const radii = []; for (let r=0;r<rows;r++) radii.push(inner + (outer-inner)*r/(rows-1));
+  const total = radii.reduce((a,b)=>a+b,0);
+  let counts = radii.map(r => Math.round(N*r/total));
+  let diff = N - counts.reduce((a,b)=>a+b,0); counts[rows-1] += diff;
+  const pts = [];
+  counts.forEach((c,ri)=>{ for(let i=0;i<c;i++){
+    const th = Math.PI - Math.PI*( c===1 ? .5 : i/(c-1) );
+    pts.push({x: cx + radii[ri]*Math.cos(th), y: cy - radii[ri]*Math.sin(th),
+              th: th, ri}); }});
+  pts.sort((a,b)=> b.th - a.th || a.ri - b.ri);
+  const svg = $("#hemi"); let k = 0; let html = "";
+  const blocOf = [];
+  seated.forEach(p => { for(let s=0;s<p.seats;s++){ const q = pts[k++];
+    const arab = BLOC[p.name]==="arab";
+    blocOf.push(BLOC[p.name]);
+    html += arab
+      ? `<circle cx="${q.x.toFixed(1)}" cy="${q.y.toFixed(1)}" r="5.6" fill="none"
+         stroke="var(--p-${PVAR[p.name]||"unity"})" stroke-width="3.4" data-p="${p.name}"/>`
+      : `<circle cx="${q.x.toFixed(1)}" cy="${q.y.toFixed(1)}" r="7.2"
+         fill="var(--p-${PVAR[p.name]||"unity"})" data-p="${p.name}"/>`; }});
+  // bloc brackets: arcs outside the outer row spanning each camp's seats
+  const blocCounts = {};
+  const seatAngle = i => Math.PI * (1 - i/(N-1));   // approx angular position
+  let start = 0;
+  const R = outer + 16;
+  ["anti","arab","nb"].forEach(b => {
+    const cnt = blocOf.filter(x=>x===b).length;
+    if (!cnt) return;
+    const a0 = Math.PI - Math.PI*(start+0.5)/N, a1 = Math.PI - Math.PI*(start+cnt-0.5)/N;
+    const x0 = cx+R*Math.cos(a0), y0 = cy-R*Math.sin(a0);
+    const x1 = cx+R*Math.cos(a1), y1 = cy-R*Math.sin(a1);
+    html += `<path d="M ${x0.toFixed(1)} ${y0.toFixed(1)} A ${R} ${R} 0 0 1 ${x1.toFixed(1)} ${y1.toFixed(1)}"
+       fill="none" stroke="var(--bloc-${b})" stroke-width="3"/>`;
+    blocCounts[b] = cnt;
+    start += cnt;
+  });
+  html += `<text x="${cx}" y="244" text-anchor="middle"
+     style="font:700 42px 'IBM Plex Sans',sans-serif;fill:var(--ink)">120</text>
+   <text x="${cx}" y="267" text-anchor="middle">${HEB_MODE?"מושבים · אחוז חסימה 3.25%":"seats · 3.25% threshold"}</text>`;
+  svg.innerHTML = html;
+  const strip = document.getElementById("hemiBlocs");
+  if (strip) strip.innerHTML = ["anti","arab","nb"].map(b =>
+    `<span><i style="display:inline-block;width:10px;height:10px;background:var(--bloc-${b});margin-right:7px;vertical-align:-1px"></i>${BLOC_NAME[b].toUpperCase()} · ${blocCounts[b]||0}</span>`).join("");
+  svg.addEventListener("pointermove", ev => { const t = ev.target;
+    if (t.dataset && t.dataset.p){ const p = D.parties.find(x=>x.name===t.dataset.p);
+      showTip(ev, HEB_MODE ? `<b>${nm(p.name)}</b> · ${BLOC_NAME[BLOC[p.name]]}<br><span class="mono">${p.seats}</span> מושבים · 90% <span class="mono">[${p.lo}–${p.hi}]</span> · מעבר <span class="mono">${pct(p.p_pass)}</span>` : `<b>${nm(p.name)}</b> · ${BLOC_NAME[BLOC[p.name]]}<br><span class="mono">${p.seats} seats · 90% [${p.lo}–${p.hi}] · pass ${pct(p.p_pass)}</span>`);
+    } else hideTip(); });
+  svg.addEventListener("pointerleave", hideTip);
+  $("#hemiLegend").innerHTML = seated.map(p=>
+    `<span><i class="sw" style="background:var(--p-${PVAR[p.name]||"unity"})${BLOC[p.name]==="arab"?";background:transparent;border:2.5px solid var(--p-"+(PVAR[p.name]||"unity")+")":""}"></i>${nm(p.name)}</span>`).join("");
+})();
+
+/* ---- interval chart ---- */
+(function(){
+  const MAX = 38, box = $("#ivl");
+  const X = v => (v/MAX*100);
+  let html = "";
+  ["anti","arab","nb"].forEach(bloc=>{
+    const grp = D.parties.filter(p=>p.hi>0 && BLOC[p.name]===bloc);
+    if (!grp.length) return;
+    const tot = grp.reduce((a,p)=>a+p.seats,0);
+    html += `<div class="blochead"><i class="sw" style="background:var(--bloc-${bloc==="arab"?"arab":bloc});width:10px;height:10px;display:inline-block;margin-right:8px;vertical-align:-1px"></i>${BLOC_NAME[bloc]} · ${tot} ${HEB_MODE?"מושבים":"seats"}</div>`;
+    grp.forEach(p=>{
+      const dead = p.seats===0, st = dead ? "--pc:var(--dead)" : pc(p.name);
+      html += `<div class="r" data-p="${p.name}" tabindex="0">
+        <div class="nm"><span class="petek${dead?" dead":""}" style="${pc(p.name)}">${heb(p.name)}</span><span class="t">${nm(p.name)}</span></div>
+        <div class="trackwrap">
+          ${[0,10,20,30].map(g=>`<span class="gridline" style="left:${X(g)}%"></span>`).join("")}
+          <span class="band" style="${st};left:${X(p.lo)}%;width:${Math.max(X(p.hi-p.lo),1.4)}%"></span>
+          <span class="dot${dead?" dead":""}" style="${pc(p.name)};left:${X(dead?p.mean:p.seats)}%"></span>
+        </div>
+        <div class="val"><b>${p.seats}</b> <span style="color:var(--muted)">[${p.lo}–${p.hi}]</span></div>
+      </div>`;
+    });
+  });
+  box.innerHTML = html;
+  $("#ivlAxis").innerHTML = [0,10,20,30].map(g=>`<span style="left:${X(g)}%">${g}</span>`).join("");
+  box.addEventListener("pointermove", ev => {
+    const r = ev.target.closest(".r"); if(!r) return hideTip();
+    const p = D.parties.find(x=>x.name===r.dataset.p);
+    showTip(ev, HEB_MODE ? `<b>${nm(p.name)}</b><br>מרכזי <span class="mono">${p.seats}</span> · ממוצע <span class="mono">${p.mean}</span> · 90% <span class="mono">[${p.lo}–${p.hi}]</span><br>מעבר <span class="mono">${pct(p.p_pass)}</span>` : `<b>${nm(p.name)}</b><br><span class="mono">central ${p.seats} · mean ${p.mean} · 90% [${p.lo}–${p.hi}]<br>P(pass) ${pct(p.p_pass)}${p.p_largest>=.01?` · P(largest) ${pct(p.p_largest)}`:""}</span>`);
+  });
+  box.addEventListener("pointerleave", hideTip);
+})();
+
+/* ---- threshold bars ---- */
+(function(){
+  const zone = D.parties.filter(p=>p.p_pass>0.02 && p.p_pass<0.97)
+    .sort((a,b)=>b.p_pass-a.p_pass);
+  const NW = HEB_MODE
+    ? {3:"שלוש",4:"ארבע",5:"חמש",6:"שש",7:"שבע",8:"שמונה",9:"תשע"}
+    : {3:"Three",4:"Four",5:"Five",6:"Six",7:"Seven",8:"Eight",9:"Nine"};
+  const h2 = document.getElementById("thrH2");
+  if (h2 && NW[zone.length]) h2.textContent = HEB_MODE
+    ? NW[zone.length] + " רשימות חיות או מתות על 3.25%"
+    : NW[zone.length] + " lists live or die at 3.25%";
+  $("#thr").innerHTML = zone.map(p=>`<div class="row">
+    <div class="nm" style="display:flex;gap:9px;align-items:center;font-weight:600;font-size:14.5px">
+      <span class="petek" style="${pc(p.name)}">${heb(p.name)}</span>${nm(p.name)}</div>
+    <div class="bar"><i style="${pc(p.name)};width:${p.p_pass*100}%"></i></div>
+    <div class="pct">${pct(p.p_pass)}</div></div>`).join("");
+})();
+
+/* ---- the pollsters' "Others" column, itemized ---- */
+(function(){
+  if (!D.sub || !D.sub.length) return;
+  const t = HEB_MODE ? {
+    h: 'עמודת ה"אחרים", בפירוט מלא',
+    note: 'הרשימות שהסוקרים מקבצים תחת "אחרים". התמיכה נמדדת מפירוטי ההערות של הסוקרים המפרסמים אחוזים מלאים (לזר, מדגם, פילבר, דיירקט פולס); הפס מציג את המרחק מאחוז החסימה של 3.25%. כל הרשימות האלה נכללות בכל סימולציה — כקול מבוזבז, אלא אם יחצו את הסף. זהות עוברת לרשימת הציונות הדתית–זהות במסגרת המיזוג הרשמי.',
+  } : {
+    h: 'The "Others" column, fully itemized',
+    note: 'The lists pollsters fold into an "Others" column. Support is measured from the itemized footnotes of the firms that publish full percentages (Lazar, Midgam, Filber, Direct Polls); each bar shows distance to the 3.25% threshold. Every one of these lists is carried in every simulation — as wasted votes unless it crosses. Zehut\u2019s share transfers to Religious Zionism\u2013Zehut under the official merger.',
+  };
+  $("#thr").insertAdjacentHTML("afterend",
+    `<div style="margin-top:26px;border-top:2px solid var(--ink);padding-top:14px">
+      <div style="font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;margin-bottom:10px">${t.h}</div>
+      <div class="thr">` + D.sub.map(p => `<div class="row">
+        <div class="nm" style="font-weight:600;font-size:13.5px">${nm(p.name)}</div>
+        <div class="bar" style="height:8px"><i style="${pc(p.name)};width:${Math.min(p.share/3.25*100,100)}%"></i></div>
+        <div class="pct">${p.share.toFixed(1)}%</div></div>`).join("") +
+      `</div><p class="note" style="margin-top:10px;max-width:68ch">${t.note}</p></div>`);
+})();
+
+/* ---- draws machinery ---- */
+const COLS = D.drawCols, DR = D.draws;
+const colIdx = {}; COLS.forEach((c,i)=>colIdx[c]=i);
+function sums(cols){ const idx = cols.map(c=>colIdx[c]).filter(i=>i!=null);
+  return DR.map(row => idx.reduce((a,i)=>a+row[i],0)); }
+const NBCOLS = COLS.filter(c=>BLOC[c]==="nb"), ANTICOLS = COLS.filter(c=>BLOC[c]==="anti");
+
+function drawHist(svgSel, data, color, h, capSel, label){
+  const svg = $(svgSel), W = 940, Hh = h, padL = 30, padB = 24;
+  const lo = 30, hi = 80;
+  const bins = new Array(hi-lo+1).fill(0);
+  data.forEach(v => { const b = Math.min(Math.max(v,lo),hi)-lo; bins[b]++; });
+  const bw = (W-padL-10)/(hi-lo+1), max = Math.max(...bins);
+  let html = "";
+  for(let g=0; g<=1; g++){}
+  bins.forEach((c,i)=>{ const v = lo+i, bh = c/max*(Hh-padB-14);
+    html += `<rect x="${(padL+i*bw+1).toFixed(1)}" y="${(Hh-padB-bh).toFixed(1)}"
+      width="${(bw-2).toFixed(1)}" height="${bh.toFixed(1)}" rx="0"
+      fill="${v>=61?`var(--${color})`:"var(--dead)"}" fill-opacity="${v>=61?1:.55}"
+      data-v="${v}" data-c="${c}"/>`; });
+  const x61 = padL + (61-lo)*bw;
+  html += `<line x1="${x61}" y1="6" x2="${x61}" y2="${Hh-padB}" stroke="var(--ink)" stroke-width="1.4" stroke-dasharray="4 3"/>
+    <text x="${x61+5}" y="16" style="fill:var(--ink);font-weight:600">61</text>`;
+  for(let v=Math.ceil(lo/10)*10; v<=hi; v+=10)
+    html += `<text x="${padL+(v-lo)*bw+bw/2}" y="${Hh-6}" text-anchor="middle">${v}</text>`;
+  svg.innerHTML = html;
+  const share = data.filter(v=>v>=61).length/data.length;
+  if (capSel) $(capSel).textContent = HEB_MODE ? `${label}: ממוצע ${(data.reduce((a,b)=>a+b,0)/data.length).toFixed(1)} מושבים · סיכוי ל־61+ = ${pct(share)}` : `${label}: mean ${(data.reduce((a,b)=>a+b,0)/data.length).toFixed(1)} seats · P(≥61) = ${pct(share)} in these draws`;
+  svg.onpointermove = ev => { const t = ev.target;
+    if (t.dataset && t.dataset.v) showTip(ev, HEB_MODE ? `<span class="mono">${t.dataset.v}</span> מושבים · <span class="mono">${t.dataset.c}/${data.length}</span> סימולציות` : `<span class="mono">${t.dataset.v} seats · ${t.dataset.c} of ${data.length} simulations</span>`);
+    else hideTip(); };
+  svg.onpointerleave = hideTip;
+  return share;
+}
+let blocSums = {nb: sums(NBCOLS), anti: sums(ANTICOLS)};
+function renderBlocHist(which){
+  drawHist("#hist", blocSums[which], which==="nb"?"bloc-nb":"bloc-anti", 260, "#histCap",
+    which==="nb" ? (HEB_MODE?"גוש נתניהו":"Netanyahu bloc") : (HEB_MODE?"המחנה נגד נתניהו (בלי הרשימות הערביות)":"Anti-Netanyahu bloc (without Arab lists)"));
+  $("#segNb").setAttribute("aria-pressed", which==="nb");
+  $("#segAnti").setAttribute("aria-pressed", which==="anti");
+}
+$("#segNb").onclick = ()=>renderBlocHist("nb");
+$("#segAnti").onclick = ()=>renderBlocHist("anti");
+renderBlocHist("anti");
+
+/* ---- coalition builder ---- */
+(function(){
+  const sel = new Set();
+  const partiesForChips = D.parties.filter(p=>p.hi>0 && colIdx[p.name]!=null);
+  const chipBox = $("#chips");
+  chipBox.innerHTML = partiesForChips.map(p=>`<button class="chip" data-p="${p.name}" aria-pressed="false">
+    <span class="petek${p.seats===0?" dead":""}" style="${pc(p.name)}">${heb(p.name)}</span>${nm(p.name)}
+    <span class="mono">${p.seats}</span></button>`).join("");
+  const PN = HEB_MODE ? {"Netanyahu bloc":"גוש נתניהו","Eisenkot centre":"מרכז אייזנקוט",
+    "Centre + Ra'am":"מרכז + רע״ם","Centre + UTJ":"מרכז + יהדות התורה",
+    "Unity (Likud + centre)":"אחדות (ליכוד + מרכז)","Clear":"ניקוי"} : {};
+  const PRESETS = [
+    ["Netanyahu bloc", ["Likud","Shas","United Torah Judaism","Otzma Yehudit","Amcha Yisrael","Religious Zionist Party"]],
+    ["Eisenkot centre", ["Yashar","Bennett 2026 + Yesh Atid","The Democrats","Yisrael Beytenu"]],
+    ["Centre + Ra'am", ["Yashar","Bennett 2026 + Yesh Atid","The Democrats","Yisrael Beytenu","Ra'am"]],
+    ["Centre + UTJ", ["Yashar","Bennett 2026 + Yesh Atid","The Democrats","Yisrael Beytenu","United Torah Judaism"]],
+    ["Unity (Likud + centre)", ["Likud","Yashar","Bennett 2026 + Yesh Atid","Yisrael Beytenu"]],
+    ["Clear", []]];
+  $("#presets").innerHTML = PRESETS.map((p,i)=>`<button data-i="${i}">${PN[p[0]]||p[0]}</button>`).join("");
+  function update(){
+    chipBox.querySelectorAll(".chip").forEach(c=>c.setAttribute("aria-pressed", sel.has(c.dataset.p)));
+    const cols = [...sel];
+    if (!cols.length){ $("#cbMean").textContent="0"; $("#cbP61").textContent="—";
+      $("#cbRange").textContent="—"; $("#cbHist").innerHTML=""; return; }
+    const s = sums(cols); s.sort((a,b)=>a-b);
+    const mean = s.reduce((a,b)=>a+b,0)/s.length;
+    const p61 = s.filter(v=>v>=61).length/s.length;
+    $("#cbMean").textContent = mean.toFixed(1);
+    $("#cbP61").textContent = pct(p61);
+    $("#cbP61").style.color = p61>=.5 ? "var(--accent)" : "var(--ink)";
+    $("#cbRange").textContent = s[Math.floor(s.length*.05)] + "–" + s[Math.floor(s.length*.95)];
+    drawHist("#cbHist", s, "accent", 130, null, "");
+  }
+  chipBox.addEventListener("click", ev=>{ const c = ev.target.closest(".chip"); if(!c) return;
+    sel.has(c.dataset.p) ? sel.delete(c.dataset.p) : sel.add(c.dataset.p); update(); });
+  $("#presets").addEventListener("click", ev=>{ const b = ev.target.closest("button"); if(!b) return;
+    sel.clear(); PRESETS[+b.dataset.i][1].forEach(p=>sel.add(p)); update(); });
+  sel.clear(); PRESETS[1][1].forEach(p=>sel.add(p)); update();
+})();
+
+/* ---- formation + PM ---- */
+(function(){
+    const OC = o => HEB_MODE ? (HE_MISC.OUTCOME[o] || o) : o.replace("->","→");
+  const f = [...D.formation].sort((a,b)=>b.p-a.p);
+  const mx = f[0].p;
+  $("#outc").innerHTML = f.map(o=>`<div class="row">
+    <div class="lab">${OC(o.o)}</div>
+    <div class="bar"><i style="width:${o.p/mx*100}%;--pc:${o.o.includes("Repeat")?"var(--dead)":o.o.includes("Unity")?"var(--ink2)":o.o.startsWith("Netanyahu")?"var(--bloc-nb)":"var(--bloc-anti)"}"></i></div>
+    <div class="pct mono" style="text-align:right;font-size:13.5px">${pct(o.p)}</div></div>`).join("");
+  const pmx = D.pm[0][1];
+  $("#pm").innerHTML = D.pm.map(([n,p,lo,hi])=>`<div class="row">
+    <div class="lab">${HEB_MODE?(HE_MISC.PM[n]||HE_MISC.PM[n.replace("Rotation / Likud successor","Rotation / Likud successor")]||n):n}</div>
+    <div class="bar" style="overflow:visible"><i style="width:${p/pmx*100}%;--pc:${n.includes("repeat")?"var(--dead)":n.includes("Netanyahu")||n.includes("Likud successor")?"var(--bloc-nb)":"var(--bloc-anti)"}"></i>${
+      lo!=null?`<span style="position:absolute;top:4px;height:4px;background:var(--ink2);opacity:.55;left:${lo/pmx*100}%;width:${Math.max((hi-lo)/pmx*100,1)}%"></span>`:""}</div>
+    <div class="pct mono" style="text-align:right;font-size:13.5px">${pct(p)}</div></div>`).join("");
+})();
+
+/* ---- ground game ---- */
+(function(){
+  if (!D.kalpi) return;
+  const SEC = {centre_left:"Centre-left localities", mixed:"Mixed cities",
+    secular_right:"Secular-right localities", arab:"Arab localities",
+    haredi:"Haredi localities", religious_zionist:"Religious-Zionist localities",
+    russian_leaning:"Druze & YB strongholds"};
+  const SECDESC = HEB_MODE ? {
+    centre_left:"גוש דן, חיפה והמישור החופי", mixed:"ערים גדולות שבהן הגושים צמודים",
+    secular_right:"פריפריית הדרום וערי הפיתוח", arab:"יישובי הגליל, המשולש והנגב",
+    haredi:"הערים החרדיות — ההצבעה הממושמעת בישראל",
+    religious_zionist:"יישובי ההתיישבות מעבר לקו הירוק",
+    russian_leaning:"כפרים דרוזיים וצ׳רקסיים, מעוזי ישראל ביתנו"
+  } : {
+    centre_left:"The Tel Aviv metropolis, Haifa and the coastal plain",
+    mixed:"Large cities where the blocs run close",
+    secular_right:"The southern periphery and development towns",
+    arab:"Arab towns of the Galilee, the Triangle and the Negev",
+    haredi:"The haredi cities — the most disciplined vote in the country",
+    religious_zionist:"Settlement communities beyond the Green Line",
+    russian_leaning:"Druze and Circassian villages with strong Yisrael Beytenu machines"};
+  const CITY_EN = {"תל אביב יפו":"Tel Aviv–Yafo","חיפה":"Haifa","ראשון לציון":"Rishon LeZion",
+    "רמת גן":"Ramat Gan","רחובות":"Rehovot","ירושלים":"Jerusalem","פתח תקווה":"Petah Tikva",
+    "נתניה":"Netanya","אשדוד":"Ashdod","חולון":"Holon","באר שבע":"Be'er Sheva",
+    "אשקלון":"Ashkelon","לוד":"Lod","רמלה":"Ramla","אילת":"Eilat","נצרת":"Nazareth",
+    "רהט":"Rahat","אום אלפחם":"Umm al-Fahm","שפרעם":"Shefa-'Amr","טייבה":"Tayibe",
+    "בני ברק":"Bnei Brak","בית שמש":"Beit Shemesh","מודיעין עילית":"Modi'in Illit",
+    "ביתר עילית":"Beitar Illit","אלעד":"El'ad","אפרת":"Efrat","קרני שומרון":"Karnei Shomron",
+    "קרית ארבע":"Kiryat Arba","כפר חבד":"Kfar Chabad","גולס":"Julis",
+    "יאנוחגת":"Yanuh-Jat","פקיעין בוקייעה":"Peki'in"};
+  const cityName = n => HEB_MODE ? n : (CITY_EN[n] || n);
+  const S2 = s => HEB_MODE ? (HE_MISC.SECTOR[s] || s) : s;
+  const fmtM = n => n >= 1e6 ? (n/1e6).toFixed(2)+"M" : Math.round(n/1e3)+"k";
+  let html = "";
+  const maxElig = Math.max(...D.kalpi.map(k=>k.eligible));
+  D.kalpi.forEach(k=>{
+    const tot = Object.values(k.seats).reduce((a,b)=>a+b,0);
+    if (tot < 0.4) return;
+    const parts = Object.entries(k.seats).sort((a,b)=>b[1]-a[1]);
+    const widthPct = Math.max(k.eligible/maxElig*100, 7);
+    const exs = (k.examples||[]).map(cityName).join(" · ");
+    html += `<div style="padding:13px 0;border-bottom:1px solid var(--line)">
+      <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px;align-items:baseline">
+        <div><span style="font-weight:700;font-size:14.5px">${S2(SEC[k.sector]||k.sector)}</span>
+          <span style="font-size:12.5px;color:var(--muted)"> — ${SECDESC[k.sector]||""}</span></div>
+        <div class="mono" style="font-size:12px;color:var(--muted)">${fmtM(k.eligible)} ${HEB_MODE?"בעלי זכות":"eligible"} · ${HEB_MODE?"הצבעה":"turnout"} ${(k.turnout*100).toFixed(0)}% · ${tot.toFixed(1)} ${HEB_MODE?"מושבים":"seats"}</div>
+      </div>
+      ${exs?`<div style="font-size:12px;color:var(--muted);margin-top:2px">${HEB_MODE?"למשל":"e.g."} ${exs}</div>`:""}
+      <div style="display:flex;height:22px;overflow:hidden;margin-top:8px;gap:2px;width:${widthPct}%;min-width:120px" role="img"
+        aria-label="${S2(SEC[k.sector])}">`;
+    parts.forEach(([name,v])=>{
+      html += `<div data-g="${name}" data-v="${v}" data-s="${S2(SEC[k.sector]||k.sector)}"
+        style="width:${v/tot*100}%;background:var(--p-${PVAR[name]||"unity"});min-width:3px"></div>`;
+    });
+    html += `</div></div>`;
+  });
+  html += `<p class="note" style="margin-top:12px">Sectors from clustering 1,221 localities'
+    official 2022 vote profiles; each bar allocates a list's projected seats to the sectors its
+    electorate lives in, via lineage weights calibrated on measured kalpi-level voter flows.
+    Bar length is proportional to each sector's eligible voters; segment widths split the
+    sector's projected seats by list. Hover any segment.</p>`;
+  const box = $("#ground-rows");
+  box.innerHTML = html;
+  box.addEventListener("pointermove", ev=>{
+    const t = ev.target;
+    if (t.dataset && t.dataset.g)
+      showTip(ev, `<b>${nm(t.dataset.g)}</b><br><span class="mono">${(+t.dataset.v).toFixed(1)} ${HEB_MODE?"מושבים מ־":"seats from "}${t.dataset.s}</span>`);
+    else hideTip();
+  });
+  box.addEventListener("pointerleave", hideTip);
+})();
+
+/* ---- house effects ---- */
+(function(){
+  const h = D.house, mx = Math.max(...h.map(x=>Math.abs(x.he)));
+  $("#he").innerHTML = h.map(x=>{
+    const w = Math.abs(x.he)/mx*50;
+    const side = x.he>=0 ? `left:50%;width:${w}%` : `left:${50-w}%;width:${w}%`;
+    const nm = HEB_MODE ? (HE_FIRM[x.p] || x.p) : x.p;
+    return `<div class="row"><div style="font-weight:600">${nm} <span class="mono" style="color:var(--muted);font-weight:400">n=${x.n}</span></div>
+    <div class="cell"><span class="zero"></span><i style="${side};background:var(--accent);position:absolute;top:0;height:14px"></i></div>
+    <div class="mono" style="text-align:right;font-size:13px">${x.he>0?"+":"\u2212"}${Math.abs(x.he).toFixed(1)}</div></div>`;
+  }).join("") + (HEB_MODE
+   ? `<p class="note" style="margin-top:12px">אפקט הבית על גוש נתניהו, במנדטים, מול ממוצע השמטת־הסוקר־עצמו, מחזור 2026: עמודות מימין לקו נוטות לעבר גוש נתניהו, עמודות משמאלו — ממנו והלאה. פילבר ודיירקט פולס — שני חצאיה של פירמה אחת לשעבר — ממודלים כקול מתואם אחד.</p>`
+   : `<p class="note" style="margin-top:12px">House effect on the Netanyahu bloc, in seats,
+  vs the leave-own-pollster-out average, 2026 cycle: bars right of the line lean toward the
+  Netanyahu bloc, bars left of it lean away. Filber and Direct Polls — two halves of one former firm — are modeled as a
+  single correlated voice.</p>`);
+})();
+
+/* ---- readability: chapter accordion + contents + scrollspy + btt ---- */
+(function(){
+  const chs = [...document.querySelectorAll(".chapters .chapter")];
+  const deck = [];
+  chs.forEach((ch, i) => {
+    ch.id = ch.id || "ch-" + (i + 1);
+    const h = ch.querySelector("h3");
+    const body = document.createElement("div");
+    body.className = "chbody";
+    [...ch.childNodes].forEach(n => { if (n !== h) body.appendChild(n); });
+    ch.appendChild(body);
+    const tgl = document.createElement("span");
+    tgl.className = "tgl"; tgl.setAttribute("aria-hidden", "true");
+    h.appendChild(tgl);
+    h.setAttribute("role", "button");
+    h.setAttribute("tabindex", "0");
+    const set = open => { ch.classList.toggle("closed", !open);
+      tgl.textContent = open ? "−" : "+";
+      h.setAttribute("aria-expanded", open); };
+    set(i === 0);
+    const flip = () => set(ch.classList.contains("closed"));
+    h.addEventListener("click", flip);
+    h.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " "){ e.preventDefault(); flip(); }});
+    deck.push({ id: ch.id, title: h.childNodes[0].textContent.trim() });
+  });
+  if (chs.length){
+    const box = document.createElement("nav");
+    box.className = "contents"; box.setAttribute("aria-label", "Methodology contents");
+    box.innerHTML = '<div class="ct">Contents</div><ol>' + deck.map((d, i) =>
+      `<li><a href="#${d.id}"><span class="fol">${String(i+1).padStart(2,"0")}</span>${d.title}</a></li>`).join("") + "</ol>";
+    chs[0].parentNode.insertBefore(box, chs[0]);
+    box.addEventListener("click", ev => {
+      const a = ev.target.closest("a"); if (!a) return;
+      const ch = document.querySelector(a.getAttribute("href"));
+      if (ch){ ch.classList.remove("closed");
+        const h = ch.querySelector("h3"); const tg = h.querySelector(".tgl");
+        if (tg) tg.textContent = "−"; h.setAttribute("aria-expanded", "true"); }
+    });
+  }
+  // open a chapter when deep-linked (e.g. the Track record nav link)
+  const openHash = () => { if (!/^#[A-Za-z][\w-]*$/.test(location.hash)) return;
+    const el = document.querySelector(location.hash);
+    if (el && el.classList && el.classList.contains("chapter")) el.classList.remove("closed"); };
+  addEventListener("hashchange", openHash); openHash();
+
+  // two-page router + per-view nav + scrollspy
+  const NAVS = HEB_MODE ? {
+    report: [["#seats","מושבים"],["#threshold","על הסף"],["#blocdist","חשבון הגושים"],
+             ["#builder","בונה הקואליציות"],["#formation","הרכבה ורוה״מ"],
+             ["#ground","משחק הקרקע"],["#page:method","מתודולוגיה ←"]],
+    method: [["#page:report","→ לתחזית"],["#pollsters","תעשיית הסקרים"],
+             ["#method","הצינור"],["#validation","ביצועי עבר"]]
+  } : {
+    report: [["#seats","Seats"],["#threshold","The knife-edges"],["#blocdist","Bloc math"],
+             ["#builder","Coalition builder"],["#formation","Formation & PM"],
+             ["#ground","Ground game"],["#page:method","Methodology →"]],
+    method: [["#page:report","← Forecast"],["#pollsters","The polling industry"],
+             ["#method","The pipeline"],["#validation","Track record"]]
+  };
+  const navwrap = document.getElementById("navwrap");
+  function renderNav(){
+    const v = document.body.dataset.view || "report";
+    navwrap.innerHTML = NAVS[v].map(([h,l]) => `<a href="${h}">${l}</a>`).join("");
+  }
+  function setView(v, anchor){
+    document.body.dataset.view = v;
+    renderNav();
+    if (anchor){ const el = document.querySelector(anchor);
+      if (el){ if (el.classList && el.classList.contains("chapter")) el.classList.remove("closed");
+        el.scrollIntoView(); return; } }
+    scrollTo(0, 0);
+  }
+  navwrap.addEventListener("click", ev => {
+    const a = ev.target.closest("a"); if (!a) return;
+    const h = a.getAttribute("href");
+    if (h.startsWith("#page:")){ ev.preventDefault(); setView(h.slice(6)); }
+    else if (h === "#validation" || h === "#method" || h === "#pollsters"){
+      ev.preventDefault(); setView("method", h); }
+  });
+  const back = document.getElementById("backToReport");
+  if (back) back.addEventListener("click", ev => { ev.preventDefault(); setView("report"); });
+  // initial view: deep links into the annex open it
+  const h0 = location.hash;
+  if (h0 === "#method" || h0 === "#pollsters" || h0 === "#validation" || /^#ch-/.test(h0))
+    setView("method", h0); else setView("report");
+  const spy = () => {
+    const links = [...navwrap.querySelectorAll("a")];
+    const targets = links.map(a => { const h = a.getAttribute("href");
+      return h.startsWith("#page:") ? null : document.querySelector(h); });
+    let cur = null;
+    targets.forEach(s => { if (s && s.getBoundingClientRect().top < 120) cur = s; });
+    links.forEach((a, i) => a.classList.toggle("active", !!cur && targets[i] === cur));
+  };
+  addEventListener("scroll", spy, { passive: true }); spy();
+
+  // back to top
+  const btt = document.getElementById("btt");
+  addEventListener("scroll", () => btt.classList.toggle("show", scrollY > 1600), { passive: true });
+  btt.addEventListener("click", () => scrollTo({ top: 0,
+    behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" }));
+})();
+
+/* ---- validation table ---- */
+(function(){
+  const v = D.val;
+  const VL = HEB_MODE
+   ? ["שגיאת מנדטים מוחלטת ממוצעת לרשימה","כיסוי רווחי 90% (יעד 90%)","ציון ברייר לאחוז החסימה",
+      "מבחן חי 2026 (14 יום, שגיאה חציונית)","תפקיד בתחזית המתפרסמת","מנדטים מרכזיים","רווחים והסתברויות"]
+   : ["Mean absolute seat error per list","90% interval coverage (target 90%)","Threshold Brier score",
+      "Live 2026 holdout (14-day, median |error|)","Role in the published forecast","central seats","intervals &amp; probabilities"];
+  $("#valTbl").innerHTML = `
+   <tr><td>${VL[0]}</td><td class="mono">${v.simple.mae}</td><td class="mono">${v.bayes.mae}</td></tr>
+   <tr><td>${VL[1]}</td><td class="mono">${v.simple.cov}%</td><td class="mono">${v.bayes.cov}%</td></tr>
+   <tr><td>${VL[2]}</td><td class="mono">${v.simple.brier}</td><td class="mono">${v.bayes.brier}</td></tr>
+   <tr><td>${VL[3]}</td><td class="mono">1.09</td><td class="mono">0.72</td></tr>
+   <tr><td>${VL[4]}</td><td>${VL[5]}</td><td>${VL[6]}</td></tr>`;
+})();
+</script>

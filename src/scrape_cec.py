@@ -70,7 +70,19 @@ PARTY_KEYWORDS = [
     ("בל\"ד", "balad+hadash_taal"),
     ("עוצמה", "otzma"),
     ("הציונות הדתית", "rzp"), ("הדתית הציונות", "rzp"),
+    # Filings spell Ra'am several ways: רע"ם (final mem), רע"מ (regular mem),
+    # unquoted רעמ, plus scrambled-RTL reversals; the leader's name is the
+    # most robust anchor and appears intact in every variant seen.
     ("רע\"ם", "raam"), ("ם\"רע", "raam"), ("רעם", "raam"),
+    ("רע\"מ", "raam"), ("מ\"ער", "raam"), ("רעמ", "raam"),
+    ("עבאס", "raam"), ("מנסור", "raam"),
+    # Hadash-Ta'al lines often drop the gershayim ("חדש תעל"); Tibi/Jabareen
+    # anchor those.
+    ("תע\"ל", "balad+hadash_taal"), ("ל\"עת", "balad+hadash_taal"),
+    ("תעל", "balad+hadash_taal"),
+    ("ג׳בארין", "balad+hadash_taal"), ("ג'בארין", "balad+hadash_taal"),
+    # Some filings label YB only by its leader.
+    ("ליברמן", "yisrael_beytenu"),
     ("ציוני בית", "zionist_home"), ("בית ציוני", "zionist_home"),
     ("הנדל", "zionist_home"), ("טרופר", "zionist_home"),
     ("כחול", "blue_white"), ("גנץ", "blue_white"),

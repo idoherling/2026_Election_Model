@@ -232,11 +232,21 @@ LIST_SHOCK_SLOPE = _P["resid_slope"]
 # A list with no polls in its final weeks has left the race by election day.
 WITHDRAWN_WEEKS = 5
 
-# Prior-only micro-lists: (share mean, share sd) from their electoral history.
+# Prior-only micro-lists: (share mean, share sd). These are the lists the
+# polling page folds into its "Others" column; the shares below are MEASURED
+# from the footnote itemizations attached to Others (Jul-Aug 2026 polls,
+# Lazar/Midgam/Filber/Direct Polls/Maagar), superseding the electoral-history
+# priors used before pollsters started itemizing. Together they carry the
+# ~4-5% Others mass so the named-list simplex is not silently inflated.
 MICRO_PRIORS = {
-    "zehut": (0.012, 0.007),   # 2.74% in Apr 2019, dormant since
-    "noam": (0.007, 0.004),    # never cleared 1% alone
-    "nep": (0.008, 0.005),     # ~1% in 2021
+    "zehut": (0.016, 0.004),           # 1.1-2.1% under Others, Aug 2026
+    "noam": (0.004, 0.003),            # 0.3% Filber 27 Aug; "<1%" elsewhere
+    "nep": (0.013, 0.004),             # 1.0-1.7% under Others, Aug 2026
+    "haredi_public": (0.013, 0.004),   # 1.2-1.5% Jul-Aug 2026 (Midgam 31 Aug: 1.2%)
+    "israel_first": (0.004, 0.003),    # 0.3-0.6% Aug 2026 (Lazar/Direct Polls)
+    "fiery_youth": (0.004, 0.003),     # 0.4% Lazar 27 Aug
+    "fourth_quarter": (0.002, 0.002),  # 0.5% once (18 Jun); not itemized since
+    "el_dagel": (0.002, 0.002),        # 0.4% once (18 Jun); not itemized since
 }
 
 

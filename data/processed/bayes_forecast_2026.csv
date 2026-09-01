@@ -1,19 +1,24 @@
 list,bloc,mean,p05,p50,p95,p_pass,p_largest,asof
-Yashar,Anti-Netanyahu bloc,25.5,18,25,34,1.0,0.516,2026-08-31
-Likud,Netanyahu bloc,25.1,17,25,33,1.0,0.478,2026-08-31
-Bennett 2026 + Yesh Atid,Anti-Netanyahu bloc,12.3,6,12,19,0.979,0.005,2026-08-31
-The Democrats,Anti-Netanyahu bloc,9.5,5,10,14,0.976,0.0,2026-08-31
-Yisrael Beytenu,Anti-Netanyahu bloc,8.1,4,8,12,0.952,0.0,2026-08-31
-United Torah Judaism,Netanyahu bloc,7.8,5,8,10,0.992,0.0,2026-08-31
-Shas,Netanyahu bloc,7.5,5,8,11,0.979,0.0,2026-08-31
-Otzma Yehudit,Netanyahu bloc,6.8,0,7,12,0.88,0.0,2026-08-31
-Balad + Hadash-Ta'al,Arab parties,6.0,0,6,11,0.815,0.0,2026-08-31
-Ra'am,Arab parties,3.4,0,4,8,0.573,0.0,2026-08-31
-Religious Zionist Party,Netanyahu bloc,3.0,0,4,8,0.518,0.0,2026-08-31
-Amcha Yisrael,Netanyahu bloc,2.3,0,0,9,0.334,0.001,2026-08-31
-Zionist Home – The Reservists,Anti-Netanyahu bloc,1.5,0,0,7,0.274,0.0,2026-08-31
-Unity,Anti-Netanyahu bloc,0.6,0,0,5,0.114,0.0,2026-08-31
-Blue and White,Anti-Netanyahu bloc,0.4,0,0,4,0.089,0.0,2026-08-31
-Zehut,unknown,0.0,0,0,0,0.001,0.0,2026-08-31
+Yashar,Anti-Netanyahu bloc,25.7,18,25,34,1.0,0.517,2026-08-31
+Likud,Netanyahu bloc,25.3,17,25,33,1.0,0.478,2026-08-31
+Bennett 2026 + Yesh Atid,Anti-Netanyahu bloc,12.4,6,12,20,0.978,0.005,2026-08-31
+The Democrats,Anti-Netanyahu bloc,9.5,5,10,14,0.973,0.0,2026-08-31
+Yisrael Beytenu,Anti-Netanyahu bloc,8.1,0,8,13,0.941,0.0,2026-08-31
+United Torah Judaism,Netanyahu bloc,7.9,5,8,11,0.989,0.0,2026-08-31
+Shas,Netanyahu bloc,7.5,5,8,11,0.965,0.0,2026-08-31
+Otzma Yehudit,Netanyahu bloc,6.8,0,7,12,0.865,0.0,2026-08-31
+Balad + Hadash-Ta'al,Arab parties,6.0,0,6,11,0.793,0.0,2026-08-31
+Ra'am,Arab parties,3.3,0,4,8,0.544,0.0,2026-08-31
+Religious Zionist Party,Netanyahu bloc,2.9,0,0,8,0.489,0.0,2026-08-31
+Amcha Yisrael,Netanyahu bloc,2.3,0,0,10,0.32,0.0,2026-08-31
+Zionist Home – The Reservists,Anti-Netanyahu bloc,1.5,0,0,7,0.254,0.0,2026-08-31
+Unity,Anti-Netanyahu bloc,0.5,0,0,5,0.1,0.0,2026-08-31
+Blue and White,Anti-Netanyahu bloc,0.4,0,0,4,0.076,0.0,2026-08-31
+Zehut,unknown,0.0,0,0,0,0.0,0.0,2026-08-31
 Noam,Netanyahu bloc,0.0,0,0,0,0.0,0.0,2026-08-31
 New Economic Party,unknown,0.0,0,0,0,0.0,0.0,2026-08-31
+The Haredi Public,Netanyahu bloc,0.0,0,0,0,0.0,0.0,2026-08-31
+Israel First,unknown,0.0,0,0,0,0.0,0.0,2026-08-31
+Fiery Youth,unknown,0.0,0,0,0,0.0,0.0,2026-08-31
+The Fourth Quarter,unknown,0.0,0,0,0,0.0,0.0,2026-08-31
+El HaDegel,unknown,0.0,0,0,0,0.0,0.0,2026-08-31
