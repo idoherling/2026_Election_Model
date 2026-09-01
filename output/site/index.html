@@ -14,7 +14,7 @@
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23f4f1ec'/%3E%3Crect width='64' height='10' fill='%23161512'/%3E%3Cpath d='M10 56a22 22 0 0 1 44 0z' fill='%230038b8'/%3E%3C/svg%3E">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"The Knesset Model","description":"Pre-registered probabilistic forecast of Israel's 2026 Knesset election","inLanguage":["en","he"],"author":{"@type":"Person","name":"Ido Herling"}}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Sans+Hebrew:wght@500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Sans+Hebrew:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
 <style>
 /* ============================================================
    Design system: mid-century American corporate modernism.
@@ -66,7 +66,8 @@ html[dir="rtl"] .mono,html[dir="rtl"] .val,html[dir="rtl"] .pct,
 html[dir="rtl"] .axis,html[dir="rtl"] .eq{direction:ltr;unicode-bidi:isolate}
 html[dir="rtl"] .dateline{text-align:left}
 html[dir="rtl"] .chapter ul{padding-left:0;padding-right:22px}
-html[dir="rtl"] #hemiBlocs{direction:ltr}
+html[dir="rtl"] #hemiBlocs{direction:ltr;letter-spacing:.03em}
+html[dir="rtl"] .dateline{letter-spacing:.02em}
 html[dir="rtl"] .trackwrap,html[dir="rtl"] .bar,html[dir="rtl"] .he .cell{direction:ltr}
 html[dir="rtl"] .eyebrow{letter-spacing:.02em}
 html[dir="rtl"] .brand small,html[dir="rtl"] .nav a,html[dir="rtl"] .tile .k,
@@ -77,7 +78,7 @@ body{margin:0;background:var(--paper);color:var(--ink);
 .wrap{max-width:1080px;margin:0 auto;padding:0 24px}
 h1,h2,h3{font-family:"IBM Plex Sans","Helvetica Neue",Arial,sans-serif;
   line-height:1.04;letter-spacing:-.015em;text-wrap:balance;margin:0}
-.mono{font-family:"IBM Plex Mono",ui-monospace,monospace;font-variant-numeric:tabular-nums}
+.mono{font-family:"IBM Plex Mono","IBM Plex Sans Hebrew",ui-monospace,monospace;font-variant-numeric:tabular-nums}
 a{color:var(--ink);text-decoration-color:var(--accent);text-decoration-thickness:2px;text-underline-offset:3px}
 :focus-visible{outline:3px solid var(--accent);outline-offset:2px}
 
@@ -87,7 +88,7 @@ a{color:var(--ink);text-decoration-color:var(--accent);text-decoration-thickness
 .brand{font-weight:700;font-size:22px;letter-spacing:-.01em;text-transform:uppercase}
 .brand small{font-weight:500;font-size:11px;color:var(--ink2);
   text-transform:uppercase;letter-spacing:.22em;display:block;margin-top:4px}
-.dateline{font-family:"IBM Plex Mono",monospace;font-size:11.5px;color:var(--ink2);
+.dateline{font-family:"IBM Plex Mono","IBM Plex Sans Hebrew",monospace;font-size:11.5px;color:var(--ink2);
   text-align:right;text-transform:uppercase;letter-spacing:.06em}
 .dateline b{color:var(--ink);font-weight:600}
 
@@ -104,7 +105,7 @@ a{color:var(--ink);text-decoration-color:var(--accent);text-decoration-thickness
 .cover{background:var(--field);color:var(--field-ink);margin:0 -24px;
   padding:52px 24px 44px;position:relative;overflow:hidden}
 @media(min-width:1128px){.cover{margin:0}}
-.cover-meta{display:flex;gap:26px;flex-wrap:wrap;font-family:"IBM Plex Mono",monospace;
+.cover-meta{display:flex;gap:26px;flex-wrap:wrap;font-family:"IBM Plex Mono","IBM Plex Sans Hebrew",monospace;
   font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;margin-bottom:26px}
 .cover-year{position:absolute;right:-8px;bottom:-56px;font-weight:700;
   font-size:clamp(180px,30vw,340px);line-height:1;letter-spacing:-.05em;
@@ -167,22 +168,22 @@ section h2{font-size:clamp(26px,3.8vw,40px);font-weight:700;margin:10px 0 12px;l
 .blochead{grid-column:1/-1;font-size:11px;font-weight:700;letter-spacing:.18em;
   text-transform:uppercase;color:var(--ink);padding:16px 0 5px;border-bottom:2px solid var(--ink)}
 .blochead:first-child{padding-top:0}
-.ivl .val{font-family:"IBM Plex Mono",monospace;font-size:13.5px;font-variant-numeric:tabular-nums;
+.ivl .val{font-family:"IBM Plex Mono","IBM Plex Sans Hebrew",monospace;font-size:13.5px;font-variant-numeric:tabular-nums;
   text-align:right;color:var(--ink2)}
 .ivl .val b{color:var(--ink);font-weight:600}
 .gridline{position:absolute;top:0;bottom:0;width:1px;background:var(--ink);opacity:.15}
 .axisrow{display:grid;grid-template-columns:minmax(150px,220px) 1fr 88px;gap:0 14px}
-.axis{position:relative;height:20px;font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--muted)}
+.axis{position:relative;height:20px;font-family:"IBM Plex Mono","IBM Plex Sans Hebrew",monospace;font-size:11px;color:var(--muted)}
 .axis span{position:absolute;transform:translateX(-50%)}
 
 /* threshold bars */
 .thr .row{display:grid;grid-template-columns:minmax(150px,230px) 1fr 64px;gap:14px;align-items:center;padding:6px 0}
 .bar{height:14px;background:var(--hit);position:relative;overflow:hidden}
 .bar i{position:absolute;inset:0 auto 0 0;background:var(--pc,var(--accent))}
-.thr .pct{font-family:"IBM Plex Mono",monospace;font-size:13px;text-align:right;color:var(--ink2)}
+.thr .pct{font-family:"IBM Plex Mono","IBM Plex Sans Hebrew",monospace;font-size:13px;text-align:right;color:var(--ink2)}
 
 /* histogram + builder */
-svg text{font-family:"IBM Plex Mono",monospace;fill:var(--muted);font-size:11.5px}
+svg text{font-family:"IBM Plex Mono","IBM Plex Sans Hebrew",monospace;fill:var(--muted);font-size:11.5px}
 .seg{display:inline-flex;border:2px solid var(--ink)}
 .seg button{border:0;background:var(--paper);color:var(--ink);font:600 12.5px "IBM Plex Sans";
   padding:8px 16px;cursor:pointer;text-transform:uppercase;letter-spacing:.08em}
@@ -234,10 +235,10 @@ body[data-view="method"] .annexhead{display:block;padding:34px 0 0}
 .contents li{break-inside:avoid;border-bottom:1px solid var(--hit);padding:5px 0}
 .contents a{display:flex;gap:12px;align-items:baseline;text-decoration:none;font-size:14px;font-weight:600}
 .contents a:hover{color:var(--accent)}
-.contents a .fol{font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--muted);font-weight:600;min-width:20px}
+.contents a .fol{font-family:"IBM Plex Mono","IBM Plex Sans Hebrew",monospace;font-size:12px;color:var(--muted);font-weight:600;min-width:20px}
 .chapter > h3{cursor:pointer;user-select:none}
 .chapter > h3:hover{color:var(--accent)}
-.chapter > h3 .tgl{margin-inline-start:auto;font-family:"IBM Plex Mono",monospace;font-size:20px;font-weight:500;color:var(--muted)}
+.chapter > h3 .tgl{margin-inline-start:auto;font-family:"IBM Plex Mono","IBM Plex Sans Hebrew",monospace;font-size:20px;font-weight:500;color:var(--muted)}
 .chapter.closed .chbody{display:none}
 .chbody{padding-top:2px}
 .nav a.active{background:var(--ink);color:var(--paper)}
@@ -262,7 +263,7 @@ body[data-view="method"] .annexhead{display:block;padding:34px 0 0}
 .chapter p b,.chapter li b{color:var(--ink)}
 .chapter ul{max-width:70ch;color:var(--ink2);padding-left:22px}
 .chapter li{margin:6px 0}
-.eq{font-family:"IBM Plex Mono",monospace;font-size:13.5px;background:var(--hit);
+.eq{font-family:"IBM Plex Mono","IBM Plex Sans Hebrew",monospace;font-size:13.5px;background:var(--hit);
   border-left:4px solid var(--ink);padding:14px 18px;margin:14px 0;
   overflow-x:auto;color:var(--ink);line-height:1.9}
 .eq i{color:var(--accent);font-style:normal}
@@ -320,7 +321,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
   </div>
   <figure class="card" style="padding:26px 22px 14px">
     <div id="hemiBlocs" style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;
-      font:700 11px 'IBM Plex Mono',monospace;letter-spacing:.14em;color:var(--ink2);
+      font:700 11px 'IBM Plex Mono','IBM Plex Sans Hebrew',monospace;letter-spacing:.14em;color:var(--ink2);
       border-bottom:1px solid var(--hit);padding-bottom:10px;margin-bottom:6px"></div>
     <svg id="hemi" viewBox="0 -6 720 312" role="img" aria-label="Hemicycle of 120 projected Knesset seats" style="width:100%;height:auto;display:block"></svg>
     <div class="legend" id="hemiLegend"></div>
@@ -926,6 +927,10 @@ function hideTip(){ tip.style.opacity = 0; }
   if (h2 && NW[zone.length]) h2.textContent = HEB_MODE
     ? NW[zone.length] + " רשימות חיות או מתות על 3.25%"
     : NW[zone.length] + " lists live or die at 3.25%";
+  $("#thr").insertAdjacentHTML("beforebegin",
+    `<div style="font-size:12.5px;color:var(--muted);margin:-4px 0 10px">${HEB_MODE
+      ? "האחוז לצד כל רשימה: ההסתברות שתחצה את אחוז החסימה של 3.25%"
+      : "The percentage beside each list: its probability of clearing the 3.25% threshold"}</div>`);
   $("#thr").innerHTML = zone.map(p=>`<div class="row">
     <div class="nm" style="display:flex;gap:9px;align-items:center;font-weight:600;font-size:14.5px">
       <span class="petek" style="${pc(p.name)}">${heb(p.name)}</span>${nm(p.name)}</div>
@@ -1007,15 +1012,23 @@ renderBlocHist("anti");
   chipBox.innerHTML = partiesForChips.map(p=>`<button class="chip" data-p="${p.name}" aria-pressed="false">
     <span class="petek${p.seats===0?" dead":""}" style="${pc(p.name)}">${heb(p.name)}</span>${nm(p.name)}
     <span class="mono">${p.seats}</span></button>`).join("");
-  const PN = HEB_MODE ? {"Netanyahu bloc":"גוש נתניהו","Eisenkot centre":"מרכז אייזנקוט",
-    "Centre + Ra'am":"מרכז + רע״ם","Centre + UTJ":"מרכז + יהדות התורה",
+  const PN = HEB_MODE ? {"Netanyahu bloc":"גוש נתניהו","Change coalition":"קואליציית השינוי",
+    "Change + Ra'am":"שינוי + רע״ם","Change + UTJ":"שינוי + יהדות התורה",
+    "Change + Amcha":"שינוי + עמך ישראל","Centre + Joint List":"מרכז + הרשימה המשותפת",
     "Unity (Likud + centre)":"אחדות (ליכוד + מרכז)","Clear":"ניקוי"} : {};
+  // One button per formation-tree outcome that reduces to a fixed party sum
+  // (the scenario board's taxonomy). "Netanyahu + defector" has no fixed
+  // party set and "repeat election" is not a coalition, so neither gets one.
+  const CENTRE = ["Yashar","Bennett 2026 + Yesh Atid","The Democrats","Yisrael Beytenu",
+    "Zionist Home – The Reservists","Blue and White","Unity"];
   const PRESETS = [
     ["Netanyahu bloc", ["Likud","Shas","United Torah Judaism","Otzma Yehudit","Amcha Yisrael","Religious Zionist Party"]],
-    ["Eisenkot centre", ["Yashar","Bennett 2026 + Yesh Atid","The Democrats","Yisrael Beytenu"]],
-    ["Centre + Ra'am", ["Yashar","Bennett 2026 + Yesh Atid","The Democrats","Yisrael Beytenu","Ra'am"]],
-    ["Centre + UTJ", ["Yashar","Bennett 2026 + Yesh Atid","The Democrats","Yisrael Beytenu","United Torah Judaism"]],
-    ["Unity (Likud + centre)", ["Likud","Yashar","Bennett 2026 + Yesh Atid","Yisrael Beytenu"]],
+    ["Change coalition", CENTRE],
+    ["Change + Ra'am", [...CENTRE, "Ra'am"]],
+    ["Change + UTJ", [...CENTRE, "United Torah Judaism"]],
+    ["Change + Amcha", [...CENTRE, "Amcha Yisrael"]],
+    ["Centre + Joint List", [...CENTRE, "Balad + Hadash-Ta'al"]],
+    ["Unity (Likud + centre)", ["Likud","Yashar","Bennett 2026 + Yesh Atid","Yisrael Beytenu","Blue and White"]],
     ["Clear", []]];
   $("#presets").innerHTML = PRESETS.map((p,i)=>`<button data-i="${i}">${PN[p[0]]||p[0]}</button>`).join("");
   function update(){
@@ -1034,9 +1047,12 @@ renderBlocHist("anti");
   }
   chipBox.addEventListener("click", ev=>{ const c = ev.target.closest(".chip"); if(!c) return;
     sel.has(c.dataset.p) ? sel.delete(c.dataset.p) : sel.add(c.dataset.p); update(); });
+  const AVAIL = new Set(partiesForChips.map(p=>p.name));
+  const applyPreset = i => { sel.clear();
+    PRESETS[i][1].forEach(p=>{ if (AVAIL.has(p)) sel.add(p); }); update(); };
   $("#presets").addEventListener("click", ev=>{ const b = ev.target.closest("button"); if(!b) return;
-    sel.clear(); PRESETS[+b.dataset.i][1].forEach(p=>sel.add(p)); update(); });
-  sel.clear(); PRESETS[1][1].forEach(p=>sel.add(p)); update();
+    applyPreset(+b.dataset.i); });
+  applyPreset(1);
 })();
 
 /* ---- formation + PM ---- */
