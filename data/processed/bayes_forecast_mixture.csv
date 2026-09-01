@@ -1,20 +1,20 @@
 list,mean,p05,p95,p_pass
-Yashar,26.6,19,35,1.0
-Likud,26.3,18,35,1.0
-Bennett 2026 + Yesh Atid,12.5,6,19,0.982
-The Democrats,9.3,5,14,0.973
-Yisrael Beytenu,8.2,4,12,0.962
-United Torah Judaism,7.7,5,10,0.994
-Shas,7.4,5,10,0.979
-Otzma Yehudit,7.0,0,12,0.886
-Balad + Hadash-Ta'al,5.5,0,11,0.78
-Ra'am,3.9,0,9,0.651
-Amcha Yisrael,2.3,0,9,0.341
-Religious Zionist Party,2.0,0,8,0.317
-Zionist Home – The Reservists,0.8,0,6,0.148
-Blue and White,0.3,0,4,0.066
+Yashar,26.3,19,34,1.0
+Likud,24.7,17,33,1.0
+Bennett 2026 + Yesh Atid,12.4,6,19,0.984
+The Democrats,9.2,5,14,0.975
+Yisrael Beytenu,8.1,4,12,0.961
+United Torah Judaism,7.6,5,10,0.994
+Shas,7.3,5,10,0.978
+Otzma Yehudit,6.6,0,11,0.878
+Balad + Hadash-Ta'al,5.8,0,11,0.82
+Religious Zionist Party,4.6,0,9,0.721
+Ra'am,3.9,0,8,0.656
+Amcha Yisrael,2.2,0,9,0.336
+Zionist Home – The Reservists,0.9,0,6,0.157
+Blue and White,0.3,0,4,0.062
 Unity,0.1,0,0,0.014
-Zehut,0.0,0,0,0.002
+Zehut,0.0,0,0,0.0
 Noam,0.0,0,0,0.0
 New Economic Party,0.0,0,0,0.0
 Balad (alone),0.0,0,0,0.0

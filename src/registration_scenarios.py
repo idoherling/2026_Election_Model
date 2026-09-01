@@ -124,7 +124,17 @@ FOLD_TRANSFER = {
 # poll stream predates the announcement; ZERO IT at the Sept 9 refit,
 # when post-announcement polls price the joint slate directly (keeping
 # both would double-count).
-RESOLVED: dict = {"segalovitz_joins_raam": True}
+# 2026-09-02: Smotrich-Feiglin (RZP-Zehut) technical bloc announced
+# OFFICIAL — rzp_fate resolves to merge_zehut: RZP absorbs Zehut's
+# share at MERGE_RETENTION and the combined list faces the 3.25%
+# threshold on its own in every draw. Post-announcement polls of the
+# joint list will absorb this directly; at that point the retention
+# transfer should be retired the same way as the Segalovitz boost.
+# 2026-09-02 (owner): Balad staying in the Joint List is to be treated
+# as certain — balad_splits resolved False.
+RESOLVED: dict = {"segalovitz_joins_raam": True,
+                  "rzp_fate": "merge_zehut",
+                  "balad_splits": False}
 
 
 def _col(comps, component):
