@@ -1,7 +1,18 @@
 <!doctype html>
+<html lang="en">
 <meta charset="utf-8">
 <title>The Knesset Model</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="A pre-registered probabilistic forecast of Israel's October 27, 2026 Knesset election: seat distributions, coalition arithmetic, and government-formation odds from a Bayesian model of 1,857 polls and official polling-station results.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="The Knesset Model">
+<meta property="og:description" content="A pre-registered probabilistic forecast of Israel's October 27, 2026 Knesset election: seats, coalition arithmetic, and government-formation odds.">
+<meta property="og:locale" content="en_IL">
+<meta property="og:locale:alternate" content="he_IL">
+<meta name="twitter:card" content="summary">
+<meta name="theme-color" content="#161512">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23f4f1ec'/%3E%3Crect width='64' height='10' fill='%23161512'/%3E%3Cpath d='M10 56a22 22 0 0 1 44 0z' fill='%230038b8'/%3E%3C/svg%3E">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"The Knesset Model","description":"Pre-registered probabilistic forecast of Israel's 2026 Knesset election","inLanguage":["en","he"],"author":{"@type":"Person","name":"Ido Herling"}}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Sans+Hebrew:wght@500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
 <style>
@@ -352,7 +363,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
       <button id="segNb" aria-pressed="false">Netanyahu bloc</button>
       <button id="segAnti" aria-pressed="true">Anti bloc</button>
     </div>
-    <svg id="hist" viewBox="0 0 940 260" style="width:100%;height:auto;display:block;margin-top:12px"></svg>
+    <svg id="hist" viewBox="0 0 940 260" role="img" aria-label="Distribution of simulated bloc seat totals" style="width:100%;height:auto;display:block;margin-top:12px"></svg>
     <figcaption id="histCap" style="margin-top:6px"></figcaption>
   </div>
 </div></section>
@@ -371,7 +382,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
       <div class="tile"><div class="k">P(≥ 61 seats)</div><div class="v" id="cbP61">—</div><div class="s">true joint probability</div></div>
       <div class="tile"><div class="k">90% range</div><div class="v" id="cbRange" style="font-size:24px">—</div><div class="s">5th–95th percentile</div></div>
     </div>
-    <svg id="cbHist" viewBox="0 0 940 130" style="width:100%;height:auto;display:block;margin-top:14px"></svg>
+    <svg id="cbHist" viewBox="0 0 940 130" role="img" aria-label="Seat distribution of the selected coalition" style="width:100%;height:auto;display:block;margin-top:14px"></svg>
     <p class="note">Totals include threshold outcomes and Bader–Ofer allocation. This is arithmetic,
     not politics; the formation model below prices the politics.</p>
   </div>
@@ -584,7 +595,8 @@ const D = {"asof":"2026-08-31","parties":[{"name":"Yashar","seats":27,"lo":19,"h
 /* ---- bilingual layer ---- */
 const LANG = (()=>{ try { return localStorage.getItem("klang") || "en"; } catch(e){ return "en"; } })();
 const HEB_MODE = LANG === "he";
-if (HEB_MODE){ document.documentElement.dir = "rtl"; document.documentElement.lang = "he"; }
+document.documentElement.lang = HEB_MODE ? "he" : "en";
+if (HEB_MODE){ document.documentElement.dir = "rtl"; }
 const HE_PARTY = {"Likud":"הליכוד","Yashar":"ישר","Bennett 2026 + Yesh Atid":"ביחד (בנט–לפיד)",
  "The Democrats":"הדמוקרטים","Yisrael Beytenu":"ישראל ביתנו","Shas":"ש״ס",
  "United Torah Judaism":"יהדות התורה","Otzma Yehudit":"עוצמה יהודית",
@@ -727,6 +739,11 @@ function trStatic(){
   if (nbm) nbm.textContent = D.blocs.nb_mean.toFixed(1);
   const fa = document.getElementById("foot-asof");
   if (fa) fa.textContent = "נתונים נכונים ל־" + D.asof;
+  const ARIA = {hemi:"חצי־גורן של 120 מושבי הכנסת החזויים",
+    hist:"התפלגות סכומי המושבים הגושיים בסימולציות",
+    cbHist:"התפלגות המושבים של הקואליציה שנבחרה"};
+  for (const id in ARIA){ const el = document.getElementById(id);
+    if (el) el.setAttribute("aria-label", ARIA[id]); }
 }
 
 const $ = s => document.querySelector(s);
@@ -1004,7 +1021,7 @@ renderBlocHist("anti");
   $("#pm").innerHTML = D.pm.map(([n,p,lo,hi])=>`<div class="row">
     <div class="lab">${HEB_MODE?(HE_MISC.PM[n]||HE_MISC.PM[n.replace("Rotation / Likud successor","Rotation / Likud successor")]||n):n}</div>
     <div class="bar" style="overflow:visible"><i style="width:${p/pmx*100}%;--pc:${n.includes("repeat")?"var(--dead)":n.includes("Netanyahu")||n.includes("Likud successor")?"var(--bloc-nb)":"var(--bloc-anti)"}"></i>${
-      lo!=null?`<span style="position:absolute;top:4px;height:4px;border-radius:2px;background:var(--ink2);opacity:.55;left:${lo/pmx*100}%;width:${Math.max((hi-lo)/pmx*100,1)}%"></span>`:""}</div>
+      lo!=null?`<span style="position:absolute;top:4px;height:4px;background:var(--ink2);opacity:.55;left:${lo/pmx*100}%;width:${Math.max((hi-lo)/pmx*100,1)}%"></span>`:""}</div>
     <div class="pct mono" style="text-align:right;font-size:13.5px">${pct(p)}</div></div>`).join("");
 })();
 
@@ -1056,7 +1073,7 @@ renderBlocHist("anti");
         <div class="mono" style="font-size:12px;color:var(--muted)">${fmtM(k.eligible)} ${HEB_MODE?"בעלי זכות":"eligible"} · ${HEB_MODE?"הצבעה":"turnout"} ${(k.turnout*100).toFixed(0)}% · ${tot.toFixed(1)} ${HEB_MODE?"מושבים":"seats"}</div>
       </div>
       ${exs?`<div style="font-size:12px;color:var(--muted);margin-top:2px">${HEB_MODE?"למשל":"e.g."} ${exs}</div>`:""}
-      <div style="display:flex;height:22px;border-radius:5px;overflow:hidden;margin-top:8px;gap:2px;width:${widthPct}%;min-width:120px" role="img"
+      <div style="display:flex;height:22px;overflow:hidden;margin-top:8px;gap:2px;width:${widthPct}%;min-width:120px" role="img"
         aria-label="${S2(SEC[k.sector])}">`;
     parts.forEach(([name,v])=>{
       html += `<div data-g="${name}" data-v="${v}" data-s="${S2(SEC[k.sector]||k.sector)}"
@@ -1138,7 +1155,8 @@ renderBlocHist("anti");
     });
   }
   // open a chapter when deep-linked (e.g. the Track record nav link)
-  const openHash = () => { const el = document.querySelector(location.hash || "#x0");
+  const openHash = () => { if (!/^#[A-Za-z][\w-]*$/.test(location.hash)) return;
+    const el = document.querySelector(location.hash);
     if (el && el.classList && el.classList.contains("chapter")) el.classList.remove("closed"); };
   addEventListener("hashchange", openHash); openHash();
 
