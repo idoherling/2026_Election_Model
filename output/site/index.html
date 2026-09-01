@@ -112,7 +112,8 @@ section{padding:52px 0 8px}
 .eyebrow::before{content:"";width:11px;height:11px;background:var(--accent);flex:none}
 section h2{font-size:clamp(26px,3.8vw,40px);font-weight:700;margin:10px 0 12px;letter-spacing:-.02em}
 .lede{max-width:64ch;color:var(--ink2);margin:0 0 24px;line-height:1.65}
-.card{background:var(--card);border:3px solid var(--ink);border-radius:0;padding:24px;box-shadow:none}
+.card{background:var(--card);border:2px solid var(--ink);border-radius:0;padding:24px;box-shadow:none}
+.sheet{border-top:2px solid var(--ink);padding:20px 0 4px}
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
 @media(max-width:820px){.grid2{grid-template-columns:1fr}}
 
@@ -192,10 +193,10 @@ svg text{font-family:"IBM Plex Mono",monospace;fill:var(--muted);font-size:11.5p
 .contents li{break-inside:avoid;border-bottom:1px solid var(--hit);padding:5px 0}
 .contents a{display:flex;gap:12px;align-items:baseline;text-decoration:none;font-size:14px;font-weight:600}
 .contents a:hover{color:var(--accent)}
-.contents a .fol{font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--accent);font-weight:600;min-width:20px}
+.contents a .fol{font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--muted);font-weight:600;min-width:20px}
 .chapter > h3{cursor:pointer;user-select:none}
 .chapter > h3:hover{color:var(--accent)}
-.chapter > h3 .tgl{margin-left:auto;font-family:"IBM Plex Mono",monospace;font-size:20px;font-weight:500;color:var(--accent)}
+.chapter > h3 .tgl{margin-left:auto;font-family:"IBM Plex Mono",monospace;font-size:20px;font-weight:500;color:var(--muted)}
 .chapter.closed .chbody{display:none}
 .chbody{padding-top:2px}
 .nav a.active{background:var(--ink);color:var(--paper)}
@@ -221,7 +222,7 @@ svg text{font-family:"IBM Plex Mono",monospace;fill:var(--muted);font-size:11.5p
 .chapter ul{max-width:70ch;color:var(--ink2);padding-left:22px}
 .chapter li{margin:6px 0}
 .eq{font-family:"IBM Plex Mono",monospace;font-size:13.5px;background:var(--hit);
-  border-left:5px solid var(--accent);padding:14px 18px;margin:14px 0;
+  border-left:4px solid var(--ink);padding:14px 18px;margin:14px 0;
   overflow-x:auto;color:var(--ink);line-height:1.9}
 .eq i{color:var(--accent);font-style:normal}
 table{border-collapse:collapse;width:100%;font-size:14px}
@@ -262,13 +263,13 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
     <div class="cover-year">26</div>
     <h1>A dead-even race that only one side can win outright.</h1>
   </div>
-  <p class="standfirst">Yashar and Likud are tied at 26 seats, but the arithmetic underneath is asymmetric:
-  the anti-Netanyahu camp holds more paths to 61. The single most likely outcome after an
-  Eisenkot-led government is that <em>no one</em> forms a government at all.</p>
+  <p class="standfirst">Yashar and Likud are tied at 26 seats, but the arithmetic underneath is not
+  symmetric. The anti-Netanyahu camp has more paths to 61, and after an Eisenkot-led government the
+  most likely single outcome is that <em>no one</em> forms a government at all.</p>
   <div class="tiles">
-    <div class="tile anti"><div class="k">P(anti bloc ≥ 61)</div><div class="v" id="tAnti"></div><div class="s">without Arab-party seats</div></div>
-    <div class="tile nb"><div class="k">P(Netanyahu bloc ≥ 61)</div><div class="v" id="tNb"></div><div class="s">mean <span class="mono" id="tNbMean"></span> seats</div></div>
-    <div class="tile dead"><div class="k">P(neither bloc at 61)</div><div class="v" id="tNeither"></div><div class="s">the formation game begins</div></div>
+    <div class="tile anti"><div class="k">Anti-Netanyahu majority</div><div class="v" id="tAnti"></div><div class="s">chance the camp reaches 61 without Arab-party seats</div></div>
+    <div class="tile nb"><div class="k">Netanyahu majority</div><div class="v" id="tNb"></div><div class="s">chance his bloc reaches 61 · mean <span class="mono" id="tNbMean"></span> seats</div></div>
+    <div class="tile dead"><div class="k">Deadlock</div><div class="v" id="tNeither"></div><div class="s">neither side at 61; the formation fight decides</div></div>
   </div>
   <figure class="card" style="padding:26px 22px 14px">
     <svg id="hemi" viewBox="0 -16 720 322" role="img" aria-label="Hemicycle of 120 projected Knesset seats" style="width:100%;height:auto;display:block"></svg>
@@ -282,38 +283,31 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
 <section id="seats"><div class="wrap">
   <p class="eyebrow">Seat forecast</p>
   <h2>Every list, with its uncertainty attached</h2>
-  <p class="lede">The dot is the central projection; the band is the 90% credible interval from the
-  posterior — including forward drift to election day, correlated bloc swing, sector shocks, and
-  registration-scenario uncertainty. Hollow dots poll below the 3.25% threshold today.</p>
-  <div class="card">
+  <p class="lede">Each dot is the forecast. Each band holds 90% of the simulations, drift to
+  election day included. Hollow dots sit below the 3.25% threshold today.</p>
+  <div class="sheet">
     <div class="ivl" id="ivl"></div>
     <div class="axisrow"><div></div><div class="axis" id="ivlAxis"></div><div></div></div>
     <div class="legend"><span><i class="sw" style="background:var(--ink);width:12px;height:3px"></i>90% interval</span>
     <span><i class="sw hollow"></i>below threshold in central projection</span></div>
-    <p class="note" style="margin-top:8px">Ballot letters are the parties' registered CEC letters
-    where owned (מחל, שס, ג, ל, עם, ום, ט, כן; Together via Yesh Atid's פה; the Democrats via
-    Labor's אמת). Lists too new to own letters carry a provisional combination<span class="mono">*</span>
-    built only from unreserved letter-strings, until the CEC assigns real ones at registration on
-    September 9 — individual characters may legally repeat across lists (מ serves מחל, אמת and עם
-    alike), but a reserved string belongs to its party alone.</p>
+    <p class="note" style="margin-top:8px">Chips show each list's registered CEC ballot letters.
+    Starred letters are provisional for new lists until registration closes on September 9.</p>
   </div>
 </div></section>
 
 <section id="threshold"><div class="wrap">
   <p class="eyebrow">The knife-edges</p>
   <h2>Five lists live or die at 3.25%</h2>
-  <p class="lede">Israeli elections are decided as much by who clears the electoral threshold as by
-  who wins. Roughly 8% of the current vote sits below it. Each failure moves 4-plus seats to the
-  surviving lists — in 2022, exactly this arithmetic manufactured a 64-seat majority from a
-  near-50/50 vote.</p>
-  <div class="card thr" id="thr"></div>
+  <p class="lede">About 8% of the vote currently sits below the 3.25% threshold. Every list that
+  misses hands its seats to the survivors. In 2022 that arithmetic turned a near-even vote into a
+  64-seat majority.</p>
+  <div class="sheet thr" id="thr"></div>
 </div></section>
 
 <section id="blocdist"><div class="wrap">
   <p class="eyebrow">Bloc math</p>
   <h2>The full distribution, not just the mean</h2>
-  <p class="lede">8,000 simulated elections (2,500 shown here, drawn from the same posterior).
-  The line at 61 is the only number that matters on the night.</p>
+  <p class="lede">8,000 simulated elections; 2,500 shown. The line at 61 is the one that matters.</p>
   <div class="card">
     <div class="seg" role="group" aria-label="Bloc selector">
       <button id="segNb" aria-pressed="false">Netanyahu bloc</button>
@@ -327,9 +321,9 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
 <section id="builder"><div class="wrap">
   <p class="eyebrow">Interactive</p>
   <h2>Build a coalition</h2>
-  <p class="lede">Pick parties; the model answers from the <b>joint</b> distribution — the same 2,500
-  simulated elections, so correlations count: draws where Amcha misses the threshold are draws where
-  Likud tends to surge, and your coalition feels both at once.</p>
+  <p class="lede">Pick parties. The answer comes from the same simulated elections, so the
+  correlations count: when Amcha misses the threshold, Likud tends to surge, and your total
+  feels both.</p>
   <div class="card">
     <div class="presets" id="presets"></div>
     <div class="chips" id="chips"></div>
@@ -339,34 +333,34 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
       <div class="tile"><div class="k">90% range</div><div class="v" id="cbRange" style="font-size:24px">—</div><div class="s">5th–95th percentile</div></div>
     </div>
     <svg id="cbHist" viewBox="0 0 940 130" style="width:100%;height:auto;display:block;margin-top:14px"></svg>
-    <p class="note">Seat totals per simulation include threshold outcomes and Bader–Ofer allocation. This is arithmetic feasibility, not political willingness — the formation model below prices the politics.</p>
+    <p class="note">Totals include threshold outcomes and Bader–Ofer allocation. This is arithmetic,
+    not politics; the formation model below prices the politics.</p>
   </div>
 </div></section>
 
 <section id="formation"><div class="wrap">
   <p class="eyebrow">After the vote</p>
-  <h2>Who actually forms a government — and who is Prime Minister</h2>
-  <p class="lede">Every simulated Knesset runs through an explicit coalition-formation tree with
-  behavioral parameters derived from institutional history: who signs for each party, which pledges
-  historically break, and at what price. The PM allocation prices rotation deals within each
-  winning coalition.</p>
+  <h2>Who forms a government, and who is Prime Minister</h2>
+  <p class="lede">Every simulated Knesset runs through a coalition-formation tree. Its assumptions
+  come from institutional history: who signs for each party, which pledges break, and at what
+  price. Rotation deals are priced inside each winning coalition.</p>
   <div class="grid2">
     <div class="card outc"><h3 style="font-size:18px;margin-bottom:12px">Formation outcome</h3><div id="outc"></div></div>
     <div class="card outc"><h3 style="font-size:18px;margin-bottom:12px">Next Prime Minister</h3><div id="pm"></div>
-      <p class="note" style="margin-top:12px">Lapid is at 0 by editorial judgment: taking the No. 2 slot inside Bennett's
-      list subordinated his rotation claim. Cromwell caveat on record.</p></div>
+      <p class="note" style="margin-top:12px">Whiskers are 90% intervals over the model's own
+      assumptions. Lapid is held at zero by editorial judgment: taking the No. 2 slot in
+      Bennett's list subordinated his rotation claim.</p></div>
   </div>
 </div></section>
 
 <section id="scenarios"><div class="wrap">
   <p class="eyebrow">Scenario board</p>
   <h2>September 9 decides the shape of the race</h2>
-  <p class="lede">Final lists are filed with the Central Elections Committee on September 9. Until
-  then the forecast is a <b>mixture over registration scenarios</b> — each event sampled per
-  simulation, so its marginal effect can be read off the same draws. The table shows what each
-  event does to P(Netanyahu bloc ≥ 61).</p>
+  <p class="lede">Lists close on September 9. Until then the forecast averages over the open
+  questions, each sampled per simulation. The table reads off what each event would do to
+  Netanyahu's majority odds.</p>
   <div class="card tblwrap"><table id="scen">
-    <thead><tr><th>Event</th><th>Outcome</th><th class="num">Prior</th><th class="num">P(NB ≥ 61) if it happens</th><th class="num">NB mean</th></tr></thead>
+    <thead><tr><th>Event</th><th>Outcome</th><th class="num">Prior</th><th class="num">Majority odds if so</th><th class="num">NB seats</th></tr></thead>
     <tbody></tbody>
   </table></div>
 </div></section>
@@ -380,7 +374,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
   lineages. Turnout per sector is measured from the same administrative data — this is what makes
   a national number physically checkable: a list cannot take more of a sector's votes than that
   sector casts.</p>
-  <div class="card" id="ground-rows"></div>
+  <div class="sheet" id="ground-rows"></div>
 </div></section>
 
 <section id="pollsters"><div class="wrap">
@@ -390,7 +384,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
   estimates each firm's lean (its <b>house effect</b> on the Netanyahu bloc, in seats, measured
   leave-own-pollster-out) and each firm's historical accuracy, and weights accordingly. Firms with
   shared ownership or methodology are modeled as correlated voices, not independent ones.</p>
-  <div class="card he" id="he"></div>
+  <div class="sheet he" id="he"></div>
 </div></section>
 
 <section id="method"><div class="wrap">
@@ -875,7 +869,7 @@ renderBlocHist("anti");
     const side = x.he>=0 ? `left:50%;width:${w}%` : `left:${50-w}%;width:${w}%`;
     return `<div class="row"><div style="font-weight:600">${x.p} <span class="mono" style="color:var(--muted);font-weight:400">n=${x.n}</span></div>
     <div class="cell"><span class="zero"></span><i style="${side};background:var(--accent);position:absolute;top:0;height:14px"></i></div>
-    <div class="mono" style="text-align:right;font-size:13px">${x.he>0?"+":""}${x.he.toFixed(1)}</div></div>`;
+    <div class="mono" style="text-align:right;font-size:13px">${x.he>0?"+":"\u2212"}${Math.abs(x.he).toFixed(1)}</div></div>`;
   }).join("") + `<p class="note" style="margin-top:12px">House effect on the Netanyahu bloc, in seats,
   vs the leave-own-pollster-out average, 2026 cycle: bars right of the line lean toward the
   Netanyahu bloc, bars left of it lean away. Filber and Direct Polls — two halves of one former firm — are modeled as a
