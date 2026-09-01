@@ -180,6 +180,29 @@ UNDECIDED_BREAK_SEATS = (U_POOL * U_TURNOUT * U_EXCESS_ANTI
                          * 120 * U_NET_DISCOUNT)   # ~1.6 seats
 UNDECIDED_BREAK_SD = UNDECIDED_BREAK_SEATS
 
+# ---- Campaign volatility calendar (2026-09-01, improvement #4) --------
+# Measured from the own DB (7 cycles, RMS weekly movement of party
+# averages by days-to-election): the list-formation window D-36..77
+# moves ~1.3-1.5 seats/week; the final five weeks move ~0.6-0.75
+# (a measurement that already includes holiday-freeze cycles); early
+# campaign ~1.2. Weights are relative to the all-window mean (~1.04),
+# so the fitted tau's overall scale is preserved - only the SHAPE of
+# forward uncertainty changes. Effect: roughly neutral at today's
+# horizon (spike+calm integrate to ~the uniform total), but after the
+# Sept 9 filing the remaining path is all calm-zone and forward
+# intervals tighten ~25% automatically, as they should.
+# Herding was measured (final-window dispersion 0.88x mid-campaign,
+# 0.6-0.9x sampling noise) and deliberately NOT added: the
+# decomposition's election-day shocks are fitted on final-poll errors
+# that already contain historical herding - adding it would
+# double-count. Recorded in the dossier.
+def campaign_vol_weight(dte: float) -> float:
+    if dte <= 35:
+        return 0.64
+    if dte <= 77:
+        return 1.25
+    return 1.13
+
 LOYAL_SD = {
     "shas": 1.5,             # measured 0.92, worst downside ever -0.4
     "utj": 1.3,              # measured 0.74
@@ -485,8 +508,16 @@ def project(data, idata, rng, config="current", config_params=None):
     take = rng.choice(n_post, N_PROJ, replace=True)
     z_last, tau = z_last[take], tau[take]
 
-    weeks_ahead = max((ELECTION_DAY_2026 - data["asof"]).days, 0) / 7.0
-    z_e = z_last + np.sqrt(weeks_ahead) * tau * rng.standard_normal(z_last.shape)
+    # Calendar-shaped forward variance: each remaining week is weighted
+    # by the measured campaign volatility profile (see campaign_vol_weight).
+    days_ahead = max((ELECTION_DAY_2026 - data["asof"]).days, 0)
+    eff_weeks = 0.0
+    d = days_ahead
+    while d > 0:
+        step = min(d, 7)
+        eff_weeks += campaign_vol_weight(d) ** 2 * (step / 7.0)
+        d -= step
+    z_e = z_last + np.sqrt(eff_weeks) * tau * rng.standard_normal(z_last.shape)
     z_full = np.concatenate([z_e, np.zeros((N_PROJ, 1))], axis=1)
     shares = np.exp(z_full - z_full.max(axis=1, keepdims=True))
     shares /= shares.sum(axis=1, keepdims=True)

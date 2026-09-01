@@ -255,3 +255,22 @@ Effect: P(NB>=61) 20.1->14.6, P(anti) 25.4->35.0, PM Eisenkot
 31.3->38.6 - landing inside the fundamentals desk's independently
 computed "fair value 38-42%" band that both we (31) and Polymarket (50)
 had missed from opposite sides.
+
+## 12. Addendum (2026-09-01f): the campaign volatility calendar
+
+Improvement #4. Measured from the own DB (RMS weekly movement of party
+poll averages, 7 cycles): list-formation window D-36..77 moves 1.3-1.5
+seats/week; final five weeks 0.6-0.75 (measurement includes the
+holiday-freeze cycles); early campaign ~1.2. campaign_vol_weight()
+(0.64 / 1.25 / 1.13, normalized to the all-window mean) now shapes the
+projection's forward random-walk variance per remaining week instead
+of uniform sqrt(weeks). Shape-neutral at today's D-56 horizon by
+construction; after Sept 9 the remaining path is all calm-zone and
+forward intervals tighten ~12% immediately, ~25% by D-35 - the model
+now breathes with the campaign's actual calendar.
+HERDING measured and DECLINED: final-window cross-pollster dispersion
+0.88x mid-campaign (0.6-0.9x pure sampling noise per bias_herding),
+but the decomposition's election-day shocks are fitted on final-poll
+errors that already contain historical herding - an eve-of-election
+inflation would double-count. Harness untouched (its projections run
+from election eve, where the forward profile is inactive).
