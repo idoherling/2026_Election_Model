@@ -204,3 +204,26 @@ against national totals at load. Products:
 True respondent-level MRP remains blocked on microdata (pollsters do
 not publish crosstab microdata); the kalpi substrate is the honest
 ecological equivalent.
+
+## 10. Addendum (2026-09-01d): Kolot Nodedim cross-validation
+
+Owner pointed to kolot-nodedim.netlify.app (harelc/elections-vote-
+transfer): kalpi-level voter-transition matrices via constrained convex
+optimization (row-stochastic M, R^2 0.75-0.96 per pair, K16-K25) with a
+Dirichlet(alpha*p) per-kalpi noise layer, alpha estimated by moments.
+Three integrations:
+1. LINEAGE_2026 recalibrated against their measured K24->K25 matrix
+   (Yamina->RZP 45/JH 24/Likud 14/NU 11; B&W->NU 71+YA 30; Likud
+   retention 90%; YB 79%) - also fixed a silent bug where "yamina" keys
+   had no 2022 counterpart and zeroed out.
+2. Their per-party alpha (effective kalpi sample size ~30-120 vs ~340
+   voters, overdispersion 3-14x) INDEPENDENTLY corroborates the
+   loyal-electorate calibration: haredi lists tightest (Shas alpha to
+   226), big Jewish lists middle, with their honest note that Arab
+   lists' low alpha is geographic bimodality, not voter fickleness.
+   Their finding that alpha collapses in upheaval cycles (K20->K21)
+   mirrors our sector-swing non-transfer result.
+3. alpha_estimates.json + transfer matrices stored in
+   data/raw/transfer/ - the per-kalpi overdispersion is the noise model
+   the October election-night engine needs (without it, early returns
+   would be over-trusted ~10x).

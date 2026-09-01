@@ -132,21 +132,29 @@ def load_localities() -> pd.DataFrame:
 
 # 2026 lists -> lineage weights in the 2022 party space (which 2022
 # electorates does each 2026 list draw from). Sourced from the measured
-# vote-flow research (N12 sourcing, certainty desk, scenario polls).
+# vote-flow research (N12 sourcing, certainty desk, scenario polls) and
+# CALIBRATED against the Kolot Nodedim measured K24->K25 kalpi transfer
+# matrix (harelc/elections-vote-transfer; R^2 0.889, 7,035 kalpiot):
+# ex-Yamina electorates live in 2022's RZP 45% / Jewish Home 24% /
+# Likud 14% / National Unity 11% localities, B&W'21 -> NU 71% + YA 30%,
+# Likud retention 90%, YB retention 79%. All keys are 2022 lineages
+# (an earlier revision referenced "yamina", which does not exist in the
+# 2022 space and silently zeroed those weights).
 LINEAGE_2026 = {
-    "likud": {"likud": 0.80, "rzp": 0.05, "yamina": 0.05, "blue_white": 0.10},
+    "likud": {"likud": 0.82, "rzp": 0.07, "blue_white": 0.11},
     "yashar": {"blue_white": 0.45, "yesh_atid": 0.25, "likud": 0.15,
                "labor": 0.10, "shas": 0.05},
-    "bennett_2026+yesh_atid": {"yesh_atid": 0.60, "yamina": 0.20,
-                               "likud": 0.10, "blue_white": 0.10},
+    "bennett_2026+yesh_atid": {"yesh_atid": 0.60, "rzp": 0.09,
+                               "jewish_home": 0.05, "likud": 0.13,
+                               "blue_white": 0.13},
     "democrats": {"labor": 0.50, "meretz": 0.50},
     "yisrael_beytenu": {"yisrael_beytenu": 0.90, "likud": 0.10},
     "shas": {"shas": 0.95, "likud": 0.05},
     "utj": {"utj": 1.00},
     "otzma": {"rzp": 0.55, "likud": 0.30, "shas": 0.15},
-    "rzp": {"rzp": 0.80, "yamina": 0.20},
-    "amcha_yisrael": {"likud": 0.45, "rzp": 0.30, "yisrael_beytenu": 0.10,
-                      "yamina": 0.15},
+    "rzp": {"rzp": 0.90, "jewish_home": 0.10},
+    "amcha_yisrael": {"likud": 0.47, "rzp": 0.37, "jewish_home": 0.04,
+                      "yisrael_beytenu": 0.10, "blue_white": 0.02},
     "raam": {"raam": 1.00},
     "balad+hadash_taal": {"hadash_taal": 0.65, "balad": 0.35},
 }
