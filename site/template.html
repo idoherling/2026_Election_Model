@@ -936,19 +936,20 @@ function hideTip(){ tip.style.opacity = 0; }
   if (!D.sub || !D.sub.length) return;
   const t = HEB_MODE ? {
     h: 'המפלגות הקטנות',
-    note: 'התמיכה במפלגות הקטנות נמדדת מפירוטי ההערות של הסוקרים המפרסמים אחוזים מלאים (לזר, מדגם, פילבר, דיירקט פולס); הפס מציג את המרחק מאחוז החסימה של 3.25%. כל המפלגות האלה נכללות בכל סימולציה — כקול מבוזבז, אלא אם יחצו את הסף. זהות אינה מופיעה כאן: מאז המיזוג הרשמי תמיכתה (כ־1.6%) נספרת בתוך שורת הציונות הדתית–זהות, ורישומה גם כאן היה סופר את אותם בוחרים פעמיים.',
+    sub: 'נתח מהקולות הארציים, לפי מדידות הסוקרים; אחוז החסימה — 3.25%',
   } : {
     h: 'The small parties',
-    note: 'Support for the small parties is measured from the itemized footnotes of the firms that publish full percentages (Lazar, Midgam, Filber, Direct Polls); each bar shows distance to the 3.25% threshold. Every one of these parties is carried in every simulation — as wasted votes unless it crosses. Zehut is not listed here: since the official merger its ≈1.6% support is counted inside the Religious Zionism\u2013Zehut row, and listing it again would count the same voters twice.',
+    sub: 'Share of the national vote, as measured by pollsters; the threshold is 3.25%',
   };
   $("#thr").insertAdjacentHTML("afterend",
     `<div style="margin-top:26px;border-top:2px solid var(--ink);padding-top:14px">
-      <div style="font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;margin-bottom:10px">${t.h}</div>
+      <div style="font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;margin-bottom:4px">${t.h}</div>
+      <div style="font-size:12.5px;color:var(--muted);margin-bottom:10px">${t.sub}</div>
       <div class="thr">` + D.sub.map(p => `<div class="row">
         <div class="nm" style="font-weight:600;font-size:13.5px">${nm(p.name)}</div>
         <div class="bar" style="height:8px"><i style="${pc(p.name)};width:${Math.min(p.share/3.25*100,100)}%"></i></div>
         <div class="pct">${p.share.toFixed(1)}%</div></div>`).join("") +
-      `</div><p class="note" style="margin-top:10px;max-width:68ch">${t.note}</p></div>`);
+      `</div></div>`);
 })();
 
 /* ---- draws machinery ---- */
