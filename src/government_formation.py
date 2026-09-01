@@ -81,8 +81,10 @@ BEHAVIOR = {
     # at the outset — entry is modeled as post-formation expansion,
     # hence joins < supports.
     "raam_supports": 0.60,
-    # Owner taxonomy 2026-09-02: no Ra'am-inside branch — Ra'am matters
-    # through the with-Ra'am majority arithmetic and outside support.
+    # Ra'am joins a change coalition outright (2021 precedent; the
+    # Segalovitz bridge and Eisenkot's published entry conditions make
+    # it live, the universal no-Arab-party-inside pledges cap it).
+    "raam_joins": 0.40,
     # JL revived with Jabareen #1/Tibi #2 (ToI late Aug); Hadash-led list
     # likelier to abstain constructively than Balad-led; Tibi placated.
     "jl_supports": 0.45,
@@ -145,6 +147,8 @@ PM_ALLOC = {
                                           # helps, Liberman a dealbreaker
     5: [0.85, 0.10, 0.02, 0.00, 0.03],   # JL-backed minority: explicitly
                                           # Eisenkot's own doctrine
+    8: [0.80, 0.13, 0.02, 0.00, 0.05],   # with Ra'am: the Segalovitz-bridge
+                                          # scenario, Eisenkot's negotiation
     6: [0.35, 0.10, 0.05, 0.00, 0.50],   # unity: Likud successor/rotation heavy
 }
 PM_NAMES = ["Eisenkot", "Bennett", "Liberman", "Lapid",
@@ -164,6 +168,7 @@ BEHAVIOR_NEFF = {
     "shas_defects": 30,         # institutional (psak mechanism, re-lock)
     "utj_defects": 16,          # full/partial blend, two councils
     "liberman_haredi_ok": 25,   # identity veto, held at every fork
+    "raam_joins": 18,           # desk-triangulated, deal official
     "liberman_minority_ok": 14, # doctrine vs veto, genuinely uncertain
     "likud_sans_bibi": 20,      # base rates + kalon precedent
     "centre_defects": 25,       # graded on the 2020 realization
@@ -184,6 +189,7 @@ OUTCOMES = [
     "Centre minority backed by the Joint List",
     "Unity government (Likud without Netanyahu)",
     "Repeat election",
+    "Change coalition with Ra'am",
 ]
 
 
@@ -240,6 +246,7 @@ def simulate_formation(draws: pd.DataFrame, behavior: dict, seed=SEED,
         [u[:, 0] < behavior["amcha_right"],
          u[:, 0] < behavior["amcha_right"] + amcha_center_eff],
         [1, 2], default=0)  # 1 right, 2 centre, 0 neither
+    raam_joins = u[:, 1] < behavior["raam_joins"]
     raam_supports = u[:, 2] < behavior["raam_supports"]
     jl_supports = u[:, 3] < behavior["jl_supports"]
     shas_on = u[:, 4] < behavior["shas_defects"]
@@ -280,6 +287,10 @@ def simulate_formation(draws: pd.DataFrame, behavior: dict, seed=SEED,
     ch_base = ce_pure + amcha_ce
     ch_seats = np.where(lib_haredi, ch_base, ch_base - yb) + defecting_haredi
     outcome[np.where((ch_seats >= 61) & (defecting_haredi > 0))] = 4
+    # change coalition WITH Ra'am inside: the camp is short alone and
+    # Ra'am's remaining seats close it (Segalovitz's seat already in ce)
+    outcome[np.where((ce_pure < 61) & raam_joins
+                     & (ce_pure + (raam - seg) >= 61))] = 8
     # change coalition WITH Amcha: the camp is short alone, Winter's
     # seats close it, and he joins (conditional on a Bennett-led draw)
     outcome[np.where((ce_pure < 61)
@@ -298,7 +309,7 @@ def simulate_formation(draws: pd.DataFrame, behavior: dict, seed=SEED,
         pm[mask] = np.array(PM_NAMES)[np.minimum(pick, len(PM_NAMES) - 1)]
     # In coalitions where Together outweighs Yashar, the rotation flips:
     # Bennett leads and Eisenkot is the junior partner.
-    flip = (together > yashar) & np.isin(outcome, [2, 3, 4, 5])
+    flip = (together > yashar) & np.isin(outcome, [2, 3, 4, 5, 8])
     pm = np.where(flip & (pm == "Eisenkot"), "Bennett",
                   np.where(flip & (pm == "Bennett"), "Eisenkot", pm))
     return outcome, pm
