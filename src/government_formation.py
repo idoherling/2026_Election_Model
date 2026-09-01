@@ -83,11 +83,6 @@ BEHAVIOR = {
     "raam_supports": 0.60,
     # Owner taxonomy 2026-09-02: no Ra'am-inside branch — Ra'am matters
     # through the with-Ra'am majority arithmetic and outside support.
-    # If deadlock persists to a repeat election, does Likud replace
-    # Netanyahu first? Institutions desk: he trades everything except
-    # political existence (kalon precedent), but a failed formation +
-    # the trial + the Herzog shuttle move some mass.
-    "bibi_out_by_repeat": 0.25,
     # JL revived with Jabareen #1/Tibi #2 (ToI late Aug); Hadash-led list
     # likelier to abstain constructively than Balad-led; Tibi placated.
     "jl_supports": 0.45,
@@ -170,7 +165,6 @@ BEHAVIOR_NEFF = {
     "utj_defects": 16,          # full/partial blend, two councils
     "liberman_haredi_ok": 25,   # identity veto, held at every fork
     "liberman_minority_ok": 14, # doctrine vs veto, genuinely uncertain
-    "bibi_out_by_repeat": 12,   # soft judgment, kalon precedent vs pressure
     "likud_sans_bibi": 20,      # base rates + kalon precedent
     "centre_defects": 25,       # graded on the 2020 realization
 }
@@ -189,8 +183,7 @@ OUTCOMES = [
     "Change coalition with a haredi party",
     "Centre minority backed by the Joint List",
     "Unity government (Likud without Netanyahu)",
-    "Repeat election - Netanyahu still leads Likud",
-    "Repeat election - after Netanyahu is replaced",
+    "Repeat election",
 ]
 
 
@@ -247,7 +240,6 @@ def simulate_formation(draws: pd.DataFrame, behavior: dict, seed=SEED,
         [u[:, 0] < behavior["amcha_right"],
          u[:, 0] < behavior["amcha_right"] + amcha_center_eff],
         [1, 2], default=0)  # 1 right, 2 centre, 0 neither
-    bibi_out = u[:, 1] < behavior["bibi_out_by_repeat"]
     raam_supports = u[:, 2] < behavior["raam_supports"]
     jl_supports = u[:, 3] < behavior["jl_supports"]
     shas_on = u[:, 4] < behavior["shas_defects"]
@@ -262,9 +254,7 @@ def simulate_formation(draws: pd.DataFrame, behavior: dict, seed=SEED,
     ce_pure = centre + seg                        # WITHOUT Amcha
     amcha_ce = np.where(amcha_side == 2, amcha, 0)
 
-    # default: repeat election, split by whether Likud replaces
-    # Netanyahu before the re-run
-    outcome = np.where(bibi_out, 8, 7)
+    outcome = np.full(n, 7)  # default: repeat election
     outcome[np.where((ce_pure + amcha_ce
                       + draws["Likud"].values >= 61) & sans_bibi)] = 6
     # pledge-break: some centre list can close Netanyahu's gap and does
