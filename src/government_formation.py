@@ -146,6 +146,27 @@ PM_ALLOC = {
 PM_NAMES = ["Eisenkot", "Bennett", "Liberman", "Lapid",
             "rotation / Likud successor"]
 
+# Evidence-quality concentrations for the behavioral parameters
+# (2026-09-01, improvement #5): each BEHAVIOR value becomes
+# Beta(p*n, (1-p)*n) with n reflecting how well-sourced the number is.
+# High n = institutionally grounded or publicly pledged; low n =
+# triangulated judgment. Drawn per hierarchical replication so the PM
+# probabilities carry parameter uncertainty, not just seat uncertainty.
+BEHAVIOR_NEFF = {
+    "amcha_right": 35,          # public, repeated pledge
+    "amcha_center": 12,         # analog reasoning (Bennett-led condition)
+    "raam_joins": 18,           # desk-triangulated, deal now official
+    "raam_supports": 18,
+    "jl_supports": 14,          # one Jabareen signal + precedent
+    "shas_defects": 30,         # institutional (psak mechanism, re-lock)
+    "utj_defects": 16,          # full/partial blend, two councils
+    "liberman_haredi_ok": 25,   # identity veto, held at every fork
+    "liberman_minority_ok": 14, # doctrine vs veto, genuinely uncertain
+    "likud_sans_bibi": 20,      # base rates + kalon precedent
+    "centre_defects": 25,       # graded on the 2020 realization
+}
+PM_ALLOC_NEFF = 60              # Dirichlet concentration on rotation rows
+
 # P(Amcha joins an Eisenkot-led centre government) — floored, not zeroed:
 # Winter's vendetta is personal and public, but coalitions have bought
 # stranger conversions (Cromwell caveat).
@@ -176,8 +197,25 @@ def load_draws():
     return d
 
 
-def simulate_formation(draws: pd.DataFrame, behavior: dict, seed=SEED):
+def draw_behavior(rng) -> dict:
+    """One parameter vector from the evidence-quality Beta priors."""
+    out = {}
+    for k, p in BEHAVIOR.items():
+        n = BEHAVIOR_NEFF.get(k)
+        out[k] = float(rng.beta(p * n, (1 - p) * n)) if n else p
+    return out
+
+
+def draw_pm_alloc(rng) -> dict:
+    return {oc: rng.dirichlet(np.array(a) * PM_ALLOC_NEFF + 1e-3).tolist()
+            for oc, a in PM_ALLOC.items()}
+
+
+def simulate_formation(draws: pd.DataFrame, behavior: dict, seed=SEED,
+                       pm_alloc=None):
     rng = np.random.default_rng(seed)
+    if pm_alloc is None:
+        pm_alloc = PM_ALLOC
     n = len(draws)
     nb_core = draws[NB_CORE].sum(axis=1).values
     centre = draws[CENTRE].sum(axis=1).values
@@ -241,7 +279,7 @@ def simulate_formation(draws: pd.DataFrame, behavior: dict, seed=SEED):
     pm[outcome == 0] = "Netanyahu"
     pm[outcome == 1] = "Netanyahu"
     u_pm = rng.random(n)
-    for oc, alloc in PM_ALLOC.items():
+    for oc, alloc in pm_alloc.items():
         mask = outcome == oc
         cum = np.cumsum(alloc)
         pick = np.searchsorted(cum, u_pm[mask], side="right")
@@ -256,22 +294,48 @@ def simulate_formation(draws: pd.DataFrame, behavior: dict, seed=SEED):
 
 def main() -> None:
     draws = load_draws()
-    outcome, pm = simulate_formation(draws, BEHAVIOR)
 
-    probs = pd.Series(outcome).value_counts(normalize=True).sort_index()
+    # Hierarchical over parameter uncertainty: M parameter vectors from
+    # the evidence-quality priors, each evaluated on all seat draws.
+    M = 200
+    prng = np.random.default_rng(SEED + 7)
+    oc_mat = np.zeros((M, len(OUTCOMES)))
+    pm_names_all = PM_NAMES + ["Netanyahu", "none (repeat election)"]
+    pm_mat = np.zeros((M, len(pm_names_all)))
+    for m in range(M):
+        b = draw_behavior(prng)
+        pa = draw_pm_alloc(prng)
+        oc, pmv = simulate_formation(draws, b, seed=SEED + m, pm_alloc=pa)
+        cnt = pd.Series(oc).value_counts(normalize=True)
+        for i in range(len(OUTCOMES)):
+            oc_mat[m, i] = cnt.get(i, 0.0)
+        pcnt = pd.Series(pmv).value_counts(normalize=True)
+        for j, nmn in enumerate(pm_names_all):
+            pm_mat[m, j] = pcnt.get(nmn, 0.0)
+
     table = pd.DataFrame({
         "outcome": OUTCOMES,
-        "probability": [round(float(probs.get(i, 0.0)), 3)
-                        for i in range(len(OUTCOMES))],
+        "probability": oc_mat.mean(axis=0).round(3),
+        "p05": np.percentile(oc_mat, 5, axis=0).round(3),
+        "p95": np.percentile(oc_mat, 95, axis=0).round(3),
     })
     table.to_csv(PROCESSED_DIR / "government_formation.csv", index=False)
-    print("Government formation (8,000 Knessets x behavioral draws):\n")
+    print(f"Government formation ({len(draws)} Knessets x {M} parameter "
+          "vectors x behavioral draws):\n")
     print(table.to_string(index=False))
 
-    pm_probs = pd.Series(pm).value_counts(normalize=True)
-    print("\nP(next prime minister):")
-    for name, p in pm_probs.items():
-        print(f"  {p:6.1%}  {name}")
+    pm_df = pd.DataFrame({
+        "pm": pm_names_all,
+        "probability": pm_mat.mean(axis=0).round(3),
+        "p05": np.percentile(pm_mat, 5, axis=0).round(3),
+        "p95": np.percentile(pm_mat, 95, axis=0).round(3),
+    }).sort_values("probability", ascending=False)
+    pm_df = pm_df[pm_df.probability > 0.001]
+    pm_df.to_csv(PROCESSED_DIR / "pm_probabilities.csv", index=False)
+    pm_probs = pd.Series(pm_df.probability.values, index=pm_df.pm)
+    print("\nP(next prime minister) [90% CI over parameter uncertainty]:")
+    for r in pm_df.itertuples():
+        print(f"  {r.probability:6.1%}  [{r.p05:.1%}-{r.p95:.1%}]  {r.pm}")
 
     # Sensitivity: the two assumptions with the most leverage.
     rows = []

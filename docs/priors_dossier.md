@@ -274,3 +274,20 @@ but the decomposition's election-day shocks are fitted on final-poll
 errors that already contain historical herding - an eve-of-election
 inflation would double-count. Harness untouched (its projections run
 from election eve, where the forward profile is inactive).
+
+## 13. Addendum (2026-09-01g): parameter uncertainty in the formation tree
+
+Improvement #5. Every BEHAVIOR parameter now carries an evidence-quality
+Beta prior (BEHAVIOR_NEFF 12-35: public pledges and institutional
+mechanisms concentrated, triangulated judgments diffuse); PM_ALLOC rows
+get Dirichlet(alpha*60). The formation run is hierarchical: 200
+parameter vectors x 8,000 Knessets. Headline PM (means barely move -
+the priors are centered on the dossier values):
+Eisenkot 38.7 [34.2-43.0] / repeat 26.1 [20.5-32.2] / Netanyahu 18.1
+[15.0-22.5] / Bennett 11.1 [8.4-14.5] / Liberman 2.0 [0.8-3.9].
+Diagnostic value of the outcome CIs: Netanyahu-coalition is
+arithmetic-dominated (13.7 [13.0-14.3] - parameters barely matter),
+while pledge-break [1.3-8.8], unity [2.3-11.6] and Centre+Ra'am
+[5.1-13.5] are parameter-dominated - the honest map of which published
+claims rest on assumptions vs seat math. pm_probabilities.csv now
+feeds the site directly (hardcoded values removed).
