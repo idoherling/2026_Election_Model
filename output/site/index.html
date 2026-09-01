@@ -280,6 +280,8 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
   <div style="display:flex;align-items:center;gap:18px">
     <button id="langbtn" style="border:2px solid var(--ink);background:transparent;color:var(--ink);
       font:700 12px 'IBM Plex Sans Hebrew','IBM Plex Sans';padding:7px 14px;cursor:pointer;letter-spacing:.06em"></button>
+    <button id="themebtn" style="border:2px solid var(--ink);background:transparent;color:var(--ink);
+      font:700 12px 'IBM Plex Sans Hebrew','IBM Plex Sans';padding:7px 14px;cursor:pointer;letter-spacing:.06em"></button>
     <div class="dateline" id="dateline">Forecast as of <b class="mono" id="asof"></b><br>Election: Tuesday, <b>October 27, 2026</b> · <span class="mono" id="tminus"></span> days out</div>
   </div>
 </div></header>
@@ -731,6 +733,24 @@ trStatic();
   b.addEventListener("click", () => {
     try { localStorage.setItem("klang", HEB_MODE ? "en" : "he"); } catch(e){}
     location.reload();
+  });
+  // theme toggle: explicit light/dark, persisted; no reload needed
+  // (every color on the page resolves through the theme tokens)
+  const tb = document.getElementById("themebtn");
+  const effective = () => document.documentElement.dataset.theme
+    || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+  const label = () => { tb.textContent = effective() === "dark"
+    ? (HEB_MODE ? "מצב בהיר" : "Light") : (HEB_MODE ? "מצב כהה" : "Dark"); };
+  try { const saved = localStorage.getItem("ktheme");
+    if (saved === "light" || saved === "dark")
+      document.documentElement.dataset.theme = saved; } catch(e){}
+  label();
+  tb.addEventListener("click", () => {
+    const next = effective() === "dark" ? "light" : "dark";
+    document.documentElement.dataset.theme = next;
+    document.documentElement.style.colorScheme = next;
+    try { localStorage.setItem("ktheme", next); } catch(e){}
+    label();
   });
 })();
 
