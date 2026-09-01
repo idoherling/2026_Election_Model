@@ -66,13 +66,20 @@ def build_payload() -> dict:
 
     from bayes_model import MICRO_PRIORS
     from normalize import load_party_registry
+    from registration_scenarios import RESOLVED
     reg = load_party_registry()
     names = dict(zip(reg["party_id"], reg["name_en"]))
     ppass = dict(zip(off["list"], off["p_pass"]))
+    # A micro-list absorbed by a RESOLVED merger is not a separate "Other":
+    # its support already sits inside the absorbing list's seat row, and
+    # listing it again would count the same voters twice.
+    merged_away = set()
+    if RESOLVED.get("rzp_fate") == "merge_zehut":
+        merged_away.add("zehut")
     sub = [
         {"name": names.get(pid, pid), "share": round(mean * 100, 1),
          "pass": round(float(ppass.get(names.get(pid, pid), 0.0)), 3)}
-        for pid, (mean, _sd) in MICRO_PRIORS.items()
+        for pid, (mean, _sd) in MICRO_PRIORS.items() if pid not in merged_away
     ]
     sub.sort(key=lambda x: -x["share"])
 
