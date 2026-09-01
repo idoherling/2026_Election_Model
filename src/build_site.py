@@ -105,8 +105,9 @@ def build_payload() -> dict:
                "nb61": round(float(r.p_nb_61), 3),
                "nbm": round(float(r.nb_mean), 1)} for r in ev.itertuples()]
 
-    he = pd.read_csv(PROCESSED / "house_effects_lists_2026.csv")
-    he = he[(he["unit"] == "Netanyahu bloc") & (he["n_polls"] >= 10)]
+    he = pd.read_csv(PROCESSED / "house_effects_blocs.csv")
+    he = he[(he["unit"] == "Netanyahu bloc") & (he["n_polls"] >= 10)
+            & (he["cycle"].astype(str) == "2026")]
     house = [{"p": r.pollster, "he": round(float(r.house_effect), 1),
               "n": int(r.n_polls)}
              for r in he.sort_values("house_effect").itertuples()]
