@@ -66,14 +66,25 @@ def main() -> None:
     out = pd.DataFrame(rows).sort_values("central_seats", ascending=False)
 
     # Largest-remainder the centers onto exactly 120 among passing lists.
+    # A list that clears 3.25% mathematically starts at 4 seats under
+    # Bader-Ofer (3.25% of 120 ~= 3.9) - 3-seat parties are essentially
+    # impossible, so the floor binds before reconciliation.
     passing = out["p_pass"] >= 0.5
+    out.loc[passing, "central_seats"] = out.loc[passing,
+                                                "central_seats"].clip(lower=4)
     total = out.loc[passing, "central_seats"].sum()
     gap = 120 - int(total)
     if gap:
-        idx = out[passing].sort_values("p_pass", ascending=False).index
         step = 1 if gap > 0 else -1
-        for i in list(idx)[: abs(gap)]:
+        idx = out[passing].sort_values("p_pass", ascending=False).index
+        moved = 0
+        for i in list(idx):
+            if moved == abs(gap):
+                break
+            if step < 0 and out.loc[i, "central_seats"] <= 4:
+                continue  # never shave a passing list below the floor
             out.loc[i, "central_seats"] += step
+            moved += 1
     out.loc[~passing, "central_seats"] = 0
 
     out["asof"] = bayes["asof"].iloc[0]
