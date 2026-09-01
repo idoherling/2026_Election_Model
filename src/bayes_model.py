@@ -152,6 +152,34 @@ KALPI_FAMILY_RHO = 0.5
 KALPI_ARAB_CAP = 0.163      # joint arab-family share ceiling
 KALPI_HAREDI_FLOOR = 0.066  # joint Shas+UTJ share floor
 
+# ---- Measured undecided-allocation layer (2026-09-01, improvement #3) --
+# Published seat polls already allocate undecideds by each house's opaque
+# method (~proportionally). The 2026-measured break is NOT proportional:
+# N12/Midgam Jul 30 (n=505): pool 12% of the electorate; 55% will vote
+# "a candidate who is not Netanyahu", 16% Netanyahu, 29% true tossup.
+# GIQ panel research: the unsophisticated half of undecideds under-votes
+# -> 0.65 turnout haircut on the pool. Excess net anti-ward allocation
+# vs proportional (decided split ~52/48): leaned 71% of pool breaking
+# 77/23 minus proportional -> ~+35% of the voting pool. Raw effect
+# ~2.7 seats anti-ward. NET_DISCOUNT 0.5: the decomposition's anchors
+# already embed the HISTORICAL late-break (which favored Likud - the
+# 2026 measurement is a sign reversal, which is exactly why it is
+# cycle-specific information), but partial overlap cannot be excluded,
+# so only half the measured excess is applied. Drawn with sd equal to
+# the mean - the layer widens honesty as much as it shifts the center.
+# Applied netanyahu_bloc <-> opposition_bloc only (the instrument
+# sampled the Jewish electorate's Netanyahu question; Arab lists' own
+# undecided dynamics live in the arab family shock/turnout dial).
+# Harness-inactive by construction (inputs are 2026 measurements);
+# revisit after Sept 9 - JPPI shows the pool shrinking ~2pp/month.
+U_POOL = 0.12
+U_TURNOUT = 0.65
+U_EXCESS_ANTI = 0.35
+U_NET_DISCOUNT = 0.5
+UNDECIDED_BREAK_SEATS = (U_POOL * U_TURNOUT * U_EXCESS_ANTI
+                         * 120 * U_NET_DISCOUNT)   # ~1.6 seats
+UNDECIDED_BREAK_SD = UNDECIDED_BREAK_SEATS
+
 LOYAL_SD = {
     "shas": 1.5,             # measured 0.92, worst downside ever -0.4
     "utj": 1.3,              # measured 0.74
@@ -552,6 +580,16 @@ def project(data, idata, rng, config="current", config_params=None):
     swing = rng.standard_t(T_DF, N_PROJ) * BLOC_SWING_SD * EVENT_RISK / 120.0
     w_nb, w_op = np.where(is_nb, base, 0), np.where(~is_nb, base, 0)
     shares = shares + swing[:, None] * (w_nb / w_nb.sum() - w_op / w_op.sum())
+
+    # Measured undecided break (see UNDECIDED_BREAK_SEATS note): shifts
+    # opposition_bloc vs netanyahu_bloc only - Arab lists excluded.
+    is_op = blocs == "opposition_bloc"
+    if is_op.any() and is_nb.any():
+        ub = (UNDECIDED_BREAK_SEATS
+              + rng.standard_normal(N_PROJ) * UNDECIDED_BREAK_SD) / 120.0
+        w_o2 = np.where(is_op, base, 0)
+        shares = shares + ub[:, None] * (w_o2 / w_o2.sum()
+                                         - w_nb / w_nb.sum())
     # Family shocks with kalpi-measured correlation: the haredi and Arab
     # sector tides correlated +0.92 across the 2019-2022 locality panel
     # (both are turnout-machine sectors) - shrunk hard to rho=0.5 for

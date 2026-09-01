@@ -227,3 +227,31 @@ Three integrations:
    data/raw/transfer/ - the per-kalpi overdispersion is the noise model
    the October election-night engine needs (without it, early returns
    would be over-trusted ~10x).
+
+## 11. Addendum (2026-09-01e): the measured undecided-allocation layer
+
+Improvement #3 implemented. Published seat polls already allocate
+undecideds by each house's opaque method (~proportional or past-vote);
+the 2026-MEASURED break is neither: N12/Midgam Jul 30 - pool 12% of the
+electorate, 55% "a candidate who is not Netanyahu" / 16% Netanyahu /
+29% tossup. With the GIQ 0.65 turnout haircut and the excess-vs-
+proportional arithmetic: ~2.7 seats anti-ward raw. Applied at HALF
+weight (UNDECIDED_BREAK_SEATS ~1.6, sd equal to mean), because the
+decomposition anchors already embed the HISTORICAL late-break (which
+favored Likud - the 2026 sign reversal is precisely why this is
+cycle-specific information the anchors cannot carry). NB<->opposition
+blocs only; Arab lists excluded (different instrument).
+
+FRAGILITY DISCLOSED: the 55/16 lean rests on ~60 undecided respondents
+(MoE ~+-13pp); direction is triple-sourced (JPPI certainty asymmetry,
+Likud-panel defection destinations) but magnitude is soft - hence sd =
+mean and the half discount. N12's own sizing was "~8 potential extra
+seats for the change bloc"; we apply 1.6. Inputs are constants to be
+REMEASURED after Sept 9 (JPPI shows the pool shrinking ~2pp/month; by
+final polls the layer should approach zero as houses' own allocations
+absorb the resolved pool). Harness-inactive by construction.
+
+Effect: P(NB>=61) 20.1->14.6, P(anti) 25.4->35.0, PM Eisenkot
+31.3->38.6 - landing inside the fundamentals desk's independently
+computed "fair value 38-42%" band that both we (31) and Polymarket (50)
+had missed from opposite sides.
