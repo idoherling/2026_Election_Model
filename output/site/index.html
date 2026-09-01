@@ -51,9 +51,10 @@
 *{box-sizing:border-box}
 html[dir="rtl"] body{font-family:"IBM Plex Sans Hebrew","IBM Plex Sans",sans-serif}
 html[dir="rtl"] h1,html[dir="rtl"] h2,html[dir="rtl"] h3{font-family:"IBM Plex Sans Hebrew","IBM Plex Sans",sans-serif;letter-spacing:0}
-html[dir="rtl"] .mono,html[dir="rtl"] .val,html[dir="rtl"] .pct,html[dir="rtl"] .dateline,
+html[dir="rtl"] .mono,html[dir="rtl"] .val,html[dir="rtl"] .pct,
 html[dir="rtl"] .axis,html[dir="rtl"] .eq{direction:ltr;unicode-bidi:isolate}
 html[dir="rtl"] .dateline{text-align:left}
+html[dir="rtl"] .chapter ul{padding-left:0;padding-right:22px}
 html[dir="rtl"] #hemiBlocs{direction:ltr}
 html[dir="rtl"] .trackwrap,html[dir="rtl"] .bar,html[dir="rtl"] .he .cell{direction:ltr}
 html[dir="rtl"] .eyebrow{letter-spacing:.02em}
@@ -225,7 +226,7 @@ body[data-view="method"] .annexhead{display:block;padding:34px 0 0}
 .contents a .fol{font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--muted);font-weight:600;min-width:20px}
 .chapter > h3{cursor:pointer;user-select:none}
 .chapter > h3:hover{color:var(--accent)}
-.chapter > h3 .tgl{margin-left:auto;font-family:"IBM Plex Mono",monospace;font-size:20px;font-weight:500;color:var(--muted)}
+.chapter > h3 .tgl{margin-inline-start:auto;font-family:"IBM Plex Mono",monospace;font-size:20px;font-weight:500;color:var(--muted)}
 .chapter.closed .chbody{display:none}
 .chbody{padding-top:2px}
 .nav a.active{background:var(--ink);color:var(--paper)}
@@ -517,9 +518,8 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
 
   <div class="chapter"><h3>The registration mixture</h3>
     <p>Until lists close on September 9, the forecast samples <b>registration events per
-    simulation</b>: the Smotrich–Feiglin technical bloc (0.31), the RZP-into-Likud absorption
-    the centre micro-list folds and the Erdan–Gantz union tail, each with sourced transfer
-    vectors. Resolved events collapse out of the mixture as they happen: Segalovitz joining Ra'am
+    simulation</b>: the centre micro-list folds and the Erdan–Gantz union tail, each with
+    sourced transfer vectors. Resolved events collapse out of the mixture as they happen: Segalovitz joining Ra'am
     became official on September 1, and the Smotrich–Feiglin (RZP–Zehut) technical bloc on
     September 2 — both are now certainties in every draw. The published forecast is the mixture; each
     event's marginal effect is read off the same draws (see the scenario board above). On filing
@@ -636,8 +636,7 @@ const HE_LEDE = {
  "formation":"כל כנסת מדומה עוברת דרך עץ הרכבה קואליציוני. ההנחות מגיעות מההיסטוריה המוסדית: מי חותם בשם כל מפלגה, אילו הבטחות נשברות, ובאיזה מחיר. עסקאות רוטציה מתומחרות בתוך כל קואליציה מנצחת.",
  "ground":"תוצאות רשמיות לכל יישוב, 2019 עד 2022, ממיינות את ישראל למגזרים פוליטיים. המושבים החזויים של כל רשימה מוקצים למגזרים שבהם גרים בוחריה. מספר ארצי חייב להיות בר־הצבעה בשטח.",
  "pollsters":"סוקרים ישראלים חלוקים בעד עשרה מנדטים על סך הגושים. המודל מודד את הנטייה של כל מכון ומשקלל את דיוקו; מכונים בבעלות משותפת נספרים כקול אחד, לא שניים.",
- "method":"הצינור הוא רצף; כל שלב צורך את קודמו. פרמטרים נמדדים על תשע מערכות בחירות, תמיד בהשמטת־מחזור. פרמטרים שיפוטיים מוצהרים, ממוסמכים ונבחנים בלחץ.",
- "annexnote":"פרקי הנספח המלאים מנוסחים באנגלית."};
+ "method":"הצינור הוא רצף; כל שלב צורך את קודמו. פרמטרים נמדדים על תשע מערכות בחירות, תמיד בהשמטת־מחזור. פרמטרים שיפוטיים מוצהרים, ממוסמכים ונבחנים בלחץ."};
 const HE_MISC = {
  "OUTCOME": {"Netanyahu rightist coalition":"קואליציה ימנית של נתניהו",
   "Netanyahu + centrist defector coalition":"נתניהו + עריק מהמרכז",
@@ -656,6 +655,41 @@ const HE_MISC = {
   "Haredi localities":"יישובים חרדיים","Religious-Zionist localities":"יישובי הציונות הדתית",
   "Russian-speaking localities":"יישובים דוברי רוסית"},
  "BLOC": {"anti":"המחנה נגד נתניהו","arab":"הרשימות הערביות","nb":"גוש נתניהו"}};
+const HE_FIRM = {"Lazar":"לזר","Midgam":"מדגם","Tatika":"טטיקה","Midgam Project":"פרויקט המדגם",
+ "Camil Fuchs":"קמיל פוקס","Kantar":"קנטאר","Maagar Mochot":"מאגר מוחות",
+ "Panels Politics":"פאנלס פוליטיקס","Direct Polls":"דיירקט פולס","Filber":"פילבר"};
+const HE_CH = [
+ {t:"מאגר הסקרים", b:`<p><b>1,857 סקרים, 22,681 תצפיות ברמת הרשימה, תשע מערכות בחירות (2009–2026)</b>, שנאספו מארכיוני הסקרים של ויקיפדיה באמצעות מפענח ייעודי (טיפול בטבלאות ממוזגות, שנים דו־ספרתיות, תאריכים בפורמט אמריקאי, זיהוי שורות תוצאה), והוצלבו מול <b>מרשם מפלגות</b> קנוני העוקב אחר כל מיזוג, פיצול וזהות גושית של כל רשימה לאורך 17 שנים — כך ש"ימינה 2021" ו"הימין החדש 2019" נפתרים לאובייקטים ברי־השוואה. עבור מחזור 2026 נאספים ישירות מ־gov.il קובצי הסקרים הגולמיים שהמכונים מחויבים בחוק להגיש לוועדת הבחירות המרכזית (19 הגשות עד כה); כאשר הגשה לוועדה תואמת סקר שפורסם, נתוני ההצבעה הגולמיים מן ההגשה החוקית מחליפים את המספרים הנגזרים ממנדטים.</p>`},
+ {t:"אפקטי בית ואמינות המכונים", b:`<p>הנטייה הגושית של כל מכון נאמדת בשיטת <b>השמטת־הסוקר־עצמו</b> מול הממוצע בן־הזמן של כל שאר המכונים, עם כיווץ אמפירי־בייסיאני למדגמים קטנים. מכונים בעלי בעלות או שושלת משותפת — שני חצאיה של פירמת פילבר/דיירקט פולס לשעבר, לזר/פאנלס פוליטיקס — חולקים <b>קבוצת מתאם</b>: השגיאות שלהם ממודלות כקול אחד, כך שחמישה סקרים מסכימים ממשפחת סקרים אחת לעולם אינם מתחזים לחמישה אישושים בלתי־תלויים. כרטיסי דיוק משמונה מערכות בחירות מדורגות קובעים את פריור הדיוק של כל מכון.</p>`},
+ {t:"מודל מרחב־המצבים הבייסיאני", b:`<p>מודל הייצור הוא מודל מסלול חבוי המותאם ב־NUTS&rlm; (PyMC). התמיכה האמיתית של כל רשימה מתנהלת כהילוך מקרי במרחב יחסי־לוג על גבי רשת זמן לא־אחידה — פחים שבועיים, המתהדקים לפחים של יומיים בחודש האחרון — ואי־הוודאות קדימה של ההיטל עוקבת אחר <b>לוח תנודתיות מדוד</b>: חלון גיבוש הרשימות (36–77 ימים לפני הבחירות) זז 1.3–1.5 מנדטים לשבוע ברשומה ההיסטורית, חמשת השבועות האחרונים רק 0.6–0.75, ולכן הרווחים מתהדקים אוטומטית עם סגירת הרשימות ב־9 בספטמבר. (עדריות סקרים נמדדה — פיזור השבוע האחרון עומד על כ־0.88 מפיזור אמצע הקמפיין — ובמכוון לא נספרה פעמיים: זעזועי יום הבחירות מותאמים על שגיאות הסקרים הסופיים, שכבר מכילות אותה.)</p>
+    <div class="eq">
+      z<sub>t</sub> = z<sub>t−1</sub> + √Δt · τ · ε<sub>t</sub>&nbsp;&nbsp;&nbsp;&nbsp;<i>תמיכה חבויה, מרחב ALR</i><br>
+      y<sub>p,ℓ</sub> ~ StudentT(4, softmax(z<sub>t(p)</sub>)<sub>ℓ</sub> + β<sub>g(p)</sub> + δ<sub>f(p)</sub>, σ<sub>p</sub>)&nbsp;&nbsp;&nbsp;&nbsp;<i>תצפית סקר</i><br>
+      σ<sub>p</sub> = s<sub>obs</sub> / √λ<sub>f(p)</sub> · exp(β<sub>u</sub> · u<sub>p</sub>)&nbsp;&nbsp;&nbsp;&nbsp;<i>הרעש גדל עם רקורד המכון והמתלבטים</i>
+    </div>
+    <p>אפקטי הבית β מקוננים בתוך קבוצות המתאם של המכונים; משקלי המכונים λ נושאים פריורים לוג־נורמליים המרוכזים סביב הדיוק ההיסטורי של כל מכון; β<sub>u</sub> הוא מקדם <b>נאמד</b> המאפשר לשיעור המתלבטים המדווח להרחיב את רעש הסקר (פוסטריור: פי 1.01 רעש לכל &lrm;+5 נק׳ מתלבטים). ההתאמה הנוכחית: 0 דיברגנציות, r̂ ≤ 1.02, ומבחן חוץ־מדגם חי — התאמה מחדש ללא 14 הימים האחרונים — החוזה את הסקרים שהוחזקו בחוץ עם <b>שגיאה חציונית של 0.72 מנדטים</b>.</p>`},
+ {t:"פירוק השגיאות", b:`<p>סקרים מחטיאים בחירות בדרכים בעלות מבנה. פירוק סדרתי של שמונה מערכות הבחירות המדורגות (כל אחת נאמדת בהשמטת־מחזור, כך שאף מחזור אינו מדרג את עצמו) מפצל את שגיאת הסקרים הסופיים לשכבות אורתוגונליות, שהופכות לזעזועי ההיטל — דבר אינו נספר פעמיים:</p>
+    <ul>
+      <li><b>תנודת גוש</b> — ס״ת 3.36 מנדטים, שגיאת הימין/שמאל המתואמת (התפלגות t עם 5 דרגות חופש), מוכפלת ב־1.2 במחזור הזה בשל סיכון אירועים מוגבר;</li>
+      <li><b>זעזועי מגזר</b> — רשימות חרדיות נחסרות בסקרים ב־1.35 ± 1.77 מנדטים; רשימות ערביות &lrm;−0.32 ± 1.45 (שגיאת השתתפות, לא הטיה);</li>
+      <li><b>עוגנים</b> — הליכוד מכה את סקריו ב־2.30 מנדטים בממוצע (רקורד ה"גֶוַואלד": &lrm;+8.4 ב־2015, &lrm;+6.7 באפריל 2019, ≈0 בשאר); המפלגה המובילה בסקרים מפגרת אחריהם ב־1.74;</li>
+      <li><b>זעזוע שיורי לרשימה</b> — 1.83 + 0.044·מנדטים, עם מכפיל ×1.35 לרשימות במחזור ראשון (נמדד: סקריהן הסופיים של מפלגות חדשות אינם מוטים אך רועשים ב־35% יותר) וכיול אלקטורט־נאמן לרשימות ותיקות מגזריות — ש״ס מעולם לא החטיאה את סקריה הסופיים כלפי מטה ביותר מחצי מנדט בשמונה מחזורים, ולכן ש״ס, יהדות התורה וישראל ביתנו מכווצות לתנודתיות ההיסטורית המדודה שלהן (חיץ חדשנות ×1.5) במקום לרוחב המאוחד;</li>
+      <li><b>שבירת מתלבטים מדודה</b> — מאגר המתלבטים של 2026 (12% מן הבוחרים) נוטה 55/16 לעבר מועמד שאינו נתניהו (N12/מדגם), היפוך סימן של השבירה המאוחרת ההיסטורית; מיושמת בחצי משקל (כ־1.6 מנדטים, ס״ת השווה לממוצע) לעבר מחנה השינוי, עם גילוי מלא של השבריריות: הנטייה נשענת על כ־60 משיבים ונמדדת מחדש עם כל סקר ודאות חדש;</li>
+      <li><b>צימוד הגוואלד</b> — העברה בסכום אפס (ס״ת 2.0 מנדטים) בין הליכוד ללווייני הגוש שלו, כך שמיתות סף של לוויינים מתרחשות יחד עם זינוקי ליכוד, כפי שקרה ב־2015 וב־2019.</li>
+    </ul>`},
+ {t:"תשתית הקלפיות", b:`<p>מתחת למספרים הארציים שוכנת רשומת הקלפיות: תוצאות רשמיות של ועדת הבחירות לכל יישוב בחמש מערכות הבחירות 2019–2022, מותאמות לשושלות המפלגות דרך אותיות הקלפי של כל מחזור (מאומתות מול הסיכומים הארציים, כך שאות שגויה אינה יכולה להרעיל את הפאנל בשקט). היישובים מתקבצים למגזרים פוליטיים לפי פרופילי ההצבעה שלהם עצמם — הגאוגרפיה האלקטורלית הישראלית מופרדת דיה כדי שהפרופילים ישחזרו את המגזרים כמעט במדויק, יחד עם ההשתתפות המדודה שלהם (חרדים 76%, ערבים 54%, ציונות דתית 76%). שלושה תוצרים מזינים את התחזית: <b>טבלת פוסט־סטרטיפיקציה</b> המקצה את מנדטיה החזויים של כל רשימת 2026 למגזרים שמהם היא שואבת — ודרכה <b>קיטום קיבולת</b> של הפוסטריור: סימולציות שבהן הרשימות הערביות חורגות יחד ממה שהשתתפות המגזר הערבי מסוגלת פיזית להטיל (כ־16.3% מהקולות), או שבהן ש״ס+יהדות התורה נופלות מתחת לרצפה הדמוגרפית החרדית (כ־6.7%), נחתכות אל הגבול האפשרי (כל תנאי גזם כ־1.5% מהדגימות); <b>מתאם מדוד של &lrm;+0.92 בין גאויות המגזר החרדי והערבי</b> (שניהם מגזרי מכונת־השתתפות), המכווץ ל־0.5 בשל ארבעה מעברים נצפים בלבד ומחווט אל זעזועי המשפחה של ההיטל, שנדגמו קודם לכן באופן בלתי־תלוי; ובסיס היישובים למנוע ליל הבחירות. תוצאה שלילית כנה מתועדת לצדם: תנודות ברמת המגזר <em>אינן</em> עוברות בין זוגות בחירות (השמטת־מחזור: תנודה ארצית אחידה חוזה יישובים בשגיאה ממוצעת של 1.20 נק׳, והוספת תנודות מגזר היסטוריות נותנת 1.31) — סיפור המגזר של כל מחזור הוא שלו בלבד, ולכן שכבת המגזרים מזינה מתאמים וקיבולת, לא תנודות נקודתיות. משקלי השושלות מכוילים בנוסף מול מטריצות מעבר־הקולות המדודות ברמת הקלפי של פרויקט הקוד הפתוח <a href="https://kolot-nodedim.netlify.app/" rel="noopener">קולות נודדים</a> (אמידה קמורה מאולצת על כ־7,000 קלפיות מותאמות לכל זוג בחירות, R²&rlm; 0.89 עבור 2021→2022), שאומדני הלכידות שלו לכל מפלגה משחזרים באופן בלתי־תלוי את סדר האלקטורטים הנאמנים של המודל הזה — ושמדידות פיזור־היתר שלו (קלפי של 340 מצביעים מתנהגת כ־30–120 הגרלות בלתי־תלויות בלבד) יניעו את מודל הרעש של מנוע ליל הבחירות באוקטובר.</p>`},
+ {t:"אחוז החסימה ובדר–עופר", b:`<p>כל וקטור קולות מדומה עובר את מבחן אחוז החסימה של 3.25%, ואז המנדטים מוקצים בשיטה הישראלית האמיתית: <b>בדר–עופר</b> (ד'הונדט על עודפים), כאשר הסכמי עודפים חתומים מטופלים כרשימות משותפות בשלב העודפים — שווי מדוד של &lrm;+0.5 עד &lrm;+0.9 מנדטים צפויים לכל זוג. קולותיהן של רשימות שנפלו מתחלקים מחדש בין השורדות — וכך גוש יכול להפסיד בקולות ולנצח בכנסת.</p>`},
+ {t:"תערובת אירועי ההרשמה", b:`<p>עד סגירת הרשימות ב־9 בספטמבר, התחזית דוגמת <b>אירועי הרשמה בכל סימולציה</b>: קיפולי המיקרו־רשימות במרכז וזנב האיחוד ארדן–גנץ, כל אחד עם וקטורי העברה ממוסמכים. אירועים שהוכרעו קורסים החוצה מן התערובת עם התרחשותם: הצטרפות סגלוביץ׳ לרע״ם הפכה רשמית ב־1 בספטמבר, והגוש הטכני סמוטריץ׳–פייגלין (הציונות הדתית–זהות) ב־2 בספטמבר — שניהם כעת ודאויות בכל דגימה. התחזית המתפרסמת היא התערובת; ההשפעה השולית של כל אירוע נקראת מאותן דגימות עצמן. ביום ההגשה התערובת קורסת אל התצורה האמיתית והמודל מותאם מחדש.</p>`},
+ {t:"עץ ההרכבה", b:`<p>מנדטים אינם כוח. כל כנסת מדומה עוברת רצף הרכבה מפורש — גוש נתניהו תחילה, אחר כך רוב מרכז, מרכז+רע״ם, עריקה חרדית, מיעוט בהימנעויות, הפרת התחייבות, אחדות, בחירות חוזרות — עם פרמטרים התנהגותיים הנגזרים ממחקר מוסדי: מי באמת חותם בשם כל מפלגה (מועצת חכמי התורה של ש״ס, שתי המועצות של יהדות התורה, עצמאותה של רע״ם שלאחר ביטול וטו השורא), הרקורד הנגלה של כל מנהיג בצמתים קודמים (התהפוכות של ליברמן, הפרת ההתחייבות של בנט ב־2021, גנץ ב־2020), ושיעורי בסיס היסטוריים (בחירות חוזרות באו אחרי 2 מתוך 4 מבואות סתומים; אחדות פתרה את מחציתם; שום ממשלת מיעוט מעולם לא הושבעה מיומה הראשון). עמך ישראל של וינטר מקודדת כ<b>קשיחות אנטי־אייזנקוט</b>, לא כחברת גוש ימין גנרית: היא יכולה להצטרף לממשלת מרכז בראשות בנט, אך כמעט לעולם לא לממשלה בראשות אייזנקוט.</p>`},
+ {t:"הקצאת ראשות הממשלה", b:`<p>בתוך כל קואליציה מנצחת, ראשות הממשלה מוקצית בהסתברויות מודעות־רוטציה (בנט היה ראש ממשלה עם 7 מנדטים ב־2021 — היגיון "המפלגה הגדולה" אינו היגיון ישראלי), המתהפכות כאשר ביחד עוקפת את ישר בדגימה. השכבה הזאת נבחנה מול שמונה תוצאות ההרכבה האמיתיות מאז 2009: לוג־לוס ממוצע &lrm;−0.92, והיא מעניקה לתוצאה שהתממשה את ההסתברות הגבוהה ביותר בחמישה משמונה מחזורים.</p>`},
+ {t:"פריורים של מומחים, מתועדים", b:`<p>כל מספר שיפוטי מתחקה אל דוסייה כתוב שחובר משישה שולחנות מחקר: שיעורי בסיס של הרכבת קואליציות 1992–2022, רשומת שגיאות הסקרים הישראלית המלאה 1996–2022, מוסדות מפלגתיים וביוגרפיות מנהיגים, סוציולוגיה אלקטורלית וזרימות קולות, שוקי חיזוי ויסודות מבניים, ודינמיקת הישורת האחרונה. היכן שהשולחנות חלקו על המודל — המודל זז; היכן שהשוק חולק על המודל (פולימרקט מתמחר את אייזנקוט כראש הממשלה בכ־50%; אנחנו אומרים 33%), הדוסייה מתעד מדוע אנו עומדים על שלנו: שוקי הפרלמנט־התלוי והממשלה־עד־דצמבר של אותו שוק עצמו אינם עקביים עם מספר הכותרת שלו.</p>`},
+ {t:"אימות: המודל בוחן את עצמו", b:`<p>כל שכבה מותנית במבחן־עבר של שמונה מחזורים (2013–2022, בהשמטת־מחזור; 2009 זורע את הפריורים). המתקן מריץ מחדש את הצינור המלא כפי שהיה ערב כל מערכת בחירות ומדרג אותו מול התוצאה האמיתית. שינויים שנכשלו במבחן נדחו ותועדו — ובהם מודול דינמיקת ישורת אחרונה והתאמה היררכית רב־מחזורית שנותרו מחקריים בלבד.</p>
+    <div class="tblwrap"><table>
+      <thead><tr><th>מדד (מבחן־עבר, 8 מחזורים)</th><th class="num">הצינור הפשוט</th><th class="num">המודל הבייסיאני</th></tr></thead>
+      <tbody id="valTbl"></tbody>
+    </table></div>
+    <p class="note" style="margin-top:10px">שני המודלים מחלקים ביניהם את העבודה: הצינור המשוקלל הפשוט קובע את המנדטים המרכזיים (דיוק נקודתי טוב יותר); המודל הבייסיאני מחזיק בכל רווח והסתברות (כיול טוב יותר, והוא מנצח במבחן החי של 2026: 0.80 מול 1.09 מנדטים חציוניים). מיזוג נבחן ונדחה — השגיאות מתואמות ב־0.93, ולכן מיזוג אינו קונה דבר.</p>`}];
+
 function trStatic(){
   if (!HEB_MODE) return;
   const walk = sel => document.querySelectorAll(sel).forEach(el => {
@@ -676,15 +710,23 @@ function trStatic(){
     el.innerHTML = [ 'מושבו של סגלוביץ׳ נספר בשניהם',
       'הגוש מגיע ל־61 · ממוצע <span class="mono" id="tNbMean"></span> מושבים',
       'אין רוב לאף צד, כשרע״ם נספרת עם מחנה השינוי'][i] || el.innerHTML; });
-  const mn = document.querySelector("#method .lede");
-  if (mn) mn.insertAdjacentHTML("afterend",
-    '<p class="note" style="margin-top:-12px;margin-bottom:20px">'+HE_LEDE.annexnote+'</p>');
+  document.querySelectorAll(".chapters .chapter").forEach((ch, i) => {
+    const c = HE_CH[i]; if (!c) return;
+    const h = ch.querySelector("h3"); h.textContent = c.t;
+    [...ch.children].forEach(n => { if (n !== h) n.remove(); });
+    h.insertAdjacentHTML("afterend", c.b);
+  });
+  const ft = document.querySelector("footer .wrap");
+  if (ft) ft.innerHTML = '<div>מודל הכנסת · תחזית ציבורית רשומה־מראש · המתודולוגיה הוקפאה לפני יום הבחירות<br>נתוני סקרים: ארכיוני ויקיפדיה + הגשות לוועדת הבחירות המרכזית · התאמה: PyMC/NUTS · כל הפרמטרים ממוסמכים במאגר</div>'
+    + '<div style="text-align:left">נבנה על ידי עידו הרלינג<br><span class="mono" id="foot-asof"></span></div>';
   // the rewrites above recreated these spans - refill from the data
   document.getElementById("asof").textContent = D.asof;
   document.getElementById("tminus").textContent =
     Math.round((new Date("2026-10-27") - new Date(D.asof)) / 864e5);
   const nbm = document.getElementById("tNbMean");
   if (nbm) nbm.textContent = D.blocs.nb_mean.toFixed(1);
+  const fa = document.getElementById("foot-asof");
+  if (fa) fa.textContent = "נתונים נכונים ל־" + D.asof;
 }
 
 const $ = s => document.querySelector(s);
@@ -1044,13 +1086,16 @@ renderBlocHist("anti");
   $("#he").innerHTML = h.map(x=>{
     const w = Math.abs(x.he)/mx*50;
     const side = x.he>=0 ? `left:50%;width:${w}%` : `left:${50-w}%;width:${w}%`;
-    return `<div class="row"><div style="font-weight:600">${x.p} <span class="mono" style="color:var(--muted);font-weight:400">n=${x.n}</span></div>
+    const nm = HEB_MODE ? (HE_FIRM[x.p] || x.p) : x.p;
+    return `<div class="row"><div style="font-weight:600">${nm} <span class="mono" style="color:var(--muted);font-weight:400">n=${x.n}</span></div>
     <div class="cell"><span class="zero"></span><i style="${side};background:var(--accent);position:absolute;top:0;height:14px"></i></div>
     <div class="mono" style="text-align:right;font-size:13px">${x.he>0?"+":"\u2212"}${Math.abs(x.he).toFixed(1)}</div></div>`;
-  }).join("") + `<p class="note" style="margin-top:12px">House effect on the Netanyahu bloc, in seats,
+  }).join("") + (HEB_MODE
+   ? `<p class="note" style="margin-top:12px">אפקט הבית על גוש נתניהו, במנדטים, מול ממוצע השמטת־הסוקר־עצמו, מחזור 2026: עמודות מימין לקו נוטות לעבר גוש נתניהו, עמודות משמאלו — ממנו והלאה. פילבר ודיירקט פולס — שני חצאיה של פירמה אחת לשעבר — ממודלים כקול מתואם אחד.</p>`
+   : `<p class="note" style="margin-top:12px">House effect on the Netanyahu bloc, in seats,
   vs the leave-own-pollster-out average, 2026 cycle: bars right of the line lean toward the
   Netanyahu bloc, bars left of it lean away. Filber and Direct Polls — two halves of one former firm — are modeled as a
-  single correlated voice.</p>`;
+  single correlated voice.</p>`);
 })();
 
 /* ---- readability: chapter accordion + contents + scrollspy + btt ---- */
@@ -1157,11 +1202,16 @@ renderBlocHist("anti");
 /* ---- validation table ---- */
 (function(){
   const v = D.val;
+  const VL = HEB_MODE
+   ? ["שגיאת מנדטים מוחלטת ממוצעת לרשימה","כיסוי רווחי 90% (יעד 90%)","ציון ברייר לאחוז החסימה",
+      "מבחן חי 2026 (14 יום, שגיאה חציונית)","תפקיד בתחזית המתפרסמת","מנדטים מרכזיים","רווחים והסתברויות"]
+   : ["Mean absolute seat error per list","90% interval coverage (target 90%)","Threshold Brier score",
+      "Live 2026 holdout (14-day, median |error|)","Role in the published forecast","central seats","intervals &amp; probabilities"];
   $("#valTbl").innerHTML = `
-   <tr><td>Mean absolute seat error per list</td><td class="mono">${v.simple.mae}</td><td class="mono">${v.bayes.mae}</td></tr>
-   <tr><td>90% interval coverage (target 90%)</td><td class="mono">${v.simple.cov}%</td><td class="mono">${v.bayes.cov}%</td></tr>
-   <tr><td>Threshold Brier score</td><td class="mono">${v.simple.brier}</td><td class="mono">${v.bayes.brier}</td></tr>
-   <tr><td>Live 2026 holdout (14-day, median |error|)</td><td class="mono">1.09</td><td class="mono">0.72</td></tr>
-   <tr><td>Role in the published forecast</td><td>central seats</td><td>intervals &amp; probabilities</td></tr>`;
+   <tr><td>${VL[0]}</td><td class="mono">${v.simple.mae}</td><td class="mono">${v.bayes.mae}</td></tr>
+   <tr><td>${VL[1]}</td><td class="mono">${v.simple.cov}%</td><td class="mono">${v.bayes.cov}%</td></tr>
+   <tr><td>${VL[2]}</td><td class="mono">${v.simple.brier}</td><td class="mono">${v.bayes.brier}</td></tr>
+   <tr><td>${VL[3]}</td><td class="mono">1.09</td><td class="mono">0.72</td></tr>
+   <tr><td>${VL[4]}</td><td>${VL[5]}</td><td>${VL[6]}</td></tr>`;
 })();
 </script>
