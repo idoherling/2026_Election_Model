@@ -296,8 +296,12 @@ def main() -> None:
     # toward the anti-bloc 61 whenever Ra'am wins at least 2 seats.
     anti = seats[:, blocs == "opposition_bloc"].sum(axis=1)
     _ri = next((i for i, l in enumerate(labels) if l == "Ra'am"), None)
+    raam_seats = seats[:, _ri] if _ri is not None else np.zeros(len(seats))
     if _ri is not None:
-        anti = anti + (seats[:, _ri] >= 2).astype(int)
+        anti = anti + (raam_seats >= 2).astype(int)
+    # "with Ra'am": the full party joins the camp (Segalovitz's seat is
+    # inside Ra'am's total, so start from the raw opposition sum).
+    anti_raam = seats[:, blocs == "opposition_bloc"].sum(axis=1) + raam_seats
 
     dist = pd.DataFrame({
         "list": labels,
@@ -315,7 +319,9 @@ def main() -> None:
     summary = pd.DataFrame([{
         "p_nb_61": round(float((nb >= 61).mean()), 3),
         "p_anti_61": round(float((anti >= 61).mean()), 3),
-        "p_neither": round(float(((nb < 61) & (anti < 61)).mean()), 3),
+        "p_anti_raam_61": round(float((anti_raam >= 61).mean()), 3),
+        # deadlock counts Ra'am with the change bloc (owner definition)
+        "p_neither": round(float(((nb < 61) & (anti_raam < 61)).mean()), 3),
         "nb_mean": round(float(nb.mean()), 1),
         "nb_p05": int(np.percentile(nb, 5)),
         "nb_p95": int(np.percentile(nb, 95)),
