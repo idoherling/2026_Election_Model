@@ -80,8 +80,14 @@ BEHAVIOR = {
     # Aug 16) but every Jewish party still pledges no Arab party INSIDE
     # at the outset — entry is modeled as post-formation expansion,
     # hence joins < supports.
-    "raam_joins": 0.40,
     "raam_supports": 0.60,
+    # Owner taxonomy 2026-09-02: no Ra'am-inside branch — Ra'am matters
+    # through the with-Ra'am majority arithmetic and outside support.
+    # If deadlock persists to a repeat election, does Likud replace
+    # Netanyahu first? Institutions desk: he trades everything except
+    # political existence (kalon precedent), but a failed formation +
+    # the trial + the Herzog shuttle move some mass.
+    "bibi_out_by_repeat": 0.25,
     # JL revived with Jabareen #1/Tibi #2 (ToI late Aug); Hadash-led list
     # likelier to abstain constructively than Balad-led; Tibi placated.
     "jl_supports": 0.45,
@@ -136,11 +142,14 @@ BEHAVIOR = {
 # to zero at the owner's call.
 #           Eisenkot  Bennett  Liberman  Lapid  other
 PM_ALLOC = {
-    2: [0.75, 0.19, 0.04, 0.00, 0.02],   # centre coalition
-    3: [0.75, 0.19, 0.04, 0.00, 0.02],   # centre + Ra'am
-    4: [0.64, 0.31, 0.00, 0.00, 0.05],   # centre-haredi: right-cred PM helps,
-                                          # Liberman is a dealbreaker for haredim
-    5: [0.75, 0.19, 0.04, 0.00, 0.02],   # centre minority
+    2: [0.75, 0.19, 0.04, 0.00, 0.02],   # change coalition (pure)
+    3: [0.70, 0.25, 0.02, 0.00, 0.03],   # with Amcha: exists mostly in
+                                          # Bennett-led draws - the flip rule
+                                          # makes Bennett the modal PM there
+    4: [0.64, 0.31, 0.00, 0.00, 0.05],   # with a haredi party: right-cred PM
+                                          # helps, Liberman a dealbreaker
+    5: [0.85, 0.10, 0.02, 0.00, 0.03],   # JL-backed minority: explicitly
+                                          # Eisenkot's own doctrine
     6: [0.35, 0.10, 0.05, 0.00, 0.50],   # unity: Likud successor/rotation heavy
 }
 PM_NAMES = ["Eisenkot", "Bennett", "Liberman", "Lapid",
@@ -155,13 +164,13 @@ PM_NAMES = ["Eisenkot", "Bennett", "Liberman", "Lapid",
 BEHAVIOR_NEFF = {
     "amcha_right": 35,          # public, repeated pledge
     "amcha_center": 12,         # analog reasoning (Bennett-led condition)
-    "raam_joins": 18,           # desk-triangulated, deal now official
     "raam_supports": 18,
     "jl_supports": 14,          # one Jabareen signal + precedent
     "shas_defects": 30,         # institutional (psak mechanism, re-lock)
     "utj_defects": 16,          # full/partial blend, two councils
     "liberman_haredi_ok": 25,   # identity veto, held at every fork
     "liberman_minority_ok": 14, # doctrine vs veto, genuinely uncertain
+    "bibi_out_by_repeat": 12,   # soft judgment, kalon precedent vs pressure
     "likud_sans_bibi": 20,      # base rates + kalon precedent
     "centre_defects": 25,       # graded on the 2020 realization
 }
@@ -173,14 +182,15 @@ PM_ALLOC_NEFF = 60              # Dirichlet concentration on rotation rows
 AMCHA_JOIN_EISENKOT = 0.03
 
 OUTCOMES = [
-    "Netanyahu coalition",
-    "Netanyahu-led with centre defector (pledge-break)",
-    "Centre coalition (own majority)",
-    "Centre + Ra'am",
-    "Centre-haredi coalition",
-    "Centre minority (outside support)",
-    "Unity govt (Likud without Netanyahu)",
-    "No government -> repeat election",
+    "Netanyahu rightist coalition",
+    "Netanyahu + centrist defector coalition",
+    "Change coalition (without Ra'am)",
+    "Change coalition with Amcha",
+    "Change coalition with a haredi party",
+    "Centre minority backed by the Joint List",
+    "Unity government (Likud without Netanyahu)",
+    "Repeat election - Netanyahu still leads Likud",
+    "Repeat election - after Netanyahu is replaced",
 ]
 
 
@@ -237,7 +247,7 @@ def simulate_formation(draws: pd.DataFrame, behavior: dict, seed=SEED,
         [u[:, 0] < behavior["amcha_right"],
          u[:, 0] < behavior["amcha_right"] + amcha_center_eff],
         [1, 2], default=0)  # 1 right, 2 centre, 0 neither
-    raam_joins = u[:, 1] < behavior["raam_joins"]
+    bibi_out = u[:, 1] < behavior["bibi_out_by_repeat"]
     raam_supports = u[:, 2] < behavior["raam_supports"]
     jl_supports = u[:, 3] < behavior["jl_supports"]
     shas_on = u[:, 4] < behavior["shas_defects"]
@@ -245,40 +255,46 @@ def simulate_formation(draws: pd.DataFrame, behavior: dict, seed=SEED,
     sans_bibi = u[:, 5] < behavior["likud_sans_bibi"]
 
     nb = nb_core + np.where(amcha_side == 1, amcha, 0)
-    # Segalovitz's own seat (Ra'am slot #2, deal official Sept 1) is a
-    # centre vote: it counts toward the centre's 61 whenever Ra'am wins
-    # at least 2 seats, and Ra'am-as-party contributes the remainder in
-    # the joins/supports branches (no double count).
+    # Segalovitz's own seat (Ra'am slot #2, official) is a centre vote:
+    # counted whenever Ra'am wins >=2 seats; Ra'am-as-party contributes
+    # only outside support in this taxonomy (no Ra'am-inside branch).
     seg = (raam >= 2).astype(int)
-    ce = centre + np.where(amcha_side == 2, amcha, 0) + seg
-    raam = raam - seg
+    ce_pure = centre + seg                        # WITHOUT Amcha
+    amcha_ce = np.where(amcha_side == 2, amcha, 0)
 
-    outcome = np.full(n, 7)  # default: repeat election (last index)
-    outcome[np.where((ce + draws["Likud"].values >= 61) & sans_bibi)] = 6
+    # default: repeat election, split by whether Likud replaces
+    # Netanyahu before the re-run
+    outcome = np.where(bibi_out, 8, 7)
+    outcome[np.where((ce_pure + amcha_ce
+                      + draws["Likud"].values >= 61) & sans_bibi)] = 6
     # pledge-break: some centre list can close Netanyahu's gap and does
     centre_seats = draws[CENTRE].values
     gap = (61 - nb)[:, None]
     feasible = ((centre_seats >= gap) & (gap > 0)).any(axis=1)
     outcome[np.where((u[:, 6] < behavior["centre_defects"]) & feasible)] = 1
+    # minority: sworn by plurality with the JOINT LIST abstaining (the
+    # named backer); a Ra'am abstention additionally lowers the bar
     yb = draws["Yisrael Beytenu"].values
-    abstaining = (np.where(raam_supports & ~raam_joins, raam, 0)
-                  + np.where(jl_supports, jl, 0))
+    abstaining = (np.where(jl_supports, jl, 0)
+                  + np.where(raam_supports, raam - seg, 0))
     present = 120 - abstaining
     lib_ok = rng.random(n) < behavior["liberman_minority_ok"]
-    minority_ce = np.where(lib_ok, ce, ce - yb)
-    outcome[np.where((abstaining > 0)
+    minority_ce = np.where(lib_ok, ce_pure, ce_pure - yb)
+    outcome[np.where(jl_supports & (abstaining > 0)
                      & (minority_ce > present / 2))] = 5
     defecting_haredi = (np.where(shas_on, draws["Shas"].values, 0)
                         + np.where(utj_on,
                                    draws["United Torah Judaism"].values, 0))
-    # Liberman won't sit WITH haredim (identity veto, ~0.80 held): the
-    # centre-haredi coalition is either centre-minus-YB + haredim, or
-    # needs his rare relent.
+    # Liberman won't sit WITH haredim (identity veto, ~0.80 held)
     lib_haredi = rng.random(n) < behavior["liberman_haredi_ok"]
-    ch_seats = np.where(lib_haredi, ce, ce - yb) + defecting_haredi
+    ch_base = ce_pure + amcha_ce
+    ch_seats = np.where(lib_haredi, ch_base, ch_base - yb) + defecting_haredi
     outcome[np.where((ch_seats >= 61) & (defecting_haredi > 0))] = 4
-    outcome[np.where((ce + raam >= 61) & raam_joins)] = 3
-    outcome[np.where(ce >= 61)] = 2
+    # change coalition WITH Amcha: the camp is short alone, Winter's
+    # seats close it, and he joins (conditional on a Bennett-led draw)
+    outcome[np.where((ce_pure < 61)
+                     & (ce_pure + amcha_ce >= 61))] = 3
+    outcome[np.where(ce_pure >= 61)] = 2
     outcome[np.where(nb >= 61)] = 0
 
     pm = np.full(n, "none (repeat election)", dtype=object)

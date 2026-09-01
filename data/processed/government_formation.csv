@@ -1,9 +1,10 @@
 outcome,probability,p05,p95
-Netanyahu coalition,0.15,0.144,0.156
-Netanyahu-led with centre defector (pledge-break),0.044,0.013,0.088
-Centre coalition (own majority),0.353,0.352,0.354
-Centre + Ra'am,0.069,0.04,0.108
-Centre-haredi coalition,0.036,0.015,0.068
-Centre minority (outside support),0.023,0.008,0.04
-Unity govt (Likud without Netanyahu),0.06,0.02,0.116
-No government -> repeat election,0.264,0.206,0.32
+Netanyahu rightist coalition,0.15,0.143,0.156
+Netanyahu + centrist defector coalition,0.05,0.014,0.102
+Change coalition (without Ra'am),0.349,0.349,0.349
+Change coalition with Amcha,0.004,0.003,0.005
+Change coalition with a haredi party,0.045,0.019,0.076
+Centre minority backed by the Joint List,0.025,0.008,0.05
+Unity government (Likud without Netanyahu),0.067,0.022,0.122
+Repeat election - Netanyahu still leads Likud,0.235,0.156,0.321
+Repeat election - after Netanyahu is replaced,0.075,0.024,0.142

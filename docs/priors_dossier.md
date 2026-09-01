@@ -291,3 +291,19 @@ while pledge-break [1.3-8.8], unity [2.3-11.6] and Centre+Ra'am
 [5.1-13.5] are parameter-dominated - the honest map of which published
 claims rest on assumptions vs seat math. pm_probabilities.csv now
 feeds the site directly (hardcoded values removed).
+
+## 14. Addendum (2026-09-02): owner formation taxonomy
+
+Formation outcomes restructured to the owner's eight-plus-one list:
+NB rightist / NB+centrist defector / change (without Ra'am, Segalovitz
+seat counted) / change+Amcha / change+haredi (Shas or UTJ) / JL-backed
+minority / unity sans Netanyahu / repeat split into Netanyahu-stays vs
+Netanyahu-replaced (new bibi_out_by_repeat 0.25, NEFF 12). The
+Ra'am-inside branch is REMOVED per owner judgment - Ra'am enters the
+model through the with-Ra'am majority arithmetic, the Segalovitz seat,
+and abstention assistance to the JL-backed minority. Scenario-specific
+PM rows: JL minority is Eisenkot's own doctrine (0.85); change+Amcha
+exists mostly in Bennett-led draws (flip rule makes Bennett modal
+there). Result: outcome table above; PM Eisenkot 33.5 [29.8-37.2] /
+none 31.1 (23.5 with Bibi + 7.5 replaced) / Netanyahu 19.9 / Bennett
+9.4.
