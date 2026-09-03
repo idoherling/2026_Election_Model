@@ -77,7 +77,8 @@ SURPLUS_PAIRS = [
 ]
 
 BLOC_LABEL = {"netanyahu_bloc": "Netanyahu bloc",
-              "opposition_bloc": "Anti-Netanyahu bloc", "other": "Arab parties"}
+              "opposition_bloc": "Anti-Netanyahu bloc", "other": "Arab parties",
+              "unaligned": "Unaligned"}
 BLUE = "#2a78d6"
 
 

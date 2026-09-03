@@ -52,8 +52,13 @@ SEED = 20261027
 NB_CORE = ["Likud", "Otzma Yehudit", "Shas", "United Torah Judaism",
            "Religious Zionist Party", "Noam", "Zehut"]
 CENTRE = ["Yashar", "Bennett 2026 + Yesh Atid", "The Democrats",
-          "Yisrael Beytenu", "Zionist Home – The Reservists",
-          "Blue and White", "Unity"]
+          "Yisrael Beytenu", "Zionist Home – The Reservists"]
+# Kingmakers (owner ruling 2026-09-03): neither list is a change-bloc
+# member. Each draw sends its seats right, centre, or neither by the
+# side priors below (Gantz: 2020 precedent of joining Netanyahu; Erdan
+# and Edelstein: Likud alumni).
+UNALIGNED = {"Blue and White": ("bw_right", "bw_centre"),
+             "Unity": ("unity_right", "unity_centre")}
 HAREDI = ["Shas", "United Torah Judaism"]
 JOINT_LIST = "Balad + Hadash-Ta'al"
 RAAM = "Ra'am"
@@ -126,6 +131,9 @@ BEHAVIOR = {
     # for 2026, where all four centre parties were founded on never-Bibi —
     # as was Gantz's in 2019, which is why it isn't zero.
     "centre_defects": 0.12,
+    # Kingmaker side priors (declared; residual = sits out / opposition)
+    "bw_right": 0.40, "bw_centre": 0.45,
+    "unity_right": 0.60, "unity_centre": 0.25,
 }
 
 # PM allocation WITHIN a winning coalition — rotations are the Israeli norm
@@ -161,6 +169,7 @@ PM_NAMES = ["Eisenkot", "Bennett", "Liberman", "Lapid",
 # triangulated judgment. Drawn per hierarchical replication so the PM
 # probabilities carry parameter uncertainty, not just seat uncertainty.
 BEHAVIOR_NEFF = {
+    "bw_right": 10, "bw_centre": 10, "unity_right": 12, "unity_centre": 10,
     "amcha_right": 35,          # public, repeated pledge
     "amcha_center": 12,         # analog reasoning (Bennett-led condition)
     "raam_supports": 18,
@@ -284,6 +293,19 @@ def simulate_formation(draws: pd.DataFrame, behavior: dict, seed=SEED,
     seg = (raam >= 2).astype(int)
     ce_pure = centre + seg                        # WITHOUT Amcha
     amcha_ce = np.where(amcha_side == 2, amcha, 0)
+
+    # kingmakers: seats go right or centre by their side priors
+    una_r = np.zeros(n)
+    una_c = np.zeros(n)
+    for name, (kr, kc) in UNALIGNED.items():
+        if name not in draws.columns:
+            continue
+        sv = draws[name].values
+        uu = rng.random(n)
+        una_r += np.where(uu < behavior[kr], sv, 0)
+        una_c += np.where((uu >= behavior[kr]) & (uu < behavior[kr] + behavior[kc]), sv, 0)
+    nb = nb + una_r
+    ce_pure = ce_pure + una_c
 
     # --- configuration-conditional gates (see COND) ---
     gap_nb = 61.0 - nb

@@ -467,3 +467,19 @@ retained for identification of moving leans, not for holdout gain).
 The precision weights already grade each firm's FINAL poll against the
 result (backtest.py scorecard -> quality_map), so "final-poll weighting"
 needed no change.
+
+## 22. Blue and White and Unity are kingmakers, not change-bloc lists (2026-09-03)
+
+Owner ruling. Gantz sat in Netanyahu's 2020 government; Unity is Erdan
+and Edelstein, Likud alumni. Both registry rows carried a "VERIFY bloc
+assignment" flag from the first pass. Treatment: bloc "unaligned" —
+their seats count toward NEITHER 61 in the headline bloc arithmetic
+(they are kingmakers when they pass), and the formation tree sends each
+list's seats right / centre / neither per draw by declared side priors:
+Blue and White 0.40 / 0.45 / 0.15 (the 2020 precedent against the
+2022-24 opposition record), Unity 0.60 / 0.25 / 0.15 (Likud lineage),
+each with Beta uncertainty (n_eff 10-12). The registration mixture's
+fold events are unchanged: a fold is a merger, and it moves the VOTERS
+into the absorbing list, which is measured behaviour, not a bloc label.
+Site: a fourth bloc colour and group, "Unaligned"; the change-coalition
+preset no longer includes them.

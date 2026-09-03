@@ -26,7 +26,7 @@
   --paper:#f5f3ee; --card:#f5f3ee; --ink:#141412; --ink2:#3a3835; --muted:#6f6b64;
   --line:#141412; --line2:#141412; --dead:#a09c93;
   --accent:#0038b8; --blue:#1d56a5; --hit:#14141210;
-  --bloc-nb:#123a6d; --bloc-anti:#2e7fc2; --bloc-arab:#1a7a44;
+  --bloc-nb:#123a6d; --bloc-anti:#2e7fc2; --bloc-arab:#1a7a44; --bloc-una:#8a867d;
   --shadow:none; --field:#0038b8; --field-ink:#f5f3ee;
   --p-likud:#225A9E; --p-yashar:#2b8fd4; --p-together:#149a44;
   --p-dems:#2A38D7; --p-yb:#4d7fb8; --p-shas:#141412; --p-utj:#003366;
@@ -38,7 +38,7 @@
     --paper:#101010; --card:#101010; --ink:#f2efe8; --ink2:#c9c5bc; --muted:#8f8b82;
     --line:#f2efe8; --line2:#f2efe8; --dead:#5c594f;
     --accent:#5b8ded; --blue:#6b9fe8; --hit:#f2efe814;
-    --bloc-nb:#4a7fc4; --bloc-anti:#7fc0f2; --bloc-arab:#3aa268;
+    --bloc-nb:#4a7fc4; --bloc-anti:#7fc0f2; --bloc-arab:#3aa268; --bloc-una:#9aa196;
     --field:#0038b8; --field-ink:#f5f3ee;
     --p-likud:#4d82c8; --p-yashar:#62B9F2; --p-together:#2ec46a;
     --p-dems:#6470e8; --p-yb:#9AC0E2; --p-shas:#e8e5de; --p-utj:#4677a8;
@@ -50,7 +50,7 @@
   --paper:#101010; --card:#101010; --ink:#f2efe8; --ink2:#c9c5bc; --muted:#8f8b82;
   --line:#f2efe8; --line2:#f2efe8; --dead:#5c594f;
   --accent:#5b8ded; --blue:#6b9fe8; --hit:#f2efe814;
-    --bloc-nb:#4a7fc4; --bloc-anti:#7fc0f2; --bloc-arab:#3aa268;
+    --bloc-nb:#4a7fc4; --bloc-anti:#7fc0f2; --bloc-arab:#3aa268; --bloc-una:#9aa196;
   --field:#0038b8; --field-ink:#f5f3ee;
   --p-likud:#4d82c8; --p-yashar:#62B9F2; --p-together:#2ec46a;
   --p-dems:#6470e8; --p-yb:#9AC0E2; --p-shas:#e8e5de; --p-utj:#4677a8;
@@ -812,7 +812,7 @@ const HE_MISC = {
   "Secular-right localities":"יישובי ימין חילוני","Arab localities":"יישובים ערביים",
   "Haredi localities":"יישובים חרדיים","Religious-Zionist localities":"יישובי הציונות הדתית",
   "Russian-speaking localities":"יישובים דוברי רוסית"},
- "BLOC": {"anti":"המחנה נגד נתניהו","arab":"הרשימות הערביות","nb":"גוש נתניהו"}};
+ "BLOC": {"anti":"המחנה נגד נתניהו","arab":"הרשימות הערביות","nb":"גוש נתניהו","una":"בלתי־משויכים"}};
 const HE_FIRM = {"Lazar":"לזר","Midgam":"מדגם","Tatika":"טטיקה","Midgam Project":"פרויקט המדגם",
  "Camil Fuchs":"קמיל פוקס","Kantar":"קנטאר","Maagar Mochot":"מאגר מוחות",
  "Panels Politics":"פאנלס פוליטיקס","Direct Polls":"דיירקט פולס","Filber":"פילבר"};
@@ -918,7 +918,7 @@ const BLOC = {"Likud":"nb","Shas":"nb","United Torah Judaism":"nb","Otzma Yehudi
  "Religious Zionist Party":"nb","Amcha Yisrael":"nb","Noam":"nb","Zehut":"nb",
  "The Haredi Public":"nb","A Place for All of Us":"anti",
  "Yashar":"anti","Bennett 2026 + Yesh Atid":"anti","The Democrats":"anti","Yisrael Beytenu":"anti",
- "Zionist Home – The Reservists":"anti","Blue and White":"anti","Unity":"anti","New Economic Party":"anti",
+ "Zionist Home – The Reservists":"anti","Blue and White":"una","Unity":"una","New Economic Party":"anti",
  "Balad + Hadash-Ta'al":"arab","Ra'am":"arab","Balad (alone)":"arab"};
 // Ballot letters (otiyot): registered CEC letters where a party owns
 // them; for new lists (marked *) a realistic unused combination is shown
@@ -941,7 +941,7 @@ const PVAR = {"Likud":"likud","Yashar":"yashar","Bennett 2026 + Yesh Atid":"toge
  "Balad + Hadash-Ta'al":"jl","Balad (alone)":"jl","Zionist Home – The Reservists":"zh",
  "Blue and White":"bw","Amcha Yisrael":"amcha","Unity":"unity"};
 const pc = n => PVAR[n] ? `--pc:var(--p-${PVAR[n]})` : "--pc:var(--dead)";
-const BLOC_NAME = HEB_MODE ? HE_MISC.BLOC : {anti:"Anti-Netanyahu bloc", arab:"Arab lists", nb:"Netanyahu bloc"};
+const BLOC_NAME = HEB_MODE ? HE_MISC.BLOC : {anti:"Anti-Netanyahu bloc", arab:"Arab lists", nb:"Netanyahu bloc", una:"Unaligned"};
 const css = v => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
 const pct = x => (x*100).toFixed(1).replace(/\.0$/,"") + "%";
 
@@ -1082,8 +1082,9 @@ function hideTip(){ tip.style.opacity = 0; }
   const MAX = 38, box = $("#ivl");
   const X = v => (v/MAX*100);
   let html = "";
-  ["anti","arab","nb"].forEach(bloc=>{
+  ["anti","arab","una","nb"].forEach(bloc=>{
     const grp = D.parties.filter(p=>(p.hi>0 || D.drawCols.includes(p.name)) && BLOC[p.name]===bloc);
+    if (!grp.length) return;
     if (!grp.length) return;
     const tot = grp.reduce((a,p)=>a+p.seats,0);
     html += `<div class="blochead"><i class="sw" style="background:var(--bloc-${bloc==="arab"?"arab":bloc});width:10px;height:10px;display:inline-block;margin-right:8px;vertical-align:-1px"></i>${BLOC_NAME[bloc]} · ${tot} ${HEB_MODE?"מנדטים":"seats"}</div>`;
@@ -1212,7 +1213,7 @@ renderBlocHist("anti");
   const PN = HEB_MODE ? {"Netanyahu bloc":"גוש נתניהו","Change coalition":"קואליציית השינוי",
     "Change + Ra'am":"שינוי + רע״ם","Clear":"ניקוי"} : {};
   const CENTRE = ["Yashar","Bennett 2026 + Yesh Atid","The Democrats","Yisrael Beytenu",
-    "Zionist Home – The Reservists","Blue and White","Unity"];
+    "Zionist Home – The Reservists"];
   const PRESETS = [
     ["Netanyahu bloc", ["Likud","Shas","United Torah Judaism","Otzma Yehudit","Amcha Yisrael","Religious Zionist Party"]],
     ["Change coalition", CENTRE],
