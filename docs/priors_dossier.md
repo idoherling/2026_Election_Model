@@ -542,3 +542,32 @@ widens already-over-wide intervals, and worsens threshold calibration
 (2013, 2020). Rejected by the pre-registered arbiter; the diagnosis of
 panel stickiness stands and the machinery is kept behind BAYES_FLOOR=1
 for research. Bloc Brier 0.029 (off) vs 0.034 (on).
+
+## 24. The Arab lists: why the model sat below the polls (2026-09-03)
+
+Owner observation: since the Joint List re-formed (Aug 24) every poll
+puts the Arab lists at 11-14 seats (mean 12.0: JL 7.2, Ra'am 4.8); the
+model showed 9.5 (JL 6.5, Ra'am 3.0). Three causes found:
+
+1. **CEC raw shares were not renormalised.** Filings whose parsed parties
+   sum to 90-105% were taken as raw percentages of respondents; a filing
+   summing to 92% therefore understated every list by 8% relative. For
+   Ra'am (raw 3.8-4.0%) that is the difference between 3.9% and 4.2% of
+   the decided vote - i.e. between the 3.25% cliff and clearing it. Fixed:
+   shares are now divided by the filing's parsed party sum. Refit.
+2. **The Arab family error is regime-dependent.** Own backtest, error =
+   polled - actual: unified Joint List years 2015 -0.4, 2019s -1.9, 2020
+   -1.1, 2022 -2.0 (mean -1.35, polls under-count); split years 2019a
+   +1.2, 2021 +1.5 (over-count). Turnout is the mechanism (Arab turnout
+   56.5 -> 63.5% in 2015; 49 -> 59 -> 65% across 2019a/2019s/2020; 44.6% in
+   split 2021). The pooled -0.32 mixed both regimes. With Balad's stay
+   resolved, the unified-regime mean now applies (ARAB_UNIFIED_ERROR_MEAN
+   -1.35, pooled sd 1.45 kept).
+3. **Threshold-death tails.** Ra'am's mean of 3.0 was a 4-seat median
+   with a 49% death rate; the two fixes above move the latent and the
+   family mean and are expected to reduce it. Ra'am's per-list residual
+   width (pooled, "n=2, turnout risk real") is left as audited.
+
+The owner's reading of pollsters "anticipating a turnout boost" is,
+per the record, the reverse: pollsters have UNDER-stated the unified
+list every time, so the model should sit above them, not below.

@@ -8,17 +8,17 @@
  "n_groups": 7,
  "divergences": 0,
  "rhat_max": 1.01,
- "ess_min": 295,
+ "ess_min": 249,
  "firm_weights": {
-  "Afkar (sector)": 1.01,
+  "Afkar (sector)": 1.0,
   "Direct Polls": 0.94,
-  "Filber": 0.86,
+  "Filber": 0.85,
   "Kantar": 0.76,
   "Lazar": 0.74,
   "Maagar Mochot": 1.02,
-  "Midgam": 0.73,
-  "Midgam Project": 0.78,
-  "Midgam Project & StatNet": 1.66,
+  "Midgam": 0.72,
+  "Midgam Project": 0.77,
+  "Midgam Project & StatNet": 1.68,
   "Tatika": 0.97,
   "TrendZone": 1.2
  },
@@ -26,5 +26,5 @@
  "cec_obs": 299,
  "polls_displaced": 23,
  "holdout_obs": 237,
- "holdout_median_err": 0.78
+ "holdout_median_err": 0.82
 }

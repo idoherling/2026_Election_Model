@@ -278,6 +278,17 @@ from error_decomposition import decompose as _decompose
 _P = _decompose()
 BLOC_SWING_SD = _P["bloc_sd"]
 FAMILY_SHOCK = _P["family"]        # {family: (error mean, sd)} in seats
+# Arab family error is regime-dependent (2026-09-03 audit, own backtest,
+# error = polled - actual): with a UNIFIED Joint List the final polls
+# under-counted the Arab lists every time - 2015 -0.4, 2019s -1.9, 2020
+# -1.1, 2022 -2.0 (mean -1.35) - as unification lifts Arab turnout
+# (56.5 -> 63.5% in 2015, 49 -> 59 -> 65% across 2019a/2019s/2020); in the
+# split, demoralised years they over-counted (2019a +1.2, 2021 +1.5). The
+# pooled -0.32 mixes both regimes. With balad_splits resolved False the
+# 2026 list is unified, so the unified-regime mean applies; the pooled sd
+# is kept (turnout risk cuts both ways).
+ARAB_UNIFIED_ERROR_MEAN = -1.35
+ARAB_LIST_UNIFIED = True
 ANCHORS = _P["anchors"]            # {"likud": .., "leader": ..} error means
 LIST_SHOCK_BASE = _P["resid_base"]
 LIST_SHOCK_SLOPE = _P["resid_slope"]
@@ -559,7 +570,12 @@ def _merge_cec(obs: pd.DataFrame, block_of: dict, asof) -> pd.DataFrame:
             if comp not in block_of:
                 continue
             rows.append({"poll_id": f"cec{ref}", "block": block_of[comp],
-                         "share": r.raw_pct / 100.0, "pollster": pollster,
+                         # renormalised to the filing's parsed party sum:
+                         # a filing summing to 92% (undecided excluded)
+                         # otherwise understates every list by 8% relative,
+                         # which is decisive for threshold-straddlers
+                         # (2026-09-03 Arab-lists audit)
+                         "share": r.raw_pct / float(sums[ref]), "pollster": pollster,
                          "fieldwork_end": fw})
     cec_obs = pd.DataFrame(rows).groupby(
         ["poll_id", "block"], as_index=False).agg(
@@ -893,6 +909,8 @@ def project(data, idata, rng, config="current", config_params=None):
     tdraws = z / mix[:, None]
     for k, f in enumerate(fam_names):
         mu_f, sd_f = FAMILY_SHOCK[f]
+        if f == "arab" and ARAB_LIST_UNIFIED:
+            mu_f = ARAB_UNIFIED_ERROR_MEAN
         in_f = fams == f
         shock = (-mu_f + tdraws[:, k] * sd_f) / 120.0
         w_f, w_r = np.where(in_f, base, 0), np.where(~in_f, base, 0)

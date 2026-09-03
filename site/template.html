@@ -584,9 +584,12 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
     <ul>
       <li><b>Bloc swing</b> — the correlated right/left error (t-distributed, df 5), scaled ×1.2
       this cycle for elevated event risk;</li>
-      <li><b>Sector shocks</b> — haredi lists underpolled by 1.35 ± 1.77 seats; Arab lists
-      −0.32 ± 1.45 (a turnout error, not a bias); the haredi and Arab tides are drawn with
-      correlation 0.5 (measured +0.92 on four transitions, shrunk);</li>
+      <li><b>Sector shocks</b> — haredi lists underpolled by 1.35 ± 1.77 seats; Arab lists are
+      regime-dependent: with a <em>unified</em> Joint List the final polls under-counted them in
+      every such election (2015, 2019s, 2020, 2022: mean 1.35 seats, turnout is the mechanism),
+      while split years over-counted — the unified-regime mean applies this cycle, with the
+      pooled ± 1.45 kept; the haredi and Arab tides are drawn with correlation 0.5 (measured
+      +0.92 on four transitions, shrunk);</li>
       <li><b>Anchors</b> — Likud beats its polls by 2.30 seats on average (+8.4 in 2015, +6.7 in
       April 2019, ≈0 elsewhere); the poll-leading party underperforms by 1.74;</li>
       <li><b>Residual per-list shock</b> — 1.83 + 0.044·seats, ×1.35 for first-cycle lists
@@ -846,7 +849,7 @@ const HE_CH = [
     <div class="eq">v = softmax( z<sub>E</sub> + swing·b + shock<sub>sector</sub> + anchor + resid + gevalt + undecided )&nbsp;&nbsp;&nbsp;&nbsp;<i>חלק הקולות המוטל</i></div>
     <ul>
       <li><b>תנודת גוש</b> — שגיאת הימין/שמאל המתואמת (התפלגות t עם 5 דרגות חופש), מוכפלת ב־1.2 במחזור הזה בשל סיכון אירועים מוגבר;</li>
-      <li><b>זעזועי מגזר</b> — רשימות חרדיות נחסרות ב־1.35 ± 1.77 מנדטים; רשימות ערביות &lrm;−0.32 ± 1.45 (שגיאת השתתפות, לא הטיה); הגאות החרדית והערבית נדגמות במתאם 0.5 (נמדד &lrm;+0.92 על ארבעה מעברים, מכווץ);</li>
+      <li><b>זעזועי מגזר</b> — רשימות חרדיות נחסרות ב־1.35 ± 1.77 מנדטים; הרשימות הערביות תלויות־משטר: עם רשימה משותפת <em>מאוחדת</em> הסקרים הסופיים חיסרו אותן בכל מערכת כזו (2015, ספט׳ 2019, 2020, 2022: ממוצע 1.35 מנדטים, ההשתתפות היא המנגנון), בעוד שנות הפיצול הפריזו — ממוצע משטר האיחוד חל במחזור הזה, עם ± 1.45 המאוחד; הגאות החרדית והערבית נדגמות במתאם 0.5 (נמדד &lrm;+0.92 על ארבעה מעברים, מכווץ);</li>
       <li><b>עוגנים</b> — הליכוד מכה את סקריו ב־2.30 מנדטים בממוצע (&lrm;+8.4 ב־2015, &lrm;+6.7 באפריל 2019, ≈0 בשאר); המובילה בסקרים מפגרת ב־1.74;</li>
       <li><b>זעזוע שיורי לרשימה</b> — 1.83 + 0.044·מנדטים, ×1.35 לרשימות במחזור ראשון (נמדד: סקרי מפלגות חדשות אינם מוטים אך רועשים ב־35%), עם כיול אלקטורט־נאמן המכווץ את ש״ס (1.5), יהדות התורה (1.3), ישראל ביתנו (2.2), הליכוד (4.8), המשותפת (3.1) וישר (4.2) לתנודתיות הכוללת המדודה שלהן;</li>
       <li><b>שכבת הוודאות</b> — התמיכה הרכה של כל רשימה (תומכיה שאינם בטוחים: ביחד 47% נעולים ועמך 38% מדודים, השאר דרגות מוצהרות) נושרת בשיעור עריקה המוגרל לכל סימולציה (ממוצע 0.25) עם פיזור ייחודי לרשימה, כך שרשימות רכות נושאות סיכון־חיסרון א־סימטרי (התנודה בתוך מחנה השינוי נמדדת פי שלושה מזו של גוש נתניהו); הנשירה נוחתת ביחס לתמיכה משוקללת־ודאות, בעיקר בתוך הגוש — היסטורית שגיאת הגוש קטנה מסכום חלקיו — עם עשירית חוצה־גוש ושביעית נמנעת (מוצהר). מאגר המתלבטים (12%, הגשות לוועדה) נשבר לפי נטיית N12 של 55/16, הנישאת עם אי־ודאות הדגימה שלה (n≈60) ובחצי משקל (כ־1.6 מנדטים למחנה השינוי בתוחלת);</li>
