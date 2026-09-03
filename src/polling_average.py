@@ -76,7 +76,14 @@ def quality_map() -> dict[str, float]:
         try:
             sc = pd.read_csv(PROCESSED_DIR / "backtest_pollsters.csv")
             med = sc["mean_abs_error"].median()
-            q = (med / sc["mean_abs_error"]).pow(0.5).clip(0.7, 1.3)
+            q = (med / sc["mean_abs_error"]).pow(0.5)
+            # Shrink toward the industry median by cycles graded: a firm
+            # scored on one or two finals earns only part of its edge
+            # (2026-09-03 weighting audit: Kantar's 4-cycle record was
+            # hitting the clip; and those "finals" were exit polls).
+            k = 3.0
+            q = 1.0 + (q - 1.0) * sc["cycles"] / (sc["cycles"] + k)
+            q = q.clip(0.7, 1.3)
             _QUALITY = dict(zip(sc["pollster"], q.round(3)))
         except FileNotFoundError:
             _QUALITY = {}

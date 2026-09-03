@@ -148,8 +148,10 @@ def build_ratings(fit: dict) -> dict:
     for cyc, eday in ELECTION_DAY.items():
         res = results[results["cycle"].astype(str) == cyc].dropna(subset=["seats"])
         res_map = dict(zip(res["party_id"], res["seats"]))
+        # strictly BEFORE election day: day-0 rows are exit polls, not
+        # pre-election polls (Kantar/Kan 11, Midgam/Ch12, Fuchs/Ch13)
         pc = polls[(polls["cycle"].astype(str) == cyc)
-                   & (polls["fieldwork_end"] <= pd.Timestamp(eday))]
+                   & (polls["fieldwork_end"] < pd.Timestamp(eday))]
         for firm, g in pc.groupby("pollster"):
             last = g[g["fieldwork_end"] == g["fieldwork_end"].max()]
             last = last[last["party_id"].isin(res_map)]

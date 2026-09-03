@@ -70,9 +70,12 @@ def main() -> None:
 
     for cycle, res in results.groupby("cycle"):
         eday = pd.Timestamp(ELECTION_DAY[cycle])
+        # Strictly BEFORE election day: day-0 rows are the broadcasters'
+        # exit polls (Kantar/Kan 11, Midgam/Channel 12, Fuchs/Channel 13),
+        # which were being graded as "final polls" (2026-09-03 audit).
         window = polls[
             (polls["cycle"] == cycle)
-            & (polls["fieldwork_end"] <= eday)
+            & (polls["fieldwork_end"] < eday)
             & (polls["fieldwork_end"] >= eday - pd.Timedelta(days=FINAL_WINDOW))
         ].copy()
         totals = window.groupby("poll_id")["seats"].sum()

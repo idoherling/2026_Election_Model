@@ -483,3 +483,40 @@ fold events are unchanged: a fold is a merger, and it moves the VOTERS
 into the absorbing list, which is measured behaviour, not a bloc label.
 Site: a fourth bloc colour and group, "Unaligned"; the change-coalition
 preset no longer includes them.
+
+## 23. Pollster weighting audit (2026-09-03, owner: "feels off")
+
+Diagnosis, three defects:
+
+1. **Exit polls graded as final polls.** The backtest's final-poll window
+   admitted fieldwork ON election day, so the broadcasters' exit polls
+   (Kantar/Kan 11, Midgam/Channel 12, Fuchs/Channel 13) were scored as
+   those firms' "final polls": Kantar's four graded cycles all had a
+   0-day gap and a 0.65 seats/list error, which put it at the maximum
+   trust clip. Midgam's four recent "finals" (0.33-1.08) were exit polls
+   while its true pre-election finals (2009-2019a) ran 1.5-2.6.
+   Fix: final poll = last fieldwork strictly before election day, in the
+   backtest scorecard and in the site ratings.
+2. **No small-sample shrinkage.** A firm graded on 1-4 cycles could earn
+   the full clip. Fix: q shrunk toward the industry median by
+   n_cycles/(n_cycles+3).
+3. **Internal consistency read as precision.** Within-firm scatter of the
+   NB-bloc total around each firm's own 21-day trend: Filber 0.43 seats,
+   Direct Polls 0.50, Lazar 0.54, Kantar 0.66, Midgam 0.67 - against a
+   binomial sampling error of 2-3 seats for n~550. Panel stickiness makes
+   a series smooth; the likelihood estimated lam from that smoothness and
+   pulled Filber (no graded record, +11.5 lean, SMS methodology) to more
+   weight than Maagar Mochot's eight cycles, and every weekly panel firm
+   far below its historical prior (Lazar 0.98 -> 0.68). Fix: a hard
+   sampling floor on observation noise, sqrt(p(1-p)/n x DEFF), with n
+   from the poll or the firm's CEC-filing median and a declared design
+   effect by fieldwork mode (phone/own infrastructure 1.0, mixed 1.1,
+   opt-in online panels 1.3, SMS/undisclosed 1.4; AAPOR/Pew opt-in
+   panel literature, and the two SMS firms own the worst graded
+   records). The lam prior tightened from sigma 0.25 to 0.20 so the
+   graded record holds more weight against within-cycle consistency.
+
+Checked and not a problem: Lazar and Panels Politics (same operation)
+do not double-publish the same weekly poll (0 of 20 Panels Politics
+polls fall within 2 days of a Lazar poll); correlation groups already
+share the bias term.

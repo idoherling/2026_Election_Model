@@ -437,6 +437,9 @@ def prepare_data(polls: pd.DataFrame | None = None,
         "y": obs["share"].values,
         "noise_mult": obs["noise_mult"].fillna(1.0).values.astype(float)
                       if "noise_mult" in obs.columns else np.ones(len(obs)),
+        "n_resp": (obs["n"] if "n" in obs.columns else pd.Series(np.nan, index=obs.index))
+                  .fillna(obs["pollster"].map(FIRM_N_DEFAULT)).fillna(N_DEFAULT).values.astype(float),
+        "deff": obs["pollster"].map(DEFF).fillna(DEFF_DEFAULT).values.astype(float),
         "week": obs["week"].values.astype(int),
         "block_i": obs["block"].map(lb_ix).values.astype(int),
         "firm_i": obs["pollster"].map(firm_ix).values.astype(int),
@@ -463,10 +466,34 @@ def implied_share_obs(win: pd.DataFrame) -> pd.DataFrame:
     return (win[win["share"].notna()]
             .groupby(["poll_id", "block"], as_index=False)
             .agg(share=("share", "sum"), pollster=("pollster", "first"),
-                 fieldwork_end=("fieldwork_end", "first")))
+                 fieldwork_end=("fieldwork_end", "first"),
+                 n=("sample_size", "first")))
 
 
 LAST_CEC_MERGE: dict = {}   # filled by _merge_cec, read into fit_summary.json
+
+# ---- Sampling floor + design effects (2026-09-03 weighting audit) ----
+# No poll can be more precise than its own sample. Within-firm scatter of
+# the NB-bloc total around each firm's own trend measures 0.4-0.7 seats
+# (Filber 0.43, Direct Polls 0.50, Lazar 0.54) against a binomial sampling
+# error of 2-3 seats for n~550 - series smoothed by panel stickiness that
+# the likelihood was reading as precision. The observation noise now has
+# a hard floor at the binomial sampling sd for the poll's n, inflated by a
+# declared design effect for opt-in panels (AAPOR/Pew: opt-in online and
+# SMS panels carry effective samples well below nominal; the two SMS
+# firms also own the worst graded final-poll records).
+FIRM_N_DEFAULT = {"Kantar": 550, "Midgam": 500, "Lazar": 500, "Panels Politics": 500,
+                  "Maagar Mochot": 550, "Direct Polls": 500, "Filber": 600,
+                  "Tatika": 500, "Dialog": 500}      # CEC filing medians
+N_DEFAULT = 550
+DEFF = {"Kantar": 1.0, "Smith Consulting": 1.0, "Midgam": 1.1, "Maagar Mochot": 1.1,
+        "Camil Fuchs": 1.1, "Dialog": 1.2, "Afkar (sector)": 1.2,
+        "Lazar": 1.3, "Panels Politics": 1.3, "Tatika": 1.3, "Midgam Project": 1.3,
+        "Midgam Project & StatNet": 1.3, "TrendZone": 1.3, "Timor Group": 1.3,
+        "Direct Polls": 1.4, "Filber": 1.4}
+DEFF_DEFAULT = 1.3
+LAM_PRIOR_SIGMA = 0.20   # was 0.25: the graded record holds more weight against
+                         # 30-40 internally consistent within-cycle polls
 
 
 def _merge_sector(obs: pd.DataFrame, block_of: dict, asof) -> pd.DataFrame:
@@ -488,7 +515,7 @@ def _merge_sector(obs: pd.DataFrame, block_of: dict, asof) -> pd.DataFrame:
             continue
         rows.append({"poll_id": r.poll_id, "block": block_of[comp], "share": float(r.share),
                      "pollster": r.pollster, "fieldwork_end": r.fieldwork_end,
-                     "noise_mult": float(r.noise_mult)})
+                     "noise_mult": float(r.noise_mult), "n": float(r.n)})
     if rows:
         print(f"sector stream: {len(rows)} converted observations from "
               f"{so['pollster'].nunique()} sector firm(s)")
@@ -560,6 +587,10 @@ def fit(data, draws=800, tune=800, holdout_mask=None):
     bi, fi = data["block_i"][keep], data["firm_i"][keep]
     u_c = np.asarray(data.get("u_c", np.zeros(len(data["y"]))))[keep]
     nmult = np.asarray(data.get("noise_mult", np.ones(len(data["y"]))))[keep]
+    n_resp = np.asarray(data.get("n_resp", np.full(len(data["y"]), N_DEFAULT)))[keep]
+    deff = np.asarray(data.get("deff", np.full(len(data["y"]), DEFF_DEFAULT)))[keep]
+    yc = np.clip(y, 0.01, 0.99)
+    floor = np.sqrt(yc * (1 - yc) / n_resp * deff)   # binomial sampling sd x design effect
     # centred time coordinate per observation (drift identifiability)
     edges_, _ = time_grid()
     mids_ = (edges_[:-1] + edges_[1:]) / 2.0
@@ -609,16 +640,16 @@ def fit(data, draws=800, tune=800, holdout_mask=None):
         from polling_average import QUALITY_ALIAS, quality_map
         q = np.array([quality_map().get(QUALITY_ALIAS.get(f, f), 1.0)
                       for f in data["firms"]])
-        lam = pm.LogNormal("lam", mu=np.log(1.0 / q ** 2), sigma=0.25,
+        lam = pm.LogNormal("lam", mu=np.log(1.0 / q ** 2), sigma=LAM_PRIOR_SIGMA,
                            shape=F)
         # Undecided-share effect on informativeness: a filing-reported
         # undecided share above the field average widens that poll's noise
         # by an ESTIMATED factor (beta_u -> 0 if undecideds don't matter).
         beta_u = pm.HalfNormal("beta_u", 3.0)
         mu = shares[wk, bi] + delta_c[fi, bi] + slope_c[fi, bi] * tcent
+        sig_model = (s_obs[bi] + 0.002) * lam[fi] * nmult * pt.exp(beta_u * u_c)
         pm.StudentT("y", nu=4, mu=mu,
-                    sigma=(s_obs[bi] + 0.002) * lam[fi] * nmult
-                    * pt.exp(beta_u * u_c), observed=y)
+                    sigma=pt.sqrt(sig_model ** 2 + floor ** 2), observed=y)
 
         idata = pm.sample(draws=draws, tune=tune, chains=4, cores=4,
                           target_accept=0.92, random_seed=SEED,
@@ -653,7 +684,9 @@ def posterior_predictive_check(data, idata):
     if "slope_c" in post:
         slope = post["slope_c"].values.reshape(-1, *post["slope_c"].shape[2:])
         mu = mu + slope[idx][:, data["firm_i"], data["block_i"]] * tcent[None, :]
-    sd = s_obs[idx][:, data["block_i"]] + 0.002
+    yc = np.clip(data["y"], 0.01, 0.99)
+    floor = np.sqrt(yc * (1 - yc) / data["n_resp"] * data["deff"])
+    sd = np.sqrt((s_obs[idx][:, data["block_i"]] + 0.002) ** 2 + floor[None, :] ** 2)
     lo = np.percentile(mu - 1.96 * sd, 2.5, axis=0)
     hi = np.percentile(mu + 1.96 * sd, 97.5, axis=0)
     cover = ((data["y"] >= lo) & (data["y"] <= hi)).mean()
@@ -1008,6 +1041,8 @@ def main() -> None:
         "n_lists": int(len(data["latent_blocks"])), "n_bins": int(data["n_weeks"]),
         "n_firms": int(len(data["firms"])), "n_groups": int(len(data["groups"])),
         "divergences": div, "rhat_max": round(rhat, 3), "ess_min": int(ess),
+        "firm_weights": {f: round(float(w), 2) for f, w in zip(
+            data["firms"], idata.posterior["lam"].mean(dim=("chain", "draw")).values)},
         **LAST_CEC_MERGE,
         **(fit_summary_holdout if "fit_summary_holdout" in dir() else {}),
     }
