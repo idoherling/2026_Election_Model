@@ -86,6 +86,26 @@ a{color:var(--ink);text-decoration-color:var(--accent);text-decoration-thickness
 .contents .ct{display:flex;align-items:baseline;justify-content:space-between;gap:12px}
 .contents .xall{border:0;background:none;color:var(--accent);font:600 11px "IBM Plex Mono","IBM Plex Sans Hebrew",monospace;
   letter-spacing:.12em;text-transform:uppercase;cursor:pointer;padding:8px 0;min-height:36px}
+.ledger-ctl{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:0 0 12px}
+.ledger-ctl select,.ledger-ctl input[type=search]{border:2px solid var(--ink);background:var(--paper);color:var(--ink);
+  padding:6px 10px;font:500 13px "IBM Plex Sans","IBM Plex Sans Hebrew",sans-serif;min-height:36px}
+.ledger-ctl label{font-size:13px;display:inline-flex;align-items:center;gap:6px;min-height:36px}
+.ledger-ctl .cnt{font-family:"IBM Plex Mono","IBM Plex Sans Hebrew",monospace;font-size:12px;color:var(--muted);margin-inline-start:auto}
+.ledger-wrap{max-height:70vh;overflow:auto;border:2px solid var(--ink)}
+table.ledger,table.rt{border-collapse:collapse;width:100%}
+table.ledger th,table.ledger td{white-space:nowrap;font-size:12.5px;padding:5px 9px;border-bottom:1px solid var(--hit)}
+table.ledger th{position:sticky;top:0;background:var(--paper);z-index:2;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;text-align:start}
+table.ledger td.num,table.rt td.num{font-family:"IBM Plex Mono","IBM Plex Sans Hebrew",monospace;font-variant-numeric:tabular-nums;text-align:right}
+html[dir="rtl"] table.ledger td.num,html[dir="rtl"] table.rt td.num{text-align:left}
+table.ledger td.dim,table.rt td.dim{color:var(--muted)}
+th.sort{cursor:pointer;user-select:none} th.sort:hover{color:var(--accent)} th.sort[aria-sort]::after{content:" ↕";color:var(--muted)}
+th.sort[aria-sort="ascending"]::after{content:" ↑"} th.sort[aria-sort="descending"]::after{content:" ↓"}
+table.rt th,table.rt td{padding:8px 10px;font-size:13px;border-bottom:1px solid var(--hit);vertical-align:top}
+table.rt th{font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;text-align:start}
+table.rt tr.firm{cursor:pointer} table.rt tr.firm:hover td{color:var(--accent)}
+table.rt tr.detail td{background:var(--hit);font-size:12.5px}
+table.rt .bar{display:inline-block;height:8px;background:var(--accent);vertical-align:middle;margin-inline-end:6px}
+.ledger a,.rt a{color:var(--accent);text-decoration:none;border-bottom:1px solid currentColor}
 @media print{
   .nav,#langbtn,#themebtn,#btt,#tip,.presets,.skip,.contents .xall,.chapter > h3 .tgl{display:none !important}
   .pg-report,.pg-method{display:block !important}
@@ -443,6 +463,28 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
   <div class="sheet he" id="he"></div>
 </div></section>
 
+<section id="ratings" class="pg-method"><div class="wrap">
+  <p class="eyebrow">Track record by firm</p>
+  <h2>Pollster ratings</h2>
+  <p class="lede">Every firm graded against the official result of every election it polled since
+  2009: the error of its final poll, its error across the final month, and how far it leans toward
+  the Netanyahu bloc. These are the numbers behind the model's precision weights. Click a firm to see
+  each cycle.</p>
+  <div class="tblwrap"><table class="rt" id="ratingsTbl"></table></div>
+  <p class="note" id="ratingsSrc"></p>
+</div></section>
+
+<section id="polls" class="pg-method"><div class="wrap">
+  <p class="eyebrow">Every input</p>
+  <h2>The poll ledger</h2>
+  <p class="lede">Every poll of this cycle that the model consumes, with the publication the archive
+  cites for it and, where the firm filed one, its legal disclosure report to the Central Elections
+  Committee. Toggle house-adjusted to see each poll after the firm's measured lean is removed.</p>
+  <div class="ledger-ctl" id="ledgerCtl"></div>
+  <div class="tblwrap ledger-wrap"><table class="ledger" id="ledgerTbl"></table></div>
+  <p class="note" id="ledgerNote"></p>
+</div></section>
+
 <section id="method" class="pg-method"><div class="wrap">
   <p class="eyebrow">Methodology</p>
   <h2>The statistical machinery, end to end</h2>
@@ -713,6 +755,8 @@ const HE_STATIC = {
  "Anti bloc":"המחנה נגד",
  "Contents":"תוכן העניינים",
  "Technical annex — methodology & track record":"נספח טכני — מתודולוגיה וביצועי עבר",
+ "Track record by firm":"ביצועי עבר לפי מכון","Pollster ratings":"דירוג המכונים",
+ "Every input":"כל קלט","The poll ledger":"יומן הסקרים",
  "← Back to the forecast":"→ חזרה לתחזית"};
 const HE_LEDE = {
  "standfirst":"תחזית הסתברותית לבחירות ב־27 באוקטובר 2026: מנדטים, חשבון קואליציוני והרכבת ממשלה. מבוססת על יותר מ־700 סקרים שפורסמו, תוצאות רשמיות ברמת הקלפי ומודל הרכבה מפורש; מתעדכנת עם כל סקר והגשה חדשים. המתודולוגיה וביצועי העבר בנספח הטכני.",
@@ -723,7 +767,9 @@ const HE_LEDE = {
  "formation":"כל כנסת מדומה עוברת דרך עץ הרכבה קואליציוני. ההנחות מגיעות מההיסטוריה המוסדית: מי חותם בשם כל מפלגה, אילו הבטחות נשברות, ובאיזה מחיר. עסקאות רוטציה מתומחרות בתוך כל קואליציה מנצחת.",
  "ground":"תוצאות רשמיות לכל יישוב, 2019 עד 2022, ממיינות את ישראל למגזרים פוליטיים. המנדטים החזויים של כל רשימה מוקצים למגזרים שבהם גרים בוחריה. מספר ארצי חייב להיות בר־הצבעה בשטח.",
  "pollsters":"סוקרים ישראלים חלוקים בעד עשרה מנדטים על סך הגושים. המודל מודד את הנטייה של כל מכון ומשקלל את דיוקו; מכונים בבעלות משותפת נספרים כקול אחד, לא שניים.",
- "method":"הצינור הוא רצף; כל שלב צורך את קודמו. פרמטרים נמדדים על תשע מערכות בחירות, תמיד בהשמטת־מחזור. פרמטרים שיפוטיים מוצהרים, ממוסמכים ונבחנים בלחץ."};
+ "method":"הצינור הוא רצף; כל שלב צורך את קודמו. פרמטרים נמדדים על תשע מערכות בחירות, תמיד בהשמטת־מחזור. פרמטרים שיפוטיים מוצהרים, ממוסמכים ונבחנים בלחץ.",
+ "ratings":"כל מכון מדורג מול התוצאה הרשמית של כל מערכת בחירות שסקר מאז 2009: שגיאת הסקר הסופי שלו, שגיאתו לאורך החודש האחרון, ועד כמה הוא נוטה לעבר גוש נתניהו. אלה המספרים שמאחורי משקלי הדיוק של המודל. לחצו על מכון כדי לראות כל מערכת.",
+ "polls":"כל סקר של המחזור הזה שהמודל צורך, עם הפרסום שהארכיון מצטט עבורו, וכאשר המכון הגיש אחד — דוח הגילוי החוקי שלו לוועדת הבחירות המרכזית. הפעילו \"מתוקנן לאפקט בית\" כדי לראות כל סקר אחרי הסרת הנטייה המדודה של המכון."};
 const HE_MISC = {
  "OUTCOME": {"Netanyahu rightist coalition":"קואליציה ימנית של נתניהו",
   "Netanyahu + centrist defector coalition":"נתניהו + עריק מהמרכז",
@@ -805,7 +851,8 @@ function trStatic(){
   document.querySelector(".brand").childNodes[0].textContent = HE_STATIC["The Knesset Model"];
   const SF = document.querySelector(".standfirst"); if (SF) SF.innerHTML = HE_LEDE.standfirst;
   const LK = {seats:"seats",threshold:"threshold",blocdist:"blocdist",builder:"builder",
-              formation:"formation",ground:"ground",pollsters:"pollsters",method:"method"};
+              formation:"formation",ground:"ground",pollsters:"pollsters",method:"method",
+              ratings:"ratings",polls:"polls"};
   for (const id in LK){ const el = document.querySelector("#"+id+" .lede");
     if (el && HE_LEDE[id]) el.innerHTML = HE_LEDE[id]; }
   const dl = document.getElementById("dateline");
@@ -1333,14 +1380,14 @@ renderBlocHist("anti");
     report: [["#seats","מנדטים"],["#threshold","על הסף"],["#blocdist","חשבון הגושים"],
              ["#builder","בונה הקואליציות"],["#formation","הרכבה ורוה״מ"],
              ["#ground","משחק הקרקע"],["#page:method","מתודולוגיה ←"]],
-    method: [["#page:report","→ לתחזית"],["#pollsters","תעשיית הסקרים"],
-             ["#method","הצינור"],["#validation","ביצועי עבר"]]
+    method: [["#page:report","→ לתחזית"],["#pollsters","תעשיית הסקרים"],["#ratings","דירוג המכונים"],
+             ["#polls","יומן הסקרים"],["#method","הצינור"],["#validation","ביצועי עבר"]]
   } : {
     report: [["#seats","Seats"],["#threshold","The knife-edges"],["#blocdist","Bloc math"],
              ["#builder","Coalition builder"],["#formation","Formation & PM"],
              ["#ground","Ground game"],["#page:method","Methodology →"]],
-    method: [["#page:report","← Forecast"],["#pollsters","The polling industry"],
-             ["#method","The pipeline"],["#validation","Track record"]]
+    method: [["#page:report","← Forecast"],["#pollsters","The polling industry"],["#ratings","Pollster ratings"],
+             ["#polls","Poll ledger"],["#method","The pipeline"],["#validation","Track record"]]
   };
   const navwrap = document.getElementById("navwrap");
   function renderNav(){
@@ -1361,13 +1408,13 @@ renderBlocHist("anti");
     const a = ev.target.closest("a"); if (!a) return;
     const h = a.getAttribute("href");
     if (h.startsWith("#page:")){ ev.preventDefault(); setView(h.slice(6)); }
-    else if (h === "#validation" || h === "#method" || h === "#pollsters"){
+    else if (h === "#validation" || h === "#method" || h === "#pollsters" || h === "#ratings" || h === "#polls"){
       ev.preventDefault(); setView("method", h); }
   });
   const back = document.getElementById("backToReport");
   if (back) back.addEventListener("click", ev => { ev.preventDefault(); setView("report"); });
   // initial view: deep links into the annex open it
-  const isAnnex = h => h === "#method" || h === "#pollsters" || h === "#validation"
+  const isAnnex = h => h === "#method" || h === "#pollsters" || h === "#validation" || h === "#ratings" || h === "#polls"
     || h === "#page:method" || /^#ch-/.test(h);
   const h0 = location.hash;
   if (isAnnex(h0)) setView("method", h0 === "#page:method" ? "#method" : h0);
@@ -1390,6 +1437,114 @@ renderBlocHist("anti");
   addEventListener("scroll", () => btt.classList.toggle("show", scrollY > 1600), { passive: true });
   btt.addEventListener("click", () => scrollTo({ top: 0,
     behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" }));
+})();
+
+/* ---- pollster ratings ---- */
+(function(){
+  const R = D.ratings; if (!R || !R.firms.length) return;
+  const H = HEB_MODE;
+  const T = H ? {firm:"מכון", who:"עורך · במה", grp:"קבוצת מתאם", cyc:"מערכות מדורגות",
+      fin:"שגיאת סקר סופי", mon:"שגיאת חודש אחרון", lean:"|נטייה| היסטורית", lean26:"נטייה לגוש נתניהו 2026",
+      n26:"סקרים 2026", w:"משקל λ", per:"מנדטים לרשימה", det:["מערכת","סקר סופי","חודש אחרון","נטייה","ימים לפני הבחירות","מקור"],
+      src:"מקורות: ", srcTxt:"הציונים מחושבים מסקרי הארכיון של כל מערכת מול שורת התוצאה הרשמית באותו עמוד (ועדת הבחירות המרכזית).",
+      cecRes:"תוצאות רשמיות של ועדת הבחירות", none:"—", ledger:"לסקרי 2026 ביומן"}
+    : {firm:"Firm", who:"Principal · outlet", grp:"Correlation group", cyc:"Cycles graded",
+      fin:"Final-poll error", mon:"Final-month error", lean:"|lean| historical", lean26:"NB lean 2026",
+      n26:"Polls 2026", w:"Weight λ", per:"seats per list", det:["Cycle","Final poll","Final month","Lean","Days before election","Source"],
+      src:"Sources: ", srcTxt:"Grades are computed from each cycle's archive polls against the official result row on the same page (Central Elections Committee).",
+      cecRes:"official CEC results", none:"—", ledger:"2026 polls in the ledger"};
+  const num = (v, d=2) => v == null ? T.none : Number(v).toFixed(d);
+  const signed = v => v == null ? T.none : (v > 0 ? "+" : "") + Number(v).toFixed(1);
+  const mx = Math.max(...R.firms.map(f => f.final_mae || 0));
+  const cols = [["f",T.firm],["who",T.who],["group",T.grp],["n_cycles",T.cyc],["final_mae",T.fin+" · "+T.per],
+                ["month_mae",T.mon],["lean_abs",T.lean],["lean26",T.lean26],["n26",T.n26],["w",T.w]];
+  const tbl = document.getElementById("ratingsTbl");
+  let sortK = "final_mae", sortDir = 1;
+  function render(){
+    const rows = [...R.firms].sort((a,b) => {
+      const va = a[sortK], vb = b[sortK];
+      if (va == null && vb == null) return 0; if (va == null) return 1; if (vb == null) return -1;
+      return (typeof va === "string" ? va.localeCompare(vb) : va - vb) * sortDir; });
+    tbl.innerHTML = "<thead><tr>" + cols.map(([k,l]) =>
+      `<th class="sort" data-k="${k}" ${k===sortK?`aria-sort="${sortDir>0?"ascending":"descending"}"`:'aria-sort="none"'}>${l}</th>`).join("") + "</tr></thead><tbody>" +
+      rows.map(f => `<tr class="firm" data-f="${f.f}" tabindex="0">
+        <td><b>${f.f}</b></td><td class="dim">${[f.principal, f.outlet].filter(Boolean).join(" · ") || T.none}</td>
+        <td class="dim">${f.group || T.none}</td><td class="num">${f.n_cycles}</td>
+        <td class="num">${f.final_mae != null ? `<i class="bar" style="width:${(f.final_mae/mx*70).toFixed(0)}px"></i>` : ""}${num(f.final_mae)}</td>
+        <td class="num">${num(f.month_mae)}</td><td class="num">${num(f.lean_abs,1)}</td>
+        <td class="num">${signed(f.lean26)}</td><td class="num">${f.n26}</td><td class="num">${num(f.w)}</td></tr>`).join("") + "</tbody>";
+  }
+  render();
+  tbl.addEventListener("click", ev => {
+    const th = ev.target.closest("th.sort");
+    if (th){ const k = th.dataset.k; sortDir = (k === sortK) ? -sortDir : 1; sortK = k; render(); return; }
+    const tr = ev.target.closest("tr.firm"); if (!tr) return;
+    const next = tr.nextElementSibling;
+    if (next && next.classList.contains("detail")){ next.remove(); return; }
+    const f = R.firms.find(x => x.f === tr.dataset.f);
+    const cyc = Object.entries(f.cycles);
+    const inner = cyc.length ? `<table class="rt" style="width:auto"><thead><tr>${T.det.map(d=>`<th>${d}</th>`).join("")}</tr></thead><tbody>` +
+      cyc.map(([c, v]) => { const s = R.cycles[c] || {};
+        return `<tr><td>${c}</td><td class="num">${num(v.final_mae)}</td><td class="num">${num(v.month_mae)}</td><td class="num">${signed(v.lean)}</td><td class="num">${v.final_gap}</td>
+        <td>${s.archive ? `<a href="${s.archive}" target="_blank" rel="noopener">Wikipedia ↗</a>` : ""}</td></tr>`; }).join("") + "</tbody></table>"
+      : `<span class="dim">${H ? "לא נבחן במערכות קודמות" : "No graded cycles"}</span>`;
+    const link = `<a href="#polls" data-firm="${f.f}" class="toLedger">${T.ledger} ↗</a>`;
+    tr.insertAdjacentHTML("afterend", `<tr class="detail"><td colspan="${cols.length}">${inner}<div style="margin-top:8px">${link}</div></td></tr>`);
+  });
+  const srcs = Object.entries(R.cycles).filter(([c,s]) => s.archive)
+    .sort().map(([c,s]) => `<a href="${s.archive}" target="_blank" rel="noopener">${c}</a>`).join(" · ");
+  document.getElementById("ratingsSrc").innerHTML = T.src + T.srcTxt + " " + (H ? "ארכיוני הסקרים:" : "Poll archives:") + " " + srcs +
+    ` · <a href="${R.cec_results}" target="_blank" rel="noopener">${T.cecRes} ↗</a>`;
+})();
+
+/* ---- the poll ledger ---- */
+(function(){
+  const L = D.ledger; if (!L || !L.rows.length) return;
+  const H = HEB_MODE;
+  const T = H ? {date:"תאריך", firm:"מכון", pub:"במה", n:"n", w:"משקל λ", cec:"הגשה לוועדה", src:"מקור",
+      all:"כל המכונים", search:"חיפוש במה / מכון", adj:"מתוקנן לאפקט בית", of:"מתוך", polls:"סקרים",
+      filing:"ועדת הבחירות ↗", source:"פרסום ↗", archive:"ארכיון ↗",
+      note:"מנדטים כפי שפורסמו; קו מקף = הרשימה לא נסקרה. מתוקנן לאפקט בית: המנדטים פחות הנטייה המדודה של המכון לאותה רשימה (השמטת־הסוקר־עצמו, מחזור 2026). משקל λ הוא ממוצע הפוסטריור של דיוק המכון בהתאמה הנוכחית. קישורי הפרסום הם הציטוטים של ארכיון הסקרים בוויקיפדיה; קישורי ההגשה מובילים לקובץ הגילוי החוקי ב־gov.il."}
+    : {date:"Date", firm:"Firm", pub:"Publisher", n:"n", w:"Weight λ", cec:"CEC filing", src:"Source",
+      all:"All firms", search:"Search publisher / firm", adj:"House-adjusted", of:"of", polls:"polls",
+      filing:"CEC ↗", source:"publication ↗", archive:"archive ↗",
+      note:"Seats as published; a dash means the list was not polled. House-adjusted: seats minus the firm's measured lean for that list (leave-own-pollster-out, 2026 cycle). Weight λ is the posterior mean of the firm's precision in the current fit. Publication links are the Wikipedia polling archive's own citations; filing links open the legal disclosure PDF on gov.il."};
+  const firms = [...new Set(L.rows.map(r => r.f))].sort();
+  const ctl = document.getElementById("ledgerCtl");
+  ctl.innerHTML = `<select id="lgFirm" aria-label="${T.firm}"><option value="">${T.all}</option>${firms.map(f=>`<option>${f}</option>`).join("")}</select>
+    <input type="search" id="lgQ" placeholder="${T.search}" aria-label="${T.search}">
+    <label><input type="checkbox" id="lgAdj"> ${T.adj}</label><span class="cnt" id="lgCnt"></span>`;
+  const tbl = document.getElementById("ledgerTbl");
+  const colName = c => H ? c.he : (SHORT[c.en] || c.en);
+  let sortK = "d", sortDir = -1;
+  function val(r, k){ if (k.startsWith("s")){ const v = r.s[+k.slice(1)]; return v == null ? -Infinity : v; } return r[k] == null ? "" : r[k]; }
+  function render(){
+    const firm = document.getElementById("lgFirm").value, q = document.getElementById("lgQ").value.trim().toLowerCase();
+    const adj = document.getElementById("lgAdj").checked;
+    let rows = L.rows.filter(r => (!firm || r.f === firm) && (!q || (r.p + " " + r.f).toLowerCase().includes(q)));
+    rows.sort((a,b) => { const va = val(a,sortK), vb = val(b,sortK);
+      return (typeof va === "string" ? va.localeCompare(vb) : va - vb) * sortDir; });
+    document.getElementById("lgCnt").textContent = `${rows.length} ${T.of} ${L.rows.length} ${T.polls}`;
+    const head = [["d",T.date],["f",T.firm],["p",T.pub],["n",T.n]].concat(L.cols.map((c,i)=>["s"+i, colName(c)])).concat([["w",T.w],["cec",T.cec],["src",T.src]]);
+    tbl.innerHTML = "<thead><tr>" + head.map(([k,l]) =>
+      `<th class="sort" data-k="${k}" ${k===sortK?`aria-sort="${sortDir>0?"ascending":"descending"}"`:'aria-sort="none"'}>${l}</th>`).join("") + "</tr></thead><tbody>" +
+      rows.map(r => { const hf = (L.house[r.f] || {});
+        return `<tr><td class="num">${r.d}</td><td>${r.f}</td><td class="dim">${r.p}</td><td class="num dim">${r.n ?? "–"}</td>` +
+        L.cols.map((c,i) => { const v = r.s[i]; if (v == null) return `<td class="num dim">–</td>`;
+          const a = adj && hf[c.id] != null ? v - hf[c.id] : v;
+          return `<td class="num">${adj ? a.toFixed(1) : (Number.isInteger(v) ? v : v.toFixed(1))}</td>`; }).join("") +
+        `<td class="num dim">${r.w != null ? r.w.toFixed(2) : "–"}</td>` +
+        `<td>${r.cec ? `<a href="${r.cec}" target="_blank" rel="noopener">${T.filing}</a>` : `<span class="dim">–</span>`}</td>` +
+        `<td>${r.src ? `<a href="${r.src}" target="_blank" rel="noopener">${T.source}</a>` : (L.archive[r.pg] ? `<a href="${L.archive[r.pg]}" target="_blank" rel="noopener">${T.archive}</a>` : "")}</td></tr>`; }).join("") + "</tbody>";
+  }
+  render();
+  ctl.addEventListener("input", render); ctl.addEventListener("change", render);
+  tbl.addEventListener("click", ev => { const th = ev.target.closest("th.sort"); if (!th) return;
+    const k = th.dataset.k; sortDir = (k === sortK) ? -sortDir : (k === "d" ? -1 : 1); sortK = k; render(); });
+  document.getElementById("ledgerNote").textContent = T.note;
+  // "2026 polls in the ledger" links from the ratings table pre-select the firm
+  document.addEventListener("click", ev => { const a = ev.target.closest("a.toLedger"); if (!a) return;
+    document.getElementById("lgFirm").value = a.dataset.firm; render(); });
 })();
 
 /* ---- validation table ---- */

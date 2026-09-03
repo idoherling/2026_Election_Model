@@ -22,6 +22,8 @@ Key -> source:
   val       carried forward from the previous payload (backtest numbers
             change only when the harness is re-run)
   fit       fit_summary.json (written by bayes_model.main) + CEC filing count
+  ledger    site_ledger.build_ledger — every 2026 poll with its sources
+  ratings   site_ledger.build_ratings — per-firm track record
 """
 from __future__ import annotations
 
@@ -155,8 +157,13 @@ def build_payload() -> dict:
         })
     kalpi.sort(key=lambda k: -k["eligible"])
 
+    from site_ledger import build_ledger, build_ratings
+    ledger = build_ledger(fit)
+    ratings = build_ratings(fit)
+
     return {
         "asof": str(off["asof"].iloc[0]), "parties": parties, "sub": sub,
+        "ledger": ledger, "ratings": ratings,
         "blocs": blocs, "formation": formation, "pm": pm, "events": events,
         "house": house, "val": prev.get("val", {}), "counts": counts, "fit": fit,
         "drawCols": draw_cols, "draws": draws, "kalpi": kalpi,

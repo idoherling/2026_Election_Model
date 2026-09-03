@@ -13,5 +13,17 @@
  "holdout_median_err": 0.74,
  "cec_filings_merged": 21,
  "cec_obs": 299,
- "polls_displaced": 23
+ "polls_displaced": 23,
+ "firm_weights": {
+  "Direct Polls": 0.86,
+  "Filber": 0.84,
+  "Kantar": 0.66,
+  "Lazar": 0.67,
+  "Maagar Mochot": 0.94,
+  "Midgam": 0.62,
+  "Midgam Project": 0.67,
+  "Midgam Project & StatNet": 1.94,
+  "Tatika": 0.99,
+  "TrendZone": 1.28
+ }
 }
