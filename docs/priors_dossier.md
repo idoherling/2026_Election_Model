@@ -410,3 +410,60 @@ Amcha 2.3 -> 1.8, ZH 1.5 -> 1.2; YB 7.7 -> 8.5, Democrats 9.4 -> 9.8,
 UTJ/Shas +0.3. Baseline NB mean 53.1 -> 54.0 (the anti bloc's soft base
 is larger, so symmetric cross/abstain rates move net mass); P(NB>=61)
 20.4 -> 18.8, P(anti>=61) 31.2 -> 29.8. Harness-inactive by construction.
+
+## 19. Configuration-conditional formation gates (2026-09-03)
+
+The BEHAVIOR probabilities are now marginal means: each simulated
+parliament's gate probability moves with its seat configuration through
+a logistic, p = sigmoid(logit(p0) + beta*x), with x centred over the
+draws so the marginal is preserved (government_formation.COND).
+
+| gate | covariate | beta | anchor |
+|---|---|---|---|
+| shas_defects, utj_defects | NB gap to 61 (per 5 seats) | +0.35 | Shas 1992, Shas+UTJ 1999: haredim joined non-Likud governments only when the right had no path |
+| same | that party alone closes the centre's gap | +0.50 | the decisive partner sets the price |
+| centre_defects | NB gap to 61 (per 5 seats) | -0.35 | Gantz 2020 at gap 3; no defector at gaps 5-6 in 2019 |
+| likud_sans_bibi | deadlock depth min(gap_NB, gap_centre) | +0.35 | unity resolved the deep deadlocks (1984/1988) |
+
+Validation (validate_formation.py, eight real outcomes 2009-2022):
+mean log score -0.93 vs -0.92 for the unconditional tree; P(PM side)
+0.64 vs 0.63; P(realized) 0.52 vs 0.53. Indistinguishable — eight
+outcomes cannot resolve betas of this size — so the mechanism is retained
+on institutional grounds, with marginals unchanged by construction. Its
+bite is in 2026's configuration distribution, where it moves probability
+toward pivotal draws (a haredi party that alone closes the centre's gap
+defects more often; a 2-seat NB gap attracts a defector more than an
+8-seat one).
+
+## 20. Sector polls as a second observation stream (2026-09-03)
+
+src/sector_stream.py converts sector-specialist polls (data/sector_polls.csv,
+currently Afkar Sept 2026, N=815) to national-share observations:
+v = share_of_sector x W_sector / conc_list, with W_sector = (locality
+eligible / locality concentration 0.78) x measured turnout 0.538 / total
+voters = 0.121, and conc from the kalpi poststrat (JL 0.775, Ra'am 0.879;
+lists below MIN_CONC 0.5 do not convert). Afkar's 38% / 19% become
+5.9% / 2.6% nationally (7.1 / 3.1 seats) — at Afkar's own 60% turnout
+assumption they would be 6.6% / 2.9%. The observations enter the fit as
+polls by "Afkar (sector)" with a 1.6x noise multiplier for the
+conversion's uncertainty (turnout and concentration are estimates).
+Turnout is a dial (SECTOR_TURNOUT) for scenario runs. The participation-
+attitude series in the repo measures coalition attitudes, not turnout
+intention, so it does not drive the dial.
+
+## 21. Time-varying house effects (2026-09-03)
+
+Each firm's per-list lean now carries a linear drift over the 240-day
+window, slope_c centred across firms per list so a common drift stays in
+the latent trend: delta(t) = delta + slope_c x (t - tbar)/T, prior
+HalfNormal(0.01) on the slope scale. Posterior sigma_slope 0.0085 (90%
+[0.0069, 0.0103]) — the data want drift at roughly the prior scale.
+Largest learned drifts (end-to-end seats, |z|>2): Tatika/Likud -2.95,
+Filber/UTJ -1.88, Filber/YB -1.80, Filber/JL -1.70, Maagar/Democrats
++1.65, Lazar/YB +1.31, Tatika/Democrats -1.18, Kantar/UTJ +1.14.
+Fit: 0 divergences, r-hat 1.01, ESS 355, predictive coverage 99.2%,
+14-day holdout 0.78 (0.74 without drift — within noise; the term is
+retained for identification of moving leans, not for holdout gain).
+The precision weights already grade each firm's FINAL poll against the
+result (backtest.py scorecard -> quality_map), so "final-poll weighting"
+needed no change.

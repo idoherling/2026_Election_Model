@@ -193,6 +193,33 @@ OUTCOMES = [
 ]
 
 
+# Configuration-conditional gates (2026-09-03, Fable audit #4). The declared
+# probabilities in BEHAVIOR are MARGINAL means; each draw's gate probability
+# moves with the seat configuration through a logistic,
+#     p = sigmoid(logit(p0) + beta * x),   x centred over the draws,
+# so the marginal stays at p0 while pivotal configurations get more (or
+# less) of it. Anchors, institutional record:
+#  - haredi parties joined non-Likud governments exactly when the right had
+#    no path (Shas 1992, Shas+UTJ 1999) and they were the decisive partner
+#    -> defection rises with the NB gap to 61 and when that party alone
+#    closes the centre's gap;
+#  - a centre list joined Netanyahu when a SMALL gap made one partner
+#    sufficient (Gantz 2020, gap 3; no defector at gaps of 5-6 in 2019)
+#    -> the defection gate falls with the gap;
+#  - Likud shedding Netanyahu for unity rises with deadlock depth (both
+#    blocs short by more: 1984/1988 pattern).
+# Graded on the eight real outcomes in validate_formation.py.
+COND = {"gap_unit": 5.0,
+        "haredi_beta_gap": 0.35, "haredi_beta_piv": 0.50,
+        "defect_beta_gap": -0.35, "unity_beta_deadlock": 0.35}
+
+
+def cond_prob(p0, x):
+    """Logistic shift of a base probability by a centred covariate term."""
+    p0 = np.clip(p0, 1e-4, 1 - 1e-4)
+    return 1.0 / (1.0 + np.exp(-(np.log(p0 / (1 - p0)) + x)))
+
+
 def load_draws():
     # Prefer the registration-mixture draws (they carry the RZP-Zehut
     # pass/fail and centre-fold events); fall back to the baseline draws.
@@ -249,9 +276,6 @@ def simulate_formation(draws: pd.DataFrame, behavior: dict, seed=SEED,
     raam_joins = u[:, 1] < behavior["raam_joins"]
     raam_supports = u[:, 2] < behavior["raam_supports"]
     jl_supports = u[:, 3] < behavior["jl_supports"]
-    shas_on = u[:, 4] < behavior["shas_defects"]
-    utj_on = rng.random(n) < behavior["utj_defects"]
-    sans_bibi = u[:, 5] < behavior["likud_sans_bibi"]
 
     nb = nb_core + np.where(amcha_side == 1, amcha, 0)
     # Segalovitz's own seat (Ra'am slot #2, official) is a centre vote:
@@ -261,6 +285,28 @@ def simulate_formation(draws: pd.DataFrame, behavior: dict, seed=SEED,
     ce_pure = centre + seg                        # WITHOUT Amcha
     amcha_ce = np.where(amcha_side == 2, amcha, 0)
 
+    # --- configuration-conditional gates (see COND) ---
+    gap_nb = 61.0 - nb
+    gap_ce = 61.0 - ce_pure
+    xg = (gap_nb - gap_nb.mean()) / COND["gap_unit"]
+    shas_seats = draws["Shas"].values
+    utj_seats = draws["United Torah Judaism"].values
+    piv_shas = ((ce_pure < 61) & (ce_pure + shas_seats >= 61)).astype(float)
+    piv_utj = ((ce_pure < 61) & (ce_pure + utj_seats >= 61)).astype(float)
+    p_shas = cond_prob(behavior["shas_defects"],
+                       COND["haredi_beta_gap"] * xg
+                       + COND["haredi_beta_piv"] * (piv_shas - piv_shas.mean()))
+    p_utj = cond_prob(behavior["utj_defects"],
+                      COND["haredi_beta_gap"] * xg
+                      + COND["haredi_beta_piv"] * (piv_utj - piv_utj.mean()))
+    p_defect = cond_prob(behavior["centre_defects"], COND["defect_beta_gap"] * xg)
+    dead = np.minimum(gap_nb, gap_ce)
+    p_unity = cond_prob(behavior["likud_sans_bibi"],
+                        COND["unity_beta_deadlock"] * (dead - dead.mean()) / COND["gap_unit"])
+    shas_on = u[:, 4] < p_shas
+    utj_on = rng.random(n) < p_utj
+    sans_bibi = u[:, 5] < p_unity
+
     outcome = np.full(n, 7)  # default: repeat election
     outcome[np.where((ce_pure + amcha_ce
                       + draws["Likud"].values >= 61) & sans_bibi)] = 6
@@ -268,7 +314,7 @@ def simulate_formation(draws: pd.DataFrame, behavior: dict, seed=SEED,
     centre_seats = draws[CENTRE].values
     gap = (61 - nb)[:, None]
     feasible = ((centre_seats >= gap) & (gap > 0)).any(axis=1)
-    outcome[np.where((u[:, 6] < behavior["centre_defects"]) & feasible)] = 1
+    outcome[np.where((u[:, 6] < p_defect) & feasible)] = 1
     # minority: sworn by plurality with the JOINT LIST abstaining (the
     # named backer); a Ra'am abstention additionally lowers the bar
     yb = draws["Yisrael Beytenu"].values

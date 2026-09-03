@@ -392,6 +392,7 @@ def prepare_data(polls: pd.DataFrame | None = None,
     if modern_remaps:
         obs = _merge_cec(obs, block_of, asof)
         obs = _apply_structural_breaks(obs, block_of)
+        obs = _merge_sector(obs, block_of, asof)
 
     edges, dt_weeks = time_grid()
     obs["obs_day"] = (obs["fieldwork_end"] - asof).dt.days
@@ -434,6 +435,8 @@ def prepare_data(polls: pd.DataFrame | None = None,
         "dt_weeks": dt_weeks,
         "components": ["+".join(sorted(blocks[b])) for b in latent_blocks],
         "y": obs["share"].values,
+        "noise_mult": obs["noise_mult"].fillna(1.0).values.astype(float)
+                      if "noise_mult" in obs.columns else np.ones(len(obs)),
         "week": obs["week"].values.astype(int),
         "block_i": obs["block"].map(lb_ix).values.astype(int),
         "firm_i": obs["pollster"].map(firm_ix).values.astype(int),
@@ -464,6 +467,33 @@ def implied_share_obs(win: pd.DataFrame) -> pd.DataFrame:
 
 
 LAST_CEC_MERGE: dict = {}   # filled by _merge_cec, read into fit_summary.json
+
+
+def _merge_sector(obs: pd.DataFrame, block_of: dict, asof) -> pd.DataFrame:
+    """Append sector-poll observations converted to national shares
+    (src/sector_stream.py). They enter as polls by the sector firm with a
+    noise multiplier for the conversion's own uncertainty."""
+    from sector_stream import sector_observations
+    reg = load_party_registry()
+    so = sector_observations(dict(zip(reg["name_en"], reg["party_id"])))
+    if "noise_mult" not in obs.columns:
+        obs = obs.assign(noise_mult=1.0)
+    if so.empty:
+        return obs
+    so = so[so["fieldwork_end"] <= asof]
+    rows = []
+    for r in so.itertuples():
+        comp = r.party_id.split("+")[0]
+        if comp not in block_of:
+            continue
+        rows.append({"poll_id": r.poll_id, "block": block_of[comp], "share": float(r.share),
+                     "pollster": r.pollster, "fieldwork_end": r.fieldwork_end,
+                     "noise_mult": float(r.noise_mult)})
+    if rows:
+        print(f"sector stream: {len(rows)} converted observations from "
+              f"{so['pollster'].nunique()} sector firm(s)")
+        obs = pd.concat([obs, pd.DataFrame(rows)], ignore_index=True)
+    return obs
 
 
 def _merge_cec(obs: pd.DataFrame, block_of: dict, asof) -> pd.DataFrame:
@@ -529,6 +559,11 @@ def fit(data, draws=800, tune=800, holdout_mask=None):
     y, wk = data["y"][keep], data["week"][keep]
     bi, fi = data["block_i"][keep], data["firm_i"][keep]
     u_c = np.asarray(data.get("u_c", np.zeros(len(data["y"]))))[keep]
+    nmult = np.asarray(data.get("noise_mult", np.ones(len(data["y"]))))[keep]
+    # centred time coordinate per observation (drift identifiability)
+    edges_, _ = time_grid()
+    mids_ = (edges_[:-1] + edges_[1:]) / 2.0
+    tcent = ((mids_[wk] - mids_.mean()) / WINDOW_DAYS).astype(float)
 
     # Empirical ALR start point for faster convergence.
     first = pd.DataFrame({"b": data["block_i"], "y": data["y"],
@@ -558,6 +593,13 @@ def fit(data, draws=800, tune=800, holdout_mask=None):
         delta = pm.Normal("delta", gamma[data["firm_group"]], sigma_f,
                           shape=(F, B))
         delta_c = pm.Deterministic("delta_c", delta - delta.mean(axis=0))
+        # Time-varying house effects (2026-09-03, Fable audit #3): each
+        # firm's lean drifts linearly over the window, slope_c centred
+        # across firms per list so a common drift stays in the latent
+        # trend. Prior scale 0.01 share (~1.2 seats end to end).
+        sigma_slope = pm.HalfNormal("sigma_slope", 0.01)
+        slope = pm.Normal("slope", 0, sigma_slope, shape=(F, B))
+        slope_c = pm.Deterministic("slope_c", slope - slope.mean(axis=0))
 
         s_obs = pm.HalfNormal("s_obs", 0.012, shape=B)
         # Firm reliability: per-firm noise multipliers with priors from the
@@ -573,9 +615,9 @@ def fit(data, draws=800, tune=800, holdout_mask=None):
         # undecided share above the field average widens that poll's noise
         # by an ESTIMATED factor (beta_u -> 0 if undecideds don't matter).
         beta_u = pm.HalfNormal("beta_u", 3.0)
-        mu = shares[wk, bi] + delta_c[fi, bi]
+        mu = shares[wk, bi] + delta_c[fi, bi] + slope_c[fi, bi] * tcent
         pm.StudentT("y", nu=4, mu=mu,
-                    sigma=(s_obs[bi] + 0.002) * lam[fi]
+                    sigma=(s_obs[bi] + 0.002) * lam[fi] * nmult
                     * pt.exp(beta_u * u_c), observed=y)
 
         idata = pm.sample(draws=draws, tune=tune, chains=4, cores=4,
@@ -603,8 +645,14 @@ def posterior_predictive_check(data, idata):
     delta = post["delta_c"].values.reshape(-1, *post["delta_c"].shape[2:])
     s_obs = post["s_obs"].values.reshape(-1, post["s_obs"].shape[-1])
     idx = np.random.default_rng(0).choice(len(shares), 500, replace=False)
+    edges_, _ = time_grid()
+    mids_ = (edges_[:-1] + edges_[1:]) / 2.0
+    tcent = (mids_[data["week"]] - mids_.mean()) / WINDOW_DAYS
     mu = shares[idx][:, data["week"], data["block_i"]] \
         + delta[idx][:, data["firm_i"], data["block_i"]]
+    if "slope_c" in post:
+        slope = post["slope_c"].values.reshape(-1, *post["slope_c"].shape[2:])
+        mu = mu + slope[idx][:, data["firm_i"], data["block_i"]] * tcent[None, :]
     sd = s_obs[idx][:, data["block_i"]] + 0.002
     lo = np.percentile(mu - 1.96 * sd, 2.5, axis=0)
     hi = np.percentile(mu + 1.96 * sd, 97.5, axis=0)

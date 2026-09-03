@@ -76,10 +76,37 @@ OUTCOMES = ["nb", "nb_king", "defect", "centre", "centre_king",
             "repeat"]
 
 
-def run_tree(h, with_defection, rng):
+def _cond(p0, x):
+    p0 = min(max(p0, 1e-4), 1 - 1e-4)
+    return 1.0 / (1.0 + np.exp(-(np.log(p0 / (1 - p0)) + x)))
+
+
+# centring constants for the conditional mode: means over the eight cycles
+_GAPS = np.array([61 - h["nb"] for h in HISTORY.values()], dtype=float)
+_DEAD = np.array([min(61 - h["nb"], 61 - h["centre"]) for h in HISTORY.values()], dtype=float)
+_PIV = np.array([float((h["centre"] < 61) and (h["centre"] + h["haredi"] >= 61))
+                 for h in HISTORY.values()])
+
+
+def run_tree(h, with_defection, rng, conditional=False):
     """The 2026 tree's branch logic on one historical seat vector."""
     n = N
     u = rng.random((n, 7))
+    p_haredi = BEHAVIOR["haredi_defect"]
+    p_def = 0.33 if with_defection else 0.0
+    p_unity = BEHAVIOR["likud_sans_bibi"]
+    if conditional:
+        from government_formation import COND
+        gap = 61 - h["nb"]
+        piv = float((h["centre"] < 61) and (h["centre"] + h["haredi"] >= 61))
+        dead = min(61 - h["nb"], 61 - h["centre"])
+        xg = (gap - _GAPS.mean()) / COND["gap_unit"]
+        p_haredi = _cond(p_haredi, COND["haredi_beta_gap"] * xg
+                         + COND["haredi_beta_piv"] * (piv - _PIV.mean()))
+        if with_defection:
+            p_def = _cond(p_def, COND["defect_beta_gap"] * xg)
+        p_unity = _cond(p_unity, COND["unity_beta_deadlock"]
+                        * (dead - _DEAD.mean()) / COND["gap_unit"])
     king_side = np.select(
         [u[:, 0] < BEHAVIOR["king_right"],
          u[:, 0] < BEHAVIOR["king_right"] + BEHAVIOR["king_centre"]],
@@ -89,9 +116,9 @@ def run_tree(h, with_defection, rng):
     raam_joins = u[:, 1] < p_join
     raam_supports = u[:, 2] < p_supp
     jl_supports = u[:, 3] < BEHAVIOR["jl_supports"]
-    haredi_defect = u[:, 4] < BEHAVIOR["haredi_defect"]
-    sans_bibi = u[:, 5] < BEHAVIOR["likud_sans_bibi"]
-    defects = u[:, 6] < (0.33 if with_defection else 0.0)
+    haredi_defect = u[:, 4] < p_haredi
+    sans_bibi = u[:, 5] < p_unity
+    defects = u[:, 6] < p_def
 
     nb = h["nb"] + np.where(king_side == 1, h["king"], 0)
     ce = h["centre"] + np.where(king_side == 2, h["king"], 0)
@@ -117,11 +144,11 @@ def run_tree(h, with_defection, rng):
     return out
 
 
-def grade(with_defection):
+def grade(with_defection, conditional=False):
     rng = np.random.default_rng(SEED)
     rows = []
     for cycle, h in HISTORY.items():
-        out = run_tree(h, with_defection, rng)
+        out = run_tree(h, with_defection, rng, conditional)
         # score family: count nb/nb_king as one family for realized "nb"
         realized = h["outcome"]
         fam_map = {"nb": {"nb", "nb_king"}, "nb_king": {"nb", "nb_king"},
@@ -150,8 +177,13 @@ def main() -> None:
     both.to_csv(PROCESSED_DIR / "formation_validation.csv", index=False)
     print("Formation tree graded on eight real outcomes:\n")
     print(both.to_string(index=False))
+    cond = grade(with_defection=True, conditional=True)
+    cond.to_csv(PROCESSED_DIR / "formation_validation_conditional.csv", index=False)
+    print("\nconfiguration-conditional gates:\n")
+    print(cond.to_string(index=False))
     for tag, df in (("shipped tree", without), ("with defection branch",
-                                                withd)):
+                                                withd),
+                    ("conditional gates", cond)):
         print(f"\n{tag}: mean P(realized) "
               f"{df['p_realized'].mean():.2f} | mean P(PM side) "
               f"{df['p_pm_side'].mean():.2f} | mean log score "
