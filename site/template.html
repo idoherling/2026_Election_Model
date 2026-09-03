@@ -379,6 +379,13 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
   </div>
 </div></section>
 
+<section id="smallparties" class="pg-report"><div class="wrap">
+  <p class="eyebrow">Below the threshold</p>
+  <h2>The small parties</h2>
+  <p class="lede" id="spLede"></p>
+  <div class="sheet thr" id="sp"></div>
+</div></section>
+
 <section id="threshold" class="pg-report"><div class="wrap">
   <p class="eyebrow">The knife-edges</p>
   <h2 id="thrH2">Five lists live or die at 3.25%</h2>
@@ -806,6 +813,7 @@ const HE_STATIC = {
  "Contents":"תוכן העניינים",
  "Technical annex — methodology & track record":"נספח טכני — מתודולוגיה וביצועי עבר",
  "Track record by firm":"ביצועי עבר לפי מכון","Pollster ratings":"דירוג המכונים",
+ "Below the threshold":"מתחת לאחוז החסימה","The small parties":"המפלגות הקטנות",
  "Every input":"כל קלט","The poll ledger":"יומן הסקרים",
  "← Back to the forecast":"→ חזרה לתחזית"};
 const HE_LEDE = {
@@ -1162,24 +1170,18 @@ function hideTip(){ tip.style.opacity = 0; }
 (function(){
   if (!D.sub || !D.sub.length) return;
   const t = HEB_MODE ? {
-    h: 'המפלגות הקטנות',
-    sub: 'תחזית הנתח מהקולות הארציים: מדידות הסוקרים, מתוקננות לפי האופן שבו סקרים סופיים של רשימות קטנות תורגמו לקולות אמת ב־2015–2022; אחוז החסימה — 3.25%',
-    polled: 'בסקרים', sector: 'סקר מגזרי',
+    sub: 'כל רשימה שהתחזית משאירה מתחת לאחוז החסימה, עם הנתח החזוי שלה מהקולות הארציים. מפלגות שנסקרות רק בהערות שוליים: מדידות הסוקרים מתוקננות לפי האופן שבו סקרים סופיים של רשימות קטנות תורגמו לקולות אמת ב־2015–2022; רשימות בעלות עמודת סקרים משלהן: ממוצע התערובת, עם הסיכוי לעבור. אחוז החסימה — 3.25%.',
+    polled: 'בסקרים', sector: 'סקר מגזרי', pass: 'מעבר',
   } : {
-    h: 'The small parties',
-    sub: 'Forecast share of the national vote: the pollsters\u2019 measured support, adjusted for how small lists\u2019 final polls translated into real votes in 2015\u20132022; the threshold is 3.25%',
-    polled: 'polled', sector: 'Arab-sector poll',
+    sub: 'Every list the forecast leaves below the threshold, with its forecast share of the national vote. Parties polled only in footnotes: the pollsters\u2019 measured support, adjusted for how small lists\u2019 final polls translated into real votes in 2015\u20132022; lists with their own poll column: the mixture\u2019s mean, with the chance of passing. The threshold is 3.25%.',
+    polled: 'polled', sector: 'Arab-sector poll', pass: 'pass',
   };
-  $("#thr").insertAdjacentHTML("afterend",
-    `<div style="margin-top:26px;border-top:2px solid var(--ink);padding-top:14px">
-      <div style="font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;margin-bottom:4px">${t.h}</div>
-      <div style="font-size:12.5px;color:var(--muted);margin-bottom:10px">${t.sub}</div>
-      <div class="thr">` + D.sub.map(p => `<div class="row">
+  document.getElementById("spLede").textContent = t.sub;
+  $("#sp").innerHTML = D.sub.map(p => `<div class="row">
         <div class="nm" style="font-weight:600;font-size:13.5px">${nm(p.name)}
-          <span style="color:var(--muted);font-weight:400;font-size:11.5px">${p.src==="sector"?t.sector:t.polled} ${p.polled.toFixed(1)}%</span></div>
+          <span style="color:var(--muted);font-weight:400;font-size:11.5px">${p.polled != null ? `${p.src==="sector"?t.sector:t.polled} ${p.polled.toFixed(1)}%` : ""}${p.kind==="list" ? ` · ${t.pass} ${pct(p.pass)}` : ""}</span></div>
         <div class="bar" style="height:8px"><i style="${pc(p.name)};width:${Math.min(p.share/3.25*100,100)}%"></i></div>
-        <div class="pct">${p.share.toFixed(1)}%</div></div>`).join("") +
-      `</div></div>`);
+        <div class="pct">${p.share.toFixed(1)}%</div></div>`).join("");
 })();
 
 /* ---- draws machinery ---- */
@@ -1431,13 +1433,13 @@ renderBlocHist("anti");
 
   // two-page router + per-view nav + scrollspy
   const NAVS = HEB_MODE ? {
-    report: [["#seats","מנדטים"],["#threshold","על הסף"],["#blocdist","חשבון הגושים"],
+    report: [["#seats","מנדטים"],["#smallparties","המפלגות הקטנות"],["#threshold","על הסף"],["#blocdist","חשבון הגושים"],
              ["#builder","בונה הקואליציות"],["#formation","הרכבה ורוה״מ"],
              ["#ground","משחק הקרקע"],["#page:method","מתודולוגיה ←"]],
     method: [["#page:report","→ לתחזית"],["#pollsters","תעשיית הסקרים"],["#ratings","דירוג המכונים"],
              ["#polls","יומן הסקרים"],["#method","הצינור"],["#validation","ביצועי עבר"]]
   } : {
-    report: [["#seats","Seats"],["#threshold","The knife-edges"],["#blocdist","Bloc math"],
+    report: [["#seats","Seats"],["#smallparties","Small parties"],["#threshold","The knife-edges"],["#blocdist","Bloc math"],
              ["#builder","Coalition builder"],["#formation","Formation & PM"],
              ["#ground","Ground game"],["#page:method","Methodology →"]],
     method: [["#page:report","← Forecast"],["#pollsters","The polling industry"],["#ratings","Pollster ratings"],

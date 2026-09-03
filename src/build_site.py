@@ -83,14 +83,44 @@ def build_payload() -> dict:
     # is labelled as such on the site.
     SECTOR_POLLED = {"makom_lekulanu"}
     sub = [
-        {"name": names.get(pid, pid),
+        {"name": names.get(pid, pid), "kind": "micro",
          "polled": round(MICRO_POLLED[pid][0] * 100, 1),
          "src": "sector" if pid in SECTOR_POLLED else "national",
          "share": round(mean * 100, 1),
          "pass": round(float(ppass.get(names.get(pid, pid), 0.0)), 3)}
         for pid, (mean, _sd) in MICRO_PRIORS.items() if pid not in merged_away
     ]
-    sub.sort(key=lambda x: (-x["share"], -x["polled"]))
+    # Every modeled list the forecast leaves below the threshold joins the
+    # section too, with its forecast vote share (the mixture's mean share)
+    # and its polled share over the last 14 days (seat-derived, or the
+    # below-threshold percentage where a pollster published one).
+    ms = pd.read_csv(PROCESSED / "mixture_shares.csv")
+    mshare = dict(zip(ms["list"], ms["share_mean"]))
+    polls_all = pd.read_csv(PROCESSED / "polls.csv", parse_dates=["fieldwork_end"])
+    p26 = polls_all[polls_all["cycle"].astype(str) == "2026"]
+    recent = p26[p26["fieldwork_end"] >= p26["fieldwork_end"].max() - pd.Timedelta(days=14)]
+    name_of_id = dict(zip(reg["party_id"], reg["name_en"]))
+    comp_name = {"together": "Bennett 2026 + Yesh Atid", "balad+hadash_taal": "Balad + Hadash-Ta'al"}
+    recent = recent.assign(list_name=recent["party_id"].map(lambda i: comp_name.get(i, name_of_id.get(i, i))))
+    already = {x["name"] for x in sub}
+    for r in off.itertuples():
+        if r.central_seats > 0 or r.list in already or r.list not in mshare:
+            continue
+        g = recent[recent["list_name"] == r.list]
+        vals = []
+        for q in g.itertuples():
+            if pd.notna(q.seats) and q.seats > 0:
+                vals.append(q.seats / 120 * 100)
+            elif pd.notna(q.vote_pct):
+                vals.append(float(q.vote_pct))
+        sub.append({"name": r.list, "kind": "list",
+                    "polled": round(float(np.mean(vals)), 1) if vals else None,
+                    "src": "national", "share": round(float(mshare[r.list]) * 100, 1),
+                    "pass": round(float(r.p_pass), 3)})
+    # columns a resolved event zeroes in every draw (e.g. a split that did
+    # not happen) are not contenders
+    sub = [x for x in sub if x["share"] > 0]
+    sub.sort(key=lambda x: (-x["share"], -(x["polled"] or 0)))
 
     b = pd.read_csv(PROCESSED / "mixture_blocs.csv").iloc[0]
     blocs = {"nb": round(float(b.p_nb_61), 3),
