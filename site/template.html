@@ -1179,7 +1179,7 @@ function hideTip(){ tip.style.opacity = 0; }
   document.getElementById("spLede").textContent = t.sub;
   $("#sp").innerHTML = D.sub.map(p => `<div class="row">
         <div class="nm" style="font-weight:600;font-size:13.5px">${nm(p.name)}
-          <span style="color:var(--muted);font-weight:400;font-size:11.5px">${p.polled != null ? `${p.src==="sector"?t.sector:t.polled} ${p.polled.toFixed(1)}%` : ""}${p.kind==="list" ? ` · ${t.pass} ${pct(p.pass)}` : ""}</span></div>
+          <span style="color:var(--muted);font-weight:400;font-size:11.5px">${t.pass} ${pct(p.pass)}</span></div>
         <div class="bar" style="height:8px"><i style="${pc(p.name)};width:${Math.min(p.share/3.25*100,100)}%"></i></div>
         <div class="pct">${p.share.toFixed(1)}%</div></div>`).join("");
 })();
