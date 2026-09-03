@@ -746,3 +746,22 @@ refits. (2) The volatility calendar helps at D-21 (interval score 9.78
 vs 10.11) and is neutral at D-56; retained. (3) Point error roughly
 doubles from election eve to D-56 (1.66 -> 2.79), which is the honest
 scale of what eight weeks of campaign can do.
+
+### 28a. Anchor decision
+
+Finer ablation (pooled MAE mean / median; Brier): full 1.665 / 1.574 /
+0.060; no Likud anchor 1.656 / 1.597 / 0.059; no leader anchor 1.649 /
+1.554 / 0.059; half strength 1.614 / 1.553 / 0.059; NO ANCHORS 1.589 /
+1.541 / 0.058. Removing both beats every partial option. Per cycle, no
+anchors loses in 2019a (2.24 -> 2.47, the gevalt election the anchor was
+built for) and slightly in 2020, and wins in 2013, 2019s, 2021 and 2022.
+Decision: ANCHORS_ON = False in production; values retained for the
+record. Successor to test: a CONDITIONAL gevalt - the Likud beat applied
+only when Likud is rising over the final fortnight of polling, which is
+what 2015 and April 2019 had in common.
+
+Also shipped from the ablation: the central seat count now uses the
+mixture's MEDIAN share vector (renormalised) rather than the mean - the
+harness grades the median as the better point estimate by ~0.09 seats
+per list in every configuration (threshold deaths skew the means of
+straddling lists downward).

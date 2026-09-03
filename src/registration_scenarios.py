@@ -322,7 +322,8 @@ def main() -> None:
     dist.to_csv(PROCESSED_DIR / "bayes_forecast_mixture.csv", index=False)
     pd.DataFrame({"list": project.last_labels,
                   "components": project.last_components,
-                  "share_mean": np.round(project.last_share_mean, 5)}).to_csv(
+                  "share_mean": np.round(project.last_share_mean, 5),
+                  "share_median": np.round(project.last_share_median, 5)}).to_csv(
         PROCESSED_DIR / "mixture_shares.csv", index=False)
     # Feed the formation layer the same mixture draws, so registration
     # events (RZP-Zehut pass/fail, centre folds) flow into coalition math.

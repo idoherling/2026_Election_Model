@@ -346,6 +346,15 @@ ARAB_LIST_UNIFIED = True
 ARAB_TURNOUT = {"base": 0.538, "mean_unified": 0.625, "mean_split": 0.47,
                 "sd": 0.05, "max": 0.72}
 ANCHORS = _P["anchors"]            # {"likud": .., "leader": ..} error means
+# 2026-09-03 (accuracy round three): anchors RETIRED. Eight-cycle harness
+# ablation - full 1.665 / no anchors 1.589 seats per list (median 1.574
+# -> 1.541), Brier 0.060 -> 0.058, coverage 0.983 -> 0.972; removing
+# either anchor alone or halving both is worse than removing both. The
+# Likud beat is +8.4 and +6.7 in two cycles and ~0 in six, so a mean
+# applied everywhere is wrong six times in eight. Values kept for the
+# record; a conditional gevalt (Likud rising in the final fortnight) is
+# the principled successor to test.
+ANCHORS_ON = False
 # Interval-width calibration (audit improvement #2): one global factor on
 # the per-list residual shock, fitted leave-one-cycle-out on the harness
 # to bring 90% coverage to its target (validate_bayes writes the curve to
@@ -1013,7 +1022,7 @@ def project(data, idata, rng, config="current", config_params=None):
     leader_col = non_likud[int(np.argmax(base[non_likud]))] if non_likud else None
     for col, mu in ((likud_col, ANCHORS["likud"]),
                     (leader_col, ANCHORS["leader"])):
-        if col is None:
+        if col is None or not ANCHORS_ON:
             continue
         onehot = np.zeros(len(comps))
         onehot[col] = 1.0
@@ -1101,6 +1110,10 @@ def project(data, idata, rng, config="current", config_params=None):
     # through the seat law), so the point estimate and the intervals come
     # from the same distribution.
     project.last_share_mean = shares.mean(axis=0)
+    # The harness scores the MEDIAN as the better point estimate (MAE 1.57
+    # vs 1.67 for the mean, in every ablation configuration): threshold
+    # deaths skew the means of straddling lists downward.
+    project.last_share_median = np.median(shares, axis=0)
     project.last_labels = list(labels)
     project.last_components = ["+".join(sorted(c)) for c in comps]
     seats = np.zeros((N_PROJ, shares.shape[1]), dtype=int)

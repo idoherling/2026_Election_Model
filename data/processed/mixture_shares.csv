@@ -1,24 +1,24 @@
-list,components,share_mean
-Blue and White,blue_white,0.00534
-The Democrats,democrats,0.07134
-Likud,likud,0.19344
-Otzma Yehudit,otzma,0.05343
-Ra'am,raam,0.03741
-Religious Zionist Party,rzp,0.04112
-Shas,shas,0.06011
-United Torah Judaism,utj,0.06049
-Yashar,yashar,0.19654
-Yisrael Beytenu,yisrael_beytenu,0.06271
-Zionist Home – The Reservists,zionist_home,0.01035
-Bennett 2026 + Yesh Atid,bennett_2026+yesh_atid,0.08892
-Balad + Hadash-Ta'al,balad+hadash_taal,0.06097
-Amcha Yisrael,amcha_yisrael,0.02229
-Unity,unity,0.00133
-Noam,noam,0.00348
-New Economic Party,nep,0.00747
-The Haredi Public,haredi_public,0.01097
-Israel First,israel_first,0.00263
-A Place for All of Us,makom_lekulanu,0.00682
-The Fourth Quarter,fourth_quarter,0.00141
-El HaDegel,el_dagel,0.00141
-Balad (alone),balad,0.0
+list,components,share_mean,share_median
+Blue and White,blue_white,0.00548,0.00012
+The Democrats,democrats,0.07439,0.07434
+Likud,likud,0.17766,0.17786
+Otzma Yehudit,otzma,0.05578,0.05556
+Ra'am,raam,0.03882,0.03871
+Religious Zionist Party,rzp,0.04292,0.04283
+Shas,shas,0.06247,0.06211
+United Torah Judaism,utj,0.06284,0.06271
+Yashar,yashar,0.18661,0.18615
+Yisrael Beytenu,yisrael_beytenu,0.06528,0.06507
+Zionist Home – The Reservists,zionist_home,0.01064,0.0007
+Bennett 2026 + Yesh Atid,bennett_2026+yesh_atid,0.09315,0.09264
+Balad + Hadash-Ta'al,balad+hadash_taal,0.06324,0.06256
+Amcha Yisrael,amcha_yisrael,0.0236,0.01989
+Unity,unity,0.00135,0.0
+Noam,noam,0.00364,0.00344
+New Economic Party,nep,0.00784,0.00775
+The Haredi Public,haredi_public,0.01151,0.01148
+Israel First,israel_first,0.00274,0.00242
+A Place for All of Us,makom_lekulanu,0.0071,0.00661
+The Fourth Quarter,fourth_quarter,0.00147,0.00119
+El HaDegel,el_dagel,0.00147,0.0012
+Balad (alone),balad,0.0,0.0

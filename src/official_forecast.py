@@ -4,8 +4,8 @@ The published object is the registration MIXTURE (the Bayesian posterior
 projected through the measured shock stack and mixed over the open
 registration events). Intervals, pass probabilities and bloc odds are
 read off its draws. The CENTRAL seat count is the mixture's own point
-forecast: its mean vote-share vector passed once through the real seat
-law - the 3.25% threshold and Bader-Ofer with the surplus-vote pairs - so
+forecast: its MEDIAN vote-share vector (renormalised) passed once through
+the real seat law - the 3.25% threshold and Bader-Ofer with the surplus-vote pairs - so
 the table sums to 120 by construction, with no rounding, floors or
 remainder hand-outs.
 
@@ -33,7 +33,11 @@ def allocate_central(shares: pd.DataFrame) -> dict:
     """Seats for the mean share vector: threshold, surplus pairs, d'Hondt."""
     names = shares["list"].tolist()
     comps = [set(str(c).split("+")) for c in shares["components"]]
-    v = shares["share_mean"].values.astype(float)
+    # median share vector: the harness grades the median as the better point
+    # estimate (MAE 1.57 vs 1.67); renormalised so the pie sums to one
+    col = "share_median" if "share_median" in shares.columns else "share_mean"
+    v = shares[col].values.astype(float)
+    v = v / v.sum()
     passed = v >= THRESHOLD
     comp_of = {c: i for i, cs in enumerate(comps) for c in cs}
     pair_idx = [(comp_of[a], comp_of[b]) for a, b in SURPLUS_PAIRS
@@ -84,7 +88,7 @@ def main() -> None:
     out.to_csv(PROCESSED_DIR / "official_forecast.csv", index=False)
 
     print(f"OFFICIAL FORECAST as of {out['asof'].iloc[0]} "
-          f"(centres: Bader-Ofer on the mixture's mean shares; distributions: mixture)\n")
+          f"(centres: Bader-Ofer on the mixture's median shares; distributions: mixture)\n")
     for r in out[out["central_seats"] > 0].itertuples():
         print(f"  {r.central_seats:>3}  {r.list:<32} [{r.interval_90}]  pass {r.p_pass:.0%}")
     print(f"\n  Bloc probabilities (registration mixture): "
