@@ -349,3 +349,28 @@ directly, so two pre-registered retirements fired:
 
 Also in the wave: Amcha at 4-5 seats in three of four polls (Lazar 0) —
 left to the model; no parameter touched.
+
+## 17. Afkar Arab-sector poll (Sept 2026): Makom Lekulanu enters the board
+
+Afkar Research (Arab-sector specialist), N=815, mandates computed by the
+firm on a 60% sector-turnout assumption (their methodological note says
+they prefer publishing answer shares over mandates). Owner-supplied.
+
+Scenario 1 (all lists separate, % of sector): Joint List (Jabareen) 38%
+(~9 mandates on their basis) | Ra'am+Segalovitz (Abbas) 19% (~5) |
+Makom Lekulanu (Daoud/Green, the Standing Together list) 7% (~1.6) |
+Democrats 5% | Likud 3% | Together 2%.
+
+Merger scenarios: JL+Makom polls 53% — an +8pp SYNERGY over the sum of
+parts (38+7) — while Ra'am+Makom polls 26%, purely additive (19+7).
+If a JL-Makom slate files by Sept 9, this is the transfer evidence.
+
+Integration: makom_lekulanu added to the registry (opposition_bloc) and
+to MICRO_POLLED at (1.0%, 0.6%) — 7% of the sector is 0.7-1.3% of the
+national vote depending on the turnout basis, its Jewish support is
+unmeasured, and three national CEC filings (Midgam Project) register it
+at 0.0%, so the sd is wide. MICRO_REALIZE 0.7 (organized movement, no
+parliamentary base). CEC keyword added. The sector totals (64% of the
+sector to Arab-led lists, 10% crossover to Zionist lists) sit inside
+the KALPI_ARAB_CAP arithmetic; the JL 38% reading is consistent with
+the Sept 2 national wave's JL 7-9 seats. No non-micro parameter moved.

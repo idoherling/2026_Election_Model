@@ -1,22 +1,23 @@
 list,bloc,mean,p05,p50,p95,p_pass,p_largest,asof
-Likud,Netanyahu bloc,25.5,18,25,34,1.0,0.533,2026-09-02
-Yashar,Anti-Netanyahu bloc,24.9,17,25,33,1.0,0.462,2026-09-02
-Bennett 2026 + Yesh Atid,Anti-Netanyahu bloc,12.2,5,12,19,0.979,0.006,2026-09-02
-The Democrats,Anti-Netanyahu bloc,9.6,5,10,14,0.978,0.0,2026-09-02
-United Torah Judaism,Netanyahu bloc,7.9,5,8,11,0.992,0.0,2026-09-02
-Yisrael Beytenu,Anti-Netanyahu bloc,7.9,0,8,12,0.944,0.0,2026-09-02
-Shas,Netanyahu bloc,7.7,5,8,11,0.982,0.0,2026-09-02
-Otzma Yehudit,Netanyahu bloc,6.7,0,7,11,0.869,0.0,2026-09-02
+Likud,Netanyahu bloc,25.5,18,25,34,1.0,0.523,2026-09-02
+Yashar,Anti-Netanyahu bloc,25.0,17,25,33,1.0,0.472,2026-09-02
+Bennett 2026 + Yesh Atid,Anti-Netanyahu bloc,12.2,6,12,19,0.98,0.004,2026-09-02
+The Democrats,Anti-Netanyahu bloc,9.6,5,10,14,0.976,0.0,2026-09-02
+United Torah Judaism,Netanyahu bloc,7.9,5,8,11,0.991,0.0,2026-09-02
+Yisrael Beytenu,Anti-Netanyahu bloc,7.9,0,8,12,0.939,0.0,2026-09-02
+Shas,Netanyahu bloc,7.7,5,8,11,0.979,0.0,2026-09-02
+Otzma Yehudit,Netanyahu bloc,6.7,0,7,12,0.866,0.0,2026-09-02
 Balad + Hadash-Ta'al,Arab parties,6.4,0,7,12,0.833,0.0,2026-09-02
-Ra'am,Arab parties,3.4,0,4,8,0.572,0.0,2026-09-02
-Religious Zionist Party,Netanyahu bloc,3.3,0,4,8,0.55,0.0,2026-09-02
-Amcha Yisrael,Netanyahu bloc,2.1,0,0,9,0.318,0.0,2026-09-02
-Zionist Home – The Reservists,Anti-Netanyahu bloc,1.5,0,0,7,0.272,0.0,2026-09-02
-Unity,Anti-Netanyahu bloc,0.6,0,0,5,0.108,0.0,2026-09-02
-Blue and White,Anti-Netanyahu bloc,0.4,0,0,4,0.078,0.0,2026-09-02
+Ra'am,Arab parties,3.4,0,4,8,0.564,0.0,2026-09-02
+Religious Zionist Party,Netanyahu bloc,3.3,0,4,8,0.538,0.0,2026-09-02
+Amcha Yisrael,Netanyahu bloc,2.1,0,0,9,0.316,0.0,2026-09-02
+Zionist Home – The Reservists,Anti-Netanyahu bloc,1.6,0,0,7,0.273,0.0,2026-09-02
+Unity,Anti-Netanyahu bloc,0.5,0,0,5,0.105,0.0,2026-09-02
+Blue and White,Anti-Netanyahu bloc,0.4,0,0,4,0.075,0.0,2026-09-02
 Noam,Netanyahu bloc,0.0,0,0,0,0.0,0.0,2026-09-02
 New Economic Party,unknown,0.0,0,0,0,0.0,0.0,2026-09-02
 The Haredi Public,Netanyahu bloc,0.0,0,0,0,0.0,0.0,2026-09-02
 Israel First,unknown,0.0,0,0,0,0.0,0.0,2026-09-02
+A Place for All of Us,Anti-Netanyahu bloc,0.0,0,0,0,0.0,0.0,2026-09-02
 The Fourth Quarter,unknown,0.0,0,0,0,0.0,0.0,2026-09-02
 El HaDegel,unknown,0.0,0,0,0,0.0,0.0,2026-09-02

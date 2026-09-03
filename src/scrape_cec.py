@@ -90,6 +90,7 @@ PARTY_KEYWORDS = [
     ("אדלשטיין", "unity"),
     ("עמך", "amcha_yisrael"), ("וינטר", "amcha_yisrael"),
     ("זהות", "zehut"), ("נעם", "noam"),
+    ("מקום לכולנו", "makom_lekulanu"), ("לכולנו מקום", "makom_lekulanu"),
 ]
 UNDECIDED_TOKENS = ("יודע לא", "לא יודע", "מתלבט", "החלטתי לא", "לא החלטתי")
 

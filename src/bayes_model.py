@@ -245,6 +245,11 @@ MICRO_POLLED = {
     "nep": (0.013, 0.004),             # 1.0-1.7%, Aug 2026
     "haredi_public": (0.013, 0.004),   # 1.2-1.5% Jul-Aug (Midgam 31 Aug: 1.2%)
     "israel_first": (0.004, 0.003),    # 0.3-0.6% Aug 2026 (Lazar/Direct Polls)
+    # Standing Together's list (Daoud/Green): Afkar Sept 2026 Arab-sector
+    # poll has it at 7% of the sector, which is 0.7-1.3% of the national
+    # vote depending on the turnout basis (their 60% assumption vs our
+    # measured 54%); its Jewish support is unmeasured, so the sd is wide.
+    "makom_lekulanu": (0.010, 0.006),
     # fiery_youth REMOVED (owner ruling, Sept 1): not running — Muchtar
     # is leading Likud's youth campaign.
     "fourth_quarter": (0.002, 0.002),  # 0.5% once (18 Jun); not itemized since
@@ -263,6 +268,7 @@ MICRO_POLLED = {
 MICRO_REALIZE = {
     "noam": 1.0, "haredi_public": 1.0,
     "nep": 0.7, "israel_first": 0.7, "fourth_quarter": 0.7, "el_dagel": 0.7,
+    "makom_lekulanu": 0.7,   # organized movement but no parliamentary base
 }
 # Forecast prior = polled x realization; the calibration's own dispersion
 # (ratio spread ~0.6-1.1) is folded into the sd.

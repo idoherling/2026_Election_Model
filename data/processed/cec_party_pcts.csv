@@ -87,6 +87,7 @@ ref,pollster,fieldwork_end,party_id,raw_pct,shown_passing
 4052,Midgam Project & StatNet,2026-08-04,otzma,5.0,True
 4052,Midgam Project & StatNet,2026-08-04,democrats,6.4,True
 4052,Midgam Project & StatNet,2026-08-04,together,7.9,True
+4052,Midgam Project & StatNet,2026-08-04,makom_lekulanu,0.0,True
 4054,Lazar,2026-07-29,yashar,18.0,True
 4054,Lazar,2026-07-29,likud,17.8,True
 4054,Lazar,2026-07-29,together,11.5,True
@@ -257,6 +258,7 @@ ref,pollster,fieldwork_end,party_id,raw_pct,shown_passing
 4077,Midgam Project & StatNet,2026-08-11,democrats,14.9,True
 4077,Midgam Project & StatNet,2026-08-11,together,24.5,True
 4077,Midgam Project & StatNet,2026-08-11,unity,0.6,True
+4077,Midgam Project & StatNet,2026-08-11,makom_lekulanu,0.0,True
 4079,Kantar,2026-08-13,likud,17.5,True
 4079,Kantar,2026-08-13,together,10.7,True
 4079,Kantar,2026-08-13,yashar,17.7,True
@@ -393,6 +395,7 @@ ref,pollster,fieldwork_end,party_id,raw_pct,shown_passing
 4094,Midgam Project & StatNet,2026-08-18,yashar,16.4,True
 4094,Midgam Project & StatNet,2026-08-18,zionist_home,1.2,True
 4094,Midgam Project & StatNet,2026-08-18,unity,0.8,True
+4094,Midgam Project & StatNet,2026-08-18,makom_lekulanu,0.0,True
 4096,Dialog,2026-08-17,yashar,19.0,True
 4096,Dialog,2026-08-17,likud,13.0,True
 4096,Dialog,2026-08-17,together,10.0,True
