@@ -1083,7 +1083,7 @@ function hideTip(){ tip.style.opacity = 0; }
   const X = v => (v/MAX*100);
   let html = "";
   ["anti","arab","nb"].forEach(bloc=>{
-    const grp = D.parties.filter(p=>p.hi>0 && BLOC[p.name]===bloc);
+    const grp = D.parties.filter(p=>(p.hi>0 || D.drawCols.includes(p.name)) && BLOC[p.name]===bloc);
     if (!grp.length) return;
     const tot = grp.reduce((a,p)=>a+p.seats,0);
     html += `<div class="blochead"><i class="sw" style="background:var(--bloc-${bloc==="arab"?"arab":bloc});width:10px;height:10px;display:inline-block;margin-right:8px;vertical-align:-1px"></i>${BLOC_NAME[bloc]} · ${tot} ${HEB_MODE?"מנדטים":"seats"}</div>`;
@@ -1112,11 +1112,11 @@ function hideTip(){ tip.style.opacity = 0; }
 
 /* ---- threshold bars ---- */
 (function(){
-  const zone = D.parties.filter(p=>p.p_pass>0.02 && p.p_pass<0.97)
+  const zone = D.parties.filter(p=>p.p_pass>0.005 && p.p_pass<0.97)
     .sort((a,b)=>b.p_pass-a.p_pass);
   const NW = HEB_MODE
-    ? {3:"שלוש",4:"ארבע",5:"חמש",6:"שש",7:"שבע",8:"שמונה",9:"תשע"}
-    : {3:"Three",4:"Four",5:"Five",6:"Six",7:"Seven",8:"Eight",9:"Nine"};
+    ? {3:"שלוש",4:"ארבע",5:"חמש",6:"שש",7:"שבע",8:"שמונה",9:"תשע",10:"עשר",11:"אחת־עשרה"}
+    : {3:"Three",4:"Four",5:"Five",6:"Six",7:"Seven",8:"Eight",9:"Nine",10:"Ten",11:"Eleven"};
   const h2 = document.getElementById("thrH2");
   if (h2 && NW[zone.length]) h2.textContent = HEB_MODE
     ? NW[zone.length] + " רשימות חיות או מתות על 3.25%"
@@ -1204,7 +1204,7 @@ renderBlocHist("anti");
 /* ---- coalition builder ---- */
 (function(){
   const sel = new Set();
-  const partiesForChips = D.parties.filter(p=>p.hi>0 && colIdx[p.name]!=null);
+  const partiesForChips = D.parties.filter(p=>colIdx[p.name]!=null);
   const chipBox = $("#chips");
   chipBox.innerHTML = partiesForChips.map(p=>`<button class="chip" data-p="${p.name}" aria-pressed="false">
     <span class="petek${p.seats===0?" dead":""}" style="${pc(p.name)}">${heb(p.name)}</span>${nm(p.name)}
