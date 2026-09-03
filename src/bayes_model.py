@@ -477,11 +477,12 @@ LAST_CEC_MERGE: dict = {}   # filled by _merge_cec, read into fit_summary.json
 # the NB-bloc total around each firm's own trend measures 0.4-0.7 seats
 # (Filber 0.43, Direct Polls 0.50, Lazar 0.54) against a binomial sampling
 # error of 2-3 seats for n~550 - series smoothed by panel stickiness that
-# the likelihood was reading as precision. The observation noise now has
-# a hard floor at the binomial sampling sd for the poll's n, inflated by a
-# declared design effect for opt-in panels (AAPOR/Pew: opt-in online and
-# SMS panels carry effective samples well below nominal; the two SMS
-# firms also own the worst graded final-poll records).
+# the likelihood was reading as precision. A hard floor at the binomial
+# sampling sd (x a declared design effect for opt-in panels) was built
+# and REJECTED by the eight-cycle harness (see the switch in fit()); the
+# machinery stays for research runs. What ships against the pathology:
+# exit polls out of the scorecard, shrinkage by cycles graded, and a
+# tighter lam prior (LAM_PRIOR_SIGMA) so the graded record holds.
 FIRM_N_DEFAULT = {"Kantar": 550, "Midgam": 500, "Lazar": 500, "Panels Politics": 500,
                   "Maagar Mochot": 550, "Direct Polls": 500, "Filber": 600,
                   "Tatika": 500, "Dialog": 500}      # CEC filing medians
@@ -591,6 +592,16 @@ def fit(data, draws=800, tune=800, holdout_mask=None):
     deff = np.asarray(data.get("deff", np.full(len(data["y"]), DEFF_DEFAULT)))[keep]
     yc = np.clip(y, 0.01, 0.99)
     floor = np.sqrt(yc * (1 - yc) / n_resp * deff)   # binomial sampling sd x design effect
+    import os
+    # Default OFF. Eight-cycle harness ablation (2026-09-03, dossier s.23):
+    # with the floor, pooled MAE 1.66 -> 1.71, 90% coverage 97.3% -> 98.4%
+    # (already over-wide), threshold Brier 0.062 -> 0.065; without it the
+    # harness reproduces the committed record exactly. The panel-stickiness
+    # diagnosis stands, but historically the smooth series still carried
+    # real signal, so the pre-registered arbiter rejects the floor. Set
+    # BAYES_FLOOR=1 to re-enable for research runs.
+    if os.environ.get("BAYES_FLOOR", "0") != "1":
+        floor = np.zeros_like(floor)
     # centred time coordinate per observation (drift identifiability)
     edges_, _ = time_grid()
     mids_ = (edges_[:-1] + edges_[1:]) / 2.0

@@ -520,3 +520,25 @@ Checked and not a problem: Lazar and Panels Politics (same operation)
 do not double-publish the same weekly poll (0 of 20 Panels Politics
 polls fall within 2 days of a Lazar poll); correlation groups already
 share the bias term.
+
+### 23a. Harness ablation of the sampling floor
+
+| cycle | MAE committed | MAE floor off | MAE floor on | cov off | cov on | Brier off | Brier on |
+|---|---|---|---|---|---|---|---|
+| 2009 | 1.79 | 1.78 | 1.76 | 1.00 | 1.00 | 0.021 | 0.023 |
+| 2013 | 1.98 | 1.99 | 2.19 | 0.92 | 0.92 | 0.052 | 0.054 |
+| 2015 | 2.10 | 2.12 | 2.14 | 0.91 | 1.00 | 0.041 | 0.040 |
+| 2019a | 2.25 | 2.26 | 2.22 | 1.00 | 1.00 | 0.169 | 0.173 |
+| 2019s | 1.12 | 1.11 | 1.10 | 1.00 | 1.00 | 0.031 | 0.026 |
+| 2020 | 1.04 | 1.02 | 1.25 | 1.00 | 1.00 | 0.031 | 0.057 |
+| 2021 | 1.80 | 1.79 | 1.79 | 0.95 | 0.95 | 0.082 | 0.080 |
+| 2022 | 1.23 | 1.24 | 1.25 | 1.00 | 1.00 | 0.066 | 0.068 |
+| pooled | 1.66 | 1.66 | 1.71 | 97.2% | 98.4% | 0.062 | 0.065 |
+
+"Floor off" carries every other change of the day (house-effect drift,
+exit-poll exclusion, cycle shrinkage, lam sigma 0.20) and reproduces the
+committed record exactly - those ship. The floor alone costs 0.05 seats,
+widens already-over-wide intervals, and worsens threshold calibration
+(2013, 2020). Rejected by the pre-registered arbiter; the diagnosis of
+panel stickiness stands and the machinery is kept behind BAYES_FLOOR=1
+for research. Bloc Brier 0.029 (off) vs 0.034 (on).
