@@ -586,12 +586,13 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
     <ul>
       <li><b>Bloc swing</b> — the correlated right/left error (t-distributed, df 5), scaled ×1.2
       this cycle for elevated event risk;</li>
-      <li><b>Sector shocks</b> — haredi lists underpolled by 1.35 ± 1.77 seats; Arab lists are
-      regime-dependent: with a <em>unified</em> Joint List the final polls under-counted them in
-      every such election (2015, 2019s, 2020, 2022: mean 1.35 seats, turnout is the mechanism),
-      while split years over-counted — the unified-regime mean applies this cycle, with the
-      pooled ± 1.45 kept; the haredi and Arab tides are drawn with correlation 0.5 (measured
-      +0.92 on four transitions, shrunk);</li>
+      <li><b>Sector shocks</b> — haredi lists underpolled by 1.35 ± 1.77 seats. The Arab lists
+      carry a <em>turnout mechanism</em> instead of a seat shift: national panels weight the
+      Arab sector to the last election's 53.8% turnout, while realised turnout under a unified
+      Joint List ran 63.5 / 59.2 / 64.8% (2015, 2019s, 2020) and 49 / 45% in the split years;
+      each simulation draws a turnout, scales the Joint List and Ra'am <em>together</em> by its
+      ratio to 53.8%, and takes the mass from every other list; the haredi and Arab tides share
+      a correlated draw (measured +0.92 on four transitions, shrunk to 0.5);</li>
       <li><b>Anchors</b> — Likud beats its polls by 2.30 seats on average (+8.4 in 2015, +6.7 in
       April 2019, ≈0 elsewhere); the poll-leading party underperforms by 1.74;</li>
       <li><b>Residual per-list shock</b> — 1.83 + 0.044·seats, ×1.35 for first-cycle lists
@@ -601,12 +602,14 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
       <li><b>Certainty layer</b> — each list's soft support (its supporters who are not certain:
       Together 47% locked and Amcha 38% are measured, the rest declared tiers) churns at a
       defection rate drawn per simulation (mean 0.25) with list-specific spread, so soft lists
-      carry asymmetric downside (the change bloc's within-bloc wavering measures three times the
-      Netanyahu bloc's); churn lands in proportion to certainty-weighted support, mostly within
-      bloc — historically bloc error is smaller than the sum of its parts — with a tenth crossing
-      and a seventh abstaining (declared). The 12% undecided pool (CEC
-      filings) breaks by the N12 55/16 lean, carried with its own sampling uncertainty
-      (n≈60) and at half weight (~1.6 seats toward the change bloc in expectation);</li>
+      carry asymmetric downside; where churn lands is <em>measured</em> from the 2021→2022
+      voter-transition matrix (Kolot Nodedim, 7,035 matched stations): of change-bloc voters who
+      left their list, 72.5% chose another change list, 10.3% crossed, 17.2% abstained; for the
+      Netanyahu bloc 85.5 / 6.6 / 7.9. The undecided pool is measured from the CEC filings of
+      the firms that report a genuine undecided share (median of the last 45 days, ~12%); its
+      lean is pooled over every published undecided-lean measurement with a proportional-split
+      prior of equal n — today N12's 55/16 (~43 leaned respondents), so ~1.7 seats toward the
+      change bloc in expectation, and every new wave shifts the posterior by its own n;</li>
       <li><b>Gevalt coupling</b> — a zero-sum transfer (sd 2.0) between Likud and its own bloc's
       satellites, so satellite threshold deaths co-occur with Likud surges, as in 2015 and
       2019.</li>
@@ -662,8 +665,10 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
 
   <div class="chapter"><h3>The registration mixture</h3>
     <p>Until lists close on September 9, the forecast samples <b>registration events per
-    simulation</b>: the centre micro-list folds and the Erdan–Gantz union tail, each with
-    sourced transfer vectors. Three events have already resolved and are certainties in every
+    simulation</b>: the centre micro-list folds and the Erdan–Gantz union tail, with transfer vectors
+    structured on the measured fate of absorbed lists in the 2021→2022 transition matrix
+    (Yamina's voters: RZP 45 / Jewish Home 24 / Likud 14 / National Unity 11 / Shas 6; New
+    Hope's: National Unity 58 / Likud 42; Blue and White's: National Unity 70 / Yesh Atid 30). Three events have already resolved and are certainties in every
     draw: Segalovitz joining Ra'am (September 1), the Smotrich–Feiglin technical bloc
     (September 2), and Balad remaining inside the Joint List. Still open: a centre union filing
     (0.12), and the fold decisions of Zionist Home–Reservists (0.45), Blue and White (0.58) and
@@ -716,7 +721,10 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
     seeds the priors). The harness re-runs the full pipeline as of each election eve and scores
     it against the real result. Changes that failed the harness were rejected and documented —
     including a final-stretch dynamics module, a hierarchical multi-cycle fit that stays
-    research-only, and a per-poll sampling-error floor. The harness projection mirrors the
+    research-only, and a per-poll sampling-error floor. The harness also calibrates the width of
+    the per-list residual shock: re-projecting every fitted cycle under a grid of width factors
+    and scoring the intervals, a factor of 0.9 wins every leave-one-cycle-out fold (narrower
+    factors hurt point accuracy through the threshold nonlinearity). The harness projection mirrors the
     production shock stack layer for layer (bloc swing, correlated sector shocks, anchors,
     residual, loyal-electorate calibration, gevalt coupling); only the 2026-specific layers —
     the certainty layer, the volatility calendar, event risk, the micro-lists and the capacity
@@ -857,10 +865,10 @@ const HE_CH = [
     <div class="eq">v = softmax( z<sub>E</sub> + swing·b + shock<sub>sector</sub> + anchor + resid + gevalt + undecided )&nbsp;&nbsp;&nbsp;&nbsp;<i>חלק הקולות המוטל</i></div>
     <ul>
       <li><b>תנודת גוש</b> — שגיאת הימין/שמאל המתואמת (התפלגות t עם 5 דרגות חופש), מוכפלת ב־1.2 במחזור הזה בשל סיכון אירועים מוגבר;</li>
-      <li><b>זעזועי מגזר</b> — רשימות חרדיות נחסרות ב־1.35 ± 1.77 מנדטים; הרשימות הערביות תלויות־משטר: עם רשימה משותפת <em>מאוחדת</em> הסקרים הסופיים חיסרו אותן בכל מערכת כזו (2015, ספט׳ 2019, 2020, 2022: ממוצע 1.35 מנדטים, ההשתתפות היא המנגנון), בעוד שנות הפיצול הפריזו — ממוצע משטר האיחוד חל במחזור הזה, עם ± 1.45 המאוחד; הגאות החרדית והערבית נדגמות במתאם 0.5 (נמדד &lrm;+0.92 על ארבעה מעברים, מכווץ);</li>
+      <li><b>זעזועי מגזר</b> — רשימות חרדיות נחסרות ב־1.35 ± 1.77 מנדטים. הרשימות הערביות נושאות <em>מנגנון השתתפות</em> במקום הזזת מנדטים: פאנלים ארציים משקללים את המגזר הערבי להשתתפות של 53.8% מהבחירות הקודמות, בעוד ההשתתפות בפועל תחת רשימה משותפת מאוחדת עמדה על 63.5 / 59.2 / 64.8% (2015, ספט׳ 2019, 2020) ועל 49 / 45% בשנות הפיצול; כל סימולציה מגרילה השתתפות, מכפילה את המשותפת ורע״ם <em>יחד</em> ביחסה ל־53.8%, ולוקחת את המסה מכל שאר הרשימות; הגאות החרדית והערבית חולקות הגרלה מתואמת (נמדד &lrm;+0.92 על ארבעה מעברים, מכווץ ל־0.5);</li>
       <li><b>עוגנים</b> — הליכוד מכה את סקריו ב־2.30 מנדטים בממוצע (&lrm;+8.4 ב־2015, &lrm;+6.7 באפריל 2019, ≈0 בשאר); המובילה בסקרים מפגרת ב־1.74;</li>
       <li><b>זעזוע שיורי לרשימה</b> — 1.83 + 0.044·מנדטים, ×1.35 לרשימות במחזור ראשון (נמדד: סקרי מפלגות חדשות אינם מוטים אך רועשים ב־35%), עם כיול אלקטורט־נאמן המכווץ את ש״ס (1.5), יהדות התורה (1.3), ישראל ביתנו (2.2), הליכוד (4.8), המשותפת (3.1) וישר (4.2) לתנודתיות הכוללת המדודה שלהן;</li>
-      <li><b>שכבת הוודאות</b> — התמיכה הרכה של כל רשימה (תומכיה שאינם בטוחים: ביחד 47% נעולים ועמך 38% מדודים, השאר דרגות מוצהרות) נושרת בשיעור עריקה המוגרל לכל סימולציה (ממוצע 0.25) עם פיזור ייחודי לרשימה, כך שרשימות רכות נושאות סיכון־חיסרון א־סימטרי (התנודה בתוך מחנה השינוי נמדדת פי שלושה מזו של גוש נתניהו); הנשירה נוחתת ביחס לתמיכה משוקללת־ודאות, בעיקר בתוך הגוש — היסטורית שגיאת הגוש קטנה מסכום חלקיו — עם עשירית חוצה־גוש ושביעית נמנעת (מוצהר). מאגר המתלבטים (12%, הגשות לוועדה) נשבר לפי נטיית N12 של 55/16, הנישאת עם אי־ודאות הדגימה שלה (n≈60) ובחצי משקל (כ־1.6 מנדטים למחנה השינוי בתוחלת);</li>
+      <li><b>שכבת הוודאות</b> — התמיכה הרכה של כל רשימה (תומכיה שאינם בטוחים: ביחד 47% נעולים ועמך 38% מדודים, השאר דרגות מוצהרות) נושרת בשיעור עריקה המוגרל לכל סימולציה (ממוצע 0.25) עם פיזור ייחודי לרשימה, כך שרשימות רכות נושאות סיכון־חיסרון א־סימטרי; לאן הנשירה נוחתת <em>נמדד</em> ממטריצת מעבר הבוחרים 2021←2022 (קולות נודדים, 7,035 קלפיות תואמות): מבין מצביעי מחנה השינוי שעזבו את רשימתם, 72.5% בחרו רשימת שינוי אחרת, 10.3% חצו ו־17.2% נמנעו; בגוש נתניהו 85.5 / 6.6 / 7.9. מאגר המתלבטים נמדד מהגשות לוועדת הבחירות של המכונים המדווחים שיעור מתלבטים אמיתי (חציון 45 הימים האחרונים, כ־12%); נטייתו מאוחדת על פני כל מדידת נטיית־מתלבטים שפורסמה עם פריור של פיצול פרופורציונלי ב־n שווה — כיום 55/16 של N12 (כ־43 משיבים נוטים), כלומר כ־1.7 מנדטים למחנה השינוי בתוחלת, וכל גל חדש מזיז את הפוסטריור לפי ה־n שלו;</li>
       <li><b>צימוד הגוואלד</b> — העברה בסכום־אפס (ס״ת 2.0) בין הליכוד ללווייני גושו, כך שמיתות סף מתרחשות יחד עם זינוקי ליכוד, כמו ב־2015 וב־2019.</li>
     </ul>`},
  {t:"תשתית הקלפיות", b:`<p>מתחת למספרים הארציים שוכנת רשומת הקלפיות: תוצאות רשמיות לכל יישוב בחמש מערכות הבחירות 2019–2022, מותאמות לשושלות המפלגות דרך אותיות הקלפי של כל מחזור (מאומתות מול הסיכומים הארציים). היישובים מתקבצים למגזרים פוליטיים לפי פרופילי ההצבעה שלהם עצמם, יחד עם ההשתתפות המדודה (חרדים 76%, ערבים 54%, ציונות דתית 76%). שלושה תוצרים מזינים את התחזית: <b>טבלת פוסט־סטרטיפיקציה</b> המקצה את מנדטי כל רשימה למגזרים שלה (מדור משחק הקרקע); <b>קיטום הקיבולת</b> שלהלן; ובסיס היישובים למנוע ליל הבחירות. משקלי השושלות מכוילים מול מטריצות מעבר־הקולות המדודות של פרויקט הקוד הפתוח <a href="https://kolot-nodedim.netlify.app/" rel="noopener">קולות נודדים</a> (כ־7,000 קלפיות מותאמות לכל זוג בחירות, R²&rlm; 0.89 עבור 2021→2022), שאומדני הלכידות שלו משחזרים באופן בלתי־תלוי את סדר האלקטורטים הנאמנים של המודל הזה.</p>
@@ -870,7 +878,7 @@ const HE_CH = [
     <div class="eq">m<sub>j</sub> ~ N<sup>+</sup>(&mu;<sub>j</sub>, &sigma;<sub>j</sub>),&nbsp;&nbsp;v&prime; = ( v·(1−&Sigma;<sub>j</sub>m<sub>j</sub>),&nbsp;m )&nbsp;&nbsp;&nbsp;&nbsp;<i>מיקרו־רשימות נחתכות מהסימפלקס</i></div>`},
  {t:"אחוז החסימה ובדר–עופר", b:`<p>כל וקטור קולות מדומה עובר את מבחן אחוז החסימה של 3.25%, ואז המנדטים מוקצים בשיטה הישראלית האמיתית — <b>בדר–עופר</b>, ד'הונדט על עודפים — כאשר הסכמי עודפים חתומים מטופלים כרשימות משותפות בשלב העודפים (שווי מדוד של &lrm;+0.5 עד &lrm;+0.9 מנדטים לזוג). קולות רשימות שנפלו מתחלקים מחדש בין השורדות — וכך גוש יכול להפסיד בקולות ולנצח בכנסת. המנדטים המרכזיים המתפרסמים הם החוק הזה מיושם פעם אחת על וקטור נתחי־הקולות הממוצע של התערובת, ולכן הטבלה מסתכמת ב־120 ללא עיגול או רצפות.</p>
     <div class="eq">seat<sub>k</sub> &rarr; argmax<sub>&#8467;</sub> v<sub>&#8467;</sub> / (s<sub>&#8467;</sub> + 1)&nbsp;&nbsp;&nbsp;&nbsp;<i>איטרציית ד'הונדט, זוגות עודפים מאוחדים</i></div>`},
- {t:"תערובת אירועי ההרשמה", b:`<p>עד סגירת הרשימות ב־9 בספטמבר, התחזית דוגמת <b>אירועי הרשמה בכל סימולציה</b>: קיפולי המיקרו־רשימות במרכז וזנב האיחוד ארדן–גנץ, כל אחד עם וקטורי העברה ממוסמכים. שלושה אירועים כבר הוכרעו והם ודאויות בכל דגימה: הצטרפות סגלוביץ׳ לרע״ם (1 בספטמבר), הגוש הטכני סמוטריץ׳–פייגלין (2 בספטמבר), והישארות בל״ד ברשימה המשותפת. עדיין פתוחים: הגשת איחוד מרכז (0.12), והחלטות הקיפול של הבית הציוני–המילואימניקים (0.45), כחול לבן (0.58) והאחדות (0.75). התחזית המתפרסמת היא התערובת; ההשפעה השולית של כל אירוע נקראת מאותן דגימות. ביום ההגשה התערובת קורסת אל התצורה האמיתית והמודל מותאם מחדש.</p>
+ {t:"תערובת אירועי ההרשמה", b:`<p>עד סגירת הרשימות ב־9 בספטמבר, התחזית דוגמת <b>אירועי הרשמה בכל סימולציה</b>: קיפולי המיקרו־רשימות במרכז וזנב האיחוד ארדן–גנץ, עם וקטורי העברה הבנויים על גורלן המדוד של רשימות שנבלעו במטריצת המעבר 2021←2022 (מצביעי ימינה: הציונות הדתית 45 / הבית היהודי 24 / הליכוד 14 / המחנה הממלכתי 11 / ש״ס 6; תקווה חדשה: המחנה הממלכתי 58 / הליכוד 42; כחול לבן: המחנה הממלכתי 70 / יש עתיד 30). שלושה אירועים כבר הוכרעו והם ודאויות בכל דגימה: הצטרפות סגלוביץ׳ לרע״ם (1 בספטמבר), הגוש הטכני סמוטריץ׳–פייגלין (2 בספטמבר), והישארות בל״ד ברשימה המשותפת. עדיין פתוחים: הגשת איחוד מרכז (0.12), והחלטות הקיפול של הבית הציוני–המילואימניקים (0.45), כחול לבן (0.58) והאחדות (0.75). התחזית המתפרסמת היא התערובת; ההשפעה השולית של כל אירוע נקראת מאותן דגימות. ביום ההגשה התערובת קורסת אל התצורה האמיתית והמודל מותאם מחדש.</p>
     <div class="eq">P(seats) = &Sigma;<sub>e</sub> P(e) · P(seats | e)&nbsp;&nbsp;&nbsp;&nbsp;<i>תערובת על אירועי הרשמה e</i></div>`},
  {t:"עץ ההרכבה", b:`<p>מנדטים אינם כוח. כל כנסת מדומה עוברת רצף הרכבה מפורש — סולם שערים סדור, שלכל שער פרמטרים התנהגותיים הנגזרים ממחקר מוסדי: מי באמת חותם בשם כל מפלגה (מועצת חכמי התורה של ש״ס, שתי המועצות של יהדות התורה, עצמאות רע״ם שלאחר ביטול וטו השורא), הרקורד הנגלה של כל מנהיג בצמתים קודמים (התהפוכות של ליברמן, הפרת ההתחייבות של בנט ב־2021, גנץ ב־2020), ושיעורי בסיס היסטוריים. עמך של וינטר מקודדת כ<b>קשיחות אנטי־אייזנקוט</b>: יכולה להצטרף לממשלת מרכז בראשות בנט, כמעט לעולם לא בראשות אייזנקוט. הפרמטרים ההתנהגותיים עצמם נושאים אי־ודאות — כל סימולציה מגרילה סט משלה מפריורי Beta/Dirichlet — ולכן הסתברויות ההרכבה מגיעות עם רווחים כנים, המוצגים בלוח התרחישים. והשערים <b>מותנים בתצורה</b>: ההסתברויות המוצהרות הן ממוצעים שוליים, וההסתברות של כל שער בכל כנסת מדומה זזה עם מפת המנדטים שלה דרך לוגיסטית — עריקה חרדית עולה עם הפער של הימין מ־61 וכאשר אותה מפלגה לבדה סוגרת את פער המרכז (ש״ס 1992, ש״ס+יהדות התורה 1999), עריקה של מפלגת מרכז יורדת ככל שהפער גדל (גנץ 2020 בפער של שלושה), אחדות עולה עם עומק המבוי הסתום. במדידה על שמונה התוצאות האמיתיות מאז 2009 העץ המותנה מקבל את אותו ציון כמו הלא־מותנה (לוג־ציון ‎−0.93 מול ‎−0.92) — שמונה תוצאות אינן יכולות להכריע אפקטים בגודל כזה — ולכן הוא נשמר על בסיס מוסדי, כשהשוליים נשמרים מעצם הבנייה.</p>
     <div class="eq">p<sub>gate</sub> = &sigma;( logit p<sub>0</sub> + &beta;<sub>gap</sub>·(61 − NB − g&#772;)/5 + &beta;<sub>piv</sub>·pivotal )&nbsp;&nbsp;&nbsp;&nbsp;<i>שער מותנה־תצורה</i></div>
@@ -878,7 +886,7 @@ const HE_CH = [
  {t:"הקצאת ראשות הממשלה", b:`<p>בתוך כל קואליציה מנצחת, ראשות הממשלה מוקצית בהסתברויות מודעות־רוטציה ותלויות־תרחיש (בנט היה ראש ממשלה עם 7 מנדטים ב־2021 — היגיון "המפלגה הגדולה" אינו היגיון ישראלי), המתהפכות כאשר ביחד עוקפת את ישר בדגימה. השכבה נבחנה מול שמונה תוצאות ההרכבה האמיתיות מאז 2009: לוג־לוס ממוצע &lrm;−0.92, והתוצאה שהתממשה מקבלת את ההסתברות הגבוהה ביותר בחמישה משמונה מחזורים.</p>
     <div class="eq">PM | outcome ~ Categorical( alloc<sub>outcome</sub> ),&nbsp;&nbsp;alloc ~ Dirichlet(60·p&#772;)&nbsp;&nbsp;&nbsp;&nbsp;<i>תלוי־תרחיש, האי־ודאות נישאת</i></div>`},
  {t:"פריורים של מומחים, מתועדים", b:`<p>כל מספר שיפוטי מתחקה אל דוסייה כתוב שחובר משישה שולחנות מחקר: שיעורי בסיס של הרכבת קואליציות 1992–2022, רשומת שגיאות הסקרים המלאה 1996–2022, מוסדות מפלגתיים וביוגרפיות מנהיגים, סוציולוגיה אלקטורלית וזרימות קולות, שוקי חיזוי ויסודות מבניים, ודינמיקת הישורת האחרונה. היכן שהשולחנות חלקו על המודל — המודל זז; היכן שהשוק חולק על המודל (פולימרקט מתמחר את אייזנקוט כרוה״מ בכ־50%; אנחנו אומרים כ־36%), הדוסייה מתעד מדוע אנו עומדים על שלנו: שוקי הפרלמנט־התלוי והממשלה־עד־דצמבר של אותו שוק עצמו אינם עקביים עם מספר הכותרת שלו.</p>`},
- {t:"אימות: המודל בוחן את עצמו", b:`<p>כל שכבה מותנית במבחן־עבר של שמונה מחזורים (2013–2022, בהשמטת־מחזור; 2009 זורע את הפריורים). המתקן מריץ מחדש את הצינור המלא כפי שהיה ערב כל מערכת בחירות ומדרג אותו מול התוצאה האמיתית. שינויים שנכשלו נדחו ותועדו — ובהם מודול דינמיקת ישורת אחרונה, התאמה היררכית רב־מחזורית שנותרה מחקרית בלבד, ורצפת שגיאת־דגימה לכל סקר. היטל המתקן משקף את מחסנית הזעזועים של הייצור שכבה אחר שכבה (תנודת גוש, זעזועי מגזר מתואמים, עוגנים, שיורי, כיול אלקטורט־נאמן, צימוד הגוואלד); רק השכבות הייחודיות ל־2026 — שכבת הוודאות, לוח התנודתיות, סיכון האירועים, המיקרו־רשימות וגבולות הקיבולת — נמצאות מחוץ להישג ידו מעצם הבנייה, והנספח אומר זאת בכל מקום שבו הן מופיעות.</p>
+ {t:"אימות: המודל בוחן את עצמו", b:`<p>כל שכבה מותנית במבחן־עבר של שמונה מחזורים (2013–2022, בהשמטת־מחזור; 2009 זורע את הפריורים). המתקן מריץ מחדש את הצינור המלא כפי שהיה ערב כל מערכת בחירות ומדרג אותו מול התוצאה האמיתית. שינויים שנכשלו נדחו ותועדו — ובהם מודול דינמיקת ישורת אחרונה, התאמה היררכית רב־מחזורית שנותרה מחקרית בלבד, ורצפת שגיאת־דגימה לכל סקר. המתקן גם מכייל את רוחב הזעזוע השיורי לרשימה: בהיטל מחודש של כל מערכת מותאמת תחת רשת של מקדמי רוחב ובניקוד הרווחים, מקדם 0.9 מנצח בכל קיפול השמטת־מחזור (מקדמים צרים יותר פוגעים בדיוק הנקודתי דרך אי־הליניאריות של אחוז החסימה). היטל המתקן משקף את מחסנית הזעזועים של הייצור שכבה אחר שכבה (תנודת גוש, זעזועי מגזר מתואמים, עוגנים, שיורי, כיול אלקטורט־נאמן, צימוד הגוואלד); רק השכבות הייחודיות ל־2026 — שכבת הוודאות, לוח התנודתיות, סיכון האירועים, המיקרו־רשימות וגבולות הקיבולת — נמצאות מחוץ להישג ידו מעצם הבנייה, והנספח אומר זאת בכל מקום שבו הן מופיעות.</p>
     <div class="tblwrap"><table>
       <thead><tr><th>מדד (מבחן־עבר, 8 מחזורים)</th><th class="num">הצינור הפשוט</th><th class="num">המודל הבייסיאני</th></tr></thead>
       <tbody id="valTbl"></tbody>

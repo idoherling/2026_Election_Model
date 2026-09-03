@@ -648,3 +648,66 @@ Yashar 26, Likud 25, Together 12, Democrats 10, Shas 8, YB 8, JL 7,
 Otzma 7, RZP-Zehut 5, Ra'am 4. The simple pipeline remains the
 point-accuracy benchmark in the validation table, not a component of
 the published forecast; the annex says so in both languages.
+
+## 27. Round-two improvements (2026-09-03): what the data allowed
+
+**#1 Undecided pool, pooled.** The CEC filings carry no leaning or
+forced-choice tables (scanned all 37: only "still undecided" rows), so
+the lean cannot yet be pooled from filings. Implemented instead: (a) pool
+SIZE measured every build as the 45-day median of the firms reporting a
+genuine undecided share (Lazar, Midgam Project & StatNet, Maagar Mochot;
+Kantar includes non-voters, Midgam is post-allocation) - 12.3% today;
+(b) a pooling machinery over data/undecided_leans.csv: each measurement
+enters by its leaned n, against a proportional-split prior of n = 43 -
+the pre-registered half weight made explicit (posterior today Beta(55.4,
+30.2), mean excess 0.50, identical to the old point estimate but now a
+posterior that every new wave updates by its own n).
+
+**#3 Arab turnout mechanism.** Replaces the additive unified-regime mean
+(-1.35 seats). Panels weight the Arab sector to 0.538 (2022); realised
+turnout under a unified list 0.635 / 0.592 / 0.648 (2015, 2019s, 2020),
+split years 0.492 / 0.446. Each draw: T ~ 0.625 + 0.05 x (the arab
+family's correlated t draw), clipped at the kalpi ceiling 0.72; the Arab
+lists' joint share scales by T/0.538 and the mass comes from every other
+list. JL and Ra'am now move together. Ra'am's idiosyncratic width joins
+LOYAL_SD at 1.8 (measured 2021-22 final error 0.6-1.0 x 2 buffer).
+Effect vs the additive version: Ra'am pass 0.589 -> 0.620, JL 7.3 -> 7.5.
+
+**#4 Measured transfers.** Kolot Nodedim 2021->2022 with abstention
+(7,035 stations): of voters who left their list, change bloc 72.5%
+within / 10.3% cross / 17.2% abstain; Netanyahu bloc 85.5 / 6.6 / 7.9 -
+the declared 0.75 / 0.10 / 0.15 was within a point; now CHURN_SPLIT by
+bloc, measured. Same-list loyalty change 59% vs right 82% corroborates
+the CERTAINTY tiers. Fold transfers restructured on absorbed lists'
+measured fate (Yamina 45/24/14/11/6 to RZP/JH/Likud/NU/Shas; New Hope
+58/42 NU/Likud; B&W 70/30 NU/Yesh Atid): ZH -> Yashar .55 / Together
+.15 / Likud .20; B&W -> Yashar .60 / Together .25; Unity -> Likud .45 /
+Yashar .25 / YB .10 / Together .10 (analog mapping declared, structure
+measured).
+
+**#2 Interval width.** RESID_SCALE on the per-list residual shock;
+validate_bayes re-projects each fitted cycle under a grid 0.6-1.1 and
+scores coverage, MAE, Brier and the Gneiting-Raftery interval score;
+choice by leave-one-cycle-out interval score. Result recorded in s.27a
+when the run completes.
+
+### 27a. Interval-width calibration result
+
+| width | coverage | MAE | Brier | interval score |
+|---|---|---|---|---|
+| 0.6 | 0.950 | 1.897 | 0.067 | 9.764 |
+| 0.7 | 0.963 | 1.873 | 0.067 | 9.815 |
+| 0.8 | 0.968 | 1.736 | 0.063 | 8.946 |
+| **0.9** | 0.983 | **1.655** | 0.060 | **8.364** |
+| 1.0 | 0.983 | 1.659 | 0.060 | 8.617 |
+| 1.1 | 0.983 | 1.661 | 0.061 | 9.070 |
+
+Leave-one-cycle-out choice by interval score: 0.9 in all eight folds.
+RESID_SCALE = 0.9 ships. Two honest notes: (1) narrowing the residual
+below 0.8 WORSENS point accuracy - the per-list shock is load-bearing
+for the means through the threshold nonlinearity (fewer death draws
+shifts the means of straddling lists); (2) coverage barely moves across
+the grid (0.95-0.98), so the over-width the harness has always shown is
+NOT in the residual shock but in the other layers (bloc swing, sector
+shocks, loyal-sd caps). The next calibration target is a joint scale on
+those, gated the same way.

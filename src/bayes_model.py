@@ -172,22 +172,54 @@ KALPI_HAREDI_FLOOR = 0.066  # joint Shas+UTJ share floor
 # undecided dynamics live in the arab family shock/turnout dial).
 # Harness-inactive by construction (inputs are 2026 measurements);
 # revisit after Sept 9 - JPPI shows the pool shrinking ~2pp/month.
-U_POOL = 0.12          # comparable CEC filings cluster at 10-16% (Lazar 12-16,
-                       # Midgam Project/StatNet 12.3, Maagar 10); Kantar's
-                       # 24-41% includes non-voters and is a different question
-U_TURNOUT = 0.65
-U_EXCESS_ANTI = 0.35
-U_NET_DISCOUNT = 0.5
-UNDECIDED_BREAK_SEATS = (U_POOL * U_TURNOUT * U_EXCESS_ANTI
-                         * 120 * U_NET_DISCOUNT)   # ~1.6 seats, mean of the lean piece
-# The N12 55/16 lean rests on ~60 respondents: carried as Beta(46.5, 13.5)
-# on the anti share of the leaned pool (mean 0.775), against the ~0.52
-# proportional baseline, times a LogNormal magnitude term for the turnout
-# haircut and discount that the point estimate hides.
-U_LEAN_BETA = (46.5, 13.5)
-U_LEAN_BASE = 0.775
-U_PROP_ANTI = 0.52
+# ---- Undecided pool (2026-09-03, audit improvement #1) ----
+# Pool SIZE is measured from the CEC filings of firms that report a
+# genuine undecided share (Lazar, Midgam Project & StatNet, Maagar Mochot;
+# Kantar's figure includes non-voters, Midgam's is post-allocation): the
+# median over the last 45 days, refreshed every build.
+U_POOL_FIRMS = ("Lazar", "Midgam Project & StatNet", "Maagar Mochot")
+U_POOL_DEFAULT = 0.12
+U_TURNOUT = 0.65        # GIQ: the unsophisticated half of undecideds under-votes
+U_EXCESS_ANTI = 0.35    # excess-vs-proportional arithmetic at the N12 lean
+# Pool LEAN is pooled over every published undecided-lean measurement in
+# data/undecided_leans.csv (today: N12 only, ~43 leaned respondents) with
+# a proportional-split prior of equal n - the pre-registered "half weight"
+# made explicit, so each new wave shifts the posterior by its own n.
+U_PROP_ANTI = 0.52      # the decided electorate's anti share (proportional baseline)
+U_LEAN_BASE = 0.775     # the N12 lean the excess arithmetic was derived at
+U_PRIOR_N = 43
 U_MAG_SDLOG = 0.5
+
+
+def _undecided_pool() -> float:
+    try:
+        f = pd.read_csv(PROCESSED_DIR / "cec_filings.csv", parse_dates=["fieldwork_end"])
+        f = f[f["pollster"].isin(U_POOL_FIRMS) & f["undecided_pct"].notna()]
+        f = f[f["fieldwork_end"] >= f["fieldwork_end"].max() - pd.Timedelta(days=45)]
+        return float(f["undecided_pct"].median() / 100) if len(f) >= 3 else U_POOL_DEFAULT
+    except FileNotFoundError:
+        return U_POOL_DEFAULT
+
+
+def _lean_posterior() -> tuple:
+    """Beta(a, b) on the anti share of the leaned pool: measurements pooled
+    by their leaned n, plus the proportional prior of n = U_PRIOR_N."""
+    a = U_PROP_ANTI * U_PRIOR_N
+    b = (1 - U_PROP_ANTI) * U_PRIOR_N
+    try:
+        L = pd.read_csv(PROCESSED_DIR.parent / "undecided_leans.csv")
+        for r in L.itertuples():
+            n_lean = r.n_undecided * (r.anti + r.nb)
+            a += r.anti / (r.anti + r.nb) * n_lean
+            b += r.nb / (r.anti + r.nb) * n_lean
+    except FileNotFoundError:
+        pass
+    return a, b
+
+
+U_POOL = _undecided_pool()
+U_LEAN_BETA = _lean_posterior()
+UNDECIDED_BREAK_SEATS = U_POOL * U_TURNOUT * U_EXCESS_ANTI * 120   # at full lean
 
 # ---- Certainty layer (2026-09-03, improvement #1 of the Fable audit) ----
 # Share of each list's current supporters who say they are certain to
@@ -226,7 +258,15 @@ CHURN_LIST_SDLOG = 0.35
 # error is smaller than the sum of its parts (movement is mostly within
 # bloc): 0.75 within / 0.10 cross / 0.15 abstain. Arab-family churn
 # stays in-family (different instrument).
-CHURN_WITHIN, CHURN_CROSS, CHURN_ABSTAIN = 0.75, 0.10, 0.15
+CHURN_WITHIN, CHURN_CROSS, CHURN_ABSTAIN = 0.75, 0.10, 0.15   # declared (superseded below)
+# MEASURED 2026-09-03 from the Kolot Nodedim 2021->2022 transition matrix
+# with abstention (7,035 matched stations): of voters who left their 2021
+# list, the change bloc's went 72.5% to another change list / 10.3% across
+# / 17.2% abstained; the Netanyahu bloc's 85.5 / 6.6 / 7.9. Same-list
+# loyalty: change 59%, right 82% - the bloc-level certainty asymmetry
+# CERTAINTY encodes. Arab-list movers stayed in-family (0% cross).
+CHURN_SPLIT = {"opposition_bloc": (0.725, 0.103, 0.172),
+               "netanyahu_bloc": (0.855, 0.066, 0.079)}
 # Inflow (churn and undecideds) lands in proportion to certainty-weighted
 # support: firm lists attract, soft lists do not.
 AMCHA_FADE_TOTAL = 1.5   # the reference-class mean; the certainty layer's
@@ -267,6 +307,10 @@ LOYAL_SD = {
     # (sd 2.76, mean -2.3: UNDER-polled - the upside mean is already
     # carried by the leader anchor). 2.76 x 1.5:
     "yashar": 4.2,
+    # Ra'am (2026-09-03): with sector turnout carried by ARAB_TURNOUT, the
+    # remaining idiosyncratic risk is the JL/Ra'am split; measured final
+    # error 0.6-1.0 seats over 2021-22 (n=2) x 2 buffer.
+    "raam": 1.8,
 }
 
 # All election-day shocks come from the sequential decomposition of the
@@ -287,9 +331,30 @@ FAMILY_SHOCK = _P["family"]        # {family: (error mean, sd)} in seats
 # pooled -0.32 mixes both regimes. With balad_splits resolved False the
 # 2026 list is unified, so the unified-regime mean applies; the pooled sd
 # is kept (turnout risk cuts both ways).
-ARAB_UNIFIED_ERROR_MEAN = -1.35
 ARAB_LIST_UNIFIED = True
+# 2026-09-03 (audit improvement #3): the Arab lists' family error is now
+# a TURNOUT mechanism instead of an additive seat mean. National panels
+# weight the Arab sector to the last election's turnout (0.538 in 2022);
+# realised turnout under a unified Joint List ran 63.5 / 59.2 / 64.8%
+# (2015, 2019s, 2020; mean 0.625, sd 0.03) and 49.2 / 44.6% in the split
+# years. Each simulation draws T, scales the Arab lists' joint share by
+# T/base (JL and Ra'am move TOGETHER, which is what the data show), and
+# takes the mass proportionally from every other list. The draw shares
+# the haredi tide's correlated z (KALPI_FAMILY_RHO). The kalpi capacity
+# ceiling still binds above. The additive -1.35 this replaces is the
+# same history expressed in seats.
+ARAB_TURNOUT = {"base": 0.538, "mean_unified": 0.625, "mean_split": 0.47,
+                "sd": 0.05, "max": 0.72}
 ANCHORS = _P["anchors"]            # {"likud": .., "leader": ..} error means
+# Interval-width calibration (audit improvement #2): one global factor on
+# the per-list residual shock, fitted leave-one-cycle-out on the harness
+# to bring 90% coverage to its target (validate_bayes writes the curve to
+# model_validation_width.csv). 1.0 = the decomposition's raw width.
+# 2026-09-03 harness: 0.9 chosen by every leave-one-cycle-out fold
+# (interval score 8.36 vs 8.62 at 1.0; MAE 1.655 vs 1.659; Brier equal);
+# 0.6-0.8 WORSEN MAE (1.90 at 0.6) through the threshold nonlinearity,
+# and coverage stays ~98% at 0.9 - the over-width lives in other layers.
+RESID_SCALE = 0.9
 LIST_SHOCK_BASE = _P["resid_base"]
 LIST_SHOCK_SLOPE = _P["resid_slope"]
 # A list with no polls in its final weeks has left the race by election day.
@@ -760,23 +825,22 @@ def _certainty_layer(shares, comps, blocs, fams, rng):
         w = np.where(mask[None, :], attract, 0.0)
         tot = w.sum(axis=1, keepdims=True)
         return np.where(tot > 0, w / np.maximum(tot, 1e-12), 0.0) * mass[:, None]
-    for own, other in ((is_nb, is_op), (is_op, is_nb)):
+    for own, other, key in ((is_nb, is_op, "netanyahu_bloc"), (is_op, is_nb, "opposition_bloc")):
         if not own.any():
             continue
+        w_in, w_x, _w_abs = CHURN_SPLIT[key]
         pool = churn[:, own].sum(axis=1)
-        out += spread(pool * CHURN_WITHIN, own)
+        out += spread(pool * w_in, own)
         if other.any():
-            out += spread(pool * CHURN_CROSS, other)
-        # the abstaining fifth simply leaves the pie
+            out += spread(pool * w_x, other)
+        # the abstaining share simply leaves the pie
     if is_arab.any():
         pool = churn[:, is_arab].sum(axis=1)
         out += spread(pool * (1 - CHURN_ABSTAIN), is_arab)
     # undecided pool: N12 lean with its own sampling uncertainty (n~60)
     if is_nb.any() and is_op.any():
-        f_anti = rng.beta(*U_LEAN_BETA, size=n)
-        # mean-one magnitude term (a LogNormal(0, s) has mean exp(s^2/2) -
-        # the uncorrected form was inflating the lean by 13%)
-        mag = np.exp(rng.normal(-0.5 * U_MAG_SDLOG ** 2, U_MAG_SDLOG, size=n))
+        f_anti = rng.beta(*U_LEAN_BETA, size=n)   # pooled posterior (see _lean_posterior)
+        mag = np.exp(rng.normal(-0.5 * U_MAG_SDLOG ** 2, U_MAG_SDLOG, size=n))  # mean one
         excess = (f_anti - U_PROP_ANTI) / (U_LEAN_BASE - U_PROP_ANTI)
         ub = UNDECIDED_BREAK_SEATS / 120.0 * excess * mag
         out += spread(np.maximum(ub, 0), is_op) - spread(np.maximum(ub, 0), is_nb)
@@ -828,7 +892,7 @@ def project(data, idata, rng, config="current", config_params=None):
     # Per-list election-day shock: residual final-poll error beyond
     # bloc/family components, calibrated on the backtest.
     base0 = shares.mean(axis=0)
-    sd_list = (LIST_SHOCK_BASE + LIST_SHOCK_SLOPE * base0 * 120) / 120.0
+    sd_list = (LIST_SHOCK_BASE + LIST_SHOCK_SLOPE * base0 * 120) / 120.0 * RESID_SCALE
     comps0 = [set(c.split("+")) for c in data["components"]]
     is_new = np.array([bool(cs & NEW_LIST_IDS) for cs in comps0])
     sd_list = np.where(is_new, sd_list * NEW_LIST_MULT, sd_list)
@@ -927,9 +991,17 @@ def project(data, idata, rng, config="current", config_params=None):
     tdraws = z / mix[:, None]
     for k, f in enumerate(fam_names):
         mu_f, sd_f = FAMILY_SHOCK[f]
-        if f == "arab" and ARAB_LIST_UNIFIED:
-            mu_f = ARAB_UNIFIED_ERROR_MEAN
         in_f = fams == f
+        if f == "arab":
+            # turnout mechanism (ARAB_TURNOUT): joint scaling of the Arab lists
+            T_mean = ARAB_TURNOUT["mean_unified" if ARAB_LIST_UNIFIED else "mean_split"]
+            T = np.clip(T_mean + tdraws[:, k] * ARAB_TURNOUT["sd"], 0.35, ARAB_TURNOUT["max"])
+            r = T / ARAB_TURNOUT["base"]
+            tot = shares[:, in_f].sum(axis=1)
+            delta = (r - 1.0) * tot
+            w_f, w_r = np.where(in_f, base, 0), np.where(~in_f, base, 0)
+            shares = shares + delta[:, None] * (w_f / w_f.sum() - w_r / w_r.sum())
+            continue
         shock = (-mu_f + tdraws[:, k] * sd_f) / 120.0
         w_f, w_r = np.where(in_f, base, 0), np.where(~in_f, base, 0)
         shares = shares + shock[:, None] * (w_f / w_f.sum() - w_r / w_r.sum())

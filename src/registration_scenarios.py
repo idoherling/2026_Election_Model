@@ -111,11 +111,18 @@ MERGE_RETENTION = 0.90
 # explicit shares; the remainder scatters proportionally (renormalization).
 # Unity's voters are ex-Likud but have LEFT the Likud orbit - only ~20%
 # return; Erdan/Edelstein/Shaked voters split toward Together and YB.
+# Fold transfers (2026-09-03, audit #4): structure from the measured
+# Kolot Nodedim 2021->2022 matrix for ABSORBED lists - their voters land
+# ~90-100% on heir lists, split across several: Yamina -> RZP 45 / Jewish
+# Home 24 / Likud 14 / National Unity 11 / Shas 6; New Hope -> National
+# Unity 58 / Likud 42; Blue and White -> National Unity 70 / Yesh Atid 30.
+# Analogs: ZH-Reservists ~ New Hope + B&W (Hendel ex-New Hope, Tropper
+# ex-B&W); Blue and White ~ its own 2022 pattern; Unity ~ Likud alumni.
 FOLD_TRANSFER = {
-    "zionist_home": [("yashar", 0.75)],
-    "blue_white": [("yashar", 0.45), ("bennett_2026", 0.15)],
-    "unity": [("bennett_2026", 0.25), ("yisrael_beytenu", 0.20),
-              ("likud", 0.20), ("yashar", 0.15)],
+    "zionist_home": [("yashar", 0.55), ("bennett_2026", 0.15), ("likud", 0.20)],
+    "blue_white": [("yashar", 0.60), ("bennett_2026", 0.25)],
+    "unity": [("likud", 0.45), ("yashar", 0.25), ("yisrael_beytenu", 0.10),
+              ("bennett_2026", 0.10)],
 }
 # Set on filing day to collapse the mixture, e.g.
 # RESOLVED = {"balad_splits": False, "rzp_fate": "merge_otzma", ...}

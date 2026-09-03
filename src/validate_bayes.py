@@ -36,6 +36,7 @@ from validate_model import (
 warnings.filterwarnings("ignore")
 
 N_PROJ = 4000
+WIDTH_GRID = [0.6, 0.7, 0.8, 0.9, 1.0, 1.1]
 
 # Era-specific alliance identities: which composite each historical id was.
 # Applied component-wise before block-building, so pre-merger component
@@ -79,7 +80,7 @@ def apply_decomp(polls: pd.DataFrame, cycle: str) -> pd.DataFrame:
 
 
 def project_cycle(data, idata, eday, threshold, pairs, params,
-                  bloc_overrides, rng):
+                  bloc_overrides, rng, resid_scale=1.0):
     swing_sd, shocks = params["bloc_sd"], params["family"]
     reg = load_party_registry()
     bloc_map = dict(zip(reg["party_id"], reg["bloc"]))
@@ -102,7 +103,7 @@ def project_cycle(data, idata, eday, threshold, pairs, params,
         shares /= shares.sum(axis=1, keepdims=True)
     base0 = shares.mean(axis=0)
     sd_list = (params["resid_base"]
-               + params["resid_slope"] * base0 * 120) / 120.0
+               + params["resid_slope"] * base0 * 120) / 120.0 * resid_scale
     shares = np.clip(
         shares + rng.standard_normal(shares.shape) * sd_list, 0, None)
     shares /= shares.sum(axis=1, keepdims=True)
@@ -214,7 +215,7 @@ def main() -> None:
     results = pd.read_csv(PROCESSED_DIR / "results.csv")
     rng = np.random.default_rng(SEED)
 
-    rows, covered_all, list_rows = [], [], []
+    rows, covered_all, list_rows, width_rows = [], [], [], []
     for cycle in ORDER:
         eday = pd.Timestamp(ELECTION_DAY[cycle])
         asof = eday - pd.Timedelta(days=1)
@@ -245,6 +246,24 @@ def main() -> None:
                 actual[hit.pop()] += r.seats
             else:
                 unmatched += r.seats
+
+        # Interval-width calibration curve (audit improvement #2): the same
+        # posterior re-projected under a grid of residual-width factors.
+        for w in WIDTH_GRID:
+            sw, _, bw, _ = project_cycle(
+                data, idata, eday, CYCLE_THRESHOLD.get(cycle, THRESHOLD),
+                PAST_PAIRS[cycle], params, VAL_BLOC_OVERRIDES.get(cycle),
+                np.random.default_rng(SEED + 7), resid_scale=w)
+            act_w = (bw >= 0.005) | (actual > 0)
+            lo_w, hi_w = np.percentile(sw, 5, axis=0), np.percentile(sw, 95, axis=0)
+            pp = (sw >= 1).mean(axis=0)
+            a = 0.10   # interval score (Gneiting-Raftery): width + miss penalties
+            isc = (hi_w - lo_w) + (2/a) * np.maximum(lo_w - actual, 0) + (2/a) * np.maximum(actual - hi_w, 0)
+            width_rows.append({"cycle": cycle, "width": w,
+                               "coverage_90": float(((actual >= lo_w) & (actual <= hi_w))[act_w].mean()),
+                               "seat_mae": float(np.abs(sw.mean(axis=0) - actual)[act_w].mean()),
+                               "threshold_brier": float(np.mean((pp[act_w] - (actual[act_w] > 0)) ** 2)),
+                               "interval_score": float(isc[act_w].mean())})
 
         pred_mean = seats.mean(axis=0)
         p05 = np.percentile(seats, 5, axis=0)
@@ -310,6 +329,19 @@ def main() -> None:
               f"simple {both['brier_simple'].mean():.3f}")
     except FileNotFoundError:
         pass
+    if width_rows:
+        wdf = pd.DataFrame(width_rows)
+        wdf.to_csv(PROCESSED_DIR / "model_validation_width.csv", index=False)
+        pooled = wdf.groupby("width").agg(coverage=("coverage_90", "mean"), mae=("seat_mae", "mean"),
+                                          brier=("threshold_brier", "mean"), iscore=("interval_score", "mean"))
+        print("\nInterval-width calibration (pooled over cycles):")
+        print(pooled.round(3).to_string())
+        loo = []
+        for cyc in wdf["cycle"].unique():
+            other = wdf[wdf["cycle"] != cyc].groupby("width")["interval_score"].mean()
+            loo.append((cyc, float(other.idxmin())))
+        print("LOO width choices:", loo)
+        print(f"pooled choice (min interval score): {pooled['iscore'].idxmin()}")
     print("\nwrote model_validation_bayes.csv")
 
 
