@@ -79,6 +79,21 @@ h1,h2,h3{font-family:"IBM Plex Sans","Helvetica Neue",Arial,sans-serif;
 .mono{font-family:"IBM Plex Mono","IBM Plex Sans Hebrew",ui-monospace,monospace;font-variant-numeric:tabular-nums}
 a{color:var(--ink);text-decoration-color:var(--accent);text-decoration-thickness:2px;text-underline-offset:3px}
 :focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.skip{position:absolute;left:-9999px;top:8px;z-index:100;background:var(--ink);color:var(--paper);
+  padding:10px 14px;font-weight:700;text-decoration:none}
+.skip:focus{left:8px}
+.seg button,.presets button,.chip,#langbtn,#themebtn{min-height:36px}
+.contents .ct{display:flex;align-items:baseline;justify-content:space-between;gap:12px}
+.contents .xall{border:0;background:none;color:var(--accent);font:600 11px "IBM Plex Mono","IBM Plex Sans Hebrew",monospace;
+  letter-spacing:.12em;text-transform:uppercase;cursor:pointer;padding:8px 0;min-height:36px}
+@media print{
+  .nav,#langbtn,#themebtn,#btt,#tip,.presets,.skip,.contents .xall,.chapter > h3 .tgl{display:none !important}
+  .pg-report,.pg-method{display:block !important}
+  .chapter.closed .chbody{display:block !important}
+  body{background:#fff;color:#000}
+  .card,.sheet,.chapter,.tile{break-inside:avoid}
+  a{color:inherit;text-decoration:none}
+}
 
 /* masthead — report cover head */
 .masthead{border-top:14px solid var(--ink);border-bottom:3px solid var(--ink);padding:20px 0 16px}
@@ -299,7 +314,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
 
 <nav class="nav" aria-label="Sections"><div class="wrap" id="navwrap"></div></nav>
 
-<div class="hero pg-report"><div class="wrap">
+<div class="hero pg-report" id="main"><div class="wrap">
   <div class="cover">
     <div class="cover-meta"><span>Forecast No. 1</span><span>26th Knesset</span><span>Election · 27 Oct 2026</span></div>
     <div class="cover-year">26</div>
@@ -644,6 +659,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
 </div></footer>
 
 <button id="btt" aria-label="Back to top" title="Back to top">↑</button>
+<a class="skip" href="#main">Skip to content</a>
 <div id="tip" role="status"></div>
 
 <script>
@@ -784,7 +800,7 @@ function trStatic(){
     const k = el.textContent.trim().replace(/\s+/g," ");
     if (HE_STATIC[k]) el.textContent = HE_STATIC[k];
   });
-  ["h1","h2","h3",".eyebrow",".tile .k",".tile .v2 small",".brand small",".contents .ct",
+  ["h1","h2","h3",".eyebrow",".tile .k",".tile .v2 small",".brand small",".contents .ct span",
    ".annexhead b",".annexhead a",".seg button"].forEach(walk);
   document.querySelector(".brand").childNodes[0].textContent = HE_STATIC["The Knesset Model"];
   const SF = document.querySelector(".standfirst"); if (SF) SF.innerHTML = HE_LEDE.standfirst;
@@ -863,6 +879,13 @@ $("#tNeither").textContent = pct(D.blocs.neither); $("#tNbMean").textContent = D
 
 /* language toggle + static translation */
 trStatic();
+/* ---- touch: a tap on a chart element reads as a hover for its tooltip ---- */
+document.addEventListener("pointerdown", e => {
+  if (e.pointerType !== "touch") return;
+  e.target.dispatchEvent(new PointerEvent("pointermove",
+    {bubbles: true, clientX: e.clientX, clientY: e.clientY, pointerType: "touch"}));
+}, {passive: true});
+document.querySelector(".skip").textContent = HEB_MODE ? "דלג לתוכן" : "Skip to content";
 /* ---- data-driven numbers in the annex (filled from the payload) ---- */
 (function(){
   const fmt = v => typeof v === "number" ? v.toLocaleString("en-US") : v;
@@ -1280,9 +1303,17 @@ renderBlocHist("anti");
   if (chs.length){
     const box = document.createElement("nav");
     box.className = "contents"; box.setAttribute("aria-label", "Methodology contents");
-    box.innerHTML = '<div class="ct">Contents</div><ol>' + deck.map((d, i) =>
+    const XA = HEB_MODE ? ["הרחב הכל", "כווץ הכל"] : ["Expand all", "Collapse all"];
+    box.innerHTML = '<div class="ct"><span>' + (HEB_MODE ? "תוכן העניינים" : "Contents") + '</span><button class="xall" type="button">' + XA[0] + '</button></div><ol>' + deck.map((d, i) =>
       `<li><a href="#${d.id}"><span class="fol">${String(i+1).padStart(2,"0")}</span>${d.title}</a></li>`).join("") + "</ol>";
     chs[0].parentNode.insertBefore(box, chs[0]);
+    const xall = box.querySelector(".xall");
+    xall.addEventListener("click", () => {
+      const open = xall.textContent === XA[0];
+      chs.forEach(ch => { ch.classList.toggle("closed", !open);
+        const h = ch.querySelector("h3"), tg = h.querySelector(".tgl");
+        if (tg) tg.textContent = open ? "−" : "+"; h.setAttribute("aria-expanded", open); });
+      xall.textContent = open ? XA[1] : XA[0]; });
     box.addEventListener("click", ev => {
       const a = ev.target.closest("a"); if (!a) return;
       const ch = document.querySelector(a.getAttribute("href"));
@@ -1319,6 +1350,8 @@ renderBlocHist("anti");
   function setView(v, anchor){
     document.body.dataset.view = v;
     renderNav();
+    try { history.replaceState(null, "", v === "method" ? (anchor || "#method")
+                                                    : location.pathname + location.search); } catch(e){}
     if (anchor){ const el = document.querySelector(anchor);
       if (el){ if (el.classList && el.classList.contains("chapter")) el.classList.remove("closed");
         el.scrollIntoView(); return; } }
@@ -1334,9 +1367,14 @@ renderBlocHist("anti");
   const back = document.getElementById("backToReport");
   if (back) back.addEventListener("click", ev => { ev.preventDefault(); setView("report"); });
   // initial view: deep links into the annex open it
+  const isAnnex = h => h === "#method" || h === "#pollsters" || h === "#validation"
+    || h === "#page:method" || /^#ch-/.test(h);
   const h0 = location.hash;
-  if (h0 === "#method" || h0 === "#pollsters" || h0 === "#validation" || /^#ch-/.test(h0))
-    setView("method", h0); else setView("report");
+  if (isAnnex(h0)) setView("method", h0 === "#page:method" ? "#method" : h0);
+  else setView("report");
+  addEventListener("hashchange", () => { const h = location.hash;
+    if (isAnnex(h) && document.body.dataset.view !== "method")
+      setView("method", h === "#page:method" ? "#method" : h); });
   const spy = () => {
     const links = [...navwrap.querySelectorAll("a")];
     const targets = links.map(a => { const h = a.getAttribute("href");
