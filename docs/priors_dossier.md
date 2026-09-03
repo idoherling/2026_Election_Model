@@ -571,3 +571,59 @@ model showed 9.5 (JL 6.5, Ra'am 3.0). Three causes found:
 The owner's reading of pollsters "anticipating a turnout boost" is,
 per the record, the reverse: pollsters have UNDER-stated the unified
 list every time, so the model should sit above them, not below.
+
+## 25. Stage-by-stage deep dive (2026-09-03)
+
+Method as in s.23: a measured probe per stage, fixes only for
+demonstrated defects, harness validation for anything touching the
+likelihood or the projection.
+
+**Data (scraper, registry).** No unmapped labels; every result row sums
+to 120; no byte-identical duplicates across ids. Found: the archive's
+same-day "a/b" variants of one survey (with/without a list, joint vs
+split Arab lists) both entered the fit as independent polls - 14 extra
+polls in the window, one pair identical (Kantar Aug 9). Fix: one poll
+per firm and fieldwork date, keeping the most complete configuration
+(most list rows); 4 polls dropped after the existing composite-Ra'am
+exclusion. Refit; harness run for the historical cycles.
+
+**State-space fit.** Latent end-state matches the last-14-day poll
+averages after wasted-vote renormalisation; posterior weekly innovation
+sd 0.45 seats (Likud) to 1.08 (Yashar), in line with the measured
+formation-window movement; the calendar trims effective forward weeks at
+D-55 from 7.9 to 6.7. No defect.
+
+**Shock stack (ablation, current posterior).** Residual per-list shock
+is the dominant width source (Likud sd 4.85 -> 3.89 without). Bloc swing
+carries the NB tail (P(NB61) 0.163 -> 0.105 without). Loyal-sd trims
+Yashar 6.0 -> 5.0. Gevalt, kalpi rho, kalpi cap, new-list multiplier:
+negligible headline effect. The certainty layer is the largest single
+lever, and it splits cleanly: the soft-support churn alone moves the
+headline little (P(NB61) 0.156 vs 0.163 baseline), while the UNDECIDED
+LEAN alone is worth ~8 points of P(NB61) and ~9 of P(anti61) (churn-only
+run: 0.246 / 0.157). That lean rests on the N12 55/16 measurement of ~60
+respondents. Two consequences: (a) a mean-inflation bug fixed - the
+LogNormal magnitude term had mean exp(s^2/2) = 1.13, so the lean was 13%
+larger than declared; now mean-one; (b) it is flagged here as the
+model's most consequential judgment input, to be REMEASURED at the
+first post-Sept-9 certainty/undecided wave and shrunk toward zero by the
+final polls as pre-registered (s.11).
+
+**Threshold + Bader-Ofer.** The implementation reproduces the official
+2022 allocation exactly from CEC vote counts, including the three
+surplus-vote pairs (Likud-RZP, Yesh Atid-National Unity, Shas-UTJ);
+without pairs Likud would be 31 and Labor 5, which is the measured worth
+of a pair. Every simulated parliament sums to 120 in every file.
+
+**Registration mixture.** Fold transfers retain 60-80% of a folding
+list's votes (ZH -> Yashar 0.75; B&W -> Yashar 0.45 + Together 0.15;
+Unity -> four absorbers 0.80); shares renormalise to 1; draws sum to
+120. No defect.
+
+**Validation harness.** Its projection mirrored the production stack
+only partially: bloc swing, family shocks, anchors, residual and
+loyal-sd, but NOT gevalt coupling or the kalpi haredi-arab correlation,
+so those two production layers had never been graded. Both are now
+mirrored into validate_bayes.project_cycle (the era's right-flank NB
+lists as satellites). 2026-only layers (certainty, calendar, event risk,
+micro-lists, capacity) remain harness-inactive by construction.

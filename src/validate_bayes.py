@@ -121,13 +121,31 @@ def project_cycle(data, idata, eday, threshold, pairs, params,
         sw = rng.standard_t(T_DF, N_PROJ) * swing_sd / 120.0
         w_nb, w_op = np.where(is_nb, base, 0), np.where(~is_nb, base, 0)
         shares = shares + sw[:, None] * (w_nb / w_nb.sum() - w_op / w_op.sum())
-    for f, (mu_f, sd_f) in shocks.items():
+    # Family shocks with the kalpi-measured haredi<->arab correlation,
+    # mirrored from bayes_model (shared chi-square mixer -> correlated t).
+    from bayes_model import KALPI_FAMILY_RHO, GEVALT_SD
+    fam_names = [f for f in shocks if (fams == f).any() and not (fams == f).all()]
+    rho = KALPI_FAMILY_RHO if len(fam_names) == 2 else 0.0
+    cov = np.array([[1.0, rho], [rho, 1.0]]) if rho else np.eye(max(len(fam_names), 1))
+    zf = rng.multivariate_normal(np.zeros(len(fam_names)), cov[:len(fam_names), :len(fam_names)],
+                                 size=N_PROJ) if fam_names else np.zeros((N_PROJ, 0))
+    mixer = np.sqrt(rng.chisquare(T_DF, N_PROJ) / T_DF)
+    for k, f in enumerate(fam_names):
+        mu_f, sd_f = shocks[f]
         in_f = fams == f
-        if not in_f.any() or in_f.all():
-            continue
-        sk = (-mu_f + rng.standard_t(T_DF, N_PROJ) * sd_f) / 120.0
+        sk = (-mu_f + (zf[:, k] / mixer) * sd_f) / 120.0
         w_f, w_r = np.where(in_f, base, 0), np.where(~in_f, base, 0)
         shares = shares + sk[:, None] * (w_f / w_f.sum() - w_r / w_r.sum())
+    # Gevalt coupling, mirrored: zero-sum Likud <-> its bloc's non-haredi
+    # satellites (the era's right-flank lists), sd GEVALT_SD seats.
+    lk = next((i for i, cp in enumerate(comps) if "likud" in cp), None)
+    sat = np.array([(blocs[i] == "netanyahu_bloc") and (fams[i] != "haredi") and i != lk
+                    for i in range(len(comps))])
+    if lk is not None and sat.any():
+        g = rng.standard_normal(N_PROJ) * GEVALT_SD / 120.0
+        w_s = np.where(sat, base, 0)
+        shares[:, lk] += g
+        shares = shares - g[:, None] * (w_s / w_s.sum())
 
     # Party anchors (error-space means, negated to shift simulated truth).
     likud_col = next((i for i, cp in enumerate(comps) if "likud" in cp), None)

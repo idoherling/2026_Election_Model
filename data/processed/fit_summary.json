@@ -1,30 +1,30 @@
 {
  "asof": "2026-09-02",
- "n_polls": 178,
- "n_obs": 2250,
+ "n_polls": 177,
+ "n_obs": 2238,
  "n_lists": 15,
  "n_bins": 45,
  "n_firms": 11,
  "n_groups": 7,
  "divergences": 0,
  "rhat_max": 1.01,
- "ess_min": 249,
+ "ess_min": 298,
  "firm_weights": {
   "Afkar (sector)": 1.0,
   "Direct Polls": 0.94,
   "Filber": 0.85,
   "Kantar": 0.76,
-  "Lazar": 0.74,
-  "Maagar Mochot": 1.02,
+  "Lazar": 0.73,
+  "Maagar Mochot": 1.01,
   "Midgam": 0.72,
   "Midgam Project": 0.77,
   "Midgam Project & StatNet": 1.68,
   "Tatika": 0.97,
-  "TrendZone": 1.2
+  "TrendZone": 1.19
  },
  "cec_filings_merged": 21,
  "cec_obs": 299,
- "polls_displaced": 23,
+ "polls_displaced": 20,
  "holdout_obs": 237,
- "holdout_median_err": 0.82
+ "holdout_median_err": 0.81
 }

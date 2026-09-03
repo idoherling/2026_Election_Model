@@ -395,6 +395,22 @@ def prepare_data(polls: pd.DataFrame | None = None,
     win = polls[(polls["fieldwork_end"] > asof - pd.Timedelta(days=WINDOW_DAYS))
                 & (polls["fieldwork_end"] <= asof)].copy()
 
+    # One poll per firm and fieldwork date: the archive carries "a/b"
+    # variants of the same survey (with/without a list, joint vs split
+    # Arab lists). Keeping both counts one sample twice (2026-09-03 audit:
+    # 14 extra polls in the window, one pair byte-identical). Keep the most
+    # complete configuration - the variant with the most list rows.
+    rows_per = win.groupby("poll_id").size()
+    order = (win.drop_duplicates("poll_id")[["poll_id", "pollster", "fieldwork_end"]]
+             .assign(n=lambda d: d["poll_id"].map(rows_per))
+             .sort_values(["pollster", "fieldwork_end", "n", "poll_id"],
+                          ascending=[True, True, False, True]))
+    keep_ids = order.drop_duplicates(["pollster", "fieldwork_end"])["poll_id"]
+    dropped = win["poll_id"].nunique() - len(keep_ids)
+    if dropped:
+        print(f"same-day variants dropped: {dropped} polls")
+    win = win[win["poll_id"].isin(set(keep_ids))]
+
     blocks = merge_blocks(win["party_id"].unique())
     block_of = {c: i for i, b in enumerate(blocks) for c in b}
     win["block"] = win["party_id"].map(lambda p: block_of[p.split("+")[0]])
@@ -758,7 +774,9 @@ def _certainty_layer(shares, comps, blocs, fams, rng):
     # undecided pool: N12 lean with its own sampling uncertainty (n~60)
     if is_nb.any() and is_op.any():
         f_anti = rng.beta(*U_LEAN_BETA, size=n)
-        mag = np.exp(rng.normal(0, U_MAG_SDLOG, size=n))
+        # mean-one magnitude term (a LogNormal(0, s) has mean exp(s^2/2) -
+        # the uncorrected form was inflating the lean by 13%)
+        mag = np.exp(rng.normal(-0.5 * U_MAG_SDLOG ** 2, U_MAG_SDLOG, size=n))
         excess = (f_anti - U_PROP_ANTI) / (U_LEAN_BASE - U_PROP_ANTI)
         ub = UNDECIDED_BREAK_SEATS / 120.0 * excess * mag
         out += spread(np.maximum(ub, 0), is_op) - spread(np.maximum(ub, 0), is_nb)
