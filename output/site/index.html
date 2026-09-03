@@ -723,7 +723,10 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
     seeds the priors). The harness re-runs the full pipeline as of each election eve and scores
     it against the real result. Changes that failed the harness were rejected and documented —
     including a final-stretch dynamics module, a hierarchical multi-cycle fit that stays
-    research-only, and a per-poll sampling-error floor. The harness projection mirrors the
+    research-only, and a per-poll sampling-error floor. The harness also calibrates the width of
+    the per-list residual shock: re-projecting every fitted cycle under a grid of width factors
+    and scoring the intervals, a factor of 0.9 wins every leave-one-cycle-out fold (narrower
+    factors hurt point accuracy through the threshold nonlinearity). The harness projection mirrors the
     production shock stack layer for layer (bloc swing, correlated sector shocks, anchors,
     residual, loyal-electorate calibration, gevalt coupling); only the 2026-specific layers —
     the certainty layer, the volatility calendar, event risk, the micro-lists and the capacity
@@ -885,7 +888,7 @@ const HE_CH = [
  {t:"הקצאת ראשות הממשלה", b:`<p>בתוך כל קואליציה מנצחת, ראשות הממשלה מוקצית בהסתברויות מודעות־רוטציה ותלויות־תרחיש (בנט היה ראש ממשלה עם 7 מנדטים ב־2021 — היגיון "המפלגה הגדולה" אינו היגיון ישראלי), המתהפכות כאשר ביחד עוקפת את ישר בדגימה. השכבה נבחנה מול שמונה תוצאות ההרכבה האמיתיות מאז 2009: לוג־לוס ממוצע &lrm;−0.92, והתוצאה שהתממשה מקבלת את ההסתברות הגבוהה ביותר בחמישה משמונה מחזורים.</p>
     <div class="eq">PM | outcome ~ Categorical( alloc<sub>outcome</sub> ),&nbsp;&nbsp;alloc ~ Dirichlet(60·p&#772;)&nbsp;&nbsp;&nbsp;&nbsp;<i>תלוי־תרחיש, האי־ודאות נישאת</i></div>`},
  {t:"פריורים של מומחים, מתועדים", b:`<p>כל מספר שיפוטי מתחקה אל דוסייה כתוב שחובר משישה שולחנות מחקר: שיעורי בסיס של הרכבת קואליציות 1992–2022, רשומת שגיאות הסקרים המלאה 1996–2022, מוסדות מפלגתיים וביוגרפיות מנהיגים, סוציולוגיה אלקטורלית וזרימות קולות, שוקי חיזוי ויסודות מבניים, ודינמיקת הישורת האחרונה. היכן שהשולחנות חלקו על המודל — המודל זז; היכן שהשוק חולק על המודל (פולימרקט מתמחר את אייזנקוט כרוה״מ בכ־50%; אנחנו אומרים כ־36%), הדוסייה מתעד מדוע אנו עומדים על שלנו: שוקי הפרלמנט־התלוי והממשלה־עד־דצמבר של אותו שוק עצמו אינם עקביים עם מספר הכותרת שלו.</p>`},
- {t:"אימות: המודל בוחן את עצמו", b:`<p>כל שכבה מותנית במבחן־עבר של שמונה מחזורים (2013–2022, בהשמטת־מחזור; 2009 זורע את הפריורים). המתקן מריץ מחדש את הצינור המלא כפי שהיה ערב כל מערכת בחירות ומדרג אותו מול התוצאה האמיתית. שינויים שנכשלו נדחו ותועדו — ובהם מודול דינמיקת ישורת אחרונה, התאמה היררכית רב־מחזורית שנותרה מחקרית בלבד, ורצפת שגיאת־דגימה לכל סקר. היטל המתקן משקף את מחסנית הזעזועים של הייצור שכבה אחר שכבה (תנודת גוש, זעזועי מגזר מתואמים, עוגנים, שיורי, כיול אלקטורט־נאמן, צימוד הגוואלד); רק השכבות הייחודיות ל־2026 — שכבת הוודאות, לוח התנודתיות, סיכון האירועים, המיקרו־רשימות וגבולות הקיבולת — נמצאות מחוץ להישג ידו מעצם הבנייה, והנספח אומר זאת בכל מקום שבו הן מופיעות.</p>
+ {t:"אימות: המודל בוחן את עצמו", b:`<p>כל שכבה מותנית במבחן־עבר של שמונה מחזורים (2013–2022, בהשמטת־מחזור; 2009 זורע את הפריורים). המתקן מריץ מחדש את הצינור המלא כפי שהיה ערב כל מערכת בחירות ומדרג אותו מול התוצאה האמיתית. שינויים שנכשלו נדחו ותועדו — ובהם מודול דינמיקת ישורת אחרונה, התאמה היררכית רב־מחזורית שנותרה מחקרית בלבד, ורצפת שגיאת־דגימה לכל סקר. המתקן גם מכייל את רוחב הזעזוע השיורי לרשימה: בהיטל מחודש של כל מערכת מותאמת תחת רשת של מקדמי רוחב ובניקוד הרווחים, מקדם 0.9 מנצח בכל קיפול השמטת־מחזור (מקדמים צרים יותר פוגעים בדיוק הנקודתי דרך אי־הליניאריות של אחוז החסימה). היטל המתקן משקף את מחסנית הזעזועים של הייצור שכבה אחר שכבה (תנודת גוש, זעזועי מגזר מתואמים, עוגנים, שיורי, כיול אלקטורט־נאמן, צימוד הגוואלד); רק השכבות הייחודיות ל־2026 — שכבת הוודאות, לוח התנודתיות, סיכון האירועים, המיקרו־רשימות וגבולות הקיבולת — נמצאות מחוץ להישג ידו מעצם הבנייה, והנספח אומר זאת בכל מקום שבו הן מופיעות.</p>
     <div class="tblwrap"><table>
       <thead><tr><th>מדד (מבחן־עבר, 8 מחזורים)</th><th class="num">הצינור הפשוט</th><th class="num">המודל הבייסיאני</th></tr></thead>
       <tbody id="valTbl"></tbody>
