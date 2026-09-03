@@ -279,6 +279,33 @@ MICRO_PRIORS = {
 }
 
 
+# Mid-campaign mergers polled WITHOUT a column for the absorbed component
+# create a step in the absorbing list's series that the random walk would
+# otherwise smooth across. Make pre-merger observations comparable to the
+# merged list by adding the absorbed list's measured pre-merger share.
+#   2026-09-02: pollsters switched to a single "RZP - Zehut" column (5-6
+#   seats vs 3.3 for RZP alone the week before). Before that Zehut lived
+#   only in the small-party footnotes at ~1.6%, retained at 0.9 on merger.
+STRUCTURAL_BREAKS = [
+    {"component": "rzp", "from": "2026-09-02", "add_share": 0.9 * 0.016,
+     "note": "Zehut absorbed into the RZP-Zehut technical bloc"},
+]
+
+
+def _apply_structural_breaks(obs: pd.DataFrame, block_of: dict) -> pd.DataFrame:
+    for brk in STRUCTURAL_BREAKS:
+        b = block_of.get(brk["component"])
+        if b is None:
+            continue
+        m = (obs["block"] == b) & (obs["fieldwork_end"] < pd.Timestamp(brk["from"]))
+        obs.loc[m, "share"] = obs.loc[m, "share"] + brk["add_share"]
+        if m.any():
+            print(f"structural break: +{brk['add_share']:.4f} share on "
+                  f"{int(m.sum())} pre-{brk['from']} obs of {brk['component']} "
+                  f"({brk['note']})")
+    return obs
+
+
 def prepare_data(polls: pd.DataFrame | None = None,
                  asof: pd.Timestamp | None = None,
                  modern_remaps: bool = True):
@@ -312,6 +339,7 @@ def prepare_data(polls: pd.DataFrame | None = None,
     obs = implied_share_obs(win)
     if modern_remaps:
         obs = _merge_cec(obs, block_of, asof)
+        obs = _apply_structural_breaks(obs, block_of)
 
     edges, dt_weeks = time_grid()
     obs["obs_day"] = (obs["fieldwork_end"] - asof).dt.days
@@ -383,6 +411,9 @@ def implied_share_obs(win: pd.DataFrame) -> pd.DataFrame:
                  fieldwork_end=("fieldwork_end", "first")))
 
 
+LAST_CEC_MERGE: dict = {}   # filled by _merge_cec, read into fit_summary.json
+
+
 def _merge_cec(obs: pd.DataFrame, block_of: dict, asof) -> pd.DataFrame:
     """Swap in CEC-filed RAW percentages where available.
 
@@ -425,6 +456,9 @@ def _merge_cec(obs: pd.DataFrame, block_of: dict, asof) -> pd.DataFrame:
         share=("share", "sum"), pollster=("pollster", "first"),
         fieldwork_end=("fieldwork_end", "first"))
     kept = obs[~obs["poll_id"].isin(displaced)]
+    LAST_CEC_MERGE.update({"cec_filings_merged": int(cec_obs["poll_id"].nunique()),
+                           "cec_obs": int(len(cec_obs)),
+                           "polls_displaced": int(len(displaced))})
     print(f"CEC filings merged: {cec_obs['poll_id'].nunique()} filings "
           f"({len(cec_obs)} obs) displacing {len(displaced)} table-derived "
           f"polls")
@@ -815,14 +849,26 @@ def main() -> None:
         y_h = data["y"][holdout]
         b_h = data["block_i"][holdout]
         err = np.abs(np.median(pred, axis=0)[b_h] - y_h) * 120
+        fit_summary_holdout = {"holdout_obs": int(holdout.sum()),
+                               "holdout_median_err": round(float(np.median(err)), 2)}
         print(f"holdout ({int(holdout.sum())} obs, last {HOLDOUT_DAYS}d): "
               f"median |error| {np.median(err):.2f} seats "
               f"(no-update prediction)")
 
     model, idata = fit(data)
-    import arviz as az
+    import arviz as az, json
     az.to_netcdf(idata, PROCESSED_DIR / "m3_idata.nc")  # shared with mixture
-    diagnostics(idata)
+    div, rhat, ess = diagnostics(idata)
+    fit_summary = {
+        "asof": data["asof"].date().isoformat(),
+        "n_polls": int(data["n_polls"]), "n_obs": int(len(data["y"])),
+        "n_lists": int(len(data["latent_blocks"])), "n_bins": int(data["n_weeks"]),
+        "n_firms": int(len(data["firms"])), "n_groups": int(len(data["groups"])),
+        "divergences": div, "rhat_max": round(rhat, 3), "ess_min": int(ess),
+        **LAST_CEC_MERGE,
+        **(fit_summary_holdout if "fit_summary_holdout" in dir() else {}),
+    }
+    (PROCESSED_DIR / "fit_summary.json").write_text(json.dumps(fit_summary, indent=1))
     if "beta_u" in idata.posterior:
         bu = idata.posterior["beta_u"].values.ravel()
         print(f"undecided coefficient beta_u: mean {bu.mean():.2f}, "

@@ -8,19 +8,20 @@ Key -> source:
   asof      official_forecast.csv
   parties   official_forecast.csv (seats/interval/p_pass/p_largest)
             + bayes_forecast_mixture.csv (mixture mean)
-  sub       bayes_model.MICRO_PRIORS — the polling page's "Others" column
-            itemized (shares measured from pollsters' footnotes), with
-            pass probabilities from official_forecast.csv
+  sub       bayes_model.MICRO_POLLED x MICRO_REALIZE — the small parties
+            (polled support and forecast vote), with pass probabilities
+            from official_forecast.csv
   blocs     mixture_blocs.csv
   formation government_formation.csv
   pm        pm_probabilities.csv
   events    registration_effects.csv
-  house     house_effects_lists_2026.csv (Netanyahu-bloc unit, n >= 10)
+  house     house_effects_blocs.csv (Netanyahu-bloc unit, 2026, n >= 10)
   counts    polls.csv
   draws     mixture_draws.parquet (2,500-row sample; columns with any seats)
   kalpi     kalpi_sectors.csv + kalpi_poststrat_2026.csv x current seats
   val       carried forward from the previous payload (backtest numbers
             change only when the harness is re-run)
+  fit       fit_summary.json (written by bayes_model.main) + CEC filing count
 """
 from __future__ import annotations
 
@@ -76,9 +77,13 @@ def build_payload() -> dict:
     merged_away = set()
     if RESOLVED.get("rzp_fate") == "merge_zehut":
         merged_away.add("zehut")
+    # Support measured only in a sector poll (not a national itemization)
+    # is labelled as such on the site.
+    SECTOR_POLLED = {"makom_lekulanu"}
     sub = [
         {"name": names.get(pid, pid),
          "polled": round(MICRO_POLLED[pid][0] * 100, 1),
+         "src": "sector" if pid in SECTOR_POLLED else "national",
          "share": round(mean * 100, 1),
          "pass": round(float(ppass.get(names.get(pid, pid), 0.0)), 3)}
         for pid, (mean, _sd) in MICRO_PRIORS.items() if pid not in merged_away
@@ -114,6 +119,12 @@ def build_payload() -> dict:
               "n": int(r.n_polls)}
              for r in he.sort_values("house_effect").itertuples()]
 
+    fit = {}
+    fs = PROCESSED / "fit_summary.json"
+    if fs.exists():
+        fit = json.loads(fs.read_text())
+    fit["cec_filings_parsed"] = int(len(pd.read_csv(PROCESSED / "cec_filings.csv")))
+
     polls = pd.read_csv(PROCESSED / "polls.csv")
     p26 = polls[polls.cycle.astype(str) == "2026"]
     counts = {"polls": int(polls.poll_id.nunique()), "rows": int(len(polls)),
@@ -147,7 +158,7 @@ def build_payload() -> dict:
     return {
         "asof": str(off["asof"].iloc[0]), "parties": parties, "sub": sub,
         "blocs": blocs, "formation": formation, "pm": pm, "events": events,
-        "house": house, "val": prev.get("val", {}), "counts": counts,
+        "house": house, "val": prev.get("val", {}), "counts": counts, "fit": fit,
         "drawCols": draw_cols, "draws": draws, "kalpi": kalpi,
     }
 

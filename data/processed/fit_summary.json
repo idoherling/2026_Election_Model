@@ -1,0 +1,17 @@
+{
+ "asof": "2026-09-02",
+ "n_polls": 177,
+ "n_obs": 2248,
+ "n_lists": 15,
+ "n_bins": 45,
+ "n_firms": 10,
+ "n_groups": 6,
+ "divergences": 0,
+ "rhat_max": 1.02,
+ "ess_min": 443,
+ "holdout_obs": 235,
+ "holdout_median_err": 0.74,
+ "cec_filings_merged": 21,
+ "cec_obs": 299,
+ "polls_displaced": 23
+}
