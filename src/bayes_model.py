@@ -232,22 +232,43 @@ LIST_SHOCK_SLOPE = _P["resid_slope"]
 # A list with no polls in its final weeks has left the race by election day.
 WITHDRAWN_WEEKS = 5
 
-# Prior-only micro-lists: (share mean, share sd). These are the lists the
-# polling page folds into its "Others" column; the shares below are MEASURED
-# from the footnote itemizations attached to Others (Jul-Aug 2026 polls,
-# Lazar/Midgam/Filber/Direct Polls/Maagar), superseding the electoral-history
-# priors used before pollsters started itemizing. Together they carry the
-# ~4-5% Others mass so the named-list simplex is not silently inflated.
-MICRO_PRIORS = {
-    "zehut": (0.016, 0.004),           # 1.1-2.1% under Others, Aug 2026
+# Small-party layer, two measured pieces:
+#
+# 1. MICRO_POLLED — what pollsters measure today, from the footnote
+#    itemizations of the firms publishing full percentages (Jul-Aug 2026,
+#    Lazar/Midgam/Filber/Direct Polls/Maagar).
+MICRO_POLLED = {
+    "zehut": (0.016, 0.004),           # 1.1-2.1% under the small-party notes
     "noam": (0.004, 0.003),            # 0.3% Filber 27 Aug; "<1%" elsewhere
-    "nep": (0.013, 0.004),             # 1.0-1.7% under Others, Aug 2026
-    "haredi_public": (0.013, 0.004),   # 1.2-1.5% Jul-Aug 2026 (Midgam 31 Aug: 1.2%)
+    "nep": (0.013, 0.004),             # 1.0-1.7%, Aug 2026
+    "haredi_public": (0.013, 0.004),   # 1.2-1.5% Jul-Aug (Midgam 31 Aug: 1.2%)
     "israel_first": (0.004, 0.003),    # 0.3-0.6% Aug 2026 (Lazar/Direct Polls)
     # fiery_youth REMOVED (owner ruling, Sept 1): not running — Muchtar
     # is leading Likud's youth campaign.
     "fourth_quarter": (0.002, 0.002),  # 0.5% once (18 Jun); not itemized since
     "el_dagel": (0.002, 0.002),        # 0.4% once (18 Jun); not itemized since
+}
+# 2. MICRO_REALIZE — how sub-threshold lists' final itemized polls translated
+#    into actual votes in the graded record:
+#      NEP 2021        polled ~1.2%  -> 0.79%  (x0.66)
+#      Jewish Home '22 polled  1.9%  -> 1.17%  (x0.62)
+#      Yachad 2015     polled ~3.3%  -> 2.97%  (x0.90)
+#      Zehut Apr '19   polled ~3.0%  -> 2.74%  (x0.91)
+#      Otzma Sept '19  polled ~1.7%  -> 1.88%  (x1.11)
+#    Non-sectoral lists shed ~30% to strategic desertion (voters flee a
+#    wasted vote); lists with a committed sectarian/ideological core hold
+#    their polling. Zehut's carve keeps x1.0: under the official merger its
+#    voters land on a viable list, so there is nothing to desert.
+MICRO_REALIZE = {
+    "zehut": 1.0, "noam": 1.0, "haredi_public": 1.0,
+    "nep": 0.7, "israel_first": 0.7, "fourth_quarter": 0.7, "el_dagel": 0.7,
+}
+# Forecast prior = polled x realization; the calibration's own dispersion
+# (ratio spread ~0.6-1.1) is folded into the sd.
+MICRO_PRIORS = {
+    pid: (round(m * MICRO_REALIZE[pid], 4),
+          round((sd ** 2 + (0.30 * m * MICRO_REALIZE[pid]) ** 2) ** 0.5, 4))
+    for pid, (m, sd) in MICRO_POLLED.items()
 }
 
 

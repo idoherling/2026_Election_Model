@@ -307,3 +307,28 @@ exists mostly in Bennett-led draws (flip rule makes Bennett modal
 there). Result: outcome table above; PM Eisenkot 33.5 [29.8-37.2] /
 none 31.1 (23.5 with Bibi + 7.5 replaced) / Netanyahu 19.9 / Bennett
 9.4.
+
+## 15. Small-party realization calibration (2026-09-01)
+
+The polling page's footnote itemizations give each sub-threshold list's
+*polled* support; the forecast converts it to *expected actual vote* using
+the measured record of how such lists' final polls translated into ballots:
+
+| list | final polls | actual | ratio |
+|---|---|---|---|
+| New Economic Party 2021 | ~1.2% | 0.79% | 0.66 |
+| Jewish Home (Shaked) 2022 | 1.9% | 1.17% | 0.62 |
+| Yachad (Yishai) 2015 | ~3.3% | 2.97% | 0.90 |
+| Zehut Apr 2019 | ~3.0% | 2.74% | 0.91 |
+| Otzma Yehudit Sept 2019 | ~1.7% | 1.88% | 1.11 |
+
+Reading: lists without a committed base shed ~30% of polled support to
+strategic desertion; sectarian/ideological-core lists hold or beat their
+polls. Implemented as MICRO_REALIZE in src/bayes_model.py — x0.7 for
+NEP / Israel First / The Fourth Quarter / El HaDegel, x1.0 for The Haredi
+Public, Noam, and Zehut (whose voters land on the viable merged RZP-Zehut
+list, so wasted-vote flight does not apply). The ratio dispersion
+(~0.6-1.1) is folded into each micro-list's sd (+30% of the mean in
+quadrature). Sources: CEC official results; Wikipedia results pages;
+JPost/ToI final-poll coverage. Revisit at the Sept 9 refit alongside the
+Zehut carve retirement.

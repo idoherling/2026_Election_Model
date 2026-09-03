@@ -549,12 +549,21 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
     informs correlations and capacity, not point swings.</p></div>
 
   <div class="chapter"><h3>The small parties</h3>
-    <p>Lists polled below the threshold are not dropped: each is carried as a measured micro-list
-    and carved out of the modeled pie before seats are allocated, so the named lists' shares are
-    never silently inflated. Their support comes from the itemized footnotes of the pollsters
-    that publish full percentages (currently: NEP 1.3%, The Haredi Public 1.3%, Noam 0.4%,
-    Israel First 0.4%, The Fourth Quarter 0.2%, El HaDegel 0.2%). Zehut's measured 1.6% rides
-    inside the merged Religious Zionism–Zehut line under the official merger.</p>
+    <p>Lists polled below the threshold are not dropped: each is carried as a micro-list and
+    carved out of the modeled pie before seats are allocated, so the named lists' shares are
+    never silently inflated. Their polled support comes from the itemized footnotes of the
+    pollsters that publish full percentages — but the model does not simply reproduce those
+    numbers. It <b>forecasts</b> each list's actual vote using the measured record of how
+    sub-threshold lists' final polls translated into real ballots: NEP 2021 polled ~1.2% and
+    took 0.79% (×0.66); Jewish Home 2022 polled 1.9% and took 1.17% (×0.62); Yachad 2015
+    ~3.3% → 2.97% (×0.90); Zehut April 2019 ~3.0% → 2.74% (×0.91); Otzma September 2019
+    ~1.7% → 1.88% (×1.11). Lists without a committed base shed roughly <b>30% of their polled
+    support to strategic desertion</b> — voters flee a wasted vote — while lists with a
+    sectarian or ideological core hold theirs. So NEP and Israel First are forecast at 0.7× their
+    polling, The Haredi Public and Noam at 1.0×, and the calibration's own dispersion widens
+    every micro-list's uncertainty. Zehut's measured 1.6% rides inside the merged Religious
+    Zionism–Zehut line at full weight: under the official merger its voters land on a viable
+    list, so there is nothing to desert.</p>
     <div class="eq">m<sub>j</sub> ~ N<sup>+</sup>(&mu;<sub>j</sub>, &sigma;<sub>j</sub>),&nbsp;&nbsp;v&prime; = ( v·(1−&Sigma;<sub>j</sub>m<sub>j</sub>),&nbsp;m )&nbsp;&nbsp;&nbsp;&nbsp;<i>micro-lists carved from the simplex</i></div></div>
 
   <div class="chapter"><h3>Threshold and Bader–Ofer</h3>
@@ -750,7 +759,7 @@ const HE_CH = [
  {t:"תשתית הקלפיות", b:`<p>מתחת למספרים הארציים שוכנת רשומת הקלפיות: תוצאות רשמיות לכל יישוב בחמש מערכות הבחירות 2019–2022, מותאמות לשושלות המפלגות דרך אותיות הקלפי של כל מחזור (מאומתות מול הסיכומים הארציים). היישובים מתקבצים למגזרים פוליטיים לפי פרופילי ההצבעה שלהם עצמם, יחד עם ההשתתפות המדודה (חרדים 76%, ערבים 54%, ציונות דתית 76%). שלושה תוצרים מזינים את התחזית: <b>טבלת פוסט־סטרטיפיקציה</b> המקצה את מנדטי כל רשימה למגזרים שלה (מדור משחק הקרקע); <b>קיטום הקיבולת</b> שלהלן; ובסיס היישובים למנוע ליל הבחירות. משקלי השושלות מכוילים מול מטריצות מעבר־הקולות המדודות של פרויקט הקוד הפתוח <a href="https://kolot-nodedim.netlify.app/" rel="noopener">קולות נודדים</a> (כ־7,000 קלפיות מותאמות לכל זוג בחירות, R²&rlm; 0.89 עבור 2021→2022), שאומדני הלכידות שלו משחזרים באופן בלתי־תלוי את סדר האלקטורטים הנאמנים של המודל הזה.</p>
     <div class="eq">&Sigma;<sub>&#8467;&isin;Arab</sub> v<sub>&#8467;</sub> &le; 16.3%&nbsp;&nbsp;&nbsp;&nbsp;<i>קיבולת ההשתתפות של המגזר הערבי</i><br>v<sub>Shas</sub> + v<sub>UTJ</sub> &ge; 6.7%&nbsp;&nbsp;&nbsp;&nbsp;<i>הרצפה הדמוגרפית החרדית</i></div>
     <p>סימולציות המפרות אחד הגבולות נחתכות אל הגבול האפשרי (כל תנאי גוזם כ־1.5% מהדגימות). תוצאה שלילית כנה מתועדת לצדם: תנודות מגזריות <em>אינן</em> עוברות בין זוגות בחירות (תנודה ארצית אחידה חוזה יישובים ב־1.20 נק׳ שגיאה; הוספת תנודות מגזר היסטוריות נותנת 1.31) — ולכן שכבת המגזרים מזינה מתאמים וקיבולת, לא תנודות נקודתיות.</p>`},
- {t:"המפלגות הקטנות", b:`<p>רשימות הנסקרות מתחת לאחוז החסימה אינן נזרקות: כל אחת נישאת כמיקרו־רשימה מדודה ונחתכת מהעוגה הממודלת לפני חלוקת המנדטים, כך שחלקי הרשימות הגדולות לעולם אינם מנופחים בשקט. התמיכה נמדדת מפירוטי ההערות של הסוקרים המפרסמים אחוזים מלאים (כיום: כלכלה חדשה 1.3%, הציבור החרדי 1.3%, נעם 0.4%, ישראל ראשונה 0.4%, הרבע הרביעי 0.2%, אל הדגל 0.2%). תמיכת זהות המדודה (1.6%) נוסעת בתוך רשימת הציונות הדתית–זהות הממוזגת.</p>
+ {t:"המפלגות הקטנות", b:`<p>רשימות הנסקרות מתחת לאחוז החסימה אינן נזרקות: כל אחת נישאת כמיקרו־רשימה ונחתכת מהעוגה הממודלת לפני חלוקת המנדטים, כך שחלקי הרשימות הגדולות לעולם אינם מנופחים בשקט. התמיכה הנסקרת נמדדת מפירוטי ההערות של הסוקרים המפרסמים אחוזים מלאים — אבל המודל אינו משכפל את המספרים האלה כפי שהם. הוא <b>חוזה</b> את הקולות בפועל של כל רשימה לפי הרשומה המדודה של האופן שבו סקרים סופיים של רשימות תת־סף תורגמו לקולות אמת: כלכלה חדשה 2021 נסקרה בכ־1.2% וקיבלה 0.79% (×0.66); הבית היהודי 2022 נסקר ב־1.9% וקיבל 1.17% (×0.62); יחד 2015 כ־3.3% ← 2.97% (×0.90); זהות אפריל 2019 כ־3.0% ← 2.74% (×0.91); עוצמה ספטמבר 2019 כ־1.7% ← 1.88% (×1.11). רשימות ללא בסיס מחויב מאבדות <b>כ־30% מתמיכתן הנסקרת לעריקה אסטרטגית</b> — בוחרים בורחים מקול מבוזבז — בעוד רשימות עם גרעין מגזרי או אידאולוגי מחזיקות בשלהן. לכן כלכלה חדשה וישראל ראשונה נחזות ב־0.7 מסקריהן, הציבור החרדי ונעם ב־1.0, ופיזור הכיול עצמו מרחיב את אי־הוודאות של כל מיקרו־רשימה. תמיכת זהות המדודה (1.6%) נוסעת בתוך רשימת הציונות הדתית–זהות הממוזגת במשקל מלא: במסגרת המיזוג הרשמי בוחריה נוחתים על רשימה בת־קיימא, ואין ממה לערוק.</p>
     <div class="eq">m<sub>j</sub> ~ N<sup>+</sup>(&mu;<sub>j</sub>, &sigma;<sub>j</sub>),&nbsp;&nbsp;v&prime; = ( v·(1−&Sigma;<sub>j</sub>m<sub>j</sub>),&nbsp;m )&nbsp;&nbsp;&nbsp;&nbsp;<i>מיקרו־רשימות נחתכות מהסימפלקס</i></div>`},
  {t:"אחוז החסימה ובדר–עופר", b:`<p>כל וקטור קולות מדומה עובר את מבחן אחוז החסימה של 3.25%, ואז המנדטים מוקצים בשיטה הישראלית האמיתית — <b>בדר–עופר</b>, ד'הונדט על עודפים — כאשר הסכמי עודפים חתומים מטופלים כרשימות משותפות בשלב העודפים (שווי מדוד של &lrm;+0.5 עד &lrm;+0.9 מנדטים לזוג). קולות רשימות שנפלו מתחלקים מחדש בין השורדות — וכך גוש יכול להפסיד בקולות ולנצח בכנסת. המנדטים המרכזיים המתפרסמים מכבדים בנוסף רצפת 4 מנדטים לרשימות עוברות, מיושבת בלי לגלח אף רשימה מתחת לרצפתה.</p>
     <div class="eq">seat<sub>k</sub> &rarr; argmax<sub>&#8467;</sub> v<sub>&#8467;</sub> / (s<sub>&#8467;</sub> + 1)&nbsp;&nbsp;&nbsp;&nbsp;<i>איטרציית ד'הונדט, זוגות עודפים מאוחדים</i></div>`},
@@ -1013,17 +1022,20 @@ function hideTip(){ tip.style.opacity = 0; }
   if (!D.sub || !D.sub.length) return;
   const t = HEB_MODE ? {
     h: 'המפלגות הקטנות',
-    sub: 'נתח מהקולות הארציים, לפי מדידות הסוקרים; אחוז החסימה — 3.25%',
+    sub: 'תחזית הנתח מהקולות הארציים: מדידות הסוקרים, מתוקננות לפי האופן שבו סקרים סופיים של רשימות קטנות תורגמו לקולות אמת ב־2015–2022; אחוז החסימה — 3.25%',
+    polled: 'בסקרים',
   } : {
     h: 'The small parties',
-    sub: 'Share of the national vote, as measured by pollsters; the threshold is 3.25%',
+    sub: 'Forecast share of the national vote: the pollsters\u2019 measured support, adjusted for how small lists\u2019 final polls translated into real votes in 2015\u20132022; the threshold is 3.25%',
+    polled: 'polled',
   };
   $("#thr").insertAdjacentHTML("afterend",
     `<div style="margin-top:26px;border-top:2px solid var(--ink);padding-top:14px">
       <div style="font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;margin-bottom:4px">${t.h}</div>
       <div style="font-size:12.5px;color:var(--muted);margin-bottom:10px">${t.sub}</div>
       <div class="thr">` + D.sub.map(p => `<div class="row">
-        <div class="nm" style="font-weight:600;font-size:13.5px">${nm(p.name)}</div>
+        <div class="nm" style="font-weight:600;font-size:13.5px">${nm(p.name)}
+          <span style="color:var(--muted);font-weight:400;font-size:11.5px">${t.polled} ${p.polled.toFixed(1)}%</span></div>
         <div class="bar" style="height:8px"><i style="${pc(p.name)};width:${Math.min(p.share/3.25*100,100)}%"></i></div>
         <div class="pct">${p.share.toFixed(1)}%</div></div>`).join("") +
       `</div></div>`);
