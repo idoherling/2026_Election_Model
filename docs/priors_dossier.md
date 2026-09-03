@@ -627,3 +627,24 @@ so those two production layers had never been graded. Both are now
 mirrored into validate_bayes.project_cycle (the era's right-flank NB
 lists as satellites). 2026-only layers (certainty, calendar, event risk,
 micro-lists, capacity) remain harness-inactive by construction.
+
+## 26. The central seat count (2026-09-03)
+
+Found: the published centres were meant to come from the simple
+final-window pipeline (harness point MAE 1.42 vs 1.66), but a name
+mismatch (display names vs party ids) meant the match never fired; the
+fallback rounded the BASELINE Bayesian means, zeroed non-passing lists,
+applied a 4-seat floor, and handed the ~5 missing seats to the highest
+pass-probability lists - UTJ showed 9 with a mean of 7.9 and a median of
+8. The simple snapshot was also stale (not in the refresh chain), and
+centres came from the baseline while intervals came from the mixture.
+
+Now: one distribution. project() exposes the final projected share
+distribution's mean vector; registration_scenarios writes it
+(mixture_shares.csv); official_forecast passes it once through the real
+seat law - 3.25% threshold, surplus pairs, Bader-Ofer - so the table sums
+to 120 by construction with no rounding, floors or remainders. UTJ 8,
+Yashar 26, Likud 25, Together 12, Democrats 10, Shas 8, YB 8, JL 7,
+Otzma 7, RZP-Zehut 5, Ra'am 4. The simple pipeline remains the
+point-accuracy benchmark in the validation table, not a component of
+the published forecast; the annex says so in both languages.

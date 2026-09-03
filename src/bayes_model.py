@@ -1024,6 +1024,13 @@ def project(data, idata, rng, config="current", config_params=None):
     pairs = [(comp_of[a], comp_of[b]) for a, b in SURPLUS_PAIRS
              if a in comp_of and b in comp_of and comp_of[a] != comp_of[b]]
 
+    # Expose the final projected share distribution's mean vector: the
+    # official forecast allocates the central seats from it (one pass
+    # through the seat law), so the point estimate and the intervals come
+    # from the same distribution.
+    project.last_share_mean = shares.mean(axis=0)
+    project.last_labels = list(labels)
+    project.last_components = ["+".join(sorted(c)) for c in comps]
     seats = np.zeros((N_PROJ, shares.shape[1]), dtype=int)
     for i in range(N_PROJ):
         sh = shares[i]

@@ -1,23 +1,24 @@
 list,central_seats,interval_90,p_pass,p_largest,center_source,asof
-Likud,26,17-33,1.0,0.513,bayes,2026-09-02
-Yashar,26,18-35,1.0,0.485,bayes,2026-09-02
-Bennett 2026 + Yesh Atid,12,6-18,0.984,0.001,bayes,2026-09-02
-The Democrats,10,5-14,0.969,0.0,bayes,2026-09-02
-Yisrael Beytenu,8,4-13,0.957,0.0,bayes,2026-09-02
-United Torah Judaism,9,5-10,0.994,0.0,bayes,2026-09-02
-Shas,8,5-11,0.984,0.0,bayes,2026-09-02
-Balad + Hadash-Ta'al,7,0-12,0.888,0.0,bayes,2026-09-02
-Otzma Yehudit,6,0-11,0.859,0.0,bayes,2026-09-02
-Religious Zionist Party,4,0-9,0.688,0.0,bayes,2026-09-02
-Ra'am,4,0-8,0.593,0.0,bayes,2026-09-02
-Amcha Yisrael,0,0-8,0.282,0.001,bayes,2026-09-02
-Zionist Home – The Reservists,0,0-5,0.122,0.0,bayes,2026-09-02
-Unity,0,0-0,0.008,0.0,bayes,2026-09-02
-Blue and White,0,0-0,0.031,0.0,bayes,2026-09-02
-Noam,0,0-0,0.0,0.0,bayes,2026-09-02
-New Economic Party,0,0-0,0.0,0.0,bayes,2026-09-02
-The Haredi Public,0,0-0,0.0,0.0,bayes,2026-09-02
-Israel First,0,0-0,0.0,0.0,bayes,2026-09-02
-A Place for All of Us,0,0-0,0.0,0.0,bayes,2026-09-02
-The Fourth Quarter,0,0-0,0.0,0.0,bayes,2026-09-02
-El HaDegel,0,0-0,0.0,0.0,bayes,2026-09-02
+Yashar,26,18-35,1.0,0.485,mixture,2026-09-02
+Likud,25,17-33,1.0,0.513,mixture,2026-09-02
+Bennett 2026 + Yesh Atid,12,6-18,0.984,0.001,mixture,2026-09-02
+The Democrats,10,5-14,0.969,0.0,mixture,2026-09-02
+United Torah Judaism,8,5-10,0.994,0.0,mixture,2026-09-02
+Shas,8,5-11,0.984,0.0,mixture,2026-09-02
+Yisrael Beytenu,8,4-13,0.957,0.0,mixture,2026-09-02
+Balad + Hadash-Ta'al,7,0-12,0.888,0.0,mixture,2026-09-02
+Otzma Yehudit,7,0-11,0.859,0.0,mixture,2026-09-02
+Religious Zionist Party,5,0-9,0.688,0.0,mixture,2026-09-02
+Ra'am,4,0-8,0.593,0.0,mixture,2026-09-02
+Amcha Yisrael,0,0-8,0.282,0.001,mixture,2026-09-02
+Zionist Home – The Reservists,0,0-5,0.122,0.0,mixture,2026-09-02
+Blue and White,0,0-0,0.031,0.0,mixture,2026-09-02
+Unity,0,0-0,0.008,0.0,mixture,2026-09-02
+Noam,0,0-0,0.0,0.0,mixture,2026-09-02
+New Economic Party,0,0-0,0.0,0.0,mixture,2026-09-02
+The Haredi Public,0,0-0,0.0,0.0,mixture,2026-09-02
+Israel First,0,0-0,0.0,0.0,mixture,2026-09-02
+A Place for All of Us,0,0-0,0.0,0.0,mixture,2026-09-02
+The Fourth Quarter,0,0-0,0.0,0.0,mixture,2026-09-02
+El HaDegel,0,0-0,0.0,0.0,mixture,2026-09-02
+Balad (alone),0,0-0,0.0,0.0,mixture,2026-09-02

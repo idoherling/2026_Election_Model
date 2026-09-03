@@ -1,17 +1,21 @@
-"""The official forecast: each instrument doing the job it validated for.
+"""The official forecast: one distribution, one point estimate from it.
 
-Four gated experiments (fine time grid, firm-reliability priors, a grading
-comparability audit, and an ensemble test) established that the simple
-final-window pipeline owns the election-eve POINT estimate (harness MAE
-1.42 vs 1.66; blend curve monotone into it at error correlation 0.93),
-while the Bayesian model owns DISTRIBUTIONS — intervals (97.3% coverage),
-threshold and bloc probabilities, the registration mixture, and live
-tracking (holdout 0.69-0.77 vs 1.09). This module assembles the published
-object accordingly:
+The published object is the registration MIXTURE (the Bayesian posterior
+projected through the measured shock stack and mixed over the open
+registration events). Intervals, pass probabilities and bloc odds are
+read off its draws. The CENTRAL seat count is the mixture's own point
+forecast: its mean vote-share vector passed once through the real seat
+law - the 3.25% threshold and Bader-Ofer with the surplus-vote pairs - so
+the table sums to 120 by construction, with no rounding, floors or
+remainder hand-outs.
 
-  central seats        simple pipeline snapshot (current configuration)
-  intervals, P(pass),
-  P(largest), blocs    Bayesian posterior + registration mixture
+History: an earlier design gave the point estimate to the simple
+final-window pipeline (better election-eve MAE on the harness, 1.42 vs
+1.66). A name mismatch meant that never actually happened, the fallback
+rounded the baseline means and reconciled to 120 by handing seats to the
+highest-pass-probability lists (UTJ at 9 with a mean of 7.9). Retired
+2026-09-03: the mixture carries information the simple pipeline never
+sees (merger backcasts, the unified-list regime, resolved events).
 
 Outputs: data/processed/official_forecast.csv (+ printed summary)
 """
@@ -22,83 +26,69 @@ import numpy as np
 import pandas as pd
 
 from scrape_polls import PROCESSED_DIR
+from simulate import SURPLUS_PAIRS, THRESHOLD, dhondt
+
+
+def allocate_central(shares: pd.DataFrame) -> dict:
+    """Seats for the mean share vector: threshold, surplus pairs, d'Hondt."""
+    names = shares["list"].tolist()
+    comps = [set(str(c).split("+")) for c in shares["components"]]
+    v = shares["share_mean"].values.astype(float)
+    passed = v >= THRESHOLD
+    comp_of = {c: i for i, cs in enumerate(comps) for c in cs}
+    pair_idx = [(comp_of[a], comp_of[b]) for a, b in SURPLUS_PAIRS
+                if a in comp_of and b in comp_of and comp_of[a] != comp_of[b]]
+    fvotes, fmembers, used = [], [], set()
+    for a, b in pair_idx:
+        if passed[a] and passed[b]:
+            fvotes.append(v[a] + v[b]); fmembers.append([a, b]); used |= {a, b}
+    for j in np.nonzero(passed)[0]:
+        if j not in used:
+            fvotes.append(v[j]); fmembers.append([int(j)])
+    seats = {n: 0 for n in names}
+    if not fvotes:
+        return seats
+    alloc = dhondt(np.array(fvotes), 120)
+    for members, k in zip(fmembers, alloc):
+        if len(members) == 1:
+            seats[names[members[0]]] = int(k)
+        else:
+            a, b = members
+            inner = dhondt(np.array([v[a], v[b]]), int(k))
+            seats[names[a]], seats[names[b]] = int(inner[0]), int(inner[1])
+    return seats
 
 
 def main() -> None:
-    simple = pd.read_csv(PROCESSED_DIR / "forecast_2026.csv")
     bayes = pd.read_csv(PROCESSED_DIR / "bayes_forecast_2026.csv")
+    mdist = pd.read_csv(PROCESSED_DIR / "bayes_forecast_mixture.csv")
+    shares = pd.read_csv(PROCESSED_DIR / "mixture_shares.csv")
     mix = pd.read_csv(PROCESSED_DIR / "mixture_blocs.csv").iloc[0]
 
-    # The MIXTURE is the published distribution: its intervals and pass
-    # probabilities (which price the registration scenarios) displace the
-    # baseline projection's wherever a list matches.
-    try:
-        mdist = pd.read_csv(PROCESSED_DIR / "bayes_forecast_mixture.csv")
-        mmap = {r.list: r for r in mdist.itertuples()}
-        for col in ("p05", "p95", "p_pass"):
-            bayes[col] = bayes.apply(
-                lambda r: getattr(mmap[r["list"]], col)
-                if r["list"] in mmap else r[col], axis=1)
-    except FileNotFoundError:
-        pass
-
-    # Match by component overlap (partitions differ slightly across models).
-    def comps(x):
-        return set(str(x).split("+"))
-
+    central = allocate_central(shares)
+    m = {r.list: r for r in mdist.itertuples()}
+    pl = dict(zip(bayes["list"], bayes["p_largest"]))
     rows = []
-    for rb in bayes.itertuples():
-        cb = comps(getattr(rb, "components", rb.list))
-        match = None
-        for rs in simple.itertuples():
-            if comps(rs.components) & cb:
-                match = rs
-                break
+    for r in mdist.itertuples():
         rows.append({
-            "list": rb.list,
-            "central_seats": (round(match.mean) if match else
-                              int(round(rb.mean))),
-            "interval_90": f"{rb.p05}-{rb.p95}",
-            "p_pass": rb.p_pass,
-            "p_largest": rb.p_largest,
-            "center_source": "simple" if match else "bayes",
+            "list": r.list,
+            "central_seats": central.get(r.list, 0),
+            "interval_90": f"{r.p05}-{r.p95}",
+            "p_pass": r.p_pass,
+            "p_largest": pl.get(r.list, 0.0),
+            "center_source": "mixture",
         })
-    out = pd.DataFrame(rows).sort_values("central_seats", ascending=False)
-
-    # Largest-remainder the centers onto exactly 120 among passing lists.
-    # A list that clears 3.25% mathematically starts at 4 seats under
-    # Bader-Ofer (3.25% of 120 ~= 3.9) - 3-seat parties are essentially
-    # impossible, so the floor binds before reconciliation.
-    passing = out["p_pass"] >= 0.5
-    out.loc[passing, "central_seats"] = out.loc[passing,
-                                                "central_seats"].clip(lower=4)
-    total = out.loc[passing, "central_seats"].sum()
-    gap = 120 - int(total)
-    if gap:
-        step = 1 if gap > 0 else -1
-        idx = out[passing].sort_values("p_pass", ascending=False).index
-        moved = 0
-        for i in list(idx):
-            if moved == abs(gap):
-                break
-            if step < 0 and out.loc[i, "central_seats"] <= 4:
-                continue  # never shave a passing list below the floor
-            out.loc[i, "central_seats"] += step
-            moved += 1
-    out.loc[~passing, "central_seats"] = 0
-
+    out = pd.DataFrame(rows).sort_values(["central_seats", "p_pass"], ascending=False)
+    assert out["central_seats"].sum() == 120, out["central_seats"].sum()
     out["asof"] = bayes["asof"].iloc[0]
     out.to_csv(PROCESSED_DIR / "official_forecast.csv", index=False)
 
     print(f"OFFICIAL FORECAST as of {out['asof'].iloc[0]} "
-          f"(centers: simple pipeline; distributions: Bayesian mixture)\n")
-    show = out[out["central_seats"] > 0]
-    for r in show.itertuples():
-        print(f"  {r.central_seats:>3}  {r.list:<32} "
-              f"[{r.interval_90}]  pass {r.p_pass:.0%}")
+          f"(centres: Bader-Ofer on the mixture's mean shares; distributions: mixture)\n")
+    for r in out[out["central_seats"] > 0].itertuples():
+        print(f"  {r.central_seats:>3}  {r.list:<32} [{r.interval_90}]  pass {r.p_pass:.0%}")
     print(f"\n  Bloc probabilities (registration mixture): "
-          f"P(NB>=61) {mix['p_nb_61']:.1%} | "
-          f"P(anti>=61) {mix['p_anti_61']:.1%} | "
+          f"P(NB>=61) {mix['p_nb_61']:.1%} | P(anti>=61) {mix['p_anti_61']:.1%} | "
           f"P(neither) {mix['p_neither']:.1%}")
 
 

@@ -655,9 +655,9 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
     the actual Israeli method — <b>Bader–Ofer</b>, d'Hondt over remainders — with signed
     surplus-vote agreements treated as joint lists at the remainder stage (worth a measured
     +0.5 to +0.9 expected seats per pair). Threshold failures redistribute their votes to
-    survivors, which is how a bloc can lose the vote and win the Knesset. The published central
-    seats additionally respect a 4-seat floor for passing lists, reconciled without shaving any
-    list below its own floor.</p>
+    survivors, which is how a bloc can lose the vote and win the Knesset. The published central seats
+    are this law applied once to the mixture's mean vote-share vector, so the table sums to 120
+    with no rounding or floors.</p>
     <div class="eq">seat<sub>k</sub> &rarr; argmax<sub>&#8467;</sub> v<sub>&#8467;</sub> / (s<sub>&#8467;</sub> + 1)&nbsp;&nbsp;&nbsp;&nbsp;<i>d’Hondt iteration, surplus pairs pooled</i></div></div>
 
   <div class="chapter"><h3>The registration mixture</h3>
@@ -725,11 +725,13 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
       <thead><tr><th>Metric (8-cycle backtest)</th><th class="num">Simple pipeline</th><th class="num">Bayesian model</th></tr></thead>
       <tbody id="valTbl"></tbody>
     </table></div>
-    <p class="note" style="margin-top:10px">The two models divide labor: the simple weighted
-    pipeline sets central seats (better point accuracy); the Bayesian model owns every interval
-    and probability (better calibration, and it wins the live 2026 holdout <span data-fit="holdout_median_err">0.73</span> vs 1.09 median
-    seats). Blending was tested and rejected — their errors correlate at 0.93, so a blend buys
-    nothing.</p></div>
+    <p class="note" style="margin-top:10px">The simple weighted pipeline is the point-accuracy
+    benchmark, not a component of the published forecast. Everything shown — the central seats,
+    the intervals, every probability — comes from one distribution, the registration mixture;
+    the central seat count is that distribution's mean vote-share vector passed once through the
+    real seat law (threshold, surplus pairs, Bader–Ofer), so the table sums to 120 by
+    construction. The Bayesian model wins the live 2026 holdout <span data-fit="holdout_median_err">0.73</span> vs 1.09 median seats.
+    Blending the two was tested and rejected — their errors correlate at 0.93.</p></div>
 
   </div>
 </div></section>
@@ -866,7 +868,7 @@ const HE_CH = [
     <p>סימולציות המפרות אחד הגבולות נחתכות אל הגבול האפשרי (כל תנאי גוזם כ־1.5% מהדגימות). תוצאה שלילית כנה מתועדת לצדם: תנודות מגזריות <em>אינן</em> עוברות בין זוגות בחירות (תנודה ארצית אחידה חוזה יישובים ב־1.20 נק׳ שגיאה; הוספת תנודות מגזר היסטוריות נותנת 1.31) — ולכן שכבת המגזרים מזינה מתאמים וקיבולת, לא תנודות נקודתיות.</p>`},
  {t:"המפלגות הקטנות", b:`<p>רשימות הנסקרות מתחת לאחוז החסימה אינן נזרקות: כל אחת נישאת כמיקרו־רשימה ונחתכת מהעוגה הממודלת לפני חלוקת המנדטים, כך שחלקי הרשימות הגדולות לעולם אינם מנופחים בשקט. התמיכה הנסקרת נמדדת מפירוטי ההערות של הסוקרים המפרסמים אחוזים מלאים — אבל המודל אינו משכפל את המספרים האלה כפי שהם. הוא <b>חוזה</b> את הקולות בפועל של כל רשימה לפי הרשומה המדודה של האופן שבו סקרים סופיים של רשימות תת־סף תורגמו לקולות אמת: כלכלה חדשה 2021 נסקרה בכ־1.2% וקיבלה 0.79% (×0.66); הבית היהודי 2022 נסקר ב־1.9% וקיבל 1.17% (×0.62); יחד 2015 כ־3.3% ← 2.97% (×0.90); זהות אפריל 2019 כ־3.0% ← 2.74% (×0.91); עוצמה ספטמבר 2019 כ־1.7% ← 1.88% (×1.11). רשימות ללא בסיס מחויב מאבדות <b>כ־30% מתמיכתן הנסקרת לעריקה אסטרטגית</b> — בוחרים בורחים מקול מבוזבז — בעוד רשימות עם גרעין מגזרי או אידאולוגי מחזיקות בשלהן. לכן כלכלה חדשה, ישראל ראשונה ומקום לכולנו נחזות ב־0.7 מסקריהן, הציבור החרדי ונעם ב־1.0, ופיזור הכיול עצמו מרחיב את אי־הוודאות של כל מיקרו־רשימה. זהות כבר אינה נישאת בנפרד כלל: מאז 2 בספטמבר הסוקרים מפרסמים עמודה אחת של הציונות הדתית–זהות, ולכן תמיכתה חיה ישירות בתוך זרם הסקרים של אותה רשימה.</p>
     <div class="eq">m<sub>j</sub> ~ N<sup>+</sup>(&mu;<sub>j</sub>, &sigma;<sub>j</sub>),&nbsp;&nbsp;v&prime; = ( v·(1−&Sigma;<sub>j</sub>m<sub>j</sub>),&nbsp;m )&nbsp;&nbsp;&nbsp;&nbsp;<i>מיקרו־רשימות נחתכות מהסימפלקס</i></div>`},
- {t:"אחוז החסימה ובדר–עופר", b:`<p>כל וקטור קולות מדומה עובר את מבחן אחוז החסימה של 3.25%, ואז המנדטים מוקצים בשיטה הישראלית האמיתית — <b>בדר–עופר</b>, ד'הונדט על עודפים — כאשר הסכמי עודפים חתומים מטופלים כרשימות משותפות בשלב העודפים (שווי מדוד של &lrm;+0.5 עד &lrm;+0.9 מנדטים לזוג). קולות רשימות שנפלו מתחלקים מחדש בין השורדות — וכך גוש יכול להפסיד בקולות ולנצח בכנסת. המנדטים המרכזיים המתפרסמים מכבדים בנוסף רצפת 4 מנדטים לרשימות עוברות, מיושבת בלי לגלח אף רשימה מתחת לרצפתה.</p>
+ {t:"אחוז החסימה ובדר–עופר", b:`<p>כל וקטור קולות מדומה עובר את מבחן אחוז החסימה של 3.25%, ואז המנדטים מוקצים בשיטה הישראלית האמיתית — <b>בדר–עופר</b>, ד'הונדט על עודפים — כאשר הסכמי עודפים חתומים מטופלים כרשימות משותפות בשלב העודפים (שווי מדוד של &lrm;+0.5 עד &lrm;+0.9 מנדטים לזוג). קולות רשימות שנפלו מתחלקים מחדש בין השורדות — וכך גוש יכול להפסיד בקולות ולנצח בכנסת. המנדטים המרכזיים המתפרסמים הם החוק הזה מיושם פעם אחת על וקטור נתחי־הקולות הממוצע של התערובת, ולכן הטבלה מסתכמת ב־120 ללא עיגול או רצפות.</p>
     <div class="eq">seat<sub>k</sub> &rarr; argmax<sub>&#8467;</sub> v<sub>&#8467;</sub> / (s<sub>&#8467;</sub> + 1)&nbsp;&nbsp;&nbsp;&nbsp;<i>איטרציית ד'הונדט, זוגות עודפים מאוחדים</i></div>`},
  {t:"תערובת אירועי ההרשמה", b:`<p>עד סגירת הרשימות ב־9 בספטמבר, התחזית דוגמת <b>אירועי הרשמה בכל סימולציה</b>: קיפולי המיקרו־רשימות במרכז וזנב האיחוד ארדן–גנץ, כל אחד עם וקטורי העברה ממוסמכים. שלושה אירועים כבר הוכרעו והם ודאויות בכל דגימה: הצטרפות סגלוביץ׳ לרע״ם (1 בספטמבר), הגוש הטכני סמוטריץ׳–פייגלין (2 בספטמבר), והישארות בל״ד ברשימה המשותפת. עדיין פתוחים: הגשת איחוד מרכז (0.12), והחלטות הקיפול של הבית הציוני–המילואימניקים (0.45), כחול לבן (0.58) והאחדות (0.75). התחזית המתפרסמת היא התערובת; ההשפעה השולית של כל אירוע נקראת מאותן דגימות. ביום ההגשה התערובת קורסת אל התצורה האמיתית והמודל מותאם מחדש.</p>
     <div class="eq">P(seats) = &Sigma;<sub>e</sub> P(e) · P(seats | e)&nbsp;&nbsp;&nbsp;&nbsp;<i>תערובת על אירועי הרשמה e</i></div>`},
@@ -881,7 +883,7 @@ const HE_CH = [
       <thead><tr><th>מדד (מבחן־עבר, 8 מחזורים)</th><th class="num">הצינור הפשוט</th><th class="num">המודל הבייסיאני</th></tr></thead>
       <tbody id="valTbl"></tbody>
     </table></div>
-    <p class="note" style="margin-top:10px">שני המודלים מחלקים ביניהם את העבודה: הצינור המשוקלל הפשוט קובע את המנדטים המרכזיים (דיוק נקודתי טוב יותר); המודל הבייסיאני מחזיק בכל רווח והסתברות (כיול טוב יותר, והוא מנצח במבחן החי של 2026: <span data-fit="holdout_median_err">0.73</span> מול 1.09 מנדטים חציוניים). מיזוג נבחן ונדחה — השגיאות מתואמות ב־0.93, ולכן מיזוג אינו קונה דבר.</p>`}];
+    <p class="note" style="margin-top:10px">הצינור המשוקלל הפשוט הוא מדד־ייחוס לדיוק הנקודתי, לא רכיב בתחזית המתפרסמת. כל מה שמוצג — המנדטים המרכזיים, הרווחים, כל הסתברות — מגיע מהתפלגות אחת, תערובת ההרשמה; ספירת המנדטים המרכזית היא וקטור נתחי־הקולות הממוצע של אותה התפלגות המועבר פעם אחת דרך חוק המנדטים האמיתי (אחוז חסימה, הסכמי עודפים, בדר–עופר), ולכן הטבלה מסתכמת ב־120 מעצם הבנייה. המודל הבייסיאני מנצח במבחן החי של 2026: <span data-fit="holdout_median_err">0.73</span> מול 1.09 מנדטים חציוניים. מיזוג השניים נבחן ונדחה — השגיאות מתואמות ב־0.93.</p>`}];
 
 function trStatic(){
   if (!HEB_MODE) return;
@@ -1596,9 +1598,9 @@ renderBlocHist("anti");
   const v = D.val;
   const VL = HEB_MODE
    ? ["שגיאת מנדטים מוחלטת ממוצעת לרשימה","כיסוי רווחי 90% (יעד 90%)","ציון ברייר לאחוז החסימה",
-      "מבחן חי 2026 (14 יום, שגיאה חציונית)","תפקיד בתחזית המתפרסמת","מנדטים מרכזיים","רווחים והסתברויות"]
+      "מבחן חי 2026 (14 יום, שגיאה חציונית)","תפקיד בתחזית המתפרסמת","מדד־ייחוס לדיוק נקודתי","התחזית המתפרסמת"]
    : ["Mean absolute seat error per list","90% interval coverage (target 90%)","Threshold Brier score",
-      "Live 2026 holdout (14-day, median |error|)","Role in the published forecast","central seats","intervals &amp; probabilities"];
+      "Live 2026 holdout (14-day, median |error|)","Role in the published forecast","point-accuracy benchmark","the published forecast"];
   $("#valTbl").innerHTML = `
    <tr><td>${VL[0]}</td><td class="mono">${v.simple.mae}</td><td class="mono">${v.bayes.mae}</td></tr>
    <tr><td>${VL[1]}</td><td class="mono">${v.simple.cov}%</td><td class="mono">${v.bayes.cov}%</td></tr>
