@@ -92,7 +92,7 @@ NEW_LIST_IDS = {"yashar", "amcha_yisrael", "zionist_home", "unity"}
 # - Together is the softest major list (47% of its voters locked per the
 #   JPPI/Midgam certainty series; ten consecutive weekly seat losses to
 #   Yashar) -> widen its residual shock.
-SOFT_LIST_MULT = {"bennett_2026": 1.25}
+SOFT_LIST_MULT = {}   # retired 2026-09-03: the certainty layer carries soft-list risk
 # - Within-bloc churn in the change bloc measures ~3x the Netanyahu
 #   bloc's (Midgam Jul 27: 4.0% vs 1.3% of the electorate wavering
 #   within-bloc). Zero-sum exchanges keep the bloc total stable while
@@ -172,13 +172,65 @@ KALPI_HAREDI_FLOOR = 0.066  # joint Shas+UTJ share floor
 # undecided dynamics live in the arab family shock/turnout dial).
 # Harness-inactive by construction (inputs are 2026 measurements);
 # revisit after Sept 9 - JPPI shows the pool shrinking ~2pp/month.
-U_POOL = 0.12
+U_POOL = 0.12          # comparable CEC filings cluster at 10-16% (Lazar 12-16,
+                       # Midgam Project/StatNet 12.3, Maagar 10); Kantar's
+                       # 24-41% includes non-voters and is a different question
 U_TURNOUT = 0.65
 U_EXCESS_ANTI = 0.35
 U_NET_DISCOUNT = 0.5
 UNDECIDED_BREAK_SEATS = (U_POOL * U_TURNOUT * U_EXCESS_ANTI
-                         * 120 * U_NET_DISCOUNT)   # ~1.6 seats
-UNDECIDED_BREAK_SD = UNDECIDED_BREAK_SEATS
+                         * 120 * U_NET_DISCOUNT)   # ~1.6 seats, mean of the lean piece
+# The N12 55/16 lean rests on ~60 respondents: carried as Beta(46.5, 13.5)
+# on the anti share of the leaned pool (mean 0.775), against the ~0.52
+# proportional baseline, times a LogNormal magnitude term for the turnout
+# haircut and discount that the point estimate hides.
+U_LEAN_BETA = (46.5, 13.5)
+U_LEAN_BASE = 0.775
+U_PROP_ANTI = 0.52
+U_MAG_SDLOG = 0.5
+
+# ---- Certainty layer (2026-09-03, improvement #1 of the Fable audit) ----
+# Share of each list's current supporters who say they are certain to
+# vote for it. Two entries are MEASURED (M) from the JPPI/Midgam certainty
+# series and the N12 Winter panel; the rest are DECLARED tiers (J): sect-
+# based veterans whose D-60 error record is tiny (Shas/UTJ have never
+# missed downward by more than half a seat; see LOYAL_SD) sit high; new
+# leader-vehicles and threshold-straddling centre micro-lists sit low.
+# To be replaced list by list as certainty waves are published post
+# Sept 9. Harness-inactive (inputs are 2026 measurements).
+CERTAINTY = {
+    "bennett_2026": 0.47,    # M  JPPI/Midgam: 47% locked, Aug 2026
+    "yesh_atid": 0.47,       # M  (component of the same list)
+    "amcha_yisrael": 0.38,   # M  Midgam/N12: 38% locked, 40% unattached
+    "shas": 0.88, "utj": 0.90,                     # J  captive electorates
+    "yisrael_beytenu": 0.80,                       # J  measured sd 1.7 class
+    "balad": 0.75, "hadash_taal": 0.75, "raam": 0.70,  # J  turnout, not switching
+    "likud": 0.78,           # J  N12 Likudnikim panel: high loyalty, some drift
+    "otzma": 0.72, "rzp": 0.68, "zehut": 0.68,     # J  merged/right-flank lists
+    "yashar": 0.65, "democrats": 0.70,             # J  new leader vehicle / merged left
+    "zionist_home": 0.40, "blue_white": 0.40, "unity": 0.40,  # J  threshold-straddlers
+}
+CERTAINTY_DEFAULT = 0.50
+# Soft supporters (1 - certainty) defect at rate d by election day:
+# d ~ Beta(mean 0.25, sd 0.12), JUDGMENT anchored on INES panel switching
+# (roughly a quarter to a third of Israeli voters change intention across
+# a campaign, concentrated among the uncertain), with a per-list
+# idiosyncratic LogNormal(0, 0.35) multiplier so soft lists carry
+# asymmetric downside rather than a uniform haircut.
+CHURN_D_MEAN, CHURN_D_SD = 0.25, 0.12
+CHURN_LIST_SDLOG = 0.35
+# Where churn goes. MEASURED: the change bloc's within-bloc wavering is
+# ~3x the Netanyahu bloc's (Midgam Jul 27: 4.0% vs 1.3% of the
+# electorate) - that asymmetry enters through CERTAINTY. The split of
+# movers is DECLARED (J), anchored on the historical record that bloc
+# error is smaller than the sum of its parts (movement is mostly within
+# bloc): 0.75 within / 0.10 cross / 0.15 abstain. Arab-family churn
+# stays in-family (different instrument).
+CHURN_WITHIN, CHURN_CROSS, CHURN_ABSTAIN = 0.75, 0.10, 0.15
+# Inflow (churn and undecideds) lands in proportion to certainty-weighted
+# support: firm lists attract, soft lists do not.
+AMCHA_FADE_TOTAL = 1.5   # the reference-class mean; the certainty layer's
+                         # expected Amcha loss counts toward it (no double shift)
 
 # ---- Campaign volatility calendar (2026-09-01, improvement #4) --------
 # Measured from the own DB (7 cycles, RMS weekly movement of party
@@ -561,6 +613,52 @@ def posterior_predictive_check(data, idata):
           f"95% predictive band")
 
 
+def _certainty_layer(shares, comps, blocs, fams, rng):
+    """Soft-support churn + certainty-weighted allocation of the undecided
+    pool. Operates on the share matrix (draws x lists); returns it
+    renormalised. See the CERTAINTY block for sources."""
+    n, k = shares.shape
+    cert = np.array([np.mean([CERTAINTY.get(c, CERTAINTY_DEFAULT) for c in cs])
+                     for cs in comps])
+    is_nb = blocs == "netanyahu_bloc"
+    is_op = blocs == "opposition_bloc"
+    is_arab = fams == "arab"
+    # defection rate: common Beta draw x per-list LogNormal idiosyncrasy
+    m = CHURN_D_MEAN
+    v = CHURN_D_SD ** 2
+    kk = m * (1 - m) / v - 1
+    d = rng.beta(m * kk, (1 - m) * kk, size=(n, 1))
+    d = np.clip(d * np.exp(rng.normal(0, CHURN_LIST_SDLOG, size=(n, k))), 0, 0.8)
+    churn = shares * (1 - cert)[None, :] * d
+    out = shares - churn
+    attract = shares * cert[None, :]
+    def spread(mass, mask):
+        w = np.where(mask[None, :], attract, 0.0)
+        tot = w.sum(axis=1, keepdims=True)
+        return np.where(tot > 0, w / np.maximum(tot, 1e-12), 0.0) * mass[:, None]
+    for own, other in ((is_nb, is_op), (is_op, is_nb)):
+        if not own.any():
+            continue
+        pool = churn[:, own].sum(axis=1)
+        out += spread(pool * CHURN_WITHIN, own)
+        if other.any():
+            out += spread(pool * CHURN_CROSS, other)
+        # the abstaining fifth simply leaves the pie
+    if is_arab.any():
+        pool = churn[:, is_arab].sum(axis=1)
+        out += spread(pool * (1 - CHURN_ABSTAIN), is_arab)
+    # undecided pool: N12 lean with its own sampling uncertainty (n~60)
+    if is_nb.any() and is_op.any():
+        f_anti = rng.beta(*U_LEAN_BETA, size=n)
+        mag = np.exp(rng.normal(0, U_MAG_SDLOG, size=n))
+        excess = (f_anti - U_PROP_ANTI) / (U_LEAN_BASE - U_PROP_ANTI)
+        ub = UNDECIDED_BREAK_SEATS / 120.0 * excess * mag
+        out += spread(np.maximum(ub, 0), is_op) - spread(np.maximum(ub, 0), is_nb)
+        out += spread(np.maximum(-ub, 0), is_nb) - spread(np.maximum(-ub, 0), is_op)
+    out = np.clip(out, 0, None)
+    return out / out.sum(axis=1, keepdims=True)
+
+
 def project(data, idata, rng, config="current", config_params=None):
     """Election-day seat draws: RW forward + industry shocks + micro-lists.
 
@@ -685,15 +783,9 @@ def project(data, idata, rng, config="current", config_params=None):
     w_nb, w_op = np.where(is_nb, base, 0), np.where(~is_nb, base, 0)
     shares = shares + swing[:, None] * (w_nb / w_nb.sum() - w_op / w_op.sum())
 
-    # Measured undecided break (see UNDECIDED_BREAK_SEATS note): shifts
-    # opposition_bloc vs netanyahu_bloc only - Arab lists excluded.
-    is_op = blocs == "opposition_bloc"
-    if is_op.any() and is_nb.any():
-        ub = (UNDECIDED_BREAK_SEATS
-              + rng.standard_normal(N_PROJ) * UNDECIDED_BREAK_SD) / 120.0
-        w_o2 = np.where(is_op, base, 0)
-        shares = shares + ub[:, None] * (w_o2 / w_o2.sum()
-                                         - w_nb / w_nb.sum())
+    # Certainty layer: soft support churns (asymmetric, list-specific),
+    # churn and the undecided pool land by certainty-weighted attraction.
+    shares = _certainty_layer(shares, comps, blocs, fams, rng)
     # Family shocks with kalpi-measured correlation: the haredi and Arab
     # sector tides correlated +0.92 across the 2019-2022 locality panel
     # (both are turnout-machine sectors) - shrunk hard to rho=0.5 for
@@ -754,7 +846,10 @@ def project(data, idata, rng, config="current", config_params=None):
     am = next((i for i, cs in enumerate(comps) if cs == {"amcha_yisrael"}),
               None)
     if am is not None:
-        f = AMCHA_FADE / 120.0
+        c_am = CERTAINTY["amcha_yisrael"]
+        exp_loss = (1 - c_am) * CHURN_D_MEAN * (1 - CHURN_WITHIN) \
+            * float(base[am]) * 120          # seats already removed above
+        f = max(AMCHA_FADE_TOTAL - exp_loss, 0.0) / 120.0
         shares[:, am] -= f
         lk = _c("likud")
         for pid, w in AMCHA_FADE_TO.items():

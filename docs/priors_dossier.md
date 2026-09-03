@@ -374,3 +374,39 @@ parliamentary base). CEC keyword added. The sector totals (64% of the
 sector to Arab-led lists, 10% crossover to Zionist lists) sit inside
 the KALPI_ARAB_CAP arithmetic; the JL 38% reading is consistent with
 the Sept 2 national wave's JL 7-9 seats. No non-micro parameter moved.
+
+## 18. Certainty layer (2026-09-03): soft support and the undecided pool
+
+Replaces the flat undecided break (one ~1.6-seat anti-ward shift) and
+Together's ad-hoc noise multiplier with a list-specific layer applied at
+projection (bayes_model._certainty_layer).
+
+Inputs and their status:
+- CERTAINTY (locked share of each list's supporters). MEASURED: Together
+  0.47 (JPPI/Midgam certainty series, Aug 2026), Amcha 0.38 (Midgam/N12
+  Winter panel). DECLARED tiers for the rest: Shas 0.88 / UTJ 0.90 (never
+  missed a final poll downward by more than half a seat), YB 0.80, Likud
+  0.78, Arab lists 0.70-0.75 (turnout, not switching), Otzma 0.72,
+  RZP-Zehut 0.68, Democrats 0.70, Yashar 0.65, ZH/B&W/Unity 0.40. To be
+  replaced list by list as post-Sept-9 certainty waves publish.
+- Defection rate of soft supporters d ~ Beta(mean 0.25, sd 0.12) per
+  simulation, times a LogNormal(0, 0.35) per-list factor. JUDGMENT,
+  anchored on INES panel switching (a quarter to a third of voters change
+  intention across a campaign, concentrated among the uncertain).
+- Destination split 0.75 within bloc / 0.10 cross / 0.15 abstain.
+  DECLARED, anchored on the historical record that bloc error is smaller
+  than the sum of its parts. The MEASURED asymmetry (change-bloc within-
+  bloc wavering 3x the NB bloc's, Midgam Jul 27) enters through CERTAINTY,
+  not through this split. Inflow lands by certainty-weighted support.
+- Undecided pool 12% (comparable CEC filings cluster at 10-16%; Kantar's
+  24-41% is a different question), GIQ 0.65 turnout haircut, N12 55/16
+  lean now carried as Beta(46.5, 13.5) on the anti share of the leaned
+  pool (n~60) x LogNormal(0, 0.5) magnitude; half weight retained.
+- Amcha: the layer's expected loss counts toward the reference-class fade
+  (AMCHA_FADE_TOTAL 1.5), so the mean shift is not doubled.
+
+Effect vs the prior projection (same posterior): Together 12.1 -> 11.2,
+Amcha 2.3 -> 1.8, ZH 1.5 -> 1.2; YB 7.7 -> 8.5, Democrats 9.4 -> 9.8,
+UTJ/Shas +0.3. Baseline NB mean 53.1 -> 54.0 (the anti bloc's soft base
+is larger, so symmetric cross/abstain rates move net mass); P(NB>=61)
+20.4 -> 18.8, P(anti>=61) 31.2 -> 29.8. Harness-inactive by construction.
