@@ -37,6 +37,10 @@ warnings.filterwarnings("ignore")
 
 N_PROJ = 4000
 WIDTH_GRID = [0.6, 0.7, 0.8, 0.9, 1.0, 1.1]
+ABLATIONS = [("full", {}), ("no_resid", {"resid": False}), ("no_swing", {"swing": False}),
+             ("no_family", {"family": False}), ("no_anchors", {"anchors": False}),
+             ("no_gevalt", {"gevalt": False}), ("no_loyal", {"loyal": False}),
+             ("latent_only", {k: False for k in ["resid", "swing", "family", "anchors", "gevalt", "loyal"]})]
 
 # Era-specific alliance identities: which composite each historical id was.
 # Applied component-wise before block-building, so pre-merger component
@@ -79,8 +83,14 @@ def apply_decomp(polls: pd.DataFrame, cycle: str) -> pd.DataFrame:
     return polls
 
 
+ALL_LAYERS = {"resid": True, "swing": True, "family": True, "anchors": True,
+              "gevalt": True, "loyal": True}
+
+
 def project_cycle(data, idata, eday, threshold, pairs, params,
-                  bloc_overrides, rng, resid_scale=1.0):
+                  bloc_overrides, rng, resid_scale=1.0, layers=None,
+                  weeks_override=None):
+    L = dict(ALL_LAYERS, **(layers or {}))
     swing_sd, shocks = params["bloc_sd"], params["family"]
     reg = load_party_registry()
     bloc_map = dict(zip(reg["party_id"], reg["bloc"]))
@@ -92,6 +102,8 @@ def project_cycle(data, idata, eday, threshold, pairs, params,
     take = rng.choice(len(z_last), N_PROJ, replace=True)
     z_last, tau = z_last[take], tau[take]
     weeks = max((eday - data["asof"]).days, 0) / 7.0
+    if weeks_override is not None:
+        weeks = float(weeks_override)
     z_e = z_last + np.sqrt(weeks) * tau * rng.standard_normal(z_last.shape)
     z_f = np.concatenate([z_e, np.zeros((N_PROJ, 1))], axis=1)
     shares = np.exp(z_f - z_f.max(axis=1, keepdims=True))
@@ -104,9 +116,10 @@ def project_cycle(data, idata, eday, threshold, pairs, params,
     base0 = shares.mean(axis=0)
     sd_list = (params["resid_base"]
                + params["resid_slope"] * base0 * 120) / 120.0 * resid_scale
-    shares = np.clip(
-        shares + rng.standard_normal(shares.shape) * sd_list, 0, None)
-    shares /= shares.sum(axis=1, keepdims=True)
+    if L["resid"]:
+        shares = np.clip(
+            shares + rng.standard_normal(shares.shape) * sd_list, 0, None)
+        shares /= shares.sum(axis=1, keepdims=True)
 
     comps = [set(c.split("+")) for c in data["components"]]
     blocs = np.array([
@@ -118,7 +131,7 @@ def project_cycle(data, idata, eday, threshold, pairs, params,
 
     base = shares.mean(axis=0)
     is_nb = blocs == "netanyahu_bloc"
-    if is_nb.any() and (~is_nb).any():
+    if L["swing"] and is_nb.any() and (~is_nb).any():
         sw = rng.standard_t(T_DF, N_PROJ) * swing_sd / 120.0
         w_nb, w_op = np.where(is_nb, base, 0), np.where(~is_nb, base, 0)
         shares = shares + sw[:, None] * (w_nb / w_nb.sum() - w_op / w_op.sum())
@@ -132,6 +145,8 @@ def project_cycle(data, idata, eday, threshold, pairs, params,
                                  size=N_PROJ) if fam_names else np.zeros((N_PROJ, 0))
     mixer = np.sqrt(rng.chisquare(T_DF, N_PROJ) / T_DF)
     for k, f in enumerate(fam_names):
+        if not L["family"]:
+            break
         mu_f, sd_f = shocks[f]
         in_f = fams == f
         sk = (-mu_f + (zf[:, k] / mixer) * sd_f) / 120.0
@@ -142,7 +157,7 @@ def project_cycle(data, idata, eday, threshold, pairs, params,
     lk = next((i for i, cp in enumerate(comps) if "likud" in cp), None)
     sat = np.array([(blocs[i] == "netanyahu_bloc") and (fams[i] != "haredi") and i != lk
                     for i in range(len(comps))])
-    if lk is not None and sat.any():
+    if L["gevalt"] and lk is not None and sat.any():
         g = rng.standard_normal(N_PROJ) * GEVALT_SD / 120.0
         w_s = np.where(sat, base, 0)
         shares[:, lk] += g
@@ -154,7 +169,7 @@ def project_cycle(data, idata, eday, threshold, pairs, params,
     leader_col = non_likud[int(np.argmax(base[non_likud]))] if non_likud else None
     for col, mu in ((likud_col, params["anchors"]["likud"]),
                     (leader_col, params["anchors"]["leader"])):
-        if col is None:
+        if col is None or not L["anchors"]:
             continue
         onehot = np.zeros(len(comps))
         onehot[col] = 1.0
@@ -164,7 +179,7 @@ def project_cycle(data, idata, eday, threshold, pairs, params,
     # Loyal-electorate calibration, mirrored from bayes_model.LOYAL_SD:
     # standalone captive-base lists are shrunk to their measured total sd.
     from bayes_model import LOYAL_SD
-    for pid, tgt in LOYAL_SD.items():
+    for pid, tgt in (LOYAL_SD.items() if L["loyal"] else []):
         want = set(pid.split("+"))
         col = next((i for i, cs in enumerate(comps) if cs == want), None)
         if col is None:
@@ -215,7 +230,7 @@ def main() -> None:
     results = pd.read_csv(PROCESSED_DIR / "results.csv")
     rng = np.random.default_rng(SEED)
 
-    rows, covered_all, list_rows, width_rows = [], [], [], []
+    rows, covered_all, list_rows, width_rows, abl_rows = [], [], [], [], []
     for cycle in ORDER:
         eday = pd.Timestamp(ELECTION_DAY[cycle])
         asof = eday - pd.Timedelta(days=1)
@@ -246,6 +261,22 @@ def main() -> None:
                 actual[hit.pop()] += r.seats
             else:
                 unmatched += r.seats
+
+        # Layer ablation (accuracy round 3, #1): which projection layers
+        # help or hurt point accuracy on the graded record.
+        for tag, flags in ABLATIONS:
+            sa, _, ba, _ = project_cycle(
+                data, idata, eday, CYCLE_THRESHOLD.get(cycle, THRESHOLD),
+                PAST_PAIRS[cycle], params, VAL_BLOC_OVERRIDES.get(cycle),
+                np.random.default_rng(SEED + 11), layers=flags)
+            act_a = (ba >= 0.005) | (actual > 0)
+            lo_a, hi_a = np.percentile(sa, 5, axis=0), np.percentile(sa, 95, axis=0)
+            ppa = (sa >= 1).mean(axis=0)
+            abl_rows.append({"cycle": cycle, "ablation": tag,
+                             "seat_mae": float(np.abs(sa.mean(axis=0) - actual)[act_a].mean()),
+                             "seat_mae_median": float(np.abs(np.median(sa, axis=0) - actual)[act_a].mean()),
+                             "coverage_90": float(((actual >= lo_a) & (actual <= hi_a))[act_a].mean()),
+                             "threshold_brier": float(np.mean((ppa[act_a] - (actual[act_a] > 0)) ** 2))})
 
         # Interval-width calibration curve (audit improvement #2): the same
         # posterior re-projected under a grid of residual-width factors.
@@ -329,6 +360,13 @@ def main() -> None:
               f"simple {both['brier_simple'].mean():.3f}")
     except FileNotFoundError:
         pass
+    if abl_rows:
+        adf = pd.DataFrame(abl_rows)
+        adf.to_csv(PROCESSED_DIR / "model_validation_ablation.csv", index=False)
+        print("\nLayer ablation (pooled over cycles):")
+        print(adf.groupby("ablation").agg(mae=("seat_mae", "mean"), mae_med=("seat_mae_median", "mean"),
+                                          coverage=("coverage_90", "mean"), brier=("threshold_brier", "mean"))
+              .loc[[t for t, _ in ABLATIONS]].round(3).to_string())
     if width_rows:
         wdf = pd.DataFrame(width_rows)
         wdf.to_csv(PROCESSED_DIR / "model_validation_width.csv", index=False)
