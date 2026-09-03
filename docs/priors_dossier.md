@@ -711,3 +711,38 @@ the grid (0.95-0.98), so the over-width the harness has always shown is
 NOT in the residual shock but in the other layers (bloc swing, sector
 shocks, loyal-sd caps). The next calibration target is a joint scale on
 those, gated the same way.
+
+## 28. Accuracy round three: layer ablation and the horizon harness (2026-09-03)
+
+**Layer ablation** (validate_bayes, eight cycles, pooled; MAE of the mean
+/ of the median; coverage; Brier): full 1.665 / 1.574 / 0.983 / 0.060;
+no residual 1.859 / 1.845 / 0.823 / 0.068; no bloc swing 1.664 / 1.591;
+no family shocks 1.722 / 1.616; NO ANCHORS 1.589 / 1.541 / 0.972 /
+0.058; no gevalt 1.662 / 1.586 / 0.972; no loyal-sd 1.664 / 1.575;
+latent only 1.734 / 1.590 / 0.561 / 0.071.
+Reading: the residual and the family shocks earn their place; swing,
+gevalt and loyal-sd are neutral on points as they should be; the ANCHORS
+HURT - 0.08 seats per list, and worse Brier and coverage. Structurally
+expected: the Likud beat is +8.4 and +6.7 in two cycles and ~0 in six, so
+a mean applied to every cycle is wrong six times in eight. The median is
+a better point estimate than the mean by ~0.09 in every configuration.
+Finer run (Likud-only, leader-only, half strength) in progress; decision
+in s.28a.
+
+**Horizon harness** (validate_horizon, each cycle refit as of D-56 and
+D-21, projected with plain vs calendar-effective forward weeks):
+D-21 calendar MAE 1.90 / coverage 96.5% / width 7.7 / interval score
+9.78 (plain 10.11); D-56 calendar 2.79 / 90.1% / 9.5 / 17.94 (plain
+92.0% / 9.7 / 17.63). Per cycle at D-56: 2013 and 2021 under-cover
+(0.67-0.78, 0.81-0.86), the rest at or above 0.90.
+Reading: (1) the published intervals at the current horizon are
+calibrated - coverage 90% at D-56; the 98% over-coverage is an
+election-eve artefact where the forward variance has gone to zero and
+the shock stack alone over-covers. So the stack is somewhat too wide AND
+the forward variance somewhat too small, netting out at D-56. The right
+fix is a joint (stack scale, forward-variance scale) calibrated on both
+horizons; the harness now caches posteriors so that grid costs no
+refits. (2) The volatility calendar helps at D-21 (interval score 9.78
+vs 10.11) and is neutral at D-56; retained. (3) Point error roughly
+doubles from election eve to D-56 (1.66 -> 2.79), which is the honest
+scale of what eight weeks of campaign can do.

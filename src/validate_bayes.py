@@ -40,7 +40,9 @@ WIDTH_GRID = [0.6, 0.7, 0.8, 0.9, 1.0, 1.1]
 ABLATIONS = [("full", {}), ("no_resid", {"resid": False}), ("no_swing", {"swing": False}),
              ("no_family", {"family": False}), ("no_anchors", {"anchors": False}),
              ("no_gevalt", {"gevalt": False}), ("no_loyal", {"loyal": False}),
-             ("latent_only", {k: False for k in ["resid", "swing", "family", "anchors", "gevalt", "loyal"]})]
+             ("latent_only", {k: False for k in ["resid", "swing", "family", "anchors", "gevalt", "loyal"]}),
+             ("no_likud_anchor", {"anchor_likud": False}), ("no_leader_anchor", {"anchor_leader": False}),
+             ("half_anchors", {"anchor_scale": 0.5})]
 
 # Era-specific alliance identities: which composite each historical id was.
 # Applied component-wise before block-building, so pre-merger component
@@ -84,7 +86,9 @@ def apply_decomp(polls: pd.DataFrame, cycle: str) -> pd.DataFrame:
 
 
 ALL_LAYERS = {"resid": True, "swing": True, "family": True, "anchors": True,
-              "gevalt": True, "loyal": True}
+              "gevalt": True, "loyal": True,
+              "anchor_likud": True, "anchor_leader": True, "anchor_scale": 1.0,
+              "shock_scale": 1.0}
 
 
 def project_cycle(data, idata, eday, threshold, pairs, params,
@@ -132,7 +136,7 @@ def project_cycle(data, idata, eday, threshold, pairs, params,
     base = shares.mean(axis=0)
     is_nb = blocs == "netanyahu_bloc"
     if L["swing"] and is_nb.any() and (~is_nb).any():
-        sw = rng.standard_t(T_DF, N_PROJ) * swing_sd / 120.0
+        sw = rng.standard_t(T_DF, N_PROJ) * swing_sd * L["shock_scale"] / 120.0
         w_nb, w_op = np.where(is_nb, base, 0), np.where(~is_nb, base, 0)
         shares = shares + sw[:, None] * (w_nb / w_nb.sum() - w_op / w_op.sum())
     # Family shocks with the kalpi-measured haredi<->arab correlation,
@@ -149,7 +153,7 @@ def project_cycle(data, idata, eday, threshold, pairs, params,
             break
         mu_f, sd_f = shocks[f]
         in_f = fams == f
-        sk = (-mu_f + (zf[:, k] / mixer) * sd_f) / 120.0
+        sk = (-mu_f + (zf[:, k] / mixer) * sd_f * L["shock_scale"]) / 120.0
         w_f, w_r = np.where(in_f, base, 0), np.where(~in_f, base, 0)
         shares = shares + sk[:, None] * (w_f / w_f.sum() - w_r / w_r.sum())
     # Gevalt coupling, mirrored: zero-sum Likud <-> its bloc's non-haredi
@@ -167,10 +171,11 @@ def project_cycle(data, idata, eday, threshold, pairs, params,
     likud_col = next((i for i, cp in enumerate(comps) if "likud" in cp), None)
     non_likud = [i for i in range(len(comps)) if i != likud_col]
     leader_col = non_likud[int(np.argmax(base[non_likud]))] if non_likud else None
-    for col, mu in ((likud_col, params["anchors"]["likud"]),
-                    (leader_col, params["anchors"]["leader"])):
-        if col is None or not L["anchors"]:
+    for col, mu, on in ((likud_col, params["anchors"]["likud"], L["anchor_likud"]),
+                        (leader_col, params["anchors"]["leader"], L["anchor_leader"])):
+        if col is None or not L["anchors"] or not on:
             continue
+        mu = mu * L["anchor_scale"]
         onehot = np.zeros(len(comps))
         onehot[col] = 1.0
         w_r = np.where(onehot == 0, base, 0)
@@ -241,7 +246,14 @@ def main() -> None:
             print(f"[{cycle}] {data['n_polls']} polls, "
                   f"{len(data['latent_blocks'])} lists, "
                   f"{data['n_weeks']} weeks — fitting...")
-            _, idata = fit(data, draws=600, tune=600)
+            import arviz as az
+            cache = PROCESSED_DIR / "harness_cache"; cache.mkdir(exist_ok=True)
+            nc = cache / f"{cycle}_eve.nc"
+            if nc.exists():
+                idata = az.from_netcdf(nc)
+            else:
+                _, idata = fit(data, draws=600, tune=600)
+                az.to_netcdf(idata, nc)
             div = int(idata.sample_stats["diverging"].sum())
             params = decompose(exclude_cycle=cycle)
             seats, blocs, base, comp_of = project_cycle(
