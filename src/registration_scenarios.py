@@ -120,16 +120,14 @@ FOLD_TRANSFER = {
 # Set on filing day to collapse the mixture, e.g.
 # RESOLVED = {"balad_splits": False, "rzp_fate": "merge_otzma", ...}
 # 2026-09-01: Segalovitz-Ra'am deal announced as OFFICIAL — the event is
-# resolved True. The +0.4-seat scenario boost stays for now because the
-# poll stream predates the announcement; ZERO IT at the Sept 9 refit,
-# when post-announcement polls price the joint slate directly (keeping
-# both would double-count).
+# resolved True. 2026-09-03: the +0.4 scenario boost ZEROED — the Sept 2
+# poll wave prices the joint slate directly (see apply function).
 # 2026-09-02: Smotrich-Feiglin (RZP-Zehut) technical bloc announced
-# OFFICIAL — rzp_fate resolves to merge_zehut: RZP absorbs Zehut's
-# share at MERGE_RETENTION and the combined list faces the 3.25%
-# threshold on its own in every draw. Post-announcement polls of the
-# joint list will absorb this directly; at that point the retention
-# transfer should be retired the same way as the Segalovitz boost.
+# OFFICIAL — rzp_fate resolved to merge_zehut. 2026-09-03: the
+# MERGE_RETENTION transfer is RETIRED — pollsters now publish a single
+# "RZP - Zehut" column (Sept 2 wave, 5-6 seats), so the zehut micro-list
+# was removed from MICRO_POLLED in bayes_model and the merge branch
+# no-ops (no zehut component exists to transfer).
 # 2026-09-02 (owner): Balad staying in the Joint List is to be treated
 # as certain — balad_splits resolved False.
 RESOLVED: dict = {"segalovitz_joins_raam": True,
@@ -162,7 +160,11 @@ def apply_registration_events(shares, comps, labels, blocs, fams, rng,
     # Segalovitz joins Ra'am's slate: Ra'am gains his crossover voters,
     # carved proportionally from the centre bloc. No new list is created.
     seg_on = bern("segalovitz_joins_raam")
-    boost = cp.get("segalovitz_boost_seats", 1.3) / 120.0
+    # 2026-09-03: boost RETIRED (set to 0). Four post-announcement polls
+    # (fieldwork Sept 2: Lazar, Direct Polls, Maagar, Midgam Project) price
+    # the joint Ra'am-Segalovitz slate directly at 4-5 seats; keeping the
+    # scenario boost on top would count his voters twice.
+    boost = 0.0
     raam = _col(comps, "raam")
     centre = blocs == "opposition_bloc"
     w = np.where(centre, shares.mean(axis=0), 0.0)

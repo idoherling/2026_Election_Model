@@ -332,3 +332,20 @@ list, so wasted-vote flight does not apply). The ratio dispersion
 quadrature). Sources: CEC official results; Wikipedia results pages;
 JPost/ToI final-poll coverage. Revisit at the Sept 9 refit alongside the
 Zehut carve retirement.
+
+## 16. Sept 2 poll wave: tripwires fired (2026-09-03)
+
+Four polls with Sept 2 fieldwork (Lazar, Direct Polls, Maagar Mochot,
+Midgam Project) are the first to price the resolved registration events
+directly, so two pre-registered retirements fired:
+
+1. **Segalovitz boost zeroed.** The polls carry the joint Ra'am slate
+   (4-5 seats incl. Segalovitz); the +0.4-seat scenario boost on top
+   would count his voters twice.
+2. **Zehut carve + MERGE_RETENTION transfer retired.** The pollsters now
+   publish a single "RZP - Zehut" column (5-6 seats); zehut was removed
+   from MICRO_POLLED and the merge branch no-ops. Registry alias added
+   so the merged column maps to rzp.
+
+Also in the wave: Amcha at 4-5 seats in three of four polls (Lazar 0) —
+left to the model; no parameter touched.

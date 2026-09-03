@@ -238,7 +238,9 @@ WITHDRAWN_WEEKS = 5
 #    itemizations of the firms publishing full percentages (Jul-Aug 2026,
 #    Lazar/Midgam/Filber/Direct Polls/Maagar).
 MICRO_POLLED = {
-    "zehut": (0.016, 0.004),           # 1.1-2.1% under the small-party notes
+    # zehut RETIRED 2026-09-03: pollsters now publish a single "RZP - Zehut"
+    # column (Sept 2 wave), so its support lives inside the rzp poll stream;
+    # carving it separately would count Zehut's voters twice.
     "noam": (0.004, 0.003),            # 0.3% Filber 27 Aug; "<1%" elsewhere
     "nep": (0.013, 0.004),             # 1.0-1.7%, Aug 2026
     "haredi_public": (0.013, 0.004),   # 1.2-1.5% Jul-Aug (Midgam 31 Aug: 1.2%)
@@ -257,10 +259,9 @@ MICRO_POLLED = {
 #      Otzma Sept '19  polled ~1.7%  -> 1.88%  (x1.11)
 #    Non-sectoral lists shed ~30% to strategic desertion (voters flee a
 #    wasted vote); lists with a committed sectarian/ideological core hold
-#    their polling. Zehut's carve keeps x1.0: under the official merger its
-#    voters land on a viable list, so there is nothing to desert.
+#    their polling.
 MICRO_REALIZE = {
-    "zehut": 1.0, "noam": 1.0, "haredi_public": 1.0,
+    "noam": 1.0, "haredi_public": 1.0,
     "nep": 0.7, "israel_first": 0.7, "fourth_quarter": 0.7, "el_dagel": 0.7,
 }
 # Forecast prior = polled x realization; the calibration's own dispersion
