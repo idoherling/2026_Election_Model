@@ -641,7 +641,19 @@ def _merge_cec(obs: pd.DataFrame, block_of: dict, asof) -> pd.DataFrame:
     except FileNotFoundError:
         return obs
     sums = pcts.groupby("ref")["raw_pct"].sum()
+    # A filing is trusted when its party table accounts for the sample:
+    # parties alone within 90-105%, or parties plus the undecided share the
+    # filing reports separately within 95-105% (Maagar Mochot files 86-89%
+    # of parties beside a 9-13% undecided line; the renormalisation below
+    # then puts those lists on the same footing as everyone else).
     good = set(sums[(sums >= 90) & (sums <= 105)].index)
+    try:
+        und = pd.read_csv(PROCESSED_DIR / "cec_filings.csv", dtype={"ref": str}
+                          ).set_index("ref")["undecided_pct"]
+        tot = sums.add(und.reindex(sums.index).fillna(0.0))
+        good |= set(tot[(sums >= 80) & (tot >= 95) & (tot <= 105)].index)
+    except FileNotFoundError:
+        pass
     pcts = pcts[pcts["ref"].isin(good)
                 & (pcts["fieldwork_end"] <= asof)].copy()
     if pcts.empty:

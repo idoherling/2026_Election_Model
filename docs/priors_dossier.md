@@ -765,3 +765,101 @@ mixture's MEDIAN share vector (renormalised) rather than the mean - the
 harness grades the median as the better point estimate by ~0.09 seats
 per list in every configuration (threshold deaths skew the means of
 straddling lists downward).
+
+## 29. Poll update of 4 September and the religious-Zionist sector poll (2026-09-04)
+
+**What came in.** Three new polls from the public archive (Filber/Ch14,
+Kantar/Israel Hayom, Tatika/Zman Yisrael, all fieldwork 3 Sept; 734 polls
+in the 2026 cycle), and thirteen new CEC filings (index refreshed from 37 to
+50 via the gov.il collector API). A Lazar/Maariv poll published the morning
+of 4 Sept (fieldwork 2-3 Sept, n=600, ±4%) is reported only in bloc terms
+(Netanyahu bloc 51, Zionist opposition 57, Arab lists 12; RZ-Zehut 5, Amcha
+4, Yashar down 2; sub-threshold: Zionist Home 2.1, Economic Party 1.7,
+Unity 1.1, Makom Lekulanu 0.7, Blue & White 0.6, Haredi Public 0.4) and
+carries no complete seat table yet; it enters at the next scrape once the
+archive or its CEC filing has the per-list figures. Nothing is entered by
+inference from bloc totals.
+
+**Parser defect found and fixed (scrape_cec).** Two filing formats glue a
+count onto the percentage: Tatika files "<list><respondents><pct>%<seats>"
+("224.40%6" = 22 respondents, 4.40%, 6 seats) and the Midgam Project
+consortium files "<list><seats><pct>%..." with four raw, UNWEIGHTED
+sub-sample columns (Jewish adults / young / haredi / Arab) that are not a
+national distribution at all. The old regex took the last two digits before
+the decimal point, so every Tatika filing summed to 160-270% (rejected by
+the 90-105% filter: harmless but wasted) and two Midgam Project filings
+(4094, 4106) PASSED the filter with sub-sample garbage - Together at 37-40%,
+the Democrats at 17-18%, the Joint List at 0% - and sat in the likelihood as
+Midgam Project observations. Fix: the digit run is split by corroboration
+(respondents / n, or seats / 1.2), Midgam Project filings and any
+sector-only sample (Dialog's reservists poll for Yedioth, ref 4096) are
+flagged `national_table = False` and contribute methodology fields only.
+The merge filter now also admits a filing whose parties plus its separately
+reported undecided line sum to 95-105% (Maagar Mochot files 86-89% beside a
+9-13% undecided row; renormalisation puts it on the same footing). Eligible
+filings: 35 of 50, all five Tatika filings now readable (sums 98-104).
+
+**Ynet / Dialog poll of religious-Zionist voters** (Dialog, Emet group, for
+Ynet and Yedioth; two waves - 31 Aug-2 Sept n=508 before the Smotrich-
+Feiglin merger, 3-4 Sept n=484 after it; ±4.4%; self-identified sample: 50%
+"national-religious stream", 33% "religious Zionism", 17% hardal). Second
+wave: RZ-Zehut 30, Likud 17, undecided 13, Otzma 12, Amcha 6, Yashar 4,
+Shas 4, Together 3, Zionist Home 3, other 2, Unity 2, YB 1, Noam 1, none 1,
+B&W 1, UTJ 0, Democrats 0. First wave: RZP 21 + Zehut 5 = 26; the merger
+added 4 points, taken from Winter (9 -> 6) and Ben-Gvir (14 -> 12).
+
+*Conversion.* The kalpi layer's "religious-Zionist localities" sector is the
+settlement/RZ-town cluster (2.0% of the national vote; RZP draws 11.5% of
+its vote there), not the population, so the sector stream cannot convert
+this poll and it is NOT entered as an observation. Population arithmetic
+instead: IDI's 2022 post-election panel (n=12,322 Jews; 10,694 voters) puts
+the national-religious at 11% of Jewish voters, i.e. about 10% of all
+voters; among deciders (86% of the sample) the second wave is RZ-Zehut
+34.9, Likud 19.8, Otzma 14.0, Amcha 7.0, Yashar 4.7, Shas 4.7, Together 3.5,
+Zionist Home 3.5, Unity 2.3, YB/Noam/B&W 1.2. National contribution from
+this population = share x 0.10:
+
+| list | from dati voters | current polling level | dati share of its vote |
+|---|---|---|---|
+| RZ-Zehut | 3.5% | ~4.8% (5-6 seats) | ~0.7 |
+| Likud | 2.0% | ~17% | ~0.12 (2022: 22.5% x 0.10 / 23.4% = 0.10) |
+| Otzma | 1.4% | ~5.5% | ~0.25 |
+| Amcha | 0.7% | ~3.5% | ~0.2 |
+| Together | 0.35% | ~10% | ~0.035 |
+| Zionist Home | 0.35% | ~2% | ~0.17 |
+| Unity | 0.23% | ~0.8% | ~0.3 |
+| Noam | 0.12% | MICRO 0.4% | ~0.3 |
+
+*What it says.* (1) The poll corroborates RZ-Zehut at 5-6 seats and shows
+its vote is ~70% national-religious; that core alone (3.5% national) sits
+above the 3.25% threshold, which argues its pass probability is bounded
+below by dati loyalty rather than by the national panel noise - a point in
+favour of the list's current ~0.7 pass rate and against treating it as a
+coin flip. (2) The merger's +4 points of the sector (+0.4% national, about
+half a seat) came from Winter and Ben-Gvir, i.e. zero-sum inside the right,
+consistent with the GEVALT_SD coupling and with no bloc-level effect; the
+STRUCTURAL_BREAK backcast (+1.44% for the Zehut carry) is larger than the
+dati contribution of Zehut alone (5% x 0.10 = 0.5%), which is as expected
+- Feiglin's remaining vote is secular-libertarian. (3) Bennett at 3% of the
+sector (vs the ~20%+ Yamina held in 2021) confirms that Together's vote is
+not religious-Zionist at all now; the certainty layer's 0.47 for Together
+is a centre-electorate property. (4) Amcha's 6% of the sector is a fifth of
+its vote - Winter's base is the traditional and secular right, so the
+AMCHA_FADE residualisation toward Likud/Otzma stands. (5) 23% "politically
+homeless", 15% naming the haredi draft as the top issue: the sector's
+undecided share (13%) is no larger than the national pool (12.3%).
+
+Nothing in the projection changes on this poll; it is recorded as a
+composition check and the table above is the reference for a future
+population-sector conversion if the sector stream is extended beyond
+locality-defined sectors (it would need measured concentrations per list,
+which only the 2022 IDI panel provides, and only for the joint RZ-Otzma
+list: 45% of dati voters x 0.10 / 10.84% = 0.42 of that list's vote).
+
+Sources: Ynet, "במי תומכים הדתיים הלאומיים" (4 Sept 2026),
+https://www.ynet.co.il/news/elections2026/article/sydameiozg ; IDI Viterbi
+Center, "Voting Patterns of Jews in the 2022 Elections by Religious
+Identity", https://en.idi.org.il/articles/64807 ; Maariv, "סקר מנדטים של
+מעריב: כך סמוטריץ' ופייגלין השפיעו על מפת הגושים" (4 Sept 2026, 06:01),
+https://www.maariv.co.il/news/politics/article-1362890 ; CEC filings index,
+https://www.gov.il/he/Departments/DynamicCollectors/knesset_election_polls_26

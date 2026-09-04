@@ -95,6 +95,54 @@ PARTY_KEYWORDS = [
 UNDECIDED_TOKENS = ("יודע לא", "לא יודע", "מתלבט", "החלטתי לא", "לא החלטתי")
 
 PCT = re.compile(r"(\d{1,2}(?:\.\d{1,2})?)%")
+# The full digit run in front of a percent sign. Several filings glue a
+# respondent count or a seat count onto the percentage ("224.40%6" =
+# 22 respondents, 4.40%, 6 seats; "139.7%" = 13 seats, 9.7%), so the
+# split between prefix and percentage has to be resolved, not assumed.
+PCT_RUN = re.compile(r"(\d+(?:\.\d{1,2})?)%")
+# Filings whose party table is NOT a national distribution: the Midgam
+# Project consortium files the seat column plus four raw UNWEIGHTED
+# sub-sample columns (Jewish adults / young / haredi / Arab), none of
+# which is a national share; a sector-only sample (e.g. Dialog's
+# reservists poll for Yedioth) is a different universe altogether.
+NON_NATIONAL_MARKERS = (r"גולמיים\s+לא\s+משוקללים", r"משרתי\s+מילואים")
+# Editors whose filings never carry a national raw-share table (the
+# Midgam Project consortium files seats + raw sub-samples in every format
+# it has used).
+NON_NATIONAL_EDITORS = {"Midgam Project & StatNet"}
+
+
+def split_pct(run: str, n_resp, seats_after):
+    """Resolve a glued digit run into (prefix, pct).
+
+    Candidates: the last 1 or 2 integer digits are the percentage's
+    integer part, the rest is a prefix. A candidate is chosen by whichever
+    is corroborated: prefix / n_resp x 100 ~ pct (Tatika files respondent
+    counts), or pct ~ seats / 1.2 (a seat count glued in front). With no
+    corroboration and no ambiguity (<= 2 integer digits) the run is the
+    percentage itself; ambiguous runs with nothing to test against are
+    rejected (None).
+    """
+    ip, _, dp = run.partition(".")
+    if len(ip) <= 2:
+        return "", float(run)
+    cands = []
+    for k in (1, 2):
+        pre, pct_i = ip[:-k], ip[-k:]
+        if pct_i.startswith("0") and k == 2:
+            continue
+        pct = float(pct_i + ("." + dp if dp else ""))
+        cands.append((pre, pct))
+    best, best_err = None, 1.5
+    for pre, pct in cands:
+        errs = []
+        if n_resp and pre:
+            errs.append(abs(int(pre) / n_resp * 100 - pct))
+        if seats_after is not None:
+            errs.append(abs(seats_after / 1.2 - pct))
+        if errs and min(errs) < best_err:
+            best, best_err = (pre, pct), min(errs)
+    return best
 
 
 def download_all(index: pd.DataFrame) -> None:
@@ -123,6 +171,8 @@ def parse_pdf(path: Path):
 
     lines = [ln.strip() for ln in text.splitlines() if ln.strip()]
     meta = {}
+    national = not any(re.search(m, text) for m in NON_NATIONAL_MARKERS)
+    meta["national_table"] = national
 
     for ln in lines:
         # respondents: "משיבים 500" / "השיבו לו"
@@ -167,14 +217,22 @@ def parse_pdf(path: Path):
     # Party lines: a known keyword + a percentage; keep the FIRST match per
     # party (the main vote-intention table precedes crosstabs).
     parties = {}
+    if not national:
+        return meta, []
     for ln in lines:
-        pcts = PCT.findall(ln)
-        if not pcts:
+        runs = PCT_RUN.findall(ln)
+        if not runs:
             continue
         for kw, pid in PARTY_KEYWORDS:
             if kw in ln and pid not in parties:
+                # a seat count glued after the first percentage ("4.40%6")
+                m_after = re.search(r"%(\d{1,2})(?!\d|\.)", ln)
+                seats_after = int(m_after.group(1)) if m_after else None
+                res = split_pct(runs[0], meta.get("n"), seats_after)
+                if res is None:
+                    break
+                val = res[1]
                 # party tables carry small percents; skip demographic rows
-                val = float(pcts[0])
                 if val <= 40:
                     passed = ("עבר לא" not in ln and "לא עבר" not in ln)
                     parties[pid] = {"raw_pct": val, "shown_passing": passed}
@@ -201,6 +259,9 @@ def main() -> None:
         if not path.exists():
             continue
         meta, parties = parse_pdf(path)
+        if EDITOR_MAP.get(r.editor, r.editor) in NON_NATIONAL_EDITORS:
+            meta["national_table"] = False
+            parties = []
         meta_rows.append({
             "ref": r.ref, "pollster": EDITOR_MAP.get(r.editor, r.editor),
             "editor_he": r.editor, "publisher_he": r.publisher,
