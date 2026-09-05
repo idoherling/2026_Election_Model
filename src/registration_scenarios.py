@@ -31,6 +31,7 @@ Events, priors, and precedents (all priors are stated judgment):
                             pre-agreed fallback is folding into Yashar
   blue_white_folds    0.65  Gantz MK ultimatum vs his slot-#1 demand
   unity_folds         0.85  Erdan won't run to the end at 0.8%
+                            -> RESOLVED True 2026-09-04 (withdrew)
   centre_union_files  0.12  Erdan-Gantz(-Zelicha) union files as one list
                             instead of folding (usually still sub-threshold)
   segalovitz_joins_raam 0.80  agreement in principle signed Aug 5 (Maariv);
@@ -139,7 +140,14 @@ FOLD_TRANSFER = {
 # as certain — balad_splits resolved False.
 RESOLVED: dict = {"segalovitz_joins_raam": True,
                   "rzp_fate": "merge_zehut",
-                  "balad_splits": False}
+                  "balad_splits": False,
+                  # 2026-09-04: Erdan announced Unity will not run (Ynet,
+                  # Israel Hayom, N12) after the Blue & White merger talks
+                  # collapsed the same day; no endorsement given. The fold
+                  # vector (Likud .45 / Yashar .25 / YB .10 / ...) applies
+                  # in every draw; the Erdan-Gantz union can no longer file.
+                  "unity_folds": True,
+                  "centre_union_files": False}
 
 
 def _col(comps, component):

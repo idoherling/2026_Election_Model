@@ -863,3 +863,52 @@ Identity", https://en.idi.org.il/articles/64807 ; Maariv, "סקר מנדטים �
 מעריב: כך סמוטריץ' ופייגלין השפיעו על מפת הגושים" (4 Sept 2026, 06:01),
 https://www.maariv.co.il/news/politics/article-1362890 ; CEC filings index,
 https://www.gov.il/he/Departments/DynamicCollectors/knesset_election_polls_26
+
+## 30. Unity withdraws; Maariv poll lands (2026-09-05)
+
+**Event.** On 4 September Gilad Erdan announced that Unity (Erdan,
+Edelstein, Bloch, Samadja) will not run: support "does not guarantee
+crossing the threshold with high probability", the merger talks with Blue
+and White collapsed the same day, and "a large majority of the public asks
+first of all for a clear decision on the identity of the prime minister".
+No endorsement was given. Sources: Ynet
+https://www.ynet.co.il/news/article/b184d800ofg ; Israel Hayom
+https://www.israelhayom.co.il/news/politics/article/21355002 ; N12
+https://www.mako.co.il/news-politics/2026_q3/Article-1640e0df3dc60a1027.htm
+
+**Model.** `RESOLVED` now carries `unity_folds: True` and
+`centre_union_files: False` (the Erdan-Gantz union can no longer file). The
+fold vector already in place applies in every draw - Likud 0.45 / Yashar
+0.25 / Yisrael Beytenu 0.10 / rest scattered - built from the measured
+fates of absorbed Likud-alumni lists (New Hope -> National Unity 58 /
+Likud 42). Unity's polled 0.3-1.1% therefore moves about 0.4% to Likud and
+0.2% to Yashar; at the seat level that is noise, and the site drops the
+list from the seat rows, chips and small-parties section automatically
+(no draw carries a Unity seat). The formation tree's UNALIGNED side priors
+for Unity are now unreachable and stay on record. Blue and White's fold
+probability is unchanged at 0.65 (the annex previously showed 0.58 = 0.65
+x (1 - 0.12) net of the union branch; with the union off it reads 0.65).
+
+**Polls.** The Lazar/Maariv poll of 2-3 September (n=600) is now in the
+archive with its full table (Yashar 23, Likud 20, Together 15, Democrats
+10, YB 9, Otzma 8, Shas 7, UTJ 7, JL 7, Ra'am 5, RZ-Zehut 5, Amcha 4):
+736 polls in the cycle. No new CEC filings (index still 50). The
+structural-break backcast for the Zehut carry now skips any observation
+whose published column was already the merged "RZP - Zehut" line (one
+pre-2 Sept observation was being double-shifted).
+
+**Archive change caught the same day.** Between two scrapes on 5 Sept the
+polling archive added a standalone "Zehut" column and re-keyed the
+post-merger polls as a cell spanning "RZP" and "Zehut". The scraper's
+colspan logic turned that into a composite id `rzp+zehut`, which (a) the
+registry did not know, so the list fell into the default bloc, and (b) the
+mixture's merge_zehut rule read as two columns and zeroed - RZ-Zehut
+vanished from the seat table and P(NB>=61) fell to 6.8% in one build.
+Fixes: `COMPOSITE_ALIASES` in scrape_polls maps `rzp+zehut` to `rzp`
+(the archive's spanning cell is the absorbing list, not a new one), and
+`ABSORBED_IDS` in prepare_data drops the standalone pre-merger Zehut rows
+(their support already rides inside RZP through the structural break;
+a Zehut column of its own would count those voters twice). The list
+count is back to 15 and the fit was rerun on the corrected data. Lesson:
+a build whose bloc odds move by eight points on one poll is a data
+defect until proven otherwise - check the component list first.

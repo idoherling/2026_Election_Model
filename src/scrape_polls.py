@@ -38,6 +38,13 @@ USER_AGENT = "IsraelElectionModel/0.1 (contact: idoherling98@gmail.com)"
 WIKI = "https://en.wikipedia.org/wiki"
 
 # page key -> (url, default year for dates without an explicit year, cycle)
+# A colspan cell that covers two archive columns yields a composite id.
+# When the registry already treats one component as absorbed into the
+# other (Zehut inside the RZP-Zehut technical bloc from Sept 2, 2026 -
+# the archive added a "Zehut" column and spans both), the composite is
+# the absorbing list, not a new list.
+COMPOSITE_ALIASES = {"rzp+zehut": "rzp"}
+
 PAGES: dict[str, tuple[str, int, str]] = {
     "2026_main": (f"{WIKI}/Opinion_polling_for_the_2026_Israeli_legislative_election", 2026, "2026"),
     "2026_2025": (f"{WIKI}/2025_opinion_polling_for_the_2026_Israeli_legislative_election", 2025, "2026"),
@@ -432,7 +439,8 @@ def scrape() -> tuple[pd.DataFrame, pd.DataFrame]:
                             unknown_parties.add(label)
                             pid = f"RAW:{label}"
                         ids.append(pid)
-                    parsed.append(("+".join(sorted(set(ids))), seats, pct))
+                    pid = "+".join(sorted(set(ids)))
+                    parsed.append((COMPOSITE_ALIASES.get(pid, pid), seats, pct))
 
                 if not parsed:
                     continue

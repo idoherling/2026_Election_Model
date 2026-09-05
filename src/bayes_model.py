@@ -423,6 +423,7 @@ MICRO_PRIORS = {
 #   2026-09-02: pollsters switched to a single "RZP - Zehut" column (5-6
 #   seats vs 3.3 for RZP alone the week before). Before that Zehut lived
 #   only in the small-party footnotes at ~1.6%, retained at 0.9 on merger.
+ABSORBED_IDS = {"zehut"}   # inside RZP-Zehut from 2026-09-02 (see STRUCTURAL_BREAKS)
 STRUCTURAL_BREAKS = [
     {"component": "rzp", "from": "2026-09-02", "add_share": 0.9 * 0.016,
      "note": "Zehut absorbed into the RZP-Zehut technical bloc"},
@@ -435,6 +436,10 @@ def _apply_structural_breaks(obs: pd.DataFrame, block_of: dict) -> pd.DataFrame:
         if b is None:
             continue
         m = (obs["block"] == b) & (obs["fieldwork_end"] < pd.Timestamp(brk["from"]))
+        # a poll that already published the merged column ("RZP - Zehut")
+        # before the break date is not pre-merger data
+        if "party_id" in obs.columns:
+            m &= ~obs["party_id"].astype(str).str.contains("zehut")
         obs.loc[m, "share"] = obs.loc[m, "share"] + brk["add_share"]
         if m.any():
             print(f"structural break: +{brk['add_share']:.4f} share on "
@@ -484,6 +489,13 @@ def prepare_data(polls: pd.DataFrame | None = None,
     if dropped:
         print(f"same-day variants dropped: {dropped} polls")
     win = win[win["poll_id"].isin(set(keep_ids))]
+
+    # Lists absorbed into another list before the fit window's end are not
+    # separate columns: the archive keeps a standalone "Zehut" column for
+    # its pre-merger polls, but that support is carried inside the RZP
+    # stream by the structural break (below), and a Zehut column of its
+    # own would count the same voters twice.
+    win = win[~win["party_id"].isin(ABSORBED_IDS)]
 
     blocks = merge_blocks(win["party_id"].unique())
     block_of = {c: i for i, b in enumerate(blocks) for c in b}
