@@ -320,6 +320,8 @@ def poststratify_2026(sectors: pd.DataFrame, panel: pd.DataFrame):
                "United Torah Judaism": "utj", "Otzma Yehudit": "otzma",
                "Religious Zionist Party": "rzp", "Ra'am": "raam",
                "Balad + Hadash-Ta'al": "balad+hadash_taal",
+               "Reservists – Economic Party": "zionist_home",
+               "Blue and White": "blue_white",
                "Amcha Yisrael": "amcha_yisrael"}
     rows = []
     for r in fc.itertuples():
