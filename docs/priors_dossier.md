@@ -1062,3 +1062,27 @@ Economic = Nat'l Unity 0.50 / Yesh Atid 0.30 / Likud 0.10 / YB 0.05 / Labor
 and Wilf are centre-left Tel Aviv electorates); Blue and White = its own
 2022 pattern, NU 0.70 / Yesh Atid 0.30. Unity (withdrew) needs none.
 Nothing else in the projection changes.
+
+## 35. Owner taxonomy: unaligned lists close coalitions explicitly (2026-09-09)
+
+Two formation outcomes are redefined so the kingmakers are visible rather
+than folded into bloc sums:
+
+* **Change coalition with unaligned / Amcha** (was "with Amcha"): the change
+  lists alone are short of 61 and Blue and White, the Reservists–Economic list
+  (on their centre-side draws) or Amcha close the gap. "Change coalition
+  (without Ra'am)" now means the change lists ALONE reach 61.
+* **Netanyahu + unaligned / defector coalition** (was "+ centrist defector"):
+  Netanyahu's bloc (with Amcha on its right-side draws) is short and unaligned
+  seats on their right-side draws, or a pledge-breaking centrist, close it.
+  "Netanyahu rightist coalition" now means the bloc alone reaches 61.
+
+Precedence: bloc-alone outcomes override everything; the unaligned-closed
+outcomes override the haredi / Ra'am / minority / unity branches. PM
+allocation for the unaligned/Amcha row: Eisenkot 0.73 / Bennett 0.21 /
+Liberman 0.03 / other 0.03 (the Together>Yashar flip still makes Bennett the
+PM in Amcha-closed draws). Same posterior. Outcomes: Netanyahu rightist 0.147,
++ unaligned/defector 0.079, change alone 0.137, change + unaligned/Amcha
+0.027, + haredi 0.050, JL-backed minority 0.019, unity 0.089, repeat 0.367,
+change + Ra'am 0.084. PM: repeat 36.7 / Eisenkot 26.8 / Netanyahu 22.7 /
+Bennett 6.9.

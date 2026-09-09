@@ -158,9 +158,10 @@ BEHAVIOR = {
 #           Eisenkot  Bennett  Liberman  Lapid  other
 PM_ALLOC = {
     2: [0.75, 0.19, 0.04, 0.00, 0.02],   # change coalition (pure)
-    3: [0.70, 0.25, 0.02, 0.00, 0.03],   # with Amcha: exists mostly in
-                                          # Bennett-led draws - the flip rule
-                                          # makes Bennett the modal PM there
+    3: [0.73, 0.21, 0.03, 0.00, 0.03],   # with unaligned / Amcha: closed by
+                                          # Gantz/Hendel (Eisenkot-led) or by
+                                          # Amcha (Bennett-led draws; the flip
+                                          # rule makes Bennett the PM there)
     4: [0.64, 0.31, 0.00, 0.00, 0.05],   # with a haredi party: right-cred PM
                                           # helps, Liberman a dealbreaker
     5: [0.85, 0.10, 0.02, 0.00, 0.03],   # JL-backed minority: explicitly
@@ -202,9 +203,9 @@ AMCHA_JOIN_EISENKOT = 0.03
 
 OUTCOMES = [
     "Netanyahu rightist coalition",
-    "Netanyahu + centrist defector coalition",
+    "Netanyahu + unaligned / defector coalition",
     "Change coalition (without Ra'am)",
-    "Change coalition with Amcha",
+    "Change coalition with unaligned / Amcha",
     "Change coalition with a haredi party",
     "Centre minority backed by the Joint List",
     "Unity government (Likud without Netanyahu)",
@@ -297,11 +298,13 @@ def simulate_formation(draws: pd.DataFrame, behavior: dict, seed=SEED,
     raam_supports = u[:, 2] < behavior["raam_supports"]
     jl_supports = u[:, 3] < behavior["jl_supports"]
 
-    nb = nb_core + np.where(amcha_side == 1, amcha, 0)
+    nb0 = nb_core + np.where(amcha_side == 1, amcha, 0)   # the bloc itself
+    nb = nb0.copy()
     # Owner ruling 2026-09-09: Segalovitz's seat (Ra'am slot #2) is NOT
     # counted with the centre on its own; Ra'am enters whole or not at
     # all (the "with Ra'am" branch below).
     seg = np.zeros(n, dtype=int)
+    ce0 = centre.copy()                           # the change lists alone
     ce_pure = centre                              # WITHOUT Amcha
     amcha_ce = np.where(amcha_side == 2, amcha, 0)
 
@@ -372,10 +375,15 @@ def simulate_formation(draws: pd.DataFrame, behavior: dict, seed=SEED,
                      & (ce_pure + (raam - seg) >= 61))] = 8
     # change coalition WITH Amcha: the camp is short alone, Winter's
     # seats close it, and he joins (conditional on a Bennett-led draw)
-    outcome[np.where((ce_pure < 61)
+    # Owner taxonomy 2026-09-09: the change lists alone reach 61 (2), or
+    # they are short and the UNALIGNED kingmakers and/or Amcha close the
+    # gap (3); likewise Netanyahu's bloc alone (0), or short and closed by
+    # unaligned seats or a pledge-breaking centrist (1).
+    outcome[np.where((ce0 < 61)
                      & (ce_pure + amcha_ce >= 61))] = 3
-    outcome[np.where(ce_pure >= 61)] = 2
-    outcome[np.where(nb >= 61)] = 0
+    outcome[np.where(ce0 >= 61)] = 2
+    outcome[np.where((nb0 < 61) & (nb >= 61))] = 1
+    outcome[np.where(nb0 >= 61)] = 0
 
     pm = np.full(n, "none (repeat election)", dtype=object)
     pm[outcome == 0] = "Netanyahu"
