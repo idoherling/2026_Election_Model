@@ -1,8 +1,8 @@
 event,outcome,probability,p_nb_61,p_neither,nb_mean
-segalovitz_joins_raam,True,1.0,0.155,0.685,53.3
-balad_splits,False,1.0,0.155,0.685,53.3
-rzp_fate,merge_zehut,1.0,0.155,0.685,53.3
-centre_union_files,False,1.0,0.155,0.685,53.3
-zionist_home_folds,False,1.0,0.155,0.685,53.3
-blue_white_folds,False,1.0,0.155,0.685,53.3
-unity_folds,True,1.0,0.155,0.685,53.3
+segalovitz_joins_raam,True,1.0,0.155,0.708,53.3
+balad_splits,False,1.0,0.155,0.708,53.3
+rzp_fate,merge_zehut,1.0,0.155,0.708,53.3
+centre_union_files,False,1.0,0.155,0.708,53.3
+zionist_home_folds,False,1.0,0.155,0.708,53.3
+blue_white_folds,False,1.0,0.155,0.708,53.3
+unity_folds,True,1.0,0.155,0.708,53.3

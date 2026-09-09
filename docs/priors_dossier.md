@@ -1002,3 +1002,16 @@ seats were counted toward the change bloc's 61 and now count toward
 neither. Formation outcomes: change without Ra'am 0.187, with a haredi party
 0.053, with Ra'am 0.070; Netanyahu rightist 0.162, plus defector 0.062;
 unity 0.095; repeat 0.348.
+
+## 33. Owner ruling: Segalovitz's seat counts only with Ra'am (2026-09-09)
+
+Reverses the 2 September rule (s.14/22) that added Segalovitz's Ra'am seat
+to the change bloc's "without Arab seats" 61 whenever Ra'am won at least two
+seats. From now on the first hero line is the opposition lists alone; the
+second ("with Ra'am") adds Ra'am as a whole; the formation tree's change
+coalition without Ra'am no longer carries the seat, and the with-Ra'am branch
+adds all of Ra'am. Same posterior, no refit. Effect: change-bloc majority
+without Arab seats 16.0 -> 13.7 (with Ra'am unchanged at 33.1; NB 15.5;
+deadlock 51.4); PM repeat election 34.8 -> 36.2, Eisenkot 28.2 -> 26.9,
+Netanyahu 22.4 -> 22.6. Formation: change without Ra'am 0.187 -> 0.162, with
+Ra'am 0.070 -> 0.080.

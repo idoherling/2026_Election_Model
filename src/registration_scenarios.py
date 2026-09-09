@@ -319,16 +319,13 @@ def main() -> None:
     events = project.last_events  # attached by the mixture branch
 
     nb = seats[:, blocs == "netanyahu_bloc"].sum(axis=1)
-    # Segalovitz's own seat (Ra'am slot #2) is a centre vote: count it
-    # toward the anti-bloc 61 whenever Ra'am wins at least 2 seats.
+    # Owner ruling 2026-09-09: "without Arab seats" = the opposition lists
+    # alone (Segalovitz's Ra'am seat is NOT added); "with Ra'am" = the
+    # opposition lists plus Ra'am as a whole.
     anti = seats[:, blocs == "opposition_bloc"].sum(axis=1)
     _ri = next((i for i, l in enumerate(labels) if l == "Ra'am"), None)
     raam_seats = seats[:, _ri] if _ri is not None else np.zeros(len(seats))
-    if _ri is not None:
-        anti = anti + (raam_seats >= 2).astype(int)
-    # "with Ra'am": the full party joins the camp (Segalovitz's seat is
-    # inside Ra'am's total, so start from the raw opposition sum).
-    anti_raam = seats[:, blocs == "opposition_bloc"].sum(axis=1) + raam_seats
+    anti_raam = anti + raam_seats
 
     dist = pd.DataFrame({
         "list": labels,

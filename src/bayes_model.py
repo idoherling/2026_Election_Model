@@ -1241,12 +1241,10 @@ def main() -> None:
         PROCESSED_DIR / "bayes_draws.parquet")
 
     nb = seats[:, blocs == "netanyahu_bloc"].sum(axis=1)
-    # Segalovitz's own seat (Ra'am slot #2) is a centre vote: count it
-    # toward the anti-bloc 61 whenever Ra'am wins at least 2 seats.
+    # Owner ruling 2026-09-09: the change bloc "without Arab seats" is the
+    # opposition lists alone - Segalovitz's seat (Ra'am slot #2) is no
+    # longer added to it; it counts only where Ra'am counts as a whole.
     anti = seats[:, blocs == "opposition_bloc"].sum(axis=1)
-    _ri = next((i for i, l in enumerate(labels) if l == "Ra'am"), None)
-    if _ri is not None:
-        anti = anti + (seats[:, _ri] >= 2).astype(int)
     summary = pd.DataFrame([{
         "asof": data["asof"].date().isoformat(), "n_proj": N_PROJ,
         "p_netanyahu_bloc_61": (nb >= 61).mean().round(3),

@@ -298,11 +298,11 @@ def simulate_formation(draws: pd.DataFrame, behavior: dict, seed=SEED,
     jl_supports = u[:, 3] < behavior["jl_supports"]
 
     nb = nb_core + np.where(amcha_side == 1, amcha, 0)
-    # Segalovitz's own seat (Ra'am slot #2, official) is a centre vote:
-    # counted whenever Ra'am wins >=2 seats; Ra'am-as-party contributes
-    # only outside support in this taxonomy (no Ra'am-inside branch).
-    seg = (raam >= 2).astype(int)
-    ce_pure = centre + seg                        # WITHOUT Amcha
+    # Owner ruling 2026-09-09: Segalovitz's seat (Ra'am slot #2) is NOT
+    # counted with the centre on its own; Ra'am enters whole or not at
+    # all (the "with Ra'am" branch below).
+    seg = np.zeros(n, dtype=int)
+    ce_pure = centre                              # WITHOUT Amcha
     amcha_ce = np.where(amcha_side == 2, amcha, 0)
 
     # kingmakers: seats go right or centre by their side priors
