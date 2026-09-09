@@ -980,3 +980,25 @@ Likud 23, Together 11, Democrats 10, Shas 9, UTJ 8, YB 8, Joint List 8, Otzma
 that resolved were already priced near their outcomes (B&W and the Reservists
 each filed at roughly their fold-vs-file odds), and the news of the week is
 the Reservists-Economic list joining Amcha at the threshold line.
+
+## 32. Owner ruling: the Reservists–Economic list is unaligned (2026-09-09)
+
+The owner's ruling: count the Reservists–Economic list (Hendel, Zelekha, Wilf)
+the same way as Blue and White - a kingmaker, not a change-bloc member. The
+registry bloc is now `unaligned`; the formation tree routes its seats by side
+priors like Gantz's: right 0.30 / centre 0.45 / sits out 0.25 (Beta n=10
+each). The priors are lower on the right than Blue and White's 0.40 because
+Hendel is on record refusing a Netanyahu government (and was a minister in
+the Bennett–Lapid government), and the sit-out residual is larger because his
+stated conditions - no haredi and no Arab partners - rule out most feasible
+coalitions on either side. The site's change preset excludes the list; it
+sits in the Unaligned group with Blue and White.
+
+Effect (same posterior, no refit): change-bloc majority without Arab seats
+22.8 -> 16.0, with Ra'am 41.4 -> 33.1, deadlock 43.7 -> 51.4, NB 15.0 ->
+15.5; PM repeat election 32.5 -> 34.8, Eisenkot 31.7 -> 28.2, Netanyahu 20.4
+-> 22.4. The whole move is the ~28% of draws in which the list passes: those
+seats were counted toward the change bloc's 61 and now count toward
+neither. Formation outcomes: change without Ra'am 0.187, with a haredi party
+0.053, with Ra'am 0.070; Netanyahu rightist 0.162, plus defector 0.062;
+unity 0.095; repeat 0.348.

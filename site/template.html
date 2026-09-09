@@ -970,7 +970,7 @@ const BLOC = {"Likud":"nb","Shas":"nb","United Torah Judaism":"nb","Otzma Yehudi
  "Religious Zionist Party":"nb","Amcha Yisrael":"nb","Noam":"nb","Zehut":"nb",
  "The Haredi Public":"nb","A Place for All of Us":"anti",
  "Yashar":"anti","Bennett 2026 + Yesh Atid":"anti","The Democrats":"anti","Yisrael Beytenu":"anti",
- "Reservists – Economic Party":"anti","Blue and White":"una","Unity":"una","New Economic Party":"anti",
+ "Reservists – Economic Party":"una","Blue and White":"una","Unity":"una","New Economic Party":"anti",
  "Balad + Hadash-Ta'al":"arab","Ra'am":"arab","Balad (alone)":"arab"};
 // Ballot letters (otiyot): registered CEC letters where a party owns
 // them; for new lists (marked *) a realistic unused combination is shown
@@ -1262,8 +1262,7 @@ renderBlocHist("anti");
     <span class="mono">${p.seats}</span></button>`).join("");
   const PN = HEB_MODE ? {"Netanyahu bloc":"גוש נתניהו","Change coalition":"קואליציית השינוי",
     "Change + Ra'am":"שינוי + רע״ם","Clear":"ניקוי"} : {};
-  const CENTRE = ["Yashar","Bennett 2026 + Yesh Atid","The Democrats","Yisrael Beytenu",
-    "Reservists – Economic Party"];
+  const CENTRE = ["Yashar","Bennett 2026 + Yesh Atid","The Democrats","Yisrael Beytenu"];
   const PRESETS = [
     ["Netanyahu bloc", ["Likud","Shas","United Torah Judaism","Otzma Yehudit","Amcha Yisrael","Religious Zionist Party"]],
     ["Change coalition", CENTRE],

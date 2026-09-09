@@ -52,13 +52,16 @@ SEED = 20261027
 NB_CORE = ["Likud", "Otzma Yehudit", "Shas", "United Torah Judaism",
            "Religious Zionist Party", "Noam", "Zehut"]
 CENTRE = ["Yashar", "Bennett 2026 + Yesh Atid", "The Democrats",
-          "Yisrael Beytenu", "Reservists – Economic Party"]
+          "Yisrael Beytenu"]
 # Kingmakers (owner ruling 2026-09-03): neither list is a change-bloc
 # member. Each draw sends its seats right, centre, or neither by the
 # side priors below (Gantz: 2020 precedent of joining Netanyahu; Erdan
 # and Edelstein: Likud alumni).
 UNALIGNED = {"Blue and White": ("bw_right", "bw_centre"),
-             "Unity": ("unity_right", "unity_centre")}
+             "Unity": ("unity_right", "unity_centre"),
+             # Owner ruling 2026-09-09: the Reservists-Economic list (Hendel,
+             # Zelekha, Wilf) is counted like Blue and White - a kingmaker.
+             "Reservists – Economic Party": ("res_right", "res_centre")}
 HAREDI = ["Shas", "United Torah Judaism"]
 JOINT_LIST = "Balad + Hadash-Ta'al"
 RAAM = "Ra'am"
@@ -134,6 +137,13 @@ BEHAVIOR = {
     # Kingmaker side priors (declared; residual = sits out / opposition)
     "bw_right": 0.40, "bw_centre": 0.45,
     "unity_right": 0.60, "unity_centre": 0.25,
+    # Hendel: New Hope minister in the Bennett-Lapid government (2021),
+    # refused Netanyahu in 2021-22, on record in 2026 against a Netanyahu
+    # government AND against haredi/Arab partners ("a Zionist coalition");
+    # Zelekha and Wilf are anti-Netanyahu. Lower right-side prior than
+    # Gantz (who joined Netanyahu in 2020), a larger sit-out residual
+    # because his stated conditions rule out most feasible coalitions.
+    "res_right": 0.30, "res_centre": 0.45,
 }
 
 # PM allocation WITHIN a winning coalition — rotations are the Israeli norm
@@ -170,6 +180,7 @@ PM_NAMES = ["Eisenkot", "Bennett", "Liberman", "Lapid",
 # probabilities carry parameter uncertainty, not just seat uncertainty.
 BEHAVIOR_NEFF = {
     "bw_right": 10, "bw_centre": 10, "unity_right": 12, "unity_centre": 10,
+    "res_right": 10, "res_centre": 10,
     "amcha_right": 35,          # public, repeated pledge
     "amcha_center": 12,         # analog reasoning (Bennett-led condition)
     "raam_supports": 18,
