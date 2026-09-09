@@ -1,32 +1,46 @@
 list,sector,share_of_list,seats_from_sector
-Likud,arab,0.005,0.14
-Likud,centre_left,0.405,10.97
-Likud,haredi,0.012,0.33
-Likud,mixed,0.296,8.02
-Likud,religious_zionist,0.018,0.5
-Likud,russian_leaning,0.001,0.02
-Likud,secular_right,0.263,7.11
-Yashar,arab,0.006,0.16
-Yashar,centre_left,0.581,15.0
-Yashar,haredi,0.011,0.28
-Yashar,mixed,0.245,6.31
+Yashar,arab,0.006,0.15
+Yashar,centre_left,0.581,14.41
+Yashar,haredi,0.011,0.27
+Yashar,mixed,0.245,6.07
 Yashar,religious_zionist,0.008,0.19
-Yashar,russian_leaning,0.002,0.05
-Yashar,secular_right,0.148,3.81
+Yashar,russian_leaning,0.002,0.04
+Yashar,secular_right,0.148,3.66
+Likud,arab,0.005,0.12
+Likud,centre_left,0.405,9.55
+Likud,haredi,0.012,0.29
+Likud,mixed,0.296,6.99
+Likud,religious_zionist,0.018,0.43
+Likud,russian_leaning,0.001,0.02
+Likud,secular_right,0.263,6.2
 Bennett 2026 + Yesh Atid,arab,0.005,0.06
-Bennett 2026 + Yesh Atid,centre_left,0.612,7.4
-Bennett 2026 + Yesh Atid,haredi,0.006,0.08
-Bennett 2026 + Yesh Atid,mixed,0.234,2.83
-Bennett 2026 + Yesh Atid,religious_zionist,0.012,0.15
+Bennett 2026 + Yesh Atid,centre_left,0.612,6.73
+Bennett 2026 + Yesh Atid,haredi,0.006,0.07
+Bennett 2026 + Yesh Atid,mixed,0.234,2.58
+Bennett 2026 + Yesh Atid,religious_zionist,0.012,0.13
 Bennett 2026 + Yesh Atid,russian_leaning,0.001,0.01
-Bennett 2026 + Yesh Atid,secular_right,0.129,1.56
-The Democrats,arab,0.03,0.27
-The Democrats,centre_left,0.783,6.97
+Bennett 2026 + Yesh Atid,secular_right,0.129,1.42
+The Democrats,arab,0.03,0.28
+The Democrats,centre_left,0.783,7.44
 The Democrats,haredi,0.002,0.02
-The Democrats,mixed,0.136,1.21
+The Democrats,mixed,0.136,1.3
 The Democrats,religious_zionist,0.002,0.02
 The Democrats,russian_leaning,0.002,0.02
-The Democrats,secular_right,0.045,0.4
+The Democrats,secular_right,0.045,0.43
+Shas,arab,0.004,0.04
+Shas,centre_left,0.245,2.06
+Shas,haredi,0.15,1.26
+Shas,mixed,0.338,2.84
+Shas,religious_zionist,0.01,0.08
+Shas,russian_leaning,0.0,0.0
+Shas,secular_right,0.252,2.12
+Yisrael Beytenu,arab,0.008,0.07
+Yisrael Beytenu,centre_left,0.416,3.41
+Yisrael Beytenu,haredi,0.008,0.07
+Yisrael Beytenu,mixed,0.312,2.56
+Yisrael Beytenu,religious_zionist,0.008,0.06
+Yisrael Beytenu,russian_leaning,0.008,0.07
+Yisrael Beytenu,secular_right,0.24,1.96
 United Torah Judaism,arab,0.001,0.01
 United Torah Judaism,centre_left,0.121,0.97
 United Torah Judaism,haredi,0.436,3.49
@@ -34,52 +48,38 @@ United Torah Judaism,mixed,0.347,2.78
 United Torah Judaism,religious_zionist,0.007,0.05
 United Torah Judaism,russian_leaning,0.0,0.0
 United Torah Judaism,secular_right,0.088,0.71
-Yisrael Beytenu,arab,0.008,0.06
-Yisrael Beytenu,centre_left,0.416,3.29
-Yisrael Beytenu,haredi,0.008,0.06
-Yisrael Beytenu,mixed,0.312,2.46
-Yisrael Beytenu,religious_zionist,0.008,0.06
-Yisrael Beytenu,russian_leaning,0.008,0.07
-Yisrael Beytenu,secular_right,0.24,1.89
-Shas,arab,0.004,0.03
-Shas,centre_left,0.245,1.89
-Shas,haredi,0.15,1.16
-Shas,mixed,0.338,2.61
-Shas,religious_zionist,0.01,0.08
-Shas,russian_leaning,0.0,0.0
-Shas,secular_right,0.252,1.94
-Otzma Yehudit,arab,0.003,0.02
-Otzma Yehudit,centre_left,0.361,2.64
-Otzma Yehudit,haredi,0.036,0.26
-Otzma Yehudit,mixed,0.292,2.13
-Otzma Yehudit,religious_zionist,0.056,0.41
-Otzma Yehudit,russian_leaning,0.0,0.0
-Otzma Yehudit,secular_right,0.25,1.83
-Balad + Hadash-Ta'al,arab,0.775,4.26
-Balad + Hadash-Ta'al,centre_left,0.134,0.74
+Balad + Hadash-Ta'al,arab,0.775,5.97
+Balad + Hadash-Ta'al,centre_left,0.134,1.03
 Balad + Hadash-Ta'al,haredi,0.0,0.0
-Balad + Hadash-Ta'al,mixed,0.026,0.15
+Balad + Hadash-Ta'al,mixed,0.026,0.2
 Balad + Hadash-Ta'al,religious_zionist,0.0,0.0
-Balad + Hadash-Ta'al,russian_leaning,0.004,0.02
-Balad + Hadash-Ta'al,secular_right,0.061,0.34
-Ra'am,arab,0.879,3.43
-Ra'am,centre_left,0.077,0.3
+Balad + Hadash-Ta'al,russian_leaning,0.004,0.03
+Balad + Hadash-Ta'al,secular_right,0.061,0.47
+Otzma Yehudit,arab,0.003,0.02
+Otzma Yehudit,centre_left,0.361,2.39
+Otzma Yehudit,haredi,0.036,0.24
+Otzma Yehudit,mixed,0.292,1.93
+Otzma Yehudit,religious_zionist,0.056,0.37
+Otzma Yehudit,russian_leaning,0.0,0.0
+Otzma Yehudit,secular_right,0.25,1.65
+Religious Zionist Party,arab,0.001,0.0
+Religious Zionist Party,centre_left,0.352,1.76
+Religious Zionist Party,haredi,0.037,0.19
+Religious Zionist Party,mixed,0.272,1.36
+Religious Zionist Party,religious_zionist,0.115,0.57
+Religious Zionist Party,russian_leaning,0.0,0.0
+Religious Zionist Party,secular_right,0.223,1.12
+Ra'am,arab,0.879,3.6
+Ra'am,centre_left,0.077,0.32
 Ra'am,haredi,0.0,0.0
 Ra'am,mixed,0.01,0.04
 Ra'am,religious_zionist,0.0,0.0
 Ra'am,russian_leaning,0.001,0.0
-Ra'am,secular_right,0.034,0.13
+Ra'am,secular_right,0.034,0.14
 Amcha Yisrael,arab,0.004,0.01
-Amcha Yisrael,centre_left,0.388,0.93
-Amcha Yisrael,haredi,0.018,0.04
-Amcha Yisrael,mixed,0.293,0.7
-Amcha Yisrael,religious_zionist,0.04,0.1
+Amcha Yisrael,centre_left,0.388,0.7
+Amcha Yisrael,haredi,0.018,0.03
+Amcha Yisrael,mixed,0.293,0.53
+Amcha Yisrael,religious_zionist,0.04,0.07
 Amcha Yisrael,russian_leaning,0.001,0.0
-Amcha Yisrael,secular_right,0.256,0.61
-Religious Zionist Party,arab,0.001,0.0
-Religious Zionist Party,centre_left,0.352,0.74
-Religious Zionist Party,haredi,0.037,0.08
-Religious Zionist Party,mixed,0.272,0.57
-Religious Zionist Party,religious_zionist,0.115,0.24
-Religious Zionist Party,russian_leaning,0.0,0.0
-Religious Zionist Party,secular_right,0.223,0.47
+Amcha Yisrael,secular_right,0.256,0.46

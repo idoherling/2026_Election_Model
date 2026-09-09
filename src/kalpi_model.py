@@ -157,6 +157,14 @@ LINEAGE_2026 = {
                       "yisrael_beytenu": 0.10, "blue_white": 0.02},
     "raam": {"raam": 1.00},
     "balad+hadash_taal": {"hadash_taal": 0.65, "balad": 0.35},
+    # 2026-09-09 (dossier s.34): lists with real pass probability that had
+    # no lineage. Reservists-Economic (Hendel + Zelekha + Wilf): Hendel's
+    # New Hope voters went National Unity 58 / Likud 42 in 2022 (measured
+    # K24->K25); Zelekha's and Wilf's electorates are centre-left urban.
+    # Blue and White: its own 2022 pattern (National Unity 70 / Yesh Atid 30).
+    "zionist_home": {"blue_white": 0.50, "yesh_atid": 0.30, "likud": 0.10,
+                     "yisrael_beytenu": 0.05, "labor": 0.05},
+    "blue_white": {"blue_white": 0.70, "yesh_atid": 0.30},
 }
 
 

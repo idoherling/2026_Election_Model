@@ -1015,3 +1015,50 @@ without Arab seats 16.0 -> 13.7 (with Ra'am unchanged at 33.1; NB 15.5;
 deadlock 51.4); PM repeat election 34.8 -> 36.2, Eisenkot 28.2 -> 26.9,
 Netanyahu 22.4 -> 22.6. Formation: change without Ra'am 0.187 -> 0.162, with
 Ra'am 0.070 -> 0.080.
+
+## 34. Kolot Nodedim's K26 update (2026-09-07): a judgment cross-check, not new data
+
+The project (harelc/elections-vote-transfer, kolot-nodedim.netlify.app)
+pushed two commits on 7 September: a simulated 26th Knesset ("K26") retuned
+to that day's Madad 120 map, and D'Hondt seat-block displays. The MEASURED
+transition files we hold (2021->2022 and 2022->2023-25 with abstention,
+alpha estimates) are byte-identical to the repository's current copies; the
+2025->2026 files are outputs of the simulation, not measurements. K26 pushes
+every 2022 ballot through a hand-written TRANSFER_MATRIX (12 source lists x
+14 destination lists), per-source ROW_TURNOUT factors, a 7.5% roll-growth
+multiplier and Dirichlet noise (alpha 80), and is calibrated by hand to the
+poll map - so its outputs cannot be used as evidence about 2026. Its inputs
+are, however, an independent expert's judgment about vote flows, and that is
+worth comparing with our LINEAGE_2026 (which is calibrated on the measured
+K24->K25 kalpi matrix, R^2 0.889). Their matrix converted to destination
+composition on the official 2022 shares, no turnout factors:
+
+| 2026 list | Kolot Nodedim implied composition | ours (LINEAGE_2026) | verdict |
+|---|---|---|---|
+| Yashar | Yesh Atid 52 / Nat'l Unity 39 / Labor 4 / Meretz 3 | Nat'l Unity 45 / Yesh Atid 25 / Likud 15 / Labor 10 / Shas 5 | they give Eisenkot NO ex-Likud vote; our 15% is the N12-sourced soft-right crossover the certainty desk measured - kept |
+| Together | Yesh Atid 78 / Nat'l Unity 12 / Labor+Meretz 8 | Yesh Atid 60 / Likud 13 / Nat'l Unity 13 / RZP 9 / Jewish Home 5 | they give Bennett none of ex-Yamina's 2022 electorates (RZP/JH/Likud localities); the K24->K25 matrix says that is where Yamina's voters went - kept |
+| Likud | Likud 91 / RZP 6 | Likud 82 / Nat'l Unity 11 / RZP 7 | they have Likud retaining 73% with no inflow; we let Gantz-2022 localities feed Likud (Likud's 2022 vote was itself partly ex-B&W) |
+| Otzma | RZP 67 / Likud 30 | RZP 55 / Likud 30 / Shas 15 | close; our Shas 15 is the masorti-periphery term |
+| Amcha | Likud 52 / RZP 48 | Likud 47 / RZP 37 / YB 10 / JH 4 | close (the Ynet dati poll: Amcha's vote is ~20% national-religious, consistent with both) |
+| RZP-Zehut | RZP 76 / Likud 24 | RZP 90 / JH 10 | they route 10% of Likud 2022 into Smotrich; the dati poll's 70% national-religious share favours ours |
+| Democrats | Labor 38 / Meretz 33 / Yesh Atid 19 / Hadash 6 | Labor 50 / Meretz 50 | their 19% ex-Yesh Atid is plausible (Golan's polling exceeds Labor+Meretz 2022 by ~3 seats); a note for the next lineage revision |
+| Reservists-Economic | Nat'l Unity 52 / Yesh Atid 38 | (absent) | GAP in ours - added below |
+| Blue and White | Yesh Atid 41 / B&W 35 / YB 10 | (absent) | GAP in ours - added below |
+| Joint List | Hadash-Ta'al 51 / Balad 42 / Ra'am 5 | Hadash-Ta'al 65 / Balad 35 | both judgment; ours follows 2022 vote weights |
+
+Their ROW_TURNOUT is the striking part: Shas 0.62, Likud 0.80, RZP 0.84
+against Yisrael Beytenu 1.40, National Unity 1.18, Yesh Atid 1.08 - a
+40-50% differential-turnout swing against the right, which is the device that
+makes the hand matrix land on the poll map. The measured record runs the
+other way: haredi lists beat their final polls by +1.35 seats on average
+and 2022's haredi turnout surge is the reason; our haredi shock and
+HAREDI_FLOOR keep that sign. We do not adopt any of their turnout factors.
+
+**What changes here.** Two lists with real pass probability (Reservists-
+Economic 0.28, Blue and White 0.03) had no lineage in LINEAGE_2026, so the
+kalpi poststrat and capacity truncation ignored them. Added: Reservists-
+Economic = Nat'l Unity 0.50 / Yesh Atid 0.30 / Likud 0.10 / YB 0.05 / Labor
+0.05 (Hendel's New Hope voters went NU 58 / Likud 42 in 2022; Zelekha's NEP
+and Wilf are centre-left Tel Aviv electorates); Blue and White = its own
+2022 pattern, NU 0.70 / Yesh Atid 0.30. Unity (withdrew) needs none.
+Nothing else in the projection changes.
