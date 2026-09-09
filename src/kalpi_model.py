@@ -165,6 +165,13 @@ LINEAGE_2026 = {
     "zionist_home": {"blue_white": 0.50, "yesh_atid": 0.30, "likud": 0.10,
                      "yisrael_beytenu": 0.05, "labor": 0.05},
     "blue_white": {"blue_white": 0.70, "yesh_atid": 0.30},
+    # Micro-lists (filed 2026-09-08): Noam ran inside RZP/Otzma lists and
+    # draws from the hardal electorate; the Haredi Public is a haredi
+    # protest list; Israel First (Haskel, ex-New Hope/Likud, with Aleh
+    # Yarok) is secular-right.
+    "noam": {"rzp": 0.70, "utj": 0.30},
+    "haredi_public": {"utj": 0.50, "shas": 0.50},
+    "israel_first": {"likud": 0.50, "yisrael_beytenu": 0.30, "rzp": 0.20},
 }
 
 
@@ -322,7 +329,9 @@ def poststratify_2026(sectors: pd.DataFrame, panel: pd.DataFrame):
                "Balad + Hadash-Ta'al": "balad+hadash_taal",
                "Reservists – Economic Party": "zionist_home",
                "Blue and White": "blue_white",
-               "Amcha Yisrael": "amcha_yisrael"}
+               "Amcha Yisrael": "amcha_yisrael",
+               "Noam": "noam", "The Haredi Public": "haredi_public",
+               "Israel First": "israel_first"}
     rows = []
     for r in fc.itertuples():
         lid = NAME2ID.get(r.list)

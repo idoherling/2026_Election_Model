@@ -449,8 +449,9 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
   <h2>Where the seats actually live</h2>
   <p class="lede">The forecast poststratified through the polling-station record: official
   per-locality results for 2019–2022 cluster Israel's localities into political sectors, and each
-  2026 list's projected seats are allocated to the sectors it draws from via measured voter-flow
-  lineages. Turnout per sector is measured from the same administrative data — this is what makes
+  2026 list's expected seats — its mean over the simulations, so a list below the threshold today
+  still appears with its fractional expectation — are allocated to the sectors it draws from via
+  measured voter-flow lineages. Turnout per sector is measured from the same administrative data — this is what makes
   a national number physically checkable: a list cannot take more of a sector's votes than that
   sector casts.</p>
   <div class="sheet" id="ground-rows"></div>
@@ -930,7 +931,7 @@ function trStatic(){
   document.querySelector(".brand").childNodes[0].textContent = HE_STATIC["The Knesset Model"];
   const SF = document.querySelector(".standfirst"); if (SF) SF.innerHTML = HE_LEDE.standfirst;
   const LK = {seats:"seats",threshold:"threshold",blocdist:"blocdist",builder:"builder",
-              formation:"formation",ground:"ground",pollsters:"pollsters",method:"method",
+              formation:"formation",ground:"ground כל רשימה מוצגת לפי <b>המנדטים הצפויים</b> שלה — הממוצע על פני הסימולציות — ולכן גם רשימה שנמצאת היום מתחת לאחוז החסימה מופיעה עם הציפייה השברית שלה.",pollsters:"pollsters",method:"method",
               ratings:"ratings",polls:"polls"};
   for (const id in LK){ const el = document.querySelector("#"+id+" .lede");
     if (el && HE_LEDE[id]) el.innerHTML = HE_LEDE[id]; }
@@ -1366,11 +1367,14 @@ renderBlocHist("anti");
     });
     html += `</div></div>`;
   });
-  html += `<p class="note" style="margin-top:12px">Sectors from clustering 1,221 localities'
-    official 2022 vote profiles; each bar allocates a list's projected seats to the sectors its
+  html += HEB_MODE
+    ? `<p class="note" style="margin-top:12px">המגזרים נוצרו מקיבוץ פרופילי ההצבעה הרשמיים של 1,221 יישובים ב־2022; כל פס מקצה את המנדטים הצפויים של רשימה (הממוצע על פני הסימולציות, ולכן גם רשימות שמתחת לאחוז החסימה מופיעות בחלקי מנדט) למגזרים שבהם חי ציבור בוחריה, לפי משקלי שושלת המכוילים על מעברי קולות מדודים ברמת הקלפי. אורך הפס יחסי למספר בעלי זכות הבחירה במגזר; רוחב המקטעים מחלק את מנדטי המגזר לפי רשימה. רחפו מעל כל מקטע.</p>`
+    : `<p class="note" style="margin-top:12px">Sectors from clustering 1,221 localities'
+    official 2022 vote profiles; each bar allocates a list's expected seats (the mean over the
+    simulations, so lists below the threshold appear with fractional seats) to the sectors its
     electorate lives in, via lineage weights calibrated on measured kalpi-level voter flows.
     Bar length is proportional to each sector's eligible voters; segment widths split the
-    sector's projected seats by list. Hover any segment.</p>`;
+    sector's expected seats by list. Hover any segment.</p>`;
   const box = $("#ground-rows");
   box.innerHTML = html;
   box.addEventListener("pointermove", ev=>{

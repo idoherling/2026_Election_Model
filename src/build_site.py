@@ -18,7 +18,7 @@ Key -> source:
   house     house_effects_blocs.csv (Netanyahu-bloc unit, 2026, n >= 10)
   counts    polls.csv
   draws     mixture_draws.parquet (2,500-row sample; columns with any seats)
-  kalpi     kalpi_sectors.csv + kalpi_poststrat_2026.csv x current seats
+  kalpi     kalpi_sectors.csv + kalpi_poststrat_2026.csv x expected seats (mixture mean)
   val       carried forward from the previous payload (backtest numbers
             change only when the harness is re-run)
   fit       fit_summary.json (written by bayes_model.main) + CEC filing count
@@ -170,7 +170,10 @@ def build_payload() -> dict:
     draw_cols = list(samp.columns)
     draws = samp.values.tolist()
 
-    seats_by = dict(zip(off["list"], off["central_seats"]))
+    # Expected seats (the mixture mean), not the central count: a list at
+    # 0 central seats but a real pass probability (Amcha, the Reservists,
+    # Blue and White) still lives somewhere, and the micro-lists too.
+    seats_by = dict(zip(mix["list"], mix["mean"]))
     ps = pd.read_csv(PROCESSED / "kalpi_poststrat_2026.csv")
     ps["seats_now"] = ps["list"].map(seats_by).fillna(0) * ps["share_of_list"]
     loc = pd.read_csv(PROCESSED / "kalpi_sectors.csv")
