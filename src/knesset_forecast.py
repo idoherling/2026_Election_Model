@@ -37,7 +37,7 @@ def bloc_color(b: str) -> str:
 SPECTRUM = [
     "Balad + Hadash-Ta'al + Ra'am", "Balad + Hadash-Ta'al", "Ra'am",
     "The Democrats", "Together", "Bennett 2026 + Yesh Atid", "Yashar",
-    "Blue and White", "Zionist Home – The Reservists", "Unity",
+    "Blue and White", "Reservists – Economic Party", "Unity",
     "New Economic Party", "Yisrael Beytenu", "Likud",
     "Religious Zionist Party", "Otzma Yehudit", "Zehut", "Noam",
     "Shas", "United Torah Judaism",

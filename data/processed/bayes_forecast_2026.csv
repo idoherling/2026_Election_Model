@@ -1,23 +1,19 @@
 list,bloc,mean,p05,p50,p95,p_pass,p_largest,asof
-Yashar,Anti-Netanyahu bloc,23.6,16,24,32,1.0,0.517,2026-09-04
-Likud,Netanyahu bloc,23.2,16,23,31,1.0,0.477,2026-09-04
-Bennett 2026 + Yesh Atid,Anti-Netanyahu bloc,11.9,6,12,18,0.993,0.005,2026-09-04
-The Democrats,Anti-Netanyahu bloc,9.6,5,10,14,0.98,0.0,2026-09-04
-Shas,Netanyahu bloc,8.4,5,8,11,0.992,0.0,2026-09-04
-Yisrael Beytenu,Anti-Netanyahu bloc,8.3,4,8,13,0.956,0.0,2026-09-04
-United Torah Judaism,Netanyahu bloc,8.2,6,8,11,0.994,0.0,2026-09-04
-Balad + Hadash-Ta'al,Arab parties,7.9,0,8,13,0.922,0.0,2026-09-04
-Otzma Yehudit,Netanyahu bloc,6.7,0,7,11,0.889,0.0,2026-09-04
-Religious Zionist Party,Netanyahu bloc,4.7,0,5,9,0.738,0.0,2026-09-04
-Ra'am,Arab parties,4.1,0,5,8,0.691,0.0,2026-09-04
-Amcha Yisrael,Netanyahu bloc,1.9,0,0,8,0.293,0.001,2026-09-04
-Zionist Home – The Reservists,Anti-Netanyahu bloc,1.2,0,0,6,0.223,0.0,2026-09-04
-Unity,Unaligned,0.2,0,0,0,0.043,0.0,2026-09-04
-Blue and White,Unaligned,0.1,0,0,0,0.025,0.0,2026-09-04
-Noam,Netanyahu bloc,0.0,0,0,0,0.0,0.0,2026-09-04
-New Economic Party,unknown,0.0,0,0,0,0.0,0.0,2026-09-04
-The Haredi Public,Netanyahu bloc,0.0,0,0,0,0.0,0.0,2026-09-04
-Israel First,unknown,0.0,0,0,0,0.0,0.0,2026-09-04
-A Place for All of Us,Anti-Netanyahu bloc,0.0,0,0,0,0.0,0.0,2026-09-04
-The Fourth Quarter,unknown,0.0,0,0,0,0.0,0.0,2026-09-04
-El HaDegel,unknown,0.0,0,0,0,0.0,0.0,2026-09-04
+Yashar,Anti-Netanyahu bloc,24.6,17,24,33,1.0,0.591,2026-09-09
+Likud,Netanyahu bloc,23.0,16,23,31,1.0,0.407,2026-09-09
+Bennett 2026 + Yesh Atid,Anti-Netanyahu bloc,10.9,6,11,17,0.985,0.001,2026-09-09
+The Democrats,Anti-Netanyahu bloc,9.7,5,10,14,0.984,0.0,2026-09-09
+Shas,Netanyahu bloc,8.4,6,8,11,0.994,0.0,2026-09-09
+Yisrael Beytenu,Anti-Netanyahu bloc,8.1,4,8,12,0.955,0.0,2026-09-09
+United Torah Judaism,Netanyahu bloc,8.1,6,8,11,0.995,0.0,2026-09-09
+Balad + Hadash-Ta'al,Arab parties,7.7,0,8,12,0.935,0.0,2026-09-09
+Otzma Yehudit,Netanyahu bloc,6.7,0,7,11,0.901,0.0,2026-09-09
+Religious Zionist Party,Netanyahu bloc,5.0,0,6,9,0.782,0.0,2026-09-09
+Ra'am,Arab parties,4.1,0,5,8,0.705,0.0,2026-09-09
+Amcha Yisrael,Netanyahu bloc,1.8,0,0,8,0.291,0.0,2026-09-09
+Reservists – Economic Party,Anti-Netanyahu bloc,1.5,0,0,7,0.285,0.0,2026-09-09
+Unity,Unaligned,0.2,0,0,0,0.048,0.0,2026-09-09
+Blue and White,Unaligned,0.1,0,0,0,0.025,0.0,2026-09-09
+Noam,Netanyahu bloc,0.0,0,0,0,0.0,0.0,2026-09-09
+The Haredi Public,Netanyahu bloc,0.0,0,0,0,0.0,0.0,2026-09-09
+Israel First,unknown,0.0,0,0,0,0.0,0.0,2026-09-09

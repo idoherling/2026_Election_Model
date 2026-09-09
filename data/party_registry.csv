@@ -12,9 +12,9 @@ yashar,Yashar,ישר,opposition_bloc,Eisenkot|Eizenkot,Gadi Eisenkot's party aft
 democrats,The Democrats,הדמוקרטים,opposition_bloc,Dems|Golan,Labor-Meretz merger led by Yair Golan
 labor,Labor,העבודה,opposition_bloc,HaAvoda|Avoda,pre-merger; component of The Democrats from 2024
 meretz,Meretz,מרצ,opposition_bloc,,pre-merger; component of The Democrats from 2024
-blue_white,Blue and White,כחול לבן,unaligned,Blue & White|B&W|National Unity|NUP / B&W – NH|Gantz|State Camp,"UNALIGNED (owner ruling 2026-09-03): Gantz sat in Netanyahu's 2020 government; kingmaker, not a change-bloc list"
+blue_white,Blue and White,כחול לבן,unaligned,Blue & White|B&W|National Unity|NUP / B&W – NH|Gantz|State Camp,"UNALIGNED (owner ruling 2026-09-03): Gantz sat in Netanyahu's 2020 government; kingmaker, not a change-bloc list" | FILED 2026-09-08 (Gantz #1; letters כן)
 unity,Unity,אחדות,unaligned,,"WITHDREW 2026-09-04: Erdan announced the party will not run (threshold risk; Blue & White merger talks failed that day); Edelstein/Bloch not running. UNALIGNED (owner ruling 2026-09-03): Erdan + Edelstein are Likud alumni; kingmaker, not a change-bloc list"
-zionist_home,Zionist Home – The Reservists,הבית הציוני,opposition_bloc,Zionist Home|Hendel party|Reserv.|The Reservists,Hendel + Tropper; VERIFY bloc assignment
+zionist_home,Reservists – Economic Party,המילואימניקים והכלכלית,opposition_bloc,Zionist Home|Hendel party|Reserv.|The Reservists|Reserv. - NEP|Reservists - NEP|Reservists – NEP|Hendel-Zelekha|Zionist Home – The Reservists,"FILED 2026-09-08 as המילואימניקים והכלכלית (Hendel #1 / Zelekha #1-equal / Wilf #3; requested letters די). History: Zionist Home – The Reservists (Hendel + Tropper) dissolved 2026-09-06; Tropper joined Yashar (#6); Zelekha's New Economic Party folded in the same day (nep absorbed). Series continuity kept: -Tropper +NEP roughly offset (ZH polled 2-3%; new list 4 seats in Kantar 6 Sep / Lazar 8 Sep, below threshold elsewhere). Hendel: will not sit in a Netanyahu government; wants a Zionist coalition without haredi/Arab parties (Ynet, Kikar) -> opposition bloc, haredi-averse"
 new_hope,New Hope,תקווה חדשה,netanyahu_bloc,Sa'ar|Tikva Hadasha,Sa'ar; split from National Unity; merged into Likud for 2026
 yisrael_beytenu,Yisrael Beytenu,ישראל ביתנו,opposition_bloc,Yisrael Beiteinu|Israel Beiteinu|YB|Liberman,
 raam,Ra'am,"רע""ם",other,United Arab List|Mansour Abbas,
@@ -43,7 +43,7 @@ otzma_noam,Otzma Yehudit-Noam,עוצמה יהודית-נעם,netanyahu_bloc,Otzm
 zionist_spirit,Zionist Spirit,הרוח הציונית,unknown,Zionist Spirit/ Yamina,Shaked; 2022
 israelis,The Israelis,הישראלים,opposition_bloc,Israelis|Huldai,Huldai; 2021; did not run
 idp,Israel Democratic Party,מפלגה דמוקרטית ישראלית,opposition_bloc,IDP,Barak; 2019s; merged into Democratic Union
-nep,New Economic Party,המפלגה הכלכלית החדשה,unknown,NEP|New Economic,Zelekha; 2021
+nep,New Economic Party,המפלגה הכלכלית החדשה,unknown,NEP|New Economic,Zelekha; 2021 | ABSORBED 2026-09-06 into Reservists – Economic Party (zionist_home); not a separate list in 2026
 tnufa,Tnufa,תנופה,unknown,,Hendel-Hauser vehicle
 derekh_eretz,Derekh Eretz,דרך ארץ,unknown,,Hendel-Hauser; 2020-2021
 greens,The Greens,הירוקים,unknown,Green|Greens,minor list in pre-2019 tables
@@ -55,10 +55,10 @@ deri,Aryeh Deri list,רשימת דרעי,unknown,Aryeh Deri|Deri,polled 2012 bef
 yachad_yishai,Yachad (Yishai),יחד,netanyahu_bloc,Yachad,Eli Yishai 2015; distinct from the 2026 Together list
 otzma_leyisrael,Otzma LeYisrael,עוצמה לישראל,netanyahu_bloc,Strong Israel,Eldad-Ben Ari 2013; precursor of Otzma Yehudit
 amcha_yisrael,Amcha Yisrael,עמך ישראל,netanyahu_bloc,Amcha|Winter|Winter party,Ofer Winter (ex-Givati); launched 2026-08-25; pro-Netanyahu right ('will only recommend him' - stated but soft per analysts); anti-Eisenkot; refuses mergers; draws ~69% from NB bloc
-noam,Noam,נעם,netanyahu_bloc,Maoz,Avi Maoz; historically ran inside RZP/Otzma lists
-haredi_public,The Haredi Public,הציבור החרדי,netanyahu_bloc,Haredi Public,new haredi list; polled under Others at 1.2-1.5% Jul-Aug 2026 (name provisional from EN press)
-israel_first,Israel First,ישראל ראשונה,unknown,,polled under Others at 0.3-0.6% Aug 2026 (name provisional from EN press)
+noam,Noam,נעם,netanyahu_bloc,Maoz|Neemanu|Noam LeYisrael|נאמנו,Avi Maoz; historically ran inside RZP/Otzma lists | FILED 2026-09-08 alone as נעם לישראל (requested letters ני)
+haredi_public,The Haredi Public,הציבור החרדי,netanyahu_bloc,Haredi Public,new haredi list; polled under Others at 1.2-1.5% Jul-Aug 2026 (name provisional from EN press) | FILED 2026-09-08 (Leitner; requested letters זך)
+israel_first,Israel First,ישראל תחילה,unknown,Israel First|Haskel|Aleh Yarok,polled under Others at 0.3-0.6% Aug 2026 (name provisional from EN press) | FILED 2026-09-08 (Haskel; union with Aleh Yarok 3 Sep)
 fiery_youth,Fiery Youth,צעירים בוערים,unknown,Tzeirim Boarim|Hadar Muchtar,NOT running 2026 (owner ruling Sept 1): Muchtar leads Likud's youth campaign. Was 0.4% under small-parties footnotes (Lazar 27 Aug)
-fourth_quarter,The Fourth Quarter,הרבע הרביעי,unknown,,0.5% under Others once (18 Jun 2026); not itemized since
-el_dagel,El HaDegel,אל הדגל,unknown,El Dagel,0.4% under Others once (18 Jun 2026); not itemized since
-makom_lekulanu,A Place for All of Us,מקום לכולנו,opposition_bloc,Makom Lekulanu|Standing Together,Standing Together list (Rula Daoud + Alon-Lee Green); Afkar Sept 2026 Arab-sector poll: 7% of sector (~0.7-1.3% national dep. on turnout assumptions); Jewish support unmeasured; merger scenarios polled: JL+Makom 53% (+8pp synergy) vs Raam+Makom 26% (additive); also seen in one CEC filing
+fourth_quarter,The Fourth Quarter,הרבע הרביעי,unknown,,0.5% under Others once (18 Jun 2026); not itemized since | did not file a list 2026-09-08
+el_dagel,El HaDegel,אל הדגל,unknown,El Dagel,0.4% under Others once (18 Jun 2026); not itemized since | did not file a list 2026-09-08
+makom_lekulanu,A Place for All of Us,מקום לכולנו,opposition_bloc,Makom Lekulanu|Standing Together,Standing Together list (Rula Daoud + Alon-Lee Green); Afkar Sept 2026 Arab-sector poll: 7% of sector (~0.7-1.3% national dep. on turnout assumptions); Jewish support unmeasured; merger scenarios polled: JL+Makom 53% (+8pp synergy) vs Raam+Makom 26% (additive); also seen in one CEC filing | WITHDREW before filing (did not submit a list by 2026-09-08; he.wikipedia filing record)

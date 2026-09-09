@@ -52,7 +52,7 @@ SEED = 20261027
 NB_CORE = ["Likud", "Otzma Yehudit", "Shas", "United Torah Judaism",
            "Religious Zionist Party", "Noam", "Zehut"]
 CENTRE = ["Yashar", "Bennett 2026 + Yesh Atid", "The Democrats",
-          "Yisrael Beytenu", "Zionist Home – The Reservists"]
+          "Yisrael Beytenu", "Reservists – Economic Party"]
 # Kingmakers (owner ruling 2026-09-03): neither list is a change-bloc
 # member. Each draw sends its seats right, centre, or neither by the
 # side priors below (Gantz: 2020 precedent of joining Netanyahu; Erdan

@@ -147,7 +147,17 @@ RESOLVED: dict = {"segalovitz_joins_raam": True,
                   # vector (Likud .45 / Yashar .25 / YB .10 / ...) applies
                   # in every draw; the Erdan-Gantz union can no longer file.
                   "unity_folds": True,
-                  "centre_union_files": False}
+                  "centre_union_files": False,
+                  # FILING DAY 2026-09-08/09 (38 lists filed; CEC approval
+                  # Sept 27): Blue and White FILED (Gantz #1, letters כן),
+                  # so it does not fold; the Reservists FILED as
+                  # "Reservists - Economic Party" (Hendel + Zelekha + Wilf)
+                  # after Tropper left for Yashar on Sept 6 - the
+                  # zionist_home series continues as that list and does
+                  # not fold. Every registration event is now resolved:
+                  # the mixture is a single configuration.
+                  "zionist_home_folds": False,
+                  "blue_white_folds": False}
 
 
 def _col(comps, component):

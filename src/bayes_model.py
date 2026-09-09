@@ -378,19 +378,15 @@ MICRO_POLLED = {
     # zehut RETIRED 2026-09-03: pollsters now publish a single "RZP - Zehut"
     # column (Sept 2 wave), so its support lives inside the rzp poll stream;
     # carving it separately would count Zehut's voters twice.
-    "noam": (0.004, 0.003),            # 0.3% Filber 27 Aug; "<1%" elsewhere
-    "nep": (0.013, 0.004),             # 1.0-1.7%, Aug 2026
-    "haredi_public": (0.013, 0.004),   # 1.2-1.5% Jul-Aug (Midgam 31 Aug: 1.2%)
-    "israel_first": (0.004, 0.003),    # 0.3-0.6% Aug 2026 (Lazar/Direct Polls)
-    # Standing Together's list (Daoud/Green): Afkar Sept 2026 Arab-sector
-    # poll has it at 7% of the sector, which is 0.7-1.3% of the national
-    # vote depending on the turnout basis (their 60% assumption vs our
-    # measured 54%); its Jewish support is unmeasured, so the sd is wide.
-    "makom_lekulanu": (0.010, 0.006),
+    # Filing day 2026-09-08/09 (38 lists filed): only lists that FILED
+    # remain here. nep ABSORBED into the Reservists-Economic list (its
+    # archive column, "Reserv. - NEP", is the zionist_home series);
+    # makom_lekulanu, fourth_quarter, el_dagel did not file.
+    "noam": (0.004, 0.003),            # filed alone as Noam LeYisrael; 0.3% Filber 27 Aug / 3 Sep
+    "haredi_public": (0.013, 0.004),   # filed (Leitner); 1.2-1.5% Jul-Aug (Midgam 31 Aug: 1.2%)
+    "israel_first": (0.004, 0.003),    # filed (Haskel + Aleh Yarok); 0.3-0.6% Aug 2026
     # fiery_youth REMOVED (owner ruling, Sept 1): not running — Muchtar
     # is leading Likud's youth campaign.
-    "fourth_quarter": (0.002, 0.002),  # 0.5% once (18 Jun); not itemized since
-    "el_dagel": (0.002, 0.002),        # 0.4% once (18 Jun); not itemized since
 }
 # 2. MICRO_REALIZE — how sub-threshold lists' final itemized polls translated
 #    into actual votes in the graded record:
@@ -423,7 +419,12 @@ MICRO_PRIORS = {
 #   2026-09-02: pollsters switched to a single "RZP - Zehut" column (5-6
 #   seats vs 3.3 for RZP alone the week before). Before that Zehut lived
 #   only in the small-party footnotes at ~1.6%, retained at 0.9 on merger.
-ABSORBED_IDS = {"zehut"}   # inside RZP-Zehut from 2026-09-02 (see STRUCTURAL_BREAKS)
+ABSORBED_IDS = {"zehut",   # inside RZP-Zehut from 2026-09-02 (see STRUCTURAL_BREAKS)
+                "nep"}     # inside Reservists-Economic from 2026-09-06 (archive column "Reserv. - NEP" -> zionist_home)
+# From these dates a CEC filing's separate line for the absorbed list (a
+# scenario table left in the report) would double count voters already in
+# the absorbing list's line: dropped before the filing is summed.
+ABSORBED_FROM = {"zehut": "2026-09-02", "nep": "2026-09-06"}
 STRUCTURAL_BREAKS = [
     {"component": "rzp", "from": "2026-09-02", "add_share": 0.9 * 0.016,
      "note": "Zehut absorbed into the RZP-Zehut technical bloc"},
@@ -652,6 +653,8 @@ def _merge_cec(obs: pd.DataFrame, block_of: dict, asof) -> pd.DataFrame:
                            parse_dates=["fieldwork_end"], dtype={"ref": str})
     except FileNotFoundError:
         return obs
+    for pid, since in ABSORBED_FROM.items():
+        pcts = pcts[~((pcts["party_id"] == pid) & (pcts["fieldwork_end"] >= since))]
     sums = pcts.groupby("ref")["raw_pct"].sum()
     # A filing is trusted when its party table accounts for the sample:
     # parties alone within 90-105%, or parties plus the undecided share the

@@ -54,6 +54,7 @@ EDITOR_MAP = {
     "טאטיקה מחקרים ומדיה": "Tatika",
     "מאגר מוחות": "Maagar Mochot",
     "דיאלוג": "Dialog",
+    "אפקאר מחקרים וידע": "Afkar",     # Arab-sector specialist (sector stream)
 }
 
 # Keyword (appears intact even in scrambled lines) -> party_id.
@@ -89,9 +90,22 @@ PARTY_KEYWORDS = [
     ("אחודות", "unity"), ("אחדות", "unity"), ("ארדן", "unity"),
     ("אדלשטיין", "unity"),
     ("עמך", "amcha_yisrael"), ("וינטר", "amcha_yisrael"),
-    ("זהות", "zehut"), ("נעם", "noam"),
+    # "זהות" is NOT a keyword: since the Sept 2 technical bloc it names the
+    # RZP-Zehut list (matched by its RZP tokens above) or a merger
+    # SCENARIO line ("if RZP + Amcha + Zehut united ... 8.9%"), never a
+    # list of its own.
+    ("נעם", "noam"),
+    # Filing-day lists (Sept 8): the Reservists-Economic list (Hendel +
+    # Zelekha) continues the zionist_home series; pre-merger NEP lines map
+    # to the absorbed id so they are not mistaken for the merged list.
+    ("המילואימניקים", "zionist_home"), ("המילואמיניקים", "zionist_home"),
+    ("הכלכלית החדשה", "nep"), ("המפלגה הכלכלית", "nep"),
+    ("הציבור החרדי", "haredi_public"), ("ישראל תחילה", "israel_first"),
     ("מקום לכולנו", "makom_lekulanu"), ("לכולנו מקום", "makom_lekulanu"),
 ]
+# Lines that pose a hypothetical ("if X and Y united ...") are scenario
+# tables, not the vote-intention table.
+SCENARIO_TOKENS = ("איחוד", "יתאחדו", "אם יהיה", "אם  יהיה", "להצטרף")
 UNDECIDED_TOKENS = ("יודע לא", "לא יודע", "מתלבט", "החלטתי לא", "לא החלטתי")
 
 PCT = re.compile(r"(\d{1,2}(?:\.\d{1,2})?)%")
@@ -219,10 +233,22 @@ def parse_pdf(path: Path):
     parties = {}
     if not national:
         return meta, []
-    for ln in lines:
+    for i, ln in enumerate(lines):
+        if any(t in ln for t in SCENARIO_TOKENS):
+            continue
         runs = PCT_RUN.findall(ln)
         if not runs:
-            continue
+            # A long list name wraps: the keyword sits on this line and the
+            # percentage on the next, which names no party of its own.
+            nxt = lines[i + 1] if i + 1 < len(lines) else ""
+            if (any(kw in ln for kw, _ in PARTY_KEYWORDS)
+                    and not any(kw in nxt for kw, _ in PARTY_KEYWORDS)
+                    and not any(t in nxt for t in SCENARIO_TOKENS)):
+                runs = PCT_RUN.findall(nxt)
+                if runs:
+                    ln = ln + " " + nxt
+            if not runs:
+                continue
         for kw, pid in PARTY_KEYWORDS:
             if kw in ln and pid not in parties:
                 # a seat count glued after the first percentage ("4.40%6")

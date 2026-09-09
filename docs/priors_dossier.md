@@ -912,3 +912,71 @@ a Zehut column of its own would count those voters twice). The list
 count is back to 15 and the fit was rerun on the corrected data. Lesson:
 a build whose bloc odds move by eight points on one poll is a data
 defect until proven otherwise - check the component list first.
+
+## 31. Filing day (2026-09-08/09): the mixture collapses to one configuration
+
+**What filed.** 38 lists were submitted to the CEC on 7-8 September (chair Justice
+Sohlberg; names and letters are examined and approved by 27 September). The
+modeled lists and what changed:
+
+| list | filed as | what changed on filing |
+|---|---|---|
+| Yashar | ישר! (requested דרך) | Tropper joined at #6 after Zionist Home–Reservists dissolved (6 Sept); Stern, Folkman also on the list |
+| Together | ביחד (ב / רק) | Bennett–Eisenkot union finally off (7 Sept); asked for ב, contested by Otzma (Ben-Gvir's municipal precedence) |
+| Likud | מחל | reserved slots filled (Medan, Gueili, Peter); Avivi withdrew to be an outside minister |
+| RZP–Zehut | הציונות הדתית–זהות (ט) | Feiglin #2; Amcha merger refused; Yossi Bachar added |
+| Otzma | עוצמה יהודית (ב requested) | Gotliv #2 (from Likud) |
+| Amcha Yisrael | עמך ישראל (ך) | Winter refused every merger; Haddad #2 |
+| Reservists – Economic Party | המילואימניקים והכלכלית (די) | Hendel + Zelekha (co-#1) + Wilf #3; continues the zionist_home series (Tropper's part to Yashar, NEP's in) |
+| Blue and White | כחול לבן (כן) | Gantz FILED (Tamano-Shata #2); Biton left; Hendel asked him to quit |
+| Ra'am | רע"ם (עם) | Segalovitz #2 as agreed |
+| Joint List | הרשימה המשותפת (ודם) | Jabareen, Tibi, Abu Shahada; Balad inside |
+| Noam | נעם לישראל (ני) | filed alone |
+| Haredi Public | הציבור החרדי (זך) | filed (Leitner); refused Winter's offer |
+| Israel First | ישראל תחילה (יר) | filed (Haskel; Aleh Yarok joined 3 Sept) |
+| Unity | — | withdrew 4 Sept |
+| Makom Lekulanu, Fourth Quarter, El HaDegel | — | did not file |
+
+**Model consequences.** `RESOLVED` now closes the last two events
+(`zionist_home_folds` False, `blue_white_folds` False): the mixture is a single
+configuration. The registry's zionist_home row is renamed Reservists – Economic
+Party with the archive's new column label ("Reserv. - NEP") as an alias; the
+series is kept continuous (Tropper out, Zelekha in roughly offset: 2-3% before,
+4 seats in Kantar 6 Sept and Lazar 8 Sept, below threshold elsewhere). `nep`
+joins `ABSORBED_IDS` (its pre-merger lines in filings are dropped from 6 Sept
+by `ABSORBED_FROM`, as Zehut's are from 2 Sept, so a scenario table left in
+a report cannot double count). MICRO_POLLED keeps only lists that filed
+(noam, haredi_public, israel_first). Formation: the Reservists–Economic list
+stays in the centre set — Hendel is on record refusing a Netanyahu government
+and wanting a Zionist coalition without haredi or Arab parties (Ynet, Kikar),
+which the existing haredi-inclusion defection gate already prices. Ballot
+letters on the site are the REQUESTED ones (Together shown with its
+alternative רק while ב is contested), flagged until the 27 Sept ruling.
+
+**CEC parser, third pass.** The new filings exposed two more formats: Kantar
+wraps a long list name onto the next line (the percentage sits on the line
+after the keyword), and several reports keep merger SCENARIO tables ("if RZP,
+Amcha and Zehut united ... 8.9%") whose lines contain party names. The old
+keyword "זהות" therefore attributed a scenario line to a phantom Zehut column
+(Kantar 8.9%, Filber 27% — the latter pushed a good filing over the sum
+filter). Fixes: wrapped names read the next line; scenario tokens skip the
+line; Zehut is no longer a keyword (it has been inside RZP since 2 Sept);
+keywords added for the Reservists–Economic list, the Haredi Public and Israel
+First. 40 of 57 filings are now merge-eligible (Afkar's Arab-sector filing,
+ref 4126, is the sector-stream poll already in the model - it is not a
+national table and is excluded by design).
+
+**Polls.** Six national polls since the last update (Lazar/Maariv 4 and 8
+Sept, Kantar/Kan 6 Sept, Filber/Ch14 7 Sept, Midgam/N12 7 Sept, Lazar/Walla
+9 Sept; 741 in the cycle) and seven CEC filings (57 indexed).
+
+**Refit (9 Sept).** 183 polls / 2,332 observations / 40 filings merged; 0
+divergences, r-hat 1.01, ESS 553, holdout 0.70 seats. Headline: P(NB>=61)
+15.0 / change bloc 22.8 / with Ra'am 41.4 / deadlock 43.7; PM repeat election
+32.5 / Eisenkot 31.7 / Netanyahu 20.4 / Bennett 8.2. Central: Yashar 25,
+Likud 23, Together 11, Democrats 10, Shas 9, UTJ 8, YB 8, Joint List 8, Otzma
+7, RZP-Zehut 6 (pass .78), Ra'am 5 (.70); Amcha 0 (.28), Reservists-Economic
+0 (.28), Blue and White 0 (.03). Filing day moved almost nothing: the events
+that resolved were already priced near their outcomes (B&W and the Reservists
+each filed at roughly their fold-vs-file odds), and the news of the week is
+the Reservists-Economic list joining Amcha at the threshold line.

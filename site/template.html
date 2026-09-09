@@ -358,8 +358,8 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
       border-bottom:1px solid var(--hit);padding-bottom:10px;margin-bottom:6px"></div>
     <svg id="hemi" viewBox="0 -6 720 312" role="img" aria-label="Hemicycle of 120 projected Knesset seats" style="width:100%;height:auto;display:block"></svg>
     <div class="legend" id="hemiLegend"></div>
-    <figcaption style="margin-top:10px">Central seat allocation (largest-remainder over lists with P(pass) ≥ 50%),
-    grouped by camp — brackets mark the blocs; Arab-list seats are drawn as rings. Each list keeps its
+    <figcaption style="margin-top:10px">Central seat allocation (the mixture's median vote shares passed once through the 3.25%
+    threshold and Bader–Ofer), grouped by camp — brackets mark the blocs; Arab-list seats are drawn as rings. Each list keeps its
     conventional polling-chart color. Hover any seat.</figcaption>
   </figure>
 </div></div>
@@ -374,8 +374,9 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
     <div class="axisrow"><div></div><div class="axis" id="ivlAxis"></div><div></div></div>
     <div class="legend"><span><i class="sw" style="background:var(--ink);width:12px;height:3px"></i>90% interval</span>
     <span><i class="sw hollow"></i>below threshold in central projection</span></div>
-    <p class="note" style="margin-top:8px">Chips show each list's registered CEC ballot letters.
-    Starred letters are provisional for new lists until registration closes on September 9.</p>
+    <p class="note" style="margin-top:8px">Chips show the ballot letters each list requested when it
+    filed on September 7–8. Starred letters are contested (Together and Otzma Yehudit both asked for ב)
+    or offered as alternatives; the Central Elections Committee rules on names and letters by September 27.</p>
   </div>
 </div></section>
 
@@ -658,8 +659,9 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
     ~3.3% → 2.97% (×0.90); Zehut April 2019 ~3.0% → 2.74% (×0.91); Otzma September 2019
     ~1.7% → 1.88% (×1.11). Lists without a committed base shed roughly <b>30% of their polled
     support to strategic desertion</b> — voters flee a wasted vote — while lists with a
-    sectarian or ideological core hold theirs. So NEP, Israel First and A Place for All of Us are forecast at 0.7× their
-    polling, The Haredi Public and Noam at 1.0×, and the calibration's own dispersion widens
+    sectarian or ideological core hold theirs. So Israel First is forecast at 0.7× its
+    polling, The Haredi Public and Noam at 1.0× (after filing day only lists that filed remain: the
+    New Economic Party is inside the Reservists–Economic list, and A Place for All of Us did not file), and the calibration's own dispersion widens
     every micro-list's uncertainty. Zehut is no longer carried separately at all: since
     September 2 the pollsters publish a single Religious Zionism–Zehut column, so its support
     lives directly inside that line's poll stream.</p>
@@ -676,18 +678,18 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
     <div class="eq">seat<sub>k</sub> &rarr; argmax<sub>&#8467;</sub> v<sub>&#8467;</sub> / (s<sub>&#8467;</sub> + 1)&nbsp;&nbsp;&nbsp;&nbsp;<i>d’Hondt iteration, surplus pairs pooled</i></div></div>
 
   <div class="chapter"><h3>The registration mixture</h3>
-    <p>Until lists close on September 9, the forecast samples <b>registration events per
-    simulation</b>: the centre micro-list folds and the Erdan–Gantz union tail, with transfer vectors
-    structured on the measured fate of absorbed lists in the 2021→2022 transition matrix
-    (Yamina's voters: RZP 45 / Jewish Home 24 / Likud 14 / National Unity 11 / Shas 6; New
-    Hope's: National Unity 58 / Likud 42; Blue and White's: National Unity 70 / Yesh Atid 30). Four events have already resolved and are certainties in every
-    draw: Segalovitz joining Ra'am (September 1), the Smotrich–Feiglin technical bloc
-    (September 2), Balad remaining inside the Joint List, and Unity's withdrawal (September 4,
-    after its merger talks with Blue and White collapsed — its support is redistributed by the
-    measured fold vector). Still open: the fold decisions of Zionist Home–Reservists (0.45) and
-    Blue and White (0.65). The published forecast is the mixture; each event's marginal effect is read
-    off the same draws. On filing day the mixture collapses to the real configuration and the
-    model refits.</p>
+    <p>Until the lists closed, the forecast sampled <b>registration events per simulation</b>: the
+    centre micro-list folds and the Erdan–Gantz union tail, with transfer vectors structured on the
+    measured fate of absorbed lists in the 2021→2022 transition matrix (Yamina's voters: RZP 45 /
+    Jewish Home 24 / Likud 14 / National Unity 11 / Shas 6; New Hope's: National Unity 58 / Likud 42;
+    Blue and White's: National Unity 70 / Yesh Atid 30). <b>On September 8 the lists closed and every
+    event resolved</b>: 38 lists filed. Segalovitz sits second on Ra'am; Smotrich and Feiglin filed the
+    RZP–Zehut technical bloc; Balad stayed inside the Joint List; Unity withdrew (September 4); Blue and
+    White filed under Gantz rather than folding; and the Reservists filed with Zelekha's Economic Party and
+    Einat Wilf after Tropper left for Yashar's sixth slot (September 6), so that series continues as the
+    Reservists–Economic list. Noam, the Haredi Public and Israel First filed as small lists; Makom
+    Lekulanu, the Fourth Quarter and El HaDegel did not file. The mixture is therefore a single
+    configuration from here on; the machinery stays in the code for the record and for future cycles.</p>
     <div class="eq">P(seats) = &Sigma;<sub>e</sub> P(e) · P(seats | e)&nbsp;&nbsp;&nbsp;&nbsp;<i>mixture over registration events e</i></div></div>
 
   <div class="chapter"><h3>The formation tree</h3>
@@ -783,11 +785,11 @@ const HE_PARTY = {"Likud":"הליכוד","Yashar":"ישר","Bennett 2026 + Yesh 
  "United Torah Judaism":"יהדות התורה","Otzma Yehudit":"עוצמה יהודית",
  "Religious Zionist Party":"הציונות הדתית–זהות","Ra'am":"רע״ם",
  "Balad + Hadash-Ta'al":"הרשימה המשותפת","Balad (alone)":"בל״ד",
- "Zionist Home – The Reservists":"הבית הציוני–המילואימניקים","Blue and White":"כחול לבן",
+ "Reservists – Economic Party":"המילואימניקים והכלכלית","Blue and White":"כחול לבן",
  "Unity":"האחדות","Zehut":"זהות","Noam":"נעם","New Economic Party":"כלכלה חדשה",
  "Amcha Yisrael":"עמך ישראל","The Haredi Public":"הציבור החרדי",
  "A Place for All of Us":"מקום לכולנו",
- "Israel First":"ישראל ראשונה","Fiery Youth":"צעירים בוערים",
+ "Israel First":"ישראל תחילה","Fiery Youth":"צעירים בוערים",
  "The Fourth Quarter":"הרבע הרביעי","El HaDegel":"אל הדגל"};
 const HE_STATIC = {
  "The Knesset Model":"מודל הכנסת",
@@ -826,6 +828,12 @@ const HE_STATIC = {
  "Below the threshold":"מתחת לאחוז החסימה","The small parties":"המפלגות הקטנות",
  "Every input":"כל קלט","The poll ledger":"יומן הסקרים",
  "← Back to the forecast":"→ חזרה לתחזית"};
+const HE_NOTES = {
+  "#main figure figcaption": "חלוקת המנדטים המרכזית (חלקי הקול החציוניים של התערובת, מועברים פעם אחת דרך אחוז החסימה 3.25% ובדר–עופר), מקובצת לפי מחנה — הסוגריים מסמנים את הגושים; מנדטי הרשימות הערביות מצוירים כטבעות. כל רשימה שומרת על צבעה המקובל בגרפי הסקרים. רחפו מעל כל מנדט.",
+  "#seats .note": "השבבים מציגים את האותיות שכל רשימה ביקשה בעת ההגשה ב־7–8 בספטמבר. אותיות מסומנות בכוכבית שנויות במחלוקת (ביחד ועוצמה יהודית ביקשו שתיהן את ב) או הוצעו כחלופה; ועדת הבחירות המרכזית מכריעה על השמות והאותיות עד 27 בספטמבר.",
+  "#builder .note": "הסכומים כוללים את תוצאות אחוז החסימה ואת חלוקת בדר–עופר. זו אריתמטיקה, לא פוליטיקה; מודל ההרכבה למטה מתמחר את הפוליטיקה.",
+  "#formation .note": "השפמים הם רווחי 90% על פני הנחות המודל עצמו."
+};
 const HE_LEDE = {
  "standfirst":"תחזית הסתברותית לבחירות ב־27 באוקטובר 2026: מנדטים, חשבון קואליציוני והרכבת ממשלה. מבוססת על יותר מ־700 סקרים שפורסמו, תוצאות רשמיות ברמת הקלפי ומודל הרכבה מפורש; מתעדכנת עם כל סקר והגשה חדשים. המתודולוגיה וביצועי העבר בנספח הטכני.",
  "seats":"כל נקודה היא התחזית. כל רצועה מכילה 90% מהסימולציות, כולל התנודה עד יום הבחירות. נקודות חלולות נמצאות היום מתחת לאחוז החסימה.",
@@ -892,11 +900,11 @@ const HE_CH = [
  {t:"תשתית הקלפיות", b:`<p>מתחת למספרים הארציים שוכנת רשומת הקלפיות: תוצאות רשמיות לכל יישוב בחמש מערכות הבחירות 2019–2022, מותאמות לשושלות המפלגות דרך אותיות הקלפי של כל מחזור (מאומתות מול הסיכומים הארציים). היישובים מתקבצים למגזרים פוליטיים לפי פרופילי ההצבעה שלהם עצמם, יחד עם ההשתתפות המדודה (חרדים 76%, ערבים 54%, ציונות דתית 76%). שלושה תוצרים מזינים את התחזית: <b>טבלת פוסט־סטרטיפיקציה</b> המקצה את מנדטי כל רשימה למגזרים שלה (מדור משחק הקרקע); <b>קיטום הקיבולת</b> שלהלן; ובסיס היישובים למנוע ליל הבחירות. משקלי השושלות מכוילים מול מטריצות מעבר־הקולות המדודות של פרויקט הקוד הפתוח <a href="https://kolot-nodedim.netlify.app/" rel="noopener">קולות נודדים</a> (כ־7,000 קלפיות מותאמות לכל זוג בחירות, R²&rlm; 0.89 עבור 2021→2022), שאומדני הלכידות שלו משחזרים באופן בלתי־תלוי את סדר האלקטורטים הנאמנים של המודל הזה.</p>
     <div class="eq">&Sigma;<sub>&#8467;&isin;Arab</sub> v<sub>&#8467;</sub> &le; 16.3%&nbsp;&nbsp;&nbsp;&nbsp;<i>קיבולת ההשתתפות של המגזר הערבי</i><br>v<sub>Shas</sub> + v<sub>UTJ</sub> &ge; 6.7%&nbsp;&nbsp;&nbsp;&nbsp;<i>הרצפה הדמוגרפית החרדית</i></div>
     <p>סימולציות המפרות אחד הגבולות נחתכות אל הגבול האפשרי (כל תנאי גוזם כ־1.5% מהדגימות). תוצאה שלילית כנה מתועדת לצדם: תנודות מגזריות <em>אינן</em> עוברות בין זוגות בחירות (תנודה ארצית אחידה חוזה יישובים ב־1.20 נק׳ שגיאה; הוספת תנודות מגזר היסטוריות נותנת 1.31) — ולכן שכבת המגזרים מזינה מתאמים וקיבולת, לא תנודות נקודתיות.</p>`},
- {t:"המפלגות הקטנות", b:`<p>רשימות הנסקרות מתחת לאחוז החסימה אינן נזרקות: כל אחת נישאת כמיקרו־רשימה ונחתכת מהעוגה הממודלת לפני חלוקת המנדטים, כך שחלקי הרשימות הגדולות לעולם אינם מנופחים בשקט. התמיכה הנסקרת נמדדת מפירוטי ההערות של הסוקרים המפרסמים אחוזים מלאים — אבל המודל אינו משכפל את המספרים האלה כפי שהם. הוא <b>חוזה</b> את הקולות בפועל של כל רשימה לפי הרשומה המדודה של האופן שבו סקרים סופיים של רשימות תת־סף תורגמו לקולות אמת: כלכלה חדשה 2021 נסקרה בכ־1.2% וקיבלה 0.79% (×0.66); הבית היהודי 2022 נסקר ב־1.9% וקיבל 1.17% (×0.62); יחד 2015 כ־3.3% ← 2.97% (×0.90); זהות אפריל 2019 כ־3.0% ← 2.74% (×0.91); עוצמה ספטמבר 2019 כ־1.7% ← 1.88% (×1.11). רשימות ללא בסיס מחויב מאבדות <b>כ־30% מתמיכתן הנסקרת לעריקה אסטרטגית</b> — בוחרים בורחים מקול מבוזבז — בעוד רשימות עם גרעין מגזרי או אידאולוגי מחזיקות בשלהן. לכן כלכלה חדשה, ישראל ראשונה ומקום לכולנו נחזות ב־0.7 מסקריהן, הציבור החרדי ונעם ב־1.0, ופיזור הכיול עצמו מרחיב את אי־הוודאות של כל מיקרו־רשימה. זהות כבר אינה נישאת בנפרד כלל: מאז 2 בספטמבר הסוקרים מפרסמים עמודה אחת של הציונות הדתית–זהות, ולכן תמיכתה חיה ישירות בתוך זרם הסקרים של אותה רשימה.</p>
+ {t:"המפלגות הקטנות", b:`<p>רשימות הנסקרות מתחת לאחוז החסימה אינן נזרקות: כל אחת נישאת כמיקרו־רשימה ונחתכת מהעוגה הממודלת לפני חלוקת המנדטים, כך שחלקי הרשימות הגדולות לעולם אינם מנופחים בשקט. התמיכה הנסקרת נמדדת מפירוטי ההערות של הסוקרים המפרסמים אחוזים מלאים — אבל המודל אינו משכפל את המספרים האלה כפי שהם. הוא <b>חוזה</b> את הקולות בפועל של כל רשימה לפי הרשומה המדודה של האופן שבו סקרים סופיים של רשימות תת־סף תורגמו לקולות אמת: כלכלה חדשה 2021 נסקרה בכ־1.2% וקיבלה 0.79% (×0.66); הבית היהודי 2022 נסקר ב־1.9% וקיבל 1.17% (×0.62); יחד 2015 כ־3.3% ← 2.97% (×0.90); זהות אפריל 2019 כ־3.0% ← 2.74% (×0.91); עוצמה ספטמבר 2019 כ־1.7% ← 1.88% (×1.11). רשימות ללא בסיס מחויב מאבדות <b>כ־30% מתמיכתן הנסקרת לעריקה אסטרטגית</b> — בוחרים בורחים מקול מבוזבז — בעוד רשימות עם גרעין מגזרי או אידאולוגי מחזיקות בשלהן. לכן כלכלה חדשה, ישראל תחילה נחזית ב־0.7 מסקריה, הציבור החרדי ונעם ב־1.0 (לאחר יום ההגשה נותרות רק רשימות שהוגשו: המפלגה הכלכלית נמצאת בתוך רשימת המילואימניקים והכלכלית, ומקום לכולנו לא הגישה), ופיזור הכיול עצמו מרחיב את אי־הוודאות של כל מיקרו־רשימה. זהות כבר אינה נישאת בנפרד כלל: מאז 2 בספטמבר הסוקרים מפרסמים עמודה אחת של הציונות הדתית–זהות, ולכן תמיכתה חיה ישירות בתוך זרם הסקרים של אותה רשימה.</p>
     <div class="eq">m<sub>j</sub> ~ N<sup>+</sup>(&mu;<sub>j</sub>, &sigma;<sub>j</sub>),&nbsp;&nbsp;v&prime; = ( v·(1−&Sigma;<sub>j</sub>m<sub>j</sub>),&nbsp;m )&nbsp;&nbsp;&nbsp;&nbsp;<i>מיקרו־רשימות נחתכות מהסימפלקס</i></div>`},
  {t:"אחוז החסימה ובדר–עופר", b:`<p>כל וקטור קולות מדומה עובר את מבחן אחוז החסימה של 3.25%, ואז המנדטים מוקצים בשיטה הישראלית האמיתית — <b>בדר–עופר</b>, ד'הונדט על עודפים — כאשר הסכמי עודפים חתומים מטופלים כרשימות משותפות בשלב העודפים (שווי מדוד של &lrm;+0.5 עד &lrm;+0.9 מנדטים לזוג). קולות רשימות שנפלו מתחלקים מחדש בין השורדות — וכך גוש יכול להפסיד בקולות ולנצח בכנסת. המנדטים המרכזיים המתפרסמים הם החוק הזה מיושם פעם אחת על וקטור נתחי־הקולות החציוני של התערובת, ולכן הטבלה מסתכמת ב־120 ללא עיגול או רצפות.</p>
     <div class="eq">seat<sub>k</sub> &rarr; argmax<sub>&#8467;</sub> v<sub>&#8467;</sub> / (s<sub>&#8467;</sub> + 1)&nbsp;&nbsp;&nbsp;&nbsp;<i>איטרציית ד'הונדט, זוגות עודפים מאוחדים</i></div>`},
- {t:"תערובת אירועי ההרשמה", b:`<p>עד סגירת הרשימות ב־9 בספטמבר, התחזית דוגמת <b>אירועי הרשמה בכל סימולציה</b>: קיפולי המיקרו־רשימות במרכז וזנב האיחוד ארדן–גנץ, עם וקטורי העברה הבנויים על גורלן המדוד של רשימות שנבלעו במטריצת המעבר 2021←2022 (מצביעי ימינה: הציונות הדתית 45 / הבית היהודי 24 / הליכוד 14 / המחנה הממלכתי 11 / ש״ס 6; תקווה חדשה: המחנה הממלכתי 58 / הליכוד 42; כחול לבן: המחנה הממלכתי 70 / יש עתיד 30). ארבעה אירועים כבר הוכרעו והם ודאויות בכל דגימה: הצטרפות סגלוביץ׳ לרע״ם (1 בספטמבר), הגוש הטכני סמוטריץ׳–פייגלין (2 בספטמבר), הישארות בל״ד ברשימה המשותפת, ופרישת האחדות (4 בספטמבר, לאחר שהמגעים לאיחוד עם כחול לבן קרסו — תמיכתה מחולקת מחדש לפי וקטור הקיפול המדוד). עדיין פתוחות: החלטות הקיפול של הבית הציוני–המילואימניקים (0.45) וכחול לבן (0.65). התחזית המתפרסמת היא התערובת; ההשפעה השולית של כל אירוע נקראת מאותן דגימות. ביום ההגשה התערובת קורסת אל התצורה האמיתית והמודל מותאם מחדש.</p>
+ {t:"תערובת אירועי ההרשמה", b:`<p>עד סגירת הרשימות, התחזית דגמה <b>אירועי הרשמה בכל סימולציה</b>: קיפולי המיקרו־רשימות במרכז וזנב האיחוד ארדן–גנץ, עם וקטורי העברה הבנויים על גורלן המדוד של רשימות שנבלעו במטריצת המעבר 2021←2022 (מצביעי ימינה: הציונות הדתית 45 / הבית היהודי 24 / הליכוד 14 / המחנה הממלכתי 11 / ש״ס 6; תקווה חדשה: המחנה הממלכתי 58 / הליכוד 42; כחול לבן: המחנה הממלכתי 70 / יש עתיד 30). <b>ב־8 בספטמבר נסגרו הרשימות וכל האירועים הוכרעו</b>: 38 רשימות הוגשו. סגלוביץ׳ במקום השני ברע״ם; סמוטריץ׳ ופייגלין הגישו את הגוש הטכני הציונות הדתית–זהות; בל״ד נשארה ברשימה המשותפת; האחדות פרשה (4 בספטמבר); כחול לבן הגישה רשימה בראשות גנץ במקום להתקפל; והמילואימניקים הגישו רשימה עם המפלגה הכלכלית של זליכה ועם עינת וילף לאחר שטרופר עבר למקום השישי בישר (6 בספטמבר), כך שהסדרה ממשיכה כרשימת המילואימניקים והכלכלית. נעם, הציבור החרדי וישראל תחילה הגישו רשימות קטנות; מקום לכולנו, הרבעון הרביעי ואל הדגל לא הגישו. מכאן ואילך התערובת היא תצורה אחת; המנגנון נשאר בקוד לתיעוד ולמערכות הבאות.</p>
     <div class="eq">P(seats) = &Sigma;<sub>e</sub> P(e) · P(seats | e)&nbsp;&nbsp;&nbsp;&nbsp;<i>תערובת על אירועי הרשמה e</i></div>`},
  {t:"עץ ההרכבה", b:`<p>מנדטים אינם כוח. כל כנסת מדומה עוברת רצף הרכבה מפורש — סולם שערים סדור, שלכל שער פרמטרים התנהגותיים הנגזרים ממחקר מוסדי: מי באמת חותם בשם כל מפלגה (מועצת חכמי התורה של ש״ס, שתי המועצות של יהדות התורה, עצמאות רע״ם שלאחר ביטול וטו השורא), הרקורד הנגלה של כל מנהיג בצמתים קודמים (התהפוכות של ליברמן, הפרת ההתחייבות של בנט ב־2021, גנץ ב־2020), ושיעורי בסיס היסטוריים. עמך של וינטר מקודדת כ<b>קשיחות אנטי־אייזנקוט</b>: יכולה להצטרף לממשלת מרכז בראשות בנט, כמעט לעולם לא בראשות אייזנקוט. הפרמטרים ההתנהגותיים עצמם נושאים אי־ודאות — כל סימולציה מגרילה סט משלה מפריורי Beta/Dirichlet — ולכן הסתברויות ההרכבה מגיעות עם רווחים כנים, המוצגים בלוח התרחישים. והשערים <b>מותנים בתצורה</b>: ההסתברויות המוצהרות הן ממוצעים שוליים, וההסתברות של כל שער בכל כנסת מדומה זזה עם מפת המנדטים שלה דרך לוגיסטית — עריקה חרדית עולה עם הפער של הימין מ־61 וכאשר אותה מפלגה לבדה סוגרת את פער המרכז (ש״ס 1992, ש״ס+יהדות התורה 1999), עריקה של מפלגת מרכז יורדת ככל שהפער גדל (גנץ 2020 בפער של שלושה), אחדות עולה עם עומק המבוי הסתום. במדידה על שמונה התוצאות האמיתיות מאז 2009 העץ המותנה מקבל את אותו ציון כמו הלא־מותנה (לוג־ציון ‎−0.93 מול ‎−0.92) — שמונה תוצאות אינן יכולות להכריע אפקטים בגודל כזה — ולכן הוא נשמר על בסיס מוסדי, כשהשוליים נשמרים מעצם הבנייה.</p>
     <div class="eq">p<sub>gate</sub> = &sigma;( logit p<sub>0</sub> + &beta;<sub>gap</sub>·(61 − NB − g&#772;)/5 + &beta;<sub>piv</sub>·pivotal )&nbsp;&nbsp;&nbsp;&nbsp;<i>שער מותנה־תצורה</i></div>
@@ -926,6 +934,7 @@ function trStatic(){
               ratings:"ratings",polls:"polls"};
   for (const id in LK){ const el = document.querySelector("#"+id+" .lede");
     if (el && HE_LEDE[id]) el.innerHTML = HE_LEDE[id]; }
+  for (const sel in HE_NOTES){ const el = document.querySelector(sel); if (el) el.textContent = HE_NOTES[sel]; }
   const dl = document.getElementById("dateline");
   dl.innerHTML = 'התחזית נכונה ל־<b class="mono" id="asof"></b><br>הבחירות: יום שלישי, <b>27 באוקטובר 2026</b> · בעוד <span class="mono" id="tminus"></span> ימים';
   document.querySelectorAll(".hero .tile .s").forEach((el,i)=>{
@@ -961,27 +970,31 @@ const BLOC = {"Likud":"nb","Shas":"nb","United Torah Judaism":"nb","Otzma Yehudi
  "Religious Zionist Party":"nb","Amcha Yisrael":"nb","Noam":"nb","Zehut":"nb",
  "The Haredi Public":"nb","A Place for All of Us":"anti",
  "Yashar":"anti","Bennett 2026 + Yesh Atid":"anti","The Democrats":"anti","Yisrael Beytenu":"anti",
- "Zionist Home – The Reservists":"anti","Blue and White":"una","Unity":"una","New Economic Party":"anti",
+ "Reservists – Economic Party":"anti","Blue and White":"una","Unity":"una","New Economic Party":"anti",
  "Balad + Hadash-Ta'al":"arab","Ra'am":"arab","Balad (alone)":"arab"};
 // Ballot letters (otiyot): registered CEC letters where a party owns
 // them; for new lists (marked *) a realistic unused combination is shown
 // provisionally until the CEC assigns real ones at registration.
-const HEB = {"Likud":"מחל","Yashar":"יר","Bennett 2026 + Yesh Atid":"פה","The Democrats":"אמת",
- "Yisrael Beytenu":"ל","Shas":"שס","United Torah Judaism":"ג","Otzma Yehudit":"עצ",
- "Balad + Hadash-Ta'al":"ום","Ra'am":"עם","Amcha Yisrael":"נר","Religious Zionist Party":"ט",
- "Zionist Home – The Reservists":"בר","Blue and White":"כן","Unity":"אח","Zehut":"ז","Noam":"נע",
- "New Economic Party":"כל"};
-const HEB_PROV = new Set(["Yashar","Amcha Yisrael","Zionist Home – The Reservists","Unity",
- "New Economic Party","Noam","Otzma Yehudit"]);
+// Filing day (Sept 7-8, 2026): the letters each list REQUESTED with the
+// CEC (N12 live blog, Maariv, Emess); the committee rules on names and
+// letters by Sept 27. Two lists asked for ב (Together and Otzma Yehudit;
+// Ben-Gvir holds the prior municipal claim), so Together is shown with
+// its alternative request רק until the ruling.
+const HEB = {"Likud":"מחל","Yashar":"דרך","Bennett 2026 + Yesh Atid":"רק","The Democrats":"אמת",
+ "Yisrael Beytenu":"ל","Shas":"שס","United Torah Judaism":"ג","Otzma Yehudit":"ב",
+ "Balad + Hadash-Ta'al":"ודם","Ra'am":"עם","Amcha Yisrael":"ך","Religious Zionist Party":"ט",
+ "Reservists – Economic Party":"די","Blue and White":"כן","Noam":"ני",
+ "The Haredi Public":"זך","Israel First":"יר"};
+const HEB_PROV = new Set(["Bennett 2026 + Yesh Atid","Otzma Yehudit","Reservists – Economic Party"]);
 const heb = n => (HEB[n]||"") + (HEB_PROV.has(n) ? "<i style=\"font-style:normal;font-size:9px;vertical-align:top\">*</i>" : "");
 const SHORT = {"Bennett 2026 + Yesh Atid":"Together","Balad + Hadash-Ta'al":"Joint List",
- "Zionist Home – The Reservists":"Zionist Home–Reservists","Religious Zionist Party":"Religious Zionism–Zehut",
+ "Reservists – Economic Party":"Reservists–Economic","Religious Zionist Party":"Religious Zionism–Zehut",
  "United Torah Judaism":"UTJ"};
 const nm = n => HEB_MODE ? (HE_PARTY[n] || n) : (SHORT[n] || n);
 const PVAR = {"Likud":"likud","Yashar":"yashar","Bennett 2026 + Yesh Atid":"together",
  "The Democrats":"dems","Yisrael Beytenu":"yb","Shas":"shas","United Torah Judaism":"utj",
  "Otzma Yehudit":"otzma","Religious Zionist Party":"rzp","Ra'am":"raam",
- "Balad + Hadash-Ta'al":"jl","Balad (alone)":"jl","Zionist Home – The Reservists":"zh",
+ "Balad + Hadash-Ta'al":"jl","Balad (alone)":"jl","Reservists – Economic Party":"zh",
  "Blue and White":"bw","Amcha Yisrael":"amcha","Unity":"unity"};
 const pc = n => PVAR[n] ? `--pc:var(--p-${PVAR[n]})` : "--pc:var(--dead)";
 const BLOC_NAME = HEB_MODE ? HE_MISC.BLOC : {anti:"Anti-Netanyahu bloc", arab:"Arab lists", nb:"Netanyahu bloc", una:"Unaligned"};
@@ -1059,7 +1072,7 @@ function hideTip(){ tip.style.opacity = 0; }
   const seated = D.parties.filter(p => p.seats > 0);
   // Owner's left-to-right arrangement; conditional lists slot in when they pass.
   const SEAT_ORDER = ["Balad + Hadash-Ta'al","Balad (alone)","Ra'am","The Democrats","Yashar",
-    "Bennett 2026 + Yesh Atid","Yisrael Beytenu","Zionist Home – The Reservists","Blue and White",
+    "Bennett 2026 + Yesh Atid","Yisrael Beytenu","Reservists – Economic Party","Blue and White",
     "Unity","New Economic Party",
     "Shas","United Torah Judaism","Amcha Yisrael","Noam","Likud","Religious Zionist Party",
     "Otzma Yehudit","Zehut"];
@@ -1250,7 +1263,7 @@ renderBlocHist("anti");
   const PN = HEB_MODE ? {"Netanyahu bloc":"גוש נתניהו","Change coalition":"קואליציית השינוי",
     "Change + Ra'am":"שינוי + רע״ם","Clear":"ניקוי"} : {};
   const CENTRE = ["Yashar","Bennett 2026 + Yesh Atid","The Democrats","Yisrael Beytenu",
-    "Zionist Home – The Reservists"];
+    "Reservists – Economic Party"];
   const PRESETS = [
     ["Netanyahu bloc", ["Likud","Shas","United Torah Judaism","Otzma Yehudit","Amcha Yisrael","Religious Zionist Party"]],
     ["Change coalition", CENTRE],
