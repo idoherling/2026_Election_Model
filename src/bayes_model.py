@@ -364,6 +364,41 @@ ANCHORS_ON = False
 # 0.6-0.8 WORSEN MAE (1.90 at 0.6) through the threshold nonlinearity,
 # and coverage stays ~98% at 0.9 - the over-width lives in other layers.
 RESID_SCALE = 0.9
+# Accuracy round four #2 (2026-09-10): joint width knobs, calibrated on the
+# horizon cache (validate_horizon STACK_GRID x RW_GRID). STACK_SCALE
+# multiplies the election-day shock stack (bloc swing, family shocks, the
+# residual on top of RESID_SCALE); RW_FORWARD_SCALE multiplies the forward
+# random-walk VARIANCE. 1.0 / 1.0 = the pre-calibration model.
+STACK_SCALE = 1.0
+RW_FORWARD_SCALE = 1.0
+# Accuracy round four #4: the trailing-Likud conditional (successor to the
+# retired fixed anchors). Measured on the record: in the cycles where Likud
+# trailed or tied the largest non-bloc list in the final week (2015, April
+# 2019, September 2019) it beat its final polls by +8.8 / +6.8 / -0.5 seats
+# (mean +5.0, sd 4.9, n=3); when it led clearly the miss was ~0. Applied
+# only when Likud's projected standing trails the leader by the margin.
+# Ships only on the harness verdict (validate_bayes ABLATIONS
+# no_anchors_trail / _half).
+# HARNESS VERDICT (2026-09-11, dossier s.36): on top of the shipped
+# no-anchor configuration the layer at HALF strength gives the best
+# median-seat MAE of every ablation (1.467 vs 1.524 without; mean 1.578 vs
+# 1.565), Brier 0.053 tie, coverage 0.983: 2015 2.09 -> 1.36, April 2019
+# 2.54 -> 2.31, September 2019 0.57 -> 1.07, five cycles untouched. Full
+# strength loses more in Sept 2019 (1.57) for the same gains. Shipped at
+# 0.5 with the caveat that n=3 trailing cycles is thin evidence.
+EXCLUDE_POLLSTERS = {"S.M.L.T."}
+# Accuracy round four #1 (2026-09-11, dossier s.36): FIRST-CYCLE lists
+# projected within the threshold band lose votes to strategic desertion.
+# Measured on the horizon record (D-56/D-21 projections of every cycle):
+# 11 new-list straddlers, 2 passed, mean drift -1.6 pp (sd 2.6; LOO means
+# -1.1 to -2.2); established straddlers are calibrated (drift ~0). The
+# layer cut the straddler Brier from 0.256 to 0.226 (D-56) and 0.245 to
+# 0.234 (D-21) with established lists unchanged. First-cycle = no
+# component polled before this cycle. In 2026: Amcha, Reservists-Economic.
+NEW_STRADDLER_ON = True
+NEW_STRADDLER = {"mu": -1.6, "sd": 2.6, "band": (-0.75, 1.5)}   # pp of the vote
+TRAIL_ON = True
+TRAIL = {"mu": 5.0, "sd": 4.9, "margin": 0.5, "scale": 0.5}
 LIST_SHOCK_BASE = _P["resid_base"]
 LIST_SHOCK_SLOPE = _P["resid_slope"]
 # A list with no polls in its final weeks has left the race by election day.
@@ -382,9 +417,12 @@ MICRO_POLLED = {
     # remain here. nep ABSORBED into the Reservists-Economic list (its
     # archive column, "Reserv. - NEP", is the zionist_home series);
     # makom_lekulanu, fourth_quarter, el_dagel did not file.
-    "noam": (0.004, 0.003),            # filed alone as Noam LeYisrael; 0.3% Filber 27 Aug / 3 Sep
-    "haredi_public": (0.013, 0.004),   # filed (Leitner); 1.2-1.5% Jul-Aug (Midgam 31 Aug: 1.2%)
-    "israel_first": (0.004, 0.003),    # filed (Haskel + Aleh Yarok); 0.3-0.6% Aug 2026
+    # Post-filing itemizations (CEC filings 4128-4137, 3-9 Sept): Noam
+    # 0.3 / 0.6 / 1.0 / 0.4; the Haredi Public 0.1 / 0.9 / 0.4 / 0.7 / 0.9
+    # (down from 1.2-1.5 in August); Israel First 0.2 / 0.2 / 0.5.
+    "noam": (0.006, 0.003),            # filed alone as Noam LeYisrael
+    "haredi_public": (0.006, 0.003),   # filed (Leitner); refused Winter's slate
+    "israel_first": (0.003, 0.002),    # filed (Haskel + Aleh Yarok)
     # fiery_youth REMOVED (owner ruling, Sept 1): not running — Muchtar
     # is leading Likud's youth campaign.
 }
@@ -425,6 +463,14 @@ ABSORBED_IDS = {"zehut",   # inside RZP-Zehut from 2026-09-02 (see STRUCTURAL_BR
 # scenario table left in the report) would double count voters already in
 # the absorbing list's line: dropped before the filing is summed.
 ABSORBED_FROM = {"zehut": "2026-09-02", "nep": "2026-09-06"}
+# Lists whose COMPOSITION changed mid-campaign (2026-09-10, accuracy round
+# four #5): observations taken before the change measured a different
+# list, so they carry a noise multiplier - they still inform the level
+# (the electorate is mostly the same) but cannot pin it, and the per-firm
+# drift term is not fitted to a discontinuity. Reservists: Tropper left
+# for Yashar and Zelekha's NEP joined (Sept 6); RZP: Zehut absorbed
+# (Sept 2; the structural break already shifts the level, this widens it).
+REFORMED_NOISE = {"zionist_home": ("2026-09-06", 1.5), "rzp": ("2026-09-02", 1.3)}
 STRUCTURAL_BREAKS = [
     {"component": "rzp", "from": "2026-09-02", "add_share": 0.9 * 0.016,
      "note": "Zehut absorbed into the RZP-Zehut technical bloc"},
@@ -497,6 +543,15 @@ def prepare_data(polls: pd.DataFrame | None = None,
     # stream by the structural break (below), and a Zehut column of its
     # own would count the same voters twice.
     win = win[~win["party_id"].isin(ABSORBED_IDS)]
+    # Micro-lists are carried by the small-party layer (MICRO_POLLED), not
+    # as latent columns: an archive row that names one (e.g. a pollster
+    # itemizing the Haredi Public at 0 seats) must not create a block.
+    if modern_remaps:
+        win = win[~win["party_id"].isin(set(MICRO_POLLED))]
+        # Firms with no series and no track record whose one entry is an
+        # outlier (the archive's "S.M.L.T." row is the DRI filing, see
+        # scrape_cec.EXCLUDED_EDITORS) do not enter the likelihood.
+        win = win[~win["pollster"].isin(EXCLUDE_POLLSTERS)]
 
     blocks = merge_blocks(win["party_id"].unique())
     block_of = {c: i for i, b in enumerate(blocks) for c in b}
@@ -505,6 +560,18 @@ def prepare_data(polls: pd.DataFrame | None = None,
     obs = implied_share_obs(win)
     if modern_remaps:
         obs = _merge_cec(obs, block_of, asof)
+    if modern_remaps:
+        # Re-formed lists: widen every observation taken before the change
+        # (table-derived and filed alike; see REFORMED_NOISE).
+        if "noise_mult" not in obs.columns:
+            obs = obs.assign(noise_mult=1.0)
+        obs["noise_mult"] = obs["noise_mult"].fillna(1.0)
+        for pid, (since, mult) in REFORMED_NOISE.items():
+            if pid in block_of:
+                pre = (obs["block"] == block_of[pid]) & (obs["fieldwork_end"] < pd.Timestamp(since))
+                obs.loc[pre, "noise_mult"] *= mult
+                if pre.any():
+                    print(f"re-formed list {pid}: {int(pre.sum())} pre-{since} obs x{mult} noise")
         obs = _apply_structural_breaks(obs, block_of)
         obs = _merge_sector(obs, block_of, asof)
 
@@ -655,6 +722,22 @@ def _merge_cec(obs: pd.DataFrame, block_of: dict, asof) -> pd.DataFrame:
         return obs
     for pid, since in ABSORBED_FROM.items():
         pcts = pcts[~((pcts["party_id"] == pid) & (pcts["fieldwork_end"] >= since))]
+    # Duplicate filings: a firm sometimes files the same survey twice
+    # (Lazar's Walla/Maariv reports 4120/4121; Direct Polls 4136/4138) -
+    # identical party vectors within 3 days count once (first ref kept).
+    sig = (pcts.sort_values(["ref", "party_id"])
+           .groupby("ref").agg(pollster=("pollster", "first"), fw=("fieldwork_end", "first"),
+                               vec=("raw_pct", lambda v: tuple(np.round(v.values, 2)))))
+    dup_refs = set()
+    seen = []
+    for ref, r in sig.sort_index().iterrows():
+        if any(p == r.pollster and v == r.vec and abs((f - r.fw).days) <= 3 for p, f, v in seen):
+            dup_refs.add(ref)
+        else:
+            seen.append((r.pollster, r.fw, r.vec))
+    if dup_refs:
+        print(f"CEC duplicate filings dropped: {sorted(dup_refs)}")
+        pcts = pcts[~pcts["ref"].isin(dup_refs)]
     sums = pcts.groupby("ref")["raw_pct"].sum()
     # A filing is trusted when its party table accounts for the sample:
     # parties alone within 90-105%, or parties plus the undecided share the
@@ -885,6 +968,17 @@ def _certainty_layer(shares, comps, blocs, fams, rng):
     return out / out.sum(axis=1, keepdims=True)
 
 
+def _first_cycle_ids() -> set:
+    """Component ids with no polls before the 2026 cycle."""
+    try:
+        p = pd.read_csv(PROCESSED_DIR / "polls.csv", usecols=["cycle", "party_id"])
+    except FileNotFoundError:
+        return set()
+    old = set(p[p["cycle"].astype(str) != "2026"]["party_id"].str.split("+").explode())
+    now = set(p[p["cycle"].astype(str) == "2026"]["party_id"].str.split("+").explode())
+    return {c for c in now if c not in old}
+
+
 def project(data, idata, rng, config="current", config_params=None):
     """Election-day seat draws: RW forward + industry shocks + micro-lists.
 
@@ -914,6 +1008,7 @@ def project(data, idata, rng, config="current", config_params=None):
         step = min(d, 7)
         eff_weeks += campaign_vol_weight(d) ** 2 * (step / 7.0)
         d -= step
+    eff_weeks *= RW_FORWARD_SCALE
     z_e = z_last + np.sqrt(eff_weeks) * tau * rng.standard_normal(z_last.shape)
     z_full = np.concatenate([z_e, np.zeros((N_PROJ, 1))], axis=1)
     shares = np.exp(z_full - z_full.max(axis=1, keepdims=True))
@@ -928,7 +1023,7 @@ def project(data, idata, rng, config="current", config_params=None):
     # Per-list election-day shock: residual final-poll error beyond
     # bloc/family components, calibrated on the backtest.
     base0 = shares.mean(axis=0)
-    sd_list = (LIST_SHOCK_BASE + LIST_SHOCK_SLOPE * base0 * 120) / 120.0 * RESID_SCALE
+    sd_list = (LIST_SHOCK_BASE + LIST_SHOCK_SLOPE * base0 * 120) / 120.0 * RESID_SCALE * STACK_SCALE
     comps0 = [set(c.split("+")) for c in data["components"]]
     is_new = np.array([bool(cs & NEW_LIST_IDS) for cs in comps0])
     sd_list = np.where(is_new, sd_list * NEW_LIST_MULT, sd_list)
@@ -1005,7 +1100,7 @@ def project(data, idata, rng, config="current", config_params=None):
     # Industry shocks (unidentifiable from polls).
     base = shares.mean(axis=0)
     is_nb = blocs == "netanyahu_bloc"
-    swing = rng.standard_t(T_DF, N_PROJ) * BLOC_SWING_SD * EVENT_RISK / 120.0
+    swing = rng.standard_t(T_DF, N_PROJ) * BLOC_SWING_SD * EVENT_RISK * STACK_SCALE / 120.0
     w_nb, w_op = np.where(is_nb, base, 0), np.where(~is_nb, base, 0)
     shares = shares + swing[:, None] * (w_nb / w_nb.sum() - w_op / w_op.sum())
 
@@ -1027,11 +1122,12 @@ def project(data, idata, rng, config="current", config_params=None):
     tdraws = z / mix[:, None]
     for k, f in enumerate(fam_names):
         mu_f, sd_f = FAMILY_SHOCK[f]
+        sd_f = sd_f * STACK_SCALE
         in_f = fams == f
         if f == "arab":
             # turnout mechanism (ARAB_TURNOUT): joint scaling of the Arab lists
             T_mean = ARAB_TURNOUT["mean_unified" if ARAB_LIST_UNIFIED else "mean_split"]
-            T = np.clip(T_mean + tdraws[:, k] * ARAB_TURNOUT["sd"], 0.35, ARAB_TURNOUT["max"])
+            T = np.clip(T_mean + tdraws[:, k] * ARAB_TURNOUT["sd"] * STACK_SCALE, 0.35, ARAB_TURNOUT["max"])
             r = T / ARAB_TURNOUT["base"]
             tot = shares[:, in_f].sum(axis=1)
             delta = (r - 1.0) * tot
@@ -1055,6 +1151,37 @@ def project(data, idata, rng, config="current", config_params=None):
         onehot[col] = 1.0
         w_r = np.where(onehot == 0, base, 0)
         shares = shares + (-mu / 120.0) * (onehot - w_r / w_r.sum())
+
+    # New-straddler desertion (see NEW_STRADDLER): first-cycle lists whose
+    # projected share sits in the threshold band.
+    if NEW_STRADDLER_ON:
+        new_ids = _first_cycle_ids()
+        lo_b, hi_b = NEW_STRADDLER["band"]
+        hit = []
+        for i, cp in enumerate(comps):
+            if cp <= new_ids and lo_b <= base[i] * 100 - THRESHOLD * 100 <= hi_b:
+                g = rng.normal(NEW_STRADDLER["mu"], NEW_STRADDLER["sd"], N_PROJ) / 100.0
+                onehot = np.zeros(len(comps)); onehot[i] = 1.0
+                w_r = np.where(onehot == 0, base, 0)
+                shares = shares + g[:, None] * (onehot - w_r / w_r.sum())[None, :]
+                hit.append("+".join(sorted(cp)))
+        shares = np.clip(shares, 0, None)
+        project.last_new_straddlers = hit
+        if hit:
+            print(f"new-straddler desertion applied to: {hit}")
+
+    # Trailing-Likud conditional (see TRAIL): fires only when Likud's
+    # projected standing trails or ties the largest non-bloc list.
+    if TRAIL_ON and likud_col is not None:
+        non_nb = [i for i in range(len(comps)) if blocs[i] != "netanyahu_bloc" and i != likud_col]
+        if non_nb and base[likud_col] * 120.0 <= base[non_nb].max() * 120.0 + TRAIL["margin"]:
+            g = rng.normal(TRAIL["mu"], TRAIL["sd"], N_PROJ) * TRAIL["scale"] / 120.0
+            onehot = np.zeros(len(comps)); onehot[likud_col] = 1.0
+            w_r = np.where(onehot == 0, base, 0)
+            shares = shares + g[:, None] * (onehot - w_r / w_r.sum())[None, :]
+            project.last_trail_on = True
+        else:
+            project.last_trail_on = False
 
     # Gevalt coupling: zero-sum transfer between Likud and its bloc's
     # satellites, proportional to satellite size (see GEVALT_SD note).

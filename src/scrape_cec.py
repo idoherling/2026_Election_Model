@@ -124,6 +124,11 @@ NON_NATIONAL_MARKERS = (r"גולמיים\s+לא\s+משוקללים", r"משרת�
 # Midgam Project consortium files seats + raw sub-samples in every format
 # it has used).
 NON_NATIONAL_EDITORS = {"Midgam Project & StatNet"}
+# Filings that are not polls the model should learn from: a self-
+# commissioned "institute" with no publisher, no published series and a
+# report whose party names are RTL-scrambled (DRI, filed 2026-09-08 with
+# Likud 25 / Yashar 20 / Blue and White 4). Parsed for the record only.
+EXCLUDED_EDITORS = {"מכון די אר איי"}
 
 
 def split_pct(run: str, n_resp, seats_after):
@@ -285,7 +290,8 @@ def main() -> None:
         if not path.exists():
             continue
         meta, parties = parse_pdf(path)
-        if EDITOR_MAP.get(r.editor, r.editor) in NON_NATIONAL_EDITORS:
+        if (EDITOR_MAP.get(r.editor, r.editor) in NON_NATIONAL_EDITORS
+                or r.editor in EXCLUDED_EDITORS):
             meta["national_table"] = False
             parties = []
         meta_rows.append({

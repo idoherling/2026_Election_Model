@@ -42,7 +42,12 @@ ABLATIONS = [("full", {}), ("no_resid", {"resid": False}), ("no_swing", {"swing"
              ("no_gevalt", {"gevalt": False}), ("no_loyal", {"loyal": False}),
              ("latent_only", {k: False for k in ["resid", "swing", "family", "anchors", "gevalt", "loyal"]}),
              ("no_likud_anchor", {"anchor_likud": False}), ("no_leader_anchor", {"anchor_leader": False}),
-             ("half_anchors", {"anchor_scale": 0.5})]
+             ("half_anchors", {"anchor_scale": 0.5}),
+             # the shipped configuration is no_anchors; the trailing-Likud
+             # conditional is tested on top of it at full and half strength
+             ("no_anchors_trail", {"anchors": False, "gevalt_cond": True}),
+             ("no_anchors_trail_half", {"anchors": False, "gevalt_cond": True, "trail_scale": 0.5}),
+]
 
 # Era-specific alliance identities: which composite each historical id was.
 # Applied component-wise before block-building, so pre-merger component
@@ -88,7 +93,83 @@ def apply_decomp(polls: pd.DataFrame, cycle: str) -> pd.DataFrame:
 ALL_LAYERS = {"resid": True, "swing": True, "family": True, "anchors": True,
               "gevalt": True, "loyal": True,
               "anchor_likud": True, "anchor_leader": True, "anchor_scale": 1.0,
-              "shock_scale": 1.0}
+              "shock_scale": 1.0,
+              # accuracy round four #4: Likud's poll beat conditional on
+              # TRAILING (or tying) the largest non-bloc list at the
+              # projection date - the successor to the retired fixed anchor
+              "gevalt_cond": False, "trail_scale": 1.0,
+              # accuracy round four #1: first-cycle lists projected at the
+              # threshold band lose votes to strategic desertion (measured on
+              # the D-56/D-21 straddler record: 2 of 11 passed, drift -1.6 pp)
+              "new_straddler": False}
+NSTRAD_BAND = (-0.75, 1.5)   # pp around the threshold (projected share)
+
+
+def new_lists_for_cycle(polls: pd.DataFrame, cycle: str) -> set:
+    """Component ids first polled in this cycle (no polls in any earlier one)."""
+    seen = set()
+    for cyc in ORDER:
+        if cyc == cycle:
+            break
+        seen |= set(polls[polls["cycle"] == cyc]["party_id"].str.split("+").explode())
+    now = set(polls[polls["cycle"] == cycle]["party_id"].str.split("+").explode())
+    return {c for c in now if c not in seen}
+
+
+def new_straddler_params(exclude_cycle: str | None = None) -> dict:
+    """LOO mean/sd of the realised drift (result - projected share, pp) of
+    FIRST-CYCLE lists projected within NSTRAD_BAND at D-56/D-21, from
+    model_validation_threshold.csv (validate_threshold.py)."""
+    try:
+        d = pd.read_csv(PROCESSED_DIR / "model_validation_threshold.csv")
+    except FileNotFoundError:
+        return {"mu": 0.0, "sd": 0.0, "n": 0}
+    if "new" not in d.columns:
+        return {"mu": 0.0, "sd": 0.0, "n": 0}
+    d = d[d["new"] & (d["cycle"].astype(str) != str(exclude_cycle))]
+    if len(d) < 3:
+        return {"mu": 0.0, "sd": 0.0, "n": int(len(d))}
+    return {"mu": float(d["drift"].mean()), "sd": float(d["drift"].std(ddof=1)), "n": int(len(d))}
+TRAIL_MARGIN = 0.5   # seats: "trailing or tied" = Likud <= leader + margin
+
+
+def trailing_likud_params(polls: pd.DataFrame, results: pd.DataFrame,
+                          exclude_cycle: str | None = None) -> dict:
+    """Leave-one-cycle-out measurement of Likud's final-week poll miss in
+    cycles where it trailed (or tied) the largest non-Netanyahu-bloc list
+    in the final week. Returns {"mu", "sd", "n", "cycles"}."""
+    reg = load_party_registry()
+    bloc_map = dict(zip(reg["party_id"], reg["bloc"]))
+    misses = {}
+    for cyc in ORDER:
+        if cyc == exclude_cycle:
+            continue
+        eday = pd.Timestamp(ELECTION_DAY[cyc])
+        p = polls[(polls["cycle"] == cyc) & (polls["fieldwork_end"] < eday)
+                  & (polls["fieldwork_end"] >= eday - pd.Timedelta(days=7))]
+        r = results[results["cycle"] == cyc]
+        if p.empty or r.empty:
+            continue
+        bm_c = dict(bloc_map, **VAL_BLOC_OVERRIDES.get(cyc, {}))
+        avg = p.groupby("party_id")["seats"].mean()
+        lk = [pid for pid in avg.index if "likud" in pid.split("+")]
+        if not lk:
+            continue
+        lk = lk[0]
+        others = [pid for pid in avg.index
+                  if pid != lk and bm_c.get(pid.split("+")[0], "other") != "netanyahu_bloc"]
+        if not others:
+            continue
+        leader = avg[others].max()
+        if avg[lk] <= leader + TRAIL_MARGIN:
+            act = r[r["party_id"] == lk]["seats"]
+            if len(act):
+                misses[cyc] = float(act.iloc[0]) - float(avg[lk])
+    vals = np.array(list(misses.values()))
+    if len(vals) == 0:
+        return {"mu": 0.0, "sd": 0.0, "n": 0, "cycles": {}}
+    return {"mu": float(vals.mean()), "sd": float(vals.std(ddof=1)) if len(vals) > 1 else 3.0,
+            "n": int(len(vals)), "cycles": misses}
 
 
 def project_cycle(data, idata, eday, threshold, pairs, params,
@@ -181,6 +262,37 @@ def project_cycle(data, idata, eday, threshold, pairs, params,
         w_r = np.where(onehot == 0, base, 0)
         shares = shares + (-mu / 120.0) * (onehot - w_r / w_r.sum())
 
+    # New-straddler desertion (accuracy round four #1): first-cycle lists
+    # whose projected share sits in the threshold band get the LOO-measured
+    # mean drift (negative) with its sd, zero-sum against the field.
+    if L["new_straddler"] and params.get("nstrad", {}).get("n", 0) >= 3 and "new_lists" in params:
+        ns = params["nstrad"]
+        for i, cp in enumerate(comps):
+            if not (cp <= params["new_lists"]):
+                continue
+            rel = base[i] * 100 - threshold * 100
+            if NSTRAD_BAND[0] <= rel <= NSTRAD_BAND[1]:
+                g = rng.normal(ns["mu"], ns["sd"], N_PROJ) / 100.0
+                onehot = np.zeros(len(comps)); onehot[i] = 1.0
+                w_r = np.where(onehot == 0, base, 0)
+                shares = shares + g[:, None] * (onehot - w_r / w_r.sum())[None, :]
+        shares = np.clip(shares, 0, None)
+
+    # Trailing-Likud conditional (accuracy round four #4): if Likud's
+    # projected standing at the projection date trails or ties the largest
+    # non-bloc list, add the LOO-measured miss of trailing years (mean mu,
+    # sd over those years), zero-sum against the rest of the field.
+    if L["gevalt_cond"] and likud_col is not None and "trail" in params:
+        tp = params["trail"]
+        non_nb = [i for i in range(len(comps)) if blocs[i] != "netanyahu_bloc" and i != likud_col]
+        if non_nb and tp["n"] > 0:
+            leader_seats = base[non_nb].max() * 120.0
+            if base[likud_col] * 120.0 <= leader_seats + TRAIL_MARGIN:
+                g = rng.normal(tp["mu"], tp["sd"], N_PROJ) * L["trail_scale"] / 120.0
+                onehot = np.zeros(len(comps)); onehot[likud_col] = 1.0
+                w_r = np.where(onehot == 0, base, 0)
+                shares = shares + g[:, None] * (onehot - w_r / w_r.sum())[None, :]
+
     # Loyal-electorate calibration, mirrored from bayes_model.LOYAL_SD:
     # standalone captive-base lists are shrunk to their measured total sd.
     from bayes_model import LOYAL_SD
@@ -256,6 +368,8 @@ def main() -> None:
                 az.to_netcdf(idata, nc)
             div = int(idata.sample_stats["diverging"].sum())
             params = decompose(exclude_cycle=cycle)
+            params["trail"] = trailing_likud_params(polls, results, exclude_cycle=cycle)
+            print(f"[{cycle}] trailing-Likud LOO: mu {params['trail']['mu']:+.2f} sd {params['trail']['sd']:.2f} n {params['trail']['n']}")
             seats, blocs, base, comp_of = project_cycle(
                 data, idata, eday, CYCLE_THRESHOLD.get(cycle, THRESHOLD),
                 PAST_PAIRS[cycle], params,

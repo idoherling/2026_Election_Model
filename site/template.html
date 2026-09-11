@@ -607,8 +607,20 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
       party underperformed by 1.74. Applied as fixed shifts they <em>cost</em> accuracy on the
       eight-cycle harness (1.67 → 1.59 seats per list without them, better Brier and coverage),
       because a mean of two big years and six near-zero years is wrong six times in eight. They
-      are off; a conditional version — a Likud surge only when Likud is rising in the final
-      fortnight — is the successor under test;</li>
+      are off. What replaced them is <em>conditional</em>: the record shows Likud's big beats came
+      when it was <em>trailing</em> the largest non-bloc list in the final polls (2015 behind
+      Zionist Union +8.8, April 2019 behind Blue and White +6.8, September 2019 tied −0.5; when
+      it led clearly the miss was ~0). When Likud's projected standing trails the leader, the
+      simulation adds that trailing-year beat at half strength (mean +2.5 seats, wide), zero-sum
+      against the field — the harness's best median-seat accuracy of any configuration, on three
+      cycles of evidence. Likud trails Yashar today, so the condition is on;</li>
+      <li><b>New lists at the line</b> — measured on the horizon record (every cycle projected
+      as of D-56 and D-21): of eleven first-cycle lists projected within the threshold band, two
+      passed and nine failed, a mean drift of −1.6 points of the vote (established lists at the
+      line are calibrated). A first-cycle list projected within −0.75/+1.5 points of 3.25%
+      therefore carries that desertion (mean −1.6, sd 2.6), which cut the straddler Brier score
+      from 0.256 to 0.226 at D-56 with established lists unchanged. Today it applies to Amcha
+      and the Reservists–Economic list;</li>
       <li><b>Residual per-list shock</b> — 1.83 + 0.044·seats, ×1.35 for first-cycle lists
       (measured: new parties' final polls are unbiased but 35% noisier), with a loyal-electorate
       calibration shrinking Shas (1.5), UTJ (1.3), Yisrael Beytenu (2.2), Likud (4.8), the Joint
@@ -893,7 +905,8 @@ const HE_CH = [
     <ul>
       <li><b>תנודת גוש</b> — שגיאת הימין/שמאל המתואמת (התפלגות t עם 5 דרגות חופש), מוכפלת ב־1.2 במחזור הזה בשל סיכון אירועים מוגבר;</li>
       <li><b>זעזועי מגזר</b> — רשימות חרדיות נחסרות ב־1.35 ± 1.77 מנדטים. הרשימות הערביות נושאות <em>מנגנון השתתפות</em> במקום הזזת מנדטים: פאנלים ארציים משקללים את המגזר הערבי להשתתפות של 53.8% מהבחירות הקודמות, בעוד ההשתתפות בפועל תחת רשימה משותפת מאוחדת עמדה על 63.5 / 59.2 / 64.8% (2015, ספט׳ 2019, 2020) ועל 49 / 45% בשנות הפיצול; כל סימולציה מגרילה השתתפות, מכפילה את המשותפת ורע״ם <em>יחד</em> ביחסה ל־53.8%, ולוקחת את המסה מכל שאר הרשימות; הגאות החרדית והערבית חולקות הגרלה מתואמת (נמדד &lrm;+0.92 על ארבעה מעברים, מכווץ ל־0.5);</li>
-      <li><b>עוגנים — נמדדו, ואז הוצאו משימוש.</b> הליכוד היכה את סקריו הסופיים ב־2.30 מנדטים בממוצע (&lrm;+8.4 ב־2015, &lrm;+6.7 באפריל 2019, ≈0 בשש מערכות אחרות) והמובילה בסקרים פיגרה ב־1.74. כהזזות קבועות הם <em>פגעו</em> בדיוק במתקן שמונת המחזורים (1.67 ← 1.59 מנדטים לרשימה בלעדיהם, ברייר וכיסוי טובים יותר), כי ממוצע של שתי שנים גדולות ושש שנים כמעט־אפסיות טועה שש פעמים משמונה. הם כבויים; גרסה מותנית — זינוק ליכוד רק כשהליכוד עולה בשבועיים האחרונים — היא היורשת שבבדיקה;</li>
+      <li><b>עוגנים — נמדדו, ואז הוצאו משימוש.</b> הליכוד היכה את סקריו הסופיים ב־2.30 מנדטים בממוצע (&lrm;+8.4 ב־2015, &lrm;+6.7 באפריל 2019, ≈0 בשש מערכות אחרות) והמובילה בסקרים פיגרה ב־1.74. כהזזות קבועות הם <em>פגעו</em> בדיוק במתקן שמונת המחזורים (1.67 ← 1.59 מנדטים לרשימה בלעדיהם, ברייר וכיסוי טובים יותר), כי ממוצע של שתי שנים גדולות ושש שנים כמעט־אפסיות טועה שש פעמים משמונה. הם כבויים. מה שהחליף אותם הוא <em>מותנה</em>: הרשומה מראה שההכאות הגדולות של הליכוד הגיעו כשהוא <em>פיגר</em> אחרי הרשימה הלא־גושית הגדולה בסקרים הסופיים (2015 מאחורי המחנה הציוני &lrm;+8.8, אפריל 2019 מאחורי כחול לבן &lrm;+6.7, ספטמבר 2019 בתיקו &lrm;−0.5; כשהוביל בבירור הפספוס היה ≈0). כאשר מעמדו החזוי של הליכוד מפגר אחרי המובילה, הסימולציה מוסיפה את ההכאה של שנות הפיגור בחצי עוצמה (ממוצע &lrm;+2.5 מנדטים, רחב), באיזון־אפס מול השדה — הדיוק החציוני הטוב ביותר של כל תצורה במתקן, על שלושה מחזורים של ראיות. הליכוד מפגר היום אחרי ישר, ולכן התנאי פעיל;</li>
+      <li><b>רשימות חדשות על הסף</b> — נמדד על רשומת האופקים (כל מחזור מוקרן נכון ל־D-56 ול־D-21): מאחת־עשרה רשימות בנות מחזור ראשון שהוקרנו בתוך רצועת אחוז החסימה, שתיים עברו ותשע נפלו — סחף ממוצע של ‎−1.6 נקודות מהקול (רשימות ותיקות על הסף מכוילות). לכן רשימה בת מחזור ראשון שמוקרנת בטווח ‎−0.75/+1.5 נקודות מ־3.25% נושאת את הנטישה הזו (ממוצע ‎−1.6, ס״ת 2.6), מה שהוריד את ציון ברייר של הרשימות על הסף מ־0.256 ל־0.226 ב־D-56 בלי לשנות את הוותיקות. היום זה חל על עמך ועל המילואימניקים והכלכלית;</li>
       <li><b>זעזוע שיורי לרשימה</b> — 1.83 + 0.044·מנדטים, ×1.35 לרשימות במחזור ראשון (נמדד: סקרי מפלגות חדשות אינם מוטים אך רועשים ב־35%), עם כיול אלקטורט־נאמן המכווץ את ש״ס (1.5), יהדות התורה (1.3), ישראל ביתנו (2.2), הליכוד (4.8), המשותפת (3.1) וישר (4.2) לתנודתיות הכוללת המדודה שלהן;</li>
       <li><b>שכבת הוודאות</b> — התמיכה הרכה של כל רשימה (תומכיה שאינם בטוחים: ביחד 47% נעולים ועמך 38% מדודים, השאר דרגות מוצהרות) נושרת בשיעור עריקה המוגרל לכל סימולציה (ממוצע 0.25) עם פיזור ייחודי לרשימה, כך שרשימות רכות נושאות סיכון־חיסרון א־סימטרי; לאן הנשירה נוחתת <em>נמדד</em> ממטריצת מעבר הבוחרים 2021←2022 (קולות נודדים, 7,035 קלפיות תואמות): מבין מצביעי מחנה השינוי שעזבו את רשימתם, 72.5% בחרו רשימת שינוי אחרת, 10.3% חצו ו־17.2% נמנעו; בגוש נתניהו 85.5 / 6.6 / 7.9. מאגר המתלבטים נמדד מהגשות לוועדת הבחירות של המכונים המדווחים שיעור מתלבטים אמיתי (חציון 45 הימים האחרונים, כ־12%); נטייתו מאוחדת על פני כל מדידת נטיית־מתלבטים שפורסמה עם פריור של פיצול פרופורציונלי ב־n שווה — כיום 55/16 של N12 (כ־43 משיבים נוטים), כלומר כ־1.7 מנדטים למחנה השינוי בתוחלת, וכל גל חדש מזיז את הפוסטריור לפי ה־n שלו;</li>
       <li><b>צימוד הגוואלד</b> — העברה בסכום־אפס (ס״ת 2.0) בין הליכוד ללווייני גושו, כך שמיתות סף מתרחשות יחד עם זינוקי ליכוד, כמו ב־2015 וב־2019.</li>

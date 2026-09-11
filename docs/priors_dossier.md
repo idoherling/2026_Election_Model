@@ -1086,3 +1086,189 @@ PM in Amcha-closed draws). Same posterior. Outcomes: Netanyahu rightist 0.147,
 0.027, + haredi 0.050, JL-backed minority 0.019, unity 0.089, repeat 0.367,
 change + Ra'am 0.084. PM: repeat 36.7 / Eisenkot 26.8 / Netanyahu 22.7 /
 Bennett 6.9.
+
+## 36. Accuracy round four (2026-09-10): what the record said about the four proposals
+
+Owner asked for items 1, 2, 4 and 5 of the post-filing list. Each was
+MEASURED before anything was built; two of the four were reshaped by the
+measurement.
+
+**#1 Threshold straddlers: no late-desertion term.** For every graded cycle,
+lists whose D-60..D-30 poll average sat within [threshold - 0.75, threshold
++ 1.5] points (27 list-cycles) were compared with their result:
+
+| cycle | straddlers | mean drift (result - D-45 avg, pp) |
+|---|---|---|
+| 2009 | 5 | +0.66 |
+| 2013 | 5 | +0.01 |
+| 2015 | 2 | -1.75 (Otzma-Yachad 3.29 -> 2.97) |
+| 2019a | 6 | -0.06 (Zehut 2.86 -> 2.74; Shas 4.3 -> 6.7) |
+| 2021 | 4 | +1.94 (RZP, Blue and White, Meretz, Labor all rose) |
+| 2022 | 5 | +0.03 |
+
+Pooled: mean drift +0.27, median +0.37, realised pass rate 0.85; the spread
+(sd ~1.5 pp) is what the residual shock already gives a 4-seat list. Lists
+that failed had polled BELOW the line at D-45 (Zehut, Am Shalem, Otzma-
+Yachad) and lists that polled below and passed are just as common (National
+Union 2009, Yisrael Beytenu 2019a, RZP and Blue and White 2021). A
+desertion term would have biased 2021 badly and helped nowhere. NOT built.
+Instead the threshold question is graded directly: src/validate_threshold.py
+projects every cycle from the cached D-56 and D-21 posteriors and scores
+pass probabilities for straddlers (Brier, reliability bins, realised drift);
+results below once the cache is complete.
+
+**#4 The conditional gevalt is real but the condition is not "rising".**
+Likud's final-fortnight trend against its final-week miss:
+
+| cycle | D28-15 -> D14-1 (seats) | final week | result | miss |
+|---|---|---|---|---|
+| 2009 | 30.0 -> 27.6 | 26.6 | 27 | +0.4 |
+| 2015 | 23.2 -> 22.0 | 21.2 | 30 | +8.8 |
+| 2019a | 28.9 -> 28.1 | 28.2 | 35 | +6.8 |
+| 2019s | 31.4 -> 32.1 | 32.5 | 32 | -0.5 |
+| 2020 | 32.9 -> 33.7 | 34.1 | 36 | +1.9 |
+| 2021 | 28.3 -> 29.6 | 30.6 | 30 | -0.6 |
+| 2022 | 32.4 -> 31.5 | 31.2 | 32 | +0.8 |
+
+The two big beats came with Likud FALLING in the polls, not rising: the
+gevalt is a reaction to perceived danger. The predictor that separates the
+record is whether Likud trailed or tied the largest non-bloc list in the
+final week (2015 behind Zionist Union, April 2019 behind Blue and White,
+September 2019 tied): misses +8.8 / +6.8 / -0.5, mean +5.0, sd 4.9, n=3;
+in the years it led clearly (2013, 2021, 2022) the miss was -3 / -0.6 /
++0.8. Built as a harness layer (`gevalt_cond`, TRAIL_MARGIN 0.5 seats):
+when Likud's projected standing trails the leader, add the leave-one-
+cycle-out mean of trailing years with its sd, zero-sum against the field.
+n=3 is thin, so it is tested on top of the shipped no-anchor configuration
+at full and half strength and ships only if the eight-cycle harness says so.
+Likud (23) trails Yashar (25) today, so the condition is ON for 2026.
+
+**#2 Width: joint stack x forward-variance grid.** Runs on the horizon
+cache (D-56 and D-21 posteriors for every cycle), STACK_GRID 0.7/0.85/1.0 x
+RW_GRID 1.0/1.25/1.5, scored by interval score and coverage at both
+horizons and by the straddler Brier. Verdict below.
+
+**#5 Post-filing remeasurement: what exists and what does not.** Searched
+every post-filing publication (N12/Midgam 7 Sept, Kan/Kantar 9 Sept,
+Maariv/Lazar 8 Sept, Walla/Lazar 9 Sept, Ch13, i24, Ch14). No pollster has
+published an undecided-lean crosstab or a list-certainty wave since the
+lists closed; the N12 lean (n~60, 27 Aug) remains the only measurement and
+keeps its pooled weight. What was published: N12 7 Sept - 11.5% undecided,
+turnout intention 69% overall, coalition voters 75% vs opposition voters
+81%; 21% say the near-threshold lists strengthen their vote, 27% weaken
+(recorded as evidence, not used - self-reported turnout intention has no
+graded track record here). Built instead: (a) `REFORMED_NOISE` - every
+observation of the Reservists series before 6 Sept (Tropper out, Zelekha
+in) carries x1.5 noise and of RZP before 2 Sept (Zehut in) x1.3, so the fit
+and its drift term are not pinned to a list that no longer exists (279
+observations widened); (b) MICRO_POLLED refreshed from the post-filing CEC
+itemizations (Noam 0.6%, the Haredi Public 0.6%, Israel First 0.3%); (c) the
+DRI "institute" filing (self-commissioned, no publisher, scrambled names,
+Likud 25 / Blue and White 4) is parsed for the record and excluded from the
+likelihood by editor.
+
+**#2 verdict (horizon grid, 8 cycles x D-56/D-21, cached posteriors).**
+Interval score (lower is better), coverage of the 90% band, straddler-
+relevant threshold Brier and seat MAE:
+
+| horizon | config | MAE | coverage | Brier | width | interval score |
+|---|---|---|---|---|---|---|
+| D-21 | calendar (shipped: stack 1.0, RW 1.0) | 1.935 | 0.964 | 0.074 | 7.77 | 9.75 |
+| D-21 | stack 0.85, RW 1.0 | 1.968 | 0.956 | 0.076 | 7.18 | 9.43 |
+| D-21 | stack 0.7, RW 1.0 | 2.013 | 0.944 | 0.079 | 6.67 | 9.99 |
+| D-21 | stack 1.0, RW 1.25 | 1.935 | 0.964 | 0.074 | 7.88 | 9.65 |
+| D-56 | calendar (shipped) | 2.768 | 0.912 | 0.103 | 9.72 | 15.62 |
+| D-56 | stack 1.0, RW 1.5 | 2.765 | 0.926 | 0.103 | 10.23 | 15.45 |
+| D-56 | stack 0.85, RW 1.0 | 2.791 | 0.906 | 0.106 | 9.30 | 15.78 |
+| D-56 | stack 0.7, RW 1.0 | 2.833 | 0.897 | 0.110 | 8.87 | 16.41 |
+
+No configuration dominates. A 0.85 stack buys a 3% better interval score at
+D-21 but costs 0.03 seats of MAE and 0.002 of threshold Brier, and at D-56
+it loses on every score; a 1.5x forward variance helps the interval score
+at D-56 and hurts it at D-21. Per-cycle winners are split (D-21: the 0.7
+stack wins 5 of 8 cycles on interval score yet loses the pooled mean, i.e.
+its misses are large when they come). The standing rule since RESID_SCALE
+(ship only what wins every leave-one-cycle-out fold) is not met, and the
+objective is the seat count, where the shipped width is best or tied. The
+knobs STACK_SCALE and RW_FORWARD_SCALE are wired into the projection at
+1.0 / 1.0; the over-coverage (96% at D-21) is real but shrinking it costs
+point accuracy through the threshold nonlinearity, exactly as the width
+grid of s.27 found for the residual alone.
+
+**#4 verdict (eight-cycle harness, projection on the cached election-eve
+posteriors, LOO parameters).** Median-seat MAE per list, the published
+point estimate, and threshold Brier:
+
+| configuration | MAE (mean) | MAE (median) | coverage | Brier |
+|---|---|---|---|---|
+| no anchors (shipped) | 1.565 | 1.524 | 0.962 | 0.053 |
+| + trailing-Likud, full | 1.616 | 1.506 | 0.974 | 0.054 |
+| + trailing-Likud, half | 1.578 | 1.467 | 0.983 | 0.053 |
+
+Per cycle (median MAE, shipped -> half): 2015 2.09 -> 1.36, April 2019
+2.54 -> 2.31, September 2019 0.57 -> 1.07, the other five untouched (the
+condition never fires). Two wins, one loss, best median accuracy of any
+ablation ever run on this harness; the mean MAE is 0.01 worse because the
+sd it carries (4.9 seats) widens Likud. Shipped at half strength
+(`TRAIL_ON`, scale 0.5) with the caveat stated in the code: three trailing
+cycles are thin evidence, and the layer is the first thing to revisit if
+Likud's final-fortnight polling changes the condition.
+
+**#1 verdict (straddler calibration from the horizon cache).** 24 lists at
+D-56 and 27 at D-21 were projected within the band. Established lists are
+calibrated (D-21: realised pass 0.70 vs predicted 0.60, drift -0.4 pp;
+D-56: 0.58 vs 0.65, drift -1.2). FIRST-CYCLE lists are not: of 11
+new-list straddlers across both horizons, 2 passed (Hatnuah 2013, Yamina
+September 2019) and 9 failed (Gil, the Greens, Am Shalem, Otzma 2013, New
+Right April 2019, Gesher, the IDP, the Israelis), realised pass 0.18 vs
+predicted 0.50, mean drift -1.6 pp (sd 2.6; LOO means -1.1 to -2.2). That is
+the strategic-desertion effect the poll-based measure could not see
+(below-threshold polls are censored at zero seats). Built as a layer,
+`new_straddler`: a first-cycle list whose projected share sits within
+[-0.75, +1.5] pp of the threshold receives the LOO mean drift with its sd,
+zero-sum against the field. Validated projection-only on the horizon cache
+(D-56 and D-21) and by the straddler Brier with and without the layer;
+verdict below. In 2026 the condition covers Amcha Yisrael and the
+Reservists-Economic list.
+
+**Data notes (11 Sept).** Two polls (Lazar/Maariv 10 Sept, Tatika/Zman
+Yisrael 10 Sept; 750 in the cycle) and one filing (Direct Polls 4138, a
+duplicate of 4136). Duplicate filings are now detected in the merge
+(identical party vectors from one firm within three days: 4120/4121 and
+4136/4138 count once). The "S.M.L.T." row the archive carries for Channel
+14 is the DRI filing (n 2,185, Likud 25, Blue and White 4) under another
+label; it is excluded from the likelihood as an unknown firm with no
+series. A stray "Haredi Public" row (Lazar 10 Sept, 0 seats) would have
+created a 16th latent list; micro-list ids are now kept out of the latent
+blocks (they live in the small-party layer).
+
+**#1 verdict (horizon cache, projection-only, LOO parameters).**
+
+| horizon | config | MAE | coverage | Brier | interval score |
+|---|---|---|---|---|---|
+| D-21 | calendar (shipped) | 1.935 | 0.964 | 0.074 | 9.75 |
+| D-21 | + new-straddler | 1.928 | 0.964 | 0.071 | 9.50 |
+| D-56 | calendar (shipped) | 2.768 | 0.912 | 0.103 | 15.62 |
+| D-56 | + new-straddler | 2.750 | 0.912 | 0.097 | 15.62 |
+
+Straddler Brier alone: D-56 0.256 -> 0.226 (new lists 0.299 -> 0.111,
+established 0.247 -> 0.249), D-21 0.245 -> 0.234 (new 0.311 -> 0.269,
+established unchanged). Per cycle the layer is neutral where no new list
+straddles, better in 2009, 2013, April 2019 and September 2019 at D-56, and
+worse only in September 2019 at D-21 (Yamina's late rescue, the one case in
+eleven where a new straddler surged). Better on every pooled score at both
+horizons: SHIPPED (`NEW_STRADDLER_ON`, mean -1.6 pp, sd 2.6, band -0.75/+1.5
+around the threshold, first-cycle lists only). In 2026 it applies to Amcha
+Yisrael and the Reservists-Economic list; the annex carries the bullet.
+
+**Refit and headline (11 Sept, 750 polls, 43 filings merged).** 0
+divergences, r-hat 1.01, ESS 489, holdout 0.74 seats. Both new layers fire
+today (Likud 23 trails Yashar; Amcha and the Reservists sit in the band).
+Headline: P(NB>=61) 21.0 / change bloc alone 8.3 / with Ra'am 25.9 /
+deadlock 53.1; PM repeat 38.4 / Netanyahu 28.2 / Eisenkot 21.2 / Bennett
+5.6. Central: Likud 27, Yashar 23, Together 11, Democrats 10, UTJ 8, Shas
+8, YB 8, Joint List 8, Otzma 7, RZP-Zehut 5 (.77), Ra'am 5 (.77); Amcha 0
+(.20), Reservists 0 (.19), B&W 0 (.02). The move since the previous build
+(NB 14.5 -> 21.0, Likud 23 -> 27) is the trailing-Likud layer (+2.5 seats
+mean, zero-sum) plus the two new-straddler desertions redistributed to the
+field; the polls themselves moved little.

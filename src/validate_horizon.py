@@ -53,6 +53,9 @@ def main() -> None:
         cyc = apply_decomp(polls[(polls["cycle"] == cycle) & polls["sums_ok"]], cycle)
         res = apply_decomp(results[results["cycle"] == cycle], cycle)
         params = decompose(exclude_cycle=cycle)
+        from validate_bayes import new_lists_for_cycle, new_straddler_params
+        params["new_lists"] = new_lists_for_cycle(polls, cycle)
+        params["nstrad"] = new_straddler_params(exclude_cycle=cycle)
         for h in HORIZONS:
             asof = eday - pd.Timedelta(days=h)
             try:
@@ -71,7 +74,8 @@ def main() -> None:
             except Exception as e:
                 print(f"[{cycle} D-{h}] FAILED: {e}")
                 continue
-            configs = [("plain", h / 7.0, 1.0, 1.0), ("calendar", calendar_weeks(h), 1.0, 1.0)]
+            configs = [("plain", h / 7.0, 1.0, 1.0), ("calendar", calendar_weeks(h), 1.0, 1.0),
+                       ("cal_nstrad", calendar_weeks(h), 1.0, 1.0)]
             configs += [(f"cal_s{st}_rw{rw}", calendar_weeks(h) * rw, st, rw)
                         for st in STACK_GRID for rw in RW_GRID if not (st == 1.0 and rw == 1.0)]
             for mode, wk, st, rw in configs:
@@ -79,7 +83,8 @@ def main() -> None:
                     data, idata, eday, CYCLE_THRESHOLD.get(cycle, THRESHOLD),
                     PAST_PAIRS[cycle], params, VAL_BLOC_OVERRIDES.get(cycle),
                     np.random.default_rng(SEED + h), resid_scale=bm.RESID_SCALE * st,
-                    weeks_override=wk, layers={"shock_scale": st})
+                    weeks_override=wk,
+                    layers={"shock_scale": st, "new_straddler": mode == "cal_nstrad"})
                 actual = np.zeros(seats.shape[1])
                 for r in res.itertuples():
                     hit = {comp_of[c] for c in r.party_id.split("+") if c in comp_of}
