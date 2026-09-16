@@ -106,6 +106,31 @@ PRIORS = {
     # Residual: the recognition-formula double-speak spiral (Abbas's
     # Aug 26 Arabic post).
     "segalovitz_joins_raam": 0.80,
+    # 2026-09-16: disqualification petitions (section 7A) filed by the
+    # Sept 15 deadline - Ra'am (Likud, Otzma, a voters' forum), the Joint
+    # List (Likud), Otzma Yehudit (the Democrats, Zulat), RZP-Zehut
+    # (Zulat), the Democrats (Otzma). The CEC hears them next week; a
+    # list disqualification is appealable to the Supreme Court, which has
+    # reinstated every Arab list the committee barred since 2003 (Tibi/
+    # Bishara 2003, Balad and Ra'am-Ta'al 2009, Ra'am-Balad 2019) and has
+    # barred no Jewish list since Kach in 1988. Priors are the residual
+    # after that record; candidate-level petitions (Kasif, Abu Shahada) do
+    # not remove a list's seats and are not modeled.
+    "raam_disqualified": 0.02,
+    "joint_list_disqualified": 0.015,
+    "otzma_disqualified": 0.01,
+    "rzp_disqualified": 0.005,
+    "democrats_disqualified": 0.005,
+}
+# Where a disqualified list's voters go (share of its vote; the remainder
+# abstains): Arab-list voters mostly stay in the family, right-wing lists
+# flow to Likud and the sister list.
+DISQUALIFY_TRANSFER = {
+    "raam": ("raam_disqualified", [("balad", 0.50)]),
+    "balad": ("joint_list_disqualified", [("raam", 0.40)]),
+    "otzma": ("otzma_disqualified", [("likud", 0.50), ("rzp", 0.35), ("amcha_yisrael", 0.10)]),
+    "rzp": ("rzp_disqualified", [("otzma", 0.55), ("likud", 0.35)]),
+    "democrats": ("democrats_disqualified", [("yashar", 0.45), ("bennett_2026", 0.35), ("balad", 0.10)]),
 }
 MERGE_RETENTION = 0.90
 # Fold redistribution vectors (centre desk, Aug 30): named absorbers get
@@ -273,6 +298,21 @@ def apply_registration_events(shares, comps, labels, blocs, fams, rng,
             shares[on, dst] += transfer * shares[on, src]
         shares[on, src] = 0.0
         events[f"{pid}_folds"] = on
+
+    # Disqualification petitions (open until the CEC and the Supreme Court
+    # rule): the list's column is zeroed and its voters redistributed.
+    for pid, (event, dests) in DISQUALIFY_TRANSFER.items():
+        src = _col(comps, pid)
+        if src is None:
+            continue
+        on = bern(event)
+        for absorber, transfer in dests:
+            dst = _col(comps, absorber)
+            if dst is None or dst == src:
+                continue
+            shares[on, dst] += transfer * shares[on, src]
+        shares[on, src] = 0.0
+        events[event] = on
 
     shares = np.clip(shares, 0, None)
     shares /= shares.sum(axis=1, keepdims=True)

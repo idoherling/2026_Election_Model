@@ -1272,3 +1272,44 @@ deadlock 53.1; PM repeat 38.4 / Netanyahu 28.2 / Eisenkot 21.2 / Bennett
 (NB 14.5 -> 21.0, Likud 23 -> 27) is the trailing-Likud layer (+2.5 seats
 mean, zero-sum) plus the two new-straddler desertions redistributed to the
 field; the polls themselves moved little.
+
+## 37. Update of 16 September: petitions, the archive's relabelling, filings
+
+**Events.** The disqualification-petition deadline passed on 15 Sept (Israel
+Hayom, Kipa, JDN, Ynet): three petitions against Ra'am (Likud, Otzma, the
+"Voters' Forum"), Likud against the Joint List and MK Kasif, Otzma against
+Balad's Abu Shahada, Orot HaShachar against Balad, the Democrats and Zulat
+against Otzma Yehudit, Zulat against RZP-Zehut, Otzma against the
+Democrats; the Betsalmo petition against Kasif was struck for lacking the
+12 committee signatures. The CEC hears the rest the week of 21 Sept; the AG
+files a position; a list disqualification is appealable to the Supreme
+Court and a candidate disqualification needs its approval. Record: the
+court reinstated every Arab list the committee barred (2003, 2009, 2019),
+struck no Jewish list since Kach (1988), and did bar one candidate
+(Ben-Ari, 2019). Modeled as open mixture events with residual priors -
+Ra'am 0.02, Joint List 0.015, Otzma 0.01, RZP-Zehut and Democrats 0.005 -
+each zeroing the list and redistributing its voters within the family
+(`DISQUALIFY_TRANSFER`); candidate-level petitions are not modeled (a
+seat does not leave the list). Collapse on the rulings.
+
+**Archive relabelling.** The polling archive renamed the 2026 firms to
+consortium abbreviations (LRI+P4A = Lazar/Panel4All, MM+SN = Maagar Mochot/
+StatNet, MP+TM+SN+A = the Channel 13 consortium, SF+ND = Filber/Next Data);
+aliases added so the series stay whole. "S.M.L.T." remains excluded.
+
+**Filings.** Nine new (4139-4149; 72 indexed, 51 merged after duplicates).
+Two Sept 13-15 filings (Kantar, Filber) carry a "unity government"
+question whose line matched the withdrawn Unity list's keyword (27% and
+24%): lines for a withdrawn list after its withdrawal date are now dropped
+before the sum filter (`ABSORBED_FROM["unity"]`).
+
+**Refit and headline (16 Sept, 753 polls, 51 filings).** 0 divergences,
+r-hat 1.02, ESS 358, holdout 0.75. Headline: P(NB>=61) 15.9 / change bloc
+alone 10.1 / with Ra'am 28.1 / deadlock 56.0; PM repeat 40.0 / Netanyahu
+23.8 / Eisenkot 23.3 / Bennett 6.0. Central: Likud 26, Yashar 24, Together
+11, Democrats 10, UTJ 8, Shas 8, YB 8, Joint List 8, Otzma 7, Ra'am 5
+(.77), RZP-Zehut 5 (.75); Reservists 0 (.21), Amcha 0 (.18), B&W 0 (.02).
+The week's polls trimmed Likud's trailing-year beat (Likud 27 -> 26, NB
+21.0 -> 15.9): Yashar's lead is now 1-4 seats in every poll, so the
+condition holds but the latent gap widened, and the petitions cost Ra'am
+and the Joint List about a point of pass probability each.

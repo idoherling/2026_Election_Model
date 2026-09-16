@@ -10,3 +10,8 @@ blue_white_folds,0.65
 unity_folds,0.85
 centre_union_files,0.12
 segalovitz_joins_raam,0.8
+raam_disqualified,0.02
+joint_list_disqualified,0.015
+otzma_disqualified,0.01
+rzp_disqualified,0.005
+democrats_disqualified,0.005

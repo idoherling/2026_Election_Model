@@ -462,7 +462,10 @@ ABSORBED_IDS = {"zehut",   # inside RZP-Zehut from 2026-09-02 (see STRUCTURAL_BR
 # From these dates a CEC filing's separate line for the absorbed list (a
 # scenario table left in the report) would double count voters already in
 # the absorbing list's line: dropped before the filing is summed.
-ABSORBED_FROM = {"zehut": "2026-09-02", "nep": "2026-09-06"}
+ABSORBED_FROM = {"zehut": "2026-09-02", "nep": "2026-09-06",
+                 # Unity withdrew on Sept 4: a later filing line matching its
+                 # keyword is a "unity government" question, not the list
+                 "unity": "2026-09-05"}
 # Lists whose COMPOSITION changed mid-campaign (2026-09-10, accuracy round
 # four #5): observations taken before the change measured a different
 # list, so they carry a noise multiplier - they still inform the level

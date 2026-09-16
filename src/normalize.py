@@ -15,16 +15,16 @@ DATA_DIR = Path(__file__).resolve().parent.parent / "data"
 # Extend as the scraper hits new spellings; keys are the only names allowed
 # in processed data.
 POLLSTER_ALIASES: dict[str, list[str]] = {
-    "Lazar": ["Lazar Research", "Panels/Lazar", "Maariv/Lazar"],
+    "Lazar": ["LRI+P4A", "Lazar Research", "Panels/Lazar", "Maariv/Lazar"],
     "Midgam": ["Midgam Institute", "Migdam", "Midgam R&C", "Midgam Research",
                "Meno Geva", "Mano Geva"],
-    "Midgam Project": [],
+    "Midgam Project": ["MP+TM+SN+A", "MP+TM+SN+A`", ],
     "Midgam Project & StatNet": ["Midgam Project & Stat Net"],
     "Kantar": ["Kantar Institute", "Kan/Kantar"],
-    "Maagar Mochot": ["Ma'agar Mochot", "Maagar Mohot", "Maagar",
+    "Maagar Mochot": ["MM+SN", "Ma'agar Mochot", "Maagar Mohot", "Maagar",
                       "Makor Rishon Maagar Mochot"],
     "Direct Polls": ["DirectPolls", "Direct Polls Institute"],
-    "Filber": ["Next Data/Filber", "Filber Institute"],
+    "Filber": ["SF+ND", "Next Data/Filber", "Filber Institute"],
     "Tatika": ["Taktika", "Yossi Tatika"],
     "StatNet": ["Statnet", "Stat-Net"],
     "Camil Fuchs": ["Camile Fuchs"],
