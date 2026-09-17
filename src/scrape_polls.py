@@ -26,6 +26,7 @@ import sys
 from pathlib import Path
 
 import lxml.html
+import numpy as np
 import pandas as pd
 
 from normalize import canonical_pollster, party_lookup
@@ -576,6 +577,24 @@ if __name__ == "__main__":
     polls = finalize(polls_raw)
     results = finalize_results(results_raw)
     PROCESSED_DIR.mkdir(parents=True, exist_ok=True)
+    # Manually entered polls (data/manual_polls.csv): published polls the
+    # archive has not yet carried, with their publication URL as the source
+    # row; the same-firm/same-date signature dedupe above removes them once
+    # the archive catches up with identical numbers, and a CEC filing
+    # displaces them in the fit like any table-derived poll.
+    manual_path = PROCESSED_DIR.parent.parent / "data" / "manual_polls.csv"
+    if manual_path.exists():
+        man = pd.read_csv(manual_path, parse_dates=["fieldwork_end"])
+        man = man[~man["poll_id"].isin(set(polls["poll_id"]))]
+        if len(man):
+            add = pd.DataFrame({
+                "poll_id": man["poll_id"], "cycle": "2026", "pollster": man["pollster"],
+                "publisher": man["publisher"], "fieldwork_end": man["fieldwork_end"],
+                "sample_size": man["sample_size"], "party_id": man["party_id"],
+                "seats": man["seats"].astype(float), "vote_pct": np.nan, "sums_ok": True,
+                "page": "manual", "section": "manual", "source_row": man["source_url"]})
+            polls = pd.concat([polls, add], ignore_index=True)
+            print(f"manual polls appended: {man['poll_id'].nunique()}")
     polls.to_csv(PROCESSED_DIR / "polls.csv", index=False)
     results.to_csv(PROCESSED_DIR / "results.csv", index=False)
     print(f"wrote {PROCESSED_DIR / 'polls.csv'} and results.csv")

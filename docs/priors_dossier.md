@@ -1313,3 +1313,15 @@ The week's polls trimmed Likud's trailing-year beat (Likud 27 -> 26, NB
 21.0 -> 15.9): Yashar's lead is now 1-4 seats in every poll, so the
 condition holds but the latent gap widened, and the petitions cost Ra'am
 and the Joint List about a point of pass probability each.
+
+**17 Sept.** Two polls (Channel 13 consortium 15 Sept, relabelled again in
+the archive and aliased; Channel 16 / Maagar Mochot 16 Sept - Yashar 21,
+Likud 18, Together 16, Otzma 9, Shas 9, Democrats 9, UTJ 7, YB 7, Joint
+List 6, Ra'am 5, RZP-Zehut 5, Amcha 4, Reservists 4 - not yet in the
+archive, entered through the new data/manual_polls.csv channel with
+Maariv's five-channel compilation as its source link; the archive's
+signature dedupe and the CEC displacement keep it single once the
+official copies arrive). 755 polls; refit 0 divergences, r-hat 1.01, ESS
+584, holdout 0.82. Headline: NB 16.6 / change alone 9.3 / with Ra'am 28.1
+/ deadlock 55.3; PM repeat 40.0 / Netanyahu 24.3 / Eisenkot 22.9. Likud
+26, Yashar 24; Ra'am .79, RZP-Zehut .76, Reservists .21, Amcha .20.

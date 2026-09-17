@@ -118,7 +118,8 @@ def build_ledger(fit: dict) -> dict:
             "n": int(f0.sample_size) if pd.notna(f0.sample_size) else None,
             "s": seats, "w": weights.get(f0.pollster),
             "cec": cand["url"].iloc[0] if len(cand) else None,
-            "src": srcs.get(f0.source_row),
+            "src": (f0.source_row if isinstance(f0.source_row, str) and f0.source_row.startswith("http")
+                    else srcs.get(f0.source_row)),
             "pg": f0.page,
         })
     rows.sort(key=lambda r: r["d"], reverse=True)

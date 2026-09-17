@@ -18,7 +18,7 @@ POLLSTER_ALIASES: dict[str, list[str]] = {
     "Lazar": ["LRI+P4A", "Lazar Research", "Panels/Lazar", "Maariv/Lazar"],
     "Midgam": ["Midgam Institute", "Migdam", "Midgam R&C", "Midgam Research",
                "Meno Geva", "Mano Geva"],
-    "Midgam Project": ["MP+TM+SN+A", "MP+TM+SN+A`", ],
+    "Midgam Project": ["MP, M, SN, A", "MP, M, SN, A`", "MP+TM+SN+A", "MP+TM+SN+A`", ],
     "Midgam Project & StatNet": ["Midgam Project & Stat Net"],
     "Kantar": ["Kantar Institute", "Kan/Kantar"],
     "Maagar Mochot": ["MM+SN", "Ma'agar Mochot", "Maagar Mohot", "Maagar",
