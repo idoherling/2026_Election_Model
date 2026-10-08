@@ -59,7 +59,11 @@ EDITOR_MAP = {
 
 # Keyword (appears intact even in scrambled lines) -> party_id.
 PARTY_KEYWORDS = [
-    ("ישר", "yashar"), ("אייזנקוט", "yashar"),
+    # "ישר" alone is a substring of "ישראל" (filing 4192: "ישראל הרשאים
+    # לבחור" + the next line's response rate parsed as Yashar 7.3%); match
+    # the list name as a token or the leader's name in either spelling.
+    ("ישר ", "yashar"), ("ישר!", "yashar"), ("!ישר", "yashar"),
+    ("אייזנקוט", "yashar"), ("איזנקוט", "yashar"),
     ("הליכוד", "likud"), ("ליכוד", "likud"),
     ("ביחד", "together"), ("בנט", "together"), ("יחד בראשות", "together"),
     ("ביתנו", "yisrael_beytenu"),
@@ -107,6 +111,13 @@ PARTY_KEYWORDS = [
 # tables, not the vote-intention table.
 SCENARIO_TOKENS = ("איחוד", "יתאחדו", "אם יהיה", "אם  יהיה", "להצטרף")
 UNDECIDED_TOKENS = ("יודע לא", "לא יודע", "מתלבט", "החלטתי לא", "לא החלטתי")
+# Leader names also appear in PM-suitability tables ("גדי איזנקוט 32%"); a
+# leader-only keyword counts as a party line only when the line names a
+# list ("בראשות" / "בהובלת" / "בהנהגת").
+LEADER_KEYWORDS = {"אייזנקוט", "איזנקוט", "עבאס", "מנסור", "ליברמן", "הנדל",
+                   "טרופר", "גנץ", "ארדן", "אדלשטיין", "וינטר", "ג׳בארין",
+                   "ג'בארין", "בנט"}
+LIST_MARKERS = ("בראשות", "בהובלת", "בהנהגת")
 
 PCT = re.compile(r"(\d{1,2}(?:\.\d{1,2})?)%")
 # The full digit run in front of a percent sign. Several filings glue a
@@ -147,14 +158,18 @@ def split_pct(run: str, n_resp, seats_after):
     rejected (None).
     """
     ip, _, dp = run.partition(".")
-    if len(ip) <= 2:
+    if len(ip) <= 2 and float(run) <= 40:
         return "", float(run)
     cands = []
     for k in (1, 2):
+        if k >= len(ip):
+            continue
         pre, pct_i = ip[:-k], ip[-k:]
         if pct_i.startswith("0") and k == 2:
             continue
         pct = float(pct_i + ("." + dp if dp else ""))
+        if pct > 40:
+            continue
         cands.append((pre, pct))
     best, best_err = None, 1.5
     for pre, pct in cands:
@@ -163,6 +178,11 @@ def split_pct(run: str, n_resp, seats_after):
             errs.append(abs(int(pre) / n_resp * 100 - pct))
         if seats_after is not None:
             errs.append(abs(seats_after / 1.2 - pct))
+        # a seat count glued BEFORE the percentage ("2116.4%" = 21 seats,
+        # 16.4%; Filber 4176): about 1.28 seats per percent of the vote
+        # (120 / the ~93% of the vote that passes); error in seats
+        if pre and 0 < int(pre) <= 45:
+            errs.append(abs(int(pre) - pct * 1.28) / 1.28)   # back to pct units
         if errs and min(errs) < best_err:
             best, best_err = (pre, pct), min(errs)
     return best
@@ -245,13 +265,19 @@ def parse_pdf(path: Path):
     for i, ln in enumerate(lines):
         if any(t in ln for t in SCENARIO_TOKENS):
             continue
+        # methodology lines: "שיעור האנשים שסרבו ... 77%" contains the token
+        # "שס" inside "שסרבו"
+        if "סרבו" in ln or "סירבו" in ln:
+            continue
         runs = PCT_RUN.findall(ln)
         if not runs:
             # A long list name wraps: the keyword sits on this line and the
             # percentage on the next, which names no party of its own.
             nxt = lines[i + 1] if i + 1 < len(lines) else ""
+            # the continuation line may carry the leader's name (Maagar:
+            # "הרשימה המשותפת בראשות פרופ' יוסף" / "ג׳בארין 6% ...")
             if (any(kw in ln for kw, _ in PARTY_KEYWORDS)
-                    and not any(kw in nxt for kw, _ in PARTY_KEYWORDS)
+                    and not any(kw in nxt for kw, _ in PARTY_KEYWORDS if kw not in LEADER_KEYWORDS)
                     and not any(t in nxt for t in SCENARIO_TOKENS)):
                 runs = PCT_RUN.findall(nxt)
                 if runs:
@@ -260,6 +286,8 @@ def parse_pdf(path: Path):
                 continue
         for kw, pid in PARTY_KEYWORDS:
             if kw in ln and pid not in parties:
+                if kw in LEADER_KEYWORDS and not any(m in ln for m in LIST_MARKERS):
+                    continue
                 # a seat count glued after the first percentage ("4.40%6")
                 m_after = re.search(r"%(\d{1,2})(?!\d|\.)", ln)
                 seats_after = int(m_after.group(1)) if m_after else None

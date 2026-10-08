@@ -1371,3 +1371,33 @@ Together 11, YB 9, Democrats 9, Joint List 9, UTJ 8, Shas 8, Otzma 7, Ra'am
 Joint List (6 -> 8); Amcha slipped to 2-4 and its pass odds to 12%. With
 the calendar in the calm zone the forward variance is now small; the
 remaining width is the election-day shock stack.
+
+## 39. CEC parser, fourth pass (2026-10-08)
+
+Two new filings (Filber 4192, Ch13 consortium 4193) exposed three more
+format traps, and the fixes corrected two filings that had been IN the
+likelihood with a wrong Yashar share since August:
+
+* The keyword "ישר" is a substring of "ישראל": the methodology line
+  "ישראל הרשאים לבחור" (followed by the response-rate line) parsed as
+  Yashar 7.3% in 4192 - and, it turned out, as 4.4% in Filber 4070 (10 Aug)
+  and 9.0% in 4085 (18 Aug), both of which passed the sum filter and sat in
+  the fit at a fifth of Yashar's true level. Yashar is now matched as a
+  token ("ישר ", "ישר!") or by the leader's name in both spellings.
+* Leader names also appear in the PM-suitability tables ("גדי איזנקוט 32%"):
+  a leader-only keyword now counts as a party line only when the line
+  names a list (בראשות / בהובלת / בהנהגת); the wrapped-name rule treats a
+  leader name on the continuation line as part of the name (Maagar's
+  "הרשימה המשותפת בראשות פרופ' יוסף" / "ג׳בארין 6% ...").
+* Filber 4176 glues the seat count in front of the percentage
+  ("2116.4%" = 21 seats, 16.4%; "86.1%" = 8 seats, 6.1%): the digit-run
+  splitter now also corroborates a candidate by seats ~ 1.28 x percent
+  (120 seats over the ~93% of the vote that passes), within 1.5 seats; a
+  two-digit run above 40% is split the same way. The methodology line
+  "שיעור האנשים שסרבו ... 77%" contains "שס" inside "שסרבו" and had been
+  matching Shas; refusal lines are skipped.
+
+Net: 4070 Yashar 4.4 -> 16.8, 4085 9.0 -> 18.5, 4192 7.3 -> 17.4, 4176 fully
+parsed (14 lists, now eligible), Kantar Shas rows unchanged; 70 of 99
+filings merge. The fit will move Yashar's August level up slightly at the
+next refit (two filings among ~30 August observations of the list).

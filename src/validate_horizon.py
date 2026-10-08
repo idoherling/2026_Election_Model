@@ -26,7 +26,8 @@ from validate_bayes import (CYCLE_THRESHOLD, ORDER, PAST_PAIRS,
                             VAL_BLOC_OVERRIDES, apply_decomp, project_cycle)
 
 warnings.filterwarnings("ignore")
-HORIZONS = [56, 21]
+import os as _os0
+HORIZONS = [int(x) for x in _os0.environ.get("HORIZONS", "56,21").split(",")]   # e.g. HORIZONS=56,21,7
 CACHE = PROCESSED_DIR / "harness_cache"
 # Joint calibration grid for the next run: scale on the shock stack
 # (swing, family sd, residual) x scale on the forward random-walk variance.
