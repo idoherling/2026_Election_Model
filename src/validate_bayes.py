@@ -23,6 +23,7 @@ import warnings
 import numpy as np
 import pandas as pd
 
+import bayes_model as bm
 from bayes_model import SEED, T_DF, WITHDRAWN_WEEKS, fit, prepare_data
 from error_decomposition import decompose
 from bias_audit import FAMILY_OF
@@ -37,17 +38,23 @@ warnings.filterwarnings("ignore")
 
 N_PROJ = 4000
 WIDTH_GRID = [0.6, 0.7, 0.8, 0.9, 1.0, 1.1]
-ABLATIONS = [("full", {}), ("no_resid", {"resid": False}), ("no_swing", {"swing": False}),
-             ("no_family", {"family": False}), ("no_anchors", {"anchors": False}),
-             ("no_gevalt", {"gevalt": False}), ("no_loyal", {"loyal": False}),
-             ("latent_only", {k: False for k in ["resid", "swing", "family", "anchors", "gevalt", "loyal"]}),
-             ("no_likud_anchor", {"anchor_likud": False}), ("no_leader_anchor", {"anchor_leader": False}),
-             ("half_anchors", {"anchor_scale": 0.5}),
-             # the shipped configuration is no_anchors; the trailing-Likud
-             # conditional is tested on top of it at full and half strength
-             ("no_anchors_trail", {"anchors": False, "gevalt_cond": True}),
-             ("no_anchors_trail_half", {"anchors": False, "gevalt_cond": True, "trail_scale": 0.5}),
+ABLATIONS = [
+    ("shipped", {}),
+    ("no_resid", {"resid": False}), ("no_swing", {"swing": False}),
+    ("no_family", {"family": False}), ("no_gevalt", {"gevalt": False}),
+    ("no_loyal", {"loyal": False}),
+    ("no_trail", {"gevalt_cond": False}), ("trail_full", {"trail_scale": 1.0}),
+    ("no_nstrad", {"new_straddler": False}),
+    ("anchors_on", {"anchors": True}),
+    ("latent_only", {k: False for k in ["resid", "swing", "family", "gevalt", "loyal",
+                                        "gevalt_cond", "new_straddler"]}),
 ]
+# Quick runs (candidate testing): HARNESS_ABLATIONS=shipped,my_layer limits the
+# ablation list by name; HARNESS_SKIP_WIDTH=1 skips the width grid.
+import os as _os
+if _os.environ.get("HARNESS_ABLATIONS"):
+    _keep = set(_os.environ["HARNESS_ABLATIONS"].split(","))
+    ABLATIONS = [a for a in ABLATIONS if a[0] in _keep]
 
 # Era-specific alliance identities: which composite each historical id was.
 # Applied component-wise before block-building, so pre-merger component
@@ -90,18 +97,21 @@ def apply_decomp(polls: pd.DataFrame, cycle: str) -> pd.DataFrame:
     return polls
 
 
-ALL_LAYERS = {"resid": True, "swing": True, "family": True, "anchors": True,
+# Defaults MIRROR PRODUCTION (bayes_model): anchors retired, the
+# trailing-Likud conditional at half strength, new-straddler desertion on.
+# An ablation turns one layer off (or an alternative on) relative to this.
+ALL_LAYERS = {"resid": True, "swing": True, "family": True, "anchors": False,
               "gevalt": True, "loyal": True,
               "anchor_likud": True, "anchor_leader": True, "anchor_scale": 1.0,
               "shock_scale": 1.0,
               # accuracy round four #4: Likud's poll beat conditional on
               # TRAILING (or tying) the largest non-bloc list at the
               # projection date - the successor to the retired fixed anchor
-              "gevalt_cond": False, "trail_scale": 1.0,
+              "gevalt_cond": True, "trail_scale": 0.5,
               # accuracy round four #1: first-cycle lists projected at the
               # threshold band lose votes to strategic desertion (measured on
               # the D-56/D-21 straddler record: 2 of 11 passed, drift -1.6 pp)
-              "new_straddler": False}
+              "new_straddler": True}
 NSTRAD_BAND = (-0.75, 1.5)   # pp around the threshold (projected share)
 
 
@@ -173,8 +183,10 @@ def trailing_likud_params(polls: pd.DataFrame, results: pd.DataFrame,
 
 
 def project_cycle(data, idata, eday, threshold, pairs, params,
-                  bloc_overrides, rng, resid_scale=1.0, layers=None,
+                  bloc_overrides, rng, resid_scale=None, layers=None,
                   weeks_override=None):
+    if resid_scale is None:
+        resid_scale = bm.RESID_SCALE          # production width
     L = dict(ALL_LAYERS, **(layers or {}))
     swing_sd, shocks = params["bloc_sd"], params["family"]
     reg = load_party_registry()
@@ -369,6 +381,8 @@ def main() -> None:
             div = int(idata.sample_stats["diverging"].sum())
             params = decompose(exclude_cycle=cycle)
             params["trail"] = trailing_likud_params(polls, results, exclude_cycle=cycle)
+            params["new_lists"] = new_lists_for_cycle(polls, cycle)
+            params["nstrad"] = new_straddler_params(exclude_cycle=cycle)
             print(f"[{cycle}] trailing-Likud LOO: mu {params['trail']['mu']:+.2f} sd {params['trail']['sd']:.2f} n {params['trail']['n']}")
             seats, blocs, base, comp_of = project_cycle(
                 data, idata, eday, CYCLE_THRESHOLD.get(cycle, THRESHOLD),
@@ -394,7 +408,8 @@ def main() -> None:
             sa, _, ba, _ = project_cycle(
                 data, idata, eday, CYCLE_THRESHOLD.get(cycle, THRESHOLD),
                 PAST_PAIRS[cycle], params, VAL_BLOC_OVERRIDES.get(cycle),
-                np.random.default_rng(SEED + 11), layers=flags)
+                np.random.default_rng(SEED + 11 + int(_os.environ.get("HARNESS_SEED_OFFSET", 0))),
+                layers=flags)
             act_a = (ba >= 0.005) | (actual > 0)
             lo_a, hi_a = np.percentile(sa, 5, axis=0), np.percentile(sa, 95, axis=0)
             ppa = (sa >= 1).mean(axis=0)
@@ -406,7 +421,7 @@ def main() -> None:
 
         # Interval-width calibration curve (audit improvement #2): the same
         # posterior re-projected under a grid of residual-width factors.
-        for w in WIDTH_GRID:
+        for w in ([] if _os.environ.get("HARNESS_SKIP_WIDTH") else WIDTH_GRID):
             sw, _, bw, _ = project_cycle(
                 data, idata, eday, CYCLE_THRESHOLD.get(cycle, THRESHOLD),
                 PAST_PAIRS[cycle], params, VAL_BLOC_OVERRIDES.get(cycle),

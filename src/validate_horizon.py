@@ -74,17 +74,26 @@ def main() -> None:
             except Exception as e:
                 print(f"[{cycle} D-{h}] FAILED: {e}")
                 continue
-            configs = [("plain", h / 7.0, 1.0, 1.0), ("calendar", calendar_weeks(h), 1.0, 1.0),
-                       ("cal_nstrad", calendar_weeks(h), 1.0, 1.0)]
-            configs += [(f"cal_s{st}_rw{rw}", calendar_weeks(h) * rw, st, rw)
-                        for st in STACK_GRID for rw in RW_GRID if not (st == 1.0 and rw == 1.0)]
+            # "calendar" = the shipped configuration (production layer defaults).
+            configs = [("plain", h / 7.0, 1.0, 1.0), ("calendar", calendar_weeks(h), 1.0, 1.0)]
+            import os as _os, json as _json
+            if not _os.environ.get("HORIZON_SKIP_GRID"):
+                configs += [(f"cal_s{st}_rw{rw}", calendar_weeks(h) * rw, st, rw)
+                            for st in STACK_GRID for rw in RW_GRID if not (st == 1.0 and rw == 1.0)]
+            # HORIZON_LAYERS='name1:{"flag":true};name2:{...}' adds layer configs
+            # (candidate tests) at the calendar horizon.
+            extra = {}
+            for spec in filter(None, _os.environ.get("HORIZON_LAYERS", "").split(";")):
+                nm_, js_ = spec.split(":", 1)
+                extra[nm_] = _json.loads(js_)
+                configs.append((nm_, calendar_weeks(h), 1.0, 1.0))
             for mode, wk, st, rw in configs:
                 seats, blocs, base, comp_of = project_cycle(
                     data, idata, eday, CYCLE_THRESHOLD.get(cycle, THRESHOLD),
                     PAST_PAIRS[cycle], params, VAL_BLOC_OVERRIDES.get(cycle),
                     np.random.default_rng(SEED + h), resid_scale=bm.RESID_SCALE * st,
                     weeks_override=wk,
-                    layers={"shock_scale": st, "new_straddler": mode == "cal_nstrad"})
+                    layers=dict({"shock_scale": st}, **extra.get(mode, {})))
                 actual = np.zeros(seats.shape[1])
                 for r in res.itertuples():
                     hit = {comp_of[c] for c in r.party_id.split("+") if c in comp_of}
