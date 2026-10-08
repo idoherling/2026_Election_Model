@@ -128,7 +128,11 @@ NON_NATIONAL_EDITORS = {"Midgam Project & StatNet"}
 # commissioned "institute" with no publisher, no published series and a
 # report whose party names are RTL-scrambled (DRI, filed 2026-09-08 with
 # Likud 25 / Yashar 20 / Blue and White 4). Parsed for the record only.
-EXCLUDED_EDITORS = {"מכון די אר איי"}
+EXCLUDED_EDITORS = {"מכון די אר איי",
+                    # aChord (Hebrew University social-psychology centre): one
+                    # self-commissioned survey of non-haredi Jews aged 22-34 -
+                    # not a national sample, no series
+                    "מרכז אקורד"}
 
 
 def split_pct(run: str, n_resp, seats_after):

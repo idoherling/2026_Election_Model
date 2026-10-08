@@ -182,7 +182,23 @@ RESOLVED: dict = {"segalovitz_joins_raam": True,
                   # not fold. Every registration event is now resolved:
                   # the mixture is a single configuration.
                   "zionist_home_folds": False,
-                  "blue_white_folds": False}
+                  # 2026-10-08: the disqualification petitions are closed -
+                  # the CEC barred Ra'am (18-5-1), the Joint List and Kasif
+                  # and rejected the petitions against Otzma, RZP-Zehut and
+                  # the Democrats; the Supreme Court unanimously reinstated
+                  # Ra'am, the Joint List and Kasif (early Oct); Abu Shahada
+                  # withdrew his candidacy (no seat effect). All resolved.
+                  "raam_disqualified": False, "joint_list_disqualified": False,
+                  "otzma_disqualified": False, "rzp_disqualified": False,
+                  "democrats_disqualified": False}
+# blue_white_folds is REOPENED (2026-10-08) with a new meaning: Blue and
+# White withdrawing before election day. It polls 0.7-1.3% in every
+# post-approval filing; opposition leaders are reported to be offering
+# Gantz a "withdrawal with honour" (Ch13, Israel Hayom), he is in talks
+# with Eisenkot, and his list is also negotiating a surplus pact with
+# the Reservists (a signal of staying). A withdrawal routes its voters by
+# the measured 2022 pattern (Yashar 0.60 / Together 0.25, rest abstain).
+PRIORS["blue_white_folds"] = 0.40
 
 
 def _col(comps, component):

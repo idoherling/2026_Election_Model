@@ -374,9 +374,8 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
     <div class="axisrow"><div></div><div class="axis" id="ivlAxis"></div><div></div></div>
     <div class="legend"><span><i class="sw" style="background:var(--ink);width:12px;height:3px"></i>90% interval</span>
     <span><i class="sw hollow"></i>below threshold in central projection</span></div>
-    <p class="note" style="margin-top:8px">Chips show the ballot letters each list requested when it
-    filed on September 7–8. Starred letters are contested (Together and Otzma Yehudit both asked for ב)
-    or offered as alternatives; the Central Elections Committee rules on names and letters by September 27.</p>
+    <p class="note" style="margin-top:8px">Chips show each list's ballot letters as approved by the
+    Central Elections Committee on September 27 (Together received בד after Otzma Yehudit's prior claim to ב).</p>
   </div>
 </div></section>
 
@@ -707,9 +706,15 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
     List, two against Otzma Yehudit, one each against RZP–Zehut and the Democrats). The committee hears
     them the week of September 21; a list disqualification is appealable to the Supreme Court, which has
     reinstated every Arab list the committee barred since 2003 and has barred no Jewish list since 1988.
-    They are priced at the residual after that record (Ra'am 2%, Joint List 1.5%, Otzma 1%, RZP–Zehut and
-    the Democrats 0.5%), with a disqualified list's voters redistributed within its family; candidate-level
-    petitions do not remove a list's seats and are not modeled.</p>
+    They were priced at the residual after that record until they resolved: the committee barred Ra'am,
+    the Joint List and MK Kasif and rejected the petitions against Otzma, RZP–Zehut and the Democrats; in
+    early October the Supreme Court unanimously reinstated all three, and Balad's Abu Shahada withdrew his
+    candidacy (a seat does not leave a list). All 38 lists stand. Two things remain open: <b>Blue and
+    White's run</b> — it polls 0.7–1.3%, opposition leaders are reported to be offering Gantz a withdrawal,
+    and the forecast carries a 40% withdrawal event whose voters go to Yashar and Together by the 2022
+    pattern — and the <b>surplus-vote agreements</b> (deadline October 16): Likud–RZP-Zehut, Together–Yisrael
+    Beytenu and Yashar–Democrats are signed; Shas–UTJ, Otzma–Amcha and Joint List–Ra'am are expected and
+    carried as pairs in the seat law.</p>
     <div class="eq">P(seats) = &Sigma;<sub>e</sub> P(e) · P(seats | e)&nbsp;&nbsp;&nbsp;&nbsp;<i>mixture over registration events e</i></div></div>
 
   <div class="chapter"><h3>The formation tree</h3>
@@ -850,7 +855,7 @@ const HE_STATIC = {
  "← Back to the forecast":"→ חזרה לתחזית"};
 const HE_NOTES = {
   "#main figure figcaption": "חלוקת המנדטים המרכזית (חלקי הקול החציוניים של התערובת, מועברים פעם אחת דרך אחוז החסימה 3.25% ובדר–עופר), מקובצת לפי מחנה — הסוגריים מסמנים את הגושים; מנדטי הרשימות הערביות מצוירים כטבעות. כל רשימה שומרת על צבעה המקובל בגרפי הסקרים. רחפו מעל כל מנדט.",
-  "#seats .note": "השבבים מציגים את האותיות שכל רשימה ביקשה בעת ההגשה ב־7–8 בספטמבר. אותיות מסומנות בכוכבית שנויות במחלוקת (ביחד ועוצמה יהודית ביקשו שתיהן את ב) או הוצעו כחלופה; ועדת הבחירות המרכזית מכריעה על השמות והאותיות עד 27 בספטמבר.",
+  "#seats .note": "השבבים מציגים את אותיות הקלפי של כל רשימה כפי שאישרה ועדת הבחירות המרכזית ב־27 בספטמבר (ביחד קיבלה בד לאחר זכות הקדימה של עוצמה יהודית על ב).",
   "#builder .note": "הסכומים כוללים את תוצאות אחוז החסימה ואת חלוקת בדר–עופר. זו אריתמטיקה, לא פוליטיקה; מודל ההרכבה למטה מתמחר את הפוליטיקה.",
   "#formation .note": "השפמים הם רווחי 90% על פני הנחות המודל עצמו."
 };
@@ -925,7 +930,7 @@ const HE_CH = [
     <div class="eq">m<sub>j</sub> ~ N<sup>+</sup>(&mu;<sub>j</sub>, &sigma;<sub>j</sub>),&nbsp;&nbsp;v&prime; = ( v·(1−&Sigma;<sub>j</sub>m<sub>j</sub>),&nbsp;m )&nbsp;&nbsp;&nbsp;&nbsp;<i>מיקרו־רשימות נחתכות מהסימפלקס</i></div>`},
  {t:"אחוז החסימה ובדר–עופר", b:`<p>כל וקטור קולות מדומה עובר את מבחן אחוז החסימה של 3.25%, ואז המנדטים מוקצים בשיטה הישראלית האמיתית — <b>בדר–עופר</b>, ד'הונדט על עודפים — כאשר הסכמי עודפים חתומים מטופלים כרשימות משותפות בשלב העודפים (שווי מדוד של &lrm;+0.5 עד &lrm;+0.9 מנדטים לזוג). קולות רשימות שנפלו מתחלקים מחדש בין השורדות — וכך גוש יכול להפסיד בקולות ולנצח בכנסת. המנדטים המרכזיים המתפרסמים הם החוק הזה מיושם פעם אחת על וקטור נתחי־הקולות החציוני של התערובת, ולכן הטבלה מסתכמת ב־120 ללא עיגול או רצפות.</p>
     <div class="eq">seat<sub>k</sub> &rarr; argmax<sub>&#8467;</sub> v<sub>&#8467;</sub> / (s<sub>&#8467;</sub> + 1)&nbsp;&nbsp;&nbsp;&nbsp;<i>איטרציית ד'הונדט, זוגות עודפים מאוחדים</i></div>`},
- {t:"תערובת אירועי ההרשמה", b:`<p>עד סגירת הרשימות, התחזית דגמה <b>אירועי הרשמה בכל סימולציה</b>: קיפולי המיקרו־רשימות במרכז וזנב האיחוד ארדן–גנץ, עם וקטורי העברה הבנויים על גורלן המדוד של רשימות שנבלעו במטריצת המעבר 2021←2022 (מצביעי ימינה: הציונות הדתית 45 / הבית היהודי 24 / הליכוד 14 / המחנה הממלכתי 11 / ש״ס 6; תקווה חדשה: המחנה הממלכתי 58 / הליכוד 42; כחול לבן: המחנה הממלכתי 70 / יש עתיד 30). <b>ב־8 בספטמבר נסגרו הרשימות וכל האירועים הוכרעו</b>: 38 רשימות הוגשו. סגלוביץ׳ במקום השני ברע״ם; סמוטריץ׳ ופייגלין הגישו את הגוש הטכני הציונות הדתית–זהות; בל״ד נשארה ברשימה המשותפת; האחדות פרשה (4 בספטמבר); כחול לבן הגישה רשימה בראשות גנץ במקום להתקפל; והמילואימניקים הגישו רשימה עם המפלגה הכלכלית של זליכה ועם עינת וילף לאחר שטרופר עבר למקום השישי בישר (6 בספטמבר), כך שהסדרה ממשיכה כרשימת המילואימניקים והכלכלית. נעם, הציבור החרדי וישראל תחילה הגישו רשימות קטנות; מקום לכולנו, הרבעון הרביעי ואל הדגל לא הגישו. על ההרשמה התערובת היא תצורה אחת. סוג אירוע אחד נשאר פתוח: <b>בקשות הפסילה</b> שהוגשו עד המועד האחרון ב־15 בספטמבר לפי סעיף 7א (שלוש נגד רע״ם, אחת נגד הרשימה המשותפת, שתיים נגד עוצמה יהודית, אחת נגד הציונות הדתית–זהות ואחת נגד הדמוקרטים). הוועדה תדון בהן בשבוע של 21 בספטמבר; על פסילת רשימה ניתן לערער לבית המשפט העליון, שהחזיר כל רשימה ערבית שהוועדה פסלה מאז 2003 ולא פסל רשימה יהודית מאז 1988. הן מתומחרות בשארית שאחרי הרשומה הזו (רע״ם 2%, המשותפת 1.5%, עוצמה 1%, הציונות הדתית–זהות והדמוקרטים 0.5%), כשקולות רשימה שנפסלה מחולקים מחדש בתוך משפחתה; בקשות נגד מועמדים בודדים אינן מורידות מנדטים מרשימה ואינן ממודלות.</p>
+ {t:"תערובת אירועי ההרשמה", b:`<p>עד סגירת הרשימות, התחזית דגמה <b>אירועי הרשמה בכל סימולציה</b>: קיפולי המיקרו־רשימות במרכז וזנב האיחוד ארדן–גנץ, עם וקטורי העברה הבנויים על גורלן המדוד של רשימות שנבלעו במטריצת המעבר 2021←2022 (מצביעי ימינה: הציונות הדתית 45 / הבית היהודי 24 / הליכוד 14 / המחנה הממלכתי 11 / ש״ס 6; תקווה חדשה: המחנה הממלכתי 58 / הליכוד 42; כחול לבן: המחנה הממלכתי 70 / יש עתיד 30). <b>ב־8 בספטמבר נסגרו הרשימות וכל האירועים הוכרעו</b>: 38 רשימות הוגשו. סגלוביץ׳ במקום השני ברע״ם; סמוטריץ׳ ופייגלין הגישו את הגוש הטכני הציונות הדתית–זהות; בל״ד נשארה ברשימה המשותפת; האחדות פרשה (4 בספטמבר); כחול לבן הגישה רשימה בראשות גנץ במקום להתקפל; והמילואימניקים הגישו רשימה עם המפלגה הכלכלית של זליכה ועם עינת וילף לאחר שטרופר עבר למקום השישי בישר (6 בספטמבר), כך שהסדרה ממשיכה כרשימת המילואימניקים והכלכלית. נעם, הציבור החרדי וישראל תחילה הגישו רשימות קטנות; מקום לכולנו, הרבעון הרביעי ואל הדגל לא הגישו. על ההרשמה התערובת היא תצורה אחת. סוג אירוע אחד נשאר פתוח: <b>בקשות הפסילה</b> שהוגשו עד המועד האחרון ב־15 בספטמבר לפי סעיף 7א (שלוש נגד רע״ם, אחת נגד הרשימה המשותפת, שתיים נגד עוצמה יהודית, אחת נגד הציונות הדתית–זהות ואחת נגד הדמוקרטים). הוועדה תדון בהן בשבוע של 21 בספטמבר; על פסילת רשימה ניתן לערער לבית המשפט העליון, שהחזיר כל רשימה ערבית שהוועדה פסלה מאז 2003 ולא פסל רשימה יהודית מאז 1988. הן תומחרו בשארית שאחרי הרשומה הזו עד שהוכרעו: הוועדה פסלה את רע״ם, את המשותפת ואת ח״כ כסיף ודחתה את הבקשות נגד עוצמה, הציונות הדתית–זהות והדמוקרטים; בתחילת אוקטובר הכשיר בג״ץ פה אחד את שלושתם, ויו״ר בל״ד אבו שחאדה הסיר את מועמדותו (מנדט אינו עוזב רשימה). כל 38 הרשימות עומדות. שני דברים נותרו פתוחים: <b>ריצתה של כחול לבן</b> — היא מקבלת 0.7–1.3% בסקרים, ראשי האופוזיציה מציעים לגנץ, על פי הדיווחים, פרישה, והתחזית נושאת אירוע פרישה בהסתברות 40% שקולותיו הולכים לישר ולביחד לפי דפוס 2022 — ו<b>הסכמי העודפים</b> (מועד אחרון 16 באוקטובר): הליכוד–הציונות הדתית־זהות, ביחד–ישראל ביתנו וישר–הדמוקרטים חתומים; ש״ס–יהדות התורה, עוצמה–עמך והמשותפת–רע״ם צפויים ונישאים כזוגות בחוק המנדטים.</p>
     <div class="eq">P(seats) = &Sigma;<sub>e</sub> P(e) · P(seats | e)&nbsp;&nbsp;&nbsp;&nbsp;<i>תערובת על אירועי הרשמה e</i></div>`},
  {t:"עץ ההרכבה", b:`<p>מנדטים אינם כוח. כל כנסת מדומה עוברת רצף הרכבה מפורש — סולם שערים סדור, שלכל שער פרמטרים התנהגותיים הנגזרים ממחקר מוסדי: מי באמת חותם בשם כל מפלגה (מועצת חכמי התורה של ש״ס, שתי המועצות של יהדות התורה, עצמאות רע״ם שלאחר ביטול וטו השורא), הרקורד הנגלה של כל מנהיג בצמתים קודמים (התהפוכות של ליברמן, הפרת ההתחייבות של בנט ב־2021, גנץ ב־2020), ושיעורי בסיס היסטוריים. עמך של וינטר מקודדת כ<b>קשיחות אנטי־אייזנקוט</b>: יכולה להצטרף לממשלת מרכז בראשות בנט, כמעט לעולם לא בראשות אייזנקוט. הפרמטרים ההתנהגותיים עצמם נושאים אי־ודאות — כל סימולציה מגרילה סט משלה מפריורי Beta/Dirichlet — ולכן הסתברויות ההרכבה מגיעות עם רווחים כנים, המוצגים בלוח התרחישים. והשערים <b>מותנים בתצורה</b>: ההסתברויות המוצהרות הן ממוצעים שוליים, וההסתברות של כל שער בכל כנסת מדומה זזה עם מפת המנדטים שלה דרך לוגיסטית — עריקה חרדית עולה עם הפער של הימין מ־61 וכאשר אותה מפלגה לבדה סוגרת את פער המרכז (ש״ס 1992, ש״ס+יהדות התורה 1999), עריקה של מפלגת מרכז יורדת ככל שהפער גדל (גנץ 2020 בפער של שלושה), אחדות עולה עם עומק המבוי הסתום. במדידה על שמונה התוצאות האמיתיות מאז 2009 העץ המותנה מקבל את אותו ציון כמו הלא־מותנה (לוג־ציון ‎−0.93 מול ‎−0.92) — שמונה תוצאות אינן יכולות להכריע אפקטים בגודל כזה — ולכן הוא נשמר על בסיס מוסדי, כשהשוליים נשמרים מעצם הבנייה.</p>
     <div class="eq">p<sub>gate</sub> = &sigma;( logit p<sub>0</sub> + &beta;<sub>gap</sub>·(61 − NB − g&#772;)/5 + &beta;<sub>piv</sub>·pivotal )&nbsp;&nbsp;&nbsp;&nbsp;<i>שער מותנה־תצורה</i></div>
@@ -1001,12 +1006,14 @@ const BLOC = {"Likud":"nb","Shas":"nb","United Torah Judaism":"nb","Otzma Yehudi
 // letters by Sept 27. Two lists asked for ב (Together and Otzma Yehudit;
 // Ben-Gvir holds the prior municipal claim), so Together is shown with
 // its alternative request רק until the ruling.
-const HEB = {"Likud":"מחל","Yashar":"דרך","Bennett 2026 + Yesh Atid":"רק","The Democrats":"אמת",
+// Final letters approved by the CEC on Sept 27, 2026 (Ynet, Walla): all 38
+// lists approved; Together received בד (ב went to Otzma), Israel First י.
+const HEB = {"Likud":"מחל","Yashar":"דרך","Bennett 2026 + Yesh Atid":"בד","The Democrats":"אמת",
  "Yisrael Beytenu":"ל","Shas":"שס","United Torah Judaism":"ג","Otzma Yehudit":"ב",
  "Balad + Hadash-Ta'al":"ודם","Ra'am":"עם","Amcha Yisrael":"ך","Religious Zionist Party":"ט",
  "Reservists – Economic Party":"די","Blue and White":"כן","Noam":"ני",
- "The Haredi Public":"זך","Israel First":"יר"};
-const HEB_PROV = new Set(["Bennett 2026 + Yesh Atid","Otzma Yehudit","Reservists – Economic Party"]);
+ "The Haredi Public":"זך","Israel First":"י"};
+const HEB_PROV = new Set([]);
 const heb = n => (HEB[n]||"") + (HEB_PROV.has(n) ? "<i style=\"font-style:normal;font-size:9px;vertical-align:top\">*</i>" : "");
 const SHORT = {"Bennett 2026 + Yesh Atid":"Together","Balad + Hadash-Ta'al":"Joint List",
  "Reservists – Economic Party":"Reservists–Economic","Religious Zionist Party":"Religious Zionism–Zehut",

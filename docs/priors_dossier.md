@@ -1325,3 +1325,49 @@ official copies arrive). 755 polls; refit 0 divergences, r-hat 1.01, ESS
 584, holdout 0.82. Headline: NB 16.6 / change alone 9.3 / with Ra'am 28.1
 / deadlock 55.3; PM repeat 40.0 / Netanyahu 24.3 / Eisenkot 22.9. Likud
 26, Yashar 24; Ra'am .79, RZP-Zehut .76, Reservists .21, Amcha .20.
+
+## 38. Catch-up of 8 October: rulings, letters, surplus pacts, 22 polls
+
+**Petitions resolved.** The CEC barred Ra'am (18-5-1), the Joint List, MK
+Kasif and Balad's Abu Shahada (31-4; 23 Sept) and rejected the petitions
+against Otzma, RZP-Zehut and the Democrats. The Supreme Court unanimously
+reinstated Ra'am, the Joint List and Kasif (early Oct; Ynet, N12); Abu
+Shahada withdrew his candidacy after the President of the Court suggested
+it (Israel Hayom, Ynet) - no seat leaves Balad. The five DISQUALIFY events
+are RESOLVED False. The record stands at 0 final list disqualifications in
+8 attempts.
+
+**Lists and letters.** All 38 lists approved 27 Sept (Ynet, Walla, Emess).
+Final letters as requested except Together = בד (Otzma's prior claim to ב)
+and Israel First = י. Site chips updated; contested marks removed.
+
+**Surplus-vote agreements (deadline 16 Oct).** Signed: Likud - RZP-Zehut
+(6 Oct; Otzma was left out and is to sign with Amcha or run alone), Together
+- Yisrael Beytenu, Yashar - Democrats. Expected: Shas - UTJ, Otzma - Amcha,
+Joint List - Ra'am; Reservists - Blue and White negotiating (no effect
+unless both pass). SURPLUS_PAIRS replaced with the signed + expected set;
+the previous assumed pairs (Together-Yashar, Democrats-YB) were wrong on
+both centre pairs.
+
+**Blue and White.** 0.7-1.3% in every post-approval filing; Ch13 and Israel
+Hayom report an offer of a "withdrawal with honour", Gantz meeting Eisenkot
+on continuing the run. blue_white_folds reopened as a withdrawal event at
+0.40 (2022 transfer pattern: Yashar .60 / Together .25).
+
+**Data.** 22 archive polls (777; the archive now carries the Channel 16 poll
+the manual channel supplied - the poll_id dedupe dropped the manual copy),
+25 filings (97 indexed). Excluded by editor: aChord (one self-commissioned
+survey of non-haredi Jews 22-34). Dialog's "liberals" sample (4166) is
+non-national and flagged by the marker. Filber 4176 parsed 7 parties (a
+partial report) and fails the sum filter by design.
+
+**Refit and headline (8 Oct; 777 polls, 68 filings, D-19).** 0 divergences,
+r-hat 1.01, ESS 369, holdout 0.71. Headline: P(NB>=61) 19.1 / change bloc
+alone 5.6 / with Ra'am 21.2 / deadlock 59.7; PM repeat 42.8 / Netanyahu 27.3
+/ Eisenkot 18.4 / Likud successor 5.8. Central: Likud 26, Yashar 23,
+Together 11, YB 9, Democrats 9, Joint List 9, UTJ 8, Shas 8, Otzma 7, Ra'am
+5 (.81), RZP-Zehut 5 (.78); Reservists 0 (.21), Amcha 0 (.12), B&W 0
+(.01). Three weeks of polls narrowed Together (16 -> 11-13) and lifted the
+Joint List (6 -> 8); Amcha slipped to 2-4 and its pass odds to 12%. With
+the calendar in the calm zone the forward variance is now small; the
+remaining width is the election-day shock stack.

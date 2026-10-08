@@ -67,13 +67,20 @@ DEBUT_FACTOR = 1.5           # audit: debut lists ~50% harder to poll
 DEBUT = {"yashar", "together", "democrats", "unity", "zionist_home"}
 SUB_THRESHOLD_DEFAULT = 0.015  # share for 0-seat lists with no polled pct
 
-# ASSUMED pre-filing surplus-vote pairs (by dominant component); the 2022
-# pattern adapted to 2026 lists. Replace with the registered agreements.
+# Surplus-vote pairs (by dominant component). Deadline Oct 16, 2026.
+# SIGNED (Ynet, Haaretz, JDN, 6 Oct): Likud - RZP-Zehut; Together - Yisrael
+# Beytenu; Yashar - the Democrats. EXPECTED and carried as pairs: Shas -
+# UTJ (signed in every cycle since 2013), Otzma - Amcha (Ben-Gvir's stated
+# fallback, valid only if Amcha passes), Joint List - Ra'am (reported).
+# Reservists - Blue and White are negotiating; a pair of two sub-threshold
+# lists has no effect and is not carried.
 SURPLUS_PAIRS = [
     ("likud", "rzp"),
+    ("together", "yisrael_beytenu"),
+    ("yashar", "democrats"),
     ("shas", "utj"),
-    ("together", "yashar"),
-    ("democrats", "yisrael_beytenu"),
+    ("otzma", "amcha_yisrael"),
+    ("balad", "raam"),
 ]
 
 BLOC_LABEL = {"netanyahu_bloc": "Netanyahu bloc",
