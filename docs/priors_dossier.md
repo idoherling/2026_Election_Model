@@ -1401,3 +1401,25 @@ Net: 4070 Yashar 4.4 -> 16.8, 4085 9.0 -> 18.5, 4192 7.3 -> 17.4, 4176 fully
 parsed (14 lists, now eligible), Kantar Shas rows unchanged; 70 of 99
 filings merge. The fit will move Yashar's August level up slightly at the
 next refit (two filings among ~30 August observations of the list).
+
+## 40. Update of 10 October (D-17)
+
+Six archive polls since the 8 Oct build (Direct Polls, Filber, Ch13
+consortium 7 Oct; Kantar/Israel Hayom, Lazar/Maariv, Tatika 8 Oct): 783
+in the cycle; no new CEC filings beyond 4193. Window fit: 211 polls, 2,752
+observations, 71 filings merged (4192 now inside asof).
+Events checked, no model change: Eisenkot (Ynet, ~8 Oct) - "even without
+61 I will bring my government to the Knesset", will not ask the haredi or
+Arab parties to vote for it: consistent with the abstention-based
+JL-backed minority branch as coded; he is "convinced" Gantz will withdraw
+at 1.5% - the Blue and White camp says otherwise (Walla 1 Oct), so the
+0.40 withdrawal event stands. Likud-RZP held a joint "saving the right"
+conference without Ben-Gvir (N12, 8 Oct); Otzma has no signed pact, Hendel
+publicly asked Winter to sign with him - Otzma-Amcha stays carried as an
+expected pair until the 16 Oct deadline.
+
+Refit: 0 divergences, r-hat 1.01, ESS 433, holdout 0.68. Headline: P(NB>=61)
+21.7 / change bloc alone 5.2 / with Ra'am 18.8 / deadlock 59.5; PM repeat
+41.9 / Netanyahu 29.6 / Eisenkot 17.3. Central: Likud 27, Yashar 23,
+Together 11, Democrats 9, Joint List 9, UTJ 8, Shas 8, YB 8, Otzma 7,
+Ra'am 5 (.78), RZP-Zehut 5 (.78); Reservists (.20), Amcha (.15), B&W (.01).
