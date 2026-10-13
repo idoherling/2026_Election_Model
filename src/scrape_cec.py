@@ -106,6 +106,8 @@ PARTY_KEYWORDS = [
     ("המילואימניקים", "zionist_home"), ("המילואמיניקים", "zionist_home"),
     ("הכלכלית החדשה", "nep"), ("המפלגה הכלכלית", "nep"),
     ("הציבור החרדי", "haredi_public"), ("ישראל תחילה", "israel_first"),
+    ("אח\"י", "ahi"), ("חוזרים לשורשים", "ahi"),
+    ("צומת בית ישראל", "beit_yisrael"), ("צבע שחור", "code_black"),
     ("מקום לכולנו", "makom_lekulanu"), ("לכולנו מקום", "makom_lekulanu"),
 ]
 # Lines that pose a hypothetical ("if X and Y united ...") are scenario

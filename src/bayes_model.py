@@ -521,29 +521,33 @@ WITHDRAWN_WEEKS = 5
 WITHDRAWN_DAYS_LATE = 14
 WITHDRAWN_LATE_GATE = 28
 GONE_STAY_ZERO = True
+# Candidate resid_relcap (2026-10-13, dossier s.42) - OFF until graded. The
+# residual shock is additive (1.83 + 0.044 x seats, in seats), so a list
+# polled at 0.3% draws a ~1.4 pp sd shock (x1.35 if first-cycle) that the
+# zero clip turns into a ~0.7-0.9% mean. Harmless while only established
+# lists were modelled; with every polled list in the latent it would add
+# several pp of phantom small-party vote. Cap: sd <= RESID_REL_CAP x the
+# list's own projected share. Mirrored in validate_bayes (resid_relcap).
+RESID_REL_CAP = None
 
 # Small-party layer, two measured pieces:
 #
 # 1. MICRO_POLLED — what pollsters measure today, from the footnote
 #    itemizations of the firms publishing full percentages (Jul-Aug 2026,
 #    Lazar/Midgam/Filber/Direct Polls/Maagar).
-MICRO_POLLED = {
-    # zehut RETIRED 2026-09-03: pollsters now publish a single "RZP - Zehut"
-    # column (Sept 2 wave), so its support lives inside the rzp poll stream;
-    # carving it separately would count Zehut's voters twice.
-    # Filing day 2026-09-08/09 (38 lists filed): only lists that FILED
-    # remain here. nep ABSORBED into the Reservists-Economic list (its
-    # archive column, "Reserv. - NEP", is the zionist_home series);
-    # makom_lekulanu, fourth_quarter, el_dagel did not file.
-    # Post-filing itemizations (CEC filings 4128-4137, 3-9 Sept): Noam
-    # 0.3 / 0.6 / 1.0 / 0.4; the Haredi Public 0.1 / 0.9 / 0.4 / 0.7 / 0.9
-    # (down from 1.2-1.5 in August); Israel First 0.2 / 0.2 / 0.5.
-    "noam": (0.006, 0.003),            # filed alone as Noam LeYisrael
-    "haredi_public": (0.006, 0.003),   # filed (Leitner); refused Winter's slate
-    "israel_first": (0.003, 0.002),    # filed (Haskel + Aleh Yarok)
-    # fiery_youth REMOVED (owner ruling, Sept 1): not running — Muchtar
-    # is leading Likud's youth campaign.
+MICRO_POLLED_RETIRED = {
+    # Kept for the record (13 Oct 2026). These lists are now LATENT COLUMNS
+    # like every other polled list (owner: "treat all the lists that have
+    # polls equally"): their archive footnote itemizations
+    # (scrape_polls.footnote_items) and CEC filing shares enter the
+    # likelihood, with house effects, the random walk and every projection
+    # layer - the same treatment the harness has always given small lists
+    # in past cycles (NEP 2021, Jewish Home 2022, Zehut 2019 are graded
+    # there as ordinary blocks).
+    "noam": (0.006, 0.003), "haredi_public": (0.006, 0.003),
+    "israel_first": (0.003, 0.002),
 }
+MICRO_POLLED = {}
 # 2. MICRO_REALIZE — how sub-threshold lists' final itemized polls translated
 #    into actual votes in the graded record:
 #      NEP 2021        polled ~1.2%  -> 0.79%  (x0.66)
@@ -575,6 +579,23 @@ MICRO_PRIORS = {
 #   2026-09-02: pollsters switched to a single "RZP - Zehut" column (5-6
 #   seats vs 3.3 for RZP alone the week before). Before that Zehut lived
 #   only in the small-party footnotes at ~1.6%, retained at 0.9 on merger.
+# Lists that polled in 2026 but are not on the ballot (did not file or
+# withdrew before filing); Unity (withdrew 4 Sept) stays a column so the
+# registration mixture can route its polled support.
+NOT_ON_BALLOT_2026 = {"makom_lekulanu", "fourth_quarter", "el_dagel", "fiery_youth",
+                      "ale_yarok"}
+MIN_LIST_POLLS = 3
+# The 2026 ballot is known (all 38 lists approved by the CEC on 27 Sept, with
+# their letters), so the withdrawn rule below - built to catch lists that left
+# the race - never drops a modelled list that is on the ballot. Today this
+# only keeps Israel First (itemized 0.0-0.5% until 22 Sept, then folded into
+# the pollsters' "others") instead of zeroing it. Unity withdrew and is not
+# on the ballot, so the rule still removes it.
+ON_BALLOT_2026 = {"likud", "yashar", "bennett_2026", "yesh_atid", "democrats",
+                  "yisrael_beytenu", "shas", "utj", "otzma", "rzp", "raam",
+                  "balad", "hadash_taal", "amcha_yisrael", "zionist_home",
+                  "blue_white", "noam", "haredi_public", "israel_first", "ahi",
+                  "beit_yisrael", "code_black"}
 ABSORBED_IDS = {"zehut",   # inside RZP-Zehut from 2026-09-02 (see STRUCTURAL_BREAKS)
                 "nep"}     # inside Reservists-Economic from 2026-09-06 (archive column "Reserv. - NEP" -> zionist_home)
 # From these dates a CEC filing's separate line for the absorbed list (a
@@ -664,11 +685,27 @@ def prepare_data(polls: pd.DataFrame | None = None,
     # stream by the structural break (below), and a Zehut column of its
     # own would count the same voters twice.
     win = win[~win["party_id"].isin(ABSORBED_IDS)]
-    # Micro-lists are carried by the small-party layer (MICRO_POLLED), not
-    # as latent columns: an archive row that names one (e.g. a pollster
-    # itemizing the Haredi Public at 0 seats) must not create a block.
+    # Every list ON THE BALLOT with polling is a latent column (13 Oct 2026,
+    # MICRO_POLLED retired). Lists that did not file are dropped, and a
+    # list needs MIN_LIST_POLLS polls in the window to be identified.
     if modern_remaps:
-        win = win[~win["party_id"].isin(set(MICRO_POLLED))]
+        win = win[~win["party_id"].isin(NOT_ON_BALLOT_2026)]
+        n_polls_list = win.groupby("party_id")["poll_id"].nunique()
+        # legal filings that itemize the list count as polls too
+        try:
+            _pc = pd.read_csv(PROCESSED_DIR / "cec_party_pcts.csv",
+                              parse_dates=["fieldwork_end"], dtype={"ref": str})
+            _pc = _pc[(_pc["fieldwork_end"] >= win["fieldwork_end"].min())
+                      & (_pc["fieldwork_end"] <= win["fieldwork_end"].max())]
+            n_polls_list = n_polls_list.add(_pc.groupby("party_id")["ref"].nunique(),
+                                            fill_value=0)
+        except FileNotFoundError:
+            pass
+        n_polls_list = n_polls_list[n_polls_list.index.isin(set(win["party_id"]))]
+        thin = set(n_polls_list[n_polls_list < MIN_LIST_POLLS].index)
+        if thin:
+            print(f"lists below {MIN_LIST_POLLS} polls in the window, not modelled: {sorted(thin)}")
+            win = win[~win["party_id"].isin(thin)]
         # Firms with no series and no track record whose one entry is an
         # outlier (the archive's "S.M.L.T." row is the DRI filing, see
         # scrape_cec.EXCLUDED_EDITORS) do not enter the likelihood.
@@ -732,6 +769,8 @@ def prepare_data(polls: pd.DataFrame | None = None,
         "blocks": blocks,
         "latent_blocks": latent_blocks,
         "last_obs_day": last_obs_day.reindex(latent_blocks).values,
+        "on_ballot": (np.array([bool(blocks[bk] & ON_BALLOT_2026) for bk in latent_blocks])
+                      if modern_remaps else np.zeros(len(latent_blocks), bool)),
         "obs_day": obs["obs_day"].values.astype(int),
         "u_c": u_c,
         "dt_weeks": dt_weeks,
@@ -880,12 +919,14 @@ def _merge_cec(obs: pd.DataFrame, block_of: dict, asof) -> pd.DataFrame:
 
     remap = {"together": "bennett_2026"}
     rows, displaced = [], set()
+    disp_by_ref = {}
     for ref, g in pcts.groupby("ref"):
         pollster = g["pollster"].iloc[0]
         fw = g["fieldwork_end"].iloc[0]
         near = obs[(obs["pollster"] == pollster)
                    & ((obs["fieldwork_end"] - fw).dt.days.abs() <= 3)]
         displaced |= set(near["poll_id"])
+        disp_by_ref[ref] = set(near["poll_id"])
         for r in g.itertuples():
             comp = remap.get(r.party_id, r.party_id).split("+")[0]
             if comp not in block_of:
@@ -903,6 +944,22 @@ def _merge_cec(obs: pd.DataFrame, block_of: dict, asof) -> pd.DataFrame:
         share=("share", "sum"), pollster=("pollster", "first"),
         fieldwork_end=("fieldwork_end", "first"))
     kept = obs[~obs["poll_id"].isin(displaced)]
+    # A filing replaces only the lists it REPORTS: the displaced table
+    # poll's rows for blocks the filing lacks (lists the parser did not
+    # find, or footnote itemizations of small lists the report omits) are
+    # kept, so a list is never dropped from a poll that measured it.
+    covered = cec_obs.groupby("poll_id")["block"].apply(set).to_dict()
+    retained = []
+    for ref, pids in disp_by_ref.items():
+        have = covered.get(f"cec{ref}", set())
+        if not have:
+            continue
+        extra = obs[obs["poll_id"].isin(pids) & ~obs["block"].isin(have)]
+        if len(extra):
+            retained.append(extra.drop_duplicates(["block"]))
+    if retained:
+        kept = pd.concat([kept] + retained, ignore_index=True)
+        LAST_CEC_MERGE["table_rows_retained"] = int(sum(len(x) for x in retained))
     LAST_CEC_MERGE.update({"cec_filings_merged": int(cec_obs["poll_id"].nunique()),
                            "cec_obs": int(len(cec_obs)),
                            "polls_displaced": int(len(displaced))})
@@ -1164,6 +1221,8 @@ def project(data, idata, rng, config="current", config_params=None):
     if WITHDRAWN_DAYS_LATE is not None and days_ahead <= WITHDRAWN_LATE_GATE:
         gone_days = WITHDRAWN_DAYS_LATE
     gone = data["last_obs_day"] < -gone_days
+    if "on_ballot" in data:
+        gone = gone & ~data["on_ballot"]
     if gone.any():
         shares[:, np.nonzero(gone)[0]] = 0.0
         shares /= shares.sum(axis=1, keepdims=True)
@@ -1179,6 +1238,8 @@ def project(data, idata, rng, config="current", config_params=None):
     for pid, m in SOFT_LIST_MULT.items():
         soft = np.array([pid in cs for cs in comps0])
         sd_list = np.where(soft, sd_list * m, sd_list)
+    if RESID_REL_CAP is not None:
+        sd_list = np.minimum(sd_list, RESID_REL_CAP * base0)
     if GONE_STAY_ZERO:
         # base-weighted layers below (swing, family, certainty, gevalt)
         # then leave the column at zero too
@@ -1196,9 +1257,10 @@ def project(data, idata, rng, config="current", config_params=None):
         micro_names.append(names.get(pid, pid))
         comps.append({pid})
         micro_draws.append(np.clip(rng.normal(m, s, N_PROJ), 0, None))
-    micro = np.column_stack(micro_draws)
-    shares = np.concatenate([shares * (1 - micro.sum(axis=1, keepdims=True)),
-                             micro], axis=1)
+    if micro_draws:          # empty since every polled list is modelled (s.42)
+        micro = np.column_stack(micro_draws)
+        shares = np.concatenate([shares * (1 - micro.sum(axis=1, keepdims=True)),
+                                 micro], axis=1)
     labels += micro_names
 
     blocs = []
@@ -1468,6 +1530,12 @@ def main() -> None:
     print(f"data: {data['n_polls']} polls, {len(data['y'])} observations, "
           f"{len(data['latent_blocks'])} lists, {data['n_weeks']} weeks, "
           f"{len(data['firms'])} firms in {len(data['groups'])} groups")
+    import os
+    if os.environ.get("BAYES_PROJECT_ONLY") == "1":
+        # re-project from the saved posterior (no refit; fit_summary kept)
+        import arviz as az
+        project_and_write(data, az.from_netcdf(PROCESSED_DIR / "m3_idata.nc"), rng)
+        return
 
     # Holdout: refit without the last 14 days, predict them.
     cut = data["asof"] - pd.Timedelta(days=HOLDOUT_DAYS)
@@ -1511,7 +1579,10 @@ def main() -> None:
               f"{np.percentile(bu, 95):.2f}]  "
               f"(x{np.exp(bu.mean() * 0.05):.2f} noise per +5pp undecided)")
     posterior_predictive_check(data, idata)
+    project_and_write(data, idata, rng)
 
+
+def project_and_write(data, idata, rng) -> None:
     seats, labels, blocs = project(data, idata, rng)
     is_max = seats == seats.max(axis=1, keepdims=True)
     p_largest = (is_max / is_max.sum(axis=1, keepdims=True)).mean(axis=0)

@@ -491,6 +491,78 @@ def scrape() -> tuple[pd.DataFrame, pd.DataFrame]:
     return polls, pd.DataFrame(result_rows)
 
 
+# The archive itemizes lists below the threshold in footnotes of its
+# "Others" cell ("[[Noam (political party)|Noam]] at 0.6%"). They are polls
+# like any other row (owner, 13 Oct 2026: every list with polling is
+# treated equally), so for the 2026 cycle each itemization becomes a row
+# with vote_pct and 0 seats. Censored entries ("<1%") are skipped; names
+# the registry does not know are skipped; Ale Yarok after its 3 Sept
+# merger is added to Israel First; a list already present in the poll as
+# a column keeps its column value.
+FOOTNOTE_ITEM = re.compile(r"\[\[([^\]|]+)(?:\|([^\]]+))?\]\]\s*(?:at\s*)?(<\s*)?(\d+(?:\.\d+)?)\s*%")
+FOOTNOTE_MERGES = {"ale_yarok": ("israel_first", pd.Timestamp("2026-09-03"))}
+
+
+def footnote_items(polls: pd.DataFrame, cycle: str = "2026") -> pd.DataFrame:
+    import html as _html
+    import lxml.html
+    lookup = party_lookup()
+    rows = []
+    cache = {}
+    sub = polls[polls["cycle"] == cycle].drop_duplicates("poll_id")
+    for r in sub.itertuples():
+        try:
+            page, ti, ri = r.source_row.split(":")
+            ti, ri = int(ti), int(ri)
+        except (ValueError, AttributeError):
+            continue
+        if page not in cache:
+            path = RAW_DIR / f"{page}.html"
+            if not path.exists():
+                cache[page] = None
+                continue
+            cache[page] = [t for _, t in poll_tables(path.read_text())]
+        tables = cache[page]
+        if not tables or ti >= len(tables):
+            continue
+        trs = tables[ti].findall(".//tr")
+        if ri >= len(trs):
+            continue
+        text = _html.unescape(lxml.html.tostring(trs[ri], encoding="unicode"))
+        have = set(polls.loc[polls["poll_id"] == r.poll_id, "party_id"])
+        found = {}
+        for m in FOOTNOTE_ITEM.finditer(text):
+            if m.group(3):            # "<1%": censored
+                continue
+            target, shown, val = m.group(1).strip(), (m.group(2) or "").strip(), float(m.group(4))
+            pid = lookup.get(shown.casefold()) or lookup.get(target.casefold())
+            if pid is None:
+                continue
+            if pid in FOOTNOTE_MERGES:
+                into, since = FOOTNOTE_MERGES[pid]
+                if r.fieldwork_end < since:
+                    continue
+                pid = into
+            merge_target = pid in {v[0] for v in FOOTNOTE_MERGES.values()}
+            if pid in found and merge_target:
+                found[pid] += val          # Israel First + post-merger Ale Yarok
+            elif pid not in found:
+                found[pid] = val
+        for pid, val in found.items():
+            if pid in have:
+                continue
+            rows.append({"poll_id": r.poll_id, "cycle": r.cycle, "pollster": r.pollster,
+                         "publisher": r.publisher, "fieldwork_end": r.fieldwork_end,
+                         "sample_size": r.sample_size, "party_id": pid, "seats": 0.0,
+                         "vote_pct": val, "sums_ok": r.sums_ok, "page": r.page,
+                         "section": r.section, "source_row": r.source_row})
+    out = pd.DataFrame(rows)
+    if len(out):
+        print(f"footnote itemizations added ({cycle}): {len(out)} rows, "
+              + ", ".join(f"{k} {v}" for k, v in out["party_id"].value_counts().items()))
+    return out
+
+
 def finalize(polls: pd.DataFrame) -> pd.DataFrame:
     """Deduplicate across pages, assign poll ids, flag bad seat sums."""
     sig = (
@@ -575,6 +647,10 @@ def finalize_results(results: pd.DataFrame) -> pd.DataFrame:
 if __name__ == "__main__":
     polls_raw, results_raw = scrape()
     polls = finalize(polls_raw)
+    fn_rows = footnote_items(polls)
+    if len(fn_rows):
+        polls = pd.concat([polls, fn_rows], ignore_index=True).sort_values(
+            ["fieldwork_end", "poll_id", "party_id"])
     results = finalize_results(results_raw)
     PROCESSED_DIR.mkdir(parents=True, exist_ok=True)
     # Manually entered polls (data/manual_polls.csv): published polls the
@@ -595,6 +671,10 @@ if __name__ == "__main__":
                 "page": "manual", "section": "manual", "source_row": man["source_url"]})
             polls = pd.concat([polls, add], ignore_index=True)
             print(f"manual polls appended: {man['poll_id'].nunique()}")
+    # seats stay whole on disk (footnote rows made the column float)
+    for col in ("seats",):
+        if col in polls.columns and (polls[col].dropna() % 1 == 0).all():
+            polls[col] = polls[col].astype("Int64")
     polls.to_csv(PROCESSED_DIR / "polls.csv", index=False)
     results.to_csv(PROCESSED_DIR / "results.csv", index=False)
     print(f"wrote {PROCESSED_DIR / 'polls.csv'} and results.csv")

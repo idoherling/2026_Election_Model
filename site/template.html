@@ -375,7 +375,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
     <div class="legend"><span><i class="sw" style="background:var(--ink);width:12px;height:3px"></i>90% interval</span>
     <span><i class="sw hollow"></i>below threshold in central projection</span></div>
     <p class="note" style="margin-top:8px">Chips show each list's ballot letters as approved by the
-    Central Elections Committee on September 27 (Together received בד after Otzma Yehudit's prior claim to ב).</p>
+    Central Elections Committee on September 27 (Together received רק after Otzma Yehudit's prior claim to ב).</p>
   </div>
 </div></section>
 
@@ -669,23 +669,25 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
     informs correlations and capacity, not point swings.</p></div>
 
   <div class="chapter"><h3>The small parties</h3>
-    <p>Lists polled below the threshold are not dropped: each is carried as a micro-list and
-    carved out of the modeled pie before seats are allocated, so the named lists' shares are
-    never silently inflated. Their polled support comes from the itemized footnotes of the
-    pollsters that publish full percentages — but the model does not simply reproduce those
-    numbers. It <b>forecasts</b> each list's actual vote using the measured record of how
-    sub-threshold lists' final polls translated into real ballots: NEP 2021 polled ~1.2% and
-    took 0.79% (×0.66); Jewish Home 2022 polled 1.9% and took 1.17% (×0.62); Yachad 2015
-    ~3.3% → 2.97% (×0.90); Zehut April 2019 ~3.0% → 2.74% (×0.91); Otzma September 2019
-    ~1.7% → 1.88% (×1.11). Lists without a committed base shed roughly <b>30% of their polled
-    support to strategic desertion</b> — voters flee a wasted vote — while lists with a
-    sectarian or ideological core hold theirs. So Israel First is forecast at 0.7× its
-    polling, The Haredi Public and Noam at 1.0× (after filing day only lists that filed remain: the
-    New Economic Party is inside the Reservists–Economic list, and A Place for All of Us did not file), and the calibration's own dispersion widens
-    every micro-list's uncertainty. Zehut is no longer carried separately at all: since
-    September 2 the pollsters publish a single Religious Zionism–Zehut column, so its support
-    lives directly inside that line's poll stream.</p>
-    <div class="eq">m<sub>j</sub> ~ N<sup>+</sup>(&mu;<sub>j</sub>, &sigma;<sub>j</sub>),&nbsp;&nbsp;v&prime; = ( v·(1−&Sigma;<sub>j</sub>m<sub>j</sub>),&nbsp;m )&nbsp;&nbsp;&nbsp;&nbsp;<i>micro-lists carved from the simplex</i></div></div>
+    <p>Every list on the ballot that the pollsters measure is modelled the same way, however
+    small. The Haredi Public, Noam, Israel First, Ahi, Tzomet Beit Yisrael and Code Black are
+    full members of the poll model, exactly like Likud: each has its own latent trend, its own
+    house effects and its own election-day shock, fed by the pollsters' itemized footnotes and
+    by the raw legal filings, which carry every list's percentage. A list needs at least three
+    polls or filings in the window to be identified; lists that did not file for the ballot are
+    dropped, and Ale Yarok's readings after its 3 September union are added to Israel First.
+    This is how the eight-cycle harness has always treated the record's small lists that
+    had their own poll column (Yachad 2015, Otzma September 2019, Jewish Home 2022), so the 2026
+    small lists are now graded by the same machinery that grades the large ones. Strategic
+    desertion, voters fleeing a wasted vote, comes from the layers that act on every list:
+    the certainty layer moves soft support, and first-cycle lists inside the threshold band
+    carry the measured straddler term. The record shows why both matter: the New Economic
+    Party polled about 1.2% in 2021 and took 0.79%, and Jewish Home polled 1.9% in 2022 and
+    took 1.17%, while lists with a sectarian or ideological core held their polling. Zehut is
+    no longer carried separately at all: since September 2 the pollsters publish a single
+    Religious Zionism–Zehut column, so its support lives directly inside that line's poll
+    stream.</p>
+    <div class="eq">n<sub>j</sub><sup>polls + filings</sup> &ge; 3&nbsp;&nbsp;&rArr;&nbsp;&nbsp;j &isin; latent simplex&nbsp;&nbsp;&nbsp;&nbsp;<i>every polled list on the ballot is a modelled component</i></div></div>
 
   <div class="chapter"><h3>Threshold and Bader–Ofer</h3>
     <p>Each simulated vote vector passes the 3.25% threshold test, then seats are allocated by
@@ -785,7 +787,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
     about 2.8 seats per list eight weeks out against 1.7 on election eve. The harness projection mirrors the
     production shock stack layer for layer (bloc swing, correlated sector shocks, anchors,
     residual, loyal-electorate calibration, gevalt coupling); only the 2026-specific layers —
-    the certainty layer, the volatility calendar, event risk, the micro-lists and the capacity
+    the certainty layer, the volatility calendar, event risk and the capacity
     bounds — are outside its reach by construction, and the annex says so where they appear.</p>
     <div class="tblwrap"><table>
       <thead><tr><th>Metric (8-cycle backtest)</th><th class="num">Simple pipeline</th><th class="num">Bayesian model</th></tr></thead>
@@ -829,7 +831,9 @@ const HE_PARTY = {"Likud":"הליכוד","Yashar":"ישר","Bennett 2026 + Yesh 
  "Amcha Yisrael":"עמך ישראל","The Haredi Public":"הציבור החרדי",
  "A Place for All of Us":"מקום לכולנו",
  "Israel First":"ישראל תחילה","Fiery Youth":"צעירים בוערים",
- "The Fourth Quarter":"הרבע הרביעי","El HaDegel":"אל הדגל"};
+ "The Fourth Quarter":"הרבע הרביעי","El HaDegel":"אל הדגל",
+ "Ahi – Back to the Roots":"תנועת אחי","Tzomet Beit Yisrael":"צומת בית ישראל",
+ "Code Black – Shield of the Torah World":"צבע שחור"};
 const HE_STATIC = {
  "The Knesset Model":"מודל הכנסת",
  "A pre-registered forecast of Israel's 2026 election":"תחזית רשומה־מראש לבחירות 2026",
@@ -869,7 +873,7 @@ const HE_STATIC = {
  "← Back to the forecast":"→ חזרה לתחזית"};
 const HE_NOTES = {
   "#main figure figcaption": "חלוקת המנדטים המרכזית (חלקי הקול החציוניים של התערובת, מועברים פעם אחת דרך אחוז החסימה 3.25% ובדר–עופר), מקובצת לפי מחנה — הסוגריים מסמנים את הגושים; מנדטי הרשימות הערביות מצוירים כטבעות. כל רשימה שומרת על צבעה המקובל בגרפי הסקרים. רחפו מעל כל מנדט.",
-  "#seats .note": "השבבים מציגים את אותיות הקלפי של כל רשימה כפי שאישרה ועדת הבחירות המרכזית ב־27 בספטמבר (ביחד קיבלה בד לאחר זכות הקדימה של עוצמה יהודית על ב).",
+  "#seats .note": "השבבים מציגים את אותיות הקלפי של כל רשימה כפי שאישרה ועדת הבחירות המרכזית ב־27 בספטמבר (ביחד קיבלה רק לאחר זכות הקדימה של עוצמה יהודית על ב).",
   "#builder .note": "הסכומים כוללים את תוצאות אחוז החסימה ואת חלוקת בדר–עופר. זו אריתמטיקה, לא פוליטיקה; מודל ההרכבה למטה מתמחר את הפוליטיקה.",
   "#formation .note": "השפמים הם רווחי 90% על פני הנחות המודל עצמו."
 };
@@ -940,8 +944,8 @@ const HE_CH = [
  {t:"תשתית הקלפיות", b:`<p>מתחת למספרים הארציים שוכנת רשומת הקלפיות: תוצאות רשמיות לכל יישוב בחמש מערכות הבחירות 2019–2022, מותאמות לשושלות המפלגות דרך אותיות הקלפי של כל מחזור (מאומתות מול הסיכומים הארציים). היישובים מתקבצים למגזרים פוליטיים לפי פרופילי ההצבעה שלהם עצמם, יחד עם ההשתתפות המדודה (חרדים 76%, ערבים 54%, ציונות דתית 76%). שלושה תוצרים מזינים את התחזית: <b>טבלת פוסט־סטרטיפיקציה</b> המקצה את מנדטי כל רשימה למגזרים שלה (מדור משחק הקרקע); <b>קיטום הקיבולת</b> שלהלן; ובסיס היישובים למנוע ליל הבחירות. משקלי השושלות מכוילים מול מטריצות מעבר־הקולות המדודות של פרויקט הקוד הפתוח <a href="https://kolot-nodedim.netlify.app/" rel="noopener">קולות נודדים</a> (כ־7,000 קלפיות מותאמות לכל זוג בחירות, R²&rlm; 0.89 עבור 2021→2022), שאומדני הלכידות שלו משחזרים באופן בלתי־תלוי את סדר האלקטורטים הנאמנים של המודל הזה.</p>
     <div class="eq">&Sigma;<sub>&#8467;&isin;Arab</sub> v<sub>&#8467;</sub> &le; 16.3%&nbsp;&nbsp;&nbsp;&nbsp;<i>קיבולת ההשתתפות של המגזר הערבי</i><br>v<sub>Shas</sub> + v<sub>UTJ</sub> &ge; 6.7%&nbsp;&nbsp;&nbsp;&nbsp;<i>הרצפה הדמוגרפית החרדית</i></div>
     <p>סימולציות המפרות אחד הגבולות נחתכות אל הגבול האפשרי (כל תנאי גוזם כ־1.5% מהדגימות). תוצאה שלילית כנה מתועדת לצדם: תנודות מגזריות <em>אינן</em> עוברות בין זוגות בחירות (תנודה ארצית אחידה חוזה יישובים ב־1.20 נק׳ שגיאה; הוספת תנודות מגזר היסטוריות נותנת 1.31) — ולכן שכבת המגזרים מזינה מתאמים וקיבולת, לא תנודות נקודתיות.</p>`},
- {t:"המפלגות הקטנות", b:`<p>רשימות הנסקרות מתחת לאחוז החסימה אינן נזרקות: כל אחת נישאת כמיקרו־רשימה ונחתכת מהעוגה הממודלת לפני חלוקת המנדטים, כך שחלקי הרשימות הגדולות לעולם אינם מנופחים בשקט. התמיכה הנסקרת נמדדת מפירוטי ההערות של הסוקרים המפרסמים אחוזים מלאים — אבל המודל אינו משכפל את המספרים האלה כפי שהם. הוא <b>חוזה</b> את הקולות בפועל של כל רשימה לפי הרשומה המדודה של האופן שבו סקרים סופיים של רשימות תת־סף תורגמו לקולות אמת: כלכלה חדשה 2021 נסקרה בכ־1.2% וקיבלה 0.79% (×0.66); הבית היהודי 2022 נסקר ב־1.9% וקיבל 1.17% (×0.62); יחד 2015 כ־3.3% ← 2.97% (×0.90); זהות אפריל 2019 כ־3.0% ← 2.74% (×0.91); עוצמה ספטמבר 2019 כ־1.7% ← 1.88% (×1.11). רשימות ללא בסיס מחויב מאבדות <b>כ־30% מתמיכתן הנסקרת לעריקה אסטרטגית</b> — בוחרים בורחים מקול מבוזבז — בעוד רשימות עם גרעין מגזרי או אידאולוגי מחזיקות בשלהן. לכן כלכלה חדשה, ישראל תחילה נחזית ב־0.7 מסקריה, הציבור החרדי ונעם ב־1.0 (לאחר יום ההגשה נותרות רק רשימות שהוגשו: המפלגה הכלכלית נמצאת בתוך רשימת המילואימניקים והכלכלית, ומקום לכולנו לא הגישה), ופיזור הכיול עצמו מרחיב את אי־הוודאות של כל מיקרו־רשימה. זהות כבר אינה נישאת בנפרד כלל: מאז 2 בספטמבר הסוקרים מפרסמים עמודה אחת של הציונות הדתית–זהות, ולכן תמיכתה חיה ישירות בתוך זרם הסקרים של אותה רשימה.</p>
-    <div class="eq">m<sub>j</sub> ~ N<sup>+</sup>(&mu;<sub>j</sub>, &sigma;<sub>j</sub>),&nbsp;&nbsp;v&prime; = ( v·(1−&Sigma;<sub>j</sub>m<sub>j</sub>),&nbsp;m )&nbsp;&nbsp;&nbsp;&nbsp;<i>מיקרו־רשימות נחתכות מהסימפלקס</i></div>`},
+ {t:"המפלגות הקטנות", b:`<p>כל רשימה בקלפי שהסוקרים מודדים ממודלת באותה דרך, קטנה ככל שתהיה. הציבור החרדי, נעם, ישראל תחילה, אחי, צומת בית ישראל וצבע שחור הם חברים מלאים במודל הסקרים, בדיוק כמו הליכוד: לכל אחת מגמה חבויה משלה, אפקטי בית משלה וזעזוע יום־בחירות משלה, והיא מוזנת מפירוטי ההערות של הסוקרים ומהדוחות הגולמיים שהוגשו לוועדת הבחירות, הכוללים את האחוז של כל רשימה. רשימה זקוקה לשלושה סקרים או דוחות לפחות בחלון כדי להיות מזוהה; רשימות שלא הוגשו לקלפי מוסרות, והמדידות של עלה ירוק אחרי האיחוד ב־3 בספטמבר מתווספות לישראל תחילה. כך התייחס מתקן שמונת המחזורים מאז ומעולם לרשימות הקטנות ברשומה שהייתה להן עמודת סקרים משלהן (יחד 2015, עוצמה בספטמבר 2019, הבית היהודי 2022), ולכן הרשימות הקטנות של 2026 נבחנות כעת באותו מנגנון שבוחן את הגדולות. עריקה אסטרטגית — בוחרים הבורחים מקול מבוזבז — מגיעה מהשכבות הפועלות על כל רשימה: שכבת הוודאות מזיזה תמיכה רכה, ורשימות במחזור הראשון שלהן בתוך רצועת הסף נושאות את איבר המתנדנדות המדוד. הרשומה מראה מדוע שניהם חשובים: כלכלה חדשה נסקרה בכ־1.2% ב־2021 וקיבלה 0.79%, והבית היהודי נסקר ב־1.9% ב־2022 וקיבל 1.17%, בעוד רשימות עם גרעין מגזרי או אידאולוגי החזיקו בסקריהן. זהות כבר אינה נישאת בנפרד כלל: מאז 2 בספטמבר הסוקרים מפרסמים עמודה אחת של הציונות הדתית–זהות, ולכן תמיכתה חיה ישירות בתוך זרם הסקרים של אותה רשימה.</p>
+    <div class="eq">n<sub>j</sub><sup>polls + filings</sup> &ge; 3&nbsp;&nbsp;&rArr;&nbsp;&nbsp;j &isin; latent simplex&nbsp;&nbsp;&nbsp;&nbsp;<i>כל רשימה נסקרת בקלפי היא רכיב ממודל</i></div>`},
  {t:"אחוז החסימה ובדר–עופר", b:`<p>כל וקטור קולות מדומה עובר את מבחן אחוז החסימה של 3.25%, ואז המנדטים מוקצים בשיטה הישראלית האמיתית — <b>בדר–עופר</b>, ד'הונדט על עודפים — כאשר הסכמי עודפים חתומים מטופלים כרשימות משותפות בשלב העודפים (שווי מדוד של &lrm;+0.5 עד &lrm;+0.9 מנדטים לזוג). קולות רשימות שנפלו מתחלקים מחדש בין השורדות — וכך גוש יכול להפסיד בקולות ולנצח בכנסת. המנדטים המרכזיים המתפרסמים הם החוק הזה מיושם פעם אחת על וקטור נתחי־הקולות החציוני של התערובת, ולכן הטבלה מסתכמת ב־120 ללא עיגול או רצפות.</p>
     <div class="eq">seat<sub>k</sub> &rarr; argmax<sub>&#8467;</sub> v<sub>&#8467;</sub> / (s<sub>&#8467;</sub> + 1)&nbsp;&nbsp;&nbsp;&nbsp;<i>איטרציית ד'הונדט, זוגות עודפים מאוחדים</i></div>`},
  {t:"תערובת אירועי ההרשמה", b:`<p>עד סגירת הרשימות, התחזית דגמה <b>אירועי הרשמה בכל סימולציה</b>: קיפולי המיקרו־רשימות במרכז וזנב האיחוד ארדן–גנץ, עם וקטורי העברה הבנויים על גורלן המדוד של רשימות שנבלעו במטריצת המעבר 2021←2022 (מצביעי ימינה: הציונות הדתית 45 / הבית היהודי 24 / הליכוד 14 / המחנה הממלכתי 11 / ש״ס 6; תקווה חדשה: המחנה הממלכתי 58 / הליכוד 42; כחול לבן: המחנה הממלכתי 70 / יש עתיד 30). <b>ב־8 בספטמבר נסגרו הרשימות וכל האירועים הוכרעו</b>: 38 רשימות הוגשו. סגלוביץ׳ במקום השני ברע״ם; סמוטריץ׳ ופייגלין הגישו את הגוש הטכני הציונות הדתית–זהות; בל״ד נשארה ברשימה המשותפת; האחדות פרשה (4 בספטמבר); כחול לבן הגישה רשימה בראשות גנץ במקום להתקפל; והמילואימניקים הגישו רשימה עם המפלגה הכלכלית של זליכה ועם עינת וילף לאחר שטרופר עבר למקום השישי בישר (6 בספטמבר), כך שהסדרה ממשיכה כרשימת המילואימניקים והכלכלית. נעם, הציבור החרדי וישראל תחילה הגישו רשימות קטנות; מקום לכולנו, הרבעון הרביעי ואל הדגל לא הגישו. על ההרשמה התערובת היא תצורה אחת. סוג אירוע אחד נשאר פתוח: <b>בקשות הפסילה</b> שהוגשו עד המועד האחרון ב־15 בספטמבר לפי סעיף 7א (שלוש נגד רע״ם, אחת נגד הרשימה המשותפת, שתיים נגד עוצמה יהודית, אחת נגד הציונות הדתית–זהות ואחת נגד הדמוקרטים). הוועדה תדון בהן בשבוע של 21 בספטמבר; על פסילת רשימה ניתן לערער לבית המשפט העליון, שהחזיר כל רשימה ערבית שהוועדה פסלה מאז 2003 ולא פסל רשימה יהודית מאז 1988. הן תומחרו בשארית שאחרי הרשומה הזו עד שהוכרעו: הוועדה פסלה את רע״ם, את המשותפת ואת ח״כ כסיף ודחתה את הבקשות נגד עוצמה, הציונות הדתית–זהות והדמוקרטים; בתחילת אוקטובר הכשיר בג״ץ פה אחד את שלושתם, ויו״ר בל״ד אבו שחאדה הסיר את מועמדותו (מנדט אינו עוזב רשימה). כל 38 הרשימות עומדות. שני דברים נותרו פתוחים: <b>ריצתה של כחול לבן</b> — היא מקבלת 0.7–1.3% בסקרים, ראשי האופוזיציה מציעים לגנץ, על פי הדיווחים, פרישה, והתחזית נושאת אירוע פרישה בהסתברות 25% (גנץ שלל פרישה בפומבי; יציאה מאוחרת עדיין אפשרית) שקולותיו הולכים לישר ולביחד לפי דפוס 2022 — ו<b>הסכמי העודפים</b> (מועד אחרון 16 באוקטובר): הליכוד–הציונות הדתית־זהות, ביחד–ישראל ביתנו וישר–הדמוקרטים חתומים; ש״ס–יהדות התורה, עוצמה–עמך והמשותפת–רע״ם צפויים ונישאים כזוגות בחוק המנדטים.</p>
@@ -952,7 +956,7 @@ const HE_CH = [
  {t:"הקצאת ראשות הממשלה", b:`<p>בתוך כל קואליציה מנצחת, ראשות הממשלה מוקצית בהסתברויות מודעות־רוטציה ותלויות־תרחיש (בנט היה ראש ממשלה עם 7 מנדטים ב־2021 — היגיון "המפלגה הגדולה" אינו היגיון ישראלי), המתהפכות כאשר ביחד עוקפת את ישר בדגימה. השכבה נבחנה מול שמונה תוצאות ההרכבה האמיתיות מאז 2009: לוג־לוס ממוצע &lrm;−0.92, והתוצאה שהתממשה מקבלת את ההסתברות הגבוהה ביותר בחמישה משמונה מחזורים.</p>
     <div class="eq">PM | outcome ~ Categorical( alloc<sub>outcome</sub> ),&nbsp;&nbsp;alloc ~ Dirichlet(60·p&#772;)&nbsp;&nbsp;&nbsp;&nbsp;<i>תלוי־תרחיש, האי־ודאות נישאת</i></div>`},
  {t:"פריורים של מומחים, מתועדים", b:`<p>כל מספר שיפוטי מתחקה אל דוסייה כתוב שחובר משישה שולחנות מחקר: שיעורי בסיס של הרכבת קואליציות 1992–2022, רשומת שגיאות הסקרים המלאה 1996–2022, מוסדות מפלגתיים וביוגרפיות מנהיגים, סוציולוגיה אלקטורלית וזרימות קולות, שוקי חיזוי ויסודות מבניים, ודינמיקת הישורת האחרונה. היכן שהשולחנות חלקו על המודל — המודל זז; היכן שהשוק חולק על המודל (פולימרקט מתמחר את אייזנקוט כרוה״מ בכ־50%; אנחנו אומרים כ־36%), הדוסייה מתעד מדוע אנו עומדים על שלנו: שוקי הפרלמנט־התלוי והממשלה־עד־דצמבר של אותו שוק עצמו אינם עקביים עם מספר הכותרת שלו.</p>`},
- {t:"אימות: המודל בוחן את עצמו", b:`<p>כל שכבה מותנית במבחן־עבר של שמונה מחזורים (2013–2022, בהשמטת־מחזור; 2009 זורע את הפריורים). המתקן מריץ מחדש את הצינור המלא כפי שהיה ערב כל מערכת בחירות ומדרג אותו מול התוצאה האמיתית. שינויים שנכשלו נדחו ותועדו — ובהם מודול דינמיקת ישורת אחרונה, התאמה היררכית רב־מחזורית שנותרה מחקרית בלבד, ורצפת שגיאת־דגימה לכל סקר. המתקן גם מכייל את רוחב הזעזוע השיורי לרשימה: בהיטל מחודש של כל מערכת מותאמת תחת רשת של מקדמי רוחב ובניקוד הרווחים, מקדם 0.9 מנצח בכל קיפול השמטת־מחזור (מקדמים צרים יותר פוגעים בדיוק הנקודתי דרך אי־הליניאריות של אחוז החסימה). מתקן שני, מודע־אופק, מתאים מחדש כל מערכת כפי שהייתה 56 ו־21 ימים לפני הבחירות: באופק שבו התחזית הזאת מתפרסמת, רווחי 90% מכסים 90% מהתוצאות — כיסוי־היתר של 98% הוא תופעה של ערב הבחירות, שבה השונות קדימה התאפסה ומחסנית הזעזועים לבדה מכסה יתר על המידה — ושגיאת הנקודה עומדת על כ־2.8 מנדטים לרשימה שמונה שבועות לפני, לעומת 1.7 בערב הבחירות. היטל המתקן משקף את מחסנית הזעזועים של הייצור שכבה אחר שכבה (תנודת גוש, זעזועי מגזר מתואמים, עוגנים, שיורי, כיול אלקטורט־נאמן, צימוד הגוואלד); רק השכבות הייחודיות ל־2026 — שכבת הוודאות, לוח התנודתיות, סיכון האירועים, המיקרו־רשימות וגבולות הקיבולת — נמצאות מחוץ להישג ידו מעצם הבנייה, והנספח אומר זאת בכל מקום שבו הן מופיעות.</p>
+ {t:"אימות: המודל בוחן את עצמו", b:`<p>כל שכבה מותנית במבחן־עבר של שמונה מחזורים (2013–2022, בהשמטת־מחזור; 2009 זורע את הפריורים). המתקן מריץ מחדש את הצינור המלא כפי שהיה ערב כל מערכת בחירות ומדרג אותו מול התוצאה האמיתית. שינויים שנכשלו נדחו ותועדו — ובהם מודול דינמיקת ישורת אחרונה, התאמה היררכית רב־מחזורית שנותרה מחקרית בלבד, ורצפת שגיאת־דגימה לכל סקר. המתקן גם מכייל את רוחב הזעזוע השיורי לרשימה: בהיטל מחודש של כל מערכת מותאמת תחת רשת של מקדמי רוחב ובניקוד הרווחים, מקדם 0.9 מנצח בכל קיפול השמטת־מחזור (מקדמים צרים יותר פוגעים בדיוק הנקודתי דרך אי־הליניאריות של אחוז החסימה). מתקן שני, מודע־אופק, מתאים מחדש כל מערכת כפי שהייתה 56 ו־21 ימים לפני הבחירות: באופק שבו התחזית הזאת מתפרסמת, רווחי 90% מכסים 90% מהתוצאות — כיסוי־היתר של 98% הוא תופעה של ערב הבחירות, שבה השונות קדימה התאפסה ומחסנית הזעזועים לבדה מכסה יתר על המידה — ושגיאת הנקודה עומדת על כ־2.8 מנדטים לרשימה שמונה שבועות לפני, לעומת 1.7 בערב הבחירות. היטל המתקן משקף את מחסנית הזעזועים של הייצור שכבה אחר שכבה (תנודת גוש, זעזועי מגזר מתואמים, עוגנים, שיורי, כיול אלקטורט־נאמן, צימוד הגוואלד); רק השכבות הייחודיות ל־2026 — שכבת הוודאות, לוח התנודתיות, סיכון האירועים וגבולות הקיבולת — נמצאות מחוץ להישג ידו מעצם הבנייה, והנספח אומר זאת בכל מקום שבו הן מופיעות.</p>
     <div class="tblwrap"><table>
       <thead><tr><th>מדד (מבחן־עבר, 8 מחזורים)</th><th class="num">הצינור הפשוט</th><th class="num">המודל הבייסיאני</th></tr></thead>
       <tbody id="valTbl"></tbody>
@@ -1011,7 +1015,9 @@ const BLOC = {"Likud":"nb","Shas":"nb","United Torah Judaism":"nb","Otzma Yehudi
  "The Haredi Public":"nb","A Place for All of Us":"anti",
  "Yashar":"anti","Bennett 2026 + Yesh Atid":"anti","The Democrats":"anti","Yisrael Beytenu":"anti",
  "Reservists – Economic Party":"una","Blue and White":"una","Unity":"una","New Economic Party":"anti",
- "Balad + Hadash-Ta'al":"arab","Ra'am":"arab","Balad (alone)":"arab"};
+ "Balad + Hadash-Ta'al":"arab","Ra'am":"arab","Balad (alone)":"arab",
+ "Israel First":"una","Ahi – Back to the Roots":"una","Tzomet Beit Yisrael":"una",
+ "Code Black – Shield of the Torah World":"una"};
 // Ballot letters (otiyot): registered CEC letters where a party owns
 // them; for new lists (marked *) a realistic unused combination is shown
 // provisionally until the CEC assigns real ones at registration.
@@ -1021,17 +1027,19 @@ const BLOC = {"Likud":"nb","Shas":"nb","United Torah Judaism":"nb","Otzma Yehudi
 // Ben-Gvir holds the prior municipal claim), so Together is shown with
 // its alternative request רק until the ruling.
 // Final letters approved by the CEC on Sept 27, 2026 (Ynet, Walla): all 38
-// lists approved; Together received בד (ב went to Otzma), Israel First י.
-const HEB = {"Likud":"מחל","Yashar":"דרך","Bennett 2026 + Yesh Atid":"בד","The Democrats":"אמת",
+// lists approved; Together received רק (ב went to Otzma), Israel First י.
+const HEB = {"Likud":"מחל","Yashar":"דרך","Bennett 2026 + Yesh Atid":"רק","The Democrats":"אמת",
  "Yisrael Beytenu":"ל","Shas":"שס","United Torah Judaism":"ג","Otzma Yehudit":"ב",
  "Balad + Hadash-Ta'al":"ודם","Ra'am":"עם","Amcha Yisrael":"ך","Religious Zionist Party":"ט",
  "Reservists – Economic Party":"די","Blue and White":"כן","Noam":"ני",
- "The Haredi Public":"זך","Israel First":"י"};
+ "The Haredi Public":"זך","Israel First":"י","Ahi – Back to the Roots":"צבי",
+ "Tzomet Beit Yisrael":"בי","Code Black – Shield of the Torah World":"נר"};
 const HEB_PROV = new Set([]);
 const heb = n => (HEB[n]||"") + (HEB_PROV.has(n) ? "<i style=\"font-style:normal;font-size:9px;vertical-align:top\">*</i>" : "");
 const SHORT = {"Bennett 2026 + Yesh Atid":"Together","Balad + Hadash-Ta'al":"Joint List",
  "Reservists – Economic Party":"Reservists–Economic","Religious Zionist Party":"Religious Zionism–Zehut",
- "United Torah Judaism":"UTJ"};
+ "United Torah Judaism":"UTJ","Ahi – Back to the Roots":"Ahi","Tzomet Beit Yisrael":"Beit Yisrael",
+ "Code Black – Shield of the Torah World":"Code Black"};
 const nm = n => HEB_MODE ? (HE_PARTY[n] || n) : (SHORT[n] || n);
 const PVAR = {"Likud":"likud","Yashar":"yashar","Bennett 2026 + Yesh Atid":"together",
  "The Democrats":"dems","Yisrael Beytenu":"yb","Shas":"shas","United Torah Judaism":"utj",
@@ -1235,10 +1243,10 @@ function hideTip(){ tip.style.opacity = 0; }
 (function(){
   if (!D.sub || !D.sub.length) return;
   const t = HEB_MODE ? {
-    sub: 'כל רשימה שהתחזית משאירה מתחת לאחוז החסימה, עם הנתח החזוי שלה מהקולות הארציים. מפלגות שנסקרות רק בהערות שוליים: מדידות הסוקרים מתוקננות לפי האופן שבו סקרים סופיים של רשימות קטנות תורגמו לקולות אמת ב־2015–2022; רשימות בעלות עמודת סקרים משלהן: ממוצע התערובת, עם הסיכוי לעבור. אחוז החסימה — 3.25%.',
+    sub: 'כל רשימה שהתחזית משאירה מתחת לאחוז החסימה, עם הנתח החזוי שלה מהקולות הארציים (החציון, אותו וקטור שעליו בנויה ספירת המנדטים המרכזית) והסיכוי שלה לעבור. כל הרשימות ממודלות באותה דרך, גם אלה שהסוקרים מפרטים רק בהערות שוליים. אחוז החסימה — 3.25%.',
     polled: 'בסקרים', sector: 'סקר מגזרי', pass: 'מעבר',
   } : {
-    sub: 'Every list the forecast leaves below the threshold, with its forecast share of the national vote. Parties polled only in footnotes: the pollsters\u2019 measured support, adjusted for how small lists\u2019 final polls translated into real votes in 2015\u20132022; lists with their own poll column: the mixture\u2019s mean, with the chance of passing. The threshold is 3.25%.',
+    sub: 'Every list the forecast leaves below the threshold, with its forecast share of the national vote (the median, the same vector the central seat count is built on) and its chance of passing. All lists are modelled the same way, including those the pollsters itemize only in footnotes. The threshold is 3.25%.',
     polled: 'polled', sector: 'Arab-sector poll', pass: 'pass',
   };
   document.getElementById("spLede").textContent = t.sub;

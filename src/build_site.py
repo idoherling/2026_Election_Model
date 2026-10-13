@@ -95,7 +95,10 @@ def build_payload() -> dict:
     # and its polled share over the last 14 days (seat-derived, or the
     # below-threshold percentage where a pollster published one).
     ms = pd.read_csv(PROCESSED / "mixture_shares.csv")
-    mshare = dict(zip(ms["list"], ms["share_mean"]))
+    # the median share: the same vector the central seat count is built on
+    # (s.42 - the mean of a list polled under 1% is lifted by the residual
+    # shock's clip at zero, so it overstates the list's own polling)
+    mshare = dict(zip(ms["list"], ms["share_median"]))
     polls_all = pd.read_csv(PROCESSED / "polls.csv", parse_dates=["fieldwork_end"])
     p26 = polls_all[polls_all["cycle"].astype(str) == "2026"]
     recent = p26[p26["fieldwork_end"] >= p26["fieldwork_end"].max() - pd.Timedelta(days=14)]

@@ -67,6 +67,9 @@ ABLATIONS = [
     ("combined", {"pair_fix": True, "gone_days": 14, "gone_zero": True, "trail_source": "sat"}),
     ("latent_only", {k: False for k in ["resid", "swing", "family", "gevalt", "loyal",
                                         "gevalt_cond", "new_straddler"]}),
+    # candidate resid_relcap (dossier s.42)
+    ("relcap075", {"resid_relcap": 0.75}), ("relcap100", {"resid_relcap": 1.0}),
+    ("relcap150", {"resid_relcap": 1.5}),
 ]
 # Quick runs (candidate testing): HARNESS_ABLATIONS=shipped,my_layer limits the
 # ablation list by name; HARNESS_SKIP_WIDTH=1 skips the width grid.
@@ -149,7 +152,12 @@ ALL_LAYERS = {"resid": True, "swing": True, "family": True, "anchors": False,
               # gate 'mean' (0.5-seat cliff on the mean projection) | 'draw'
               # (same test per pre-shock latent draw) | 'ramp' (weight falls
               # linearly from margin 0.5 to trail_hi seats)
-              "trail_source": "sat", "trail_mode": "mean", "trail_hi": 2.0}
+              "trail_source": "sat", "trail_mode": "mean", "trail_hi": 2.0,
+              # candidate resid_relcap (2026-10-13, dossier s.42): cap each
+              # list's residual sd at c x its own projected share, so a list
+              # polling 0.3% is not given a 1.4 pp additive shock that the
+              # zero clip turns into a ~0.7% mean (None = shipped, uncapped)
+              "resid_relcap": None}
 # Hand-picked right-flank ids per era (sensitivity run only: its case was
 # argued from outcomes - it drops Yisrael Beytenu from the 2015 pool).
 GEVALT_ERA_IDS = {"jewish_home", "national_union", "otzma", "yachad_yishai",
@@ -287,6 +295,8 @@ def project_cycle(data, idata, eday, threshold, pairs, params,
     base0 = shares.mean(axis=0)
     sd_list = (params["resid_base"]
                + params["resid_slope"] * base0 * 120) / 120.0 * resid_scale
+    if L["resid_relcap"] is not None:
+        sd_list = np.minimum(sd_list, L["resid_relcap"] * base0)
     if L["gone_zero"]:
         sd_list = np.where(gone, 0.0, sd_list)
     if L["resid"]:

@@ -21479,6 +21479,7 @@ poll_id,cycle,pollster,publisher,fieldwork_end,sample_size,party_id,seats,vote_p
 2026_20260618_lazar,2026,Lazar,Maariv,2026-06-18,501.0,democrats,10,,True,2026_main,2026,2026_main:4:22
 2026_20260618_lazar,2026,Lazar,Maariv,2026-06-18,501.0,hadash_taal,6,,True,2026_main,2026,2026_main:4:22
 2026_20260618_lazar,2026,Lazar,Maariv,2026-06-18,501.0,likud,21,,True,2026_main,2026,2026_main:4:22
+2026_20260618_lazar,2026,Lazar,Maariv,2026-06-18,501.0,nep,0,2.1,True,2026_main,2026,2026_main:4:22
 2026_20260618_lazar,2026,Lazar,Maariv,2026-06-18,501.0,otzma,8,,True,2026_main,2026,2026_main:4:22
 2026_20260618_lazar,2026,Lazar,Maariv,2026-06-18,501.0,raam,4,,True,2026_main,2026,2026_main:4:22
 2026_20260618_lazar,2026,Lazar,Maariv,2026-06-18,501.0,rzp,4,,True,2026_main,2026,2026_main:4:22
@@ -21493,6 +21494,7 @@ poll_id,cycle,pollster,publisher,fieldwork_end,sample_size,party_id,seats,vote_p
 2026_20260618_midgam,2026,Midgam,HaHadashot 12,2026-06-18,,democrats,10,,True,2026_main,2026,2026_main:4:20
 2026_20260618_midgam,2026,Midgam,HaHadashot 12,2026-06-18,,hadash_taal,5,,True,2026_main,2026,2026_main:4:20
 2026_20260618_midgam,2026,Midgam,HaHadashot 12,2026-06-18,,likud,22,,True,2026_main,2026,2026_main:4:20
+2026_20260618_midgam,2026,Midgam,HaHadashot 12,2026-06-18,,makom_lekulanu,0,0.2,True,2026_main,2026,2026_main:4:20
 2026_20260618_midgam,2026,Midgam,HaHadashot 12,2026-06-18,,otzma,9,,True,2026_main,2026,2026_main:4:20
 2026_20260618_midgam,2026,Midgam,HaHadashot 12,2026-06-18,,raam,5,,True,2026_main,2026,2026_main:4:20
 2026_20260618_midgam,2026,Midgam,HaHadashot 12,2026-06-18,,rzp,4,,True,2026_main,2026,2026_main:4:20
@@ -21544,6 +21546,7 @@ poll_id,cycle,pollster,publisher,fieldwork_end,sample_size,party_id,seats,vote_p
 2026_20260625_directpolls,2026,Direct Polls,i24 News,2026-06-25,530.0,blue_white,0,1.2,True,2026_main,2026,2026_main:4:15
 2026_20260625_directpolls,2026,Direct Polls,i24 News,2026-06-25,530.0,democrats,10,,True,2026_main,2026,2026_main:4:15
 2026_20260625_directpolls,2026,Direct Polls,i24 News,2026-06-25,530.0,likud,27,,True,2026_main,2026,2026_main:4:15
+2026_20260625_directpolls,2026,Direct Polls,i24 News,2026-06-25,530.0,nep,0,1.7,True,2026_main,2026,2026_main:4:15
 2026_20260625_directpolls,2026,Direct Polls,i24 News,2026-06-25,530.0,otzma,8,,True,2026_main,2026,2026_main:4:15
 2026_20260625_directpolls,2026,Direct Polls,i24 News,2026-06-25,530.0,raam,5,,True,2026_main,2026,2026_main:4:15
 2026_20260625_directpolls,2026,Direct Polls,i24 News,2026-06-25,530.0,rzp,5,,True,2026_main,2026,2026_main:4:15
@@ -21552,6 +21555,7 @@ poll_id,cycle,pollster,publisher,fieldwork_end,sample_size,party_id,seats,vote_p
 2026_20260625_directpolls,2026,Direct Polls,i24 News,2026-06-25,530.0,utj,8,,True,2026_main,2026,2026_main:4:15
 2026_20260625_directpolls,2026,Direct Polls,i24 News,2026-06-25,530.0,yashar,20,,True,2026_main,2026,2026_main:4:15
 2026_20260625_directpolls,2026,Direct Polls,i24 News,2026-06-25,530.0,yisrael_beytenu,10,,True,2026_main,2026,2026_main:4:15
+2026_20260625_directpolls,2026,Direct Polls,i24 News,2026-06-25,530.0,zehut,0,2.1,True,2026_main,2026,2026_main:4:15
 2026_20260625_directpolls,2026,Direct Polls,i24 News,2026-06-25,530.0,zionist_home,0,1.7,True,2026_main,2026,2026_main:4:15
 2026_20260625_filber,2026,Filber,Channel 14,2026-06-25,654.0,balad+hadash_taal,5,,True,2026_main,2026,2026_main:4:14
 2026_20260625_filber,2026,Filber,Channel 14,2026-06-25,654.0,blue_white,0,1.8,True,2026_main,2026,2026_main:4:14
@@ -21758,6 +21762,7 @@ poll_id,cycle,pollster,publisher,fieldwork_end,sample_size,party_id,seats,vote_p
 2026_20260709_filber,2026,Filber,Channel 14,2026-07-09,752.0,utj,8,,True,2026_main,2026,2026_main:3:37
 2026_20260709_filber,2026,Filber,Channel 14,2026-07-09,752.0,yashar,21,,True,2026_main,2026,2026_main:3:37
 2026_20260709_filber,2026,Filber,Channel 14,2026-07-09,752.0,yisrael_beytenu,8,,True,2026_main,2026,2026_main:3:37
+2026_20260709_filber,2026,Filber,Channel 14,2026-07-09,752.0,zehut,0,1.8,True,2026_main,2026,2026_main:3:37
 2026_20260709_filber,2026,Filber,Channel 14,2026-07-09,752.0,zionist_home,0,1.6,True,2026_main,2026,2026_main:3:37
 2026_20260709_kantar,2026,Kantar,Israel Hayom,2026-07-09,,balad,0,2.2,True,2026_main,2026,2026_main:3:36
 2026_20260709_kantar,2026,Kantar,Israel Hayom,2026-07-09,,blue_white,0,2.1,True,2026_main,2026,2026_main:3:36
@@ -21820,6 +21825,7 @@ poll_id,cycle,pollster,publisher,fieldwork_end,sample_size,party_id,seats,vote_p
 2026_20260715_midgamproject,2026,Midgam Project,Channel 13,2026-07-15,,democrats,11,,True,2026_main,2026,2026_main:3:33
 2026_20260715_midgamproject,2026,Midgam Project,Channel 13,2026-07-15,,hadash_taal,5,,True,2026_main,2026,2026_main:3:33
 2026_20260715_midgamproject,2026,Midgam Project,Channel 13,2026-07-15,,likud,22,,True,2026_main,2026,2026_main:3:33
+2026_20260715_midgamproject,2026,Midgam Project,Channel 13,2026-07-15,,makom_lekulanu,0,0.8,True,2026_main,2026,2026_main:3:33
 2026_20260715_midgamproject,2026,Midgam Project,Channel 13,2026-07-15,,otzma,7,,True,2026_main,2026,2026_main:3:33
 2026_20260715_midgamproject,2026,Midgam Project,Channel 13,2026-07-15,,raam,4,,True,2026_main,2026,2026_main:3:33
 2026_20260715_midgamproject,2026,Midgam Project,Channel 13,2026-07-15,,rzp,6,,True,2026_main,2026,2026_main:3:33
@@ -21833,6 +21839,7 @@ poll_id,cycle,pollster,publisher,fieldwork_end,sample_size,party_id,seats,vote_p
 2026_20260716_directpolls,2026,Direct Polls,i24 News,2026-07-16,550.0,blue_white,0,1.9,True,2026_main,2026,2026_main:3:31
 2026_20260716_directpolls,2026,Direct Polls,i24 News,2026-07-16,550.0,democrats,11,,True,2026_main,2026,2026_main:3:31
 2026_20260716_directpolls,2026,Direct Polls,i24 News,2026-07-16,550.0,likud,28,,True,2026_main,2026,2026_main:3:31
+2026_20260716_directpolls,2026,Direct Polls,i24 News,2026-07-16,550.0,nep,0,0.8,True,2026_main,2026,2026_main:3:31
 2026_20260716_directpolls,2026,Direct Polls,i24 News,2026-07-16,550.0,otzma,7,,True,2026_main,2026,2026_main:3:31
 2026_20260716_directpolls,2026,Direct Polls,i24 News,2026-07-16,550.0,raam,5,,True,2026_main,2026,2026_main:3:31
 2026_20260716_directpolls,2026,Direct Polls,i24 News,2026-07-16,550.0,rzp,6,,True,2026_main,2026,2026_main:3:31
@@ -21841,6 +21848,7 @@ poll_id,cycle,pollster,publisher,fieldwork_end,sample_size,party_id,seats,vote_p
 2026_20260716_directpolls,2026,Direct Polls,i24 News,2026-07-16,550.0,utj,8,,True,2026_main,2026,2026_main:3:31
 2026_20260716_directpolls,2026,Direct Polls,i24 News,2026-07-16,550.0,yashar,22,,True,2026_main,2026,2026_main:3:31
 2026_20260716_directpolls,2026,Direct Polls,i24 News,2026-07-16,550.0,yisrael_beytenu,8,,True,2026_main,2026,2026_main:3:31
+2026_20260716_directpolls,2026,Direct Polls,i24 News,2026-07-16,550.0,zehut,0,2.0,True,2026_main,2026,2026_main:3:31
 2026_20260716_directpolls,2026,Direct Polls,i24 News,2026-07-16,550.0,zionist_home,0,2.1,True,2026_main,2026,2026_main:3:31
 2026_20260716_filber,2026,Filber,Channel 14,2026-07-16,,balad,0,2.1,True,2026_main,2026,2026_main:3:30
 2026_20260716_filber,2026,Filber,Channel 14,2026-07-16,,blue_white,0,0.9,True,2026_main,2026,2026_main:3:30
@@ -21855,6 +21863,7 @@ poll_id,cycle,pollster,publisher,fieldwork_end,sample_size,party_id,seats,vote_p
 2026_20260716_filber,2026,Filber,Channel 14,2026-07-16,,utj,8,,True,2026_main,2026,2026_main:3:30
 2026_20260716_filber,2026,Filber,Channel 14,2026-07-16,,yashar,21,,True,2026_main,2026,2026_main:3:30
 2026_20260716_filber,2026,Filber,Channel 14,2026-07-16,,yisrael_beytenu,7,,True,2026_main,2026,2026_main:3:30
+2026_20260716_filber,2026,Filber,Channel 14,2026-07-16,,zehut,0,1.5,True,2026_main,2026,2026_main:3:30
 2026_20260716_filber,2026,Filber,Channel 14,2026-07-16,,zionist_home,0,2.5,True,2026_main,2026,2026_main:3:30
 2026_20260716_tatika,2026,Tatika,Zman Yisrael,2026-07-16,500.0,balad+hadash_taal,6,,True,2026_main,2026,2026_main:3:32
 2026_20260716_tatika,2026,Tatika,Zman Yisrael,2026-07-16,500.0,blue_white,4,,True,2026_main,2026,2026_main:3:32
@@ -21916,6 +21925,7 @@ poll_id,cycle,pollster,publisher,fieldwork_end,sample_size,party_id,seats,vote_p
 2026_20260721_midgamproject,2026,Midgam Project,Channel 13,2026-07-21,988.0,democrats,11,,True,2026_main,2026,2026_main:3:24
 2026_20260721_midgamproject,2026,Midgam Project,Channel 13,2026-07-21,988.0,hadash_taal,6,,True,2026_main,2026,2026_main:3:24
 2026_20260721_midgamproject,2026,Midgam Project,Channel 13,2026-07-21,988.0,likud,21,,True,2026_main,2026,2026_main:3:24
+2026_20260721_midgamproject,2026,Midgam Project,Channel 13,2026-07-21,988.0,makom_lekulanu,0,0.5,True,2026_main,2026,2026_main:3:24
 2026_20260721_midgamproject,2026,Midgam Project,Channel 13,2026-07-21,988.0,otzma,7,,True,2026_main,2026,2026_main:3:24
 2026_20260721_midgamproject,2026,Midgam Project,Channel 13,2026-07-21,988.0,raam,5,,True,2026_main,2026,2026_main:3:24
 2026_20260721_midgamproject,2026,Midgam Project,Channel 13,2026-07-21,988.0,rzp,5,,True,2026_main,2026,2026_main:3:24
@@ -21979,6 +21989,7 @@ poll_id,cycle,pollster,publisher,fieldwork_end,sample_size,party_id,seats,vote_p
 2026_20260726_filber,2026,Filber,Channel 14,2026-07-26,878.0,utj,7,,False,2026_main,2026,2026_main:3:20
 2026_20260726_filber,2026,Filber,Channel 14,2026-07-26,878.0,yashar,23,,False,2026_main,2026,2026_main:3:20
 2026_20260726_filber,2026,Filber,Channel 14,2026-07-26,878.0,yisrael_beytenu,6,,False,2026_main,2026,2026_main:3:20
+2026_20260726_filber,2026,Filber,Channel 14,2026-07-26,878.0,zehut,0,1.9,False,2026_main,2026,2026_main:3:20
 2026_20260726_filber,2026,Filber,Channel 14,2026-07-26,878.0,zionist_home,0,2.1,False,2026_main,2026,2026_main:3:20
 2026_20260726_kantar,2026,Kantar,Kan 11,2026-07-26,551.0,balad,0,2.1,True,2026_main,2026,2026_main:3:19
 2026_20260726_kantar,2026,Kantar,Kan 11,2026-07-26,551.0,blue_white,0,2.6,True,2026_main,2026,2026_main:3:19
@@ -22044,6 +22055,7 @@ poll_id,cycle,pollster,publisher,fieldwork_end,sample_size,party_id,seats,vote_p
 2026_20260729_filber,2026,Filber,Channel 14,2026-07-29,539.0,utj,8,,True,2026_main,2026,2026_main:3:15
 2026_20260729_filber,2026,Filber,Channel 14,2026-07-29,539.0,yashar,22,,True,2026_main,2026,2026_main:3:15
 2026_20260729_filber,2026,Filber,Channel 14,2026-07-29,539.0,yisrael_beytenu,8,,True,2026_main,2026,2026_main:3:15
+2026_20260729_filber,2026,Filber,Channel 14,2026-07-29,539.0,zehut,0,1.3,True,2026_main,2026,2026_main:3:15
 2026_20260729_filber,2026,Filber,Channel 14,2026-07-29,539.0,zionist_home,0,2.1,True,2026_main,2026,2026_main:3:15
 2026_20260729_midgamproject,2026,Midgam Project,Channel 13,2026-07-29,956.0,balad,0,1.8,True,2026_main,2026,2026_main:3:14
 2026_20260729_midgamproject,2026,Midgam Project,Channel 13,2026-07-29,956.0,blue_white,0,2.3,True,2026_main,2026,2026_main:3:14
@@ -22127,6 +22139,7 @@ poll_id,cycle,pollster,publisher,fieldwork_end,sample_size,party_id,seats,vote_p
 2026_20260804_filber,2026,Filber,Channel 14,2026-08-04,588.0,utj,8,,True,2026_main,2026,2026_main:3:8
 2026_20260804_filber,2026,Filber,Channel 14,2026-08-04,588.0,yashar,22,,True,2026_main,2026,2026_main:3:8
 2026_20260804_filber,2026,Filber,Channel 14,2026-08-04,588.0,yisrael_beytenu,8,,True,2026_main,2026,2026_main:3:8
+2026_20260804_filber,2026,Filber,Channel 14,2026-08-04,588.0,zehut,0,1.3,True,2026_main,2026,2026_main:3:8
 2026_20260804_filber,2026,Filber,Channel 14,2026-08-04,588.0,zionist_home,0,1.9,True,2026_main,2026,2026_main:3:8
 2026_20260804_maagarmochot,2026,Maagar Mochot,Channel 16,2026-08-04,,democrats,11,,True,2026_main,2026,2026_main:3:9
 2026_20260804_maagarmochot,2026,Maagar Mochot,Channel 16,2026-08-04,,hadash_taal,5,,True,2026_main,2026,2026_main:3:9
@@ -22167,6 +22180,7 @@ poll_id,cycle,pollster,publisher,fieldwork_end,sample_size,party_id,seats,vote_p
 2026_20260806_directpolls,2026,Direct Polls,i24 News,2026-08-06,535.0,utj,9,,False,2026_main,2026,2026_main:2:34
 2026_20260806_directpolls,2026,Direct Polls,i24 News,2026-08-06,535.0,yashar,23,,False,2026_main,2026,2026_main:2:34
 2026_20260806_directpolls,2026,Direct Polls,i24 News,2026-08-06,535.0,yisrael_beytenu,8,,False,2026_main,2026,2026_main:2:34
+2026_20260806_directpolls,2026,Direct Polls,i24 News,2026-08-06,535.0,zehut,0,1.5,False,2026_main,2026,2026_main:2:34
 2026_20260806_directpolls,2026,Direct Polls,i24 News,2026-08-06,535.0,zionist_home,0,2.1,False,2026_main,2026,2026_main:2:34
 2026_20260806_kantar,2026,Kantar,Israel Hayom,2026-08-06,552.0,balad,0,1.6,False,2026_main,2026,2026_main:3:4
 2026_20260806_kantar,2026,Kantar,Israel Hayom,2026-08-06,552.0,blue_white,0,0.7,False,2026_main,2026,2026_main:3:4
@@ -22222,6 +22236,7 @@ poll_id,cycle,pollster,publisher,fieldwork_end,sample_size,party_id,seats,vote_p
 2026_20260809_filber,2026,Filber,Channel 14,2026-08-09,741.0,utj,7,,True,2026_main,2026,2026_main:2:30
 2026_20260809_filber,2026,Filber,Channel 14,2026-08-09,741.0,yashar,23,,True,2026_main,2026,2026_main:2:30
 2026_20260809_filber,2026,Filber,Channel 14,2026-08-09,741.0,yisrael_beytenu,8,,True,2026_main,2026,2026_main:2:30
+2026_20260809_filber,2026,Filber,Channel 14,2026-08-09,741.0,zehut,0,1.3,True,2026_main,2026,2026_main:2:30
 2026_20260809_filber,2026,Filber,Channel 14,2026-08-09,741.0,zionist_home,0,1.2,True,2026_main,2026,2026_main:2:30
 2026_20260809_kantara,2026,Kantar,Kan 11,2026-08-09,551.0,balad,0,2.1,True,2026_main,2026,2026_main:2:31
 2026_20260809_kantara,2026,Kantar,Kan 11,2026-08-09,551.0,blue_white,0,1.3,True,2026_main,2026,2026_main:2:31
@@ -22268,6 +22283,7 @@ poll_id,cycle,pollster,publisher,fieldwork_end,sample_size,party_id,seats,vote_p
 2026_20260810_maagarmochot,2026,Maagar Mochot,Channel 16,2026-08-10,,utj,7,,True,2026_main,2026,2026_main:2:27
 2026_20260810_maagarmochot,2026,Maagar Mochot,Channel 16,2026-08-10,,yashar,22,,True,2026_main,2026,2026_main:2:27
 2026_20260810_maagarmochot,2026,Maagar Mochot,Channel 16,2026-08-10,,yisrael_beytenu,9,,True,2026_main,2026,2026_main:2:27
+2026_20260810_maagarmochot,2026,Maagar Mochot,Channel 16,2026-08-10,,zehut,0,1.5,True,2026_main,2026,2026_main:2:27
 2026_20260810_maagarmochot,2026,Maagar Mochot,Channel 16,2026-08-10,,zionist_home,0,2.6,True,2026_main,2026,2026_main:2:27
 2026_20260810_midgam,2026,Midgam,HaHadashot 12,2026-08-10,502.0,balad,0,1.6,True,2026_main,2026,2026_main:2:28
 2026_20260810_midgam,2026,Midgam,HaHadashot 12,2026-08-10,502.0,blue_white,0,0.8,True,2026_main,2026,2026_main:2:28
@@ -22304,6 +22320,7 @@ poll_id,cycle,pollster,publisher,fieldwork_end,sample_size,party_id,seats,vote_p
 2026_20260813_directpolls,2026,Direct Polls,i24 News,2026-08-13,512.0,democrats,10,,True,2026_main,2026,2026_main:2:23
 2026_20260813_directpolls,2026,Direct Polls,i24 News,2026-08-13,512.0,hadash_taal,6,,True,2026_main,2026,2026_main:2:23
 2026_20260813_directpolls,2026,Direct Polls,i24 News,2026-08-13,512.0,likud,30,,True,2026_main,2026,2026_main:2:23
+2026_20260813_directpolls,2026,Direct Polls,i24 News,2026-08-13,512.0,nep,0,1.2,True,2026_main,2026,2026_main:2:23
 2026_20260813_directpolls,2026,Direct Polls,i24 News,2026-08-13,512.0,otzma,7,,True,2026_main,2026,2026_main:2:23
 2026_20260813_directpolls,2026,Direct Polls,i24 News,2026-08-13,512.0,raam,5,,True,2026_main,2026,2026_main:2:23
 2026_20260813_directpolls,2026,Direct Polls,i24 News,2026-08-13,512.0,rzp,5,,True,2026_main,2026,2026_main:2:23
@@ -22313,12 +22330,15 @@ poll_id,cycle,pollster,publisher,fieldwork_end,sample_size,party_id,seats,vote_p
 2026_20260813_directpolls,2026,Direct Polls,i24 News,2026-08-13,512.0,utj,9,,True,2026_main,2026,2026_main:2:23
 2026_20260813_directpolls,2026,Direct Polls,i24 News,2026-08-13,512.0,yashar,23,,True,2026_main,2026,2026_main:2:23
 2026_20260813_directpolls,2026,Direct Polls,i24 News,2026-08-13,512.0,yisrael_beytenu,9,,True,2026_main,2026,2026_main:2:23
+2026_20260813_directpolls,2026,Direct Polls,i24 News,2026-08-13,512.0,zehut,0,2.2,True,2026_main,2026,2026_main:2:23
 2026_20260813_directpolls,2026,Direct Polls,i24 News,2026-08-13,512.0,zionist_home,0,2.0,True,2026_main,2026,2026_main:2:23
 2026_20260813_lazar,2026,Lazar,Maariv,2026-08-13,506.0,balad,0,1.5,True,2026_main,2026,2026_main:2:24
 2026_20260813_lazar,2026,Lazar,Maariv,2026-08-13,506.0,blue_white,0,1.9,True,2026_main,2026,2026_main:2:24
 2026_20260813_lazar,2026,Lazar,Maariv,2026-08-13,506.0,democrats,10,,True,2026_main,2026,2026_main:2:24
 2026_20260813_lazar,2026,Lazar,Maariv,2026-08-13,506.0,hadash_taal,6,,True,2026_main,2026,2026_main:2:24
+2026_20260813_lazar,2026,Lazar,Maariv,2026-08-13,506.0,israel_first,0,0.6,True,2026_main,2026,2026_main:2:24
 2026_20260813_lazar,2026,Lazar,Maariv,2026-08-13,506.0,likud,21,,True,2026_main,2026,2026_main:2:24
+2026_20260813_lazar,2026,Lazar,Maariv,2026-08-13,506.0,nep,0,2.5,True,2026_main,2026,2026_main:2:24
 2026_20260813_lazar,2026,Lazar,Maariv,2026-08-13,506.0,otzma,8,,True,2026_main,2026,2026_main:2:24
 2026_20260813_lazar,2026,Lazar,Maariv,2026-08-13,506.0,raam,5,,True,2026_main,2026,2026_main:2:24
 2026_20260813_lazar,2026,Lazar,Maariv,2026-08-13,506.0,rzp,4,,True,2026_main,2026,2026_main:2:24
@@ -22394,6 +22414,7 @@ poll_id,cycle,pollster,publisher,fieldwork_end,sample_size,party_id,seats,vote_p
 2026_20260818_directpolls,2026,Direct Polls,i24 News,2026-08-18,522.0,democrats,11,,True,2026_main,2026,2026_main:2:18
 2026_20260818_directpolls,2026,Direct Polls,i24 News,2026-08-18,522.0,hadash_taal,5,,True,2026_main,2026,2026_main:2:18
 2026_20260818_directpolls,2026,Direct Polls,i24 News,2026-08-18,522.0,likud,31,,True,2026_main,2026,2026_main:2:18
+2026_20260818_directpolls,2026,Direct Polls,i24 News,2026-08-18,522.0,nep,0,1.2,True,2026_main,2026,2026_main:2:18
 2026_20260818_directpolls,2026,Direct Polls,i24 News,2026-08-18,522.0,otzma,6,,True,2026_main,2026,2026_main:2:18
 2026_20260818_directpolls,2026,Direct Polls,i24 News,2026-08-18,522.0,raam,5,,True,2026_main,2026,2026_main:2:18
 2026_20260818_directpolls,2026,Direct Polls,i24 News,2026-08-18,522.0,rzp,5,,True,2026_main,2026,2026_main:2:18
@@ -22403,6 +22424,7 @@ poll_id,cycle,pollster,publisher,fieldwork_end,sample_size,party_id,seats,vote_p
 2026_20260818_directpolls,2026,Direct Polls,i24 News,2026-08-18,522.0,utj,8,,True,2026_main,2026,2026_main:2:18
 2026_20260818_directpolls,2026,Direct Polls,i24 News,2026-08-18,522.0,yashar,24,,True,2026_main,2026,2026_main:2:18
 2026_20260818_directpolls,2026,Direct Polls,i24 News,2026-08-18,522.0,yisrael_beytenu,8,,True,2026_main,2026,2026_main:2:18
+2026_20260818_directpolls,2026,Direct Polls,i24 News,2026-08-18,522.0,zehut,0,2.1,True,2026_main,2026,2026_main:2:18
 2026_20260818_directpolls,2026,Direct Polls,i24 News,2026-08-18,522.0,zionist_home,0,1.1,True,2026_main,2026,2026_main:2:18
 2026_20260818_filber,2026,Filber,Channel 14,2026-08-18,636.0,amcha_yisrael,0,0.9,True,2026_main,2026,2026_main:2:17
 2026_20260818_filber,2026,Filber,Channel 14,2026-08-18,636.0,balad,0,2.1,True,2026_main,2026,2026_main:2:17
@@ -22419,6 +22441,7 @@ poll_id,cycle,pollster,publisher,fieldwork_end,sample_size,party_id,seats,vote_p
 2026_20260818_filber,2026,Filber,Channel 14,2026-08-18,636.0,utj,7,,True,2026_main,2026,2026_main:2:17
 2026_20260818_filber,2026,Filber,Channel 14,2026-08-18,636.0,yashar,24,,True,2026_main,2026,2026_main:2:17
 2026_20260818_filber,2026,Filber,Channel 14,2026-08-18,636.0,yisrael_beytenu,7,,True,2026_main,2026,2026_main:2:17
+2026_20260818_filber,2026,Filber,Channel 14,2026-08-18,636.0,zehut,0,1.2,True,2026_main,2026,2026_main:2:17
 2026_20260818_filber,2026,Filber,Channel 14,2026-08-18,636.0,zionist_home,0,1.2,True,2026_main,2026,2026_main:2:17
 2026_20260819_kantar,2026,Kantar,Kan 11,2026-08-19,558.0,balad,0,2.1,True,2026_main,2026,2026_main:2:16
 2026_20260819_kantar,2026,Kantar,Kan 11,2026-08-19,558.0,blue_white,0,1.4,True,2026_main,2026,2026_main:2:16
@@ -22496,6 +22519,7 @@ poll_id,cycle,pollster,publisher,fieldwork_end,sample_size,party_id,seats,vote_p
 2026_20260820_lazar,2026,Lazar,Maariv,2026-08-20,501.0,democrats,10,,True,2026_main,2026,2026_main:2:12
 2026_20260820_lazar,2026,Lazar,Maariv,2026-08-20,501.0,hadash_taal,6,,True,2026_main,2026,2026_main:2:12
 2026_20260820_lazar,2026,Lazar,Maariv,2026-08-20,501.0,likud,20,,True,2026_main,2026,2026_main:2:12
+2026_20260820_lazar,2026,Lazar,Maariv,2026-08-20,501.0,nep,0,1.7,True,2026_main,2026,2026_main:2:12
 2026_20260820_lazar,2026,Lazar,Maariv,2026-08-20,501.0,otzma,9,,True,2026_main,2026,2026_main:2:12
 2026_20260820_lazar,2026,Lazar,Maariv,2026-08-20,501.0,raam,5,,True,2026_main,2026,2026_main:2:12
 2026_20260820_lazar,2026,Lazar,Maariv,2026-08-20,501.0,rzp,5,,True,2026_main,2026,2026_main:2:12
@@ -22549,6 +22573,7 @@ poll_id,cycle,pollster,publisher,fieldwork_end,sample_size,party_id,seats,vote_p
 2026_20260824_filber,2026,Filber,Channel 14,2026-08-24,486.0,utj,8,,True,2026_main,2026,2026_main:2:6
 2026_20260824_filber,2026,Filber,Channel 14,2026-08-24,486.0,yashar,24,,True,2026_main,2026,2026_main:2:6
 2026_20260824_filber,2026,Filber,Channel 14,2026-08-24,486.0,yisrael_beytenu,7,,True,2026_main,2026,2026_main:2:6
+2026_20260824_filber,2026,Filber,Channel 14,2026-08-24,486.0,zehut,0,1.7,True,2026_main,2026,2026_main:2:6
 2026_20260824_filber,2026,Filber,Channel 14,2026-08-24,486.0,zionist_home,0,1.3,True,2026_main,2026,2026_main:2:6
 2026_20260824_midgama,2026,Midgam,HaHadashot 12,2026-08-24,500.0,balad+hadash_taal,7,,True,2026_main,2026,2026_main:2:4
 2026_20260824_midgama,2026,Midgam,HaHadashot 12,2026-08-24,500.0,blue_white,0,0.4,True,2026_main,2026,2026_main:2:4
@@ -22584,6 +22609,7 @@ poll_id,cycle,pollster,publisher,fieldwork_end,sample_size,party_id,seats,vote_p
 2026_20260826_directpolls,2026,Direct Polls,i24 News,2026-08-26,532.0,democrats,10,,True,2026_main,2026,2026_main:1:22
 2026_20260826_directpolls,2026,Direct Polls,i24 News,2026-08-26,532.0,joint_list,6,,True,2026_main,2026,2026_main:1:22
 2026_20260826_directpolls,2026,Direct Polls,i24 News,2026-08-26,532.0,likud,26,,True,2026_main,2026,2026_main:1:22
+2026_20260826_directpolls,2026,Direct Polls,i24 News,2026-08-26,532.0,nep,0,1.1,True,2026_main,2026,2026_main:1:22
 2026_20260826_directpolls,2026,Direct Polls,i24 News,2026-08-26,532.0,otzma,6,,True,2026_main,2026,2026_main:1:22
 2026_20260826_directpolls,2026,Direct Polls,i24 News,2026-08-26,532.0,raam,6,,True,2026_main,2026,2026_main:1:22
 2026_20260826_directpolls,2026,Direct Polls,i24 News,2026-08-26,532.0,rzp,4,,True,2026_main,2026,2026_main:1:22
@@ -22598,8 +22624,10 @@ poll_id,cycle,pollster,publisher,fieldwork_end,sample_size,party_id,seats,vote_p
 2026_20260826_lazar,2026,Lazar,Walla,2026-08-26,500.0,amcha_yisrael,6,,True,2026_main,2026,2026_main:1:23
 2026_20260826_lazar,2026,Lazar,Walla,2026-08-26,500.0,blue_white,0,1.2,True,2026_main,2026,2026_main:1:23
 2026_20260826_lazar,2026,Lazar,Walla,2026-08-26,500.0,democrats,10,,True,2026_main,2026,2026_main:1:23
+2026_20260826_lazar,2026,Lazar,Walla,2026-08-26,500.0,israel_first,0,0.3,True,2026_main,2026,2026_main:1:23
 2026_20260826_lazar,2026,Lazar,Walla,2026-08-26,500.0,joint_list,7,,True,2026_main,2026,2026_main:1:23
 2026_20260826_lazar,2026,Lazar,Walla,2026-08-26,500.0,likud,21,,True,2026_main,2026,2026_main:1:23
+2026_20260826_lazar,2026,Lazar,Walla,2026-08-26,500.0,nep,0,1.2,True,2026_main,2026,2026_main:1:23
 2026_20260826_lazar,2026,Lazar,Walla,2026-08-26,500.0,otzma,8,,True,2026_main,2026,2026_main:1:23
 2026_20260826_lazar,2026,Lazar,Walla,2026-08-26,500.0,raam,5,,True,2026_main,2026,2026_main:1:23
 2026_20260826_lazar,2026,Lazar,Walla,2026-08-26,500.0,rzp,0,2.6,True,2026_main,2026,2026_main:1:23
@@ -22642,6 +22670,7 @@ poll_id,cycle,pollster,publisher,fieldwork_end,sample_size,party_id,seats,vote_p
 2026_20260827_filber,2026,Filber,Channel 14,2026-08-27,981.0,democrats,9,,True,2026_main,2026,2026_main:1:17
 2026_20260827_filber,2026,Filber,Channel 14,2026-08-27,981.0,joint_list,7,,True,2026_main,2026,2026_main:1:17
 2026_20260827_filber,2026,Filber,Channel 14,2026-08-27,981.0,likud,31,,True,2026_main,2026,2026_main:1:17
+2026_20260827_filber,2026,Filber,Channel 14,2026-08-27,981.0,noam,0,0.3,True,2026_main,2026,2026_main:1:17
 2026_20260827_filber,2026,Filber,Channel 14,2026-08-27,981.0,otzma,7,,True,2026_main,2026,2026_main:1:17
 2026_20260827_filber,2026,Filber,Channel 14,2026-08-27,981.0,raam,5,,True,2026_main,2026,2026_main:1:17
 2026_20260827_filber,2026,Filber,Channel 14,2026-08-27,981.0,rzp,4,,True,2026_main,2026,2026_main:1:17
@@ -22658,6 +22687,7 @@ poll_id,cycle,pollster,publisher,fieldwork_end,sample_size,party_id,seats,vote_p
 2026_20260827_lazar,2026,Lazar,Maariv,2026-08-27,506.0,democrats,10,,True,2026_main,2026,2026_main:1:19
 2026_20260827_lazar,2026,Lazar,Maariv,2026-08-27,506.0,joint_list,8,,True,2026_main,2026,2026_main:1:19
 2026_20260827_lazar,2026,Lazar,Maariv,2026-08-27,506.0,likud,20,,True,2026_main,2026,2026_main:1:19
+2026_20260827_lazar,2026,Lazar,Maariv,2026-08-27,506.0,nep,0,1.5,True,2026_main,2026,2026_main:1:19
 2026_20260827_lazar,2026,Lazar,Maariv,2026-08-27,506.0,otzma,8,,True,2026_main,2026,2026_main:1:19
 2026_20260827_lazar,2026,Lazar,Maariv,2026-08-27,506.0,raam,5,,True,2026_main,2026,2026_main:1:19
 2026_20260827_lazar,2026,Lazar,Maariv,2026-08-27,506.0,rzp,0,3.0,True,2026_main,2026,2026_main:1:19
@@ -22688,6 +22718,7 @@ poll_id,cycle,pollster,publisher,fieldwork_end,sample_size,party_id,seats,vote_p
 2026_20260830_filber,2026,Filber,Channel 14,2026-08-30,666.0,democrats,8,,True,2026_main,2026,2026_main:1:14
 2026_20260830_filber,2026,Filber,Channel 14,2026-08-30,666.0,joint_list,7,,True,2026_main,2026,2026_main:1:14
 2026_20260830_filber,2026,Filber,Channel 14,2026-08-30,666.0,likud,31,,True,2026_main,2026,2026_main:1:14
+2026_20260830_filber,2026,Filber,Channel 14,2026-08-30,666.0,noam,0,0.3,True,2026_main,2026,2026_main:1:14
 2026_20260830_filber,2026,Filber,Channel 14,2026-08-30,666.0,otzma,7,,True,2026_main,2026,2026_main:1:14
 2026_20260830_filber,2026,Filber,Channel 14,2026-08-30,666.0,raam,5,,True,2026_main,2026,2026_main:1:14
 2026_20260830_filber,2026,Filber,Channel 14,2026-08-30,666.0,rzp,4,,True,2026_main,2026,2026_main:1:14
@@ -22724,8 +22755,10 @@ poll_id,cycle,pollster,publisher,fieldwork_end,sample_size,party_id,seats,vote_p
 2026_20260831_midgam,2026,Midgam,HaHadashot 12,2026-08-31,506.0,amcha_yisrael,4,,True,2026_main,2026,2026_main:1:13
 2026_20260831_midgam,2026,Midgam,HaHadashot 12,2026-08-31,506.0,blue_white,0,0.9,True,2026_main,2026,2026_main:1:13
 2026_20260831_midgam,2026,Midgam,HaHadashot 12,2026-08-31,506.0,democrats,11,,True,2026_main,2026,2026_main:1:13
+2026_20260831_midgam,2026,Midgam,HaHadashot 12,2026-08-31,506.0,haredi_public,0,1.2,True,2026_main,2026,2026_main:1:13
 2026_20260831_midgam,2026,Midgam,HaHadashot 12,2026-08-31,506.0,joint_list,7,,True,2026_main,2026,2026_main:1:13
 2026_20260831_midgam,2026,Midgam,HaHadashot 12,2026-08-31,506.0,likud,23,,True,2026_main,2026,2026_main:1:13
+2026_20260831_midgam,2026,Midgam,HaHadashot 12,2026-08-31,506.0,nep,0,1.0,True,2026_main,2026,2026_main:1:13
 2026_20260831_midgam,2026,Midgam,HaHadashot 12,2026-08-31,506.0,otzma,8,,True,2026_main,2026,2026_main:1:13
 2026_20260831_midgam,2026,Midgam,HaHadashot 12,2026-08-31,506.0,raam,4,,True,2026_main,2026,2026_main:1:13
 2026_20260831_midgam,2026,Midgam,HaHadashot 12,2026-08-31,506.0,rzp,0,2.6,True,2026_main,2026,2026_main:1:13
@@ -22755,8 +22788,12 @@ poll_id,cycle,pollster,publisher,fieldwork_end,sample_size,party_id,seats,vote_p
 2026_20260902_lazar,2026,Lazar,Walla,2026-09-02,500.0,amcha_yisrael,0,2.3,True,2026_main,2026,2026_main:1:10
 2026_20260902_lazar,2026,Lazar,Walla,2026-09-02,500.0,blue_white,0,0.7,True,2026_main,2026,2026_main:1:10
 2026_20260902_lazar,2026,Lazar,Walla,2026-09-02,500.0,democrats,10,,True,2026_main,2026,2026_main:1:10
+2026_20260902_lazar,2026,Lazar,Walla,2026-09-02,500.0,haredi_public,0,0.4,True,2026_main,2026,2026_main:1:10
+2026_20260902_lazar,2026,Lazar,Walla,2026-09-02,500.0,israel_first,0,0.2,True,2026_main,2026,2026_main:1:10
 2026_20260902_lazar,2026,Lazar,Walla,2026-09-02,500.0,joint_list,8,,True,2026_main,2026,2026_main:1:10
 2026_20260902_lazar,2026,Lazar,Walla,2026-09-02,500.0,likud,22,,True,2026_main,2026,2026_main:1:10
+2026_20260902_lazar,2026,Lazar,Walla,2026-09-02,500.0,makom_lekulanu,0,0.5,True,2026_main,2026,2026_main:1:10
+2026_20260902_lazar,2026,Lazar,Walla,2026-09-02,500.0,nep,0,2.0,True,2026_main,2026,2026_main:1:10
 2026_20260902_lazar,2026,Lazar,Walla,2026-09-02,500.0,otzma,7,,True,2026_main,2026,2026_main:1:10
 2026_20260902_lazar,2026,Lazar,Walla,2026-09-02,500.0,raam,5,,True,2026_main,2026,2026_main:1:10
 2026_20260902_lazar,2026,Lazar,Walla,2026-09-02,500.0,rzp,5,,True,2026_main,2026,2026_main:1:10
@@ -22770,8 +22807,10 @@ poll_id,cycle,pollster,publisher,fieldwork_end,sample_size,party_id,seats,vote_p
 2026_20260902_maagarmochot,2026,Maagar Mochot,Channel 16,2026-09-02,552.0,amcha_yisrael,5,,True,2026_main,2026,2026_main:1:7
 2026_20260902_maagarmochot,2026,Maagar Mochot,Channel 16,2026-09-02,552.0,blue_white,0,1.0,True,2026_main,2026,2026_main:1:7
 2026_20260902_maagarmochot,2026,Maagar Mochot,Channel 16,2026-09-02,552.0,democrats,10,,True,2026_main,2026,2026_main:1:7
+2026_20260902_maagarmochot,2026,Maagar Mochot,Channel 16,2026-09-02,552.0,haredi_public,0,1.0,True,2026_main,2026,2026_main:1:7
 2026_20260902_maagarmochot,2026,Maagar Mochot,Channel 16,2026-09-02,552.0,joint_list,7,,True,2026_main,2026,2026_main:1:7
 2026_20260902_maagarmochot,2026,Maagar Mochot,Channel 16,2026-09-02,552.0,likud,19,,True,2026_main,2026,2026_main:1:7
+2026_20260902_maagarmochot,2026,Maagar Mochot,Channel 16,2026-09-02,552.0,nep,0,2.0,True,2026_main,2026,2026_main:1:7
 2026_20260902_maagarmochot,2026,Maagar Mochot,Channel 16,2026-09-02,552.0,otzma,9,,True,2026_main,2026,2026_main:1:7
 2026_20260902_maagarmochot,2026,Maagar Mochot,Channel 16,2026-09-02,552.0,raam,4,,True,2026_main,2026,2026_main:1:7
 2026_20260902_maagarmochot,2026,Maagar Mochot,Channel 16,2026-09-02,552.0,rzp,5,,True,2026_main,2026,2026_main:1:7
@@ -22785,8 +22824,11 @@ poll_id,cycle,pollster,publisher,fieldwork_end,sample_size,party_id,seats,vote_p
 2026_20260902_midgamproject,2026,Midgam Project,Channel 13,2026-09-02,940.0,amcha_yisrael,4,,True,2026_main,2026,2026_main:1:8
 2026_20260902_midgamproject,2026,Midgam Project,Channel 13,2026-09-02,940.0,blue_white,0,1.2,True,2026_main,2026,2026_main:1:8
 2026_20260902_midgamproject,2026,Midgam Project,Channel 13,2026-09-02,940.0,democrats,11,,True,2026_main,2026,2026_main:1:8
+2026_20260902_midgamproject,2026,Midgam Project,Channel 13,2026-09-02,940.0,haredi_public,0,0.3,True,2026_main,2026,2026_main:1:8
 2026_20260902_midgamproject,2026,Midgam Project,Channel 13,2026-09-02,940.0,joint_list,9,,True,2026_main,2026,2026_main:1:8
 2026_20260902_midgamproject,2026,Midgam Project,Channel 13,2026-09-02,940.0,likud,21,,True,2026_main,2026,2026_main:1:8
+2026_20260902_midgamproject,2026,Midgam Project,Channel 13,2026-09-02,940.0,makom_lekulanu,0,0.3,True,2026_main,2026,2026_main:1:8
+2026_20260902_midgamproject,2026,Midgam Project,Channel 13,2026-09-02,940.0,nep,0,0.2,True,2026_main,2026,2026_main:1:8
 2026_20260902_midgamproject,2026,Midgam Project,Channel 13,2026-09-02,940.0,otzma,7,,True,2026_main,2026,2026_main:1:8
 2026_20260902_midgamproject,2026,Midgam Project,Channel 13,2026-09-02,940.0,raam,5,,True,2026_main,2026,2026_main:1:8
 2026_20260902_midgamproject,2026,Midgam Project,Channel 13,2026-09-02,940.0,rzp,6,,True,2026_main,2026,2026_main:1:8
@@ -22802,6 +22844,7 @@ poll_id,cycle,pollster,publisher,fieldwork_end,sample_size,party_id,seats,vote_p
 2026_20260903_filber,2026,Filber,Channel 14,2026-09-03,865.0,democrats,8,,True,2026_main,2026,2026_main:1:3
 2026_20260903_filber,2026,Filber,Channel 14,2026-09-03,865.0,joint_list,7,,True,2026_main,2026,2026_main:1:3
 2026_20260903_filber,2026,Filber,Channel 14,2026-09-03,865.0,likud,31,,True,2026_main,2026,2026_main:1:3
+2026_20260903_filber,2026,Filber,Channel 14,2026-09-03,865.0,noam,0,0.3,True,2026_main,2026,2026_main:1:3
 2026_20260903_filber,2026,Filber,Channel 14,2026-09-03,865.0,otzma,7,,True,2026_main,2026,2026_main:1:3
 2026_20260903_filber,2026,Filber,Channel 14,2026-09-03,865.0,raam,5,,True,2026_main,2026,2026_main:1:3
 2026_20260903_filber,2026,Filber,Channel 14,2026-09-03,865.0,rzp,7,,True,2026_main,2026,2026_main:1:3
@@ -22845,8 +22888,11 @@ poll_id,cycle,pollster,publisher,fieldwork_end,sample_size,party_id,seats,vote_p
 2026_20260904_lazar,2026,Lazar,Maariv,2026-09-04,600.0,amcha_yisrael,4,,True,2026_main,2026,2026_main:1:2
 2026_20260904_lazar,2026,Lazar,Maariv,2026-09-04,600.0,blue_white,0,0.7,True,2026_main,2026,2026_main:1:2
 2026_20260904_lazar,2026,Lazar,Maariv,2026-09-04,600.0,democrats,10,,True,2026_main,2026,2026_main:1:2
+2026_20260904_lazar,2026,Lazar,Maariv,2026-09-04,600.0,haredi_public,0,0.4,True,2026_main,2026,2026_main:1:2
 2026_20260904_lazar,2026,Lazar,Maariv,2026-09-04,600.0,joint_list,7,,True,2026_main,2026,2026_main:1:2
 2026_20260904_lazar,2026,Lazar,Maariv,2026-09-04,600.0,likud,20,,True,2026_main,2026,2026_main:1:2
+2026_20260904_lazar,2026,Lazar,Maariv,2026-09-04,600.0,makom_lekulanu,0,0.7,True,2026_main,2026,2026_main:1:2
+2026_20260904_lazar,2026,Lazar,Maariv,2026-09-04,600.0,nep,0,1.7,True,2026_main,2026,2026_main:1:2
 2026_20260904_lazar,2026,Lazar,Maariv,2026-09-04,600.0,otzma,8,,True,2026_main,2026,2026_main:1:2
 2026_20260904_lazar,2026,Lazar,Maariv,2026-09-04,600.0,raam,5,,True,2026_main,2026,2026_main:1:2
 2026_20260904_lazar,2026,Lazar,Maariv,2026-09-04,600.0,rzp,5,,True,2026_main,2026,2026_main:1:2
@@ -22876,6 +22922,7 @@ poll_id,cycle,pollster,publisher,fieldwork_end,sample_size,party_id,seats,vote_p
 2026_20260907_filber,2026,Filber,Channel 14,2026-09-07,1057.0,haredi_public,0,0.3,True,2026_main,2026,2026_main:0:57
 2026_20260907_filber,2026,Filber,Channel 14,2026-09-07,1057.0,joint_list,8,,True,2026_main,2026,2026_main:0:57
 2026_20260907_filber,2026,Filber,Channel 14,2026-09-07,1057.0,likud,30,,True,2026_main,2026,2026_main:0:57
+2026_20260907_filber,2026,Filber,Channel 14,2026-09-07,1057.0,noam,0,0.2,True,2026_main,2026,2026_main:0:57
 2026_20260907_filber,2026,Filber,Channel 14,2026-09-07,1057.0,otzma,8,,True,2026_main,2026,2026_main:0:57
 2026_20260907_filber,2026,Filber,Channel 14,2026-09-07,1057.0,raam,5,,True,2026_main,2026,2026_main:0:57
 2026_20260907_filber,2026,Filber,Channel 14,2026-09-07,1057.0,rzp,8,,True,2026_main,2026,2026_main:0:57
@@ -22889,8 +22936,11 @@ poll_id,cycle,pollster,publisher,fieldwork_end,sample_size,party_id,seats,vote_p
 2026_20260907_midgam,2026,Midgam,HaHadashot 12,2026-09-07,503.0,blue_white,0,1.0,True,2026_main,2026,2026_main:0:58
 2026_20260907_midgam,2026,Midgam,HaHadashot 12,2026-09-07,503.0,democrats,11,,True,2026_main,2026,2026_main:0:58
 2026_20260907_midgam,2026,Midgam,HaHadashot 12,2026-09-07,503.0,haredi_public,0,1.2,True,2026_main,2026,2026_main:0:58
+2026_20260907_midgam,2026,Midgam,HaHadashot 12,2026-09-07,503.0,israel_first,0,0.0,True,2026_main,2026,2026_main:0:58
 2026_20260907_midgam,2026,Midgam,HaHadashot 12,2026-09-07,503.0,joint_list,7,,True,2026_main,2026,2026_main:0:58
 2026_20260907_midgam,2026,Midgam,HaHadashot 12,2026-09-07,503.0,likud,21,,True,2026_main,2026,2026_main:0:58
+2026_20260907_midgam,2026,Midgam,HaHadashot 12,2026-09-07,503.0,makom_lekulanu,0,0.1,True,2026_main,2026,2026_main:0:58
+2026_20260907_midgam,2026,Midgam,HaHadashot 12,2026-09-07,503.0,noam,0,0.3,True,2026_main,2026,2026_main:0:58
 2026_20260907_midgam,2026,Midgam,HaHadashot 12,2026-09-07,503.0,otzma,6,,True,2026_main,2026,2026_main:0:58
 2026_20260907_midgam,2026,Midgam,HaHadashot 12,2026-09-07,503.0,raam,4,,True,2026_main,2026,2026_main:0:58
 2026_20260907_midgam,2026,Midgam,HaHadashot 12,2026-09-07,503.0,rzp,6,,True,2026_main,2026,2026_main:0:58
@@ -22904,8 +22954,10 @@ poll_id,cycle,pollster,publisher,fieldwork_end,sample_size,party_id,seats,vote_p
 2026_20260907_smlt,2026,S.M.L.T.,— N/a,2026-09-07,2185.0,blue_white,4,,True,2026_main,2026,2026_main:0:56
 2026_20260907_smlt,2026,S.M.L.T.,— N/a,2026-09-07,2185.0,democrats,9,,True,2026_main,2026,2026_main:0:56
 2026_20260907_smlt,2026,S.M.L.T.,— N/a,2026-09-07,2185.0,haredi_public,0,0.24,True,2026_main,2026,2026_main:0:56
+2026_20260907_smlt,2026,S.M.L.T.,— N/a,2026-09-07,2185.0,israel_first,0,0.3,True,2026_main,2026,2026_main:0:56
 2026_20260907_smlt,2026,S.M.L.T.,— N/a,2026-09-07,2185.0,joint_list,7,,True,2026_main,2026,2026_main:0:56
 2026_20260907_smlt,2026,S.M.L.T.,— N/a,2026-09-07,2185.0,likud,25,,True,2026_main,2026,2026_main:0:56
+2026_20260907_smlt,2026,S.M.L.T.,— N/a,2026-09-07,2185.0,noam,0,0.35,True,2026_main,2026,2026_main:0:56
 2026_20260907_smlt,2026,S.M.L.T.,— N/a,2026-09-07,2185.0,otzma,9,,True,2026_main,2026,2026_main:0:56
 2026_20260907_smlt,2026,S.M.L.T.,— N/a,2026-09-07,2185.0,raam,5,,True,2026_main,2026,2026_main:0:56
 2026_20260907_smlt,2026,S.M.L.T.,— N/a,2026-09-07,2185.0,rzp,8,,True,2026_main,2026,2026_main:0:56
@@ -22921,6 +22973,7 @@ poll_id,cycle,pollster,publisher,fieldwork_end,sample_size,party_id,seats,vote_p
 2026_20260908_lazar,2026,Lazar,Maariv,2026-09-08,600.0,haredi_public,0,0.4,True,2026_main,2026,2026_main:0:55
 2026_20260908_lazar,2026,Lazar,Maariv,2026-09-08,600.0,joint_list,7,,True,2026_main,2026,2026_main:0:55
 2026_20260908_lazar,2026,Lazar,Maariv,2026-09-08,600.0,likud,20,,True,2026_main,2026,2026_main:0:55
+2026_20260908_lazar,2026,Lazar,Maariv,2026-09-08,600.0,noam,0,0.6,True,2026_main,2026,2026_main:0:55
 2026_20260908_lazar,2026,Lazar,Maariv,2026-09-08,600.0,otzma,8,,True,2026_main,2026,2026_main:0:55
 2026_20260908_lazar,2026,Lazar,Maariv,2026-09-08,600.0,raam,5,,True,2026_main,2026,2026_main:0:55
 2026_20260908_lazar,2026,Lazar,Maariv,2026-09-08,600.0,rzp,5,,True,2026_main,2026,2026_main:0:55
@@ -22951,6 +23004,7 @@ poll_id,cycle,pollster,publisher,fieldwork_end,sample_size,party_id,seats,vote_p
 2026_20260909_filber,2026,Filber,Channel 14,2026-09-09,537.0,haredi_public,0,0.1,True,2026_main,2026,2026_main:0:50
 2026_20260909_filber,2026,Filber,Channel 14,2026-09-09,537.0,joint_list,6,,True,2026_main,2026,2026_main:0:50
 2026_20260909_filber,2026,Filber,Channel 14,2026-09-09,537.0,likud,31,,True,2026_main,2026,2026_main:0:50
+2026_20260909_filber,2026,Filber,Channel 14,2026-09-09,537.0,noam,0,0.1,True,2026_main,2026,2026_main:0:50
 2026_20260909_filber,2026,Filber,Channel 14,2026-09-09,537.0,otzma,8,,True,2026_main,2026,2026_main:0:50
 2026_20260909_filber,2026,Filber,Channel 14,2026-09-09,537.0,raam,6,,True,2026_main,2026,2026_main:0:50
 2026_20260909_filber,2026,Filber,Channel 14,2026-09-09,537.0,rzp,8,,True,2026_main,2026,2026_main:0:50
@@ -22964,8 +23018,10 @@ poll_id,cycle,pollster,publisher,fieldwork_end,sample_size,party_id,seats,vote_p
 2026_20260909_kantar,2026,Kantar,Kan 11,2026-09-09,554.0,blue_white,0,0.8,True,2026_main,2026,2026_main:0:52
 2026_20260909_kantar,2026,Kantar,Kan 11,2026-09-09,554.0,democrats,9,,True,2026_main,2026,2026_main:0:52
 2026_20260909_kantar,2026,Kantar,Kan 11,2026-09-09,554.0,haredi_public,0,0.9,True,2026_main,2026,2026_main:0:52
+2026_20260909_kantar,2026,Kantar,Kan 11,2026-09-09,554.0,israel_first,0,0.5,True,2026_main,2026,2026_main:0:52
 2026_20260909_kantar,2026,Kantar,Kan 11,2026-09-09,554.0,joint_list,7,,True,2026_main,2026,2026_main:0:52
 2026_20260909_kantar,2026,Kantar,Kan 11,2026-09-09,554.0,likud,21,,True,2026_main,2026,2026_main:0:52
+2026_20260909_kantar,2026,Kantar,Kan 11,2026-09-09,554.0,noam,0,0.0,True,2026_main,2026,2026_main:0:52
 2026_20260909_kantar,2026,Kantar,Kan 11,2026-09-09,554.0,otzma,7,,True,2026_main,2026,2026_main:0:52
 2026_20260909_kantar,2026,Kantar,Kan 11,2026-09-09,554.0,raam,5,,True,2026_main,2026,2026_main:0:52
 2026_20260909_kantar,2026,Kantar,Kan 11,2026-09-09,554.0,rzp,5,,True,2026_main,2026,2026_main:0:52
@@ -22975,12 +23031,14 @@ poll_id,cycle,pollster,publisher,fieldwork_end,sample_size,party_id,seats,vote_p
 2026_20260909_kantar,2026,Kantar,Kan 11,2026-09-09,554.0,yashar,24,,True,2026_main,2026,2026_main:0:52
 2026_20260909_kantar,2026,Kantar,Kan 11,2026-09-09,554.0,yisrael_beytenu,7,,True,2026_main,2026,2026_main:0:52
 2026_20260909_kantar,2026,Kantar,Kan 11,2026-09-09,554.0,zionist_home,4,,True,2026_main,2026,2026_main:0:52
+2026_20260909_lazar,2026,Lazar,Walla,2026-09-09,506.0,ahi,0,1.1,True,2026_main,2026,2026_main:0:51
 2026_20260909_lazar,2026,Lazar,Walla,2026-09-09,506.0,amcha_yisrael,4,,True,2026_main,2026,2026_main:0:51
 2026_20260909_lazar,2026,Lazar,Walla,2026-09-09,506.0,blue_white,0,0.9,True,2026_main,2026,2026_main:0:51
 2026_20260909_lazar,2026,Lazar,Walla,2026-09-09,506.0,democrats,9,,True,2026_main,2026,2026_main:0:51
 2026_20260909_lazar,2026,Lazar,Walla,2026-09-09,506.0,haredi_public,0,0.2,True,2026_main,2026,2026_main:0:51
 2026_20260909_lazar,2026,Lazar,Walla,2026-09-09,506.0,joint_list,7,,True,2026_main,2026,2026_main:0:51
 2026_20260909_lazar,2026,Lazar,Walla,2026-09-09,506.0,likud,21,,True,2026_main,2026,2026_main:0:51
+2026_20260909_lazar,2026,Lazar,Walla,2026-09-09,506.0,noam,0,0.2,True,2026_main,2026,2026_main:0:51
 2026_20260909_lazar,2026,Lazar,Walla,2026-09-09,506.0,otzma,7,,True,2026_main,2026,2026_main:0:51
 2026_20260909_lazar,2026,Lazar,Walla,2026-09-09,506.0,raam,5,,True,2026_main,2026,2026_main:0:51
 2026_20260909_lazar,2026,Lazar,Walla,2026-09-09,506.0,rzp,5,,True,2026_main,2026,2026_main:0:51
@@ -23009,8 +23067,10 @@ poll_id,cycle,pollster,publisher,fieldwork_end,sample_size,party_id,seats,vote_p
 2026_20260909_midgam,2026,Midgam,HaHadashot 12,2026-09-09,504.0,blue_white,0,1.4,True,2026_main,2026,2026_main:0:53
 2026_20260909_midgam,2026,Midgam,HaHadashot 12,2026-09-09,504.0,democrats,10,,True,2026_main,2026,2026_main:0:53
 2026_20260909_midgam,2026,Midgam,HaHadashot 12,2026-09-09,504.0,haredi_public,0,1.0,True,2026_main,2026,2026_main:0:53
+2026_20260909_midgam,2026,Midgam,HaHadashot 12,2026-09-09,504.0,israel_first,0,0.3,True,2026_main,2026,2026_main:0:53
 2026_20260909_midgam,2026,Midgam,HaHadashot 12,2026-09-09,504.0,joint_list,7,,True,2026_main,2026,2026_main:0:53
 2026_20260909_midgam,2026,Midgam,HaHadashot 12,2026-09-09,504.0,likud,21,,True,2026_main,2026,2026_main:0:53
+2026_20260909_midgam,2026,Midgam,HaHadashot 12,2026-09-09,504.0,noam,0,0.2,True,2026_main,2026,2026_main:0:53
 2026_20260909_midgam,2026,Midgam,HaHadashot 12,2026-09-09,504.0,otzma,6,,True,2026_main,2026,2026_main:0:53
 2026_20260909_midgam,2026,Midgam,HaHadashot 12,2026-09-09,504.0,raam,4,,True,2026_main,2026,2026_main:0:53
 2026_20260909_midgam,2026,Midgam,HaHadashot 12,2026-09-09,504.0,rzp,5,,True,2026_main,2026,2026_main:0:53
@@ -23041,6 +23101,7 @@ poll_id,cycle,pollster,publisher,fieldwork_end,sample_size,party_id,seats,vote_p
 2026_20260910_lazar,2026,Lazar,Maariv,2026-09-10,601.0,haredi_public,0,0.4,True,2026_main,2026,2026_main:0:45
 2026_20260910_lazar,2026,Lazar,Maariv,2026-09-10,601.0,joint_list,7,,True,2026_main,2026,2026_main:0:45
 2026_20260910_lazar,2026,Lazar,Maariv,2026-09-10,601.0,likud,19,,True,2026_main,2026,2026_main:0:45
+2026_20260910_lazar,2026,Lazar,Maariv,2026-09-10,601.0,noam,0,0.7,True,2026_main,2026,2026_main:0:45
 2026_20260910_lazar,2026,Lazar,Maariv,2026-09-10,601.0,otzma,8,,True,2026_main,2026,2026_main:0:45
 2026_20260910_lazar,2026,Lazar,Maariv,2026-09-10,601.0,raam,5,,True,2026_main,2026,2026_main:0:45
 2026_20260910_lazar,2026,Lazar,Maariv,2026-09-10,601.0,rzp,5,,True,2026_main,2026,2026_main:0:45
@@ -23097,6 +23158,7 @@ poll_id,cycle,pollster,publisher,fieldwork_end,sample_size,party_id,seats,vote_p
 2026_20260915_filber,2026,Filber,Channel 14,2026-09-15,483.0,haredi_public,0,0.2,True,2026_main,2026,2026_main:0:40
 2026_20260915_filber,2026,Filber,Channel 14,2026-09-15,483.0,joint_list,7,,True,2026_main,2026,2026_main:0:40
 2026_20260915_filber,2026,Filber,Channel 14,2026-09-15,483.0,likud,30,,True,2026_main,2026,2026_main:0:40
+2026_20260915_filber,2026,Filber,Channel 14,2026-09-15,483.0,noam,0,0.3,True,2026_main,2026,2026_main:0:40
 2026_20260915_filber,2026,Filber,Channel 14,2026-09-15,483.0,otzma,8,,True,2026_main,2026,2026_main:0:40
 2026_20260915_filber,2026,Filber,Channel 14,2026-09-15,483.0,raam,5,,True,2026_main,2026,2026_main:0:40
 2026_20260915_filber,2026,Filber,Channel 14,2026-09-15,483.0,rzp,8,,True,2026_main,2026,2026_main:0:40
@@ -23155,6 +23217,7 @@ poll_id,cycle,pollster,publisher,fieldwork_end,sample_size,party_id,seats,vote_p
 2026_20260917_filber,2026,Filber,Channel 14,2026-09-17,817.0,haredi_public,0,0.3,True,2026_main,2026,2026_main:0:33
 2026_20260917_filber,2026,Filber,Channel 14,2026-09-17,817.0,joint_list,7,,True,2026_main,2026,2026_main:0:33
 2026_20260917_filber,2026,Filber,Channel 14,2026-09-17,817.0,likud,31,,True,2026_main,2026,2026_main:0:33
+2026_20260917_filber,2026,Filber,Channel 14,2026-09-17,817.0,noam,0,0.1,True,2026_main,2026,2026_main:0:33
 2026_20260917_filber,2026,Filber,Channel 14,2026-09-17,817.0,otzma,8,,True,2026_main,2026,2026_main:0:33
 2026_20260917_filber,2026,Filber,Channel 14,2026-09-17,817.0,raam,5,,True,2026_main,2026,2026_main:0:33
 2026_20260917_filber,2026,Filber,Channel 14,2026-09-17,817.0,rzp,7,,True,2026_main,2026,2026_main:0:33
@@ -23166,10 +23229,12 @@ poll_id,cycle,pollster,publisher,fieldwork_end,sample_size,party_id,seats,vote_p
 2026_20260917_filber,2026,Filber,Channel 14,2026-09-17,817.0,zionist_home,0,2.2,True,2026_main,2026,2026_main:0:33
 2026_20260917_kantar,2026,Kantar,Israel Hayom,2026-09-17,551.0,amcha_yisrael,4,,True,2026_main,2026,2026_main:0:36
 2026_20260917_kantar,2026,Kantar,Israel Hayom,2026-09-17,551.0,blue_white,0,1.2,True,2026_main,2026,2026_main:0:36
+2026_20260917_kantar,2026,Kantar,Israel Hayom,2026-09-17,551.0,code_black,0,0.5,True,2026_main,2026,2026_main:0:36
 2026_20260917_kantar,2026,Kantar,Israel Hayom,2026-09-17,551.0,democrats,9,,True,2026_main,2026,2026_main:0:36
 2026_20260917_kantar,2026,Kantar,Israel Hayom,2026-09-17,551.0,haredi_public,0,0.8,True,2026_main,2026,2026_main:0:36
 2026_20260917_kantar,2026,Kantar,Israel Hayom,2026-09-17,551.0,joint_list,7,,True,2026_main,2026,2026_main:0:36
 2026_20260917_kantar,2026,Kantar,Israel Hayom,2026-09-17,551.0,likud,20,,True,2026_main,2026,2026_main:0:36
+2026_20260917_kantar,2026,Kantar,Israel Hayom,2026-09-17,551.0,noam,0,0.4,True,2026_main,2026,2026_main:0:36
 2026_20260917_kantar,2026,Kantar,Israel Hayom,2026-09-17,551.0,otzma,8,,True,2026_main,2026,2026_main:0:36
 2026_20260917_kantar,2026,Kantar,Israel Hayom,2026-09-17,551.0,raam,5,,True,2026_main,2026,2026_main:0:36
 2026_20260917_kantar,2026,Kantar,Israel Hayom,2026-09-17,551.0,rzp,6,,True,2026_main,2026,2026_main:0:36
@@ -23179,12 +23244,15 @@ poll_id,cycle,pollster,publisher,fieldwork_end,sample_size,party_id,seats,vote_p
 2026_20260917_kantar,2026,Kantar,Israel Hayom,2026-09-17,551.0,yashar,22,,True,2026_main,2026,2026_main:0:36
 2026_20260917_kantar,2026,Kantar,Israel Hayom,2026-09-17,551.0,yisrael_beytenu,8,,True,2026_main,2026,2026_main:0:36
 2026_20260917_kantar,2026,Kantar,Israel Hayom,2026-09-17,551.0,zionist_home,4,,True,2026_main,2026,2026_main:0:36
+2026_20260917_lazar,2026,Lazar,Maariv,2026-09-17,600.0,ahi,0,0.8,True,2026_main,2026,2026_main:0:35
 2026_20260917_lazar,2026,Lazar,Maariv,2026-09-17,600.0,amcha_yisrael,4,,True,2026_main,2026,2026_main:0:35
+2026_20260917_lazar,2026,Lazar,Maariv,2026-09-17,600.0,beit_yisrael,0,0.4,True,2026_main,2026,2026_main:0:35
 2026_20260917_lazar,2026,Lazar,Maariv,2026-09-17,600.0,blue_white,0,1.1,True,2026_main,2026,2026_main:0:35
 2026_20260917_lazar,2026,Lazar,Maariv,2026-09-17,600.0,democrats,9,,True,2026_main,2026,2026_main:0:35
 2026_20260917_lazar,2026,Lazar,Maariv,2026-09-17,600.0,haredi_public,0,0.6,True,2026_main,2026,2026_main:0:35
 2026_20260917_lazar,2026,Lazar,Maariv,2026-09-17,600.0,joint_list,7,,True,2026_main,2026,2026_main:0:35
 2026_20260917_lazar,2026,Lazar,Maariv,2026-09-17,600.0,likud,18,,True,2026_main,2026,2026_main:0:35
+2026_20260917_lazar,2026,Lazar,Maariv,2026-09-17,600.0,noam,0,0.6,True,2026_main,2026,2026_main:0:35
 2026_20260917_lazar,2026,Lazar,Maariv,2026-09-17,600.0,otzma,8,,True,2026_main,2026,2026_main:0:35
 2026_20260917_lazar,2026,Lazar,Maariv,2026-09-17,600.0,raam,5,,True,2026_main,2026,2026_main:0:35
 2026_20260917_lazar,2026,Lazar,Maariv,2026-09-17,600.0,rzp,6,,True,2026_main,2026,2026_main:0:35
@@ -23214,6 +23282,7 @@ poll_id,cycle,pollster,publisher,fieldwork_end,sample_size,party_id,seats,vote_p
 2026_20260922_midgam,2026,Midgam,HaHadashot 12,2026-09-22,501.0,haredi_public,0,0.3,True,2026_main,2026,2026_main:0:32
 2026_20260922_midgam,2026,Midgam,HaHadashot 12,2026-09-22,501.0,joint_list,7,,True,2026_main,2026,2026_main:0:32
 2026_20260922_midgam,2026,Midgam,HaHadashot 12,2026-09-22,501.0,likud,20,,True,2026_main,2026,2026_main:0:32
+2026_20260922_midgam,2026,Midgam,HaHadashot 12,2026-09-22,501.0,noam,0,0.1,True,2026_main,2026,2026_main:0:32
 2026_20260922_midgam,2026,Midgam,HaHadashot 12,2026-09-22,501.0,otzma,6,,True,2026_main,2026,2026_main:0:32
 2026_20260922_midgam,2026,Midgam,HaHadashot 12,2026-09-22,501.0,raam,5,,True,2026_main,2026,2026_main:0:32
 2026_20260922_midgam,2026,Midgam,HaHadashot 12,2026-09-22,501.0,rzp,5,,True,2026_main,2026,2026_main:0:32
@@ -23229,6 +23298,7 @@ poll_id,cycle,pollster,publisher,fieldwork_end,sample_size,party_id,seats,vote_p
 2026_20260923_filber,2026,Filber,Channel 14,2026-09-23,647.0,haredi_public,0,0.5,True,2026_main,2026,2026_main:0:29
 2026_20260923_filber,2026,Filber,Channel 14,2026-09-23,647.0,joint_list,7,,True,2026_main,2026,2026_main:0:29
 2026_20260923_filber,2026,Filber,Channel 14,2026-09-23,647.0,likud,32,,True,2026_main,2026,2026_main:0:29
+2026_20260923_filber,2026,Filber,Channel 14,2026-09-23,647.0,noam,0,0.1,True,2026_main,2026,2026_main:0:29
 2026_20260923_filber,2026,Filber,Channel 14,2026-09-23,647.0,otzma,6,,True,2026_main,2026,2026_main:0:29
 2026_20260923_filber,2026,Filber,Channel 14,2026-09-23,647.0,raam,5,,True,2026_main,2026,2026_main:0:29
 2026_20260923_filber,2026,Filber,Channel 14,2026-09-23,647.0,rzp,7,,True,2026_main,2026,2026_main:0:29
@@ -23273,6 +23343,7 @@ poll_id,cycle,pollster,publisher,fieldwork_end,sample_size,party_id,seats,vote_p
 2026_20260924_lazar,2026,Lazar,Maariv,2026-09-24,610.0,haredi_public,0,0.9,True,2026_main,2026,2026_main:0:28
 2026_20260924_lazar,2026,Lazar,Maariv,2026-09-24,610.0,joint_list,7,,True,2026_main,2026,2026_main:0:28
 2026_20260924_lazar,2026,Lazar,Maariv,2026-09-24,610.0,likud,18,,True,2026_main,2026,2026_main:0:28
+2026_20260924_lazar,2026,Lazar,Maariv,2026-09-24,610.0,noam,0,0.7,True,2026_main,2026,2026_main:0:28
 2026_20260924_lazar,2026,Lazar,Maariv,2026-09-24,610.0,otzma,9,,True,2026_main,2026,2026_main:0:28
 2026_20260924_lazar,2026,Lazar,Maariv,2026-09-24,610.0,raam,5,,True,2026_main,2026,2026_main:0:28
 2026_20260924_lazar,2026,Lazar,Maariv,2026-09-24,610.0,rzp,6,,True,2026_main,2026,2026_main:0:28
@@ -23328,6 +23399,7 @@ poll_id,cycle,pollster,publisher,fieldwork_end,sample_size,party_id,seats,vote_p
 2026_20260928_filber,2026,Filber,Channel 14,2026-09-28,573.0,haredi_public,0,0.2,True,2026_main,2026,2026_main:0:22
 2026_20260928_filber,2026,Filber,Channel 14,2026-09-28,573.0,joint_list,7,,True,2026_main,2026,2026_main:0:22
 2026_20260928_filber,2026,Filber,Channel 14,2026-09-28,573.0,likud,31,,True,2026_main,2026,2026_main:0:22
+2026_20260928_filber,2026,Filber,Channel 14,2026-09-28,573.0,noam,0,0.2,True,2026_main,2026,2026_main:0:22
 2026_20260928_filber,2026,Filber,Channel 14,2026-09-28,573.0,otzma,7,,True,2026_main,2026,2026_main:0:22
 2026_20260928_filber,2026,Filber,Channel 14,2026-09-28,573.0,raam,5,,True,2026_main,2026,2026_main:0:22
 2026_20260928_filber,2026,Filber,Channel 14,2026-09-28,573.0,rzp,7,,True,2026_main,2026,2026_main:0:22
@@ -23353,11 +23425,13 @@ poll_id,cycle,pollster,publisher,fieldwork_end,sample_size,party_id,seats,vote_p
 2026_20260929_maagarmochot,2026,Maagar Mochot,Channel 16,2026-09-29,550.0,yisrael_beytenu,7,,True,2026_main,2026,2026_main:0:21
 2026_20260929_maagarmochot,2026,Maagar Mochot,Channel 16,2026-09-29,550.0,zionist_home,4,,True,2026_main,2026,2026_main:0:21
 2026_20260930_lazar,2026,Lazar,Maariv,2026-09-30,602.0,amcha_yisrael,4,,True,2026_main,2026,2026_main:0:19
+2026_20260930_lazar,2026,Lazar,Maariv,2026-09-30,602.0,beit_yisrael,0,0.3,True,2026_main,2026,2026_main:0:19
 2026_20260930_lazar,2026,Lazar,Maariv,2026-09-30,602.0,blue_white,0,0.7,True,2026_main,2026,2026_main:0:19
 2026_20260930_lazar,2026,Lazar,Maariv,2026-09-30,602.0,democrats,10,,True,2026_main,2026,2026_main:0:19
 2026_20260930_lazar,2026,Lazar,Maariv,2026-09-30,602.0,haredi_public,0,0.6,True,2026_main,2026,2026_main:0:19
 2026_20260930_lazar,2026,Lazar,Maariv,2026-09-30,602.0,joint_list,7,,True,2026_main,2026,2026_main:0:19
 2026_20260930_lazar,2026,Lazar,Maariv,2026-09-30,602.0,likud,19,,True,2026_main,2026,2026_main:0:19
+2026_20260930_lazar,2026,Lazar,Maariv,2026-09-30,602.0,noam,0,0.4,True,2026_main,2026,2026_main:0:19
 2026_20260930_lazar,2026,Lazar,Maariv,2026-09-30,602.0,otzma,9,,True,2026_main,2026,2026_main:0:19
 2026_20260930_lazar,2026,Lazar,Maariv,2026-09-30,602.0,raam,5,,True,2026_main,2026,2026_main:0:19
 2026_20260930_lazar,2026,Lazar,Maariv,2026-09-30,602.0,rzp,5,,True,2026_main,2026,2026_main:0:19
@@ -23409,12 +23483,14 @@ poll_id,cycle,pollster,publisher,fieldwork_end,sample_size,party_id,seats,vote_p
 2026_20261001_directpolls,2026,Direct Polls,i24 News,2026-10-01,504.0,yashar,22,,True,2026_main,2026,2026_main:0:16
 2026_20261001_directpolls,2026,Direct Polls,i24 News,2026-10-01,504.0,yisrael_beytenu,7,,True,2026_main,2026,2026_main:0:16
 2026_20261001_directpolls,2026,Direct Polls,i24 News,2026-10-01,504.0,zionist_home,0,1.81,True,2026_main,2026,2026_main:0:16
+2026_20261001_filber,2026,Filber,Channel 14,2026-10-01,2175.0,ahi,0,0.1,True,2026_main,2026,2026_main:0:17
 2026_20261001_filber,2026,Filber,Channel 14,2026-10-01,2175.0,amcha_yisrael,0,1.7,True,2026_main,2026,2026_main:0:17
 2026_20261001_filber,2026,Filber,Channel 14,2026-10-01,2175.0,blue_white,0,0.4,True,2026_main,2026,2026_main:0:17
 2026_20261001_filber,2026,Filber,Channel 14,2026-10-01,2175.0,democrats,9,,True,2026_main,2026,2026_main:0:17
 2026_20261001_filber,2026,Filber,Channel 14,2026-10-01,2175.0,haredi_public,0,0.2,True,2026_main,2026,2026_main:0:17
 2026_20261001_filber,2026,Filber,Channel 14,2026-10-01,2175.0,joint_list,7,,True,2026_main,2026,2026_main:0:17
 2026_20261001_filber,2026,Filber,Channel 14,2026-10-01,2175.0,likud,32,,True,2026_main,2026,2026_main:0:17
+2026_20261001_filber,2026,Filber,Channel 14,2026-10-01,2175.0,noam,0,0.1,True,2026_main,2026,2026_main:0:17
 2026_20261001_filber,2026,Filber,Channel 14,2026-10-01,2175.0,otzma,7,,True,2026_main,2026,2026_main:0:17
 2026_20261001_filber,2026,Filber,Channel 14,2026-10-01,2175.0,raam,5,,True,2026_main,2026,2026_main:0:17
 2026_20261001_filber,2026,Filber,Channel 14,2026-10-01,2175.0,rzp,7,,True,2026_main,2026,2026_main:0:17
@@ -23469,12 +23545,14 @@ poll_id,cycle,pollster,publisher,fieldwork_end,sample_size,party_id,seats,vote_p
 2026_20261007_directpolls,2026,Direct Polls,i24 News,2026-10-07,504.0,yashar,20,,True,2026_main,2026,2026_main:0:8
 2026_20261007_directpolls,2026,Direct Polls,i24 News,2026-10-07,504.0,yisrael_beytenu,7,,True,2026_main,2026,2026_main:0:8
 2026_20261007_directpolls,2026,Direct Polls,i24 News,2026-10-07,504.0,zionist_home,0,2.3,True,2026_main,2026,2026_main:0:8
+2026_20261007_filber,2026,Filber,Channel 14,2026-10-07,2175.0,ahi,0,0.1,True,2026_main,2026,2026_main:0:9
 2026_20261007_filber,2026,Filber,Channel 14,2026-10-07,2175.0,amcha_yisrael,0,2.2,True,2026_main,2026,2026_main:0:9
 2026_20261007_filber,2026,Filber,Channel 14,2026-10-07,2175.0,blue_white,0,1.3,True,2026_main,2026,2026_main:0:9
 2026_20261007_filber,2026,Filber,Channel 14,2026-10-07,2175.0,democrats,9,,True,2026_main,2026,2026_main:0:9
 2026_20261007_filber,2026,Filber,Channel 14,2026-10-07,2175.0,haredi_public,0,0.4,True,2026_main,2026,2026_main:0:9
 2026_20261007_filber,2026,Filber,Channel 14,2026-10-07,2175.0,joint_list,7,,True,2026_main,2026,2026_main:0:9
 2026_20261007_filber,2026,Filber,Channel 14,2026-10-07,2175.0,likud,31,,True,2026_main,2026,2026_main:0:9
+2026_20261007_filber,2026,Filber,Channel 14,2026-10-07,2175.0,noam,0,0.9,True,2026_main,2026,2026_main:0:9
 2026_20261007_filber,2026,Filber,Channel 14,2026-10-07,2175.0,otzma,8,,True,2026_main,2026,2026_main:0:9
 2026_20261007_filber,2026,Filber,Channel 14,2026-10-07,2175.0,raam,5,,True,2026_main,2026,2026_main:0:9
 2026_20261007_filber,2026,Filber,Channel 14,2026-10-07,2175.0,rzp,6,,True,2026_main,2026,2026_main:0:9
@@ -23514,11 +23592,13 @@ poll_id,cycle,pollster,publisher,fieldwork_end,sample_size,party_id,seats,vote_p
 2026_20261008_kantar,2026,Kantar,Israel Hayom,2026-10-08,555.0,yisrael_beytenu,8,,True,2026_main,2026,2026_main:0:7
 2026_20261008_kantar,2026,Kantar,Israel Hayom,2026-10-08,555.0,zionist_home,5,,True,2026_main,2026,2026_main:0:7
 2026_20261008_lazar,2026,Lazar,Maariv,2026-10-08,700.0,amcha_yisrael,4,,True,2026_main,2026,2026_main:0:5
+2026_20261008_lazar,2026,Lazar,Maariv,2026-10-08,700.0,beit_yisrael,0,0.3,True,2026_main,2026,2026_main:0:5
 2026_20261008_lazar,2026,Lazar,Maariv,2026-10-08,700.0,blue_white,0,1.9,True,2026_main,2026,2026_main:0:5
 2026_20261008_lazar,2026,Lazar,Maariv,2026-10-08,700.0,democrats,9,,True,2026_main,2026,2026_main:0:5
 2026_20261008_lazar,2026,Lazar,Maariv,2026-10-08,700.0,haredi_public,0,0.8,True,2026_main,2026,2026_main:0:5
 2026_20261008_lazar,2026,Lazar,Maariv,2026-10-08,700.0,joint_list,7,,True,2026_main,2026,2026_main:0:5
 2026_20261008_lazar,2026,Lazar,Maariv,2026-10-08,700.0,likud,20,,True,2026_main,2026,2026_main:0:5
+2026_20261008_lazar,2026,Lazar,Maariv,2026-10-08,700.0,noam,0,0.6,True,2026_main,2026,2026_main:0:5
 2026_20261008_lazar,2026,Lazar,Maariv,2026-10-08,700.0,otzma,8,,True,2026_main,2026,2026_main:0:5
 2026_20261008_lazar,2026,Lazar,Maariv,2026-10-08,700.0,raam,5,,True,2026_main,2026,2026_main:0:5
 2026_20261008_lazar,2026,Lazar,Maariv,2026-10-08,700.0,rzp,6,,True,2026_main,2026,2026_main:0:5

@@ -745,6 +745,7 @@ ref,pollster,fieldwork_end,party_id,raw_pct,shown_passing
 4139,Lazar,2026-09-09,raam,4.7,True
 4139,Lazar,2026-09-09,amcha_yisrael,3.4,True
 4139,Lazar,2026-09-09,zionist_home,2.8,True
+4139,Lazar,2026-09-09,ahi,1.1,True
 4139,Lazar,2026-09-09,blue_white,0.9,True
 4139,Lazar,2026-09-09,haredi_public,0.2,True
 4139,Lazar,2026-09-09,noam,0.2,True
@@ -895,6 +896,8 @@ ref,pollster,fieldwork_end,party_id,raw_pct,shown_passing
 4151,Maagar Mochot,2026-09-15,haredi_public,1.2,True
 4151,Maagar Mochot,2026-09-15,unity,0.0,True
 4151,Maagar Mochot,2026-09-15,noam,0.2,True
+4151,Maagar Mochot,2026-09-15,code_black,0.2,True
+4151,Maagar Mochot,2026-09-15,beit_yisrael,0.0,True
 4158,Lazar,2026-09-16,yashar,17.0,True
 4158,Lazar,2026-09-16,likud,14.9,True
 4158,Lazar,2026-09-16,together,11.0,True
@@ -911,6 +914,7 @@ ref,pollster,fieldwork_end,party_id,raw_pct,shown_passing
 4158,Lazar,2026-09-16,blue_white,1.1,True
 4158,Lazar,2026-09-16,noam,0.6,True
 4158,Lazar,2026-09-16,haredi_public,0.6,True
+4158,Lazar,2026-09-16,beit_yisrael,0.4,True
 4159,Filber,2026-09-17,likud,24.0,True
 4159,Filber,2026-09-17,yashar,15.4,True
 4159,Filber,2026-09-17,shas,7.9,True
@@ -942,6 +946,7 @@ ref,pollster,fieldwork_end,party_id,raw_pct,shown_passing
 4160,Kantar,2026-09-16,blue_white,1.2,True
 4160,Kantar,2026-09-16,haredi_public,0.8,True
 4160,Kantar,2026-09-16,noam,0.4,True
+4160,Kantar,2026-09-16,code_black,0.5,True
 4161,Direct Polls,2026-09-17,likud,21.6,True
 4161,Direct Polls,2026-09-17,yashar,17.0,True
 4161,Direct Polls,2026-09-17,democrats,8.0,True
@@ -971,6 +976,7 @@ ref,pollster,fieldwork_end,party_id,raw_pct,shown_passing
 4162,Midgam,2026-09-22,blue_white,0.7,True
 4162,Midgam,2026-09-22,haredi_public,0.3,True
 4162,Midgam,2026-09-22,noam,0.1,True
+4162,Midgam,2026-09-22,beit_yisrael,0.0,True
 4162,Midgam,2026-09-22,israel_first,0.0,True
 4163,Kantar,2026-09-09,likud,17.0,True
 4163,Kantar,2026-09-09,together,9.7,True
@@ -1005,6 +1011,7 @@ ref,pollster,fieldwork_end,party_id,raw_pct,shown_passing
 4164,Lazar,2026-09-23,blue_white,1.3,True
 4164,Lazar,2026-09-23,haredi_public,0.9,True
 4164,Lazar,2026-09-23,noam,0.7,True
+4164,Lazar,2026-09-23,beit_yisrael,0.2,True
 4165,Direct Polls,2026-09-24,likud,20.4,True
 4165,Direct Polls,2026-09-24,yashar,17.5,True
 4165,Direct Polls,2026-09-24,together,7.2,True
@@ -1077,6 +1084,7 @@ ref,pollster,fieldwork_end,party_id,raw_pct,shown_passing
 4176,Filber,2026-10-01,zionist_home,1.2,True
 4176,Filber,2026-10-01,blue_white,0.4,True
 4176,Filber,2026-10-01,haredi_public,0.2,True
+4176,Filber,2026-10-01,ahi,0.1,True
 4177,Lazar,2026-09-30,yashar,15.4,True
 4177,Lazar,2026-09-30,likud,14.8,True
 4177,Lazar,2026-09-30,together,11.3,True
@@ -1093,6 +1101,7 @@ ref,pollster,fieldwork_end,party_id,raw_pct,shown_passing
 4177,Lazar,2026-09-30,blue_white,0.7,True
 4177,Lazar,2026-09-30,haredi_public,0.6,True
 4177,Lazar,2026-09-30,noam,0.4,True
+4177,Lazar,2026-09-30,beit_yisrael,0.3,True
 4178,Direct Polls,2026-10-01,likud,22.0,True
 4178,Direct Polls,2026-10-01,yashar,17.1,True
 4178,Direct Polls,2026-10-01,together,7.4,True
@@ -1122,6 +1131,7 @@ ref,pollster,fieldwork_end,party_id,raw_pct,shown_passing
 4179,Kantar,2026-09-27,blue_white,0.7,True
 4179,Kantar,2026-09-27,haredi_public,0.9,True
 4179,Kantar,2026-09-27,noam,0.4,True
+4179,Kantar,2026-09-27,code_black,0.6,True
 4188,Kantar,2026-10-04,likud,16.2,True
 4188,Kantar,2026-10-04,together,9.4,True
 4188,Kantar,2026-10-04,yashar,18.0,True
@@ -1137,6 +1147,8 @@ ref,pollster,fieldwork_end,party_id,raw_pct,shown_passing
 4188,Kantar,2026-10-04,amcha_yisrael,2.6,True
 4188,Kantar,2026-10-04,blue_white,1.3,True
 4188,Kantar,2026-10-04,haredi_public,0.9,True
+4188,Kantar,2026-10-04,ahi,0.7,True
+4188,Kantar,2026-10-04,code_black,0.6,True
 4190,Midgam,2026-10-05,yashar,18.7,True
 4190,Midgam,2026-10-05,likud,17.0,True
 4190,Midgam,2026-10-05,together,10.5,True
@@ -1165,6 +1177,7 @@ ref,pollster,fieldwork_end,party_id,raw_pct,shown_passing
 4192,Filber,2026-10-07,zionist_home,1.8,True
 4192,Filber,2026-10-07,blue_white,1.3,True
 4192,Filber,2026-10-07,haredi_public,0.4,True
+4192,Filber,2026-10-07,ahi,0.1,True
 4192,Filber,2026-10-07,unity,31.0,True
 4197,Lazar,2026-10-07,yashar,15.9,True
 4197,Lazar,2026-10-07,likud,15.2,True
@@ -1182,6 +1195,7 @@ ref,pollster,fieldwork_end,party_id,raw_pct,shown_passing
 4197,Lazar,2026-10-07,blue_white,0.9,True
 4197,Lazar,2026-10-07,haredi_public,0.8,True
 4197,Lazar,2026-10-07,noam,0.6,True
+4197,Lazar,2026-10-07,beit_yisrael,0.3,True
 4199,Direct Polls,2026-10-07,likud,19.8,True
 4199,Direct Polls,2026-10-07,yashar,16.0,True
 4199,Direct Polls,2026-10-07,together,8.4,True
@@ -1210,3 +1224,5 @@ ref,pollster,fieldwork_end,party_id,raw_pct,shown_passing
 4200,Kantar,2026-10-11,raam,4.0,True
 4200,Kantar,2026-10-11,blue_white,0.9,True
 4200,Kantar,2026-10-11,haredi_public,0.9,True
+4200,Kantar,2026-10-11,ahi,0.5,True
+4200,Kantar,2026-10-11,code_black,0.7,True
