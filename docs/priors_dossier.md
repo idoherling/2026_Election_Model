@@ -1525,3 +1525,15 @@ entirely) - Likud keeps its beat (25.0 vs 22.2 without it) while Otzma
 (-1.6) and RZP-Zehut (-1.2) pay for it, as the right flank did in the
 trailing years. The pair fix lifts Ra'am to 6; the retired fade lifts Amcha
 to .29. The trailing margin in the published run is 0.0 seats (a tie).
+
+**Baseline restated (13 Oct).** The shipped configuration now holds dropped
+lists at zero, so they fall below the 0.5% scoring cutoff and leave the
+graded set; the harness numbers are therefore restated on the NEW shipped
+list mask and are not comparable with the pre-13-Oct record (the old
+configuration's numbers were deflated by phantom lists resurrected at
+0.5-0.6% and graded as easy near-zeros). New baseline, own mask (eve: mean
+of 3 seeds): eve median 1.630 / mean 1.735 / coverage 0.970 / Brier 0.051;
+D-7 1.628 / 1.719 / 0.990 / 0.049 (interval score 9.53); D-21 1.831 /
+1.914 / 0.979 / 0.063 (10.14); D-56 2.511 / 2.590 / 0.939 / 0.098 (14.07).
+The same configuration graded on the old mask: eve median 1.411, the
+figure in the table above. Future candidates are graded on this mask.
