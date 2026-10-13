@@ -1537,3 +1537,76 @@ D-7 1.628 / 1.719 / 0.990 / 0.049 (interval score 9.53); D-21 1.831 /
 1.914 / 0.979 / 0.063 (10.14); D-56 2.511 / 2.590 / 0.939 / 0.098 (14.07).
 The same configuration graded on the old mask: eve median 1.411, the
 figure in the table above. Future candidates are graded on this mask.
+
+## 42. Every polled list modelled the same way (13 Oct)
+
+**Owner request (13 Oct).** Lists the pollsters measure, The Haredi Public,
+Noam and the other small lists, are to be treated like every other list
+rather than carried as fixed micro-list priors. The same message flagged
+Together's ballot letters: the CEC gave Together רק (its filing-day
+alternative), and בד belongs to another list (Beyachad Natzliach). The
+site said בד since s.38; corrected.
+
+**What changed (commit 6b79a1d).**
+- `scrape_polls.footnote_items` turns the archive's "Others" footnotes into
+  poll rows (80). Ale Yarok's readings after its 3 September union with
+  Israel First are added to Israel First (`FOOTNOTE_MERGES`); "<1%" entries
+  and unknown names are skipped; lists already in the table are not counted
+  twice.
+- `MICRO_POLLED` retired (kept as `MICRO_POLLED_RETIRED`). The Haredi
+  Public, Noam and Israel First are latent components with their own trend,
+  house effects and election-day shock, as are Ahi, Tzomet Beit Yisrael and
+  Code Black (new CEC parser keywords). 21 lists, 230 polls, 2,836
+  observations.
+- `prepare_data`, 2026 only: lists that did not file are dropped
+  (`NOT_ON_BALLOT_2026`); a list needs three polls or legal filings in the
+  window (`MIN_LIST_POLLS`, filings counted).
+- `_merge_cec`: a filing that displaces a table poll keeps the table's rows
+  for lists the filing does not itemize (37 rows).
+- `ON_BALLOT_2026`: the withdrawn rule never drops a list on the
+  CEC-approved ballot. It now keeps Israel First (itemized 0.0-0.5% until
+  22 Sept, then folded into "others"); Unity, which withdrew, is still
+  removed.
+- Harness parity: the eight-cycle harness has always modelled the record's
+  small lists that had their own poll column (Yachad 2015, Otzma Sept 2019,
+  Jewish Home 2022) as latent components; Zehut April 2019 and NEP 2021 had
+  no column and were never in it. Everything above sits inside
+  `modern_remaps`, so the historical harness numbers are unchanged by
+  construction and the s.41 baseline stands.
+
+**Fit.** 0 divergences, max r_hat 1.010, min bulk ESS 330; 14-day holdout
+median error 0.71 seats (0.73 before). Latent last-week means: The Haredi
+Public 0.45%, Tzomet Beit Yisrael 0.60%, Code Black 0.42%, Ahi 0.38%, Israel
+First 0.31%, Noam 0.30%.
+
+**Candidate resid_relcap - tested, NOT shipped.** The residual shock is
+additive (1.83 + 0.044 x seats, in seats, x0.9, x1.35 for first-cycle lists),
+so a list at 0.3% draws a ~1.4-1.9 pp sd shock that the clip at zero turns
+into a 0.6-0.8% mean. Across the six small lists that is +1.7 pp of phantom
+mean vote (4.15% vs a 2.46% latent). Capping each list's sd at c x its own
+projected share (layer `resid_relcap`, production `RESID_REL_CAP`):
+
+| config | eve median | eve mean | eve cov | eve Brier | D-7 cov | D-7 iscore | D-21 median | D-21 cov | D-21 iscore |
+|---|---|---|---|---|---|---|---|---|---|
+| shipped | 1.630 | 1.735 | 0.970 | 0.0508 | 0.990 | 9.53 | 1.831 | 0.979 | 10.14 |
+| c = 0.75 | 1.617 | 1.734 | 0.970 | 0.0515 | - | 9.67 | 1.841 | - | 10.48 |
+| c = 1.0 | 1.617 | 1.737 | 0.970 | 0.0516 | 0.979 | 9.68 | 1.841 | 0.969 | 10.32 |
+| c = 1.5 | 1.630 | 1.739 | 0.970 | 0.0514 | - | 9.73 | 1.841 | - | 10.33 |
+
+(eve: 3 seeds, shipped mask; horizons: one seed.) At the eve c = 1.0 ties
+seven folds and wins 2022 (-0.10), so it passes the fold rule, but the
+horizon harness contradicts it: at D-7 and D-21 it loses one list of
+coverage, 2021's Religious Zionism, whose latent stood near 1% a week out
+against a 6-seat result; the additive shock's tail is what covered it.
+The 2026 seat effect is negligible (P(NB>=61) 13.3 vs 13.2; no list moves
+more than 0.06 seats), so the flag stays OFF. The phantom mean matters
+only for display, so the site's small-parties panel now shows each list's
+MEDIAN share (the vector the central seat count is built on) instead of
+the mean.
+
+**2026 effect (13 Oct build, registration mixture).** P(NB>=61) 13.1
+(12.4 before), change bloc alone 6.9 (6.4), with Ra'am 26.4 (26.3), neither
+60.5. Central: Likud 26, Yashar 23, Together 11, Shas 9, Democrats 9, Joint
+List 9, YB 9, UTJ 8, Ra'am 6, Otzma 6, RZP-Zehut 4. PM: repeat election
+47.4, Eisenkot 20.6, Netanyahu 19.4. The trailing margin is 0.11 seats, so
+TRAIL fires. Every new small list passes with probability under 1.5%.
