@@ -47,6 +47,7 @@ EDITOR_MAP = {
     "נקסט דאטה - שלמה פילבר": "Filber",
     "שלמה פילבר": "Filber",
     "דיירקט פולס בע\"מ": "Direct Polls",
+    "דיירקט פולס בעמ": "Direct Polls",   # spelling without gershayim (4199)
     "קנטאר ישראל": "Kantar",
     "ד\"ר מנחם לזר": "Lazar",
     "מנחם לזר": "Lazar",

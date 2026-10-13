@@ -46,6 +46,7 @@ from bias_audit import FAMILY_OF
 from normalize import load_party_registry
 from polling_average import ELECTION_DAY_2026, load_2026
 from scrape_polls import PROCESSED_DIR
+import simulate as _sim
 from simulate import BLOC_LABEL, SURPLUS_PAIRS, THRESHOLD, dhondt
 
 warnings.filterwarnings("ignore")
@@ -180,7 +181,7 @@ KALPI_HAREDI_FLOOR = 0.066  # joint Shas+UTJ share floor
 U_POOL_FIRMS = ("Lazar", "Midgam Project & StatNet", "Maagar Mochot")
 U_POOL_DEFAULT = 0.12
 U_TURNOUT = 0.65        # GIQ: the unsophisticated half of undecideds under-votes
-U_EXCESS_ANTI = 0.35    # excess-vs-proportional arithmetic at the N12 lean
+U_EXCESS_ANTI = 0.35    # excess-vs-proportional arithmetic at the N12 lean (= the GAP excess, applied per side: see s.41)
 # Pool LEAN is pooled over every published undecided-lean measurement in
 # data/undecided_leans.csv (today: N12 only, ~43 leaned respondents) with
 # a proportional-split prior of equal n - the pre-registered "half weight"
@@ -189,27 +190,61 @@ U_PROP_ANTI = 0.52      # the decided electorate's anti share (proportional base
 U_LEAN_BASE = 0.775     # the N12 lean the excess arithmetic was derived at
 U_PRIOR_N = 43
 U_MAG_SDLOG = 0.5
+# ---- Undecided-lean correction (2026-10-10, dossier s.41; flags OFF) ----
+# (a) U_LEAN_PER_SIDE. s.11's 0.35 = 0.71*(0.77-0.23) - 0.71*(0.52-0.48)
+# is the excess change of the bloc GAP (anti minus NB) as a fraction of
+# the pool, but _certainty_layer adds ub to anti AND removes ub from NB,
+# so the gap moved 2 x 0.35 = 0.70 of the voting pool: double the
+# measurement. The per-side transfer is leaned fraction x (lean - the
+# proportional anti share) = 0.71 x (0.775 - 0.52) = 0.181. At the
+# posterior lean the shipped layer moved ~1.40 seats per side = the FULL
+# measured transfer (1.45), i.e. the pre-registered half weight (carried
+# by the n=43 prior) was cancelled by the doubling. Source of 55/16/29:
+# N12/Midgam, fieldwork 30 Jul 2026, n=505,
+# https://www.mako.co.il/news-israel-elections/2026_q3/Article-b13ddbd17f8bf91027.htm
+U_LEAN_PER_SIDE = True
+U_LEANED_FRAC = 0.71    # 0.55 + 0.16 of the N12 undecided pool state a lean
+U_EXCESS_PER_SIDE = U_LEANED_FRAC * (U_LEAN_BASE - U_PROP_ANTI)   # 0.181
+# (b) U_LEAN_TAU: calendar staleness decay exp(-age/tau) on each lean
+# measurement's n before pooling. JUDGMENT, not pre-registered (s.11
+# pre-registered shrinkage through pool RESOLUTION, which U_POOL already
+# measures; s.36 #5 kept the N12 lean at full pooled weight). None = off.
+U_LEAN_TAU = None
+# (c) U_POOL_ESTIMATOR: "pooled" (shipped: median of all filings in the
+# last 45 days) or "house_balanced" (median per firm in the window, then
+# the mean across firms, so the estimate does not track filing cadence).
+U_POOL_ESTIMATOR = "pooled"
+U_POOL_WINDOW = 45
 
 
 def _undecided_pool() -> float:
     try:
         f = pd.read_csv(PROCESSED_DIR / "cec_filings.csv", parse_dates=["fieldwork_end"])
         f = f[f["pollster"].isin(U_POOL_FIRMS) & f["undecided_pct"].notna()]
-        f = f[f["fieldwork_end"] >= f["fieldwork_end"].max() - pd.Timedelta(days=45)]
-        return float(f["undecided_pct"].median() / 100) if len(f) >= 3 else U_POOL_DEFAULT
+        f = f[f["fieldwork_end"] >= f["fieldwork_end"].max() - pd.Timedelta(days=U_POOL_WINDOW)]
+        if len(f) < 3:
+            return U_POOL_DEFAULT
+        if U_POOL_ESTIMATOR == "house_balanced":
+            return float(f.groupby("pollster")["undecided_pct"].median().mean() / 100)
+        return float(f["undecided_pct"].median() / 100)
     except FileNotFoundError:
         return U_POOL_DEFAULT
 
 
-def _lean_posterior() -> tuple:
+def _lean_posterior(asof=None) -> tuple:
     """Beta(a, b) on the anti share of the leaned pool: measurements pooled
-    by their leaned n, plus the proportional prior of n = U_PRIOR_N."""
+    by their leaned n, plus the proportional prior of n = U_PRIOR_N.
+    With U_LEAN_TAU set and an asof date, each measurement's n is
+    discounted by exp(-age / U_LEAN_TAU)."""
     a = U_PROP_ANTI * U_PRIOR_N
     b = (1 - U_PROP_ANTI) * U_PRIOR_N
     try:
-        L = pd.read_csv(PROCESSED_DIR.parent / "undecided_leans.csv")
+        L = pd.read_csv(PROCESSED_DIR.parent / "undecided_leans.csv",
+                        parse_dates=["fieldwork_end"])
         for r in L.itertuples():
             n_lean = r.n_undecided * (r.anti + r.nb)
+            if U_LEAN_TAU and asof is not None:
+                n_lean *= np.exp(-max((asof - r.fieldwork_end).days, 0) / U_LEAN_TAU)
             a += r.anti / (r.anti + r.nb) * n_lean
             b += r.nb / (r.anti + r.nb) * n_lean
     except FileNotFoundError:
@@ -219,7 +254,7 @@ def _lean_posterior() -> tuple:
 
 U_POOL = _undecided_pool()
 U_LEAN_BETA = _lean_posterior()
-UNDECIDED_BREAK_SEATS = U_POOL * U_TURNOUT * U_EXCESS_ANTI * 120   # at full lean
+UNDECIDED_BREAK_SEATS = U_POOL * U_TURNOUT * U_EXCESS_ANTI * 120   # at full lean (per side; gap = 2x)
 
 # ---- Certainty layer (2026-09-03, improvement #1 of the Fable audit) ----
 # Share of each list's current supporters who say they are certain to
@@ -397,12 +432,95 @@ EXCLUDE_POLLSTERS = {"S.M.L.T."}
 # component polled before this cycle. In 2026: Amcha, Reservists-Economic.
 NEW_STRADDLER_ON = True
 NEW_STRADDLER = {"mu": -1.6, "sd": 2.6, "band": (-0.75, 1.5)}   # pp of the vote
+# Candidate "amcha_double_count" (2026-10-10, dossier s.41). EVIDENCE class,
+# not harness-validated: neither the fade nor the certainty layer exists in
+# validate_bayes.project_cycle, so NEW_STRADDLER was measured on a base free
+# of both, and in 2026 three desertion terms stack on Amcha (churn ~0.4 pp,
+# fade 1.17 pp, NEW_STRADDLER 1.6 pp; shipped median share ~0 against a
+# 3.3% posterior base and a 2.66% CEC-filing mean, refs 4173-4192).
+# AMCHA_FADE_RETIRED: skip the AMCHA_FADE_TOTAL block. The fade is a D-60
+#   term (s.8) applied at D-17; the posterior latent already fell 4.24% ->
+#   3.26% since D-63..56 (~80% of the 1.5 seats realised), and its
+#   reference class shares New Right '19a / Yamina '19s with NEW_STRADDLER.
+# NEW_STRADDLER_CHURN_EXEMPT: lists hit by NEW_STRADDLER's band test keep
+#   their soft support in the certainty layer (one desertion term per list);
+#   their inflow attraction stays at their CERTAINTY. Caveat: NEW_STRADDLER's
+#   -1.6/2.6 was graded on seat-implied shares (failed lists at 0% of the
+#   vote, two non-runners counted as total desertion); on ballot shares the
+#   record is mean -0.3 (n=9), D-21 +0.2 (n=7). Flip this only after that
+#   re-grade keeps a negative mean on the harness.
+AMCHA_FADE_RETIRED = True
+NEW_STRADDLER_CHURN_EXEMPT = False
 TRAIL_ON = True
 TRAIL = {"mu": 5.0, "sd": 4.9, "margin": 0.5, "scale": 0.5}
+# Candidate trail_geometry (2026-10-10, dossier s.41) - DEFAULT OFF. The
+# shipped TRAIL takes Likud's beat from the whole field in proportion to
+# size, so ~2/3 of it comes out of non-bloc lists and the layer adds
+# ~+1.5 seats to the Netanyahu bloc. The record it is calibrated on shows
+# no bloc-level move (2015 / April 2019 opposition-side final-poll error
+# +0.12 / +0.33 seats): the beat was paid by the bloc's own right flank
+# (Jewish Home 11.75 -> 8, Yachad dead; New Right and Zehut dead). With the
+# flag on, the SAME draw (same mean, sd, half strength, same 0.5-seat
+# gate) is sourced from the bloc's non-haredi satellites (GEVALT_SAT_IDS,
+# the gevalt coupling's own pre-existing set), in proportion to each one's
+# share IN THAT DRAW, capped at TRAIL_SAT_CAP of the satellites' share in
+# that draw; the remainder comes from the rest of the field. Amcha is
+# excluded from the source: AMCHA_FADE is already the gevalt squeeze on
+# Amcha (same reference class, 50% routed to Likud) and NEW_STRADDLER
+# drains it again; a third drain would count one record three times.
+# Harness numbers (trail_sat): see dossier s.41.
+TRAIL_SAT_SOURCE = True
+TRAIL_SAT_CAP = 0.75
+TRAIL_SAT_EXCLUDE = {"amcha_yisrael"}
+
+
+def trail_transfer(shares, g, lk, src, base, cap=TRAIL_SAT_CAP):
+    """Zero-sum move of g (share units, one value per draw) INTO column lk
+    out of the `src` columns, in proportion to each source column's share in
+    that draw and capped at `cap` x the source pool in that draw; whatever
+    the pool cannot pay (all of it when the pool is empty) comes from the
+    remaining columns in proportion to `base`. Negative g runs the other
+    way (lk pays the sources). Shared by project() and the harness's
+    project_cycle so both use identical geometry. Returns (shares,
+    overflow), overflow = mean fraction of positive g paid by the field."""
+    k = shares.shape[1]
+    src = np.asarray(src, bool).copy()
+    src[lk] = False
+    pw = np.where(src[None, :], np.clip(shares, 0, None), 0.0)
+    pool = pw.sum(axis=1)
+    from_src = np.where(g > 0, np.minimum(g, cap * pool), g)
+    from_src = np.where(pool > 0, from_src, 0.0)
+    rest = g - from_src
+    w_src = pw / np.maximum(pool, 1e-12)[:, None]
+    field = np.ones(k, bool)
+    field[lk] = False
+    if (field & ~src).any():
+        field &= ~src
+    w_f = np.where(field, base, 0.0)
+    w_f = w_f / w_f.sum()
+    out = shares.copy()
+    out[:, lk] += g
+    out -= from_src[:, None] * w_src + rest[:, None] * w_f[None, :]
+    pos = g > 0
+    overflow = float(rest[pos].sum() / g[pos].sum()) if pos.any() else 0.0
+    return out, overflow
 LIST_SHOCK_BASE = _P["resid_base"]
 LIST_SHOCK_SLOPE = _P["resid_slope"]
 # A list with no polls in its final weeks has left the race by election day.
 WITHDRAWN_WEEKS = 5
+# Candidate gone14 (2026-10-10, dossier s.41) - OFF. WITHDRAWN_DAYS_LATE =
+# 14 drops a list unpolled for more than 14 days when the projection date
+# is within WITHDRAWN_LATE_GATE days of the election (35 days otherwise);
+# GONE_STAY_ZERO keeps a dropped list at zero through the residual shock
+# (without it the shock's floor sd resurrects it at a ~0.55-0.75% mean).
+# Mirrored in validate_bayes (layers gone_days / gone_gate / gone_zero).
+# Harness, fixed list mask: both on = eve median 1.496 -> 1.470 (1 win /
+# 7 ties), D-21 mean 1.857 -> 1.709, Brier .070 -> .055, cov .973 -> .979,
+# D-56 tie; the D-21 gain is off-ballot phantoms. 2026: removes Unity's
+# frozen-latent fold transfer (P(NB>=61) .217 -> .212, Likud -0.45 seats).
+WITHDRAWN_DAYS_LATE = 14
+WITHDRAWN_LATE_GATE = 28
+GONE_STAY_ZERO = True
 
 # Small-party layer, two measured pieces:
 #
@@ -924,13 +1042,18 @@ def posterior_predictive_check(data, idata):
           f"95% predictive band")
 
 
-def _certainty_layer(shares, comps, blocs, fams, rng):
+def _certainty_layer(shares, comps, blocs, fams, rng, asof=None, exempt=None):
     """Soft-support churn + certainty-weighted allocation of the undecided
     pool. Operates on the share matrix (draws x lists); returns it
-    renormalised. See the CERTAINTY block for sources."""
+    renormalised. See the CERTAINTY block for sources.
+    `exempt` (bool per list) switches churn off for lists whose desertion
+    another layer owns (NEW_STRADDLER_CHURN_EXEMPT); their attraction weight
+    is unchanged. Churn of unaligned lists (Blue and White, Reservists-
+    Economic) is not redistributed - it is treated as abstention."""
     n, k = shares.shape
     cert = np.array([np.mean([CERTAINTY.get(c, CERTAINTY_DEFAULT) for c in cs])
                      for cs in comps])
+    cert_churn = cert if exempt is None else np.where(exempt, 1.0, cert)
     is_nb = blocs == "netanyahu_bloc"
     is_op = blocs == "opposition_bloc"
     is_arab = fams == "arab"
@@ -940,7 +1063,7 @@ def _certainty_layer(shares, comps, blocs, fams, rng):
     kk = m * (1 - m) / v - 1
     d = rng.beta(m * kk, (1 - m) * kk, size=(n, 1))
     d = np.clip(d * np.exp(rng.normal(0, CHURN_LIST_SDLOG, size=(n, k))), 0, 0.8)
-    churn = shares * (1 - cert)[None, :] * d
+    churn = shares * (1 - cert_churn)[None, :] * d
     out = shares - churn
     attract = shares * cert[None, :]
     def spread(mass, mask):
@@ -961,10 +1084,20 @@ def _certainty_layer(shares, comps, blocs, fams, rng):
         out += spread(pool * (1 - CHURN_ABSTAIN), is_arab)
     # undecided pool: N12 lean with its own sampling uncertainty (n~60)
     if is_nb.any() and is_op.any():
-        f_anti = rng.beta(*U_LEAN_BETA, size=n)   # pooled posterior (see _lean_posterior)
+        beta = _lean_posterior(asof) if U_LEAN_TAU else U_LEAN_BETA
+        f_anti = rng.beta(*beta, size=n)   # pooled posterior (see _lean_posterior)
         mag = np.exp(rng.normal(-0.5 * U_MAG_SDLOG ** 2, U_MAG_SDLOG, size=n))  # mean one
         excess = (f_anti - U_PROP_ANTI) / (U_LEAN_BASE - U_PROP_ANTI)
-        ub = UNDECIDED_BREAK_SEATS / 120.0 * excess * mag
+        if U_LEAN_PER_SIDE:   # share moved NB -> anti; the gap moves 2 x ub
+            ub = U_POOL * U_TURNOUT * U_EXCESS_PER_SIDE * excess * mag
+            # identity: 2 x per-side = s.11's gap excess 0.71*(0.55 - 0.04)
+            assert np.isclose(2 * U_EXCESS_PER_SIDE, U_LEANED_FRAC * (
+                (2 * U_LEAN_BASE - 1) - (2 * U_PROP_ANTI - 1)))
+        else:
+            ub = UNDECIDED_BREAK_SEATS / 120.0 * excess * mag
+        print(f"undecided lean: pool {U_POOL:.3f}, leaned n {sum(beta) - U_PRIOR_N:.1f}, "
+              f"lean {beta[0] / sum(beta):.3f}, mean transfer {ub.mean() * 120:.2f} seats "
+              f"per side ({'per-side' if U_LEAN_PER_SIDE else 'shipped gap'} constant)")
         out += spread(np.maximum(ub, 0), is_op) - spread(np.maximum(ub, 0), is_nb)
         out += spread(np.maximum(-ub, 0), is_nb) - spread(np.maximum(-ub, 0), is_op)
     out = np.clip(out, 0, None)
@@ -980,6 +1113,15 @@ def _first_cycle_ids() -> set:
     old = set(p[p["cycle"].astype(str) != "2026"]["party_id"].str.split("+").explode())
     now = set(p[p["cycle"].astype(str) == "2026"]["party_id"].str.split("+").explode())
     return {c for c in now if c not in old}
+
+
+def _new_straddler_mask(comps, base) -> np.ndarray:
+    """NEW_STRADDLER's band test: first-cycle lists whose projected share
+    `base` sits within the band around the threshold."""
+    new_ids = _first_cycle_ids()
+    lo_b, hi_b = NEW_STRADDLER["band"]
+    return np.array([cp <= new_ids and lo_b <= base[i] * 100 - THRESHOLD * 100 <= hi_b
+                     for i, cp in enumerate(comps)], dtype=bool)
 
 
 def project(data, idata, rng, config="current", config_params=None):
@@ -1018,10 +1160,14 @@ def project(data, idata, rng, config="current", config_params=None):
     shares /= shares.sum(axis=1, keepdims=True)
 
     # Lists with no polls in their final weeks have left the race.
-    gone = data["last_obs_day"] < -7 * WITHDRAWN_WEEKS
+    gone_days = 7 * WITHDRAWN_WEEKS
+    if WITHDRAWN_DAYS_LATE is not None and days_ahead <= WITHDRAWN_LATE_GATE:
+        gone_days = WITHDRAWN_DAYS_LATE
+    gone = data["last_obs_day"] < -gone_days
     if gone.any():
         shares[:, np.nonzero(gone)[0]] = 0.0
         shares /= shares.sum(axis=1, keepdims=True)
+    project.last_gone = [data["components"][i] for i in np.nonzero(gone)[0]]
 
     # Per-list election-day shock: residual final-poll error beyond
     # bloc/family components, calibrated on the backtest.
@@ -1033,6 +1179,10 @@ def project(data, idata, rng, config="current", config_params=None):
     for pid, m in SOFT_LIST_MULT.items():
         soft = np.array([pid in cs for cs in comps0])
         sd_list = np.where(soft, sd_list * m, sd_list)
+    if GONE_STAY_ZERO:
+        # base-weighted layers below (swing, family, certainty, gevalt)
+        # then leave the column at zero too
+        sd_list = np.where(gone, 0.0, sd_list)
     shares = np.clip(
         shares + rng.standard_normal(shares.shape) * sd_list, 0, None)
     shares /= shares.sum(axis=1, keepdims=True)
@@ -1109,7 +1259,10 @@ def project(data, idata, rng, config="current", config_params=None):
 
     # Certainty layer: soft support churns (asymmetric, list-specific),
     # churn and the undecided pool land by certainty-weighted attraction.
-    shares = _certainty_layer(shares, comps, blocs, fams, rng)
+    exempt = (_new_straddler_mask(comps, base)
+              if NEW_STRADDLER_ON and NEW_STRADDLER_CHURN_EXEMPT else None)
+    shares = _certainty_layer(shares, comps, blocs, fams, rng, asof=data.get("asof"),
+                              exempt=exempt)
     # Family shocks with kalpi-measured correlation: the haredi and Arab
     # sector tides correlated +0.92 across the 2019-2022 locality panel
     # (both are turnout-machine sectors) - shrunk hard to rho=0.5 for
@@ -1158,11 +1311,10 @@ def project(data, idata, rng, config="current", config_params=None):
     # New-straddler desertion (see NEW_STRADDLER): first-cycle lists whose
     # projected share sits in the threshold band.
     if NEW_STRADDLER_ON:
-        new_ids = _first_cycle_ids()
-        lo_b, hi_b = NEW_STRADDLER["band"]
+        in_band = _new_straddler_mask(comps, base)
         hit = []
         for i, cp in enumerate(comps):
-            if cp <= new_ids and lo_b <= base[i] * 100 - THRESHOLD * 100 <= hi_b:
+            if in_band[i]:
                 g = rng.normal(NEW_STRADDLER["mu"], NEW_STRADDLER["sd"], N_PROJ) / 100.0
                 onehot = np.zeros(len(comps)); onehot[i] = 1.0
                 w_r = np.where(onehot == 0, base, 0)
@@ -1175,16 +1327,25 @@ def project(data, idata, rng, config="current", config_params=None):
 
     # Trailing-Likud conditional (see TRAIL): fires only when Likud's
     # projected standing trails or ties the largest non-bloc list.
+    project.last_trail_on, project.last_trail_margin = False, None
+    project.last_trail_overflow = None
     if TRAIL_ON and likud_col is not None:
         non_nb = [i for i in range(len(comps)) if blocs[i] != "netanyahu_bloc" and i != likud_col]
+        if non_nb:
+            project.last_trail_margin = float((base[likud_col] - base[non_nb].max()) * 120.0)
         if non_nb and base[likud_col] * 120.0 <= base[non_nb].max() * 120.0 + TRAIL["margin"]:
             g = rng.normal(TRAIL["mu"], TRAIL["sd"], N_PROJ) * TRAIL["scale"] / 120.0
-            onehot = np.zeros(len(comps)); onehot[likud_col] = 1.0
-            w_r = np.where(onehot == 0, base, 0)
-            shares = shares + g[:, None] * (onehot - w_r / w_r.sum())[None, :]
+            src = np.array([bool(cs & (GEVALT_SAT_IDS - TRAIL_SAT_EXCLUDE))
+                            and blocs[i] == "netanyahu_bloc"
+                            for i, cs in enumerate(comps)])
+            if TRAIL_SAT_SOURCE and src.any():
+                shares, project.last_trail_overflow = trail_transfer(
+                    shares, g, likud_col, src, base)
+            else:
+                onehot = np.zeros(len(comps)); onehot[likud_col] = 1.0
+                w_r = np.where(onehot == 0, base, 0)
+                shares = shares + g[:, None] * (onehot - w_r / w_r.sum())[None, :]
             project.last_trail_on = True
-        else:
-            project.last_trail_on = False
 
     # Gevalt coupling: zero-sum transfer between Likud and its bloc's
     # satellites, proportional to satellite size (see GEVALT_SD note).
@@ -1211,7 +1372,7 @@ def project(data, idata, rng, config="current", config_params=None):
     # Amcha fade: reference-class D-60 over-polling, returned to sources.
     am = next((i for i, cs in enumerate(comps) if cs == {"amcha_yisrael"}),
               None)
-    if am is not None:
+    if am is not None and not AMCHA_FADE_RETIRED:
         c_am = CERTAINTY["amcha_yisrael"]
         exp_loss = (1 - c_am) * CHURN_D_MEAN * (1 - CHURN_WITHIN) \
             * float(base[am]) * 120          # seats already removed above
@@ -1258,9 +1419,18 @@ def project(data, idata, rng, config="current", config_params=None):
     shares = np.clip(shares, 0, None)
     shares /= shares.sum(axis=1, keepdims=True)
 
-    comp_of = {c: i for i, cs in enumerate(comps) for c in cs}
-    pairs = [(comp_of[a], comp_of[b]) for a, b in SURPLUS_PAIRS
-             if a in comp_of and b in comp_of and comp_of[a] != comp_of[b]]
+    # Surplus pairs via the shared resolver (simulate.PAIR_RESOLVER_FIX,
+    # dossier s.40): first occurrence wins, so the appended "Balad (alone)"
+    # column cannot capture 'balad' from the Joint List block, and
+    # 'together' resolves to the bennett_2026+yesh_atid block. With the fix
+    # on (8 Oct posterior, same seed, both pairs together): JL+Ra'am +1 seat
+    # in 30% of draws, Together+YB +1 in 35% (-1 in 1% each, the other
+    # pair's remainder); P(NB>=61) 19.4 -> 17.8; central seats unchanged.
+    pairs, _, dropped = _sim.resolve_pairs(SURPLUS_PAIRS, comps,
+                                           aliases=_sim.PAIR_ALIASES_2026)
+    if dropped and _sim.PAIR_RESOLVER_FIX:
+        print(f"WARNING surplus pairs not resolved (not pooled): {dropped}")
+    project.last_pairs = [(labels[a], labels[b]) for a, b in pairs]
 
     # Expose the final projected share distribution's mean vector: the
     # official forecast allocates the central seats from it (one pass
@@ -1280,16 +1450,7 @@ def project(data, idata, rng, config="current", config_params=None):
         if not passed.any():
             continue
         votes = np.where(passed, sh, 0.0)
-        fvotes, fmembers, used = [], [], set()
-        for a, b in pairs:
-            if passed[a] and passed[b]:
-                fvotes.append(votes[a] + votes[b])
-                fmembers.append([a, b])
-                used |= {a, b}
-        for j in np.nonzero(passed)[0]:
-            if j not in used:
-                fvotes.append(votes[j])
-                fmembers.append([int(j)])
+        fvotes, fmembers = _sim.form_factions(pairs, passed, votes)
         alloc = dhondt(np.array(fvotes), 120)
         for members, k in zip(fmembers, alloc):
             if len(members) == 1:

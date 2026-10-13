@@ -1,28 +1,35 @@
 {
- "asof": "2026-10-08",
- "n_polls": 211,
- "n_obs": 2752,
+ "asof": "2026-10-12",
+ "n_polls": 208,
+ "n_obs": 2716,
  "n_lists": 15,
  "n_bins": 45,
  "n_firms": 9,
  "n_groups": 7,
  "divergences": 0,
  "rhat_max": 1.01,
- "ess_min": 433,
+ "ess_min": 448,
  "firm_weights": {
   "Afkar (sector)": 1.0,
   "Direct Polls": 0.9,
-  "Filber": 0.91,
+  "Filber": 0.94,
   "Kantar": 0.79,
-  "Lazar": 0.84,
-  "Maagar Mochot": 1.11,
-  "Midgam": 0.78,
-  "Midgam Project": 0.88,
-  "Tatika": 1.13
+  "Lazar": 0.85,
+  "Maagar Mochot": 1.08,
+  "Midgam": 0.77,
+  "Midgam Project": 0.87,
+  "Tatika": 1.11
  },
- "cec_filings_merged": 71,
- "cec_obs": 1006,
- "polls_displaced": 69,
- "holdout_obs": 222,
- "holdout_median_err": 0.68
+ "cec_filings_merged": 74,
+ "cec_obs": 1047,
+ "polls_displaced": 72,
+ "holdout_obs": 207,
+ "holdout_median_err": 0.68,
+ "trail_on": true,
+ "trail_margin_seats": -0.0,
+ "trail_source": "satellites",
+ "new_straddlers": [
+  "Reservists \u2013 Economic Party",
+  "Amcha Yisrael"
+ ]
 }

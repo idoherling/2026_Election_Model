@@ -71,7 +71,16 @@ BEHAVIOR = {
     # Ofer Winter (Aug 27): "we will only recommend him [Netanyahu]" —
     # public, repeated, cheap to honor at the President's Residence
     # (JPost/Haaretz Aug 27); analysts doubt everything after that stage.
-    "amcha_right": 0.87,
+    # 2026-10-10: 0.87 -> 0.60 (NEFF 35 -> 15). The tree adds Amcha's seats
+    # to the Netanyahu bloc's 61, so this is P(JOINS), not P(recommends);
+    # Winter separated the two on 2 Sept: he recommends Netanyahu but joins
+    # only if a national service law passes BEFORE the government is sworn
+    # in, and recommending "does not commit the party to join"
+    # (https://www.israelnationalnews.com/news/432614; Maariv 1362429;
+    # Jewish Insider Oct 2026). Tripwire: if Winter signs Hendel's proposed
+    # 8 Oct "Zionist government only" declaration (JPost 911020), move
+    # Amcha into ZIONIST_ONLY below as well.
+    "amcha_right": 0.60,
     # Winter deep-dive (Aug 30): the promotion-saga grudge is against
     # EISENKOT, not Liberman — Winter served as Liberman's military
     # secretary, Liberman publicly defends him (Srugim Aug 28), and Winter
@@ -104,8 +113,18 @@ BEHAVIOR = {
     # 0.10. UTJ — a full signature needs BOTH Moetzes incl. Gur; the
     # likelier form is a Degel-only partial (2004-06 Agudah-alone
     # precedent). Full-equivalent blend: 0.15 full + 0.22 partial x 1/2.
+    # 2026-10-10: utj_defects 0.26 -> 0.15. Maariv/JPost 17 Sept: the
+    # haredi parties lean to "recommend nobody" and sit in opposition for
+    # about a year while the next government settles the draft law
+    # (https://www.jpost.com/israel-election-2026/article-908924); UTJ chair
+    # Asher, 29 Sept: no UTJ faction backs any government until the
+    # exemption is "legally settled" (ToI); Eisenkot prefers another
+    # election to compromising on the draft. 0.15 = the old "full UTJ"
+    # term alone; the Degel-partial term is dropped. The reported Gur
+    # (Goldknopf/Tessler) ABSTENTION on an Eisenkot minority is a separate,
+    # weaker channel - see UTJ_ABSTAINS below (sensitivity only).
     "shas_defects": 0.10,
-    "utj_defects": 0.26,
+    "utj_defects": 0.15,
     # Liberman's haredi veto is his electoral identity since 2019
     # ("not a millimeter"); he relents on sitting WITH haredim only
     # rarely -> the centre-haredi branch must clear 61 without YB unless
@@ -143,8 +162,37 @@ BEHAVIOR = {
     # Zelekha and Wilf are anti-Netanyahu. Lower right-side prior than
     # Gantz (who joined Netanyahu in 2020), a larger sit-out residual
     # because his stated conditions rule out most feasible coalitions.
-    "res_right": 0.30, "res_centre": 0.45,
+    # 2026-10-10: the conditions are now STRUCTURAL (ZIONIST_ONLY below:
+    # the list's centre-side seats count only in coalitions with no haredi
+    # or Arab partner), so the sit-out residual no longer stands in for
+    # them. Hendel (JPost 906335, 23 Aug): "our mission is solely to
+    # establish a Zionist government" - he will not "complete a 61-seat
+    # majority with the haredim", nor be the 61st seat of an Arab-backed
+    # opposition government. Every feasible right-side close is Netanyahu +
+    # Shas + UTJ, so res_right is now the probability of breaking that
+    # pledge: 0.30 -> 0.12 (NEFF 12). res_centre 0.45 -> 0.70 now reads as
+    # "joins a Zionist-only centre coalition"; the residual sit-out falls
+    # 0.25 -> 0.18 (near Gantz's 0.15), so the conditions are not counted
+    # twice (once in the gate, once in the residual).
+    "res_right": 0.12, "res_centre": 0.70,
 }
+
+# Lists whose centre-side seats count only in a coalition with no haredi
+# and no Arab partner (2026-10-10, Hendel's stated rule - see res_right).
+# Empty set = the pre-10 Oct tree.
+ZIONIST_ONLY = {"Reservists – Economic Party"}
+
+# UTJ confidence-vote abstention on a JL-backed centre minority
+# (2026-10-10). Ch12 via ToI 28-29 Sept: Gur MKs Goldknopf and Tessler plan
+# to abstain on an Eisenkot-led government in a deadlock - one unsourced
+# report, rebuffed the same night by chair Asher ("no desire to topple or
+# install anyone"). Kept OUT of the headline (0.0) and carried as a
+# sensitivity row at 0.25 until a second source confirms it. When on, only
+# Agudah's share of UTJ's seats (Gur's faction, ~4 of 7) abstains, drawn
+# from its own generator so the rest of the tree's random stream is
+# unchanged.
+UTJ_ABSTAINS = 0.0
+AGUDAH_SHARE = 4 / 7
 
 # PM allocation WITHIN a winning coalition — rotations are the Israeli norm
 # (Bennett was PM with 7 seats in 2021). Probabilities are judgment,
@@ -181,8 +229,8 @@ PM_NAMES = ["Eisenkot", "Bennett", "Liberman", "Lapid",
 # probabilities carry parameter uncertainty, not just seat uncertainty.
 BEHAVIOR_NEFF = {
     "bw_right": 10, "bw_centre": 10, "unity_right": 12, "unity_centre": 10,
-    "res_right": 10, "res_centre": 10,
-    "amcha_right": 35,          # public, repeated pledge
+    "res_right": 12, "res_centre": 10,  # res_right: on-record pledge
+    "amcha_right": 15,          # recommend pledge firm, JOINING conditional
     "amcha_center": 12,         # analog reasoning (Bennett-led condition)
     "raam_supports": 18,
     "jl_supports": 14,          # one Jabareen signal + precedent
@@ -311,19 +359,32 @@ def simulate_formation(draws: pd.DataFrame, behavior: dict, seed=SEED,
     # kingmakers: seats go right or centre by their side priors
     una_r = np.zeros(n)
     una_c = np.zeros(n)
+    # ZIONIST_ONLY lists' centre-side seats: counted only where the
+    # coalition has no haredi or Arab partner (unity, outcome 3, gap_ce)
+    res_c = np.zeros(n)
+    zo_seats = np.zeros(n)
+    zo_right = np.zeros(n, dtype=bool)
+    zo_centre = np.zeros(n, dtype=bool)
     for name, (kr, kc) in UNALIGNED.items():
         if name not in draws.columns:
             continue
         sv = draws[name].values
         uu = rng.random(n)
         una_r += np.where(uu < behavior[kr], sv, 0)
-        una_c += np.where((uu >= behavior[kr]) & (uu < behavior[kr] + behavior[kc]), sv, 0)
+        cmask = (uu >= behavior[kr]) & (uu < behavior[kr] + behavior[kc])
+        if name in ZIONIST_ONLY:
+            res_c += np.where(cmask, sv, 0)
+        else:
+            una_c += np.where(cmask, sv, 0)
+        if name == "Reservists – Economic Party":   # diagnostic only
+            zo_seats = sv.astype(float)
+            zo_right, zo_centre = uu < behavior[kr], cmask
     nb = nb + una_r
     ce_pure = ce_pure + una_c
 
     # --- configuration-conditional gates (see COND) ---
     gap_nb = 61.0 - nb
-    gap_ce = 61.0 - ce_pure
+    gap_ce = 61.0 - (ce_pure + res_c)
     xg = (gap_nb - gap_nb.mean()) / COND["gap_unit"]
     shas_seats = draws["Shas"].values
     utj_seats = draws["United Torah Judaism"].values
@@ -343,8 +404,17 @@ def simulate_formation(draws: pd.DataFrame, behavior: dict, seed=SEED,
     utj_on = rng.random(n) < p_utj
     sans_bibi = u[:, 5] < p_unity
 
+    # UTJ (Agudah share) abstains on a JL-backed minority; own generator so
+    # the stream above and below is identical whatever UTJ_ABSTAINS is
+    p_abst = behavior.get("utj_abstains", UTJ_ABSTAINS)
+    if p_abst > 0:
+        utj_abst = ((np.random.default_rng(seed + 991).random(n) < p_abst)
+                    & ~utj_on)
+    else:
+        utj_abst = np.zeros(n, dtype=bool)
+
     outcome = np.full(n, 7)  # default: repeat election
-    outcome[np.where((ce_pure + amcha_ce
+    outcome[np.where((ce_pure + res_c + amcha_ce
                       + draws["Likud"].values >= 61) & sans_bibi)] = 6
     # pledge-break: some centre list can close Netanyahu's gap and does
     centre_seats = draws[CENTRE].values
@@ -355,7 +425,8 @@ def simulate_formation(draws: pd.DataFrame, behavior: dict, seed=SEED,
     # named backer); a Ra'am abstention additionally lowers the bar
     yb = draws["Yisrael Beytenu"].values
     abstaining = (np.where(jl_supports, jl, 0)
-                  + np.where(raam_supports, raam - seg, 0))
+                  + np.where(raam_supports, raam - seg, 0)
+                  + np.where(utj_abst, AGUDAH_SHARE * utj_seats, 0))
     present = 120 - abstaining
     lib_ok = rng.random(n) < behavior["liberman_minority_ok"]
     minority_ce = np.where(lib_ok, ce_pure, ce_pure - yb)
@@ -380,10 +451,20 @@ def simulate_formation(draws: pd.DataFrame, behavior: dict, seed=SEED,
     # gap (3); likewise Netanyahu's bloc alone (0), or short and closed by
     # unaligned seats or a pledge-breaking centrist (1).
     outcome[np.where((ce0 < 61)
-                     & (ce_pure + amcha_ce >= 61))] = 3
+                     & (ce_pure + res_c + amcha_ce >= 61))] = 3
     outcome[np.where(ce0 >= 61)] = 2
     outcome[np.where((nb0 < 61) & (nb >= 61))] = 1
     outcome[np.where(nb0 >= 61)] = 0
+    # Diagnostic: P(Reservists' seats are counted in the government that
+    # forms | the list passes) - right side in outcome 1; centre side in
+    # 3/6 (and, when the list is not ZIONIST_ONLY, also in 4/5/8)
+    c_oc = ([3, 6] if "Reservists – Economic Party" in ZIONIST_ONLY
+            else [3, 4, 5, 6, 8])
+    counted = ((zo_right & (outcome == 1))
+               | (zo_centre & np.isin(outcome, c_oc)))
+    passed = zo_seats > 0
+    simulate_formation.last_res_counted = (
+        float(counted[passed].mean()) if passed.any() else float("nan"))
 
     pm = np.full(n, "none (repeat election)", dtype=object)
     pm[outcome == 0] = "Netanyahu"
@@ -412,10 +493,12 @@ def main() -> None:
     oc_mat = np.zeros((M, len(OUTCOMES)))
     pm_names_all = PM_NAMES + ["Netanyahu", "none (repeat election)"]
     pm_mat = np.zeros((M, len(pm_names_all)))
+    res_counted = np.zeros(M)
     for m in range(M):
         b = draw_behavior(prng)
         pa = draw_pm_alloc(prng)
         oc, pmv = simulate_formation(draws, b, seed=SEED + m, pm_alloc=pa)
+        res_counted[m] = simulate_formation.last_res_counted
         cnt = pd.Series(oc).value_counts(normalize=True)
         for i in range(len(OUTCOMES)):
             oc_mat[m, i] = cnt.get(i, 0.0)
@@ -446,23 +529,31 @@ def main() -> None:
     print("\nP(next prime minister) [90% CI over parameter uncertainty]:")
     for r in pm_df.itertuples():
         print(f"  {r.probability:6.1%}  [{r.p05:.1%}-{r.p95:.1%}]  {r.pm}")
+    print("\nP(Reservists' seats counted in the government formed | list "
+          f"passes): {np.nanmean(res_counted):.3f}")
 
-    # Sensitivity: the two assumptions with the most leverage.
-    rows = []
-    for ud in (0.15, 0.35, 0.55):
-        for ar in (0.60, 0.80, 0.95):
-            b = dict(BEHAVIOR, utj_defects=ud, amcha_right=ar,
-                     amcha_center=min(0.9 - ar, 0.35))
-            oc, pm_s = simulate_formation(draws, b)
-            rows.append({
-                "utj_defects": ud, "amcha_right": ar,
+    # Sensitivity (re-centred 2026-10-10 on the new central values):
+    # UTJ defection x Amcha alignment grid, then one-at-a-time rows for
+    # the Reservists' right side and the UTJ abstention channel.
+    def _sens_row(**over):
+        b = dict(BEHAVIOR, **over)
+        oc, pm_s = simulate_formation(draws, b)
+        return {"utj_defects": b["utj_defects"],
+                "amcha_right": b["amcha_right"],
+                "res_right": b["res_right"],
+                "utj_abstains": b.get("utj_abstains", UTJ_ABSTAINS),
                 "p_netanyahu_pm": round(float((pm_s == "Netanyahu").mean()), 3),
                 "p_eisenkot_pm": round(float((pm_s == "Eisenkot").mean()), 3),
-                "p_repeat_election": round(float((oc == 7).mean()), 3),
-            })
+                "p_repeat_election": round(float((oc == 7).mean()), 3)}
+    rows = [_sens_row(utj_defects=ud, amcha_right=ar,
+                      amcha_center=min(0.9 - ar, 0.35))
+            for ud in (0.05, 0.15, 0.30) for ar in (0.60, 0.80, 0.95)]
+    rows += [_sens_row(res_right=rr) for rr in (0.12, 0.20, 0.30)]
+    rows += [_sens_row(utj_abstains=ua) for ua in (0.0, 0.25)]
     sens = pd.DataFrame(rows)
     sens.to_csv(PROCESSED_DIR / "government_sensitivity.csv", index=False)
-    print("\nSensitivity (UTJ defection x Amcha alignment):")
+    print("\nSensitivity (UTJ defection x Amcha alignment; Reservists right "
+          "side; UTJ abstention):")
     print(sens.to_string(index=False))
 
     plot(table, pm_probs)

@@ -11,7 +11,15 @@ model_validation_horizon.csv against "calendar". Leave-one-cycle-out win
 counts are the standing shipping rule: a layer ships when it wins (or
 ties) the median-seat MAE in every fold, or wins the pooled score on every
 metric without losing coverage.
+
+    python src/harness_compare.py <ablation_name> [<horizon_mode>] --fixed
+
+grades both configurations on the SHIPPED configuration's list mask (the
+*_fixed columns) - needed when the candidate moves lists across the 0.5%
+scoring cutoff (2026-10-10, dossier s.41).
 """
+from __future__ import annotations   # the venv is Python 3.9 (str | None)
+
 import sys
 import pandas as pd
 from pathlib import Path
@@ -19,9 +27,10 @@ from pathlib import Path
 P = Path(__file__).resolve().parent.parent / "data" / "processed"
 
 
-def main(cand: str, hmode: str | None = None) -> None:
+def main(cand: str, hmode: str | None = None, fixed: bool = False) -> None:
+    sfx = "_fixed" if fixed else ""
     a = pd.read_csv(P / "model_validation_ablation.csv")
-    cols = ["seat_mae_median", "seat_mae", "coverage_90", "threshold_brier"]
+    cols = [c + sfx for c in ["seat_mae_median", "seat_mae", "coverage_90", "threshold_brier"]]
     base = a[a.ablation == "shipped"].set_index("cycle")[cols]
     c = a[a.ablation == cand].set_index("cycle")[cols]
     if c.empty:
@@ -32,12 +41,13 @@ def main(cand: str, hmode: str | None = None) -> None:
     print(pd.concat({"shipped": base.round(3), "cand": c.round(3), "delta": d}, axis=1).to_string())
     pooled = pd.DataFrame({"shipped": base.mean(), "cand": c.mean(), "delta": (c.mean() - base.mean())}).round(3)
     print("\npooled:"); print(pooled.to_string())
-    wins = int((d["seat_mae_median"] < -1e-9).sum()); ties = int((d["seat_mae_median"].abs() <= 1e-9).sum())
-    losses = int((d["seat_mae_median"] > 1e-9).sum())
+    dm = d["seat_mae_median" + sfx]
+    wins = int((dm < -1e-9).sum()); ties = int((dm.abs() <= 1e-9).sum())
+    losses = int((dm > 1e-9).sum())
     print(f"\nLOO median-MAE folds: wins {wins} / ties {ties} / losses {losses}")
     if hmode:
         h = pd.read_csv(P / "model_validation_horizon.csv")
-        hc = ["seat_mae", "coverage_90", "threshold_brier", "interval_score"]
+        hc = [c + sfx for c in ["seat_mae", "coverage_90", "threshold_brier", "interval_score"]]
         for hz in sorted(h.horizon.unique()):
             b = h[(h["mode"] == "calendar") & (h.horizon == hz)].set_index("cycle")[hc]
             x = h[(h["mode"] == hmode) & (h.horizon == hz)].set_index("cycle")[hc]
@@ -45,9 +55,10 @@ def main(cand: str, hmode: str | None = None) -> None:
                 print(f"\nD-{hz}: no horizon mode {hmode!r}"); continue
             print(f"\n=== horizon D-{hz}: {hmode} vs calendar ===")
             print(pd.DataFrame({"calendar": b.mean(), "cand": x.mean(), "delta": x.mean() - b.mean()}).round(3).to_string())
-            dd = (x["seat_mae"] - b["seat_mae"])
+            dd = (x["seat_mae" + sfx] - b["seat_mae" + sfx])
             print(f"per-cycle MAE wins {int((dd < -1e-9).sum())} / ties {int((dd.abs() <= 1e-9).sum())} / losses {int((dd > 1e-9).sum())}")
 
 
 if __name__ == "__main__":
-    main(sys.argv[1], sys.argv[2] if len(sys.argv) > 2 else None)
+    args = [x for x in sys.argv[1:] if x != "--fixed"]
+    main(args[0], args[1] if len(args) > 1 else None, fixed="--fixed" in sys.argv)

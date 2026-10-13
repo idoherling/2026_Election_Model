@@ -198,7 +198,23 @@ RESOLVED: dict = {"segalovitz_joins_raam": True,
 # with Eisenkot, and his list is also negotiating a surplus pact with
 # the Reservists (a signal of staying). A withdrawal routes its voters by
 # the measured 2022 pattern (Yashar 0.60 / Together 0.25, rest abstain).
+# 2026-10-10 review, vector KEPT: a "late halt, no endorsement" re-spec
+# (Yashar .35 / Together .15 / Likud .10) has no voter-level source, and
+# Gantz's own framing ("no votes will be wasted", ToI 20 Sept) does not
+# imply a larger loss. CAUTION: any change here moves Yashar's mean share
+# and with it the GLOBAL trailing-Likud switch in bayes_model.project
+# (TRAIL fires on mean shares): on the 10 Oct posterior the half-step
+# .45/.20 turns TRAIL off and moves P(NB>=61) 21.7 -> 14.1. Re-check on
+# 20 Oct (last pre-blackout polls); collapse via RESOLVED on 23 Oct.
 PRIORS["blue_white_folds"] = 0.40
+# 2026-10-13: Gantz, publicly, ~2.5 weeks out: "I am not withdrawing -
+# whoever says I am burning votes is lying" (Kan live blog,
+# https://www.kan.org.il/content/kan-news/politic/live-1107821/); his camp
+# told Walla (1 Oct) withdrawal is "not on the table"; Israel Hayom
+# (https://www.israelhayom.co.il/news/politics/article/21557821) reports a
+# possible exit only in the final days if the threshold is out of reach.
+# Lowered to 0.25: a late exit stays live but is no longer the base case.
+PRIORS["blue_white_folds"] = 0.25
 
 
 def _col(comps, component):
@@ -412,6 +428,27 @@ def main() -> None:
         "nb_p95": int(np.percentile(nb, 95)),
     }])
     summary.to_csv(PROCESSED_DIR / "mixture_blocs.csv", index=False)
+    # Persist the conditional layers' state from THIS (published) run into
+    # fit_summary.json for the site annex: whether the trailing-Likud
+    # conditional fired and on what margin, and which lists the
+    # new-straddler desertion hit. (bayes_model.main writes the file before
+    # its own 'current' projection, so it cannot record the mixture's.)
+    import json
+    fs = PROCESSED_DIR / "fit_summary.json"
+    try:
+        fsum = json.loads(fs.read_text())
+    except (FileNotFoundError, ValueError):
+        fsum = {}
+    from bayes_model import TRAIL_SAT_SOURCE
+    margin = getattr(project, "last_trail_margin", None)
+    fsum.update({
+        "trail_on": bool(getattr(project, "last_trail_on", False)),
+        "trail_margin_seats": None if margin is None else round(float(margin), 2),
+        "trail_source": "satellites" if TRAIL_SAT_SOURCE else "field",
+        "new_straddlers": [labels[i] for i, c in enumerate(project.last_components)
+                           if c in set(getattr(project, "last_new_straddlers", []))],
+    })
+    fs.write_text(json.dumps(fsum, indent=1))
 
     effects = []
     for col in events.columns:

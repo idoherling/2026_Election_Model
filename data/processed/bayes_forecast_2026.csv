@@ -1,19 +1,19 @@
 list,bloc,mean,p05,p50,p95,p_pass,p_largest,asof
-Likud,Netanyahu bloc,25.8,18,26,34,1.0,0.695,2026-10-08
-Yashar,Anti-Netanyahu bloc,21.9,15,22,29,1.0,0.304,2026-10-08
-Bennett 2026 + Yesh Atid,Anti-Netanyahu bloc,10.9,6,11,16,0.991,0.001,2026-10-08
-The Democrats,Anti-Netanyahu bloc,9.0,5,9,13,0.98,0.0,2026-10-08
-Balad + Hadash-Ta'al,Arab parties,8.7,5,9,13,0.972,0.0,2026-10-08
-Shas,Netanyahu bloc,8.4,6,8,11,0.996,0.0,2026-10-08
-United Torah Judaism,Netanyahu bloc,8.3,6,8,11,0.998,0.0,2026-10-08
-Yisrael Beytenu,Anti-Netanyahu bloc,7.9,4,8,12,0.966,0.0,2026-10-08
-Otzma Yehudit,Netanyahu bloc,7.2,0,7,11,0.936,0.0,2026-10-08
-Ra'am,Arab parties,4.8,0,5,9,0.78,0.0,2026-10-08
-Religious Zionist Party,Netanyahu bloc,4.8,0,5,9,0.773,0.0,2026-10-08
-Reservists – Economic Party,Unaligned,1.2,0,0,7,0.197,0.0,2026-10-08
-Amcha Yisrael,Netanyahu bloc,0.9,0,0,6,0.147,0.0,2026-10-08
-Unity,Unaligned,0.2,0,0,0,0.05,0.0,2026-10-08
-Blue and White,Unaligned,0.1,0,0,0,0.017,0.0,2026-10-08
-Noam,Netanyahu bloc,0.0,0,0,0,0.0,0.0,2026-10-08
-The Haredi Public,Netanyahu bloc,0.0,0,0,0,0.0,0.0,2026-10-08
-Israel First,unknown,0.0,0,0,0,0.0,0.0,2026-10-08
+Likud,Netanyahu bloc,25.0,17,25,34,1.0,0.653,2026-10-12
+Yashar,Anti-Netanyahu bloc,22.2,15,22,29,1.0,0.346,2026-10-12
+Bennett 2026 + Yesh Atid,Anti-Netanyahu bloc,11.2,6,11,16,0.993,0.001,2026-10-12
+The Democrats,Anti-Netanyahu bloc,9.4,5,9,14,0.987,0.0,2026-10-12
+Balad + Hadash-Ta'al,Arab parties,9.4,5,9,13,0.984,0.0,2026-10-12
+Shas,Netanyahu bloc,8.8,6,9,12,0.998,0.0,2026-10-12
+United Torah Judaism,Netanyahu bloc,8.7,6,9,11,1.0,0.0,2026-10-12
+Yisrael Beytenu,Anti-Netanyahu bloc,8.3,5,8,12,0.973,0.0,2026-10-12
+Otzma Yehudit,Netanyahu bloc,5.3,0,6,10,0.774,0.0,2026-10-12
+Ra'am,Arab parties,5.3,0,6,9,0.836,0.0,2026-10-12
+Religious Zionist Party,Netanyahu bloc,3.3,0,4,8,0.568,0.0,2026-10-12
+Amcha Yisrael,Netanyahu bloc,1.9,0,0,9,0.293,0.0,2026-10-12
+Reservists – Economic Party,Unaligned,1.3,0,0,7,0.211,0.0,2026-10-12
+Blue and White,Unaligned,0.1,0,0,0,0.018,0.0,2026-10-12
+Unity,Unaligned,0.0,0,0,0,0.0,0.0,2026-10-12
+Noam,Netanyahu bloc,0.0,0,0,0,0.0,0.0,2026-10-12
+The Haredi Public,Netanyahu bloc,0.0,0,0,0,0.0,0.0,2026-10-12
+Israel First,unknown,0.0,0,0,0,0.0,0.0,2026-10-12

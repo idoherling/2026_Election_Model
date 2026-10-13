@@ -26,6 +26,7 @@ import numpy as np
 import pandas as pd
 
 from scrape_polls import PROCESSED_DIR
+import simulate as _sim
 from simulate import SURPLUS_PAIRS, THRESHOLD, dhondt
 
 
@@ -39,16 +40,15 @@ def allocate_central(shares: pd.DataFrame) -> dict:
     v = shares[col].values.astype(float)
     v = v / v.sum()
     passed = v >= THRESHOLD
-    comp_of = {c: i for i, cs in enumerate(comps) for c in cs}
-    pair_idx = [(comp_of[a], comp_of[b]) for a, b in SURPLUS_PAIRS
-                if a in comp_of and b in comp_of and comp_of[a] != comp_of[b]]
-    fvotes, fmembers, used = [], [], set()
-    for a, b in pair_idx:
-        if passed[a] and passed[b]:
-            fvotes.append(v[a] + v[b]); fmembers.append([a, b]); used |= {a, b}
-    for j in np.nonzero(passed)[0]:
-        if j not in used:
-            fvotes.append(v[j]); fmembers.append([int(j)])
+    # shared resolver (simulate.PAIR_RESOLVER_FIX, dossier s.40): with the
+    # fix, 'balad' binds to the Joint List row, not the appended
+    # "Balad (alone)" row, and 'together' to the bennett_2026+yesh_atid row
+    pair_idx, _, dropped = _sim.resolve_pairs(SURPLUS_PAIRS, comps,
+                                              aliases=_sim.PAIR_ALIASES_2026)
+    if dropped and _sim.PAIR_RESOLVER_FIX:
+        print(f"WARNING surplus pairs not resolved (not pooled): {dropped}")
+    allocate_central.last_pairs = [(names[a], names[b]) for a, b in pair_idx]
+    fvotes, fmembers = _sim.form_factions(pair_idx, passed, v)
     seats = {n: 0 for n in names}
     if not fvotes:
         return seats

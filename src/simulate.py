@@ -69,11 +69,17 @@ SUB_THRESHOLD_DEFAULT = 0.015  # share for 0-seat lists with no polled pct
 
 # Surplus-vote pairs (by dominant component). Deadline Oct 16, 2026.
 # SIGNED (Ynet, Haaretz, JDN, 6 Oct): Likud - RZP-Zehut; Together - Yisrael
-# Beytenu; Yashar - the Democrats. EXPECTED and carried as pairs: Shas -
-# UTJ (signed in every cycle since 2013), Otzma - Amcha (Ben-Gvir's stated
-# fallback, valid only if Amcha passes), Joint List - Ra'am (reported).
+# Beytenu; Yashar - the Democrats. SIGNED 11 Sept: Joint List (Hadash-
+# Ta'al) - Ra'am (JPost https://www.jpost.com/israel-election-2026/article-908431,
+# INN https://www.israelnationalnews.com/flashes/693446; CEC submission
+# after list approval). EXPECTED and carried as pairs: Shas - UTJ (signed
+# in every cycle since 2013), Otzma - Amcha (Ben-Gvir's stated fallback,
+# valid only if Amcha passes).
 # Reservists - Blue and White are negotiating; a pair of two sub-threshold
 # lists has no effect and is not carried.
+# Ids are COMPONENT ids. The Bayesian pipeline merges some under another
+# name (prepare_data: together -> bennett_2026+yesh_atid), so consumers
+# resolve them through resolve_pairs() below.
 SURPLUS_PAIRS = [
     ("likud", "rzp"),
     ("together", "yisrael_beytenu"),
@@ -82,6 +88,76 @@ SURPLUS_PAIRS = [
     ("otzma", "amcha_yisrael"),
     ("balad", "raam"),
 ]
+
+# Pair-resolver fix (2026-10-10, dossier s.40). Every consumer used to build
+# comp_of = {c: i for i, cs in enumerate(comps) for c in cs}: LAST occurrence
+# wins, so the appended "Balad (alone)" scenario column ({balad}, identically
+# zero since balad_splits resolved False) captured 'balad' and the signed
+# Joint List - Ra'am pair never pooled; and ids the Bayesian pipeline renames
+# ('together') failed `a in comp_of`, so the signed Together - Yisrael
+# Beytenu pair was silently dropped too. Flag ON: first occurrence wins,
+# absent ids resolve through an alias map, a list already pooled in a draw
+# is never pooled twice, and unresolved pairs are returned (production
+# warns). Harness: provably bit-identical (no graded window has a duplicate
+# component or a block in two pairs). OFF = legacy behaviour, bit-for-bit.
+PAIR_RESOLVER_FIX = True
+# The 2026 Bayesian pipeline's vocabulary (bayes_model.prepare_data remaps).
+PAIR_ALIASES_2026 = {"together": "bennett_2026+yesh_atid",
+                     "joint_list": "balad+hadash_taal"}
+
+
+def resolve_pairs(pairs, comps, aliases=None, fixed=None):
+    """Surplus pairs (component ids) -> column-index pairs.
+
+    comps: per-column component sets or '+'-joined strings. Returns
+    (pair_idx, comp_of, dropped). fixed=None reads PAIR_RESOLVER_FIX."""
+    if fixed is None:
+        fixed = PAIR_RESOLVER_FIX
+    comp_of: dict = {}
+    for i, cs in enumerate(comps):
+        for c in (cs.split("+") if isinstance(cs, str) else cs):
+            if fixed:
+                comp_of.setdefault(c, i)
+            else:
+                comp_of[c] = i
+
+    def find(pid):
+        if pid in comp_of:
+            return comp_of[pid]
+        if fixed and aliases and pid in aliases:
+            for part in aliases[pid].split("+"):
+                if part in comp_of:
+                    return comp_of[part]
+        return None
+
+    pair_idx, dropped = [], []
+    for a, b in pairs:
+        ia, ib = find(a), find(b)
+        if ia is None or ib is None or ia == ib:
+            dropped.append((a, b))
+        else:
+            pair_idx.append((ia, ib))
+    return pair_idx, comp_of, dropped
+
+
+def form_factions(pair_idx, passed, votes, fixed=None):
+    """One draw's factions: pooled pairs where both partners pass, then
+    singles. With the fix a list already pooled is never pooled again."""
+    if fixed is None:
+        fixed = PAIR_RESOLVER_FIX
+    fvotes, fmembers, used = [], [], set()
+    for a, b in pair_idx:
+        if passed[a] and passed[b] and (
+                not fixed or (a not in used and b not in used)):
+            fvotes.append(votes[a] + votes[b])
+            fmembers.append([a, b])
+            used |= {a, b}
+    for j in np.nonzero(passed)[0]:
+        if j not in used:
+            fvotes.append(votes[j])
+            fmembers.append([int(j)])
+    return fvotes, fmembers
+
 
 BLOC_LABEL = {"netanyahu_bloc": "Netanyahu bloc",
               "opposition_bloc": "Anti-Netanyahu bloc", "other": "Arab parties",
@@ -242,10 +318,7 @@ def simulate_core(avg: pd.DataFrame, pairs: list[tuple[str, str]],
     shares = np.clip(shares + noise, 0.0, None)
     shares /= shares.sum(axis=1, keepdims=True)
 
-    comp_of = {c: i for i, cs in enumerate(avg["components"]) for c in cs.split("+")}
-    pair_idx = [(comp_of[a], comp_of[b]) for a, b in pairs
-                if a in comp_of and b in comp_of
-                and comp_of[a] != comp_of[b]]
+    pair_idx, _, _ = resolve_pairs(pairs, list(avg["components"]))
 
     seats = np.zeros((n_sims, n_lists), dtype=int)
     for s in range(n_sims):
@@ -254,17 +327,7 @@ def simulate_core(avg: pd.DataFrame, pairs: list[tuple[str, str]],
         if not passed.any():
             continue
         votes = np.where(passed, sh, 0.0)
-        faction_votes, faction_members = [], []
-        used = set()
-        for a, b in pair_idx:
-            if passed[a] and passed[b]:
-                faction_votes.append(votes[a] + votes[b])
-                faction_members.append([a, b])
-                used |= {a, b}
-        for i in np.nonzero(passed)[0]:
-            if i not in used:
-                faction_votes.append(votes[i])
-                faction_members.append([int(i)])
+        faction_votes, faction_members = form_factions(pair_idx, passed, votes)
         alloc = dhondt(np.array(faction_votes), 120)
         for members, k in zip(faction_members, alloc):
             if len(members) == 1:

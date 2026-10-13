@@ -1423,3 +1423,105 @@ Refit: 0 divergences, r-hat 1.01, ESS 433, holdout 0.68. Headline: P(NB>=61)
 41.9 / Netanyahu 29.6 / Eisenkot 17.3. Central: Likud 27, Yashar 23,
 Together 11, Democrats 9, Joint List 9, UTJ 8, Shas 8, YB 8, Otzma 7,
 Ra'am 5 (.78), RZP-Zehut 5 (.78); Reservists (.20), Amcha (.15), B&W (.01).
+
+## 41. Accuracy search, round five (8-13 Oct): what shipped and why
+
+A multi-agent search audited the model through eight lenses (likelihood and
+latent, shock stack, threshold and seat law, 2026 judgment layers, data
+quality, mixture and formation, validation methodology, outside knowledge),
+merged 54 proposals into 14 candidates, put each through three adversarial
+skeptics (statistics and double counting, evidence quality, buildability),
+and implemented and tested the survivors in isolated worktrees on the
+cached harnesses. One candidate was killed by the skeptics (asof from the
+newest filing: a no-op once the archive catches up). Six were built and
+graded; seven harder ones (harness scoring integrity, shock-stack width,
+centred-log-ratio latent, endpoint re-centring, ballot fidelity, the Arab
+turnout regime, the parser fixes) were interrupted by usage limits and are
+carried to the next round. The harness now mirrors production and grades
+configurations on the SHIPPED configuration's list mask (`*_fixed`
+columns; `harness_compare.py --fixed`) so a layer that moves a list across
+the 0.5% scoring cutoff is not graded on a different denominator.
+
+**Shipped (harness-validated, the set tested together).**
+
+| candidate | change | evidence |
+|---|---|---|
+| surplus-pair resolver | `simulate.PAIR_RESOLVER_FIX`: first-occurrence component binding, alias map (together -> bennett_2026+yesh_atid, joint_list -> balad+hadash_taal), membership guard, loud warning on unresolved pairs | Two SIGNED pacts never pooled: Joint List-Ra'am was bound to the zero-share "Balad (alone)" column the mixture appends, and Together-Yisrael Beytenu never resolved after the composite rename. Bit-identical on every harness fold; 2026: JL+Ra'am gain a seat in 30% of draws, Together+YB in 35% |
+| trailing-Likud geometry | `TRAIL_SAT_SOURCE`: same draw, gate and half strength, but the beat is taken from Likud's non-haredi satellites (Otzma, RZP-Zehut; capped at 75% of their share; Amcha excluded) | In the trailing years the opposition side's final-poll error was +0.12 (2015) and +0.33 (2019a): the surge was paid by the right flank. 3 seeds: median MAE 1.498 -> 1.480, mean 1.578 -> 1.514, Brier 0.049 -> 0.044, bloc Brier 0.047 -> 0.029, coverage unchanged; one sub-noise fold loss (2015 +0.09) |
+| withdrawn-list rule | `WITHDRAWN_DAYS_LATE = 14` inside the final 28 days + `GONE_STAY_ZERO` (a dropped list is not resurrected by the residual shock) | Every list dropped inside four weeks was an off-ballot phantom with 0 seats; the shipped rule resurrected them at 0.5-0.6% each (2026: Unity's fold transfer counted twice) |
+
+Combined set vs shipped, fixed mask (eight cycles; eve = 3 seeds):
+
+| horizon | median MAE | mean MAE | threshold Brier | interval score | coverage |
+|---|---|---|---|---|---|
+| eve | 1.492 -> 1.411 | 1.576 -> 1.500 | 0.049 -> 0.042 | — | 0.973 -> 0.973 |
+| D-7 | 1.522 -> 1.386 | 1.581 -> 1.484 | 0.050 -> 0.041 | 8.65 -> 8.42 | 0.983 -> 0.990 |
+| D-21 | 1.816 -> 1.560 | 1.817 -> 1.649 | 0.070 -> 0.051 | 9.38 -> 8.88 | 0.973 -> 0.979 |
+| D-56 | 2.419 -> 2.457 | 2.560 -> 2.535 | 0.099 -> 0.095 | 13.83 -> 13.80 | 0.940 -> 0.939 |
+
+Eve folds: 4 wins, 3 ties, 1 sub-noise loss. The D-56 median loss is the
+trailing layer in 2020, a horizon now behind us. Note: the horizon harness
+never passed the trailing-Likud parameters before this round, so every
+earlier D-56/D-21 number on record was for a configuration without it; the
+calendar baselines above are the corrected ones.
+
+**Shipped (evidence-class, 2026-only layers - not harness-testable).**
+
+* `U_LEAN_PER_SIDE`: s.11's 0.35 is the change in the bloc GAP, but the
+  certainty layer applied it to EACH side, doubling the undecided transfer
+  (5.64 seats of gap at full lean vs the measured 2.91). Per-side constant
+  0.71 x (0.775 - 0.52) = 0.181. The pre-registered half weight now holds.
+  The lean measurement's date is also corrected: N12/Midgam fieldwork 30
+  July (n 505), not 27 August. Calendar decay and a 21-day pool window were
+  tested and NOT shipped (the decay rate had no support; the window moves
+  the pool the wrong way).
+* `AMCHA_FADE_RETIRED`: three subtractions were stacked on Amcha (churn
+  ~0.4 pp, the 1.5-seat fade 1.17 pp, the new-straddler layer 1.6 pp) on a
+  3.29% base, leaving a median share of 0.02% against polls of 2.7-3.3%.
+  The fade was a D-60 term; Amcha's latent fell from 4.24% (D-58) to 3.26%,
+  so most of it has already happened in the polls. Retired. The churn
+  exemption for new straddlers stays OFF pending the re-grade below.
+* Formation (government_formation.py, cited October statements):
+  Reservists-Economic seats count only in coalitions without haredi or Arab
+  partners (`ZIONIST_ONLY`; Hendel, JPost, "we will not complete a 61-seat
+  majority" for Netanyahu with the haredim), res_right 0.30 -> 0.12,
+  res_centre 0.45 -> 0.70; amcha_right 0.87 -> 0.60 (Winter, INN 2 Sept:
+  recommends Netanyahu, JOINS only if a national-service law passes before
+  the swearing-in); utj_defects 0.26 -> 0.15 (JPost 17 Sept: the haredi
+  parties lean to recommend no one); a UTJ confidence-abstention channel is
+  coded but OFF (unsourced Channel 12 report, rebuffed by Asher).
+* Blue and White withdrawal 0.40 -> 0.25: Gantz publicly ruled it out
+  ("whoever says I am burning votes is lying", Kan live blog); Israel Hayom
+  reports a possible exit only in the final days.
+
+**Open findings carried to the next round.**
+
+* The new-straddler mean (-1.6 pp) was measured on seat-implied shares (a
+  failed list scored at 0, two non-runners counted as total desertion). On
+  the vote shares the failed lists actually won, the nine lists that ran
+  drifted -0.33 pp (sd 2.0; D-21 alone +0.17, n=7) with 2 of 7 passing at
+  D-21. The layer still improved straddler Brier because pushing a list
+  under the line predicts failure; the size is over-stated. Re-grade on CEC
+  vote shares (part of harness_ballot_fidelity) before the final build.
+* The trailing condition is a 0.5-seat cliff on the Monte-Carlo mean; today
+  Likud and Yashar sit on it, so whether it fires is seed-sensitive. With
+  satellite sourcing the bloc headline no longer depends on it (P(NB>=61)
+  13.2 sourced vs 13.9 off on the 10 Oct posterior), but Likud's central
+  count still does (about 27 vs 24). A ramp in the margin scored best of
+  all variants (median 1.471, Brier 0.042) but was not pre-registered;
+  graded as sensitivity only.
+
+**Refit and headline (13 Oct, D-14; 784 polls, 74 filings merged).** 0
+divergences, r-hat 1.01, ESS 448, holdout 0.68. One archive poll (Filber 12
+Oct) and filings 4197-4200 since the 10 Oct build. Headline with the ship
+set: P(NB>=61) 12.4 / change bloc alone 6.4 / with Ra'am 26.3 / deadlock
+61.3; PM repeat 48.1 / Eisenkot 20.3 / Netanyahu 19.1. Central: Likud 25,
+Yashar 22, Together 11, Democrats 10, UTJ 9, Shas 9, Joint List 9, YB 9,
+Ra'am 6 (.83), Otzma 6 (.78), RZP-Zehut 4 (.56); Amcha 0 (.29),
+Reservists 0 (.22), B&W 0 (.01). Decomposition on this posterior (plain
+projection, same seed): the old configuration gives P(NB>=61) 20.9; the
+trailing-Likud source alone moves it to 13.5 (14.4 with the layer off
+entirely) - Likud keeps its beat (25.0 vs 22.2 without it) while Otzma
+(-1.6) and RZP-Zehut (-1.2) pay for it, as the right flank did in the
+trailing years. The pair fix lifts Ra'am to 6; the retired fade lifts Amcha
+to .29. The trailing margin in the published run is 0.0 seats (a tie).

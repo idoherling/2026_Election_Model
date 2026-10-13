@@ -156,6 +156,9 @@ def build_payload() -> dict:
     if fs.exists():
         fit = json.loads(fs.read_text())
     fit["cec_filings_parsed"] = int(len(pd.read_csv(PROCESSED / "cec_filings.csv")))
+    # a tie prints as "-0.0" otherwise
+    if isinstance(fit.get("trail_margin_seats"), (int, float)):
+        fit["trail_margin_seats"] = round(float(fit["trail_margin_seats"]), 1) + 0.0
 
     polls = pd.read_csv(PROCESSED / "polls.csv")
     p26 = polls[polls.cycle.astype(str) == "2026"]

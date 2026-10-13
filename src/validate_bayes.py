@@ -29,6 +29,7 @@ from error_decomposition import decompose
 from bias_audit import FAMILY_OF
 from normalize import load_party_registry
 from scrape_polls import ELECTION_DAY, PROCESSED_DIR
+import simulate as _sim
 from simulate import THRESHOLD, dhondt
 from validate_model import (
     CYCLE_THRESHOLD, ORDER, PAST_PAIRS, VAL_BLOC_OVERRIDES,
@@ -46,6 +47,24 @@ ABLATIONS = [
     ("no_trail", {"gevalt_cond": False}), ("trail_full", {"trail_scale": 1.0}),
     ("no_nstrad", {"new_straddler": False}),
     ("anchors_on", {"anchors": True}),
+    ("pair_fix", {"pair_fix": True}), ("pair_alias", {"pair_alias": True}),
+    # candidate gone14 (2026-10-10, dossier s.41): withdrawn-list rule at 14
+    # days inside the final four weeks; gone_zero keeps dropped lists at
+    # zero through the residual shock (the stats/build skeptic fix).
+    ("gone14", {"gone_days": 14}), ("gone10", {"gone_days": 10}),
+    ("gone_zero", {"gone_zero": True}),
+    ("gone14_zero", {"gone_days": 14, "gone_zero": True}),
+    # candidate trail_geometry (2026-10-10, dossier s.41). PRIMARY,
+    # pre-registered: trail_sat = same draw, same gate, same half strength,
+    # sourced from the bloc's own non-haredi satellites (the gevalt
+    # coupling's rule mask). The rest are sensitivity runs, not choices.
+    ("trail_sat", {"trail_source": "sat"}),
+    ("trail_sat_era", {"trail_source": "era"}),
+    ("trail_draw_sat", {"trail_source": "sat", "trail_mode": "draw"}),
+    ("trail_draw_sat_full", {"trail_source": "sat", "trail_mode": "draw", "trail_scale": 1.0}),
+    ("trail_ramp_sat", {"trail_source": "sat", "trail_mode": "ramp", "trail_hi": 2.0}),
+    # 2026-10-13 combine: the ship set together
+    ("combined", {"pair_fix": True, "gone_days": 14, "gone_zero": True, "trail_source": "sat"}),
     ("latent_only", {k: False for k in ["resid", "swing", "family", "gevalt", "loyal",
                                         "gevalt_cond", "new_straddler"]}),
 ]
@@ -98,7 +117,10 @@ def apply_decomp(polls: pd.DataFrame, cycle: str) -> pd.DataFrame:
 
 
 # Defaults MIRROR PRODUCTION (bayes_model): anchors retired, the
-# trailing-Likud conditional at half strength, new-straddler desertion on.
+# trailing-Likud conditional at half strength sourced from the bloc's
+# satellites, new-straddler desertion on, the surplus-pair resolver fix,
+# the 14-day withdrawn-list rule with dropped lists held at zero
+# (2026-10-13 ship set, dossier s.41).
 # An ablation turns one layer off (or an alternative on) relative to this.
 ALL_LAYERS = {"resid": True, "swing": True, "family": True, "anchors": False,
               "gevalt": True, "loyal": True,
@@ -111,7 +133,28 @@ ALL_LAYERS = {"resid": True, "swing": True, "family": True, "anchors": False,
               # accuracy round four #1: first-cycle lists projected at the
               # threshold band lose votes to strategic desertion (measured on
               # the D-56/D-21 straddler record: 2 of 11 passed, drift -1.6 pp)
-              "new_straddler": True}
+              "new_straddler": True,
+              # dossier s.40: surplus-pair resolver fix (simulate.
+              # PAIR_RESOLVER_FIX); pair_alias also resolves DECOMP-renamed
+              # PAST_PAIRS ids
+              "pair_fix": True, "pair_alias": False,
+              # candidate gone14 (OFF): unpolled-days cutoff that replaces
+              # 7 x WITHDRAWN_WEEKS when the projection date is within
+              # gone_gate days of the election; gone_zero holds dropped
+              # lists at zero (no residual shock resurrects them).
+              "gone_days": 14, "gone_gate": 28, "gone_zero": True,
+              # candidate trail_geometry (defaults = shipped geometry):
+              # source 'field' | 'sat' (NB non-haredi non-Likud rule mask,
+              # the gevalt coupling's) | 'era' (hand list, sensitivity only);
+              # gate 'mean' (0.5-seat cliff on the mean projection) | 'draw'
+              # (same test per pre-shock latent draw) | 'ramp' (weight falls
+              # linearly from margin 0.5 to trail_hi seats)
+              "trail_source": "sat", "trail_mode": "mean", "trail_hi": 2.0}
+# Hand-picked right-flank ids per era (sensitivity run only: its case was
+# argued from outcomes - it drops Yisrael Beytenu from the 2015 pool).
+GEVALT_ERA_IDS = {"jewish_home", "national_union", "otzma", "yachad_yishai",
+                  "zehut", "new_right", "urwp", "yamina", "rzp", "noam",
+                  "amcha_yisrael"}
 NSTRAD_BAND = (-0.75, 1.5)   # pp around the threshold (projected share)
 
 
@@ -182,6 +225,31 @@ def trailing_likud_params(polls: pd.DataFrame, results: pd.DataFrame,
             "n": int(len(vals)), "cycles": misses}
 
 
+def allocate_vector(v, threshold, pair_idx):
+    """Threshold + surplus pairs + d'Hondt (Bader-Ofer) on one share vector."""
+    v = np.asarray(v, float) / np.sum(v)
+    out = np.zeros(len(v), dtype=int)
+    passed = v >= threshold
+    if not passed.any():
+        return out
+    fvotes, fmembers, used = [], [], set()
+    for a, b in pair_idx:
+        if passed[a] and passed[b]:
+            fvotes.append(v[a] + v[b]); fmembers.append([a, b]); used |= {a, b}
+    for j in np.nonzero(passed)[0]:
+        if j not in used:
+            fvotes.append(v[j]); fmembers.append([int(j)])
+    alloc = dhondt(np.array(fvotes), 120)
+    for members, k in zip(fmembers, alloc):
+        if len(members) == 1:
+            out[members[0]] = k
+        else:
+            a, b = members
+            inner = dhondt(np.array([v[a], v[b]]), int(k))
+            out[a], out[b] = int(inner[0]), int(inner[1])
+    return out
+
+
 def project_cycle(data, idata, eday, threshold, pairs, params,
                   bloc_overrides, rng, resid_scale=None, layers=None,
                   weeks_override=None):
@@ -206,13 +274,21 @@ def project_cycle(data, idata, eday, threshold, pairs, params,
     shares = np.exp(z_f - z_f.max(axis=1, keepdims=True))
     shares /= shares.sum(axis=1, keepdims=True)
 
-    gone = data["last_obs_day"] < -7 * WITHDRAWN_WEEKS
+    # days_ahead from the real dates, never weeks_override (calendar weeks)
+    days_ahead = max((eday - data["asof"]).days, 0)
+    gone_days = 7 * WITHDRAWN_WEEKS
+    if L["gone_days"] is not None and days_ahead <= L["gone_gate"]:
+        gone_days = L["gone_days"]
+    gone = data["last_obs_day"] < -gone_days
     if gone.any():
         shares[:, np.nonzero(gone)[0]] = 0.0
         shares /= shares.sum(axis=1, keepdims=True)
+    shares_pre = shares.copy()    # latent draws before any shock (draw gate)
     base0 = shares.mean(axis=0)
     sd_list = (params["resid_base"]
                + params["resid_slope"] * base0 * 120) / 120.0 * resid_scale
+    if L["gone_zero"]:
+        sd_list = np.where(gone, 0.0, sd_list)
     if L["resid"]:
         shares = np.clip(
             shares + rng.standard_normal(shares.shape) * sd_list, 0, None)
@@ -294,16 +370,36 @@ def project_cycle(data, idata, eday, threshold, pairs, params,
     # projected standing at the projection date trails or ties the largest
     # non-bloc list, add the LOO-measured miss of trailing years (mean mu,
     # sd over those years), zero-sum against the rest of the field.
+    project_cycle.last_trail = {"frac": 0.0, "overflow": None}
     if L["gevalt_cond"] and likud_col is not None and "trail" in params:
         tp = params["trail"]
         non_nb = [i for i in range(len(comps)) if blocs[i] != "netanyahu_bloc" and i != likud_col]
         if non_nb and tp["n"] > 0:
-            leader_seats = base[non_nb].max() * 120.0
-            if base[likud_col] * 120.0 <= leader_seats + TRAIL_MARGIN:
-                g = rng.normal(tp["mu"], tp["sd"], N_PROJ) * L["trail_scale"] / 120.0
-                onehot = np.zeros(len(comps)); onehot[likud_col] = 1.0
-                w_r = np.where(onehot == 0, base, 0)
-                shares = shares + g[:, None] * (onehot - w_r / w_r.sum())[None, :]
+            margin = (base[likud_col] - base[non_nb].max()) * 120.0
+            if L["trail_mode"] == "draw":
+                m_d = (shares_pre[:, likud_col] - shares_pre[:, non_nb].max(axis=1)) * 120.0
+                gate = (m_d <= TRAIL_MARGIN).astype(float)
+            elif L["trail_mode"] == "ramp":
+                gate = np.full(N_PROJ, float(np.clip(
+                    (L["trail_hi"] - margin) / (L["trail_hi"] - TRAIL_MARGIN), 0.0, 1.0)))
+            else:
+                gate = np.full(N_PROJ, float(margin <= TRAIL_MARGIN))
+            project_cycle.last_trail["frac"] = float(gate.mean())
+            if gate.any():
+                g = rng.normal(tp["mu"], tp["sd"], N_PROJ) * L["trail_scale"] / 120.0 * gate
+                if L["trail_source"] == "sat":
+                    src = sat
+                elif L["trail_source"] == "era":
+                    src = np.array([bool(cp & GEVALT_ERA_IDS) for cp in comps])
+                else:
+                    src = np.zeros(len(comps), bool)
+                if src.any():
+                    shares, ov = bm.trail_transfer(shares, g, likud_col, src, base)
+                    project_cycle.last_trail["overflow"] = ov
+                else:   # shipped geometry: zero-sum against the whole field
+                    onehot = np.zeros(len(comps)); onehot[likud_col] = 1.0
+                    w_r = np.where(onehot == 0, base, 0)
+                    shares = shares + g[:, None] * (onehot - w_r / w_r.sum())[None, :]
 
     # Loyal-electorate calibration, mirrored from bayes_model.LOYAL_SD:
     # standalone captive-base lists are shrunk to their measured total sd.
@@ -318,12 +414,23 @@ def project_cycle(data, idata, eday, threshold, pairs, params,
         if act > tgt:
             shares[:, col] = v.mean() + (v - v.mean()) * (tgt / act)
     shares = np.clip(shares, 0, None)
+    if L["gone_zero"] and gone.any():
+        shares[:, np.nonzero(gone)[0]] = 0.0
     shares /= shares.sum(axis=1, keepdims=True)
 
-    comp_of = {c: i for i, cs in enumerate(data["components"])
-               for c in cs.split("+")}
-    pair_idx = [(comp_of[a], comp_of[b]) for a, b in pairs
-                if a in comp_of and b in comp_of and comp_of[a] != comp_of[b]]
+    # Surplus pairs through the shared resolver (dossier s.40). pair_fix:
+    # first occurrence wins + a list is never pooled twice in a draw (the
+    # production fix; a provable no-op here). pair_alias additionally
+    # resolves PAST_PAIRS ids that DECOMP renamed (urwp, blue_white,
+    # labor_gesher, ...) - the harness analogue of 'together'.
+    pair_idx, comp_of, _ = _sim.resolve_pairs(
+        pairs, data["components"],
+        aliases=params.get("pair_alias") if L["pair_alias"] else None,
+        fixed=L["pair_fix"] or L["pair_alias"])
+    # production's central estimator: the seat law applied once to the
+    # renormalised median share vector (official_forecast.allocate_central)
+    project_cycle.last_central = allocate_vector(np.median(shares, axis=0), threshold, pair_idx)
+    fixed_pairs = L["pair_fix"] or L["pair_alias"]
 
     seats = np.zeros((N_PROJ, shares.shape[1]), dtype=int)
     for i in range(N_PROJ):
@@ -332,16 +439,8 @@ def project_cycle(data, idata, eday, threshold, pairs, params,
         if not passed.any():
             continue
         votes = np.where(passed, sh, 0.0)
-        fvotes, fmembers, used = [], [], set()
-        for a, b in pair_idx:
-            if passed[a] and passed[b]:
-                fvotes.append(votes[a] + votes[b])
-                fmembers.append([a, b])
-                used |= {a, b}
-        for j in np.nonzero(passed)[0]:
-            if j not in used:
-                fvotes.append(votes[j])
-                fmembers.append([int(j)])
+        fvotes, fmembers = _sim.form_factions(pair_idx, passed, votes,
+                                              fixed=fixed_pairs)
         alloc = dhondt(np.array(fvotes), 120)
         for members, k in zip(fmembers, alloc):
             if len(members) == 1:
@@ -383,6 +482,7 @@ def main() -> None:
             params["trail"] = trailing_likud_params(polls, results, exclude_cycle=cycle)
             params["new_lists"] = new_lists_for_cycle(polls, cycle)
             params["nstrad"] = new_straddler_params(exclude_cycle=cycle)
+            params["pair_alias"] = DECOMP.get(cycle, {})
             print(f"[{cycle}] trailing-Likud LOO: mu {params['trail']['mu']:+.2f} sd {params['trail']['sd']:.2f} n {params['trail']['n']}")
             seats, blocs, base, comp_of = project_cycle(
                 data, idata, eday, CYCLE_THRESHOLD.get(cycle, THRESHOLD),
@@ -404,6 +504,11 @@ def main() -> None:
 
         # Layer ablation (accuracy round 3, #1): which projection layers
         # help or hurt point accuracy on the graded record.
+        # *_fixed columns grade every ablation on the SHIPPED config's list
+        # mask, so a layer that moves a list across the 0.5% scoring cutoff
+        # (e.g. holding dropped lists at zero) is not graded on a different
+        # denominator (harness_compare --fixed).
+        fixed = None
         for tag, flags in ABLATIONS:
             sa, _, ba, _ = project_cycle(
                 data, idata, eday, CYCLE_THRESHOLD.get(cycle, THRESHOLD),
@@ -411,13 +516,17 @@ def main() -> None:
                 np.random.default_rng(SEED + 11 + int(_os.environ.get("HARNESS_SEED_OFFSET", 0))),
                 layers=flags)
             act_a = (ba >= 0.005) | (actual > 0)
+            if tag == "shipped":
+                fixed = act_a
             lo_a, hi_a = np.percentile(sa, 5, axis=0), np.percentile(sa, 95, axis=0)
             ppa = (sa >= 1).mean(axis=0)
-            abl_rows.append({"cycle": cycle, "ablation": tag,
-                             "seat_mae": float(np.abs(sa.mean(axis=0) - actual)[act_a].mean()),
-                             "seat_mae_median": float(np.abs(np.median(sa, axis=0) - actual)[act_a].mean()),
-                             "coverage_90": float(((actual >= lo_a) & (actual <= hi_a))[act_a].mean()),
-                             "threshold_brier": float(np.mean((ppa[act_a] - (actual[act_a] > 0)) ** 2))})
+            row = {"cycle": cycle, "ablation": tag}
+            for sfx, m in (("", act_a), ("_fixed", fixed if fixed is not None else act_a)):
+                row.update({"seat_mae" + sfx: float(np.abs(sa.mean(axis=0) - actual)[m].mean()),
+                            "seat_mae_median" + sfx: float(np.abs(np.median(sa, axis=0) - actual)[m].mean()),
+                            "coverage_90" + sfx: float(((actual >= lo_a) & (actual <= hi_a))[m].mean()),
+                            "threshold_brier" + sfx: float(np.mean((ppa[m] - (actual[m] > 0)) ** 2))})
+            abl_rows.append(row)
 
         # Interval-width calibration curve (audit improvement #2): the same
         # posterior re-projected under a grid of residual-width factors.

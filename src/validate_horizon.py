@@ -54,9 +54,17 @@ def main() -> None:
         cyc = apply_decomp(polls[(polls["cycle"] == cycle) & polls["sums_ok"]], cycle)
         res = apply_decomp(results[results["cycle"] == cycle], cycle)
         params = decompose(exclude_cycle=cycle)
-        from validate_bayes import new_lists_for_cycle, new_straddler_params
+        from validate_bayes import (new_lists_for_cycle, new_straddler_params,
+                                    trailing_likud_params)
+        # 2026-10-10 (dossier s.41): the trailing-Likud parameters were never
+        # passed here, so TRAIL was OFF in every horizon run - including the
+        # shipped "calendar" baseline. Horizon numbers recorded before this
+        # date are TRAIL-off numbers.
+        params["trail"] = trailing_likud_params(polls, results, exclude_cycle=cycle)
         params["new_lists"] = new_lists_for_cycle(polls, cycle)
         params["nstrad"] = new_straddler_params(exclude_cycle=cycle)
+        from validate_bayes import DECOMP
+        params["pair_alias"] = DECOMP.get(cycle, {})   # dossier s.40
         for h in HORIZONS:
             asof = eday - pd.Timedelta(days=h)
             try:
@@ -76,7 +84,10 @@ def main() -> None:
                 print(f"[{cycle} D-{h}] FAILED: {e}")
                 continue
             # "calendar" = the shipped configuration (production layer defaults).
-            configs = [("plain", h / 7.0, 1.0, 1.0), ("calendar", calendar_weeks(h), 1.0, 1.0)]
+            # calendar first: its list mask grades every config in the
+            # *_fixed columns (each config draws from its own fresh rng)
+            configs = [("calendar", calendar_weeks(h), 1.0, 1.0), ("plain", h / 7.0, 1.0, 1.0)]
+            fixed = None
             import os as _os, json as _json
             if not _os.environ.get("HORIZON_SKIP_GRID"):
                 configs += [(f"cal_s{st}_rw{rw}", calendar_weeks(h) * rw, st, rw)
@@ -92,7 +103,8 @@ def main() -> None:
                 seats, blocs, base, comp_of = project_cycle(
                     data, idata, eday, CYCLE_THRESHOLD.get(cycle, THRESHOLD),
                     PAST_PAIRS[cycle], params, VAL_BLOC_OVERRIDES.get(cycle),
-                    np.random.default_rng(SEED + h), resid_scale=bm.RESID_SCALE * st,
+                    np.random.default_rng(SEED + h + int(_os.environ.get("HARNESS_SEED_OFFSET", 0))),
+                    resid_scale=bm.RESID_SCALE * st,
                     weeks_override=wk,
                     layers=dict({"shock_scale": st}, **extra.get(mode, {})))
                 actual = np.zeros(seats.shape[1])
@@ -101,6 +113,8 @@ def main() -> None:
                     if len(hit) == 1:
                         actual[hit.pop()] += r.seats
                 active = (base >= 0.005) | (actual > 0)
+                if mode == "calendar":
+                    fixed = active
                 lo, hi = np.percentile(seats, 5, axis=0), np.percentile(seats, 95, axis=0)
                 pp = (seats >= 1).mean(axis=0)
                 a = 0.10
@@ -109,9 +123,17 @@ def main() -> None:
                 rows.append({"cycle": cycle, "horizon": h, "mode": mode,
                              "n_polls": int(data["n_polls"]),
                              "seat_mae": float(np.abs(seats.mean(axis=0) - actual)[active].mean()),
+                             "seat_mae_median": float(np.abs(np.median(seats, axis=0) - actual)[active].mean()),
+                             "seat_mae_central": float(np.abs(project_cycle.last_central - actual)[active].mean()),
+                             "trail_frac": project_cycle.last_trail["frac"],
                              "coverage_90": float(((actual >= lo) & (actual <= hi))[active].mean()),
                              "threshold_brier": float(np.mean((pp[active] - (actual[active] > 0)) ** 2)),
                              "interval_score": float(isc[active].mean()),
+                             "seat_mae_fixed": float(np.abs(seats.mean(axis=0) - actual)[fixed].mean()),
+                             "seat_mae_median_fixed": float(np.abs(np.median(seats, axis=0) - actual)[fixed].mean()),
+                             "coverage_90_fixed": float(((actual >= lo) & (actual <= hi))[fixed].mean()),
+                             "threshold_brier_fixed": float(np.mean((pp[fixed] - (actual[fixed] > 0)) ** 2)),
+                             "interval_score_fixed": float(isc[fixed].mean()),
                              "mean_width": float((hi - lo)[active].mean()),
                              "p_nb61": float((nb >= 61).mean()),
                              "nb_actual": int(actual[blocs == "netanyahu_bloc"].sum())})
