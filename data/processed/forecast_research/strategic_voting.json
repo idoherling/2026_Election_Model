@@ -1,0 +1,541 @@
+{
+ "desk": "STR",
+ "summary": "Desk STR checked the behavioural basis of four forecast layers against the literature and the Israeli record: new-straddler desertion, gevalt coupling, the trailing-Likud conditional and small-party realization. Twenty-five findings: 17 peer-reviewed, one book chapter (Cox), one official text (the Elections Law), four poll and result compilations, and two reports.\n\nWhat the literature supports. Under Israeli PR, voters do desert lists they expect to be wasted, or to be left out of the coalition. In Israeli election-study data, people whose favourite was a minor party intended to vote for it only 61-80% of the time, against 82-96% for major-party supporters, and the defectors went to the large parties. In 2003 Likud got most of them (Abramson et al. 2010). Coalition-targeted desertion runs to the bloc-defining lists: in 2006 it moved Labor and Likud support, but not Meretz, Shas, Yisrael Beitenu or the NRP (Bargsted & Kedar 2009). In 2015 almost all of Likud's and Zionist Union's gains came from their own blocs (Rahat, Hazan & Ben-Nun Bloom 2016). This backs the zero-sum, within-bloc geometry of gevalt coupling and the satellite-sourced trailing beat. The closest individual-level evidence for the trailing layer is an Israeli 2019-2020 panel. Voters who saw the race for formateur as close were more likely to switch to a formateur party (Harsgor, Itzkovitch-Malka & Tuttnauer 2023), though that effect is fragile in bootstrap. Experiments find bandwagon effects small and asymmetric: rising polls help a party, falling polls do not measurably hurt it. So the model's choice to carry no poll-momentum term is sound. Israeli law (Elections Law s.16E(h)) bars new polls from the end of the Friday before polling day. For 27 October that is Friday 23 October, leaving about four unobserved days in which 2015's late, right-leaning decisions fell.\n\nWhere it challenges the model. (1) Desertion is not one-signed. Threshold-insurance research finds that small parties tied to a senior partner gain votes when polls put them just under the line: Sweden's Christian Democrats, Lower Saxony's FDP in 2013 (polled 4-6%, won 9.9%), and a 2022 Swedish experiment in which KD's vote fell from 8.2% to 4.1% as its shown poll rose from 2.5% to 5.5%. Issue parties neither gain nor are abandoned. The Israeli record is the same mixture. Every 4-seat-floor list beat its final polls in 2021, Gil surged from 0-2 seats to 7 in 2006, and in 2015, April 2019, September 2019 and 2022 the satellites collapsed. The collapses came in close formateur races or under explicit 'wasted vote' campaigns, and they included established lists (Meretz 2022). The model's own fidelity re-grade (s.46.1) puts first-cycle ballot drift at -0.42 pp, not -1.6. The literature says the right conditioning variables are formateur-race closeness and coalition embedding, not list age. (2) The trailing layer is one-sided. In April 2019 Blue and White beat its final polls almost as much as Likud did, at Labor's and Meretz's expense, and the mechanism the literature identifies is closeness. A symmetric, closeness-ramped formateur consolidation is a candidate. (3) The final-week polls on record contradict two rows of the s.15 realization table: Zehut 2019a polled 4-6 seats and Otzma 2019s 4 seats in five of eight final polls. That makes their ratios about 0.55-0.8, not 0.91 and 1.11. The site sentence that ideological-core lists 'held their polling' holds for Arab and haredi sectoral lists (Balad 2022, Ra'am 2021) but not for right-flank lists under a gevalt appeal.\n\nUnverified items are marked: Blais et al. (2006) and Aldrich et al. (2004) are cited secondhand. Fredén (2014, 2017) and Shikano et al. (2009) are abstract-level. The 2015 late-decider survey was commissioned by a partisan group.",
+ "findings": [
+  {
+   "id": "STR-F01",
+   "claim": "Cox's coordination theory treats deserting a non-viable option as a feature of every electoral system. For PR, though, the claim that strategic voting matters politically (the Leys-Sartori conjecture: low district magnitude, high thresholds, or other features that penalise small parties) is one Cox says rests on reasoning rather than systematic evidence. Israel elects 120 members from one national district, so the only wasted-vote trigger is the legal threshold. Desk inference: wasted-vote desertion should concentrate on lists projected near 3.25% and be weak elsewhere.",
+   "quant": "Chapter 5, 'Strategic voting in multimember districts', pp. 99-122 (chapter DOI 10.1017/CBO9781139174954.007). The concluding chapter's M+1 rule caps viable lists at district magnitude + 1 and is an upper bound, not a point prediction. Israel M = 120 (Abramson et al. 2010, p. 76). Only the chapter abstract was read, so it gives no magnitude.",
+   "source": {
+    "authors": "Gary W. Cox",
+    "year": 1997,
+    "title": "Making Votes Count: Strategic Coordination in the World's Electoral Systems",
+    "venue": "Cambridge University Press (ch. 5, pp. 99-122)",
+    "doi_or_url": "https://doi.org/10.1017/CBO9781139174954.007",
+    "type": "book chapter"
+   },
+   "model_link": "new_straddler band test (desertion only near the line); certainty-layer soft-support churn (applies to every list)",
+   "stance": "informs",
+   "site_use": "Strategic desertion, voters fleeing a wasted vote, comes from the layers that act on every list: the certainty layer moves soft support, and first-cycle lists inside the threshold band carry the measured straddler term."
+  },
+  {
+   "id": "STR-F02",
+   "claim": "Israeli election-study respondents whose favourite was a minor party were much less likely to intend to vote for it than major-party supporters were for theirs, and the defections went mainly to the large parties. In 2003 Likud received most of them. The authors find that in every election studied, smaller parties lose votes to major parties.",
+   "quant": "Jewish respondents with a strict top preference, pre-election vote intention (INES). 1999: One Israel 94.7% and Likud 93.6% loyal vs 61.3% for those preferring Center/Meretz/Shas (n=83) (Table 3A, p.77). 2003: Labor 81.9% and Likud 90.2% vs 72.5% for six other parties (n=349); of those 349, 15.2% intended Likud and 8.0% Labor (Table 3B, p.77). 2006: Kadima 93.1%, Labor 96.4%, Likud 92.9% vs 79.7% for Meretz/NU-NRP/YB/Shas (n=360) (Table 3C, p.78). These are intentions, not ballots, and the 'minor' group includes mid-size lists. Implied minor-list retention is 0.61-0.80, which brackets the retired x0.7 realization ratio.",
+   "source": {
+    "authors": "Paul R. Abramson; John H. Aldrich; Andre Blais; Matthew Diamond; Abraham Diskin; Indridi H. Indridason; Daniel J. Lee; Renan Levine",
+    "year": 2010,
+    "title": "Comparing Strategic Voting Under FPTP and PR",
+    "venue": "Comparative Political Studies 43(1):61-90",
+    "doi_or_url": "https://doi.org/10.1177/0010414009341717",
+    "type": "peer-reviewed"
+   },
+   "model_link": "gevalt coupling and TRAIL_SAT_SOURCE (consolidation toward the bloc's large list); size of small-list desertion (NEW_STRADDLER mu; retired MICRO_REALIZE 0.7)",
+   "stance": "supports",
+   "site_use": "Gevalt coupling - a zero-sum transfer (sd 2.0) between Likud and its own bloc's satellites, so satellite threshold deaths co-occur with Likud surges, as in 2015 and 2019."
+  },
+  {
+   "id": "STR-F03",
+   "claim": "Voters who expect their preferred party to stay out of the coalition often desert it for the least-bad viable partner. In Israel 2006 this held after controlling for ideological and coalition preferences, but only for the two bloc-defining parties (Labor, Likud). Support for Meretz, Shas, Yisrael Beitenu and the NRP did not move with coalition expectations. Coalition-targeted consolidation is therefore a large-party phenomenon, and small-list cores are insensitive to it.",
+   "quant": "INES 2006 pre-election survey, 28 Feb-23 Mar 2006, n=1,919; coalition items asked of a random subsample of n=1,276 (p.312 fn 8). 95% of that subsample (1,206 of 1,276) answered the coalition-prospect items (p.314). Mean perceived chance of entering the coalition: Kadima 79%, Labor 58%, Likud 49% (p.313). Labor-proximate respondents (N=335): 50% supported Labor when they expected a Labor coalition vs 14.6% when they expected Likud. Likud-proximate (N=332): 38.4% vs 17.9% (p.318). Expectation coefficients for Meretz, Shas, YB and NRP were insignificant (p.318).",
+   "source": {
+    "authors": "Matias A. Bargsted; Orit Kedar",
+    "year": 2009,
+    "title": "Coalition-Targeted Duvergerian Voting: How Expectations Affect Voter Choice under Proportional Representation",
+    "venue": "American Journal of Political Science 53(2):307-323",
+    "doi_or_url": "https://doi.org/10.1111/j.1540-5907.2009.00372.x",
+    "type": "peer-reviewed"
+   },
+   "model_link": "gevalt coupling and trailing-Likud (consolidation is coalition-targeted and runs to the bloc-defining list); new_straddler and the sectarian distinction (small-list cores do not respond to coalition expectations)",
+   "stance": "supports",
+   "site_use": "Gevalt coupling - a zero-sum transfer (sd 2.0) between Likud and its own bloc's satellites ...; and 'lists with a sectarian or ideological core held their polling'."
+  },
+  {
+   "id": "STR-F04",
+   "claim": "Under PR with a threshold there are three strategic-coalition contexts: (1) a rental vote by a major-party supporter for a junior partner at risk at the threshold, (2) avoiding a wasted vote for a small party not expected to pass, and (3) explicit coalition voting. An Austria 2006 survey supports all three. The paper's review of the Israeli work adds two points. In 2003, about one voter in ten met stringent conditions for coalition-motivated voting for a non-favourite party (Blais et al. 2006). Expectations did not affect the vote intentions of right-religious party supporters, but did affect them for the secular Shinui (Aldrich et al. 2004).",
+   "quant": "Austria: nationally representative pre-election survey, 2006 election. Israel: 'about one in ten voters passes a series of stringent conditions' (p.340). The original Blais, Aldrich, Indridason & Levine (2006, Party Politics 12(6):691-705, doi 10.1177/1354068806068594) and Aldrich et al. (2004, in Arian & Shamir eds., The Elections in Israel 2003, pp. 180-211) were not opened. The Israeli figures here are UNVERIFIED beyond this secondary account.",
+   "source": {
+    "authors": "Michael F. Meffert; Thomas Gschwend",
+    "year": 2010,
+    "title": "Strategic coalition voting: Evidence from Austria",
+    "venue": "Electoral Studies 29(3):339-349",
+    "doi_or_url": "https://doi.org/10.1016/j.electstud.2010.03.005",
+    "type": "peer-reviewed"
+   },
+   "model_link": "both directions of the threshold mechanism (rental surge vs wasted-vote desertion); certainty-layer churn magnitude; the sectarian/ideological exemption",
+   "stance": "supports",
+   "site_use": "Strategic desertion, voters fleeing a wasted vote, comes from the layers that act on every list ..."
+  },
+  {
+   "id": "STR-F05",
+   "claim": "Under an operational definition of strategic voting, Israeli strategic voters are a very small share of the electorate. They are better educated, more often support small parties, more often believe polls influence voters, and therefore delay their final decision. They do not switch parties between elections more than sincere voters, and they do not differ from sincere voters on which coalition should or will form.",
+   "quant": "Abstract-level (full text not opened); no percentage retrieved. The abstract calls strategic voters 'a very small percentage of the entire electorate'.",
+   "source": {
+    "authors": "Dan S. Felsenthal; Avraham Brichta",
+    "year": 1985,
+    "title": "Sincere and strategic voters: An Israeli study",
+    "venue": "Political Behavior 7(4):311-324",
+    "doi_or_url": "https://doi.org/10.1007/BF00987208",
+    "type": "peer-reviewed"
+   },
+   "model_link": "ceiling on the size of desertion layers; timing (strategic decisions are late, so they fall in the poll-silence window)",
+   "stance": "informs",
+   "site_use": "new claim"
+  },
+  {
+   "id": "STR-F06",
+   "claim": "Across national election studies, the share of voters who actually vote strategically is typically 5-15% of the electorate. In a lab experiment embedded in two real German state campaigns, supporters projected their preferred small party 1.7-2.9 points above the poll they were shown. They still expected it to pass even in the 'failure' condition. Strategic-voting theory explained only a small number of the insincere votes. Wishful thinking damps desertion: supporters discount bad polls for their own small list.",
+   "quant": "'typically ranges between 5 and 15 per cent of the electorate' (p.638). The mean forecast for the preferred small party fell from 9.8% (10% poll) to 6.4% (4% poll condition), F=9.85, p<0.001, but participants added 1.7-2.9 pp to the polls (p.653). Abstract: theory supported 'only for a small number of voters' (p.636).",
+   "source": {
+    "authors": "Michael F. Meffert; Thomas Gschwend",
+    "year": 2011,
+    "title": "Polls, coalition signals and strategic voting: An experimental investigation of perceptions and effects",
+    "venue": "European Journal of Political Research 50(5):636-667",
+    "doi_or_url": "https://doi.org/10.1111/j.1475-6765.2010.01986.x",
+    "type": "peer-reviewed"
+   },
+   "model_link": "NEW_STRADDLER mu = -1.6 pp. Helps explain why realised ballot drift for first-cycle straddlers is only -0.42 pp (dossier s.46.1) against -1.6 seat-implied.",
+   "stance": "challenges",
+   "site_use": "A first-cycle list projected within -0.75/+1.5 points of 3.25% therefore carries that desertion (mean -1.6, sd 2.6) ..."
+  },
+  {
+   "id": "STR-F07",
+   "claim": "In a three-wave Israeli panel spanning the 2019-2020 elections, voters abandoned a party they had voted for when they expected it to be left out of the next coalition. Voters who saw the race between the two would-be formateurs (Likud, Blue and White) as close were more likely to switch to a formateur party than voters who expected their side to win. This is the individual-level mechanism behind late consolidation into the bloc's largest list, and it is triggered by closeness, not by trailing.",
+   "quant": "Waves: Apr 2019 n=1,206; Sep 2019 n=909; Mar 2020 n=801, each about a week before the vote; 1,104 observations from 655 respondents. Switching: 28.5% at the first opportunity, 18.1% at the second. Predicted switching probability is 47-58% when expected coalition chances are 0-2 (0-10 scale) vs 13% at 10. 8.6% moved non-formateur to formateur and 6.8% the reverse. 'None of the non-formateur party voters ... switched to the party of the unpreferred formateur' (fn 12). The close-race effect is significant in Model 3 but loses significance (keeping its size) in bootstrapped subsamples. Race perceptions: 61.9% expected their side to win, 24.6% saw it as close, 13.6% expected the other side to win.",
+   "source": {
+    "authors": "Liran Harsgor; Reut Itzkovitch-Malka; Or Tuttnauer",
+    "year": 2023,
+    "title": "Do coalition and formateur expectations affect vote switching?",
+    "venue": "European Political Science Review 15(1):96-115",
+    "doi_or_url": "https://doi.org/10.1017/S1755773922000455",
+    "type": "peer-reviewed"
+   },
+   "model_link": "TRAIL condition (trail/tie by 0.5 seats, cliff), TRAIL_RAMP_ON (held off, s.46.3), and the layer's one-sidedness (Likud only)",
+   "stance": "supports",
+   "site_use": "... the record shows Likud's big beats came when it was trailing the largest non-bloc list in the final polls (2015 behind Zionist Union +8.8, April 2019 behind Blue and White +6.8, September 2019 tied -0.5 ...)"
+  },
+  {
+   "id": "STR-F08",
+   "claim": "In 2015, framed as Likud vs Zionist Union, both large lists gained on 2013, but almost all of their gains came from parties in their own bloc. Identity politics led each to court voters inside its bloc. The late Likud surge was a within-bloc transfer, not a bloc swing.",
+   "quant": "Abstract-level; no transfer matrix retrieved. Consistent with Galston & Schwartz (Brookings, 18 Mar 2015): bloc totals moved about 1 seat (right 43 to 44, centre-left 27 to 28) while Likud gained about 10 over 2013.",
+   "source": {
+    "authors": "Gideon Rahat; Reuven Y. Hazan; Pazit Ben-Nun Bloom",
+    "year": 2016,
+    "title": "Stable Blocs and Multiple Identities: The 2015 Elections in Israel",
+    "venue": "Representation 52(1):99-117",
+    "doi_or_url": "https://doi.org/10.1080/00344893.2016.1190592",
+    "type": "peer-reviewed"
+   },
+   "model_link": "TRAIL_SAT_SOURCE (beat sourced from own satellites); gevalt coupling as a zero-sum within-bloc transfer",
+   "stance": "supports",
+   "site_use": "... taken from Likud's own non-haredi satellites (Otzma, RZP-Zehut) - in the trailing years the opposition side's error was near zero (+0.12 seats in 2015 ...), so the beat came out of the right flank, not the other camp."
+  },
+  {
+   "id": "STR-F09",
+   "claim": "In the eight polls published 12-13 March 2015, the last before the legal poll silence, Likud stood at 20-23 seats and trailed Zionist Union (24-26). Likud won 30. Its satellites paid: Jewish Home fell from 11-12 to 8 and Yachad from 4-5 to 0. Zionist Union landed at the bottom of its range (24), so the other camp did not supply the surge.",
+   "quant": "Results (CEC, as reproduced): Likud 30 seats (23.40%), ZU 24 (18.67%), Jewish Home 8 (6.74%), Yachad 0 (2.97%, dossier s.15). Final-poll ranges, eight polls 12-13 Mar: Likud 20-23, ZU 24-26, JH 11-12, Yachad 4-5, Kulanu 8-10 (won 10), YB 4-6 (won 6).",
+   "source": {
+    "authors": "Wikipedia contributors (compilation of published Israeli polls; CEC results)",
+    "year": 2015,
+    "title": "Opinion polling for the 2015 Israeli legislative election",
+    "venue": "Wikipedia",
+    "doi_or_url": "https://en.wikipedia.org/wiki/Opinion_polling_for_the_2015_Israeli_legislative_election",
+    "type": "reference work"
+   },
+   "model_link": "trailing-Likud conditional (2015 fold); gevalt coupling; TRAIL_SAT_SOURCE",
+   "stance": "supports",
+   "site_use": "2015 behind Zionist Union +8.8"
+  },
+  {
+   "id": "STR-F10",
+   "claim": "In April 2019 both would-be formateurs beat their final polls by similar margins, each at the expense of its own bloc's smaller lists. Likud went from 26-31 to 35 and Blue and White from 28-32 to 35. On the right, New Right (5-6 seats in every final poll) and Zehut (4-6) both failed. On the centre-left, Labor (8-11) fell to 6 and Meretz (5-8) to 4. Consolidation in a close formateur race was two-sided, while the shipped trailing layer gives the beat to Likud only.",
+   "quant": "Eight polls of 4-5 Apr 2019. Results: Likud 26.46%, B&W 26.13%, New Right 3.22% (138,598 votes, about 1,450 short of 3.25% of 4,309,270 valid votes), Zehut 2.74%, Gesher 1.73% (polled 2.0-2.9%, one poll 4 seats), Kulanu 3.54% (polled 4-6 seats), URWP 3.70% (5-7), Labor 4.43%, Meretz 3.63%. Zehut's final-week level (4-6 seats, about 3.3-5%) is well above the '~3.0%' in the dossier s.15 realization table, which would put Zehut's ratio near 0.55-0.8 rather than 0.91.",
+   "source": {
+    "authors": "Wikipedia contributors (compilation of published Israeli polls; CEC results)",
+    "year": 2019,
+    "title": "Opinion polling for the April 2019 Israeli legislative election; April 2019 Israeli legislative election (results)",
+    "venue": "Wikipedia",
+    "doi_or_url": "https://en.wikipedia.org/wiki/Opinion_polling_for_the_April_2019_Israeli_legislative_election",
+    "type": "reference work"
+   },
+   "model_link": "TRAIL (Likud-only beat); gevalt coupling; NEW_STRADDLER (New Right and Zehut are among the nine first-cycle failures); dossier s.15 Zehut row",
+   "stance": "challenges",
+   "site_use": "April 2019 behind Blue and White +6.8"
+  },
+  {
+   "id": "STR-F11",
+   "claim": "In September 2019 the formateur race was tied in the final polls (Likud 31-36, Blue and White 31-33), and both landed inside their ranges (32, 33): there was no trailing beat. Otzma Yehudit showed 4 seats (at least 3.25%) in five of the eight final polls and 2.9-3.1% in two others, yet won about 1.9%, after Likud and Yamina argued its votes would be wasted. An ideological-core right-flank list was deserted under a gevalt appeal.",
+   "quant": "Eight polls of 10-13 Sep 2019. Otzma result 1.88% (dossier s.15), just under 84,000 votes against about 140,000 needed. The Times of Israel (18 Sep 2019, https://www.timesofisrael.com/far-right-minister-slams-peacock-extremist-party-leader-for-election-fail/) reports that Likud and Yamina claimed Otzma 'was never going to cross the threshold' and was taking votes from other right-wing parties. Ratio of result to final-week polls is about 0.55-0.65, not the x1.11 (from '~1.7% polled') in dossier s.15.",
+   "source": {
+    "authors": "Wikipedia contributors (compilation of published Israeli polls; CEC results)",
+    "year": 2019,
+    "title": "Opinion polling for the September 2019 Israeli legislative election",
+    "venue": "Wikipedia",
+    "doi_or_url": "https://en.wikipedia.org/wiki/Opinion_polling_for_the_September_2019_Israeli_legislative_election",
+    "type": "reference work"
+   },
+   "model_link": "dossier s.15 realization table (Otzma Sept 2019 row) and the site sentence on sectarian/ideological lists; gevalt coupling (Otzma in GEVALT_SAT_IDS); TRAIL (tie fold)",
+   "stance": "challenges",
+   "site_use": "... while lists with a sectarian or ideological core held their polling."
+  },
+  {
+   "id": "STR-F12",
+   "claim": "In 2021 Likud led clearly (29-32 vs Yesh Atid 17-19), so there was no close formateur race. Every list sitting at the 4-seat floor of the final polls met or beat it: Blue and White 4-7 to 8, Meretz 4-5 to 6, Religious Zionism 4-5 to 6, Labor 4-6 to 7, and Ra'am, 4 in seven polls and 1.7% in one, to 4. The mid-sized first-cycle New Hope fell from 7-10 to 6. Near-threshold lists can surge as well as desert.",
+   "quant": "Eight polls of 16-19 Mar 2021. Results: B&W 6.63%, Meretz 4.59%, RZP 5.12%, Labor 6.09%, Ra'am 3.79%, New Hope 4.74%, Yamina 6.21% (polled 8-10). The pattern matches the dossier's own 2021 straddler drift of +1.94 pp (s.36) and Ra'am entering the fidelity record as a D-21 straddler that passed (projected 3.16%, won 3.79%, s.46.1).",
+   "source": {
+    "authors": "Wikipedia contributors (compilation of published Israeli polls; CEC results)",
+    "year": 2021,
+    "title": "Opinion polling for the 2021 Israeli legislative election",
+    "venue": "Wikipedia",
+    "doi_or_url": "https://en.wikipedia.org/wiki/Opinion_polling_for_the_2021_Israeli_legislative_election",
+    "type": "reference work"
+   },
+   "model_link": "NEW_STRADDLER (one-signed desertion term); a desert/surge mixture; TRAIL (non-firing fold)",
+   "stance": "challenges",
+   "site_use": "... of eleven first-cycle lists projected within the threshold band, two passed and nine failed, a mean drift of -1.6 points of seat-implied share ..."
+  },
+  {
+   "id": "STR-F13",
+   "claim": "In 2022 almost 9% of votes were wasted below the threshold. The Netanyahu bloc outpolled its rivals by about 30,000 votes, under one seat, yet won 64 seats. All four Netanyahu-bloc lists signed surplus agreements, against two in the other camp, where five lists were wobbling near the line. Measured against the final polls, Meretz (an established list, 4-5 seats in all eight final polls) failed with 3.16%, about 4,050 votes short. Jewish Home (polled 1.2-2.1%) took 1.19%. Balad, an Arab sectoral list polled at 1.0-2.75%, took 2.91%.",
+   "quant": "Kenig: 'almost 9% of the votes were wasted below the electoral threshold'; Meretz and Balad together 'some 300,000 votes'. Final polls from https://en.wikipedia.org/wiki/Opinion_polling_for_the_2022_Israeli_legislative_election (eight polls of 23-28 Oct 2022). Results: Meretz 150,793 votes (3.16%), Balad 138,617 (2.91%), Jewish Home 56,775 (1.19%), of 4,764,742 valid votes. Jewish Home's ratio is about 0.6-0.65 (supports the old x0.7). Balad's is about 1.5 (supports a sectoral exemption). Meretz's is about 0.75-0.95, and Meretz is NOT first-cycle.",
+   "source": {
+    "authors": "Ofer Kenig (Israel Democracy Institute)",
+    "year": 2022,
+    "title": "The 2022 Elections: Results Analysis",
+    "venue": "Israel Democracy Institute, 7 Nov 2022",
+    "doi_or_url": "https://en.idi.org.il/articles/46229",
+    "type": "report"
+   },
+   "model_link": "NEW_STRADDLER first-cycle restriction (Meretz 2022 is an established list that was deserted); sectoral exemption (Balad); surplus agreements as a coalition signal",
+   "stance": "challenges",
+   "site_use": "Today it applies to Amcha and the Reservists-Economic list ..."
+  },
+  {
+   "id": "STR-F14",
+   "claim": "Gil (Pensioners), a first-cycle list polled at 0-2 seats under a 2% threshold, gained support in the days before the 2006 election. Contrary to all predictions it won 7 seats. This is a first-cycle near-threshold SURGE outside the graded 2009-2022 window. Inside the window the only surge among the eleven first-cycle straddlers is Yamina (Sept 2019).",
+   "quant": "Bargsted & Kedar p.312 fn 11: Gil 'gained support in the days leading to the elections, and contrary to all predictions won seven seats'. Result: 185,759 votes, 5.92%, 7 seats; threshold 2%; pre-election polls 0-2 seats (https://en.wikipedia.org/wiki/2006_Israeli_legislative_election).",
+   "source": {
+    "authors": "Matias A. Bargsted; Orit Kedar",
+    "year": 2009,
+    "title": "Coalition-Targeted Duvergerian Voting: How Expectations Affect Voter Choice under Proportional Representation (fn 11)",
+    "venue": "American Journal of Political Science 53(2):307-323",
+    "doi_or_url": "https://doi.org/10.1111/j.1540-5907.2009.00372.x",
+    "type": "peer-reviewed"
+   },
+   "model_link": "NEW_STRADDLER as a single normal with mu < 0 vs a desert/surge mixture",
+   "stance": "challenges",
+   "site_use": "... of eleven first-cycle lists projected within the threshold band, two passed and nine failed ..."
+  },
+  {
+   "id": "STR-F15",
+   "claim": "Threshold insurance voting needs three conditions: the voter weighs government outcomes, the party is at risk of missing the threshold, and it is not the voter's first preference. All three held in Sweden 2010 for the Christian Democrats, the government coalition's small party at risk under the 4% line, which received strategic insurance votes. In the author's summary, a majority of KD voters named the Moderates (the senior partner) as their preferred party.",
+   "quant": "Conditional logit on the 2010 Swedish National Election Study. KD won 5.6% (threshold 4%). The 'majority preferred the Moderates' wording is from Freden's LSE EUROPP post of 26 Feb 2015 (https://blogs.lse.ac.uk/europpblog/2015/02/26/evidence-from-sweden-shows-the-importance-of-parties-signalling-potential-coalition-partners-for-strategic-voting). Effect magnitudes were not retrieved (full text not opened).",
+   "source": {
+    "authors": "Annika Freden",
+    "year": 2014,
+    "title": "Threshold Insurance Voting in PR Systems: A Study of Voters' Strategic Behavior in the 2010 Swedish General Election",
+    "venue": "Journal of Elections, Public Opinion and Parties 24(4):473-492",
+    "doi_or_url": "https://doi.org/10.1080/17457289.2013.872118",
+    "type": "peer-reviewed"
+   },
+   "model_link": "surge component for straddlers embedded in a bloc with a senior partner (RZP-Zehut, Otzma, Amcha relative to Likud; Democrats or B&W relative to Yashar)",
+   "stance": "challenges",
+   "site_use": "new claim"
+  },
+  {
+   "id": "STR-F16",
+   "claim": "In survey experiments with randomised polls and coalition signals, insurance voting for a small party depended on two things: polls putting it just below the threshold, and its membership of a clear pre-electoral coalition. Small parties outside a coalition benefited much less.",
+   "quant": "Abstract-level (Lund University record); the experiment's magnitudes were not retrieved.",
+   "source": {
+    "authors": "Annika Freden",
+    "year": 2017,
+    "title": "Opinion Polls, Coalition Signals and Strategic Voting: Evidence from a Survey Experiment",
+    "venue": "Scandinavian Political Studies 40(3):247-264",
+    "doi_or_url": "https://doi.org/10.1111/1467-9477.12087",
+    "type": "peer-reviewed"
+   },
+   "model_link": "conditioning variable for a desert/surge mixture: coalition embedding of the straddler, not its age",
+   "stance": "challenges",
+   "site_use": "new claim"
+  },
+  {
+   "id": "STR-F17",
+   "claim": "A 2022 Swedish survey experiment placed each of the three smallest parties below, at, or above the 4% threshold. Poll-induced insurance voting appeared for the party most tied to a government alternative (Christian Democrats), weakly for the Liberals, and not at all for the issue-focused Greens. None of the threshold parties was abandoned because of low poll levels.",
+   "quant": "N=3,259 (fieldwork 31 Aug-9 Sep 2022; nine conditions). KD vote: 8.2% when shown at 2.5%, 7.3% at 4.0%, 4.1% at 5.5% (2.5 vs 5.5: t=4.88, p<.05; 4.0 vs 5.5: t=3.06, p<.05). Liberals 6.8 / 4.8 / 4.9% (n.s.). Greens 11.4 / 11.2 / 12.2% (n.s.) (p.6). Insurance came mainly from Moderate supporters; Sweden Democrat supporters mostly stayed. Authors: 'none of the smaller threshold parties were abandoned because of low poll levels'.",
+   "source": {
+    "authors": "Annika Freden; Bastiaan Bruinsma; Nora Theorin; Henrik Oscarsson",
+    "year": 2024,
+    "title": "Insurance Voting in the Centre: An Experimental Approach",
+    "venue": "International Journal of Public Opinion Research 36(3): edae041",
+    "doi_or_url": "https://doi.org/10.1093/ijpor/edae041",
+    "type": "peer-reviewed"
+   },
+   "model_link": "NEW_STRADDLER sign and conditioning; certainty-layer churn on near-threshold lists (low polls did not by themselves trigger abandonment)",
+   "stance": "challenges",
+   "site_use": "A first-cycle list projected within -0.75/+1.5 points of 3.25% therefore carries that desertion ..."
+  },
+  {
+   "id": "STR-F18",
+   "claim": "Rental (insurance) votes need consistent coalition signals from the senior partner. At the January 2013 Lower Saxony election, the FDP polled about 4-6% and won 9.9% on CDU rental votes, with the CDU at about 36% against 40% in the polls. In the federal election months later, without a consistent signal, the FDP fell to 4.8% nationally and lost its seats.",
+   "quant": "Lower Saxony: Forschungsgruppe Wahlen estimated the CDU was the most preferred party of 80% of actual FDP voters (p.296). Pre-election Harris/Decima surveys (n=1,023 state, 1,211 federal): 21% of CDU supporters intended to vote FDP at the state election vs 5% at the federal election (p.299). FDP federal list vote within Lower Saxony 4.2%.",
+   "source": {
+    "authors": "Thomas Gschwend; Lukas F. Stoetzer; Steffen Zittlau",
+    "year": 2016,
+    "title": "What drives rental votes? How coalitions signals facilitate strategic coalition voting",
+    "venue": "Electoral Studies 44:293-306",
+    "doi_or_url": "https://doi.org/10.1016/j.electstud.2016.06.011",
+    "type": "peer-reviewed"
+   },
+   "model_link": "surge component conditional on a senior-partner signal. Israeli analogues: Netanyahu-brokered mergers and surplus agreements (2021, 2022), or the opposite signal ('a vote for Otzma is wasted', 2019s).",
+   "stance": "informs",
+   "site_use": "new claim"
+  },
+  {
+   "id": "STR-F19",
+   "claim": "Supporters of the major German parties sometimes voted against their first preference on the PR (second) vote to raise the chance of a majority with the declared junior partner. Their party choice responded to expectations about the small party's chances of re-entering parliament.",
+   "quant": "Two-step random-utility estimation on German election-study data. Abstract-level; magnitudes and elections covered not retrieved (full text not opened).",
+   "source": {
+    "authors": "Susumu Shikano; Michael Herrmann; Paul W. Thurner",
+    "year": 2009,
+    "title": "Strategic Voting under Proportional Representation: Threshold Insurance in German Elections",
+    "venue": "West European Politics 32(3):634-656",
+    "doi_or_url": "https://doi.org/10.1080/01402380902779147",
+    "type": "peer-reviewed"
+   },
+   "model_link": "surge component (threshold insurance from the senior partner's voters)",
+   "stance": "informs",
+   "site_use": "new claim"
+  },
+  {
+   "id": "STR-F20",
+   "claim": "Because coalition bargaining waters down each party's influence on policy, outcome-oriented voters often back parties more extreme than themselves to pull the coalition's policy their way (compensational voting). The effect is stronger in consensual systems, such as the Netherlands and Norway, than in majoritarian ones (Britain, Canada). This is a standing counterforce to consolidation: some right-flank satellite support is held in order to pull a Likud-led coalition rightward, not merely parked.",
+   "quant": "Four parliamentary democracies (Britain, Canada, Norway, Netherlands); the abstract states the theory and finds that institutional context conditions the weight on compensational voting. No pooled pp effect.",
+   "source": {
+    "authors": "Orit Kedar",
+    "year": 2005,
+    "title": "When Moderate Voters Prefer Extreme Parties: Policy Balancing in Parliamentary Elections",
+    "venue": "American Political Science Review 99(2):185-199",
+    "doi_or_url": "https://doi.org/10.1017/S0003055405051592",
+    "type": "peer-reviewed"
+   },
+   "model_link": "TRAIL_SAT_CAP 0.75 (a cap on how much satellites can lose to a Likud beat); the sectarian/ideological distinction",
+   "stance": "informs",
+   "site_use": "new claim"
+  },
+  {
+   "id": "STR-F21",
+   "claim": "Israeli law bars broadcasting or publishing the results of any election survey not already published from the END of the Friday before the polls open until the polls close. A survey published before that point may be repeated only with a prominent note that it is not current and says nothing about voting patterns on the day. For the 27 Oct 2026 election, Friday 23 Oct is the last legal day for new polls, which leaves about four unobserved days (Friday night to Tuesday 22:00).",
+   "quant": "Elections Law (Propaganda Methods), 5719-1959, s.16E(h) (Hebrew 16ה(ח)), current text as published by the Central Elections Committee (reference 2022-000238). The same section requires filing every survey with the CEC (s.16E(e)). An IDI note of 15 Nov 2002 (https://www.idi.org.il/parliaments/7129/9017) described the October 2002 amendment as a one-day ban; the amendment history between that and the current end-of-Friday text was not traced. The Wikipedia 2022 polling page marks the silence from the end of Friday 28 Oct 2022 for a Tuesday 1 Nov election.",
+   "source": {
+    "authors": "State of Israel, Central Elections Committee",
+    "year": 2022,
+    "title": "Elections Law (Propaganda Methods) 1959, s.16E - current text (נוסח סעיף 16ה)",
+    "venue": "Central Elections Committee (gov.il)",
+    "doi_or_url": "https://www.gov.il/BlobFolder/guide/knesset25-elections-info/he/survey_section16_acces.pdf",
+    "type": "official data"
+   },
+   "model_link": "calendar (dossier s.5: 'Oct 23 (Fri) Poll blackout begins'); final refit on the 22-23 Oct polls; the forward random walk and gevalt/late-swing shocks cover a window no poll can observe",
+   "stance": "supports",
+   "site_use": "new claim (calendar): 'No new polls may be published from the end of Friday 23 October until the polls close on 27 October.'"
+  },
+  {
+   "id": "STR-F22",
+   "claim": "In a post-election survey of 1,133 voters after the 2015 election, 15% said they decided on election day and another 13% in the campaign's final days. 62% of these late deciders voted for right-wing parties, 21% for centrist and 16% for left-wing parties. A large and right-leaning late decision fell inside the poll-silence window.",
+   "quant": "n=1,133 voters; 15% election day + 13% final days = 28%; late deciders 62% right / 21% centre / 16% left. The survey was commissioned by New Majority, an anti-Netanyahu group, and the pollster is not named, so this is weak evidence. No INES time-of-decision series was located.",
+   "source": {
+    "authors": "JTA (Jewish Telegraphic Agency)",
+    "year": 2015,
+    "title": "More than 1 in 4 Israeli voters made decision at last minute",
+    "venue": "JTA, 20 Apr 2015",
+    "doi_or_url": "https://www.jta.org/2015/04/20/israel/more-than-1-in-4-israeli-voters-made-decision-at-last-minute",
+    "type": "report"
+   },
+   "model_link": "poll-silence window variance; timing of the gevalt transfer; certainty layer (undecided lean)",
+   "stance": "informs",
+   "site_use": "new claim"
+  },
+  {
+   "id": "STR-F23",
+   "claim": "In a large Danish survey experiment (PR, eight parties), a news story showing a party gaining raised intended votes for it relative to a story showing it losing, for both a large party (about 21%) and a small one (about 4%). The loss story did not significantly lower support relative to the control. Bandwagon effects are real but small and asymmetric: a poll decline alone does not trigger measurable desertion.",
+   "quant": "YouGov panel, 10-28 Jan 2014, 3,011 complete responses, five arms. Social Democrats shown +/-5 pp, Conservatives +/-2 pp. Gain vs loss p<0.05 for both parties. Gain vs control (joint) p<0.05. Loss vs control negative, n.s. (p<0.4). No heterogeneity by age, gender, education or past vote (accepted manuscript, pp. 8-12).",
+   "source": {
+    "authors": "Jens Olav Dahlgaard; Jonas Hedegaard Hansen; Kasper M. Hansen; Martin V. Larsen",
+    "year": 2017,
+    "title": "How Election Polls Shape Voting Behaviour",
+    "venue": "Scandinavian Political Studies 40(3):330-343",
+    "doi_or_url": "https://doi.org/10.1111/1467-9477.12094",
+    "type": "peer-reviewed"
+   },
+   "model_link": "no poll-momentum (bandwagon) term in the projection; a falling straddler is not deserted by poll exposure alone",
+   "stance": "supports",
+   "site_use": "new claim"
+  },
+  {
+   "id": "STR-F24",
+   "claim": "In a Dutch survey experiment with real poll results, simply showing poll standings did not change later vote intentions. Framing a party as growing produced a small bandwagon effect, and that effect was no larger among undecided voters.",
+   "quant": "N=23,421. Plain standings: no effect. Growth framing: modest positive effect. No moderation by indecision (abstract).",
+   "source": {
+    "authors": "Tom W.G. van der Meer; Armen Hakhverdian; Loes Aaldering",
+    "year": 2016,
+    "title": "Off the Fence, Onto the Bandwagon? A Large-Scale Survey Experiment on Effect of Real-Life Poll Outcomes on Subsequent Vote Intentions",
+    "venue": "International Journal of Public Opinion Research 28(1):46-72",
+    "doi_or_url": "https://doi.org/10.1093/ijpor/edu041",
+    "type": "peer-reviewed"
+   },
+   "model_link": "no bandwagon term; the undecided lean (certainty layer) need not track poll momentum",
+   "stance": "supports",
+   "site_use": "new claim"
+  },
+  {
+   "id": "STR-F25",
+   "claim": "Strong partisans react to a threatened electoral loss with anger and more campaign activity, and to reassured victory with enthusiasm. Holders of strong issue positions show no such arousal. This is the psychological basis of a 'gevalt' appeal: it works on identifiers when their party's standing is threatened, which fits a trigger based on the formateur race rather than a constant Likud premium.",
+   "quant": "Four studies (APSR 109(1):1-17). Effects of threat and reassurance on anger and enthusiasm concentrate among strong identifiers (abstract). No vote-share magnitude.",
+   "source": {
+    "authors": "Leonie Huddy; Lilliana Mason; Lene Aaroe",
+    "year": 2015,
+    "title": "Expressive Partisanship: Campaign Involvement, Political Emotion, and Partisan Identity",
+    "venue": "American Political Science Review 109(1):1-17",
+    "doi_or_url": "https://doi.org/10.1017/S0003055414000604",
+    "type": "peer-reviewed"
+   },
+   "model_link": "TRAIL trigger (threat = trailing or tied) and the retired fixed anchors (a constant premium fired in two cycles out of eight)",
+   "stance": "supports",
+   "site_use": "What replaced them is conditional: the record shows Likud's big beats came when it was trailing the largest non-bloc list in the final polls ..."
+  }
+ ],
+ "challenges": [
+  {
+   "title": "New-straddler desertion: replace a one-signed first-cycle shift with a desert/surge mixture conditioned on formateur race and coalition embedding",
+   "what_literature_says": "Strategic behaviour at the threshold goes both ways. Wasted-vote desertion (Abramson et al. 2010; Meffert & Gschwend 2010) coexists with threshold-insurance surges for small parties tied to a senior partner (Freden 2014, 2017; Freden et al. 2024; Shikano et al. 2009; Gschwend et al. 2016). Issue parties get neither and are not abandoned at low polls (Freden et al. 2024). Supporters overrate their own small party by 1.7-2.9 pp (Meffert & Gschwend 2011), which damps desertion. The Israeli record is a mixture. Satellites collapsed in the close-race and gevalt cycles: 2015, April 2019 (New Right, Zehut), September 2019 (Otzma) and 2022 (Meretz, an established list). Every list at the 4-seat floor beat its final polls in 2021, when there was no close formateur race, and the first-cycle Gil surged in 2006.",
+   "current_model": "NEW_STRADDLER: first-cycle lists within -0.75/+1.5 pp of 3.25% receive N(-1.6, 2.6) pp, zero-sum against the field. The -1.6 is seat-implied. On CEC ballot shares the first-cycle straddlers drifted -0.42 pp (sd 1.72; D-21 -0.04, n=7; D-56 -1.09, n=4; dossier s.46.1). The layer's value lies in its Brier gain from pushing lists under the line, not in its mean.",
+   "proposed_change": "Re-measure on ballot shares (as s.46.1 already recommends). Then test a two-component version. A desert component, mean about -1 pp of the list's share, carries weight w1 that rises with formateur-race closeness (|Likud - largest non-bloc list| in seats) and with an explicit 'wasted vote' signal from the bloc leader. A surge component, mean about +1 pp, carries weight that rises with a senior-partner rescue signal (signed surplus agreement, merger or endorsement) and is zero for orphan lists. Extend eligibility from first-cycle lists to all straddlers and keep the sectoral (Arab/haredi) lists out of the desert component.",
+   "how_to_test": "Fidelity harness (HARNESS_FIDELITY on), validate_threshold on CEC vote shares at D-56 and D-21, with the layer-off base explicit. Compare straddler Brier and log score of (a) the shipped layer, (b) the shipped layer with mu re-measured on ballots, and (c) the mixture with the two covariates fixed in advance (closeness from the D-21 projection; signal coded from dated press before D-21). Pre-register the covariates, because n is about 25 list-cycles.",
+   "finding_ids": [
+    "STR-F02",
+    "STR-F04",
+    "STR-F06",
+    "STR-F10",
+    "STR-F11",
+    "STR-F12",
+    "STR-F13",
+    "STR-F14",
+    "STR-F15",
+    "STR-F16",
+    "STR-F17",
+    "STR-F18",
+    "STR-F19"
+   ]
+  },
+  {
+   "title": "Trailing-Likud: the academic mechanism is formateur-race closeness, and it is two-sided",
+   "what_literature_says": "Coalition-targeted desertion flows to the bloc-defining lists (Bargsted & Kedar 2009). In 2003 Likud received most minor-party defections (Abramson et al. 2010). In a 2019-2020 Israeli panel, voters who saw the formateur race as close were more likely to switch to a formateur party (Harsgor et al. 2023; significant in the main model, fragile in bootstrap). Threat of loss activates strong identifiers (Huddy et al. 2015). The academic support is for closeness, not trailing as such. In April 2019 Blue and White beat its final polls by +3 to +7 seats at Labor's and Meretz's expense while Likud beat its own by +4 to +9. In 2015 Zionist Union did not beat its polls. In September 2019, a tie with consolidation already priced into the polls, neither list beat them.",
+   "current_model": "TRAIL: when Likud trails or ties the largest non-bloc list by 0.5 seats or less, Likud gets N(5.0, 4.9) x 0.5 seats from Otzma and RZP-Zehut (cap 75%). The cliff is shipped; the closeness ramp is held off on the fidelity Brier gate (s.46.3). There is no counterpart for the change bloc's largest list.",
+   "proposed_change": "(a) If the ramp is reopened, define it on |margin| (closeness) as Harsgor et al. do, rather than on the signed margin. (b) Test a symmetric arm. Under the same closeness weight, the largest non-bloc list (Yashar) receives a beat sourced from its own non-Arab satellites (Democrats, Together, YB, B&W), sized from the 2019a B&W record. This mostly moves list-level seats, not P(NB>=61), because the transfer stays inside each bloc.",
+   "how_to_test": "Fidelity harness eve/D-7/D-21: arms trail_cliff (shipped), tramp_abs, and trail_sym (both bloc leaders). Grade median/mean MAE, threshold Brier and coverage on the fixed mask, with a fold table for 2015, 2019a and 2019s. Expect 2019a to favour trail_sym and 2015 to penalise it. Ship only under the existing fold rule.",
+   "finding_ids": [
+    "STR-F02",
+    "STR-F03",
+    "STR-F07",
+    "STR-F08",
+    "STR-F09",
+    "STR-F10",
+    "STR-F11",
+    "STR-F25"
+   ]
+  },
+  {
+   "title": "The small-party realization record (s.15) and the site's 'ideological core held their polling' sentence",
+   "what_literature_says": "Measured against the final-week polls on record, Zehut 2019a polled 4-6 seats (about 3.3-5%) and won 2.74%, and Otzma 2019s polled 4 seats in five of eight final polls (2.9-3.1% in two) and won about 1.9%. Both ratios are about 0.55-0.8, against the table's 0.91 and 1.11. Right-religious supporters' intentions were insensitive to coalition expectations in 2003 (Aldrich et al. 2004, via Meffert & Gschwend 2010), but an explicit 'wasted vote' campaign still emptied Otzma in 2019. Arab sectoral lists did hold or beat their polls: Balad 2022 (1.0-2.75% to 2.91%) and Ra'am 2021.",
+   "current_model": "MICRO_REALIZE (x0.7 non-sectoral, x1.0 sectarian/ideological) has been inactive since 13 Oct (MICRO_POLLED empty; small lists are now latent components, s.42). The site still states the conclusion, and the s.15 table is cited by the own-measurements desk (DL-15).",
+   "proposed_change": "Recompute the s.15 ratios from a fixed window (the final eight polls, or the final week) using the poll archive. Reword the site sentence to: 'Arab and haredi sectoral lists held or beat their final polls; right-flank lists did not when the bloc leader campaigned against wasted votes (Otzma 2019, Yachad 2015).' Treat ideological right-flank lists as gevalt-exposed rather than exempt.",
+   "how_to_test": "Evidence class: recompute from data/polls (final-week means per list) and the CEC results; report the table with its window stated. No harness change is needed, since the layer is retired.",
+   "finding_ids": [
+    "STR-F04",
+    "STR-F10",
+    "STR-F11",
+    "STR-F12",
+    "STR-F13"
+   ]
+  },
+  {
+   "title": "Gevalt coupling: directional and triggered, not symmetric noise",
+   "what_literature_says": "The intra-bloc transfer in the record is one-way, toward the formateur list, and appears in close-race or wasted-vote-campaign cycles (2015, 2019a, 2019s). In 2021, with Likud clearly ahead, the satellites rose instead. Coalition-targeted desertion is directional by construction (Bargsted & Kedar 2009; Harsgor et al. 2023).",
+   "current_model": "GEVALT_SD = 2.0 seats: a zero-sum N(0, 2) transfer between Likud and its satellites, symmetric in sign, always on, and not harness-validated (s.2). TRAIL now carries the directional mean.",
+   "proposed_change": "Keep the coupling as covariance, but make its variance conditional on the same closeness weight as TRAIL, larger in close races and smaller otherwise. Consider a matching coupling on the change-bloc side. Alternatively, drop GEVALT_SD where TRAIL fires, so the same mechanism is not counted twice.",
+   "how_to_test": "Harness arm gevalt_cond (variance x closeness weight) vs shipped, graded on threshold Brier for the satellites (Otzma, RZP, New Right, Zehut, Yachad, Jewish Home) and on coverage. This needs era-specific satellite maps (the reason s.2 left the coupling ungraded).",
+   "finding_ids": [
+    "STR-F03",
+    "STR-F07",
+    "STR-F08",
+    "STR-F09",
+    "STR-F11",
+    "STR-F12"
+   ]
+  }
+ ],
+ "parameters": [
+  {
+   "name": "NEW_STRADDLER (mu, sd, band, eligibility)",
+   "current": "mu -1.6 pp, sd 2.6, band -0.75/+1.5 pp around 3.25%, first-cycle lists only (seat-implied record)",
+   "literature_range": "The sign depends on context. Gross desertion of minor-list preferrers in Israeli surveys is 20-39% (1999-2006), about -0.7 to -1.4 pp for a 3.5% list before any inflow. Final-week realisation runs 0.55-0.9 in close-race or gevalt cycles and 1.0-1.4 in 2021. Experimental rescue for coalition-embedded parties is about +4 pp of the vote between 'safe' and 'below the line' polls (Sweden 2022), and none for issue parties. The model's own ballot-share drift is -0.42 pp (s.46.1).",
+   "finding_ids": [
+    "STR-F02",
+    "STR-F06",
+    "STR-F10",
+    "STR-F11",
+    "STR-F12",
+    "STR-F13",
+    "STR-F17"
+   ]
+  },
+  {
+   "name": "TRAIL (mu, sd, margin, scale; ramp)",
+   "current": "mu 5.0, sd 4.9 seats, x0.5, fires when Likud trails or ties by 0.5 seats or less (cliff); ramp held off; sourced from Otzma and RZP-Zehut, cap 0.75",
+   "literature_range": "Mechanism: switching to a formateur party rises when the race is perceived as close (Harsgor et al. 2023). Record: beats of +4 to +9 seats for Likud (2015, 2019a) and +3 to +7 for B&W (2019a) over final polls, about 0 in a priced-in tie (2019s), and none for the trailing ZU in 2015.",
+   "finding_ids": [
+    "STR-F07",
+    "STR-F09",
+    "STR-F10",
+    "STR-F11"
+   ]
+  },
+  {
+   "name": "GEVALT_SD",
+   "current": "2.0 seats, zero-sum, symmetric, unconditional",
+   "literature_range": "Directional (toward the formateur list) and conditional on closeness or a wasted-vote campaign; no published magnitude",
+   "finding_ids": [
+    "STR-F03",
+    "STR-F08",
+    "STR-F12"
+   ]
+  },
+  {
+   "name": "MICRO_REALIZE (retired 13 Oct; site sentence remains)",
+   "current": "x0.7 non-sectoral, x1.0 sectarian/ideological, from the s.15 table",
+   "literature_range": "Orphan or non-sectoral lists 0.6-0.8 (Jewish Home 2022 about 0.62; Israeli survey retention 0.61-0.80). Arab sectoral lists 1.0-1.5 (Ra'am 2021, Balad 2022). Right-flank ideological lists under a gevalt appeal about 0.55-0.65 against final-week polls (Otzma 2019s, Zehut 2019a).",
+   "finding_ids": [
+    "STR-F02",
+    "STR-F11",
+    "STR-F13"
+   ]
+  },
+  {
+   "name": "Poll-silence window",
+   "current": "Dossier s.5: blackout begins Fri 23 Oct; final refit on 22-23 Oct polls",
+   "literature_range": "Statutory: from the end of the Friday before polling day to polls close (s.16E(h)), so Friday polls are legal and about 4 days go unobserved. 28% of 2015 voters reported deciding in that span (partisan-sponsored survey).",
+   "finding_ids": [
+    "STR-F21",
+    "STR-F22"
+   ]
+  }
+ ],
+ "open_questions": [
+  "Blais, Aldrich, Indridason & Levine (2006) and Aldrich et al. (2004) were not opened. The 'one in ten' and the insensitivity of right-religious supporters come via Meffert & Gschwend (2010, p.340). Pull the originals before the site cites them directly.",
+  "Fredén (2014, 2017) and Shikano et al. (2009) are abstract-level here. Their effect sizes would help size a surge component.",
+  "No INES time-of-decision series was located. The 2015 late-decider figure comes from a survey commissioned by an anti-Netanyahu group. Does INES 2019-2022 carry a 'when did you decide' item?",
+  "When did s.16E(h) move from the one-day ban that IDI described in 2002 to the end-of-Friday rule? The current text is certain; its history is not.",
+  "2026 covariates for a mixture: which near-line lists have a senior-partner rescue signal? Candidates are the surplus agreements filed 16 Oct, any Likud statement on Amcha, Otzma or RZP-Zehut, and Yashar's on B&W and the Democrats. Is Netanyahu running an explicit 'wasted vote' campaign against Amcha?",
+  "Which window did dossier s.15 use for 'final polls' (Zehut ~3.0%, Otzma ~1.7%)? The final-week figures on record are far higher.",
+  "Should the formateur race be measured as list vs list (Likud vs Yashar) or as perceived PM race (Netanyahu vs Eisenkot/Bennett)? Harsgor et al. code the formateur parties."
+ ]
+}

@@ -24,7 +24,8 @@ import sys
 import pandas as pd
 from pathlib import Path
 
-P = Path(__file__).resolve().parent.parent / "data" / "processed"
+import os
+P = Path(os.environ.get("HARNESS_OUT_DIR") or Path(__file__).resolve().parent.parent / "data" / "processed")   # HARNESS_OUT_DIR: ballot-fidelity runs write apart
 
 
 def main(cand: str, hmode: str | None = None, fixed: bool = False) -> None:
@@ -36,6 +37,11 @@ def main(cand: str, hmode: str | None = None, fixed: bool = False) -> None:
     if c.empty:
         print(f"no ablation named {cand!r}; have {sorted(a.ablation.unique())}")
         return
+    common = base.index.intersection(c.index)
+    if len(common) < len(base.index):
+        print(f"WARNING: {cand} is scored in {len(common)} of {len(base.index)} cycles; "
+              f"comparing on the common cycles only: {sorted(common)}")
+        base, c = base.loc[common], c.loc[common]
     d = (c - base).round(3)
     print(f"=== eight-cycle harness: {cand} vs shipped (candidate - shipped) ===")
     print(pd.concat({"shipped": base.round(3), "cand": c.round(3), "delta": d}, axis=1).to_string())

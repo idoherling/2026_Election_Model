@@ -31,6 +31,11 @@ Key -> source:
   fit.u_*   the certainty layer's undecided pool and expected per-side
             transfer, from bayes_model's own constants
   fit       fit_summary.json (written by bayes_model.main) + CEC filing count
+  params    build_params: the model's live constants quoted in the annex
+            prose (bayes_model / government_formation), so the text
+            follows the model when a layer is retuned
+  sources   data/forecast_sources.json (src/build_sources.py): the
+            verified evidence registry every inline citation resolves to
   ledger    site_ledger.build_ledger — every 2026 poll with its sources
   ratings   site_ledger.build_ratings — per-firm track record
 """
@@ -88,6 +93,114 @@ def build_val() -> dict:
                                          "cov": round(float(g.coverage_90.mean()) * 100, 1),
                                          "brier": round(float(g.threshold_brier.mean()), 3)}
                           for k, g in h.groupby("horizon")}
+    # Track record (Gneiting, Balabdaoui & Raftery 2007: calibration first,
+    # then sharpness): per-election eve results and a reliability table of
+    # the threshold-pass probabilities against what happened.
+    bp = PROCESSED / "model_validation_bayes.csv"
+    if bp.exists():
+        b = pd.read_csv(bp, dtype={"cycle": str}).set_index("cycle").reindex(order)
+        out["cyc"] = [{"cycle": c, "mae": round(float(r.seat_mae), 2), "cov": round(float(r.coverage_90) * 100),
+                       "p61": round(float(r.p_bloc_61), 3), "nb": int(r.bloc_actual),
+                       "hit61": bool(r.bloc_61_happened)}
+                      for c, r in b.iterrows() if pd.notna(r.seat_mae)]
+    lp = PROCESSED / "model_validation_bayes_lists.csv"
+    if lp.exists():
+        L = pd.read_csv(lp, dtype={"cycle": str})
+        if "p_pass" in L.columns:
+            L = L[L["components"] != "micro"]
+            edges = [0, .1, .3, .5, .7, .9, 1.0001]
+            rel = []
+            for lo_, hi_ in zip(edges[:-1], edges[1:]):
+                g = L[(L.p_pass >= lo_) & (L.p_pass < hi_)]
+                if len(g):
+                    rel.append({"lo": lo_, "hi": min(hi_, 1.0), "n": int(len(g)),
+                                "pred": round(float(g.p_pass.mean()), 3),
+                                "obs": round(float((g.actual > 0).mean()), 3)})
+            inside = (L.actual >= L.p05) & (L.actual <= L.p95)
+            size = pd.cut(L.actual.where(L.actual > 0, L.pred_median), [-1, 5.5, 15.5, 200],
+                          labels=["small (0-5)", "mid (6-15)", "large (16+)"])
+            out["rel"] = rel
+            out["covsize"] = [{"size": str(k), "n": int(len(g)), "cov": round(float(inside[g.index].mean()) * 100, 1)}
+                              for k, g in L.groupby(size, observed=True)]
+            out["nlists"] = int(len(L))
+    return out
+
+
+def build_params(names: dict) -> dict:
+    """Live model constants quoted in the annex prose (data-par spans).
+
+    The methodology text names the layers' current settings (bloc-swing
+    scale, residual width, Arab turnout term, formation gates, refit gates
+    ...). They are read here from the model code every build, so the prose
+    follows the model when a layer is retuned instead of going stale.
+    Values under the top level are display strings; "num" holds the raw
+    numbers the annex's layer-size chart draws from.
+    """
+    import bayes_model as bm
+    import government_formation as gf
+
+    def f(x, d):
+        return f"{float(x):.{d}f}"
+
+    def sg(x, d):
+        x = float(x)
+        return ("+" if x > 0 else "−" if x < 0 else "") + f"{abs(x):.{d}f}"
+
+    P, fam = bm._P, bm.FAMILY_SHOCK
+    fe0 = P.get("family_e0", {})
+    B = gf.BEHAVIOR
+    at = bm.ARAB_TURNOUT
+    icpt = bm.ARAB_TURNOUT_INTERCEPT
+    comp = {"balad+hadash_taal": "Balad + Hadash-Ta'al"}
+    loyal = [[comp.get(k, names.get(k, k)), f(v, 1)] for k, v in bm.LOYAL_SD.items()]
+    resid = lambda s: (P["resid_base"] + P["resid_slope"] * s) * bm.RESID_SCALE
+    out = {
+        # election-day stack
+        "bloc_sd": f(bm.BLOC_SWING_SD, 2), "t_df": str(bm.T_DF),
+        "event_risk": f(bm.EVENT_RISK, 2).rstrip("0").rstrip("."),
+        "haredi_under": f(-fam["haredi"][0], 2), "haredi_sd": f(fam["haredi"][1], 2),
+        "haredi_under_raw": f(-fe0["haredi"][0], 2) if "haredi" in fe0 else None,
+        # the mean the projection actually applies (s.51: "e1" shipped, "e0" candidate)
+        "haredi_used": f(-(fe0["haredi"][0] if getattr(bm, "HAREDI_FAMILY_FORM", "e1") == "e0"
+                           and "haredi" in fe0 else fam["haredi"][0]), 2),
+        "arab_mean_pct": f(at["mean_unified"] * 100, 0), "arab_base_pct": f(at["base"] * 100, 1),
+        "arab_sd_pct": f(at["sd"] * 100, 0), "arab_max_pct": f(at["max"] * 100, 0),
+        "arab_k": f(bm.ARAB_TURNOUT_K, 2),
+        "arab_icpt": f(abs(icpt), 2) if icpt is not None else None,
+        "kalpi_rho": f(bm.KALPI_FAMILY_RHO, 1),
+        "resid_base": f(P["resid_base"], 2), "resid_slope": f(P["resid_slope"], 3),
+        "resid_scale": f(bm.RESID_SCALE, 2).rstrip("0").rstrip("."),
+        "new_list_mult": f(bm.NEW_LIST_MULT, 2),
+        "loyal": loyal,
+        "gevalt_sd": f(bm.GEVALT_SD, 1),
+        "trail_mean": f(bm.TRAIL["mu"] * bm.TRAIL["scale"], 1),
+        "trail_margin": f(bm.TRAIL["margin"], 1),
+        "trail_cap_pct": f(bm.TRAIL_SAT_CAP * 100, 0),
+        "nstrad_mu": sg(bm.NEW_STRADDLER["mu"], 1), "nstrad_sd": f(bm.NEW_STRADDLER["sd"], 1),
+        "nstrad_lo": sg(bm.NEW_STRADDLER["band"][0], 2), "nstrad_hi": sg(bm.NEW_STRADDLER["band"][1], 1),
+        "churn_mean": f(bm.CHURN_D_MEAN, 2),
+        "cert_together_pct": f(bm.CERTAINTY["bennett_2026"] * 100, 0),
+        "cert_amcha_pct": f(bm.CERTAINTY["amcha_yisrael"] * 100, 0),
+        "kalpi_arab_cap_pct": f(bm.KALPI_ARAB_CAP * 100, 1),
+        "kalpi_haredi_floor_pct": f(bm.KALPI_HAREDI_FLOOR * 100, 1),
+        "min_list_polls": str(bm.MIN_LIST_POLLS),
+        # computation: the refit gates the production fit must pass
+        "gate_rhat": f(bm.REFIT_GATES["rhat_max"], 2), "gate_ess": str(bm.REFIT_GATES["ess_min"]),
+        # formation tree (marginal means of the Beta priors)
+        "raam_joins": f(B["raam_joins"], 2), "raam_supports": f(B["raam_supports"], 2),
+        "jl_supports": f(B["jl_supports"], 2), "shas_defects": f(B["shas_defects"], 2),
+        "utj_defects": f(B["utj_defects"], 2), "liberman_haredi_ok": f(B["liberman_haredi_ok"], 2),
+        "likud_sans_bibi": f(B["likud_sans_bibi"], 2), "centre_defects": f(B["centre_defects"], 2),
+        "amcha_right_pct": f(B["amcha_right"] * 100, 0), "pm_neff": str(gf.PM_ALLOC_NEFF),
+        "num": {
+            "bloc": round(float(bm.BLOC_SWING_SD * bm.EVENT_RISK), 2),
+            "haredi_sd": round(float(fam["haredi"][1]), 2),
+            "resid4": round(float(resid(4)), 2), "resid25": round(float(resid(25)), 2),
+            "resid4_new": round(float(resid(4) * bm.NEW_LIST_MULT), 2),
+            "gevalt": round(float(bm.GEVALT_SD), 2),
+            "trail": round(float(bm.TRAIL["mu"] * bm.TRAIL["scale"]), 2) if bm.TRAIL_ON else None,
+        },
+    }
     return out
 
 
@@ -226,6 +339,7 @@ def build_payload() -> dict:
               "firms26": int(p26.pollster.nunique())}
 
     dr = pd.read_parquet(PROCESSED / "mixture_draws.parquet")
+    counts["nsims"] = int(len(dr))   # simulated Knessets behind every probability
     dr = dr[[c for c in dr.columns if dr[c].max() > 0]]
     samp = dr.sample(n=min(2500, len(dr)), random_state=1).astype(int)
     draw_cols = list(samp.columns)
@@ -255,7 +369,14 @@ def build_payload() -> dict:
     ledger = build_ledger(fit)
     ratings = build_ratings(fit)
 
+    # Evidence registry (data/forecast_sources.json, built by src/build_sources.py
+    # from the verified research desks in data/processed/forecast_research/):
+    # every inline citation on the site resolves to one of these entries.
+    src_path = ROOT / "data" / "forecast_sources.json"
+    sources = json.loads(src_path.read_text(encoding="utf-8")) if src_path.exists() else []
+
     return {
+        "sources": sources, "params": build_params(names),
         "asof": str(off["asof"].iloc[0]), "parties": parties, "sub": sub,
         "ledger": ledger, "ratings": ratings,
         "blocs": blocs, "formation": formation, "pm": pm, "events": events,

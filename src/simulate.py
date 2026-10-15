@@ -77,9 +77,13 @@ SUB_THRESHOLD_DEFAULT = 0.015  # share for 0-seat lists with no polled pct
 # liveblog 6 Oct, https://www.timesofisrael.com/liveblog_entry/likud-and-religious-zionism-sign-surplus-vote-agreement/;
 # Ynet https://www.ynetnews.com/article/asxop5pjn, undated). SIGNED 11 Oct: Shas - UTJ
 # (JPost https://www.jpost.com/israel-election-2026/article-911320, Ynet
-# https://www.ynetnews.com/article/e073g8o82). UNSIGNED and carried as a
-# pair: Otzma - Amcha (Ben-Gvir's only remaining option, undecided per the
-# Ynet report of the Likud signing; valid only if Amcha passes).
+# https://www.ynetnews.com/article/e073g8o82). REFUSED 13 Oct: Otzma - Amcha
+# (Ben-Gvir: no surplus agreement with Winter, "Winter is Bennett 2"; Ynet
+# https://www.ynet.co.il/news/article/ry8ck9iigx, INN
+# https://www.inn.co.il/news/708398, date per the Haaretz live blog of 13 Oct)
+# - no longer carried. Amcha's last option is the Reservists-Economic list;
+# a pair of two sub-threshold lists would change nothing here. Re-check
+# against the CEC's published list of registered agreements (~19 Oct).
 # Reservists - Blue and White are negotiating; a pair of two sub-threshold
 # lists has no effect and is not carried.
 # Ids are COMPONENT ids. The Bayesian pipeline merges some under another
@@ -90,7 +94,6 @@ SURPLUS_PAIRS = [
     ("together", "yisrael_beytenu"),
     ("yashar", "democrats"),
     ("shas", "utj"),
-    ("otzma", "amcha_yisrael"),
     ("balad", "raam"),
 ]
 

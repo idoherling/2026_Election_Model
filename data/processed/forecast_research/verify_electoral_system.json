@@ -1,0 +1,168 @@
+{
+ "verdicts": [
+  {
+   "id": "SYS-F01",
+   "status": "verified",
+   "note": "Read the Hebrew Wikisource consolidated text (raw wikitext, includes the 5786 amendments). s.81(a) says 'not less than 3.25% (three and a quarter per cent) of all the valid votes'; s.81(b) sets an integer quota; s.81(c) gives floor seats. The 2022 quota of 36,227 is confirmed by Kenig (IDI, 16 Mar 2026) and recomputed from data/raw/kalpi/expc_25.csv: P=4,347,342, so P//120=36,227. simulate.THRESHOLD=0.0325 and the `sh >= threshold` test match the statute.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "SYS-F02",
+   "status": "verified",
+   "note": "Statute: s.81(d)(2) settles ties by a CEC lottery (הגרלה), and s.81(d)(4) is the half-the-seats clause as described. Code: simulate.dhondt uses np.argmax (lowest index wins), and no clause caps a list at 60. Exact-arithmetic recomputation on CEC counts 2015-2022 found 0 ties. mixture_shares.csv (15 Oct) gives Likud share_mean 0.18992, so (d)(4) cannot bind.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "SYS-F03",
+   "status": "verified",
+   "note": "Statute text confirmed. s.67(a): one partner only. s.67(b): notice by the 11th day before the election. s.67(c): CEC publication by the 8th day. s.82(a): pooled only for s.81(d), and only if each list passed s.81(a) by itself. s.82(b): internal split by the s.81 method. The dates hold: 27 Oct minus 11 days is 16 Oct, minus 8 is 19 Oct. s.81 amendment history lists 5733 (1973). In code, form_factions pools a pair only if passed[a] and passed[b], pools a list at most once (PAIR_RESOLVER_FIX), and splits a pair with an inner dhondt.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "SYS-F04",
+   "status": "verified",
+   "note": "Independently re-implemented ss.81-82 in exact Fraction arithmetic on expc_20..25 with the registered pairs. The result equals the official seats in 6/6 elections, with 0 ties. Running the repo's own validate_bayes.allocate_vector (D'Hondt on factions) on the same counts also gives 6/6. Valid-vote totals match the official totals (2015: 4,210,884 ... 2022: 4,764,742). The CEC guide p.5 says remaining seats go 'according to the Bader-Ofer method', and Kenig (2026) calls it D'Hondt. The dossier s.25 sentence exists.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "SYS-F05",
+   "status": "verified",
+   "note": "Recomputed remainder-stage seats as 120 minus the sum of floors. Results: 2015 4 (q 33,511), 2019a 7 (32,860), 2019s 3 (35,917), 2020 3 (37,943), 2021 8 (36,210), 2022 7 (36,227); mean 5.33. All match. IDI article 63750 confirms the 2022 quota of 36,227 and '7 seats remained'. Dossier s.1 line 28 does say '~6-9'. The cited IDI source covers 2022 only; the other cycles rest on CEC computation, which reproduces.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "SYS-F06",
+   "status": "verified",
+   "note": "The he.wikipedia 'הסכם עודפים' lists match the desk's pairs for the 20th-25th Knessets. The 20th-22nd cite CEC notices; the 23rd-25th are uncited on the page. Kenig (2026) confirms the four 2022 pairs. ToI and JPost corroborate the 2021 pairs Yamina-New Hope and YA-YB, and JPost 585334 says B&W had no 2019a deal. Recomputed: all registered pairs vs none gives 2015 Kulanu+1/JL-1, 2019a UTJ+1/Likud-1, 2019s none, 2020 none, 2021 Meretz+1/Likud-1, 2022 Likud+1/Labor-1. Pair by pair, 9 of 23 effective pairs gain, and the list of gainers is identical. Caveat on definitions: in 2019s and 2020 single pairs WERE pivotal (B&W-YB, Likud-Yamina, B&W-LGM each +1 with the other pairs held fixed), but the effects cancel, so all-vs-none shows no change. Wikipedia's own narrative credits 2019s with a moved seat. The 'four of six' figure holds only on the all-pairs-vs-none counterfactual.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "SYS-F07",
+   "status": "verified",
+   "note": "Re-ran the perturbation: each list N(0, 0.15 pp), 400 draws, with vs without each pair, other pairs fixed. Mean +0.398 over 23 pairs; min 0.25 (UTJ-Shas 2015; desk 0.23, within MC noise); max 0.76 (Labor-Meretz 2021). The result is robust to the noise scale: 0.38 at 0.5 pp and 0.36 at 1 pp. So '+0.5 to +0.9' (template.html l.746, dossier l.28) is not supported. Schuster, Pukelsheim, Drton & Draper (2003), Electoral Studies 22(4):651-676, is confirmed via Crossref. The abstract summary says Jefferson/D'Hondt favours larger parties and Hamilton/Webster are almost unbiased. The +30%/+35% model figures are in the bayes_model.project() comment.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "SYS-F08",
+   "status": "corrected",
+   "note": "The 8 misallocated list-seats reproduce exactly: 2015 Likud+1/Kulanu-1; 2019s UTJ+1/B&W-1; 2021 Likud+1, YA+1, Meretz-1, New Hope-1. The listed missing and fictitious pairs are right. But the scope is understated. (a) 2022 PAST_PAIRS also differs: Labor-Meretz is missing, which does not matter on exact counts but does in draws where Meretz passes. 2009 and 2013 also differ from the Wikipedia/CEC lists. 2009 lacks Labor-Meretz, which Wikipedia credits with a seat, plus JH-NU and Kadima-Greens. 2013 lacks Labor-Yesh Atid, Hatnuah-Meretz, Hadash-Balad and Kadima-Am Shalem. That makes 7 of 8 cycles differ, not 4. (b) As executed, the Bayesian harness (validate_bayes.ALL_LAYERS pair_alias=False) silently drops every PAST_PAIRS id that DECOMP renamed. Resolving PAST_PAIRS against the component lists stored in data/processed/harness_cache/*.nc drops: 2015 Meretz-ZU; 2019a Likud-URWP and B&W-Labor (only Shas-UTJ applied); 2019s B&W-Labor-Gesher; 2020 Likud-Yamina and B&W-LGM (only Shas-UTJ applied). On exact counts the as-executed set still misallocates the same 8 list-seats.",
+   "corrected_url": "",
+   "corrected_quant": "PAST_PAIRS differs from the registered agreements in 7 of 8 cycles (all but 2020). On exact CEC counts it misallocates 8 list-seats (2015, 2019s, 2021). The shipped harness additionally drops 6 PAST_PAIRS entries via DECOMP renaming (pair_alias off)."
+  },
+  {
+   "id": "SYS-F09",
+   "status": "corrected",
+   "note": "All the numbers verify. Wasted shares: 4.50, 8.49, 2.86, 0.80, 1.47, 8.76%. New Right 138,598 vs a threshold of 140,052, short by 1,454. Meretz 150,793 vs 154,855, short by 4,062. Balad 2.909%, JH 1.192%. IDI 46247 quotes 'some 300,000 votes were squandered' and 'outpolled ... by about 30,000 votes'. That margin is reproduced as NB+JH 2,361,739 vs the anti-Netanyahu lists including the Arab parties (YA, NU, YB, Labor, Meretz, Ra'am, Hadash-Ta'al, Balad) 2,331,788. The NB four lists had 48.38% of valid votes. Overstatement: 'decided the majority' holds for 2019a only. If New Right had passed, the NB without YB would have had 62 seats instead of 60. In 2022, Meretz passing alone gives NB 62, still a majority; Meretz and Balad both passing gives about 61. The waste enlarged the 2022 majority from about 61-62 to 64 but did not decide it.",
+   "corrected_url": "",
+   "corrected_quant": "2019a: New Right's 1,454-vote miss cost the NB-without-YB a majority (60 vs 62). 2022: waste enlarged the NB from ~61-62 to 64 but did not decide the majority (Meretz passing alone -> NB 62)."
+  },
+  {
+   "id": "SYS-F10",
+   "status": "corrected",
+   "note": "The Gallagher PDF (mirror, creation date 18 Jan 2023, author MichaelG) p.24 Israel table matches every quoted LSq, Eff Nv and Eff Ns value. My recomputation from CEC counts reproduces 2015-2022 to two decimals. The TCD URL now returns 404, as the desk said. Two corrections. (1) 'Tracks almost one-for-one' is overstated. LSq is monotone in waste, but at high waste it is about half the wasted share (8.49% gives 4.45; 8.76% gives 4.40). (2) '2% era 1996-2009' is wrong. The threshold was 1.5% for 1992-2003 and 2% for 2006-2013; the 2% era values are 2006 2.49, 2009 1.61, 2013 3.09.",
+   "corrected_url": "https://www.almendron.com/tribuna/wp-content/uploads/2018/11/electionindices.pdf",
+   "corrected_quant": "LSq rises with waste, at roughly half its size at high waste (2020 0.80% -> 0.86; 2019a 8.49% -> 4.45; 2022 8.76% -> 4.40). 1.5% era 1996-2003: 1.65-2.53; 2% era 2006-2013: 1.61-3.09."
+  },
+  {
+   "id": "SYS-F11",
+   "status": "verified",
+   "note": "fs.knesset.gov.il/19/law/19_lsr_301595.pdf opens: Sefer HaHukim page 347, passed 9 Adar II 5774, 'אחוזים ורבע', applies from the 20th Knesset. The Wikisource amendment index lists 'תשע״ד, 347 תיקון מס׳ 62' with this URL, and search results tie the amendment to Sefer HaHukim 2440. The vote thresholds recompute: 140,052 / 143,327 / 154,855. validate_model.CYCLE_THRESHOLD is correct.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "SYS-F12",
+   "status": "unverifiable",
+   "note": "The chapter exists: Eizenberg & Harsgor, 'Apples and Oranges: Putting Electoral Thresholds in Context', Shamir & Rahat (eds), The Elections in Israel 2015, Routledge 2017, pp.47-69. Its text and abstract could not be opened (Haifa CRIS has metadata only), so its support for the claim is unconfirmed, as the desk itself flagged. 'Plesner (IDI 2015)' could not be located. The numbers check out against official data: 2013 regular-station counts give Ra'am-Ta'al 3.80%, Hadash 3.12% and Balad 2.67% without envelopes, consistent with the official 3.65/2.99/2.56% (11 seats). 2015 JL 446,583 = 10.61%; Ra'am-Balad 2019a passed by 3,614; Balad 2022 2.91%. Recommend citing the CEC results for the numbers and treating the chapter as background only.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "SYS-F13",
+   "status": "verified",
+   "note": "The Gallagher p.24 Eff Nv/Eff Ns values match, and my recomputation reproduces 2015-2022. The Rahat & Hazan (2005) abstract (OUP) contains 'closed list PR system that was so proportional' and 'very fragmented parliament'. Crossref gives pp.333-352; the author page says 333-351. Hazan, Itzkovitch-Malka & Rahat (2017) is cited in quant without a source entry. It is 'Electoral Systems in Context: Israel', Oxford Handbook of Electoral Systems, pp.581-600, doi:10.1093/oxfordhb/9780190258658.013.43, and its abstract says 'a prototype of an extreme PR system'. That source should be added.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "SYS-F14",
+   "status": "verified",
+   "note": "Invalid ballots recomputed from expc: 2015 43,854/4,254,738 = 1.03%; 2019a 0.71%; 2019s 0.64%; 2020 0.54%; 2021 0.59%; 2022 29,851/4,794,593 = 0.62%. The 2013 figure of 40,904 matches the official 3,833,646 cast minus 3,792,742 valid; the leaflet itself was not opened. Statute s.78(a)(1)-(5) and s.84(a)(2) confirmed. CEC guide p.4: 'two or three ballots for the same list ... valid', and blank slips without list name or letters are invalid.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "SYS-F15",
+   "status": "corrected",
+   "note": "Code confirmed. bayes_model.project() renormalises over modelled columns (`shares /= shares.sum(...)`) with MICRO_PRIORS empty (MICRO_POLLED = {}). There is no 'other' column: mixture_shares.csv has 22 rows, 20 non-zero, summing to 1.000. The same holds for simulate_core, whose build_inputs reserves 1% for micro-lists only for renormalisation to undo it, and for validate_bayes.allocate_vector and project_cycle. implied_share_obs uses seats/120*(1-wasted-0.01), while _merge_cec divides by the filing sum. The CEC micro-shares reproduce: <0.3% gives 0.41/0.80/0.64/0.38/0.28/0.85%; <0.5% gives 0.41-1.49%. Corrections: (1) the claim's '800-1,300 votes' conflicts with the quant's 450-1,350; at 4.76M valid it is about 430-1,330. (2) The net direction is not established. The modelled small-list columns (Israel First, Noam, Haredi Public, Ahi, Code Black, Beit Yisrael) carry 2.3% (sum of medians) to 4.2% (sum of means) of projected share, above the historical sub-0.5% tail of 0.4-1.5%. That already deflates straddlers by more than m inflates them. Harness-calibrated layers were also fitted on the same renormalised pipeline. The P(pass) effects (+0.2-1.2 pp) are a first-order normal approximation, not measured.",
+   "corrected_url": "",
+   "corrected_quant": "Formal bias 3.25% x m = 0.009-0.028 pp (~430-1,330 votes at 4.76M valid). The net bias is unmeasured; the modelled small-list columns already hold 2.3-4.2% of projected share."
+  },
+  {
+   "id": "SYS-F16",
+   "status": "corrected",
+   "note": "Statute confirmed: s.91(b) soldiers' outer envelope; s.68A(e)(1) self-declared mobility-limited voters use an outer envelope. Chapter 10-3C defines an evacuee as one who left home 'since 22 Tishrei 5784 (7 Oct 2023)', and s.116יז12(c) gives the outer envelope. Basic Law: The Knesset s.11 requires publication 'within eight days', so 4 Nov 2026. CEC guide p.3: envelopes checked so no one voted twice, then counted by Counting Committees 'located within the Knesset'. The Media Line (2 Nov 2022) quotes 'counted by just after noon' and 'some 500,000 double envelopes'. Citation fix: the sections are 116יז10-116יז13 (116YZ10-13), not '116Y10'. Chapter 10-3C is a temporary provision (הוראת שעה) for the 26th Knesset only.",
+   "corrected_url": "",
+   "corrected_quant": "ch. 10-3C (פרק י׳3ג, temporary provision for the 26th Knesset), ss.116יז10-116יז13; outer envelope at s.116יז12(c)."
+  },
+  {
+   "id": "SYS-F17",
+   "status": "verified",
+   "note": "Recomputed from the CEC files (row 'מעטפות חיצוניות', code 9999/99999). 2019a 240,783 cast / 238,822 valid = 5.54%; 2019s 282,442/280,216 = 6.32%; 2020 330,209/327,702 = 7.14%; 2021 425,512/421,619 = 9.56%; 2022 462,807/458,714 = 9.63%. 2022 has 838 counting units in expb_25. Invalid rates inside envelopes are 0.76-0.91%. ToI (2 Nov 2022) indeed says 'over 600,000' and 'over 12.5%', with an IDI series of 5.5/6.3/7.2/9.6%. The 2020 figure is 7.2% on votes cast versus 7.14% on valid votes. Atmor, Friedberg & Kenig (2025), Israel Affairs 31(2):198-214, exists, and its abstract carries the quoted phrase. (2015 also has an envelope row: code 0, 234,599 cast / 232,681 valid = 5.53%.)",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "SYS-F18",
+   "status": "verified",
+   "note": "Recomputed double-envelope share minus regular share for every quoted list. JL -6.75/-7.70/-2.40; Hadash-Ta'al -2.89/-2.26; Ra'am(-Balad) -2.29/-2.45/-2.57; Balad -1.46; UTJ -2.03 to -2.62; Shas -0.63 to -1.88; Zehut +4.09; URWP/Yamina +0.88/+3.18/+3.34/+3.54; RZ +1.46/+5.11; Likud +2.90 to +3.45 then +0.27/+0.12; Labor +2.25/+1.58. All match. The ToI/IDI characterisation is verified ('young Jewish voters', 'right-wing parties and trendy fringe parties', 'disadvantaging ultra-Orthodox and Arab parties'). Minor: the Arab lists' envelope-to-regular ratio is 34-53%, not 34-52% (JL 2021 = 53%).",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "SYS-F19",
+   "status": "verified",
+   "note": "Recomputed the statutory allocation on regular-only vs final counts with the registered pairs. All quoted list moves and straddler shares match (e.g. Balad 3.049 -> 2.909, Meretz 3.169 -> 3.165, Ra'am 2021 4.023 -> 3.788). NB totals: 2019a 65 -> 65, 2019s 55 -> 55, 2020 58 -> 58, 2021 52 -> 52, 2022 65 -> 64. Caveats: (1) the dossier's 'night->final drift' refers to partial election-night counts, which this does not measure, as the desk notes. (2) 'Net bloc change zero' is for the NB total. The non-NB side moved in 2020 (B&W +1 from JL) and in 2021 (Meretz +1 from the then-unaligned Ra'am).",
+   "corrected_url": "",
+   "corrected_quant": ""
+  }
+ ],
+ "challenge_checks": [
+  {
+   "title": "Threshold denominator: include the unmodelled micro-list vote",
+   "status": "partly",
+   "note": "The deviation is real. bayes_model.project() renormalises draws over the modelled columns at every stage and has no 'other' column: MICRO_PRIORS is empty because MICRO_POLLED = {}, and mixture_shares.csv's 20 non-zero columns sum to 1.000. simulate.simulate_core renormalises too, which undoes build_inputs' 1% reservation. So do validate_bayes.allocate_vector and project_cycle. The observation layers disagree, as claimed (seat rows x(1-wasted-0.01); CEC filings divided by the filing sum). The formal size (3.25% x m = 0.009-0.028 pp) is plausible. Not established: the net direction and the P(pass) effects. The six modelled micro columns plus B&W already hold 2.3% (medians) to 4.2% (means) of projected share, more than the 0.4-1.5% historical tail. That deflates straddlers. The harness-calibrated layers were also fitted on the same renormalised pipeline. A larger instance of the same issue was missed: official_forecast.allocate_central renormalises the MEDIAN share vector, whose sum is 0.9565 (15 Oct). That inflates every central-table share by 4.5% relative, about +0.15 pp at the threshold (RZP 3.437% -> 3.593%), versus the 0.01-0.03 pp the desk flagged. It does not flip any central pass/fail today. The fix should define the latent's denominator once and apply it in project(), allocate_central and the harness."
+  },
+  {
+   "title": "Harness historical surplus pairs: replace approximations with the registered agreements",
+   "status": "holds",
+   "note": "Confirmed and understated. Allocating the official CEC counts with PAST_PAIRS misallocates exactly 8 list-seats (2015, 2019s, 2021), and the registered pairs reproduce 6/6. The registered lists are confirmed by he.wikipedia (CEC-cited for the 19th-22nd), IDI 63750 for 2022, and ToI/JPost for 2021 and the 2019a B&W no-deal. Understated in two ways. (1) 2022 also differs (Labor-Meretz missing), and 2009/2013 differ from the Wikipedia/CEC lists (2009 missing Labor-Meretz, which Wikipedia says moved a seat), so 7 of 8 cycles differ. (2) As executed, the Bayesian harness (ALL_LAYERS pair_alias=False) silently drops PAST_PAIRS whose ids DECOMP renamed. Checked against the component lists in harness_cache/*.nc, the dropped pairs are: 2015 Meretz-ZU; 2019a Likud-URWP and B&W-Labor; 2019s B&W-Labor-Gesher; 2020 Likud-Yamina and B&W-LGM. In 2019a and 2020 only Shas-UTJ is pooled. The fix must use harness component ids (or turn pair_alias on), not only edit PAST_PAIRS. The expected MAE gain of 0.15-0.3 seat per list is an upper bound (8 seats / ~37 lists, deterministic), and simulated draws will show less."
+  },
+  {
+   "title": "Correct the seat-law and double-envelope numbers stated on the site and in the dossier",
+   "status": "holds",
+   "note": "Every replacement value reproduces from the CEC files. Remainder seats 3-8 (mean 5.33) against the dossier's '~6-9' (l.28). Pair value +0.40 (0.36-0.38 at larger perturbations) against the site's '+0.5 to +0.9' (template.html l.746). 462,807 envelopes (9.63%) against '600-700k (12-13%)'. NB total unchanged from regular to final in 4/5, -1 in 2022. Meretz and Balad were already below 3.25% on the complete regular count, so 'died in the envelopes' (dossier l.84) is wrong. Caveat: the dossier's 'night->final drift' concerns partial election-night counts, which were not measured. The 2026 envelope volume could still exceed 2022 because of the evacuee stations (ch.10-3C) and reservists, so the 600-700k figure lacks an official basis rather than being refuted."
+  },
+  {
+   "title": "Statutory fidelity: lottery tie-break and the s.81(d)(4) majority clause (low priority)",
+   "status": "holds",
+   "note": "simulate.dhondt uses int(np.argmax(quot)), so the lowest index wins ties. No 60-seat cap exists anywhere. Statute s.81(d)(2) and (4) are confirmed. There were 0 exact ties on CEC counts 2015-2022, and Likud's mean share is 0.190, so the clause cannot bind. No measurable effect, as stated."
+  }
+ ],
+ "missing_key_works": [
+  "Bochsler, D. (2010) 'Who gains from apparentments under D'Hondt?', Electoral Studies 29(4):617-627, doi:10.1016/j.electstud.2010.06.001. The core peer-reviewed analysis of the expected value of list alliances under D'Hondt, which is exactly what SYS-F07 estimates by simulation.",
+  "Schwingenschlögl, U. & Pukelsheim, F. (2006) 'Seat biases in proportional representation systems with thresholds', Social Choice and Welfare 27:189-193, doi:10.1007/s00355-006-0116-0. Extends Schuster et al. (2003) to thresholds: the biases shrink linearly as the threshold rises.",
+  "Pukelsheim, F. (2017) Proportional Representation: Apportionment Methods and Their Applications, 2nd ed., Springer (ch.7 'Favoring Some at the Expense of Others: Seat Biases', doi:10.1007/978-3-319-64707-4_7). The standard reference for divisor methods and the equivalence of quota-floor plus highest averages with D'Hondt.",
+  "Atmor, N., Friedberg, C. & Kenig, O. (2025) 'Special votes and voter turnout in Israel's 2022 elections', Israel Affairs 31(2):198-214. Cited only through its abstract; the full text is needed to resolve the 600k vs 462,807 double-envelope discrepancy.",
+  "Hazan, R.Y., Itzkovitch-Malka, R. & Rahat, G. (2017) 'Electoral Systems in Context: Israel', Oxford Handbook of Electoral Systems, pp.581-600, doi:10.1093/oxfordhb/9780190258658.013.43. Quoted in SYS-F13 but has no source entry.",
+  "CEC primary notices of the registered linkages (bechirot20/21/22 notice PDFs; Reshumot notices for the 23rd-25th Knessets) and official 2009/2013 results including double envelopes (data.gov.il). Needed so PAST_PAIRS rests on primary records rather than he.wikipedia, and to check 2009/2013.",
+  "CEC 2026 publication of registered surplus agreements (due 19 Oct 2026 under s.67(c)), to replace the press-sourced SURPLUS_PAIRS."
+ ]
+}

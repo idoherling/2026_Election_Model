@@ -1,0 +1,228 @@
+{
+ "verdicts": [
+  {
+   "id": "ERR-F01",
+   "status": "corrected",
+   "note": "The citation is correct: NHB 2(4):276-283, 2018. The author correction (4:769-770, 2020) fixes Fig. 2c,e only, with no text changes. Opened the accepted manuscript (Southampton eprint 421260, Wayback copy) and the Mar 2018 press release; the Nature PDF itself is paywalled. Confirmed: 30,916 polls, 351 elections, 45 countries, 1942-2017; MAE 2.1 in the 1940s-50s, 2.1 in the 1960s-70s, 2.0 since 2000 (ms p.10); year effect 'a trivial -0.001' (p=0.85, Table 3), so cite the article, not a 2026 brief; 'survey organizations have adapted' (pp.17-19). The snippet figure is now verified: close to 4 pp at 150-200 days, about 3 at 50 days, under 2 on the eve (p.6; 286 elections, parties of 5% and up). Problems: (1) '2.5% presidential vs 1.9% legislative' comes from the Aug 2017 version (eprint 413658). The 2018 paper's Table 2 has 2.70 vs 1.83. (2) The final-week analysis covers 220 elections in 32 countries (763 party observations), not all 351 elections in 45 countries. (3) The paper is internally inconsistent on presidential elections (+0.53 in Table 3; 'lower' in the discussion).",
+   "corrected_url": "https://doi.org/10.1038/s41562-018-0315-6",
+   "corrected_quant": "30,916 polls, 351 elections, 45 countries, 1942-2017. The final-week model uses 220 elections in 32 countries (763 party observations). Final-week MAE per party: 2.1 (1940s-50s), 2.1 (1960s-70s), 2.0 since 2000. Year coefficient -0.001 (p=0.85, Table 3). About 4 pp at 150-200 days, about 3 at 50 days, under 2 on the eve. Table 2: presidential 2.70 vs legislative 1.83; PR 1.62 vs SMD 2.28; ENPP>3 1.71; parties <20% 1.29 vs >=20% 2.28."
+  },
+  {
+   "id": "ERR-F02",
+   "status": "corrected",
+   "note": "Dataverse doi 10.7910/DVN/8421DX resolves (V3, 2020). 'Nature Dataverse Codebook v2.0' lists country IDs 1-45 with no Israel. Israel is also absent from the 2013 working paper (41 countries), the 2017/2018 manuscripts and the 2016 AJPS codebook (DVN/28856). Own record re-run from error_decomposition._frames(): 1.64 / 1.69 / 1.86 / 2.99 / 0.88 / 0.66 / 1.07 / 1.04, mean 1.477 seats, exact match. Problems: (1) data/processed/backtest_summary.csv does NOT hold these numbers. Its MAE column is 1.65 / 1.69 / 1.87 / 3.0 / 1.28 / 0.99 / 1.49 / 1.16 (mean 1.64), so drop it as the source. (2) 1.48 seats is 1.23% of seats, a little above the vote-share equivalent because of wasted votes. (3) 'Smaller than the cross-national figure' holds against the 2.0 all-party mean. The like-for-like comparison is the 2018 paper's small-party (<20%) mean of 1.29 pp or ENPP>3 1.71 pp, and Israel is close to those.",
+   "corrected_url": "",
+   "corrected_quant": "Own record (error_decomposition._frames(), FINAL_WINDOW 21 days): per-list final-window MAE 1.64 / 1.69 / 1.86 / 2.99 / 0.88 / 0.66 / 1.07 / 1.04 seats, mean 1.48 seats (about 1.1-1.2 pp of the vote). Cross-national comparators (JW 2018 Table 2): small parties 1.29 pp, ENPP>3 1.71 pp, all 2.03."
+  },
+  {
+   "id": "ERR-F03",
+   "status": "verified",
+   "note": "The PDF exists at the cited URL. The title page matches: Ruler, Jennings & Wlezien, POAL Methods Brief, 28 July 2026. Confirmed: UK 2024 MAE 2.15 = 12.89 / 6, excluding Other (p.3); eq.2 variable list with signs for larger parties, presidential, PR and year, and no coefficients (p.4); errors fall toward election day (p.2). Caveats: (1) It is a lab methods brief, not peer-reviewed. (2) It contains errors of its own: it calls the 2018 paper's 763 party observations '763 elections', and eq.2 as printed includes eq.3 terms. (3) The fragmentation sentence is supported only via party size. In the 2018 paper ENPP>3 is not significant (+0.17, se 0.16), and Wlezien & Jennings 2023 find MORE volatility with more parties at fixed size. Cite JW 2018 Table 3 for any coefficients.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "ERR-F04",
+   "status": "corrected",
+   "note": "The working paper (Lancaster URL, HTTP 200; identical to the local copy) confirms: 23,554 polls, 41 countries, 245 cycles; R2 above 0.75 at 2.5 years and 0.9 at 4-5 months, with a further rise in the final month (p.15, not pp.15-16); ENPP>4 'almost 0.15 less' a year out, flat or slightly worse over the final 150 days, sharper in the final 50 (pp.17-18, Fig.10). The AJPS citation 60(1):219-233 is confirmed, but the published title is 'The Timeline of Elections: A Comparative Perspective'. Problem: the published article changed the method (RMSE with multiple imputation, a 200-day focus, legislative split at ENPP 3.5; replication scripts in DVN/28856). The R2 values and the ENPP>4 pattern therefore exist only in the superseded working paper and must not be presented as the AJPS findings. 'Israel ENPP typically 7-9' is unsourced; seat-based ENPP is about 5.0 (2020) and 6.5 (2022), and 7-9 fits only vote-based ENEP. Own horizon numbers 1.630 / 1.831 / 2.511 match dossier s.41.",
+   "corrected_url": "",
+   "corrected_quant": "WORKING PAPER ONLY (superseded by AJPS 2016, which uses RMSE and splits at ENPP 3.5): 23,554 polls / 41 countries / 245 cycles; R2 >0.75 at 2.5 years, 0.9 at 4-5 months (p.15); ENPP>4 R2 about 0.15 lower one year out, flat over the final 150 days, rising over the final 50 (pp.17-18, Fig.10). AJPS 2016: 26,000+ polls, 45 countries, 312 cycles. Israel seat-based ENPP about 5-6.5 (2020-2022)."
+  },
+  {
+   "id": "ERR-F05",
+   "status": "verified",
+   "note": "The citation is confirmed: EJPR 62(4):1347-1368, doi 10.1111/1475-6765.12579. The abstract's numbers (27,357 polls, 26 countries, 231 cycles, 208 parties) and 'characteristics of parties matter most of all, and effectively mediate institutional influences' are confirmed. The full accepted manuscript was opened, so the UNVERIFIED note can go: party size has the 'greatest relative effect', with 'a substantial effect of party age' (pp.29-31). Scope: legislative elections only, final 365 days, outcome the logged absolute poll-vote error. Caveat for model_link: the party-age effect 'declines during the campaign' and is 'just below 0 at the very end' (p.29). It supports wider early-horizon error for new lists, not a 1.35x multiplier at the eve.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "ERR-F06",
+   "status": "corrected",
+   "note": "Opened the typeset JASA PDF (Gelman's site); Crossref and DOI match. Confirmed: 4,221 polls, 608 races, 1998-2014; RMSE 3.5 pp, 'about twice' the reported intervals (p.608); Senate 3.7, governor 3.9, president 2.5 against SRS 2.0-2.1; SRS 95% intervals cover 73/74/88% (p.609); within-state bias correlations 0.45/0.50/0.39 (p.613; Utah 2004 outlier excluded, fn 6). Problems: (1) 'about half of it is an election-level bias' is not in the paper. The paper says the bias is 'about as big as the theoretical sampling variation'; a back-calculation gives about half for Senate and governor and about a third for president, so label it derived or drop it. (2) The one-month-vs-one-week result comes from a secondary dataset (7,040 polls, last 100 days, 2004-2012), not the 4,221-poll set. (3) Table 1 numbers are more exact than 'about 2 / about 1'.",
+   "corrected_url": "",
+   "corrected_quant": "Average absolute election-level bias (Table 1, p.612): Senate 2.1, governor 2.3, president 1.2 pp. The one-month vs one-week comparison uses the secondary 7,040-poll set (2004-2012). 'About half' is a derived share (about 1/2 Senate and governor, about 1/3 president), not a figure the paper states."
+  },
+  {
+   "id": "ERR-F07",
+   "status": "corrected",
+   "note": "Opened the publisher PDF (KOPS, stamped POQ 87(4):1025-1037). Every Table 1 number matches by party (p.1033): 5,240 polls, 1994-2021; 'generally weak' party-institute effects (p.1031); 'industry effects ... (or herding)' (p.1035). Problems: (1) 'In relative terms it is largest for the smallest parties' overreaches. The authors write that differences 'lessen' relative to size and that there are 'hardly any other obvious patterns across parties' (p.1031). The Greens are about the same size as FDP and Left but have relbias 0.098, and the posterior sds overlap. (2) 'Others' is a changing aggregate (AfD included, 3-19% of the vote; fn 3), which the authors flag as a possible artifact. (3) The third author is Körtner. (4) The model_link extrapolates to a '0.6-0.7 pp sd for a 3.3% party'. Relbias is a mean absolute value for parties of 5% and up, not an sd, so that extrapolation is the desk's own and weak.",
+   "corrected_url": "",
+   "corrected_quant": "Absolute election-day bias 0.92-3.17 pp; relative bias 5-17% of share, highest for FDP, Left and Others (0.14-0.17), with no clear size pattern according to the authors (p.1031); variance ratio 1.6-3.1x SRS, average 2.3 (p.1032)."
+  },
+  {
+   "id": "ERR-F08",
+   "status": "verified",
+   "note": "Opened the CC-BY version of record (LSE). Authors, order and venue match. Confirmed: polls 'underestimated the Conservative lead over Labour by an average of 7 percentage points' (Summary, p.757); Con 37.7 / Lab 31.2 (Table 1, p.759); late swing 0.6 / 1.8 / -0.4 (Section 4.1, Table 3); unrepresentative samples are the primary cause and weighting 'did not mitigate' it (p.777). Minor: the CI is -0.2 to 1.6 in the text but -0.2 to 1.5 in Table 3, an inconsistency in the paper itself.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "ERR-F09",
+   "status": "verified",
+   "note": "Opened the full Cambridge PDF (open access). Confirmed: abstract language (errors constant over time, beyond stated margins, little evidence of shy voters, causes ranked); 5+ point lead errors in 1951, 1970, Oct 1974, 1983, 1992, 1997, 2001, 2015 and 2017, with only 1970, 1992 and 2015 called 'misses' (p.766); shy-voter conclusions summarise other studies (pp.769-770); differential don't-knows (pp.770-771). Minor: the list is in the subsection 'Why Do We Think Polling Is Getting Worse?', not the one named. The model_link's '9 of ~20 UK elections since 1945' is the desk's arithmetic, not the authors'.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "ERR-F10",
+   "status": "verified",
+   "note": "Opened the AAPOR 2016 PDF. The 13 committee members match. Confirmed on printed pp.9-10: national absolute error 2.2, signed 1.3; 2012 2.9, 2008 1.8, 2004 2.1; since 1936 4.4; since 1992 2.7; state absolute 5.1, signed 3.0; 'somewhat correlated in any given election'; no consistent partisan direction. Footnote 5 defines the window as the last 13 days, each firm's final estimate. Caveat: Appendix Table A.1 gives 2.1 against 2.2 in the text, a discrepancy in the source. The POQ version (82(1):1-33, doi 10.1093/poq/nfx047) is confirmed via Crossref.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "ERR-F11",
+   "status": "corrected",
+   "note": "Opened the AAPOR 2020 PDF (July 2021; 19 members, Clinton chair). The Executive Summary numbers are confirmed (4.5 / 5.1 absolute, 3.9 / 4.3 signed, 6.0 for Senate and governor, Trump share 3.3, 40-year and 20-year records, every mode in the same direction). Problems: (1) The 'did not shrink in the final two weeks / week / three days' bullet is about presidential polls only. (2) Table 4 (p.19) is mislabelled: the 2004, 2008 and 2012 rows combine president, Senate and governor (NCPP); 2002-2014 come from NCPP and 2018 from AAPOR; there is no 2016 row; 2020 is 6.7 for Senate and governor (6.2 with presidential).",
+   "corrected_url": "",
+   "corrected_quant": "Table 4 p.19 poll MAE history: 2002 4.8, 2004 3.4*, 2006 4.0, 2008 4.0*, 2010 4.8, 2012 3.8*, 2014 5.8, 2018 4.6, 2020 6.7 (6.2 incl. presidential); *rows include presidential polls; NCPP 2002-14, AAPOR 2018. The no-shrinkage finding is for presidential polls."
+  },
+  {
+   "id": "ERR-F12",
+   "status": "verified",
+   "note": "Opened the executive summary (printed pp.4-9). Confirmed on p.4: 611 polls; 3.3 (2020 5.3, 2016 5.2); national 2.6, state 3.0; Democratic margin overstated 2.7 (4.6, 3.1); midterms 2022 +0.6 R, 2018 +0.1 D; 'rare for polls to err in the same direction for more than a couple of consecutive presidential elections'. Fixes: the Republican-affiliated-pollster passage is on p.5, not p.4. The executive summary lists no authors; the 16 names (Pasek chair) come from the full report, https://aapor.org/wp-content/uploads/2025/10/AAPOR-Task-Force-on-2024-Pre-Election-Polling_Report.pdf. The 2024 window is polls ending 23 Oct to 5 Nov.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "ERR-F13",
+   "status": "verified",
+   "note": "The Goodreads repost holds the full article text. The original 538 URL now redirects to ABC News; a Wayback copy confirms the byline (Silver, 24 Oct 2016). Confirmed: t instead of normal; '1-in-1,000' becomes '1-in-180'; 85% vs 87% under the normal; 99.8% with independent states; t 'makes relatively little difference' while correlation makes 'a huge difference'; undecided and third-party share correlates with volatility. The df is not stated. Wording: the 85/87 figures are from the polls-only model, and 'about 85% of the vote' is 'in national polls'. A blog post, not peer-reviewed.",
+   "corrected_url": "https://web.archive.org/web/20161024232336/http://fivethirtyeight.com/features/election-update-why-our-model-is-more-bullish-than-others-on-trump/",
+   "corrected_quant": ""
+  },
+  {
+   "id": "ERR-F14",
+   "status": "verified",
+   "note": "JDM 15(5):863-880 (Sept 2020) is confirmed, and both the UBC mirror and journal.sjdm.org resolve. Add the DOI, 10.1017/S1930297500007981. Confirmed: the se 0.14 / '0.5 and 0.9' example and 'a 1-in-20 event only once in 80 years' (s.2.1); state-error correlation; tails 'cannot be directly checked from past data'; 538's 20% events at 14% and 80% at 88%, 'based on a small number of elections' (s.3.2, citing Boice & Wezerek 2019); 'about twice the stated margin of error' (s.1.2, which cites Shirani-Mehr et al. 2018, the primary source); incentives (s.3). Wording: 'cannot be checked at all' should be 'cannot be directly checked'.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "ERR-F15",
+   "status": "corrected",
+   "note": "The DOI resolves to HDSR 2(4), Oct 2020 (read via Wayback copies of the published PDF). Two documents are conflated. The published version has the 'scaled version of the same correlation matrix' (s.2.5), the backward random walk (s.4) and the '3% polling error for each poll' starting prior, later adjusted (s.5). The sentence about a renewed COVID-19 outbreak or a candidate's death is NOT in the published HDSR article. It is only in the 18 Jul 2020 preprint, which has a different title ('... for the 2020 Election'), and the 'pp. 2-4' references fit that preprint. The published equivalent: the forecast is conditional on both candidates staying in, no major third-party challenge, and no unprecedented turnout or vote-counting problems (Abstract); COVID effects on turnout and ballot rejection are not modelled (s.5). The characterisation that the model adds no event-risk term is fair in both versions.",
+   "corrected_url": "https://sites.stat.columbia.edu/gelman/research/published/hdsr_forecasting.pdf (preprint, for the events sentence)",
+   "corrected_quant": "HDSR s.2.5 / s.4 / s.5. Either cite the July 2020 preprint for 'not adjusted for a renewed COVID-19 outbreak in late October or the death of either candidate', or, keeping the DOI, use: 'conditional on both major candidates staying in the race, no major third-party challenge and no unprecedented turnout or vote-counting problems (Abstract); COVID-19 effects on turnout and ballot rejection not modelled (s.5).'"
+  },
+  {
+   "id": "ERR-F16",
+   "status": "verified",
+   "note": "Opened the full Cambridge PDF. Confirmed: alr transform (p.256, eq.2 p.257); backward random walk with full covariance W (eqs.3-4, p.257); LKJ prior (nu=50, p.258); footnote 14 (p.259): 'overconfident' because the poll model 'exclusively relies on current' polls, so an election-day error term 'similar to' Hanretty et al. 2016 was added, giving 94% coverage of 95% intervals over four German elections; 2017 RMSE 1.88, six of seven 5/6 intervals covered. Wording: the model combines polls with a fundamentals prior, so read 'whose poll component used only current polls'. The paper does not say whether the 94% is out-of-sample. Venue is 27(2):255-262.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "ERR-F17",
+   "status": "corrected",
+   "note": "Opened the accepted manuscript (LSE eprint 65213); the published version returned 403. Confirmed: the highlight on '110 seats' and 'overconfident predictions'; the alr and multinomial set-up; house effects of active company-method combinations 'have mean zero for each party'; swing-regression coefficients rising 'from about 0.45 to 0.80' over the final year, fitted on 8 elections from 1979 (swingback). Problems: (1) 'House-effect centring cannot detect an industry-wide error; that error must come from a separate election-day term' is not in the paper and misdescribes it. The model already carried election-day error (the swing-regression residual variance in a Beta forecast distribution). The post-script's lesson is that it put too little probability on errors this large: 'better calibrating the likely magnitude of polling errors'. (2) 'Badly overconfident' overstates the post-script's 'probably over-confident'. Present the centring point as the desk's inference, and cite Jackman 2005 for the sum-to-zero identification.",
+   "corrected_url": "https://eprints.lse.ac.uk/65213/",
+   "corrected_quant": ""
+  },
+  {
+   "id": "ERR-F18",
+   "status": "corrected",
+   "note": "Crossref, OpenAlex and the Bar-Ilan CRIS record confirm the citation exactly (Israel Affairs 28(6):917-939, 2022, peer-reviewed). The abstract supports direction only: 'on average, polls commissioned by anti-Netanyahu media consistently underestimated' the pro-Netanyahu bloc. Problems: (1) The finding covers anti-Netanyahu outlets only. The general 'biased in line with their outlet's stance' is the research question, not a reported result for pro-Netanyahu outlets. (2) Media stance is defined by attitudes to the corruption 'charges', not 'indictments'. (3) 'Only peer-reviewed study of Israeli poll bias' holds only if restricted to quantitative bias studies; Aharoni et al. 2022 (Journalism 23(2):337-353) covers the April 2019 exit-poll miss qualitatively. Effect sizes are still unread (paywall).",
+   "corrected_url": "",
+   "corrected_quant": "Direction only (abstract): on average, polls commissioned by anti-Netanyahu outlets consistently under-estimated the pro-Netanyahu bloc's seats, Apr 2019 to Mar 2020; no effect sizes; no reported result for pro-Netanyahu outlets."
+  },
+  {
+   "id": "ERR-F19",
+   "status": "corrected",
+   "note": "The article exists (Newman, 27 Nov 2016). The live headline ends 'fiasco'; only the URL slug says 'failure'. Confirmed: Channel 1/2/10 exit polls Likud 27-28 and ZU 27; result Likud 30, ZU 24; Tzemach ('of the Midgam institute') says all changes were 'within the right-wing bloc', citing the final Sunday rally and the 'droves' warning; Sarid says Likud took seats 'from his partners'. Problems: (1) Yachad is not mentioned; Jewish Home is the only party named as the source. (2) The article says Likud was 'trailing or tied'. (3) It also gives a measurement explanation for the exit-poll miss (exit polls close at 8 pm, two hours of voting missed), so 'mainly late movement' is one pollster's reading. Own-record figures (21.2 vs 30 = +8.8 beat; bloc error -0.12 polled-minus-actual; 2019a +6.8 / +0.39) are reproduced from dossier s.36 and error_decomposition._frames(). Note the mixed sign conventions: the Likud figures are actual minus polled, the bloc figure polled minus actual.",
+   "corrected_url": "",
+   "corrected_quant": "Exit polls (Ch 1/2/10) Likud 27-28, ZU 27; result Likud 30, ZU 24. Final polls had Likud trailing or tied. Pollsters cite late movement within the right bloc (Jewish Home named; Yachad not mentioned) plus an exit-poll closing-time gap. Own record: Likud final-week 21.2 vs 30 (beat +8.8, actual-polled); bloc error -0.12 (polled-actual); 2019a Likud beat +6.8, bloc +0.39."
+  },
+  {
+   "id": "ERR-F20",
+   "status": "verified",
+   "note": "The Israel Policy Forum page exists with the cited author, date and URL. Every point is in the text: samples 'usually around 500'; margin of error 'over 4%, which is larger than the 3.25% electoral threshold'; Haredim 'less likely to respond to polls, especially online ones'; Arab and FSU immigrants 'may be less willing to share opinions'; oversampling 'expensive', done by party pollsters; 'no pollster is explicit or detailed' about weighting; HaMadad (polls for Channel 13) disaggregates Jewish and Arab respondents; better on blocs than on parties. Nuance: weighting 'can exacerbate' sampling error. A policy-forum explainer, not peer-reviewed. The own-record figures in model_link (haredi -1.35 / sd 1.77; Shas +1.2 over six cycles) are from dossier s.1 and decompose(); the haredi mean is net of the bloc swing (raw e0 is -0.98).",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "ERR-F21",
+   "status": "corrected",
+   "note": "The IDI page exists (Rudnitzky, 25 Dec 2022; the page title carries a typo). Verbatim: 2022 Arab and Druze turnout 53.2%; 'low point' 44.6% in 2021; 2013-2022 average 55.9%; Druze 48.7% (2021-22) vs 55.9% (2013-20), a coincidental repeat that is genuinely in the source; Balad 'would probably have cleared the electoral threshold' had turnout 'approached 60%'. Problems: (1) This article does not support 'swings by double digits between consecutive elections'. Its only consecutive pair is 44.6 to 53.2 (+8.6 pp). The double-digit swings (2019a 49.2, 2019s 59.2, 2020 64.8, 2021 44.6) come from other IDI pieces, which this checker saw in summaries only. (2) The article does not discuss polls, so 'Arab-sector poll error is mainly a turnout problem' is the desk's inference (consistent with dossier s.43). (3) 'Not its share of Arab voters' is also an inference; the counterfactual assumes most voters choose Arab lists.",
+   "corrected_url": "",
+   "corrected_quant": "Rudnitzky 2022: 2021 44.6%, 2022 53.2% (+8.6 pp), 2013-2022 average 55.9%; Druze 48.7 vs 55.9. Double-digit swings need another source (e.g. IDI on 2019-2021: 49.2 / 59.2 / 64.8 / 44.6). The poll-error interpretation is the desk's."
+  },
+  {
+   "id": "ERR-F22",
+   "status": "corrected",
+   "note": "Wikipedia matches the official CEC page (votes25.bechirot.gov.il) exactly: Meretz 150,793 (3.16%), Balad 138,617 (2.91%), Jewish Home 56,775 (1.19%), valid votes 4,764,742, threshold 3.25%. The 0.09 pp miss (3.25 - 3.165 = 0.085; 4,061 votes) is correct. The 'about 0.5 pp' vote-share miss is overstated. It assumes zero wasted vote (4.4/120 = 3.67%). With a realistic wasted share (5.6% if Meretz passes, 8.76% actual), 4.4 seats is about 3.35-3.46% of the valid vote, a miss of about 0.2-0.3 pp. The same 0.5 pp appears in the residual challenge. Polled 4.43 seats is reproduced from _frames(). Cite the CEC as official data rather than Wikipedia.",
+   "corrected_url": "https://votes25.bechirot.gov.il/",
+   "corrected_quant": "2022 CEC: Meretz 150,793 votes = 3.16% (0.085 pp / 4,061 votes short of 3.25%); final-window poll average 4.43 seats is about 3.35-3.46% of the valid vote, so the vote-share miss was about 0.2-0.3 pp, booked as a +4.4 seat error."
+  },
+  {
+   "id": "ERR-F23",
+   "status": "corrected",
+   "note": "Re-run of error_decomposition._frames() / decompose(). Reproduced: bloc errors +2.11 / +7.54 / -0.12 / +0.39 / +4.10 / 0.00 / +3.00 / -3.71; mean +1.66, sd 3.36, t 1.40; positive in five of eight; haredi family -1.35 / sd 1.77; Arab -0.32 / sd 1.45. The Likud trailing-year beats +8.8 / +6.8 / -0.5 match dossier s.36. Problems: (1) 'When leading: -0.6 to +0.8' is wrong. Dossier s.36 lists the clear-lead years as 2013 / 2021 / 2022 at -3 / -0.6 / +0.8, and the table also has 2009 +0.4 and 2020 +1.9, so the non-trailing range is -3 to +1.9. (2) The Likud beats are actual minus polled while the bloc errors are polled minus actual; state the convention. (3) The haredi -1.35 is the e1 total after a proportional bloc-swing removal. The raw family miss (decompose()['family_e0']) is -0.98, sd 1.58. Because the production bloc swing is zero-mean, the e1 mean overstates raw under-polling, so the summary's 'about 1.4 seats' should be about 1.0 raw. (4) The zero-mean swing is scaled by the ddof=1 sd around the +1.66 mean; the RMS around zero is 3.55.",
+   "corrected_url": "",
+   "corrected_quant": "Bloc error (polled - actual, seats): mean +1.66, sd 3.36, RMS about zero 3.55, t 1.40, n=8; over-polled in 5 of 8. Likud final-week beat (actual - polled): trailing or tied +8.8 / +6.8 / -0.5; otherwise -3 (2013) to +1.9 (2020). Haredi family: raw -0.98 (sd 1.58); net of bloc swing -1.35 (sd 1.77). Arab: -0.32 (sd 1.45) net, raw -0.69 (sd 1.17)."
+  },
+  {
+   "id": "ERR-F24",
+   "status": "corrected",
+   "note": "Re-run reproduces most numbers: 91 rows, 83 won seats, 8 deaths (Gil, Am Shalem, Otzma 2013, Otzma-Yachad, New Right, Zehut, Otzma 2019s, Meretz); won-seat raw sd 2.09; excess kurtosis 4.12 (biased; 4.45 unbiased); ML t df 2.15; e2 (bloc and family removed) kurtosis 4.63; small won-seat sd 1.22 (n=49); deaths +3.30 (on e1-e3; raw +3.43); herding ratios 0.47-1.06, median 0.66. Problems: (1) The refit '0.67 + 0.097' is computed on e2, while the shipped fit uses e3 (anchors also removed). The like-for-like e3 refit on won-seat lists is 0.79 + 0.075, giving 1.10 / 1.55 / 2.68 at 4 / 10 / 25 seats. The desk also sets shipped x0.9 values beside an unscaled refit. (2) The desk missed a code bug that explains part of the inflated intercept. In decompose() step 4, `resid.loc[others['actual'].idxmax(), 'e3'] -= anchors['leader']` runs on frames concatenated across cycles whose block-id index is non-unique (91 rows, 14 labels). The leader anchor (-1.74) is therefore subtracted from 32 of 91 rows across all cycles, and the label-0 rows get it three times (+5.2 seats) in seven cycles. With a unique index the full-sample fit is 1.48 + 0.041, against the shipped 1.83 + 0.044. So of the 1.83 -> 0.79 intercept gap the desk attributes to threshold deaths, about 0.35 is the bug. (3) The residual the model actually fits (e3) has excess kurtosis 2.0 (won) / 1.7 (all), with a t-fit df of about 2.6: fat-tailed, but about half the 4.1-4.6 quoted. (4) The herding ratio assumes n=500; larger n or seat rounding also compress spread, so 'herding' is one reading.",
+   "corrected_url": "",
+   "corrected_quant": "Won-seat lists (n=83): raw sd 2.09, excess kurtosis 4.1, t df 2.2; e2 kurtosis 4.6; e3 (the fitted residual) kurtosis 2.0. Like-for-like e3 refit on won-seat lists: 0.79 + 0.075 x seats (1.10 / 1.55 / 2.68 at 4 / 10 / 25). Shipped decompose() 1.83 + 0.044 is inflated by an index-aliasing bug; corrected full-sample fit 1.48 + 0.041 (x0.9: 1.48 / 1.70 / 2.25 vs shipped 1.80 / 2.04 / 2.63). Herding ratio 0.47-1.06 (median 0.66) of n=500 SRS spread."
+  }
+ ],
+ "challenge_checks": [
+  {
+   "title": "Bloc swing is about 1.3-1.55x wider than its own measurement (t-scale x event risk)",
+   "status": "partly",
+   "note": "The inflation is real in the code. bayes_model.py l.1458: swing = rng.standard_t(T_DF=5) * BLOC_SWING_SD * EVENT_RISK * STACK_SCALE / 120, with no division by sqrt(df/(df-2)) = 1.29. The harness (validate_bayes.project_cycle l.750) uses standard_t(5) * swing_sd * shock_scale, with no EVENT_RISK. The family shocks (l.1479; harness l.761/785: z / sqrt(chi2_5/5) * sd_f) and the Arab turnout draw (t5 x 0.05) are inflated the same way. Effective sd: 4.33 seats in the harness, 5.20 in production; haredi 1.77 -> 2.28. Three caveats make 'too wide by 1.29x' an overstatement. (1) bloc_sd is the ddof=1 sd around a +1.66 sample mean, but the swing is zero-mean, so the target is the RMS around zero (3.55). Inflation against that is 1.22x in the harness and 1.46x in production. (2) With n=8 the sd is itself uncertain (90% CI for sigma 2.4-6.0). The posterior-predictive sd for a new cycle is about 4.1-4.2 (t7 with scale s*sqrt(1+1/n), or t8 on the RMS), within 3-6% of the harness's 4.33. The t5-on-sd scaling therefore works roughly as a parameter-uncertainty allowance, and the proposed fix (unit-variance t, sd 3.36) would make the swing NARROWER than both the record's RMS and the predictive. The real excess is EVENT_RISK (5.20 vs about 4.2). (3) The 97-98% harness coverage is per-list coverage, driven mostly by the residual layer (itself inflated by a decompose() bug, see below); it is not direct evidence about bloc width. Grade on bloc Brier, not coverage."
+  },
+  {
+   "title": "EVENT_RISK sits on a measurement-error term that never decays",
+   "status": "holds",
+   "note": "EVENT_RISK = 1.2 is a constant referenced only at bayes_model.py l.1458, on the election-day bloc swing. Nothing ties it to days-to-election, so it applies equally at D-56 and on the eve. Its own code comment calls it a 'forward event-risk multiplier', a forward-looking judgement deliberately left out of the harness, so its placement contradicts its stated purpose and it has never been graded. Two literature corrections: Shirani-Mehr's one-month-vs-one-week result is from their secondary 7,040-poll dataset, and AAPOR 2020's 'did not shrink' is about presidential polls. The Economist / HDSR point is fair, but the COVID / candidate-death sentence is from the July 2020 preprint, not the published HDSR article (ERR-F15). Moving the allowance into the forward walk, so it decays to zero at the blackout, is coherent. The size of the change to P(NB>=61) needs the proposed sensitivity run."
+  },
+  {
+   "title": "Per-list residual 1.83 + 0.044 x seats: intercept inflated by threshold deaths, slope too flat",
+   "status": "partly",
+   "note": "Mechanism confirmed. error_decomposition.py fits the residual on seat errors in which the 8 threshold deaths (actual = 0) sit in the <=8-seat group (e3 mean +3.30). bayes_model.py l.1374-1388 then adds sd_list (seats/120) to vote shares, and Bader-Ofer applies the threshold again. NEW FINDING the desk missed: a larger, verifiable cause of the inflated intercept is a code bug. In decompose() step 4, `resid.loc[others['actual'].idxmax(), 'e3'] -= anchors['leader']` indexes frames concatenated across cycles whose block-id index is non-unique (91 rows, 14 labels). The -1.74 leader anchor is applied to 32 of 91 rows in every cycle, and the label-0 rows get it three times (+5.2 seats) in seven cycles. With a unique index, resid = 1.48 + 0.041 against the shipped 1.83 + 0.044, about 19% narrower at 4 seats. The same function feeds the harness's LOO params (validate_bayes l.944), so RESID_SCALE 0.9 and the coverage record were calibrated on the bugged width. The bug dates from cc8a1c9 (29 Aug). Other problems: the desk's 0.67 + 0.097 refit uses e2 (anchors not removed); like-for-like e3 on won-seat lists is 0.79 + 0.075. The German benchmark (0.6-0.7 pp at 3.3%) is an extrapolation from mean-absolute relbias on parties of 5% and up, and the authors report no clear size pattern. The own record (won-seat small lists sd 1.22 seats, about 1.0 pp) is the better target. In code, a 4-seat sd is 1.51 pp (2.04 pp with x1.35), not 1.45 / 1.95. The Meretz 'about 0.5 pp' is about 0.2-0.3 pp. Fix the index bug first, then regrade the shape on the harness. The code notes RESID_SCALE 0.6-0.8 worsened MAE through the threshold nonlinearity, so a narrower residual is not automatically better."
+  },
+  {
+   "title": "The residual is Gaussian while Israeli list errors are fat-tailed",
+   "status": "partly",
+   "note": "The code fact holds: production l.1387 and harness l.736 draw rng.standard_normal * sd_list. Tail evidence is weaker than stated. Raw won-seat list errors have excess kurtosis 4.1 (t df 2.15) and e2 has 4.6, but the residual the model actually fits (e3) has 2.0 (won) / 1.7 (all), t df about 2.6. That is fat-tailed, but about half the quoted figure. The largest raw misses (Likud 2015 -8.0, 2019a -6.1 in the 21-day frame; Yesh Atid 2013 -8.2) are partly carried by other layers (trailing-Likud, bloc swing). 'Too-wide body, too-thin tails' from 97% coverage is confounded by the decompose() bug. Hanretty et al. support 'election-day error too small', not fat tails as such (ERR-F17). Mixed sign conventions: Likud +8.8 is actual minus polled, Yesh Atid -7.9 is polled minus actual. A variance-matched t(4-5) residual is a reasonable harness candidate."
+  },
+  {
+   "title": "x1.35 for first-cycle lists overlaps the new-straddler desertion",
+   "status": "holds",
+   "note": "Confirmed and understated. NEW_LIST_IDS = {yashar, amcha_yisrael, zionist_home (Reservists), unity}, and site_data.json lists new_straddlers = [Reservists - Economic Party, Amcha Yisrael], so both lists receive the x1.35 residual AND the N(-1.6, 2.6 pp) straddler draw (bayes_model l.1521-1530). The overlap is in variance as well as mean. At 4 seats the x1.35 residual is about 2.0 pp sd, and the straddler draw adds sd 2.6 pp, about 3.3 pp combined on a roughly 3% list. Both terms draw on the same first-cycle reference class: the NEW_LIST_MULT comment names New Right 2019a (+7.4), a threshold death. The dossier s.41 note (-0.33 pp, sd 2.0 on ballot shares) is verified in the dossier and in the code comment. Wlezien & Jennings 2023 (p.29) find the party-age effect fades to about 0 by election day, which also argues against an eve-time novelty multiplier on straddlers."
+  },
+  {
+   "title": "Coverage claims rest on 8 correlated cycles",
+   "status": "holds",
+   "note": "Gelman et al. 2020 is verified (se 0.14 example; tails 'cannot be directly checked'). _frames() has 91 list-cycle rows; dossier s.41 baseline coverage is 0.970 at the eve and 0.979 at D-21 against 0.90. EVENT_RISK is excluded from the harness by design, and T_DF and GEVALT_SD are untested judgement. A cycle-block bootstrap of model_validation_*.csv is cheap and appropriate. Caveat: the harness inherits the decompose() index bug, so current coverage partly reflects bugged residual width."
+  },
+  {
+   "title": "[verifier addition] Premise of challenges 3-4: the shipped residual 1.83 + 0.044 is a correct output of the decomposition",
+   "status": "wrong",
+   "note": "error_decomposition.decompose() step 4 aliases the leader-anchor subtraction across cycles through a non-unique index. Reproduced: shipped (base 1.830, slope 0.0438) vs unique-index (1.484, 0.0408); bloc_sd, family and anchors are unaffected. Fix: reset_index or a (cycle, block) key before the concat, then re-run the eight-cycle harness, because RESID_SCALE, STACK_SCALE and the coverage record were all calibrated on the inflated width. Also note: the anchors are retired in production (ANCHORS_ON False), but the residual is still fitted net of them (e3), so Likud and leader errors are under-represented in the residual width. That is a separate double-accounting question."
+  }
+ ],
+ "missing_key_works": [
+  "Jennings & Wlezien 2016, 'The Timeline of Elections: A Comparative Perspective', AJPS 60(1):219-233, doi 10.1111/ajps.12189. Cited only through the superseded 2013 working paper; the published method (RMSE, ENPP split 3.5) differs.",
+  "Jackman 2005, 'Pooling the polls over an election campaign', Australian Journal of Political Science 40(4):499-517. The origin of sum-to-zero house-effect identification, and the right citation for 'centring cannot detect industry-wide bias'.",
+  "Linzer 2013, 'Dynamic Bayesian forecasting of presidential elections in the states', JASA 108(501):124-134. The backward random walk the forecast and Stoetzer et al. build on.",
+  "Mellon & Prosser 2017, 'Missing nonvoters and misweighted samples', POQ 81(3):661-687, doi 10.1093/poq/nfx015. The mechanism behind the UK 2015 miss.",
+  "Kennedy et al. 2018, POQ 82(1):1-33, doi 10.1093/poq/nfx047. The peer-reviewed version of AAPOR 2016; cite it alongside the report.",
+  "Sturgis et al. 2016, Report of the Inquiry into the 2015 British general election opinion polls (BPC/MRS). Named in the brief; the desk used the 2018 JRSS-A article instead.",
+  "Selb & Munzert 2016, 'Forecasting the 2013 German Bundestag Election Using Many Polls and Historical Election Results', German Politics 25(1):73-83, doi 10.1080/09644008.2015.1121454. Historical poll error folded into a multiparty forecast.",
+  "Gelman, Goel, Rivers & Rothschild 2016, 'The Mythical Swing Voter', QJPS 11(1):103-130, doi 10.1561/100.00015031. Differential nonresponse inflates apparent campaign movement, which bears on forward-walk and EVENT_RISK sizing.",
+  "Gelman & King 1993, 'Why are American presidential election campaign polls so variable when votes are so predictable?', BJPS 23(4):409-451. Swingback, the open question on mean reversion.",
+  "Arzheimer & Evans 2014, 'A New Multinomial Accuracy Measure for Polling Bias', Political Analysis 22(1):31-44, doi 10.1093/pan/mpt012; with Martin, Traugott & Kennedy 2005, POQ 69(3):342-369. Multiparty poll-accuracy measures.",
+  "García-Montalvo, Papaspiliopoulos & Stumpf-Fétizon 2019, 'Bayesian forecasting of electoral outcomes with new parties' competition', European Journal of Political Economy 59:52-70 (arXiv 1612.03073). New-party poll uncertainty, directly relevant to NEW_LIST_MULT.",
+  "Walsh, Dolfin & DiNardo 2009, 'Lies, Damn Lies, and Pre-Election Polling', AER P&P 99(2):316-322, doi 10.1257/aer.99.2.316. Poll variance against sampling theory, relevant to the herding reading.",
+  "Sohlberg, Gilljam & Martinsson 2017, JEPOP 27(4):433-447, doi 10.1080/17457289.2017.1300588; Wright, Farrar & Russell 2014, 'Polling Accuracy in a Multiparty Election', IJPOR 26(1):113-124. Multiparty accuracy evidence (agent-reported, existence checked via Crossref by the sub-checker only).",
+  "Jennings, Lewis-Beck & Wlezien 2020, 'Election forecasting: Too far out?', International Journal of Forecasting 36(3):949-962; Wlezien, Jennings & Erikson 2017, Electoral Studies 48:45-56 (the timeline method).",
+  "Shamir 1986, 'Preelection Polls in Israel: Structural Constraints on Accuracy', POQ 50(1):62-75, doi 10.1086/268959. The only Israel-specific accuracy paper; located but not opened. Obtain it.",
+  "Weimann 1990, 'The Obsession to Forecast: Pre-Election Polls in the Israeli Press', POQ 54(3):396-408, doi 10.1086/269213 (relates coverage to prediction errors 1969-88); Weimann 1983, Journalism Quarterly 60(2):288-300.",
+  "Aharoni, Tenenboim-Weinblatt, Baden & Overbeck 2022, Journalism 23(2):337-353, doi 10.1177/1464884920978105. The April 2019 Israeli exit-poll miss (qualitative)."
+ ]
+}

@@ -1,0 +1,608 @@
+{
+ "desk": "COA",
+ "summary": "The formation tree has the right academic footing, but the historical record challenges four of its gates. The model's headline 45% chance of a repeat election is its most exposed number.\n\nTheory and comparative evidence. The standard large-N work on which cabinet forms is Martin & Stevenson (2001), whose 220-formation sample includes Israel, as replicated by Glasgow, Golder & Golder (2012). It finds that pre-election pacts and public refusals predict formation better than size does: only 1 of 220 cabinets that formed contained parties that had publicly refused each other. Incumbency helps only when the partners did not part in public conflict (Martin & Stevenson 2010). The largest party supplies the prime minister about three times in four, not always (Glasgow, Golder & Golder 2011). The same literature sets a ceiling on accuracy. The best models name the exact cabinet a third (Bäck & Dumont 2007) to half (Kayser et al. 2023) of the time. Multiparty poll forecasters stop at seat majorities (Stoetzer et al. 2019). Presenting formation as declared scenario analysis with parameter uncertainty is therefore defensible, and the log score is proper (Gneiting & Raftery 2007).\n\nIsraeli practice. The Basic Law gives the President open discretion over whom to task. It allows 28+14 days, a second mandate of 28 days, then a 21-day window for 61 MKs before automatic dissolution (atlas D10-F16). Investiture needs only a simple majority of those voting, so minority governments are legally cheap (Cheibub, Martin & Rasch; Akirav). Israel has run one before: Rabin and then Peres in 1993-96, on outside Arab support. Twenty-three of 25 Knesset elections produced a government; both failures were in 2019. Formation takes 7-12 weeks (ParlGov). Of three rotation deals, one was honoured on schedule, one never reached its date, and one transferred early by statute. Shas joined non-Likud premiers in 1992, 1999 and 2006; UTJ joined only Barak in 1999, briefly. Since 2019 both have tied themselves to Netanyahu in writing. Ra'am entered government in 2021, after four elections, when both blocs were courting it. Liberman's haredi veto has held at every fork since 2019, and his Joint List veto softened in 2020.\n\nWhere the record challenges the model. (1) Repeat election. The tree gives 45% overall. On the 15 Oct draws (desk run) it gives about 61% conditional on neither bloc reaching 61 even with Ra'am, against 2 of 5 historical deadlocks. Kalshi contracts, which resolve to 'no one' on a repeat exactly as the model does, imply roughly 3-15%. (2) Haredi defection. Priors of 0.10 and 0.15 sit far below Shas's pre-2019 record (3 of 4 when a non-Likud premier was viable). They rest on the bloc era and the 2026 draft-law split. Meanwhile the arithmetic treats both haredi parties as certain members of Netanyahu's coalition, although they left it in conflict in 2025. (3) Ra'am inside at 0.40. The ostracism literature says exclusion holds when there is no pressing need, and 2026 is the first election of a sequence. (4) Likud without Netanyahu at 0.18 has no Israeli precedent. The dossier's 1988 anchor was not a deadlock, and Spain's 2016 leader change came only after two failed elections. (5) The validation harness grades a stale parameter set, counts three of its eight cycles as certainties, and so cannot discriminate between trees.\n\nProposed: anchor the repeat-election residual to a reference-class prior; make Ra'am, pledge-break and Likud-without-Netanyahu depend on the election's position in a sequence; give haredi membership of Netanyahu's bloc a probability; rebuild the harness on 25 Knessets with the shipped parameters; and publish a pre-registered market benchmark.",
+ "findings": [
+  {
+   "id": "COA-F01",
+   "claim": "The standard large-N model of which cabinet forms (Martin & Stevenson 2001, conditional logit over every potential cabinet) finds that pre-electoral pacts and public refusals to govern together ('anti-pacts') are the largest predictors, followed by incumbency and the presence of the largest party. Minority cabinets are penalised where an investiture vote is required. Israel is one of the 14 countries in the sample, and formations where a single party held a majority are excluded.",
+   "quant": "220 formation opportunities, 33,256 potential governments, 14 democracies including Israel, mid-1940s to mid-1980s. Model 7 coefficients (as replicated exactly by Glasgow, Golder & Golder 2012, Table 1, p.258): pre-electoral pact +2.72 (SE 0.62), anti-pact -4.10 (1.04), incumbent coalition +1.89 (0.20), largest party +1.40 (0.27), minimal winning +0.55 (0.26), number of parties -0.31 (0.14), minority where investiture required -0.91 (0.34), anti-system party -19.13 (3.71). Log-likelihood -558.74. Sample description: Glasgow, Golder & Golder 2012, p.256. The 2001 original was not opened; all figures come from that exact replication.",
+   "source": {
+    "authors": "Lanny W. Martin; Randolph T. Stevenson",
+    "year": 2001,
+    "title": "Government Formation in Parliamentary Democracies",
+    "venue": "American Journal of Political Science 45(1):33-50",
+    "doi_or_url": "https://doi.org/10.2307/2669358",
+    "type": "peer-reviewed"
+   },
+   "model_link": "Formation-tree architecture: the bloc-first ordering of gates, the pledge gates (centre_defects, raam_joins, ZIONIST_ONLY) and the incumbency assumption built into NB_CORE.",
+   "stance": "supports",
+   "site_use": "new claim: 'In the comparative record, pre-election pacts and public refusals predict which government forms better than seat counts do; the tree is built around them.'"
+  },
+  {
+   "id": "COA-F02",
+   "claim": "Public refusals bind in the comparative record. In the Martin & Stevenson sample only 1 of the 220 cabinets that formed contained parties that had publicly refused to govern together. Anti-pact and anti-system values almost perfectly predict that a cabinet will not form, so their coefficients are poorly identified. Debus (2009) confirms that pre-electoral commitments, both pacts and rejections, significantly shape formation after controlling for endogeneity (atlas D10-F08, verified). Israel 2020-21 is an outlier: both governments formed in the 2019-21 sequence broke public refusals (Gantz's 2020 entry under Netanyahu; Bennett's 2021 government with Lapid and Ra'am), and both came only after three or four elections.",
+   "quant": "Anti-pact cabinets that formed: 1 of 220. Cabinets with an anti-system party: 6 of 220. Potential cabinets with a pre-electoral pact: 30 of 33,256, of which 7 formed (Glasgow, Golder & Golder 2012, p.256). Israel: both governments formed in the 2019-21 sequence (2020, 2021) broke a public refusal. At the sequence's first election (April 2019) no one broke a pledge and no government formed.",
+   "source": {
+    "authors": "Garrett Glasgow; Matt Golder; Sona N. Golder",
+    "year": 2012,
+    "title": "New Empirical Strategies for the Study of Parliamentary Government Formation",
+    "venue": "Political Analysis 20(2):248-270",
+    "doi_or_url": "https://doi.org/10.1093/pan/mpr058",
+    "type": "peer-reviewed"
+   },
+   "model_link": "centre_defects 0.12 (pledge-break), raam_joins 0.40 (every Jewish change list's 'Zionist government' framing acts as a soft anti-pact), res_right 0.12 and ZIONIST_ONLY. Dossier s.3 already argues that pledge-break is endogenous to the number of elections.",
+   "stance": "supports",
+   "site_use": "Backs the dossier s.3 statement that 2026 is the first election of a new sequence, which argues for the low end of pledge-break probabilities."
+  },
+  {
+   "id": "COA-F03",
+   "claim": "The incumbency advantage in government formation is conditional. Coalitions are more likely to form when their parties have recently governed together, but the incumbent's advantage disappears completely when partners became mired in public conflict or lost seats. A cabinet that collapsed through internal conflict is one-tenth as likely to re-form immediately as one that did not. Seat gains raise every potential coalition's odds, and incumbents' odds about twice as much.",
+   "quant": "256 formation opportunities and 65,320 potential coalitions in 17 West European countries (p.509). Outgoing coalitions immediately re-formed about 35% of the time in the 2001 sample (p.503). A conflict-collapsed cabinet is 1/10 as likely to re-form and 1/4 as likely as an alternative coalition (p.515). A 1% average seat gain raises a non-incumbent coalition's odds by about 10%, and the effect for incumbents is about twice that (p.516).",
+   "source": {
+    "authors": "Lanny W. Martin; Randolph T. Stevenson",
+    "year": 2010,
+    "title": "The Conditional Impact of Incumbency on Government Formation",
+    "venue": "American Political Science Review 104(3):503-518",
+    "doi_or_url": "https://doi.org/10.1017/S0003055410000213",
+    "type": "peer-reviewed"
+   },
+   "model_link": "NB_CORE counts Shas and UTJ as unconditional members of a Netanyahu coalition. Yet UTJ quit Netanyahu's government in July 2025 over the draft-exemption law and Shas's ministers resigned (atlas D10-F28, corrected). That is the 'public conflict' condition under which the incumbency advantage disappears. The 2026 haredi mood to recommend no one (atlas D10-F29) points the same way.",
+   "stance": "challenges",
+   "site_use": "new claim: 'The Netanyahu-bloc arithmetic assumes Shas and UTJ return to his coalition; their 2025 exit over the draft law makes that a behavioural assumption, not arithmetic.'"
+  },
+  {
+   "id": "COA-F04",
+   "claim": "Even the best statistical models of formation predict the exact cabinet only about one time in three in Western Europe. Most of that predictive power comes from the status-quo (incumbent) indicator. The authors argue for combining large-n prediction with case study of the deviant cases.",
+   "quant": "'We cannot predict more than about one-third of the Western European governments' (abstract). Martin & Stevenson (2010, p.504) report Bäck & Dumont's predictive efficiency, the share of predicted cabinets that are correct, as 12% without the status-quo indicator and 32% with it.",
+   "source": {
+    "authors": "Hanna Bäck; Patrick Dumont",
+    "year": 2007,
+    "title": "Combining large-n and small-n strategies: The way forward in coalition research",
+    "venue": "West European Politics 30(3):467-501",
+    "doi_or_url": "https://doi.org/10.1080/01402380701276295",
+    "type": "peer-reviewed"
+   },
+   "model_link": "Formation outcome intervals (p05-p95) and the BEHAVIOR_NEFF concentrations. The model predicts 9 coarse outcome classes rather than exact cabinets, which is easier, but the literature's ceiling argues against tight formation intervals.",
+   "stance": "informs",
+   "site_use": "Backs 'the formation probabilities come with honest intervals', and supports showing wide whiskers on the scenario board."
+  },
+  {
+   "id": "COA-F05",
+   "claim": "Conditional-logit formation models violate independence of irrelevant alternatives. A mixed logit with random coefficients fits better and shows that key effects vary sharply across formation opportunities. For example, incumbency is an advantage in about 63% of formations and a disadvantage in 37%. The best-fitting model's log-likelihood gives the field's benchmark for scoring formation forecasts.",
+   "quant": "Same 220 opportunities. Log-likelihood: conditional logit -558.74, mixed logit -532.99 (LR chi2 51.5). Incumbent coalition: mean 1.47, SD 4.50, so advantaged 62.8% and disadvantaged 37.2% of the time (Table 1, p.258). Desk computation: the conditional logit's mean log score per formation is -2.54 (geometric-mean probability 0.079 on the exact cabinet among about 151 alternatives). A uniform guess scores -5.02. The 2026 tree's harness reports -0.93 on coarse outcome classes, against a uniform-over-7 baseline of -1.95.",
+   "source": {
+    "authors": "Garrett Glasgow; Matt Golder; Sona N. Golder",
+    "year": 2012,
+    "title": "New Empirical Strategies for the Study of Parliamentary Government Formation",
+    "venue": "Political Analysis 20(2):248-270",
+    "doi_or_url": "https://doi.org/10.1093/pan/mpr058",
+    "type": "peer-reviewed"
+   },
+   "model_link": "Hierarchical Beta/Dirichlet parameter draws (dossier s.13). These are the scenario-tree analogue of random coefficients, and the literature supports carrying behavioural heterogeneity rather than fixed gates. Also validate_formation.py's choice of score.",
+   "stance": "supports",
+   "site_use": "Backs 'each simulation draws its own set from Beta/Dirichlet priors'."
+  },
+  {
+   "id": "COA-F06",
+   "claim": "A poll-driven coalition-formation forecast has a peer-reviewed analogue. Kayser, Orlowski & Rehmert combine monthly polls with an empirical formation model chosen by out-of-sample testing to estimate each party's probability of entering government. Held out of sample, the model picks the cabinet that actually formed in about 48% of formation opportunities, against at most 45% for the competitor specifications.",
+   "quant": "Training and test data: 454 formation opportunities and 116,484 potential cabinets (p.334). Test set: 62 held-out opportunities. Out-of-sample: about 48% correct (competitors at most 45%, p.337). Party-level AUC 0.89. 21 parliamentary democracies; Israel is not in the sample.",
+   "source": {
+    "authors": "Mark A. Kayser; Matthias Orlowski; Jochen Rehmert",
+    "year": 2023,
+    "title": "Coalition inclusion probabilities: a party-strategic measure for predicting policy and politics",
+    "venue": "Political Science Research and Methods 11(2):328-346 (online Jan 2022)",
+    "doi_or_url": "https://doi.org/10.1017/psrm.2021.75",
+    "type": "peer-reviewed"
+   },
+   "model_link": "The whole pipeline: seat draws, then a formation model, then outcome and PM probabilities. A party-level 'inclusion probability' (P(Shas in government), P(Ra'am in government)) is a natural extra output and is easier to validate than coalition classes.",
+   "stance": "supports",
+   "site_use": "new claim: 'Turning polls into probabilities of who governs has a tested academic precedent; out of sample the best models name the right cabinet about half the time.'"
+  },
+  {
+   "id": "COA-F07",
+   "claim": "The multiparty poll-forecasting literature reports probabilities of coalition seat majorities, not of which government forms. Stoetzer et al.'s dynamic Bayesian model (polls plus fundamentals) gives the probability of a plurality and of majorities for given coalitions, and stops there. Formation has no likelihood in that framework.",
+   "quant": "Two ex ante forecasts of 2017 elections. The model outperforms fundamentals-only models on accuracy and on calibration of uncertainty (abstract).",
+   "source": {
+    "authors": "Lukas F. Stoetzer; Marcel Neunhoeffer; Thomas Gschwend; Simon Munzert; Sebastian Sternberg",
+    "year": 2019,
+    "title": "Forecasting Elections in Multiparty Systems: A Bayesian Approach Combining Polls and Fundamentals",
+    "venue": "Political Analysis 27(2):255-262",
+    "doi_or_url": "https://doi.org/10.1017/pan.2018.49",
+    "type": "peer-reviewed"
+   },
+   "model_link": "The site's split between arithmetic (P(NB>=61), change alone, with Ra'am) and politics (the formation tree). The government_formation.py docstring ('this layer cannot be estimated from data ... scenario analysis') matches the field's practice.",
+   "stance": "supports",
+   "site_use": "Backs 'This is arithmetic, not politics; the formation model below prices the politics.'"
+  },
+  {
+   "id": "COA-F08",
+   "claim": "The logarithmic score is strictly proper for categorical forecasts, so the formation harness's choice of score is sound. The harness itself has three weaknesses. It grades a parameter set that is not the shipped one. Three of its eight cycles are scored as certainties. It floors probabilities at 1e-3, so the score is not strictly logarithmic. Its -0.93 vs -0.92 comparison therefore cannot discriminate between trees.",
+   "quant": "Gneiting & Raftery (2007): proper scoring rules, including the logarithmic score for categorical variables (abstract, Savage representation). Harness (src/validate_formation.py; data/processed/formation_validation.csv): BEHAVIOR there has haredi_defect 0.30, raam_joins 0.55, raam_supports 0.40, jl_supports 0.25, likud_sans_bibi 0.15. The shipped tree has shas 0.10, utj 0.15, raam_joins 0.40, raam_supports 0.60, jl_supports 0.45, likud_sans_bibi 0.18. 2009, 2013 and 2022 get P(realized)=1.0 (log score 0), so the informative n is 5. On those 5 the with-defection tree averages -1.48, against -1.95 for uniform over 7 (desk computation from the CSV).",
+   "source": {
+    "authors": "Tilmann Gneiting; Adrian E. Raftery",
+    "year": 2007,
+    "title": "Strictly Proper Scoring Rules, Prediction, and Estimation",
+    "venue": "Journal of the American Statistical Association 102(477):359-378",
+    "doi_or_url": "https://doi.org/10.1198/016214506000001437",
+    "type": "peer-reviewed"
+   },
+   "model_link": "validate_formation.py and dossier s.19. The site's sentences 'log score -0.93 vs -0.92' and 'average log-loss -0.92 ... highest probability in five of eight cycles' rest on the stale parameter set.",
+   "stance": "challenges",
+   "site_use": "Qualifies 'Graded on the eight real outcomes since 2009 the conditional tree scores the same as the unconditional one (log score -0.93 vs -0.92)'. Add that the grade uses an earlier parameter set and only five informative cycles."
+  },
+  {
+   "id": "COA-F09",
+   "claim": "Exchange-traded markets give an external benchmark for the formation layer, and on 15 Oct 2026 they price a repeat election far below the model. Kalshi's 'Prime Minister of Israel after the 2026 election?' contracts resolve to 'No one' if new elections are called before a government forms, which is the same definition as the model's repeat outcome. Its candidate prices leave little room for that outcome. Polymarket's larger market resolves to the next PM sworn in following the 2026 election. That appears to include one sworn in after a repeat election, since it resolves 'Other' only if no PM is sworn in by 31 Dec 2027, so its prices are not directly comparable to the model's.",
+   "quant": "Kalshi KXISRAELPM-26OCT27 (public API, last update 13 Oct 2026, retrieved 15 Oct): mid prices Eisenkot 0.455, Netanyahu 0.265, Bennett 0.13, Liberman 0.025. Sum of mids across all strikes 0.97, sum of bids 0.85, sum of asks 1.09, so implied P(no one) is about 0.03-0.15. Polymarket 'Prime Minister of Israel after the next election?' (volume about $46.6m, retrieved 15 Oct): Eisenkot 0.477, Netanyahu 0.275, Bennett 0.155, Liberman 0.030; sum of yes prices 0.96. Model (government_formation.csv / pm_probabilities.csv): repeat 0.453, Eisenkot 0.216, Netanyahu 0.204, rotation or Likud successor 0.061, Bennett 0.055, Liberman 0.012.",
+   "source": {
+    "authors": "Kalshi; Polymarket (exchange market data)",
+    "year": 2026,
+    "title": "Prime Minister of Israel after the 2026 election? (KXISRAELPM-26OCT27); Prime Minister of Israel after the next election?",
+    "venue": "Kalshi trade API; Polymarket gamma API (retrieved 15 Oct 2026)",
+    "doi_or_url": "https://api.elections.kalshi.com/trade-api/v2/markets?event_ticker=KXISRAELPM-26OCT27 ; https://polymarket.com/event/who-will-be-the-next-prime-minister-of-israel-after-the-next-election",
+    "type": "report"
+   },
+   "model_link": "Repeat-election residual (outcome 7, 0.453 [0.35-0.54]) and the 'rotation / Likud successor' PM row (0.061; markets price Likud alternatives at about 0.01-0.02 in total).",
+   "stance": "challenges",
+   "site_use": "new claim, if adopted: 'Prediction markets, which resolve the same way, price a repeat election at roughly 3-15%; our 45% is the model's most assumption-driven number.'"
+  },
+  {
+   "id": "COA-F10",
+   "claim": "Prediction markets typically produce fairly accurate forecasts that beat most moderately sophisticated benchmarks, and well-designed contracts can reveal probabilities. Market design matters, and thin markets and contract wording limit what prices mean. This makes a liquid, same-definition market a legitimate benchmark for the formation layer, not a target to fit.",
+   "quant": "Review across prediction contexts (abstract). No coalition-specific accuracy figures. Coalition-formation markets have no peer-reviewed track record that this desk could locate.",
+   "source": {
+    "authors": "Justin Wolfers; Eric Zitzewitz",
+    "year": 2004,
+    "title": "Prediction Markets",
+    "venue": "Journal of Economic Perspectives 18(2):107-126",
+    "doi_or_url": "https://doi.org/10.1257/0895330041371321",
+    "type": "peer-reviewed"
+   },
+   "model_link": "How to use COA-F09: as a pre-registered external benchmark scored with the same log score on resolution, not as an input.",
+   "stance": "informs",
+   "site_use": "Methodology note: 'We compare, but do not fit, our formation probabilities to exchange prices that resolve the same way.'"
+  },
+  {
+   "id": "COA-F11",
+   "claim": "Failed formation is rare in the Israeli record. Of 25 Knesset elections from 1949 to 2022, 23 produced a government; the only two that did not were April and September 2019. Since 1996 the count is 10 of 12. In the parliamentary era since 2003 it is 8 of 10. Formation takes about seven weeks and has lengthened. Every government since 2009 took 49 days or more from election to start date, and 2020-22 took 58-82 days.",
+   "quant": "ParlGov election-to-cabinet days (first non-caretaker cabinet; desk computation): 1949-2022 median 51.5, mean 54.3 (n=22 formed; 1955 Ben-Gurion VIII is the maximum at 100). Since 1996: 1996 20 (direct-election era), 1999 50, 2003 34, 2006 37, 2009 49, 2013 55, 2015 58, 2020 76, 2021 82, 2022 58; median 52.5. The 2021 and 2022 durations match atlas D10-F16's verified calendar (82 and 58 days). Repeat rate with a Jeffreys Beta prior: since 1949 0.10 (90% 0.02-0.20); since 1996 0.19 (0.05-0.39).",
+   "source": {
+    "authors": "Holger Döring; Philip Manow et al. (ParlGov project)",
+    "year": 2026,
+    "title": "ParlGov: Parliaments and governments database, development version (view_cabinet, view_election; Israel)",
+    "venue": "parlgov.org",
+    "doi_or_url": "https://parlgov.org/data/parlgov-development_csv-utf-8/view_cabinet.csv",
+    "type": "reference work"
+   },
+   "model_link": "P(repeat election) = 0.453 (p05-p95 0.35-0.54), the largest single outcome in the 15 Oct build. Also the site's formation calendar.",
+   "stance": "challenges",
+   "site_use": "new claim: 'Israel has failed to form a government after 2 of its 25 elections, both in 2019; governments usually take seven to twelve weeks to form.'"
+  },
+  {
+   "id": "COA-F12",
+   "claim": "Delays in forming a government come from uncertainty about which cabinets are acceptable. Bargaining complexity (more parties, more polarisation) lengthens formation only when that uncertainty is present. Bäck et al. (2024; atlas D10-F09, verified) add that pre-electoral blocs short of a majority delay formation and can cause breakdown. Both describe the 2026 configuration: two blocs, each short of 61.",
+   "quant": "16 West European countries, 1944-1998 (abstract). Bäck et al.: 17 countries 1945-2019, plus the Swedish 2018-19 case.",
+   "source": {
+    "authors": "Sona N. Golder",
+    "year": 2010,
+    "title": "Bargaining Delays in the Government Formation Process",
+    "venue": "Comparative Political Studies 43(1):3-32",
+    "doi_or_url": "https://doi.org/10.1177/0010414009341714",
+    "type": "peer-reviewed"
+   },
+   "model_link": "Supports a higher-than-historical repeat risk and a long formation window for 2026. It explains delay, not failure, so it does not license a 61% conditional failure rate (see COA-F11 and the challenges).",
+   "stance": "supports",
+   "site_use": "new claim: 'With both blocs short of a majority, a long formation is likely; the literature links this to delay more than to outright failure.'"
+  },
+  {
+   "id": "COA-F13",
+   "claim": "Basic Law: The Government sets the sequence that the tree collapses into one step. After consultations the President tasks an MK within 7 days, choosing by recommendations and list size; neither binds him. That MK has 28 days, extendable by 14. A second MK may then get 28 days. After that, a 21-day window lets 61 MKs name a candidate in writing, who gets 14 days. Failure means deemed dissolution, with an election within about 90 days (atlas D10-F16, verified). The first mandate need not go to the largest list: Netanyahu got it in 2009 with 65 recommendations to Livni's 28, although Kadima had won 28 seats to Likud's 27 (atlas D10-F17, corrected). Recommendation counts were 55-54 in Sept 2019 and 61 for Gantz in March 2020 (atlas D10-F18, corrected).",
+   "quant": "s.7: 7 days. s.8: 28+14 days. s.9: second MK, 28 days. s.10: 21 days, then 14 days. s.11: dissolution. 2026 calendar (atlas D10-F16): results about 4 Nov, mandate about 11 Nov, first mandate ends 9 Dec or 23 Dec with extension, second ends about 23 Jan 2027, s.10 window ends about 13 Feb; a repeat election falls between April and May 2027.",
+   "source": {
+    "authors": "State of Israel (Knesset), unofficial English translation",
+    "year": 2023,
+    "title": "Basic Law: The Government (consolidated text, amendments through 15 Aug 2023)",
+    "venue": "Knesset of Israel",
+    "doi_or_url": "https://main.knesset.gov.il/EN/activity/Documents/BasicLawsPDF/BasicLawTheGovernment.pdf",
+    "type": "official data"
+   },
+   "model_link": "Outcome 7 (repeat) is the end of a three-stage process. The tree has no 'who is tasked first' stage: PM_ALLOC is drawn within outcome classes, so formateur advantage and the President's discretion do not enter. Glasgow, Golder & Golder (2011) find that presidents can influence PM choice.",
+   "stance": "informs",
+   "site_use": "Backs the formation calendar. new claim: 'If no one forms a government after two mandates and a 21-day Knesset window, a new election follows about three months later, in April-May 2027.'"
+  },
+  {
+   "id": "COA-F14",
+   "claim": "Investiture rules decide whether minority governments are a live option. A requirement to hold an investiture vote does not by itself reduce minority cabinets; only an absolute-majority decision rule does. Israel's investiture needs only a simple majority of those voting, held after the government is formed (Akirav 2022; Basic Law s.13(d), atlas D10-F21). The Bennett-Lapid government was approved 60-59-1.",
+   "quant": "26 European countries since 1946 or democratisation: absolute-majority investiture rules make minority governments considerably less likely, while other investiture features do not (abstract). Israel: approval by a simple majority; Bennett-Lapid 60-59 with one Ra'am abstention (13 June 2021; atlas D10-F21). Akirav (2022, Journal of Legislative Studies 30(1):1-24, doi:10.1080/13572334.2021.2024397) classifies Israel's rule as a simple-majority, ex-post vote.",
+   "source": {
+    "authors": "José Antonio Cheibub; Shane Martin; Bjørn Erik Rasch",
+    "year": 2021,
+    "title": "Investiture rules and formation of minority governments in European parliamentary democracies",
+    "venue": "Party Politics 27(2):351-362 (online 2019)",
+    "doi_or_url": "https://doi.org/10.1177/1354068819850447",
+    "type": "peer-reviewed"
+   },
+   "model_link": "Outcome 5 (centre minority backed by the Joint List) and its arithmetic minority_ce > present/2 with abstainers removed. That is legally correct for Israel's plurality rule.",
+   "stance": "supports",
+   "site_use": "Backs dossier s.3: 'Investiture needs plurality only (60-59 precedent) - minority branch is legally cheap.'"
+  },
+  {
+   "id": "COA-F15",
+   "claim": "Minority governments are a normal outcome in parliamentary democracies. They are not a sign of crisis: they form when opposition parties can influence policy and when governing carries an electoral cost (Strøm 1990; Strøm 1984 puts them at about 35% of postwar governments in 15 democracies, atlas D10-F11). With written support agreements they last as long as majority governments (atlas D10-F12). Israel has done this: Rabin's government lost its majority in Sept 1993 and survived about two years on Hadash and Arab Democratic Party votes from outside (atlas D10-F23). Peres's new government of 22 Nov 1995 was formed on the same Labor-Meretz-Yi'ud coalition, below 61 seats.",
+   "quant": "Strøm 1990: over 350 postwar governments (publisher and catalogue description; book not opened, so figures beyond Strøm 1984 are unverified). Strøm 1984: about 35% minority (atlas D10-F11). Krauss & Thürk: 471 cabinets, 30 countries, 1977-2019 (atlas D10-F12). ParlGov 'Peres II' (start 22 Nov 1995): cabinet parties Labor 44, Meretz 12, Yi'ud 3 = 59 seats, counted at their 1992 election size.",
+   "source": {
+    "authors": "Kaare Strøm",
+    "year": 1990,
+    "title": "Minority Government and Majority Rule",
+    "venue": "Cambridge University Press (ISBN 0521374316); reviewed APSR 85(3):1065-1066, doi:10.2307/1963919",
+    "doi_or_url": "https://doi.org/10.2307/1963919",
+    "type": "book"
+   },
+   "model_link": "Outcome 5 and jl_supports 0.45, raam_supports 0.60, liberman_minority_ok 0.25. Challenges the site's sentence that 'no Israeli minority government has been sworn in from day one'. That holds for post-election formations but not for the mid-term Peres government of Nov 1995.",
+   "stance": "challenges",
+   "site_use": "Reword the outcome-07 note to: 'no Israeli government formed after an election has started as a minority; Rabin and Peres governed on outside Arab support in 1993-96.'"
+  },
+  {
+   "id": "COA-F16",
+   "claim": "Israel has signed three premiership-rotation agreements, and their record is mixed. Peres-Shamir (1984) was honoured on the two-year date. Netanyahu-Gantz (2020) was never executed: the government collapsed over the budget in Dec 2020, before the Nov 2021 rotation date. Bennett-Lapid (2021) transferred the premiership early, on 1 July 2022, through the statutory trigger added in 2020-21. The Basic Law now makes rotation legally enforceable, with dissolution and budget-failure triggers (atlas D10-F19, verified; D10-F24; D10-F26).",
+   "quant": "Rotations agreed: 3. The premiership passed in 2 of them (1986 on schedule; 2022 early, by law) and never passed in 1 (2020). ToI (18 Nov 2020): Netanyahu 'is to serve as prime minister until November 17, 2021, when Gantz will succeed him', and 'if the government falls due to failure to pass the state budget, Netanyahu retains the premiership'. The budget-failure dissolution came in Dec 2020 (IDI 2021 election page, atlas D10-F25). Amendment No. 10 later added budget failure as an early-rotation trigger (atlas D10-F19).",
+   "source": {
+    "authors": "Times of Israel staff",
+    "year": 2020,
+    "title": "Netanyahu associates: 'Negligible chance' Gantz will be PM (URL slug: a-year-before-gantz-is-set-to-succeed-netanyahu-both-express-doubt-itll-happen)",
+    "venue": "The Times of Israel, 18 Nov 2020",
+    "doi_or_url": "https://www.timesofisrael.com/a-year-before-gantz-is-set-to-succeed-netanyahu-both-express-doubt-itll-happen/",
+    "type": "report"
+   },
+   "model_link": "PM_ALLOC: the 'rotation / Likud successor' column and the Together-vs-Yashar flip rule. The model's PM is the first PM sworn in, which the record supports, because second-half rotations are often not reached.",
+   "stance": "informs",
+   "site_use": "Backs 'the premiership is allocated with rotation-aware ... probabilities'. new claim: 'Of three rotation deals, one never reached its handover date.'"
+  },
+  {
+   "id": "COA-F17",
+   "claim": "The largest party usually supplies the prime minister, but not always. Across 28 European countries the largest party took the premiership in 72.8% (West) and 77.5% (East) of PM selection opportunities, and the largest-party bonus varies sharply across cases. Israel since 1996 matches: the largest list's leader became PM in 7 of 10 governments formed. The exceptions were 1996 (direct election), 2009 (Kadima first, Netanyahu PM) and 2021 (Bennett with 7 seats). Formateurs also gain a bonus over their seat weight in portfolio share (Ansolabehere et al. 2005; atlas D10-F10).",
+   "quant": "369 PM selection opportunities, 2,412 potential PM parties (p.944). Largest party PM: 72.8% West, 77.5% East (p.945). In Western Europe the largest party is advantaged about 67% of the time and disadvantaged about 33% (random-coefficient SD 4.73 around a mean of 2.11, p.945). Israel 1996-2022 from ParlGov seats and cabinets: 7/10; 6/8 since 2003.",
+   "source": {
+    "authors": "Garrett Glasgow; Matt Golder; Sona N. Golder",
+    "year": 2011,
+    "title": "Who 'Wins'? Determining the Party of the Prime Minister",
+    "venue": "American Journal of Political Science 55(4):937-954",
+    "doi_or_url": "https://doi.org/10.1111/j.1540-5907.2011.00524.x",
+    "type": "peer-reviewed"
+   },
+   "model_link": "PM_ALLOC change rows: Eisenkot, leader of the largest change list, gets 0.64-0.85, flipping to Bennett when Together outweighs Yashar. These shares match the comparative rate.",
+   "stance": "supports",
+   "site_use": "Refines 'Bennett was PM with 7 seats in 2021 - largest-party logic is not Israeli logic' to 'the largest list supplied the PM in 7 of the last 10 Israeli governments; 2021 is the exception that shows the rule can break'."
+  },
+  {
+   "id": "COA-F18",
+   "claim": "UTJ and its components historically refused full ministerial posts on principle, with exceptions since 2015. Since the 1990s their only non-Likud-led government was Barak's in 1999, which they left in September 1999 over Sabbath work. Shas has been far more mobile. It sat in the 1984 unity government (Peres PM for the first two years), joined Rabin in 1992, Barak in 1999 and Olmert in 2006 (atlas D10-F28, corrected), and stayed out in 2003, 2013-15 and 2021. When a non-Likud premier was viable, Shas joined 3 times in 4 (1992, 1999, 2006 yes; 2021 no). UTJ joined once in 4 (1999).",
+   "quant": "IDI UTJ page: 1999 Barak coalition 'briefly ... no government post', left Sept 1999 over a turbine shipped on the Sabbath. Its list of governments joined has no entry for the 1992, 2006 or 2021 non-Likud governments (absence inferred from that list). Jeffreys-Beta desk estimates: Shas 0.70 (90% 0.35-0.95); UTJ 0.30 (0.05-0.65). 1999 was in the direct-election era, when the PM had already been elected (Mahler 1997, Israel Affairs 3(3-4):3-27, doi:10.1080/13537129708719428). In the parliamentary-era cases only, Shas joined 2 of 3 (1992, 2006 yes; 2021 no).",
+   "source": {
+    "authors": "Israel Democracy Institute",
+    "year": 2026,
+    "title": "United Torah Judaism (party page)",
+    "venue": "Israel Democracy Institute, Israeli Elections and Parties",
+    "doi_or_url": "https://en.idi.org.il/israeli-elections-and-parties/parties/united-torah-judaism/",
+    "type": "report"
+   },
+   "model_link": "shas_defects 0.10 (NEFF 30) and utj_defects 0.15 (NEFF 16), with COND anchors 'Shas 1992, Shas+UTJ 1999'. The anchors omit Shas-Olmert 2006, which fits the pivot pattern, and the 2021 refusal.",
+   "stance": "challenges",
+   "site_use": "Corrects the gate note 'haredi defection rises ... (Shas 1992, Shas+UTJ 1999)' to add Shas 2006 and the 2021 refusal."
+  },
+  {
+   "id": "COA-F19",
+   "claim": "Since 2019 the haredi parties have tied themselves to Netanyahu's bloc in writing. After the September 2019 election Likud, Shas, UTJ and Yamina agreed to negotiate as one 55-MK bloc headed by Netanyahu. On 16 Feb 2020 Shas, UTJ and Yamina signed a letter declaring 'We'll only support Netanyahu'. In 2021 both haredi parties stayed in opposition rather than join the change government. Nissim Leon's chapter title, 'From Preference to Default' (Purdue UP 2024, pp.203-226, doi:10.2307/jj.22177844.13), states the thesis that haredi alignment with the right hardened over time; its abstract was not available, so treat it as unverified. The 2026 counter-signal is the reported mood to recommend no one and sit out for about a year (atlas D10-F29, verified).",
+   "quant": "Bloc of 55 MKs (Likud 32, Shas 9, UTJ 7, Yamina 7; Sept 2019). Loyalty letter: 16 Feb 2020, signed by Shas, UTJ and Yamina and initiated by Deri. In the bloc era (2019-22) the haredi parties joined 0 non-Likud governments.",
+   "source": {
+    "authors": "Times of Israel staff",
+    "year": 2020,
+    "title": "Right-wing religious parties renew pledge to back Netanyahu as PM",
+    "venue": "The Times of Israel, 16 Feb 2020",
+    "doi_or_url": "https://www.timesofisrael.com/right-wing-religious-parties-renew-pledge-to-back-netanyahu-as-pm/",
+    "type": "report"
+   },
+   "model_link": "This is the evidence for the low haredi defection priors (and why COA-F18's pre-2019 rate should be down-weighted, not adopted). It also bears on a missing branch: haredi abstention or later entry rather than defection at formation (UTJ_ABSTAINS is coded but set to 0).",
+   "stance": "supports",
+   "site_use": "Backs the low shas_defects/utj_defects values as a bloc-era judgment: 'since 2019 Shas and UTJ have pledged in writing to support only Netanyahu'."
+  },
+  {
+   "id": "COA-F20",
+   "claim": "Liberman's vetoes are real but have bent once under pressure. In 2019 his refusal to compromise on the haredi draft law caused Israel's first-ever failure to form a government (atlas D10-F25, corrected). He has not sat with the haredi parties since. In March 2020, facing a fourth election that he called 'the worst of all possible scenarios', he softened his earlier refusal to work with the Joint List while talking with Gantz about a minority government. That government was blocked instead by two of Gantz's own MKs, Hauser and Yoaz Hendel. In 2021 he sat in a coalition with Ra'am inside.",
+   "quant": "ToI, 9 Mar 2020: Liberman 'had earlier ruled out working with the Joint List but appeared to soften that stance'. Channel 12 reported an ultimatum to Hauser and Hendel to back a Joint List-supported minority government or resign. Liberman with the haredim: 0 of 5 formations since 2019 (2019a, 2019s, 2020, 2021, 2022).",
+   "source": {
+    "authors": "Times of Israel staff",
+    "year": 2020,
+    "title": "Blue and White may oust 2 renegade MKs as Gantz-Liberman alliance moves forward",
+    "venue": "The Times of Israel, 9 Mar 2020",
+    "doi_or_url": "https://www.timesofisrael.com/blue-and-white-may-oust-2-renegade-mks-as-gantz-liberman-alliance-moves-forward/",
+    "type": "report"
+   },
+   "model_link": "liberman_haredi_ok 0.20 (supported by 0 of 5) and liberman_minority_ok 0.25 (one softening in two tests). The binding 2020 veto came from Hendel, whose 2026 'Zionist government only' rule the model now encodes (ZIONIST_ONLY), so the minority branch faces two independent vetoes.",
+   "stance": "supports",
+   "site_use": "Backs the site's 'Liberman's flips' and the JL-minority gate. new claim: 'In 2020 a Joint List-backed minority government was blocked by Hendel, who leads the Reservists-Economic list in 2026.'"
+  },
+  {
+   "id": "COA-F21",
+   "claim": "Ra'am's 2021 entry was a first, and it came at the end of a deadlock sequence. INSS described the Bennett-Lapid coalition as the first time an Arab party joined an Israeli coalition (atlas D10-F26: first independent Arab party in decades). INSS warned the precedent would be reversible if the government proved short-lived. In the same 2021 deadlock Netanyahu also courted Ra'am: Deri offered Abbas 'exclusivity' on Arab-sector issues at the Interior Ministry, and the talks failed over Smotrich's opposition and the May 2021 Gaza operation. After four elections, both blocs treated Ra'am as available.",
+   "quant": "Ra'am 4 seats in 2021; coalition 61 including Ra'am; investiture 60-59-1 (atlas D10-F26). The government lasted about one year (dissolved 30 June 2022). Netanyahu-Ra'am contacts: ToI, 11 Aug 2022, citing Channel 12.",
+   "source": {
+    "authors": "Ephraim Lavie; Meir Elran; Khader Sawaed; Ilham Shahbari; Jony Essa",
+    "year": 2021,
+    "title": "Ra'am Joins the Government Coalition: Paving a Path to Jewish-Arab Political Partnership?",
+    "venue": "INSS Insight No. 1489 (17 June 2021)",
+    "doi_or_url": "https://www.inss.org.il/publication/raam-party/",
+    "type": "report"
+   },
+   "model_link": "raam_joins 0.40 and raam_supports 0.60. The only Israeli precedent for an Arab party inside a coalition followed three repeat elections, so it says little about the first election of a new sequence.",
+   "stance": "informs",
+   "site_use": "Backs 'Ra'am joins (0.40) - the 2021 precedent', with the qualifier that the precedent came after four elections."
+  },
+  {
+   "id": "COA-F22",
+   "claim": "Mainstream parties shut a party out when they have no pressing need to cooperate with it and can credibly say its ideology is beyond accepted norms. Size and ideology are the main determinants. When mainstream parties do take in formerly excluded partners, office, policy and votes all drive the choice, enabled by electoral shifts and convergence of positions (de Lange 2012, Political Studies 60(4):899-918, doi:10.1111/j.1467-9248.2012.00947.x).",
+   "quant": "Logistic regression on 31 Western European anti-immigration parties (abstract and repository record). Full text not opened.",
+   "source": {
+    "authors": "Joost van Spanje",
+    "year": 2010,
+    "title": "Parties beyond the pale: Why some political parties are ostracized by their competitors while others are not",
+    "venue": "Comparative European Politics 8(3):354-383",
+    "doi_or_url": "https://doi.org/10.1057/cep.2009.2",
+    "type": "peer-reviewed"
+   },
+   "model_link": "raam_joins is conditioned only on arithmetic: it fires when the centre is short and Ra'am's seats close the gap. The literature says the decisive condition is 'pressing need', which in Israel rose with each repeat election in 2019-21. A first-election raam_joins should sit below the 2021-derived level.",
+   "stance": "challenges",
+   "site_use": "new claim: 'Excluded parties enter government when the alternative is worse; in 2021 that took four elections.'"
+  },
+  {
+   "id": "COA-F23",
+   "claim": "The 2026 signals on Ra'am are 'not at the outset'. On 16 Sept 2026 Channel 12 reported Bedouin council heads saying Eisenkot had promised to bring Ra'am into his coalition. Yashar denied it ('These things were never said, not even by implication'). Yashar restated three tests for partners: accepting the Declaration of Independence, recognising Israel as Jewish and democratic, and serving all citizens. It added that partners must recognise Hamas as a terrorist organisation Israel must destroy, a test aimed at Abbas's July interview. Bennett and Lapid launched Together in April 2026 pledging a 'Zionist government', and Hendel rules out Arab-dependent coalitions (atlas D10-F30).",
+   "quant": "JNS, 16 Sept 2026 (citing Channel 12 and Nas Radio; Yashar statement). JNS, 27 Apr 2026: 'vow to form a Zionist government, with Bennett at the helm'. No change-bloc leader has publicly accepted Ra'am inside a government.",
+   "source": {
+    "authors": "JNS staff",
+    "year": 2026,
+    "title": "Eisenkot promised Bedouin council heads he'd bring Ra'am into gov't",
+    "venue": "JNS, 16 Sept 2026",
+    "doi_or_url": "https://jns.org/news/israel-news/eisenkot-promised-bedouin-council-heads-hed-bring-raam-into-govt",
+    "type": "report"
+   },
+   "model_link": "raam_joins 0.40 versus raam_supports 0.60. The code comment 'every Jewish party still pledges no Arab party INSIDE at the outset' is now sourced as a soft anti-pact (no explicit 'never Ra'am' quote), which supports joins < supports.",
+   "stance": "supports",
+   "site_use": "Sources the site's implicit claim that change leaders exclude Arab parties at the outset; cite JNS 16 Sept 2026 and JNS 27 Apr 2026."
+  },
+  {
+   "id": "COA-F24",
+   "claim": "No Israeli party has ever dropped its sitting leader after an election in order to form a government. All three unity governments kept both leaders: Peres-Shamir in 1984 and Shamir-Peres in 1988 (atlas D10-F24, verified), and Netanyahu-Gantz in 2020. The 1988 case was not a deadlock: the right-religious bloc held 65 seats and Shamir chose unity anyway. The closest comparative precedent is Spain in October 2016. After two inconclusive elections, PSOE's leader Pedro Sánchez was pushed out, and the party's federal committee voted 139-96 to abstain so that Rajoy could govern, explicitly to avoid a third election in under a year.",
+   "quant": "Israeli precedents for 'party drops leader to form': 0 in 25 Knessets (desk reading of the IDI election pages and atlas D10-F24/F25). Spain: second election June 2016; leader out 1 Oct 2016; abstention vote 23 Oct 2016 (139-96, 2 abstentions); Rajoy invested 29 Oct.",
+   "source": {
+    "authors": "Euronews",
+    "year": 2016,
+    "title": "Spain's Socialists vote to abstain in confidence vote; Mariano Rajoy becomes PM in second vote, third election averted",
+    "venue": "Euronews, 23 Oct 2016",
+    "doi_or_url": "https://www.euronews.com/2016/10/23/spain-s-socialists-vote-to-abstain-in-confidence-vote-mariano-rajoy-becomes-pm-in-second-vote-third-election-averted",
+    "type": "report"
+   },
+   "model_link": "likud_sans_bibi 0.18 (NEFF 20) and its COND anchor 'unity resolved the deep deadlocks (1984/1988)' in dossier s.19, which overstates the case: 1988 was not a deadlock and neither unity dropped a leader. The comparative precedent fired only after a second failed election.",
+   "stance": "challenges",
+   "site_use": "Corrects the gate note 'Likud drops him (0.18) rather than go to a fifth repeat election': there is no Israeli precedent, and the one comparative case came after two failed elections."
+  },
+  {
+   "id": "COA-F25",
+   "claim": "Laver & Schofield set the agenda the tree implements. Coalition outcomes depend on who the actors are and what motivates them (office, policy), on which coalitions form, how long they last, how payoffs are shared, and on constitutional, behavioural and historical constraints on bargaining. Their framework treats formation as constrained bargaining among motivated actors rather than seat arithmetic. That is the case for an explicit behavioural tree over a pure 'who reaches 61' rule.",
+   "quant": "Book: 328 pages, 27 tables, with case studies of European coalitions (publisher description). The original OUP 1990 edition was reissued by the University of Michigan Press in 1998.",
+   "source": {
+    "authors": "Michael Laver; Norman Schofield",
+    "year": 1998,
+    "title": "Multiparty Government: The Politics of Coalition in Europe (Ann Arbor paperback edition; first published OUP 1990)",
+    "venue": "University of Michigan Press",
+    "doi_or_url": "https://doi.org/10.3998/mpub.8290",
+    "type": "book"
+   },
+   "model_link": "Design of government_formation.py: actor-level behavioural gates (motivations, vetoes, institutional signatories) layered on seat arithmetic.",
+   "stance": "supports",
+   "site_use": "Backs 'Seats are not power. Every simulated Knesset runs through an explicit formation sequence'."
+  }
+ ],
+ "challenges": [
+  {
+   "title": "P(repeat election) of 45% sits far above every reference class",
+   "what_literature_says": "Israel failed to form after 2 of 25 Knesset elections (8%) and 2 of 12 since 1996 (17%; Jeffreys 90% 5-39%). Conditional on a deadlock (1984, 2019a, 2019s, 2020, 2021) the rate is 2/5 (Jeffreys 0.42, 90% 0.13-0.74). The site's own note says '2 of 4'. Comparative work links bloc deadlocks to delay more than to failure (Golder 2010; Bäck et al. 2024). The deadlocks that did resolve did so through the second mandate or the 21-day window: unity in 1984 and 2020, a cross-bloc coalition in 2021. Kalshi prices resolve to 'no one' on a repeat, as the model does, and imply about 3-15%.",
+   "current_model": "Repeat is the residual when every gate fails: 0.453 (p05-p95 0.35-0.54). Desk run on the 15 Oct mixture draws, 200 parameter vectors: P(neither NB core nor change+Ra'am reaches 61) = 0.641; P(repeat | that deadlock) = 0.61 (0.46-0.74); P(repeat | not deadlock) = 0.17, which comes mostly from change+Ra'am draws where Ra'am declines.",
+   "proposed_change": "(a) Add an explicit 'late closure' stage for the second mandate and the s.10 window, whose success probability given a deadlock is anchored to the record (about 0.4-0.6) and shared out across unity, pledge-break, haredi entry and Ra'am entry, instead of letting repeat absorb every gate's failure. (b) Report P(repeat | deadlock) on the site next to the historical 2/5. (c) Re-centre so that P(repeat | deadlock) sits nearer 0.45-0.5 unless a 2026-specific argument is documented in the dossier.",
+   "how_to_test": "Harness: extend validate_formation.py to all 25 Knessets (ParlGov plus IDI election pages) with the shipped BEHAVIOR imported, not copied, and score repeat versus formed with the log and Brier scores. External: pre-register the Kalshi KXISRAELPM mid prices at D-1 and score both forecasts on resolution.",
+   "finding_ids": [
+    "COA-F09",
+    "COA-F10",
+    "COA-F11",
+    "COA-F12",
+    "COA-F13"
+   ]
+  },
+  {
+   "title": "Haredi defection priors and certain haredi membership of Netanyahu's bloc",
+   "what_literature_says": "When a non-Likud premier was viable, Shas joined 3 of 4 times (1992, 1999, 2006; not 2021) and UTJ 1 of 4 (1999). Since 2019 both are bound to Netanyahu by written pledges, and in 2026 they reportedly lean to recommend no one and sit out for about a year (atlas D10-F29). Martin & Stevenson (2010): the incumbency advantage disappears when partners became mired in public conflict, and UTJ and Shas's ministers left the government in July 2025.",
+   "current_model": "shas_defects 0.10 and utj_defects 0.15 (marginal, raised in pivotal draws by COND). NB_CORE always counts Shas and UTJ with Netanyahu. UTJ_ABSTAINS = 0.",
+   "proposed_change": "(a) Write the haredi prior as a two-era mixture: a pre-2019 pivot rate (Beta(3.5,1.5) for Shas, Beta(1.5,3.5) for UTJ) weighted against the bloc-era zero. Then apply the 2026 draft-law discount explicitly, so the 0.10/0.15 is derived rather than asserted. (b) Add P(haredi party joins Netanyahu | NB>=61) slightly below 1 (e.g. 0.9-0.95), or a 'sit out, then join later' state. (c) Turn on a small haredi-abstention channel for the JL-minority branch as a sensitivity row (it is already coded).",
+   "how_to_test": "Sensitivity grid in government_formation.py on P(NB government), P(repeat) and PM shares. Grade the 1992, 1999, 2006 and 2021 cases in the extended harness. Evidence class: institutional and record-based, not estimable.",
+   "finding_ids": [
+    "COA-F03",
+    "COA-F18",
+    "COA-F19"
+   ]
+  },
+  {
+   "title": "Ra'am inside a coalition at 0.40 at the first election of a sequence",
+   "what_literature_says": "Comparatively, public refusals almost never end in a government that contradicts them (1 of 220 formed cabinets). Mainstream parties ostracise a party when there is no pressing need (van Spanje 2010). Israel's only precedent (2021) came after four elections, when both blocs courted Ra'am. In 2026 the change lists campaign for a 'Zionist government', and Yashar denies any Ra'am promise.",
+   "current_model": "raam_joins 0.40 (NEFF 18) and raam_supports 0.60, conditioned only on whether Ra'am's seats close the centre's gap.",
+   "proposed_change": "Index raam_joins (and centre_defects and likud_sans_bibi) to the election's position in a deadlock sequence. Use a lower first-election value (about 0.2-0.3) and keep outside support (raam_supports and the minority branch) as the main Arab-party channel. Show the repeat-election path as raising these gates, so the site explains why a second election would differ.",
+   "how_to_test": "Not gradable on one precedent. Report as a sensitivity row (raam_joins 0.25/0.40/0.55) and document the judgment in the dossier. Watch for post-election statements from Eisenkot or Bennett as tripwires.",
+   "finding_ids": [
+    "COA-F02",
+    "COA-F21",
+    "COA-F22",
+    "COA-F23"
+   ]
+  },
+  {
+   "title": "Unity without Netanyahu at 0.18, and the 1988 anchor",
+   "what_literature_says": "No Israeli party has ever replaced its sitting leader after an election in order to form a government. The 1984, 1988 and 2020 unity governments kept both leaders, and 1988 was not a deadlock (the right-religious bloc held 65). The closest comparative case, PSOE in Oct 2016, came after two failed elections and enabled an opponent's minority government by abstention.",
+   "current_model": "likud_sans_bibi 0.18 (NEFF 20), with unity_beta_deadlock +0.35 anchored on '1984/1988'. The outcome gets 0.105 and 'rotation / Likud successor' 0.061 of the PM, while exchange prices give Likud alternatives about 0.01-0.02 in total.",
+   "proposed_change": "Lower the first-election value to about 0.05-0.10, raised in the repeat-election path. Correct the dossier s.19 anchor text to 1984 and 2020, both of which kept the leaders. Keep the Herzog plea-deal channel as an explicit, sourced tripwire.",
+   "how_to_test": "Extended harness (1984, 1988, 2020 as unity cases). External benchmark against market prices for Likud successors. Sensitivity row on P(PM = Likud successor).",
+   "finding_ids": [
+    "COA-F09",
+    "COA-F24"
+   ]
+  },
+  {
+   "title": "The formation harness cannot grade the shipped tree",
+   "what_literature_says": "The log score is strictly proper (Gneiting & Raftery 2007). Large-N formation models are scored on hundreds of formation opportunities (220 to 454) with out-of-sample tests (Glasgow et al. 2012; Kayser et al. 2023).",
+   "current_model": "validate_formation.py keeps its own BEHAVIOR (haredi 0.30, raam_joins 0.55, jl 0.25, unity 0.15). Three of eight cycles score P=1, so the informative n is 5, and probabilities are floored at 1e-3. The site cites -0.93 vs -0.92 and 'highest probability in five of eight'.",
+   "proposed_change": "Import BEHAVIOR and COND from government_formation.py. Extend to 25 Knessets. Report the mean log score with a bootstrap SE over the informative cycles against two baselines: a base-rate forecaster and uniform. Add a party-level inclusion-probability score (AUC or Brier per party, as in Kayser et al.).",
+   "how_to_test": "Harness: rerun and publish in the dossier. A shipping rule like the poll layer's: a gate change ships only if it does not worsen the extended-harness log score.",
+   "finding_ids": [
+    "COA-F05",
+    "COA-F06",
+    "COA-F08"
+   ]
+  },
+  {
+   "title": "Two site sentences overstate the record",
+   "what_literature_says": "Peres's government of 22 Nov 1995 was formed on a Labor-Meretz-Yi'ud coalition below 61 that relied on Arab votes from outside (ParlGov; atlas D10-F23). The largest list supplied the PM in 7 of the last 10 Israeli governments (Glasgow, Golder & Golder 2011 comparative rate 73-78%).",
+   "current_model": "Outcome 07 note: 'no Israeli minority government has been sworn in from day one'. PM note: 'largest-party logic is not Israeli logic'.",
+   "proposed_change": "Reword to 'no government formed after an election has started as a minority (Rabin and Peres governed on outside Arab support in 1993-96)', and to 'largest-party logic usually holds (7 of 10) but broke in 2009 and 2021'.",
+   "how_to_test": "Editorial. Verify the Peres 1995 coalition size against Knesset government records.",
+   "finding_ids": [
+    "COA-F15",
+    "COA-F17"
+   ]
+  }
+ ],
+ "parameters": [
+  {
+   "name": "P(repeat election) [output]",
+   "current": "0.453 (p05-p95 0.35-0.54)",
+   "literature_range": "Israel 2/25 = 0.08 (Jeffreys 90% 0.02-0.20); 2/12 since 1996 = 0.17 (0.05-0.39); market-implied (Kalshi, same definition, 15 Oct 2026) about 0.03-0.15",
+   "finding_ids": [
+    "COA-F09",
+    "COA-F11"
+   ]
+  },
+  {
+   "name": "P(repeat | deadlock) [desk-derived output]",
+   "current": "0.61 (0.46-0.74); deadlock = NB core <61 and change+Ra'am <61, P = 0.641",
+   "literature_range": "2/5 historical deadlocks (Jeffreys 0.42, 90% 0.13-0.74); the site's own '2 of 4' = 0.5",
+   "finding_ids": [
+    "COA-F11",
+    "COA-F12"
+   ]
+  },
+  {
+   "name": "shas_defects",
+   "current": "0.10 (NEFF 30), COND-raised when pivotal",
+   "literature_range": "Pre-2019 pivot record 3/4 (Jeffreys 0.70, 0.35-0.95); parliamentary-era 2/3; bloc era (2019-22) 0",
+   "finding_ids": [
+    "COA-F18",
+    "COA-F19"
+   ]
+  },
+  {
+   "name": "utj_defects",
+   "current": "0.15 (NEFF 16)",
+   "literature_range": "1/4 (1999 only, left after about 2 months; Jeffreys 0.30, 0.05-0.65); bloc era 0",
+   "finding_ids": [
+    "COA-F18",
+    "COA-F19"
+   ]
+  },
+  {
+   "name": "P(Shas/UTJ join Netanyahu | NB>=61) [implicit]",
+   "current": "1.0 (NB_CORE)",
+   "literature_range": "Below 1 after a conflictual exit (Martin & Stevenson 2010); 2026 'recommend no one' mood (atlas D10-F29). Suggested 0.9-0.95",
+   "finding_ids": [
+    "COA-F03",
+    "COA-F19"
+   ]
+  },
+  {
+   "name": "raam_joins",
+   "current": "0.40 (NEFF 18)",
+   "literature_range": "Arab party inside a coalition: 1 of 25 Knessets, after 4 elections; anti-pact violation 1/220 comparative. Suggested first-election 0.2-0.3",
+   "finding_ids": [
+    "COA-F02",
+    "COA-F21",
+    "COA-F22",
+    "COA-F23"
+   ]
+  },
+  {
+   "name": "raam_supports / jl_supports",
+   "current": "0.60 / 0.45",
+   "literature_range": "Outside Arab support sustained Rabin and Peres in 1993-96; JL recommended Gantz in March 2020 but the minority government was vetoed by Hendel and Hauser. No base rate beyond these cases",
+   "finding_ids": [
+    "COA-F15",
+    "COA-F20"
+   ]
+  },
+  {
+   "name": "centre_defects (pledge-break)",
+   "current": "0.12 (NEFF 25)",
+   "literature_range": "Comparative anti-pact cabinets 1/220. Israel 2019-21: 0 pledge-breaks at the first election (no government formed), 2 of 2 formations after 3 or more elections",
+   "finding_ids": [
+    "COA-F01",
+    "COA-F02"
+   ]
+  },
+  {
+   "name": "likud_sans_bibi",
+   "current": "0.18 (NEFF 20)",
+   "literature_range": "Israeli precedent 0 of 25; comparative (PSOE 2016) only after two failed elections; market prices on Likud alternatives about 0.01-0.02. Suggested first-election 0.05-0.10",
+   "finding_ids": [
+    "COA-F09",
+    "COA-F24"
+   ]
+  },
+  {
+   "name": "liberman_haredi_ok",
+   "current": "0.20 (NEFF 25)",
+   "literature_range": "0 of 5 formations since 2019",
+   "finding_ids": [
+    "COA-F20"
+   ]
+  },
+  {
+   "name": "liberman_minority_ok",
+   "current": "0.25 (NEFF 14)",
+   "literature_range": "Refused in 2019; softened in March 2020 under a fourth-election threat (1 of 2)",
+   "finding_ids": [
+    "COA-F20"
+   ]
+  },
+  {
+   "name": "PM_ALLOC largest change list (Eisenkot) share",
+   "current": "0.64-0.85 by row, flipped to Bennett when Together > Yashar",
+   "literature_range": "Largest party PM 72.8% (W. Europe), 77.5% (E. Europe); Israel 7/10 since 1996, 6/8 since 2003",
+   "finding_ids": [
+    "COA-F17"
+   ]
+  },
+  {
+   "name": "Formation duration [calendar, not in model]",
+   "current": "n/a",
+   "literature_range": "Israel median 52.5 days since 1996; 58-82 days in 2020-22; first non-caretaker government after 4 Nov 2026 results most likely late Dec 2026 to Jan 2027",
+   "finding_ids": [
+    "COA-F11",
+    "COA-F13"
+   ]
+  }
+ ],
+ "open_questions": [
+  "Market comparability: Kalshi resolves to 'no one' on a repeat (the model's definition); Polymarket resolves to whoever is sworn in after a repeat. Should the site also publish P(next PM after any repeat) so it can be compared with the larger Polymarket market?",
+  "How many seats did Peres's coalition actually hold on 22 Nov 1995, given Labor's mid-term defections? ParlGov counts 1992 election seats (59); check the Knesset's government records before rewording the site.",
+  "Navot & Goldshmidt, 'Netanyahu and the Very Short History of the Right-Wing Bloc' (in Shamir & Rahat eds., The Elections in Israel 2019-2021, Routledge 2022, pp.119-138, doi:10.4324/9781003267911-8), and Leon (2024), 'From Preference to Default', were located but not opened. They are the peer-reviewed sources for bloc-era haredi loyalty and should replace the press citation in COA-F19.",
+  "Navot, Swaid & Khalaily, 'The Arab electorate and parties, 2019-2021' (same volume, pp.238-258) was located but not opened. It is the academic source for Ra'am's 2021 strategy.",
+  "Does Ra'am's separation from the Shura Council count as ratified (atlas verify of D10-F31 found it still pending in Aug 2026)? It bears on who signs for Ra'am, a premise of the site's 'Ra'am's post-Shura independence'.",
+  "Will the haredi parties recommend no one at the President's Residence? If so, the first mandate likely goes to the change candidate (atlas D10-F32 arithmetic), which the tree does not model. Should a formateur stage be added?",
+  "Is there a coalition-specific accuracy record for exchange markets in other countries (Netherlands, Germany, Belgium)? None was located; until one is, treat markets as a benchmark only."
+ ]
+}

@@ -1,0 +1,655 @@
+{
+ "desk": "sector_turnout",
+ "summary": "The sector layers stand on firm ground for the Arab term, on softer ground for the haredi shock, and the Arab capacity ceiling is looser than the data allow.\n\nArab turnout. The official series (Bayan 28) runs from 75% in 1999 to the mid-50s, then 63.5 (2015), 49.2 / 59.2 / 64.8 (2019-20), 44.6 (2021) and 53.2 (2022). Peer-reviewed work (Hitman 2021; Rudnitzky 2022; Rosenthal, Zubida & Nachmias 2017) explains the swings by list unity and perceived political efficacy, and 2022 shows the unity rule is conditional. The Central Elections Committee moved to disqualify Arab lists or candidates in most elections since 2003, the Court always reversed it, and turnout moved both ways afterwards, so there is no backlash term to add. The 2025-26 KAP/Stat-Net surveys bracket the model: 53% if the parties run separately, 62-67% if all four reunite. But survey-based turnout forecasts have missed by 4-15 points in both directions (KAP 2021 +15; Statnet for Kan, Aug 2022, -14; KAP Oct 2022 -4), and stated intention runs 15-35 points above reality. That vindicates the s.20 decision not to drive the dial from surveys. The 0.58 mean sits inside the pre-registered band, but three of its four years are four-party-unity years. 2026's structure has one precedent (2021, 44.6%), and both prime-ministerial candidates exclude Arab parties, which the efficacy literature reads as a demobiliser. The stakes are small: through k = 0.247, 0.53 vs 0.58 is about 0.25 seats. The site sentence calling 2021 a 'split year' contradicts the 58% it sits inside.\n\nHow polls see the sector. The 2026 CEC filings show mostly Hebrew online panels of 500-610 with low response. Tatika's raw sample is 11% Arab, about the 2022 voter share and far below the ~16% electorate share. Channel 13 alone runs a separate StatNet phone sample of Arabs. INES had to add Arabic phone interviews because online panels yield too few Arabs. Houses embed different turnouts: Lazar about 0.5, Afkar 0.60, Channel 13 13-15 seats. The record fits the graded term: polls under-count Arab lists by 0.69 seats on average and absorbed most swings (2021's collapse was caught; the 2022 rise was missed when the consensus expected the low 40s). The under-count is Ra'am-shaped. KAP concedes its surveys miss the Negev Bedouin, and final polls under-counted Ra'am by 2.3 seats (2021) and 0.6 (2022), yet the model moves the Joint List and Ra'am together.\n\nHaredi. The population grows 4.2% a year (IDI 2025). Turnout is flat, about 76% at regular stations and about 79% with envelopes; 2022 was a rebound, not a surge. Under-coverage is real: 69% internet use vs 94%, online response rates of 3.6-26%, and a pre-2015 audit found haredi parties under-polled. The -1.35 magnitude is fragile, though: the raw mean is -0.98, the last four cycles -0.58, and the mean without April 2019 is -0.92. April 2019 had a structural cause (Yahad's late withdrawal). About 90% of the under-poll is Shas, not UTJ. The 17 Sept High Court ban on real-time voter tracking weakens the machine that produced past beats. Realised haredi-list growth is about +1 seat per term, not +1.5-2.\n\nCapacity. KALPI_ARAB_CAP implicitly assumes a 100% Arab-list share and 0.78 concentration. Measured values (at most 0.94, and 0.81-0.85) put the bound near 15%. The 15 Oct draws give 19 or more Arab seats in 10.7% of simulations, which would need record-breaking turnout. The haredi floor is a judgement bound that binds in under 1% of draws.\n\nDruze turnout is falling and Druze barely appear in samples. Yisrael Beytenu's record shows no FSU poll bias. Envelopes add about 10 points to settlement turnout.",
+ "findings": [
+  {
+   "id": "SEC-F01",
+   "claim": "The official Arab-and-Druze turnout series swings far more than national turnout, and the 2022 base the model scales from is a regular-station figure. Reuses atlas D2-F02 (verified with corrections) and D2-F07.",
+   "quant": "Arab and Druze towns, % of eligible (regular stations, no double envelopes): 1999 75.0, 2003 62.0, 2006 56.3, 2009 53.4, 2013 56.5, 2015 63.5, Apr 2019 49.2, Sep 2019 59.2, 2020 64.8, 2021 44.6, 2022 53.2 (Bayan 28, Figure 1). 2022: 938,401 eligible, 498,894 voters; Arab lists 85.8% of these votes (423,877), Jewish parties 14.2% (70,118) (Table 2). Regions 2022: North 53.9, Triangle 52.5, Negev 51.0. Gap to national turnout 3.7-22.8 points (atlas correction). Project kalpi cluster 'arab' (839,273 eligible, 2022) measures 0.538, the model's ARAB_TURNOUT base.",
+   "source": {
+    "authors": "Arik Rudnitzky",
+    "year": 2022,
+    "title": "Summary of the 25th Knesset election results in Arab society (Bayan, Issue 28, December 2022)",
+    "venue": "Konrad Adenauer Program for Jewish-Arab Cooperation, Moshe Dayan Center, Tel Aviv University",
+    "doi_or_url": "https://dayan.org/file-download/download/public/17864",
+    "type": "report",
+    "access": "opened (web.archive.org copy; dayan.org returned 504); Figure 1 and Table 2 read"
+   },
+   "model_link": "ARAB_TURNOUT_REC (harness), ARAB_TURNOUT base 0.538 (kalpi) vs 0.532 (s.43 disclosure e), regime tables A/B.",
+   "stance": "supports",
+   "site_use": "Each simulation draws an Arab-sector turnout around 58% (...) realised turnout ran 63.5 / 59.2 / 64.8% under a unified Joint List in 2015, 2019s and 2020, and 49 / 45% in the split years."
+  },
+  {
+   "id": "SEC-F02",
+   "claim": "Peer-reviewed analysis of 2019-20 ties Arab turnout to list unity: when the Joint List broke up in April 2019, disappointed Arab voters stayed home and Arab seats fell from 13 to 10; the reunited list won 13 and then 15.",
+   "quant": "Seats: 13 (2015) -> 10 (Apr 2019, split) -> 13 (Sep 2019, reunited) -> 15 (Mar 2020). Turnout over the same cycles 63.5 -> 49.2 -> 59.2 -> 64.8 (SEC-F01).",
+   "source": {
+    "authors": "Gadi Hitman",
+    "year": 2021,
+    "title": "Together we stand, divided we fall: the Arab minority in Israel's general elections, 2019-20",
+    "venue": "Israel Affairs 27(2): 284-299",
+    "doi_or_url": "https://doi.org/10.1080/13537121.2021.1891502",
+    "type": "peer-reviewed",
+    "access": "abstract verified (Crossref/Semantic Scholar); full text not opened"
+   },
+   "model_link": "Regime structure of ARAB_TURNOUT (mean_unified vs mean_split; harness tables A/B).",
+   "stance": "supports",
+   "site_use": "The Arab lists carry a graded turnout term instead of a fixed seat shift."
+  },
+  {
+   "id": "SEC-F03",
+   "claim": "The unity rule is conditional, not mechanical: Rudnitzky's peer-reviewed account frames 2019-21 as the Arab public disciplining the parties' configuration, and 2022 broke the rule (turnout rose 8.6 points despite a three-way split). Reuses atlas D2-F07.",
+   "quant": "Turnout 49.2% (Apr 2019) -> 64.8% (2020, a two-decade high) -> 44.6% (2021, record low); seats 10 -> 15 -> 10. 2022: 53.2% with three separate lists; Rudnitzky (Bayan 28): 2021 abstainers 'found an address', boycott declarations were reversed, tactical votes for Balad.",
+   "source": {
+    "authors": "Arik Rudnitzky",
+    "year": 2022,
+    "title": "Searching for political efficacy: the Israeli Arab vote in the 2019-21 Knesset elections",
+    "venue": "Israel Affairs 28(6): 856-877",
+    "doi_or_url": "https://doi.org/10.1080/13537121.2022.2134345",
+    "type": "peer-reviewed",
+    "access": "abstract verified (OpenAlex); full text not opened (T&F 403)"
+   },
+   "model_link": "Regime table B mean 0.580 (s.43): three four-party-unity years plus 2021. 2026 is a partial reunion (Hadash-Ta'al-Balad on one list, Ra'am separate).",
+   "stance": "informs",
+   "site_use": "new claim"
+  },
+  {
+   "id": "SEC-F04",
+   "claim": "Minority turnout in national elections falls when representation is descriptive but not substantive (no policy influence). In 2026 both prime-ministerial candidates rule out Arab parties in a coalition, while three in four Arab citizens want an Arab party in government: by this mechanism a downside risk to the 0.58 mean.",
+   "quant": "Rosenthal, Zubida & Nachmias: Muslim Arab turnout fell in national elections while rising in local ones. KAP May 2026: 77.2% support an Arab party joining the coalition (43.3% any government, 33.9% centre-left only). Xinhua, 11 Oct 2026: neither Netanyahu nor Eisenkot willing to bring Arab parties into his coalition; Kan 4 Oct poll: Arab parties 13 seats.",
+   "source": {
+    "authors": "Maoz Rosenthal, Hani Zubida, David Nachmias",
+    "year": 2018,
+    "title": "Voting locally abstaining nationally: descriptive representation, substantive representation and minority voters' turnout",
+    "venue": "Ethnic and Racial Studies 41(9): 1632-1650",
+    "doi_or_url": "https://doi.org/10.1080/01419870.2017.1295161",
+    "type": "peer-reviewed",
+    "access": "abstract verified (OpenAlex); full text not opened. 2026 context: Xinhua 11 Oct 2026 https://english.news.cn/20261011/b5d29c5813524a5d960be78198c56303/c.html (opened)"
+   },
+   "model_link": "ARAB_TURNOUT mean_unified 0.580 (enters the mean only through k = 0.247).",
+   "stance": "challenges",
+   "site_use": "new claim"
+  },
+  {
+   "id": "SEC-F05",
+   "claim": "Disqualification fights are near-constant and leave no consistent turnout signature: the Central Elections Committee has moved against Arab lists or candidates in most elections since 2003, the Supreme Court reversed every one, and Arab turnout rose after four and fell after three. Configuration, not backlash, tracks turnout. Reuses atlas D2-F24 for 2026.",
+   "quant": "CEC disqualifications, all overruled: 2003 (Balad, Bishara, Tibi), 2009 (Balad, Ra'am-Ta'al), 2013 and 2015 (Zoabi), Apr 2019 (Ra'am-Balad), Mar 2020 (Yazbek) [IDI table]; 2022 Balad (CEC 9-5, Court 9-0, Adalah); 2026 Joint List and Ra'am (Court unanimous, 2 Oct 2026, atlas D2-F24). Arab turnout change in those elections: 2003 -13.0, 2009 -2.9, 2013 +3.1, 2015 +7.0, Apr 2019 -14.3, 2020 +5.6, 2022 +8.6 points.",
+   "source": {
+    "authors": "Dana Blander",
+    "year": 2021,
+    "title": "Disqualification of Electoral Lists and Candidates by the Central Elections Committee",
+    "venue": "Israel Democracy Institute",
+    "doi_or_url": "https://www.idi.org.il/articles/33991",
+    "type": "report",
+    "access": "opened; 2022 from Adalah https://adalah.org/en/content/view/10705 (opened); turnout from SEC-F01"
+   },
+   "model_link": "No disqualification/backlash term in ARAB_TURNOUT; the T draw's spread carries it.",
+   "stance": "informs",
+   "site_use": "new claim (do not describe the 2026 ruling as a turnout upside)"
+  },
+  {
+   "id": "SEC-F06",
+   "claim": "The 2025-26 KAP/Stat-Net surveys bracket the model's 0.58: about 53% if the parties run separately, 62-67% if all four reunite; 2026 is in between (a Joint List without Ra'am). Crime dominates the agenda. Verifies the November 2025 figures the atlas desk could not open (atlas D2-F19).",
+   "quant": "Nov 2025 (Stat-Net, phone in Arabic, n=500, 13-18 Nov): 52.4% separate (Hadash-Ta'al 5.3, Ra'am 3.9, Balad 2.6 seats) vs 61.8% four-party Joint List (15.5 seats); June 2025 survey 57%; the authors link the Nov dip to the Monitoring Committee dispute. May 2026 (Stat-Net, n=500, 26 Apr-3 May): 53% separate (5.3 / 4.6 / 1.8) vs 67% four-party (16.3 seats). Nov 2025: violence and crime the top issue for 74%; 76.6% report weak personal security; Arab homicides 244 (2023), 237 (2024), 228 (to Nov 2025).",
+   "source": {
+    "authors": "Arik Rudnitzky",
+    "year": 2025,
+    "title": "An in-depth survey of the Arab community in Israel following the Israel-Hamas ceasefire (27 Nov 2025); with Integration and Influence: Survey of Arab Citizens in Israel (12 May 2026)",
+    "venue": "Konrad Adenauer Program, Moshe Dayan Center, Tel Aviv University",
+    "doi_or_url": "https://dayan.org/file-download/download/public/18732",
+    "type": "report",
+    "access": "both PDFs opened (web.archive.org copies); May 2026: https://dayan.org/file-download/download/public/18837"
+   },
+   "model_link": "ARAB_TURNOUT mean_unified 0.580; s.4 pre-registered band 56-62%.",
+   "stance": "supports",
+   "site_use": "Each simulation draws an Arab-sector turnout around 58%."
+  },
+  {
+   "id": "SEC-F07",
+   "claim": "Survey-based Arab turnout forecasts have missed by 4 to 15 points in both directions, so they cannot tell 0.53 from 0.62. KAP's 'expected turnout' re-weights stated intention by respondents' past voting.",
+   "quant": "KAP/Stat-Net Mar 2021 (n=501, 4-6 Mar): 82.5% intend to vote -> 59.7% expected vs 44.6% actual (+15.1). KAP Aug 2022 (same method): 42% (-11.2). KAP/Yafa Oct 2022 (n=510, 16-21 Oct): 69% decided -> 49% vs 53.2% (-4.2). Statnet for Kan/Makan, Aug 2022: 39% (n=200, no margin of error; Times of Israel 28 Aug 2022) (-14.2). Verified forecast error from the atlas: Coalition 17/9 internal poll 56% vs 59% (Sep 2019, atlas D2-F21 correction).",
+   "source": {
+    "authors": "Arik Rudnitzky",
+    "year": 2021,
+    "title": "A comprehensive survey of the Arab community ahead of the Knesset elections (14 Mar 2021); also the 25 Oct 2022 survey",
+    "venue": "Konrad Adenauer Program, Moshe Dayan Center, Tel Aviv University",
+    "doi_or_url": "https://dayan.org/file-download/download/public/17311",
+    "type": "report",
+    "access": "opened (web.archive.org); Oct 2022: https://dayan.org/file-download/download/public/17878 (opened); Kan/Statnet: https://www.timesofisrael.com/poll-predicts-all-time-low-arab-turnout-in-election-potentially-boosting-netanyahu/ (opened)"
+   },
+   "model_link": "s.20 rule that turnout-intention series do not drive SECTOR_TURNOUT; ARAB_TURNOUT sd; Afkar 1.6x noise multiplier.",
+   "stance": "supports",
+   "site_use": "new claim"
+  },
+  {
+   "id": "SEC-F08",
+   "claim": "Stated intention to vote overstates Arab turnout by 15-35 points, and stated certainty does not rank sectors by actual turnout (haredim, the highest-turnout sector, report the least certainty). Reuses atlas D2-F21 (corrected).",
+   "quant": "IDI special survey (fieldwork Afkar, phone in Arabic, n=614, 21-28 Sep 2022): 70% think or are certain they will vote vs 53.2% actual; IDI's Khalaily put realistic turnout near 50%. CEC filing, Ch13 / Midgam Project-StatNet, 29-30 Sep 2026: Arab sample (n=122) 73.0% 'certain' + 16.4% 'fairly sure' (89.4%); haredi sample (n=230) 67.0% certain; Jewish adults 73.0% certain. IDI Aug 2026 Voice Index: 8.7% of Arab respondents chose 'don't intend to vote' on a vote-consideration item (n=150; atlas D2-F21).",
+   "source": {
+    "authors": "Tamar Hermann, Muhammed Khalaily, Or Anabi",
+    "year": 2022,
+    "title": "Arab Society: Special Election Survey",
+    "venue": "Israel Democracy Institute",
+    "doi_or_url": "https://en.idi.org.il/articles/46164",
+    "type": "report",
+    "access": "opened; 2026 figures read from CEC filing 4182 https://www.gov.il/BlobFolder/dynamiccollectorresultitem/knesset_election94/he/Survey_4182.pdf (local copy data/raw/cec_pdfs/4182.pdf)"
+   },
+   "model_link": "s.20 participation dial; certainty layer (undecided lean) should not use stated turnout certainty by sector.",
+   "stance": "supports",
+   "site_use": "new claim"
+  },
+  {
+   "id": "SEC-F09",
+   "claim": "Afkar's September 2026 Arab-sector poll is a mixed-mode stratified sample with low response rates, converted to seats at an assumed 60% turnout. No published Afkar turnout or seat track record was located; IDI has used Afkar for fieldwork (2022 special survey, 2026 first-time voters).",
+   "quant": "CEC filing 4126 (filed 5 Sep 2026; fieldwork 27 Aug-1 Sep 2026; Dr. Hisham Jubran; commissioned by a Nazareth publisher): n=815 (482 phone, 333 online panel); phone response 23% of 2,080 answered calls; online 7% of 5,020 invitations; MoE 3.4%. Seat basis 60% sector turnout (dossier s.17). sector_stream converts at 0.538: 38% / 19% -> 5.9% / 2.6% national; at Afkar's 60%, 6.6% / 2.9%.",
+   "source": {
+    "authors": "Central Elections Committee (poll report filed by Afkar Research and Knowledge)",
+    "year": 2026,
+    "title": "Election survey in Arab society, report of 5 Sep 2026 (CEC ref. 4126)",
+    "venue": "Central Elections Committee for the 26th Knesset",
+    "doi_or_url": "https://www.gov.il/BlobFolder/dynamiccollectorresultitem/knesset_election55/he/%D7%A1%D7%A7%D7%A8%20%D7%91%D7%97%D7%99%D7%A8%D7%95%D7%AA%20%D7%9E%D7%99%D7%95%D7%9D%207.9.2026%204126.pdf",
+    "type": "official data",
+    "access": "opened (local copy data/raw/cec_pdfs/4126.pdf)"
+   },
+   "model_link": "sector_stream.py (W_sector turnout 0.538, 1.6x noise for 'Afkar (sector)').",
+   "stance": "informs",
+   "site_use": "A second observation stream carries sector-specialist polls (Afkar, StatNet) (...) with extra noise for the conversion."
+  },
+  {
+   "id": "SEC-F10",
+   "claim": "The under-count is Ra'am-shaped, not proportional: sector surveys admit they miss Ra'am's Negev Bedouin base, sector pollsters' Ra'am scenarios were wrong in 2021, and national final polls under-counted Ra'am in both cycles it ran alone.",
+   "quant": "KAP Nov 2025: sampling misses Negev Bedouin tribes, so Ra'am's strength is underestimated (p.11). Ra'am took 73.9% of the Negev Arab vote in 2022 (Bayan 28); Negev 144,860 eligible, 51.0% turnout; tribal stations 38% (atlas D2-F09). Makladeh, Mar 2021: Ra'am likely fails near 55% turnout and passes near 59% (Times of Israel, 23 Mar 2021); actual turnout 44.6% and Ra'am won 4 seats. KAP Oct 2022 gave Ra'am 3.7 seats from Arab votes; it won 5. Own record, final-poll mean minus result: Ra'am -2.29 (2021), -0.57 (2022); Joint List +2.29 in 2021 (family error 0.00).",
+   "source": {
+    "authors": "Arik Rudnitzky",
+    "year": 2025,
+    "title": "An in-depth survey of the Arab community in Israel following the Israel-Hamas ceasefire (limitations section, p.11)",
+    "venue": "Konrad Adenauer Program, Moshe Dayan Center, Tel Aviv University",
+    "doi_or_url": "https://dayan.org/file-download/download/public/18732",
+    "type": "report",
+    "access": "opened (web.archive.org); Makladeh: https://www.timesofisrael.com/for-arab-israelis-it-all-hinges-on-turnout-as-raam-hovers-at-voter-threshold/ (opened); own record from src/error_decomposition.py _frames()"
+   },
+   "model_link": "Arab family term allocates the shift by base share (JL and Ra'am move together); Ra'am pass probability 0.752; LOYAL_SD raam 1.8; harness merges 2021 JL+Ra'am (s.43 disclosure i).",
+   "stance": "challenges",
+   "site_use": "the Joint List and Ra'am move together"
+  },
+  {
+   "id": "SEC-F11",
+   "claim": "Most 2026 national polls are Hebrew-language online panels of 500-610 with single-digit to mid-20s response rates, so their Arab subsamples are small and self-selected. Tatika's raw sample was 11% Arab, close to the Arab share of 2022 voters but well below the ~16% Arab share of the electorate. Channel 13's consortium alone runs a separate StatNet phone sample of Arabs (101-221) and converts to seats 'by sector weights in the population'.",
+   "quant": "CEC filings: Kantar/Kan 9 Sep (online panel, n=554, 24% response); Lazar/Maariv 23-24 Sep (online, n=610, 14%); Direct Polls/i24 24 Sep (online, n=537, 6.1%); Midgam/Ch12 22 Sep (phone+online, n=501, 20%); Tatika/Zman Israel 26-27 Aug (n=500): Muslim Arab 41 (8%), Christian Arab 13 (3%), Druze 2 (0.4%), haredi 42 (8%). Ch13 / Midgam Project-StatNet (statistical adviser Prof. David Steinberg): Arab phone samples 101 (16 Sep), 122 (30 Sep), 221 (9 Sep); 137 haredi and non-Jewish respondents from the general online sample dropped to avoid double counting. Arab share of electorate ~16% (ACI Task Force, Aug 2026).",
+   "source": {
+    "authors": "Central Elections Committee (poll reports filed by Kantar, Lazar, Direct Polls, Midgam, Tatika, Midgam Project-StatNet)",
+    "year": 2026,
+    "title": "Poll reports for the 26th Knesset, refs 4107, 4153, 4162, 4163, 4164, 4165, 4182",
+    "venue": "Central Elections Committee for the 26th Knesset",
+    "doi_or_url": "https://www.gov.il/BlobFolder/dynamiccollectorresultitem/knesset_election94/he/Survey_4182.pdf",
+    "type": "official data",
+    "access": "opened (local copies data/raw/cec_pdfs/<ref>.pdf; URL for 4182 resolves, HTTP 200)"
+   },
+   "model_link": "ARAB_TURNOUT base comment: 'National panels weight the Arab sector to the last election's turnout (0.538)'; house effects.",
+   "stance": "informs",
+   "site_use": "precisely the voters mainstream panels under-reach"
+  },
+  {
+   "id": "SEC-F12",
+   "claim": "The national election study itself found online panels yield too few Arab respondents and supplements them by telephone in Arabic; in 2020 it commissioned Statnet for the Arab sample. This is independent support for the claim that mainstream panels under-reach the sector.",
+   "quant": "INES 2022 and 2025: Cohen Institute online probability panel, with phone interviews added among Arabic speakers to raise Arab numbers; 2019: phone, Arab households stratified by district and religion; 2020: Statnet random cellular sample after the pre-election survey produced few Arab interviews. Arab subsample sizes are given only in images (not read).",
+   "source": {
+    "authors": "Israel National Election Studies (Tel Aviv University)",
+    "year": 2025,
+    "title": "Our Data (study design notes by election)",
+    "venue": "INES, Tel Aviv University",
+    "doi_or_url": "https://socsci4.tau.ac.il/mu2/ines/data/our-data/",
+    "type": "official data",
+    "access": "opened (first 100k characters)"
+   },
+   "model_link": "sector_stream rationale; ARAB_TURNOUT base assumption.",
+   "stance": "supports",
+   "site_use": "precisely the voters mainstream panels under-reach"
+  },
+  {
+   "id": "SEC-F13",
+   "claim": "Houses embed different Arab turnout assumptions, so 'polls weight Arabs to 2022 turnout' is true for some firms only. Maariv's pollster says Arab lists would reach 17 seats at Jewish-level turnout while his polls show about 12; Afkar converts at 60%; Channel 13 shows 13-15.",
+   "quant": "Lazar (JPost, 13 Sep 2026): Arab turnout 'not increasing'; 17 seats at Jewish-level turnout; Ra'am steady at 5; his CEC filings show Joint List 7 + Ra'am 5 = 12 (implied Arab turnout about 0.7x Jewish, roughly 0.50-0.53). Afkar: 60% (SEC-F09). Ch13 / Midgam Project: Joint List 8-10 + Ra'am 5-6 = 13-15 seats across Aug-Oct filings. Range of house totals 12-15 seats is about what Arab turnout of 0.50-0.60 implies.",
+   "source": {
+    "authors": "Moshe Cohen (interview with Menachem Lazar)",
+    "year": 2026,
+    "title": "Maariv pollster: Election race, Likud struggles, and threshold battles",
+    "venue": "The Jerusalem Post (news report)",
+    "doi_or_url": "https://jpost.com/israel-election-2026/article-908437",
+    "type": "report",
+    "access": "opened; implied-turnout arithmetic is this desk's inference"
+   },
+   "model_link": "ARAB_TURNOUT base 0.538 used as the poll average's implicit turnout in r = 1 + k(T_mean/base - 1).",
+   "stance": "challenges",
+   "site_use": "Only about a quarter of the expected change against the last election's 53.8% reaches the vote"
+  },
+  {
+   "id": "SEC-F14",
+   "claim": "National polls absorb most of a turnout swing but under-count the Arab lists on average, matching the graded term. In 2022 the press consensus expected Arab turnout in the low 40s and about 8 Arab seats; turnout was 53.2% and Arab lists won 10 seats, with Balad's 2.9% wasted. In 2021 the polls caught the turnout collapse exactly.",
+   "quant": "AP, 26 Oct 2022: Arab turnout expected 'in the low 40s', Arab parties about 8 seats, Ra'am polling 4. Own record, Arab family final-poll mean minus result (seats): 2009 -2.78, 2013 -0.27, 2015 -0.38, 2019a +1.22, 2019s -0.71, 2020 -1.00, 2021 0.00, 2022 -1.57; mean -0.69. Harness fit (s.43): slope k 0.247 (se 0.21, strict-LOO 0.10-0.32), intercept -0.634 (se 0.41), n=8.",
+   "source": {
+    "authors": "Tia Goldenberg, Sam McNeil (Associated Press)",
+    "year": 2022,
+    "title": "Arab voters key to breaking deadlock in Israeli election",
+    "venue": "Associated Press (news report, syndicated copy)",
+    "doi_or_url": "https://abc17news.com/news/ap-national-news/2022/10/26/arab-voters-key-to-breaking-deadlock-in-israeli-election/",
+    "type": "report",
+    "access": "opened; own record recomputed from src/error_decomposition.py; harness numbers from dossier s.43"
+   },
+   "model_link": "ARAB_TURNOUT_K 0.247 and ARAB_TURNOUT_INTERCEPT -0.634.",
+   "stance": "supports",
+   "site_use": "the record shows final polls already absorb most of a turnout swing (slope 0.25), plus a general under-count of 0.63 seats"
+  },
+  {
+   "id": "SEC-F15",
+   "claim": "A pre-2015 audit of every published poll found Arab and ultra-Orthodox parties under-estimated and Likud and Labor over-estimated. Its author warned that house corrections stop working when pollsters change methods, which matters because 2026 firms now run dedicated haredi and Arab samples.",
+   "quant": "Project 61 (Nehemia Gershuni-Aylho): all polls of the 2006, 2009 and 2013 elections up to 30 days out, compared with results. Directional finding only; no published magnitudes in the article.",
+   "source": {
+    "authors": "Angela Gruber",
+    "year": 2015,
+    "title": "Perfecting the art of predicting the future - Israeli elections",
+    "venue": "+972 Magazine (news report)",
+    "doi_or_url": "https://www.972mag.com/perfecting-the-art-of-predicting-the-future-israeli-elections/102339/",
+    "type": "report",
+    "access": "opened; underlying spreadsheet not opened"
+   },
+   "model_link": "Signs of ARAB_TURNOUT_INTERCEPT and the haredi FAMILY_SHOCK mean; case for down-weighting pre-2019 cycles.",
+   "stance": "supports",
+   "site_use": "Sector shocks - haredi lists underpolled by 1.35 ± 1.77 seats."
+  },
+  {
+   "id": "SEC-F16",
+   "claim": "The haredi population grows about 4.2% a year, but the haredi lists' realised vote share has grown about 0.2 points a year (about +1 seat per four-year term), well below the dossier's '+1.5-2 seats' demographic drift.",
+   "quant": "Haredi population 1,452,350 in 2025 (14.3%; 750,000 in 2009); 57% under 20; CBS projects 16% by 2030. Shas+UTJ share of the vote 8.2% (1992) -> 14.1% (2022), +5.9 points in 30 years. Malach's chapter (atlas D2-F12): UTJ votes +3.95%/yr vs Ashkenazi haredi eligible +4.1-4.3%/yr. Project kalpi data: Shas+UTJ 11.8% (2019a), 13.5%, 13.7%, 12.8%, 14.1% (2022).",
+   "source": {
+    "authors": "Lee Cahaner, Gilad Malach",
+    "year": 2025,
+    "title": "Annual Statistical Report on Ultra-Orthodox (Haredi) Society in Israel 2025 (executive summary)",
+    "venue": "Israel Democracy Institute",
+    "doi_or_url": "https://en.idi.org.il/media/30207/final-final-haredi-shnaton-2025-pdf.pdf",
+    "type": "report",
+    "access": "opened (pp.2, 4, 15-17)"
+   },
+   "model_link": "Dossier s.4 'haredi pool +1.5-2 seats (mechanical)'; KALPI_HAREDI_FLOOR.",
+   "stance": "challenges",
+   "site_use": "new claim"
+  },
+  {
+   "id": "SEC-F17",
+   "claim": "Haredi turnout is high and nearly flat. 2022 rebounded to the 2019-20 level after a 2021 dip; it was not a surge. Reuses atlas D2-F12 (corrected) and D2-F22.",
+   "quant": "Clearly haredi polling stations: 76% (2013) -> 72.5% (2022) at regular stations, offset by +3.5 points of envelope voting, so about 79% including envelopes in both years (Malach). Project kalpi haredi cluster (304,123 eligible in 2022): 76.4, 76.8, 76.6, 72.8, 75.8% (2019a-2022). Arab and haredi cluster turnout swings correlate 0.88 over four transitions, carried by both sectors' 2021 dip. Local elections 2018->2024: haredi -0.5 points (atlas D2-F23).",
+   "source": {
+    "authors": "Gilad Malach",
+    "year": 2025,
+    "title": "Does the growth of United Torah Judaism match the growth of the haredi population? (in The Elections in Israel 2022, Hebrew ed., pp.371ff)",
+    "venue": "Israel Democracy Institute",
+    "doi_or_url": "https://en.idi.org.il/media/27873/the-elections-in-israel-2022.pdf",
+    "type": "book chapter",
+    "access": "via atlas verify_israeli-turnout D2-F12 (verified with corrections); kalpi series recomputed from data/processed/kalpi_localities.parquet"
+   },
+   "model_link": "KALPI_HAREDI_FLOOR turnout 0.74; s.4 haredi 78-82%; KALPI_FAMILY_RHO 0.5 (+0.92 measured); dossier s.34 line 'haredi lists beat their final polls by +1.35 seats ... and 2022's haredi turnout surge is the reason'.",
+   "stance": "challenges",
+   "site_use": "Localities cluster into political sectors (...) along with their measured turnout (haredi 76%, Arab 54%, religious-Zionist 76%)."
+  },
+  {
+   "id": "SEC-F18",
+   "claim": "The mechanism for haredi under-polling is coverage: haredim are less likely to answer polls, especially online ones, and only 69% use the internet regularly. The 2026 filings show the cost: haredi online samples answer at 3.6-26%, and only the Channel 13 consortium adds a phone haredi sample.",
+   "quant": "Regular internet use, ages 20+: haredi 69% vs other Jews 94% (IDI 2025 yearbook p.15). IPF: weekly polls of about 500 have MoE over 4 points; super-sampling Arabs or haredim is costly and not typical. CEC filings, Ch13 / Midgam Project: haredi online invitations 5,530 at 3.6% response (28 Jul), 1,031 at 22.3% (30 Sep), 1,899 at 15.4% plus 220 by phone (23 Sep). Tatika raw sample 8% haredi (42/500).",
+   "source": {
+    "authors": "Gabriel Epstein",
+    "year": 2026,
+    "title": "Israeli Election Polls & Pollsters",
+    "venue": "Israel Policy Forum",
+    "doi_or_url": "https://israelpolicyforum.org/2026/08/20/israeli-election-polls-pollsters/",
+    "type": "report",
+    "access": "opened; internet figure from SEC-F16 source; response rates from CEC filings 4036, 4169, 4182"
+   },
+   "model_link": "Sign of FAMILY_SHOCK['haredi'] mean.",
+   "stance": "supports",
+   "site_use": "Sector shocks - haredi lists underpolled by 1.35 ± 1.77 seats."
+  },
+  {
+   "id": "SEC-F19",
+   "claim": "The 'haredi' under-poll is almost entirely Shas. UTJ's final-poll errors average about zero. Shas draws a large share of its vote from traditional and national-religious non-haredi voters, the low-SES Mizrahi base that online panels also under-reach. The model spreads the family shift across Shas and UTJ by base share.",
+   "quant": "Own record, final-poll mean minus result, seats: Shas 2009 -1.11, 2013 -0.55, 2015 +0.38, 2019a -2.67, 2019s -1.00, 2020 -0.25, 2021 -0.43, 2022 -1.43 (mean -0.88); UTJ +0.67, -1.09, +0.50, -1.67, +0.71, +0.38, -0.29, 0.00 (mean -0.10). IDI pooled surveys, 2022 vote (12,322 Jews): haredim 58% UTJ / 28% Shas / 7% RZP-Otzma / 4% Likud; Shas 10% of traditional-religious and 10.5% of national-religious voters. Malach (2019): about a third of Shas voters are not haredi.",
+   "source": {
+    "authors": "Ariel Finkelstein",
+    "year": 2026,
+    "title": "Voting Patterns of Jews in the 2022 Elections by Religious Self-Definition",
+    "venue": "Israel Democracy Institute",
+    "doi_or_url": "https://en.idi.org.il/articles/64807",
+    "type": "report",
+    "access": "opened; own record recomputed from src/error_decomposition.py _frames()"
+   },
+   "model_link": "FAMILY_SHOCK['haredi'] allocated by base weights (w_f / w_f.sum()) to Shas and UTJ alike.",
+   "stance": "challenges",
+   "site_use": "Sector shocks - haredi lists underpolled by 1.35 ± 1.77 seats."
+  },
+  {
+   "id": "SEC-F20",
+   "claim": "The -1.35 mean is fragile. It is the post-bloc-swing (e1) mean, carried by two misses (2013 -3.44, Apr 2019 -4.41). The April 2019 miss had a structural cause: Yahad's late withdrawal and a record wasted vote, on top of young first-time voters. Without that cycle, or on the raw scale, or in the last four cycles, the mean is -0.6 to -1.0.",
+   "quant": "Haredi family e1 by cycle: 2009 -0.93, 2013 -3.44, 2015 +0.91, 2019a -4.41, 2019s -1.24, 2020 +0.12, 2021 -1.33, 2022 -0.50 (mean -1.35, median -1.09, sd 1.77). Raw e0 mean -0.98; last four cycles e0 -0.58, e1 -0.74; ex-2019a e1 -0.92. Malach (IDI, 17 Apr 2019): haredi seats 13 -> 15; pollsters expected Shas to shrink; UTJ about 250,000 votes vs about 240,000 expected from 4% growth; wasted ballots at least 8% (from 4%); Yahad withdrew at the last minute.",
+   "source": {
+    "authors": "Gilad Malach",
+    "year": 2019,
+    "title": "Ultra-Orthodox Streamed to the Polls",
+    "venue": "Israel Democracy Institute (first published in the Jerusalem Post)",
+    "doi_or_url": "https://en.idi.org.il/articles/26565",
+    "type": "report",
+    "access": "opened; per-cycle errors recomputed from src/error_decomposition.py (family totals reproduce data/processed/error_decomposition.csv -1.352 / 1.768)"
+   },
+   "model_link": "FAMILY_SHOCK['haredi'] = (-1.352, 1.768) from decompose().",
+   "stance": "challenges",
+   "site_use": "Sector shocks - haredi lists underpolled by 1.35 ± 1.77 seats."
+  },
+  {
+   "id": "SEC-F21",
+   "claim": "The election-day machine that produced past haredi over-performance is constrained in 2026. The High Court unanimously barred party polling-station agents from passing who-has-voted data to their parties. The Likud and the ultra-Orthodox parties had relied on that data heavily.",
+   "quant": "Ruling of 17 Sep 2026 (Justice Willner, with Stein and Kabub). It overturned the full Committee's decision allowing the practice; per other press reports, not opened, that decision had reversed chairman Sohlberg's August ban. Grounds: no legal authority, and a breach of the Protection of Privacy Law. Per the same unopened reports, the CEC will publish aggregate per-station turnout during the day. No quantitative estimate of the GOTV effect exists.",
+   "source": {
+    "authors": "Jeremy Sharon",
+    "year": 2026,
+    "title": "High Court bans parties from tracking voters on election day, angering Likud",
+    "venue": "The Times of Israel (news report)",
+    "doi_or_url": "https://www.timesofisrael.com/high-court-bans-parties-from-tracking-voters-on-election-day-angering-likud",
+    "type": "report",
+    "access": "opened"
+   },
+   "model_link": "Haredi FAMILY_SHOCK mean (election-day beat); s.4 note on machine-party GOTV.",
+   "stance": "challenges",
+   "site_use": "new claim"
+  },
+  {
+   "id": "SEC-F22",
+   "claim": "2026 polls already contain haredi leakage and a new haredi list. In Channel 13's dedicated haredi sample, Shas plus UTJ hold about 73% of decided respondents, against 86% of haredi voters in 2022. The Haredi Public takes 7.8% and Otzma 8.3%. If the small list fades late, as Yahad did in 2019, the gain goes to Shas and UTJ beyond the polls.",
+   "quant": "CEC filing 4182 (29-30 Sep 2026, haredi online sample n=230): UTJ 47.8, Shas 17.0, Otzma 8.3, The Haredi Public 7.8, Likud 4.3, undecided 6.5, won't vote 4.3. 16 Sep (n=263): UTJ 41.8, Shas 19.4, The Haredi Public 7.2. IDI 2022 haredi vote: 58 UTJ / 28 Shas / 7 RZP-Otzma / 4 Likud (SEC-F19). The model's 15 Oct draws: The Haredi Public mean 0.06 seats.",
+   "source": {
+    "authors": "Central Elections Committee (poll report filed by Shmuel Rosner with Midgam Project, StatNet, Askaria)",
+    "year": 2026,
+    "title": "Mandates survey, 30 September 2026 (CEC ref. 4182), sector columns",
+    "venue": "Central Elections Committee for the 26th Knesset",
+    "doi_or_url": "https://www.gov.il/BlobFolder/dynamiccollectorresultitem/knesset_election94/he/Survey_4182.pdf",
+    "type": "official data",
+    "access": "opened (local copy)"
+   },
+   "model_link": "Haredi family shock; small-list desertion; withdrawn-list rule.",
+   "stance": "informs",
+   "site_use": "new claim"
+  },
+  {
+   "id": "SEC-F23",
+   "claim": "Druze turnout has fallen for 25 years, and Druze votes go overwhelmingly to Zionist lists. Druze are effectively absent from national poll samples (Tatika: 2 of 500). Reuses atlas D2-F11 (corrected; the unverified '2021-22 average 48.7%' is dropped).",
+   "quant": "Druze turnout: 1996 76.8, 1999 78.9, 2003 64.2, 2006 64.9, Sep 2019 53.2 (Shanan & Eilat); 2015 57.7, Apr 2019 60.1, Sep 2019 54.5 (Brake). About 90% of Druze-town votes went to Zionist parties in 2022 (Bayan 28). Druze are about 1.5-1.6% of the population (CBS, reported via secondary tables; not opened).",
+   "source": {
+    "authors": "Mahmoud Shanan, Omri Eilat",
+    "year": 2021,
+    "title": "From a Community to a Society: Trends in Druze Voting Patterns in the Knesset Elections, 1996-2020 (Bayan, 18 Mar 2021)",
+    "venue": "Moshe Dayan Center, Tel Aviv University",
+    "doi_or_url": "https://dayan.org/content/community-society-trends-druze-voting-patterns-knesset-elections-1996-2020",
+    "type": "report",
+    "access": "via atlas verify D2-F11 (corrected citation); not re-opened by this desk"
+   },
+   "model_link": "Druze are outside the Arab family and the KALPI_ARAB_CAP cluster; they sit in the general Jewish/Zionist residual.",
+   "stance": "informs",
+   "site_use": "new claim"
+  },
+  {
+   "id": "SEC-F24",
+   "claim": "Russian-speaking (FSU) voters turn out less and are said to be harder to poll, but the FSU party's final-poll record shows no systematic bias. No FSU family term is warranted. Reuses atlas D2-F13 and D2-F27.",
+   "quant": "Post-election self-reported non-voting, 2013: FSU immigrants (1989-2012) 15.7% vs 6.8% for Jews and others (Heller). Raw 2022 regular-station turnout in FSU-heavy cities: Bat Yam 50.8, Nof HaGalil 52.8, Haifa 55.5, Kiryat Yam 55.6, Karmiel 57.1 (atlas D2-F27; partly emigration and age). IPF 2026: post-Soviet respondents may be less willing to share opinions. Own record, Yisrael Beytenu standalone, final-poll mean minus result: 2009 +2.67, 2015 -0.75, 2019a -2.50, 2019s +0.71, 2020 -0.38, 2021 +0.71, 2022 -0.86 (mean -0.06, sd 1.71 per s.7).",
+   "source": {
+    "authors": "Ella Heller",
+    "year": 2015,
+    "title": "Who Doesn't Vote in the Israeli Knesset Elections?",
+    "venue": "Israel Democracy Institute",
+    "doi_or_url": "https://en.idi.org.il/articles/5204",
+    "type": "report",
+    "access": "via atlas verify D2-F13 (verified); own record recomputed"
+   },
+   "model_link": "LOYAL_SD yisrael_beytenu 2.2; absence of an FSU family shock.",
+   "stance": "supports",
+   "site_use": "new claim"
+  },
+  {
+   "id": "SEC-F25",
+   "claim": "The Arab capacity ceiling is loose. Its formula implicitly assumes every Arab-town voter backs an Arab list and uses a 0.78 concentration. Measured values (at most 94% in-sector Arab-list share; concentration 0.81-0.85) and 2020's record, scaled to the 72% maximum turnout, put the physical bound near 14.8-15.4% of the vote, not 16.3%. Turnout must be compared on one basis: envelopes add about 3 points to Arab and 7.5-10 points to Jewish and settlement turnout (atlas D2-F04).",
+   "quant": "Project kalpi 'arab' cluster (CEC locality results): eligible 757,660 / 767,421 / 779,315 / 804,615 / 839,273; turnout 0.485 / 0.599 / 0.660 / 0.445 / 0.538; in-sector Arab-list share 0.790 / 0.873 / 0.942 / 0.880 / 0.931; concentration 0.852 / 0.845 / 0.829 / 0.821 / 0.813 (2019a-2022). Record: Arab lists 12.67% of all votes in 2020 at 0.660. Cap formula: 839k x 0.72 / 0.78 / 4.79M = 16.3%; with share 0.942 and concentration 0.813 on a 2026 cluster of about 940k eligible and 5.1-5.3M votes, about 14.8-15.4%. Production draws (15 Oct): P(Arab seats >= 19) 10.7%, >= 20 6.1%, 95th percentile 20; given Ra'am passes, Arab sd 3.09 seats vs a final-poll family error sd of 1.45. Envelope basis: Arab localities 53.2 -> 56.0%, Jewish/mixed 73.0% with envelopes, Judea and Samaria 75.3 -> 85.3% (atlas D2-F04). Max Arab+Druze turnout on record 75.0% (1999); central Arab localities 75.6% (2020).",
+   "source": {
+    "authors": "SEC desk computation from Central Elections Committee official locality results (project files data/processed/kalpi_localities.parquet, kalpi_sectors.csv, bayes_draws.parquet)",
+    "year": 2026,
+    "title": "Arab-cluster turnout, list share and concentration, Knesset elections 2019-2022; 2026 production seat draws",
+    "venue": "Central Elections Committee results (media21-25.bechirot.gov.il) via the project's kalpi layer (dossier s.9)",
+    "doi_or_url": "https://media25.bechirot.gov.il/",
+    "type": "official data",
+    "access": "computed this session with the project .venv; envelope figures via atlas D2-F04 (Atmor, Friedberg & Harsgor 2025, doi 10.4324/9781032633299-5)"
+   },
+   "model_link": "KALPI_ARAB_CAP 0.163 (839k x 72% / 0.78); ARAB_TURNOUT max 0.72; KALPI_HAREDI_FLOOR 0.066 (Shas+UTJ get only 28% of their votes from the haredi cluster, so the floor is a judgement, not a physical bound).",
+   "stance": "challenges",
+   "site_use": "Σ Arab ≤ 16.3% Arab-sector turnout capacity; Shas+UTJ ≥ 6.6% haredi demographic floor; each condition prunes ~1.5% of draws."
+  }
+ ],
+ "challenges": [
+  {
+   "title": "Haredi family mean: shrink toward the raw and recent record, and allocate it to Shas",
+   "what_literature_says": "Haredi under-coverage is real: low internet use, low online response, and a pre-2015 audit finding haredi parties under-estimated (SEC-F15, F18). But the magnitude is fragile. The raw mean is -0.98; the last four cycles are -0.58 raw and -0.74 e1; without Apr 2019 it is -0.92 (SEC-F20). Apr 2019 had a structural cause (Yahad's late withdrawal and a record wasted vote; Malach). About 90% of the raw under-poll is Shas (-0.88 vs UTJ -0.10), consistent with Shas's non-haredi masorti base (SEC-F19). 2022 was a turnout rebound, not a surge (SEC-F17). The 2026 GOTV-tracking ban weakens the election-day machine (SEC-F21). Pollsters now run dedicated haredi samples, and Project 61 warned that house corrections lapse when methods change.",
+   "current_model": "FAMILY_SHOCK['haredi'] = (-1.352, 1.768) seats (e1 mean over 8 cycles), applied to Shas and UTJ in proportion to base share. Site: 'haredi lists underpolled by 1.35 ± 1.77 seats'. Dossier s.34 attributes the beat to '2022's haredi turnout surge'.",
+   "proposed_change": "Grade three arms: (a) the e0 mean (-0.98); (b) a shrunk or recency-weighted mean (for example, 50% shrinkage toward the last-four-cycle -0.6); (c) list-weighted allocation, with each list's share of the family mean set by its own lineage record (Shas about 90%, UTJ about 10%) instead of base share. Keep the sd. Correct the s.34 sentence: the record shows a rebound to the 2019-20 turnout level.",
+   "how_to_test": "Strict leave-one-cycle-out harness (validate_bayes), pooled across the 3 seeds at eve, D-7 and D-21: median and mean MAE, list-level MAE for Shas and UTJ, threshold Brier, interval score; shipping rule as in s.36. Report the 2026 effect on the NB seat mean and P(NB>=61). Evidence class: own measurement plus IDI demographic data.",
+   "finding_ids": [
+    "SEC-F15",
+    "SEC-F17",
+    "SEC-F18",
+    "SEC-F19",
+    "SEC-F20",
+    "SEC-F21",
+    "SEC-F22"
+   ]
+  },
+  {
+   "title": "Arab turnout mean 0.58 leans on four-party-unity years; 2026's structure points lower",
+   "what_literature_says": "Unity raises turnout only conditionally (Hitman 2021; Rudnitzky 2022). 2026 is a partial reunion whose one precedent, 2021, ran at 44.6%. The KAP separate-lists scenario is 53% (Nov 2025, May 2026). Efficacy theory (Rosenthal et al. 2017) predicts abstention when both PM candidates exclude Arab parties, as in 2026. Disqualification fights show no consistent backlash upside (SEC-F05). Survey forecasts carry errors of 4-15 points and cannot settle the question (SEC-F07, F08).",
+   "current_model": "ARAB_TURNOUT['mean_unified'] = 0.580 = mean of 2015, 2019s, 2020 (four-party Joint List) and 2021 (Joint List without Ra'am), regime table B. Site text calls 2021's 45% a 'split year' although it is inside the 58% mean.",
+   "proposed_change": "Keep 0.58 (it is inside the s.4 pre-registered band and is only worth about 0.25 seats through k = 0.247). Publish a sensitivity with a structural table C: 2021 plus the non-unity years 2009, 2013, 2019a and 2022, mean 0.515. Rewrite the site sentence: '58% is the mean of 2015, Sept 2019 and 2020 (all four parties on one list) and 2021 (the 2026 structure: Hadash-Ta'al-Balad together, Ra'am alone)'.",
+   "how_to_test": "Harness arm arab_regC (table C, LOO) against the shipped arab_regB on the pooled route. Also a production sensitivity at T_mean 0.53 / 0.58 / 0.62 reporting Arab seats, Ra'am pass and P(NB>=61). Evidence class: own measurement plus survey brackets.",
+   "finding_ids": [
+    "SEC-F02",
+    "SEC-F03",
+    "SEC-F04",
+    "SEC-F05",
+    "SEC-F06",
+    "SEC-F07",
+    "SEC-F08"
+   ]
+  },
+  {
+   "title": "The ratio's base should be the polls' implied turnout, not 2022's",
+   "what_literature_says": "Houses differ: Lazar's numbers imply roughly 0.50-0.53, Afkar converts at 0.60, and Channel 13's sector-weighted conversion gives 13-15 Arab seats (SEC-F13). Online panels carry 11% Arab respondents, about the 2022 voter share, while Channel 13 samples Arabs separately (SEC-F11, F12).",
+   "current_model": "r = 1 + k (T_mean / 0.538 - 1) + (T - T_mean) / 0.538, on the assumption that 'national panels weight the Arab sector to the last election's turnout'.",
+   "proposed_change": "Estimate the poll average's implied Arab turnout, either from filings with sector columns (Ch13 raw Arab column x population weight vs seats) or from each house's Arab total relative to its Jewish turnout. Use that as the base, or let base vary by house through the house-effect layer. Expected 2026 effect at most 0.3 seats.",
+   "how_to_test": "Reconstruct implied turnout per house for 2019-2022 from archived seat tables and CEC 2022 filings; regress each house's Arab-family error on (realised / implied) turnout. If the slope beats the common-base k on LOO, adopt it. Evidence class: CEC filings plus own measurement.",
+   "finding_ids": [
+    "SEC-F11",
+    "SEC-F12",
+    "SEC-F13",
+    "SEC-F14"
+   ]
+  },
+  {
+   "title": "Within the Arab family, the under-count belongs to Ra'am",
+   "what_literature_says": "Sector surveys miss Ra'am's Negev Bedouin base (KAP's own caveat). Sector pollsters' Ra'am scenarios failed in 2021, and KAP under-forecast Ra'am in 2022. Final polls under-counted Ra'am by 2.29 seats (2021) and 0.57 (2022) while over-counting the Joint List in 2021 (SEC-F10).",
+   "current_model": "The turnout term and the -0.634 intercept move the Joint List and Ra'am together by base share. Ra'am pass 0.752; Ra'am LOYAL_SD 1.8. The harness merges 2021 JL+Ra'am (s.43 disclosure i).",
+   "proposed_change": "After the harness splits the 2021 block, grade an allocation that places the intercept on Ra'am in proportion to its Negev/under-covered share (for example, two-thirds Ra'am). Alternatively, give Ra'am a small positive own mean, and leave the turnout scaling proportional.",
+   "how_to_test": "Harness (ballot-fidelity) arm on 2021 and 2022, plus the threshold Brier for Ra'am. n=2, so require no loss on pooled metrics and report as disclosed judgement if it ships. Evidence class: own measurement plus sector-survey caveats.",
+   "finding_ids": [
+    "SEC-F09",
+    "SEC-F10",
+    "SEC-F14"
+   ]
+  },
+  {
+   "title": "Kalpi capacity bounds: tighten the Arab ceiling; relabel the haredi floor",
+   "what_literature_says": "On the project's own CEC locality data, Arab lists never took more than 94% of the Arab cluster's vote. Their concentration is 0.81-0.85, not 0.78. The 2020 record (12.67% of the vote at 66% cluster turnout), scaled to a 72% turnout ceiling and 2026 electorate growth, gives about 14.8-15.4% (SEC-F25). Shas and UTJ draw only 28% of their vote from the haredi cluster, so the 6.6% floor is a judgement bound; it binds in under 1% of draws.",
+   "current_model": "KALPI_ARAB_CAP = 0.163 (839k x 0.72 / 0.78, implicitly a 100% Arab-list share). KALPI_HAREDI_FLOOR = 0.066. Site: 'each condition prunes ~1.5% of draws' (1 Sept audit). 15 Oct draws: Arab >= 19 seats in 10.7%, >= 20 in 6.1%.",
+   "proposed_change": "Re-derive the cap as eligible_2026 x 0.72 x 0.94 / 0.813 / projected total votes, about 0.150 (range 0.148-0.154). Re-measure and restate the prune rates. Describe the haredi floor as a judgement floor, or retire it, since LOYAL_SD already bounds the haredi lists.",
+   "how_to_test": "Backtest the cap formula, computed from the previous cycle's data only, on 2019s-2022 (no realised Arab total may exceed it). Count clipped draws in production. Report the Arab 95th percentile and the P(NB>=61) change. The capacity layer is outside the harness by construction (site annex). Evidence class: official CEC data.",
+   "finding_ids": [
+    "SEC-F01",
+    "SEC-F16",
+    "SEC-F17",
+    "SEC-F25"
+   ]
+  },
+  {
+   "title": "Demographic drift claim in s.4 overstates the haredi per-cycle gain",
+   "what_literature_says": "Population growth is 4.2% a year, but realised Shas+UTJ share rose about 0.2 points a year from 1992 to 2022 (about +1 seat per four-year term), and UTJ realises about 95% of its demographic growth (SEC-F16). Polls weighted to current population carry the growth already; only past-vote weighting would lag it.",
+   "current_model": "Dossier s.4: 'haredi pool +1.5-2 seats (mechanical)'. It is not a parameter, but it is cited as a reason for the haredi shock's sign.",
+   "proposed_change": "Restate as 'about +1 seat per four-year term; 2022->2026 about +1 (partly offset by leakage visible in the 2026 haredi samples)'. Do not use it to justify the family mean.",
+   "how_to_test": "Documentation change. Optionally, regress final-poll haredi error on years since the previous election to test whether polls lag demography. Evidence class: IDI/CBS data plus own measurement.",
+   "finding_ids": [
+    "SEC-F16",
+    "SEC-F22"
+   ]
+  }
+ ],
+ "parameters": [
+  {
+   "name": "ARAB_TURNOUT['mean_unified']",
+   "current": "0.580 (regime table B, LOO mean of 2015/2019s/2020/2021)",
+   "literature_range": "0.53 (KAP 2026, separate lists) to 0.67 (KAP 2026, four-party list); structural precedent 2021 0.446; non-four-party-unity years mean 0.515; s.4 pre-registered 0.56-0.62",
+   "finding_ids": [
+    "SEC-F01",
+    "SEC-F03",
+    "SEC-F04",
+    "SEC-F06",
+    "SEC-F07"
+   ]
+  },
+  {
+   "name": "ARAB_TURNOUT['base']",
+   "current": "0.538 (kalpi Arab cluster, 2022, regular stations)",
+   "literature_range": "0.532 (Bayan 28, Arab+Druze towns); 0.560 with envelopes (Atmor et al.); house-implied 0.50-0.60",
+   "finding_ids": [
+    "SEC-F01",
+    "SEC-F13",
+    "SEC-F25"
+   ]
+  },
+  {
+   "name": "ARAB_TURNOUT['sd']",
+   "current": "0.05 (t, df 5, x STACK_SCALE; spread passes in full, about 1.2 seats)",
+   "literature_range": "Cycle-to-cycle sector swings of +11.4 / +6.1 / -21.5 / +9.3 points (2019a-2022); survey forecast errors of 4-15 points; final-poll family error sd 1.45 seats. Consistent once polls absorb most of the swing.",
+   "finding_ids": [
+    "SEC-F07",
+    "SEC-F14",
+    "SEC-F25"
+   ]
+  },
+  {
+   "name": "ARAB_TURNOUT['max']",
+   "current": "0.72",
+   "literature_range": "Record 0.750 (1999, Arab+Druze); 0.648 (2020); cluster record 0.660; central Arab localities 0.756 (2020)",
+   "finding_ids": [
+    "SEC-F01",
+    "SEC-F25"
+   ]
+  },
+  {
+   "name": "ARAB_TURNOUT_K",
+   "current": "0.247 (se 0.21; strict-LOO 0.10-0.32)",
+   "literature_range": "No external estimate. Qualitative: polls caught the 2021 collapse (family error 0.00) and missed 2022's rise (-1.57) when the consensus expected the low 40s.",
+   "finding_ids": [
+    "SEC-F14"
+   ]
+  },
+  {
+   "name": "ARAB_TURNOUT_INTERCEPT",
+   "current": "-0.634 seats (se 0.41)",
+   "literature_range": "Raw 8-cycle family mean -0.69; Project 61 under-estimation 2006-2013; Ra'am-specific -2.29 (2021) and -0.57 (2022)",
+   "finding_ids": [
+    "SEC-F10",
+    "SEC-F14",
+    "SEC-F15"
+   ]
+  },
+  {
+   "name": "FAMILY_SHOCK['haredi'] mean",
+   "current": "-1.352 seats (e1)",
+   "literature_range": "e0 -0.98; last four cycles -0.58 (e0) / -0.74 (e1); ex-2019a -0.92; median -1.09; Shas -0.88 vs UTJ -0.10 (e0)",
+   "finding_ids": [
+    "SEC-F19",
+    "SEC-F20"
+   ]
+  },
+  {
+   "name": "FAMILY_SHOCK['haredi'] sd",
+   "current": "1.768 seats",
+   "literature_range": "e1 range -4.41 to +0.91 across 8 cycles; LOYAL_SD (Shas 1.5, UTJ 1.3) already caps list totals",
+   "finding_ids": [
+    "SEC-F20"
+   ]
+  },
+  {
+   "name": "KALPI_ARAB_CAP",
+   "current": "0.163",
+   "literature_range": "0.148-0.154 re-derived from measured in-sector share (<=0.94), concentration (0.81-0.85) and the 2020 record scaled to 72% turnout",
+   "finding_ids": [
+    "SEC-F25"
+   ]
+  },
+  {
+   "name": "KALPI_HAREDI_FLOOR",
+   "current": "0.066",
+   "literature_range": "Shas+UTJ realised 11.8-14.1% (2019a-2022), 14.1% in 2022 (IDI); votes cast in haredi-cluster localities alone about 4%; binds in <1% of 15 Oct draws",
+   "finding_ids": [
+    "SEC-F16",
+    "SEC-F17",
+    "SEC-F25"
+   ]
+  },
+  {
+   "name": "Haredi turnout (s.4 78-82%; kalpi 0.758; floor 0.74)",
+   "current": "0.74-0.82 depending on basis",
+   "literature_range": "72.5-76.8% at regular stations (2013-2022); about 79% including envelopes (Malach)",
+   "finding_ids": [
+    "SEC-F17"
+   ]
+  },
+  {
+   "name": "KALPI_FAMILY_RHO",
+   "current": "0.5 (measured +0.92 on 4 transitions)",
+   "literature_range": "Turnout-swing correlation 0.88 on the same 4 transitions, carried by the 2021 dip in both sectors; uninformative without it",
+   "finding_ids": [
+    "SEC-F17"
+   ]
+  },
+  {
+   "name": "Sector-stream turnout and noise (sector_stream.py)",
+   "current": "W_sector at 0.538; 1.6x noise multiplier",
+   "literature_range": "Afkar converts at 0.60; sector-survey turnout errors 4-15 points; no Afkar track record located",
+   "finding_ids": [
+    "SEC-F07",
+    "SEC-F09"
+   ]
+  },
+  {
+   "name": "Haredi demographic drift (dossier s.4)",
+   "current": "+1.5-2 seats per cycle",
+   "literature_range": "Realised about +1 seat per four-year term (Shas+UTJ 8.2% -> 14.1%, 1992-2022); population growth 4.2%/yr",
+   "finding_ids": [
+    "SEC-F16"
+   ]
+  }
+ ],
+ "open_questions": [
+  "What Arab (and haredi) turnout does Channel 13's 'sector weights in the population' conversion (Prof. David Steinberg) assume? The same question applies to Kantar's and Lazar's online-panel weighting. Ask for the methodology notes; they set the base the turnout ratio should use.",
+  "Afkar has no public turnout or seat track record that this desk could locate. IDI has used Afkar for fieldwork (Sept 2022 special survey; 2026 first-time voters, Arab n=154). Can the firm's 2021/2022 pre-election seat estimates be obtained?",
+  "As of 15 Oct no KAP, IDI or Stat-Net turnout survey was found from after the Joint List re-formed (24 Aug) or the Supreme Court ruling (2 Oct). KAP published final pre-election surveys about a week out in 2021 and 2022 (14 Mar 2021; 25 Oct 2022). Watch for one around 20 Oct, and remember its error record (SEC-F07).",
+  "Will The Haredi Public (7.2-7.8% of Ch13's haredi samples; 0.06 expected seats in the model) withdraw or collapse into UTJ and Shas, as Yahad did in April 2019?",
+  "Size of the GOTV-tracking ban effect: no quantitative evidence exists. The CEC's aggregate per-station turnout releases may partly substitute for it.",
+  "Jewish votes for Ra'am via Segalovitz bypass the Arab-sector arithmetic behind KALPI_ARAB_CAP; there is no measurement of their size.",
+  "In the 15 Oct production draws Shas is at zero seats in 0.35% of draws and UTJ in 0.18%, even though the floor holds (the floor bounds the sum, not each list). Is that intended, given each list's LOYAL_SD and record?",
+  "The site's claim that each capacity condition 'prunes ~1.5% of draws' dates from the 1 Sept audit and should be re-measured. The haredi floor now appears to bind in well under 1%.",
+  "Direct measures of 2022 Druze and FSU turnout were not found. Nir Atmor's 2026 Springer chapter 'Divided We Stand: The Electoral System and Voter Turnout in Israel, 2019-2022' (doi 10.1007/978-981-95-3704-4_16) may contain them; it was not opened and is unverified.",
+  "Expert expectations reported in the press for 2026 range from roughly 40-60% (Rudnitzky, quoted by the Jewish Chronicle, 14 Oct 2026) to about 65% (Jonathan Mendel, same article). These are news-reported judgements, not data, so they were not used as findings."
+ ]
+}

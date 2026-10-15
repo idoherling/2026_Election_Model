@@ -445,6 +445,10 @@ def main() -> None:
         "trail_on": bool(getattr(project, "last_trail_on", False)),
         "trail_margin_seats": None if margin is None else round(float(margin), 2),
         "trail_source": "satellites" if TRAIL_SAT_SOURCE else "field",
+        # trail_ramp (merged 15 Oct, held off; dossier s.46): the layer's
+        # weight (mean over draws, 0..1) when bm.TRAIL_RAMP_ON; None under
+        # the cliff, where trail_on says whether it fired
+        "trail_weight": getattr(project, "last_trail_weight", None),
         "new_straddlers": [labels[i] for i, c in enumerate(project.last_components)
                            if c in set(getattr(project, "last_new_straddlers", []))],
     })

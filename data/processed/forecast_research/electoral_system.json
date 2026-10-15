@@ -1,0 +1,454 @@
+{
+ "desk": "electoral-system",
+ "summary": "Desk SYS checked the forecast's seat law against the statute and measured what the law does on the official record. The model's Bader-Ofer implementation is legally sound. The Knesset Elections Law sets the threshold at 3.25% of all valid votes (s.81(a), from Amendment 62 of 11 March 2014, in force since 2015). It uses an integer quota and floor seats, then hands out the remaining seats by highest averages, with a CEC lottery for ties (s.81(b)-(d)). A surplus agreement links one list to exactly one other, must be filed by the 11th day before the election (16 Oct 2026) and is published by the 8th (19 Oct). It counts only at the remainder stage and only if both partners pass on their own. The pair's joint seats are then split by the same method (ss.67, 82). Re-implementing ss.81-82 in exact arithmetic on the CEC's final counts reproduces the official allocation of all six 3.25%-era elections. The model's D'Hondt-on-factions code gives the identical result in 6/6, with no ties. The model's only formal departures, column-order tie-breaking and the missing majority clause s.81(d)(4), have no measurable effect.\n\nThe measured record corrects several numbers the forecast states. Between 3 and 8 seats per election are decided at the remainder stage (mean 5.3), not 6-9. Surplus pairs moved exactly one seat in 4 of 6 elections. Pair by pair, 9 of 23 effective pairs gained a seat, and the expected value is about +0.4 seat per pair (range 0.23-0.77). That matches the model's own 2026 figure (+1 in 30-35% of draws) and D'Hondt's large-list bias (Schuster et al. 2003), but not the site's '+0.5 to +0.9'.\n\nDisproportionality in Israel is threshold waste. Gallagher's index (0.86 in 2020, 4.40-4.45 in 2019a/2022, which the desk reproduces exactly) tracks the wasted share (0.8% to 8.8%). The two high-waste elections were decided by margins of 1,454 votes (New Right 2019a) and 4,062 (Meretz 2022).\n\nDouble envelopes were 5.5% of valid votes in 2019a and 9.6% in 2021-2022: 462,807 cast in 2022 per the CEC file, not the 'over 600,000' reported in election week. 2026 adds a new legal category: evacuees vote in outer envelopes at designated stations (ch.10-3C, 5786). The envelopes cut Arab lists by 1.5-7.7 pp and UTJ by about 2-2.6 pp relative to regular stations, and favour right-religious lists. Yet from the complete regular count to the final count, the net bloc change was zero in four of five elections and -1 for the Netanyahu bloc in 2022. Meretz and Balad were already below 3.25% before the envelopes were opened.\n\nTwo implementation challenges follow. (1) The threshold test runs on shares renormalised over the 20 modelled lists. The law's denominator also includes the micro-lists, historically 0.3-0.9% of valid votes. That makes the model's threshold about 0.01-0.03 pp too lenient, of the order of the 2019a New Right miss. (2) The validation harness's historical surplus pairs are approximations that differ from the registered agreements in 2015, 2019a, 2019s and 2021. On exact official counts they misallocate 8 list-seats, so part of the graded error is seat-law error. Both fixes are cheap and testable on the harness.",
+ "findings": [
+  {
+   "id": "SYS-F01",
+   "claim": "The legal threshold is 3.25% of ALL valid votes, tested per list ('not less than'); only lists that pass take part in the allocation, and the quota is the INTEGER part of the passing lists' valid votes divided by 120; each list first receives the integer part of votes/quota.",
+   "quant": "s.81(a): 'not less than 3.25% (three and a quarter per cent) of all the valid votes'; s.81(b): quota = whole number of (sum of valid votes of participating lists)/120; s.81(c): seats = whole number of votes/quota. 2022: quota 36,227 (Kenig 2026, reproduced exactly from CEC counts).",
+   "source": {
+    "authors": "State of Israel (Knesset)",
+    "year": 1969,
+    "title": "Knesset Elections Law [Consolidated Version], 5729-1969 (חוק הבחירות לכנסת [נוסח משולב], תשכ\"ט-1969), as amended to 5786 (2026); ss.81(a)-(c)",
+    "venue": "Consolidated statute; text read from the Hebrew Wikisource transcription of the consolidated version (Knesset National Legislation Database item 2000191)",
+    "doi_or_url": "https://he.wikisource.org/wiki/%D7%97%D7%95%D7%A7_%D7%94%D7%91%D7%97%D7%99%D7%A8%D7%95%D7%AA_%D7%9C%D7%9B%D7%A0%D7%A1%D7%AA",
+    "type": "official data"
+   },
+   "model_link": "src/simulate.py THRESHOLD = 0.0325 and `passed = sh >= threshold` (also src/bayes_model.py project(), validate_bayes.allocate_vector): the comparison operator and the 3.25% value match the statute; see SYS-F15 for the denominator.",
+   "stance": "supports",
+   "site_use": "Each simulated vote vector passes the 3.25% threshold test (3.25% of all valid votes, Knesset Elections Law s.81(a))."
+  },
+  {
+   "id": "SYS-F02",
+   "claim": "Remainder seats go one at a time to the largest 'list quotient' votes/(seats+1); an exact tie is broken by a lottery run by the CEC; and a list with no more than half of the participating valid votes stops receiving seats once it holds half of all seats. The model breaks ties by column order (np.argmax) and does not implement the majority clause.",
+   "quant": "s.81(d)(1)-(3) highest-averages iteration; s.81(d)(2) tie -> 'a lottery conducted by the Central Committee'; s.81(d)(4) majority clause (cap at 60 seats for a list with <=50% of participating votes). Exact ties on the CEC counts 2015-2022: 0 of 6 elections. In the model, shares are continuous floats, so exact ties have probability ~0; the largest 2026 list is ~19% (Likud mean share 0.190), so s.81(d)(4) is unreachable.",
+   "source": {
+    "authors": "State of Israel (Knesset)",
+    "year": 1969,
+    "title": "Knesset Elections Law [Consolidated Version], 5729-1969 (חוק הבחירות לכנסת [נוסח משולב], תשכ\"ט-1969), as amended to 5786 (2026); s.81(d)(1)-(4)",
+    "venue": "Consolidated statute; text read from the Hebrew Wikisource transcription of the consolidated version (Knesset National Legislation Database item 2000191)",
+    "doi_or_url": "https://he.wikisource.org/wiki/%D7%97%D7%95%D7%A7_%D7%94%D7%91%D7%97%D7%99%D7%A8%D7%95%D7%AA_%D7%9C%D7%9B%D7%A0%D7%A1%D7%AA",
+    "type": "official data"
+   },
+   "model_link": "src/simulate.py dhondt(): `i = int(np.argmax(quot))` (lowest index wins ties) - a formal deviation from the statutory lottery with no measurable consequence; 81(d)(4) absent.",
+   "stance": "informs",
+   "site_use": "new claim: 'Ties (never observed) would be settled by a CEC lottery; the simulation's continuous vote shares make exact ties impossible.'"
+  },
+  {
+   "id": "SYS-F03",
+   "claim": "Surplus-vote agreements ('linkage', התקשרות): a list may link with only ONE other list; written notice signed by both lists' agents must reach the CEC no later than the 11th day before election day; the CEC publishes the linkages by the 8th day. Linked lists act as one list ONLY in the remainder stage (combined votes and combined s.81(c) seats), and only if EACH passed the threshold on its own; their joint seats are then split between them by the same s.81 method.",
+   "quant": "s.67(a) one partner only; s.67(b) deadline day 11 = Friday 16 Oct 2026 for the 27 Oct election; s.67(c) publication by day 8 = 19 Oct 2026; s.82(a) 'provided that each of them by itself received the percentage of votes fixed in s.81(a)'; s.82(b) internal split by the s.81 method. Statutory amendment history of ss.67/81 includes 5733 (1973), the Bader-Ofer amendment.",
+   "source": {
+    "authors": "State of Israel (Knesset)",
+    "year": 1969,
+    "title": "Knesset Elections Law [Consolidated Version], 5729-1969 (חוק הבחירות לכנסת [נוסח משולב], תשכ\"ט-1969), as amended to 5786 (2026); ss.67, 82",
+    "venue": "Consolidated statute; text read from the Hebrew Wikisource transcription of the consolidated version (Knesset National Legislation Database item 2000191)",
+    "doi_or_url": "https://he.wikisource.org/wiki/%D7%97%D7%95%D7%A7_%D7%94%D7%91%D7%97%D7%99%D7%A8%D7%95%D7%AA_%D7%9C%D7%9B%D7%A0%D7%A1%D7%AA",
+    "type": "official data"
+   },
+   "model_link": "src/simulate.py SURPLUS_PAIRS (5 signed pairs, 'Deadline Oct 16'), form_factions() (pool only if passed[a] and passed[b]; a list pooled at most once), and the inner dhondt([votes[a], votes[b]], k): all three legal conditions are implemented correctly. The site's 'deadline October 16' is correct.",
+   "stance": "supports",
+   "site_use": "Signed surplus-vote agreements are treated as joint lists at the remainder stage, and only when both partners pass the threshold (s.82(a))."
+  },
+  {
+   "id": "SYS-F04",
+   "claim": "Bader-Ofer as legislated (integer quota, floor seats, highest averages, linked lists pooled for the remainder stage, internal split) is mathematically D'Hondt applied to 'factions' (pairs pooled), and the model's implementation reproduces every official seat allocation 2015-2022 exactly.",
+   "quant": "Desk re-implementation of ss.81-82 in exact integer arithmetic on CEC final counts with the registered agreements: equals the official seats in 6/6 elections (2015, 2019a, 2019s, 2020, 2021, 2022); simulate.dhondt + form_factions on the same counts equals the statutory result in 6/6; 0 ties. The CEC guide describes the floor stage 'then ... the Bader-Ofer method'; Kenig (IDI 2026) calls the remainder stage D'Hondt (2022: 7 remainder seats).",
+   "source": {
+    "authors": "Central Elections Committee (CEC)",
+    "year": 2022,
+    "title": "Official results by locality and polling station, 21st-25th Knessets (expc/expb files; settlement code 9999/99999 = outer (double) envelopes); 20th Knesset via the CEC dataset on data.gov.il",
+    "venue": "CEC results sites votes21-votes25.bechirot.gov.il (files from media21-25.bechirot.gov.il); repository copies data/raw/kalpi/expc_20..25.csv, expb_24..25.csv; desk computation, scripts in this desk's scratchpad (seatlaw.py, pairvalue.py, night.py)",
+    "doi_or_url": "https://votes25.bechirot.gov.il/ ; https://data.gov.il/he/datasets/central-election-committee/votes-knesset",
+    "type": "official data"
+   },
+   "model_link": "src/simulate.py dhondt()/form_factions(); dossier s.25 ('reproduces the official 2022 allocation exactly') - extended here to all six 3.25%-era elections.",
+   "stance": "supports",
+   "site_use": "Seats are allocated by the actual Israeli method - Bader-Ofer, which is d'Hondt over the threshold-passing lists, with surplus pairs pooled - and the implementation reproduces the official allocation of every election since 2015 exactly."
+  },
+  {
+   "id": "SYS-F05",
+   "claim": "Only a handful of seats are decided at the remainder (surplus) stage: 3 to 8 per election in 2015-2022 (mean 5.3), not 6-9.",
+   "quant": "Seats awarded under s.81(d) (120 minus the sum of integer quotas): 2015 4 (quota 33,511), 2019a 7 (32,860), 2019s 3 (35,917), 2020 3 (37,943), 2021 8 (36,210), 2022 7 (36,227). IDI (Kenig 2026) independently gives 2022 quota 36,227 and '7 seats remained'.",
+   "source": {
+    "authors": "Kenig, Ofer",
+    "year": 2026,
+    "title": "How Votes Become Knesset Seats",
+    "venue": "Israel Democracy Institute (16 March 2026)",
+    "doi_or_url": "https://en.idi.org.il/articles/63750",
+    "type": "report"
+   },
+   "model_link": "docs/priors_dossier.md s.1 table row 'Surplus pairs in Bader-Ofer': '~6-9 of 120 seats decided at the surplus stage'.",
+   "stance": "challenges",
+   "site_use": "Correct to: 'Between 3 and 8 of the 120 seats (5 on average since 2015) are decided at the remainder stage where surplus pairs act.'"
+  },
+  {
+   "id": "SYS-F06",
+   "claim": "Surplus agreements moved exactly one seat in four of the six 3.25%-era elections; per pair, holding the other registered pairs fixed, 9 of 23 effective pairs (both partners passed) gained a seat.",
+   "quant": "Registered pairs vs no pairs (CEC counts): 2015 Kulanu +1 / Joint List -1; 2019a UTJ +1 / Likud -1; 2019s none; 2020 none; 2021 Meretz +1 / Likud -1; 2022 Likud +1 / Labor -1 (dossier's 'without pairs Likud 31, Labor 5' confirmed). Pair-by-pair marginal gains (+1): 2015 YB-Kulanu; 2019a Shas-UTJ; 2019s B&W-YB, Likud-Yamina; 2020 B&W-Labor-Gesher-Meretz; 2021 Yamina-New Hope, Labor-Meretz; 2022 YA-National Unity, Likud-RZ. Pairs that died because one partner failed: 2019a New Right-YB, 2019s Noam-Otzma, 2021 B&W-New Economic, 2022 Labor-Meretz.",
+   "source": {
+    "authors": "Hebrew Wikipedia contributors",
+    "year": 2026,
+    "title": "הסכם עודפים (Surplus-vote agreement) - lists of agreements by Knesset",
+    "venue": "Wikipedia (he); the 19th-22nd Knesset lists cite CEC notices/PDFs (bechirot21/22.bechirot.gov.il, bechirot20.gov.il); 23rd-25th lists uncited on the page - 25th confirmed by Kenig (IDI 2026), 24th confirmed only by the exact reproduction of the official allocation",
+    "doi_or_url": "https://he.wikipedia.org/wiki/%D7%94%D7%A1%D7%9B%D7%9D_%D7%A2%D7%95%D7%93%D7%A4%D7%99%D7%9D",
+    "type": "reference work"
+   },
+   "model_link": "src/simulate.py SURPLUS_PAIRS / the pair layer; backs the site's description that pairs are a real but one-seat-sized mechanism.",
+   "stance": "supports",
+   "site_use": "Since 2015 surplus agreements have shifted exactly one seat in four of six elections (CEC counts)."
+  },
+  {
+   "id": "SYS-F07",
+   "claim": "The expected value of one effective surplus pair is about +0.4 seat (range +0.23 to +0.77), consistent with the model's own 2026 measurement (+1 seat in 30-35% of draws) and with D'Hondt's known large-list seat bias - but below the '+0.5 to +0.9 expected seats per pair' stated on the site.",
+   "quant": "Desk perturbation on the CEC counts 2015-2022 (each list +/- N(0, 0.15 pp), 400 draws, registered pairs with vs without the pair): mean expected gain +0.40 seat over 23 effective pairs (min 0.23 UTJ-Shas 2015, max 0.77 Labor-Meretz 2021). Model 2026 (dossier s.40, 8 Oct posterior): JL+Ra'am +1 in 30% of draws, Together+YB +1 in 35% (-1 in 1% each) => ~+0.3. Schuster et al.: the divisor method with rounding down (Jefferson/D'Hondt) 'exhibits noticeable seat biases in favor of larger parties'; Hamilton and Webster are ~unbiased.",
+   "source": {
+    "authors": "Schuster, Karsten; Pukelsheim, Friedrich; Drton, Mathias; Draper, Norman R.",
+    "year": 2003,
+    "title": "Seat biases of apportionment methods for proportional representation",
+    "venue": "Electoral Studies 22(4): 651-676",
+    "doi_or_url": "https://doi.org/10.1016/S0261-3794(02)00027-6",
+    "type": "peer-reviewed"
+   },
+   "model_link": "site/template.html 'Threshold and Bader-Ofer' chapter: 'worth a measured +0.5 to +0.9 expected seats per pair'; dossier s.1 table 'Measured value +0.5-0.9 expected seats per signed pair'.",
+   "stance": "challenges",
+   "site_use": "Correct to: 'worth about +0.3 to +0.4 expected seats per pair - a pair gains a seat in roughly a third of outcomes (CEC record 2015-2022: 9 of 23 pairs; model 2026: 30-35% of draws)'."
+  },
+  {
+   "id": "SYS-F08",
+   "claim": "The validation harness's historical surplus pairs are not the registered agreements in four of eight cycles, and with exact official vote counts they misallocate 8 list-seats across three of the six 3.25%-era cycles, so part of the graded seat error is seat-law error, not poll error.",
+   "quant": "validate_model.PAST_PAIRS vs registered: 2015 missing YB-Kulanu; 2019a has a fictitious Blue&White-Labor and lacks Labor-Meretz, Ra'am-Balad-Hadash-Ta'al, New Right-YB; 2019s fictitious Blue&White-Labor-Gesher, lacks B&W-YB and Labor-Gesher-Democratic Union; 2021 fictitious Yesh Atid-Blue&White, lacks Yesh Atid-YB, Yamina-New Hope, Labor-Meretz. Allocating the official CEC counts with PAST_PAIRS: 2015 Likud +1 / Kulanu -1; 2019s UTJ +1 / B&W -1; 2021 Likud +1, Yesh Atid +1, Meretz -1, New Hope -1; 2019a, 2020, 2022 correct. 2009/2013 not checked (the repo's 2013 CEC file lacks double envelopes).",
+   "source": {
+    "authors": "Hebrew Wikipedia contributors",
+    "year": 2026,
+    "title": "הסכם עודפים (Surplus-vote agreement) - lists of agreements by Knesset",
+    "venue": "Wikipedia (he); the 19th-22nd Knesset lists cite CEC notices/PDFs (bechirot21/22.bechirot.gov.il, bechirot20.gov.il); 23rd-25th lists uncited on the page - 25th confirmed by Kenig (IDI 2026), 24th confirmed only by the exact reproduction of the official allocation",
+    "doi_or_url": "https://he.wikipedia.org/wiki/%D7%94%D7%A1%D7%9B%D7%9D_%D7%A2%D7%95%D7%93%D7%A4%D7%99%D7%9D",
+    "type": "reference work"
+   },
+   "model_link": "src/validate_model.py PAST_PAIRS ('approximations of the registered agreements'), consumed by validate_bayes.project_cycle; dossier 'Not established: the registered surplus agreements (item 4)'.",
+   "stance": "challenges",
+   "site_use": "new claim (methods annex): 'The harness applies each past election's registered surplus agreements.' - true only after the fix."
+  },
+  {
+   "id": "SYS-F09",
+   "claim": "Wasted votes (lists below 3.25%) swing between under 1% and almost 9% of valid votes, and in the two high-waste elections they decided the majority: 2019a (New Right short by 1,454 votes) and 2022 (Meretz short by 4,062).",
+   "quant": "Share of valid votes cast for lists below 3.25%: 2015 4.50% (Yachad 2.97%); 2019a 8.49% (New Right 138,598 = 3.216%, threshold 140,052; Zehut 2.74%; Gesher 1.73%); 2019s 2.86%; 2020 0.80%; 2021 1.47%; 2022 8.76% (Meretz 150,793 = 3.165%, threshold 154,855; Balad 2.91%; Jewish Home 1.19%). IDI 2022: 'some 300,000 votes were squandered' (Meretz+Balad); the Netanyahu bloc (incl. Jewish Home) 'outpolled the anti-Netanyahu bloc by about 30,000 votes' yet won 64 seats; the four NB lists had 48.4% of valid votes.",
+   "source": {
+    "authors": "Kenig, Ofer",
+    "year": 2022,
+    "title": "2022 Election Results",
+    "venue": "Israel Democracy Institute (7 November 2022)",
+    "doi_or_url": "https://en.idi.org.il/articles/46247",
+    "type": "report"
+   },
+   "model_link": "Threshold layer of project(); backs the site sentence on vote-loss/seat-win asymmetry.",
+   "stance": "supports",
+   "site_use": "Threshold failures redistribute their votes to survivors, which is how a bloc can lose the vote and win the Knesset (2022: some 300,000 votes wasted; the Netanyahu camp won 64 seats on a ~30,000-vote edge)."
+  },
+  {
+   "id": "SYS-F10",
+   "claim": "Israel's disproportionality is driven by threshold waste, not by the D'Hondt formula: the Gallagher least-squares index tracks the wasted-vote share almost one-for-one across the 3.25% era.",
+   "quant": "Gallagher LSq, Israel (dataset p. 24): 2009 1.61, 2013 3.09, 2015 2.77, 2019a 4.45, 2019s 2.10, 2020 0.86, 2021 1.09, 2022 4.40 (desk recomputation from CEC counts reproduces 2015-2022 to two decimals). Pair with waste: 2020 0.80% waste -> LSq 0.86; 2019a 8.49% -> 4.45; 2022 8.76% -> 4.40. 2% era 1996-2009: 1.61-2.53.",
+   "source": {
+    "authors": "Gallagher, Michael",
+    "year": 2023,
+    "title": "Election indices dataset (LSq, Eff Nv, Eff Ns), Israel table p. 24",
+    "venue": "Trinity College Dublin, ElSystems/Docts/ElectionIndices.pdf (PDF dated 18 Jan 2023; TCD URL now 404, read from the mirror); index defined in Gallagher (1991) Electoral Studies 10(1):33-51, doi:10.1016/0261-3794(91)90004-C",
+    "doi_or_url": "https://www.almendron.com/tribuna/wp-content/uploads/2018/11/electionindices.pdf",
+    "type": "official data"
+   },
+   "model_link": "Supports modelling the threshold explicitly per draw (seat totals are a nonlinear function of straddlers' fates) rather than a proportional seat mapping.",
+   "stance": "supports",
+   "site_use": "new claim: 'Israel's seat-vote gap (Gallagher index 0.9 to 4.5 since 2015) is almost entirely the votes wasted on lists below the threshold.'"
+  },
+  {
+   "id": "SYS-F11",
+   "claim": "The 3.25% threshold was set by Amendment No. 62 to the Knesset Elections Law, passed 11 March 2014 and applied from the 2015 election; it replaced 2%.",
+   "quant": "Amendment 62 (Sefer HaHukim 5774 p.347; passed 9 Adar II 5774 = 11 March 2014) substitutes '3.25% (three and a quarter per cent)' in s.81(a). IDI (Kenig 2026): 'Since the 2015 election, the electoral threshold has been set at 3.25% of the valid votes.' Threshold in votes: 140,052 (2019a), 143,327 (2021), 154,855 (2022).",
+   "source": {
+    "authors": "State of Israel (Knesset)",
+    "year": 2014,
+    "title": "Knesset Elections Law (Amendment No. 62), 5774-2014 (חוק הבחירות לכנסת (תיקון מס' 62), התשע\"ד-2014)",
+    "venue": "Sefer HaHukim 5774, p. 347; passed 9 Adar II 5774 (11 March 2014); applies from the elections to the 20th Knesset",
+    "doi_or_url": "https://fs.knesset.gov.il/19/law/19_lsr_301595.pdf",
+    "type": "official data"
+   },
+   "model_link": "THRESHOLD constant; validate_model.CYCLE_THRESHOLD = 2% for 2009/2013, 3.25% from 2015 (correct).",
+   "stance": "supports",
+   "site_use": "The threshold has been 3.25% of valid votes since the 2015 election (Amendment 62, March 2014); it was 2% before."
+  },
+  {
+   "id": "SYS-F12",
+   "claim": "The threshold rise reshaped Arab-list strategy: under the 2013 shares two of the three Arab lists would have failed 3.25%, and they ran jointly in 2015 (13 seats, up from 11), but the alliance has since split and re-formed, so the threshold creates merger incentives rather than a stable merged party.",
+   "quant": "2013 (2% threshold): Hadash 2.99%, Balad 2.56%, Ra'am-Ta'al 3.65%; 11 seats combined. 2015 Joint List 446,583 votes = 10.61%, 13 seats (CEC). 2019a separate: Ra'am-Balad 3.334% (passed by 3,614 votes); 2022 three-way split: Balad 2.91% failed. Eizenberg & Harsgor (2017) analyse the threshold change and its effect on Arab representation in 2015 (topic per the IDI summary; full text not opened); Plesner (IDI 2015) names the Joint List as the most prominent behavioural effect.",
+   "source": {
+    "authors": "Eizenberg, Raz A.; Harsgor, Liran",
+    "year": 2017,
+    "title": "Apples and Oranges: Putting Electoral Thresholds in Context",
+    "venue": "in M. Shamir & G. Rahat (eds), The Elections in Israel 2015, Routledge/Taylor & Francis, pp. 47-69 (bibliographic record and IDI summary read; full text not opened - unverified beyond its topic)",
+    "doi_or_url": "https://doi.org/10.4324/9781315112121",
+    "type": "book chapter"
+   },
+   "model_link": "Arab family layer (graded turnout term), the Joint List-Ra'am pair, and the Balad-splits scenario: the legal incentive explains why split/merge configurations are the dominant Arab-list risk.",
+   "stance": "informs",
+   "site_use": "new claim: 'The 2014 threshold rise is why the Arab parties' fate turns on alliances: two of three Arab lists of 2013 would have fallen short of 3.25%.'"
+  },
+  {
+   "id": "SYS-F13",
+   "claim": "Israel is the textbook 'extreme' PR system (one 120-seat national district, closed lists), and the threshold rise did not durably cut fragmentation: the effective number of electoral parties fell from 8.68 (2013) to 5.19 (2020) and rebounded to 8.92 (2021) and 7.99 (2022).",
+   "quant": "Gallagher Eff Nv / Eff Ns: 2013 8.68/7.28; 2015 7.71/6.94; 2019a 6.33/5.24; 2019s 6.11/5.57; 2020 5.19/5.01; 2021 8.92/8.52; 2022 7.99/6.51. Rahat & Hazan: a closed-list PR system 'so proportional' that it produced a fragmented parliament (abstract); Hazan, Itzkovitch-Malka & Rahat (2017) treat Israel as 'a prototype of an extreme PR system' (abstract).",
+   "source": {
+    "authors": "Rahat, Gideon; Hazan, Reuven Y.",
+    "year": 2005,
+    "title": "Israel: The Politics of an Extreme Electoral System",
+    "venue": "in M. Gallagher & P. Mitchell (eds), The Politics of Electoral Systems, Oxford University Press, ch. 16, pp. 333-351 (abstract read; full text not opened)",
+    "doi_or_url": "https://doi.org/10.1093/0199257566.003.0016",
+    "type": "book chapter"
+   },
+   "model_link": "Context for the many-straddler structure of 2026 (21 latent lists, 38 filed): a fragmented field under a 3.25% bar keeps several lists in the threshold band every cycle.",
+   "stance": "informs",
+   "site_use": "new claim: 'Israel elects all 120 members in one national district - one of the most proportional systems in the world - so a handful of lists near 3.25% decide the majority.'"
+  },
+  {
+   "id": "SYS-F14",
+   "claim": "Invalid ballots are excluded from every denominator; they run at 0.5-1.0% of votes cast and are defined by statute (identifying marks, more than three identical slips or slips for different lists, non-official envelope, blank slips).",
+   "quant": "Invalid share of votes cast (CEC): 2015 1.03% (43,854), 2019a 0.71%, 2019s 0.64%, 2020 0.54%, 2021 0.59%, 2022 0.62% (29,851 of 4,794,593). 2013: 40,904 (about 1%) disqualified (Knesset RIC/CEC leaflet). Grounds: s.78(a); CEC guide: 'two or three ballots for the same list ... valid'; blank slips without list letters invalid. s.84 requires the published results to list invalid votes separately.",
+   "source": {
+    "authors": "Central Elections Committee for the 25th Knesset",
+    "year": 2022,
+    "title": "Guide to Knesset Elections (English translation of 'Elections for the 25th Knesset')",
+    "venue": "CEC / Ministry of Aliyah and Integration, Jerusalem 2022, pp. 3-5",
+    "doi_or_url": "https://www.gov.il/BlobFolder/news/elections-25/en/Guide-to-Knesset-Elections-en.pdf",
+    "type": "official data"
+   },
+   "model_link": "Model shares are shares of valid votes (vote intention); invalid voting is correctly not modelled as a list. No change.",
+   "stance": "supports",
+   "site_use": "Shares are of valid votes; invalid ballots (about 0.6% in 2022) count toward turnout but not toward any list or the threshold."
+  },
+  {
+   "id": "SYS-F15",
+   "claim": "The threshold denominator in law is ALL valid votes, including votes for the many micro-lists the model does not carry; the model renormalises shares over its modelled lists, which makes its threshold effectively 3.25% x (1 - m) of valid votes - slightly lenient, by roughly 800-1,300 votes in 2026 terms.",
+   "quant": "Valid-vote share of lists under 0.3% (closest analogue of the 2026 unmodelled set): 2015 0.41%, 2019a 0.80%, 2019s 0.64%, 2020 0.38%, 2021 0.28%, 2022 0.85%; lists under 0.5%: 0.41-1.49% (2022 1.49%). Ballots: 25-40 lists (2026: 38 filed; 20 latent columns in mixture_shares.csv summing to 1.000). Bias = 3.25% x m = 0.009-0.028 pp (~450-1,350 votes at ~4.8M valid) - the same order as New Right's 2019a miss (1,454 votes). Normal approximation to the 8 Oct mixture: P(pass) inflated by ~0.2-0.5 pp at m=0.3-0.7% and ~1.1-1.2 pp at m=1.5% for RZP-Zehut and Ra'am.",
+   "source": {
+    "authors": "Central Elections Committee (CEC)",
+    "year": 2022,
+    "title": "Official results by locality and polling station, 21st-25th Knessets (expc/expb files; settlement code 9999/99999 = outer (double) envelopes); 20th Knesset via the CEC dataset on data.gov.il",
+    "venue": "CEC results sites votes21-votes25.bechirot.gov.il (files from media21-25.bechirot.gov.il); repository copies data/raw/kalpi/expc_20..25.csv, expb_24..25.csv; desk computation, scripts in this desk's scratchpad (seatlaw.py, pairvalue.py, night.py)",
+    "doi_or_url": "https://votes25.bechirot.gov.il/ ; https://data.gov.il/he/datasets/central-election-committee/votes-knesset",
+    "type": "official data"
+   },
+   "model_link": "src/bayes_model.py project(): shares /= shares.sum(axis=1) over modelled lists, MICRO_PRIORS empty since s.42, then `passed = sh >= THRESHOLD`; same in simulate_core and validate_bayes.allocate_vector (v/sum(v)). Note implied_share_obs reserves 1% for micro-lists in seat-derived observations (seats/120*(1-wasted-0.01)) while CEC filings are renormalised to 1 - the latent's denominator is ambiguous.",
+   "stance": "challenges",
+   "site_use": "new claim after the fix: 'The 3.25% test uses all valid votes, including the ~0.5% that historically go to unpolled micro-lists.'"
+  },
+  {
+   "id": "SYS-F16",
+   "claim": "Double-envelope (outer-envelope) votes are cast by soldiers, voters at accessible stations, hospital patients, prisoners, diplomats, shelter residents and - new for 2026 - evacuees displaced since 7 October 2023; they are checked for double voting after polls close and counted centrally in the Knesset after the regular count, and the official results must be published within eight days.",
+   "quant": "Law: s.91(b) soldiers; s.68A(e)(1) mobility-limited voters at accessible stations (self-declaration); ch.10-3C ss.116Y10-116Y13 (amendment 5786/2026): evacuees ('a person who left his place of residence due to the security situation since 7 October 2023 and has not returned') vote at designated evacuee stations or accessible stations in an outer envelope (s.116Y12(c)). CEC guide: outer envelopes are checked so no one voted twice, then counted by Counting Committees 'located within the Knesset'. Basic Law: The Knesset s.11: results published 'within eight days'. 2022: 'all the regular ballots ... counted by just after noon' on 2 Nov, after which the CEC 'moved on to the counting of some 500,000 double envelopes' (The Media Line, 2 Nov 2022, https://themedialine.org/?p=134483). For 27 Oct 2026: regular count expected by midday 28 Oct, envelopes after that (estimate by analogy); statutory publication deadline 4 Nov.",
+   "source": {
+    "authors": "State of Israel (Knesset)",
+    "year": 1969,
+    "title": "Knesset Elections Law [Consolidated Version], 5729-1969 (חוק הבחירות לכנסת [נוסח משולב], תשכ\"ט-1969), as amended to 5786 (2026); ss.68A(e), 91(b), 116Y10-116Y13 (ch.10-3C, added 5786)",
+    "venue": "Consolidated statute; text read from the Hebrew Wikisource transcription of the consolidated version (Knesset National Legislation Database item 2000191)",
+    "doi_or_url": "https://he.wikisource.org/wiki/%D7%97%D7%95%D7%A7_%D7%94%D7%91%D7%97%D7%99%D7%A8%D7%95%D7%AA_%D7%9C%D7%9B%D7%A0%D7%A1%D7%AA",
+    "type": "official data"
+   },
+   "model_link": "Election-night engine (dossier s.2: publish 'election-night seats' vs 'final seats'); the new evacuee category is not in any 2019-2022 base rate.",
+   "stance": "informs",
+   "site_use": "The final result comes only after the double envelopes (soldiers, accessible stations, and in 2026 evacuees) are counted in the Knesset, after the regular count; it must be published within eight days."
+  },
+  {
+   "id": "SYS-F17",
+   "claim": "Double envelopes were 5.5% of valid votes in April 2019 and 9.6% in 2021 and 2022 (462,807 cast in 2022) per the CEC's final files; the election-week figure of 'over 600,000 / over 12.5%' for 2022 is not borne out by the CEC record, so a 2026 expectation of 600-700k (12-13%) lacks an official basis.",
+   "quant": "CEC outer-envelope rows (cast / valid / % of all valid): 2019a 240,783 / 238,822 / 5.54%; 2019s 282,442 / 280,216 / 6.32%; 2020 330,209 / 327,702 / 7.14%; 2021 425,512 / 421,619 / 9.56%; 2022 462,807 / 458,714 / 9.63% (838 counting units). IDI series via ToI matches 2019a-2021 (5.5/6.3/7.2/9.6%) but ToI (2 Nov 2022) said 'over 600,000' ballots, 'over 12.5%', for 2022. Atmor, Friedberg & Kenig (2025) document that the special-vote share 'has increased significantly in the past decade' (abstract). Invalid rate inside envelopes 0.76-0.91%.",
+   "source": {
+    "authors": "Central Elections Committee (CEC)",
+    "year": 2022,
+    "title": "Official results by locality and polling station, 21st-25th Knessets (expc/expb files; settlement code 9999/99999 = outer (double) envelopes); 20th Knesset via the CEC dataset on data.gov.il",
+    "venue": "CEC results sites votes21-votes25.bechirot.gov.il (files from media21-25.bechirot.gov.il); repository copies data/raw/kalpi/expc_20..25.csv, expb_24..25.csv; desk computation, scripts in this desk's scratchpad (seatlaw.py, pairvalue.py, night.py)",
+    "doi_or_url": "https://votes25.bechirot.gov.il/ ; https://data.gov.il/he/datasets/central-election-committee/votes-knesset",
+    "type": "official data"
+   },
+   "model_link": "docs/priors_dossier.md s.2 'Double envelopes: record 600-700k expected (~12-13% of votes)'; election-night engine sizing.",
+   "stance": "challenges",
+   "site_use": "Correct to: 'Double envelopes were 9.6% of valid votes in 2022 (463,000); 2026 adds evacuee stations, so expect more.'"
+  },
+  {
+   "id": "SYS-F18",
+   "claim": "Double envelopes lean strongly away from Arab and haredi lists and toward right-religious lists; the lean is large in percentage points and stable in sign across five elections.",
+   "quant": "Double-envelope share minus regular-station share (pp, CEC): Arab lists - Joint List 2019s -6.75, 2020 -7.70, 2021 -2.40; Hadash-Ta'al 2019a -2.89, 2022 -2.26; Ra'am(-Balad) 2019a -2.29, 2021 -2.45, 2022 -2.57; Balad 2022 -1.46. Haredi - UTJ -2.0 to -2.6 every cycle; Shas -0.6 to -1.9. Right-religious - Zehut 2019a +4.09; URWP/Yamina +0.88 (2019a), +3.18, +3.34, +3.54 (2019s-2021); RZ 2021 +1.45, 2022 +5.10. Likud +2.9 to +3.5 in 2019-2020, ~0 in 2021-2022. Labor 2021 +2.25, 2022 +1.58; Meretz -0.2 to +0.7. Matches the IDI characterisation (young Jewish voters; favour right-wing and fringe lists; disadvantage haredi and Arab lists).",
+   "source": {
+    "authors": "Times of Israel staff, reporting an IDI analysis by Or Anabi and Ofer Kenig",
+    "year": 2022,
+    "title": "Why the remaining ballots are likely to sink Balad, confirm Netanyahu's victory",
+    "venue": "Times of Israel, 2 November 2022",
+    "doi_or_url": "https://www.timesofisrael.com/why-the-remaining-ballots-are-likely-to-sink-balad-confirm-netanyahus-victory/",
+    "type": "report"
+   },
+   "model_link": "Election-night engine; dossier s.2 double-envelope lean bullet ('haredi and Arab lists ~1/3-1/2 under their regular-station share') - supported for Arab lists (34-52% of their regular-station share), weaker for haredi lists (UTJ 56-67%, Shas 69-92%).",
+   "stance": "supports",
+   "site_use": "Double envelopes skew young and Jewish: Arab lists poll a third to a half of their regular-station share in them, haredi lists clearly less, right-religious lists more."
+  },
+  {
+   "id": "SYS-F19",
+   "claim": "From the complete regular-station count to the final count, seats moved in every election but the net bloc shift was zero in four of five and -1 for the Netanyahu bloc in 2022; the envelope effect is a within-bloc and Arab-list effect, not a +0.5-1 seat drift to the right, and Meretz and Balad (2022) were already below 3.25% before any envelope was opened.",
+   "quant": "Final minus regular-only seats (statutory allocation with registered pairs, CEC counts): 2019a URWP +1, Likud -1; 2019s B&W +1, Likud +1, UTJ -1, YB -1; 2020 Likud +1, B&W +1, Shas -1, JL -1; 2021 Meretz +1, Ra'am -1; 2022 YB +1, UTJ -1. Straddlers regular% -> final%: Ra'am 2021 4.023 -> 3.788; Ra'am-Balad 2019a 3.461 -> 3.334; New Right 2019a 3.143 -> 3.216 (still short); Labor 2022 3.542 -> 3.694; Meretz 2022 3.169 -> 3.165; Balad 2022 3.049 -> 2.909. (Partial election-night counts differ from the complete regular count; not measured here.)",
+   "source": {
+    "authors": "Central Elections Committee (CEC)",
+    "year": 2022,
+    "title": "Official results by locality and polling station, 21st-25th Knessets (expc/expb files; settlement code 9999/99999 = outer (double) envelopes); 20th Knesset via the CEC dataset on data.gov.il",
+    "venue": "CEC results sites votes21-votes25.bechirot.gov.il (files from media21-25.bechirot.gov.il); repository copies data/raw/kalpi/expc_20..25.csv, expb_24..25.csv; desk computation, scripts in this desk's scratchpad (seatlaw.py, pairvalue.py, night.py)",
+    "doi_or_url": "https://votes25.bechirot.gov.il/ ; https://data.gov.il/he/datasets/central-election-committee/votes-knesset",
+    "type": "official data"
+   },
+   "model_link": "docs/priors_dossier.md s.2: 'night->final drift ~+0.5-1 seat right' and 'Meretz/Balad 2022 died in the envelopes'; election-night engine.",
+   "stance": "challenges",
+   "site_use": "Correct to: 'Counting the double envelopes typically moves one or two seats between lists - away from Arab and haredi lists - but has not moved the bloc balance to the right; an Arab list within ~0.25 pp of the threshold after the regular count is at real risk.'"
+  }
+ ],
+ "challenges": [
+  {
+   "title": "Threshold denominator: include the unmodelled micro-list vote",
+   "what_literature_says": "s.81(a) tests each list against 3.25% of ALL valid votes. In 2015-2022, lists below 0.3% took 0.28-0.85% of valid votes and lists below 0.5% took 0.41-1.49% (CEC). A 0.02-0.03 pp error at the threshold is of the order of real historical misses (New Right 2019a: 1,454 votes).",
+   "current_model": "project() (and simulate_core, validate_bayes.allocate_vector) renormalises shares to sum to 1 over the modelled lists, then tests sh >= 0.0325. Since s.42 MICRO_PRIORS is empty, so the 18 unmodelled 2026 lists have zero votes, and the effective threshold is 3.25% x (1 - m) of valid votes. Observation layers disagree on the denominator: seat rows reserve 1% for micro-lists, while CEC filings are renormalised to 1.",
+   "proposed_change": "Draw m per simulation from the CEC record of the unmodelled-list share, e.g. lognormal with median 0.5% and a 90% range of 0.3-0.9%, cycle-specific in the harness. Test sh x (1 - m) >= 0.0325, or equivalently compare sh against 0.0325/(1 - m). The D'Hondt allocation among passers is scale-invariant and unchanged. Document which denominator the latent represents.",
+   "how_to_test": "Harness: threshold Brier and straddler pass rates on the fidelity windows, with each cycle's actual unmodelled share taken from the CEC expc files, ON vs OFF. Production: change in P(pass) for RZP-Zehut, Ra'am, Otzma and Amcha (expected about -0.2 to -1 pp) and in P(NB>=61).",
+   "finding_ids": [
+    "SYS-F01",
+    "SYS-F15"
+   ]
+  },
+  {
+   "title": "Harness historical surplus pairs: replace approximations with the registered agreements",
+   "what_literature_says": "The registered agreements are on record: CEC notices for 2013-2019s, IDI for 2022, and the pairs that reproduce the official 2021 allocation exactly. With the exact official counts, the statutory allocation under the registered pairs matches the official seats in 6/6 elections. PAST_PAIRS misallocates 8 list-seats, in 2015, 2019s and 2021.",
+   "current_model": "validate_model.PAST_PAIRS, labelled 'approximations of the registered agreements'. It is missing YB-Kulanu (2015), B&W-YB (2019s) and Labor-Meretz (2019a, 2021). It includes fictitious B&W-Labor style pairs in 2019a, 2019s and 2021. The dossier lists 'the registered surplus agreements (item 4)' as not built.",
+   "proposed_change": "Use the registered pairs. 2015: ZU-Meretz, Likud-JH, UTJ-Shas, YB-Kulanu. 2019a: Labor-Meretz, New Right-YB, Ra'am-Balad-Hadash-Ta'al, Likud-URWP, Shas-UTJ. 2019s: B&W-YB, Likud-Yamina, Labor-Gesher-Democratic Union, UTJ-Shas, Noam-Otzma. 2020: B&W-Labor-Gesher-Meretz, Likud-Yamina, UTJ-Shas. 2021: Likud-RZ, B&W-New Economic, Yamina-New Hope, Yesh Atid-YB, Labor-Meretz, UTJ-Shas. 2022: YA-NU, Labor-Meretz, UTJ-Shas, Likud-RZ. Verify 2009/2013 against full official counts. Apply each pair only in windows after its signing date, which removes the look-ahead the dossier notes.",
+   "how_to_test": "Unit test: allocate the CEC final counts per cycle and require equality with the official seats. Harness: re-grade eve/D-7/D-21 seat MAE and coverage. Expected small MAE gains in 2015, 2019s and 2021, of about 0.15-0.3 seats per list in those cycles at the eve.",
+   "finding_ids": [
+    "SYS-F04",
+    "SYS-F06",
+    "SYS-F08"
+   ]
+  },
+  {
+   "title": "Correct the seat-law and double-envelope numbers stated on the site and in the dossier",
+   "what_literature_says": "On the CEC record 2015-2022: 3-8 remainder-stage seats per election (mean 5.3). Expected pair value about +0.4 seat, a +1 in about a third of cases. Double envelopes were 9.6% of valid votes in 2022 (462,807 cast). The envelopes moved bloc totals by 0 in 4/5 elections and by -1 for the NB in 2022. Meretz and Balad 2022 were below 3.25% on the regular count.",
+   "current_model": "Site: pairs 'worth a measured +0.5 to +0.9 expected seats per pair'. Dossier s.1: '~6-9 of 120 seats decided at the surplus stage'. Dossier s.2: 'record 600-700k expected (~12-13%)', 'night->final drift ~+0.5-1 seat right', 'Meretz/Balad 2022 died in the envelopes'.",
+   "proposed_change": "Replace them with the measured values in SYS-F05, F07, F17 and F19. Size the election-night engine from the CEC 2022 base (463k), plus the evacuee stations, plus any reservist effect. Model the envelope shift as list-level (Arab and haredi down, right-religious up) rather than as a bloc drift.",
+   "how_to_test": "Evidence class: official data (CEC expc files 2019a-2022). Re-run the desk scripts (seatlaw.py, pairvalue.py, night.py) whenever the site text changes.",
+   "finding_ids": [
+    "SYS-F05",
+    "SYS-F07",
+    "SYS-F17",
+    "SYS-F18",
+    "SYS-F19"
+   ]
+  },
+  {
+   "title": "Statutory fidelity: lottery tie-break and the s.81(d)(4) majority clause (low priority)",
+   "what_literature_says": "The law settles a tie in list quotients by a CEC lottery (s.81(d)(2)). It also stops a list that holds half the seats on no more than half the votes from receiving further seats (s.81(d)(4)).",
+   "current_model": "dhondt() awards ties to the lowest column index via np.argmax. There is no majority clause.",
+   "proposed_change": "Break ties with a seeded random choice and add the 60-seat cap clause, for fidelity only.",
+   "how_to_test": "Bit-identical check on harness and production draws (exact ties have probability ~0 with float shares; no 2026 list approaches 50%). Document as verified-no-effect.",
+   "finding_ids": [
+    "SYS-F02"
+   ]
+  }
+ ],
+ "parameters": [
+  {
+   "name": "THRESHOLD",
+   "current": "0.0325 of the modelled-list pie, test sh >= 0.0325",
+   "literature_range": "0.0325 of ALL valid votes, 'not less than' (s.81(a), Amendment 62 of 2014)",
+   "finding_ids": [
+    "SYS-F01",
+    "SYS-F11",
+    "SYS-F15"
+   ]
+  },
+  {
+   "name": "Unmodelled micro-list share m in the threshold denominator",
+   "current": "0 (MICRO_PRIORS empty since s.42; shares renormalised to 1)",
+   "literature_range": "lists <0.3%: 0.28-0.85% of valid votes (2015-2022); lists <0.5%: 0.41-1.49%",
+   "finding_ids": [
+    "SYS-F15"
+   ]
+  },
+  {
+   "name": "Expected value of one effective surplus pair",
+   "current": "site/dossier: +0.5 to +0.9 seats; model draws 2026: ~+0.3",
+   "literature_range": "+0.23 to +0.77 (mean +0.40) expected; realized +1 in 9/23 pairs 2015-2022",
+   "finding_ids": [
+    "SYS-F06",
+    "SYS-F07"
+   ]
+  },
+  {
+   "name": "Seats decided at the remainder (surplus) stage",
+   "current": "dossier: ~6-9",
+   "literature_range": "3-8 per election 2015-2022 (mean 5.3); 2022: 7",
+   "finding_ids": [
+    "SYS-F05"
+   ]
+  },
+  {
+   "name": "Surplus-agreement deadline / publication",
+   "current": "SURPLUS_PAIRS comment: deadline 16 Oct, CEC list ~19 Oct",
+   "literature_range": "day 11 before election (16 Oct 2026) / published by day 8 (19 Oct 2026) - s.67(b)-(c)",
+   "finding_ids": [
+    "SYS-F03"
+   ]
+  },
+  {
+   "name": "Tie-break in dhondt()",
+   "current": "lowest column index (np.argmax)",
+   "literature_range": "CEC lottery (s.81(d)(2)); 0 exact ties in 2015-2022",
+   "finding_ids": [
+    "SYS-F02"
+   ]
+  },
+  {
+   "name": "Double-envelope share of valid votes (election-night engine)",
+   "current": "dossier: 600-700k, ~12-13% expected",
+   "literature_range": "CEC: 5.54% (2019a), 6.32%, 7.14%, 9.56% (2021), 9.63% (2022, 462,807 cast); 2026 adds evacuee stations",
+   "finding_ids": [
+    "SYS-F16",
+    "SYS-F17"
+   ]
+  },
+  {
+   "name": "Regular-count -> final seat shift (bloc)",
+   "current": "dossier: +0.5-1 seat to the right",
+   "literature_range": "0 in 2019a, 2019s, 2020, 2021; -1 NB in 2022; list-level shifts 1-2 seats per election",
+   "finding_ids": [
+    "SYS-F18",
+    "SYS-F19"
+   ]
+  },
+  {
+   "name": "Harness historical surplus pairs (PAST_PAIRS)",
+   "current": "approximations; differ from registered agreements in 2015, 2019a, 2019s, 2021",
+   "literature_range": "registered agreements reproduce official seats 6/6",
+   "finding_ids": [
+    "SYS-F08"
+   ]
+  },
+  {
+   "name": "Invalid-vote share of votes cast",
+   "current": "not modelled (shares are of valid votes) - correct",
+   "literature_range": "0.54-1.03% (2015-2022); 0.62% in 2022",
+   "finding_ids": [
+    "SYS-F14"
+   ]
+  }
+ ],
+ "open_questions": [
+  "Which surplus agreements were actually filed by the 16 Oct 2026 deadline? Check against the CEC publication due by 19 Oct (s.67(c)), including any late pairs among sub-threshold lists (Reservists-Economic, Blue and White, Amcha).",
+  "How large will the 2026 double-envelope vote be, given the new evacuee stations (ch.10-3C) and reservist mobilisation? No CEC estimate was found.",
+  "Why does the election-week figure for 2022 ('over 600,000' double envelopes, ToI/IDI) differ from the CEC's final outer-envelope row (462,807)? Were some special-station ballots tallied outside that row? The full text of Atmor, Friedberg & Kenig (2025) may resolve this.",
+  "Do the 2009 and 2013 PAST_PAIRS match the registered agreements? The repo's 2013 CEC file excludes double envelopes, so an exact check needs the full official counts.",
+  "Should the latent shares represent valid-vote shares or modelled-pie shares? Seat-derived observations reserve 1% for micro-lists, while CEC filings are renormalised to 1. The threshold fix (challenge 1) depends on the answer.",
+  "How does the complete-regular-count to final shift compare with the partial election-night count the public sees? Measuring that needs CEC time-stamped interim releases, which were not located."
+ ]
+}

@@ -39,6 +39,9 @@ warnings.filterwarnings("ignore")
 
 N_PROJ = 4000
 WIDTH_GRID = [0.6, 0.7, 0.8, 0.9, 1.0, 1.1]
+# the trailing-Likud gate before round three: the 0.5-seat cliff on the
+# mean margin, calibrated on the cliff's record
+_CLIFF = {"trail_mode": "mean", "trail_lo": 0.5, "trail_wcal": False}
 ABLATIONS = [
     ("shipped", {}),
     ("no_resid", {"resid": False}), ("no_swing", {"swing": False}),
@@ -58,13 +61,16 @@ ABLATIONS = [
     # pre-registered: trail_sat = same draw, same gate, same half strength,
     # sourced from the bloc's own non-haredi satellites (the gevalt
     # coupling's rule mask). The rest are sensitivity runs, not choices.
-    ("trail_sat", {"trail_source": "sat"}),
-    ("trail_sat_era", {"trail_source": "era"}),
-    ("trail_draw_sat", {"trail_source": "sat", "trail_mode": "draw"}),
-    ("trail_draw_sat_full", {"trail_source": "sat", "trail_mode": "draw", "trail_scale": 1.0}),
-    ("trail_ramp_sat", {"trail_source": "sat", "trail_mode": "ramp", "trail_hi": 2.0}),
+    # Since the round-three ramp was merged (15 Oct), these arms spell out
+    # the cliff they were graded with (_CLIFF), so they keep their meaning
+    # whichever gate ALL_LAYERS mirrors.
+    ("trail_sat", dict(_CLIFF, trail_source="sat")),
+    ("trail_sat_era", dict(_CLIFF, trail_source="era")),
+    ("trail_draw_sat", dict(_CLIFF, trail_source="sat", trail_mode="draw")),
+    ("trail_draw_sat_full", dict(_CLIFF, trail_source="sat", trail_mode="draw", trail_scale=1.0)),
+    ("trail_ramp_sat", dict(_CLIFF, trail_source="sat", trail_mode="ramp", trail_hi=2.0)),
     # 2026-10-13 combine: the ship set together
-    ("combined", {"pair_fix": True, "gone_days": 14, "gone_zero": True, "trail_source": "sat"}),
+    ("combined", dict(_CLIFF, pair_fix=True, gone_days=14, gone_zero=True, trail_source="sat")),
     ("latent_only", {k: False for k in ["resid", "swing", "family", "gevalt", "loyal",
                                         "gevalt_cond", "new_straddler"]}),
     # candidate resid_relcap (dossier s.42)
@@ -98,10 +104,45 @@ ABLATIONS = [
                    "arab_intercept": True}),
     ("arab_oracle", {"arab_mode": "turnout", "arab_T": "oracle", "arab_k": 1.0,
                      "arab_intercept": False}),
+    # Latent arms (round three, 2026-10-15, dossier s.46): the projection on
+    # another cache's refit of the same window, graded inside the run so
+    # *_fixed uses the run's shipped list mask. alr_latent = the pre-round-
+    # three additive-log-ratio latent on the ballot-fidelity windows
+    # (harness_cache_alr_fidelity) - the comparator on the shipped harness.
+    # clr_latent = the round-three arm on the s.43 windows
+    # (harness_cache_clr; use with HARNESS_FIDELITY=0 BAYES_CLR=0
+    # HARNESS_CACHE_DIR=harness_cache_alr, the legacy ALR cache). An arm
+    # whose cache is missing or does not match the window is skipped.
+    ("alr_latent", {"posterior": "harness_cache_alr_fidelity"}),
+    ("clr_latent", {"posterior": "harness_cache_clr"}),
+    # trail_ramp (2026-10-15, dossier s.46). PRE-REGISTERED primary tramp_m
+    # (merged, HELD OFF by the fidelity gate G2): weight 1 at margin <= -1.0, 0 at
+    # >= +2.0 seats, calibrated with the same weight (w-weighted LOO
+    # record). The rest are the round-three sensitivity arms (not shipped).
+    ("tramp_m", {"trail_mode": "ramp", "trail_lo": -1.0, "trail_hi": 2.0, "trail_wcal": True}),
+    ("tramp_d", {"trail_mode": "ramp_draw", "trail_lo": -1.0, "trail_hi": 2.0, "trail_wcal": True}),
+    ("tramp05_m", {"trail_mode": "ramp", "trail_lo": 0.5, "trail_hi": 2.0, "trail_wcal": True}),
+    ("tramp05_d", {"trail_mode": "ramp_draw", "trail_lo": 0.5, "trail_hi": 2.0, "trail_wcal": True}),
+    ("tramp_m_cliffcal", {"trail_mode": "ramp", "trail_lo": -1.0, "trail_hi": 2.0}),
+    # the pre-round-three trail gate (the 0.5-seat cliff on the mean margin)
+    ("trail_cliff", dict(_CLIFF)),
+    # round-three combine (G1): CLR posterior + the ramp
+    ("clr_tramp_m", {"posterior": "harness_cache_clr", "trail_mode": "ramp",
+                     "trail_lo": -1.0, "trail_hi": 2.0, "trail_wcal": True}),
+    # Sector family terms (2026-10-15, dossier s.51; pre-registered there).
+    # hared_e0: haredi family mean = LOO raw (e0) total, e1 sd kept.
+    # arab_raam_split: the regB intercept allocated by the lineages' LOO
+    # under-count shares (s_raam = 1.0 in every fold on today's record).
+    ("hared_e0", {"haredi_mean": "e0"}),
+    ("arab_raam_split", {"arab_icpt_alloc": "lineage"}),
+    ("sector_both", {"haredi_mean": "e0", "arab_icpt_alloc": "lineage"}),
 ]
 # HORIZON_LAYERS string for the same arms (validate_horizon.py):
 ARAB_HORIZON_LAYERS = ";".join(
     f"{n}:{__import__('json').dumps(f)}" for n, f in ABLATIONS if n.startswith("arab_"))
+# and for the round-three arms (CLR needs the CLR horizon caches,
+# build_harness_cache.py):
+CLR_HORIZON_LAYERS = 'clr_latent:{"posterior": "harness_cache_clr"}'
 # Quick runs (candidate testing): HARNESS_ABLATIONS=shipped,my_layer limits the
 # ablation list by name; HARNESS_SKIP_WIDTH=1 skips the width grid.
 import os as _os
@@ -138,8 +179,264 @@ DECOMP = {
 }
 
 
+from pathlib import Path as _Path
+
+# ---------------------------------------------------------------------------
+# Harness ballot fidelity (candidate harness_ballot_fidelity, 2026-10-15,
+# dossier s.46). ON by default since the round-three restatement:
+# the historical windows are the ballot each cycle actually had. It changes
+# the fitted data, so the shared harness_cache holds fidelity windows
+# (CLR-on-fidelity); HARNESS_FIDELITY=0 needs the legacy cache.
+#   (1) drop_unfiled: after the filing deadline (+3 days), with the ballot
+#       read from the lists polled after the deadline (+2 days, as-of window
+#       only), drop (a) composites spanning two ballot lists - 2021 Joint
+#       List + Ra'am from five 1-3 Feb polls, 2015 Likud + Yisrael Beytenu,
+#       2020 Jewish Home + Otzma - together with the rest of that poll's
+#       observation of the blocks they fed (no partial sums), and (b)
+#       phantom lists not linked to any ballot list (2019a Joint List, 2019s
+#       New Right, 2022 Yamina).
+#   (2) DECOMP_FIDELITY: 2021 Yesh Atid-Telem = telem + yesh_atid; 2020
+#       Yamina = jewish_home + national_union + new_right and URWP =
+#       jewish_home + national_union (the five-party composite then folds).
+#   (3) ABSORBED_IDS (Zehut, NEP) are 2026 identities: kept in 2019a/2021,
+#       with Zehut's dated withdrawal in September 2019 (WITHDRAWALS).
+#   (4) cache safety: each posterior carries its component list,
+#       observation count and latent; a mismatch on load is an error, not
+#       a silent misalignment (check_signature).
+# ---------------------------------------------------------------------------
+# Round three (2026-10-15): DEFAULT ON - the grading harness is the
+# ballot-fidelity one; HARNESS_FIDELITY=0 reproduces the s.43 windows (the
+# legacy ALR cache, harness_cache_alr, is built on those).
+FIDELITY = _os.environ.get("HARNESS_FIDELITY", "1") == "1"
+
+
+def resolve_cache(name) -> _Path:
+    """A harness cache: a directory name under data/processed
+    (harness_cache_clr) or a path (anything with a separator)."""
+    name = str(name)
+    if _os.sep in name or "/" in name:
+        return _Path(name)
+    return PROCESSED_DIR / name
+
+
+# The shared posterior cache and the latent its posteriors are fitted with.
+# Round three (2026-10-15, dossier s.46): the shared cache holds CLR fits;
+# the pre-CLR ALR fits are kept as harness_cache_alr. A fit with any other
+# latent may never write into the shared cache (harness_cache_dir).
+SHARED_CACHE = PROCESSED_DIR / "harness_cache"
+SHARED_CACHE_LATENT = "clr"
+
+
+def current_latent() -> str:
+    return "clr" if bm.CLR_LATENT else "alr"
+
+
+def harness_cache_dir(write: bool = False) -> _Path:
+    """Posterior cache of the refit harnesses. HARNESS_CACHE_DIR (a name
+    under data/processed, or a path) points a run at a research cache
+    (harness_cache_clr, harness_cache_fidelity). write=True refuses a fit
+    whose latent differs from the shared cache's into the shared cache."""
+    d = resolve_cache(_os.environ.get("HARNESS_CACHE_DIR", "harness_cache"))
+    if write and current_latent() != SHARED_CACHE_LATENT and \
+            d.resolve() == SHARED_CACHE.resolve():
+        raise SystemExit(f"a {current_latent()} refit may not write into the shared "
+                         f"{SHARED_CACHE_LATENT} cache {SHARED_CACHE}: set HARNESS_CACHE_DIR "
+                         "to a separate cache directory")
+    return d
+
+
+CACHE_DIR = harness_cache_dir()
+OUT_DIR = _Path(_os.environ.get("HARNESS_OUT_DIR", str(PROCESSED_DIR)))
+FILING_DAYS = 47          # lists are filed on D-47 (Knesset Elections Law s.57(i))
+DECOMP_FIDELITY = {
+    "2020": {"yamina": "jewish_home+national_union+new_right",
+             "urwp": "jewish_home+national_union"},
+    "2021": {"yesh_atid_telem": "telem+yesh_atid"},
+}
+# Post-filing withdrawals: the list stops being on the ballot from this date.
+WITHDRAWALS = {"2019s": {"zehut": "2019-08-29"}}   # Feiglin withdrew for Likud
+
+
+def _decomp_map(cycle: str) -> dict:
+    m = dict(DECOMP.get(cycle, {}))
+    if FIDELITY:
+        m.update(DECOMP_FIDELITY.get(cycle, {}))
+    return m
+
+
+def drop_unfiled(cyc: pd.DataFrame, cycle: str, eday: pd.Timestamp,
+                 asof: pd.Timestamp, verbose: bool = True):
+    """Ballot fidelity (1): rows of lists not on the ballot, as seen from the
+    as-of date. Uses only polls with fieldwork_end <= asof (no look-ahead).
+    Returns (frame, dropped ids, n observations removed)."""
+    deadline = eday - pd.Timedelta(days=FILING_DAYS)
+    win = cyc[cyc["fieldwork_end"] <= asof]
+    out = cyc
+    dropped_ids: list = []
+    for pid, since in WITHDRAWALS.get(cycle, {}).items():
+        if asof >= pd.Timestamp(since):
+            hit = out["party_id"].str.split("+").map(lambda cs: pid in cs)
+            if hit.any():
+                dropped_ids.append(f"{pid}(withdrawn {since})")
+                out = out[~hit]
+                win = win[~win["party_id"].str.split("+").map(lambda cs: pid in cs)]
+    if asof < deadline + pd.Timedelta(days=3):
+        return out, dropped_ids, 0
+    from backtest import merge_blocks
+    post = win[win["fieldwork_end"] > deadline + pd.Timedelta(days=2)]
+    # ballot entities: the lists polled after the deadline (merged where
+    # post-deadline ids themselves overlap)
+    ents = merge_blocks(post["party_id"].unique())
+    ent_of = {c: i for i, e in enumerate(ents) for c in e}
+    ids = list(win["party_id"].unique())
+    # (a) straddlers: an id spanning two or more ballot lists is a composite
+    # that did not run (2021 Joint List + Ra'am, 2015 Likud + YB, 2020
+    # Jewish Home + Otzma, 2021 Labor + Meretz)
+    strad = {p for p in ids if len({ent_of[c] for c in p.split("+") if c in ent_of}) >= 2}
+    # (b) phantoms: after removing straddlers, a block of ids with no
+    # component on the ballot (2019a Joint List, 2019s New Right, 2022
+    # Yamina). Pre-merger components linked to a ballot list through a
+    # composite poll stay (2021 Otzma/Noam inside RZP, 2020 Democratic
+    # Union inside Labor-Gesher-Meretz).
+    rest = [p for p in ids if p not in strad]
+    blocks = merge_blocks(rest)
+    block_of = {c: i for i, b in enumerate(blocks) for c in b}
+    live = {i for i, b in enumerate(blocks) if b & set(ent_of)}
+    multi = [sorted(b) for b in blocks if len({ent_of[c] for c in b if c in ent_of}) >= 2]
+    if multi and verbose:
+        print(f"[{cycle} asof {asof.date()}] WARNING: blocks spanning two ballot lists: {multi}")
+    phantom = {p for p in rest if block_of[p.split("+")[0]] not in live}
+    bad = strad | phantom
+    if not bad:
+        return out, dropped_ids, 0
+    # observation-level removal: every row of the same poll that feeds a
+    # block a straddler touched goes too (no poll left as a partial sum)
+    row_block = out["party_id"].map(lambda p: block_of.get(p.split("+")[0]))
+    is_bad = out["party_id"].isin(bad)
+    kill = set()
+    for r in out[out["party_id"].isin(strad)].itertuples():
+        for c in r.party_id.split("+"):
+            if c in block_of:
+                kill.add((r.poll_id, block_of[c]))
+    extra = pd.Series([(pid, b) in kill for pid, b in zip(out["poll_id"], row_block)],
+                      index=out.index) & ~is_bad
+    n_extra = int(extra.sum())
+    dropped_ids += sorted(bad)
+    if verbose:
+        print(f"[{cycle} asof {asof.date()}] ballot fidelity: straddlers {sorted(strad)}, "
+              f"phantoms {sorted(phantom)} ({int(is_bad.sum())} rows) + {n_extra} same-poll "
+              f"rows of the blocks the straddlers fed")
+    return out[~(is_bad | extra)], dropped_ids, n_extra
+
+
+def harness_frame(polls: pd.DataFrame, cycle: str, eday: pd.Timestamp,
+                  asof: pd.Timestamp, verbose: bool = True) -> pd.DataFrame:
+    """The cycle's poll frame for an as-of fit: DECOMP, plus (FIDELITY) the
+    ballot-fidelity drops."""
+    cyc = apply_decomp(polls[(polls["cycle"] == cycle) & polls["sums_ok"]], cycle)
+    if FIDELITY:
+        cyc, _, _ = drop_unfiled(cyc, cycle, eday, asof, verbose=verbose)
+    return cyc
+
+
+def harness_prepare(cyc: pd.DataFrame, asof: pd.Timestamp) -> dict:
+    return prepare_data(cyc, asof, modern_remaps=False, drop_absorbed=not FIDELITY)
+
+
+def posterior_latent(post) -> str:
+    """"clr" for a centred-log-ratio posterior ("zc", weeks x B), "alr" for
+    the additive log-ratio one ("z", weeks x B-1)."""
+    return "clr" if "zc" in post else "alr"
+
+
+def check_signature(idata, data: dict, nc, latent: str | None = None) -> None:
+    """Cache safety: the cached posterior must be a fit of these data. Caches
+    written by load_or_fit carry the component list, observation count and
+    latent in attrs; legacy caches are checked on the latent's dimension
+    (ALR: B-1 columns of "z"; CLR: B columns of "zc"). latent: the latent
+    the caller expects (None = either)."""
+    post = idata.posterior
+    lat = posterior_latent(post)
+    B = len(data["components"])
+    at = dict(post.attrs)
+    if "components" in at:
+        if at["components"] != "|".join(data["components"]) or int(at["n_obs"]) != len(data["y"]):
+            raise RuntimeError(f"stale cache {nc}: cached {at['components']} n_obs {at['n_obs']} "
+                               f"vs data {'|'.join(data['components'])} n_obs {len(data['y'])}")
+        if at.get("latent", lat) != lat:
+            raise RuntimeError(f"cache {nc}: attrs say {at['latent']}, posterior is {lat}")
+    width = post["zc" if lat == "clr" else "z"].shape[-1]
+    if width != (B if lat == "clr" else B - 1):
+        raise RuntimeError(f"stale cache {nc}: {lat} latent width {width} vs {B} lists")
+    if latent is not None and lat != latent:
+        raise RuntimeError(f"cache {nc} holds {lat} posteriors; this run fits {latent} "
+                           f"(BAYES_CLR / HARNESS_CACHE_DIR)")
+
+
+def load_or_fit(nc, data: dict, draws: int, tune: int):
+    """Cached posterior with a signature check (components, observation count,
+    latent); a missing one is fitted with the current latent and written
+    with its signature (never a non-shared latent into the shared cache)."""
+    import arviz as az
+    nc = _Path(nc)
+    if nc.exists():
+        idata = az.from_netcdf(nc)
+        check_signature(idata, data, nc, latent=current_latent())
+        return idata
+    if current_latent() != SHARED_CACHE_LATENT and \
+            nc.parent.resolve() == SHARED_CACHE.resolve():
+        raise SystemExit(f"a {current_latent()} refit may not write {nc.name} into the "
+                         f"shared {SHARED_CACHE_LATENT} cache")
+    _, idata = fit(data, draws=draws, tune=tune)
+    idata.posterior.attrs.update({"components": "|".join(data["components"]),
+                                  "n_obs": int(len(data["y"])),
+                                  "latent": current_latent()})
+    nc.parent.mkdir(parents=True, exist_ok=True)
+    az.to_netcdf(idata, nc)
+    return idata
+
+
+_ALT_POST = {}
+
+
+class StaleArmCache(LookupError):
+    """A refit arm's cached posterior is not a fit of this window."""
+
+
+def alt_posterior(cache_name: str, job: str, data: dict):
+    """The posterior of the same cycle/horizon window from another cache (a
+    refit arm graded inside the run, so its *_fixed columns use the run's
+    shipped list mask; layer 'posterior'). Signature-checked against the
+    window's data; its latent may differ from the run's."""
+    import arviz as az
+    key = (cache_name, job)
+    if key not in _ALT_POST:
+        nc = resolve_cache(cache_name) / f"{job}.nc"
+        if not nc.exists():
+            raise FileNotFoundError(f"{nc} missing: fit it with build_harness_cache.py")
+        idata = az.from_netcdf(nc)
+        try:
+            check_signature(idata, data, nc)
+        except RuntimeError as e:
+            raise StaleArmCache(str(e)) from None
+        _ALT_POST.clear()
+        _ALT_POST[key] = idata
+    return _ALT_POST[key]
+
+
+def latent_draws(post):
+    """(last-week latent, tau) draws as the projection uses them: ALR "z"
+    (B-1 columns against a zero reference) or CLR "zc" (all B lists, a tau
+    per list). Returns (z_last, tau, is_clr)."""
+    clr = "zc" in post
+    zname = "zc" if clr else "z"
+    z_last = post[zname].values[:, :, -1, :].reshape(-1, post[zname].shape[-1])
+    tau = post["tau"].values.reshape(-1, post["tau"].shape[-1])
+    return z_last, tau, clr
+
+
 def apply_decomp(polls: pd.DataFrame, cycle: str) -> pd.DataFrame:
-    mapping = DECOMP.get(cycle)
+    mapping = _decomp_map(cycle)
     if not mapping:
         return polls
     polls = polls.copy()
@@ -182,8 +479,18 @@ ALL_LAYERS = {"resid": True, "swing": True, "family": True, "anchors": False,
               # the gevalt coupling's) | 'era' (hand list, sensitivity only);
               # gate 'mean' (0.5-seat cliff on the mean projection) | 'draw'
               # (same test per pre-shock latent draw) | 'ramp' (weight falls
-              # linearly from margin 0.5 to trail_hi seats)
+              # linearly from margin trail_lo to trail_hi seats)
               "trail_source": "sat", "trail_mode": "mean", "trail_hi": 2.0,
+              # trail_ramp (2026-10-15, dossier s.46): the ramp's lower end
+              # (weight 1 at margin <= trail_lo), mode 'ramp_draw' (the ramp
+              # per pre-shock latent draw), and trail_wcal = re-estimate the
+              # LOO mu/sd as the w-weighted record under the same ramp
+              # (False = the cliff's record). trail_lo 0.5 + 'ramp' is the
+              # round-five ramp (trail_ramp_sat).
+              # Round three (15 Oct): the ramp tramp_m is merged but HELD
+              # OFF in production (bm.TRAIL_RAMP_ON False), so the mirror
+              # stays the cliff; the arm tramp_m grades the ramp.
+              "trail_lo": 0.5, "trail_wcal": False,
               # candidate resid_relcap (2026-10-13, dossier s.42): cap each
               # list's residual sd at c x its own projected share, so a list
               # polling 0.3% is not given a 1.4 pp additive shock that the
@@ -203,7 +510,17 @@ ALL_LAYERS = {"resid": True, "swing": True, "family": True, "anchors": False,
               # arab_intercept adds that regression's LOO intercept.
               # SHIPPED 15 Oct (s.43): the regression form arab_regB.
               "arab_mode": "turnout", "arab_regime": "B", "arab_T": "regime",
-              "arab_k": "loo", "arab_intercept": True}
+              "arab_k": "loo", "arab_intercept": True,
+              # sector family terms (2026-10-15, dossier s.51; shipped =
+              # "e1" / "base"): haredi_mean "e0" = the LOO raw family mean
+              # with the e1 sd (hared_e0); arab_icpt_alloc "lineage" = the
+              # LOO intercept allocated by the Ra'am / other-Arab lineages'
+              # LOO under-count shares, family total kept (arab_raam_split)
+              "haredi_mean": "e1", "arab_icpt_alloc": "base",
+              # clr_latent (2026-10-15, dossier s.46): None = this run's
+              # posterior; a cache (name under data/processed, or a path) =
+              # the same window's posterior from that cache (a refit arm)
+              "posterior": None}
 
 # Arab-sector turnout by election (share of eligible Arab citizens voting).
 # Series as compiled in the dossier (s.4, s.24) and the production comment
@@ -295,7 +612,7 @@ def trailing_likud_params(polls: pd.DataFrame, results: pd.DataFrame,
     in the final week. Returns {"mu", "sd", "n", "cycles"}."""
     reg = load_party_registry()
     bloc_map = dict(zip(reg["party_id"], reg["bloc"]))
-    misses = {}
+    misses, record = {}, {}
     for cyc in ORDER:
         if cyc == exclude_cycle:
             continue
@@ -316,15 +633,46 @@ def trailing_likud_params(polls: pd.DataFrame, results: pd.DataFrame,
         if not others:
             continue
         leader = avg[others].max()
+        act = r[r["party_id"] == lk]["seats"]
+        if len(act):
+            # every non-excluded cycle's (final-week margin, miss): the
+            # trail_ramp candidate re-weights the record by its own ramp
+            record[cyc] = (float(avg[lk] - leader), float(act.iloc[0]) - float(avg[lk]))
         if avg[lk] <= leader + TRAIL_MARGIN:
-            act = r[r["party_id"] == lk]["seats"]
             if len(act):
                 misses[cyc] = float(act.iloc[0]) - float(avg[lk])
     vals = np.array(list(misses.values()))
     if len(vals) == 0:
-        return {"mu": 0.0, "sd": 0.0, "n": 0, "cycles": {}}
+        return {"mu": 0.0, "sd": 0.0, "n": 0, "cycles": {}, "record": record}
     return {"mu": float(vals.mean()), "sd": float(vals.std(ddof=1)) if len(vals) > 1 else 3.0,
-            "n": int(len(vals)), "cycles": misses}
+            "n": int(len(vals)), "cycles": misses, "record": record}
+
+
+def trail_ramp_weight(margin, lo, hi):
+    """Candidate trail_ramp (2026-10-15, dossier s.46): weight 1 at
+    margin <= lo seats, 0 at margin >= hi, linear in between (bm.trail_weight)."""
+    return bm.trail_weight(margin, lo, hi)
+
+
+def trail_ramp_params(tp: dict, lo: float, hi: float) -> dict:
+    """w-weighted mean/sd of Likud's final-week miss over the (LOO) record,
+    w = the same ramp the projection applies, so calibration and
+    application agree (a cycle at w=0.5 counts half). sd uses reliability
+    weights (V1 - V2/V1 denominator); 3.0 seats when fewer than two
+    cycles carry weight, as trailing_likud_params does for n=1."""
+    rec = tp.get("record", {})
+    if not rec:
+        return {"mu": 0.0, "sd": 0.0, "n": 0}
+    m = np.array([v[0] for v in rec.values()])
+    x = np.array([v[1] for v in rec.values()])
+    w = trail_ramp_weight(m, lo, hi)
+    v1, v2 = w.sum(), (w ** 2).sum()
+    if v1 <= 0:
+        return {"mu": 0.0, "sd": 0.0, "n": 0}
+    mu = float((w * x).sum() / v1)
+    n_w = int((w > 0).sum())
+    sd = float(np.sqrt((w * (x - mu) ** 2).sum() / (v1 - v2 / v1))) if n_w > 1 else 3.0
+    return {"mu": mu, "sd": sd, "n": n_w, "n_eff": float(v1 ** 2 / v2)}
 
 
 def allocate_vector(v, threshold, pair_idx):
@@ -363,16 +711,19 @@ def project_cycle(data, idata, eday, threshold, pairs, params,
     bloc_map = dict(zip(reg["party_id"], reg["bloc"]))
     bloc_map.update(bloc_overrides or {})
 
+    if L.get("posterior"):
+        # a refit arm: the same window's posterior from another cache
+        idata = alt_posterior(L["posterior"], project_cycle.job, data)
     post = idata.posterior
-    z_last = post["z"].values[:, :, -1, :].reshape(-1, post["z"].shape[-1])
-    tau = post["tau"].values.reshape(-1, post["tau"].shape[-1])
+    z_last, tau, clr = latent_draws(post)
     take = rng.choice(len(z_last), N_PROJ, replace=True)
     z_last, tau = z_last[take], tau[take]
     weeks = max((eday - data["asof"]).days, 0) / 7.0
     if weeks_override is not None:
         weeks = float(weeks_override)
+    # CLR: every list walks forward with its own tau (native, no adapter)
     z_e = z_last + np.sqrt(weeks) * tau * rng.standard_normal(z_last.shape)
-    z_f = np.concatenate([z_e, np.zeros((N_PROJ, 1))], axis=1)
+    z_f = z_e if clr else np.concatenate([z_e, np.zeros((N_PROJ, 1))], axis=1)
     shares = np.exp(z_f - z_f.max(axis=1, keepdims=True))
     shares /= shares.sum(axis=1, keepdims=True)
 
@@ -427,6 +778,8 @@ def project_cycle(data, idata, eday, threshold, pairs, params,
             break
         mu_f, sd_f = shocks[f]
         in_f = fams == f
+        if f == "haredi" and L["haredi_mean"] == "e0":
+            mu_f = params["family_e0"]["haredi"][0]   # hared_e0 (s.51): LOO raw mean, e1 sd
         if f == "arab" and L["arab_mode"] == "add_e0":
             mu_f = params["family_e0"]["arab"][0]
         elif f == "arab" and L["arab_mode"] == "turnout":
@@ -439,9 +792,15 @@ def project_cycle(data, idata, eday, threshold, pairs, params,
             r = 1.0 + kk * (T_mean / at["base"] - 1.0) + (T - T_mean) / at["base"]
             tot = shares[:, in_f].sum(axis=1)
             delta = (r - 1.0) * tot
-            if L["arab_intercept"]:
-                delta = delta - at["a_loo"] / 120.0
             w_f, w_r = np.where(in_f, base, 0), np.where(~in_f, base, 0)
+            if L["arab_intercept"] and L["arab_icpt_alloc"] == "lineage":
+                # arab_raam_split (s.51): the LOO intercept's family total,
+                # allocated by the LOO lineage under-count share
+                a_i = bm.arab_intercept_weights(comps, in_f, base,
+                                                params["arab_lineage"]["s_raam"])
+                shares = shares + (-at["a_loo"] / 120.0) * (a_i - w_r / w_r.sum())
+            elif L["arab_intercept"]:
+                delta = delta - at["a_loo"] / 120.0
             shares = shares + delta[:, None] * (w_f / w_f.sum() - w_r / w_r.sum())
             continue
         sk = (-mu_f + (zf[:, k] / mixer) * sd_f * L["shock_scale"]) / 120.0
@@ -495,15 +854,23 @@ def project_cycle(data, idata, eday, threshold, pairs, params,
     project_cycle.last_trail = {"frac": 0.0, "overflow": None}
     if L["gevalt_cond"] and likud_col is not None and "trail" in params:
         tp = params["trail"]
+        if L["trail_wcal"]:
+            # trail_ramp: calibrate on the record with the SAME ramp (strict LOO)
+            tp = trail_ramp_params(tp, L["trail_lo"], L["trail_hi"])
+        project_cycle.last_trail["mu"], project_cycle.last_trail["sd"] = tp["mu"], tp["sd"]
         non_nb = [i for i in range(len(comps)) if blocs[i] != "netanyahu_bloc" and i != likud_col]
         if non_nb and tp["n"] > 0:
             margin = (base[likud_col] - base[non_nb].max()) * 120.0
+            project_cycle.last_trail["margin"] = float(margin)
             if L["trail_mode"] == "draw":
                 m_d = (shares_pre[:, likud_col] - shares_pre[:, non_nb].max(axis=1)) * 120.0
                 gate = (m_d <= TRAIL_MARGIN).astype(float)
             elif L["trail_mode"] == "ramp":
-                gate = np.full(N_PROJ, float(np.clip(
-                    (L["trail_hi"] - margin) / (L["trail_hi"] - TRAIL_MARGIN), 0.0, 1.0)))
+                gate = np.full(N_PROJ, float(trail_ramp_weight(margin, L["trail_lo"], L["trail_hi"])))
+            elif L["trail_mode"] == "ramp_draw":
+                # per posterior draw, on the pre-shock latent margin
+                m_d = (shares_pre[:, likud_col] - shares_pre[:, non_nb].max(axis=1)) * 120.0
+                gate = trail_ramp_weight(m_d, L["trail_lo"], L["trail_hi"])
             else:
                 gate = np.full(N_PROJ, float(margin <= TRAIL_MARGIN))
             project_cycle.last_trail["frac"] = float(gate.mean())
@@ -574,6 +941,9 @@ def project_cycle(data, idata, eday, threshold, pairs, params,
     return seats, blocs, base, comp_of
 
 
+project_cycle.job = None   # "<cycle>_eve" / "<cycle>_D<h>": set by the harness loops (layer 'posterior')
+
+
 def main() -> None:
     polls = pd.read_csv(PROCESSED_DIR / "polls.csv",
                         parse_dates=["fieldwork_end"])
@@ -584,28 +954,22 @@ def main() -> None:
     for cycle in ORDER:
         eday = pd.Timestamp(ELECTION_DAY[cycle])
         asof = eday - pd.Timedelta(days=1)
-        cyc = polls[(polls["cycle"] == cycle) & polls["sums_ok"]]
-        cyc = apply_decomp(cyc, cycle)
+        cyc = harness_frame(polls, cycle, eday, asof)
         try:
-            data = prepare_data(cyc, asof, modern_remaps=(cycle == "2026"))
+            data = harness_prepare(cyc, asof)
             print(f"[{cycle}] {data['n_polls']} polls, "
                   f"{len(data['latent_blocks'])} lists, "
                   f"{data['n_weeks']} weeks — fitting...")
-            import arviz as az
-            cache = PROCESSED_DIR / "harness_cache"; cache.mkdir(exist_ok=True)
-            nc = cache / f"{cycle}_eve.nc"
-            if nc.exists():
-                idata = az.from_netcdf(nc)
-            else:
-                _, idata = fit(data, draws=600, tune=600)
-                az.to_netcdf(idata, nc)
+            idata = load_or_fit(CACHE_DIR / f"{cycle}_eve.nc", data, 600, 600)
             div = int(idata.sample_stats["diverging"].sum())
             params = decompose(exclude_cycle=cycle)
             params["trail"] = trailing_likud_params(polls, results, exclude_cycle=cycle)
             params["new_lists"] = new_lists_for_cycle(polls, cycle)
             params["nstrad"] = new_straddler_params(exclude_cycle=cycle)
-            params["pair_alias"] = DECOMP.get(cycle, {})
+            params["pair_alias"] = _decomp_map(cycle)
             params["arab_tab"] = arab_turnout_params(cycle)   # dossier s.43
+            params["arab_lineage"] = bm.arab_lineage_share(exclude_cycle=cycle)   # s.51
+            project_cycle.job = f"{cycle}_eve"   # layer 'posterior' (refit arms)
             print(f"[{cycle}] trailing-Likud LOO: mu {params['trail']['mu']:+.2f} sd {params['trail']['sd']:.2f} n {params['trail']['n']}")
             seats, blocs, base, comp_of = project_cycle(
                 data, idata, eday, CYCLE_THRESHOLD.get(cycle, THRESHOLD),
@@ -633,11 +997,15 @@ def main() -> None:
         # denominator (harness_compare --fixed).
         fixed = None
         for tag, flags in ABLATIONS:
-            sa, _, ba, _ = project_cycle(
-                data, idata, eday, CYCLE_THRESHOLD.get(cycle, THRESHOLD),
-                PAST_PAIRS[cycle], params, VAL_BLOC_OVERRIDES.get(cycle),
-                np.random.default_rng(SEED + 11 + int(_os.environ.get("HARNESS_SEED_OFFSET", 0))),
-                layers=flags)
+            try:
+                sa, _, ba, _ = project_cycle(
+                    data, idata, eday, CYCLE_THRESHOLD.get(cycle, THRESHOLD),
+                    PAST_PAIRS[cycle], params, VAL_BLOC_OVERRIDES.get(cycle),
+                    np.random.default_rng(SEED + 11 + int(_os.environ.get("HARNESS_SEED_OFFSET", 0))),
+                    layers=flags)
+            except (FileNotFoundError, StaleArmCache) as e:   # a refit arm's cache is missing / stale
+                print(f"[{cycle}] ablation {tag} skipped: {e}")
+                continue
             act_a = (ba >= 0.005) | (actual > 0)
             if tag == "shipped":
                 fixed = act_a
@@ -646,6 +1014,8 @@ def main() -> None:
             isc_a = (hi_a - lo_a) + 20 * np.maximum(lo_a - actual, 0) + 20 * np.maximum(actual - hi_a, 0)
             ar_a = project_cycle.last_fams == "arab"
             row = {"cycle": cycle, "ablation": tag,
+                   # trailing-Likud gate weight (mean over draws) of this arm
+                   "trail_frac": float(project_cycle.last_trail.get("frac", 0.0)),
                    # Arab family: mean projected seats - actual (dossier s.43)
                    "arab_fam_err": float(sa[:, ar_a].sum(axis=1).mean() - actual[ar_a].sum())
                    if ar_a.any() else np.nan}
@@ -691,7 +1061,13 @@ def main() -> None:
                               "components": data["components"][i]
                               if i < len(data["components"]) else "micro",
                               "pred": float(pred_mean[i]),
-                              "actual": int(actual[i])})
+                              "actual": int(actual[i]),
+                              # per-list calibration record (site's track-record
+                              # section: reliability diagram, coverage by size)
+                              "pred_median": float(np.median(seats[:, i])),
+                              "p05": float(p05[i]), "p95": float(p95[i]),
+                              "p_pass": float(p_pass[i]),
+                              "share_base": float(base[i])})
         rows.append({
             "cycle": cycle, "n_lists": int(active.sum()),
             "coverage_90": round(float(cov.mean()), 2),
@@ -708,10 +1084,16 @@ def main() -> None:
               f"{rows[-1]['threshold_brier']} | P(bloc61) "
               f"{rows[-1]['p_bloc_61']:.1%} (actual {nb_actual})")
 
+    if len(rows) != len(ORDER):
+        # a cycle that failed (e.g. a stale cache) must not silently leave
+        # the pooled score (ballot-fidelity cache safety)
+        print(f"WARNING: only {len(rows)} of {len(ORDER)} cycles scored")
+        if FIDELITY:
+            raise SystemExit(f"only {len(rows)} of {len(ORDER)} cycles scored")
     out = pd.DataFrame(rows).set_index("cycle")
-    out.to_csv(PROCESSED_DIR / "model_validation_bayes.csv")
+    out.to_csv(OUT_DIR / "model_validation_bayes.csv")
     pd.DataFrame(list_rows).to_csv(
-        PROCESSED_DIR / "model_validation_bayes_lists.csv", index=False)
+        OUT_DIR / "model_validation_bayes_lists.csv", index=False)
     pooled = np.concatenate(covered_all)
     p61, hap = out["p_bloc_61"], out["bloc_61_happened"].astype(float)
     print("\n== BAYESIAN MODEL, eight-cycle grade ==")
@@ -741,14 +1123,24 @@ def main() -> None:
         pass
     if abl_rows:
         adf = pd.DataFrame(abl_rows)
-        adf.to_csv(PROCESSED_DIR / "model_validation_ablation.csv", index=False)
+        adf.to_csv(OUT_DIR / "model_validation_ablation.csv", index=False)
         print("\nLayer ablation (pooled over cycles):")
-        print(adf.groupby("ablation").agg(mae=("seat_mae", "mean"), mae_med=("seat_mae_median", "mean"),
-                                          coverage=("coverage_90", "mean"), brier=("threshold_brier", "mean"))
-              .loc[[t for t, _ in ABLATIONS]].round(3).to_string())
+        tab = adf.groupby("ablation").agg(mae=("seat_mae", "mean"), mae_med=("seat_mae_median", "mean"),
+                                          coverage=("coverage_90", "mean"), brier=("threshold_brier", "mean"),
+                                          cycles=("cycle", "nunique"))
+        # an arm scored in fewer cycles than the shipped run is not comparable
+        # in a pooled table (a refit arm whose cache is missing for some cycles
+        # is skipped per cycle): drop it and say so (round-three critic, s.46)
+        full = int(tab["cycles"].max()) if len(tab) else 0
+        partial = tab[tab["cycles"] < full]
+        if len(partial):
+            print("  arms scored in fewer than %d cycles, left out of this table: %s"
+                  % (full, ", ".join(f"{a} ({int(n)})" for a, n in partial["cycles"].items())))
+        print(tab[tab["cycles"] == full].reindex([t for t, _ in ABLATIONS]).dropna(how="all")
+              .round(3).to_string())   # skipped arms drop out
     if width_rows:
         wdf = pd.DataFrame(width_rows)
-        wdf.to_csv(PROCESSED_DIR / "model_validation_width.csv", index=False)
+        wdf.to_csv(OUT_DIR / "model_validation_width.csv", index=False)
         pooled = wdf.groupby("width").agg(coverage=("coverage_90", "mean"), mae=("seat_mae", "mean"),
                                           brier=("threshold_brier", "mean"), iscore=("interval_score", "mean"))
         print("\nInterval-width calibration (pooled over cycles):")

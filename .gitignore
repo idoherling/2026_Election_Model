@@ -14,3 +14,4 @@ data/raw/
 .idea/
 data/processed/m3_idata.nc
 data/processed/harness_cache/
+data/processed/harness_cache_*/

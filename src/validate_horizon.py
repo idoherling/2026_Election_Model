@@ -22,13 +22,15 @@ from bayes_model import SEED, fit, prepare_data
 from error_decomposition import decompose
 from scrape_polls import ELECTION_DAY, PROCESSED_DIR
 from simulate import THRESHOLD
-from validate_bayes import (CYCLE_THRESHOLD, ORDER, PAST_PAIRS,
-                            VAL_BLOC_OVERRIDES, apply_decomp, project_cycle)
+from validate_bayes import (CACHE_DIR, CYCLE_THRESHOLD, ORDER, OUT_DIR,
+                            PAST_PAIRS, VAL_BLOC_OVERRIDES, _decomp_map,
+                            apply_decomp, harness_frame, harness_prepare,
+                            load_or_fit, project_cycle, StaleArmCache)
 
 warnings.filterwarnings("ignore")
 import os as _os0
 HORIZONS = [int(x) for x in _os0.environ.get("HORIZONS", "56,21").split(",")]   # e.g. HORIZONS=56,21,7
-CACHE = PROCESSED_DIR / "harness_cache"
+CACHE = CACHE_DIR   # HARNESS_CACHE_DIR (research caches live apart; a name or a path)
 # Joint calibration grid for the next run: scale on the shock stack
 # (swing, family sd, residual) x scale on the forward random-walk variance.
 STACK_GRID = [0.7, 0.85, 1.0]
@@ -51,7 +53,6 @@ def main() -> None:
     rows = []
     for cycle in ORDER:
         eday = pd.Timestamp(ELECTION_DAY[cycle])
-        cyc = apply_decomp(polls[(polls["cycle"] == cycle) & polls["sums_ok"]], cycle)
         res = apply_decomp(results[results["cycle"] == cycle], cycle)
         params = decompose(exclude_cycle=cycle)
         from validate_bayes import (new_lists_for_cycle, new_straddler_params,
@@ -63,25 +64,20 @@ def main() -> None:
         params["trail"] = trailing_likud_params(polls, results, exclude_cycle=cycle)
         params["new_lists"] = new_lists_for_cycle(polls, cycle)
         params["nstrad"] = new_straddler_params(exclude_cycle=cycle)
-        from validate_bayes import DECOMP
-        params["pair_alias"] = DECOMP.get(cycle, {})   # dossier s.40
+        params["pair_alias"] = _decomp_map(cycle)   # dossier s.40
         from validate_bayes import arab_turnout_params
         params["arab_tab"] = arab_turnout_params(cycle)   # dossier s.43
+        params["arab_lineage"] = bm.arab_lineage_share(exclude_cycle=cycle)   # s.51
         for h in HORIZONS:
             asof = eday - pd.Timedelta(days=h)
             try:
-                data = prepare_data(cyc, asof, modern_remaps=False)
+                # as-of frame: DECOMP + (HARNESS_FIDELITY) ballot fidelity
+                cyc = harness_frame(polls, cycle, eday, asof)
+                data = harness_prepare(cyc, asof)
                 if data["n_polls"] < 8:
                     print(f"[{cycle} D-{h}] only {data['n_polls']} polls, skipped")
                     continue
-                import arviz as az
-                CACHE.mkdir(exist_ok=True)
-                nc = CACHE / f"{cycle}_D{h}.nc"
-                if nc.exists():
-                    idata = az.from_netcdf(nc)
-                else:
-                    _, idata = fit(data, draws=400, tune=400)
-                    az.to_netcdf(idata, nc)
+                idata = load_or_fit(CACHE / f"{cycle}_D{h}.nc", data, 400, 400)
             except Exception as e:
                 print(f"[{cycle} D-{h}] FAILED: {e}")
                 continue
@@ -101,14 +97,19 @@ def main() -> None:
                 nm_, js_ = spec.split(":", 1)
                 extra[nm_] = _json.loads(js_)
                 configs.append((nm_, calendar_weeks(h), 1.0, 1.0))
+            project_cycle.job = f"{cycle}_D{h}"   # layer 'posterior' (refit arms)
             for mode, wk, st, rw in configs:
-                seats, blocs, base, comp_of = project_cycle(
-                    data, idata, eday, CYCLE_THRESHOLD.get(cycle, THRESHOLD),
-                    PAST_PAIRS[cycle], params, VAL_BLOC_OVERRIDES.get(cycle),
-                    np.random.default_rng(SEED + h + int(_os.environ.get("HARNESS_SEED_OFFSET", 0))),
-                    resid_scale=bm.RESID_SCALE * st,
-                    weeks_override=wk,
-                    layers=dict({"shock_scale": st}, **extra.get(mode, {})))
+                try:
+                    seats, blocs, base, comp_of = project_cycle(
+                        data, idata, eday, CYCLE_THRESHOLD.get(cycle, THRESHOLD),
+                        PAST_PAIRS[cycle], params, VAL_BLOC_OVERRIDES.get(cycle),
+                        np.random.default_rng(SEED + h + int(_os.environ.get("HARNESS_SEED_OFFSET", 0))),
+                        resid_scale=bm.RESID_SCALE * st,
+                        weeks_override=wk,
+                        layers=dict({"shock_scale": st}, **extra.get(mode, {})))
+                except (FileNotFoundError, StaleArmCache) as e:   # a refit arm's cache is missing / stale
+                    print(f"[{cycle} D-{h} {mode}] skipped: {e}")
+                    continue
                 actual = np.zeros(seats.shape[1])
                 for r in res.itertuples():
                     hit = {comp_of[c] for c in r.party_id.split("+") if c in comp_of}
@@ -144,11 +145,19 @@ def main() -> None:
                 print(f"[{cycle} D-{h} {mode}] MAE {rows[-1]['seat_mae']:.2f} | cov {rows[-1]['coverage_90']:.0%} | "
                       f"width {rows[-1]['mean_width']:.1f} | iscore {rows[-1]['interval_score']:.2f}")
     df = pd.DataFrame(rows)
-    df.to_csv(PROCESSED_DIR / "model_validation_horizon.csv", index=False)
+    df.to_csv(OUT_DIR / "model_validation_horizon.csv", index=False)
     print("\nHorizon harness (pooled over cycles):")
-    print(df.groupby(["horizon", "mode"]).agg(mae=("seat_mae", "mean"), coverage=("coverage_90", "mean"),
+    tab = df.groupby(["horizon", "mode"]).agg(mae=("seat_mae", "mean"), coverage=("coverage_90", "mean"),
                                               brier=("threshold_brier", "mean"), width=("mean_width", "mean"),
-                                              iscore=("interval_score", "mean")).round(3).to_string())
+                                              iscore=("interval_score", "mean"), cycles=("cycle", "nunique"))
+    # arms scored in fewer cycles than the calendar baseline at the same
+    # horizon are not comparable when pooled: flag and drop them
+    full = tab.groupby(level=0)["cycles"].transform("max")
+    partial = tab[tab["cycles"] < full]
+    if len(partial):
+        print("  arms scored in fewer cycles than the baseline, left out: "
+              + ", ".join(f"D-{hz} {m} ({int(n)})" for (hz, m), n in partial["cycles"].items()))
+    print(tab[tab["cycles"] == full].round(3).to_string())
     print("\nwrote model_validation_horizon.csv")
 
 

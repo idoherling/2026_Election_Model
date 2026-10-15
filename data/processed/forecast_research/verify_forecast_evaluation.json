@@ -1,0 +1,245 @@
+{
+ "verdicts": [
+  {
+   "id": "EVAL-F01",
+   "status": "verified",
+   "note": "Published JASA PDF opened; Crossref 102(477):359-378; interval score Eq.(43) Sec 6.2 p.370; Table 2 p.371 coverage/width/score figures match.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "EVAL-F02",
+   "status": "corrected",
+   "note": "Crossref MWR 78(1):1-3; original scan not opened (AMS 403). Brier's 1950 score sums over all r classes (0 perfect, 2 worst) - twice the modern one-component score; the pooling remark is the desk's reasoning, not Brier's.",
+   "corrected_url": "https://doi.org/10.1175/1520-0493(1950)078<0001:VOFEIT>2.0.CO;2",
+   "corrected_quant": "Monthly Weather Review 78(1):1-3. Brier defined P = (1/n) sum_i sum_j (f_ij - E_ij)^2 over all r classes (0 perfect, 2 worst); for a binary event twice the one-component (p - o)^2 score now called the Brier score (per secondary sources; original scan not opened)."
+  },
+  {
+   "id": "EVAL-F03",
+   "status": "verified",
+   "note": "JRSSB 69(2):243-268 opened: 'maximizing the sharpness ... subject to calibration' p.243; hump-shaped PIT = intervals too wide p.253; sharpness via average interval widths p.255. 'Over-coverage is a calibration failure' is a fair inference.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "EVAL-F04",
+   "status": "verified",
+   "note": "arXiv 2005.12881v3 opened; PLOS CB 17(2):e1008618; WIS Eq.(1)-(3) p.4; PIT shapes p.9.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "EVAL-F05",
+   "status": "verified",
+   "note": "Biometrics 65(4):1254-1261 full text opened: nonrandomized PIT for counts Sec 2.1; marginal calibration Sec 2.2; predictive deviance Sec 3.2.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "EVAL-F06",
+   "status": "verified",
+   "note": "JASA 106(494):746-762 abstract via OpenAlex + arXiv 0912.0902v2: scoring function must be specified ex ante; absolute error -> median. 'Meaningful only when' slightly strengthens the paper's wording.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "EVAL-F07",
+   "status": "verified",
+   "note": "MWR 143(4):1321-1334 full text (NOAA IR): energy score limited on correlation; variogram score more discriminative; five Colorado wind parks Sec 4 p.1330; proper not strictly proper Sec 2 p.1324, Sec 3d p.1327; use alongside ES Sec 5.",
+   "corrected_url": "",
+   "corrected_quant": "Monthly Weather Review 143(4):1321-1334 (abstract; Sec 2 p.1324; Sec 3d p.1327; Sec 4 p.1330; Sec 5 pp.1332-1333)."
+  },
+  {
+   "id": "EVAL-F08",
+   "status": "corrected",
+   "note": "JDM 15(5):863-880 opened: Sec 2.1 pp.866-867 (10 back-tested elections 'not nearly enough information to evaluate 95% intervals'); Sec 2.3 pp.867-868; incentives for both over- and underconfidence Sec 3.1-3.2 pp.872-873; 538's '20% really means 14%, 80% means 88%' on p.873 is the authors' reading of Boice & Wezerek (2019), flagged as resting on few elections.",
+   "corrected_url": "",
+   "corrected_quant": "Judgment and Decision Making 15(5):863-880. Sec 2.1 pp.866-867; Sec 2.3 pp.867-868; Sec 3.1-3.2 pp.872-873; p.873: per the Boice & Wezerek (2019) calibration plot, 538's political '20% really means 14%, and their 80% really means 88%', flagged as based on few elections."
+  },
+  {
+   "id": "EVAL-F09",
+   "status": "corrected",
+   "note": "fivethirtyeight.com URL now redirects to abcnews.com; full text read in a Wayback snapshot of 5 Apr 2019 (Silver, 4 Apr 2019): 5,589 events at 70% happened 71%; 55,853 near 5% happened 4%; election candidates given 75% won 83% (gap generally not statistically significant).",
+   "corrected_url": "https://web.archive.org/web/20190405091600/https://fivethirtyeight.com/features/when-we-say-70-percent-it-really-means-70-percent/",
+   "corrected_quant": "FiveThirtyEight, 4 Apr 2019: of 5,589 events forecast at 70%, 71% happened; of 55,853 near 5%, 4% happened; candidates given 75% won 83% (generally not statistically significant)."
+  },
+  {
+   "id": "EVAL-F10",
+   "status": "verified",
+   "note": "Crossref JOP 82(4):1530-1544; Pew summary (6 Feb 2018) and Dataverse replication (study 1 n=4,151) confirm: probability displays raised confidence about the winner; vote-share displays had no detectable effect on voting. Study 2 n=1,171 confirmed only from Pew's summary.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "EVAL-F11",
+   "status": "verified",
+   "note": "CHI 2018 full PDF: quantile dotplots with 50 outcomes reached 97% of optimal payoff (95% CI 95-98), +5 pp vs control; CDF plots nearly as good; textual uncertainty worse. The UW page 404s; DOI fine.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "EVAL-F12",
+   "status": "verified",
+   "note": "Stat Comput 27(5):1413-1432; arXiv 1507.04544v5 read: paired SE of elpd differences (Sec 5.2), grouped observations for leave-one-group-out; SE estimates are unreliable with few folds (relevant to 8 cycles).",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "EVAL-F13",
+   "status": "verified",
+   "note": "Ecography 40(8):913-929 abstract: ignoring dependence seriously underestimates predictive error; recommend block CV. Full text not opened (p.917 pin unconfirmed).",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "EVAL-F14",
+   "status": "verified",
+   "note": "JSCS 90(14):2499-2523; arXiv 1902.06281v5: LOO-CV is overly optimistic when predicting the future; proposes leave-future-out (LFO-CV) with PSIS.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "EVAL-F15",
+   "status": "verified",
+   "note": "BMC Bioinformatics 7:91 abstract: CV-tuned shrunken centroid had CV error <30% on 18.5% of null sets; nested CV gives an almost unbiased estimate; tuning must be repeated in each CV loop.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "EVAL-F16",
+   "status": "corrected",
+   "note": "American Scientist full PDF: pages 460-465 (Crossref lists 460 only). Supports the garden-of-forking-paths claim.",
+   "corrected_url": "",
+   "corrected_quant": "American Scientist 102(6):460-465 (Nov-Dec 2014)."
+  },
+  {
+   "id": "EVAL-F17",
+   "status": "verified",
+   "note": "PNAS 115(11):2600-2606 abstract: postdiction mistaken for prediction reduces credibility; preregistration defines analysis before observing outcomes; strategies exist for preexisting data.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "EVAL-F18",
+   "status": "verified",
+   "note": "Source: Crossref plus NBER w18391 PDF read. DM was 'intended for comparing forecasts... not models'. The pseudo-OOS-as-insurance hunch 'proves largely false'. The split-point mining passage is on WP PDF p. 13 (printed p. 11) and is credited to Rossi-Inoue and Hansen-Timmermann. Crossref shows pages as a '1-1' stub; 1-9 is consistent with Inoue's comment starting on p. 9. Nuance: the source says pseudo-OOS 'may be useful' for historical comparison; the claim's 'legitimate use' is firmer. JBES full text returned 403.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "EVAL-F19",
+   "status": "verified",
+   "note": "Source: ungated copy read (votamatic.org PDF), metadata matches. The abstract says forecasts overstate certainty and overlook coefficient and specification uncertainty. 95% intervals 'should span approximately ±10% at the state level and ±7% at the national level' for typical covariates. P. 966 has 'many different models will be justifiable'. Nuance: 'widened to' is the desk's framing of 'should span'. MODEL SIDE: -0.33 pp is s.41's nine-list figure; s.46.1 re-measured -0.42 pp (n 11, sd 1.72).",
+   "corrected_url": "",
+   "corrected_quant": "new-straddler drift re-measured at -0.42 pp on CEC vote shares (n 11, s.46.1; -0.33 pp was s.41 on nine lists)"
+  },
+  {
+   "id": "EVAL-F20",
+   "status": "corrected",
+   "note": "Source: arXiv 1903.08008v5 Sec. 2 pp. 4-5 read. It gives R-hat < 1.01, at least 4 chains, bulk ESS > 400, tail-ESS at the 5/95% quantiles (Sec. 4.3) and MCSE. Crossref confirms DOI 10.1214/20-BA1221, BA 16(2):667-718. The paper 'strongly suggests' tail-ESS; the claim's 'must' is slightly firmer. MODEL SIDE: REFIT_GATES and fit_summary (r-hat 1.02, ESS 261) are correct. But the site does not print a fixed '>= 332'. The span is filled from fit_summary.json and renders 'bulk ESS >= 261'; 332 is the template fallback.",
+   "corrected_url": "https://doi.org/10.1214/20-BA1221",
+   "corrected_quant": "Bayesian Analysis 16(2):667-718, doi 10.1214/20-BA1221; arXiv Sec. 2 pp. 4-5. Site renders 'r-hat <= 1.02, bulk ESS >= 261' (from fit_summary.json; 332 is only the template fallback)."
+  },
+  {
+   "id": "EVAL-F21",
+   "status": "verified",
+   "note": "Source: JMLR page and PDF read: 15(47):1593-1623 (2014). The abstract says 'Empirically, NUTS performs at least as efficiently as... a well tuned standard HMC method, without requiring user intervention or costly tuning runs', with primal-dual averaging for the step size. The claim drops 'Empirically'. MODEL SIDE checked: 4 chains, target_accept 0.92, 800/800.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "EVAL-F22",
+   "status": "verified",
+   "note": "Source: arXiv 1701.02434v2 read. 6.2 'Diagnosing Regions of High Curvature' runs pp. 44-45; the divergence text, 'should prompt suspicion' and the remark that persistence under a smaller step size indicates bias are on p. 45. Remedies are stronger priors or an alternative (centered or non-centered) parameterization. 6.3 says 'necessary and not sufficient'. MODEL SIDE matches s.46 (2020 D-7 has 1 divergence).",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "EVAL-F23",
+   "status": "verified",
+   "note": "Source: Statistica Sinica URL read. 6(4):733-807 (paper pp. 733-760, then discussion and rejoinder to 807). The abstract supports parameter-dependent realized discrepancies computed as a by-product of posterior simulation. Notation nit: GMS write D(y; θ); T(y, θ) is BDA's notation. MODEL SIDE checked: the PPC is in-sample with one coverage number, and the doc says ~98%.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "EVAL-F24",
+   "status": "verified",
+   "note": "Source: arXiv 2011.01808 read. The 10 authors match in order. 4.1 fake-data simulation, 4.2 SBC (needs many fits), 8.2 stacking over single best CV model, 8.3 many-model CV selection overfits (recommends projection predictive). MODEL SIDE understated by the desk. stage_recovery() is ONE replicate (seed 7), 6 lists x 20 weeks x 6 firms. It runs on workflow_bayes.build_model (ALR ladder), not bayes_model.fit, and its tau correlation is over only 5 values.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "EVAL-F25",
+   "status": "verified",
+   "note": "Source: JMLR PDF read, 25(72):1-58 (2024). Sec. 3.2.4 gives 1-1/log10(S) (Eq. 13), and the warning threshold is min(1-1/log10 S, 0.7). The PSIS-LOO+ or K-fold advice for k-hat > 0.7 is in this paper (Sec. 5.2.2 p. 24); Sec. 6 has the threshold bullets. MODEL SIDE checked: workflow_loo_compare.csv flags M3/M2/M1, and the doc does not disclose it.",
+   "corrected_url": "",
+   "corrected_quant": "JMLR 25(72):1-58: Sec. 3.2.4 (Eq. 13), Sec. 5.2.2 p. 24, Sec. 6."
+  }
+ ],
+ "challenge_checks": [
+  {
+   "title": "The intervals are miscalibrated, not 'conservative': retune the width and change the coverage gate",
+   "status": "holds",
+   "note": "Checked and holds. Coverage is .981/.990/.990 (s.46). The width grid in the working-tree CSV matches s.46: 0.6 gives cov .960 / MAE 1.609 / Brier .043 / IS 8.773, against 0.9 at .981 / 1.626 / .047 / 9.302, and LOO picks 0.6 x4 and 0.7 x4. RESID_SCALE=0.9 (bayes_model.py:420). The gate wording is in s.46 and in the harness_compare docstring. Site template l.846 says '0.9 wins every leave-one-cycle-out fold' and l.1878 says 'conservative'. Caveats: the grid is eve-only, one seed, and its MAE is mean-seat MAE. The site sentence was true only on s.27a; the committed s.36 width CSV already chose 1.0 in 6 of 8 folds."
+  },
+  {
+   "title": "Shipping rule: one pre-declared proper score, a paired fold test, nested selection, no OR clause",
+   "status": "partly",
+   "note": "Holds: the two-route rule (docstring), arab_regB at 4/2/2 on the pooled route after nine arms (s.43), and the sign-test p values (0.25, 0.344). Two corrections. (1) ABLATIONS has 45 arms in the working tree (36 at HEAD), not 32. (2) The |d|<0.1 tie is the dossier's applied convention (s.46). harness_compare.py counts only exact ties (|d|<=1e-9 after rounding to 0.001) and prints counts; it does not decide shipping."
+  },
+  {
+   "title": "Publish a leave-future-out grade beside leave-one-cycle-out",
+   "status": "partly",
+   "note": "The named LOO functions do borrow later cycles, as stated. The site sentence is quoted correctly (template l.483-484). But the firm lambda scorecards are NOT 'estimated from the seven other cycles'. quality_map() reads backtest_pollsters.csv, a full-record scorecard that includes the graded cycle's own final polls, so the harness fits carry an in-sample firm-precision prior. This is a stronger leak than the desk describes; add a LOO scorecard."
+  },
+  {
+   "title": "Grade the point estimate the site publishes, and state the loss",
+   "status": "holds",
+   "note": "Holds. seat_mae_central exists only in validate_horizon. Central vs median gaps are .068/.056/.047 at D-7/D-21/D-56 (13 Oct CSV). harness_compare grades seat_mae_median, the eve ablation CSV has no central column, and s.28 uses 'median beats mean by ~0.09' as the reason for the median vector."
+  },
+  {
+   "title": "Score whole distributions and the joint outcome, not one interval per list",
+   "status": "holds",
+   "note": "Holds: one 90% interval, a pooled threshold Brier and the bloc P(NB>=61) per cycle, and no joint score. Minor omission: validate_threshold.py already computes a straddler-only Brier at D-56/D-21 (s.36, s.46.1)."
+  },
+  {
+   "title": "Convergence gates and Monte Carlo error at the published standard",
+   "status": "holds",
+   "note": "Holds: REFIT_GATES (bayes_model.py:1184), bulk ESS only, one reseed. fit_summary.json gives rhat 1.02 and ESS 261. sigma_g r-hat is 1.07-1.79 (s.46). Seed SD is 0.67. The site shows 14.5% via pct() to one decimal. Nuance: the site's 'r-hat <= 1.02' is the realised max r-hat filled from fit_summary, not a gate statement, and it renders ESS 261, not 332."
+  },
+  {
+   "title": "Propagate the estimation uncertainty of layers fitted on a handful of elections",
+   "status": "holds",
+   "note": "Holds: a -0.634 (se .41), k .247 (se .21), TRAIL mu 5.0 / sd 4.9 / scale 0.5, NEW_STRADDLER mu -1.6. Stale figure: the vote-share re-measure is -0.42 pp (n 11, s.46.1); -0.33 pp is s.41's nine-list figure. Production uses full-sample TRAIL values, not LOO."
+  },
+  {
+   "title": "Model checking: targeted predictive checks, a refreshed fake-data/SBC run, and Pareto-k disclosure",
+   "status": "holds",
+   "note": "Holds. The PPC is a single in-sample coverage number. The recovery is one replicate (seed 7), 6x20, 29 Aug, on workflow_bayes.build_model rather than the production fit(), with tau correlation over 5 values. workflow_loo_compare.csv has warning=True for M3/M2/M1, which docs/bayesian_workflow.md does not disclose."
+  },
+  {
+   "title": "Communicate probabilities with their precision and their seat basis",
+   "status": "holds",
+   "note": "Holds: pct() prints one decimal (site_data blocs.nb 0.145 -> '14.5%'). Seed spread is up to 1.3 pt (s.46)."
+  }
+ ],
+ "missing_key_works": [
+  "Talts, Betancourt, Simpson, Vehtari & Gelman (2018) 'Validating Bayesian inference algorithms with simulation-based calibration', arXiv 1804.06788 - the SBC primary source behind challenge 8.",
+  "Piironen & Vehtari (2017) 'Comparison of Bayesian predictive methods for model selection', Statistics and Computing 27(3):711-735, doi 10.1007/s11222-016-9649-y - selection-induced bias when picking among many arms by CV.",
+  "Cawley & Talbot (2010) 'On over-fitting in model selection and subsequent selection bias in performance evaluation', JMLR 11:2079-2107.",
+  "Sivula, Magnusson, Matamoros & Vehtari 'Uncertainty in Bayesian leave-one-out cross-validation based model comparison', Bayesian Analysis (2025), doi 10.1214/25-BA1569 - why SEs of paired differences are unreliable with few folds or similar models.",
+  "Yao, Vehtari, Simpson & Gelman (2018) 'Using stacking to average Bayesian predictive distributions', Bayesian Analysis 13(3):917-1007, doi 10.1214/17-BA1091.",
+  "Diebold & Mariano (1995) 'Comparing predictive accuracy', JBES 13(3):253-263 - the test F18 discusses.",
+  "Gneiting & Katzfuss (2014) 'Probabilistic forecasting', Annual Review of Statistics and Its Application 1:125-151, doi 10.1146/annurev-statistics-062713-085831.",
+  "Hamill (2001) 'Interpretation of rank histograms for verifying ensemble forecasts', Monthly Weather Review 129(3):550-560.",
+  "Dimitriadis, Gneiting & Jordan (2021) 'Stable reliability diagrams for probabilistic classifiers', PNAS 118(8), doi 10.1073/pnas.2016191118 - reliability bins with counts.",
+  "Säilynoja, Bürkner & Vehtari (2022) 'Graphical test for discrete uniformity...', Statistics and Computing 32, doi 10.1007/s11222-022-10090-6 - PIT/SBC uniformity tests.",
+  "Ziel & Berk (2019) 'Multivariate forecasting evaluation: on sensitive and strictly proper scoring rules', arXiv 1910.07325.",
+  "Stoetzer, Neunhoeffer, Gschwend, Munzert & Sternberg (2019) 'Forecasting elections in multiparty systems: a Bayesian approach combining polls and fundamentals', Political Analysis 27(2):255-262, doi 10.1017/pan.2018.49 - the closest published multiparty analogue.",
+  "Jennings & Wlezien (2018) 'Election polling errors across time and space', Nature Human Behaviour 2:276-283, doi 10.1038/s41562-018-0315-6 - cross-national poll error that includes Israel.",
+  "Shirani-Mehr, Rothschild, Goel & Gelman (2018) 'Disentangling bias and variance in election polls', JASA 113(522):607-614 - total poll error about twice the sampling error.",
+  "Heidemanns, Gelman & Morris (2020) 'An updated dynamic Bayesian forecasting model for the US presidential election', Harvard Data Science Review 2(4) - correlation structure and calibration of a published forecast.",
+  "Linzer (2013) 'Dynamic Bayesian forecasting of presidential elections in the states', JASA 108(501):124-134.",
+  "Kenett, Pfeffermann & Steinberg (2018) 'Election polls - a survey, a critique, and proposals', Annual Review of Statistics and Its Application 5:1-24 (named in open_questions but not used; the only located review touching Israeli polls)."
+ ]
+}

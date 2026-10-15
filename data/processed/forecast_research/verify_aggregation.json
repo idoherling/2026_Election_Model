@@ -1,0 +1,234 @@
+{
+ "verdicts": [
+  {
+   "id": "AGG-F01",
+   "status": "verified",
+   "note": "Crossref metadata exact; venue correctly given as Australian Journal of Political Science 40(4):499-517. Full published PDF opened. p.508: y_i ~ N(mu_i, sigma_i^2), mu_i = alpha_t + delta_j, alpha_t ~ N(alpha_{t-1}, omega^2). Table 1 (p.513) matches exactly, in percentage points of Coalition 2PP (negative = poll underestimates the Coalition): ANU/ninemsn -5.7 [-7.3, -4.2], Morgan -4.9, Newspoll -2.9, ACNielsen -1.1, Galaxy +0.1 [-2.0, 1.8]; phone-poll mean -1.3 checks. Anchoring to the result and the statement that real-time tracking needs a priori restrictions on house effects are on p.509. Caveats: Jackman does not name centring across firms, so the model_link's 'which is the real-time restriction Jackman says is needed' is the desk's mapping, not his words. The source's own text gives Newspoll as 2.7 against -2.9 in the table. The -0.1 first-preference mean was not checked. Model side checked: delta_c = delta - delta.mean(axis=0), centred across firms per list.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "AGG-F02",
+   "status": "corrected",
+   "note": "Author PDF of the JASA typeset version opened (votamatic.org). p.126: binomial likelihood on respondents with a current preference, undecideds excluded; firm-specific correction 'impractical' because most firms conduct few surveys; deflating n 'actually worsens the problem of overconfidence'. Reverse random walk, no house-effect terms. p.132: 98% of daily latent changes under 0.5%. Corrections: (1) the 3-5x figure is a ratio of VARIANCES (poll results vs latent pi), so 'varied three to five times more' overstates it (about 1.7-2.2x in sd). (2) Linzer also calls the resulting overconfidence 'minimal', which the desk omits. Model side checked: s.23a pooled MAE 1.66 -> 1.71 with the floor; the floor widened intervals (coverage 97.2% -> 98.4%).",
+   "corrected_url": "https://votamatic.org/wp-content/uploads/2013/07/Linzer-JASA13.pdf",
+   "corrected_quant": "p.132: variance of poll results 3-5x the variance of the latent trend (sd about 1.7-2.2x); 98% of daily latent changes < 0.5 pp; p.126 overconfidence from deflating n described as minimal."
+  },
+  {
+   "id": "AGG-F03",
+   "status": "corrected",
+   "note": "Only the 4-page preprint (18 Jul 2020, sites.stat.columbia.edu/gelman/research/published/hdsr_forecasting.pdf) could be opened; the HDSR version of record returned 403, so this is checked against the preprint, not the published article. Matches: Linzer lineage, Stan; house, mode (phone/online), population (LV/adults) and state-vs-national adjustments; a partisan-adjustment term that follows an AR process at the national level (difference between pollsters that do and do not adjust for party); 'a 3% polling error for each poll'. Corrections: (1) cross-validation on 2008, 2012, 2016 and early 2020 is stated only for the priors on the SDs of the state-level random-walk innovations, not for the priors in general; (2) the error terms are state-level and national-level polling-error terms (state terms correlated), not 'poll-level and state-level'; poll-level error is described only as measurement error beyond the stated margin.",
+   "corrected_url": "",
+   "corrected_quant": "Preprint pp.2-4: about 3% polling error per poll as starting prior; cross-validation (2008, 2012, 2016, early 2020) applies to the state-level random-walk innovation SD priors only; error terms are national and (correlated) state polling-error terms."
+  },
+  {
+   "id": "AGG-F04",
+   "status": "corrected",
+   "note": "Cambridge open-access PDF opened. pp.256-257: multinomial likelihood with each poll's N; ALR with the last party as baseline; house effects summing to zero across parties within firm and across firms (fn 4); backward random walk alpha_t = alpha_{t+1} + omega_t, omega ~ N(0, W), t in days. Page correction: W = diag(sigma) Omega diag(sigma), the LKJ prior with nu = 50, sigma_j ~ N+(0, 0.1) and footnote 9 (0.5 -> 0.52, 'a rather unusually big jump') are on p.258, not pp.256-257. Context the desk omits: the authors call LKJ(50) 'weakly informative', but for a correlation matrix of this size LKJ(50) puts each correlation's prior sd near 0.1, so it shrinks hard toward independence; it is weak support for learning within-bloc substitution (Challenge 2). House-effect prior delta ~ N(0, 1) also on p.258.",
+   "corrected_url": "",
+   "corrected_quant": "p.258: W = diag(sigma) Omega diag(sigma), Omega ~ LKJ(50); sigma_j ~ N+(0, 0.1) per day; fn 9: 0.1 log-ratio step moves 0.50 to 0.52."
+  },
+  {
+   "id": "AGG-F05",
+   "status": "verified",
+   "note": "OpenAlex abstract and the full text (DiVA, umu.diva-portal.org) opened; metadata exact. Abstract matches: Jackman DLM applied to Germany and Sweden gives reasonable forecasts despite complexity and new parties; a seasonal component 'helps to significantly lower the error in early forecasts'. Caveat: 'significantly' is not a statistical test, 'early' means one month out, and the evidence is one election per country (Germany 2013 about 8% lower error, average 1.52 points, called 'measurable, but inconsistent'; Sweden 2014 1.28 -> 1.06 points, about 17% lower). The desk's quant said 'abstract only'; these numbers now fill it.",
+   "corrected_url": "",
+   "corrected_quant": "Seasonal component, one month out: Germany 2013 about 8% lower error (avg 1.52 pts, 'measurable, but inconsistent'); Sweden 2014 1.28 -> 1.06 pts (about 17%). One election per country."
+  },
+  {
+   "id": "AGG-F06",
+   "status": "corrected",
+   "note": "JASA typeset PDF opened (5harad.com). Matches: 4,221 polls, 608 elections, 1998-2014, final three weeks; RMSE about 3.5 pts, about twice the margin-implied error; mean absolute bias about 2 pts (2.1 Senate, 2.3 governor, 1.2 president, p.613); sigma_i^2 = p(1-p)/n + tau^2; bias alpha_j + beta_j t; house effects left out of the mean and 'implicitly enter the sigma^2 term' (p.610). Correction: the p.611 prior is tau_j^2 ~ N+(0, sigma_tau^2) with sigma_tau ~ N+(0, 0.05^2): the half-normal is on the excess VARIANCE tau^2 on the vote-share (probability) scale, not on the logit scale; only alpha and beta are on the logit scale. The 'Excess poll variance' parameter row inherits this error.",
+   "corrected_url": "",
+   "corrected_quant": "p.611: tau_j^2 ~ N+(0, sigma_tau^2), sigma_tau ~ N+(0, 0.05^2), on the probability scale (excess variance); alpha_j, beta_j on the logit scale."
+  },
+  {
+   "id": "AGG-F07",
+   "status": "corrected",
+   "note": "OpenAlex abstract and the version of record (KOPS, Konstanz) opened; metadata exact. Matches: Shirani-Mehr adapted to multiparty with more temporal flexibility; 5,240 polls 1994-2021; mean absolute election-day bias about 1.5 pts, 0.9 (Greens, tied with Linke) to 3.2 (CDU/CSU); variance about 2x nominal; 'little evidence of house or mode effects'; common biases indicate industry effects. Overstatement: 'errors dominated by industry-wide bias' is not the paper's claim; it says house effects are 'generally weak compared to the election-day biases', and variance is also inflated (1.5-3x in the conclusion). The desk quant said 'abstract only'; the full text now confirms the numbers.",
+   "corrected_url": "",
+   "corrected_quant": "Variance 1.5-3x nominal (conclusion; about 2x in the abstract); house effects 'generally weak compared to the election-day biases'; mean absolute election-day bias 1.5 pts (0.9 Greens/Linke to 3.2 CDU/CSU)."
+  },
+  {
+   "id": "AGG-F08",
+   "status": "verified",
+   "note": "arXiv 1612.03073 (v. 4 Feb 2019) opened; EJPE metadata exact on Crossref. pp.9-10: time-invariant pollster bias with the 'same systematic bias across elections', an election effect common to all pollsters, a common linear trend varying by election, idiosyncratic errors with party correlations (pollster-specific covariances). p.14: 157 polls within 30 days of the 1996-2011 elections; declared margins 'tend to underestimate the true uncertainty'. p.15: Sigma Dos (El Mundo) leans PP, Invymark (La Sexta) leans PSOE, CIS shows no bias; the 7-point collective miss on the PSOE-PP gap is there, but the text does not say which election, so 'in one cycle' is the desk's inference. Page numbers are arXiv pages, not EJPE pages. Model side checked: delta re-learned per 240-day window from a zero-mean group prior; only lam carries over.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "AGG-F09",
+   "status": "corrected",
+   "note": "Crossref metadata exact (Israel Affairs 28(6):917-939, online 14 Oct 2022; author at Ariel University); abstract opened via Crossref/Semantic Scholar/BIU CRIS; the full text returned 403. The abstract supports only one half of the claim: polls commissioned by anti-Netanyahu media consistently underestimated the pro-Netanyahu bloc's seats. 'Biased in line with the sponsoring outlet's stance' is the abstract's research question; it does not report that pro-Netanyahu outlets overestimated, and no magnitudes or methods were seen. The model_link's use (bloc-level sponsor leans, correlation groups) rests on the abstract only.",
+   "corrected_url": "",
+   "corrected_quant": "Abstract only: polls commissioned by anti-Netanyahu outlets consistently underestimated the pro-Netanyahu bloc's seats (2019-20). Per-outlet magnitudes and any pro-Netanyahu-outlet effect unverified."
+  },
+  {
+   "id": "AGG-F10",
+   "status": "corrected",
+   "note": "gov.il PDF (consolidated s.16E/16ה, updated to 08.08.2022) and he.wikisource opened. Numbering right: (ה) requires a pollster using recognised statistical methods, whose poll is meant for publication, to send the committee a copy of the results as soon as possible; (ה)(1) the (ב)(1)-(3) items, the questions and the addresses of commissioner and pollster; (ה)(2) method: sampling method, initial sample size, populations sampled, number asked and the number/percent who took part, refused or were ineligible, interview dates and hours; (ה)(3) margin of error. Corrections: (1) the statute keeps the copy open 'for inspection by anyone who asks'; it does not require the CEC to POST filings (posting on gov.il is practice). (2) Model side wrong: filing sample sizes do NOT feed n_resp. _merge_cec() builds filed observations without an 'n' column, so they take FIRM_N_DEFAULT / N_DEFAULT; the filed undecided share does feed u_c (beta_u) and U_POOL. 74 filings merged confirmed (s.41, fit_summary.json).",
+   "corrected_url": "",
+   "corrected_quant": "s.16E(e)(1)-(3) as cited; copy held for public inspection on request (posting is CEC practice, not a statutory duty). Filing n is not used by the fit; n_resp comes from firm filing medians (FIRM_N_DEFAULT)."
+  },
+  {
+   "id": "AGG-F11",
+   "status": "verified",
+   "note": "Crossref metadata exact; Vanderbilt-hosted proof opened. 159 polls; 'suggestive, but not conclusive' is in the abstract; -0.256 is the Table 2 IVR coefficient with state and electoral controls, statistically indistinguishable from zero; 3.229 (p.335) is right, compared with IVR polls conducted AFTER a human poll (3.679 with pollster controls). Caveats the desk omits: 12 of the 17 IVR-before-human polls came from one firm, and the effect is concentrated in the 7 Feb MO/CO/MN contests. Model side: s.12 herding measurement (0.88x mid-campaign dispersion, 0.6-0.9x sampling noise) confirmed.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "AGG-F12",
+   "status": "corrected",
+   "note": "Direction confirmed independently twice (the author's 8 Jan 2009 draft opened and its text extracted): polls are OVER-dispersed relative to the outcome, not too smooth. The text calls the estimated densities 'too disperse' and refers to 'bias and over-dispersion'; Table 1 variances of standardised errors are 1.58-4.38 against 1 under random sampling. The desk's NOTE (no support for the s.23 stickiness diagnosis) is correct. Numbers match the January draft: N = 1,857 / 1,554 / 704; Rep error -3.48 -> 0.03, Dem -4.57 -> -1.04; mispredicted winner 19.2-20.7% per poll ('about 18-20 percent' in the text). Corrections are about provenance and framing: (1) what was read is a conference draft, not the published AER text; the 12 Mar 2009 draft drops the raw columns and moves the adjusted results to Table 2, so 'Table 1' and the raw figures may not match the journal; (2) the paper's text says 1,761 polls against N = 1,857 in the table; (3) after the undecided adjustment the Republican bias is about 0 but the Democratic bias remains (standardised -0.55, se 0.04), so 'removed most of the raw shortfall' holds for the mean but over-dispersion is untouched (adjusted variances 1.58-3.20); (4) the 'atypical polls' remark is offered to explain BIAS (the 'honest' forecaster motive, after Ottaviani and Norman); suppressing atypical polls would narrow dispersion, so it must not be cited for herding or smoothness. Also, Walsh et al. adopt proportional allocation as an analysis convention giving the more optimistic assessment, not as a recommended baseline.",
+   "corrected_url": "https://public.websites.umich.edu/~jdinardo/AEA-PP-Walsh-Dolfin-DiNardo.pdf",
+   "corrected_quant": "Jan 2009 author draft, Table 1: N = 1,857 polls (text: 1,761); variance of standardised errors 1.58-4.38 raw/adjusted (adjusted alone 1.58-3.20) vs 1 under random sampling; Rep -3.48 -> 0.03, Dem -4.57 -> -1.04 pp after proportional undecided allocation; wrong winner 19.2-20.7% of polls. Published AER version not opened."
+  },
+  {
+   "id": "AGG-F13",
+   "status": "corrected",
+   "note": "The FiveThirtyEight URL now 301-redirects to abcnews.com; text read from the goodreads mirror (25 Sep 2014, Nate Silver), complete except footnotes. Numbers match: average miss 5.3; record noise-dominated until about 30 polls; correlation about 0.6 / about 0.45 (1998-2007 vs 2008 on, 28 firms with at least 10 polls in each half); 4.6 vs 5.5 (1998-2009); 4.0 vs 5.2 (2012); best firms about 1 point better. Correction: the 4.6/5.5 and 4.0/5.2 comparisons use AAPOR Transparency Initiative / NCPP membership as of 6 June 2010; the Roper-archive criterion belongs to the 2014 methodology score, not to those comparisons. Model side checked: one graded final poll per firm per cycle, q shrunk by cycles/(cycles+3), max 8 cycles, 8/11 = 73%. Nuance: each graded Israeli final poll scores 10-13 lists, so 8 polls is not directly comparable to 538's 30 graded polls.",
+   "corrected_url": "https://www.goodreads.com/author_blog_posts/7073023",
+   "corrected_quant": "Firms in AAPOR-TI or NCPP (membership as of 6 June 2010): 4.6 vs 5.5 points (1998-2009), 4.0 vs 5.2 (2012). Roper archive is a 2014 methodology-score criterion only."
+  },
+  {
+   "id": "AGG-F14",
+   "status": "verified",
+   "note": "Page opened: 'January 2026 update', 14 Jan 2026, Nate Silver and Eli McKown-Dawson. ADPA = 'Average Distance from Polling Average'; a penalty applies when a firm's ADPA is below the theoretical minimum based on its sampling error; scores mean-reverted by number of polls; older years discounted; bonus for AAPOR-TI membership or Roper data sharing; full methodology deferred to the older FiveThirtyEight write-up; penalty sizes not stated. Model-link problem (see challenge checks): ADPA measures closeness to the cross-firm average, while s.23's symptom is within-firm smoothness; Filber (+11.5 lean) would have a large ADPA.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "AGG-F15",
+   "status": "verified",
+   "note": "Crossref metadata exact; ORA accepted manuscript opened. Table 2 d2 (Con/Lab) matches: Opinium 0.42/0.47, YouGov 0.76/0.76, Panelbase 1.17/1.16, ICM 0.53/0.68, Ipsos-MORI 1.37/1.40 (also Populus 0.82/0.73, Survation 0.79/0.85, TNS 0.79/0.72, ComRes 0.86/1.30; range 0.42-1.40 holds, 13 of 18 values below 1). 1.04-1.68 without party-ID/past-vote calibration and the 7-point Conservative-lead miss attributed primarily to unrepresentative samples are right. Caveats: 'online panels were no worse than phone' is the desk's inference from the table, not the authors' statement; and the authors note their d2 likely UNDERESTIMATES the design effect because n ignores turnout variability. Even at face value, d2 >= 0.42 (sd factor >= 0.65) cannot explain the s.23 within-firm scatter of about 0.2x binomial.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "AGG-F16",
+   "status": "verified",
+   "note": "Pew page opened; date and authors right. All numbers match: 28 benchmarks; opt-in 6.4/6.1/5.0 (avg 5.8) vs probability 2.3/3.0/2.5 (avg 2.6); ages 18-29 11.2 vs 3.6; Hispanic 10.8 vs 3.6; six samples (3+3), 29,937 adults, 14 Jun - 21 Jul 2021. Nuances: subgroup errors average over 25 benchmarks, not 28; 'bogus respondents' is an inference the report draws from a pattern, not a direct measurement.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "AGG-F17",
+   "status": "verified",
+   "note": "Crossref metadata exact (JSSAM 1(2):90-143); the AAPOR full report PDF (June 2013) opened. p.82: margin of sampling error 'is not appropriate for non-probability samples'; precision is a model-based measure (credibility interval example). p.83: replication 'only estimates variance; biases in the estimates cannot be measured'. Page numbers are the full report's, not the JSSAM summary's, whose text was not opened.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "AGG-F18",
+   "status": "corrected",
+   "note": "Crossref metadata exact; arXiv 1703.09430 (accepted manuscript) opened. s.3: final-week weighted mean undecided 5.1%, 3.5%, 3.9%, 2.7% for 2016 to 2004, as cited; static allocation bias shown for 2016. Two corrections. (1) Wording: the authors say probabilistic allocation 'may be superior' and should at least give better uncertainty estimates; 'does better' overstates it. (2) Model side stale: the Israeli comparison 'about 12% of the electorate' is the N12 30 Jul measurement and U_POOL_DEFAULT; U_POOL as computed today (median of Lazar / Midgam Project & StatNet / Maagar Mochot CEC filings, last 45 days) is 9.65%, which s.44 already put on the site in place of '~12%'. It is a share of poll respondents, not of the electorate. The contrast with the US (2-4x) still holds.",
+   "corrected_url": "",
+   "corrected_quant": "US final-week undecided 2.7-5.1% (2004-2016) vs Israel 2026 U_POOL 9.65% of filed respondents (bayes_model._undecided_pool(), s.44); probabilistic allocation 'may be superior' (authors)."
+  },
+  {
+   "id": "AGG-F19",
+   "status": "verified",
+   "note": "Crossref metadata exact (JASA 84(408):881-896, doi resolves; publisher page 403). OpenAlex abstract supports robust likelihood inference with t errors and df as 'a convenient dimension' for robustness. Not seen in the body text: (a) estimate-or-fix df (secondary: a 2026 arXiv paper reports Lange et al. suggest estimating nu for large n and fixing it for small n); (b) the nu = 4 default (secondary only; the desk correctly marked it unverified); (c) the single shared scale-mixing factor per multivariate observation, which is a standard property of the multivariate t (normal / sqrt(Gamma)) rather than a quoted statement. Model side checked: StudentT(nu=4) per poll x list cell in fit().",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "AGG-F20",
+   "status": "verified",
+   "note": "Exists as cited: Crossref/OpenAlex for 10.1007/s10260-026-00856-x give Monti, Mateu-Figueras, Pawlowsky-Glahn, Egozcue, Statistical Methods & Applications, online 25 Jun 2026, open access (CC BY 4.0), no volume/issue yet; UPCommons record hdl 2117/472448. Abstract matches: equivalence across logratio representations; under scale contamination with leave-one-out it beats MCD and COMCoDa with higher AUC and near-perfect specificity. Evidence is Monte Carlo; full text not opened, so no AUC/specificity numbers are verified (the desk gives none).",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "AGG-F21",
+   "status": "corrected",
+   "note": "arXiv 0802.2643 opened: Property 7 (p.12) gives Sigma_P = (U'PU) Sigma (U'P'U) verbatim, and p.14 attributes closure of the logistic normal under permutation and subcompositions to Aitchison (1986) (the paper cites the proof, it does not prove it). Two corrections. (1) Cite the published version: SORT 37(1):29-56 (2013), where Property 7 becomes Property 4.3 (p.45) and the closure passage is on p.49. (2) Property 7 is about the normal on the simplex with Sigma in ILR coordinates (U = clr of an orthonormal basis), not about the ALR covariance of the logistic normal, so it does not by itself establish the ALR claim. The ALR claim itself is correct by derivation: changing the reference from part D to part j gives z_i = y_i - y_j, so every off-diagonal of the new covariance equals Var(y_j); a diagonal ALR covariance is not diagonal under another reference. The desk's own variance derivation (0.045 vs 0.950 tau^2 at D = 21, sd ratio 0.22) checks out, and s.46 confirms 0.595% -> 0.339% vs 0.30% polls; prepare_data() today confirms the ALR reference is 'beit_yisrael' (6 obs, mean 0.20%). Primary sources for the property, verified to exist: Aitchison (1982) JRSS B 44(2):139-160 (139-177 with discussion), doi 10.1111/j.2517-6161.1982.tb01195.x; Aitchison (1986) Chapman & Hall, Monographs on Statistics and Applied Probability 25.",
+   "corrected_url": "https://hdl.handle.net/2099/13756",
+   "corrected_quant": "SORT 37(1):29-56 (2013): Property 4.3 p.45 (Sigma in ILR coordinates); closure under permutation p.49, attributed to Aitchison (1986). ALR non-invariance of a diagonal covariance: own derivation (off-diagonals become Var(y_j) after a reference change)."
+  },
+  {
+   "id": "AGG-F22",
+   "status": "verified",
+   "note": "Crossref and the Frontiers full text opened. Frontiers in Microbiology 12:727398 correct. Procrustes correlations 0.9991 (rabbits), 0.9974 (mice), 0.9902 (cows) as cited; criteria are high Procrustes correlation first, then low variance of the log reference; the paper advises against a reference with low abundances or many zeros. Nuance: low reference variance is called a fringe benefit, not a prerequisite, and the datasets are omics counts, so the transfer to a 21-list poll composition is by analogy. Model side: the ALR fallback reference is 'beit_yisrael' today (6 obs, mean share 0.20%), exactly the low-abundance case.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "AGG-F23",
+   "status": "corrected",
+   "note": "Crossref confirms Statistical Science 38(3):386-410, doi 10.1214/22-STS880; ar5iv of arXiv 2201.05197 opened. Sections 3.3-3.4 match the silica-reference point (ALR ~ log of numerator when the log reference has low variance) and the CLR definition (geometric mean, sums to zero, D-1 dimensions, distances equal to all-logratio distances). Pointer error: the 'quasi-isometric' / 'isometry not a prerequisite' statements are not in 3.3-3.4; they are in the abstract, s.4.2 (a specific Tellus ALR) and s.7. Section numbers are from the arXiv version.",
+   "corrected_url": "",
+   "corrected_quant": "Sections 3.3-3.4 (silica reference; CLR definition); quasi-isometry statements in the abstract, s.4.2 and s.7 (arXiv 2201.05197)."
+  },
+  {
+   "id": "AGG-F24",
+   "status": "verified",
+   "note": "Stable PyMC docs page opened: covariance sigma^2 (I_K - J_K/K) over the constrained axis; sigma cannot have length > 1 across the zero-sum axes; n_zerosum_axes defaults to 1 (rightmost axis). 'K-1 free directions' is not stated on the page but follows from the rank of I - J/K. Implication for Challenge 1: a per-list tau cannot be passed as sigma on the zero-sum axis, which is why the desk's option 'ZeroSumNormal(1) x tau, then re-centre' is needed for per-list scales (that construction is a bijection on the zero-sum subspace because tau > 0). Model side checked: the shipped CLR branch draws free z0 (B) and steps (W-1 x B) and row-centres afterwards.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "AGG-F25",
+   "status": "corrected",
+   "note": "Kish (1992) JOS 8(2):183-200 is consistent across bibliographic records (no DOI exists); the paper itself was not opened. The cited URL is the PracTools deffK help page, which states deffK = 1 + relvar(w) and cites Kish 1992. Correction: that page does NOT say the weights must be unrelated to the outcome; its stated conditions are equal stratum unit variances, and it says the measure is not appropriate where unequal weighting is more efficient. 'Unrelated to the outcome' is the standard reading but must not be attributed to the cited page. The source type should be 'reference work' (software documentation) unless Kish's paper is opened. Model side: DEFF values in code are 1.0/1.1/1.2/1.3/1.4 per firm.",
+   "corrected_url": "",
+   "corrected_quant": "deffK = 1 + relvar(w) (PracTools deffK page, citing Kish 1992); stated conditions: equal stratum unit variances, not appropriate where unequal weighting is more efficient."
+  }
+ ],
+ "challenge_checks": [
+  {
+   "title": "CLR is right; finish the job: no unidentified direction, and a stable reference for the ALR fallback",
+   "status": "partly",
+   "note": "Code checked (src/bayes_model.py fit(), CLR branch): z0 ~ N(mu0, 0.5) shape B, tau ~ HalfNormal(0.06) shape B, steps ~ N(0,1) shape (W-1, B), zc = zr - rowmean(zr). The row mean of zr IS a direction the likelihood cannot see (softmax and the centring both remove it). It has a proper prior, so the posterior is proper; for given tau the null direction in step space is steps_wb += c_w / tau_b, so it is tau-dependent and can plausibly slow mixing. ALR fallback reference confirmed by running prepare_data() on today's data: B = 21, the last latent block is 'beit_yisrael' (6 observations, mean share 0.20%). Own derivation in F21 checked: (D-1)/D^2 = 0.045 vs [(D-1)^2+(D-2)]/D^2 = 0.950 at D = 21, sd ratio 0.22. OVERSTATED: (1) the 2026 default-seed failure in s.46 is 'max r-hat 1.04 (s_obs)', min ESS 98 with the parameter not named; nothing in the dossier ties it to the latent's null direction. (2) The endpoint shares are mathematically invariant to the row mean, so the null direction cannot directly produce bimodal endpoint shares; s.46 itself reports that the 2021 D-21 bimodality disappeared on the fidelity windows because the phantom list The Israelis was dropped. (3) 'Shipped 15 Oct' is the code default only: data/processed/fit_summary.json (asof 14 Oct, ess_min 261, no 'latent'/'refit_gates' keys) is still the ALR production fit; s.46 lists the CLR production refit as a pending step. The proposed fix is mathematically sound (centring diag(tau) x a zero-sum vector is a bijection on the zero-sum subspace because tau > 0) and the 5-seed gate test is the right test; treat it as hygiene with an unproven payoff, not as the established cause of the ESS failure. Fixing the ALR fallback reference to Likud is well supported."
+  },
+  {
+   "title": "Let the latent carry within-bloc substitution (innovation covariance)",
+   "status": "holds",
+   "note": "Model side correct: CLR innovations are independent per list (steps ~ N(0,1) x tau_b); CENTRE_CHURN = [(yashar, bennett_2026, 1.5), (yashar, democrats, 0.8)] is a declared zero-sum exchange at projection, sourced to Midgam 27 Jul (4.0% vs 1.3% within-bloc wavering). Caveat on the literature side: Stoetzer et al. (p.258, confirmed) use LKJ(50), which they call weakly informative, but at this dimension it gives each correlation a prior sd near 0.1, so it shrinks hard toward independence; the reference model allows covariance rather than demonstrating that polls identify it. A bloc-factor or LKJ(2-4) arm is the stronger test. Double-counting guard (CENTRE_CHURN off in the arm) is correctly specified."
+  },
+  {
+   "title": "Robustness at the poll level, not the cell level",
+   "status": "holds",
+   "note": "Code checked: pm.StudentT('y', nu=4, mu, sigma) is applied per poll x list cell, with no shared per-poll scale factor. The S.M.L.T. exclusion (EXCLUDE_POLLSTERS) and the composite Ra'am-poll drop in prepare_data() exist, so the proposed re-admission check is runnable. The poll-level scale mixture is a standard construction; the composition is also not closed (mu = shares + delta_c with delta_c not centred across lists), which a poll-level factor would not fix."
+  },
+  {
+   "title": "Design effects: measure, do not declare by mode; and recheck the stickiness diagnosis per list",
+   "status": "partly",
+   "note": "Model side correct: floor = sqrt(p(1-p)/n x DEFF), OFF unless BAYES_FLOOR=1 (s.23a: pooled MAE 1.66 -> 1.71, coverage 97.2% -> 98.4%, Brier .062 -> .065). DEFF is a per-FIRM dict with values 1.0/1.1/1.2/1.3/1.4 (the desk omits the 1.2 tier: Dialog, Afkar). s.23 measured scatter on the NB-bloc total (Filber 0.43 ... Midgam 0.67 seats vs binomial 2-3). OVERSTATED: the scatter is roughly 0.2x the binomial sd (implied design effect about 0.03-0.07); past-vote calibration in Sturgis et al. gives d2 no lower than 0.42 (sd factor >= 0.65), so design efficiency can explain only a small part of the s.23 shortfall. The per-list recheck is still worth doing. Also wrong in F10: filing sample sizes do NOT feed n_resp; _merge_cec() carries no 'n', so filed observations take FIRM_N_DEFAULT/N_DEFAULT (and n only matters for the floor, which is off)."
+  },
+  {
+   "title": "Price herding in the rating prior, not the likelihood",
+   "status": "partly",
+   "note": "Model side correct: s.12 measured herding (final-window dispersion 0.88x mid-campaign, 0.6-0.9x sampling noise) and declined it to avoid double counting; lam ~ LogNormal(log 1/q^2, 0.20) uses the graded record only. MIS-MAPPED: ADPA measures closeness to the CROSS-FIRM average (herding toward consensus, the s.12 phenomenon); s.23's symptom is WITHIN-firm smoothness around the firm's own trend (panel stickiness). Filber, the s.23 case, carries a +11.5 lean and would have a LARGE ADPA, so an ADPA penalty would not touch it. The desk's alternative (a within-firm AR(1) error) is the one that matches s.23. The summary sentence equating the two should be corrected."
+  },
+  {
+   "title": "Grade more polls per firm and calibrate the shrinkage",
+   "status": "holds",
+   "note": "Code checked: backtest.py grades one poll per firm per cycle (last fieldwork strictly before election day); polling_average.quality_map(): q = (median MAE / firm MAE)^0.5, shrunk q = 1 + (q-1) x cycles/(cycles+3), clipped 0.7-1.3; backtest_pollsters.csv max cycles 8; 8/11 = 73% correct. Nuance: each graded Israeli final poll scores 10-13 lists, so '8 graded polls vs 538's ~30' is not like for like (538 grades one margin per poll), though list errors within a poll are correlated. The k grid and LOO design are sound."
+  },
+  {
+   "title": "Carry signed house effects across cycles (and test sponsor grouping)",
+   "status": "holds",
+   "note": "Code checked: delta ~ N(gamma[firm_group], sigma_f), gamma ~ N(0, sigma_g), delta_c centred across firms per list, WINDOW_DAYS = 240, only lam (via quality_map) carries over cycles. Description accurate. s.21 drift figures quoted (Tatika/Likud -2.95, Filber/UTJ -1.88) are slope (drift) end-to-end, not level house effects; the level spread is larger (s.44 site lede: Lazar -5.7 to Filber +11.5 on the bloc). Gabay 2022 magnitudes remain unretrieved, so the Israeli leg rests on an abstract."
+  },
+  {
+   "title": "Give seat-table-derived observations their own noise",
+   "status": "holds",
+   "note": "Code checked: implied_share_obs() uses seats/120 x (1 - wasted - 0.01); _merge_cec() rows get no noise term of their own (noise_mult filled with 1.0 for both sources; REFORMED_NOISE applies to both). Rounding arithmetic: 0.2887 seat / 120 = 0.24 pp, x(1 - wasted - 0.01) about 0.23 pp. fit_summary.json confirms 74 filings merged, 73 table polls displaced, 37 table rows retained, so displaced pairs exist for the proposed measurement. Correctly flagged as not harness-testable."
+  }
+ ],
+ "missing_key_works": [
+  "Cargnoni, Mueller & West (1997), 'Bayesian Forecasting of Multinomial Time Series through Conditionally Gaussian Dynamic Models', JASA 92(438):640-647, doi 10.1080/01621459.1997.10474015 - the original logistic-normal dynamic model for multinomial time series; the direct ancestor of the ALR/CLR latent and its covariance question (Crossref-verified).",
+  "Aitchison (1982), 'The statistical analysis of compositional data', JRSS B 44(2):139-177, and Aitchison (1986) book - cited only second-hand via Mateu-Figueras et al.; the primary source for the logistic-normal permutation property should be cited directly.",
+  "Egozcue, Pawlowsky-Glahn, Mateu-Figueras & Barcelo-Vidal (2003), 'Isometric logratio transformations for compositional data analysis', Mathematical Geology 35(3):279-300, doi 10.1023/A:1023818214614 - the ILR/Helmert basis the Challenge 1 fix proposes; located but not opened by the desk.",
+  "Pasek (2015), 'Predicting Elections: Considering Tools to Pool the Polls', Public Opinion Quarterly 79(2):594-619, doi 10.1093/poq/nfu060 - the standard comparison of aggregation methods (Crossref-verified; desk did not open it).",
+  "Kang & Oh (2024), 'Forecasting South Korea's presidential election via multiparty dynamic Bayesian modeling', International Journal of Forecasting 40(1):124-141, doi 10.1016/j.ijforecast.2023.01.004 - a recent multiparty compositional state-space model (Crossref-verified; desk saw abstract fragments only).",
+  "Lock & Gelman (2010), 'Bayesian Combination of State Polls and Election Forecasts', Political Analysis 18(3):337-348, doi 10.1093/pan/mpq002 - the prior-plus-polls combination underlying the Linzer/Economist lineage (Crossref-verified).",
+  "Pickup & Johnston (2008), 'Campaign trial heats as election forecasts: Measurement error and bias in 2004 presidential campaign polls', International Journal of Forecasting 24(2):272-284, doi 10.1016/j.ijforecast.2008.02.007 - house effects plus industry bias in a state-space poll model (Crossref-verified).",
+  "Pickup, Matthews, Jennings, Ford & Fisher (2011), 'Why Did the Polls Overestimate Liberal Democrat Support? Sources of Polling Error in the 2010 British General Election', Journal of Elections, Public Opinion and Parties 21(2):179-209, doi 10.1080/17457289.2011.563309 - multiparty house and mode effects; a closer analogue than the US work (Crossref-verified).",
+  "Jennings & Wlezien (2018), 'Election polling errors across time and space', Nature Human Behaviour 2(4):276-283, doi 10.1038/s41562-018-0315-6 - cross-national poll-error base rates that include Israel (Crossref-verified).",
+  "Gelman, Goel, Rivers & Rothschild (2016), 'The Mythical Swing Voter', Quarterly Journal of Political Science 11(1):103-130, doi 10.1561/100.00015031 - differential partisan non-response, the mechanism behind the Economist's AR non-response term and a candidate explanation of smooth panel series (Crossref-verified).",
+  "Shamir (1986), 'Preelection Polls in Israel: Structural Constraints on Accuracy', Public Opinion Quarterly 50(1):62-75, doi 10.1086/268959 - the one Israel-specific methodological paper; listed by the desk as an open question but not opened (Crossref-verified)."
+ ]
+}

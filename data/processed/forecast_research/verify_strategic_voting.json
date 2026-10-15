@@ -1,0 +1,215 @@
+{
+ "verdicts": [
+  {
+   "id": "STR-F01",
+   "status": "verified",
+   "note": "Cambridge Core resolves DOI 10.1017/CBO9781139174954.007 to ch.5 'Strategic voting in multimember districts', pp. 99-122. The chapter summary describes the Leys-Sartori conjecture (low district magnitude, high thresholds or other small-party penalties) and says neither Leys nor Sartori adduces any evidence. 'Israel M = 120' is confirmed in Abramson et al. 2010, p.76. The desk correctly labels 'desertion concentrates near 3.25%' as its own inference and says it read only the summary.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "STR-F02",
+   "status": "verified",
+   "note": "Opened the full text (Aldrich's Duke copy). Table 3A (p.77): One Israel 94.7, Likud 93.6, Third 61.3 (n=83; Center, Meretz and Shas, with Deri's thermometer standing in for Shas). Table 3B (p.77): Labor 81.9, Likud 90.2, Third 72.5 (n=349), of whom 15.2% intended Likud and 8.0% Labor. The text says 'Likud was the recipient of most of these defections.' Table 3C (p.78): Kadima 93.1, Labor 96.4, Likud 92.9, Fourth 79.7 (n=360). The abstract says smaller parties lose votes to major parties in every election studied. All numbers match. Caveats: 1999 was a split-ballot election with direct PM voting. The 'minor' groups include mid-size parties (Center, Shas, Shinui, YB). These figures measure retention of preference into intention, not poll-to-ballot realization, so 'brackets the x0.7 ratio' is an analogy, not a calibration.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "STR-F03",
+   "status": "corrected",
+   "note": "Every number checks against the author copy (web.mit.edu/okedar). Fn 8, p.312: fieldwork 28 Feb-23 Mar, n=1,919, coalition items asked of 1,276. p.313: means 79/58/49%. p.314: 95% (1,206 of 1,276). p.318: Labor-proximate N=335, 50% vs 14.6%; Likud-proximate N=332, 38.4% vs 17.9%; expectation coefficients for Meretz, Shas, YB and IL-Mafdal insignificant. The interpretation is overstated. The authors explain the null by Labor and Likud being the parties that define a left or right coalition, and they note that Shas ended with as many seats as Likud and YB was only slightly smaller. The four 'other' parties held 5-12 seats, so this is a bloc-defining-party effect, not a 'large-party' one, and it says nothing about 'small-list cores'. The expectation measure was also built only from Labor's and Likud's chances.",
+   "corrected_url": "",
+   "corrected_quant": "Same numbers. Reword the claim: consolidation responded to coalition expectations only for the two coalition-DEFINING parties (Labor, Likud). Support for Meretz (5 seats), NU-NRP (9), YB (11) and Shas (12, equal to Likud) did not move with Labor/Likud coalition expectations (pp.318-319)."
+  },
+  {
+   "id": "STR-F04",
+   "status": "verified",
+   "note": "Full text read (Gschwend's Mannheim copy). The abstract states the three contexts and the Austria 2006 support. p.340 cites Blais et al. 2006 ('about one in ten voters passes a series of stringent conditions') and Aldrich et al. 2004 (expectations did not affect right-religious supporters but mattered for Shinui). The desk correctly flags the Israeli originals as not opened. Crossref confirms Blais et al. 2006, Party Politics 12(6):691-705, doi 10.1177/1354068806068594. Citation conflict: Meffert & Gschwend cite the Aldrich et al. chapter as 2004, pp.180-211, but Abramson et al. 2010 cite it as 2005, pp.143-166, so its year and pages are unsettled.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "STR-F05",
+   "status": "verified",
+   "note": "Abstract level only. Crossref confirms Political Behavior 7(4):311-324 (1985), and the Haifa CRIS record carries the abstract, which matches every element listed: 'a very small percentage of the entire electorate', more educated, more likely to think polls influence voters, delay the decision, lean to small parties, no more inter-election switching, no difference on coalition. This is a 1985 study, so it can cap the size of desertion only loosely.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "STR-F06",
+   "status": "verified",
+   "note": "Read the published version (SSOAR deposit, EJPR 50(5):636-667). p.638: 'typically ranges between 5 and 15 per cent of the electorate', a literature summary rather than the authors' own estimate. p.653: 9.8% ('10 per cent' control) to 6.4% ('4 per cent' failure), F=9.85, p<0.001; participants added 1.7-2.9 points, except in the 10% control; even in the failure condition the party was expected to pass 5%. Abstract: supported 'only for a small number of voters'. The two campaigns were the 2006 state elections in Baden-Wuerttemberg and Rhineland-Palatinate. 'Wishful thinking damps desertion' and the link to the -0.42 pp drift are desk inference.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "STR-F07",
+   "status": "verified",
+   "note": "Read on Cambridge Core (EPSR 15(1):96-115; online 10 Oct 2022). Waves 1,206/909/801; 1,104 observations from 655 respondents; switching 28.5%/18.1%; predicted 47-58% at expectations 0-2 vs 13% at 10; 8.6% non-formateur to formateur vs 6.8% the reverse. Fn 12 is quoted correctly. In Model 3a the close-race effect is significant, and under bootstrap it keeps its size but loses significance. Perceptions 61.9/24.6/13.6. Two points weaken the desk's use: net flow toward formateurs is small (8.6 vs 6.8 points), and voters who expected their side to lose did not differ significantly from either group. This supports 'closeness, not trailing', but only a modest consolidation.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "STR-F08",
+   "status": "corrected",
+   "note": "Rahat, Hazan & Ben-Nun Bloom exists (Crossref: Representation 52(1):99-117). Its abstract says both lists' gains came 'almost all' from their own bloc, with Kulanu as the pivotal exception, so the claim is verified at abstract level. The corroboration fails. 'Galston & Schwartz (Brookings, 18 Mar 2015)' could not be found in three searches. Its numbers also conflict with a source that was opened, Brom (CAP issue brief, 22 Apr 2015): the right bloc (Likud+JH+YB) won 44, three FEWER than 2013, while the centre-left from Kulanu to Meretz won 50, two more. Brom's footnote gives the Haaretz final-poll average of 13 Mar as right bloc 42, Likud 21 and ZU 25. Replace the Brookings line.",
+   "corrected_url": "https://www.americanprogress.org/wp-content/uploads/sites/2/2015/04/IsraelElections-brief.pdf",
+   "corrected_quant": "Rahat et al. at abstract level: no transfer matrix. Corroboration (Brom, CAP, 22 Apr 2015): the right bloc was 42 in the Haaretz final-poll average of 13 Mar and won 44, so the bloc moved +2 while Likud moved +9 (21 to 30). Against 2013, Likud gained 12 while Bennett's and Lieberman's parties lost 11 combined."
+  },
+  {
+   "id": "STR-F09",
+   "status": "corrected",
+   "note": "Wikipedia and data/processed/polls.csv both list ELEVEN polls dated 12-13 Mar 2015, not eight. Across all eleven, Likud 20-23, ZU 24-26, Yachad 4-5 and YB 4-6 match. Jewish Home is 11-13, not 11-12 (Maagar Mochot 12 Mar: 13), and Kulanu is 8-11, not 8-10 (Dialog 12 Mar: 11). The desk's ranges hold only for the last eight by date. The results (Likud 30 at 23.40%, ZU 24 at 18.67%, JH 8 at 6.74%, Yachad 2.97%) match results.csv and data/ran_vote_shares.csv.",
+   "corrected_url": "",
+   "corrected_quant": "Eleven polls of 12-13 Mar 2015: Likud 20-23, ZU 24-26, JH 11-13, Yachad 4-5, Kulanu 8-11 (won 10), YB 4-6 (won 6)."
+  },
+  {
+   "id": "STR-F10",
+   "status": "corrected",
+   "note": "The results match Wikipedia: Likud 26.46, B&W 26.13, New Right 3.22% (138,598 votes, 1,453 short of 3.25% of 4,309,270), Zehut 2.74, Gesher 1.73, Kulanu 3.54, URWP 3.70, Labor 4.43, Meretz 3.63. But there were NINE polls on 4-5 Apr 2019 (Wikipedia and polls.csv), including Miskar of 4 Apr: Likud 31, B&W 28, New Right 7, Zehut 8, URWP 8, Kulanu 3.18%. With Miskar, New Right is 5-7 (not '5-6 in every final poll'), Zehut 4-8, URWP 5-8 and Kulanu 3.18%-6 seats. Likud 26-31, B&W 28-32, Labor 8-11, Meretz 5-8 and Gesher 2.0-2.9% (Smith 4 seats) do not change. The model_link is wrong on one point: Zehut is NOT among the dossier's nine first-cycle failures. The rows with new=True in model_validation_threshold.csv are Greens 2009 (twice), Gil 2009, Am Shalem, Otzma 2013, Gesher, New Right, IDP and the Israelis that failed, and Hatnuah and Yamina that passed.",
+   "corrected_url": "",
+   "corrected_quant": "Nine polls of 4-5 Apr 2019: Likud 26-31, B&W 28-32, New Right 5-7, Zehut 4-8, URWP 5-8, Kulanu 3.18%-6 seats, Labor 8-11, Meretz 5-8, Gesher 2.0-2.9% (one poll 4 seats). Zehut's result to final-poll ratio is at most about 0.84 (2.74/3.25) and about 0.45-0.8 across the range."
+  },
+  {
+   "id": "STR-F11",
+   "status": "corrected",
+   "note": "The poll facts check against Wikipedia and polls.csv. Over the last eight polls (10/11-13 Sep), Otzma shows 4 seats in five, 3.1% and 2.9% in the two Smith polls, and no figure from Panels; Likud is 31-36 and B&W 31-33. Wikipedia has nine polls dated 10-13 Sep, with Otzma at 4 in six of them. ToI of 18 Sep 2019 confirms that Likud and Yamina 'asserted' Otzma 'was never going to cross the threshold'. One error: valid votes were 4,436,806 (Wikipedia), so 3.25% is about 144,200 votes, not 'about 140,000'. Otzma had 83,609 (1.88%), about 60,600 short. The 0.55-0.65 ratio stands.",
+   "corrected_url": "",
+   "corrected_quant": "Otzma 83,609 votes (1.88%) against a threshold of about 144,200 (3.25% of 4,436,806 valid votes). Final eight polls: 4 seats in 5, 2.9-3.1% in 2, 1 with no figure."
+  },
+  {
+   "id": "STR-F12",
+   "status": "verified",
+   "note": "Wikipedia lists exactly eight polls dated 16-19 Mar 2021, identical to polls.csv: Likud 29-32, YA 17-19, B&W 4-7, Meretz 4-5, RZP 4-5, Labor 4-6, Ra'am 4 in seven and 1.7% in Maagar Mochot, New Hope 7-10, Yamina 8-10. The results (B&W 6.63, Meretz 4.59, RZP 5.12, Labor 6.09, Ra'am 3.79, New Hope 4.74, Yamina 6.21) match ran_vote_shares.csv. Dossier s.36 gives the 2021 straddler drift as +1.94, and s.46.1 records Ra'am at a projected 3.16% against 3.79% won with p_pass .25. Wording: Ra'am met the floor (4 to 4); it did not beat it.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "STR-F13",
+   "status": "verified",
+   "note": "Kenig (IDI, 7 Nov 2022) confirms 'almost 9% of the votes were wasted below the electoral threshold', 'some 300,000 votes' for Meretz and Balad, a bloc gap of about 30,000 votes (under one seat), 64 seats, all four Netanyahu-bloc lists in surplus agreements, and five of the eight anti-Netanyahu lists 'wobbling'. Kenig's 'only two surplus vote agreements' means two AGREEMENTS (Labor-Meretz and Yesh Atid-National Unity, four lists), not two lists. The results match Wikipedia and results.csv: Meretz 150,793 (3.16%, about 4,060 short), Balad 138,617 (2.91%), JH 56,775 (1.19%) of 4,764,742. The final eight polls (25-28 Oct) in polls.csv give Meretz 4-5, JH 1.2-2.1% and Balad 1.0-2.75%. On the final-eight mean JH's ratio is 0.66 (1.19/1.81) and Balad's 1.49. Side note: dossier s.15 and the MICRO_REALIZE comment give JH 2022 as 1.17%; CEC, results.csv and the site say 1.19%.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "STR-F14",
+   "status": "verified",
+   "note": "Fn 11 on p.312 of the author copy matches the quoted text. Wikipedia (2006 election) gives Gil 185,759 votes, 5.92% and 7 seats, a 2% threshold, and polls of 0-2 seats. The claim misses one point: inside the graded window, Gil 2009 and the Greens 2009 (three of the eleven 'first-cycle' records) both ran in 2006. Gil won 7 seats then. They are flagged new only because the poll archive starts with the 2009 cycle (validate_bayes.new_lists_for_cycle). Gil's in-window 'first-cycle failure' is therefore its second cycle.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "STR-F15",
+   "status": "verified",
+   "note": "The abstract (OpenAlex/Lund) states the three conditions and the KD finding as described. JEPOP 24(4):473-492 is confirmed. The LSE EUROPP post (Freden, 26 Feb 2015) says 'a majority actually viewed the Moderates as their preferred party', with no percentages. Wikipedia confirms KD at 5.60% in 2010 against a 4% threshold. No effect sizes were retrieved, as the desk says.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "STR-F16",
+   "status": "verified",
+   "note": "Abstract level only (OpenAlex; Crossref gives SPS 40(3):247-264, online 2016). The abstract supports both conditions: polls slightly below the threshold, and membership of a well-defined coalition. 'Benefited much less' is stronger than the abstract, which says non-coalition parties 'would be less likely to benefit'.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "STR-F17",
+   "status": "verified",
+   "note": "Read the open-access full text (IJPOR 36(3) edae041). N=3,259 completed (of 3,759); fieldwork 31 Aug-9 Sep 2022; nine conditions. KD 8.24/7.31/4.08%; t=4.88 for 2.5 vs 5.5 and t=3.06 for 4.0 vs 5.5, while 2.5 vs 4.0 is n.s. (t=0.12). Liberals 6.78/4.80/4.93 and Greens 11.46/11.17/12.17, all n.s. Insurance votes came mainly from Moderate supporters, and the abandonment quote is exact. 'Weakly for the Liberals' is generous, since none of the Liberal contrasts is significant. The '+4 pp rescue' in the parameters table is a vote-intention share inside the experiment, not an election vote share.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "STR-F18",
+   "status": "unverifiable",
+   "note": "The article exists (Crossref: Electoral Studies 44:293-306), and its abstract (Mannheim MADOC) supports 'rental voting only in the context with consistent signals'. The figures attributed to pp.296 and 299 (survey n=1,023 and 1,211; 21% vs 5% of CDU supporters intending FDP) could not be opened: ScienceDirect returns 403 and there is no open copy. Partial independent checks: FGW's Wahlanalyse for Lower Saxony 2013 confirms 'nicht weniger als 80%' of FDP voters named the CDU as their preferred party. Wikipedia gives CDU 36.0 and FDP 9.9, with January 2013 polls at FDP 4.5-5% and CDU 38-41%, so 'FDP polled about 4-6%' should read about 4.5-5%. 'Harris/Decima' is a Canadian firm and is implausible as the vendor of a German pre-election survey, so treat it as unverified.",
+   "corrected_url": "https://www.forschungsgruppe.de/Wahlen/Wahlanalysen/Newsl_Nied_2013_1.pdf",
+   "corrected_quant": "Verified only: FDP 9.9% and CDU 36.0% (Lower Saxony, 20 Jan 2013); final January polls FDP 4.5-5%, CDU 38-41%; FGW: 80% of FDP voters preferred the CDU. The survey n's and the 21%/5% figures are unverified."
+  },
+  {
+   "id": "STR-F19",
+   "status": "verified",
+   "note": "Abstract level only (OpenAlex; WEP 32(3):634-656 confirmed). The abstract says supporters of the major German parties may vote against their preference to secure a majority with the declared junior partner, and that 'preferences ... are affected by their expectations on small parties' re-entry chances'. No magnitudes, as the desk says.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "STR-F20",
+   "status": "verified",
+   "note": "The abstract and full text (UH-hosted copy of APSR 99(2):185-199) confirm compensational voting. The four cases are Britain, Canada, Norway and the Netherlands, with the first two 'highly unitary' (majoritarian) and the latter two 'highly consensual'. Carrying the idea over to Israeli right-flank satellites is desk inference.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "STR-F21",
+   "status": "verified",
+   "note": "The CEC PDF (reference 2022-000238) carries s.16E(h) (16ה(ח)) as quoted. From the end of the Friday before the polls open until they close, no person may broadcast or publish results of an election survey not published before that period, and earlier results require a prominent note that they are not current. 27 Oct 2026 is a Tuesday, so Friday 23 Oct is right. IDI's page of 15 Nov 2002 confirms the October 2002 amendment set a one-day ban. Small overstatement: s.16E(e) requires a copy to the CEC only for surveys by recognised statistical methods intended for publication, not for 'every survey'.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "STR-F22",
+   "status": "corrected",
+   "note": "The JTA article (20 Apr 2015) confirms n=1,133; 15% decided on election day and 13% in the final days; late deciders split 62% right, 21% centre, 16% left; commissioned by The New Majority (anti-Netanyahu); pollster not named. Overstated inference: only the 15% who decided on election day certainly fall inside the silence window (end of Friday 13 Mar to Tuesday 17 Mar). 'Final days' need not mean after Friday. So the parameters line '28% of 2015 voters reported deciding in that span' should be 15% certain and 28% at most.",
+   "corrected_url": "",
+   "corrected_quant": "n=1,133 (sponsor New Majority, pollster unnamed): 15% decided on election day (inside the window), 13% 'in the final days' (only partly inside). Late deciders (both groups) 62% right / 21% centre / 16% left."
+  },
+  {
+   "id": "STR-F23",
+   "status": "corrected",
+   "note": "Accepted manuscript (CBS repository) read. YouGov, 10-28 Jan 2014, 3,011 completes, five arms; Social Democrats about 21% shown +/-5 pp, Conservatives about 4% shown +/-2 pp. Gain vs loss p<0.05 for both parties. Gain vs control is jointly p<0.05, but only significant at 10% one-sided for each party alone. Loss vs control is negative and n.s. (p<0.4). The desk omits the key caveat: 'the differences in size between the positive and negative effects are not significant (p<0.5)'. The abstract says voters move 'in the according direction' for both up and down stories. So the data do not show that falling polls 'do not measurably hurt': the loss effect is negative but underpowered, and the asymmetry is not established.",
+   "corrected_url": "",
+   "corrected_quant": "Gain vs loss p<0.05 for both parties; gain vs control joint p<0.05; loss vs control negative, n.s. (p<0.4); positive vs negative effect size difference n.s. (p<0.5). No heterogeneity by sociodemographics."
+  },
+  {
+   "id": "STR-F24",
+   "status": "verified",
+   "note": "The abstract (OpenAlex; IJPOR 28(1):46-72, online Feb 2015) confirms N=23,421, no effect of plain poll standings, a 'subtle but relevant' bandwagon effect from growth framing, and no stronger effect among those 'on the fence'.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "STR-F25",
+   "status": "verified",
+   "note": "The abstract (OpenAlex; APSR 109(1):1-17) confirms four studies. Strong partisans feel angrier when threatened with loss and more positive when reassured, while strong issue-position holders are 'no more aroused'. The evidence is from US partisans and gives no vote-share magnitude. Applying it to an Israeli gevalt trigger is desk inference.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  }
+ ],
+ "challenge_checks": [
+  {
+   "title": "New-straddler desertion: replace a one-signed first-cycle shift with a desert/surge mixture conditioned on formateur race and coalition embedding",
+   "status": "partly",
+   "note": "The description of the model is correct. NEW_STRADDLER is N(-1.6, 2.6) pp in a (-0.75, +1.5) band, first-cycle lists only, zero-sum (bayes_model.py l.452-453, 1521-1536). s.46.1 gives a ballot-share drift of -0.42 (sd 1.72; D-21 -0.04, n=7; D-56 -1.09, n=4). In s.46, no_nstrad loses Brier by .0047, so the layer earns its place on Brier. Problems: (1) Meretz 2022 is offered as a close-race or gevalt collapse, but Likud led Yesh Atid 30-34 to 23-27 in the final polls. The proposed covariate |Likud - largest non-bloc list| would not have fired, and only bloc-level closeness or a 'wasted vote' signal covers that case. (2) In 2021 Ra'am met its 4-seat floor; it did not beat it. B&W 2021's ratio is about 1.8 (final-8 mean 4.5 seats = 3.75%, against 6.63%), above the '1.0-1.4' in the parameters table. (3) The record being re-weighted is itself mislabelled, which the challenge misses. model_validation_threshold.csv counts Gil 2009 and the Greens 2009 (three of 11 records) as first-cycle although both ran in 2006, an artefact of the archive starting in 2009. IDP 2019s and the Israelis 2021 never ran (s.46.1 flags non-runners). (4) The bayes_model.py comment at NEW_STRADDLER_CHURN_EXEMPT quotes a different ballot-share record ('mean -0.3 (n=9), D-21 +0.2 (n=7)') from s.46.1 (-0.42, n=11); one of the two is stale. The mixture idea and the pre-registered test are sound, but the covariate needs a bloc-level closeness term to cover 2022."
+  },
+  {
+   "title": "Trailing-Likud: the academic mechanism is formateur-race closeness, and it is two-sided",
+   "status": "partly",
+   "note": "The record claims check against polls.csv and Wikipedia. April 2019: B&W 28-32 to 35 (+3 to +7) and Likud 26-31 to 35 (+4 to +9) across all nine final polls. 2015: ZU 24-26 to 24. September 2019: Likud 31-36 to 32, B&W 31-33 to 33. The model description is mostly right: TRAIL mu 5.0, sd 4.9, x0.5; gate Likud <= largest non-NB + 0.5 seats; cap 0.75; ramp held OFF (s.46.3). Errors: (1) The source set is GEVALT_SAT_IDS minus Amcha, i.e. Otzma, RZP(-Zehut), Zehut and Noam. Noam filed alone in 2026 (registry: netanyahu_bloc), so it is also a source. (2) 'The closeness ramp' is a misnomer: the held ramp runs on the signed margin (w=1 at <= -1, 0 at >= +2), as proposal (a) itself notes. (3) Proposal (b) sources Yashar's beat partly from B&W, which the registry marks 'unaligned' (owner ruling s.22). That transfer would not stay inside a bloc and could move P(NB>=61) and formation, contrary to the stated expectation. Harsgor et al. do favour closeness over trailing, since those expecting their side to lose were not significantly different. But the effect is fragile under bootstrap and net individual-level consolidation is small (8.6% vs 6.8%)."
+  },
+  {
+   "title": "The small-party realization record (s.15) and the site's 'ideological core held their polling' sentence",
+   "status": "holds",
+   "note": "Confirmed and understated. Zehut 2019a polled 4-8 seats across nine final polls (Miskar 8), so its ratio is at most 0.84 and about 0.45-0.8, not 0.91 from s.15's '~3.0%'. Otzma 2019s polled 4 seats in five of the last eight and 2.9-3.1% in two, against 1.88%: about 0.55-0.65, not 1.11 from '~1.7%'. Balad 2022 (final-8 mean about 1.96%, 2.91% won, about 1.5) and Ra'am 2021 bear out the Arab sectoral exception. MICRO_POLLED = {}, so MICRO_REALIZE is inert (bayes_model.py l.618-640). The sentence is live in site/template.html l.736 and output/site/index.html l.738, and own_measurements.json cites DL-15. The challenge misses two more errors in the s.15 table. Yachad 2015 polled 4-5 seats in all eleven final polls (mean 4.45, about 3.7%), so its ratio is about 0.80, not 0.90 from '~3.3%'. Jewish Home 2022 is entered as 1.17%; CEC gives 1.19%. The proposed rewording is supported."
+  },
+  {
+   "title": "Gevalt coupling: directional and triggered, not symmetric noise",
+   "status": "partly",
+   "note": "GEVALT_SD 2.0 is described correctly: zero-sum, sign-symmetric and unconditional (bayes_model.py l.119-120, 1574-1583). 'Not harness-validated (s.2)' is stale. validate_bayes mirrors the coupling (layer 'gevalt', arm no_gevalt, l.48 and 788-797), using an era rule (NB-bloc non-haredi lists), and s.28 graded it: no gevalt 1.662/1.586/0.972 against full 1.665/1.574/0.983. It is neutral on points, adds a little coverage, and was kept as structural. What has not been tested is a conditional variance. The record claims are mixed. In 2021 'the satellites rose' holds for RZP (4-5 to 6), but Yamina fell (8-10 to 7). September 2019 is listed as a one-way transfer toward the formateur, yet Likud landed inside its range (31-36 to 32) while Otzma collapsed and Yamina sat at the bottom of its range (7). The list results do not show where Otzma's vote went. The conditional-variance arm and the double-counting concern with TRAIL are both reasonable."
+  }
+ ],
+ "missing_key_works": [
+  "Blais, Aldrich, Indridason & Levine (2006), 'Do Voters Vote For Government Coalitions? Testing Downs' Pessimistic Conclusion', Party Politics 12(6):691-705, doi 10.1177/1354068806068594. This is the primary source for the Israeli 2003 'one in ten', which the desk cites secondhand.",
+  "Aldrich, Blais, Indridason & Levine, 'Coalition considerations and the vote', in Arian & Shamir (eds.), The Elections in Israel 2003 (Transaction). It is the primary source for right-religious insensitivity vs Shinui, and its year and pages conflict across citing sources (2004, pp.180-211 vs 2005, pp.143-166).",
+  "Duch, May & Armstrong (2010), 'Coalition-directed Voting in Multiparty Democracies', APSR 104(4):698-719, doi 10.1017/S0003055410000420. A cross-national baseline for coalition-directed voting.",
+  "Gschwend (2007), 'Ticket-splitting and strategic voting under mixed electoral rules: Evidence from Germany', EJPR 46(1):1-23, doi 10.1111/j.1475-6765.2006.00641.x. Threshold-insurance estimates.",
+  "Irwin & Van Holsteyn (2012), 'Strategic electoral considerations under proportional representation', Electoral Studies 31(1):184-191, doi 10.1016/j.electstud.2011.10.007. Evidence from the Netherlands, a single-national-district PR system like Israel.",
+  "Meffert, Huber, Gschwend & Pappi (2011), 'More than wishful thinking: Causes and consequences of voters' electoral expectations about parties and coalitions', Electoral Studies 30(4):804-815, doi 10.1016/j.electstud.2011.08.001. Backs the 'wishful thinking damps desertion' inference in F06.",
+  "Herrmann, Munzert & Selb (2016), 'Determining the Effect of Strategic Voting on Election Results', JRSS A 179(2):583-605, doi 10.1111/rssa.12130. Measures the aggregate effect of strategic voting on results, which is what a desertion layer needs.",
+  "Stoetzer, Zittlau, Gschwend & Witt (2015), 'Leihstimmen im Bundestagswahljahr 2013', Politische Psychologie. The rental-vote study of Lower Saxony, Bavaria and the 2013 federal election, and a likely open route to F18's survey figures.",
+  "Dahlgaard, Hansen, Hansen & Larsen (2016), 'How are Voters Influenced by Opinion Polls?', World Political Science 12(2):283-300. The full version of the F23 experiment.",
+  "Rothschild & Malhotra (2014), 'Are public opinion polls self-fulfilling prophecies?', Research & Politics 1(2), doi 10.1177/2053168014547667, and Morton, Muller, Page & Torgler (2015), 'Exit polls, turnout, and bandwagon voting', European Economic Review 77:65-81, doi 10.1016/j.euroecorev.2015.03.012. Bandwagon evidence from outside Scandinavian survey experiments.",
+  "Israel National Election Studies (INES) 2015-2022 time-of-vote-decision items and Shamir & Rahat (eds.), The Elections in Israel 2015. Non-partisan replacements for the New Majority late-decider survey (F22).",
+  "Brom (2015), 'The 2015 Israeli Elections', Center for American Progress issue brief, 22 Apr 2015. Not peer-reviewed, but it gives the Haaretz final-poll-average bloc arithmetic for 2015 and can replace the unlocatable Brookings corroboration in F08."
+ ]
+}

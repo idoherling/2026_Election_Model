@@ -1,0 +1,1332 @@
+{
+ "AGG-F01": {
+  "claim": "A state-space model pools polls over a campaign: a hidden level of support that moves as a random walk, observed through polls that each add sampling error and a firm-specific bias (house effect). The pooled estimate is less biased and more precise than any single poll. Level and house effects cannot both be learned from polls alone. Jackman pinned the trajectory to the actual result, and says real-time tracking needs a priori restrictions on the house effects.",
+  "quant": "Australia 2004, five poll series. Measurement model y_i ~ N(a_t + d_j, s_i^2), with s_i set from each poll's n (p. 508). Two-party-preferred house effects (Table 1, p. 513): ANU/ninemsn internet poll -5.7 pp [-7.3, -4.2]; Roy Morgan (face to face) -4.9; Newspoll -2.9; ACNielsen -1.1; Galaxy +0.1 [-2.0, 1.8]. Mean of the three phone polls about -1.3 (2PP) and -0.1 (first preferences). The largest house effects track interview mode. Full text read. Venue note: Australian Journal of Political Science, not the American JPS.",
+  "source": "AGG-F01",
+  "status": "verified",
+  "model_link": "fit(): weekly random-walk latent plus delta (firm x list house effects). delta_c is centred across firms for each list, which is the real-time restriction Jackman says is needed. So the industry-wide error cannot be learned inside the fit, and it enters at projection (correlated bloc swing, family shocks, per-list residual)."
+ },
+ "AGG-F02": {
+  "claim": "Linzer's dynamic Bayesian model uses a binomial likelihood on decided respondents only, excludes undecideds, uses a reverse random walk, and has no house-effect terms. He argues firm-specific corrections are impractical when most firms publish few polls. He also argues that deflating sample sizes to absorb over-dispersion makes the model underestimate how much opinion moves, which worsens overconfidence in the forecast.",
+  "quant": "p.132: variance of poll results 3-5x the variance of the latent trend (sd about 1.7-2.2x); 98% of daily latent changes < 0.5 pp; p.126 overconfidence from deflating n described as minimal.",
+  "source": "AGG-F02",
+  "status": "corrected",
+  "model_link": "s.23 sampling floor (BAYES_FLOOR, off): the eight-cycle harness rejected a uniform binomial-times-DEFF floor (pooled MAE 1.66 -> 1.71). Linzer gives the same verdict on uniform noise inflation from US data. The mechanism differs: in this model the floor widened intervals rather than narrowing them. CEC filings renormalised to the party sum = Linzer's exclusion of undecideds."
+ },
+ "AGG-F03": {
+  "claim": "The Economist 2020 model (Linzer lineage, in Stan) layers poll-level adjustments over a random-walk latent with correlated states. The adjustments are pollster house effects, mode (phone vs online), population (likely voters vs adults), and a time-varying partisan non-response adjustment modelled as an autoregressive process. It also has poll-level and state-level polling-error terms for measurement error beyond the stated margin of error. Priors were tuned by cross-validation on past cycles.",
+  "quant": "Preprint pp.2-4: about 3% polling error per poll as starting prior; cross-validation (2008, 2012, 2016, early 2020) applies to the state-level random-walk innovation SD priors only; error terms are national and (correlated) state polling-error terms.",
+  "source": "AGG-F03",
+  "status": "corrected",
+  "model_link": "s_obs x lam (estimated excess noise per list and firm) is the poll-level error term. The house-effect drift (s.21, linear) is a simpler cousin of their AR non-response term. The model has no explicit mode term: mode enters only through DEFF, and the floor that uses DEFF is off."
+ },
+ "AGG-F04": {
+  "claim": "The reference multiparty dynamic Bayesian model has five parts. (1) A multinomial likelihood using each poll's n. (2) An additive-log-ratio latent with the last party as baseline. (3) House effects that sum to zero across parties within each firm, and across firms. (4) A backward random walk. (5) A FULL innovation covariance W = diag(sigma) Omega diag(sigma) with an LKJ(50) prior, so parties' latent movements may covary.",
+  "quant": "p.258: W = diag(sigma) Omega diag(sigma), Omega ~ LKJ(50); sigma_j ~ N+(0, 0.1) per day; fn 9: 0.1 log-ratio step moves 0.50 to 0.52.",
+  "source": "AGG-F04",
+  "status": "corrected",
+  "model_link": "Latent z. Until 15 Oct it was ALR with an independent HalfNormal(0.06) weekly tau per coordinate and no covariance. A full covariance is what makes ALR independent of the reference choice. The shipped CLR latent (s.46) is also independent per list, so it has no within-bloc covariance in the walk (Challenge 2)."
+ },
+ "AGG-F05": {
+  "claim": "The Jackman dynamic linear model carries over to multiparty systems (Germany, Sweden) and gives reasonable forecasts despite system complexity and the emergence of new parties. Adding a seasonal component for cyclical swings in party support significantly lowers early-campaign forecast error.",
+  "quant": "Seasonal component, one month out: Germany 2013 about 8% lower error (avg 1.52 pts, 'measurable, but inconsistent'); Sweden 2014 1.28 -> 1.06 pts (about 17%). One election per country.",
+  "source": "AGG-F05",
+  "status": "verified",
+  "model_link": "Supports a state-space poll model for a multiparty system. Informs the campaign volatility calendar (campaign_vol_weight), a deterministic counterpart to a cyclical term."
+ },
+ "AGG-F06": {
+  "claim": "Across US state-level polls, total error is about twice what reported margins imply. The model writes poll variance as p(1-p)/n + tau_r^2, an additive election-level excess variance. Poll bias is alpha_r + beta_r t, an election-level bias that may change linearly in time. Firm house effects are left out of the mean, so they enter the variance. The shared bias persists however many polls are averaged.",
+  "quant": "p.611: tau_j^2 ~ N+(0, sigma_tau^2), sigma_tau ~ N+(0, 0.05^2), on the probability scale (excess variance); alpha_j, beta_j on the logit scale.",
+  "source": "AGG-F06",
+  "status": "corrected",
+  "model_link": "Industry (election-level) bias is shared by all firms and cannot be averaged away, so it lives in the projection's correlated bloc swing and family shocks. Their linear-in-time bias matches the house-effect drift (s.21). Their additive excess-variance form, binomial plus tau^2, is the template for any revived floor (Challenge 4)."
+ },
+ "AGG-F07": {
+  "claim": "Applying the Shirani-Mehr model, with more temporal flexibility, to a multiparty system: German poll errors are dominated by biases common to the whole industry. Variance is about twice what margins of error imply, and there is little evidence of house or mode effects.",
+  "quant": "Variance 1.5-3x nominal (conclusion; about 2x in the abstract); house effects 'generally weak compared to the election-day biases'; mean absolute election-day bias 1.5 pts (0.9 Greens/Linke to 3.2 CDU/CSU).",
+  "source": "AGG-F07",
+  "status": "corrected",
+  "model_link": "Supports a multiparty excess-variance term and industry shocks at projection. Contrast: the Israeli fit finds firm drifts of up to about 3 seats end to end (s.21: Tatika/Likud -2.95, Filber/UTJ -1.88). House effects are a larger share of error in Israel than in Germany, so the house-effect layer is a local necessity rather than a universal one."
+ },
+ "AGG-F08": {
+  "claim": "A multilevel decomposition of Spanish poll errors has four parts: a time-invariant house effect that persists ACROSS elections, an election-level bias common to all firms, a common linear trend, and idiosyncratic error with party covariances. Estimated house effects lined up with sponsors' politics. Sigma Dos (for El Mundo) leaned to the PP, Invymark (for La Sexta) to the PSOE, and the public CIS showed none. Declared margins of error understated the true uncertainty.",
+  "quant": "157 polls within 30 days of the 1996-2011 Congressional elections. In one cycle, firms collectively missed the PSOE-PP differential by 7 pp. arXiv version (1612.03073) read, pp. 9-10 and 14-15.",
+  "source": "AGG-F08",
+  "status": "verified",
+  "model_link": "Here, house effects are re-learned inside each 240-day window from a zero-mean group prior, and only firm PRECISION carries over from past cycles (the lam scorecard). Montalvo et al. carry the signed lean across elections too (Challenge 7)."
+ },
+ "AGG-F09": {
+  "claim": "Across the three 2019-20 Israeli elections, media-sponsored polls were biased in line with the sponsoring outlet's stance on Netanyahu. Polls commissioned by anti-Netanyahu outlets consistently underestimated the seats the pro-Netanyahu bloc won.",
+  "quant": "Abstract only: polls commissioned by anti-Netanyahu outlets consistently underestimated the pro-Netanyahu bloc's seats (2019-20). Per-outlet magnitudes and any pro-Netanyahu-outlet effect unverified.",
+  "source": "AGG-F09",
+  "status": "corrected",
+  "model_link": "Israeli evidence for firm/sponsor house effects (delta; correlation groups in pollster_meta.csv), and for leans at the BLOC level rather than list by list. The firm-level delta absorbs sponsor effects only where each firm has one sponsor."
+ },
+ "AGG-F10": {
+  "claim": "Israeli law requires anyone who conducts an election poll for publication or broadcast to send the Central Elections Committee a copy of the results. The filing must state the sampling method, initial sample size, populations sampled, how many people were asked, took part, refused or were ineligible, the interview dates and hours, and the margin of error. The CEC posts filings as received.",
+  "quant": "s.16E(e)(1)-(3) as cited; copy held for public inspection on request (posting is CEC practice, not a statutory duty). Filing n is not used by the fit; n_resp comes from firm filing medians (FIRM_N_DEFAULT).",
+  "source": "AGG-F10",
+  "status": "corrected",
+  "model_link": "_merge_cec: filed raw shares displace seat-derived table numbers. Filing n feeds n_resp, and the filed undecided share feeds u_c (beta_u) and the undecided pool (U_POOL). The method and response fields are an untapped source for firm-level design information (Challenge 4)."
+ },
+ "AGG-F11": {
+  "claim": "Polls are not independent. In the 2012 Republican primaries, automated (IVR) polls were as accurate as live-interviewer polls when a traditional poll had already been published in the state, and markedly worse when none had. That suggests pollsters take cues from each other. If so, a poll of polls is misleadingly precise.",
+  "quant": "159 polls released after the 2012 New Hampshire primary. Overall IVR-vs-human difference -0.256 (n.s.). IVR polls with no prior human poll in the state had an average absolute error 3.229 points larger (p. 335). Authors call it suggestive, not conclusive. Full text read.",
+  "source": "AGG-F11",
+  "status": "verified",
+  "model_link": "The likelihood treats polls as conditionally independent given the latent and house effects. Herding was measured (dossier s.12: final-window dispersion 0.88x mid-campaign, 0.6-0.9x sampling noise) and deliberately left out to avoid double counting with the backtest-calibrated shocks. Effective sample size is still overstated inside the fit (Challenge 5)."
+ },
+ "AGG-F12": {
+  "claim": "US state presidential polls in 2000-2008 did not behave like random samples. Standardised errors against the result were far more dispersed than sampling theory implies, and they were biased. Treating undecided respondents as ignorable (dropping them proportionally) removed most of the raw shortfall. The authors suggest pollsters may avoid publishing 'atypical' polls. NOTE for the brief: this paper documents OVER-dispersion against the outcome, not panel smoothness. It does not support the s.23 stickiness diagnosis.",
+  "quant": "Jan 2009 author draft, Table 1: N = 1,857 polls (text: 1,761); variance of standardised errors 1.58-4.38 raw/adjusted (adjusted alone 1.58-3.20) vs 1 under random sampling; Rep -3.48 -> 0.03, Dem -4.57 -> -1.04 pp after proportional undecided allocation; wrong winner 19.2-20.7% of polls. Published AER version not opened.",
+  "source": "AGG-F12",
+  "status": "corrected",
+  "model_link": "Supports proportional renormalisation of filings (raw_pct / party sum) as the baseline undecided treatment, and an estimated excess-variance term. It is NOT evidence for a floor driven by panel smoothness."
+ },
+ "AGG-F13": {
+  "claim": "A pollster's accuracy is only modestly predictable. Past accuracy correlates with future accuracy, but a firm's record is mostly noise until it has about 30 graded polls. The best firms are about 1 point better than average. Methodology and transparency standards predict accuracy and serve as the prior that records are shrunk toward.",
+  "quant": "Firms in AAPOR-TI or NCPP (membership as of 6 June 2010): 4.6 vs 5.5 points (1998-2009), 4.0 vs 5.2 (2012). Roper archive is a 2014 methodology-score criterion only.",
+  "source": "AGG-F13",
+  "status": "corrected",
+  "model_link": "lam prior from the 8-cycle scorecard. q is shrunk to the industry median by n_cycles/(n_cycles+3), and only the FINAL pre-election poll per cycle is graded (s.23). That is at most 8 graded polls per firm, far below the ~30 at which 538 lets a record dominate. A firm with 8 cycles keeps 73% of its own record (Challenge 6)."
+ },
+ "AGG-F14": {
+  "claim": "The current Silver Bulletin pollster ratings penalise herding directly. If a firm's Average Distance from the Polling Average (ADPA) is below the theoretical minimum implied by its polls' sampling error, a penalty is added to its accuracy score before the predictive rating is computed. Ratings are mean-reverted by number of polls, with older polls discounted, and transparency earns a bonus.",
+  "quant": "January 2026 update (14 Jan 2026), read. The page does not state the penalty or bonus sizes.",
+  "source": "AGG-F14",
+  "status": "verified",
+  "model_link": "s.23 found this symptom within firms: NB-bloc scatter around each firm's own trend was 0.43-0.67 seats, against a binomial 2-3 seats. The fix tried was a likelihood floor, which the harness rejected. An ADPA-type herding penalty on the lam PRIOR is the ratings-side alternative (Challenge 5)."
+ },
+ "AGG-F15": {
+  "claim": "Bootstrap design effects for the 2015 UK final polls were mostly BELOW 1. Calibrating on past vote or party identification, which correlate strongly with current vote intention, made the estimates more efficient than simple random sampling. Without those variables, design effects were 1.04-1.68. Online opt-in panels did not show larger design effects than phone polls. The miss itself, a Conservative lead underestimated by about 7 points, came from unrepresentative samples: a shared bias, not variance.",
+  "quant": "Table 2, d2 (Con/Lab). Online panels 0.42-1.17: Opinium 0.42/0.47, YouGov 0.76/0.76, Panelbase 1.17/1.16. Phone 0.53-1.40: ICM 0.53/0.68, Ipsos-MORI 1.37/1.40. Without past-vote/party-ID calibration, 1.04-1.68. Accepted manuscript read (ora.ox.ac.uk).",
+  "source": "AGG-F15",
+  "status": "verified",
+  "model_link": "DEFF table (phone 1.0, mixed 1.1, opt-in online 1.3, SMS 1.4) is declared, not measured, and the best measured evidence does not order modes that way. s.23 also computed within-firm scatter on the NB-BLOC total, the quantity that past-vote calibration makes most stable, so some sub-binomial smoothness may be design efficiency, not stickiness (Challenge 4)."
+ },
+ "AGG-F16": {
+  "claim": "Across 28 benchmarks, online opt-in samples had about twice the error of probability-based panels. The excess was concentrated among young and Hispanic adults and traced to bogus respondents. It is a bias problem, not a sampling-variance problem.",
+  "quant": "Average absolute error 5.8 points for opt-in (three vendors: 6.4, 6.1, 5.0) vs 2.6 for probability panels (2.3, 3.0, 2.5). Ages 18-29: 11.2 vs 3.6; Hispanic adults: 10.8 vs 3.6. Six samples, 29,937 adults, June-July 2021. Report page read.",
+  "source": "AGG-F16",
+  "status": "verified",
+  "model_link": "Opt-in panel quality belongs in the precision prior (graded record, lam) and in house effects, not in a variance-only design effect. This backs the shipped choice of letting the graded record carry firm quality."
+ },
+ "AGG-F17": {
+  "claim": "The AAPOR task force holds that the margin of sampling error does not apply to non-probability samples, and that precision there is a model-based quantity. Replicate-sample methods estimate variance but cannot detect bias. Treating such estimates as having no error is not acceptable either.",
+  "quant": "Full task-force report, pp. 82-83 (summary in JSSAM 1(2):90-143). Report read (aapor.org PDF).",
+  "source": "AGG-F17",
+  "status": "verified",
+  "model_link": "Supports estimating each list's and firm's noise from the data (s_obs, lam) rather than imposing sqrt(p(1-p)/n x DEFF) on opt-in panels as if they were probability samples."
+ },
+ "AGG-F18": {
+  "claim": "Static allocation of undecided respondents, proportional or even, biased 2016 US polls and poll aggregates. Undecideds did not split in proportion to decided voters, and a probabilistic allocation that carries its own uncertainty does better. The problem grows with the undecided share.",
+  "quant": "US final-week undecided 2.7-5.1% (2004-2016) vs Israel 2026 U_POOL 9.65% of filed respondents (bayes_model._undecided_pool(), s.44); probabilistic allocation 'may be superior' (authors).",
+  "source": "AGG-F18",
+  "status": "corrected",
+  "model_link": "Filed shares are renormalised proportionally (_merge_cec), beta_u widens noise for high-undecided polls, and the projection's measured undecided-lean layer (U_LEAN_PER_SIDE, Beta posterior) is a probabilistic allocation. Backs keeping that layer separate from the poll fit."
+ },
+ "AGG-F19": {
+  "claim": "Replacing normal errors with Student-t errors gives robust likelihood-based inference. The degrees of freedom are a convenient robustness setting that can be estimated or fixed. In the multivariate t, one scale-mixing factor is shared by all components of an observation, so an aberrant observation is downweighted as a whole.",
+  "quant": "Abstract read via a bibliographic mirror. The common 'df = 4' default attributed to this paper is NOT verified.",
+  "source": "AGG-F19",
+  "status": "verified",
+  "model_link": "StudentT(nu=4) likelihood, applied independently to each poll x list cell on the share scale."
+ },
+ "AGG-F20": {
+  "claim": "A logratio Student-t distribution puts heavy tails inside the simplex geometry. It is equivalent across logratio representations for estimation and outlier detection, and it flags outlying whole compositions better than classical robust methods.",
+  "quant": "Monte Carlo under scale contamination, with a leave-one-out procedure: higher AUC and near-perfect specificity against MCD and COMCoDa. Abstract read; full text not opened.",
+  "source": "AGG-F20",
+  "status": "verified",
+  "model_link": "The model's t is applied per list cell. A poll that is wrong as a whole (a mis-parsed filing, a different question, a composite list) is downweighted cell by cell, not coherently, and the cells it does not downweight still pull the latent (Challenge 3)."
+ },
+ "AGG-F21": {
+  "claim": "The logistic-normal family is closed under permutation of parts, as Aitchison (1986) proved: reordering the parts transforms (mu, Sigma) linearly. So the family is reference-free only when Sigma is unrestricted. A diagonal Sigma (independent coordinates) under one reference is generally not diagonal under another. Independent random walks per ALR coordinate are therefore a reference-specific assumption.",
+  "quant": "SORT 37(1):29-56 (2013): Property 4.3 p.45 (Sigma in ILR coordinates); closure under permutation p.49, attributed to Aitchison (1986). ALR non-invariance of a diagonal covariance: own derivation (off-diagonals become Var(y_j) after a reference change).",
+  "source": "AGG-F21",
+  "status": "corrected",
+  "model_link": "Backs the CLR latent shipped 15 Oct (s.46). The ALR latent's reference was the last merged block; on today's data prepare_data() makes it 'beit_yisrael'. Its implied volatility was about a twentieth of any other list's. The refit moved Tzomet Beit Yisrael from 0.595% to 0.339%, toward its 0.30% polls (s.46): the 'frozen reference' measured."
+ },
+ "AGG-F22": {
+  "claim": "An additive-log-ratio transformation can come measurably close to the full (isometric) logratio geometry if the reference part is well chosen. The first criterion is high Procrustes correlation with the exact geometry, the second is low variance of the log reference, and references with low abundance or many zeros should be avoided.",
+  "quant": "Procrustes correlations of 0.9991, 0.9974 and 0.9902 on three datasets with the chosen references. Full text read.",
+  "source": "AGG-F22",
+  "status": "verified",
+  "model_link": "The old ALR reference, a micro-list polled in few polls (MIN_LIST_POLLS = 3), was exactly the low-abundance, high-noise reference to avoid. The ALR path is still live: it is the refit-gate FALLBACK when CLR fails twice (s.46) and the research latent under BAYES_CLR=0. Its reference should be fixed to a large, stable list (Challenge 1)."
+ },
+ "AGG-F23": {
+  "claim": "Aitchison's pairwise and additive logratios are quasi-isometric in practice; exact isometry is not a prerequisite for good analysis. With a near-constant reference (geochemists use silica, the most abundant and stable part), ALRs behave like logs of their numerators. The centred log-ratio is the symmetric alternative: logs taken against the geometric mean, which sum to zero (D-1 free dimensions) and preserve all pairwise logratio distances.",
+  "quant": "Sections 3.3-3.4 (silica reference; CLR definition); quasi-isometry statements in the abstract, s.4.2 and s.7 (arXiv 2201.05197).",
+  "source": "AGG-F23",
+  "status": "corrected",
+  "model_link": "Two literature-backed exits from reference dependence: CLR (symmetric, shipped) or ALR with a large, stable reference (for the fallback). Either removes the data-order dependence of merge_blocks()."
+ },
+ "AGG-F24": {
+  "claim": "PyMC provides a Normal distribution constrained to sum to zero along an axis, N(0, sigma^2 (I_K - J_K/K)), which has exactly K-1 free directions. Sigma must be shared across the constrained axis.",
+  "quant": "Documentation for pymc.ZeroSumNormal (stable docs, read 15 Oct 2026); n_zerosum_axes defaults to 1.",
+  "source": "AGG-F24",
+  "status": "verified",
+  "model_link": "The shipped CLR walk draws B free z0/steps and row-centres afterwards, so the row mean is a direction the likelihood cannot see. s.46: the default-seed CLR refit failed the gates (max r-hat 1.04, min ESS 98), and two harness windows showed bimodal endpoint shares attributed to that common-mode direction. A sum-to-zero parameterisation removes it (Challenge 1)."
+ },
+ "AGG-F25": {
+  "claim": "Unequal weights alone inflate the variance of a weighted mean by deffK = 1 + relvariance(w), the Kish design effect. The formula assumes weights unrelated to the outcome. Calibration on variables that predict the outcome can push the true design effect below 1 (cf. AGG-F15).",
+  "quant": "deffK = 1 + relvar(w) (PracTools deffK page, citing Kish 1992); stated conditions: equal stratum unit variances, not appropriate where unequal weighting is more efficient.",
+  "source": "AGG-F25",
+  "status": "corrected",
+  "model_link": "The declared DEFF values (1.0-1.4) are in the range Kish's formula gives for moderately weighted samples, but heavily weighted opt-in panels can exceed them and past-vote calibration can undercut them. A firm-specific value should come from filed weights or from the data, not from mode."
+ },
+ "ERR-F01": {
+  "claim": "Across 351 general elections in 45 countries (1942-2017), the average final-week poll miss per party is about two percentage points and has not grown over time; recent high-profile misses (UK 2015, US 2016) are within the historical norm. The authors infer that pollsters have adapted to falling response rates rather than that polling has got worse.",
+  "quant": "30,916 polls, 351 elections, 45 countries, 1942-2017. The final-week model uses 220 elections in 32 countries (763 party observations). Final-week MAE per party: 2.1 (1940s-50s), 2.1 (1960s-70s), 2.0 since 2000. Year coefficient -0.001 (p=0.85, Table 3). About 4 pp at 150-200 days, about 3 at 50 days, under 2 on the eve. Table 2: presidential 2.70 vs legislative 1.83; PR 1.62 vs SMD 2.28; ENPP>3 1.71; parties <20% 1.29 vs >=20% 2.28.",
+  "source": "ERR-F01",
+  "status": "corrected",
+  "model_link": "Overall scale of the election-day shock stack, and the choice to pool 2009-2022 with equal weight (no era trend in poll error)."
+ },
+ "ERR-F02": {
+  "claim": "Israel is not one of the 45 countries in the Jennings-Wlezien polling-error dataset, so no Israeli numbers can be taken from their 2016 or 2018 papers. The cross-national benchmarks are out of sample for Israel. The model's own eight-cycle record (2009-2022) is the only direct Israeli calibration. On that record, Israel's final-poll miss per list is smaller in points than the cross-national figure, as expected for a system of many small lists.",
+  "quant": "Own record (error_decomposition._frames(), FINAL_WINDOW 21 days): per-list final-window MAE 1.64 / 1.69 / 1.86 / 2.99 / 0.88 / 0.66 / 1.07 / 1.04 seats, mean 1.48 seats (about 1.1-1.2 pp of the vote). Cross-national comparators (JW 2018 Table 2): small parties 1.29 pp, ENPP>3 1.71 pp, all 2.03.",
+  "source": "ERR-F02",
+  "status": "corrected",
+  "model_link": "Every election-day shock size (bloc_sd, family sd, residual base/slope) comes from the own Israeli record (error_decomposition.py). The literature can serve only as a prior or a sanity check, not as a direct Israeli estimate."
+ },
+ "ERR-F03": {
+  "claim": "The authors' own summary of the pooled cross-national regression: final-week absolute error is larger for larger parties and for presidential elections, and smaller under proportional representation. Errors fall as election day approaches. A more fragmented party system, with smaller parties, should lower the average per-party error in points.",
+  "quant": "Party-level absolute error is regressed on election type, electoral system, effective number of parties, party size (vote share), candidate-centricity, incumbency and year (eq. 2, p. 4). Signs are reported (larger parties, larger errors; PR, smaller errors; no significant year effect), but no coefficients. Worked example: UK 2024 final-week MAE across 6 parties was 2.15 pp (total absolute error 12.89 / 6; p. 3).",
+  "source": "ERR-F03",
+  "status": "verified",
+  "model_link": "Per-list residual: sd = (1.83 + 0.044 x seats) x 0.9. The literature backs a size gradient. The shipped slope is shallow: a 4-seat list gets 69% of the sd of a 25-seat list. See ERR-F07 and ERR-F24."
+ },
+ "ERR-F04": {
+  "claim": "Polls become steadily more informative about the vote over the election cycle, at different speeds in different institutional settings. Where the effective number of parties exceeds four, polls are less predictive at every horizon. The poll-vote fit barely improves over the final ~150 days and then sharpens over the last ~50 days. (Published as Jennings & Wlezien 2016, AJPS 60(1):219-233, doi 10.1111/ajps.12189, on 26,000+ polls, 45 countries and 312 cycles. Detailed figures come from the working paper.)",
+  "quant": "WORKING PAPER ONLY (superseded by AJPS 2016, which uses RMSE and splits at ENPP 3.5): 23,554 polls / 41 countries / 245 cycles; R2 >0.75 at 2.5 years, 0.9 at 4-5 months (p.15); ENPP>4 R2 about 0.15 lower one year out, flat over the final 150 days, rising over the final 50 (pp.17-18, Fig.10). AJPS 2016: 26,000+ polls, 45 countries, 312 cycles. Israel seat-based ENPP about 5-6.5 (2020-2022).",
+  "source": "ERR-F04",
+  "status": "corrected",
+  "model_link": "Calendar-scaled forward random walk (campaign_vol_weight 1.13 / 1.25 / 0.64 by days out). The literature says fragmented systems keep real movement into the final 50 days, so at D-12 a non-trivial forward variance is appropriate."
+ },
+ "ERR-F05": {
+  "claim": "Party characteristics matter more than institutions for how voter preferences evolve over the campaign. They largely mediate the institutional effects. This is the published basis for treating poll uncertainty as party-specific (size, novelty) rather than only country-specific.",
+  "quant": "27,357 polls, 26 countries since 1942, 231 electoral cycles, 208 parties (abstract). The full text was not opened. The claim in the 2015 conference version that party size and party age matter most is UNVERIFIED (not opened).",
+  "source": "ERR-F05",
+  "status": "verified",
+  "model_link": "NEW_LIST_MULT 1.35 (direction) and the size-dependent residual."
+ },
+ "ERR-F06": {
+  "claim": "In 608 US state-level races, total survey error in final-three-week polls is about twice what the reported margins of error imply. About half of it is an election-level bias shared by every poll of the race. That shared bias correlates across different races in the same state and year. Error barely changes between one month and one week before the election, so it is non-sampling error, not late opinion change.",
+  "quant": "Average absolute election-level bias (Table 1, p.612): Senate 2.1, governor 2.3, president 1.2 pp. The one-month vs one-week comparison uses the secondary 7,040-poll set (2004-2012). 'About half' is a derived share (about 1/2 Senate and governor, about 1/3 president), not a figure the paper states.",
+  "source": "AGG-F06",
+  "status": "corrected",
+  "model_link": "Three links. (1) The bloc swing as a shared election-level shock correlated across lists. (2) Poll-level noise beyond n (design effects, per-firm lam). (3) The election-day stack does not decay with the calendar, while campaign events belong to the forward walk. The measured Israeli bloc sd of 3.36 seats (about 2.8 pp of bloc share) is the same order as the 2 pp election-level bias."
+ },
+ "ERR-F07": {
+  "claim": "In a multiparty system (German Bundestag polls 1994-2021), the average absolute election-day bias of the poll average is 0.9-3.2 pp per party. In relative terms it is largest for the smallest parties (14-17% of their share). Total poll variance is 1.6-3.1x simple random sampling. House and mode effects are weak next to the common bias, which the authors read as industry-wide method problems or herding.",
+  "quant": "Absolute election-day bias 0.92-3.17 pp; relative bias 5-17% of share, highest for FDP, Left and Others (0.14-0.17), with no clear size pattern according to the authors (p.1031); variance ratio 1.6-3.1x SRS, average 2.3 (p.1032).",
+  "source": "AGG-F07",
+  "status": "corrected",
+  "model_link": "This challenges the residual intercept for small lists. A 4-seat Israeli list (3.3%) gets a shipped sd of 1.81 seats (about 1.45 pp), or about 1.95 pp with the new-list x1.35, which is 44-59% of its share. The German relative bias for parties of 5-10% is 14-17%, which implies an sd of about 0.6-0.7 pp for a 3.3% party. It supports the bloc and family layers carrying the common error, and the house-effect correlation-group design (common bias is not identified from house effects)."
+ },
+ "ERR-F08": {
+  "claim": "The UK 2015 miss was an industry-wide error on the lead between the two main parties, about 6.5-7 points. Its primary cause was unrepresentative samples (too many Labour and too few Conservative voters) that weighting did not fix. Late swing contributed at most a small part.",
+  "quant": "Final polls had the Conservative-Labour lead near 0; the result was Con 37.7, Lab 31.2, a 6.5-point lead (Table 1, Introduction). The Summary says the error averaged about 7 points. Recontact-survey late swing was 0.6 points in the sample-size-weighted estimate (95% CI -0.2 to 1.6), 1.8 with equal weighting and -0.4 for final-poll respondents only (Table 3, Section 4.1). Also published as the 2016 Inquiry report to the British Polling Council and Market Research Society, which could not be opened (403).",
+  "source": "AGG-F15",
+  "status": "verified",
+  "model_link": "Bloc swing (an industry-wide error on the gap between the two main camps) and its tails. A single 6.5-point lead error is about 2 sd of US election-level bias. Supports fat tails (T_DF 5) on the bloc term."
+ },
+ "ERR-F09": {
+  "claim": "A review of UK and US polling finds error constant over time but always well beyond stated margins of error. Large misses on the lead are frequent. Lying 'shy' voters are rarely a substantial cause. The usual causes are unrepresentative samples and weighting, then undecided voters breaking one way, and to a lesser extent late swing and turnout models.",
+  "quant": "UK Conservative-Labour lead errors of 5 points or more occurred in 1951, 1970, Oct 1974, 1983, 1992, 1997, 2001, 2015 and 2017. Only 1970, 1992 and 2015 were called 'misses', because the winner was wrong (section 'Is polling actually getting worse?'). No evidence of a Shy Tory effect in 2015 or a Shy Trump effect in 2016 (section 'Shy voters'). Undecideds broke one way in 1992, Scotland 2014, the US 2014 midterms and US 2016 ('Differential Don't Knows').",
+  "source": "ERR-F09",
+  "status": "verified",
+  "model_link": "Fat tails on the bloc swing: about 9 of ~20 UK elections since 1945 had a 5+ point lead error. Undecided-lean layer (certainty layer, U_LEAN_PER_SIDE). Argues against a structural 'shy right' mean shift."
+ },
+ "ERR-F10": {
+  "claim": "US 2016: national polls were among the most accurate since 1936, while state polls missed by much more. Errors are 'somewhat correlated in any given election', but there is no consistent partisan direction from election to election.",
+  "quant": "National polls, final 13 days: average absolute error on the Clinton-Trump margin 2.2 pts, signed 1.3. Compare 2012 2.9, 2008 1.8, 2004 2.1, a 1936-2016 average of 4.4 and 2.7 since 1992. State polls: absolute 5.1, signed 3.0. Polls under-estimated Democrats in 2000 and 2012 and Trump in 2016 (Key findings, pp. 9-10). Published in condensed form as Kennedy et al. 2018, Public Opinion Quarterly 82(1):1-33, doi 10.1093/poq/nfx047.",
+  "source": "ERR-F10",
+  "status": "verified",
+  "model_link": "Mean-zero bloc swing (no structural partisan bias carried across cycles), with a within-cycle correlated component."
+ },
+ "ERR-F11": {
+  "claim": "US 2020 had the largest poll error in 40 years for the national vote and in at least 20 years for state races. Every mode and sampling frame erred in the same direction. The error did not shrink in the final two weeks, the final week or the final three days.",
+  "quant": "Table 4 p.19 poll MAE history: 2002 4.8, 2004 3.4*, 2006 4.0, 2008 4.0*, 2010 4.8, 2012 3.8*, 2014 5.8, 2018 4.6, 2020 6.7 (6.2 incl. presidential); *rows include presidential polls; NCPP 2002-14, AAPOR 2018. The no-shrinkage finding is for presidential polls.",
+  "source": "ERR-F11",
+  "status": "corrected",
+  "model_link": "Two links. (1) The election-day stack should not decay with the calendar: the error is a measurement error present on the eve. Late events belong in the forward walk (see challenge on EVENT_RISK). (2) Fat tails: a 40-year-maximum miss arrived 4 years after a 'fixed' 2016."
+ },
+ "ERR-F12": {
+  "claim": "US 2024: polls were more accurate than in 2016 and 2020, but for the third straight presidential cycle they understated Republicans. Historically, same-direction errors rarely persist for more than a couple of consecutive presidential elections. Republican-affiliated pollsters were slightly more accurate, possibly because they habitually publish Republican-friendly numbers, which helps only in years when the average poll leans Democratic.",
+  "quant": "611 polls in the final two weeks. Average absolute error on the two-party margin 3.3 pts (2020: 5.3; 2016: 5.2). National presidential 2.6, state presidential 3.0. Democratic margin overstated by 2.7 across offices (2020: 4.6; 2016: 3.1). Midterms: 2022 overstated Republicans by 0.6, 2018 overstated Democrats by 0.1 (Executive Summary, p. 4).",
+  "source": "ERR-F12",
+  "status": "verified",
+  "model_link": "Mean of the bloc swing. A run of same-sign errors can happen, so a zero mean is a prior, not a certainty. The point about partisan-affiliated pollsters maps onto the Filber / Direct Polls / Channel 14 correlation group: their apparent accuracy in one cycle is not evidence of method quality."
+ },
+ "ERR-F13": {
+  "claim": "FiveThirtyEight's 2016 forecast drew errors from a Student-t rather than a normal distribution. The author reports that this changed the forecast only slightly; the correlation of errors across units mattered far more. Poll volatility is also tied to the share of undecided and minor-party voters.",
+  "quant": "A 1-in-1,000 event under the normal becomes about 1-in-180 under their t. Switching to normal moves Clinton from 85% to 87%. Treating state errors as independent gives Clinton 99.8% against 85% with correlation. Clinton plus Trump held about 85% of the national vote, against about 95% for Obama plus Romney at the same point in 2012, and more undecided voters historically meant more volatility (24 Oct 2016 post, as reposted on the author's Goodreads blog). The t's degrees of freedom are not stated.",
+  "source": "ERR-F13",
+  "status": "verified",
+  "model_link": "T_DF = 5 on the bloc and family shocks: fat tails are standard practice, but they should change the tail shape, not inflate the variance. Correlated bloc swing as the dominant term. The undecided share (N12 11.5%) as a volatility driver belongs in the forward or certainty layer."
+ },
+ "ERR-F14": {
+  "claim": "Calibration of election forecasts cannot be checked well from a handful of elections. Units within an election (states, or here lists) are correlated, not independent. Tail behaviour cannot be checked from past data at all. Forecasters also face incentives that push them toward over- or under-confidence.",
+  "quant": "With 10 events forecast at 0.7, the standard error is 0.14, so 'any success rate between, say, 0.5 and 0.9' is consistent with calibration (Section 2.1). A 1-in-20 event is expected about once in 80 years of presidential elections. FiveThirtyEight's 20% events happened about 14% of the time and its 80% events about 88% (Section 3.2; few elections). State polls missed by about twice the stated margin of error (Section 1.2).",
+  "source": "ERR-F14",
+  "status": "verified",
+  "model_link": "Validation harness: 90% coverage of 0.97 (eve) on about 90 list-cycles from 8 correlated cycles. The gap from 0.90 is suggestive, not proof. The shipping rule (win every leave-one-cycle-out fold) is the right bar. Tail parameters (T_DF, EVENT_RISK) cannot be validated on the record."
+ },
+ "ERR-F15": {
+  "claim": "The Economist's 2020 US model starts from a prior of about 3 points of polling error per poll, based on historical data. It adds national and state polling-error terms, with state errors correlated through a scaled correlation matrix. It explicitly does not model unforeseen events (a late COVID-19 outbreak, the death of a candidate).",
+  "quant": "HDSR s.2.5 / s.4 / s.5. Either cite the July 2020 preprint for 'not adjusted for a renewed COVID-19 outbreak in late October or the death of either candidate', or, keeping the DOI, use: 'conditional on both major candidates staying in the race, no major third-party challenge and no unprecedented turnout or vote-counting problems (Abstract); COVID-19 effects on turnout and ballot rejection not modelled (s.5).'",
+  "source": "ERR-F15",
+  "status": "corrected",
+  "model_link": "EVENT_RISK 1.2 on the bloc swing. A leading published model leaves event risk out of the election-day error. When forecasters do add it, it is forward-looking uncertainty, not a scale-up of measured poll error."
+ },
+ "ERR-F16": {
+  "claim": "A multiparty forecast built only on current polls was overconfident. The authors added an election-day error term per party, based on how far polls had missed in past elections, and the 95% intervals then covered 94% of results over four German elections. The model uses an additive-log-ratio latent with a backward random walk and correlated party innovations.",
+  "quant": "Additive log-ratio transform (p. 256). Backward random walk with full innovation covariance W and an LKJ prior on its correlations (pp. 257-258). Footnote 14 (p. 259): forecasts were 'overconfident' because the poll model relied only on current data; an extra error term based on past poll misses, following Hanretty et al. 2016, gave 94% coverage of 95% intervals for the last four German elections. 2017 final forecast: RMSE 1.88 pp, with 6 of 7 five-in-six intervals covering the result.",
+  "source": "AGG-F04",
+  "status": "verified",
+  "model_link": "This is the same architecture as the model: ALR latent (CLR proposed), a per-list election-day residual calibrated on historical misses, and full-board correlation. It supports the residual layer existing. It also shows the calibration target: about nominal coverage, not 97%."
+ },
+ "ERR-F17": {
+  "claim": "A UK multiparty forecast (ALR state-space, house effects summing to zero across active pollsters) was badly overconfident in 2015. House-effect centring cannot detect an industry-wide error; that error must come from a separate election-day term. The historical weight on poll-implied swing rose from about 0.45 a year out to about 0.80 on the eve: polls over-state change ('swingback').",
+  "quant": "Highlights: 'Like other poll-based models, model displayed large total seat error (110 seats) and overconfident predictions.' ALR transform and multinomial poll likelihood; house effects identified by a zero mean across active firm-method combinations. Weight on poll-implied swing fitted on 8 elections from 1979, rising from about 0.45 to 0.80 over the final year (accepted manuscript, pp. 1-2).",
+  "source": "ERR-F17",
+  "status": "corrected",
+  "model_link": "House effects with a sum-to-zero constraint (the bloc swing must carry industry bias). Fat tails. The forward walk has no mean reversion (swingback) term; see open questions."
+ },
+ "ERR-F18": {
+  "claim": "In Israel's three 2019-20 elections, media-sponsored polls were biased in line with their outlet's stance on Netanyahu. Polls commissioned by anti-Netanyahu outlets consistently under-estimated the seats the pro-Netanyahu bloc won. This is the only peer-reviewed study of Israeli poll bias for the 2019-2022 era that this desk located.",
+  "quant": "Direction only (abstract): on average, polls commissioned by anti-Netanyahu outlets consistently under-estimated the pro-Netanyahu bloc's seats, Apr 2019 to Mar 2020; no effect sizes; no reported result for pro-Netanyahu outlets.",
+  "source": "AGG-F09",
+  "status": "corrected",
+  "model_link": "House effects with outlet-aligned correlation groups (Filber / Direct / Channel 14 cluster; dossier s.1). The bias is outlet-specific and of opposite sign by camp, so it belongs in house effects, not in a mean shift of the bloc swing."
+ },
+ "ERR-F19": {
+  "claim": "Israel 2015: the final polls had Likud trailing the Zionist Union, and Likud won by six seats. Pollsters attributed the gap mainly to late movement inside the right-wing bloc (from Jewish Home and Yachad to Likud after a final-weekend rally and Netanyahu's election-day 'droves' warning), not to a swing between blocs. Even the exit polls under-counted Likud.",
+  "quant": "Exit polls (Ch 1/2/10) Likud 27-28, ZU 27; result Likud 30, ZU 24. Final polls had Likud trailing or tied. Pollsters cite late movement within the right bloc (Jewish Home named; Yachad not mentioned) plus an exit-poll closing-time gap. Own record: Likud final-week 21.2 vs 30 (beat +8.8, actual-polled); bloc error -0.12 (polled-actual); 2019a Likud beat +6.8, bloc +0.39.",
+  "source": "ERR-F19",
+  "status": "corrected",
+  "model_link": "Gevalt coupling (Likud <-> satellites, zero-sum) and the trailing-Likud conditional sourced from satellites (s.41). The large Israeli misses were within-bloc transfers, which a bloc-level swing cannot represent."
+ },
+ "ERR-F20": {
+  "claim": "Israeli polling has structural coverage problems. Haredim respond less, especially to online polls. Arab citizens and post-Soviet immigrants are less willing to share opinions. Weekly TV polls use samples of about 500 and fix gaps by weighting after collection, which adds sampling error. Pollsters disclose little about their weighting.",
+  "quant": "Typical TV-poll n is about 500; the article states a margin of error above 4%, larger than the 3.25% threshold. Haredim are less likely to respond to online polls. Oversampling small groups is too expensive for weekly media polls (party pollsters do it). HaMadad (Channel 13) separates Jewish and Arab respondents. Israeli pollsters have historically done better on bloc totals than on individual parties.",
+  "source": "ERR-F20",
+  "status": "verified",
+  "model_link": "Two links. (1) Correlated haredi and Arab family shocks: own record shows the haredi family under-polled by 1.35 seats on average (sd 1.77; Shas beat its final polls by about 1.2 over six cycles). (2) Design effects on poll noise."
+ },
+ "ERR-F21": {
+  "claim": "Arab-sector poll error is mainly a turnout problem: Arab turnout swings by double digits between consecutive elections. Balad's 2022 near-miss of the threshold turned on turnout, not on its share of Arab voters.",
+  "quant": "Rudnitzky 2022: 2021 44.6%, 2022 53.2% (+8.6 pp), 2013-2022 average 55.9%; Druze 48.7 vs 55.9. Double-digit swings need another source (e.g. IDI on 2019-2021: 49.2 / 59.2 / 64.8 / 44.6). The poll-error interpretation is the desk's.",
+  "source": "ERR-F21",
+  "status": "corrected",
+  "model_link": "Graded Arab turnout term (T about 0.58, pass-through 0.247, intercept -0.634; dossier s.43) instead of an additive Arab family shock."
+ },
+ "ERR-F22": {
+  "claim": "Near the 3.25% threshold, a small vote-share miss becomes a 4-5 seat miss. Seat-based error records therefore mix the vote-share error with the threshold's all-or-nothing rule. In 2022 Meretz missed by 0.09 pp of the vote and lost all its seats.",
+  "quant": "2022 CEC: Meretz 150,793 votes = 3.16% (0.085 pp / 4,061 votes short of 3.25%); final-window poll average 4.43 seats is about 3.35-3.46% of the valid vote, so the vote-share miss was about 0.2-0.3 pp, booked as a +4.4 seat error.",
+  "source": "ERR-F22",
+  "status": "corrected",
+  "model_link": "This challenges the residual calibration: error_decomposition fits the residual on seat errors that include eight threshold deaths, then applies that sd in vote-share space before Bader-Ofer applies the threshold again. Ties to the s.41 open item (re-grade on CEC vote shares)."
+ },
+ "ERR-F23": {
+  "claim": "Own record, 2009-2022: Israeli final-window polls show no systematic 'shy right' at bloc level. The right-plus-haredi lists were over-polled in five of eight cycles. The big right-wing under-counts were Likud-specific, in years when Likud trailed. Bloc-level error has sd 3.36 seats with a non-significant positive mean.",
+  "quant": "Bloc error (polled - actual, seats): mean +1.66, sd 3.36, RMS about zero 3.55, t 1.40, n=8; over-polled in 5 of 8. Likud final-week beat (actual - polled): trailing or tied +8.8 / +6.8 / -0.5; otherwise -3 (2013) to +1.9 (2020). Haredi family: raw -0.98 (sd 1.58); net of bloc swing -1.35 (sd 1.77). Arab: -0.32 (sd 1.45) net, raw -0.69 (sd 1.17).",
+  "source": "ERR-F23",
+  "status": "corrected",
+  "model_link": "Bloc swing sd 3.36 (BLOC_SWING_SD) and its zero mean; the trailing-Likud conditional; family shocks. Cross-national work (ERR-F09/F10/F12) also finds no stable partisan direction, which backs the zero mean."
+ },
+ "ERR-F24": {
+  "claim": "Own record, computed for this desk: Israeli list-level final-poll errors are strongly fat-tailed. The small-list residual is inflated by threshold deaths: lists of up to 8 seats that won seats miss with sd 1.22 seats, while the eight lists that died show +3.3 seat errors. Re-fitting size dependence on lists that won seats gives a steeper, lower line than the shipped one. Pollsters also spread less than pure sampling would imply (herding).",
+  "quant": "Won-seat lists (n=83): raw sd 2.09, excess kurtosis 4.1, t df 2.2; e2 kurtosis 4.6; e3 (the fitted residual) kurtosis 2.0. Like-for-like e3 refit on won-seat lists: 0.79 + 0.075 x seats (1.10 / 1.55 / 2.68 at 4 / 10 / 25). Shipped decompose() 1.83 + 0.044 is inflated by an index-aliasing bug; corrected full-sample fit 1.48 + 0.041 (x0.9: 1.48 / 1.70 / 2.25 vs shipped 1.80 / 2.04 / 2.63). Herding ratio 0.47-1.06 (median 0.66) of n=500 SRS spread.",
+  "source": "ERR-F24",
+  "status": "corrected",
+  "model_link": "This challenges two things. (1) The Gaussian per-list residual (rng.standard_normal x sd_list). (2) Its shape: (1.83 + 0.044 x seats) x 0.9 is too wide for small lists and slightly narrow for the largest. It supports a fat-tailed form on the stack (T_DF 5). Herding means between-pollster spread understates true error, so industry-level shocks must be added."
+ },
+ "SYS-F01": {
+  "claim": "The legal threshold is 3.25% of ALL valid votes, tested per list ('not less than'); only lists that pass take part in the allocation, and the quota is the INTEGER part of the passing lists' valid votes divided by 120; each list first receives the integer part of votes/quota.",
+  "quant": "s.81(a): 'not less than 3.25% (three and a quarter per cent) of all the valid votes'; s.81(b): quota = whole number of (sum of valid votes of participating lists)/120; s.81(c): seats = whole number of votes/quota. 2022: quota 36,227 (Kenig 2026, reproduced exactly from CEC counts).",
+  "source": "SYS-F01",
+  "status": "verified",
+  "model_link": "src/simulate.py THRESHOLD = 0.0325 and `passed = sh >= threshold` (also src/bayes_model.py project(), validate_bayes.allocate_vector): the comparison operator and the 3.25% value match the statute; see SYS-F15 for the denominator."
+ },
+ "SYS-F02": {
+  "claim": "Remainder seats go one at a time to the largest 'list quotient' votes/(seats+1); an exact tie is broken by a lottery run by the CEC; and a list with no more than half of the participating valid votes stops receiving seats once it holds half of all seats. The model breaks ties by column order (np.argmax) and does not implement the majority clause.",
+  "quant": "s.81(d)(1)-(3) highest-averages iteration; s.81(d)(2) tie -> 'a lottery conducted by the Central Committee'; s.81(d)(4) majority clause (cap at 60 seats for a list with <=50% of participating votes). Exact ties on the CEC counts 2015-2022: 0 of 6 elections. In the model, shares are continuous floats, so exact ties have probability ~0; the largest 2026 list is ~19% (Likud mean share 0.190), so s.81(d)(4) is unreachable.",
+  "source": "SYS-F02",
+  "status": "verified",
+  "model_link": "src/simulate.py dhondt(): `i = int(np.argmax(quot))` (lowest index wins ties) - a formal deviation from the statutory lottery with no measurable consequence; 81(d)(4) absent."
+ },
+ "SYS-F03": {
+  "claim": "Surplus-vote agreements ('linkage', התקשרות): a list may link with only ONE other list; written notice signed by both lists' agents must reach the CEC no later than the 11th day before election day; the CEC publishes the linkages by the 8th day. Linked lists act as one list ONLY in the remainder stage (combined votes and combined s.81(c) seats), and only if EACH passed the threshold on its own; their joint seats are then split between them by the same s.81 method.",
+  "quant": "s.67(a) one partner only; s.67(b) deadline day 11 = Friday 16 Oct 2026 for the 27 Oct election; s.67(c) publication by day 8 = 19 Oct 2026; s.82(a) 'provided that each of them by itself received the percentage of votes fixed in s.81(a)'; s.82(b) internal split by the s.81 method. Statutory amendment history of ss.67/81 includes 5733 (1973), the Bader-Ofer amendment.",
+  "source": "SYS-F03",
+  "status": "verified",
+  "model_link": "src/simulate.py SURPLUS_PAIRS (5 signed pairs, 'Deadline Oct 16'), form_factions() (pool only if passed[a] and passed[b]; a list pooled at most once), and the inner dhondt([votes[a], votes[b]], k): all three legal conditions are implemented correctly. The site's 'deadline October 16' is correct."
+ },
+ "SYS-F04": {
+  "claim": "Bader-Ofer as legislated (integer quota, floor seats, highest averages, linked lists pooled for the remainder stage, internal split) is mathematically D'Hondt applied to 'factions' (pairs pooled), and the model's implementation reproduces every official seat allocation 2015-2022 exactly.",
+  "quant": "Desk re-implementation of ss.81-82 in exact integer arithmetic on CEC final counts with the registered agreements: equals the official seats in 6/6 elections (2015, 2019a, 2019s, 2020, 2021, 2022); simulate.dhondt + form_factions on the same counts equals the statutory result in 6/6; 0 ties. The CEC guide describes the floor stage 'then ... the Bader-Ofer method'; Kenig (IDI 2026) calls the remainder stage D'Hondt (2022: 7 remainder seats).",
+  "source": "SYS-F04",
+  "status": "verified",
+  "model_link": "src/simulate.py dhondt()/form_factions(); dossier s.25 ('reproduces the official 2022 allocation exactly') - extended here to all six 3.25%-era elections."
+ },
+ "SYS-F05": {
+  "claim": "Only a handful of seats are decided at the remainder (surplus) stage: 3 to 8 per election in 2015-2022 (mean 5.3), not 6-9.",
+  "quant": "Seats awarded under s.81(d) (120 minus the sum of integer quotas): 2015 4 (quota 33,511), 2019a 7 (32,860), 2019s 3 (35,917), 2020 3 (37,943), 2021 8 (36,210), 2022 7 (36,227). IDI (Kenig 2026) independently gives 2022 quota 36,227 and '7 seats remained'.",
+  "source": "SYS-F05",
+  "status": "verified",
+  "model_link": "docs/priors_dossier.md s.1 table row 'Surplus pairs in Bader-Ofer': '~6-9 of 120 seats decided at the surplus stage'."
+ },
+ "SYS-F06": {
+  "claim": "Surplus agreements moved exactly one seat in four of the six 3.25%-era elections; per pair, holding the other registered pairs fixed, 9 of 23 effective pairs (both partners passed) gained a seat.",
+  "quant": "Registered pairs vs no pairs (CEC counts): 2015 Kulanu +1 / Joint List -1; 2019a UTJ +1 / Likud -1; 2019s none; 2020 none; 2021 Meretz +1 / Likud -1; 2022 Likud +1 / Labor -1 (dossier's 'without pairs Likud 31, Labor 5' confirmed). Pair-by-pair marginal gains (+1): 2015 YB-Kulanu; 2019a Shas-UTJ; 2019s B&W-YB, Likud-Yamina; 2020 B&W-Labor-Gesher-Meretz; 2021 Yamina-New Hope, Labor-Meretz; 2022 YA-National Unity, Likud-RZ. Pairs that died because one partner failed: 2019a New Right-YB, 2019s Noam-Otzma, 2021 B&W-New Economic, 2022 Labor-Meretz.",
+  "source": "SYS-F06",
+  "status": "verified",
+  "model_link": "src/simulate.py SURPLUS_PAIRS / the pair layer; backs the site's description that pairs are a real but one-seat-sized mechanism."
+ },
+ "SYS-F07": {
+  "claim": "The expected value of one effective surplus pair is about +0.4 seat (range +0.23 to +0.77), consistent with the model's own 2026 measurement (+1 seat in 30-35% of draws) and with D'Hondt's known large-list seat bias - but below the '+0.5 to +0.9 expected seats per pair' stated on the site.",
+  "quant": "Desk perturbation on the CEC counts 2015-2022 (each list +/- N(0, 0.15 pp), 400 draws, registered pairs with vs without the pair): mean expected gain +0.40 seat over 23 effective pairs (min 0.23 UTJ-Shas 2015, max 0.77 Labor-Meretz 2021). Model 2026 (dossier s.40, 8 Oct posterior): JL+Ra'am +1 in 30% of draws, Together+YB +1 in 35% (-1 in 1% each) => ~+0.3. Schuster et al.: the divisor method with rounding down (Jefferson/D'Hondt) 'exhibits noticeable seat biases in favor of larger parties'; Hamilton and Webster are ~unbiased.",
+  "source": "SYS-F07",
+  "status": "verified",
+  "model_link": "site/template.html 'Threshold and Bader-Ofer' chapter: 'worth a measured +0.5 to +0.9 expected seats per pair'; dossier s.1 table 'Measured value +0.5-0.9 expected seats per signed pair'."
+ },
+ "SYS-F08": {
+  "claim": "The validation harness's historical surplus pairs are not the registered agreements in four of eight cycles, and with exact official vote counts they misallocate 8 list-seats across three of the six 3.25%-era cycles, so part of the graded seat error is seat-law error, not poll error.",
+  "quant": "PAST_PAIRS differs from the registered agreements in 7 of 8 cycles (all but 2020). On exact CEC counts it misallocates 8 list-seats (2015, 2019s, 2021). The shipped harness additionally drops 6 PAST_PAIRS entries via DECOMP renaming (pair_alias off).",
+  "source": "SYS-F06",
+  "status": "corrected",
+  "model_link": "src/validate_model.py PAST_PAIRS ('approximations of the registered agreements'), consumed by validate_bayes.project_cycle; dossier 'Not established: the registered surplus agreements (item 4)'."
+ },
+ "SYS-F09": {
+  "claim": "Wasted votes (lists below 3.25%) swing between under 1% and almost 9% of valid votes, and in the two high-waste elections they decided the majority: 2019a (New Right short by 1,454 votes) and 2022 (Meretz short by 4,062).",
+  "quant": "2019a: New Right's 1,454-vote miss cost the NB-without-YB a majority (60 vs 62). 2022: waste enlarged the NB from ~61-62 to 64 but did not decide the majority (Meretz passing alone -> NB 62).",
+  "source": "SYS-F09",
+  "status": "corrected",
+  "model_link": "Threshold layer of project(); backs the site sentence on vote-loss/seat-win asymmetry."
+ },
+ "SYS-F10": {
+  "claim": "Israel's disproportionality is driven by threshold waste, not by the D'Hondt formula: the Gallagher least-squares index tracks the wasted-vote share almost one-for-one across the 3.25% era.",
+  "quant": "LSq rises with waste, at roughly half its size at high waste (2020 0.80% -> 0.86; 2019a 8.49% -> 4.45; 2022 8.76% -> 4.40). 1.5% era 1996-2003: 1.65-2.53; 2% era 2006-2013: 1.61-3.09.",
+  "source": "SYS-F10",
+  "status": "corrected",
+  "model_link": "Supports modelling the threshold explicitly per draw (seat totals are a nonlinear function of straddlers' fates) rather than a proportional seat mapping."
+ },
+ "SYS-F11": {
+  "claim": "The 3.25% threshold was set by Amendment No. 62 to the Knesset Elections Law, passed 11 March 2014 and applied from the 2015 election; it replaced 2%.",
+  "quant": "Amendment 62 (Sefer HaHukim 5774 p.347; passed 9 Adar II 5774 = 11 March 2014) substitutes '3.25% (three and a quarter per cent)' in s.81(a). IDI (Kenig 2026): 'Since the 2015 election, the electoral threshold has been set at 3.25% of the valid votes.' Threshold in votes: 140,052 (2019a), 143,327 (2021), 154,855 (2022).",
+  "source": "SYS-F11",
+  "status": "verified",
+  "model_link": "THRESHOLD constant; validate_model.CYCLE_THRESHOLD = 2% for 2009/2013, 3.25% from 2015 (correct)."
+ },
+ "SYS-F13": {
+  "claim": "Israel is the textbook 'extreme' PR system (one 120-seat national district, closed lists), and the threshold rise did not durably cut fragmentation: the effective number of electoral parties fell from 8.68 (2013) to 5.19 (2020) and rebounded to 8.92 (2021) and 7.99 (2022).",
+  "quant": "Gallagher Eff Nv / Eff Ns: 2013 8.68/7.28; 2015 7.71/6.94; 2019a 6.33/5.24; 2019s 6.11/5.57; 2020 5.19/5.01; 2021 8.92/8.52; 2022 7.99/6.51. Rahat & Hazan: a closed-list PR system 'so proportional' that it produced a fragmented parliament (abstract); Hazan, Itzkovitch-Malka & Rahat (2017) treat Israel as 'a prototype of an extreme PR system' (abstract).",
+  "source": "SYS-F13",
+  "status": "verified",
+  "model_link": "Context for the many-straddler structure of 2026 (21 latent lists, 38 filed): a fragmented field under a 3.25% bar keeps several lists in the threshold band every cycle."
+ },
+ "SYS-F14": {
+  "claim": "Invalid ballots are excluded from every denominator; they run at 0.5-1.0% of votes cast and are defined by statute (identifying marks, more than three identical slips or slips for different lists, non-official envelope, blank slips).",
+  "quant": "Invalid share of votes cast (CEC): 2015 1.03% (43,854), 2019a 0.71%, 2019s 0.64%, 2020 0.54%, 2021 0.59%, 2022 0.62% (29,851 of 4,794,593). 2013: 40,904 (about 1%) disqualified (Knesset RIC/CEC leaflet). Grounds: s.78(a); CEC guide: 'two or three ballots for the same list ... valid'; blank slips without list letters invalid. s.84 requires the published results to list invalid votes separately.",
+  "source": "SYS-F14",
+  "status": "verified",
+  "model_link": "Model shares are shares of valid votes (vote intention); invalid voting is correctly not modelled as a list. No change."
+ },
+ "SYS-F15": {
+  "claim": "The threshold denominator in law is ALL valid votes, including votes for the many micro-lists the model does not carry; the model renormalises shares over its modelled lists, which makes its threshold effectively 3.25% x (1 - m) of valid votes - slightly lenient, by roughly 800-1,300 votes in 2026 terms.",
+  "quant": "Formal bias 3.25% x m = 0.009-0.028 pp (~430-1,330 votes at 4.76M valid). The net bias is unmeasured; the modelled small-list columns already hold 2.3-4.2% of projected share.",
+  "source": "SYS-F04",
+  "status": "corrected",
+  "model_link": "src/bayes_model.py project(): shares /= shares.sum(axis=1) over modelled lists, MICRO_PRIORS empty since s.42, then `passed = sh >= THRESHOLD`; same in simulate_core and validate_bayes.allocate_vector (v/sum(v)). Note implied_share_obs reserves 1% for micro-lists in seat-derived observations (seats/120*(1-wasted-0.01)) while CEC filings are renormalised to 1 - the latent's denominator is ambiguous."
+ },
+ "SYS-F16": {
+  "claim": "Double-envelope (outer-envelope) votes are cast by soldiers, voters at accessible stations, hospital patients, prisoners, diplomats, shelter residents and - new for 2026 - evacuees displaced since 7 October 2023; they are checked for double voting after polls close and counted centrally in the Knesset after the regular count, and the official results must be published within eight days.",
+  "quant": "ch. 10-3C (פרק י׳3ג, temporary provision for the 26th Knesset), ss.116יז10-116יז13; outer envelope at s.116יז12(c).",
+  "source": "SYS-F16",
+  "status": "corrected",
+  "model_link": "Election-night engine (dossier s.2: publish 'election-night seats' vs 'final seats'); the new evacuee category is not in any 2019-2022 base rate."
+ },
+ "SYS-F17": {
+  "claim": "Double envelopes were 5.5% of valid votes in April 2019 and 9.6% in 2021 and 2022 (462,807 cast in 2022) per the CEC's final files; the election-week figure of 'over 600,000 / over 12.5%' for 2022 is not borne out by the CEC record, so a 2026 expectation of 600-700k (12-13%) lacks an official basis.",
+  "quant": "CEC outer-envelope rows (cast / valid / % of all valid): 2019a 240,783 / 238,822 / 5.54%; 2019s 282,442 / 280,216 / 6.32%; 2020 330,209 / 327,702 / 7.14%; 2021 425,512 / 421,619 / 9.56%; 2022 462,807 / 458,714 / 9.63% (838 counting units). IDI series via ToI matches 2019a-2021 (5.5/6.3/7.2/9.6%) but ToI (2 Nov 2022) said 'over 600,000' ballots, 'over 12.5%', for 2022. Atmor, Friedberg & Kenig (2025) document that the special-vote share 'has increased significantly in the past decade' (abstract). Invalid rate inside envelopes 0.76-0.91%.",
+  "source": "SYS-F04",
+  "status": "verified",
+  "model_link": "docs/priors_dossier.md s.2 'Double envelopes: record 600-700k expected (~12-13% of votes)'; election-night engine sizing."
+ },
+ "SYS-F18": {
+  "claim": "Double envelopes lean strongly away from Arab and haredi lists and toward right-religious lists; the lean is large in percentage points and stable in sign across five elections.",
+  "quant": "Double-envelope share minus regular-station share (pp, CEC): Arab lists - Joint List 2019s -6.75, 2020 -7.70, 2021 -2.40; Hadash-Ta'al 2019a -2.89, 2022 -2.26; Ra'am(-Balad) 2019a -2.29, 2021 -2.45, 2022 -2.57; Balad 2022 -1.46. Haredi - UTJ -2.0 to -2.6 every cycle; Shas -0.6 to -1.9. Right-religious - Zehut 2019a +4.09; URWP/Yamina +0.88 (2019a), +3.18, +3.34, +3.54 (2019s-2021); RZ 2021 +1.45, 2022 +5.10. Likud +2.9 to +3.5 in 2019-2020, ~0 in 2021-2022. Labor 2021 +2.25, 2022 +1.58; Meretz -0.2 to +0.7. Matches the IDI characterisation (young Jewish voters; favour right-wing and fringe lists; disadvantage haredi and Arab lists).",
+  "source": "SYS-F18",
+  "status": "verified",
+  "model_link": "Election-night engine; dossier s.2 double-envelope lean bullet ('haredi and Arab lists ~1/3-1/2 under their regular-station share') - supported for Arab lists (34-52% of their regular-station share), weaker for haredi lists (UTJ 56-67%, Shas 69-92%)."
+ },
+ "SYS-F19": {
+  "claim": "From the complete regular-station count to the final count, seats moved in every election but the net bloc shift was zero in four of five and -1 for the Netanyahu bloc in 2022; the envelope effect is a within-bloc and Arab-list effect, not a +0.5-1 seat drift to the right, and Meretz and Balad (2022) were already below 3.25% before any envelope was opened.",
+  "quant": "Final minus regular-only seats (statutory allocation with registered pairs, CEC counts): 2019a URWP +1, Likud -1; 2019s B&W +1, Likud +1, UTJ -1, YB -1; 2020 Likud +1, B&W +1, Shas -1, JL -1; 2021 Meretz +1, Ra'am -1; 2022 YB +1, UTJ -1. Straddlers regular% -> final%: Ra'am 2021 4.023 -> 3.788; Ra'am-Balad 2019a 3.461 -> 3.334; New Right 2019a 3.143 -> 3.216 (still short); Labor 2022 3.542 -> 3.694; Meretz 2022 3.169 -> 3.165; Balad 2022 3.049 -> 2.909. (Partial election-night counts differ from the complete regular count; not measured here.)",
+  "source": "SYS-F04",
+  "status": "verified",
+  "model_link": "docs/priors_dossier.md s.2: 'night->final drift ~+0.5-1 seat right' and 'Meretz/Balad 2022 died in the envelopes'; election-night engine."
+ },
+ "STR-F01": {
+  "claim": "Cox's coordination theory treats deserting a non-viable option as a feature of every electoral system. For PR, though, the claim that strategic voting matters politically (the Leys-Sartori conjecture: low district magnitude, high thresholds, or other features that penalise small parties) is one Cox says rests on reasoning rather than systematic evidence. Israel elects 120 members from one national district, so the only wasted-vote trigger is the legal threshold. Desk inference: wasted-vote desertion should concentrate on lists projected near 3.25% and be weak elsewhere.",
+  "quant": "Chapter 5, 'Strategic voting in multimember districts', pp. 99-122 (chapter DOI 10.1017/CBO9781139174954.007). The concluding chapter's M+1 rule caps viable lists at district magnitude + 1 and is an upper bound, not a point prediction. Israel M = 120 (Abramson et al. 2010, p. 76). Only the chapter abstract was read, so it gives no magnitude.",
+  "source": "STR-F01",
+  "status": "verified",
+  "model_link": "new_straddler band test (desertion only near the line); certainty-layer soft-support churn (applies to every list)"
+ },
+ "STR-F02": {
+  "claim": "Israeli election-study respondents whose favourite was a minor party were much less likely to intend to vote for it than major-party supporters were for theirs, and the defections went mainly to the large parties. In 2003 Likud received most of them. The authors find that in every election studied, smaller parties lose votes to major parties.",
+  "quant": "Jewish respondents with a strict top preference, pre-election vote intention (INES). 1999: One Israel 94.7% and Likud 93.6% loyal vs 61.3% for those preferring Center/Meretz/Shas (n=83) (Table 3A, p.77). 2003: Labor 81.9% and Likud 90.2% vs 72.5% for six other parties (n=349); of those 349, 15.2% intended Likud and 8.0% Labor (Table 3B, p.77). 2006: Kadima 93.1%, Labor 96.4%, Likud 92.9% vs 79.7% for Meretz/NU-NRP/YB/Shas (n=360) (Table 3C, p.78). These are intentions, not ballots, and the 'minor' group includes mid-size lists. Implied minor-list retention is 0.61-0.80, which brackets the retired x0.7 realization ratio.",
+  "source": "STR-F02",
+  "status": "verified",
+  "model_link": "gevalt coupling and TRAIL_SAT_SOURCE (consolidation toward the bloc's large list); size of small-list desertion (NEW_STRADDLER mu; retired MICRO_REALIZE 0.7)"
+ },
+ "STR-F03": {
+  "claim": "Voters who expect their preferred party to stay out of the coalition often desert it for the least-bad viable partner. In Israel 2006 this held after controlling for ideological and coalition preferences, but only for the two bloc-defining parties (Labor, Likud). Support for Meretz, Shas, Yisrael Beitenu and the NRP did not move with coalition expectations. Coalition-targeted consolidation is therefore a large-party phenomenon, and small-list cores are insensitive to it.",
+  "quant": "Same numbers. Reword the claim: consolidation responded to coalition expectations only for the two coalition-DEFINING parties (Labor, Likud). Support for Meretz (5 seats), NU-NRP (9), YB (11) and Shas (12, equal to Likud) did not move with Labor/Likud coalition expectations (pp.318-319).",
+  "source": "STR-F03",
+  "status": "corrected",
+  "model_link": "gevalt coupling and trailing-Likud (consolidation is coalition-targeted and runs to the bloc-defining list); new_straddler and the sectarian distinction (small-list cores do not respond to coalition expectations)"
+ },
+ "STR-F04": {
+  "claim": "Under PR with a threshold there are three strategic-coalition contexts: (1) a rental vote by a major-party supporter for a junior partner at risk at the threshold, (2) avoiding a wasted vote for a small party not expected to pass, and (3) explicit coalition voting. An Austria 2006 survey supports all three. The paper's review of the Israeli work adds two points. In 2003, about one voter in ten met stringent conditions for coalition-motivated voting for a non-favourite party (Blais et al. 2006). Expectations did not affect the vote intentions of right-religious party supporters, but did affect them for the secular Shinui (Aldrich et al. 2004).",
+  "quant": "Austria: nationally representative pre-election survey, 2006 election. Israel: 'about one in ten voters passes a series of stringent conditions' (p.340). The original Blais, Aldrich, Indridason & Levine (2006, Party Politics 12(6):691-705, doi 10.1177/1354068806068594) and Aldrich et al. (2004, in Arian & Shamir eds., The Elections in Israel 2003, pp. 180-211) were not opened. The Israeli figures here are UNVERIFIED beyond this secondary account.",
+  "source": "STR-F04",
+  "status": "verified",
+  "model_link": "both directions of the threshold mechanism (rental surge vs wasted-vote desertion); certainty-layer churn magnitude; the sectarian/ideological exemption"
+ },
+ "STR-F05": {
+  "claim": "Under an operational definition of strategic voting, Israeli strategic voters are a very small share of the electorate. They are better educated, more often support small parties, more often believe polls influence voters, and therefore delay their final decision. They do not switch parties between elections more than sincere voters, and they do not differ from sincere voters on which coalition should or will form.",
+  "quant": "Abstract-level (full text not opened); no percentage retrieved. The abstract calls strategic voters 'a very small percentage of the entire electorate'.",
+  "source": "STR-F05",
+  "status": "verified",
+  "model_link": "ceiling on the size of desertion layers; timing (strategic decisions are late, so they fall in the poll-silence window)"
+ },
+ "STR-F06": {
+  "claim": "Across national election studies, the share of voters who actually vote strategically is typically 5-15% of the electorate. In a lab experiment embedded in two real German state campaigns, supporters projected their preferred small party 1.7-2.9 points above the poll they were shown. They still expected it to pass even in the 'failure' condition. Strategic-voting theory explained only a small number of the insincere votes. Wishful thinking damps desertion: supporters discount bad polls for their own small list.",
+  "quant": "'typically ranges between 5 and 15 per cent of the electorate' (p.638). The mean forecast for the preferred small party fell from 9.8% (10% poll) to 6.4% (4% poll condition), F=9.85, p<0.001, but participants added 1.7-2.9 pp to the polls (p.653). Abstract: theory supported 'only for a small number of voters' (p.636).",
+  "source": "STR-F06",
+  "status": "verified",
+  "model_link": "NEW_STRADDLER mu = -1.6 pp. Helps explain why realised ballot drift for first-cycle straddlers is only -0.42 pp (dossier s.46.1) against -1.6 seat-implied."
+ },
+ "STR-F07": {
+  "claim": "In a three-wave Israeli panel spanning the 2019-2020 elections, voters abandoned a party they had voted for when they expected it to be left out of the next coalition. Voters who saw the race between the two would-be formateurs (Likud, Blue and White) as close were more likely to switch to a formateur party than voters who expected their side to win. This is the individual-level mechanism behind late consolidation into the bloc's largest list, and it is triggered by closeness, not by trailing.",
+  "quant": "Waves: Apr 2019 n=1,206; Sep 2019 n=909; Mar 2020 n=801, each about a week before the vote; 1,104 observations from 655 respondents. Switching: 28.5% at the first opportunity, 18.1% at the second. Predicted switching probability is 47-58% when expected coalition chances are 0-2 (0-10 scale) vs 13% at 10. 8.6% moved non-formateur to formateur and 6.8% the reverse. 'None of the non-formateur party voters ... switched to the party of the unpreferred formateur' (fn 12). The close-race effect is significant in Model 3 but loses significance (keeping its size) in bootstrapped subsamples. Race perceptions: 61.9% expected their side to win, 24.6% saw it as close, 13.6% expected the other side to win.",
+  "source": "STR-F07",
+  "status": "verified",
+  "model_link": "TRAIL condition (trail/tie by 0.5 seats, cliff), TRAIL_RAMP_ON (held off, s.46.3), and the layer's one-sidedness (Likud only)"
+ },
+ "STR-F08": {
+  "claim": "In 2015, framed as Likud vs Zionist Union, both large lists gained on 2013, but almost all of their gains came from parties in their own bloc. Identity politics led each to court voters inside its bloc. The late Likud surge was a within-bloc transfer, not a bloc swing.",
+  "quant": "Rahat et al. at abstract level: no transfer matrix. Corroboration (Brom, CAP, 22 Apr 2015): the right bloc was 42 in the Haaretz final-poll average of 13 Mar and won 44, so the bloc moved +2 while Likud moved +9 (21 to 30). Against 2013, Likud gained 12 while Bennett's and Lieberman's parties lost 11 combined.",
+  "source": "STR-F08",
+  "status": "corrected",
+  "model_link": "TRAIL_SAT_SOURCE (beat sourced from own satellites); gevalt coupling as a zero-sum within-bloc transfer"
+ },
+ "STR-F09": {
+  "claim": "In the eight polls published 12-13 March 2015, the last before the legal poll silence, Likud stood at 20-23 seats and trailed Zionist Union (24-26). Likud won 30. Its satellites paid: Jewish Home fell from 11-12 to 8 and Yachad from 4-5 to 0. Zionist Union landed at the bottom of its range (24), so the other camp did not supply the surge.",
+  "quant": "Eleven polls of 12-13 Mar 2015: Likud 20-23, ZU 24-26, JH 11-13, Yachad 4-5, Kulanu 8-11 (won 10), YB 4-6 (won 6).",
+  "source": "STR-F09",
+  "status": "corrected",
+  "model_link": "trailing-Likud conditional (2015 fold); gevalt coupling; TRAIL_SAT_SOURCE"
+ },
+ "STR-F10": {
+  "claim": "In April 2019 both would-be formateurs beat their final polls by similar margins, each at the expense of its own bloc's smaller lists. Likud went from 26-31 to 35 and Blue and White from 28-32 to 35. On the right, New Right (5-6 seats in every final poll) and Zehut (4-6) both failed. On the centre-left, Labor (8-11) fell to 6 and Meretz (5-8) to 4. Consolidation in a close formateur race was two-sided, while the shipped trailing layer gives the beat to Likud only.",
+  "quant": "Nine polls of 4-5 Apr 2019: Likud 26-31, B&W 28-32, New Right 5-7, Zehut 4-8, URWP 5-8, Kulanu 3.18%-6 seats, Labor 8-11, Meretz 5-8, Gesher 2.0-2.9% (one poll 4 seats). Zehut's result to final-poll ratio is at most about 0.84 (2.74/3.25) and about 0.45-0.8 across the range.",
+  "source": "STR-F10",
+  "status": "corrected",
+  "model_link": "TRAIL (Likud-only beat); gevalt coupling; NEW_STRADDLER (New Right and Zehut are among the nine first-cycle failures); dossier s.15 Zehut row"
+ },
+ "STR-F11": {
+  "claim": "In September 2019 the formateur race was tied in the final polls (Likud 31-36, Blue and White 31-33), and both landed inside their ranges (32, 33): there was no trailing beat. Otzma Yehudit showed 4 seats (at least 3.25%) in five of the eight final polls and 2.9-3.1% in two others, yet won about 1.9%, after Likud and Yamina argued its votes would be wasted. An ideological-core right-flank list was deserted under a gevalt appeal.",
+  "quant": "Otzma 83,609 votes (1.88%) against a threshold of about 144,200 (3.25% of 4,436,806 valid votes). Final eight polls: 4 seats in 5, 2.9-3.1% in 2, 1 with no figure.",
+  "source": "STR-F11",
+  "status": "corrected",
+  "model_link": "dossier s.15 realization table (Otzma Sept 2019 row) and the site sentence on sectarian/ideological lists; gevalt coupling (Otzma in GEVALT_SAT_IDS); TRAIL (tie fold)"
+ },
+ "STR-F12": {
+  "claim": "In 2021 Likud led clearly (29-32 vs Yesh Atid 17-19), so there was no close formateur race. Every list sitting at the 4-seat floor of the final polls met or beat it: Blue and White 4-7 to 8, Meretz 4-5 to 6, Religious Zionism 4-5 to 6, Labor 4-6 to 7, and Ra'am, 4 in seven polls and 1.7% in one, to 4. The mid-sized first-cycle New Hope fell from 7-10 to 6. Near-threshold lists can surge as well as desert.",
+  "quant": "Eight polls of 16-19 Mar 2021. Results: B&W 6.63%, Meretz 4.59%, RZP 5.12%, Labor 6.09%, Ra'am 3.79%, New Hope 4.74%, Yamina 6.21% (polled 8-10). The pattern matches the dossier's own 2021 straddler drift of +1.94 pp (s.36) and Ra'am entering the fidelity record as a D-21 straddler that passed (projected 3.16%, won 3.79%, s.46.1).",
+  "source": "STR-F12",
+  "status": "verified",
+  "model_link": "NEW_STRADDLER (one-signed desertion term); a desert/surge mixture; TRAIL (non-firing fold)"
+ },
+ "STR-F13": {
+  "claim": "In 2022 almost 9% of votes were wasted below the threshold. The Netanyahu bloc outpolled its rivals by about 30,000 votes, under one seat, yet won 64 seats. All four Netanyahu-bloc lists signed surplus agreements, against two in the other camp, where five lists were wobbling near the line. Measured against the final polls, Meretz (an established list, 4-5 seats in all eight final polls) failed with 3.16%, about 4,050 votes short. Jewish Home (polled 1.2-2.1%) took 1.19%. Balad, an Arab sectoral list polled at 1.0-2.75%, took 2.91%.",
+  "quant": "Kenig: 'almost 9% of the votes were wasted below the electoral threshold'; Meretz and Balad together 'some 300,000 votes'. Final polls from https://en.wikipedia.org/wiki/Opinion_polling_for_the_2022_Israeli_legislative_election (eight polls of 23-28 Oct 2022). Results: Meretz 150,793 votes (3.16%), Balad 138,617 (2.91%), Jewish Home 56,775 (1.19%), of 4,764,742 valid votes. Jewish Home's ratio is about 0.6-0.65 (supports the old x0.7). Balad's is about 1.5 (supports a sectoral exemption). Meretz's is about 0.75-0.95, and Meretz is NOT first-cycle.",
+  "source": "STR-F13",
+  "status": "verified",
+  "model_link": "NEW_STRADDLER first-cycle restriction (Meretz 2022 is an established list that was deserted); sectoral exemption (Balad); surplus agreements as a coalition signal"
+ },
+ "STR-F14": {
+  "claim": "Gil (Pensioners), a first-cycle list polled at 0-2 seats under a 2% threshold, gained support in the days before the 2006 election. Contrary to all predictions it won 7 seats. This is a first-cycle near-threshold SURGE outside the graded 2009-2022 window. Inside the window the only surge among the eleven first-cycle straddlers is Yamina (Sept 2019).",
+  "quant": "Bargsted & Kedar p.312 fn 11: Gil 'gained support in the days leading to the elections, and contrary to all predictions won seven seats'. Result: 185,759 votes, 5.92%, 7 seats; threshold 2%; pre-election polls 0-2 seats (https://en.wikipedia.org/wiki/2006_Israeli_legislative_election).",
+  "source": "STR-F03",
+  "status": "verified",
+  "model_link": "NEW_STRADDLER as a single normal with mu < 0 vs a desert/surge mixture"
+ },
+ "STR-F15": {
+  "claim": "Threshold insurance voting needs three conditions: the voter weighs government outcomes, the party is at risk of missing the threshold, and it is not the voter's first preference. All three held in Sweden 2010 for the Christian Democrats, the government coalition's small party at risk under the 4% line, which received strategic insurance votes. In the author's summary, a majority of KD voters named the Moderates (the senior partner) as their preferred party.",
+  "quant": "Conditional logit on the 2010 Swedish National Election Study. KD won 5.6% (threshold 4%). The 'majority preferred the Moderates' wording is from Freden's LSE EUROPP post of 26 Feb 2015 (https://blogs.lse.ac.uk/europpblog/2015/02/26/evidence-from-sweden-shows-the-importance-of-parties-signalling-potential-coalition-partners-for-strategic-voting). Effect magnitudes were not retrieved (full text not opened).",
+  "source": "STR-F15",
+  "status": "verified",
+  "model_link": "surge component for straddlers embedded in a bloc with a senior partner (RZP-Zehut, Otzma, Amcha relative to Likud; Democrats or B&W relative to Yashar)"
+ },
+ "STR-F16": {
+  "claim": "In survey experiments with randomised polls and coalition signals, insurance voting for a small party depended on two things: polls putting it just below the threshold, and its membership of a clear pre-electoral coalition. Small parties outside a coalition benefited much less.",
+  "quant": "Abstract-level (Lund University record); the experiment's magnitudes were not retrieved.",
+  "source": "STR-F16",
+  "status": "verified",
+  "model_link": "conditioning variable for a desert/surge mixture: coalition embedding of the straddler, not its age"
+ },
+ "STR-F17": {
+  "claim": "A 2022 Swedish survey experiment placed each of the three smallest parties below, at, or above the 4% threshold. Poll-induced insurance voting appeared for the party most tied to a government alternative (Christian Democrats), weakly for the Liberals, and not at all for the issue-focused Greens. None of the threshold parties was abandoned because of low poll levels.",
+  "quant": "N=3,259 (fieldwork 31 Aug-9 Sep 2022; nine conditions). KD vote: 8.2% when shown at 2.5%, 7.3% at 4.0%, 4.1% at 5.5% (2.5 vs 5.5: t=4.88, p<.05; 4.0 vs 5.5: t=3.06, p<.05). Liberals 6.8 / 4.8 / 4.9% (n.s.). Greens 11.4 / 11.2 / 12.2% (n.s.) (p.6). Insurance came mainly from Moderate supporters; Sweden Democrat supporters mostly stayed. Authors: 'none of the smaller threshold parties were abandoned because of low poll levels'.",
+  "source": "STR-F17",
+  "status": "verified",
+  "model_link": "NEW_STRADDLER sign and conditioning; certainty-layer churn on near-threshold lists (low polls did not by themselves trigger abandonment)"
+ },
+ "STR-F19": {
+  "claim": "Supporters of the major German parties sometimes voted against their first preference on the PR (second) vote to raise the chance of a majority with the declared junior partner. Their party choice responded to expectations about the small party's chances of re-entering parliament.",
+  "quant": "Two-step random-utility estimation on German election-study data. Abstract-level; magnitudes and elections covered not retrieved (full text not opened).",
+  "source": "STR-F19",
+  "status": "verified",
+  "model_link": "surge component (threshold insurance from the senior partner's voters)"
+ },
+ "STR-F20": {
+  "claim": "Because coalition bargaining waters down each party's influence on policy, outcome-oriented voters often back parties more extreme than themselves to pull the coalition's policy their way (compensational voting). The effect is stronger in consensual systems, such as the Netherlands and Norway, than in majoritarian ones (Britain, Canada). This is a standing counterforce to consolidation: some right-flank satellite support is held in order to pull a Likud-led coalition rightward, not merely parked.",
+  "quant": "Four parliamentary democracies (Britain, Canada, Norway, Netherlands); the abstract states the theory and finds that institutional context conditions the weight on compensational voting. No pooled pp effect.",
+  "source": "STR-F20",
+  "status": "verified",
+  "model_link": "TRAIL_SAT_CAP 0.75 (a cap on how much satellites can lose to a Likud beat); the sectarian/ideological distinction"
+ },
+ "STR-F21": {
+  "claim": "Israeli law bars broadcasting or publishing the results of any election survey not already published from the END of the Friday before the polls open until the polls close. A survey published before that point may be repeated only with a prominent note that it is not current and says nothing about voting patterns on the day. For the 27 Oct 2026 election, Friday 23 Oct is the last legal day for new polls, which leaves about four unobserved days (Friday night to Tuesday 22:00).",
+  "quant": "Elections Law (Propaganda Methods), 5719-1959, s.16E(h) (Hebrew 16ה(ח)), current text as published by the Central Elections Committee (reference 2022-000238). The same section requires filing every survey with the CEC (s.16E(e)). An IDI note of 15 Nov 2002 (https://www.idi.org.il/parliaments/7129/9017) described the October 2002 amendment as a one-day ban; the amendment history between that and the current end-of-Friday text was not traced. The Wikipedia 2022 polling page marks the silence from the end of Friday 28 Oct 2022 for a Tuesday 1 Nov election.",
+  "source": "STR-F21",
+  "status": "verified",
+  "model_link": "calendar (dossier s.5: 'Oct 23 (Fri) Poll blackout begins'); final refit on the 22-23 Oct polls; the forward random walk and gevalt/late-swing shocks cover a window no poll can observe"
+ },
+ "STR-F22": {
+  "claim": "In a post-election survey of 1,133 voters after the 2015 election, 15% said they decided on election day and another 13% in the campaign's final days. 62% of these late deciders voted for right-wing parties, 21% for centrist and 16% for left-wing parties. A large and right-leaning late decision fell inside the poll-silence window.",
+  "quant": "n=1,133 (sponsor New Majority, pollster unnamed): 15% decided on election day (inside the window), 13% 'in the final days' (only partly inside). Late deciders (both groups) 62% right / 21% centre / 16% left.",
+  "source": "STR-F22",
+  "status": "corrected",
+  "model_link": "poll-silence window variance; timing of the gevalt transfer; certainty layer (undecided lean)"
+ },
+ "STR-F23": {
+  "claim": "In a large Danish survey experiment (PR, eight parties), a news story showing a party gaining raised intended votes for it relative to a story showing it losing, for both a large party (about 21%) and a small one (about 4%). The loss story did not significantly lower support relative to the control. Bandwagon effects are real but small and asymmetric: a poll decline alone does not trigger measurable desertion.",
+  "quant": "Gain vs loss p<0.05 for both parties; gain vs control joint p<0.05; loss vs control negative, n.s. (p<0.4); positive vs negative effect size difference n.s. (p<0.5). No heterogeneity by sociodemographics.",
+  "source": "STR-F23",
+  "status": "corrected",
+  "model_link": "no poll-momentum (bandwagon) term in the projection; a falling straddler is not deserted by poll exposure alone"
+ },
+ "STR-F24": {
+  "claim": "In a Dutch survey experiment with real poll results, simply showing poll standings did not change later vote intentions. Framing a party as growing produced a small bandwagon effect, and that effect was no larger among undecided voters.",
+  "quant": "N=23,421. Plain standings: no effect. Growth framing: modest positive effect. No moderation by indecision (abstract).",
+  "source": "STR-F24",
+  "status": "verified",
+  "model_link": "no bandwagon term; the undecided lean (certainty layer) need not track poll momentum"
+ },
+ "STR-F25": {
+  "claim": "Strong partisans react to a threatened electoral loss with anger and more campaign activity, and to reassured victory with enthusiasm. Holders of strong issue positions show no such arousal. This is the psychological basis of a 'gevalt' appeal: it works on identifiers when their party's standing is threatened, which fits a trigger based on the formateur race rather than a constant Likud premium.",
+  "quant": "Four studies (APSR 109(1):1-17). Effects of threat and reassurance on anger and enthusiasm concentrate among strong identifiers (abstract). No vote-share magnitude.",
+  "source": "STR-F25",
+  "status": "verified",
+  "model_link": "TRAIL trigger (threat = trailing or tied) and the retired fixed anchors (a constant premium fired in two cycles out of eight)"
+ },
+ "SEC-F01": {
+  "claim": "The official Arab-and-Druze turnout series swings far more than national turnout, and the 2022 base the model scales from is a regular-station figure. Reuses atlas D2-F02 (verified with corrections) and D2-F07.",
+  "quant": "Arab lists 85.8% (423,877) / Jewish parties 14.2% (70,118): Bayan 28 Table 1; eligible/voters/regions: Table 2.",
+  "source": "SEC-F01",
+  "status": "corrected",
+  "model_link": "ARAB_TURNOUT_REC (harness), ARAB_TURNOUT base 0.538 (kalpi) vs 0.532 (s.43 disclosure e), regime tables A/B."
+ },
+ "SEC-F02": {
+  "claim": "Peer-reviewed analysis of 2019-20 ties Arab turnout to list unity: when the Joint List broke up in April 2019, disappointed Arab voters stayed home and Arab seats fell from 13 to 10; the reunited list won 13 and then 15.",
+  "quant": "Seats: 13 (2015) -> 10 (Apr 2019, split) -> 13 (Sep 2019, reunited) -> 15 (Mar 2020). Turnout over the same cycles 63.5 -> 49.2 -> 59.2 -> 64.8 (SEC-F01).",
+  "source": "SEC-F02",
+  "status": "verified",
+  "model_link": "Regime structure of ARAB_TURNOUT (mean_unified vs mean_split; harness tables A/B)."
+ },
+ "SEC-F03": {
+  "claim": "The unity rule is conditional, not mechanical: Rudnitzky's peer-reviewed account frames 2019-21 as the Arab public disciplining the parties' configuration, and 2022 broke the rule (turnout rose 8.6 points despite a three-way split). Reuses atlas D2-F07.",
+  "quant": "Turnout 49.2% (Apr 2019) -> 64.8% (2020, a two-decade high) -> 44.6% (2021, record low); seats 10 -> 15 -> 10. 2022: 53.2% with three separate lists; Rudnitzky (Bayan 28): 2021 abstainers 'found an address', boycott declarations were reversed, tactical votes for Balad.",
+  "source": "SEC-F03",
+  "status": "verified",
+  "model_link": "Regime table B mean 0.580 (s.43): three four-party-unity years plus 2021. 2026 is a partial reunion (Hadash-Ta'al-Balad on one list, Ra'am separate)."
+ },
+ "SEC-F04": {
+  "claim": "Minority turnout in national elections falls when representation is descriptive but not substantive (no policy influence). In 2026 both prime-ministerial candidates rule out Arab parties in a coalition, while three in four Arab citizens want an Arab party in government: by this mechanism a downside risk to the 0.58 mean.",
+  "quant": "Rosenthal, Zubida & Nachmias: Muslim Arab turnout fell in national elections while rising in local ones. KAP May 2026: 77.2% support an Arab party joining the coalition (43.3% any government, 33.9% centre-left only). Xinhua, 11 Oct 2026: neither Netanyahu nor Eisenkot willing to bring Arab parties into his coalition; Kan 4 Oct poll: Arab parties 13 seats.",
+  "source": "SEC-F04",
+  "status": "corrected",
+  "model_link": "ARAB_TURNOUT mean_unified 0.580 (enters the mean only through k = 0.247)."
+ },
+ "SEC-F05": {
+  "claim": "Disqualification fights are near-constant and leave no consistent turnout signature: the Central Elections Committee has moved against Arab lists or candidates in most elections since 2003, the Supreme Court reversed every one, and Arab turnout rose after four and fell after three. Configuration, not backlash, tracks turnout. Reuses atlas D2-F24 for 2026.",
+  "quant": "CEC disqualifications, all overruled: 2003 (Balad, Bishara, Tibi), 2009 (Balad, Ra'am-Ta'al), 2013 and 2015 (Zoabi), Apr 2019 (Ra'am-Balad), Mar 2020 (Yazbek) [IDI table]; 2022 Balad (CEC 9-5, Court 9-0, Adalah); 2026 Joint List and Ra'am (Court unanimous, 2 Oct 2026, atlas D2-F24). Arab turnout change in those elections: 2003 -13.0, 2009 -2.9, 2013 +3.1, 2015 +7.0, Apr 2019 -14.3, 2020 +5.6, 2022 +8.6 points.",
+  "source": "SEC-F05",
+  "status": "verified",
+  "model_link": "No disqualification/backlash term in ARAB_TURNOUT; the T draw's spread carries it."
+ },
+ "SEC-F06": {
+  "claim": "The 2025-26 KAP/Stat-Net surveys bracket the model's 0.58: about 53% if the parties run separately, 62-67% if all four reunite; 2026 is in between (a Joint List without Ra'am). Crime dominates the agenda. Verifies the November 2025 figures the atlas desk could not open (atlas D2-F19).",
+  "quant": "Nov 2025 (Stat-Net, phone in Arabic, n=500, 13-18 Nov): 52.4% separate (Hadash-Ta'al 5.3, Ra'am 3.9, Balad 2.6 seats) vs 61.8% four-party Joint List (15.5 seats); June 2025 survey 57%; the authors link the Nov dip to the Monitoring Committee dispute. May 2026 (Stat-Net, n=500, 26 Apr-3 May): 53% separate (5.3 / 4.6 / 1.8) vs 67% four-party (16.3 seats). Nov 2025: violence and crime the top issue for 74%; 76.6% report weak personal security; Arab homicides 244 (2023), 237 (2024), 228 (to Nov 2025).",
+  "source": "SEC-F06",
+  "status": "verified",
+  "model_link": "ARAB_TURNOUT mean_unified 0.580; s.4 pre-registered band 56-62%."
+ },
+ "SEC-F07": {
+  "claim": "Survey-based Arab turnout forecasts have missed by 4 to 15 points in both directions, so they cannot tell 0.53 from 0.62. KAP's 'expected turnout' re-weights stated intention by respondents' past voting.",
+  "quant": "Final pre-election KAP surveys: +15.1 (Mar 2021), -4.2 (Oct 2022); early-campaign readings: KAP Aug 2022 -11.2, Statnet/Kan Aug 2022 -14.2, KAP Nov 2020 +11.0; Coalition 17/9 (Sep 2019) -3. Range 3-15 points.",
+  "source": "SEC-F07",
+  "status": "corrected",
+  "model_link": "s.20 rule that turnout-intention series do not drive SECTOR_TURNOUT; ARAB_TURNOUT sd; Afkar 1.6x noise multiplier."
+ },
+ "SEC-F08": {
+  "claim": "Stated intention to vote overstates Arab turnout by 15-35 points, and stated certainty does not rank sectors by actual turnout (haredim, the highest-turnout sector, report the least certainty). Reuses atlas D2-F21 (corrected).",
+  "quant": "Stated intention above actual: +16 to +38 points (IDI Sep 2022 70 vs 53.2; KAP Oct 2022 69 vs 53.2; KAP Mar 2021 82.5 vs 44.6). Khalaily: 'optimistic' reading ~50%.",
+  "source": "SEC-F08",
+  "status": "corrected",
+  "model_link": "s.20 participation dial; certainty layer (undecided lean) should not use stated turnout certainty by sector."
+ },
+ "SEC-F09": {
+  "claim": "Afkar's September 2026 Arab-sector poll is a mixed-mode stratified sample with low response rates, converted to seats at an assumed 60% turnout. No published Afkar turnout or seat track record was located; IDI has used Afkar for fieldwork (2022 special survey, 2026 first-time voters).",
+  "quant": "IDI first-time voters (May 2026): n=576, 443 Jewish / 133 Arab, fieldwork firm not named; Afkar-IDI link documented for 2022 special survey and 2025 Democracy Index only.",
+  "source": "SEC-F09",
+  "status": "corrected",
+  "model_link": "sector_stream.py (W_sector turnout 0.538, 1.6x noise for 'Afkar (sector)')."
+ },
+ "SEC-F10": {
+  "claim": "The under-count is Ra'am-shaped, not proportional: sector surveys admit they miss Ra'am's Negev Bedouin base, sector pollsters' Ra'am scenarios were wrong in 2021, and national final polls under-counted Ra'am in both cycles it ran alone.",
+  "quant": "KAP Nov 2025: sampling misses Negev Bedouin tribes, so Ra'am's strength is underestimated (p.11). Ra'am took 73.9% of the Negev Arab vote in 2022 (Bayan 28); Negev 144,860 eligible, 51.0% turnout; tribal stations 38% (atlas D2-F09). Makladeh, Mar 2021: Ra'am likely fails near 55% turnout and passes near 59% (Times of Israel, 23 Mar 2021); actual turnout 44.6% and Ra'am won 4 seats. KAP Oct 2022 gave Ra'am 3.7 seats from Arab votes; it won 5. Own record, final-poll mean minus result: Ra'am -2.29 (2021), -0.57 (2022); Joint List +2.29 in 2021 (family error 0.00).",
+  "source": "SEC-F10",
+  "status": "corrected",
+  "model_link": "Arab family term allocates the shift by base share (JL and Ra'am move together); Ra'am pass probability 0.752; LOYAL_SD raam 1.8; harness merges 2021 JL+Ra'am (s.43 disclosure i)."
+ },
+ "SEC-F11": {
+  "claim": "Most 2026 national polls are Hebrew-language online panels of 500-610 with single-digit to mid-20s response rates, so their Arab subsamples are small and self-selected. Tatika's raw sample was 11% Arab, close to the Arab share of 2022 voters but well below the ~16% Arab share of the electorate. Channel 13's consortium alone runs a separate StatNet phone sample of Arabs (101-221) and converts to seats 'by sector weights in the population'.",
+  "quant": "Ch13 Arab phone samples 100-230 across Jul-Oct filings; drop 'Hebrew-language' (not stated in filings).",
+  "source": "SEC-F11",
+  "status": "corrected",
+  "model_link": "ARAB_TURNOUT base comment: 'National panels weight the Arab sector to the last election's turnout (0.538)'; house effects."
+ },
+ "SEC-F12": {
+  "claim": "The national election study itself found online panels yield too few Arab respondents and supplements them by telephone in Arabic; in 2020 it commissioned Statnet for the Arab sample. This is independent support for the claim that mainstream panels under-reach the sector.",
+  "quant": "INES 2022 and 2025: Cohen Institute online probability panel, with phone interviews added among Arabic speakers to raise Arab numbers; 2019: phone, Arab households stratified by district and religion; 2020: Statnet random cellular sample after the pre-election survey produced few Arab interviews. Arab subsample sizes are given only in images (not read).",
+  "source": "SEC-F12",
+  "status": "verified",
+  "model_link": "sector_stream rationale; ARAB_TURNOUT base assumption."
+ },
+ "SEC-F13": {
+  "claim": "Houses embed different Arab turnout assumptions, so 'polls weight Arabs to 2022 turnout' is true for some firms only. Maariv's pollster says Arab lists would reach 17 seats at Jewish-level turnout while his polls show about 12; Afkar converts at 60%; Channel 13 shows 13-15.",
+  "quant": "Lazar (JPost, 13 Sep 2026): Arab turnout 'not increasing'; 17 seats at Jewish-level turnout; Ra'am steady at 5; his CEC filings show Joint List 7 + Ra'am 5 = 12 (implied Arab turnout about 0.7x Jewish, roughly 0.50-0.53). Afkar: 60% (SEC-F09). Ch13 / Midgam Project: Joint List 8-10 + Ra'am 5-6 = 13-15 seats across Aug-Oct filings. Range of house totals 12-15 seats is about what Arab turnout of 0.50-0.60 implies.",
+  "source": "SEC-F13",
+  "status": "verified",
+  "model_link": "ARAB_TURNOUT base 0.538 used as the poll average's implicit turnout in r = 1 + k(T_mean/base - 1)."
+ },
+ "SEC-F14": {
+  "claim": "National polls absorb most of a turnout swing but under-count the Arab lists on average, matching the graded term. In 2022 the press consensus expected Arab turnout in the low 40s and about 8 Arab seats; turnout was 53.2% and Arab lists won 10 seats, with Balad's 2.9% wasted. In 2021 the polls caught the turnout collapse exactly.",
+  "quant": "AP, 26 Oct 2022: Arab turnout expected 'in the low 40s', Arab parties about 8 seats, Ra'am polling 4. Own record, Arab family final-poll mean minus result (seats): 2009 -2.78, 2013 -0.27, 2015 -0.38, 2019a +1.22, 2019s -0.71, 2020 -1.00, 2021 0.00, 2022 -1.57; mean -0.69. Harness fit (s.43): slope k 0.247 (se 0.21, strict-LOO 0.10-0.32), intercept -0.634 (se 0.41), n=8.",
+  "source": "SEC-F14",
+  "status": "verified",
+  "model_link": "ARAB_TURNOUT_K 0.247 and ARAB_TURNOUT_INTERCEPT -0.634."
+ },
+ "SEC-F15": {
+  "claim": "A pre-2015 audit of every published poll found Arab and ultra-Orthodox parties under-estimated and Likud and Labor over-estimated. Its author warned that house corrections stop working when pollsters change methods, which matters because 2026 firms now run dedicated haredi and Arab samples.",
+  "quant": "Project 61 (Nehemia Gershuni-Aylho): all polls of the 2006, 2009 and 2013 elections up to 30 days out, compared with results. Directional finding only; no published magnitudes in the article.",
+  "source": "SEC-F15",
+  "status": "verified",
+  "model_link": "Signs of ARAB_TURNOUT_INTERCEPT and the haredi FAMILY_SHOCK mean; case for down-weighting pre-2019 cycles."
+ },
+ "SEC-F16": {
+  "claim": "The haredi population grows about 4.2% a year, but the haredi lists' realised vote share has grown about 0.2 points a year (about +1 seat per four-year term), well below the dossier's '+1.5-2 seats' demographic drift.",
+  "quant": "Realised Shas+UTJ share growth: 1992-2022 ~+0.2 pt/yr; 2009-2022 ~+0.1; 2015-2022 ~+0.43. Mechanical pool estimate ~+1.0-1.3 seats per 4 years.",
+  "source": "SEC-F16",
+  "status": "corrected",
+  "model_link": "Dossier s.4 'haredi pool +1.5-2 seats (mechanical)'; KALPI_HAREDI_FLOOR."
+ },
+ "SEC-F17": {
+  "claim": "Haredi turnout is high and nearly flat. 2022 rebounded to the 2019-20 level after a 2021 dip; it was not a surge. Reuses atlas D2-F12 (corrected) and D2-F22.",
+  "quant": "Clearly haredi polling stations: 76% (2013) -> 72.5% (2022) at regular stations, offset by +3.5 points of envelope voting, so about 79% including envelopes in both years (Malach). Project kalpi haredi cluster (304,123 eligible in 2022): 76.4, 76.8, 76.6, 72.8, 75.8% (2019a-2022). Arab and haredi cluster turnout swings correlate 0.88 over four transitions, carried by both sectors' 2021 dip. Local elections 2018->2024: haredi -0.5 points (atlas D2-F23).",
+  "source": "SEC-F17",
+  "status": "verified",
+  "model_link": "KALPI_HAREDI_FLOOR turnout 0.74; s.4 haredi 78-82%; KALPI_FAMILY_RHO 0.5 (+0.92 measured); dossier s.34 line 'haredi lists beat their final polls by +1.35 seats ... and 2022's haredi turnout surge is the reason'."
+ },
+ "SEC-F18": {
+  "claim": "The mechanism for haredi under-polling is coverage: haredim are less likely to answer polls, especially online ones, and only 69% use the internet regularly. The 2026 filings show the cost: haredi online samples answer at 3.6-26%, and only the Channel 13 consortium adds a phone haredi sample.",
+  "quant": "Regular internet use, ages 20+: haredi 69% vs other Jews 94% (IDI 2025 yearbook p.15). IPF: weekly polls of about 500 have MoE over 4 points; super-sampling Arabs or haredim is costly and not typical. CEC filings, Ch13 / Midgam Project: haredi online invitations 5,530 at 3.6% response (28 Jul), 1,031 at 22.3% (30 Sep), 1,899 at 15.4% plus 220 by phone (23 Sep). Tatika raw sample 8% haredi (42/500).",
+  "source": "ERR-F20",
+  "status": "verified",
+  "model_link": "Sign of FAMILY_SHOCK['haredi'] mean."
+ },
+ "SEC-F19": {
+  "claim": "The 'haredi' under-poll is almost entirely Shas. UTJ's final-poll errors average about zero. Shas draws a large share of its vote from traditional and national-religious non-haredi voters, the low-SES Mizrahi base that online panels also under-reach. The model spreads the family shift across Shas and UTJ by base share.",
+  "quant": "Own record, final-poll mean minus result, seats: Shas 2009 -1.11, 2013 -0.55, 2015 +0.38, 2019a -2.67, 2019s -1.00, 2020 -0.25, 2021 -0.43, 2022 -1.43 (mean -0.88); UTJ +0.67, -1.09, +0.50, -1.67, +0.71, +0.38, -0.29, 0.00 (mean -0.10). IDI pooled surveys, 2022 vote (12,322 Jews): haredim 58% UTJ / 28% Shas / 7% RZP-Otzma / 4% Likud; Shas 10% of traditional-religious and 10.5% of national-religious voters. Malach (2019): about a third of Shas voters are not haredi.",
+  "source": "SEC-F19",
+  "status": "verified",
+  "model_link": "FAMILY_SHOCK['haredi'] allocated by base weights (w_f / w_f.sum()) to Shas and UTJ alike."
+ },
+ "SEC-F20": {
+  "claim": "The -1.35 mean is fragile. It is the post-bloc-swing (e1) mean, carried by two misses (2013 -3.44, Apr 2019 -4.41). The April 2019 miss had a structural cause: Yahad's late withdrawal and a record wasted vote, on top of young first-time voters. Without that cycle, or on the raw scale, or in the last four cycles, the mean is -0.6 to -1.0.",
+  "quant": "Haredi family e1 by cycle: 2009 -0.93, 2013 -3.44, 2015 +0.91, 2019a -4.41, 2019s -1.24, 2020 +0.12, 2021 -1.33, 2022 -0.50 (mean -1.35, median -1.09, sd 1.77). Raw e0 mean -0.98; last four cycles e0 -0.58, e1 -0.74; ex-2019a e1 -0.92. Malach (IDI, 17 Apr 2019): haredi seats 13 -> 15; pollsters expected Shas to shrink; UTJ about 250,000 votes vs about 240,000 expected from 4% growth; wasted ballots at least 8% (from 4%); Yahad withdrew at the last minute.",
+  "source": "SEC-F20",
+  "status": "verified",
+  "model_link": "FAMILY_SHOCK['haredi'] = (-1.352, 1.768) from decompose()."
+ },
+ "SEC-F21": {
+  "claim": "The election-day machine that produced past haredi over-performance is constrained in 2026. The High Court unanimously barred party polling-station agents from passing who-has-voted data to their parties. The Likud and the ultra-Orthodox parties had relied on that data heavily.",
+  "quant": "Ruling of 17 Sep 2026 (Justice Willner, with Stein and Kabub). It overturned the full Committee's decision allowing the practice; per other press reports, not opened, that decision had reversed chairman Sohlberg's August ban. Grounds: no legal authority, and a breach of the Protection of Privacy Law. Per the same unopened reports, the CEC will publish aggregate per-station turnout during the day. No quantitative estimate of the GOTV effect exists.",
+  "source": "SEC-F21",
+  "status": "verified",
+  "model_link": "Haredi FAMILY_SHOCK mean (election-day beat); s.4 note on machine-party GOTV."
+ },
+ "SEC-F22": {
+  "claim": "2026 polls already contain haredi leakage and a new haredi list. In Channel 13's dedicated haredi sample, Shas plus UTJ hold about 73% of decided respondents, against 86% of haredi voters in 2022. The Haredi Public takes 7.8% and Otzma 8.3%. If the small list fades late, as Yahad did in 2019, the gain goes to Shas and UTJ beyond the polls.",
+  "quant": "CEC filing 4182 (29-30 Sep 2026, haredi online sample n=230): UTJ 47.8, Shas 17.0, Otzma 8.3, The Haredi Public 7.8, Likud 4.3, undecided 6.5, won't vote 4.3. 16 Sep (n=263): UTJ 41.8, Shas 19.4, The Haredi Public 7.2. IDI 2022 haredi vote: 58 UTJ / 28 Shas / 7 RZP-Otzma / 4 Likud (SEC-F19). The model's 15 Oct draws: The Haredi Public mean 0.06 seats.",
+  "source": "SEC-F22",
+  "status": "verified",
+  "model_link": "Haredi family shock; small-list desertion; withdrawn-list rule."
+ },
+ "SEC-F23": {
+  "claim": "Druze turnout has fallen for 25 years, and Druze votes go overwhelmingly to Zionist lists. Druze are effectively absent from national poll samples (Tatika: 2 of 500). Reuses atlas D2-F11 (corrected; the unverified '2021-22 average 48.7%' is dropped).",
+  "quant": "Druze turnout: 1996 76.8, 1999 78.9, 2003 64.2, 2006 64.9, Sep 2019 53.2 (Shanan & Eilat); 2015 57.7, Apr 2019 60.1, Sep 2019 54.5 (Brake). About 90% of Druze-town votes went to Zionist parties in 2022 (Bayan 28). Druze are about 1.5-1.6% of the population (CBS, reported via secondary tables; not opened).",
+  "source": "SEC-F23",
+  "status": "verified",
+  "model_link": "Druze are outside the Arab family and the KALPI_ARAB_CAP cluster; they sit in the general Jewish/Zionist residual."
+ },
+ "SEC-F24": {
+  "claim": "Russian-speaking (FSU) voters turn out less and are said to be harder to poll, but the FSU party's final-poll record shows no systematic bias. No FSU family term is warranted. Reuses atlas D2-F13 and D2-F27.",
+  "quant": "YB final-poll e0: mean -0.06, sd 1.62 (7 standalone cycles); D-60 sd 1.71 (s.7).",
+  "source": "SEC-F24",
+  "status": "corrected",
+  "model_link": "LOYAL_SD yisrael_beytenu 2.2; absence of an FSU family shock."
+ },
+ "SEC-F25": {
+  "claim": "The Arab capacity ceiling is loose. Its formula implicitly assumes every Arab-town voter backs an Arab list and uses a 0.78 concentration. Measured values (at most 94% in-sector Arab-list share; concentration 0.81-0.85) and 2020's record, scaled to the 72% maximum turnout, put the physical bound near 14.8-15.4% of the vote, not 16.3%. Turnout must be compared on one basis: envelopes add about 3 points to Arab and 7.5-10 points to Jewish and settlement turnout (atlas D2-F04).",
+  "quant": "Production (mixture_draws, 15 Oct): P(Arab>=19) 9.75%, >=20 6.06%, p95 20. Cap clip rate now 2.9% (haredi floor 0.06%); at cap 0.150, 7.9%. Arab family final-poll sd: e0 1.17, e1 1.45.",
+  "source": "SEC-F25",
+  "status": "corrected",
+  "model_link": "KALPI_ARAB_CAP 0.163 (839k x 72% / 0.78); ARAB_TURNOUT max 0.72; KALPI_HAREDI_FLOOR 0.066 (Shas+UTJ get only 28% of their votes from the haredi cluster, so the floor is a judgement, not a physical bound)."
+ },
+ "COA-F01": {
+  "claim": "The standard large-N model of which cabinet forms (Martin & Stevenson 2001, conditional logit over every potential cabinet) finds that pre-electoral pacts and public refusals to govern together ('anti-pacts') are the largest predictors, followed by incumbency and the presence of the largest party. Minority cabinets are penalised where an investiture vote is required. Israel is one of the 14 countries in the sample, and formations where a single party held a majority are excluded.",
+  "quant": "220 formation opportunities, 33,256 potential governments, 14 democracies including Israel, mid-1940s to mid-1980s. Model 7 coefficients (as replicated exactly by Glasgow, Golder & Golder 2012, Table 1, p.258): pre-electoral pact +2.72 (SE 0.62), anti-pact -4.10 (1.04), incumbent coalition +1.89 (0.20), largest party +1.40 (0.27), minimal winning +0.55 (0.26), number of parties -0.31 (0.14), minority where investiture required -0.91 (0.34), anti-system party -19.13 (3.71). Log-likelihood -558.74. Sample description: Glasgow, Golder & Golder 2012, p.256. The 2001 original was not opened; all figures come from that exact replication.",
+  "source": "COA-F01",
+  "status": "corrected",
+  "model_link": "Formation-tree architecture: the bloc-first ordering of gates, the pledge gates (centre_defects, raam_joins, ZIONIST_ONLY) and the incumbency assumption built into NB_CORE."
+ },
+ "COA-F02": {
+  "claim": "Public refusals bind in the comparative record. In the Martin & Stevenson sample only 1 of the 220 cabinets that formed contained parties that had publicly refused to govern together. Anti-pact and anti-system values almost perfectly predict that a cabinet will not form, so their coefficients are poorly identified. Debus (2009) confirms that pre-electoral commitments, both pacts and rejections, significantly shape formation after controlling for endogeneity (atlas D10-F08, verified). Israel 2020-21 is an outlier: both governments formed in the 2019-21 sequence broke public refusals (Gantz's 2020 entry under Netanyahu; Bennett's 2021 government with Lapid and Ra'am), and both came only after three or four elections.",
+  "quant": "Anti-pact cabinets that formed: 1 of 220. Cabinets with an anti-system party: 6 of 220. Potential cabinets with a pre-electoral pact: 30 of 33,256, of which 7 formed (Glasgow, Golder & Golder 2012, p.256). Israel: both governments formed in the 2019-21 sequence (2020, 2021) broke a public refusal. At the sequence's first election (April 2019) no one broke a pledge and no government formed.",
+  "source": "COA-F02",
+  "status": "verified",
+  "model_link": "centre_defects 0.12 (pledge-break), raam_joins 0.40 (every Jewish change list's 'Zionist government' framing acts as a soft anti-pact), res_right 0.12 and ZIONIST_ONLY. Dossier s.3 already argues that pledge-break is endogenous to the number of elections."
+ },
+ "COA-F03": {
+  "claim": "The incumbency advantage in government formation is conditional. Coalitions are more likely to form when their parties have recently governed together, but the incumbent's advantage disappears completely when partners became mired in public conflict or lost seats. A cabinet that collapsed through internal conflict is one-tenth as likely to re-form immediately as one that did not. Seat gains raise every potential coalition's odds, and incumbents' odds about twice as much.",
+  "quant": "256 formation opportunities and 65,320 potential coalitions in 17 West European countries (p.509). Outgoing coalitions immediately re-formed about 35% of the time in the 2001 sample (p.503). A conflict-collapsed cabinet is 1/10 as likely to re-form and 1/4 as likely as an alternative coalition (p.515). A 1% average seat gain raises a non-incumbent coalition's odds by about 10%, and the effect for incumbents is about twice that (p.516).",
+  "source": "COA-F03",
+  "status": "verified",
+  "model_link": "NB_CORE counts Shas and UTJ as unconditional members of a Netanyahu coalition. Yet UTJ quit Netanyahu's government in July 2025 over the draft-exemption law and Shas's ministers resigned (atlas D10-F28, corrected). That is the 'public conflict' condition under which the incumbency advantage disappears. The 2026 haredi mood to recommend no one (atlas D10-F29) points the same way."
+ },
+ "COA-F04": {
+  "claim": "Even the best statistical models of formation predict the exact cabinet only about one time in three in Western Europe. Most of that predictive power comes from the status-quo (incumbent) indicator. The authors argue for combining large-n prediction with case study of the deviant cases.",
+  "quant": "'We cannot predict more than about one-third of the Western European governments' (abstract). Martin & Stevenson (2010, p.504) report Bäck & Dumont's predictive efficiency, the share of predicted cabinets that are correct, as 12% without the status-quo indicator and 32% with it.",
+  "source": "COA-F04",
+  "status": "verified",
+  "model_link": "Formation outcome intervals (p05-p95) and the BEHAVIOR_NEFF concentrations. The model predicts 9 coarse outcome classes rather than exact cabinets, which is easier, but the literature's ceiling argues against tight formation intervals."
+ },
+ "COA-F05": {
+  "claim": "Conditional-logit formation models violate independence of irrelevant alternatives. A mixed logit with random coefficients fits better and shows that key effects vary sharply across formation opportunities. For example, incumbency is an advantage in about 63% of formations and a disadvantage in 37%. The best-fitting model's log-likelihood gives the field's benchmark for scoring formation forecasts.",
+  "quant": "CL LL -558.74 (220 opportunities; mean -2.54 per formation in-sample). MXL Model 1 LL -532.99 (LR 51.50); MXL Model 2 LL -533.75 (LR 49.98), where incumbent mean 1.47, SD 4.50, 62.8% / 37.2%. Uniform baseline: at least -5.02 (exact value needs each opportunity's choice-set size).",
+  "source": "COA-F02",
+  "status": "corrected",
+  "model_link": "Hierarchical Beta/Dirichlet parameter draws (dossier s.13). These are the scenario-tree analogue of random coefficients, and the literature supports carrying behavioural heterogeneity rather than fixed gates. Also validate_formation.py's choice of score."
+ },
+ "COA-F06": {
+  "claim": "A poll-driven coalition-formation forecast has a peer-reviewed analogue. Kayser, Orlowski & Rehmert combine monthly polls with an empirical formation model chosen by out-of-sample testing to estimate each party's probability of entering government. Held out of sample, the model picks the cabinet that actually formed in about 48% of formation opportunities, against at most 45% for the competitor specifications.",
+  "quant": "Formation data: 454 opportunities, 116,484 potential cabinets, 31 democracies (130 single-party majorities excluded from the benchmark). Non-majority sample 324 = 262 training + 62 test. Out-of-sample 30/62 = 48% correct vs at most 45% for competitors. Party-level AUC 0.89. CIPs computed for 21 democracies. Israel in neither.",
+  "source": "COA-F06",
+  "status": "corrected",
+  "model_link": "The whole pipeline: seat draws, then a formation model, then outcome and PM probabilities. A party-level 'inclusion probability' (P(Shas in government), P(Ra'am in government)) is a natural extra output and is easier to validate than coalition classes."
+ },
+ "COA-F07": {
+  "claim": "The multiparty poll-forecasting literature reports probabilities of coalition seat majorities, not of which government forms. Stoetzer et al.'s dynamic Bayesian model (polls plus fundamentals) gives the probability of a plurality and of majorities for given coalitions, and stops there. Formation has no likelihood in that framework.",
+  "quant": "Two ex ante forecasts of 2017 elections. The model outperforms fundamentals-only models on accuracy and on calibration of uncertainty (abstract).",
+  "source": "AGG-F04",
+  "status": "verified",
+  "model_link": "The site's split between arithmetic (P(NB>=61), change alone, with Ra'am) and politics (the formation tree). The government_formation.py docstring ('this layer cannot be estimated from data ... scenario analysis') matches the field's practice."
+ },
+ "COA-F08": {
+  "claim": "The logarithmic score is strictly proper for categorical forecasts, so the formation harness's choice of score is sound. The harness itself has three weaknesses. It grades a parameter set that is not the shipped one. Three of its eight cycles are scored as certainties. It floors probabilities at 1e-3, so the score is not strictly logarithmic. Its -0.93 vs -0.92 comparison therefore cannot discriminate between trees.",
+  "quant": "Gneiting & Raftery (2007): proper scoring rules, including the logarithmic score for categorical variables (abstract, Savage representation). Harness (src/validate_formation.py; data/processed/formation_validation.csv): BEHAVIOR there has haredi_defect 0.30, raam_joins 0.55, raam_supports 0.40, jl_supports 0.25, likud_sans_bibi 0.15. The shipped tree has shas 0.10, utj 0.15, raam_joins 0.40, raam_supports 0.60, jl_supports 0.45, likud_sans_bibi 0.18. 2009, 2013 and 2022 get P(realized)=1.0 (log score 0), so the informative n is 5. On those 5 the with-defection tree averages -1.48, against -1.95 for uniform over 7 (desk computation from the CSV).",
+  "source": "COA-F08",
+  "status": "verified",
+  "model_link": "validate_formation.py and dossier s.19. The site's sentences 'log score -0.93 vs -0.92' and 'average log-loss -0.92 ... highest probability in five of eight cycles' rest on the stale parameter set."
+ },
+ "COA-F09": {
+  "claim": "Exchange-traded markets give an external benchmark for the formation layer, and on 15 Oct 2026 they price a repeat election far below the model. Kalshi's 'Prime Minister of Israel after the 2026 election?' contracts resolve to 'No one' if new elections are called before a government forms, which is the same definition as the model's repeat outcome. Its candidate prices leave little room for that outcome. Polymarket's larger market resolves to the next PM sworn in following the 2026 election. That appears to include one sworn in after a repeat election, since it resolves 'Other' only if no PM is sworn in by 31 Dec 2027, so its prices are not directly comparable to the model's.",
+  "quant": "Kalshi (15 Oct re-pull): mids Eisenkot 0.455, Netanyahu 0.265, Bennett 0.13, Liberman 0.045; sum bids 0.85, asks 1.13, mids 0.99; implied P(no one) about 0.01 (mid), range 0 to 0.15; no explicit 'No one' strike. Likud-alternative mids about 0.04 (Kalshi), 0.006 (Polymarket).",
+  "source": "COA-F09",
+  "status": "corrected",
+  "model_link": "Repeat-election residual (outcome 7, 0.453 [0.35-0.54]) and the 'rotation / Likud successor' PM row (0.061; markets price Likud alternatives at about 0.01-0.02 in total)."
+ },
+ "COA-F10": {
+  "claim": "Prediction markets typically produce fairly accurate forecasts that beat most moderately sophisticated benchmarks, and well-designed contracts can reveal probabilities. Market design matters, and thin markets and contract wording limit what prices mean. This makes a liquid, same-definition market a legitimate benchmark for the formation layer, not a target to fit.",
+  "quant": "Review across prediction contexts (abstract). No coalition-specific accuracy figures. Coalition-formation markets have no peer-reviewed track record that this desk could locate.",
+  "source": "COA-F10",
+  "status": "verified",
+  "model_link": "How to use COA-F09: as a pre-registered external benchmark scored with the same log score on resolution, not as an input."
+ },
+ "COA-F11": {
+  "claim": "Failed formation is rare in the Israeli record. Of 25 Knesset elections from 1949 to 2022, 23 produced a government; the only two that did not were April and September 2019. Since 1996 the count is 10 of 12. In the parliamentary era since 2003 it is 8 of 10. Formation takes about seven weeks and has lengthened. Every government since 2009 took 49 days or more from election to start date, and 2020-22 took 58-82 days.",
+  "quant": "ParlGov, first non-caretaker cabinet: n=23 formed of 25; median 51 days, mean 53.8 (51.5 / 54.3 only if 1949 is dropped); max 100 (1955). Since 1996: median 52.5 (2003 = 34 in ParlGov, 31 by the 28 Feb 2003 formation date).",
+  "source": "COA-F11",
+  "status": "corrected",
+  "model_link": "P(repeat election) = 0.453 (p05-p95 0.35-0.54), the largest single outcome in the 15 Oct build. Also the site's formation calendar."
+ },
+ "COA-F12": {
+  "claim": "Delays in forming a government come from uncertainty about which cabinets are acceptable. Bargaining complexity (more parties, more polarisation) lengthens formation only when that uncertainty is present. Bäck et al. (2024; atlas D10-F09, verified) add that pre-electoral blocs short of a majority delay formation and can cause breakdown. Both describe the 2026 configuration: two blocs, each short of 61.",
+  "quant": "16 West European countries, 1944-1998 (abstract). Bäck et al.: 17 countries 1945-2019, plus the Swedish 2018-19 case.",
+  "source": "COA-F12",
+  "status": "verified",
+  "model_link": "Supports a higher-than-historical repeat risk and a long formation window for 2026. It explains delay, not failure, so it does not license a 61% conditional failure rate (see COA-F11 and the challenges)."
+ },
+ "COA-F13": {
+  "claim": "Basic Law: The Government sets the sequence that the tree collapses into one step. After consultations the President tasks an MK within 7 days, choosing by recommendations and list size; neither binds him. That MK has 28 days, extendable by 14. A second MK may then get 28 days. After that, a 21-day window lets 61 MKs name a candidate in writing, who gets 14 days. Failure means deemed dissolution, with an election within about 90 days (atlas D10-F16, verified). The first mandate need not go to the largest list: Netanyahu got it in 2009 with 65 recommendations to Livni's 28, although Kadima had won 28 seats to Likud's 27 (atlas D10-F17, corrected). Recommendation counts were 55-54 in Sept 2019 and 61 for Gantz in March 2020 (atlas D10-F18, corrected).",
+  "quant": "s.7: 7 days. s.8: 28+14 days. s.9: second MK, 28 days. s.10: 21 days, then 14 days. s.11: dissolution. 2026 calendar (atlas D10-F16): results about 4 Nov, mandate about 11 Nov, first mandate ends 9 Dec or 23 Dec with extension, second ends about 23 Jan 2027, s.10 window ends about 13 Feb; a repeat election falls between April and May 2027.",
+  "source": "COA-F13",
+  "status": "verified",
+  "model_link": "Outcome 7 (repeat) is the end of a three-stage process. The tree has no 'who is tasked first' stage: PM_ALLOC is drawn within outcome classes, so formateur advantage and the President's discretion do not enter. Glasgow, Golder & Golder (2011) find that presidents can influence PM choice."
+ },
+ "COA-F14": {
+  "claim": "Investiture rules decide whether minority governments are a live option. A requirement to hold an investiture vote does not by itself reduce minority cabinets; only an absolute-majority decision rule does. Israel's investiture needs only a simple majority of those voting, held after the government is formed (Akirav 2022; Basic Law s.13(d), atlas D10-F21). The Bennett-Lapid government was approved 60-59-1.",
+  "quant": "26 European countries since 1946 or democratisation: absolute-majority investiture rules make minority governments considerably less likely, while other investiture features do not (abstract). Israel: approval by a simple majority; Bennett-Lapid 60-59 with one Ra'am abstention (13 June 2021; atlas D10-F21). Akirav (2022, Journal of Legislative Studies 30(1):1-24, doi:10.1080/13572334.2021.2024397) classifies Israel's rule as a simple-majority, ex-post vote.",
+  "source": "COA-F14",
+  "status": "verified",
+  "model_link": "Outcome 5 (centre minority backed by the Joint List) and its arithmetic minority_ce > present/2 with abstainers removed. That is legally correct for Israel's plurality rule."
+ },
+ "COA-F15": {
+  "claim": "Minority governments are a normal outcome in parliamentary democracies. They are not a sign of crisis: they form when opposition parties can influence policy and when governing carries an electoral cost (Strøm 1990; Strøm 1984 puts them at about 35% of postwar governments in 15 democracies, atlas D10-F11). With written support agreements they last as long as majority governments (atlas D10-F12). Israel has done this: Rabin's government lost its majority in Sept 1993 and survived about two years on Hadash and Arab Democratic Party votes from outside (atlas D10-F23). Peres's new government of 22 Nov 1995 was formed on the same Labor-Meretz-Yi'ud coalition, below 61 seats.",
+  "quant": "Peres II (22 Nov 1995): Labor-Meretz-Yi'ud, 58 seats (Wikipedia) or 59 at 1992 election sizes (ParlGov); Hadash + ADP (5) supported from outside.",
+  "source": "COA-F15",
+  "status": "corrected",
+  "model_link": "Outcome 5 and jl_supports 0.45, raam_supports 0.60, liberman_minority_ok 0.25. Challenges the site's sentence that 'no Israeli minority government has been sworn in from day one'. That holds for post-election formations but not for the mid-term Peres government of Nov 1995."
+ },
+ "COA-F16": {
+  "claim": "Israel has signed three premiership-rotation agreements, and their record is mixed. Peres-Shamir (1984) was honoured on the two-year date. Netanyahu-Gantz (2020) was never executed: the government collapsed over the budget in Dec 2020, before the Nov 2021 rotation date. Bennett-Lapid (2021) transferred the premiership early, on 1 July 2022, through the statutory trigger added in 2020-21. The Basic Law now makes rotation legally enforceable, with dissolution and budget-failure triggers (atlas D10-F19, verified; D10-F24; D10-F26).",
+  "quant": "Rotations agreed: 3. The premiership passed in 2 of them (1986 on schedule; 2022 early, by law) and never passed in 1 (2020). ToI (18 Nov 2020): Netanyahu 'is to serve as prime minister until November 17, 2021, when Gantz will succeed him', and 'if the government falls due to failure to pass the state budget, Netanyahu retains the premiership'. The budget-failure dissolution came in Dec 2020 (IDI 2021 election page, atlas D10-F25). Amendment No. 10 later added budget failure as an early-rotation trigger (atlas D10-F19).",
+  "source": "COA-F16",
+  "status": "verified",
+  "model_link": "PM_ALLOC: the 'rotation / Likud successor' column and the Together-vs-Yashar flip rule. The model's PM is the first PM sworn in, which the record supports, because second-half rotations are often not reached."
+ },
+ "COA-F17": {
+  "claim": "The largest party usually supplies the prime minister, but not always. Across 28 European countries the largest party took the premiership in 72.8% (West) and 77.5% (East) of PM selection opportunities, and the largest-party bonus varies sharply across cases. Israel since 1996 matches: the largest list's leader became PM in 7 of 10 governments formed. The exceptions were 1996 (direct election), 2009 (Kadima first, Netanyahu PM) and 2021 (Bennett with 7 seats). Formateurs also gain a bonus over their seat weight in portfolio share (Ansolabehere et al. 2005; atlas D10-F10).",
+  "quant": "369 PM selection opportunities, 2,412 potential PM parties (p.944). Largest party PM: 72.8% West, 77.5% East (p.945). In Western Europe the largest party is advantaged about 67% of the time and disadvantaged about 33% (random-coefficient SD 4.73 around a mean of 2.11, p.945). Israel 1996-2022 from ParlGov seats and cabinets: 7/10; 6/8 since 2003.",
+  "source": "COA-F17",
+  "status": "verified",
+  "model_link": "PM_ALLOC change rows: Eisenkot, leader of the largest change list, gets 0.64-0.85, flipping to Bennett when Together outweighs Yashar. These shares match the comparative rate."
+ },
+ "COA-F18": {
+  "claim": "UTJ and its components historically refused full ministerial posts on principle, with exceptions since 2015. Since the 1990s their only non-Likud-led government was Barak's in 1999, which they left in September 1999 over Sabbath work. Shas has been far more mobile. It sat in the 1984 unity government (Peres PM for the first two years), joined Rabin in 1992, Barak in 1999 and Olmert in 2006 (atlas D10-F28, corrected), and stayed out in 2003, 2013-15 and 2021. When a non-Likud premier was viable, Shas joined 3 times in 4 (1992, 1999, 2006 yes; 2021 no). UTJ joined once in 4 (1999).",
+  "quant": "Shas, non-Likud premier viable: joined 1984 (Peres unity), 1992, 1999, 2006; declined 1990 (Peres), Oct 2008 (Livni), Feb 2009 (recommended Netanyahu), 2021. That is 4 of 8, or 3 of 6 excluding unity and the direct-election 1999; 0 of 3 since 2008. UTJ/components: joined 1999 only (about 1 of 6 on the same cases).",
+  "source": "COA-F18",
+  "status": "corrected",
+  "model_link": "shas_defects 0.10 (NEFF 30) and utj_defects 0.15 (NEFF 16), with COND anchors 'Shas 1992, Shas+UTJ 1999'. The anchors omit Shas-Olmert 2006, which fits the pivot pattern, and the 2021 refusal."
+ },
+ "COA-F19": {
+  "claim": "Since 2019 the haredi parties have tied themselves to Netanyahu's bloc in writing. After the September 2019 election Likud, Shas, UTJ and Yamina agreed to negotiate as one 55-MK bloc headed by Netanyahu. On 16 Feb 2020 Shas, UTJ and Yamina signed a letter declaring 'We'll only support Netanyahu'. In 2021 both haredi parties stayed in opposition rather than join the change government. Nissim Leon's chapter title, 'From Preference to Default' (Purdue UP 2024, pp.203-226, doi:10.2307/jj.22177844.13), states the thesis that haredi alignment with the right hardened over time; its abstract was not available, so treat it as unverified. The 2026 counter-signal is the reported mood to recommend no one and sit out for about a year (atlas D10-F29, verified).",
+  "quant": "Bloc of 55 MKs (Likud 32, Shas 9, UTJ 7, Yamina 7; Sept 2019). Loyalty letter: 16 Feb 2020, signed by Shas, UTJ and Yamina and initiated by Deri. In the bloc era (2019-22) the haredi parties joined 0 non-Likud governments.",
+  "source": "COA-F19",
+  "status": "verified",
+  "model_link": "This is the evidence for the low haredi defection priors (and why COA-F18's pre-2019 rate should be down-weighted, not adopted). It also bears on a missing branch: haredi abstention or later entry rather than defection at formation (UTJ_ABSTAINS is coded but set to 0)."
+ },
+ "COA-F20": {
+  "claim": "Liberman's vetoes are real but have bent once under pressure. In 2019 his refusal to compromise on the haredi draft law caused Israel's first-ever failure to form a government (atlas D10-F25, corrected). He has not sat with the haredi parties since. In March 2020, facing a fourth election that he called 'the worst of all possible scenarios', he softened his earlier refusal to work with the Joint List while talking with Gantz about a minority government. That government was blocked instead by two of Gantz's own MKs, Hauser and Yoaz Hendel. In 2021 he sat in a coalition with Ra'am inside.",
+  "quant": "March 2020: the JL-backed minority government lacked 61 once three centre-left MKs refused: Levy-Abekasis (10 Mar), Hendel and Hauser.",
+  "source": "COA-F20",
+  "status": "corrected",
+  "model_link": "liberman_haredi_ok 0.20 (supported by 0 of 5) and liberman_minority_ok 0.25 (one softening in two tests). The binding 2020 veto came from Hendel, whose 2026 'Zionist government only' rule the model now encodes (ZIONIST_ONLY), so the minority branch faces two independent vetoes."
+ },
+ "COA-F21": {
+  "claim": "Ra'am's 2021 entry was a first, and it came at the end of a deadlock sequence. INSS described the Bennett-Lapid coalition as the first time an Arab party joined an Israeli coalition (atlas D10-F26: first independent Arab party in decades). INSS warned the precedent would be reversible if the government proved short-lived. In the same 2021 deadlock Netanyahu also courted Ra'am: Deri offered Abbas 'exclusivity' on Arab-sector issues at the Interior Ministry, and the talks failed over Smotrich's opposition and the May 2021 Gaza operation. After four elections, both blocs treated Ra'am as available.",
+  "quant": "Ra'am 4 seats in 2021; coalition 61 including Ra'am; investiture 60-59-1 (atlas D10-F26). The government lasted about one year (dissolved 30 June 2022). Netanyahu-Ra'am contacts: ToI, 11 Aug 2022, citing Channel 12.",
+  "source": "COA-F21",
+  "status": "verified",
+  "model_link": "raam_joins 0.40 and raam_supports 0.60. The only Israeli precedent for an Arab party inside a coalition followed three repeat elections, so it says little about the first election of a new sequence."
+ },
+ "COA-F22": {
+  "claim": "Mainstream parties shut a party out when they have no pressing need to cooperate with it and can credibly say its ideology is beyond accepted norms. Size and ideology are the main determinants. When mainstream parties do take in formerly excluded partners, office, policy and votes all drive the choice, enabled by electoral shifts and convergence of positions (de Lange 2012, Political Studies 60(4):899-918, doi:10.1111/j.1467-9248.2012.00947.x).",
+  "quant": "Logistic regression on 31 Western European anti-immigration parties (abstract and repository record). Full text not opened.",
+  "source": "COA-F22",
+  "status": "verified",
+  "model_link": "raam_joins is conditioned only on arithmetic: it fires when the centre is short and Ra'am's seats close the gap. The literature says the decisive condition is 'pressing need', which in Israel rose with each repeat election in 2019-21. A first-election raam_joins should sit below the 2021-derived level."
+ },
+ "COA-F23": {
+  "claim": "The 2026 signals on Ra'am are 'not at the outset'. On 16 Sept 2026 Channel 12 reported Bedouin council heads saying Eisenkot had promised to bring Ra'am into his coalition. Yashar denied it ('These things were never said, not even by implication'). Yashar restated three tests for partners: accepting the Declaration of Independence, recognising Israel as Jewish and democratic, and serving all citizens. It added that partners must recognise Hamas as a terrorist organisation Israel must destroy, a test aimed at Abbas's July interview. Bennett and Lapid launched Together in April 2026 pledging a 'Zionist government', and Hendel rules out Arab-dependent coalitions (atlas D10-F30).",
+  "quant": "Yashar tests: Declaration of Independence values; Israel as Jewish and democratic; 'service for all'; Hamas recognised as a terrorist organisation. Bennett (JNS 27 Apr 2026): a government 'composed solely of Zionist parties, ruling out reliance on Arab parties'.",
+  "source": "COA-F23",
+  "status": "corrected",
+  "model_link": "raam_joins 0.40 versus raam_supports 0.60. The code comment 'every Jewish party still pledges no Arab party INSIDE at the outset' is now sourced as a soft anti-pact (no explicit 'never Ra'am' quote), which supports joins < supports."
+ },
+ "COA-F24": {
+  "claim": "No Israeli party has ever dropped its sitting leader after an election in order to form a government. All three unity governments kept both leaders: Peres-Shamir in 1984 and Shamir-Peres in 1988 (atlas D10-F24, verified), and Netanyahu-Gantz in 2020. The 1988 case was not a deadlock: the right-religious bloc held 65 seats and Shamir chose unity anyway. The closest comparative precedent is Spain in October 2016. After two inconclusive elections, PSOE's leader Pedro Sánchez was pushed out, and the party's federal committee voted 139-96 to abstain so that Rajoy could govern, explicitly to avoid a third election in under a year.",
+  "quant": "Israeli precedents for 'party drops leader to form': 0 in 25 Knessets (desk reading of the IDI election pages and atlas D10-F24/F25). Spain: second election June 2016; leader out 1 Oct 2016; abstention vote 23 Oct 2016 (139-96, 2 abstentions); Rajoy invested 29 Oct.",
+  "source": "COA-F24",
+  "status": "verified",
+  "model_link": "likud_sans_bibi 0.18 (NEFF 20) and its COND anchor 'unity resolved the deep deadlocks (1984/1988)' in dossier s.19, which overstates the case: 1988 was not a deadlock and neither unity dropped a leader. The comparative precedent fired only after a second failed election."
+ },
+ "COA-F25": {
+  "claim": "Laver & Schofield set the agenda the tree implements. Coalition outcomes depend on who the actors are and what motivates them (office, policy), on which coalitions form, how long they last, how payoffs are shared, and on constitutional, behavioural and historical constraints on bargaining. Their framework treats formation as constrained bargaining among motivated actors rather than seat arithmetic. That is the case for an explicit behavioural tree over a pure 'who reaches 61' rule.",
+  "quant": "Book: 328 pages, 27 tables, with case studies of European coalitions (publisher description). The original OUP 1990 edition was reissued by the University of Michigan Press in 1998.",
+  "source": "COA-F25",
+  "status": "verified",
+  "model_link": "Design of government_formation.py: actor-level behavioural gates (motivations, vetoes, institutional signatories) layered on seat arithmetic."
+ },
+ "DYN-F01": {
+  "claim": "Across 45 countries, polls become steadily more informative about the final vote as election day approaches. Early in the cycle they predict parliamentary elections better than presidential ones, and by election day the two are indistinguishable. Differences between PR and plurality systems are small. Whether Israel is in the published dataset could not be confirmed.",
+  "quant": "More than 26,000 vote-intention polls, 45 countries, 312 electoral cycles, 1942-2013. Per the authors' AJPS summary, early-cycle error is about 4 points (RMSE) in parliamentary elections against about 6 in presidential ones; PR-vs-plurality differences are 'very small' and only intermittently significant. Israel is not in the 41-country Table 1 of the 2013 working-paper version (p. 28, see DYN-F02). The published country list is in the Dataverse codebook (doi:10.7910/DVN/28856), which was not opened.",
+  "source": "DYN-F01",
+  "status": "verified",
+  "model_link": "Forward random-walk calendar (campaign_vol_weight): backs a forward variance that shrinks as the election approaches, rather than uniform sqrt(weeks)."
+ },
+ "DYN-F02": {
+  "claim": "In the full-text working-paper version, the share of vote variance explained by polls reaches 0.9 four to five months out but keeps rising, 'particularly during the last month'. Systems with more than four effective parties are the least predictable: polls barely improve between about 150 and 50 days out, then become more informative over the final ~50 days. In fragmented systems a real share of crystallisation happens late.",
+  "quant": "More than 23,500 polls, 41 countries, 245 cycles (p. 1). R-squared about 0.9 at 4-5 months, still rising in the final month (p. 15). Where the effective number of parties exceeds 4, R-squared is about 0.15 lower a year out than where it is below 3, flat from about 150 days out, then rising over the final 50 days (p. 18). Israel is not among the 41 countries in Table 1 (p. 28). Israel's effective number of parties is well above 4 in every cycle since 2009.",
+  "source": "DYN-F02",
+  "status": "verified",
+  "model_link": "campaign_vol_weight(<=35 d) = 0.64. Informs the shape: in a fragmented system the final weeks still carry real, lasting movement, so the calm-zone weight should not be cut further. The blackout days have to be carried somewhere, and they are, by the election-day shocks."
+ },
+ "DYN-F03": {
+  "claim": "In US presidential races 1952-2008, preferences are most volatile in the convention season and most stable in the final weeks, and debates rarely produce dramatic change. Final-week polls track the vote closely (r = 0.98), yet leads shrink between the final week's polls and the vote, partly because some respondents who say they will vote do not.",
+  "quant": "Leader shrinkage in Israel (D-14..D-4, complete polls): 2009 Likud 27.9 -> 27 (-0.9); 2015 Zionist Union 24.2 -> 24 (-0.2); 2019a Blue and White 30.5 -> 35 (+4.5).",
+  "source": "DYN-F03",
+  "status": "corrected",
+  "model_link": "Supports the calm final-weeks calendar. The 'lead shrinkage' finding (a mean reversion that a zero-drift random walk lacks) does not transfer to Israel: the leading list in 2009, 2015 and April 2019 did not shrink (see DYN-F09). No change recommended."
+ },
+ "DYN-F04": {
+  "claim": "Polls taken in the final three weeks have total error about twice what their reported margins imply. A large part of it is an election-level bias that all polls of the same race share, so averaging more polls does not remove it.",
+  "quant": "4,221 polls, 608 US state-level races 1998-2014, all in the final three weeks. RMSE about 3.5 percentage points, about twice the reported margin of error. Average absolute election-level bias about 2 points.",
+  "source": "AGG-F06",
+  "status": "verified",
+  "model_link": "Election-day shock stack (bloc swing sd 3.36, family shocks), fitted on final-poll errors rather than on sampling noise. Backs treating the last four days (D-4 to E-day) as a shared industry error plus real movement, not as sampling noise that more polls would average out."
+ },
+ "DYN-F05": {
+  "claim": "In Israel the final weeks' poll movement is mostly real signal. In 6 of 8 cycles the per-list error of the final-window average is lower than that of the average 3-6 weeks out. The exceptions are 2009 and April 2019, and 2015 barely improved: the three cycles whose decisive move came after the last published poll.",
+  "quant": "Per-list mean absolute error, seats: 3-6 weeks out 1.89, final window 1.53 (mean over 8 cycles). Improvement by cycle: 2009 -0.15, 2013 +0.51, 2015 +0.03, 2019a -0.40, 2019s +0.65, 2020 +0.80, 2021 +1.29, 2022 +0.20.",
+  "source": "DYN-F05",
+  "status": "verified",
+  "model_link": "Forward random walk: late poll moves are persistent, not bounces to mean-revert, which supports a zero-drift walk. It also shows that what the walk cannot see (the blackout) is where the large misses live, which the election-day shocks must carry."
+ },
+ "DYN-F06": {
+  "claim": "Two-wave surveys covering 62 elections in 10 countries show that a sizeable share of voters settle their choice in the final two months. Their shifts track which issues they rank as important and their beliefs about candidates, while their policy preferences stay stable. TV debates and exogenous disasters had no detectable effect on vote choice.",
+  "quant": "17-29% of voters decide in the final two months. About 253,000 observations, 56 TV debates, null debate effect.",
+  "source": "DYN-F06",
+  "status": "verified",
+  "model_link": "Certainty layer soft-support churn (defection d ~ Beta(mean 0.25, sd 0.12) among soft supporters). A quarter-ish movable share two months out is the right order. By D-12 the still-movable share should be smaller, which the layer gets only if the CERTAINTY inputs are refreshed."
+ },
+ "DYN-F07": {
+  "claim": "In 2015 more than a quarter of voters decided at the last minute, and they broke right. The legal ban on polls in the closing days meant the published polls missed a late Likud surge, which commentators saw continuing into election day.",
+  "quant": "Post-election survey of 1,133 voters, commissioned by New Majority, an anti-Netanyahu group: 15% decided on election day and 13% in the final days (28%). Late deciders voted 62% right-wing, 21% centrist, 16% left-wing. Final published polls had Likud at 20-23; the result was 30.",
+  "source": "DYN-F07",
+  "status": "corrected",
+  "model_link": "Certainty-layer undecided lean and the gevalt layers. The one Israeli measurement of where late deciders went points right, opposite to the 2026 lean the layer applies. The blackout window carries real movement."
+ },
+ "DYN-F08": {
+  "claim": "Israeli law bans publishing any new poll from the end of the Friday before polling day until the polls close. In 2026 that runs from the end of Friday 23 October to 22:00 on Tuesday 27 October. In every cycle 2009-2022 the last published pre-election fieldwork ended 3-4 days before election day, so about four days of opinion movement are never observed by a published poll.",
+  "quant": "Section 16(h) of the Elections (Propaganda Methods) Law 5719-1959. Last pre-election fieldwork by cycle (poll archive): 2009, 2013, 2015, 2019a, 2019s, 2021, 2022 D-4; 2020 D-3. Comparative: WAPOR/ESOMAR 2017 (133 countries), 32% have no blackout; the median among those with one is 4.5 days.",
+  "source": "DYN-F08",
+  "status": "corrected",
+  "model_link": "Projection horizon. The final refit uses the 22-23 Oct polls. The four blackout days are carried by election-day shocks fitted on final-poll-vs-result errors (dossier s.5), which is the right vehicle (see challenge 4 for a small horizon mismatch)."
+ },
+ "DYN-F09": {
+  "claim": "Every Israeli list that beat its final polls by 4 seats or more since 2009 was either in a close race for first place or a new centrist list. Three of the five trailed for first place, and three of the five were not Likud. Every shortfall of 4 seats or more was a smaller list in the surging leader's own bloc, often at the threshold. When Likud surged, its own satellites paid. The bloc-level moves were small: the right-wing bloc beat its final polls by 0.7 seats in 2015 and fell 1.7 short in April 2019. In other years the right-wing bloc beat its final polls when Likud led.",
+  "quant": "D-14..D-4, complete polls (seat sum 108-122), seats beat (result - polls): 2009 Kadima 23.3 -> 28 (+4.7), Likud 27.9 -> 27 (-0.9; Kadima trailed by 4.6); 2013 Yesh Atid +8.4, Likud-Beytenu -3.0; 2015 Likud +8.0, Jewish Home -3.8, Yachad -4.1; 2019a Likud +6.9, Blue and White +4.5, New Right -6.0, Zehut -5.9, Labor -3.5; 2019s Likud -0.1, Blue and White +1.1; 2020 Likud 33.6 -> 36 (+2.4) trailing Blue and White 33.8 -> 33 (-0.8) by 0.2; 2021 Blue and White +3.9 (+4.1 on the desk's all-rows method), Meretz +2.5; 2022 Meretz -4.6. NB bloc (Likud + right satellites + haredim, +Kulanu 2015/2019a): 2015 +0.8, 2019a -1.9 (+0.4 with Yisrael Beytenu), 2019s -3.0, 2020 +1.4, 2021 +3.0 (about 0 with Yamina), 2022 +3.7.",
+  "source": "DYN-F09",
+  "status": "corrected",
+  "model_link": "Gevalt coupling (GEVALT_SD 2.0, NB-only) and the trailing-Likud conditional (TRAIL mu 5.0, sd 4.9, half strength). Supports the zero-sum Likud-satellite structure. Challenges the Likud-only scope: the trailing beat appeared on the other side too (Kadima 2009)."
+ },
+ "DYN-F10": {
+  "claim": "In 2015 both Likud and the Zionist Union gained compared with 2013, but almost all their gains came from parties in their own bloc. Identity campaigns targeted voters inside each bloc and kept bloc boundaries clear. Kulanu was the pivotal exception.",
+  "quant": "Qualitative: nearly all big-party gains were within-bloc.",
+  "source": "DYN-F10",
+  "status": "verified",
+  "model_link": "Gevalt coupling and the bloc-swing/residual split. Backs a zero-sum, within-bloc transfer for the late surge rather than a bloc-level shift."
+ },
+ "DYN-F11": {
+  "claim": "A three-wave Israeli panel during the 2019-2020 repeat elections finds that voters switch parties to influence who becomes formateur, and abandon parties they expect to be left out of the coalition. The effect is stronger when the race between potential formateurs is seen as close.",
+  "quant": "Three online panel waves, 2019-2020. The abstract reports no effect sizes. Companion evidence: Bargsted & Kedar (AJPS 2009, atlas D1-F24) find coalition-directed desertion significant for Likud and Labor only, not for sectoral parties.",
+  "source": "STR-F07",
+  "status": "verified",
+  "model_link": "Trailing-Likud conditional. The mechanism (formateur optimisation when the race for first place is close) is not Likud-specific. It applies to whichever bloc's leader trails. 2026 has a close Yashar-Likud race for first."
+ },
+ "DYN-F12": {
+  "claim": "The closest Israeli precedent for a security-credentialed centrist list drawing soft Likud voters is Kadima in 2006, and its soft intention faded heavily before polling day. The voters it lost did not mostly return to Likud: most went to the Pensioners party.",
+  "quant": "In December 2005, 53% of 2003 Likud voters who stated an intention said Kadima; 31% actually voted Kadima. Kadima's vote was 42% ex-Likud. Individual switching reached 63% in 2006 (record). The verifier adds that most ex-Likud votes Kadima lost went to the Pensioners party.",
+  "source": "DYN-F12",
+  "status": "verified",
+  "model_link": "Certainty layer for Yashar (declared CERTAINTY 0.65) and the churn destination split (change bloc 72.5% within / 10.3% cross / 17.2% abstain). Supports material fade of a new list's soft support and a destination that is mostly not 'home'."
+ },
+ "DYN-F13": {
+  "claim": "Not all undecided Israeli voters are alike. Sophisticated undecideds (high interest and knowledge) consume more campaign news, decide on policy, are more often choosing between parties inside one bloc ('internal floaters'), and are more likely to vote than less sophisticated undecideds.",
+  "quant": "Two panel surveys before and after the April 2019 election, N = 1,427 and N = 912. The abstract gives no turnout percentages.",
+  "source": "DYN-F13",
+  "status": "verified",
+  "model_link": "U_TURNOUT = 0.65 haircut on the undecided pool (the code cites 'GIQ'). The paper backs the direction (less sophisticated undecideds under-vote) but not the 0.65 magnitude, which is the model's own derivation. It also implies the informed part of the pool mostly moves within a bloc."
+ },
+ "DYN-F14": {
+  "claim": "The latest 2026 measurement puts 11% of voters undecided, but only 5.4% of those (about 0.6% of all respondents) are torn between the blocs; the rest are choosing within a bloc. Self-reported bloc switching favours the change bloc (5% of Netanyahu-bloc intenders vs 2% the other way). In July, N12 described about 10% undecided, the same share as four years earlier.",
+  "quant": "N12 Ulpan Shishi, published 9 Oct 2026 (pollster and n not stated): 11% undecided; 5.4% of the undecided between blocs or unsure of bloc; 5% NB->change vs 2% change->NB, 70% unchanged. N12/mako 28 Jul 2026 (atlas D5-F07): about 10% undecided, 8-10 seats; 1.3% of the undecided potential cross-bloc movers.",
+  "source": "DYN-F14",
+  "status": "verified",
+  "model_link": "Certainty-layer undecided transfer (U_LEANED_FRAC 0.71, lean 0.775 anti). The cross-bloc undecided pool is tiny, so any bloc-level transfer from the undecided must come from the bloc composition of within-bloc undecideds being allocated proportionally across all lists. That composition has not been published since July."
+ },
+ "DYN-F15": {
+  "claim": "In July 2026 a JPPI survey found 53% of voters completely sure of their vote, 29% fairly sure and 14% undecided. Certainty was lowest in the centre: 71% of left-identifiers were completely sure, 58% of the right and 44% of the centre.",
+  "quant": "JPPI Israeli Society Index, July 2026 (TheMadad panel; Afkar for the Arab sample). Completely sure 53%, fairly sure 29%, undecided 14%, not voting 4%. Completely sure by ideology: left 71%, right 58%, centre 44%. n and margin not given in the report.",
+  "source": "DYN-F15",
+  "status": "verified",
+  "model_link": "CERTAINTY tiers and the soft-centre asymmetry (Together 0.47, Yashar 0.65 declared). Supports softer certainty for centre lists than for the right."
+ },
+ "DYN-F16": {
+  "claim": "The official inquiry into the 2015 UK polling miss found the primary cause was unrepresentative samples, not late swing or 'shy' voters. It recommended pollsters review how they allocate 'don't know' and refusing respondents, calling existing procedures ad hoc and lacking a coherent theoretical rationale. The peer-reviewed version (JRSS-A 2018) confirms unrepresentative sampling as the primary cause of an average 7-point error on the Conservative lead.",
+  "quant": "Average error on the Conservative-Labour lead about 7 points. Late swing contributed at most about 1 point to the lead error, per the report's executive summary as quoted in search results (the PDF itself returned 403). Don't-know allocation was named in Recommendation 3.",
+  "source": "DYN-F16",
+  "status": "verified",
+  "model_link": "Certainty-layer undecided transfer. A non-proportional allocation is a modelling choice the polling profession itself regards as unsettled, so a single lean measurement should carry little weight. Also informs 'shy' voters: deliberate misreporting was not the cause."
+ },
+ "DYN-F17": {
+  "claim": "Proportional allocation of undecided voters, a 'cleaner' ballot question and even allocation produced no significant difference in poll accuracy. Allocating undecideds neither adds to nor detracts from a poll's accuracy.",
+  "quant": "54 polls in 20 states, 2018 US midterms; absolute error, statistical accuracy and predictive accuracy compared; no significant differences.",
+  "source": "DYN-F17",
+  "status": "verified",
+  "model_link": "Certainty-layer undecided transfer. Proportional, the model's prior, is a defensible default. A departure needs a lean measurement with a track record, which no Israeli house has."
+ },
+ "DYN-F18": {
+  "claim": "Camil Fuchs, a leading Israeli pollster, said in July 2020 that undecided respondents leaned centre-left. When asked a forced bloc choice, undecideds without a party said centre-left, and the blocs drew level at 55-56 seats each. Measurement of this kind preceded, rather than predicted, the following elections: the right-wing bloc beat its final pre-blackout polls in 2021 and 2022 (DYN-F09). This is a precedent, not a test, because the remark came eight months before the 2021 election.",
+  "quant": "Right-wing bloc vs final pre-blackout polls (D-14..D-4): 2020 +1.4; 2021 +3.0 to +3.5 for the Netanyahu bloc proper, about 0 including Yamina; 2022 +3.7.",
+  "source": "DYN-F18",
+  "status": "corrected",
+  "model_link": "Certainty-layer undecided lean (N12 55/16, 30 Jul 2026). The same kind of evidence (undecideds leaning anti-Netanyahu) has no validated record of predicting final-poll error in Israel, and the record runs the other way."
+ },
+ "DYN-F19": {
+  "claim": "The 2026 pool has been resolving without the drift the July lean implies. Within the same pollster, from late July to early October the polled Netanyahu bloc rose about 1 seat while the undecided pool shrank from about 12% to the 9.65% the model now measures. Likud itself fell about 1.7, so its satellites gained. If the leaned undecideds had resolved 77.5/22.5 against Netanyahu into houses that drop undecideds, the gap should have moved about 1 seat the other way.",
+  "quant": "Within-pollster NB change Jul->Oct: mean +1.0 seats (median +0.75, se 0.63, 7 firms). Expected under the model's pooled lean about -0.17 per side; under the raw July lean with the 0.65 turnout haircut about -0.34; the desk's -0.5 omits the haircut.",
+  "source": "DYN-F19",
+  "status": "corrected",
+  "model_link": "Certainty-layer undecided transfer. This is a falsification check the layer can run every build, and so far it does not support the anti-ward drift."
+ },
+ "DYN-F20": {
+  "claim": "The worst miss in Quebec polling history (2018) was mainly a 'polling miss' rather than a methodological 'poll failure': a post-election poll attributes most of the gap to last-minute shifts and to how non-disclosers voted, with regional variation.",
+  "quant": "Qualitative in the abstract: changing voter behaviour explains 'most of the discrepancy'. Non-disclosers voted differently from disclosers. Israeli counterpart, an anecdote only: Midgam's Mina Tzemach blamed the April 2019 Channel 12 exit-poll miss (Likud 33 vs 35, Blue and White 37 vs 35) on Likud voters lying (Times of Israel, 11 Apr 2019). That is a claim, not a finding.",
+  "source": "DYN-F20",
+  "status": "corrected",
+  "model_link": "Election-day shocks and the Likud anchor. In multiparty races, late shifts and non-disclosers can produce one-sided final-poll errors. This backs fitting E-day shocks on the final-poll record, including its right-ward Likud mean (anchor -2.30), rather than assuming the undecided break mirrors stated leans."
+ },
+ "DYN-F21": {
+  "claim": "Terror attacks raise right-bloc support, and more so near an election. A local attack within three months of an election adds about 1.35 points to the right bloc's share of the two-bloc vote in that locality. Fatalities also move places beyond the attacked locality, more strongly closer to the election. At the national level, Berrebi & Klor (2006) find relative support for the right rises after periods of high terrorism and falls after calm.",
+  "quant": "+1.35 points right-bloc share per local attack within 3 months (APSR 2008). National poll evidence 1990-2003 (Berrebi & Klor, Journal of Conflict Resolution 50(6):899-925, 2006, doi 10.1177/0022002706293673). Rocket-range localities: +2 to +6 points right (Getmansky & Zeitzoff, APSR 2014; atlas D1-F30), about +4 points per 1,000 damage claims (Elster, JEBO 2019).",
+  "source": "DYN-F21",
+  "status": "verified",
+  "model_link": "EVENT_RISK on the bloc swing. Backs some election-proximate event risk, larger the closer the event is to the vote, and with a typical right-ward sign for terror."
+ },
+ "DYN-F22": {
+  "claim": "War can cut support for incumbents. The unexpected 1973 war and its casualties reduced support for incumbent parties and leaders and raised opposition support, despite military victory. Wars over a country's core territory can be politically costly.",
+  "quant": "Oct 7 2023, within-pollster (archive): 0-35 d one firm only (Lazar): Likud -8.8, NB -11.2; 35-70 d (3 firms): Likud -8.9, NB -8.7; 70-120 d (5 firms): Likud -8.0, NB -5.6.",
+  "source": "DYN-F22",
+  "status": "corrected",
+  "model_link": "EVENT_RISK. The sign of a security shock is not fixed (right-ward for terror and rallies, anti-incumbent for failures), which backs the dossier's choice of variance inflation with no mean shift."
+ },
+ "DYN-F23": {
+  "claim": "Israeli public reactions to violent escalation are immediate but brief. Long-run change in Jewish conflict attitudes follows non-violent signals (failed negotiations, leadership changes), not violence levels. For the prime minister specifically, the 2014 Gaza war produced a rally behind Netanyahu, but after October 7 trust in him tracked blame rooted in prior judicial-reform views and did not rally.",
+  "quant": "Monthly Israeli data 2001-2020 (conflict attitudes, not vote intention). Feinstein & Ben-David (POQ 90(3), 2026): waves Mar-Apr 2023 n=1,552, Oct 2023 n=1,012, Dec 2023 n=969; the 2014 doubling of Netanyahu approval to about two-thirds is reported in that paper.",
+  "source": "DYN-F23",
+  "status": "corrected",
+  "model_link": "EVENT_RISK horizon. Event effects decay, so the event-risk premium belongs to the share of the remaining calendar in which an event can occur and still matter on election day. It is not a constant."
+ },
+ "DYN-F24": {
+  "claim": "In this cycle's own poll archive, security events moved the Netanyahu bloc little and briefly. The one exception is the October 7 failure. War rallies lifted Likud 1-3 seats for up to five weeks, mostly at its satellites' expense, and were gone within 5-10 weeks. Ordinary two-week bloc movement has sd 1.2 seats.",
+  "quant": "EVENT_RISK 1.2 adds about 2.9 seats of bloc sd (t5 scale 3.36 -> sd 4.33). Hazard-scaled multiplier with sigma 4.33: 1.02-1.14 at D-58, 1.005-1.036 at D-12. Events listed: 8 in about 36 months (about 0.0073/day). Oct 7 0-35 d figures from 1 pollster. Persistence at 70-120 d: Lebanon Sep 2024 Likud +2.7; Gaza ceasefire Oct 2025 NB +2.4.",
+  "source": "DYN-F24",
+  "status": "corrected",
+  "model_link": "EVENT_RISK = 1.2 adds about 2.2 seats of bloc sd (sqrt(4.03^2 - 3.36^2)) to every draw. On this record the hazard-weighted event variance over 12 days is 0.17-1.41 seats^2 (excluding or including an Oct-7-class shock), equivalent to a multiplier of 1.01-1.06. The same arithmetic at D-56, when 1.2 was set (30 Aug), gives 1.03-1.22. The forward tau, fitted on this war-era archive, already carries some event movement."
+ },
+ "EVAL-F01": {
+  "claim": "A scoring rule is strictly proper when issuing one's true predictive distribution uniquely maximises the expected score, so proper scores reward careful, honest forecasts. For a central (1 - alpha) prediction interval [l, u] the proper score is the interval score S = (u - l) + (2/alpha)(l - x)1{x < l} + (2/alpha)(x - u)1{x > u}: a narrow interval is rewarded and every unit by which the outcome misses is charged 2/alpha. In the paper's case study three 95% interval forecasts all had close to nominal coverage, the sharpest was not the best, and the interval score (not coverage) ranked them.",
+  "quant": "Eq. (43), Section 6.2, p. 370; case study Section 6.3 and Table 2, p. 371 (100,000 one-step forecasts of a bilinear process). Model: validate_bayes.py and validate_horizon.py compute exactly this score at alpha = 0.10, i.e. (hi - lo) + 20 x miss in seats. Restated baseline (CLR latent, ballot-fidelity windows, 3 seeds, dossier s.46): eve 9.280, D-7 9.430, D-21 9.622 seats per list.",
+  "source": "COA-F08",
+  "status": "verified",
+  "model_link": "Harness metric interval_score (validate_bayes.py, validate_horizon.py). Also bears on the shipping rule, which uses coverage, an improper criterion, as a pass/fail constraint (see EVAL-F03)."
+ },
+ "EVAL-F02": {
+  "claim": "Brier proposed scoring probability forecasts of a binary event by the mean squared difference between the stated probability and the 0/1 outcome (0 is perfect, lower is better). It is the standard verification score for yes/no events and is what the model uses for threshold passage and for the bloc-majority probability. Because it is an average over events, pooling many near-certain events (lists sure to pass) shrinks it without saying anything about the hard cases, so it needs a stratified or skill-score companion.",
+  "quant": "Monthly Weather Review 78(1):1-3. Brier defined P = (1/n) sum_i sum_j (f_ij - E_ij)^2 over all r classes (0 perfect, 2 worst); for a binary event twice the one-component (p - o)^2 score now called the Brier score (per secondary sources; original scan not opened).",
+  "source": "EVAL-F02",
+  "status": "corrected",
+  "model_link": "threshold_brier and bloc Brier in the harness; the site's 'Threshold Brier score, election eve' tile."
+ },
+ "EVAL-F03": {
+  "claim": "Probabilistic forecasts should maximise sharpness subject to calibration. Calibration (statistical consistency between forecasts and outcomes) comes first, and among calibrated forecasts the sharper one is better. A hump-shaped PIT or rank histogram signals overdispersed forecasts whose prediction intervals are too wide on average, and sharpness is read from the average width of the central 50% and 90% intervals. Over-coverage is therefore a calibration failure, not a safety margin.",
+  "quant": "Summary p. 243; PIT shapes p. 253; Section 3.3 (sharpness via 50% and 90% interval widths) p. 255. Model: 90% coverage .981 (eve), .990 (D-7) and .990 (D-21) on the s.46 yardstick. In the 13 Oct horizon file 7 of 8 cycles cover 100% at both D-7 and D-21, with 1-2 misses in about 91 list-cycles where 9 are expected (binomial P(<=1 miss | 10%) = 0.0008, ignoring within-cycle dependence). s.46 width grid: every leave-one-cycle-out fold picks a residual width of 0.6 or 0.7. At 0.6 the scores are MAE 1.609, Brier .043, interval score 8.773 and coverage .960, all better than the shipped 0.9 (1.626 / .047 / 9.302 / .981).",
+  "source": "EVAL-F03",
+  "status": "verified",
+  "model_link": "Per-list residual shock width (RESID_SCALE 0.9), the shock stack and the forward random walk. Also the site caption 'above it, the intervals are conservative' and the claim that 0.9 'wins every leave-one-cycle-out fold'."
+ },
+ "EVAL-F04": {
+  "claim": "When forecasts are issued as central intervals, the weighted interval score (WIS) combines the absolute error of the median with interval scores at K levels, using weights w0 = 1/2 and wk = alpha_k/2. It is proper for any non-negative weights, approximates the CRPS as K grows, generalises absolute error, and decomposes into a dispersion term plus over- and under-prediction penalties. The COVID-19 Forecast Hub scores the median plus K = 11 intervals (nominal 98%, 95%, 90%, ..., 10%). Inverse-U PIT histograms mark overdispersed forecasts.",
+  "quant": "Eqs. (1)-(3) and the Forecast Hub specification (arXiv 2005.12881, p. 4); PIT discussion p. 9. Model: the harness scores one level only (90%, alpha = 0.10). The 50% and 80% ranges, where most list outcomes are decided, are never graded.",
+  "source": "EVAL-F04",
+  "status": "verified",
+  "model_link": "interval_score in the harness (single 90% level); the published seat ranges."
+ },
+ "EVAL-F05": {
+  "claim": "For count (ordered discrete) outcomes the ordinary probability integral transform is not uniform even when the model is correct, so calibration checks designed for continuous variables mislead. The authors give a nonrandomised PIT histogram, marginal calibration diagrams and proper scores (such as the predictive deviance) for counts, usable with any Bayesian or classical model.",
+  "quant": "Biometrics 65(4):1254-1261. Model: seats are integers, and harness coverage counts a hit when the actual count is >= the 5th and <= the 95th percentile of integer seat draws. A calibrated discrete forecast therefore covers at least 90%, usually more, and a list whose range starts at 0 is covered whenever it fails. Part of the 98-99% coverage is this artefact. The rest is real overdispersion, which the s.46 interval-score gains from narrower widths show.",
+  "source": "EVAL-F05",
+  "status": "verified",
+  "model_link": "coverage_90 in validate_bayes.py and validate_horizon.py; the site's coverage-by-horizon chart."
+ },
+ "EVAL-F06": {
+  "claim": "Point forecasts are meaningful only when the scoring function is fixed in advance, or the forecaster is told which functional (mean, median, quantile) to report, and the scoring function must be consistent for that functional. Mismatches can produce grossly misguided comparisons. Quantiles, including the median, are elicited by generalised piecewise-linear scores such as absolute error; means are elicited by Bregman scores such as squared error.",
+  "quant": "JASA 106(494):746-762 (abstract). Model: s.28 reports the median beating the mean by ~0.09 seats per list 'in every configuration'. Under absolute-error scoring that is the expected result, not independent evidence. The published central count is a third object (the median share vector, renormalised and D'Hondt-allocated). MAE per list in the 13 Oct horizon harness, published central vs per-list seat median: D-7 1.696 vs 1.628, D-21 1.887 vs 1.831, D-56 2.558 vs 2.511. The shipping rule grades the per-list median, not what the site prints.",
+  "source": "EVAL-F06",
+  "status": "verified",
+  "model_link": "The central seat count (median share vector) and the shipping rule's median-MAE criterion (harness_compare.py)."
+ },
+ "EVAL-F07": {
+  "claim": "Few proper scores exist for multivariate forecasts. The energy score is the usual choice for sample (ensemble) forecasts but has limited power to detect a wrongly specified correlation between components. Variogram-based scores, built from pairwise differences between components, were distinctly more sensitive to errors in the correlation structure in simulations and in a five-site wind case study. They are proper but not strictly proper, so the authors use them alongside other scores.",
+  "quant": "Monthly Weather Review 143(4):1321-1334 (abstract; Sec 2 p.1324; Sec 3d p.1327; Sec 4 p.1330; Sec 5 pp.1332-1333).",
+  "source": "EVAL-F07",
+  "status": "verified",
+  "model_link": "Correlated bloc swing, gevalt coupling, trailing-Likud sourcing, family shocks: the layers that produce P(NB>=61)."
+ },
+ "EVAL-F08": {
+  "claim": "Election forecasts are hard to evaluate for calibration. 95% intervals cannot be checked even on 10 back-tested elections, and sub-unit results are correlated, so pooling them adds less than it seems. Implausible conditional predictions are a practical check. They can come from adding independent long-tailed errors on top of a correlated model, which lowers the effective correlation, and the authors found bugs in their own model by inspecting such predictions. Because calibration is so hard to verify, forecasters face incentives toward underconfidence, which hedges against the reputational cost of a miss. FiveThirtyEight's political 20% events happened 14% of the time and its 80% events 88%.",
+  "quant": "Judgment and Decision Making 15(5):863-880. Sec 2.1 pp.866-867; Sec 2.3 pp.867-868; Sec 3.1-3.2 pp.872-873; p.873: per the Boice & Wezerek (2019) calibration plot, 538's political '20% really means 14%, and their 80% really means 88%', flagged as based on few elections.",
+  "source": "EVAL-F08",
+  "status": "corrected",
+  "model_link": "Validation scope (8 cycles), the bloc headline, residual vs bloc-swing structure, and the site's framing of over-wide intervals as 'conservative'."
+ },
+ "EVAL-F09": {
+  "claim": "Calibration means that events given X% happen about X% of the time across many forecasts; FiveThirtyEight checks it over thousands of its own forecasts since 2008. Calibration alone is not skill: giving every NCAA team a 1-in-68 chance is calibrated and useless, so FiveThirtyEight also reports Brier skill scores. Its election forecasts have historically leaned underconfident.",
+  "quant": "FiveThirtyEight, 4 Apr 2019: of 5,589 events forecast at 70%, 71% happened; of 55,853 near 5%, 4% happened; candidates given 75% won 83% (generally not statistically significant).",
+  "source": "EVAL-F09",
+  "status": "corrected",
+  "model_link": "The site's track-record section (calibration, then sharpness) and the threshold reliability chart."
+ },
+ "EVAL-F10": {
+  "claim": "In survey experiments, people shown a win probability were more confident about who was ahead and who would win than people shown a vote-share projection with a margin of error, and participants in every format misjudged the chance of winning. In an incentivised voting game, higher win probabilities (but not larger vote-share leads) reduced paying to vote. Small vote-share leads map to large win probabilities, which readers misread.",
+  "quant": "Journal of Politics 82(4):1530-1544 (Oct 2020). Study 1 n = 4,151 (hypothetical Senate race, three formats); study 2 n = 1,171 (economic game). Design and n from the Pew Research summary of 6 Feb 2018; citation from Crossref.",
+  "source": "EVAL-F10",
+  "status": "verified",
+  "model_link": "Site headline probabilities: P(NB>=61), bloc and PM probabilities."
+ },
+ "EVAL-F11": {
+  "claim": "In a repeated decision experiment on transit predictions, quantile dotplots (50 discrete outcomes) and CDF plots led to better and more consistent decisions than textual interval displays. Dotplots reached about 97% of the optimal expected payoff, 5 points above the no-uncertainty control. Text displays were sensitive to which interval level was communicated.",
+  "quant": "Proc. ACM CHI 2018; dotplot gain over control +5 percentage points of optimal payoff (95% CI 2 to 8); within-subject SD 4 points lower than control.",
+  "source": "EVAL-F11",
+  "status": "verified",
+  "model_link": "Site display of seat ranges and the bloc distribution."
+ },
+ "EVAL-F12": {
+  "claim": "Leave-one-out cross-validation estimates pointwise out-of-sample predictive accuracy. Computed per held-out unit, it also gives approximate standard errors for each model's predictive error and for the difference between two models, which should accompany any comparison.",
+  "quant": "Statistics and Computing 27(5):1413-1432 (abstract). Model: leave-one-cycle-out is the grouped (leave-one-group-out) form with 8 groups. harness_compare.py prints pooled deltas and win/tie/loss counts but no standard error of the paired difference across folds.",
+  "source": "EVAL-F12",
+  "status": "verified",
+  "model_link": "The leave-one-cycle-out harness design and harness_compare.py reporting."
+ },
+ "EVAL-F13": {
+  "claim": "When data have temporal, spatial or hierarchical structure, random cross-validation seriously underestimates predictive error. Folds should be blocked on the dependence structure, even when fitted residuals look uncorrelated, though blocking can force extrapolation and so overstate error.",
+  "quant": "Ecography 40(8):913-929, abstract p. 913. Model: whole cycles are the right block. But 2019a, 2019s, 2020 and 2021 fell within 23 months with largely the same lists, so those four folds are not independent of each other; s.43 notes that the Arab slope k 'rests on 2019a'.",
+  "source": "EVAL-F13",
+  "status": "verified",
+  "model_link": "Fold design of validate_bayes.py and validate_horizon.py."
+ },
+ "EVAL-F14": {
+  "claim": "For time series, leave-one-out cross-validation lets future observations inform predictions of the past, so it is over-optimistic as a measure of forecasting skill. Leave-future-out cross-validation respects time order, and Pareto-smoothed importance sampling can approximate it without one refit per step.",
+  "quant": "Journal of Statistical Computation and Simulation 90(14):2499-2523 (2020), abstract. Model: when 2015 is graded, the trailing-Likud mean comes from 2019a and 2019s (only 3 trailing years exist; s.36). The Arab a and k, the new-straddler drift and the industry shocks also borrow later elections. The site says each election 'was forecast again ... using only the polls published before each date', which is true of the polls but not of these parameters.",
+  "source": "EVAL-F14",
+  "status": "verified",
+  "model_link": "LOO parameterisation in decompose(), trailing_likud_params, new_straddler_params, arab_turnout_params and the firm scorecards; the site's track-record sentence."
+ },
+ "EVAL-F15": {
+  "claim": "When cross-validation is used both to tune a model and to report its error, the reported error is substantially optimistic. On null datasets with no real signal, tuned classifiers showed low CV error while their independent-test performance was at chance. Nested CV (tuning inside an inner loop, error estimated in an outer loop) was nearly unbiased, so every selection step must be repeated inside each fold.",
+  "quant": "BMC Bioinformatics 7:91 (2006), abstract: the tuned shrunken-centroid classifier's CV error was below 30% on 18.5% of null training sets. Model: arab_regB was chosen among nine graded arms (s.43c), trail_sat among five variants (s.41) and the residual width from a 6-point grid, each graded on the folds that chose it. The exception is the width grid's printed 'LOO width choices', which is already a nested selection.",
+  "source": "EVAL-F15",
+  "status": "verified",
+  "model_link": "Arm selection in validate_bayes.ABLATIONS; the restated baselines; the width grid."
+ },
+ "EVAL-F16": {
+  "claim": "Even without deliberate fishing, analysis choices that would have gone differently had the data come out differently create a 'garden of forking paths': many implicit comparisons, whose winner looks better than it is.",
+  "quant": "American Scientist 102(6):460-465 (Nov-Dec 2014).",
+  "source": "EVAL-F16",
+  "status": "corrected",
+  "model_link": "The harness ablation list, restated baselines and the round-by-round candidate process."
+ },
+ "EVAL-F17": {
+  "claim": "Pre-registration, which fixes the questions and the analysis plan before the outcomes are seen, separates testing predictions from generating postdictions, a line that hindsight bias otherwise blurs. Partial strategies keep it usable when the data already exist.",
+  "quant": "PNAS 115(11):2600-2606 (abstract). Model: the dossier already pre-registers some choices. trail_sat was the PRIMARY arm with the others marked sensitivity (s.41). The combine plan's G1/G2 gates were applied as written and dropped the ramp (s.46). The undecided half-weight was fixed in advance (s.11). The 2026 election is the one truly unseen outcome.",
+  "source": "EVAL-F17",
+  "status": "verified",
+  "model_link": "Candidate grading protocol; the final 2026 build."
+ },
+ "EVAL-F18": {
+  "claim": "The Diebold-Mariano test was meant for comparing forecasts, not models. The belief that pseudo-out-of-sample analysis is the best insurance against in-sample overfitting in model comparison is largely false, and in finite samples it widens the scope for data mining (for example over the choice of sample split). Its legitimate use is learning about comparative historical predictive performance.",
+  "quant": "JBES 33(1):1-9 (2015); NBER WP 18391 (2012), abstract and the discussion of split-point mining (WP PDF p. 13). Model: the eight-cycle harness is a pseudo-out-of-sample exercise used as the model-selection device, so its numbers for the shipped configuration are selection-affected.",
+  "source": "EVAL-F18",
+  "status": "verified",
+  "model_link": "Use of the harness as both selector and scorer; the site's statement of backtest accuracy."
+ },
+ "EVAL-F19": {
+  "claim": "Election forecasts built on a few historical elections usually overstate their certainty, because they ignore uncertainty in coefficient estimates and in specification choices; with limited data, many models are empirically justifiable. Once those sources were accounted for, 95% intervals widened to about +/-10 points of vote share at the state level and +/-7 nationally.",
+  "quant": "new-straddler drift re-measured at -0.42 pp on CEC vote shares (n 11, s.46.1; -0.33 pp was s.41 on nine lists)",
+  "source": "EVAL-F19",
+  "status": "verified",
+  "model_link": "Arab turnout term (ARAB_TURNOUT_K, ARAB_TURNOUT_INTERCEPT), the trailing-Likud layer and the new-straddler layer."
+ },
+ "EVAL-F20": {
+  "claim": "Rank-normalised split-R-hat should be below 1.01 (the old 1.1 rule passes chains that have not converged), with at least four chains. Rank-normalised bulk ESS should exceed 400 for stable Monte Carlo standard errors. When intervals or quantiles are reported, the tail-ESS (at the 5% and 95% quantiles) must also be adequate, and the MCSE should be checked for every quantity of interest.",
+  "quant": "Bayesian Analysis 16(2):667-718, doi 10.1214/20-BA1221; arXiv Sec. 2 pp. 4-5. Site renders 'r-hat <= 1.02, bulk ESS >= 261' (from fit_summary.json; 332 is only the template fallback).",
+  "source": "EVAL-F20",
+  "status": "corrected",
+  "model_link": "bayes_model.REFIT_GATES and diagnostics(); harness fits (600/600 draws at eve, 400/400 at the horizons); headline precision."
+ },
+ "EVAL-F21": {
+  "claim": "The No-U-Turn Sampler removes Hamiltonian Monte Carlo's hand-tuned path length by extending trajectories until they begin to double back, and adapts the step size by dual averaging. It performs at least as efficiently as well-tuned HMC without costly tuning runs.",
+  "quant": "JMLR 15(47):1593-1623 (abstract). Model: PyMC NUTS with 4 chains, target_accept 0.92 and 800/800 production draws (bayes_model.fit).",
+  "source": "EVAL-F21",
+  "status": "verified",
+  "model_link": "Posterior sampler for the state-space poll model."
+ },
+ "EVAL-F22": {
+  "claim": "Divergent transitions flag regions of high curvature that the numerical integrator cannot resolve. Any divergence should prompt suspicion of the estimates, and divergences that persist as the step size shrinks indicate bias that calls for reparameterisation (for example non-centred forms) or stronger priors. These diagnostics are necessary but not sufficient for valid inference.",
+  "quant": "arXiv 1701.02434 v2: Section 6.2, p. 45; Section 6.3 (limitations of diagnostics). Model: 0 divergences in production fits and in 23 of 24 CLR-fidelity harness windows; 2020 D-7 has 1 (s.46).",
+  "source": "EVAL-F22",
+  "status": "verified",
+  "model_link": "Divergence monitoring in diagnostics() and in the harness (divergences column)."
+ },
+ "EVAL-F23": {
+  "claim": "Model fit is assessed by posterior predictive checks with realised discrepancies T(y, theta): functions of the data and the parameters, chosen to probe the aspects of the model that matter, and computed as a by-product of the posterior simulation.",
+  "quant": "Statistica Sinica 6(4):733-807 (abstract and issue record). Model: the production PPC is one in-sample number, the share of poll observations inside a 95% band built from the 2.5th percentile of draw-wise lower bounds and the 97.5th of upper bounds (bayes_model.posterior_predictive_check); docs/bayesian_workflow.md reports ~98% inside. No discrepancy targets the forecast's use, such as final-fortnight house-effect residuals, within-firm residual autocorrelation or the spread of final-week polls.",
+  "source": "EVAL-F23",
+  "status": "verified",
+  "model_link": "bayes_model.posterior_predictive_check; the 14-day holdout."
+ },
+ "EVAL-F24": {
+  "claim": "A Bayesian workflow validates computation with fake-data simulation (refitting data simulated from known parameters) and, more thoroughly, with simulation-based calibration, which needs many refits. It also warns that picking one model from many similar ones by minimising cross-validation error overfits and gives suboptimal choices, and recommends projection-predictive selection or stacking instead.",
+  "quant": "arXiv 2011.01808 (2020): Sections 4.1, 4.2, 8.2 and 8.3. Model: there is one fake-data replicate, from 29 Aug, with 6 lists x 20 weeks (90% of true trajectories inside 90% CIs; tau recovery r 0.88; house effects 0.94; docs/bayesian_workflow.md s.3), on the earlier ALR model. The production model has since gained the CLR latent, structural breaks, CEC raw-share filings and an undecided-noise term, and now has 21 lists x 45 weekly bins.",
+  "source": "EVAL-F24",
+  "status": "verified",
+  "model_link": "workflow_bayes.py (recovery stage); candidate selection among arms."
+ },
+ "EVAL-F25": {
+  "claim": "Pareto-smoothed importance sampling stabilises importance weights, and its fitted Pareto shape k-hat is a reliability diagnostic. Estimates are trustworthy when k-hat < min(1 - 1/log10(S), 0.7). Above 0.7 they should not be trusted, and the affected leave-one-out folds should be refit exactly (PSIS-LOO+) or replaced by K-fold CV.",
+  "quant": "JMLR 25(72):1-58: Sec. 3.2.4 (Eq. 13), Sec. 5.2.2 p. 24, Sec. 6.",
+  "source": "EVAL-F25",
+  "status": "verified",
+  "model_link": "Model ladder (PSIS-LOO M0-M3) in workflow_bayes.py; any future poll-level LOO-PIT."
+ }
+}

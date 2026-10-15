@@ -1,0 +1,641 @@
+{
+ "desk": "EVAL",
+ "desk_name": "forecast-evaluation",
+ "date": "2026-10-15",
+ "summary": "The forecast's validation machinery is serious by the standard of published election models. Every layer is graded leave-one-cycle-out on eight Knesset elections at up to four horizons, with proper scores (the interval score and the Brier score), multiple seeds, a fixed list mask, adversarial leak audits and written disclosures. The literature supports the core design. The harness's interval score is exactly the Gneiting-Raftery proper score for central intervals, the Brier score is the standard binary score, blocking folds by election follows Roberts et al. and the leave-one-group-out logic of Vehtari, Gelman and Gabry, the site's 'calibrated first, then sharp' framing is Gneiting-Balabdaoui-Raftery's, and NUTS with divergence monitoring is standard practice. The literature challenges current practice in five places. (1) Calibration. At the published horizon the intervals are not 'conservative' but too wide: the 90% bands cover 98-99% of list results at eve, D-7 and D-21 on the s.46 yardstick. On that yardstick every leave-one-cycle-out fold picks a residual width of 0.6-0.7, and 0.6 beats the shipped 0.9 on MAE, threshold Brier and interval score. The shipping gate 'must not lose coverage' blocks the move toward 90% because it scores any drop from 98% as a loss. Some of the excess is an artefact of integer seat counts (Czado-Gneiting-Held) and should be measured with a discrete PIT. (2) Selection. There are 32 arms in the eve harness, 54 proposals and 14 candidates in round five, an Arab arm chosen among nine, three baseline restatements in three days, and a two-route shipping rule whose fold route counts |d| < 0.1 as a tie, so a layer that fires in two cycles passes with 2 wins and 6 ties. Varma and Simon, Gelman and Loken, the Bayesian Workflow and Diebold all say that grading choices on the record that selected them overstates performance. The remedies are one pre-declared primary proper score, a paired fold test with a seed-noise floor, nested leave-one-cycle-out for any arm picked from variants, and a frozen, pre-registered 2026 forecast scored after 27 October. (3) Time direction. Leave-one-cycle-out lets 2019-2022 set the parameters used to grade 2009-2015 (Burkner, Gabry and Vehtari). A leave-future-out grade should sit beside it, and the site sentence 'using only the polls published before each date' should say that the layer parameters come from the other seven elections. (4) What is scored. The graded point estimate (per-list median seats) is not the one published (the median share vector, allocated), which is 0.05-0.07 seats per list worse, and 'median beats mean' is guaranteed by absolute-error scoring (Gneiting 2011). All scores are per-list marginals, so the dependence layers that drive P(NB>=61) are graded only through a bloc Brier on eight outcomes. WIS over eleven levels and energy or variogram scores would use the record better. Gelman, Hullman, Wlezien and Morris show why eight elections cannot certify a 14% probability. (5) Computation and communication. The production gates (r-hat <= 1.02, bulk ESS >= 300, one reseed) are looser than Vehtari et al.'s standard (r-hat < 1.01, bulk and tail ESS > 400). The 14 October fit had ESS 261, and sigma_g does not mix at harness draw counts. The fake-data recovery is a single August replicate on an older model, and the PSIS-LOO ladder carried undisclosed Pareto-k warnings. Headline probabilities move by up to 1.3 points across projection seeds, so a decimal place overstates precision. Win probabilities read as more certain than vote shares (Westwood, Messing and Lelkes), and quantile dotplots improve decisions (Fernandes et al.). Nine challenges below turn these into harness or evidence-class tests.",
+ "findings": [
+  {
+   "id": "EVAL-F01",
+   "claim": "A scoring rule is strictly proper when issuing one's true predictive distribution uniquely maximises the expected score, so proper scores reward careful, honest forecasts. For a central (1 - alpha) prediction interval [l, u] the proper score is the interval score S = (u - l) + (2/alpha)(l - x)1{x < l} + (2/alpha)(x - u)1{x > u}: a narrow interval is rewarded and every unit by which the outcome misses is charged 2/alpha. In the paper's case study three 95% interval forecasts all had close to nominal coverage, the sharpest was not the best, and the interval score (not coverage) ranked them.",
+   "quant": "Eq. (43), Section 6.2, p. 370; case study Section 6.3 and Table 2, p. 371 (100,000 one-step forecasts of a bilinear process). Model: validate_bayes.py and validate_horizon.py compute exactly this score at alpha = 0.10, i.e. (hi - lo) + 20 x miss in seats. Restated baseline (CLR latent, ballot-fidelity windows, 3 seeds, dossier s.46): eve 9.280, D-7 9.430, D-21 9.622 seats per list.",
+   "source": {
+    "authors": "Tilmann Gneiting; Adrian E. Raftery",
+    "year": 2007,
+    "title": "Strictly Proper Scoring Rules, Prediction, and Estimation",
+    "venue": "Journal of the American Statistical Association 102(477):359-378",
+    "doi_or_url": "https://doi.org/10.1198/016214506000001437",
+    "type": "peer-reviewed",
+    "verification": "full text read (abstract p. 359; Sections 6.2-6.3, pp. 370-371)"
+   },
+   "model_link": "Harness metric interval_score (validate_bayes.py, validate_horizon.py). Also bears on the shipping rule, which uses coverage, an improper criterion, as a pass/fail constraint (see EVAL-F03).",
+   "stance": "supports",
+   "site_use": "Each list's 90% range is scored with the interval score (Gneiting & Raftery 2007), which charges for the width of the range and, twenty-fold, for every seat by which the result falls outside it."
+  },
+  {
+   "id": "EVAL-F02",
+   "claim": "Brier proposed scoring probability forecasts of a binary event by the mean squared difference between the stated probability and the 0/1 outcome (0 is perfect, lower is better). It is the standard verification score for yes/no events and is what the model uses for threshold passage and for the bloc-majority probability. Because it is an average over events, pooling many near-certain events (lists sure to pass) shrinks it without saying anything about the hard cases, so it needs a stratified or skill-score companion.",
+   "quant": "Monthly Weather Review 78(1):1-3. Model: pooled threshold Brier .0474 at eve on the s.46 yardstick averages 9-13 lists per cycle, most with p ~ 1 and outcome 1. On straddlers alone the same machinery scored 0.226 (D-56) and 0.234 (D-21) after the new-straddler layer (s.36), about five times the pooled figure. Bloc P(NB>=61) Brier over 8 outcomes, from model_validation_bayes.csv and model_validation_horizon.csv (13 Oct runs): eve 0.030 (se 0.010), D-7 0.037 (se 0.016), D-21 0.058 (se 0.029), D-56 0.158 (se 0.062). A constant base-rate forecast (3 of 8) scores 0.234.",
+   "source": {
+    "authors": "Glenn W. Brier",
+    "year": 1950,
+    "title": "Verification of Forecasts Expressed in Terms of Probability",
+    "venue": "Monthly Weather Review 78(1):1-3",
+    "doi_or_url": "https://doi.org/10.1175/1520-0493(1950)078<0001:VOFEIT>2.0.CO;2",
+    "type": "peer-reviewed",
+    "verification": "bibliographic record and definition verified (NOAA repository, MWR DOI); full scan not re-read"
+   },
+   "model_link": "threshold_brier and bloc Brier in the harness; the site's 'Threshold Brier score, election eve' tile.",
+   "stance": "informs",
+   "site_use": "Threshold Brier score: the average squared gap between the stated chance of clearing 3.25% and what happened (Brier 1950). Reported over all lists and, separately, over the lists the model rated between 5% and 95%."
+  },
+  {
+   "id": "EVAL-F03",
+   "claim": "Probabilistic forecasts should maximise sharpness subject to calibration. Calibration (statistical consistency between forecasts and outcomes) comes first, and among calibrated forecasts the sharper one is better. A hump-shaped PIT or rank histogram signals overdispersed forecasts whose prediction intervals are too wide on average, and sharpness is read from the average width of the central 50% and 90% intervals. Over-coverage is therefore a calibration failure, not a safety margin.",
+   "quant": "Summary p. 243; PIT shapes p. 253; Section 3.3 (sharpness via 50% and 90% interval widths) p. 255. Model: 90% coverage .981 (eve), .990 (D-7) and .990 (D-21) on the s.46 yardstick. In the 13 Oct horizon file 7 of 8 cycles cover 100% at both D-7 and D-21, with 1-2 misses in about 91 list-cycles where 9 are expected (binomial P(<=1 miss | 10%) = 0.0008, ignoring within-cycle dependence). s.46 width grid: every leave-one-cycle-out fold picks a residual width of 0.6 or 0.7. At 0.6 the scores are MAE 1.609, Brier .043, interval score 8.773 and coverage .960, all better than the shipped 0.9 (1.626 / .047 / 9.302 / .981).",
+   "source": {
+    "authors": "Tilmann Gneiting; Fadoua Balabdaoui; Adrian E. Raftery",
+    "year": 2007,
+    "title": "Probabilistic forecasts, calibration and sharpness",
+    "venue": "Journal of the Royal Statistical Society: Series B 69(2):243-268",
+    "doi_or_url": "https://doi.org/10.1111/j.1467-9868.2007.00587.x",
+    "type": "peer-reviewed",
+    "verification": "full text read (pp. 243, 253, 255)"
+   },
+   "model_link": "Per-list residual shock width (RESID_SCALE 0.9), the shock stack and the forward random walk. Also the site caption 'above it, the intervals are conservative' and the claim that 0.9 'wins every leave-one-cycle-out fold'.",
+   "stance": "challenges",
+   "site_use": "Replace 'above it, the intervals are conservative' with: 'Above the line the ranges are wider than they need to be; a calibrated forecast sits on the line (Gneiting, Balabdaoui & Raftery 2007).'"
+  },
+  {
+   "id": "EVAL-F04",
+   "claim": "When forecasts are issued as central intervals, the weighted interval score (WIS) combines the absolute error of the median with interval scores at K levels, using weights w0 = 1/2 and wk = alpha_k/2. It is proper for any non-negative weights, approximates the CRPS as K grows, generalises absolute error, and decomposes into a dispersion term plus over- and under-prediction penalties. The COVID-19 Forecast Hub scores the median plus K = 11 intervals (nominal 98%, 95%, 90%, ..., 10%). Inverse-U PIT histograms mark overdispersed forecasts.",
+   "quant": "Eqs. (1)-(3) and the Forecast Hub specification (arXiv 2005.12881, p. 4); PIT discussion p. 9. Model: the harness scores one level only (90%, alpha = 0.10). The 50% and 80% ranges, where most list outcomes are decided, are never graded.",
+   "source": {
+    "authors": "Johannes Bracher; Evan L. Ray; Tilmann Gneiting; Nicholas G. Reich",
+    "year": 2021,
+    "title": "Evaluating epidemic forecasts in an interval format",
+    "venue": "PLOS Computational Biology 17(2):e1008618",
+    "doi_or_url": "https://doi.org/10.1371/journal.pcbi.1008618",
+    "type": "peer-reviewed",
+    "verification": "full text read (arXiv version, pp. 4 and 9)"
+   },
+   "model_link": "interval_score in the harness (single 90% level); the published seat ranges.",
+   "stance": "challenges",
+   "site_use": "new claim: 'Each list's whole seat distribution is graded with the weighted interval score over eleven ranges (Bracher et al. 2021), not only the 90% range.'"
+  },
+  {
+   "id": "EVAL-F05",
+   "claim": "For count (ordered discrete) outcomes the ordinary probability integral transform is not uniform even when the model is correct, so calibration checks designed for continuous variables mislead. The authors give a nonrandomised PIT histogram, marginal calibration diagrams and proper scores (such as the predictive deviance) for counts, usable with any Bayesian or classical model.",
+   "quant": "Biometrics 65(4):1254-1261. Model: seats are integers, and harness coverage counts a hit when the actual count is >= the 5th and <= the 95th percentile of integer seat draws. A calibrated discrete forecast therefore covers at least 90%, usually more, and a list whose range starts at 0 is covered whenever it fails. Part of the 98-99% coverage is this artefact. The rest is real overdispersion, which the s.46 interval-score gains from narrower widths show.",
+   "source": {
+    "authors": "Claudia Czado; Tilmann Gneiting; Leonhard Held",
+    "year": 2009,
+    "title": "Predictive Model Assessment for Count Data",
+    "venue": "Biometrics 65(4):1254-1261",
+    "doi_or_url": "https://doi.org/10.1111/j.1541-0420.2009.01191.x",
+    "type": "peer-reviewed",
+    "verification": "abstract and Crossref metadata verified; full text not opened"
+   },
+   "model_link": "coverage_90 in validate_bayes.py and validate_horizon.py; the site's coverage-by-horizon chart.",
+   "stance": "challenges",
+   "site_use": "Coverage is measured with the discrete-data PIT of Czado, Gneiting & Held (2009), which corrects for seat counts being whole numbers."
+  },
+  {
+   "id": "EVAL-F06",
+   "claim": "Point forecasts are meaningful only when the scoring function is fixed in advance, or the forecaster is told which functional (mean, median, quantile) to report, and the scoring function must be consistent for that functional. Mismatches can produce grossly misguided comparisons. Quantiles, including the median, are elicited by generalised piecewise-linear scores such as absolute error; means are elicited by Bregman scores such as squared error.",
+   "quant": "JASA 106(494):746-762 (abstract). Model: s.28 reports the median beating the mean by ~0.09 seats per list 'in every configuration'. Under absolute-error scoring that is the expected result, not independent evidence. The published central count is a third object (the median share vector, renormalised and D'Hondt-allocated). MAE per list in the 13 Oct horizon harness, published central vs per-list seat median: D-7 1.696 vs 1.628, D-21 1.887 vs 1.831, D-56 2.558 vs 2.511. The shipping rule grades the per-list median, not what the site prints.",
+   "source": {
+    "authors": "Tilmann Gneiting",
+    "year": 2011,
+    "title": "Making and Evaluating Point Forecasts",
+    "venue": "Journal of the American Statistical Association 106(494):746-762",
+    "doi_or_url": "https://doi.org/10.1198/jasa.2011.r10138",
+    "type": "peer-reviewed",
+    "verification": "abstract verified (preprint text); theorems not re-read"
+   },
+   "model_link": "The central seat count (median share vector) and the shipping rule's median-MAE criterion (harness_compare.py).",
+   "stance": "challenges",
+   "site_use": "The central seat count is the forecast's median, and it is graded with the absolute seat error, the score for which the median is the right summary (Gneiting 2011)."
+  },
+  {
+   "id": "EVAL-F07",
+   "claim": "Few proper scores exist for multivariate forecasts. The energy score is the usual choice for sample (ensemble) forecasts but has limited power to detect a wrongly specified correlation between components. Variogram-based scores, built from pairwise differences between components, were distinctly more sensitive to errors in the correlation structure in simulations and in a five-site wind case study. They are proper but not strictly proper, so the authors use them alongside other scores.",
+   "quant": "Monthly Weather Review 143(4):1321-1334 (abstract). Model: every harness score is per list (marginal), except the bloc Brier on 8 binary outcomes. The dependence features (the t(5) bloc swing, gevalt coupling, the satellite-sourced trailing-Likud beat and the Arab family term) move P(NB>=61) by several points (s.41: 20.9 -> 13.5 from the satellite sourcing alone), yet they are graded only through marginals.",
+   "source": {
+    "authors": "Michael Scheuerer; Thomas M. Hamill",
+    "year": 2015,
+    "title": "Variogram-Based Proper Scoring Rules for Probabilistic Forecasts of Multivariate Quantities",
+    "venue": "Monthly Weather Review 143(4):1321-1334",
+    "doi_or_url": "https://doi.org/10.1175/MWR-D-14-00269.1",
+    "type": "peer-reviewed",
+    "verification": "abstract verified (NOAA Institutional Repository record)"
+   },
+   "model_link": "Correlated bloc swing, gevalt coupling, trailing-Likud sourcing, family shocks: the layers that produce P(NB>=61).",
+   "stance": "challenges",
+   "site_use": "new claim: 'The joint seat outcome of each past election is also scored with energy and variogram scores, which test whether the model gets the co-movement of lists right.'"
+  },
+  {
+   "id": "EVAL-F08",
+   "claim": "Election forecasts are hard to evaluate for calibration. 95% intervals cannot be checked even on 10 back-tested elections, and sub-unit results are correlated, so pooling them adds less than it seems. Implausible conditional predictions are a practical check. They can come from adding independent long-tailed errors on top of a correlated model, which lowers the effective correlation, and the authors found bugs in their own model by inspecting such predictions. Because calibration is so hard to verify, forecasters face incentives toward underconfidence, which hedges against the reputational cost of a miss. FiveThirtyEight's political 20% events happened 14% of the time and its 80% events 88%.",
+   "quant": "Judgment and Decision Making 15(5):863-880. Section 2.1 (difficulty of calibration) p. 866; implausible predictions and correlation p. 868; incentives and the 538 calibration figures p. 873. Model: 8 graded elections, with the bloc P(NB>=61) graded on 8 outcomes. If the 2026 headline (~13-14%) were exactly calibrated, eight such forecasts would see no NB majority 30% of the time (0.86^8), so the record cannot tell 14% from 5% or 25%. The independent per-list residual shock (x1.35 for first-cycle lists) sits on top of a t(5) bloc swing, which is the structure the paper flags.",
+   "source": {
+    "authors": "Andrew Gelman; Jessica Hullman; Christopher Wlezien; George Elliott Morris",
+    "year": 2020,
+    "title": "Information, incentives, and goals in election forecasts",
+    "venue": "Judgment and Decision Making 15(5):863-880",
+    "doi_or_url": "https://doi.org/10.1017/S1930297500007981",
+    "type": "peer-reviewed",
+    "verification": "full text read (pp. 863, 866, 868, 873); DOI verified via Crossref"
+   },
+   "model_link": "Validation scope (8 cycles), the bloc headline, residual vs bloc-swing structure, and the site's framing of over-wide intervals as 'conservative'.",
+   "stance": "challenges",
+   "site_use": "Eight elections cannot certify a 14% probability. The record checks the machinery list by list, and the bloc number should be read with that limit in mind (Gelman, Hullman, Wlezien & Morris 2020)."
+  },
+  {
+   "id": "EVAL-F09",
+   "claim": "Calibration means that events given X% happen about X% of the time across many forecasts; FiveThirtyEight checks it over thousands of its own forecasts since 2008. Calibration alone is not skill: giving every NCAA team a 1-in-68 chance is calibrated and useless, so FiveThirtyEight also reports Brier skill scores. Its election forecasts have historically leaned underconfident.",
+   "quant": "FiveThirtyEight, 4 Apr 2019: of 5,589 events forecast near 70%, 71% happened; of 55,853 events near 5%, 4% happened; in elections, candidates given ~75% won ~83%. Model: the only near-adequate samples for a calibration check are list-level threshold passage (~90 list-cycles) and the formation outcomes (8).",
+   "source": {
+    "authors": "Nate Silver",
+    "year": 2019,
+    "title": "When We Say 70 Percent, It Really Means 70 Percent",
+    "venue": "FiveThirtyEight (4 April 2019)",
+    "doi_or_url": "https://fivethirtyeight.com/features/when-we-say-70-percent-it-really-means-70-percent/",
+    "type": "report",
+    "verification": "full text read via the author's syndicated copy (Goodreads author blog); the fivethirtyeight.com URL now redirects"
+   },
+   "model_link": "The site's track-record section (calibration, then sharpness) and the threshold reliability chart.",
+   "stance": "supports",
+   "site_use": "A good probabilistic forecast is first calibrated (things it calls 70% likely happen about 70% of the time) and then sharp. This is the standard FiveThirtyEight applies to its own record (Silver 2019)."
+  },
+  {
+   "id": "EVAL-F10",
+   "claim": "In survey experiments, people shown a win probability were more confident about who was ahead and who would win than people shown a vote-share projection with a margin of error, and participants in every format misjudged the chance of winning. In an incentivised voting game, higher win probabilities (but not larger vote-share leads) reduced paying to vote. Small vote-share leads map to large win probabilities, which readers misread.",
+   "quant": "Journal of Politics 82(4):1530-1544 (Oct 2020). Study 1 n = 4,151 (hypothetical Senate race, three formats); study 2 n = 1,171 (economic game). Design and n from the Pew Research summary of 6 Feb 2018; citation from Crossref.",
+   "source": {
+    "authors": "Sean Jeremy Westwood; Solomon Messing; Yphtach Lelkes",
+    "year": 2020,
+    "title": "Projecting Confidence: How the Probabilistic Horse Race Confuses and Demobilizes the Public",
+    "venue": "The Journal of Politics 82(4):1530-1544",
+    "doi_or_url": "https://doi.org/10.1086/708682",
+    "type": "peer-reviewed",
+    "verification": "Crossref metadata and Pew Research summary verified; journal full text not opened (publisher 403)"
+   },
+   "model_link": "Site headline probabilities: P(NB>=61), bloc and PM probabilities.",
+   "stance": "informs",
+   "site_use": "Probabilities are shown next to the seat ranges they come from, because a win probability on its own reads as more certain than it is (Westwood, Messing & Lelkes 2020)."
+  },
+  {
+   "id": "EVAL-F11",
+   "claim": "In a repeated decision experiment on transit predictions, quantile dotplots (50 discrete outcomes) and CDF plots led to better and more consistent decisions than textual interval displays. Dotplots reached about 97% of the optimal expected payoff, 5 points above the no-uncertainty control. Text displays were sensitive to which interval level was communicated.",
+   "quant": "Proc. ACM CHI 2018; dotplot gain over control +5 percentage points of optimal payoff (95% CI 2 to 8); within-subject SD 4 points lower than control.",
+   "source": {
+    "authors": "Michael Fernandes; Logan Walls; Sean Munson; Jessica Hullman; Matthew Kay",
+    "year": 2018,
+    "title": "Uncertainty Displays Using Quantile Dotplots or CDFs Improve Transit Decision-Making",
+    "venue": "Proceedings of the 2018 CHI Conference on Human Factors in Computing Systems",
+    "doi_or_url": "https://doi.org/10.1145/3173574.3173718",
+    "type": "peer-reviewed",
+    "verification": "abstract and results summary verified (UW Interactive Data Lab paper page)"
+   },
+   "model_link": "Site display of seat ranges and the bloc distribution.",
+   "stance": "informs",
+   "site_use": "new claim: show the bloc total as a dotplot of 50 simulated Knessets, not only as a probability and a 90% range."
+  },
+  {
+   "id": "EVAL-F12",
+   "claim": "Leave-one-out cross-validation estimates pointwise out-of-sample predictive accuracy. Computed per held-out unit, it also gives approximate standard errors for each model's predictive error and for the difference between two models, which should accompany any comparison.",
+   "quant": "Statistics and Computing 27(5):1413-1432 (abstract). Model: leave-one-cycle-out is the grouped (leave-one-group-out) form with 8 groups. harness_compare.py prints pooled deltas and win/tie/loss counts but no standard error of the paired difference across folds.",
+   "source": {
+    "authors": "Aki Vehtari; Andrew Gelman; Jonah Gabry",
+    "year": 2017,
+    "title": "Practical Bayesian model evaluation using leave-one-out cross-validation and WAIC",
+    "venue": "Statistics and Computing 27(5):1413-1432",
+    "doi_or_url": "https://doi.org/10.1007/s11222-016-9696-4",
+    "type": "peer-reviewed",
+    "verification": "abstract and bibliographic record verified"
+   },
+   "model_link": "The leave-one-cycle-out harness design and harness_compare.py reporting.",
+   "stance": "supports",
+   "site_use": "Every layer is gated on an eight-cycle backtest in which each election is predicted with parameters estimated from the other seven (leave-one-group-out cross-validation; Vehtari, Gelman & Gabry 2017)."
+  },
+  {
+   "id": "EVAL-F13",
+   "claim": "When data have temporal, spatial or hierarchical structure, random cross-validation seriously underestimates predictive error. Folds should be blocked on the dependence structure, even when fitted residuals look uncorrelated, though blocking can force extrapolation and so overstate error.",
+   "quant": "Ecography 40(8):913-929, abstract p. 913. Model: whole cycles are the right block. But 2019a, 2019s, 2020 and 2021 fell within 23 months with largely the same lists, so those four folds are not independent of each other; s.43 notes that the Arab slope k 'rests on 2019a'.",
+   "source": {
+    "authors": "David R. Roberts; Volker Bahn; Simone Ciuti; Mark S. Boyce; Jane Elith; Gurutzeta Guillera-Arroita; Severin Hauenstein; Jose J. Lahoz-Monfort; Boris Schroder; Wilfried Thuiller; David I. Warton; Brendan A. Wintle; Florian Hartig; Carsten F. Dormann",
+    "year": 2017,
+    "title": "Cross-validation strategies for data with temporal, spatial, hierarchical, or phylogenetic structure",
+    "venue": "Ecography 40(8):913-929",
+    "doi_or_url": "https://doi.org/10.1111/ecog.02881",
+    "type": "peer-reviewed",
+    "verification": "full text opened (abstract p. 913; model-selection section p. 917)"
+   },
+   "model_link": "Fold design of validate_bayes.py and validate_horizon.py.",
+   "stance": "supports",
+   "site_use": "Folds are whole elections, never individual polls, because polls within a campaign are not independent (Roberts et al. 2017)."
+  },
+  {
+   "id": "EVAL-F14",
+   "claim": "For time series, leave-one-out cross-validation lets future observations inform predictions of the past, so it is over-optimistic as a measure of forecasting skill. Leave-future-out cross-validation respects time order, and Pareto-smoothed importance sampling can approximate it without one refit per step.",
+   "quant": "Journal of Statistical Computation and Simulation 90(14):2499-2523 (2020), abstract. Model: when 2015 is graded, the trailing-Likud mean comes from 2019a and 2019s (only 3 trailing years exist; s.36). The Arab a and k, the new-straddler drift and the industry shocks also borrow later elections. The site says each election 'was forecast again ... using only the polls published before each date', which is true of the polls but not of these parameters.",
+   "source": {
+    "authors": "Paul-Christian Burkner; Jonah Gabry; Aki Vehtari",
+    "year": 2020,
+    "title": "Approximate leave-future-out cross-validation for Bayesian time series models",
+    "venue": "Journal of Statistical Computation and Simulation 90(14):2499-2523",
+    "doi_or_url": "https://doi.org/10.1080/00949655.2020.1783262",
+    "type": "peer-reviewed",
+    "verification": "abstract verified (arXiv 1902.06281); citation verified via Crossref"
+   },
+   "model_link": "LOO parameterisation in decompose(), trailing_likud_params, new_straddler_params, arab_turnout_params and the firm scorecards; the site's track-record sentence.",
+   "stance": "challenges",
+   "site_use": "Qualify the site sentence: '... using only the polls published before each date, with layer parameters estimated from the other seven elections (some of them later than the one graded).'"
+  },
+  {
+   "id": "EVAL-F15",
+   "claim": "When cross-validation is used both to tune a model and to report its error, the reported error is substantially optimistic. On null datasets with no real signal, tuned classifiers showed low CV error while their independent-test performance was at chance. Nested CV (tuning inside an inner loop, error estimated in an outer loop) was nearly unbiased, so every selection step must be repeated inside each fold.",
+   "quant": "BMC Bioinformatics 7:91 (2006), abstract: the tuned shrunken-centroid classifier's CV error was below 30% on 18.5% of null training sets. Model: arab_regB was chosen among nine graded arms (s.43c), trail_sat among five variants (s.41) and the residual width from a 6-point grid, each graded on the folds that chose it. The exception is the width grid's printed 'LOO width choices', which is already a nested selection.",
+   "source": {
+    "authors": "Sudhir Varma; Richard Simon",
+    "year": 2006,
+    "title": "Bias in error estimation when using cross-validation for model selection",
+    "venue": "BMC Bioinformatics 7:91",
+    "doi_or_url": "https://doi.org/10.1186/1471-2105-7-91",
+    "type": "peer-reviewed",
+    "verification": "abstract verified (Europe PMC record; 18.5% figure from the abstract)"
+   },
+   "model_link": "Arm selection in validate_bayes.ABLATIONS; the restated baselines; the width grid.",
+   "stance": "challenges",
+   "site_use": "new claim / disclosure: 'Where a layer was chosen among variants, its backtest gain is reported from nested leave-one-cycle-out: the variant is chosen on seven elections and scored on the eighth.'"
+  },
+  {
+   "id": "EVAL-F16",
+   "claim": "Even without deliberate fishing, analysis choices that would have gone differently had the data come out differently create a 'garden of forking paths': many implicit comparisons, whose winner looks better than it is.",
+   "quant": "American Scientist 102(6):460 (2014). Model: 32 named arms sit in validate_bayes.ABLATIONS today, and round five merged 54 proposals into 14 candidates (s.41). The baseline was restated three times between 13 and 15 Oct (s.41, s.43, s.46), and each new candidate is graded against the latest one. The trailing-Likud ramp passed the fold route on one harness (2 wins, 6 ties) and failed the Brier gate on the other (s.46).",
+   "source": {
+    "authors": "Andrew Gelman; Eric Loken",
+    "year": 2014,
+    "title": "The Statistical Crisis in Science",
+    "venue": "American Scientist 102(6):460 (magazine article; a shortened version of the 2013 working paper 'The garden of forking paths')",
+    "doi_or_url": "https://doi.org/10.1511/2014.111.460",
+    "type": "report",
+    "verification": "Crossref metadata verified; argument verified via the authors' blog and secondary sources; full text not opened"
+   },
+   "model_link": "The harness ablation list, restated baselines and the round-by-round candidate process.",
+   "stance": "challenges",
+   "site_use": "The decision log lists every configuration graded, so readers can see how many were tried before each change shipped."
+  },
+  {
+   "id": "EVAL-F17",
+   "claim": "Pre-registration, which fixes the questions and the analysis plan before the outcomes are seen, separates testing predictions from generating postdictions, a line that hindsight bias otherwise blurs. Partial strategies keep it usable when the data already exist.",
+   "quant": "PNAS 115(11):2600-2606 (abstract). Model: the dossier already pre-registers some choices. trail_sat was the PRIMARY arm with the others marked sensitivity (s.41). The combine plan's G1/G2 gates were applied as written and dropped the ramp (s.46). The undecided half-weight was fixed in advance (s.11). The 2026 election is the one truly unseen outcome.",
+   "source": {
+    "authors": "Brian A. Nosek; Charles R. Ebersole; Alexander C. DeHaven; David T. Mellor",
+    "year": 2018,
+    "title": "The preregistration revolution",
+    "venue": "Proceedings of the National Academy of Sciences 115(11):2600-2606",
+    "doi_or_url": "https://doi.org/10.1073/pnas.1708274114",
+    "type": "peer-reviewed",
+    "verification": "abstract and bibliographic record verified"
+   },
+   "model_link": "Candidate grading protocol; the final 2026 build.",
+   "stance": "supports",
+   "site_use": "Before election day the final configuration and its scoring plan are frozen and published, so the 2026 result grades the model honestly."
+  },
+  {
+   "id": "EVAL-F18",
+   "claim": "The Diebold-Mariano test was meant for comparing forecasts, not models. The belief that pseudo-out-of-sample analysis is the best insurance against in-sample overfitting in model comparison is largely false, and in finite samples it widens the scope for data mining (for example over the choice of sample split). Its legitimate use is learning about comparative historical predictive performance.",
+   "quant": "JBES 33(1):1-9 (2015); NBER WP 18391 (2012), abstract and the discussion of split-point mining (WP PDF p. 13). Model: the eight-cycle harness is a pseudo-out-of-sample exercise used as the model-selection device, so its numbers for the shipped configuration are selection-affected.",
+   "source": {
+    "authors": "Francis X. Diebold",
+    "year": 2015,
+    "title": "Comparing Predictive Accuracy, Twenty Years Later: A Personal Perspective on the Use and Abuse of Diebold-Mariano Tests",
+    "venue": "Journal of Business & Economic Statistics 33(1):1-9",
+    "doi_or_url": "https://doi.org/10.1080/07350015.2014.983236",
+    "type": "peer-reviewed",
+    "verification": "full text of the NBER working-paper version read (abstract; split-point mining passage); journal record verified"
+   },
+   "model_link": "Use of the harness as both selector and scorer; the site's statement of backtest accuracy.",
+   "stance": "challenges",
+   "site_use": "The backtest numbers describe the historical performance of a configuration that was selected on them. They are not a clean out-of-sample estimate."
+  },
+  {
+   "id": "EVAL-F19",
+   "claim": "Election forecasts built on a few historical elections usually overstate their certainty, because they ignore uncertainty in coefficient estimates and in specification choices; with limited data, many models are empirically justifiable. Once those sources were accounted for, 95% intervals widened to about +/-10 points of vote share at the state level and +/-7 nationally.",
+   "quant": "International Journal of Forecasting 31(3):965-979, abstract p. 965 and p. 966. Model: the Arab term uses full-sample point values a = -0.634 (se 0.41) and k = 0.247 (se 0.21), n = 8 (s.43 b, d). The trailing-Likud beat is drawn as Normal(LOO mean, sd) from n = 3 (mean +5.0, sd 4.9; s.36) without the mean's own standard error (~2.8). The new-straddler drift of -1.6 pp comes from 11 lists and re-measured at -0.33 pp on vote shares (s.41).",
+   "source": {
+    "authors": "Benjamin E. Lauderdale; Drew Linzer",
+    "year": 2015,
+    "title": "Under-performing, over-performing, or just performing? The limitations of fundamentals-based presidential election forecasting",
+    "venue": "International Journal of Forecasting 31(3):965-979",
+    "doi_or_url": "https://doi.org/10.1016/j.ijforecast.2015.03.002",
+    "type": "peer-reviewed",
+    "verification": "full text read (author's ungated copy, pp. 965-966, 978)"
+   },
+   "model_link": "Arab turnout term (ARAB_TURNOUT_K, ARAB_TURNOUT_INTERCEPT), the trailing-Likud layer and the new-straddler layer.",
+   "stance": "challenges",
+   "site_use": "Parameters estimated from a handful of elections are drawn from their own uncertainty in every simulation, not fixed at their best estimate (Lauderdale & Linzer 2015)."
+  },
+  {
+   "id": "EVAL-F20",
+   "claim": "Rank-normalised split-R-hat should be below 1.01 (the old 1.1 rule passes chains that have not converged), with at least four chains. Rank-normalised bulk ESS should exceed 400 for stable Monte Carlo standard errors. When intervals or quantiles are reported, the tail-ESS (at the 5% and 95% quantiles) must also be adequate, and the MCSE should be checked for every quantity of interest.",
+   "quant": "Bayesian Analysis 16(2):667-718; arXiv version Section 2 (recommendations), pp. 4-5. Model: REFIT_GATES are r-hat <= 1.02 and bulk ESS >= 300, bulk only (bayes_model.py). The 14 Oct production fit had r-hat 1.02 and min bulk ESS 261 (fit_summary.json); the first CLR refit had 1.04 / 98 and the reseed 1.01 / 395 (s.46). Harness caches show sigma_g r-hat 1.07-1.79 at 400-600 draws (s.46). Site: 'r-hat <= 1.02, bulk ESS >= 332'. On one posterior, projection seeds move P(NB>=61) to 14.4 / 13.1 / 13.5 (SD 0.67 pp).",
+   "source": {
+    "authors": "Aki Vehtari; Andrew Gelman; Daniel Simpson; Bob Carpenter; Paul-Christian Burkner",
+    "year": 2021,
+    "title": "Rank-Normalization, Folding, and Localization: An Improved R-hat for Assessing Convergence of MCMC",
+    "venue": "Bayesian Analysis 16(2):667-718 (journal pagination not re-checked this session)",
+    "doi_or_url": "https://arxiv.org/abs/1903.08008",
+    "type": "peer-reviewed",
+    "verification": "full text read (arXiv 1903.08008, Section 2, pp. 4-5); journal DOI not re-verified (Crossref rate-limited)"
+   },
+   "model_link": "bayes_model.REFIT_GATES and diagnostics(); harness fits (600/600 draws at eve, 400/400 at the horizons); headline precision.",
+   "stance": "challenges",
+   "site_use": "The current fit passes the standard convergence checks: rank-normalised r-hat below 1.01 and bulk and tail effective sample sizes above 400 (Vehtari et al. 2021). The headline probability is shown to the nearest point, its Monte Carlo error."
+  },
+  {
+   "id": "EVAL-F21",
+   "claim": "The No-U-Turn Sampler removes Hamiltonian Monte Carlo's hand-tuned path length by extending trajectories until they begin to double back, and adapts the step size by dual averaging. It performs at least as efficiently as well-tuned HMC without costly tuning runs.",
+   "quant": "JMLR 15(47):1593-1623 (abstract). Model: PyMC NUTS with 4 chains, target_accept 0.92 and 800/800 production draws (bayes_model.fit).",
+   "source": {
+    "authors": "Matthew D. Hoffman; Andrew Gelman",
+    "year": 2014,
+    "title": "The No-U-Turn Sampler: Adaptively Setting Path Lengths in Hamiltonian Monte Carlo",
+    "venue": "Journal of Machine Learning Research 15(47):1593-1623",
+    "doi_or_url": "https://jmlr.org/papers/v15/hoffman14a.html",
+    "type": "peer-reviewed",
+    "verification": "abstract and bibliographic record verified"
+   },
+   "model_link": "Posterior sampler for the state-space poll model.",
+   "stance": "supports",
+   "site_use": "The poll model is fitted with the No-U-Turn sampler (Hoffman & Gelman 2014): four chains, each checked for divergences and agreement."
+  },
+  {
+   "id": "EVAL-F22",
+   "claim": "Divergent transitions flag regions of high curvature that the numerical integrator cannot resolve. Any divergence should prompt suspicion of the estimates, and divergences that persist as the step size shrinks indicate bias that calls for reparameterisation (for example non-centred forms) or stronger priors. These diagnostics are necessary but not sufficient for valid inference.",
+   "quant": "arXiv 1701.02434 v2: Section 6.2, p. 45; Section 6.3 (limitations of diagnostics). Model: 0 divergences in production fits and in 23 of 24 CLR-fidelity harness windows; 2020 D-7 has 1 (s.46).",
+   "source": {
+    "authors": "Michael Betancourt",
+    "year": 2017,
+    "title": "A Conceptual Introduction to Hamiltonian Monte Carlo",
+    "venue": "arXiv preprint 1701.02434 (v2, 2018)",
+    "doi_or_url": "https://arxiv.org/abs/1701.02434",
+    "type": "working paper",
+    "verification": "full text read (Sections 6.2-6.3, p. 45)"
+   },
+   "model_link": "Divergence monitoring in diagnostics() and in the harness (divergences column).",
+   "stance": "supports",
+   "site_use": "Zero divergent transitions in the current fit. Divergences are the sampler's alarm for regions it cannot explore (Betancourt 2017)."
+  },
+  {
+   "id": "EVAL-F23",
+   "claim": "Model fit is assessed by posterior predictive checks with realised discrepancies T(y, theta): functions of the data and the parameters, chosen to probe the aspects of the model that matter, and computed as a by-product of the posterior simulation.",
+   "quant": "Statistica Sinica 6(4):733-807 (abstract and issue record). Model: the production PPC is one in-sample number, the share of poll observations inside a 95% band built from the 2.5th percentile of draw-wise lower bounds and the 97.5th of upper bounds (bayes_model.posterior_predictive_check); docs/bayesian_workflow.md reports ~98% inside. No discrepancy targets the forecast's use, such as final-fortnight house-effect residuals, within-firm residual autocorrelation or the spread of final-week polls.",
+   "source": {
+    "authors": "Andrew Gelman; Xiao-Li Meng; Hal Stern",
+    "year": 1996,
+    "title": "Posterior predictive assessment of model fitness via realized discrepancies",
+    "venue": "Statistica Sinica 6(4):733-807 (with discussion)",
+    "doi_or_url": "https://www3.stat.sinica.edu.tw/statistica/j6n4/j6n41/j6n41.htm",
+    "type": "peer-reviewed",
+    "verification": "abstract and issue record verified"
+   },
+   "model_link": "bayes_model.posterior_predictive_check; the 14-day holdout.",
+   "stance": "challenges",
+   "site_use": "new claim: list the targeted posterior predictive checks (house-effect residuals in the final fortnight, residual autocorrelation within firm), each with its p-value."
+  },
+  {
+   "id": "EVAL-F24",
+   "claim": "A Bayesian workflow validates computation with fake-data simulation (refitting data simulated from known parameters) and, more thoroughly, with simulation-based calibration, which needs many refits. It also warns that picking one model from many similar ones by minimising cross-validation error overfits and gives suboptimal choices, and recommends projection-predictive selection or stacking instead.",
+   "quant": "arXiv 2011.01808 (2020): Sections 4.1, 4.2, 8.2 and 8.3. Model: there is one fake-data replicate, from 29 Aug, with 6 lists x 20 weeks (90% of true trajectories inside 90% CIs; tau recovery r 0.88; house effects 0.94; docs/bayesian_workflow.md s.3), on the earlier ALR model. The production model has since gained the CLR latent, structural breaks, CEC raw-share filings and an undecided-noise term, and now has 21 lists x 45 weekly bins.",
+   "source": {
+    "authors": "Andrew Gelman; Aki Vehtari; Daniel Simpson; Charles C. Margossian; Bob Carpenter; Yuling Yao; Lauren Kennedy; Jonah Gabry; Paul-Christian Burkner; Martin Modrak",
+    "year": 2020,
+    "title": "Bayesian Workflow",
+    "venue": "arXiv preprint 2011.01808",
+    "doi_or_url": "https://arxiv.org/abs/2011.01808",
+    "type": "working paper",
+    "verification": "full text read (Sections 4.1-4.2, 8.2-8.3)"
+   },
+   "model_link": "workflow_bayes.py (recovery stage); candidate selection among arms.",
+   "stance": "challenges",
+   "site_use": "The fitting machinery recovers known truth on simulated Israeli polling data generated from the production model (fake-data simulation; Gelman et al. 2020)."
+  },
+  {
+   "id": "EVAL-F25",
+   "claim": "Pareto-smoothed importance sampling stabilises importance weights, and its fitted Pareto shape k-hat is a reliability diagnostic. Estimates are trustworthy when k-hat < min(1 - 1/log10(S), 0.7). Above 0.7 they should not be trusted, and the affected leave-one-out folds should be refit exactly (PSIS-LOO+) or replaced by K-fold CV.",
+   "quant": "JMLR 25(72):1-58 (2024): Sections 3.2.4, 5.2 and 6. Model: workflow_loo_compare.csv (29 Aug) flags warning = True for M3, M2 and M1 (high k-hat), but docs/bayesian_workflow.md reports the ELPD ladder (M3 +365, ~9 SE) without the warning.",
+   "source": {
+    "authors": "Aki Vehtari; Daniel Simpson; Andrew Gelman; Yuling Yao; Jonah Gabry",
+    "year": 2024,
+    "title": "Pareto Smoothed Importance Sampling",
+    "venue": "Journal of Machine Learning Research 25(72):1-58",
+    "doi_or_url": "https://jmlr.org/papers/v25/19-556.html",
+    "type": "peer-reviewed",
+    "verification": "full text read (arXiv 1507.02646 v9, Sections 3.2.4, 5.2, 6)"
+   },
+   "model_link": "Model ladder (PSIS-LOO M0-M3) in workflow_bayes.py; any future poll-level LOO-PIT.",
+   "stance": "challenges",
+   "site_use": "Model comparisons report the Pareto-k diagnostic, and points where it exceeds 0.7 are refit exactly (Vehtari et al. 2024)."
+  }
+ ],
+ "challenges": [
+  {
+   "title": "The intervals are miscalibrated, not 'conservative': retune the width and change the coverage gate",
+   "what_literature_says": "Sharpness should be maximised subject to calibration, and over-coverage (a hump-shaped PIT) means the intervals are too wide (F03). Coverage is not a proper score; the interval score ranks intervals that have equal coverage (F01). Integer outcomes inflate coverage counted with inclusive percentiles (F05). Underconfidence is the documented bias created by forecasters' incentives, and it is visible in FiveThirtyEight's political record (F08, F09).",
+   "current_model": "On the s.46 yardstick the 90% intervals cover .981 / .990 / .990 at eve / D-7 / D-21. In the s.46 width grid every leave-one-cycle-out fold picks residual width 0.6-0.7, and 0.6 beats the shipped 0.9 on MAE, threshold Brier and interval score while still covering .960. RESID_SCALE stays at 0.9. The s.46 gate ('must not lose coverage') and harness_compare.py ('without losing coverage') count any drop from 98% as a loss, even a move toward the 90% target. The site calls over-coverage 'conservative' and still says 0.9 'wins every leave-one-cycle-out fold', which was true on the older harness but is not on the s.46 yardstick.",
+   "proposed_change": "(1) Replace 'must not lose coverage' with 'must not move coverage further from 0.90', with a tolerance band (for about 91 list-cycles the binomial 95% band is 0.84-0.96; widen it for within-cycle dependence with a cycle bootstrap). (2) Make the weighted interval score the interval criterion. (3) Run the RESID_SCALE recalibration candidate (0.6 / 0.7) with a nested leave-one-cycle-out choice at eve, D-7, D-21 and, once the CLR caches exist, D-56. (4) Rewrite the site caption and the '0.9 wins every fold' sentence.",
+   "how_to_test": "Harness: width grid on harness_cache_clr_fidelity scored by WIS, nonrandomised PIT and straddler Brier, with the width chosen on 7 folds and graded on the 8th. Ship if pooled WIS and threshold Brier improve and median MAE does not worsen beyond seed noise (5 seeds).",
+   "finding_ids": [
+    "EVAL-F01",
+    "EVAL-F03",
+    "EVAL-F05",
+    "EVAL-F08",
+    "EVAL-F09"
+   ]
+  },
+  {
+   "title": "Shipping rule: one pre-declared proper score, a paired fold test, nested selection, no OR clause",
+   "what_literature_says": "Selecting among variants on the same folds that grade them biases the reported error (F15, F24). Forking paths make the winner of many implicit comparisons look better than it is (F16). Pseudo-out-of-sample comparison does not by itself insure against overfitting (F18). Comparisons should carry the standard error of the paired difference (F12). Pre-registration separates prediction from postdiction (F17).",
+   "current_model": "harness_compare.py: a layer ships when it wins or ties median-seat MAE in every fold, OR wins the pooled score on every metric without losing coverage. Ties are |d| < 0.1 seat (s.46), so a layer that fires in two cycles passes the fold route with 2 wins and 6 ties (one-sided sign test on the non-tied folds, p = 0.25). arab_regB shipped on the pooled route with folds 4 / 2 / 2 (sign test on the six non-tied folds, p = 0.34) after nine arms were graded. The fold criterion is a point score (median MAE), and the pooled route's coverage clause rewards over-coverage. 32 arms are in ABLATIONS, and the baseline was restated three times in three days.",
+   "proposed_change": "(1) Declare one primary score before grading: pooled WIS per list, plus log score on threshold passage for lists with 0.02 < p < 0.98, plus the bloc log score at fixed weights; the other metrics stay descriptive. (2) Use a single route: a sign-flip permutation test across the 8 folds on the primary score (minimum attainable one-sided p is 1/256), at least 5 projection seeds, and a pooled gain larger than twice the seed-to-seed SD. (3) Grade any arm chosen among variants by nested leave-one-cycle-out. (4) Record the number of arms tried beside every shipped change. (5) Before 27 Oct, freeze the final configuration and the 2026 scoring plan with a timestamped hash.",
+   "how_to_test": "Re-grade this round's shipped changes (trail_sat, gone14_zero, pair_fix, arab_regB, clr_latent) under the proposed rule on the cached posteriors (no refits) and report which would have shipped. Evidence class: harness.",
+   "finding_ids": [
+    "EVAL-F12",
+    "EVAL-F15",
+    "EVAL-F16",
+    "EVAL-F17",
+    "EVAL-F18",
+    "EVAL-F24"
+   ]
+  },
+  {
+   "title": "Publish a leave-future-out grade beside leave-one-cycle-out",
+   "what_literature_says": "For time-ordered data, leave-one-out lets the future inform the past and is optimistic for forecasting skill; leave-future-out is the time-respecting check (F14). Blocks should follow the dependence structure (F13), and LOO comparisons should carry standard errors (F12).",
+   "current_model": "Industry shocks, the trailing-Likud mean, the new-straddler drift, the Arab a and k, and the firm scorecards are all estimated from the seven other cycles, including later ones. The site says each election was forecast 'using only the polls published before each date'.",
+   "proposed_change": "Add a past_only flag to decompose(), trailing_likud_params, new_straddler_params, arab_turnout_params and the firm lambda scorecards. Grade 2013-2022 with parameters from earlier cycles only, switching off layers that have no prior data, and publish both grades. Amend the site sentence.",
+   "how_to_test": "Harness on the cached eve / D-7 / D-21 posteriors (projection only, no refits); compare pooled metrics on the 7 common folds and report the LFO minus LOCO gap.",
+   "finding_ids": [
+    "EVAL-F12",
+    "EVAL-F13",
+    "EVAL-F14"
+   ]
+  },
+  {
+   "title": "Grade the point estimate the site publishes, and state the loss",
+   "what_literature_says": "A point forecast must be scored with a function consistent for the functional it reports. Under absolute error the median wins by construction (F06).",
+   "current_model": "The shipping rule grades per-list seat medians (seat_mae_median). The site prints the central allocation from the median share vector, renormalised and D'Hondt-allocated, which is 0.05-0.07 seats per list worse at D-7, D-21 and D-56 in the 13 Oct horizon harness. s.28 presents 'median beats mean' as evidence.",
+   "proposed_change": "Either make seat_mae_central the graded point metric (add it to the eve ablation CSV and to harness_compare), or publish per-list medians with a note that they need not sum to 120. State on the site that the central count targets absolute seat error.",
+   "how_to_test": "Add seat_mae_central to validate_bayes.py ablation rows; re-grade the s.41-s.46 ship decisions on it and report any that flip.",
+   "finding_ids": [
+    "EVAL-F06"
+   ]
+  },
+  {
+   "title": "Score whole distributions and the joint outcome, not one interval per list",
+   "what_literature_says": "WIS over K = 11 levels approximates the CRPS and uses the whole distribution (F04). Marginal scores cannot see wrong correlations; variogram and energy scores can (F07). A pooled Brier is dominated by easy events (F02). Calibration of a bloc probability cannot be established from 8 elections (F08).",
+   "current_model": "The harness scores a single 90% interval, a threshold Brier pooled over every list, and a bloc Brier over 8 outcomes. No score targets the joint seat vector, even though the bloc swing, gevalt coupling and trailing-Likud sourcing are dependence layers that move P(NB>=61) by several points.",
+   "proposed_change": "Save per-cycle seat draws (or 23 quantiles) from the harness. From them compute WIS(K = 11), the ranked probability score for integer seats, pooled nonrandomised PIT histograms, a straddler-only Brier with a skill score against a poll-average reference, and energy and variogram scores on the seat vector and on the three bloc totals. On the site, show reliability bins with their counts.",
+   "how_to_test": "One harness pass on the cached posteriors that writes draws; compare shipped, latent_only and no_swing on the variogram score to check whether the bloc swing earns its place on a joint score. Evidence class: harness.",
+   "finding_ids": [
+    "EVAL-F02",
+    "EVAL-F04",
+    "EVAL-F07",
+    "EVAL-F08"
+   ]
+  },
+  {
+   "title": "Convergence gates and Monte Carlo error at the published standard",
+   "what_literature_says": "R-hat < 1.01; bulk and tail ESS > 400; MCSE for every reported quantity (F20). Divergences are necessary but not sufficient diagnostics (F22). NUTS is the standard sampler (F21).",
+   "current_model": "REFIT_GATES are r-hat <= 1.02 and bulk ESS >= 300 (no tail-ESS), with one reseed allowed. The 14 Oct fit had ESS 261 and r-hat 1.02. Harness sigma_g r-hat is 1.07-1.79 at 400-600 draws. The site prints 'r-hat <= 1.02'. P(NB>=61) is published to a decimal, while projection seeds move it by up to 1.3 points (SD 0.67 pp on the ALR posterior).",
+   "proposed_change": "Set the gates to r-hat < 1.01 and bulk and tail ESS >= 400 on the endpoint shares, tau, final-week house effects and the derived P(NB>=61). Run longer chains (for example 4 x 2000) instead of reseeding. If sigma_g still mixes poorly, non-centre the group-level house effects or raise the harness draws, and report fold-level r-hat. Report the MCSE of headline probabilities from at least 5 projection seeds and round them to whole percent.",
+   "how_to_test": "Refit 2026 at 4 x 2000 and compute tail-ESS; run 10 projection seeds for the P(NB>=61) MCSE. Refit the harness folds where sigma_g r-hat > 1.01 with more draws and check whether the graded metrics move. Evidence class: computation diagnostics.",
+   "finding_ids": [
+    "EVAL-F20",
+    "EVAL-F21",
+    "EVAL-F22"
+   ]
+  },
+  {
+   "title": "Propagate the estimation uncertainty of layers fitted on a handful of elections",
+   "what_literature_says": "Forecasts built on few elections overstate certainty when they ignore coefficient and specification uncertainty (F19).",
+   "current_model": "Arab term: full-sample point values a = -0.634 (se 0.41) and k = 0.247 (se 0.21), n = 8. Trailing-Likud: Normal(mean +5.0, sd 4.9) from n = 3, with no uncertainty in the mean. New straddler: -1.6 pp from 11 lists, re-measured at -0.33 pp on vote shares.",
+   "proposed_change": "In each simulation draw (a, k) from their joint sampling distribution (or from the 8 strict-LOO fits); draw the trailing-Likud shift from a predictive t with 2 df and scale sd x sqrt(1 + 1/n); do the same for the new-straddler drift.",
+   "how_to_test": "Horizon harness at D-7 / D-21 on WIS, coverage and threshold Brier. Expect wider intervals for the affected lists, which interacts with challenge 1, so grade the two jointly. Evidence class: harness.",
+   "finding_ids": [
+    "EVAL-F19"
+   ]
+  },
+  {
+   "title": "Model checking: targeted predictive checks, a refreshed fake-data/SBC run, and Pareto-k disclosure",
+   "what_literature_says": "Posterior predictive checks should use discrepancies that target what the model is used for (F23). Fake-data simulation and simulation-based calibration validate the computation (F24). PSIS-LOO estimates with k-hat > 0.7 are unreliable and need exact refits (F25).",
+   "current_model": "The PPC is a single in-sample coverage number (~98% inside a 95% envelope band). Fake-data recovery was run once, on 29 Aug, on the ALR model with 6 lists x 20 weeks. The PSIS-LOO ladder carried warning = True for three of four models, and the workflow doc does not disclose it.",
+   "proposed_change": "(1) Add PPC discrepancies: the per-firm mean residual in the final 14 days, lag-1 autocorrelation of within-firm residuals, and the dispersion of final-week polls around the latent, each with a posterior predictive p-value. (2) Compute LOO-PIT for poll observations via PSIS and report k-hat. (3) Re-run workflow_bayes recovery on the CLR production model at 21 lists x 45 weeks with at least 50 replicates (an SBC-style rank check on tau, endpoint shares and house effects). (4) Disclose the PSIS warnings and use K-fold CV by week block where k-hat > 0.7.",
+   "how_to_test": "Evidence class: model checking, outside the harness. Pass if the SBC rank histograms are uniform (chi-square) and no PPC p-value falls below 0.01 or above 0.99.",
+   "finding_ids": [
+    "EVAL-F23",
+    "EVAL-F24",
+    "EVAL-F25"
+   ]
+  },
+  {
+   "title": "Communicate probabilities with their precision and their seat basis",
+   "what_literature_says": "Win probabilities read as more certain than vote shares and can demobilise readers (F10). Quantile dotplots and CDFs beat text intervals for decisions (F11). Eight elections cannot certify a bloc probability (F08). Monte Carlo error should be reported (F20).",
+   "current_model": "The headline P(NB>=61) is given to a decimal (e.g. 14.5), with PM probabilities alongside and 90% ranges as bars and text.",
+   "proposed_change": "Round headline probabilities to whole percent and note the Monte Carlo error. Show the bloc total as a 50-dot quantile dotplot. Put the seat range next to every probability. Add one sentence on what eight elections can and cannot certify.",
+   "how_to_test": "Evidence class: communication research; no harness test. Optional: a small reader test of probability vs dotplot comprehension.",
+   "finding_ids": [
+    "EVAL-F08",
+    "EVAL-F10",
+    "EVAL-F11",
+    "EVAL-F20"
+   ]
+  }
+ ],
+ "parameters": [
+  {
+   "name": "90% interval coverage (achieved)",
+   "current": ".981 eve / .990 D-7 / .990 D-21 (s.46 yardstick); .939 D-56 (13 Oct ALR baseline)",
+   "literature_range": "nominal .90; binomial 95% band for ~91 list-cycles about .84-.96, wider once within-cycle dependence is allowed for; measure with the discrete (nonrandomised) PIT",
+   "finding_ids": [
+    "EVAL-F03",
+    "EVAL-F05"
+   ]
+  },
+  {
+   "name": "RESID_SCALE (per-list residual width)",
+   "current": "0.9",
+   "literature_range": "chosen by a proper interval score under nested selection; the s.46 LOO choice is 0.6-0.7 in every fold",
+   "finding_ids": [
+    "EVAL-F01",
+    "EVAL-F03",
+    "EVAL-F15"
+   ]
+  },
+  {
+   "name": "Interval levels scored",
+   "current": "one (90%, alpha = 0.10)",
+   "literature_range": "median plus K = 11 central intervals (98% ... 10%) in WIS",
+   "finding_ids": [
+    "EVAL-F04"
+   ]
+  },
+  {
+   "name": "R-hat gate",
+   "current": "<= 1.02 (REFIT_GATES)",
+   "literature_range": "< 1.01 (rank-normalised split R-hat), at least 4 chains",
+   "finding_ids": [
+    "EVAL-F20"
+   ]
+  },
+  {
+   "name": "ESS gate",
+   "current": "bulk ESS >= 300 on tau, sigma_g, sigma_f, s_obs and endpoint shares; no tail-ESS",
+   "literature_range": "bulk and tail ESS > 400 for every quantity of interest, plus MCSE",
+   "finding_ids": [
+    "EVAL-F20"
+   ]
+  },
+  {
+   "name": "Fold tie tolerance in the shipping rule",
+   "current": "|d| < 0.1 seat counts as a tie (s.46)",
+   "literature_range": "compare to the Monte Carlo SE of the paired difference; the sign test on 8 folds reaches p < 0.05 only with 7+ wins (8/8: p = 0.004; 7/8: 0.035)",
+   "finding_ids": [
+    "EVAL-F12",
+    "EVAL-F16"
+   ]
+  },
+  {
+   "name": "Graded folds",
+   "current": "8 (leave-one-cycle-out; 2019a-2021 are four elections within 23 months)",
+   "literature_range": "LOCO plus a leave-future-out grade (7 folds, 2013-2022, past-only parameters)",
+   "finding_ids": [
+    "EVAL-F13",
+    "EVAL-F14"
+   ]
+  },
+  {
+   "name": "Headline probability precision",
+   "current": "one decimal (e.g. 14.5); projection-seed SD 0.67 pp (shipped ALR) / 0.23 pp (CLR) across 3 seeds",
+   "literature_range": "report MCSE; round to whole percent unless MCSE < 0.1 pp",
+   "finding_ids": [
+    "EVAL-F20"
+   ]
+  },
+  {
+   "name": "Pareto k-hat threshold for PSIS-LOO",
+   "current": "not checked; workflow_loo_compare.csv flags warnings, undisclosed",
+   "literature_range": "k-hat < min(1 - 1/log10(S), 0.7); exact refit above",
+   "finding_ids": [
+    "EVAL-F25"
+   ]
+  },
+  {
+   "name": "Arab term a and k",
+   "current": "point values a = -0.634, k = 0.247 (full sample)",
+   "literature_range": "propagate se (0.41, 0.21) or the strict-LOO spread (k 0.10-0.32)",
+   "finding_ids": [
+    "EVAL-F19"
+   ]
+  }
+ ],
+ "open_questions": [
+  "No peer-reviewed evaluation of Israeli seat forecasts was located. The only peer-reviewed review covering Israeli poll performance found (Kenett, Pfeffermann & Steinberg 2018, Annual Review of Statistics and Its Application 5:1-24) was verified at abstract level only and is not used as a finding.",
+  "How much of the 98-99% coverage is discreteness (integer seats, lists at zero) and how much is genuine overdispersion? Answering this needs saved harness draws and a nonrandomised PIT.",
+  "Should the residual width be tuned for seat MAE (the owner's stated objective) or for interval calibration? The two can diverge through the threshold nonlinearity, and the loss should be declared before grading (Gneiting 2011). On the s.46 yardstick they agree on 0.6-0.7.",
+  "Within-cycle dependence makes binomial coverage bands too narrow. Should the coverage tolerance come from a cycle-level bootstrap?",
+  "D-56 CLR-fidelity caches do not exist yet (s.46), so the eight-weeks-out accuracy figures on the site are still on the older ALR yardstick.",
+  "Should the frozen pre-election configuration be published (for example a hashed file on the site) or kept in the repository only? This is an owner decision."
+ ]
+}

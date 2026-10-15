@@ -399,6 +399,72 @@ ARAB_FAMILY_FORM = "turnout"      # "turnout" (shipped) | "additive_e0"
 # the harness arm arab_regB is e0 = a + k x implied, fitted on the record
 # (full sample a -0.634, k 0.247). None = shipped (no intercept).
 ARAB_TURNOUT_INTERCEPT = -0.634   # shipped 15 Oct (s.43); seats, se 0.41
+# Sector family terms (2026-10-15, dossier s.51), both OFF by default.
+# HAREDI_FAMILY_FORM "e0" (candidate hared_e0): the haredi family mean is
+# the RAW final-poll family error (decompose()["family_e0"], -0.980 seats)
+# instead of the e1 mean measured after removing the bloc swing (-1.352):
+# the projected bloc swing has mean zero, so the NB over-poll e1 strips out
+# is applied nowhere (the s.43 argument for the Arab term). The sd stays
+# the e1 sd. "e1" = shipped.
+HAREDI_FAMILY_FORM = "e1"         # "e1" (shipped) | "e0"
+# ARAB_INTERCEPT_ALLOC "lineage" (candidate arab_raam_split): the regB
+# intercept keeps its family total but is split between the Ra'am lineage
+# and the other Arab lists by their under-count shares on the split-cycle
+# record (arab_lineage_share; 1.0 to Ra'am on today's record), instead of
+# by base share. The turnout term stays base-proportional (a per-lineage
+# pass-through is not supported by the record, s.51). "base" = shipped.
+ARAB_INTERCEPT_ALLOC = "base"     # "base" (shipped) | "lineage"
+
+
+def is_raam_lineage(comp) -> bool:
+    """A list containing a Ra'am id (raam, raam_taal, raam_balad)."""
+    return any(str(c).startswith("raam") for c in comp)
+
+
+def arab_lineage_share(exclude_cycle: str | None = None) -> dict:
+    """Ra'am's share of the Arab family's under-count on the split-cycle
+    record (dossier s.51): over cycles whose final-poll frame has two or
+    more Arab rows, one of them Ra'am (the graded cycle left out), m_R / m_O
+    = mean raw error of the Ra'am row / of the other Arab rows summed;
+    u = max(0, -m); s_raam = u_R / (u_R + u_O), None when neither lineage
+    is under-counted (the caller falls back to base shares)."""
+    from error_decomposition import _frames, ORDER as _ORD
+    fr = _frames()
+    er, eo = [], []
+    for c in _ORD:
+        if c == exclude_cycle or c not in fr:
+            continue
+        a = fr[c][fr[c]["family"] == "arab"]
+        isr = a["components"].str.split("+").map(is_raam_lineage)
+        if len(a) < 2 or not isr.any() or isr.all():
+            continue
+        er.append(float(a.loc[isr, "error"].sum()))
+        eo.append(float(a.loc[~isr, "error"].sum()))
+    if not er:
+        return {"s_raam": None, "m_raam": None, "m_other": None, "n": 0}
+    mr, mo = float(np.mean(er)), float(np.mean(eo))
+    ur, uo = max(0.0, -mr), max(0.0, -mo)
+    return {"s_raam": (ur / (ur + uo)) if ur + uo > 0 else None,
+            "m_raam": mr, "m_other": mo, "n": len(er)}
+
+
+def arab_intercept_weights(comps, in_f, base, s_raam):
+    """Allocation of the Arab intercept over the columns (sums to 1 over the
+    Arab columns): Ra'am-lineage columns take s_raam, the other Arab
+    columns 1 - s_raam, each split by base share. Base shares when s_raam
+    is None or the window has no separate Ra'am / other Arab column."""
+    w_f = np.where(in_f, base, 0.0)
+    w_base = w_f / w_f.sum()
+    if s_raam is None:
+        return w_base
+    isr = np.array([bool(in_f[i]) and is_raam_lineage(c) for i, c in enumerate(comps)])
+    iso = np.asarray(in_f, bool) & ~isr
+    if not isr.any() or not iso.any() or w_f[isr].sum() <= 0 or w_f[iso].sum() <= 0:
+        return w_base
+    return (s_raam * np.where(isr, w_f, 0.0) / w_f[isr].sum()
+            + (1.0 - s_raam) * np.where(iso, w_f, 0.0) / w_f[iso].sum())
+
+
 ANCHORS = _P["anchors"]            # {"likud": .., "leader": ..} error means
 # 2026-09-03 (accuracy round three): anchors RETIRED. Eight-cycle harness
 # ablation - full 1.665 / no anchors 1.589 seats per list (median 1.574
@@ -491,6 +557,33 @@ TRAIL = {"mu": 5.0, "sd": 4.9, "margin": 0.5, "scale": 0.5}
 TRAIL_SAT_SOURCE = True
 TRAIL_SAT_CAP = 0.75
 TRAIL_SAT_EXCLUDE = {"amcha_yisrael"}
+# trail_ramp (2026-10-15, dossier s.46) - MERGED, HELD OFF (round three,
+# variant tramp_m; TRAIL_RAMP_ON = True turns it on). Replaces
+# the 0.5-seat cliff on the Monte-Carlo mean margin with a weight
+# w(margin) = 1 at margin <= lo, 0 at margin >= hi, linear in between
+# (pre-registered lo -1.0, hi +2.0 seats; w = 0.5 at the old cliff), applied
+# to the mean margin ("mean") or to each draw's pre-shock latent margin
+# ("draw"). The beat's mean/sd are re-estimated on the FULL record with
+# the same weight (validate_bayes.trail_ramp_params; 2015 w 1, April 2019
+# w 1, September 2019 w .50, 2020 w .36, the rest 0), so calibration and
+# application agree. Same satellite sourcing and half strength as TRAIL.
+# Harness (3 seeds, shipped mask): on the ALR record eve median 1.558 ->
+# 1.532, every pooled metric wins at eve / D-7 / D-21 with coverage equal;
+# as an increment on the CLR posteriors eve median 1.468 -> 1.399 (folds
+# 2W/6T/0L), D-7 and D-21 win all four pooled metrics. HELD by the
+# combine plan's fidelity gate (G2): on the ballot-fidelity harness the
+# set CLR + ramp loses the eve pooled threshold Brier (.0475 -> .0480,
+# +.0005 in each of 3 seeds, from 2019s and 2020) while CLR alone does
+# not, and the plan drops the ramp when fidelity reverses only the ramp.
+# The 'draw' mode is kept but not shipped. TRAIL["mu"/"sd"] are the
+# cliff's record; TRAIL["scale"] (0.5) applies to both gates.
+TRAIL_RAMP_ON = False
+TRAIL_RAMP = {"lo": -1.0, "hi": 2.0, "mode": "mean", "mu": 5.58, "sd": 4.15}
+
+
+def trail_weight(margin, lo, hi):
+    """Linear ramp: 1 at margin <= lo, 0 at margin >= hi (seats)."""
+    return np.clip((hi - np.asarray(margin, float)) / (hi - lo), 0.0, 1.0)
 
 
 def trail_transfer(shares, g, lk, src, base, cap=TRAIL_SAT_CAP):
@@ -548,6 +641,28 @@ GONE_STAY_ZERO = True
 # several pp of phantom small-party vote. Cap: sd <= RESID_REL_CAP x the
 # list's own projected share. Mirrored in validate_bayes (resid_relcap).
 RESID_REL_CAP = None
+# clr_latent (2026-10-15, dossier s.46) - SHIPPED (round three). The
+# previous latent was an additive log-ratio (ALR): B-1 random walks
+# against the LAST latent block, which
+# merge_blocks() / prepare_data make the newest list of the window; that
+# list has no tau and no steps of its own and can move only if every other
+# list drifts in unison (2021 eve: RZP-Otzma-Noam 0.8 seats latent vs 4-5
+# polled). ON = centred log-ratio: every list gets its own z0, tau and
+# steps, the walk is row-centred and soft-maxed over all B lists, the
+# posterior stores "zc" (weeks x B) with a tau per list, and project() /
+# validate_bayes.project_cycle() project natively from it (no ALR adapter).
+# A LIKELIHOOD change: every production build refits and must pass the
+# refit gates (REFIT_GATES below: 0 divergences, r-hat <= 1.02 including
+# the endpoint shares, bulk ESS >= 300, 14-day holdout no worse than ALR on
+# the same data; one reseed, else that build ships ALR). BAYES_CLR=0 fits
+# the ALR latent (research / the legacy harness cache). NEW_STRADDLER,
+# TRAIL / TRAIL_RAMP and the interval widths keep their ALR-record values,
+# exactly as graded in the clr_latent arm. Harness (3 seeds, shipped mask):
+# eve median 1.558 -> 1.468, mean 1.723 -> 1.613, Brier .0496 -> .0425,
+# interval 9.614 -> 9.418, coverage .970 -> .980; D-21 interval 10.140 ->
+# 10.301 (2019s Yamina, a late entrant - a mechanism closed in 2026).
+import os as _os_clr
+CLR_LATENT = _os_clr.environ.get("BAYES_CLR", "1") == "1"
 
 # Small-party layer, two measured pieces:
 #
@@ -658,7 +773,8 @@ def _apply_structural_breaks(obs: pd.DataFrame, block_of: dict) -> pd.DataFrame:
 
 def prepare_data(polls: pd.DataFrame | None = None,
                  asof: pd.Timestamp | None = None,
-                 modern_remaps: bool = True):
+                 modern_remaps: bool = True,
+                 drop_absorbed: bool = True):
     """Build the model's data dict; parameterized so the validation harness
     can rebuild any past cycle's window (modern_remaps encodes 2026-only
     list identities — in earlier eras Ra'am really was inside the Joint
@@ -703,7 +819,12 @@ def prepare_data(polls: pd.DataFrame | None = None,
     # its pre-merger polls, but that support is carried inside the RZP
     # stream by the structural break (below), and a Zehut column of its
     # own would count the same voters twice.
-    win = win[~win["party_id"].isin(ABSORBED_IDS)]
+    # drop_absorbed=False (harness ballot fidelity, 2026-10-15, dossier
+    # s.46): ABSORBED_IDS are 2026 identities; in 2019a Zehut and in 2021
+    # NEP ran on their own and belong in that cycle's likelihood. The
+    # production call keeps the default (True), so 2026 is unchanged.
+    if drop_absorbed:
+        win = win[~win["party_id"].isin(ABSORBED_IDS)]
     # Every list ON THE BALLOT with polling is a latent column (13 Oct 2026,
     # MICRO_POLLED retired). Lists that did not file are dropped, and a
     # list needs MIN_LIST_POLLS polls in the window to be identified.
@@ -939,6 +1060,16 @@ def _merge_cec(obs: pd.DataFrame, block_of: dict, asof) -> pd.DataFrame:
     remap = {"together": "bennett_2026"}
     rows, displaced = [], set()
     disp_by_ref = {}
+    # The filing's own sample size (n, else the initial sample it reports)
+    # sets that poll's sampling noise; without it a filed poll fell back to
+    # the firm default (aggregation desk verifier, 15 Oct: _merge_cec carried
+    # no n). Filings without either keep the firm default downstream.
+    try:
+        _fil = pd.read_csv(PROCESSED_DIR / "cec_filings.csv", dtype={"ref": str})
+        _n = _fil.set_index("ref")["n"].fillna(_fil.set_index("ref")["initial_sample"])
+        n_by_ref = {k: float(v) for k, v in _n.items() if pd.notna(v) and 100 <= float(v) <= 20000}
+    except (FileNotFoundError, KeyError):
+        n_by_ref = {}
     for ref, g in pcts.groupby("ref"):
         pollster = g["pollster"].iloc[0]
         fw = g["fieldwork_end"].iloc[0]
@@ -957,11 +1088,11 @@ def _merge_cec(obs: pd.DataFrame, block_of: dict, asof) -> pd.DataFrame:
                          # which is decisive for threshold-straddlers
                          # (2026-09-03 Arab-lists audit)
                          "share": r.raw_pct / float(sums[ref]), "pollster": pollster,
-                         "fieldwork_end": fw})
+                         "fieldwork_end": fw, "n": n_by_ref.get(str(ref), np.nan)})
     cec_obs = pd.DataFrame(rows).groupby(
         ["poll_id", "block"], as_index=False).agg(
         share=("share", "sum"), pollster=("pollster", "first"),
-        fieldwork_end=("fieldwork_end", "first"))
+        fieldwork_end=("fieldwork_end", "first"), n=("n", "first"))
     kept = obs[~obs["poll_id"].isin(displaced)]
     # A filing replaces only the lists it REPORTS: the displaced table
     # poll's rows for blocks the filing lacks (lists the parser did not
@@ -988,7 +1119,9 @@ def _merge_cec(obs: pd.DataFrame, block_of: dict, asof) -> pd.DataFrame:
     return pd.concat([kept, cec_obs], ignore_index=True)
 
 
-def fit(data, draws=800, tune=800, holdout_mask=None):
+def fit(data, draws=800, tune=800, holdout_mask=None, clr=None):
+    """clr: None = the module latent (CLR_LATENT); True/False forces CLR/ALR
+    (the production build's ALR holdout comparison and fallback)."""
     import pymc as pm
     import pytensor.tensor as pt
 
@@ -1025,22 +1158,39 @@ def fit(data, draws=800, tune=800, holdout_mask=None):
                           "w": data["week"]})
     early = first[first["w"] <= 8].groupby("b")["y"].mean()
     early = early.reindex(range(B)).fillna(0.01).clip(lower=0.004)
-    mu0 = np.log(early.values[:-1] / early.values[-1])
 
     with pm.Model() as model:
-        z0 = pm.Normal("z0", mu=mu0, sigma=0.5, shape=B - 1)
-        tau = pm.HalfNormal("tau", 0.06, shape=B - 1)
-        steps = pm.Normal("steps", 0, 1, shape=(W - 1, B - 1))
-        z = pm.Deterministic(
-            "z", pt.concatenate(
+        if (CLR_LATENT if clr is None else clr):
+            # centred log-ratio (clr_latent): one walk per list
+            mu0 = np.log(early.values)
+            mu0 = mu0 - mu0.mean()
+            z0 = pm.Normal("z0", mu=mu0, sigma=0.5, shape=B)
+            tau = pm.HalfNormal("tau", 0.06, shape=B)
+            steps = pm.Normal("steps", 0, 1, shape=(W - 1, B))
+            zr = pt.concatenate(
                 [z0[None, :],
                  z0[None, :] + pt.cumsum(
                      steps * tau
                      * np.sqrt(data["dt_weeks"])[:, None], axis=0)],
-                axis=0))
-        shares = pm.Deterministic(
-            "shares", pt.special.softmax(
-                pt.concatenate([z, pt.zeros((W, 1))], axis=1), axis=1))
+                axis=0)
+            zc = pm.Deterministic("zc", zr - zr.mean(axis=1, keepdims=True))
+            shares = pm.Deterministic(
+                "shares", pt.special.softmax(zc, axis=1))
+        else:
+            mu0 = np.log(early.values[:-1] / early.values[-1])
+            z0 = pm.Normal("z0", mu=mu0, sigma=0.5, shape=B - 1)
+            tau = pm.HalfNormal("tau", 0.06, shape=B - 1)
+            steps = pm.Normal("steps", 0, 1, shape=(W - 1, B - 1))
+            z = pm.Deterministic(
+                "z", pt.concatenate(
+                    [z0[None, :],
+                     z0[None, :] + pt.cumsum(
+                         steps * tau
+                         * np.sqrt(data["dt_weeks"])[:, None], axis=0)],
+                    axis=0))
+            shares = pm.Deterministic(
+                "shares", pt.special.softmax(
+                    pt.concatenate([z, pt.zeros((W, 1))], axis=1), axis=1))
 
         sigma_g = pm.HalfNormal("sigma_g", 0.015)
         sigma_f = pm.HalfNormal("sigma_f", 0.008)
@@ -1083,15 +1233,45 @@ def fit(data, draws=800, tune=800, holdout_mask=None):
 
 
 def diagnostics(idata):
+    """Divergences, max r-hat and min bulk ESS over tau, sigma_g, sigma_f,
+    s_obs AND the endpoint (last-week) shares - the projection's input. The
+    shares were not checked before round three; CLR's extra common-mode
+    direction showed bimodal endpoint shares in two harness windows (2021 /
+    2022 D-21) while the scale parameters looked fine (dossier s.46)."""
     import arviz as az
     div = int(idata.sample_stats["diverging"].sum())
     summ = az.summary(idata, var_names=["tau", "sigma_g", "sigma_f", "s_obs"],
                       kind="diagnostics")
-    rhat = float(summ["r_hat"].max())
-    ess = float(summ["ess_bulk"].min())
-    print(f"diagnostics: {div} divergences | max r_hat {rhat:.3f} | "
-          f"min bulk ESS {ess:.0f}")
+    end = idata.posterior["shares"].isel(shares_dim_0=-1) \
+        if "shares_dim_0" in idata.posterior["shares"].dims else \
+        idata.posterior["shares"][:, :, -1, :]
+    se = az.summary(az.convert_to_dataset({"end": end.values}), kind="diagnostics")
+    rhat = float(max(summ["r_hat"].max(), se["r_hat"].max()))
+    ess = float(min(summ["ess_bulk"].min(), se["ess_bulk"].min()))
+    print(f"diagnostics: {div} divergences | max r_hat {rhat:.3f} "
+          f"(endpoint shares {float(se['r_hat'].max()):.3f}) | min bulk ESS {ess:.0f}")
     return div, rhat, ess
+
+
+# Refit gates for a production build (round three, 2026-10-15, dossier
+# s.46). A CLR build ships only if it passes all four; one reseed is
+# allowed; otherwise the build refits and ships ALR and fit_summary.json
+# records why.
+REFIT_GATES = {"divergences": 0, "rhat_max": 1.02, "ess_min": 300}
+
+
+def refit_gate_failures(div, rhat, ess, hold_err=None, hold_err_alr=None) -> list:
+    bad = []
+    if div > REFIT_GATES["divergences"]:
+        bad.append(f"{div} divergences")
+    if rhat > REFIT_GATES["rhat_max"]:
+        bad.append(f"max r-hat {rhat:.3f} > {REFIT_GATES['rhat_max']}")
+    if ess < REFIT_GATES["ess_min"]:
+        bad.append(f"min bulk ESS {ess:.0f} < {REFIT_GATES['ess_min']}")
+    if hold_err is not None and hold_err_alr is not None and \
+            round(hold_err, 2) > round(hold_err_alr, 2):
+        bad.append(f"14-day holdout {hold_err:.2f} worse than ALR {hold_err_alr:.2f}")
+    return bad
 
 
 def posterior_predictive_check(data, idata):
@@ -1214,7 +1394,12 @@ def project(data, idata, rng, config="current", config_params=None):
     names = dict(zip(reg["party_id"], reg["name_en"]))
 
     post = idata.posterior
-    z_last = post["z"].values[:, :, -1, :].reshape(-1, post["z"].shape[-1])
+    # CLR posteriors (CLR_LATENT fits) carry "zc" over all B lists with a tau
+    # per list and project natively; ALR posteriors carry "z" (B-1) against
+    # a zero reference column. Dispatch on the posterior, not the flag.
+    clr = "zc" in post
+    zname = "zc" if clr else "z"
+    z_last = post[zname].values[:, :, -1, :].reshape(-1, post[zname].shape[-1])
     tau = post["tau"].values.reshape(-1, post["tau"].shape[-1])
     n_post = len(z_last)
     take = rng.choice(n_post, N_PROJ, replace=True)
@@ -1231,7 +1416,7 @@ def project(data, idata, rng, config="current", config_params=None):
         d -= step
     eff_weeks *= RW_FORWARD_SCALE
     z_e = z_last + np.sqrt(eff_weeks) * tau * rng.standard_normal(z_last.shape)
-    z_full = np.concatenate([z_e, np.zeros((N_PROJ, 1))], axis=1)
+    z_full = z_e if clr else np.concatenate([z_e, np.zeros((N_PROJ, 1))], axis=1)
     shares = np.exp(z_full - z_full.max(axis=1, keepdims=True))
     shares /= shares.sum(axis=1, keepdims=True)
 
@@ -1246,6 +1431,18 @@ def project(data, idata, rng, config="current", config_params=None):
         shares[:, np.nonzero(gone)[0]] = 0.0
         shares /= shares.sum(axis=1, keepdims=True)
     project.last_gone = [data["components"][i] for i in np.nonzero(gone)[0]]
+    # trail_ramp per-draw gate (OFF by default): Likud's margin over the
+    # largest non-bloc list in each pre-shock latent draw, in seats (the
+    # harness's 'ramp_draw' uses the same pre-shock draws).
+    trail_m_draw = None
+    if TRAIL_ON and TRAIL_RAMP_ON and TRAIL_RAMP["mode"] == "draw":
+        _c0 = [set(c.split("+")) for c in data["components"]]
+        _b0 = [(lambda bs: bs.pop() if len(bs) == 1 else "other")(
+            {bloc_map.get(c, "other") for c in cs}) for cs in _c0]
+        _lk0 = next((i for i, cs in enumerate(_c0) if "likud" in cs), None)
+        _nn0 = [i for i in range(len(_c0)) if _b0[i] != "netanyahu_bloc" and i != _lk0]
+        if _lk0 is not None and _nn0:
+            trail_m_draw = (shares[:, _lk0] - shares[:, _nn0].max(axis=1)) * 120.0
 
     # Per-list election-day shock: residual final-poll error beyond
     # bloc/family components, calibrated on the backtest.
@@ -1361,6 +1558,8 @@ def project(data, idata, rng, config="current", config_params=None):
         mu_f, sd_f = FAMILY_SHOCK[f]
         sd_f = sd_f * STACK_SCALE
         in_f = fams == f
+        if f == "haredi" and HAREDI_FAMILY_FORM == "e0":
+            mu_f = _P["family_e0"]["haredi"][0]    # raw-e0 mean, e1 sd kept (s.51)
         if f == "arab" and ARAB_FAMILY_FORM == "additive_e0":
             mu_f = _P["family_e0"]["arab"][0]      # raw-e0 mean, e1 sd kept
         elif f == "arab":
@@ -1374,9 +1573,17 @@ def project(data, idata, rng, config="current", config_params=None):
             project.last_arab_r_mean = float(r.mean())
             tot = shares[:, in_f].sum(axis=1)
             delta = (r - 1.0) * tot
-            if ARAB_TURNOUT_INTERCEPT is not None:
-                delta = delta - ARAB_TURNOUT_INTERCEPT / 120.0
             w_f, w_r = np.where(in_f, base, 0), np.where(~in_f, base, 0)
+            project.last_arab_s_raam = None
+            if ARAB_TURNOUT_INTERCEPT is not None and ARAB_INTERCEPT_ALLOC == "lineage":
+                # arab_raam_split (s.51): same family total, allocated by the
+                # lineages' under-count shares; the turnout term stays by base
+                s_r = arab_lineage_share()["s_raam"]
+                project.last_arab_s_raam = s_r
+                a_i = arab_intercept_weights(comps, in_f, base, s_r)
+                shares = shares + (-ARAB_TURNOUT_INTERCEPT / 120.0) * (a_i - w_r / w_r.sum())
+            elif ARAB_TURNOUT_INTERCEPT is not None:
+                delta = delta - ARAB_TURNOUT_INTERCEPT / 120.0
             shares = shares + delta[:, None] * (w_f / w_f.sum() - w_r / w_r.sum())
             continue
         shock = (-mu_f + tdraws[:, k] * sd_f) / 120.0
@@ -1417,13 +1624,28 @@ def project(data, idata, rng, config="current", config_params=None):
     # Trailing-Likud conditional (see TRAIL): fires only when Likud's
     # projected standing trails or ties the largest non-bloc list.
     project.last_trail_on, project.last_trail_margin = False, None
-    project.last_trail_overflow = None
+    project.last_trail_overflow, project.last_trail_weight = None, None
     if TRAIL_ON and likud_col is not None:
         non_nb = [i for i in range(len(comps)) if blocs[i] != "netanyahu_bloc" and i != likud_col]
         if non_nb:
             project.last_trail_margin = float((base[likud_col] - base[non_nb].max()) * 120.0)
-        if non_nb and base[likud_col] * 120.0 <= base[non_nb].max() * 120.0 + TRAIL["margin"]:
-            g = rng.normal(TRAIL["mu"], TRAIL["sd"], N_PROJ) * TRAIL["scale"] / 120.0
+        if TRAIL_RAMP_ON:
+            # trail_ramp (merged 15 Oct, held off): a weight instead of the 0.5-seat cliff
+            if not non_nb:
+                gate = np.zeros(N_PROJ)
+            elif TRAIL_RAMP["mode"] == "draw" and trail_m_draw is not None:
+                gate = trail_weight(trail_m_draw, TRAIL_RAMP["lo"], TRAIL_RAMP["hi"])
+            else:
+                gate = np.full(N_PROJ, float(trail_weight(
+                    project.last_trail_margin, TRAIL_RAMP["lo"], TRAIL_RAMP["hi"])))
+            t_mu, t_sd = TRAIL_RAMP["mu"], TRAIL_RAMP["sd"]
+            project.last_trail_weight = float(gate.mean())
+        else:
+            gate = np.full(N_PROJ, float(bool(non_nb) and base[likud_col] * 120.0
+                                         <= base[non_nb].max() * 120.0 + TRAIL["margin"]))
+            t_mu, t_sd = TRAIL["mu"], TRAIL["sd"]
+        if gate.any():
+            g = rng.normal(t_mu, t_sd, N_PROJ) * TRAIL["scale"] / 120.0 * gate
             src = np.array([bool(cs & (GEVALT_SAT_IDS - TRAIL_SAT_EXCLUDE))
                             and blocs[i] == "netanyahu_bloc"
                             for i, cs in enumerate(comps)])
@@ -1552,6 +1774,7 @@ def project(data, idata, rng, config="current", config_params=None):
 
 
 def main() -> None:
+    global SEED   # the refit gates allow one reseed of a CLR build
     rng = np.random.default_rng(SEED)
     data = prepare_data()
     print(f"data: {data['n_polls']} polls, {len(data['y'])} observations, "
@@ -1564,35 +1787,72 @@ def main() -> None:
         project_and_write(data, az.from_netcdf(PROCESSED_DIR / "m3_idata.nc"), rng)
         return
 
-    # Holdout: refit without the last 14 days, predict them.
+    # Holdout: refit without the last 14 days, predict them. Under CLR the
+    # ALR holdout is fitted on the same data too (refit gate: CLR's may be
+    # no worse).
     cut = data["asof"] - pd.Timedelta(days=HOLDOUT_DAYS)
     holdout = data["obs_day"] > -HOLDOUT_DAYS
+    hold_err = {}
     if holdout.sum() >= 10:
-        _, idata_h = fit(data, draws=500, tune=600, holdout_mask=holdout)
-        post = idata_h.posterior
-        sh = post["shares"].values.reshape(-1, *post["shares"].shape[2:])
-        wk_last = min(int(data["week"][~holdout].max()),
-                      sh.shape[1] - 1)
-        pred = sh[:, wk_last, :]  # frozen at last fitted week
-        y_h = data["y"][holdout]
-        b_h = data["block_i"][holdout]
-        err = np.abs(np.median(pred, axis=0)[b_h] - y_h) * 120
-        fit_summary_holdout = {"holdout_obs": int(holdout.sum()),
-                               "holdout_median_err": round(float(np.median(err)), 2)}
-        print(f"holdout ({int(holdout.sum())} obs, last {HOLDOUT_DAYS}d): "
-              f"median |error| {np.median(err):.2f} seats "
-              f"(no-update prediction)")
+        for lat in (["clr", "alr"] if CLR_LATENT else ["alr"]):
+            _, idata_h = fit(data, draws=500, tune=600, holdout_mask=holdout,
+                             clr=(lat == "clr"))
+            post = idata_h.posterior
+            sh = post["shares"].values.reshape(-1, *post["shares"].shape[2:])
+            wk_last = min(int(data["week"][~holdout].max()),
+                          sh.shape[1] - 1)
+            pred = sh[:, wk_last, :]  # frozen at last fitted week
+            y_h = data["y"][holdout]
+            b_h = data["block_i"][holdout]
+            err = np.abs(np.median(pred, axis=0)[b_h] - y_h) * 120
+            hold_err[lat] = float(np.median(err))
+            print(f"holdout {lat} ({int(holdout.sum())} obs, last {HOLDOUT_DAYS}d): "
+                  f"median |error| {np.median(err):.2f} seats "
+                  f"(no-update prediction)")
+    lat0 = "clr" if CLR_LATENT else "alr"
+    fit_summary_holdout = {} if not hold_err else {
+        "holdout_obs": int(holdout.sum()),
+        "holdout_median_err": round(hold_err[lat0], 2),
+        **({"holdout_median_err_alr": round(hold_err["alr"], 2)} if CLR_LATENT else {})}
 
     model, idata = fit(data)
-    import arviz as az, json
-    az.to_netcdf(idata, PROCESSED_DIR / "m3_idata.nc")  # shared with mixture
     div, rhat, ess = diagnostics(idata)
+    latent, gate_log = lat0, []
+    if CLR_LATENT:
+        bad = refit_gate_failures(div, rhat, ess, hold_err.get("clr"), hold_err.get("alr"))
+        if bad and not any(b.startswith("14-day") for b in bad):
+            gate_log.append(f"CLR seed {SEED}: " + "; ".join(bad))
+            print(f"refit gates failed ({'; '.join(bad)}): one reseed")
+            seed0, SEED = SEED, SEED + 1
+            model, idata = fit(data)
+            SEED = seed0
+            div, rhat, ess = diagnostics(idata)
+            bad = refit_gate_failures(div, rhat, ess, hold_err.get("clr"), hold_err.get("alr"))
+        if bad:
+            gate_log.append("CLR: " + "; ".join(bad) + " -> this build ships ALR")
+            print(f"refit gates failed ({'; '.join(bad)}): fallback to the ALR latent")
+            model, idata = fit(data, clr=False)
+            div, rhat, ess = diagnostics(idata)
+            latent = "alr"
+            if "alr" in hold_err:
+                fit_summary_holdout["holdout_median_err"] = round(hold_err["alr"], 2)
+    import arviz as az, json, os as _os_save
+    # Atomic save: write a temporary file, then rename over the shared
+    # posterior. Writing in place truncated m3_idata.nc to 0 bytes on 15 Oct
+    # when another process held it open (HDF5 lock) - the fit was lost.
+    _final = PROCESSED_DIR / "m3_idata.nc"
+    _tmp = PROCESSED_DIR / f"m3_idata.nc.tmp{_os_save.getpid()}"
+    az.to_netcdf(idata, _tmp)
+    _os_save.replace(_tmp, _final)  # shared with mixture
     fit_summary = {
         "asof": data["asof"].date().isoformat(),
         "n_polls": int(data["n_polls"]), "n_obs": int(len(data["y"])),
         "n_lists": int(len(data["latent_blocks"])), "n_bins": int(data["n_weeks"]),
         "n_firms": int(len(data["firms"])), "n_groups": int(len(data["groups"])),
         "divergences": div, "rhat_max": round(rhat, 3), "ess_min": int(ess),
+        # round three (dossier s.46): the latent this build ships and the
+        # refit-gate record (r-hat / ESS include the endpoint shares)
+        "latent": latent, "refit_gates": gate_log or "passed",
         "firm_weights": {f: round(float(w), 2) for f, w in zip(
             data["firms"], idata.posterior["lam"].mean(dim=("chain", "draw")).values)},
         **LAST_CEC_MERGE,

@@ -1803,3 +1803,751 @@ Ra'am 6, Otzma 6, RZP-Zehut 4. PM: repeat election 47.7, Eisenkot 20.7,
 Netanyahu 19.0. Likud's projected margin over Yashar is -0.03 seats, so
 the trailing-Likud layer fires. The Arab turnout candidate (s.43 in its
 own patch) is under adversarial verification and is NOT in this build.
+
+## 46. Round three ship set (15 Oct, D-12)
+
+**Decision.** Three candidates came to the combine; the judge shipped all
+three, conditionally, and rejected a fourth (46.4). After the combine
+plan's two gates:
+- **Harness ballot fidelity** (46.1): ships. Harness only;
+  `HARNESS_FIDELITY` now defaults ON.
+- **CLR latent** (46.2): ships. `bayes_model.CLR_LATENT` now defaults ON
+  (`BAYES_CLR` '1'; '0' fits the old ALR latent for research). It is a
+  likelihood change, so the next production build must refit, and that
+  build must pass the refit gates below.
+- **Trailing-Likud ramp** (46.3): merged but held OFF
+  (`TRAIL_RAMP_ON = False`). It passed as an increment on CLR on the s.43
+  harness (G1). On the fidelity harness (G2) the set lost the eve pooled
+  threshold Brier, CLR alone did not, and the plan drops the ramp when
+  fidelity reverses only the ramp.
+
+Base: main 804ff2d. Every table below uses 3 seeds pooled, the shipped
+list mask, and lists median / mean MAE / 90% coverage / threshold Brier /
+interval score.
+
+**Merge.** The fidelity patch went in without its ABLATIONS Arab-arms
+hunk, which 804ff2d already carries. CLR was reconciled with fidelity as
+follows:
+- Caches: one convention for `HARNESS_CACHE_DIR`, a name under
+  data/processed or a path (`resolve_cache`).
+- Signature: every posterior `load_or_fit` writes carries its components,
+  observation count and latent. Legacy caches are checked on latent width
+  (ALR "z" has B-1 columns, CLR "zc" has B), and a cache of the other latent
+  raises.
+- Write guard: a fit whose latent differs from the shared cache's
+  (`SHARED_CACHE_LATENT = "clr"`) cannot write into
+  data/processed/harness_cache.
+- Outputs: they go to `HARNESS_OUT_DIR`. CLR's filename suffixes are
+  dropped.
+- Refit arms: layer `posterior` loads them through the same signature
+  check. A stale or missing arm cache skips the arm and does not stop the
+  run.
+- `build_harness_cache.py` builds through `harness_frame` /
+  `harness_prepare` / `load_or_fit`, so it can build fidelity windows.
+
+The ramp went in by hand at the tail of `trailing_likud_params`. Other
+changes:
+- New arms: `alr_latent` (the ALR fidelity cache), `clr_latent` (the s.43
+  windows), `tramp_m` and its sensitivity variants, `trail_cliff` and
+  `clr_tramp_m`. Since 15 Oct the older trail arms spell out the cliff
+  they were graded with (`_CLIFF`). Eve ablation rows record `trail_frac`.
+- `validate_threshold`: in non-fidelity mode, rewriting the committed
+  model_validation_threshold.csv now needs THRESHOLD_WRITE=1, so the
+  arab_tab fix cannot silently move the new-straddler LOO inputs. The file
+  itself was not regenerated.
+- `bayes_model.diagnostics()` now includes the endpoint shares.
+- `main()` refits with the gates. It fits the ALR holdout beside CLR's,
+  allows one reseed, falls back to ALR, and writes `latent` and
+  `refit_gates` to fit_summary.json.
+- `registration_scenarios` writes `trail_weight` to fit_summary.json
+  (None under the cliff).
+
+**Reproduction checks.** Each of these passed exactly:
+- With the flags off, the s.43 baseline at eve, D-7 and D-21.
+- The clr_latent arm on harness_cache_clr reproduces round three: eve
+  1.468/1.613/.980/.0425/9.418, D-7 1.516/1.634/.990/.0426/9.493, D-21
+  1.773/1.827/.977/.0568/10.301.
+- tramp_m reproduces eve 1.5323/1.6588/.9696/.0478/9.5967.
+- The flipped code, run with the pre-round-three settings spelled out,
+  reproduces G1.
+- At the production seed, 2026 `project()` with BAYES_CLR=0 is
+  bit-identical to 804ff2d.
+
+**G1: the s.43 harness.** ALR shared cache; CLR via the posterior arm.
+
+| horizon | shipped | clr_latent | tramp_m | clr_tramp_m |
+|---|---|---|---|---|
+| eve | 1.558/1.723/.970/.0496/9.614 | 1.468/1.613/.980/.0425/9.418 | 1.532/1.659/.970/.0478/9.597 | 1.399/1.565/.980/.0423/9.428 |
+| D-7 | 1.569/1.702/.986/.0480/9.534 | 1.516/1.634/.990/.0426/9.493 | 1.555/1.681/.986/.0479/9.512 | 1.510/1.611/.990/.0425/9.469 |
+| D-21 | 1.803/1.891/.972/.0618/10.140 | 1.773/1.827/.977/.0568/10.301 | 1.780/1.865/.972/.0600/10.094 | 1.726/1.789/.977/.0552/10.259 |
+
+- **clr_tramp_m vs shipped.** At eve it wins all four metrics, coverage
+  goes up .010, and the folds are 4W/4T/0L (|d|<0.1 counts as a tie). Seed
+  deltas: -.157/-.144/-.176. D-7 wins all four. D-21 wins median, mean,
+  Brier and coverage but loses the interval score (+.119); one lost metric
+  is not a contradiction.
+- **The ramp as an increment on CLR (clr_tramp_m vs clr_latent).** At eve:
+  median -.069, mean -.048, Brier -.0002, interval +.010, coverage equal;
+  folds 2W/6T/0L (2019s -.367, 2020 -.185), so it passes the fold route.
+  D-7 wins all four (folds 1/7/0); D-21 wins all four (2/6/0).
+- **Eve trail weight by fold.** Under clr_tramp_m: 2015 1.00, 2019a .90,
+  2019s .66, 2020 .39, the rest 0. Under the cliff: 1/1/1/0.
+
+**G2: fidelity windows.** Shipped and tramp_m use the ALR fidelity cache;
+the CLR arms use the new CLR-fidelity cache.
+
+| horizon | shipped | clr_latent | tramp_m | clr_tramp_m |
+|---|---|---|---|---|
+| eve | 1.591/1.683/.981/.0475/9.323 | 1.509/1.628/.981/.0474/9.280 | 1.512/1.615/.981/.0480/9.313 | 1.432/1.577/.981/.0480/9.257 |
+| D-7 | 1.542/1.674/.990/.0498/9.462 | 1.520/1.649/.990/.0492/9.430 | 1.520/1.655/.990/.0496/9.442 | 1.503/1.630/.990/.0491/9.407 |
+| D-21 | 1.676/1.830/.973/.0576/9.977 | 1.619/1.776/.990/.0542/9.622 | 1.643/1.792/.973/.0566/9.919 | 1.578/1.732/.990/.0530/9.545 |
+
+- **The gate.** The set must not lose the eve pooled median or Brier and
+  must not lose coverage.
+  - clr_tramp_m: median -.160 and coverage equal, but Brier .0475 -> .0480,
+    worse in all 3 seeds (+.0004/+.0010/+.0003).
+  - clr_latent alone: Brier -.00003 (seeds -.0002/+.0005/-.0003); median
+    -.082, folds 3W/5T/0L; wins all four pooled metrics at eve; coverage
+    equal.
+  - The Brier cost is the ramp's: +.0005 in every seed, both as tramp_m vs
+    shipped and as clr_tramp_m vs clr_latent. It comes from 2019s (+.0038)
+    and 2020. On the s.43 windows the ramp's Brier gain came from 2020
+    (-.0157), the window fidelity rebuilt.
+  - Decision: per the plan, the ramp is dropped and CLR ships.
+- **What the ramp still does on fidelity.** Apart from Brier it wins
+  everywhere: eve median -.078 (2W/6T/0L), mean -.052, interval -.023;
+  D-7 and D-21 win all four metrics. The continuity argument (no 0.5-seat
+  cliff) is untouched. Re-opening it is an owner override or a ramp
+  recalibrated on the fidelity record.
+- **CLR on fidelity at the horizons.** D-7 wins all four metrics (folds
+  1W/5T/2L; 2019a +.119, 2020 +.111). D-21 wins all four, coverage rises
+  .973 -> .990, and the interval score falls 9.977 -> 9.622. The D-21
+  interval caveat from the s.43 harness (2019s Yamina) does not survive
+  fidelity.
+
+**Restated baseline: the new yardstick.** These are the code defaults
+(CLR, cliff, fidelity windows) on harness_cache_clr_fidelity, which stands
+in for the shared cache until the owner moves it. 3 seeds, own mask:
+
+| horizon | median | mean | coverage | Brier | interval |
+|---|---|---|---|---|---|
+| eve | 1.509 | 1.628 | .981 | .0474 | 9.280 |
+| D-7 | 1.520 | 1.649 | .990 | .0492 | 9.430 |
+| D-21 | 1.619 | 1.776 | .990 | .0542 | 9.622 |
+
+nstrad_regrade and sector_stream_single_division must be rebased on these
+numbers.
+- **Layer checks on this baseline.**
+  - no_trail loses every metric (median +.074, coverage -.011, Brier
+    +.0053), so the trail layer stays.
+  - no_nstrad: median -.035, but Brier +.0047 and interval +.009, so the
+    new-straddler layer stays.
+- **Width grid** (seed-independent):
+
+  | width | coverage | MAE | Brier | interval |
+  |---|---|---|---|---|
+  | 0.6 | .960 | 1.609 | .043 | 8.773 |
+  | 0.7 | .972 | 1.616 | .044 | 8.832 |
+  | 0.8 | .981 | 1.622 | .046 | 9.037 |
+  | 0.9 (shipped) | .981 | 1.626 | .047 | 9.302 |
+  | 1.0 | .981 | 1.630 | .049 | 9.450 |
+  | 1.1 | .990 | 1.635 | .050 | 9.896 |
+
+  Every LOO fold picks 0.6 or 0.7. Under CLR on fidelity the intervals are
+  wider than they need to be. RESID_SCALE is not changed here; that is a
+  separate calibration candidate.
+
+**CLR-fidelity caches** (data/processed/harness_cache_clr_fidelity in the
+combine worktree).
+- **What was fitted.** 16 windows differ from the shipped data and were
+  refitted: 2015 D-21, and eve, D-7 and D-21 of 2019a, 2019s, 2020, 2021
+  and 2022. Settings: BAYES_CLR=1, HARNESS_FIDELITY=1, eve 600/600,
+  horizons 400/400, 185-1111 s each on 4 queues.
+- **What was reused.** The other 8 windows (2009 and 2013 at all three
+  horizons, 2015 eve and D-7) have identical y, blocks, weeks and
+  components, so they are links to harness_cache_clr. The judge counted
+  19 differing windows; the data check finds 16. The 10 Oct CLR caches
+  that were reused without a refit are therefore replaced wherever the
+  data differ, and remain only in those 8 identical windows.
+- **Diagnostics.** 0 divergences, except 2020 D-7, which has 1, as the ALR
+  fidelity fit does. Endpoint-share r-hat is at most 1.01 in all 24. The
+  2021 D-21 bimodality (The Israelis) is gone, because fidelity drops that
+  list as a phantom.
+- **sigma_g.** At harness draw counts, sigma_g mixes poorly under both
+  latents: r-hat 1.07-1.79 in the CLR caches and 1.10-1.65 in the ALR
+  caches checked. The judge's 2022 D-21 sigma_g r-hat of 1.29 is one case.
+  This predates CLR. The projection reads endpoint shares and tau, and
+  those mix.
+
+**2026 refits** (scratch only; 804ff2d data: 232 polls, 2,867
+observations, 21 lists). m3_idata.nc, fitted 14 Oct, predates the rows
+804ff2d added (2,861 observations), so both latents were refitted on the
+same data. Fits are 800/800:
+
+| fit | divergences | max r-hat | min ESS | holdout median error |
+|---|---|---|---|---|
+| ALR | 0 | 1.02 (endpoint shares 1.023 unrounded) | 305 | 0.619 |
+| CLR, NUTS seed 20261027 | 0 | 1.04 (s_obs) | 98 | 0.613 |
+| CLR, reseed 20261028 | 0 | 1.01 | 395 | 0.613 |
+
+The first CLR fit fails the r-hat and ESS gates. The reseed passes all
+four gates, which is the reseed path main() now takes. The 14 Oct
+production fit had min ESS 261, so the ALR fallback sits close to the ESS
+gate itself.
+
+**2026 effect** (production chain: registration mixture ->
+official_forecast -> government_formation, at seed offsets +0/+1/+2).
+Shipped means the ALR refit with the cliff; combined means the CLR reseed
+with the cliff, which is what ships.
+
+| | shipped | combined | CLR + ramp (held) |
+|---|---|---|---|
+| P(NB>=61) | 14.4 / 13.1 / 13.5 | 13.3 / 13.3 / 13.7 | 13.4 / 13.6 / 13.8 |
+| change bloc alone | 8.3 / 8.5 / 8.5 | 8.6 / 8.3 / 8.6 | 8.4 / 8.2 / 8.5 |
+| with Ra'am | 27.6 / 28.9 / 28.1 | 28.1 / 28.4 / 28.0 | 27.4 / 27.9 / 27.0 |
+| neither | 57.9 / 58.0 / 58.4 | 58.6 / 58.3 / 58.3 | 59.2 / 58.5 / 59.2 |
+| Likud central | 26 / 25 / 26 | 26 / 26 / 26 | 25 / 25 / 24 |
+| Otzma pass | .771 / .762 / .766 | .768 / .764 / .768 | .834 / .835 / .840 |
+| RZP-Zehut pass | .544 / .536 / .537 | .529 / .534 / .540 | .595 / .600 / .605 |
+| Ra'am pass | .751 / .762 / .760 | .764 / .778 / .768 | same as combined |
+| Likud margin over Yashar | +0.02 / +0.04 / -0.10 | +0.01 / -0.05 / +0.05 | w .66 / .68 / .65 |
+
+- **Central seats.** Combined gives the same seats at all three seeds:
+  Likud 26, Yashar 23, Together 11, UTJ 9, Shas 9, Democrats 9, JL 9, YB 9,
+  Otzma 6, Ra'am 5, RZP-Zehut 4. Shipped differs at one seed (Likud 25 and
+  Together 12 at +1).
+- **Latents.** Tzomet Beit Yisrael (the frozen ALR reference) moves from
+  0.595% to 0.339%, toward its 0.30% polls. Every other latent stays
+  within 0.04 pp.
+- **Summary.** P(NB>=61) moves within seed noise (mean 13.7 -> 13.4).
+- **PM.** Repeat election .450/.455/.452 -> .455/.454/.454; Eisenkot
+  .218/.221/.221 -> .220/.221/.220.
+- **Data versus latent.** The 15 Oct headline of 14.5 was the old
+  posterior on older data. The ALR refit on 804ff2d data gives 14.4 at the
+  production seed, so the data change accounts for -0.1 at that seed and
+  the latent for the rest.
+
+**Production refit needed.**
+1. Run `python src/bayes_model.py` once (BAYES_CLR unset). It refits CLR at
+   800/800 with the 14-day holdouts for both latents, checks the refit
+   gates, takes one reseed (SEED + 1) if they fail, and falls back to ALR
+   if the reseed fails too. It overwrites m3_idata.nc and fit_summary.json,
+   which records `latent` and `refit_gates`.
+2. Then run registration_scenarios, official_forecast,
+   government_formation and build_site, as for any build.
+3. At today's data the default seed fails and the reseed passes, as above.
+
+**Owner steps.**
+1. The other session must commit or stash its own uncommitted project()
+   hook (project.last_shares / last_pairs) before this lands. This session
+   never touched it, launch.json or targeting_* files.
+2. Move the caches:
+   - data/processed/harness_cache (ALR, s.43 windows) ->
+     harness_cache_alr. The legacy run is HARNESS_FIDELITY=0 BAYES_CLR=0
+     HARNESS_CACHE_DIR=harness_cache_alr.
+   - .claude/worktrees/wf_afb7b088-248-1/.../harness_cache_fidelity ->
+     data/processed/harness_cache_alr_fidelity, the `alr_latent` arm.
+   - This worktree's harness_cache_clr_fidelity (resolve its 8 links into
+     files) -> data/processed/harness_cache.
+   - Keep harness_cache_clr from wf_386865e9-189-1.
+3. Until step 2 is done, a default harness run stops on the latent check.
+   It does not grade CLR code against ALR posteriors.
+4. Any published accuracy figure must name its harness: s.43, or fidelity
+   (restated).
+
+**Not done here.**
+- D-56 under CLR. CLR D-56 fidelity caches do not exist yet; nstrad_regrade
+  needs them.
+- Entry-anchored start states for late entrants, a separate refit
+  candidate.
+- A RESID_SCALE recalibration (see the width grid).
+- The 8-seed stability and gate-shift reruns, which only matter if the ramp
+  is switched on.
+
+### 46.1 Harness ballot fidelity and the Arab term on the split 2021 ballot (15 Oct)
+
+**Why.** The eight-cycle harness built each past window from every poll id
+it found, so it graded lists that were not on the ballot and fused lists
+that were. The one that matters for s.43: five composite polls of 1-3
+February 2021 measured the Joint List and Ra'am as one list, `merge_blocks`
+fused the two into a single latent block, and the 2021 Arab family was
+graded as one 10-seat list - the Arab turnout term's only ungraded fold
+(s.43 (i)). Ra'am, the 2021 threshold case, was never scored.
+
+**What was built (behind `HARNESS_FIDELITY`, merged OFF and flipped ON
+at the round-three restatement; production is untouched -
+`prepare_data(drop_absorbed=True)` is the default - and the OFF harness
+reproduces the s.43 baseline to the last digit).**
+- `drop_unfiled` (validate_bayes): from the filing deadline (D-47) + 3
+  days, the ballot is read from the lists polled after deadline + 2, using
+  only polls with fieldwork_end <= as-of (no look-ahead). An id spanning two
+  ballot lists is dropped together with the rest of that poll's
+  observation of the blocks it fed (no partial sums); an id with no
+  component on the ballot is dropped. Dropped per window: 2015 Likud+YB
+  (D-21); 2019a Joint List, Zionist Union, Hatnuah; 2019s New Right, Jewish
+  Home+National Union, Hadash-Ta'al, Balad+Ra'am, Kulanu; 2020 the three
+  Jewish Home+Otzma composites (+22 same-poll rows), Greens; 2021 Joint
+  List+Ra'am, Labor+Meretz, Gesher+Labor+Meretz, Israelis, Tnufa, Gesher,
+  Jewish Home, Derekh Eretz; 2022 Joint List, Yamina, Zionist Spirit, New
+  Hope, Otzma. 2009 and 2013 are unchanged (Gil and the Greens 2009 kept).
+- `DECOMP_FIDELITY`: 2020 Yamina = JH+NU+New Right, URWP = JH+NU; 2021
+  Yesh Atid-Telem = Telem+Yesh Atid.
+- ABSORBED_IDS (Zehut, NEP) are 2026 identities: kept in 2019a and 2021;
+  Zehut 2019s leaves the ballot on its 29 Aug 2019 withdrawal (`WITHDRAWALS`).
+- Cache safety (`load_or_fit`): each fidelity posterior carries its
+  component list and observation count; a mismatch raises. A fidelity run
+  that scores fewer than eight cycles exits.
+- (The Arab ablation arms spelling out k and the intercept were found
+  here too; main already carries that fix as 804ff2d, so this hunk was
+  dropped at the merge.)
+- validate_threshold: had raised KeyError('arab_tab') on main since the
+  s.43 ship; fixed. Under fidelity it grades on CEC vote shares
+  (data/ran_vote_shares.csv, every straddler that ran and failed included,
+  each row cited), passed = seats > 0, a `ran` flag, D-56/D-21 only
+  (THRESHOLD_HORIZONS), layer-off base run explicit; output goes to
+  HARNESS_OUT_DIR so the shipped new-straddler parameters are not touched.
+- harness_compare reads HARNESS_OUT_DIR.
+
+**Caches.** data/processed/harness_cache_fidelity: 22 posteriors refitted
+(eve 600/600, D-21/D-7 400/400, same seeds; 2015 D-21; 2019a, 2019s, 2020,
+2021 and 2022 at eve/D-7/D-21; 2019s, 2020, 2021 at D-56) by the
+interrupted first attempt (03:20-04:54 15 Oct, parallel); the other ten are
+links to the shared cache after checking that the fidelity data equal the
+shipped data. All 32 checked against this code before use (components and
+observation count); 0 divergences except 2020 D-7 (1). No fit was needed
+in this session. The shared harness_cache is untouched.
+
+**Restated baseline under fidelity** (3 seeds, shipped configuration, its
+own mask; the list set differs, so these replace rather than compare with
+the s.43 numbers):
+
+| horizon | median MAE | mean MAE | coverage | Brier | interval |
+|---|---|---|---|---|---|
+| eve | 1.558 -> 1.591 | 1.723 -> 1.683 | .970 -> .981 | .0496 -> .0475 | 9.614 -> 9.323 |
+| D-7 | 1.569 -> 1.542 | 1.702 -> 1.674 | .986 -> .990 | .0480 -> .0498 | 9.534 -> 9.462 |
+| D-21 | 1.803 -> 1.676 | 1.891 -> 1.830 | .972 -> .973 | .0618 -> .0576 | 10.140 -> 9.977 |
+
+Eve median by fold, old -> fidelity: 2019a 1.95 -> 2.43 (Zehut back:
+3.5 projected, 0 won), 2019s 1.30 -> 1.40, 2020 0.78 -> 0.89, 2021 2.47 ->
+2.05, other four unchanged. D-21: 2015 1.53 -> 1.24, 2019a 2.05 -> 2.26,
+2019s 1.60 -> 1.27, 2020 0.81 -> 0.70, 2021 2.97 -> 2.52, 2022 1.13 ->
+1.08. As the evidence skeptic predicted, the eve median rises (Zehut), the
+horizons fall less than the proposal's "~1.6".
+
+**The Arab term on the split 2021 ballot.** 2021 Arab family error (mean
+projected - actual seats, eve, shipped regB): merged block +3.05, split
+-0.15 (Joint List 8.5 vs 6, Ra'am 1.4 vs 4). Pooled re-grade, 3 seeds,
+delta = arm - shipped regB (median / mean / Brier / interval; coverage
+equal unless noted):
+
+| horizon | arab_e1_prev (old harness) | arab_e1_prev (fidelity) | arab_turnA (old) | arab_turnA (fidelity) |
+|---|---|---|---|---|
+| eve | +.072 / +.012 / +.0012 / +.049 | +.093 / +.013 / +.0011 / +.039 | +.003 / -.014 / +.0022 / +.004 | -.018 / -.005 / +.0032 / +.061 |
+| D-7 | +.070 / +.022 / +.0013 / +.084 | +.114 / +.021 / +.0012 / +.084 | -.015 / -.026 / +.0017 / +.017 | -.039 / -.021 / +.0032 / +.063 |
+| D-21 | +.024 / +.035 / +.0013 / +.123 | +.065 / +.024 / +.0014 / +.151 | -.068 / -.009 / +.0012 / +.161 (cov -.007) | -.071 / -.022 / +.0026 / +.193 (cov -.003) |
+
+- regB still wins every pooled metric against the previous harness default
+  at every horizon, by more than before; the s.43 ship stands. The 2021
+  fold is a tie (eve +0.048 for e1_prev, D-7 and D-21 0.000). 2015 is still
+  regB's one fold loss beyond noise (-0.121 for e1_prev), so it remains a
+  pooled-route ship.
+- Production's previous form (turnA, k = 1) now wins point accuracy at every
+  horizon (2021 folds -0.02 / -0.33 / -0.17) but loses Brier and interval
+  score at all three and coverage at D-21; it does not pass the rule
+  against regB and regB does not dominate it. No production change.
+
+**Other layers on the fidelity baseline (3 seeds).** Trailing-Likud (half,
+satellite-sourced): switching it off loses median / mean / Brier at eve
+(+.017 / +.042 / +.0051, coverage -.011), D-7 (+.078 / +.107 / +.0044)
+and D-21 (+.096 / +.090; Brier -.0003, interval -.108); full strength is
+worse than half at D-7 and D-21. Kept. New-straddler layer: off is
+better on median at the eve (-.019) and worse at D-7 (+.019) and D-21
+(+.089); on wins Brier at all three (.0051 / .0048 / .0023). Kept.
+
+**Straddler record on CEC vote shares (D-56/D-21, layer off, diagnostic).**
+First-cycle straddlers that ran: n 11, mean drift -0.42 pp (sd 1.72; D-21
+-0.04, n 7; D-56 -1.09, n 4); pass rate 0.27 vs mean p_pass 0.47. The
+shipped record (seat-implied shares, failed lists at 0%, non-runners
+included) gives -1.68 (sd 2.56, n 11). The -1.6 pp production constant is
+mostly the zero-share censoring the s.41 note flagged. It is NOT changed
+here: re-measuring it is a separate candidate, which must re-grade the
+layer LOO with an explicit layer-off base. Straddler Brier, layer off ->
+on: D-21 .198 -> .190, D-56 .253 -> .222. Ra'am 2021 now enters the record
+as a D-21 straddler (projected 3.16%, won 3.79%, p_pass .25).
+
+**Not established.** The registered surplus agreements (item 4) and the
+common list set for the simple-vs-Bayes benchmark (item 6) were not built.
+D-56 was not re-graded (its fidelity caches exist for 2019s, 2020 and
+2021). At 2021 D-56 Ra'am has no separate poll and its 4 seats are not
+scored. Surplus pairs are applied at D-21/D-7 although signed ~D-11 (mild
+look-ahead, as before). The 2026 forecast is unchanged by construction.
+
+**Recommendation (adopted at the round-three restatement, 46).** The
+fidelity windows are the grading harness: `HARNESS_FIDELITY` now defaults
+ON, and the shared cache becomes the CLR-on-fidelity set, as the owner
+step in 46 describes. Future candidates grade against the restated
+baseline in 46. No production change.
+
+### 46.2 The centred-log-ratio latent (clr_latent; shipped)
+
+**The defect.** `fit()` modelled B-1 random walks against the LAST latent
+block, an additive log-ratio (ALR) latent. That block had no z0, tau or
+steps of its own, so it could move only when every other list drifted in
+unison. `prepare_data` orders blocks by first appearance, so the frozen
+list is always the newest one. Examples:
+- 2021's RZP-Otzma-Noam: eve latent 0.85 seats against 4.8 polled in the
+  final two weeks; it won 6.
+- 2020's Otzma composite: 3.84 against 1.99.
+- 2013 Hatnuah at D-21: 1.96 against 10.9.
+
+The misfit lands in that list's s_obs, and renormalisation pushes every
+other list the wrong way. In 2026 the frozen list is Tzomet Beit Yisrael.
+
+**The change.** Under `CLR_LATENT`, every list gets z0 ~ N(log early -
+mean, 0.5), its own tau ~ HalfNormal(0.06) and its own steps. The walk is
+row-centred ("zc", weeks x B) and soft-maxed over all B lists. House
+effects, drift, s_obs, lam, beta_u and the Student-t likelihood are
+unchanged. `project()` and `validate_bayes.project_cycle()` dispatch on the
+posterior ("zc" present) and project natively over B columns.
+NEW_STRADDLER, TRAIL and the widths keep their ALR-record values, exactly
+as graded.
+
+**Ship case.** It ships on both routes at eve (s.43 harness): every pooled
+metric wins in every seed (median deltas -.092/-.080/-.098), coverage
+rises, and the folds are 2W/6T/0L.
+- Without 2021, which carries -.60, eve still wins all four pooled metrics,
+  and so does D-7.
+- On the fidelity windows it wins all four metrics at eve, D-7 and D-21
+  (46 above).
+- D-21 caveat (s.43 harness only): the interval score went 10.140 ->
+  10.301 because of 2019s Yamina. Yamina was a late entrant (29 July) with
+  four weeks of polls at D-21, started at the 1% fill value under tau ~
+  .06. Under ALR it was the reference and took the residual.
+  - This mechanism is closed in 2026: filing closed at D-47 and every 2026
+    list has 15+ weeks of polls.
+  - On fidelity the D-21 interval improves.
+- The D-21 gains on the s.43 harness are concentrated in the
+  frozen-reference cycles. CLR is a correctness fix more than a broad D-21
+  improvement.
+- Follow-up: entry-anchored start states for late entrants, as its own
+  refit candidate.
+
+**Refit gates for every production build** (`REFIT_GATES`; checked in
+`bayes_model.main`):
+- 0 divergences.
+- Max r-hat <= 1.02 over tau, sigma_g, sigma_f, s_obs AND the endpoint
+  shares. diagnostics() did not check the shares before, and CLR's extra
+  common-mode direction showed bimodal endpoints in two harness windows.
+- Min bulk ESS >= 300.
+- 14-day holdout median error no worse than the ALR fit on the same data.
+
+One reseed is allowed. If the reseed also fails, that build ships ALR and
+fit_summary.json records why.
+
+### 46.3 Trailing-Likud ramp (trail_ramp, tramp_m; merged, held OFF)
+
+**What it does.** It replaces the 0.5-seat cliff on the Monte-Carlo mean
+margin with a weight w = 1 at margin <= -1.0 seats, 0 at >= +2.0, linear
+in between. The beat's mean and sd are re-estimated on the record with the
+same weight: production mu 5.58, sd 4.15 (the w-weighted full record,
+n_eff 3.4); in the harness they are strict LOO per fold. Satellite
+sourcing, the 0.5 scale, the 0.75 cap and the Amcha exclusion are
+unchanged. Code: `bm.TRAIL_RAMP_ON` / `TRAIL_RAMP` / `trail_weight`;
+harness `trail_mode 'ramp'`, `trail_lo`, `trail_wcal`, `trail_ramp_params`.
+The variants tramp_d, tramp05_m, tramp05_d and tramp_m_cliffcal remain as
+sensitivity arms.
+
+**How it graded.**
+- s.43 harness on ALR: wins every pooled metric at eve, D-7 and D-21 with
+  coverage equal.
+- As an increment on CLR: passes (G1).
+- On the fidelity windows: loses the eve threshold Brier by .0005 in every
+  seed, whether added on ALR or on CLR. The combine plan's G2 gate drops
+  it.
+
+**What remains true.** The cliff is discontinuous. With it, a poll move of
+about half a seat across +0.5 swings Likud's central count 26 -> 23,
+RZP-Zehut pass .545 -> .753 and P(NB>=61) by +1.1 pt. Today's margins
+(+0.01 to -0.10 across seeds) sit inside that band. With the ramp at
+today's margin (w ~ .66), the effect would be: Likud central 26 -> 25/25/24,
+Otzma pass .77 -> .84, RZP-Zehut pass .53 -> .60, and P(NB>=61) +0.1 to
++0.3 pt.
+
+**To turn it on.** Set `TRAIL_RAMP_ON = True` and mirror it in
+`ALL_LAYERS` (trail_mode 'ramp', trail_lo -1.0, trail_wcal True). Change
+the site copy from "the layer fires" to its weight; `trail_weight` is
+already written. Then rerun the 8-seed stability and gate-shift checks.
+That takes an owner override of the G2 gate, or a ramp recalibrated on the
+fidelity record that does not lose Brier.
+
+### 46.4 churn_abstain_record_gap: rejected (note for the post-election review)
+
+`CHURN_SPLIT` sits in the certainty layer. That is a 2026-only judgment
+layer no harness runs, and the candidate's own eve run with the flag on is
+bit-identical. Such layers change only on cited post-filing evidence. This
+candidate rested on a Goodman regression over 2013-2022 CEC locality
+results, which is historical evidence. Its one 2026 item, N12 of 7 Sept,
+is pre-filing, direction-only and was not used. The weaknesses:
+- The voter-space inter-election gap was carried over to the mover-space
+  campaign gap by an unvalidated typicality ratio (0.20-0.27).
+- The Goodman fit is misspecified: abstention levels fall outside [0,1],
+  NB loyalty is above 1, and the cross-bloc coefficients are negative.
+- Its source panel belongs to the other session's untracked atlas.
+- The effect (P(NB>=61) -0.4 pt, no central seat moves) is under half the
+  seed-to-seed spread.
+
+The flag code is not merged. For the review: the abstention-record gap
+input is sensitive, re-measured 0.093 -> 0.020 on the atlas record, and
+2021 -> 2022 is the extreme of six transitions. Re-open only if
+post-filing polls give a sized bloc-differential turnout intention, with n
+and fieldwork dates.
+
+## 51. Sector family terms (15 Oct, D-12)
+
+Two accuracy candidates for the sector family shocks, graded on the
+restated round-three yardstick (s.46: CLR latent, ballot-fidelity windows,
+shared CLR-fidelity cache, shipped list mask). Both flags default OFF.
+
+### 51.1 Pre-registration (written before any harness run of these arms)
+
+**Candidate A, `hared_e0` (the only haredi arm).** The haredi family mean
+becomes the leave-one-cycle-out RAW (e0) family total,
+`decompose(exclude_cycle)["family_e0"]["haredi"]`, in place of the e1 mean
+(measured after the bloc swing is removed). The sd stays the LOO e1 sd.
+Rationale as s.43 for the Arab term: the projection's bloc swing has mean
+zero, so the NB over-poll that e1 strips out (+1.66 seats raw, on average)
+is applied nowhere, and e1's extra -0.37 haredi seats have no counterpart.
+Production: `HAREDI_FAMILY_FORM = "e0"` gives mean -0.980 (shipped e1
+-1.352), sd 1.768. LOO e0 by fold: 2009 -1.06, 2013 -0.89, 2015 -1.25,
+2019a -0.50, 2019s -1.08, 2020 -1.14, 2021 -1.02, 2022 -0.92 (e1: -1.41,
+-1.05, -1.68, -0.92, -1.37, -1.56, -1.36, -1.47).
+
+**No recency variant is registered.** Under leave-one-cycle-out, a "last
+four cycles" window re-admits April 2019 (e0 -4.33) in exactly the four
+recent folds (2019s-2022 would get -1.30 to -1.69, more negative than e0),
+so the harness would grade a different object from production's -0.58,
+which excludes April 2019 by construction. It is not graded and not
+proposed.
+
+**Candidate B, `arab_raam_split`.** The regB intercept keeps its family
+total; only its allocation across the Arab lists changes.
+- Lineages: a list containing a Ra'am id (raam, raam_taal, raam_balad) vs
+  the other Arab lists of the same cycle.
+- Shares: for each fold, over the split cycles of the decomposition record
+  (two or more Arab rows, one of them Ra'am) without the graded cycle,
+  m_R and m_O = each lineage's mean raw error; u = max(0, -m);
+  s_R = u_R / (u_R + u_O), falling back to base share when both are 0.
+- Allocation: Ra'am columns take s_R of the intercept, the other Arab
+  columns 1 - s_R, each split by base share; the mass still comes from the
+  non-Arab lists by base share. The turnout term is unchanged
+  (base-proportional). Windows with one Arab column (2009, 2013 and 2015 as
+  merged in the harness, 2019s, 2020) are unchanged by construction.
+- Record (computed before grading): Ra'am lineage 2013 -0.45, 2019a 0.00,
+  2021 -2.29, 2022 -0.57; the other lists +0.18, +1.22, +2.29, -1.00.
+  m_O > 0 in every fold and in the full sample, so s_R = 1.0 everywhere:
+  the arm places the whole intercept on Ra'am wherever Ra'am runs
+  separately (harness: 2019a Ra'am-Balad, 2021, 2022; production: Ra'am).
+- Turnout-ratio allocation: support test registered and run on the record
+  first. Per-lineage regression of raw error on the ratio-implied error
+  over the four split cycles; "supported" iff |k_O - k_R| > 2 se and every
+  strict-LOO fold keeps at least three cycles per lineage. Result: k_R
+  -0.18 (se 0.87), k_O +0.83 (se 0.16), z = 1.14, and the 2021 fold keeps
+  two cycles. Not supported, so not implemented and not graded.
+
+**Grading.** `--fixed` mask throughout. Eve: 3 seeds (offsets 0/100/200)
+pooled. D-7 and D-21: seed offset 0.
+
+**Decision rule** (s.36 / s.46 shipping rule, made explicit):
+1. Eve passes by the FOLD route if no fold's median-MAE delta (3-seed
+   mean) is +0.1 or worse and the pooled median MAE falls; or by the
+   POOLED route if median MAE, mean MAE, threshold Brier and interval
+   score all fall and coverage does not move away from 0.90 (the baseline
+   is above 0.90, so coverage may not rise).
+2. D-7 and D-21 must not contradict: an arm contradicts at a horizon if it
+   loses two or more of the four pooled metrics there, or moves coverage
+   away from 0.90.
+3. B only (three split windows, two Ra'am cycles of record): additionally
+   no pooled eve metric may get worse beyond rounding (0.0005 MAE and
+   interval, 0.00005 Brier). If it ships, it ships as disclosed judgement.
+4. A and B are graded separately against the shipped baseline. If both
+   pass, the pair is run together once on the same seeds and ships only if
+   the pair passes too.
+5. The 2026 effect is reported for each arm whatever the verdict.
+
+### 51.2 Results (3 seeds pooled at eve; seed offset 0 at D-7 / D-21; fixed mask)
+
+The flags-off run reproduces the restated baseline exactly. With the flags
+off, production `project()` is bit-identical to the pre-change code at the
+production seed (same seat-draw hash).
+
+| horizon | arm | median MAE | mean MAE | coverage | Brier | interval |
+|---|---|---|---|---|---|---|
+| eve | shipped | 1.509 | 1.628 | .981 | .0474 | 9.280 |
+| eve | hared_e0 | 1.504 (-.006) | 1.626 (-.002) | .981 | .0472 (-.0002) | 9.277 (-.003) |
+| eve | arab_raam_split | 1.523 (+.014) | 1.605 (-.024) | .981 | .0453 (-.0021) | 9.286 (+.006) |
+| D-7 | shipped | 1.495 | 1.650 | .990 | .0492 | 9.454 |
+| D-7 | hared_e0 | -.013 | -.001 | = | -.0003 | -.020 |
+| D-7 | arab_raam_split | +.018 | -.024 | = | -.0021 | +.001 |
+| D-21 | shipped | 1.620 | 1.773 | .990 | .0538 | 9.655 |
+| D-21 | hared_e0 | -.010 | +.001 | = | -.0002 | -.051 |
+| D-21 | arab_raam_split | .000 | -.024 | = | -.0019 | +.045 |
+
+**hared_e0: PASSES the pre-registered rule.**
+- Eve passes both routes. Pooled, it wins all four metrics with coverage
+  equal. Fold deltas (3-seed mean median MAE): 2015 -.030, 2019a -.071,
+  2019s +.083, 2021 +.024, 2022 -.051, three folds 0. That is 0W/8T/0L,
+  with no fold loss and a lower pooled median.
+- D-7 wins all four metrics. D-21 loses only mean MAE (+.0009), which is
+  not a contradiction.
+- **Size: at the noise floor.**
+  - Per seed, median MAE is +.009 / +.012 / -.038 and the interval score
+    +.001 / -.013 / +.003. The pooled wins on those two metrics each come
+    from one seed.
+  - Brier (-.0001 / -.0002 / -.0002) and mean MAE (-.001 / -.003 / -.002)
+    win in every seed.
+- **List level** (eve, 3 seeds; error = projected mean - actual):
+  - The haredi family's mean error moves from +0.05 to -0.16. On this
+    harness the e1 mean was already about unbiased at the family level.
+  - UTJ improves: error +0.55 -> +0.36, MAE 0.95 -> 0.85.
+  - Shas gets worse: error -0.46 -> -0.68, MAE 0.98 -> 1.06.
+  - The harness rewards a smaller haredi push only because base-share
+    allocation over-feeds UTJ. That is the desk's third arm (allocation
+    by each list's own record, Shas about 90%), which was not registered
+    here.
+- Post-hoc robustness (three more eve seeds, not part of the rule): see
+  51.4. Over six seeds the median-MAE gain vanishes (+.0009).
+
+**arab_raam_split: FAILS the pre-registered rule.**
+- Eve fold route: 2022 loses +0.205, beyond noise.
+- Eve pooled route: loses median MAE (+.014) and the interval score
+  (+.006).
+- B's extra no-loss condition fails.
+- D-7 contradicts: it loses median MAE and the interval score.
+- **What it does well.**
+  - Brier -.0021 and mean MAE -.024 at eve, the same in all three seeds
+    (Brier -.0021 / -.0021 / -.0022). It is about ten times A's Brier gain.
+  - The Ra'am lineage carries it. Over 2019a / 2021 / 2022 at eve, Ra'am's
+    threshold Brier falls .329 -> .239 and its mean MAE 2.01 -> 1.39
+    (2021 Ra'am 1.44 -> 1.67 seats against 4; 2019a Ra'am-Balad
+    2.56 -> 3.69 against 4).
+- **Why it fails.** Moving the whole intercept off the other Arab lists
+  pushes the 2022 Hadash-Ta'al straddler toward the threshold:
+  - pass .54 -> .50, median 4 -> 1.3 seat-equivalents across seeds,
+    against 5 won;
+  - the other Arab lists' Brier rises .067 -> .075.
+- **Verdict.** With two Ra'am cycles of record, this is a real but
+  unbalanced gain. It does not ship.
+
+**The pair (sector_both)** was run alongside for information. Rule 4 does
+not apply because B fails. Eve: median +.004, mean -.026, Brier -.0023,
+interval +.003. That fails the pooled route.
+
+**Turnout-ratio allocation:** not supported by the record (51.1), so it
+was not graded.
+
+**error_decomposition step 4.** The family means and sds (e1 and e0) are
+fixed in the per-cycle loop, step 2, before the anchors (step 3) and the
+residual leader correction (step 4). The non-unique-index bug being fixed
+separately in step 4 moves only `resid_base` / `resid_slope`. So neither
+arm's family mean depends on it, but the harness baseline will move when
+that fix lands, and these deltas should be re-checked then.
+
+### 51.3 2026 effect (registration mixture -> official forecast -> formation; outputs in scratch)
+
+Two frozen posteriors, at seed offsets +0 / +1 / +2:
+- **CLR reseed** (the s.46 fit that passes the refit gates, which the next
+  build ships).
+- **14 Oct ALR** (the posterior behind the published build).
+
+Main's m3_idata.nc was rewritten in place by another session at 18:08 and
+was briefly 0 bytes. It was restored at 18:09 with the same hash as the
+frozen ALR copy.
+
+**CLR reseed:**
+
+| | shipped | hared_e0 | arab_raam_split |
+|---|---|---|---|
+| Shas mean (central) | 8.93 / 8.87 / 8.87 (9) | 8.73 / 8.68 / 8.66 (9) | 8.92 / 8.86 / 8.86 (9) |
+| UTJ mean (central) | 8.75 / 8.72 / 8.74 (9) | 8.56 / 8.53 / 8.56 (8) | 8.74 / 8.71 / 8.73 (9) |
+| JL mean (central), pass | 8.75 / 8.78 / 8.75 (9), .978 / .978 / .975 | 8.79 / 8.81 / 8.78 (9), .978 / .979 / .976 | 8.28 / 8.32 / 8.27 (8), .967 / .966 / .961 |
+| Ra'am mean (central), pass | 4.73 / 4.82 / 4.76 (5), .764 / .778 / .768 | 4.76 / 4.84 / 4.78 (5), .767 / .780 / .770 | 5.34 / 5.40 / 5.35 (6), .829 / .838 / .829 |
+| P(NB>=61) | 13.0 / 13.1 / 13.5 | 12.3 / 12.4 / 12.7 | 12.8 / 12.9 / 13.4 |
+| change bloc alone | 8.6 / 8.4 / 8.6 | 9.0 / 8.7 / 9.2 | 8.3 / 8.3 / 8.4 |
+| with Ra'am | 28.3 / 28.5 / 28.1 | 29.1 / 29.8 / 29.5 | 31.1 / 31.4 / 31.3 |
+| neither | 58.8 / 58.4 / 58.4 | 58.5 / 57.9 / 57.9 | 56.2 / 55.7 / 55.3 |
+| PM repeat / Eisenkot / Netanyahu | 45.5 / 22.1 / 19.5 (+0) | 45.4 / 22.6 / 19.0 (+0) | 45.2 / 22.6 / 19.2 (+0) |
+
+**Central seats.**
+- hared_e0: UTJ 9 -> 8 and Together 11 -> 12, at all three seeds. Every
+  other list holds.
+- arab_raam_split: the Joint List 9 -> 8 and Ra'am 5 -> 6, at all three
+  seeds.
+
+**14 Oct ALR, same seeds.**
+- hared_e0: P(NB>=61) 14.2 / 13.2 / 13.4 -> 13.4 / 12.6 / 12.6. Shas+UTJ
+  17.56 -> 17.17 at +0. UTJ central 9 -> 8.
+- arab_raam_split: Ra'am pass .752 / .765 / .765 -> .820 / .827 / .828.
+  With Ra'am 27.5 / 28.6 / 28.6 -> 30.6 / 31.7 / 31.2. JL 9 -> 8 and
+  Ra'am 5 -> 6.
+
+The shipped CLR row reproduces s.46's central seats and Ra'am pass
+(.764 / .778 / .768) exactly. Its bloc probabilities differ from the s.46
+table by 0.1-0.3 pt; these runs patch the seed of the registration and
+formation modules only.
+
+### 51.4 Post-hoc robustness (three more eve seeds; NOT part of the rule)
+
+These were run after the verdicts above, because hared_e0's median-MAE
+delta changed sign across the registered seeds. Offsets are 300, 400 and
+500; the shipped pooled score on these seeds is 1.489 / 1.625 / .981 /
+.0470 / 9.295.
+
+**hared_e0.**
+- On the three new seeds: median +.007, mean -.002, Brier -.0002,
+  interval -.021.
+- Over all six seeds: median +.0009, mean -.0023, Brier -.0002 (6/6
+  seeds), interval -.012 (4/6 seeds); coverage equal.
+- On six seeds it would fail by +.0009 of median MAE. Its eve pass rests on
+  seed noise in the median. The consistent part is small: Brier and mean
+  MAE win in every seed.
+- Read it as harness-neutral, not as a measured accuracy gain.
+
+**arab_raam_split.**
+- Over six seeds: median +.0009, mean -.0237 (6/6), Brier -.0021 (6/6),
+  interval +.003 (losses in 5/6). The 2022 fold is +0.103.
+- The 2022 median loss is partly a coin flip: Hadash-Ta'al passes in about
+  half the draws, and the new seeds show 0.000 there. The interval loss
+  persists. The verdict does not change.
+
+### 51.5 Recommendation
+
+**hared_e0: ship, disclosed as a consistency correction that is neutral on
+the harness.**
+- It passes the pre-registered rule. Its case is the s.43 argument: with a
+  zero-mean projected bloc swing, the e1 mean applies a bloc correction the
+  projection never makes.
+- The harness can neither confirm nor refute it beyond Brier and mean MAE
+  gains of about .0002 and .002. The six-seed median is a tie.
+- To ship: set `HAREDI_FAMILY_FORM = "e0"` and the mirror
+  `ALL_LAYERS["haredi_mean"] = "e0"`, then rerun the production chain. The
+  2026 effect is Shas+UTJ -0.4 seats, UTJ central 9 -> 8, Together
+  11 -> 12, and P(NB>=61) -0.7 pt.
+- The site's "haredi lists underpolled by 1.35 +/- 1.77" becomes
+  0.98 +/- 1.77.
+- The list-level result points to the better next candidate, the desk's
+  third arm. Base-share allocation over-feeds UTJ (harness error +0.55)
+  and under-feeds Shas (-0.46). An arm that allocates the family mean by
+  each list's own LOO record, shrunk, should be pre-registered next.
+
+**arab_raam_split: do not ship.**
+- It fails the rule: the eve median and interval score, and a
+  contradiction at D-7.
+- It is the larger Brier gain of the two arms (-.0021 in every seed) and
+  repairs Ra'am's threshold record (.329 -> .239). But putting the whole
+  intercept on Ra'am starves the other Arab lists at the threshold (2022
+  Hadash-Ta'al), and the interval score worsens.
+- A softer allocation could be registered as its own candidate: a partial
+  share such as the desk's two-thirds, or Ra'am's own LOO mean with the
+  Joint List taking the remainder. The flag code stays, OFF.
+
+Both flags remain OFF in this patch.
