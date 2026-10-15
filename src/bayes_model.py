@@ -378,8 +378,27 @@ ARAB_LIST_UNIFIED = True
 # the haredi tide's correlated z (KALPI_FAMILY_RHO). The kalpi capacity
 # ceiling still binds above. The additive -1.35 this replaces is the
 # same history expressed in seats.
-ARAB_TURNOUT = {"base": 0.538, "mean_unified": 0.625, "mean_split": 0.47,
+ARAB_TURNOUT = {"base": 0.538, "mean_unified": 0.580, "mean_split": 0.47,
                 "sd": 0.05, "max": 0.72}
+# 15 Oct (dossier s.43): mean_unified 0.625 -> 0.580 (the LOO table-B regime
+# mean, inside s.4's pre-registered 56-62% band), with the graded pass-through
+# and intercept below. Shipped on the harness's POOLED route after an
+# adversarial verification (strict-LOO fix in validate_bayes).
+# 2026-10-13 candidate arab_turnout_regime (dossier s.43), all three OFF
+# (recommended graded setting: mean_unified 0.580, K 0.247, INTERCEPT -0.634):
+# ARAB_TURNOUT_K is the pass-through of the EXPECTED turnout ratio into the
+# Arab lists' share, r = 1 + k (T_mean/base - 1) + (T - T_mean)/base (the
+# draw noise is unscaled); 1.0 = shipped (polls miss the whole turnout
+# swing). The record's regression of family error on the ratio-implied
+# error has slope ~0.25. ARAB_FAMILY_FORM "additive_e0" replaces the
+# mechanism with the additive raw-e0 family mean (decompose()["family_e0"])
+# and the family's e1 sd - the control the mechanism was graded against.
+ARAB_TURNOUT_K = 0.247            # shipped 15 Oct (s.43); full-sample fit, se 0.21
+ARAB_FAMILY_FORM = "turnout"      # "turnout" (shipped) | "additive_e0"
+# Error-space intercept (seats, polled - actual) added to the turnout form:
+# the harness arm arab_regB is e0 = a + k x implied, fitted on the record
+# (full sample a -0.634, k 0.247). None = shipped (no intercept).
+ARAB_TURNOUT_INTERCEPT = -0.634   # shipped 15 Oct (s.43); seats, se 0.41
 ANCHORS = _P["anchors"]            # {"likud": .., "leader": ..} error means
 # 2026-09-03 (accuracy round three): anchors RETIRED. Eight-cycle harness
 # ablation - full 1.665 / no anchors 1.589 seats per list (median 1.574
@@ -1342,13 +1361,21 @@ def project(data, idata, rng, config="current", config_params=None):
         mu_f, sd_f = FAMILY_SHOCK[f]
         sd_f = sd_f * STACK_SCALE
         in_f = fams == f
-        if f == "arab":
+        if f == "arab" and ARAB_FAMILY_FORM == "additive_e0":
+            mu_f = _P["family_e0"]["arab"][0]      # raw-e0 mean, e1 sd kept
+        elif f == "arab":
             # turnout mechanism (ARAB_TURNOUT): joint scaling of the Arab lists
             T_mean = ARAB_TURNOUT["mean_unified" if ARAB_LIST_UNIFIED else "mean_split"]
             T = np.clip(T_mean + tdraws[:, k] * ARAB_TURNOUT["sd"] * STACK_SCALE, 0.35, ARAB_TURNOUT["max"])
             r = T / ARAB_TURNOUT["base"]
+            if ARAB_TURNOUT_K != 1.0:
+                r = (1.0 + ARAB_TURNOUT_K * (T_mean / ARAB_TURNOUT["base"] - 1.0)
+                     + (T - T_mean) / ARAB_TURNOUT["base"])
+            project.last_arab_r_mean = float(r.mean())
             tot = shares[:, in_f].sum(axis=1)
             delta = (r - 1.0) * tot
+            if ARAB_TURNOUT_INTERCEPT is not None:
+                delta = delta - ARAB_TURNOUT_INTERCEPT / 120.0
             w_f, w_r = np.where(in_f, base, 0), np.where(~in_f, base, 0)
             shares = shares + delta[:, None] * (w_f / w_f.sum() - w_r / w_r.sum())
             continue

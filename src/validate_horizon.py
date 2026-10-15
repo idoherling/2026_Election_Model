@@ -65,6 +65,8 @@ def main() -> None:
         params["nstrad"] = new_straddler_params(exclude_cycle=cycle)
         from validate_bayes import DECOMP
         params["pair_alias"] = DECOMP.get(cycle, {})   # dossier s.40
+        from validate_bayes import arab_turnout_params
+        params["arab_tab"] = arab_turnout_params(cycle)   # dossier s.43
         for h in HORIZONS:
             asof = eday - pd.Timedelta(days=h)
             try:
@@ -135,6 +137,8 @@ def main() -> None:
                              "threshold_brier_fixed": float(np.mean((pp[fixed] - (actual[fixed] > 0)) ** 2)),
                              "interval_score_fixed": float(isc[fixed].mean()),
                              "mean_width": float((hi - lo)[active].mean()),
+                             "arab_fam_err": float(seats[:, project_cycle.last_fams == "arab"].sum(axis=1).mean()
+                                                   - actual[project_cycle.last_fams == "arab"].sum()),
                              "p_nb61": float((nb >= 61).mean()),
                              "nb_actual": int(actual[blocs == "netanyahu_bloc"].sum())})
                 print(f"[{cycle} D-{h} {mode}] MAE {rows[-1]['seat_mae']:.2f} | cov {rows[-1]['coverage_90']:.0%} | "

@@ -563,6 +563,10 @@ model showed 9.5 (JL 6.5, Ra'am 3.0). Three causes found:
    split 2021). The pooled -0.32 mixed both regimes. With Balad's stay
    resolved, the unified-regime mean now applies (ARAB_UNIFIED_ERROR_MEAN
    -1.35, pooled sd 1.45 kept).
+   [Corrected 14 Oct, see s.43: 2022 was a SPLIT year (Balad ran alone);
+   the raw family errors are 2019s -0.71 and 2021 0.00, not -1.9 and +1.5;
+   on the raw record unified years average -0.70 and split years -0.68 -
+   there is no unified-regime premium.]
 3. **Threshold-death tails.** Ra'am's mean of 3.0 was a 4-seat median
    with a 49% death rate; the two fixes above move the latent and the
    family mean and are expected to reduce it. Ra'am's per-list residual
@@ -672,6 +676,10 @@ lists' joint share scales by T/0.538 and the mass comes from every other
 list. JL and Ra'am now move together. Ra'am's idiosyncratic width joins
 LOYAL_SD at 1.8 (measured 2021-22 final error 0.6-1.0 x 2 buffer).
 Effect vs the additive version: Ra'am pass 0.589 -> 0.620, JL 7.3 -> 7.5.
+[14 Oct, s.43: this mechanism was never graded - the harness kept the
+additive e1 mean. Graded now; the -1.35 it replaced rested on the s.24
+misreading, and full pass-through of the turnout ratio is not what the
+record shows (slope ~0.25).]
 
 **#4 Measured transfers.** Kolot Nodedim 2021->2022 with abstention
 (7,035 stations): of voters who left their list, change bloc 72.5%
@@ -1610,6 +1618,78 @@ the mean.
 List 9, YB 9, UTJ 8, Ra'am 6, Otzma 6, RZP-Zehut 4. PM: repeat election
 47.4, Eisenkot 20.6, Netanyahu 19.4. The trailing margin is 0.11 seats, so
 TRAIL fires. Every new small list passes with probability under 1.5%.
+
+## 43. The Arab turnout term graded and shipped (13-15 Oct)
+
+**Why.** Production's Arab family term (s.27 #3) scaled the Joint List and
+Ra'am jointly by T/0.538 with T ~ 0.625: full pass-through of the expected
+turnout ratio, about +2.2 seats over the polls. It was never graded - the
+harness kept the additive e1 family mean - and its regime mean rested on the
+s.24 reading, which does not survive a re-run of the record (raw family
+error: unified years -0.70, split years -0.68 seats; no unified premium).
+The field atlas's harmonised Arab-locality turnout series reached the same
+conclusion independently: final polls absorb most of a turnout swing.
+
+**Candidate (arab_turnout_regime, arm arab_regB).** Family error = a + k x
+(error implied by the turnout ratio), regime-B turnout table, a and k
+leave-one-cycle-out. Production: ARAB_TURNOUT["mean_unified"] 0.580 (the
+table-B mean, inside s.4's pre-registered 56-62% band), ARAB_TURNOUT_K 0.247,
+ARAB_TURNOUT_INTERCEPT -0.634 (full-sample fit); the draw's own spread
+passes through in full.
+
+**Adversarial verification (15 Oct; three skeptics + judge, no refits).**
+Every harness number reproduced. One leak was found and fixed:
+`arab_turnout_params` let the graded cycle's realised turnout enter the
+regression as the denominator of the NEXT cycle's ratio; rows with c ==
+cycle or prev[c] == cycle are now dropped. Strict-LOO result (3-seed
+pooled, shipped mask, previous harness -> regB; coverage equal):
+
+| horizon | median MAE | mean MAE | Brier | interval | folds W/T/L |
+|---|---|---|---|---|---|
+| eve | 1.630 -> 1.558 | 1.735 -> 1.723 | .0508 -> .0496 | 9.663 -> 9.614 | 4/2/2 (2015 +0.121) |
+| D-7 | 1.638 -> 1.569 | 1.724 -> 1.702 | .0493 -> .0480 | 9.618 -> 9.534 | 4/2/2 (2015 +0.061) |
+| D-21 | 1.827 -> 1.803 | 1.926 -> 1.891 | .0631 -> .0618 | 10.263 -> 10.140 | 3/3/2 (2019a +0.077) |
+
+It ships on the POOLED route only (2015's eve fold loses by more than
+noise; D-21 seed 100 loses median MAE by 0.003). Production's previous form
+(turnA) fails the rule outright (worse Brier at eve and D-7, lower coverage
+at D-21), so the change is also corrective.
+
+**Disclosures.** (a) 2022 threshold flips (Hadash-Ta'al and Ra'am near 50%
+pass) supply 84 / 71 / 96% of the median-MAE gain and ~90% of the Brier
+gain; with 2022 dropped all four pooled metrics still win at every horizon,
+and the interval-score gain is spread across cycles. (b) k is weak: 0.247,
+se 0.21 (a -0.634, se 0.41, n = 8); strict-LOO k ranges 0.10-0.32 and rests
+on 2019a. In 2026 the k term is worth ~0.3 seats; the change is mostly the
+intercept plus the turnout spread, and it should not be described as a
+validated pass-through. (c) The arm was chosen among nine graded arms. The
+simpler add_e0 fails (loses interval score at every horizon). (d)
+Production uses the full-sample a and k; the harness grades strict LOO.
+(e) 2022's 0.538 is the kalpi Arab-locality measure; IDI's 53.2% changes
+the 2026 ratio from 1.019 to 1.022 (~+0.04 seats). (f) The intercept is
+fitted on seat errors and contains non-Arab threshold windfall; the
+windfall-netted fit (a -0.318, k 0.271) was graded and is worse on mean MAE
+and Brier at every horizon, so it is not adopted (its 2026 effect is
+further from the old form). (g) 2026's only structural precedent is 2021
+(0.446); across all turnout tables the 2026 result is 12.5-13.7 Arab seats,
+every one below the old 14.7. (h) The production-only Arab churn in the
+certainty layer adds ~0.10 seats. (i) Re-grade once the harness's merged
+2021 JL+Ra'am block is split (round three, harness_ballot_fidelity).
+
+**Harness.** ALL_LAYERS now mirror production (arab_mode "turnout",
+arab_regime "B", arab_k "loo", arab_intercept True); the previous harness
+default is kept as ablation `arab_e1_prev`. RESTATED BASELINE for future
+candidates (3-seed pooled, shipped mask): eve 1.558 / 1.723 / .970 / .0496
+(interval 9.614); D-7 1.569 / 1.702 / .986 / .0480 (9.534); D-21 1.803 /
+1.891 / .972 / .0618 (10.140).
+
+**2026 effect (14 Oct posterior, production seed).** Arab joint mean 14.72
+-> 13.38; Ra'am pass .825 -> .752; central JL 10 -> 9, Ra'am 6 -> 5, Likud
+25 -> 26, UTJ 8 -> 9; P(NB>=61) 12.4 -> 14.5 (seeds +1/+2: 11.4/11.7 ->
+13.5/13.8); change bloc alone 6.8 -> 8.3; with Ra'am 27.1 -> 27.3; neither
+60.5 -> 58.2; PM repeat / Eisenkot / Netanyahu 47.7/20.7/19.0 ->
+45.3/21.6/20.4. Shipped in the 15 Oct build (s.45's "not in this build"
+note is superseded).
 
 ## 44. Site audit fixes (14 Oct)
 

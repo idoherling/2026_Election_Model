@@ -56,6 +56,7 @@ def decompose(exclude_cycle: str | None = None):
     """Per-cycle component estimates plus pooled residual rows."""
     rows_resid, bloc_totals = [], {}
     fam_totals = {"arab": {}, "haredi": {}}
+    fam_e0 = {"arab": {}, "haredi": {}}     # raw (pre-swing) family totals
     likud_e2, leader_e2 = {}, {}
 
     for cycle, f0 in _frames().items():
@@ -77,6 +78,7 @@ def decompose(exclude_cycle: str | None = None):
                 continue
             t = float(f.loc[in_f, "e1"].sum())
             fam_totals[fam][cycle] = t
+            fam_e0[fam][cycle] = float(f.loc[in_f, "error"].sum())
             f.loc[in_f, "e2"] = f.loc[in_f, "e1"] - t * w[in_f] / w[in_f].sum()
 
         # 3. party anchors: Likud, then the largest remaining list
@@ -119,6 +121,16 @@ def decompose(exclude_cycle: str | None = None):
             fam: (float(np.mean([d[c] for c in use if c in d])),
                   float(np.std([d[c] for c in use if c in d], ddof=1)))
             for fam, d in fam_totals.items()
+        },
+        # 2026-10-13 (dossier s.43, arab_turnout_regime): RAW family totals
+        # (e0, before the bloc swing is removed). The projection's bloc
+        # swing has mean zero, so the NB mean that e1 strips out is applied
+        # nowhere; e0 is the additive control the Arab turnout mechanism is
+        # graded against. Not used by production defaults.
+        "family_e0": {
+            fam: (float(np.mean([d[c] for c in use if c in d])),
+                  float(np.std([d[c] for c in use if c in d], ddof=1)))
+            for fam, d in fam_e0.items()
         },
         "anchors": anchors,
         "resid_base": float(base), "resid_slope": float(slope),

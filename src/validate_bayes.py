@@ -70,7 +70,27 @@ ABLATIONS = [
     # candidate resid_relcap (dossier s.42)
     ("relcap075", {"resid_relcap": 0.75}), ("relcap100", {"resid_relcap": 1.0}),
     ("relcap150", {"resid_relcap": 1.5}),
+    # candidate arab_turnout_regime (2026-10-13, dossier s.43): the
+    # production turnout mechanism graded against the additive family
+    # shock. arab_add_e0 = the raw-e0 additive control; turnA/turnB =
+    # production's form (k = 1) on regime tables A/B; _k50/_k25/_kloo =
+    # partial pass-through of the expected ratio; regB = the LOO regression
+    # (intercept + slope); oracle = realised turnout (diagnostic).
+    ("arab_e1_prev", {"arab_mode": None}),   # the pre-15-Oct harness default
+    ("arab_add_e0", {"arab_mode": "add_e0"}),
+    ("arab_turnA", {"arab_mode": "turnout", "arab_regime": "A"}),
+    ("arab_turnB", {"arab_mode": "turnout", "arab_regime": "B"}),
+    ("arab_turnA_k50", {"arab_mode": "turnout", "arab_regime": "A", "arab_k": 0.5}),
+    ("arab_turnB_k50", {"arab_mode": "turnout", "arab_regime": "B", "arab_k": 0.5}),
+    ("arab_turnB_k25", {"arab_mode": "turnout", "arab_regime": "B", "arab_k": 0.25}),
+    ("arab_turnB_kloo", {"arab_mode": "turnout", "arab_regime": "B", "arab_k": "loo"}),
+    ("arab_regB", {"arab_mode": "turnout", "arab_regime": "B", "arab_k": "loo",
+                   "arab_intercept": True}),
+    ("arab_oracle", {"arab_mode": "turnout", "arab_T": "oracle"}),
 ]
+# HORIZON_LAYERS string for the same arms (validate_horizon.py):
+ARAB_HORIZON_LAYERS = ";".join(
+    f"{n}:{__import__('json').dumps(f)}" for n, f in ABLATIONS if n.startswith("arab_"))
 # Quick runs (candidate testing): HARNESS_ABLATIONS=shipped,my_layer limits the
 # ablation list by name; HARNESS_SKIP_WIDTH=1 skips the width grid.
 import os as _os
@@ -157,7 +177,70 @@ ALL_LAYERS = {"resid": True, "swing": True, "family": True, "anchors": False,
               # list's residual sd at c x its own projected share, so a list
               # polling 0.3% is not given a 1.4 pp additive shock that the
               # zero clip turns into a ~0.7% mean (None = shipped, uncapped)
-              "resid_relcap": None}
+              "resid_relcap": None,
+              # candidate arab_turnout_regime (2026-10-13, dossier s.43).
+              # arab_mode None = shipped harness (additive e1 LOO family
+              # mean) | "add_e0" (additive RAW-e0 LOO mean, e1 sd) |
+              # "turnout" (production's ARAB_TURNOUT branch mirrored: base =
+              # the previous election's Arab turnout, T ~ mean + 0.05 x the
+              # family's t draw x shock_scale, r = T/base, Arab lists scaled
+              # jointly, mass from the rest). arab_regime "A" | "B" picks the
+              # LOO regime mean (ARAB_REGIMES); arab_T "oracle" uses the
+              # cycle's REALISED turnout (diagnostic only). arab_k: pass-
+              # through of the expected ratio (1.0 = production; "loo" = the
+              # LOO slope of family e0 on the ratio-implied error);
+              # arab_intercept adds that regression's LOO intercept.
+              # SHIPPED 15 Oct (s.43): the regression form arab_regB.
+              "arab_mode": "turnout", "arab_regime": "B", "arab_T": "regime",
+              "arab_k": "loo", "arab_intercept": True}
+
+# Arab-sector turnout by election (share of eligible Arab citizens voting).
+# Series as compiled in the dossier (s.4, s.24) and the production comment
+# on ARAB_TURNOUT (IDI / Dayan Center figures); 2019a 49.2 / 2019s 59.2
+# corroborated by the IDI slide reproduced by the ACI Task Force
+# (acitaskforce.org resource-1774-1.pdf). 2022 = 0.538, the kalpi layer's
+# own Arab-locality measure (kalpi_sectors.csv, 0.5376) - the value
+# production uses as ARAB_TURNOUT["base"] and sector_stream converts with
+# (IDI reports 53.2%); one source for both the harness and production.
+ARAB_TURNOUT_REC = {"2006": 0.563, "2009": 0.534, "2013": 0.565, "2015": 0.635,
+                    "2019a": 0.492, "2019s": 0.592, "2020": 0.648, "2021": 0.446,
+                    "2022": 0.538}
+# Regime tables. A = production's (a Joint List of ALL Arab parties);
+# B = structural (Hadash-Ta'al and Balad on one list, so it adds 2021 - the
+# structure 2026 has: the Joint List without Ra'am).
+ARAB_REGIMES = {"A": {"2015", "2019s", "2020"},
+                "B": {"2015", "2019s", "2020", "2021"}}
+
+
+def arab_turnout_params(cycle: str) -> dict:
+    """Per-cycle inputs of the harness turnout layer, leave-one-cycle-out:
+    base (previous election's turnout), realised turnout, the LOO mean of
+    realised turnout in the cycle's own regime under tables A and B, and
+    the LOO regression of the family's raw error on the error the realised
+    turnout ratio implies (e0 = a + k x imp, imp = -(T/base - 1) x polled)."""
+    from error_decomposition import _frames
+    prev = dict(zip(ORDER, ["2006"] + list(ORDER[:-1])))
+    out = {"base": ARAB_TURNOUT_REC[prev[cycle]], "realised": ARAB_TURNOUT_REC[cycle]}
+    others = [c for c in ORDER if c != cycle]
+    for nm, uni in ARAB_REGIMES.items():
+        same = [c for c in others if (c in uni) == (cycle in uni)]
+        out["mean_" + nm] = float(np.mean([ARAB_TURNOUT_REC[c] for c in same]))
+    fr = _frames()
+    e0, imp = [], []
+    for c in ORDER:
+        # strict leave-one-cycle-out (15 Oct verification): drop every row
+        # whose ratio T_c / T_prev(c) reads the graded cycle's turnout
+        if c == cycle or prev[c] == cycle or c not in fr:
+            continue
+        a = fr[c][fr[c]["family"] == "arab"]
+        if a.empty:
+            continue
+        r = ARAB_TURNOUT_REC[c] / ARAB_TURNOUT_REC[prev[c]]
+        e0.append(float(a["error"].sum())); imp.append(-(r - 1.0) * float(a["polled"].sum()))
+    X = np.c_[np.ones(len(imp)), imp]
+    a_, k_ = np.linalg.lstsq(X, np.array(e0), rcond=None)[0]
+    out["a_loo"], out["k_loo"] = float(a_), float(k_)
+    return out
 # Hand-picked right-flank ids per era (sensitivity run only: its case was
 # argued from outcomes - it drops Yisrael Beytenu from the 2015 pool).
 GEVALT_ERA_IDS = {"jewish_home", "national_union", "otzma", "yachad_yishai",
@@ -327,11 +410,29 @@ def project_cycle(data, idata, eday, threshold, pairs, params,
     zf = rng.multivariate_normal(np.zeros(len(fam_names)), cov[:len(fam_names), :len(fam_names)],
                                  size=N_PROJ) if fam_names else np.zeros((N_PROJ, 0))
     mixer = np.sqrt(rng.chisquare(T_DF, N_PROJ) / T_DF)
+    project_cycle.last_fams = fams
     for k, f in enumerate(fam_names):
         if not L["family"]:
             break
         mu_f, sd_f = shocks[f]
         in_f = fams == f
+        if f == "arab" and L["arab_mode"] == "add_e0":
+            mu_f = params["family_e0"]["arab"][0]
+        elif f == "arab" and L["arab_mode"] == "turnout":
+            # production's ARAB_TURNOUT branch, per-cycle base and LOO mean
+            at = params["arab_tab"]
+            T_mean = at["realised"] if L["arab_T"] == "oracle" else at["mean_" + L["arab_regime"]]
+            kk = at["k_loo"] if L["arab_k"] == "loo" else float(L["arab_k"])
+            T = np.clip(T_mean + (zf[:, k] / mixer) * bm.ARAB_TURNOUT["sd"] * L["shock_scale"],
+                        0.35, bm.ARAB_TURNOUT["max"])
+            r = 1.0 + kk * (T_mean / at["base"] - 1.0) + (T - T_mean) / at["base"]
+            tot = shares[:, in_f].sum(axis=1)
+            delta = (r - 1.0) * tot
+            if L["arab_intercept"]:
+                delta = delta - at["a_loo"] / 120.0
+            w_f, w_r = np.where(in_f, base, 0), np.where(~in_f, base, 0)
+            shares = shares + delta[:, None] * (w_f / w_f.sum() - w_r / w_r.sum())
+            continue
         sk = (-mu_f + (zf[:, k] / mixer) * sd_f * L["shock_scale"]) / 120.0
         w_f, w_r = np.where(in_f, base, 0), np.where(~in_f, base, 0)
         shares = shares + sk[:, None] * (w_f / w_f.sum() - w_r / w_r.sum())
@@ -493,6 +594,7 @@ def main() -> None:
             params["new_lists"] = new_lists_for_cycle(polls, cycle)
             params["nstrad"] = new_straddler_params(exclude_cycle=cycle)
             params["pair_alias"] = DECOMP.get(cycle, {})
+            params["arab_tab"] = arab_turnout_params(cycle)   # dossier s.43
             print(f"[{cycle}] trailing-Likud LOO: mu {params['trail']['mu']:+.2f} sd {params['trail']['sd']:.2f} n {params['trail']['n']}")
             seats, blocs, base, comp_of = project_cycle(
                 data, idata, eday, CYCLE_THRESHOLD.get(cycle, THRESHOLD),
@@ -530,12 +632,18 @@ def main() -> None:
                 fixed = act_a
             lo_a, hi_a = np.percentile(sa, 5, axis=0), np.percentile(sa, 95, axis=0)
             ppa = (sa >= 1).mean(axis=0)
-            row = {"cycle": cycle, "ablation": tag}
+            isc_a = (hi_a - lo_a) + 20 * np.maximum(lo_a - actual, 0) + 20 * np.maximum(actual - hi_a, 0)
+            ar_a = project_cycle.last_fams == "arab"
+            row = {"cycle": cycle, "ablation": tag,
+                   # Arab family: mean projected seats - actual (dossier s.43)
+                   "arab_fam_err": float(sa[:, ar_a].sum(axis=1).mean() - actual[ar_a].sum())
+                   if ar_a.any() else np.nan}
             for sfx, m in (("", act_a), ("_fixed", fixed if fixed is not None else act_a)):
                 row.update({"seat_mae" + sfx: float(np.abs(sa.mean(axis=0) - actual)[m].mean()),
                             "seat_mae_median" + sfx: float(np.abs(np.median(sa, axis=0) - actual)[m].mean()),
                             "coverage_90" + sfx: float(((actual >= lo_a) & (actual <= hi_a))[m].mean()),
-                            "threshold_brier" + sfx: float(np.mean((ppa[m] - (actual[m] > 0)) ** 2))})
+                            "threshold_brier" + sfx: float(np.mean((ppa[m] - (actual[m] > 0)) ** 2)),
+                            "interval_score" + sfx: float(isc_a[m].mean())})
             abl_rows.append(row)
 
         # Interval-width calibration curve (audit improvement #2): the same
