@@ -78,15 +78,26 @@ ABLATIONS = [
     # (intercept + slope); oracle = realised turnout (diagnostic).
     ("arab_e1_prev", {"arab_mode": None}),   # the pre-15-Oct harness default
     ("arab_add_e0", {"arab_mode": "add_e0"}),
-    ("arab_turnA", {"arab_mode": "turnout", "arab_regime": "A"}),
-    ("arab_turnB", {"arab_mode": "turnout", "arab_regime": "B"}),
-    ("arab_turnA_k50", {"arab_mode": "turnout", "arab_regime": "A", "arab_k": 0.5}),
-    ("arab_turnB_k50", {"arab_mode": "turnout", "arab_regime": "B", "arab_k": 0.5}),
-    ("arab_turnB_k25", {"arab_mode": "turnout", "arab_regime": "B", "arab_k": 0.25}),
-    ("arab_turnB_kloo", {"arab_mode": "turnout", "arab_regime": "B", "arab_k": "loo"}),
+    # 15 Oct: every arm spells out k and the intercept. Once the ALL_LAYERS
+    # default became regB (k "loo", intercept on), bare turnA/turnB/_kNN/
+    # oracle entries would silently inherit both and stop being the arms
+    # s.43 graded (found by the round-three share-space candidate).
+    ("arab_turnA", {"arab_mode": "turnout", "arab_regime": "A", "arab_k": 1.0,
+                    "arab_intercept": False}),
+    ("arab_turnB", {"arab_mode": "turnout", "arab_regime": "B", "arab_k": 1.0,
+                    "arab_intercept": False}),
+    ("arab_turnA_k50", {"arab_mode": "turnout", "arab_regime": "A", "arab_k": 0.5,
+                        "arab_intercept": False}),
+    ("arab_turnB_k50", {"arab_mode": "turnout", "arab_regime": "B", "arab_k": 0.5,
+                        "arab_intercept": False}),
+    ("arab_turnB_k25", {"arab_mode": "turnout", "arab_regime": "B", "arab_k": 0.25,
+                        "arab_intercept": False}),
+    ("arab_turnB_kloo", {"arab_mode": "turnout", "arab_regime": "B", "arab_k": "loo",
+                         "arab_intercept": False}),
     ("arab_regB", {"arab_mode": "turnout", "arab_regime": "B", "arab_k": "loo",
                    "arab_intercept": True}),
-    ("arab_oracle", {"arab_mode": "turnout", "arab_T": "oracle"}),
+    ("arab_oracle", {"arab_mode": "turnout", "arab_T": "oracle", "arab_k": 1.0,
+                     "arab_intercept": False}),
 ]
 # HORIZON_LAYERS string for the same arms (validate_horizon.py):
 ARAB_HORIZON_LAYERS = ";".join(

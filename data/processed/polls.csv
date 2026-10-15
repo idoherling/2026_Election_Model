@@ -23650,29 +23650,34 @@ poll_id,cycle,pollster,publisher,fieldwork_end,sample_size,party_id,seats,vote_p
 2026_20261012_filber,2026,Filber,Channel 14,2026-10-12,538.0,yashar,20,,True,2026_main,2026,2026_main:0:4
 2026_20261012_filber,2026,Filber,Channel 14,2026-10-12,538.0,yisrael_beytenu,5,,True,2026_main,2026,2026_main:0:4
 2026_20261012_filber,2026,Filber,Channel 14,2026-10-12,538.0,zionist_home,4,,True,2026_main,2026,2026_main:0:4
-2026_20261012_midgam,2026,Midgam,HaHadashot 12,2026-10-12,509.0,yashar,23,,True,manual,manual,https://www.haaretz.com/israel-news/elections/2026-10-13/ty-article/poll-eisenkot-bloc-holds-at-54-seats-hard-line-ex-generals-party-falls-short/000001a1-346a-d36f-a9fd-75ead18b0000
-2026_20261012_midgam,2026,Midgam,HaHadashot 12,2026-10-12,509.0,likud,20,,True,manual,manual,https://www.haaretz.com/israel-news/elections/2026-10-13/ty-article/poll-eisenkot-bloc-holds-at-54-seats-hard-line-ex-generals-party-falls-short/000001a1-346a-d36f-a9fd-75ead18b0000
-2026_20261012_midgam,2026,Midgam,HaHadashot 12,2026-10-12,509.0,together,13,,True,manual,manual,https://www.haaretz.com/israel-news/elections/2026-10-13/ty-article/poll-eisenkot-bloc-holds-at-54-seats-hard-line-ex-generals-party-falls-short/000001a1-346a-d36f-a9fd-75ead18b0000
-2026_20261012_midgam,2026,Midgam,HaHadashot 12,2026-10-12,509.0,democrats,9,,True,manual,manual,https://www.haaretz.com/israel-news/elections/2026-10-13/ty-article/poll-eisenkot-bloc-holds-at-54-seats-hard-line-ex-generals-party-falls-short/000001a1-346a-d36f-a9fd-75ead18b0000
-2026_20261012_midgam,2026,Midgam,HaHadashot 12,2026-10-12,509.0,yisrael_beytenu,9,,True,manual,manual,https://www.haaretz.com/israel-news/elections/2026-10-13/ty-article/poll-eisenkot-bloc-holds-at-54-seats-hard-line-ex-generals-party-falls-short/000001a1-346a-d36f-a9fd-75ead18b0000
-2026_20261012_midgam,2026,Midgam,HaHadashot 12,2026-10-12,509.0,otzma,8,,True,manual,manual,https://www.haaretz.com/israel-news/elections/2026-10-13/ty-article/poll-eisenkot-bloc-holds-at-54-seats-hard-line-ex-generals-party-falls-short/000001a1-346a-d36f-a9fd-75ead18b0000
-2026_20261012_midgam,2026,Midgam,HaHadashot 12,2026-10-12,509.0,shas,8,,True,manual,manual,https://www.haaretz.com/israel-news/elections/2026-10-13/ty-article/poll-eisenkot-bloc-holds-at-54-seats-hard-line-ex-generals-party-falls-short/000001a1-346a-d36f-a9fd-75ead18b0000
-2026_20261012_midgam,2026,Midgam,HaHadashot 12,2026-10-12,509.0,joint_list,8,,True,manual,manual,https://www.haaretz.com/israel-news/elections/2026-10-13/ty-article/poll-eisenkot-bloc-holds-at-54-seats-hard-line-ex-generals-party-falls-short/000001a1-346a-d36f-a9fd-75ead18b0000
-2026_20261012_midgam,2026,Midgam,HaHadashot 12,2026-10-12,509.0,utj,7,,True,manual,manual,https://www.haaretz.com/israel-news/elections/2026-10-13/ty-article/poll-eisenkot-bloc-holds-at-54-seats-hard-line-ex-generals-party-falls-short/000001a1-346a-d36f-a9fd-75ead18b0000
-2026_20261012_midgam,2026,Midgam,HaHadashot 12,2026-10-12,509.0,rzp,6,,True,manual,manual,https://www.haaretz.com/israel-news/elections/2026-10-13/ty-article/poll-eisenkot-bloc-holds-at-54-seats-hard-line-ex-generals-party-falls-short/000001a1-346a-d36f-a9fd-75ead18b0000
-2026_20261012_midgam,2026,Midgam,HaHadashot 12,2026-10-12,509.0,raam,5,,True,manual,manual,https://www.haaretz.com/israel-news/elections/2026-10-13/ty-article/poll-eisenkot-bloc-holds-at-54-seats-hard-line-ex-generals-party-falls-short/000001a1-346a-d36f-a9fd-75ead18b0000
-2026_20261012_midgam,2026,Midgam,HaHadashot 12,2026-10-12,509.0,zionist_home,4,,True,manual,manual,https://www.haaretz.com/israel-news/elections/2026-10-13/ty-article/poll-eisenkot-bloc-holds-at-54-seats-hard-line-ex-generals-party-falls-short/000001a1-346a-d36f-a9fd-75ead18b0000
-2026_20261012_midgam,2026,Midgam,HaHadashot 12,2026-10-12,509.0,amcha_yisrael,0,,True,manual,manual,https://www.haaretz.com/israel-news/elections/2026-10-13/ty-article/poll-eisenkot-bloc-holds-at-54-seats-hard-line-ex-generals-party-falls-short/000001a1-346a-d36f-a9fd-75ead18b0000
-2026_20261014_midgamproject,2026,Midgam Project,Channel 13,2026-10-14,,yashar,20,,True,manual,manual,https://www.walla.co.il/news/politics/383957465
-2026_20261014_midgamproject,2026,Midgam Project,Channel 13,2026-10-14,,likud,18,,True,manual,manual,https://www.walla.co.il/news/politics/383957465
-2026_20261014_midgamproject,2026,Midgam Project,Channel 13,2026-10-14,,together,12,,True,manual,manual,https://www.walla.co.il/news/politics/383957465
-2026_20261014_midgamproject,2026,Midgam Project,Channel 13,2026-10-14,,democrats,9,,True,manual,manual,https://www.walla.co.il/news/politics/383957465
-2026_20261014_midgamproject,2026,Midgam Project,Channel 13,2026-10-14,,yisrael_beytenu,9,,True,manual,manual,https://www.walla.co.il/news/politics/383957465
-2026_20261014_midgamproject,2026,Midgam Project,Channel 13,2026-10-14,,joint_list,9,,True,manual,manual,https://www.walla.co.il/news/politics/383957465
-2026_20261014_midgamproject,2026,Midgam Project,Channel 13,2026-10-14,,utj,8,,True,manual,manual,https://www.walla.co.il/news/politics/383957465
-2026_20261014_midgamproject,2026,Midgam Project,Channel 13,2026-10-14,,otzma,8,,True,manual,manual,https://www.walla.co.il/news/politics/383957465
-2026_20261014_midgamproject,2026,Midgam Project,Channel 13,2026-10-14,,shas,7,,True,manual,manual,https://www.walla.co.il/news/politics/383957465
-2026_20261014_midgamproject,2026,Midgam Project,Channel 13,2026-10-14,,rzp,6,,True,manual,manual,https://www.walla.co.il/news/politics/383957465
-2026_20261014_midgamproject,2026,Midgam Project,Channel 13,2026-10-14,,raam,6,,True,manual,manual,https://www.walla.co.il/news/politics/383957465
-2026_20261014_midgamproject,2026,Midgam Project,Channel 13,2026-10-14,,zionist_home,4,,True,manual,manual,https://www.walla.co.il/news/politics/383957465
-2026_20261014_midgamproject,2026,Midgam Project,Channel 13,2026-10-14,,amcha_yisrael,4,,True,manual,manual,https://www.walla.co.il/news/politics/383957465
+2026_20261012_midgam,2026,Midgam,HaHadashot 12,2026-10-12,509.0,amcha_yisrael,0,1.8,True,2026_main,2026,2026_main:0:5
+2026_20261012_midgam,2026,Midgam,HaHadashot 12,2026-10-12,509.0,blue_white,0,0.9,True,2026_main,2026,2026_main:0:5
+2026_20261012_midgam,2026,Midgam,HaHadashot 12,2026-10-12,509.0,democrats,9,,True,2026_main,2026,2026_main:0:5
+2026_20261012_midgam,2026,Midgam,HaHadashot 12,2026-10-12,509.0,haredi_public,0,0.1,True,2026_main,2026,2026_main:0:5
+2026_20261012_midgam,2026,Midgam,HaHadashot 12,2026-10-12,509.0,joint_list,8,,True,2026_main,2026,2026_main:0:5
+2026_20261012_midgam,2026,Midgam,HaHadashot 12,2026-10-12,509.0,likud,20,,True,2026_main,2026,2026_main:0:5
+2026_20261012_midgam,2026,Midgam,HaHadashot 12,2026-10-12,509.0,noam,0,0.5,True,2026_main,2026,2026_main:0:5
+2026_20261012_midgam,2026,Midgam,HaHadashot 12,2026-10-12,509.0,otzma,8,,True,2026_main,2026,2026_main:0:5
+2026_20261012_midgam,2026,Midgam,HaHadashot 12,2026-10-12,509.0,raam,5,,True,2026_main,2026,2026_main:0:5
+2026_20261012_midgam,2026,Midgam,HaHadashot 12,2026-10-12,509.0,rzp,6,,True,2026_main,2026,2026_main:0:5
+2026_20261012_midgam,2026,Midgam,HaHadashot 12,2026-10-12,509.0,shas,8,,True,2026_main,2026,2026_main:0:5
+2026_20261012_midgam,2026,Midgam,HaHadashot 12,2026-10-12,509.0,together,13,,True,2026_main,2026,2026_main:0:5
+2026_20261012_midgam,2026,Midgam,HaHadashot 12,2026-10-12,509.0,utj,7,,True,2026_main,2026,2026_main:0:5
+2026_20261012_midgam,2026,Midgam,HaHadashot 12,2026-10-12,509.0,yashar,23,,True,2026_main,2026,2026_main:0:5
+2026_20261012_midgam,2026,Midgam,HaHadashot 12,2026-10-12,509.0,yisrael_beytenu,9,,True,2026_main,2026,2026_main:0:5
+2026_20261012_midgam,2026,Midgam,HaHadashot 12,2026-10-12,509.0,zionist_home,4,,True,2026_main,2026,2026_main:0:5
+2026_20261014_midgamproject,2026,Midgam Project,Channel 13,2026-10-14,1018.0,amcha_yisrael,4,,True,2026_main,2026,2026_main:0:3
+2026_20261014_midgamproject,2026,Midgam Project,Channel 13,2026-10-14,1018.0,blue_white,0,1.2,True,2026_main,2026,2026_main:0:3
+2026_20261014_midgamproject,2026,Midgam Project,Channel 13,2026-10-14,1018.0,democrats,9,,True,2026_main,2026,2026_main:0:3
+2026_20261014_midgamproject,2026,Midgam Project,Channel 13,2026-10-14,1018.0,haredi_public,0,1.1,True,2026_main,2026,2026_main:0:3
+2026_20261014_midgamproject,2026,Midgam Project,Channel 13,2026-10-14,1018.0,joint_list,9,,True,2026_main,2026,2026_main:0:3
+2026_20261014_midgamproject,2026,Midgam Project,Channel 13,2026-10-14,1018.0,likud,18,,True,2026_main,2026,2026_main:0:3
+2026_20261014_midgamproject,2026,Midgam Project,Channel 13,2026-10-14,1018.0,otzma,8,,True,2026_main,2026,2026_main:0:3
+2026_20261014_midgamproject,2026,Midgam Project,Channel 13,2026-10-14,1018.0,raam,6,,True,2026_main,2026,2026_main:0:3
+2026_20261014_midgamproject,2026,Midgam Project,Channel 13,2026-10-14,1018.0,rzp,6,,True,2026_main,2026,2026_main:0:3
+2026_20261014_midgamproject,2026,Midgam Project,Channel 13,2026-10-14,1018.0,shas,7,,True,2026_main,2026,2026_main:0:3
+2026_20261014_midgamproject,2026,Midgam Project,Channel 13,2026-10-14,1018.0,together,12,,True,2026_main,2026,2026_main:0:3
+2026_20261014_midgamproject,2026,Midgam Project,Channel 13,2026-10-14,1018.0,utj,8,,True,2026_main,2026,2026_main:0:3
+2026_20261014_midgamproject,2026,Midgam Project,Channel 13,2026-10-14,1018.0,yashar,20,,True,2026_main,2026,2026_main:0:3
+2026_20261014_midgamproject,2026,Midgam Project,Channel 13,2026-10-14,1018.0,yisrael_beytenu,9,,True,2026_main,2026,2026_main:0:3
+2026_20261014_midgamproject,2026,Midgam Project,Channel 13,2026-10-14,1018.0,zionist_home,4,,True,2026_main,2026,2026_main:0:3
