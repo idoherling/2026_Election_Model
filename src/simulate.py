@@ -68,13 +68,18 @@ DEBUT = {"yashar", "together", "democrats", "unity", "zionist_home"}
 SUB_THRESHOLD_DEFAULT = 0.015  # share for 0-seat lists with no polled pct
 
 # Surplus-vote pairs (by dominant component). Deadline Oct 16, 2026.
-# SIGNED (Ynet, Haaretz, JDN, 6 Oct): Likud - RZP-Zehut; Together - Yisrael
-# Beytenu; Yashar - the Democrats. SIGNED 11 Sept: Joint List (Hadash-
-# Ta'al) - Ra'am (JPost https://www.jpost.com/israel-election-2026/article-908431,
-# INN https://www.israelnationalnews.com/flashes/693446; CEC submission
-# after list approval). EXPECTED and carried as pairs: Shas - UTJ (signed
-# in every cycle since 2013), Otzma - Amcha (Ben-Gvir's stated fallback,
-# valid only if Amcha passes).
+# SIGNED 10 Sept: Together - Yisrael Beytenu; Yashar - the Democrats
+# (JPost https://www.jpost.com/israel-election-2026/article-908296).
+# SIGNED 11 Sept: Joint List (Hadash-Ta'al) - Ra'am (JPost
+# https://www.jpost.com/israel-election-2026/article-908431, INN
+# https://www.israelnationalnews.com/flashes/693446; CEC submission after
+# list approval). SIGNED 6 Oct: Likud - RZP-Zehut (date: Times of Israel
+# liveblog 6 Oct, https://www.timesofisrael.com/liveblog_entry/likud-and-religious-zionism-sign-surplus-vote-agreement/;
+# Ynet https://www.ynetnews.com/article/asxop5pjn, undated). SIGNED 11 Oct: Shas - UTJ
+# (JPost https://www.jpost.com/israel-election-2026/article-911320, Ynet
+# https://www.ynetnews.com/article/e073g8o82). UNSIGNED and carried as a
+# pair: Otzma - Amcha (Ben-Gvir's only remaining option, undecided per the
+# Ynet report of the Likud signing; valid only if Amcha passes).
 # Reservists - Blue and White are negotiating; a pair of two sub-threshold
 # lists has no effect and is not carried.
 # Ids are COMPONENT ids. The Bayesian pipeline merges some under another

@@ -19,8 +19,17 @@ Key -> source:
   counts    polls.csv
   draws     mixture_draws.parquet (2,500-row sample; columns with any seats)
   kalpi     kalpi_sectors.csv + kalpi_poststrat_2026.csv x expected seats (mixture mean)
-  val       carried forward from the previous payload (backtest numbers
-            change only when the harness is re-run)
+  val       recomputed every build from the harness outputs:
+            simple   model_validation.csv (8 cycles, eve)
+            bayes    model_validation_ablation.csv, ablation == "shipped"
+                     (eve, shipped list mask, one seed; dossier s.41 restates
+                     the 3-seed baseline at 1.735 / 1.630 / 0.970 / 0.051)
+            horizon  model_validation_horizon.csv, mode == "calendar"
+                     (D-56 / D-21 / D-7 refits, the shipped calendar)
+  below     share of the forecast vote below 3.25% (the mixture's median
+            vector, renormalised as allocate_central does)
+  fit.u_*   the certainty layer's undecided pool and expected per-side
+            transfer, from bayes_model's own constants
   fit       fit_summary.json (written by bayes_model.main) + CEC filing count
   ledger    site_ledger.build_ledger — every 2026 poll with its sources
   ratings   site_ledger.build_ratings — per-firm track record
@@ -45,15 +54,44 @@ SECTOR_LABELS = {
     "religious_zionist": "Religious-Zionist localities",
     "russian_leaning": "Druze & YB strongholds",
 }
-PM_RENAME = {"none (repeat election)": "No one — repeat election"}
+PM_RENAME = {"none (repeat election)": "No one — repeat election",
+             "rotation / Likud successor": "Rotation / Likud successor"}
+
+
+def build_val() -> dict:
+    """Validation table, recomputed from the harness CSVs every build."""
+    order = ["2009", "2013", "2015", "2019a", "2019s", "2020", "2021", "2022"]
+    out = {"cycles": order}
+    sp = PROCESSED / "model_validation.csv"
+    if sp.exists():
+        m = pd.read_csv(sp, dtype={"cycle": str}).set_index("cycle").reindex(order)
+        out["simple"] = {"mae": round(float(m.seat_mae.mean()), 2),
+                         "cov": round(float(m.coverage_90.mean()) * 100, 1),
+                         "brier": round(float(m.threshold_brier.mean()), 3),
+                         "per": [round(float(x), 2) for x in m.seat_mae]}
+    ap = PROCESSED / "model_validation_ablation.csv"
+    if ap.exists():
+        a = pd.read_csv(ap, dtype={"cycle": str})
+        a = a[a["ablation"] == "shipped"].set_index("cycle").reindex(order)
+        out["bayes"] = {"mae": round(float(a.seat_mae.mean()), 2),
+                        "mae_med": round(float(a.seat_mae_median.mean()), 2),
+                        "cov": round(float(a.coverage_90.mean()) * 100, 1),
+                        "brier": round(float(a.threshold_brier.mean()), 3),
+                        "per": [round(float(x), 2) for x in a.seat_mae],
+                        "src": "model_validation_ablation.csv (shipped, eve, one seed)"}
+    hp = PROCESSED / "model_validation_horizon.csv"
+    if hp.exists():
+        h = pd.read_csv(hp, dtype={"cycle": str})
+        h = h[h["mode"] == "calendar"]
+        out["horizon"] = {f"D{int(k)}": {"mae": round(float(g.seat_mae.mean()), 2),
+                                         "mae_med": round(float(g.seat_mae_median.mean()), 2),
+                                         "cov": round(float(g.coverage_90.mean()) * 100, 1),
+                                         "brier": round(float(g.threshold_brier.mean()), 3)}
+                          for k, g in h.groupby("horizon")}
+    return out
 
 
 def build_payload() -> dict:
-    prev = {}
-    prev_path = OUT_DIR / "site_data.json"
-    if prev_path.exists():
-        prev = json.loads(prev_path.read_text(encoding="utf-8"))
-
     off = pd.read_csv(PROCESSED / "official_forecast.csv")
     mix = pd.read_csv(PROCESSED / "bayes_forecast_mixture.csv")
     mmean = dict(zip(mix["list"], mix["mean"]))
@@ -99,6 +137,10 @@ def build_payload() -> dict:
     # (s.42 - the mean of a list polled under 1% is lifted by the residual
     # shock's clip at zero, so it overstates the list's own polling)
     mshare = dict(zip(ms["list"], ms["share_median"]))
+    # vote below the threshold on the vector the central seats use
+    # (official_forecast.allocate_central renormalises the median vector)
+    v = ms["share_median"] / ms["share_median"].sum()
+    below = round(float(v[v < 0.0325].sum()) * 100, 1)
     polls_all = pd.read_csv(PROCESSED / "polls.csv", parse_dates=["fieldwork_end"])
     p26 = polls_all[polls_all["cycle"].astype(str) == "2026"]
     recent = p26[p26["fieldwork_end"] >= p26["fieldwork_end"].max() - pd.Timedelta(days=14)]
@@ -159,6 +201,19 @@ def build_payload() -> dict:
     if fs.exists():
         fit = json.loads(fs.read_text())
     fit["cec_filings_parsed"] = int(len(pd.read_csv(PROCESSED / "cec_filings.csv")))
+    # certainty layer: today's undecided pool (median of the last 45 days of
+    # the genuine-undecided filings) and the expected per-side transfer at
+    # the posterior mean lean (the magnitude draw has mean one), exactly as
+    # bayes_model._certainty_layer computes it
+    import bayes_model as bm
+    a_, b_ = bm.U_LEAN_BETA
+    excess = (a_ / (a_ + b_) - bm.U_PROP_ANTI) / (bm.U_LEAN_BASE - bm.U_PROP_ANTI)
+    side = bm.U_POOL * bm.U_TURNOUT * (bm.U_EXCESS_PER_SIDE if bm.U_LEAN_PER_SIDE
+                                       else bm.U_EXCESS_ANTI) * excess * 120
+    fit["u_pool_pct"] = round(bm.U_POOL * 100)
+    fit["u_side_seats"] = round(side, 1)
+    fit["u_gap_seats"] = round(2 * side, 1) if bm.U_LEAN_PER_SIDE else round(side, 1)
+    fit["u_leaned_n"] = round(a_ + b_ - bm.U_PRIOR_N)
     # a tie prints as "-0.0" otherwise
     if isinstance(fit.get("trail_margin_seats"), (int, float)):
         fit["trail_margin_seats"] = round(float(fit["trail_margin_seats"]), 1) + 0.0
@@ -192,7 +247,7 @@ def build_payload() -> dict:
             "sector": sector, "eligible": elig,
             "turnout": round(float((g.turnout * g.eligible).sum() / elig), 3),
             "n": int(len(g)), "seats": seats,
-            "examples": g.nlargest(3, "eligible")["name"].tolist(),
+            "examples": [" ".join(str(x).split()) for x in g.nlargest(3, "eligible")["name"]],
         })
     kalpi.sort(key=lambda k: -k["eligible"])
 
@@ -204,7 +259,7 @@ def build_payload() -> dict:
         "asof": str(off["asof"].iloc[0]), "parties": parties, "sub": sub,
         "ledger": ledger, "ratings": ratings,
         "blocs": blocs, "formation": formation, "pm": pm, "events": events,
-        "house": house, "val": prev.get("val", {}), "counts": counts, "fit": fit,
+        "house": house, "val": build_val(), "below": below, "counts": counts, "fit": fit,
         "drawCols": draw_cols, "draws": draws, "kalpi": kalpi,
     }
 

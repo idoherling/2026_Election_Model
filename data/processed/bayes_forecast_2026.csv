@@ -1,22 +1,22 @@
 list,bloc,mean,p05,p50,p95,p_pass,p_largest,asof
-Likud,Netanyahu bloc,25.4,17,25,34,1.0,0.659,2026-10-12
-Yashar,Anti-Netanyahu bloc,22.3,15,22,30,1.0,0.34,2026-10-12
-Bennett 2026 + Yesh Atid,Anti-Netanyahu bloc,11.2,6,11,16,0.992,0.001,2026-10-12
-The Democrats,Anti-Netanyahu bloc,9.4,5,9,14,0.986,0.0,2026-10-12
-Balad + Hadash-Ta'al,Arab parties,9.4,5,9,14,0.983,0.0,2026-10-12
-Shas,Netanyahu bloc,8.7,6,9,12,0.995,0.0,2026-10-12
-United Torah Judaism,Netanyahu bloc,8.7,6,9,11,0.998,0.0,2026-10-12
-Yisrael Beytenu,Anti-Netanyahu bloc,8.3,5,8,12,0.968,0.0,2026-10-12
-Otzma Yehudit,Netanyahu bloc,5.1,0,6,10,0.748,0.0,2026-10-12
-Ra'am,Arab parties,5.1,0,6,9,0.805,0.0,2026-10-12
-Religious Zionist Party,Netanyahu bloc,3.1,0,4,8,0.527,0.0,2026-10-12
-Amcha Yisrael,Netanyahu bloc,1.9,0,0,9,0.284,0.0,2026-10-12
-Reservists – Economic Party,Unaligned,1.3,0,0,7,0.206,0.0,2026-10-12
-The Haredi Public,Netanyahu bloc,0.1,0,0,0,0.012,0.0,2026-10-12
-Code Black – Shield of the Torah World,unknown,0.1,0,0,0,0.013,0.0,2026-10-12
-Blue and White,Unaligned,0.1,0,0,0,0.013,0.0,2026-10-12
-Noam,Netanyahu bloc,0.0,0,0,0,0.003,0.0,2026-10-12
-Israel First,unknown,0.0,0,0,0,0.006,0.0,2026-10-12
-Ahi – Back to the Roots,unknown,0.0,0,0,0,0.01,0.0,2026-10-12
-Unity,Unaligned,0.0,0,0,0,0.0,0.0,2026-10-12
-Tzomet Beit Yisrael,unknown,0.0,0,0,0,0.01,0.0,2026-10-12
+Likud,Netanyahu bloc,25.0,17,25,34,1.0,0.65,2026-10-14
+Yashar,Anti-Netanyahu bloc,22.1,15,22,29,1.0,0.349,2026-10-14
+Bennett 2026 + Yesh Atid,Anti-Netanyahu bloc,11.3,6,11,16,0.993,0.001,2026-10-14
+Balad + Hadash-Ta'al,Arab parties,9.5,5,10,14,0.986,0.0,2026-10-14
+The Democrats,Anti-Netanyahu bloc,9.2,5,9,13,0.982,0.0,2026-10-14
+Shas,Netanyahu bloc,8.8,6,9,12,0.996,0.0,2026-10-14
+United Torah Judaism,Netanyahu bloc,8.6,6,9,11,0.998,0.0,2026-10-14
+Yisrael Beytenu,Anti-Netanyahu bloc,8.6,5,9,13,0.974,0.0,2026-10-14
+Otzma Yehudit,Netanyahu bloc,5.3,0,6,10,0.761,0.0,2026-10-14
+Ra'am,Arab parties,5.3,0,6,9,0.83,0.0,2026-10-14
+Religious Zionist Party,Netanyahu bloc,3.1,0,4,8,0.537,0.0,2026-10-14
+Amcha Yisrael,Netanyahu bloc,1.7,0,0,8,0.264,0.0,2026-10-14
+Reservists – Economic Party,Unaligned,1.3,0,0,7,0.206,0.0,2026-10-14
+The Haredi Public,Netanyahu bloc,0.1,0,0,0,0.013,0.0,2026-10-14
+Code Black – Shield of the Torah World,unknown,0.1,0,0,0,0.014,0.0,2026-10-14
+Blue and White,Unaligned,0.1,0,0,0,0.014,0.0,2026-10-14
+Noam,Netanyahu bloc,0.0,0,0,0,0.003,0.0,2026-10-14
+Israel First,unknown,0.0,0,0,0,0.007,0.0,2026-10-14
+Ahi – Back to the Roots,unknown,0.0,0,0,0,0.01,0.0,2026-10-14
+Unity,Unaligned,0.0,0,0,0,0.0,0.0,2026-10-14
+Tzomet Beit Yisrael,unknown,0.0,0,0,0,0.01,0.0,2026-10-14

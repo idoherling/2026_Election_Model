@@ -412,6 +412,19 @@ def scrape() -> tuple[pd.DataFrame, pd.DataFrame]:
                 for pub_label in ("Publisher", "Media"):
                     if pub_label in col_of and row[col_of[pub_label]] is not None:
                         publisher = row[col_of[pub_label]].text or publisher
+                # Firm and publisher cells swapped in the archive (e.g. 12 Oct
+                # 2026: firm "Channel 12 News", publisher "Midgam R&C"): when
+                # the firm cell is unknown but the publisher cell names a
+                # known firm, swap them back.
+                if (not is_result and pollster == pollster_raw
+                        and pollster_raw in unknown_pollsters and publisher):
+                    try:
+                        swapped = canonical_pollster(publisher)
+                    except KeyError:
+                        swapped = None
+                    if swapped:
+                        unknown_pollsters.discard(pollster_raw)
+                        pollster, publisher = swapped, pollster_raw
                 sample = None
                 if "Sample size" in col_of and row[col_of["Sample size"]] is not None:
                     sample = parse_sample(row[col_of["Sample size"]].text)
@@ -661,6 +674,13 @@ if __name__ == "__main__":
     manual_path = PROCESSED_DIR.parent.parent / "data" / "manual_polls.csv"
     if manual_path.exists():
         man = pd.read_csv(manual_path, parse_dates=["fieldwork_end"])
+        # an archive row the editors have not finished (seats not summing to
+        # 120) yields to a manual entry with the same poll_id
+        partial = set(polls.groupby("poll_id")["sums_ok"].any().loc[lambda x: ~x].index)
+        drop = partial & set(man["poll_id"])
+        if drop:
+            polls = polls[~polls["poll_id"].isin(drop)]
+            print(f"incomplete archive rows replaced by manual entries: {sorted(drop)}")
         man = man[~man["poll_id"].isin(set(polls["poll_id"]))]
         if len(man):
             add = pd.DataFrame({

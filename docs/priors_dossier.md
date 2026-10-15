@@ -1610,3 +1610,116 @@ the mean.
 List 9, YB 9, UTJ 8, Ra'am 6, Otzma 6, RZP-Zehut 4. PM: repeat election
 47.4, Eisenkot 20.6, Netanyahu 19.4. The trailing margin is 0.11 seats, so
 TRAIL fires. Every new small list passes with probability under 1.5%.
+
+## 44. Site audit fixes (14 Oct)
+
+A 61-entry audit of the published site (EN and HE) was applied. No model
+code, fit, harness or forecast output changed; everything below is site
+text, the site build (src/build_site.py, src/site_ledger.py), the party
+registry's Hebrew label for Together, and a comment in src/simulate.py.
+
+**Facts brought up to date (both languages, every edited claim linked).**
+- Surplus pacts: five signed - Together-YB and Yashar-Democrats (10 Sept,
+  JPost 908296), Joint List-Ra'am (11 Sept, JPost 908431 / INN 693446),
+  Likud-RZP-Zehut (6 Oct, Times of Israel liveblog of 6 Oct 13:24 for the
+  date; Ynet asxop5pjn, undated, for the parties), Shas-UTJ (11 Oct, JPost
+  911320, Ynet e073g8o82). Otzma-Amcha is unsigned (Ben-Gvir undecided per
+  Ynet asxop5pjn, the undated report of the Likud signing) and stays carried as a pair until the 16 Oct deadline, valid only
+  if Amcha passes. This corrects s.38 (JL-Ra'am and Shas-UTJ "expected").
+  The Hebrew text had still listed JL-Ra'am as expected.
+- Disqualification petitions rewritten in the past tense with the full
+  record: 23 Sept CEC barred Ra'am, the Joint List, Kasif and Abu Shahada
+  (JPost 909454); 24 Sept petitions against the Democrats (14-2), Otzma
+  (19-10) and RZP-Zehut (21-3) rejected (ToI); 2 Oct Supreme Court
+  reinstated Ra'am and the Joint List unanimously and Kasif 7-2, Abu Shahada
+  withdrew (JPost 910422); 4 Oct appeals against Otzma, Ben-Gvir and Gotliv
+  rejected (JPost 910555).
+- Lists closed 8 Sept (D-49), not 9 Sept; the volatility calendar is
+  measured on 7 cycles (s.12), early campaign ~1.2 seats/week (RMS).
+- Eisenkot-as-PM: the prose now quotes the model's own D.pm value (20.6%
+  today, was "~36%") against Polymarket's late-August 50-60% (linked).
+- Jewish Home 2022 result 1.19% (results.csv), not 1.17% (also s.15's
+  table row, left as written there).
+- Haredi floor printed as 6.6% (KALPI_HAREDI_FLOOR = 0.066); state-space
+  noise written sigma_p = s_obs * lambda_f * exp(beta_u u_p), as coded.
+- Backtest wording: eight graded cycles 2009-2022 (2009 is a graded fold,
+  not a prior seed); the methodology lede said nine.
+
+**Numbers now filled from data instead of typed.** Pipeline diagram counts
+(polls, cycles, CEC filings parsed); share of the forecast vote below
+3.25% (payload `below`: the renormalised median vector, 4.7% today; the
+old "about 8%" was a raw-poll/mean-vector figure); the pollster spread in
+the industry lede (max - min of D.house: Lazar -5.7 to Filber +11.5, 17
+seats; was "up to ten"); the certainty-layer undecided pool and transfer
+(fit.u_pool_pct / u_side_seats / u_gap_seats from bayes_model's own
+constants: pool 9.65%, 0.68 seats per side, 1.35 of gap; was "~12%" and
+"~1.7 seats"); the ground-game locality count (1,216 with 2022 profiles,
+was 1,221); the knife-edges heading (any count, digits past 20; today
+twelve lists).
+
+**Validation.** `val` is no longer carried forward: build_site recomputes it
+each build from model_validation.csv (simple), model_validation_ablation.csv
+shipped rows (Bayesian, eve, one seed: mean-seat MAE 1.74, median-seat MAE
+1.63, coverage 97.0%, Brier 0.051) and model_validation_horizon.csv calendar
+mode (D-56 / D-21 / D-7: 2.59 / 1.91 / 1.72, coverage 93.9 / 97.9 / 99.0).
+The table was showing an old pooled run (1.66 / 97.2 / 0.063). The horizon
+prose restates the s.41 baseline and drops the "90% coverage at the
+published horizon" and "98% over-coverage is an eve artefact" claims, which
+the restated harness contradicts.
+
+**Ledger (src/site_ledger.py).** CEC filings are matched one-to-one: same
+firm, same publisher, fieldwork within 3 days, nearest date then nearest
+sample size, a filing used by one survey only (a/b variants of one survey
+share it); 29 ledger rows changed filing, 3 of them to none (no filing
+from that publisher exists).
+Publication links skip the citation's author wikilinks (42 rows pointed at
+presenters' Wikipedia pages), dead Channel 16 vod.html links are dropped,
+and a URL cited for two different surveys is kept only on the survey it was
+published for; rows without a usable citation link the archive section that
+lists them. Rows are tagged with why the current fit does not use them
+(outside the 240-day window, same-day variant, composite Arab scenario, sums
+fail), mirroring prepare_data's filters read-only; the count of polls in the
+fit is shown separately. Official results link: the dead
+bechirot.gov.il/AllElectionResults page is replaced by the CEC's data.gov.il
+results dataset, with votes21-25.bechirot.gov.il per cycle where those load.
+
+**Hebrew and RTL.** Together's registry name_he is ביחד (was יחד, Eli
+Yishai's 2015 list); the ledger's RZP column reads הציונות הדתית–זהות; the
+seats note quotes the letters „רק” so they cannot read as "only"; HE +6.8
+(not +6.7) for the April 2019 trailing beat; the ground and pollsters ledes
+retranslated from the current English; cover strip, seat legend, builder
+captions, title and aria labels, firm names (HE_FIRM), the PM "rotation"
+row and the tooltip's P(largest) are now Hebrew; signed table cells and the
+builder range are LTR-isolated; the 2021<-2022 arrow fixed.
+
+**UI.** The Netanyahu-bloc preset takes every Netanyahu-bloc list in the
+draws (Noam and the Haredi Public were missing); report deep links (#formation
+etc.) land on their section; the skip link follows the view; the ratings'
+"2026 polls in the ledger" link shows only for firms with 2026 polls.
+
+## 45. Update of 14 October (D-13)
+
+**Polls.** The archive refresh added Kantar/Kan (11 Oct, n=553). Two
+archive rows were unfinished: Channel 12 (12 Oct) lacked Ra'am,
+Reservists and Amcha, and carried the channel in the firm column; Channel
+13 (14 Oct) lacked the firm, UTJ and the Joint List. Both entered through
+`data/manual_polls.csv` from the press: Midgam/Channel 12, n=509 (Haaretz,
+13 Oct: Yashar 23, Likud 20, Together 13, Democrats 9, YB 9, Otzma 8, Shas
+8, JL 8, UTJ 7, RZP-Zehut 6, Ra'am 5, Reservists 4, Amcha 0) and Midgam
+Project/Channel 13 (Walla, 14 Oct: Yashar 20, Likud 18, Together 12,
+Democrats 9, YB 9, JL 9, UTJ 8, Otzma 8, Shas 7, RZP-Zehut 6, Ra'am 6,
+Reservists 4, Amcha 4). `scrape_polls`: when the firm cell is unknown but
+the publisher cell names a known firm, the two are swapped back; a manual
+entry replaces an archive row with the same poll_id whose seats do not sum
+to 120. No new CEC filings after 4200.
+
+**Fit.** 232 polls, 2,861 observations, 21 lists; 0 divergences, max r_hat
+1.020, min bulk ESS 261; 14-day holdout median error 0.64 seats.
+
+**Forecast (registration mixture).** P(NB>=61) 12.4 (13.1 on 13 Oct);
+change bloc alone 6.8; with Ra'am 27.1; neither 60.5. Central: Likud 25,
+Yashar 23, Together 11, Joint List 10, Shas 9, Democrats 9, YB 9, UTJ 8,
+Ra'am 6, Otzma 6, RZP-Zehut 4. PM: repeat election 47.7, Eisenkot 20.7,
+Netanyahu 19.0. Likud's projected margin over Yashar is -0.03 seats, so
+the trailing-Likud layer fires. The Arab turnout candidate (s.43 in its
+own patch) is under adversarial verification and is NOT in this build.
