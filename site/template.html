@@ -2385,14 +2385,14 @@ renderBlocHist("anti");
       "התאמה מחדש לפי אופק: שגיאת המנדטים הממוצעים (<span class='mono'>56 / 21 / 7</span> ימים לפני)",
       "התאמה מחדש לפי אופק: כיסוי 90% (<span class='mono'>56 / 21 / 7</span> ימים לפני)",
       "מבחן חי 2026 (14 יום, שגיאה חציונית)","תפקיד בתחזית המתפרסמת","מדד־ייחוס לדיוק נקודתי","התחזית המתפרסמת",
-      "עמודת המודל הבייסיאני: מערך הבדיקה על שמונת המחזורים בתצורה המתפרסמת (זרע אחד; החישובים החוזרים בשלושה זרעים מתועדות ביומן ההחלטות <a class='cite' data-s='DL-41,DL-46'></a>). האופקים: מצב הלוח המתפרסם. הצינור הפשוט: מערך הבדיקה הנקודתי."]
+      "עמודת המודל הבייסיאני: מערך הבדיקה על שמונת המחזורים בתצורה המתפרסמת (זרע אחד; החישובים החוזרים בשלושה זרעים מתועדות ביומן ההחלטות <a class='cite' data-s='DL-41,DL-46'></a>). האופקים: מצב הלוח המתפרסם. הצינור הפשוט: מערך הבדיקה הנקודתי, שמשקלי הסוקרים בו עדיין נשענים על כרטיס הדירוג המלא, כולל מערכת הבחירות הנבחנת, ולכן העמודה שלו מוחמאת מעט (<a href='decision-log.html#s50' rel='noopener'>יומן ההחלטות, ‎§50</a>)."]
    : ["Mean absolute seat error per list (Bayesian: mean seats), election eve",
       "Absolute seat error per list, median seats, election eve",
       "90% interval coverage (target 90%), election eve","Threshold Brier score, election eve",
       "Horizon refits: mean-seat error (56 / 21 / 7 days out)",
       "Horizon refits: 90% coverage (56 / 21 / 7 days out)",
       "Live 2026 holdout (14-day, median |error|)","Role in the published forecast","point-accuracy benchmark","the published forecast",
-      "Bayesian column: the eight-cycle harness in the shipped configuration (one seed; the three-seed restatements are in the decision log <a class='cite' data-s='DL-41,DL-46'></a>). Horizons: the shipped calendar mode. Simple pipeline: the point harness."];
+      "Bayesian column: the eight-cycle harness in the shipped configuration (one seed; the three-seed restatements are in the decision log <a class='cite' data-s='DL-41,DL-46'></a>). Horizons: the shipped calendar mode. Simple pipeline: the point harness, whose pollster weights still use the full scorecard, including the election being graded, so its column is slightly flattered (<a href='decision-log.html#s50' rel='noopener'>decision log §50</a>)."];
   const hz3 = k => ["D56","D21","D7"].map(d => x(hz[d], k)).join(" / ");
   $("#valTbl").innerHTML = `
    <tr><td>${VL[0]}</td><td class="mono">${x(sp,"mae")}</td><td class="mono">${x(b,"mae")}</td></tr>
