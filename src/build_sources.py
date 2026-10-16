@@ -82,8 +82,27 @@ def _surname(name: str) -> str:
     return toks[-1]
 
 
+INSTITUTION_LABELS = [  # (substring in the author field, short label)
+    ("own measurement", "Own measurement"), ("Election Model", "Own measurement"),
+    ("desk computation", "Own measurement"), ("Central Elections Committee", "CEC"),
+    ("Central Electio", "CEC"), ("Knesset", "Knesset"), ("Israel Democracy Institute", "IDI"),
+    ("Israel National Election Studies", "INES"), ("Wikipedia", "Wikipedia"),
+    ("Jewish Telegraphic Agency", "JTA"), ("Jewish People Policy", "JPPI"),
+    ("ParlGov", "ParlGov"), ("Kalshi", "Kalshi & Polymarket"), ("Times of Israel", "Times of Israel"),
+]
+
+
 def _short(src: dict) -> str:
-    names = _authors(src.get("authors") or "")
+    raw = src.get("authors") or ""
+    yr = src.get("year") or "n.d."
+    lead = raw.split("(")[0].strip()
+    personal = bool(re.match(r"^[A-ZÀ-Ž][a-zà-ž]+ [A-ZÀ-Ž][a-zà-ž]+$", lead)) and "Wikipedia" not in lead
+    for key, label in INSTITUTION_LABELS:
+        k = key.lower()
+        if k in lead.lower() or (k in raw.lower() and not personal):
+            return f"{label} {yr}"
+    raw = re.sub(r"\s*\([^)]*\)", "", raw)       # drop parenthetical notes
+    names = _authors(raw)
     yr = src.get("year") or "n.d."
     if not names:
         return f"{(src.get('venue') or src.get('title') or 'Anon')[:30]} {yr}"

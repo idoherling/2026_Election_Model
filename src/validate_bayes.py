@@ -32,7 +32,7 @@ from scrape_polls import ELECTION_DAY, PROCESSED_DIR
 import simulate as _sim
 from simulate import THRESHOLD, dhondt
 from validate_model import (
-    CYCLE_THRESHOLD, ORDER, PAST_PAIRS, VAL_BLOC_OVERRIDES,
+    CYCLE_THRESHOLD, ORDER, PAST_PAIRS, REGISTERED_PAIRS, VAL_BLOC_OVERRIDES,
 )
 
 warnings.filterwarnings("ignore")
@@ -136,6 +136,34 @@ ABLATIONS = [
     ("hared_e0", {"haredi_mean": "e0"}),
     ("arab_raam_split", {"arab_icpt_alloc": "lineage"}),
     ("sector_both", {"haredi_mean": "e0", "arab_icpt_alloc": "lineage"}),
+    # seat_law_fidelity (2026-10-15, dossier s.47). Part A, the instrument
+    # (ADOPTED 15 Oct: the harness default, HARNESS_REG_PAIRS=1): the
+    # surplus pairs registered with the CEC (validate_model.
+    # REGISTERED_PAIRS, resolved through the cycle's DECOMP map); past_pairs
+    # = the PAST_PAIRS approximations as the harness ran them before.
+    # Part B, the threshold denominator (graded, NOT shipped): s.81(a) tests
+    # 3.25% of ALL valid votes, so the draws test sh x (1 - u) and the
+    # central count tests the UN-renormalised median (thr_u, central_raw).
+    # Pre-registered primary: u = 0.01 with central_raw on the registered
+    # pairs (reg_thr). The rest are decompositions/sensitivity: thr_u
+    # "oracle" = the window's realised unmodelled CEC share (diagnostic);
+    # "loo" = the mean of the other cycles' record.
+    ("reg_pairs", {"pairs": "registered"}),
+    ("past_pairs", {"pairs": "past"}),
+    ("thr_valid", {"pairs": "past", "thr_u": 0.01, "central_raw": True}),
+    ("reg_thr", {"pairs": "registered", "thr_u": 0.01, "central_raw": True}),
+    ("reg_thr_draws", {"pairs": "registered", "thr_u": 0.01}),
+    ("reg_central_raw", {"pairs": "registered", "central_raw": True}),
+    ("reg_thr_u005", {"pairs": "registered", "thr_u": 0.005, "central_raw": True}),
+    ("reg_thr_loo", {"pairs": "registered", "thr_u": "loo", "central_raw": True}),
+    ("reg_thr_oracle", {"pairs": "registered", "thr_u": "oracle", "central_raw": True}),
+    # uncertainty calibration (2026-10-15, dossier s.48), at the shipped
+    # width; the nested width arms (C0/CA/CAB/CABD) run in calibration_arms.py
+    ("cal_A", {"t_unit": True}),
+    ("cal_B", {"resid_space": "vote"}),
+    ("cal_Bfix", {"resid_space": "seat_fix"}),
+    ("cal_AB", {"t_unit": True, "resid_space": "vote"}),
+    ("cal_D", {"resid_df": "loo"}),
 ]
 # HORIZON_LAYERS string for the same arms (validate_horizon.py):
 ARAB_HORIZON_LAYERS = ";".join(
@@ -447,6 +475,29 @@ def apply_decomp(polls: pd.DataFrame, cycle: str) -> pd.DataFrame:
     return polls
 
 
+# seat_law_fidelity part A (dossier s.47): grade with the surplus pairs
+# registered with the CEC. ADOPTED 15 Oct as the harness instrument (default
+# ON); HARNESS_REG_PAIRS=0 grades with the PAST_PAIRS approximations as the
+# harness ran them before (the s.46 baseline).
+REG_PAIRS = _os.environ.get("HARNESS_REG_PAIRS", "1") == "1"
+# Realised vote share of the lists OUTSIDE each cycle's modelled set (the
+# eve window's components), from the CEC final counts
+# (data/cec_final_counts.csv; computed and checked by validate_seat_law.py).
+# thr_u "oracle" uses the cycle's own value (diagnostic: it is the outcome);
+# "loo" the mean of the other seven. (2009/2013 are 2%-era fields with many
+# unpolled lists; 3.25%-era mean 0.98%.)
+UNMODELLED_REC = {"2009": 0.0219, "2013": 0.0412, "2015": 0.0153, "2019a": 0.008,
+                  "2019s": 0.0097, "2020": 0.0038, "2021": 0.0068, "2022": 0.0149}
+
+
+def unmodelled_u(spec, cycle: str) -> float:
+    if spec == "oracle":
+        return UNMODELLED_REC[cycle]
+    if spec == "loo":
+        return float(np.mean([v for c, v in UNMODELLED_REC.items() if c != cycle]))
+    return float(spec or 0.0)
+
+
 # Defaults MIRROR PRODUCTION (bayes_model): anchors retired, the
 # trailing-Likud conditional at half strength sourced from the bloc's
 # satellites, new-straddler desertion on, the surplus-pair resolver fix,
@@ -512,15 +563,41 @@ ALL_LAYERS = {"resid": True, "swing": True, "family": True, "anchors": False,
               "arab_mode": "turnout", "arab_regime": "B", "arab_T": "regime",
               "arab_k": "loo", "arab_intercept": True,
               # sector family terms (2026-10-15, dossier s.51; shipped =
-              # "e1" / "base"): haredi_mean "e0" = the LOO raw family mean
+              # "e0" since 16 Oct / "base"): haredi_mean "e0" = the LOO raw family mean
               # with the e1 sd (hared_e0); arab_icpt_alloc "lineage" = the
               # LOO intercept allocated by the Ra'am / other-Arab lineages'
               # LOO under-count shares, family total kept (arab_raam_split)
-              "haredi_mean": "e1", "arab_icpt_alloc": "base",
+              "haredi_mean": "e0", "arab_icpt_alloc": "base",
               # clr_latent (2026-10-15, dossier s.46): None = this run's
               # posterior; a cache (name under data/processed, or a path) =
               # the same window's posterior from that cache (a refit arm)
-              "posterior": None}
+              "posterior": None,
+              # seat_law_fidelity (2026-10-15, dossier s.47). pairs
+              # "registered" = REGISTERED_PAIRS[cycle] resolved through the
+              # DECOMP map (the harness default since 15 Oct, REG_PAIRS: an
+              # instrument change - production has no historical pairs) |
+              # "past" = PAST_PAIRS as passed (ids DECOMP renamed are
+              # dropped unless pair_alias). thr_u: the unmodelled vote share
+              # in the s.81(a) denominator, mirrored from production
+              # (simulate.THRESHOLD_ALL_VALID / UNMODELLED_SHARE; OFF); a
+              # float, "loo" or "oracle" (UNMODELLED_REC). central_raw: the
+              # central count tests the un-renormalised median
+              # (official_forecast.allocate_central under the same flag).
+              "pairs": "registered" if REG_PAIRS else "past",
+              "thr_u": _sim.UNMODELLED_SHARE if _sim.THRESHOLD_ALL_VALID else 0.0,
+              "central_raw": bool(_sim.THRESHOLD_ALL_VALID),
+              # uncertainty calibration (2026-10-15, dossier s.48), all OFF
+              # = shipped. t_unit: every Student-t shock (bloc swing, family
+              # t draw incl. the Arab turnout draw) scaled to unit variance,
+              # so its sd is the measured one (bm.T_UNIT_VAR). resid_space:
+              # the residual line from "seat" (shipped decompose()),
+              # "seat_fix" (decompose(index_fix=True)) or "vote"
+              # (decompose_vote: vote-share errors of lists that ran), all
+              # LOO (bm.RESID_SPACE). resid_df: None = Gaussian residual;
+              # "loo" = Student t, sd matched, df from the LOO kurtosis of
+              # the record resid_space reads (bm.RESID_T_DF); a number =
+              # that df.
+              "t_unit": False, "resid_space": "seat", "resid_df": None}
 
 # Arab-sector turnout by election (share of eligible Arab citizens voting).
 # Series as compiled in the dossier (s.4, s.24) and the production comment
@@ -675,11 +752,32 @@ def trail_ramp_params(tp: dict, lo: float, hi: float) -> dict:
     return {"mu": mu, "sd": sd, "n": n_w, "n_eff": float(v1 ** 2 / v2)}
 
 
-def allocate_vector(v, threshold, pair_idx):
-    """Threshold + surplus pairs + d'Hondt (Bader-Ofer) on one share vector."""
-    v = np.asarray(v, float) / np.sum(v)
+def add_calibration_params(params: dict, cycle: str) -> dict:
+    """Leave-one-cycle-out inputs of the s.48 calibration layers: the
+    residual lines of the unique-label seat record and of the vote-share
+    record, and the arm-D tail df of each record."""
+    from error_decomposition import decompose as _dec, decompose_vote, seat_tail
+    fx = _dec(exclude_cycle=cycle, index_fix=True)
+    vt = decompose_vote(exclude_cycle=cycle)
+    params["resid_lines"] = {"seat_fix": (fx["resid_base"], fx["resid_slope"]),
+                             "vote": (vt["resid_base"], vt["resid_slope"])}
+    params["resid_tail"] = {"seat": seat_tail(exclude_cycle=cycle)["df"],
+                            "vote": vt["tail"]["df"]}
+    return params
+
+
+def allocate_vector(v, threshold, pair_idx, raw: bool = False, u: float = 0.0):
+    """Threshold + surplus pairs + d'Hondt (Bader-Ofer) on one share vector.
+    raw (seat_law_fidelity, s.47): test the vector as given (a median share
+    vector, not additive) x (1 - u) against the threshold instead of
+    renormalising it; the division among passers is scale-invariant."""
+    v = np.asarray(v, float)
+    if raw:
+        passed = v * (1.0 - u) >= threshold
+    else:
+        v = v / np.sum(v)
+        passed = v >= threshold
     out = np.zeros(len(v), dtype=int)
-    passed = v >= threshold
     if not passed.any():
         return out
     fvotes, fmembers, used = [], [], set()
@@ -738,15 +836,25 @@ def project_cycle(data, idata, eday, threshold, pairs, params,
         shares /= shares.sum(axis=1, keepdims=True)
     shares_pre = shares.copy()    # latent draws before any shock (draw gate)
     base0 = shares.mean(axis=0)
-    sd_list = (params["resid_base"]
-               + params["resid_slope"] * base0 * 120) / 120.0 * resid_scale
+    # residual line (dossier s.48): the shipped seat record, its unique-label
+    # fix, or the vote-share record of the lists that ran (all LOO)
+    r_base, r_slope = params["resid_base"], params["resid_slope"]
+    if L["resid_space"] != "seat":
+        r_base, r_slope = params["resid_lines"][L["resid_space"]]
+    sd_list = (r_base + r_slope * base0 * 120) / 120.0 * resid_scale
     if L["resid_relcap"] is not None:
         sd_list = np.minimum(sd_list, L["resid_relcap"] * base0)
     if L["gone_zero"]:
         sd_list = np.where(gone, 0.0, sd_list)
     if L["resid"]:
-        shares = np.clip(
-            shares + rng.standard_normal(shares.shape) * sd_list, 0, None)
+        if L["resid_df"] is None:
+            eps = rng.standard_normal(shares.shape)
+        else:
+            # fat-tailed residual, sd matched (dossier s.48, arm D)
+            rdf = (params["resid_tail"]["vote" if L["resid_space"] == "vote" else "seat"]
+                   if L["resid_df"] == "loo" else float(L["resid_df"]))
+            eps = rng.standard_t(rdf, shares.shape) * np.sqrt((rdf - 2.0) / rdf)
+        shares = np.clip(shares + eps * sd_list, 0, None)
         shares /= shares.sum(axis=1, keepdims=True)
 
     comps = [set(c.split("+")) for c in data["components"]]
@@ -759,8 +867,10 @@ def project_cycle(data, idata, eday, threshold, pairs, params,
 
     base = shares.mean(axis=0)
     is_nb = blocs == "netanyahu_bloc"
+    # t-scale fix (dossier s.48, arm A): a t(df) draw has sd sqrt(df/(df-2))
+    tu = float(np.sqrt((T_DF - 2.0) / T_DF)) if L["t_unit"] else 1.0
     if L["swing"] and is_nb.any() and (~is_nb).any():
-        sw = rng.standard_t(T_DF, N_PROJ) * swing_sd * L["shock_scale"] / 120.0
+        sw = rng.standard_t(T_DF, N_PROJ) * tu * swing_sd * L["shock_scale"] / 120.0
         w_nb, w_op = np.where(is_nb, base, 0), np.where(~is_nb, base, 0)
         shares = shares + sw[:, None] * (w_nb / w_nb.sum() - w_op / w_op.sum())
     # Family shocks with the kalpi-measured haredi<->arab correlation,
@@ -771,7 +881,7 @@ def project_cycle(data, idata, eday, threshold, pairs, params,
     cov = np.array([[1.0, rho], [rho, 1.0]]) if rho else np.eye(max(len(fam_names), 1))
     zf = rng.multivariate_normal(np.zeros(len(fam_names)), cov[:len(fam_names), :len(fam_names)],
                                  size=N_PROJ) if fam_names else np.zeros((N_PROJ, 0))
-    mixer = np.sqrt(rng.chisquare(T_DF, N_PROJ) / T_DF)
+    mixer = np.sqrt(rng.chisquare(T_DF, N_PROJ) / T_DF) / tu   # z / mixer: unit-variance t under t_unit
     project_cycle.last_fams = fams
     for k, f in enumerate(fam_names):
         if not L["family"]:
@@ -912,19 +1022,37 @@ def project_cycle(data, idata, eday, threshold, pairs, params,
     # production fix; a provable no-op here). pair_alias additionally
     # resolves PAST_PAIRS ids that DECOMP renamed (urwp, blue_white,
     # labor_gesher, ...) - the harness analogue of 'together'.
-    pair_idx, comp_of, _ = _sim.resolve_pairs(
-        pairs, data["components"],
-        aliases=params.get("pair_alias") if L["pair_alias"] else None,
-        fixed=L["pair_fix"] or L["pair_alias"])
+    # pairs "registered" (seat_law_fidelity part A, s.47; the default): the
+    # CEC-registered agreements, always resolved through the DECOMP map so
+    # a renamed id (urwp, blue_white, labor_gesher, yamina 2020, ...) is
+    # not dropped.
+    reg = L["pairs"] == "registered"
+    aliases = params.get("pair_alias") if L["pair_alias"] else None
+    # the graded cycle: params["cycle"] (set by the three harnesses), else
+    # the job tag "<cycle>_eve" / "<cycle>_D<h>"
+    cyc = params.get("cycle") or str(project_cycle.job or "").split("_")[0]
+    if reg:
+        pairs = params.get("registered_pairs") or REGISTERED_PAIRS[cyc]
+        aliases = params.get("pair_alias") or _decomp_map(cyc)
+    pair_idx, comp_of, dropped = _sim.resolve_pairs(
+        pairs, data["components"], aliases=aliases,
+        fixed=L["pair_fix"] or L["pair_alias"] or reg)
+    project_cycle.last_pairs = {"applied": [(data["components"][a], data["components"][b])
+                                            for a, b in pair_idx], "dropped": dropped}
+    # threshold denominator (part B, OFF): s.81(a) is 3.25% of ALL valid votes
+    u = unmodelled_u(L["thr_u"], cyc)
     # production's central estimator: the seat law applied once to the
-    # renormalised median share vector (official_forecast.allocate_central)
-    project_cycle.last_central = allocate_vector(np.median(shares, axis=0), threshold, pair_idx)
-    fixed_pairs = L["pair_fix"] or L["pair_alias"]
+    # median share vector (official_forecast.allocate_central): renormalised
+    # (shipped) or, central_raw, tested raw against 3.25% of all valid votes
+    project_cycle.last_central = allocate_vector(
+        np.median(shares, axis=0), threshold, pair_idx,
+        raw=bool(L["central_raw"]), u=u if L["central_raw"] else 0.0)
+    fixed_pairs = L["pair_fix"] or L["pair_alias"] or reg
 
     seats = np.zeros((N_PROJ, shares.shape[1]), dtype=int)
     for i in range(N_PROJ):
         sh = shares[i]
-        passed = sh >= threshold
+        passed = sh * (1.0 - u) >= threshold
         if not passed.any():
             continue
         votes = np.where(passed, sh, 0.0)
@@ -969,6 +1097,9 @@ def main() -> None:
             params["pair_alias"] = _decomp_map(cycle)
             params["arab_tab"] = arab_turnout_params(cycle)   # dossier s.43
             params["arab_lineage"] = bm.arab_lineage_share(exclude_cycle=cycle)   # s.51
+            params["registered_pairs"] = REGISTERED_PAIRS[cycle]   # dossier s.47
+            params["cycle"] = cycle
+            add_calibration_params(params, cycle)              # dossier s.48
             project_cycle.job = f"{cycle}_eve"   # layer 'posterior' (refit arms)
             print(f"[{cycle}] trailing-Likud LOO: mu {params['trail']['mu']:+.2f} sd {params['trail']['sd']:.2f} n {params['trail']['n']}")
             seats, blocs, base, comp_of = project_cycle(
@@ -998,7 +1129,7 @@ def main() -> None:
         fixed = None
         for tag, flags in ABLATIONS:
             try:
-                sa, _, ba, _ = project_cycle(
+                sa, bl_a, ba, _ = project_cycle(
                     data, idata, eday, CYCLE_THRESHOLD.get(cycle, THRESHOLD),
                     PAST_PAIRS[cycle], params, VAL_BLOC_OVERRIDES.get(cycle),
                     np.random.default_rng(SEED + 11 + int(_os.environ.get("HARNESS_SEED_OFFSET", 0))),
@@ -1013,9 +1144,15 @@ def main() -> None:
             ppa = (sa >= 1).mean(axis=0)
             isc_a = (hi_a - lo_a) + 20 * np.maximum(lo_a - actual, 0) + 20 * np.maximum(actual - hi_a, 0)
             ar_a = project_cycle.last_fams == "arab"
+            cen_a = project_cycle.last_central   # the official central count's estimator
+            nb_a = bl_a == "netanyahu_bloc"   # this arm's bloc labels
             row = {"cycle": cycle, "ablation": tag,
+                   "n_pairs": len(project_cycle.last_pairs["applied"]),
                    # trailing-Likud gate weight (mean over draws) of this arm
                    "trail_frac": float(project_cycle.last_trail.get("frac", 0.0)),
+                   # bloc Brier input (dossier s.48): P(NB >= 61) and the outcome
+                   "p_nb61": float((sa[:, nb_a].sum(axis=1) >= 61).mean()),
+                   "nb_actual": int(actual[nb_a].sum()),
                    # Arab family: mean projected seats - actual (dossier s.43)
                    "arab_fam_err": float(sa[:, ar_a].sum(axis=1).mean() - actual[ar_a].sum())
                    if ar_a.any() else np.nan}
@@ -1024,7 +1161,9 @@ def main() -> None:
                             "seat_mae_median" + sfx: float(np.abs(np.median(sa, axis=0) - actual)[m].mean()),
                             "coverage_90" + sfx: float(((actual >= lo_a) & (actual <= hi_a))[m].mean()),
                             "threshold_brier" + sfx: float(np.mean((ppa[m] - (actual[m] > 0)) ** 2)),
-                            "interval_score" + sfx: float(isc_a[m].mean())})
+                            "interval_score" + sfx: float(isc_a[m].mean()),
+                            # s.47: the published central count's estimator
+                            "seat_mae_central" + sfx: float(np.abs(cen_a - actual)[m].mean())})
             abl_rows.append(row)
 
         # Interval-width calibration curve (audit improvement #2): the same

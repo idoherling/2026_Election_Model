@@ -51,9 +51,18 @@ def _frames():
     return frames
 
 
-@lru_cache(maxsize=16)
-def decompose(exclude_cycle: str | None = None):
-    """Per-cycle component estimates plus pooled residual rows."""
+@lru_cache(maxsize=32)
+def decompose(exclude_cycle: str | None = None, index_fix: bool = False):
+    """Per-cycle component estimates plus pooled residual rows.
+
+    index_fix (dossier s.48, found 15 Oct): the per-cycle frames are indexed
+    by block number, so the pooled residual frame below has duplicate
+    labels across cycles, and step 4's resid.loc[<leader label>] subtracts
+    the seat-leader anchor (-1.74 seats) from every cycle's row carrying
+    that label, not only the leader's. That inflates the residual line
+    (full sample 1.83 + 0.044 x seats; 1.48 + 0.041 with the labels made
+    unique). bloc_sd, the family terms and the anchors are unaffected.
+    False = the shipped (collided) residual; production reads it."""
     rows_resid, bloc_totals = [], {}
     fam_totals = {"arab": {}, "haredi": {}}
     fam_e0 = {"arab": {}, "haredi": {}}     # raw (pre-swing) family totals
@@ -93,7 +102,7 @@ def decompose(exclude_cycle: str | None = None):
         rows_resid.append(f.assign(cycle=cycle))
 
     use = [c for c in ORDER if c != exclude_cycle]
-    resid = pd.concat(rows_resid)
+    resid = pd.concat(rows_resid, ignore_index=index_fix)
     anchors = {
         "likud": float(np.mean([likud_e2[c] for c in use if c in likud_e2])),
         "leader": float(np.mean([leader_e2[c] for c in use if c in leader_e2])),
@@ -135,6 +144,167 @@ def decompose(exclude_cycle: str | None = None):
         "anchors": anchors,
         "resid_base": float(base), "resid_slope": float(slope),
     }
+
+
+# ---------------------------------------------------------------------------
+# Residual on VOTE SHARES (dossier s.48, arm B). decompose() measures every
+# error in seats, so a list that died at the threshold enters the residual
+# as a +4..6-seat miss (Meretz 2022: polled 4.4 seats, 0 won, on a 0.3 pp
+# vote miss). The projection applies the residual in vote-share space and
+# then applies the threshold again, so the death is counted twice. Here the
+# same sequential decomposition runs on vote-share errors of the lists that
+# RAN, in u = 120 x share (the units the projection's sd_list x 120 is in).
+# ---------------------------------------------------------------------------
+VOTE_ZERO_IMPUTE = 0.5     # a 0-seat poll row with no printed % = half the threshold
+VOTE_MIN_MEASURED = 0.5    # share of a list's final-window polls that must measure it
+
+
+@lru_cache(maxsize=1)
+def _vote_frames():
+    """Per cycle x block, in u = 120 x vote share: final-window polled share
+    (the model's seat->share map: seats/120 x (1 - wasted - 0.01); 0-seat
+    rows at their printed %, else VOTE_ZERO_IMPUTE x threshold) and actual
+    share (lists that won seats: seats x (1 - W - 0.01), W = the failed
+    lists' CEC share; lists that ran and failed: their CEC vote share,
+    data/ran_vote_shares.csv). Kept: lists that ran, measured in at least
+    VOTE_MIN_MEASURED of their polls, that won seats or polled >= 0.5 u."""
+    from backtest import merge_blocks
+    from bias_audit import family_of_block
+    from validate_model import CYCLE_THRESHOLD
+    polls = pd.read_csv(PROCESSED_DIR / "polls.csv",
+                        parse_dates=["fieldwork_end"])
+    results = pd.read_csv(PROCESSED_DIR / "results.csv", dtype={"cycle": str})
+    ran = pd.read_csv(PROCESSED_DIR.parent / "ran_vote_shares.csv",
+                      dtype={"cycle": str})
+    frames = {}
+    for cycle, res in results.groupby("cycle"):
+        eday = pd.Timestamp(ELECTION_DAY[cycle])
+        thr = CYCLE_THRESHOLD.get(cycle, 0.0325)
+        w = window_polls(polls, cycle, eday, FINAL_WINDOW, 0).copy()
+        failed = ran[(ran["cycle"] == cycle) & (ran["seats"] == 0)]
+        W = float(failed["vote_pct"].sum()) / 100.0
+        wasted = (w[w["seats"] == 0].assign(x=w["vote_pct"].fillna(0) / 100)
+                  .groupby("poll_id")["x"].sum())
+        w["wasted"] = w["poll_id"].map(wasted).fillna(0.0)
+        meas = (w["seats"] > 0) | w["vote_pct"].notna()
+        sh = np.where(w["seats"] > 0, w["seats"] / 120.0 * (1.0 - w["wasted"] - 0.01),
+                      w["vote_pct"] / 100.0)
+        w["u"] = np.where(meas, sh, VOTE_ZERO_IMPUTE * thr) * 120.0
+        w["meas"] = meas
+        blocks = merge_blocks(list(w["party_id"].unique()) + list(res["party_id"])
+                              + list(failed["party_id"]))
+        block_of = {c: i for i, b in enumerate(blocks) for c in b}
+        w["block"] = w["party_id"].map(lambda p: block_of[p.split("+")[0]])
+        per_poll = w.groupby(["block", "poll_id"]).agg(u=("u", "sum"), meas=("meas", "any"))
+        polled = per_poll.groupby("block")["u"].mean()
+        frac = per_poll.groupby("block")["meas"].mean()
+        act_u, act_seats, ran_b = {}, {}, {}
+        for r in res.itertuples():
+            b = block_of[r.party_id.split("+")[0]]
+            act_seats[b] = act_seats.get(b, 0) + int(r.seats)
+            if r.seats > 0:
+                act_u[b] = act_u.get(b, 0.0) + r.seats * (1.0 - W - 0.01)
+                ran_b[b] = True
+        for r in failed.itertuples():
+            b = block_of[r.party_id.split("+")[0]]
+            act_u[b] = act_u.get(b, 0.0) + 120.0 * r.vote_pct / 100.0
+            act_seats.setdefault(b, 0)
+            ran_b[b] = True
+        idx = sorted(set(polled.index) | set(act_u))
+        f = pd.DataFrame({
+            "polled": polled.reindex(idx).fillna(0.0).values,
+            "actual_u": [act_u.get(b, 0.0) for b in idx],
+            "actual": [act_seats.get(b, 0) for b in idx],
+            "measured": frac.reindex(idx).fillna(0.0).values,
+            "ran": [ran_b.get(b, False) for b in idx],
+            "family": [family_of_block(blocks[b]) for b in idx],
+            "components": ["+".join(sorted(blocks[b])) for b in idx],
+        })
+        f = f[f["ran"] & (f["measured"] >= VOTE_MIN_MEASURED)
+              & ((f["actual"] > 0) | (f["polled"] >= 0.5))].copy()
+        f["error"] = f["polled"] - f["actual_u"]
+        f["is_nb"] = f["family"].isin(NB_FAMILIES)
+        f["has_likud"] = f["components"].str.split("+").map(lambda cs: "likud" in cs)
+        frames[cycle] = f.reset_index(drop=True)
+    return frames
+
+
+def _resid_record(frames, use, size_col):
+    """decompose()'s steps 1-4 on any frame set: bloc swing and own-family
+    totals removed proportionally, LOO anchors removed; returns the residual
+    rows of the cycles in `use` and the fitted (base, slope) sd line, with
+    `size_col` as the size the slope multiplies."""
+    rows, likud_e2, leader_e2 = [], {}, {}
+    for cycle, f0 in frames.items():
+        f = f0.copy()
+        w = f["polled"].clip(lower=0.1)
+        nb, rest = f["is_nb"], ~f["is_nb"]
+        delta = float(f.loc[nb, "error"].sum())
+        f["e1"] = f["error"] - np.where(
+            nb, delta * w / w[nb].sum(), -delta * w / w[rest].sum())
+        f["e2"] = f["e1"]
+        for fam in ("arab", "haredi"):
+            in_f = f["family"] == fam
+            if not in_f.any():
+                continue
+            t = float(f.loc[in_f, "e1"].sum())
+            f.loc[in_f, "e2"] = f.loc[in_f, "e1"] - t * w[in_f] / w[in_f].sum()
+        f["e3"] = f["e2"]
+        lk = f["has_likud"]
+        if lk.any():
+            likud_e2[cycle] = float(f.loc[lk, "e2"].mean())
+        others = f[~lk]
+        if len(others):
+            leader_e2[cycle] = float(f.loc[others["actual"].idxmax(), "e2"])
+        rows.append(f.assign(cycle=cycle))
+    anchors = {"likud": float(np.mean([likud_e2[c] for c in use if c in likud_e2])),
+               "leader": float(np.mean([leader_e2[c] for c in use if c in leader_e2]))}
+    resid = pd.concat(rows, ignore_index=True)
+    resid = resid[resid["cycle"].isin(use)].copy()
+    resid.loc[resid["has_likud"], "e3"] -= anchors["likud"]
+    for c in use:
+        f = resid[resid["cycle"] == c]
+        others = f[~f["has_likud"]]
+        if len(others):
+            resid.loc[others["actual"].idxmax(), "e3"] -= anchors["leader"]
+    small, big = resid[resid["actual"] <= 8], resid[resid["actual"] > 8]
+    sd_small, sd_big = float(small["e3"].std(ddof=1)), float(big["e3"].std(ddof=1))
+    m_small, m_big = float(small[size_col].mean()), float(big[size_col].mean())
+    slope = max((sd_big - sd_small) / max(m_big - m_small, 1.0), 0.0)
+    base = max(sd_small - slope * m_small, 0.4)
+    return resid, base, slope
+
+
+def tail_df(resid: pd.DataFrame, base: float, slope: float, size_col: str) -> dict:
+    """Arm D (dossier s.48): Student-t df by the method of moments from the
+    excess kurtosis G2 (bias-corrected) of the residuals standardised by
+    their fitted sd line: df = 4 + 6 / G2, clipped to [4.5, 30]; G2 <= 0.2
+    gives 30 (effectively normal)."""
+    from scipy.stats import kurtosis
+    z = resid["e3"] / (base + slope * resid[size_col])
+    g2 = float(kurtosis(z, fisher=True, bias=False))
+    df = 30.0 if g2 <= 0.2 else float(np.clip(4.0 + 6.0 / g2, 4.5, 30.0))
+    return {"g2": g2, "df": df, "n": int(len(z))}
+
+
+@lru_cache(maxsize=16)
+def decompose_vote(exclude_cycle: str | None = None) -> dict:
+    """Arm B: the residual sd line (u = 120 x share per seat-equivalent)
+    re-estimated on vote-share errors of the lists that ran, leave-one-
+    cycle-out; plus the arm-D tail df of that record."""
+    use = [c for c in ORDER if c != exclude_cycle]
+    resid, base, slope = _resid_record(_vote_frames(), use, "actual_u")
+    return {"resid_base": float(base), "resid_slope": float(slope),
+            "n": int(len(resid)), "tail": tail_df(resid, base, slope, "actual_u")}
+
+
+@lru_cache(maxsize=16)
+def seat_tail(exclude_cycle: str | None = None) -> dict:
+    """Arm D on the shipped (seat-error) record: the same df estimator on
+    decompose()'s residual rows (reproduces decompose()'s base/slope)."""
+    use = [c for c in ORDER if c != exclude_cycle]
+    resid, base, slope = _resid_record(_frames(), use, "actual")
+    return tail_df(resid, base, slope, "actual")
 
 
 def main() -> None:

@@ -30,16 +30,32 @@ import simulate as _sim
 from simulate import SURPLUS_PAIRS, THRESHOLD, dhondt
 
 
-def allocate_central(shares: pd.DataFrame) -> dict:
-    """Seats for the mean share vector: threshold, surplus pairs, d'Hondt."""
+def allocate_central(shares: pd.DataFrame, all_valid: bool | None = None,
+                     u: float | None = None) -> dict:
+    """Seats for the median share vector: threshold, surplus pairs, d'Hondt.
+
+    all_valid (default simulate.THRESHOLD_ALL_VALID, dossier s.47): the
+    threshold is tested on the UN-renormalised median shares as shares of
+    all valid votes (x (1 - u)); the medians are not additive (the vector
+    sums to ~0.96), so renormalising them lifted every list ~4.5% relative,
+    ~+0.15 pp at the threshold. The seat division among the passing lists is
+    scale-invariant, so only the pass test changes. u: the unmodelled share
+    (default simulate.UNMODELLED_SHARE when all_valid)."""
     names = shares["list"].tolist()
     comps = [set(str(c).split("+")) for c in shares["components"]]
     # median share vector: the harness grades the median as the better point
-    # estimate (MAE 1.57 vs 1.67); renormalised so the pie sums to one
+    # estimate (MAE 1.57 vs 1.67)
     col = "share_median" if "share_median" in shares.columns else "share_mean"
     v = shares[col].values.astype(float)
-    v = v / v.sum()
-    passed = v >= THRESHOLD
+    if all_valid is None:
+        all_valid = _sim.THRESHOLD_ALL_VALID
+    if all_valid:
+        scale = 1.0 - (_sim.UNMODELLED_SHARE if u is None else float(u))
+        passed = v * scale >= THRESHOLD
+    else:
+        # shipped: renormalised so the pie sums to one
+        v = v / v.sum()
+        passed = v >= THRESHOLD
     # shared resolver (simulate.PAIR_RESOLVER_FIX, dossier s.40): with the
     # fix, 'balad' binds to the Joint List row, not the appended
     # "Balad (alone)" row, and 'together' to the bennett_2026+yesh_atid row

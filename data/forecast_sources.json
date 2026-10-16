@@ -28,6 +28,20 @@
   "note": "Backs: Static allocation of undecided respondents, proportional or even, biased 2016 US polls and poll aggregates. Undecideds did not split in proportion to decided voters, and a probabilistic allocation that carries its own uncertainty does better. The problem grows with the undecided share."
  },
  {
+  "id": "AGG-F10",
+  "short": "CEC 1959b",
+  "citation": "State of Israel (Knesset); text published by the Central Elections Committee (1959). Elections (Modes of Propaganda) Law, 5719-1959, section 16E (election polls) - consolidated text. gov.il (Central Elections Committee guide, Knesset 25)",
+  "url": "https://www.gov.il/BlobFolder/guide/knesset25-elections-info/he/survey_section16_acces.pdf",
+  "group": "Poll aggregation and house effects",
+  "status": "official data",
+  "findings": [
+   "AGG-F10"
+  ],
+  "checked": "verified; the figures were corrected against the source",
+  "aliases": [],
+  "note": "Backs: Israeli law requires anyone who conducts an election poll for publication or broadcast to send the Central Elections Committee a copy of the results. The filing must state the sampling method, initial sample size, populations sampled, how many people were asked, took part, refused or were ineligible, the interview dates and hours, and the margin of error. The CEC posts filings as received."
+ },
+ {
   "id": "AGG-F11",
   "short": "Clinton & Rogers 2013",
   "citation": "Joshua D. Clinton; Steven Rogers (2013). Robo-Polls: Taking Cues from Traditional Sources?. PS: Political Science & Politics 46(2):333-337",
@@ -277,20 +291,6 @@
   "note": "Backs: A pollster's accuracy is only modestly predictable. Past accuracy correlates with future accuracy, but a firm's record is mostly noise until it has about 30 graded polls. The best firms are about 1 point better than average. Methodology and transparency standards predict accuracy and serve as the prior that records are shrunk toward."
  },
  {
-  "id": "AGG-F10",
-  "short": "State of Israel (Knesset) & text published by the Central Elections  1959",
-  "citation": "State of Israel (Knesset); text published by the Central Elections Committee (1959). Elections (Modes of Propaganda) Law, 5719-1959, section 16E (election polls) - consolidated text. gov.il (Central Elections Committee guide, Knesset 25)",
-  "url": "https://www.gov.il/BlobFolder/guide/knesset25-elections-info/he/survey_section16_acces.pdf",
-  "group": "Poll aggregation and house effects",
-  "status": "official data",
-  "findings": [
-   "AGG-F10"
-  ],
-  "checked": "verified; the figures were corrected against the source",
-  "aliases": [],
-  "note": "Backs: Israeli law requires anyone who conducts an election poll for publication or broadcast to send the Central Elections Committee a copy of the results. The filing must state the sampling method, initial sample size, populations sampled, how many people were asked, took part, refused or were ineligible, the interview dates and hours, and the margin of error. The CEC posts filings as received."
- },
- {
   "id": "AGG-F04",
   "short": "Stoetzer et al. 2019",
   "citation": "Lukas F. Stoetzer; Marcel Neunhoeffer; Thomas Gschwend; Simon Munzert; Sebastian Sternberg (2019). Forecasting Elections in Multiparty Systems: A Bayesian Approach Combining Polls and Fundamentals. Political Analysis 27(2):255-262",
@@ -369,32 +369,18 @@
   "note": "Backs: PyMC provides a Normal distribution constrained to sum to zero along an axis, N(0, sigma^2 (I_K - J_K/K)), which has exactly K-1 free directions. Sigma must be shared across the constrained axis."
  },
  {
-  "id": "ERR-F24",
-  "short": "2026 Election Model (own measurement & computed 15 Oct 2026 for desk ERR) 2026",
-  "citation": "2026 Election Model (own measurement, computed 15 Oct 2026 for desk ERR) (2026). Re-analysis of error_decomposition._frames(): kurtosis, Student-t fit, residual refit excluding threshold deaths; data/processed/bias_herding.csv. Project repository (desk computation, reproducible from src/error_decomposition.py)",
-  "url": "src/error_decomposition.py; data/processed/bias_herding.csv",
+  "id": "ERR-F22",
+  "short": "CEC 2022d",
+  "citation": "Wikipedia contributors (from Central Elections Committee results) (2022). 2022 Israeli legislative election - results table. Wikipedia",
+  "url": "https://votes25.bechirot.gov.il/",
   "group": "How large poll errors are",
-  "status": "report",
+  "status": "reference work",
   "findings": [
-   "ERR-F24"
+   "ERR-F22"
   ],
   "checked": "verified; the figures were corrected against the source",
   "aliases": [],
-  "note": "Backs: Own record, computed for this desk: Israeli list-level final-poll errors are strongly fat-tailed. The small-list residual is inflated by threshold deaths: lists of up to 8 seats that won seats miss with sd 1.22 seats, while the eight lists that died show +3.3 seat errors. Re-fitting size dependence on lists that won seats gives a steeper, lower line than the shipped one. Pollsters also spread less than pure sampling would imply (herding)."
- },
- {
-  "id": "ERR-F23",
-  "short": "2026 Election Model (own measurement) 2026",
-  "citation": "2026 Election Model (own measurement) (2026). error_decomposition.py on data/processed/polls.csv and results.csv (final-window averages vs CEC results); docs/priors_dossier.md s.1, s.36. Project repository (documented measurement)",
-  "url": "src/error_decomposition.py; docs/priors_dossier.md",
-  "group": "How large poll errors are",
-  "status": "report",
-  "findings": [
-   "ERR-F23"
-  ],
-  "checked": "verified; the figures were corrected against the source",
-  "aliases": [],
-  "note": "Backs: Own record, 2009-2022: Israeli final-window polls show no systematic 'shy right' at bloc level. The right-plus-haredi lists were over-polled in five of eight cycles. The big right-wing under-counts were Likud-specific, in years when Likud trailed. Bloc-level error has sd 3.36 seats with a non-significant positive mean."
+  "note": "Backs: Near the 3.25% threshold, a small vote-share miss becomes a 4-5 seat miss. Seat-based error records therefore mix the vote-share error with the threshold's all-or-nothing rule. In 2022 Meretz missed by 0.09 pp of the vote and lost all its seats."
  },
  {
   "id": "ERR-F11",
@@ -540,6 +526,34 @@
   "note": "Backs: Israel 2015: the final polls had Likud trailing the Zionist Union, and Likud won by six seats. Pollsters attributed the gap mainly to late movement inside the right-wing bloc (from Jewish Home and Yachad to Likud after a final-weekend rally and Netanyahu's election-day 'droves' warning), not to a swing between blocs. Even the exit polls under-counted Likud."
  },
  {
+  "id": "ERR-F23",
+  "short": "Own measurement 2026a",
+  "citation": "2026 Election Model (own measurement) (2026). error_decomposition.py on data/processed/polls.csv and results.csv (final-window averages vs CEC results); docs/priors_dossier.md s.1, s.36. Project repository (documented measurement)",
+  "url": "src/error_decomposition.py; docs/priors_dossier.md",
+  "group": "How large poll errors are",
+  "status": "report",
+  "findings": [
+   "ERR-F23"
+  ],
+  "checked": "verified; the figures were corrected against the source",
+  "aliases": [],
+  "note": "Backs: Own record, 2009-2022: Israeli final-window polls show no systematic 'shy right' at bloc level. The right-plus-haredi lists were over-polled in five of eight cycles. The big right-wing under-counts were Likud-specific, in years when Likud trailed. Bloc-level error has sd 3.36 seats with a non-significant positive mean."
+ },
+ {
+  "id": "ERR-F24",
+  "short": "Own measurement 2026b",
+  "citation": "2026 Election Model (own measurement, computed 15 Oct 2026 for desk ERR) (2026). Re-analysis of error_decomposition._frames(): kurtosis, Student-t fit, residual refit excluding threshold deaths; data/processed/bias_herding.csv. Project repository (desk computation, reproducible from src/error_decomposition.py)",
+  "url": "src/error_decomposition.py; data/processed/bias_herding.csv",
+  "group": "How large poll errors are",
+  "status": "report",
+  "findings": [
+   "ERR-F24"
+  ],
+  "checked": "verified; the figures were corrected against the source",
+  "aliases": [],
+  "note": "Backs: Own record, computed for this desk: Israeli list-level final-poll errors are strongly fat-tailed. The small-list residual is inflated by threshold deaths: lists of up to 8 seats that won seats miss with sd 1.22 seats, while the eight lists that died show +3.3 seat errors. Re-fitting size dependence on lists that won seats gives a steeper, lower line than the shipped one. Pollsters also spread less than pure sampling would imply (herding)."
+ },
+ {
   "id": "ERR-F12",
   "short": "Pasek et al. 2025",
   "citation": "Josh Pasek; Andrew Mercer; Ariel Edwards-Levy; Scott F. Clement; Ruth Igielnik; Jonathan Ladd; Emily Swanson; Jeff Horwitt; Charles Franklin; Chris Jackson; Kabir Khanna; Matthew Knee; Angela X. Ocampo; Tasha Philpot; G. Elliott Morris; Samara M. Klar (2025). Task Force on 2024 Pre-Election Polling - Executive Summary. American Association for Public Opinion Research",
@@ -610,20 +624,6 @@
   "note": "Backs: FiveThirtyEight's 2016 forecast drew errors from a Student-t rather than a normal distribution. The author reports that this changed the forecast only slightly; the correlation of errors across units mattered far more. Poll volatility is also tied to the share of undecided and minor-party voters."
  },
  {
-  "id": "ERR-F22",
-  "short": "Wikipedia contributors (from Central Ele 2022",
-  "citation": "Wikipedia contributors (from Central Elections Committee results) (2022). 2022 Israeli legislative election - results table. Wikipedia",
-  "url": "https://votes25.bechirot.gov.il/",
-  "group": "How large poll errors are",
-  "status": "reference work",
-  "findings": [
-   "ERR-F22"
-  ],
-  "checked": "verified; the figures were corrected against the source",
-  "aliases": [],
-  "note": "Backs: Near the 3.25% threshold, a small vote-share miss becomes a 4-5 seat miss. Seat-based error records therefore mix the vote-share error with the threshold's all-or-nothing rule. In 2022 Meretz missed by 0.09 pp of the vote and lost all its seats."
- },
- {
   "id": "ERR-F05",
   "short": "Wlezien & Jennings 2023",
   "citation": "Christopher Wlezien; Will Jennings (2023). Institutions, parties and the evolution of electoral preferences. European Journal of Political Research 62(4):1347-1368",
@@ -639,7 +639,7 @@
  },
  {
   "id": "SYS-F04",
-  "short": "Central Elections Committee (CEC) 2022",
+  "short": "CEC 2022a",
   "citation": "Central Elections Committee (CEC) (2022). Official results by locality and polling station, 21st-25th Knessets (expc/expb files; settlement code 9999/99999 = outer (double) envelopes); 20th Knesset via the CEC dataset on data.gov.il. CEC results sites votes21-votes25.bechirot.gov.il (files from media21-25.bechirot.gov.il); repository copies data/raw/kalpi/expc_20..25.csv, expb_24..25.csv; desk computation, scripts in this desk's scratchpad (seatlaw.py, pairvalue.py, night.py)",
   "url": "https://votes25.bechirot.gov.il/ ; https://data.gov.il/he/datasets/central-election-committee/votes-knesset",
   "group": "Israel's electoral system",
@@ -660,7 +660,7 @@
  },
  {
   "id": "SYS-F14",
-  "short": "Central Elections Committee for the 25th 2022",
+  "short": "CEC 2022b",
   "citation": "Central Elections Committee for the 25th Knesset (2022). Guide to Knesset Elections (English translation of 'Elections for the 25th Knesset'). CEC / Ministry of Aliyah and Integration, Jerusalem 2022, pp. 3-5",
   "url": "https://www.gov.il/BlobFolder/news/elections-25/en/Guide-to-Knesset-Elections-en.pdf",
   "group": "Israel's electoral system",
@@ -715,6 +715,76 @@
   "note": "Backs: Only a handful of seats are decided at the remainder (surplus) stage: 3 to 8 per election in 2015-2022 (mean 5.3), not 6-9."
  },
  {
+  "id": "SYS-F01",
+  "short": "Knesset 1969d",
+  "citation": "State of Israel (Knesset) (1969). Knesset Elections Law [Consolidated Version], 5729-1969 (חוק הבחירות לכנסת [נוסח משולב], תשכ\"ט-1969), as amended to 5786 (2026); ss.81(a)-(c). Consolidated statute; text read from the Hebrew Wikisource transcription of the consolidated version (Knesset National Legislation Database item 2000191)",
+  "url": "https://he.wikisource.org/wiki/%D7%97%D7%95%D7%A7_%D7%94%D7%91%D7%97%D7%99%D7%A8%D7%95%D7%AA_%D7%9C%D7%9B%D7%A0%D7%A1%D7%AA",
+  "group": "Israel's electoral system",
+  "status": "official data",
+  "findings": [
+   "SYS-F01"
+  ],
+  "checked": "verified against the source",
+  "aliases": [],
+  "note": "Backs: The legal threshold is 3.25% of ALL valid votes, tested per list ('not less than'); only lists that pass take part in the allocation, and the quota is the INTEGER part of the passing lists' valid votes divided by 120; each list first receives the integer part of votes/quota."
+ },
+ {
+  "id": "SYS-F02",
+  "short": "Knesset 1969a",
+  "citation": "State of Israel (Knesset) (1969). Knesset Elections Law [Consolidated Version], 5729-1969 (חוק הבחירות לכנסת [נוסח משולב], תשכ\"ט-1969), as amended to 5786 (2026); s.81(d)(1)-(4). Consolidated statute; text read from the Hebrew Wikisource transcription of the consolidated version (Knesset National Legislation Database item 2000191)",
+  "url": "https://he.wikisource.org/wiki/%D7%97%D7%95%D7%A7_%D7%94%D7%91%D7%97%D7%99%D7%A8%D7%95%D7%AA_%D7%9C%D7%9B%D7%A0%D7%A1%D7%AA",
+  "group": "Israel's electoral system",
+  "status": "official data",
+  "findings": [
+   "SYS-F02"
+  ],
+  "checked": "verified against the source",
+  "aliases": [],
+  "note": "Backs: Remainder seats go one at a time to the largest 'list quotient' votes/(seats+1); an exact tie is broken by a lottery run by the CEC; and a list with no more than half of the participating valid votes stops receiving seats once it holds half of all seats. The model breaks ties by column order (np.argmax) and does not implement the majority clause."
+ },
+ {
+  "id": "SYS-F03",
+  "short": "Knesset 1969b",
+  "citation": "State of Israel (Knesset) (1969). Knesset Elections Law [Consolidated Version], 5729-1969 (חוק הבחירות לכנסת [נוסח משולב], תשכ\"ט-1969), as amended to 5786 (2026); ss.67, 82. Consolidated statute; text read from the Hebrew Wikisource transcription of the consolidated version (Knesset National Legislation Database item 2000191)",
+  "url": "https://he.wikisource.org/wiki/%D7%97%D7%95%D7%A7_%D7%94%D7%91%D7%97%D7%99%D7%A8%D7%95%D7%AA_%D7%9C%D7%9B%D7%A0%D7%A1%D7%AA",
+  "group": "Israel's electoral system",
+  "status": "official data",
+  "findings": [
+   "SYS-F03"
+  ],
+  "checked": "verified against the source",
+  "aliases": [],
+  "note": "Backs: Surplus-vote agreements ('linkage', התקשרות): a list may link with only ONE other list; written notice signed by both lists' agents must reach the CEC no later than the 11th day before election day; the CEC publishes the linkages by the 8th day. Linked lists act as one list ONLY in the remainder stage (combined votes and combined s.81(c) seats), and only if EACH passed the threshold on its own; their joint seats are then split between them by the same s.81 method."
+ },
+ {
+  "id": "SYS-F16",
+  "short": "Knesset 1969c",
+  "citation": "State of Israel (Knesset) (1969). Knesset Elections Law [Consolidated Version], 5729-1969 (חוק הבחירות לכנסת [נוסח משולב], תשכ\"ט-1969), as amended to 5786 (2026); ss.68A(e), 91(b), 116Y10-116Y13 (ch.10-3C, added 5786). Consolidated statute; text read from the Hebrew Wikisource transcription of the consolidated version (Knesset National Legislation Database item 2000191)",
+  "url": "https://he.wikisource.org/wiki/%D7%97%D7%95%D7%A7_%D7%94%D7%91%D7%97%D7%99%D7%A8%D7%95%D7%AA_%D7%9C%D7%9B%D7%A0%D7%A1%D7%AA",
+  "group": "Israel's electoral system",
+  "status": "official data",
+  "findings": [
+   "SYS-F16"
+  ],
+  "checked": "verified; the figures were corrected against the source",
+  "aliases": [],
+  "note": "Backs: Double-envelope (outer-envelope) votes are cast by soldiers, voters at accessible stations, hospital patients, prisoners, diplomats, shelter residents and - new for 2026 - evacuees displaced since 7 October 2023; they are checked for double voting after polls close and counted centrally in the Knesset after the regular count, and the official results must be published within eight days."
+ },
+ {
+  "id": "SYS-F11",
+  "short": "Knesset 2014",
+  "citation": "State of Israel (Knesset) (2014). Knesset Elections Law (Amendment No. 62), 5774-2014 (חוק הבחירות לכנסת (תיקון מס' 62), התשע\"ד-2014). Sefer HaHukim 5774, p. 347; passed 9 Adar II 5774 (11 March 2014); applies from the elections to the 20th Knesset",
+  "url": "https://fs.knesset.gov.il/19/law/19_lsr_301595.pdf",
+  "group": "Israel's electoral system",
+  "status": "official data",
+  "findings": [
+   "SYS-F11"
+  ],
+  "checked": "verified against the source",
+  "aliases": [],
+  "note": "Backs: The 3.25% threshold was set by Amendment No. 62 to the Knesset Elections Law, passed 11 March 2014 and applied from the 2015 election; it replaced 2%."
+ },
+ {
   "id": "SYS-F13",
   "short": "Rahat & Hazan 2005",
   "citation": "Rahat, Gideon; Hazan, Reuven Y. (2005). Israel: The Politics of an Extreme Electoral System. in M. Gallagher & P. Mitchell (eds), The Politics of Electoral Systems, Oxford University Press, ch. 16, pp. 333-351 (abstract read; full text not opened)",
@@ -743,78 +813,22 @@
   "note": "Backs: The expected value of one effective surplus pair is about +0.4 seat (range +0.23 to +0.77), consistent with the model's own 2026 measurement (+1 seat in 30-35% of draws) and with D'Hondt's known large-list seat bias - but below the '+0.5 to +0.9 expected seats per pair' stated on the site."
  },
  {
-  "id": "SYS-F01",
-  "short": "State of Israel (Knesset) 1969d",
-  "citation": "State of Israel (Knesset) (1969). Knesset Elections Law [Consolidated Version], 5729-1969 (חוק הבחירות לכנסת [נוסח משולב], תשכ\"ט-1969), as amended to 5786 (2026); ss.81(a)-(c). Consolidated statute; text read from the Hebrew Wikisource transcription of the consolidated version (Knesset National Legislation Database item 2000191)",
-  "url": "https://he.wikisource.org/wiki/%D7%97%D7%95%D7%A7_%D7%94%D7%91%D7%97%D7%99%D7%A8%D7%95%D7%AA_%D7%9C%D7%9B%D7%A0%D7%A1%D7%AA",
+  "id": "SYS-F18",
+  "short": "Times of Israel 2022",
+  "citation": "Times of Israel staff, reporting an IDI analysis by Or Anabi and Ofer Kenig (2022). Why the remaining ballots are likely to sink Balad, confirm Netanyahu's victory. Times of Israel, 2 November 2022",
+  "url": "https://www.timesofisrael.com/why-the-remaining-ballots-are-likely-to-sink-balad-confirm-netanyahus-victory/",
   "group": "Israel's electoral system",
-  "status": "official data",
+  "status": "report",
   "findings": [
-   "SYS-F01"
+   "SYS-F18"
   ],
   "checked": "verified against the source",
   "aliases": [],
-  "note": "Backs: The legal threshold is 3.25% of ALL valid votes, tested per list ('not less than'); only lists that pass take part in the allocation, and the quota is the INTEGER part of the passing lists' valid votes divided by 120; each list first receives the integer part of votes/quota."
- },
- {
-  "id": "SYS-F02",
-  "short": "State of Israel (Knesset) 1969a",
-  "citation": "State of Israel (Knesset) (1969). Knesset Elections Law [Consolidated Version], 5729-1969 (חוק הבחירות לכנסת [נוסח משולב], תשכ\"ט-1969), as amended to 5786 (2026); s.81(d)(1)-(4). Consolidated statute; text read from the Hebrew Wikisource transcription of the consolidated version (Knesset National Legislation Database item 2000191)",
-  "url": "https://he.wikisource.org/wiki/%D7%97%D7%95%D7%A7_%D7%94%D7%91%D7%97%D7%99%D7%A8%D7%95%D7%AA_%D7%9C%D7%9B%D7%A0%D7%A1%D7%AA",
-  "group": "Israel's electoral system",
-  "status": "official data",
-  "findings": [
-   "SYS-F02"
-  ],
-  "checked": "verified against the source",
-  "aliases": [],
-  "note": "Backs: Remainder seats go one at a time to the largest 'list quotient' votes/(seats+1); an exact tie is broken by a lottery run by the CEC; and a list with no more than half of the participating valid votes stops receiving seats once it holds half of all seats. The model breaks ties by column order (np.argmax) and does not implement the majority clause."
- },
- {
-  "id": "SYS-F03",
-  "short": "State of Israel (Knesset) 1969b",
-  "citation": "State of Israel (Knesset) (1969). Knesset Elections Law [Consolidated Version], 5729-1969 (חוק הבחירות לכנסת [נוסח משולב], תשכ\"ט-1969), as amended to 5786 (2026); ss.67, 82. Consolidated statute; text read from the Hebrew Wikisource transcription of the consolidated version (Knesset National Legislation Database item 2000191)",
-  "url": "https://he.wikisource.org/wiki/%D7%97%D7%95%D7%A7_%D7%94%D7%91%D7%97%D7%99%D7%A8%D7%95%D7%AA_%D7%9C%D7%9B%D7%A0%D7%A1%D7%AA",
-  "group": "Israel's electoral system",
-  "status": "official data",
-  "findings": [
-   "SYS-F03"
-  ],
-  "checked": "verified against the source",
-  "aliases": [],
-  "note": "Backs: Surplus-vote agreements ('linkage', התקשרות): a list may link with only ONE other list; written notice signed by both lists' agents must reach the CEC no later than the 11th day before election day; the CEC publishes the linkages by the 8th day. Linked lists act as one list ONLY in the remainder stage (combined votes and combined s.81(c) seats), and only if EACH passed the threshold on its own; their joint seats are then split between them by the same s.81 method."
- },
- {
-  "id": "SYS-F16",
-  "short": "State of Israel (Knesset) 1969c",
-  "citation": "State of Israel (Knesset) (1969). Knesset Elections Law [Consolidated Version], 5729-1969 (חוק הבחירות לכנסת [נוסח משולב], תשכ\"ט-1969), as amended to 5786 (2026); ss.68A(e), 91(b), 116Y10-116Y13 (ch.10-3C, added 5786). Consolidated statute; text read from the Hebrew Wikisource transcription of the consolidated version (Knesset National Legislation Database item 2000191)",
-  "url": "https://he.wikisource.org/wiki/%D7%97%D7%95%D7%A7_%D7%94%D7%91%D7%97%D7%99%D7%A8%D7%95%D7%AA_%D7%9C%D7%9B%D7%A0%D7%A1%D7%AA",
-  "group": "Israel's electoral system",
-  "status": "official data",
-  "findings": [
-   "SYS-F16"
-  ],
-  "checked": "verified; the figures were corrected against the source",
-  "aliases": [],
-  "note": "Backs: Double-envelope (outer-envelope) votes are cast by soldiers, voters at accessible stations, hospital patients, prisoners, diplomats, shelter residents and - new for 2026 - evacuees displaced since 7 October 2023; they are checked for double voting after polls close and counted centrally in the Knesset after the regular count, and the official results must be published within eight days."
- },
- {
-  "id": "SYS-F11",
-  "short": "State of Israel (Knesset) 2014",
-  "citation": "State of Israel (Knesset) (2014). Knesset Elections Law (Amendment No. 62), 5774-2014 (חוק הבחירות לכנסת (תיקון מס' 62), התשע\"ד-2014). Sefer HaHukim 5774, p. 347; passed 9 Adar II 5774 (11 March 2014); applies from the elections to the 20th Knesset",
-  "url": "https://fs.knesset.gov.il/19/law/19_lsr_301595.pdf",
-  "group": "Israel's electoral system",
-  "status": "official data",
-  "findings": [
-   "SYS-F11"
-  ],
-  "checked": "verified against the source",
-  "aliases": [],
-  "note": "Backs: The 3.25% threshold was set by Amendment No. 62 to the Knesset Elections Law, passed 11 March 2014 and applied from the 2015 election; it replaced 2%."
+  "note": "Backs: Double envelopes lean strongly away from Arab and haredi lists and toward right-religious lists; the lean is large in percentage points and stable in sign across five elections."
  },
  {
   "id": "SYS-F06",
-  "short": "contributors 2026",
+  "short": "Wikipedia 2026",
   "citation": "Hebrew Wikipedia contributors (2026). הסכם עודפים (Surplus-vote agreement) - lists of agreements by Knesset. Wikipedia (he); the 19th-22nd Knesset lists cite CEC notices/PDFs (bechirot21/22.bechirot.gov.il, bechirot20.gov.il); 23rd-25th lists uncited on the page - 25th confirmed by Kenig (IDI 2026), 24th confirmed only by the exact reproduction of the official allocation",
   "url": "https://he.wikipedia.org/wiki/%D7%94%D7%A1%D7%9B%D7%9D_%D7%A2%D7%95%D7%93%D7%A4%D7%99%D7%9D",
   "group": "Israel's electoral system",
@@ -828,20 +842,6 @@
    "SYS-F08"
   ],
   "note": "Backs: Surplus agreements moved exactly one seat in four of the six 3.25%-era elections; per pair, holding the other registered pairs fixed, 9 of 23 effective pairs (both partners passed) gained a seat. | The validation harness's historical surplus pairs are not the registered agreements in four of eight cycles, and with exact official vote counts they misallocate 8 list-seats across three of the six 3.25%-era cycles, so part of the graded seat error is seat-law error, not poll error."
- },
- {
-  "id": "SYS-F18",
-  "short": "staff et al. 2022",
-  "citation": "Times of Israel staff, reporting an IDI analysis by Or Anabi and Ofer Kenig (2022). Why the remaining ballots are likely to sink Balad, confirm Netanyahu's victory. Times of Israel, 2 November 2022",
-  "url": "https://www.timesofisrael.com/why-the-remaining-ballots-are-likely-to-sink-balad-confirm-netanyahus-victory/",
-  "group": "Israel's electoral system",
-  "status": "report",
-  "findings": [
-   "SYS-F18"
-  ],
-  "checked": "verified against the source",
-  "aliases": [],
-  "note": "Backs: Double envelopes lean strongly away from Arab and haredi lists and toward right-religious lists; the lean is large in percentage points and stable in sign across five elections."
  },
  {
   "id": "STR-F02",
@@ -873,6 +873,20 @@
    "STR-F14"
   ],
   "note": "Backs: Gil (Pensioners), a first-cycle list polled at 0-2 seats under a 2% threshold, gained support in the days before the 2006 election. Contrary to all predictions it won 7 seats. This is a first-cycle near-threshold SURGE outside the graded 2009-2022 window. Inside the window the only surge among the eleven first-cycle straddlers is Yamina (Sept 2019). | Voters who expect their preferred party to stay out of the coalition often desert it for the least-bad viable partner. In Israel 2006 this held after controlling for ideological and coalition preferences, but only for the two bloc-defining partie"
+ },
+ {
+  "id": "STR-F21",
+  "short": "CEC 2022c",
+  "citation": "State of Israel, Central Elections Committee (2022). Elections Law (Propaganda Methods) 1959, s.16E - current text (נוסח סעיף 16ה). Central Elections Committee (gov.il)",
+  "url": "https://www.gov.il/BlobFolder/guide/knesset25-elections-info/he/survey_section16_acces.pdf",
+  "group": "Strategic voting and thresholds",
+  "status": "official data",
+  "findings": [
+   "STR-F21"
+  ],
+  "checked": "verified against the source",
+  "aliases": [],
+  "note": "Backs: Israeli law bars broadcasting or publishing the results of any election survey not already published from the END of the Friday before the polls open until the polls close. A survey published before that point may be repeated only with a prominent note that it is not current and says nothing about voting patterns on the day. For the 27 Oct 2026 election, Friday 23 Oct is the last legal day for new polls, which leaves about four unobserved days (Friday night to Tuesday 22:00)."
  },
  {
   "id": "STR-F01",
@@ -990,22 +1004,8 @@
   "note": "Backs: Strong partisans react to a threatened electoral loss with anger and more campaign activity, and to reassured victory with enthusiasm. Holders of strong issue positions show no such arousal. This is the psychological basis of a 'gevalt' appeal: it works on identifiers when their party's standing is threatened, which fits a trigger based on the formateur race rather than a constant Likud premium."
  },
  {
-  "id": "STR-F21",
-  "short": "Israel & Central Elections Committee 2022",
-  "citation": "State of Israel, Central Elections Committee (2022). Elections Law (Propaganda Methods) 1959, s.16E - current text (נוסח סעיף 16ה). Central Elections Committee (gov.il)",
-  "url": "https://www.gov.il/BlobFolder/guide/knesset25-elections-info/he/survey_section16_acces.pdf",
-  "group": "Strategic voting and thresholds",
-  "status": "official data",
-  "findings": [
-   "STR-F21"
-  ],
-  "checked": "verified against the source",
-  "aliases": [],
-  "note": "Backs: Israeli law bars broadcasting or publishing the results of any election survey not already published from the END of the Friday before the polls open until the polls close. A survey published before that point may be repeated only with a prominent note that it is not current and says nothing about voting patterns on the day. For the 27 Oct 2026 election, Friday 23 Oct is the last legal day for new polls, which leaves about four unobserved days (Friday night to Tuesday 22:00)."
- },
- {
   "id": "STR-F22",
-  "short": "JTA (Jewish Telegraphic Agency) 2015",
+  "short": "JTA 2015",
   "citation": "JTA (Jewish Telegraphic Agency) (2015). More than 1 in 4 Israeli voters made decision at last minute. JTA, 20 Apr 2015",
   "url": "https://www.jta.org/2015/04/20/israel/more-than-1-in-4-israeli-voters-made-decision-at-last-minute",
   "group": "Strategic voting and thresholds",
@@ -1030,6 +1030,20 @@
   "checked": "verified against the source",
   "aliases": [],
   "note": "Backs: Because coalition bargaining waters down each party's influence on policy, outcome-oriented voters often back parties more extreme than themselves to pull the coalition's policy their way (compensational voting). The effect is stronger in consensual systems, such as the Netherlands and Norway, than in majoritarian ones (Britain, Canada). This is a standing counterforce to consolidation: some right-flank satellite support is held in order to pull a Likud-led coalition rightward, not merely parked."
+ },
+ {
+  "id": "STR-F13",
+  "short": "Kenig 2022",
+  "citation": "Ofer Kenig (Israel Democracy Institute) (2022). The 2022 Elections: Results Analysis. Israel Democracy Institute, 7 Nov 2022",
+  "url": "https://en.idi.org.il/articles/46229",
+  "group": "Strategic voting and thresholds",
+  "status": "report",
+  "findings": [
+   "STR-F13"
+  ],
+  "checked": "verified against the source",
+  "aliases": [],
+  "note": "Backs: In 2022 almost 9% of votes were wasted below the threshold. The Netanyahu bloc outpolled its rivals by about 30,000 votes, under one seat, yet won 64 seats. All four Netanyahu-bloc lists signed surplus agreements, against two in the other camp, where five lists were wobbling near the line. Measured against the final polls, Meretz (an established list, 4-5 seats in all eight final polls) failed with 3.16%, about 4,050 votes short. Jewish Home (polled 1.2-2.1%) took 1.19%. Balad, an Arab sectoral list polled at 1.0-2.75%, took 2.91%."
  },
  {
   "id": "STR-F24",
@@ -1074,20 +1088,6 @@
   "note": "Backs: Across national election studies, the share of voters who actually vote strategically is typically 5-15% of the electorate. In a lab experiment embedded in two real German state campaigns, supporters projected their preferred small party 1.7-2.9 points above the poll they were shown. They still expected it to pass even in the 'failure' condition. Strategic-voting theory explained only a small number of the insincere votes. Wishful thinking damps desertion: supporters discount bad polls for their own small list."
  },
  {
-  "id": "STR-F13",
-  "short": "Ofer Kenig (Israel Democracy Institute) 2022",
-  "citation": "Ofer Kenig (Israel Democracy Institute) (2022). The 2022 Elections: Results Analysis. Israel Democracy Institute, 7 Nov 2022",
-  "url": "https://en.idi.org.il/articles/46229",
-  "group": "Strategic voting and thresholds",
-  "status": "report",
-  "findings": [
-   "STR-F13"
-  ],
-  "checked": "verified against the source",
-  "aliases": [],
-  "note": "Backs: In 2022 almost 9% of votes were wasted below the threshold. The Netanyahu bloc outpolled its rivals by about 30,000 votes, under one seat, yet won 64 seats. All four Netanyahu-bloc lists signed surplus agreements, against two in the other camp, where five lists were wobbling near the line. Measured against the final polls, Meretz (an established list, 4-5 seats in all eight final polls) failed with 3.16%, about 4,050 votes short. Jewish Home (polled 1.2-2.1%) took 1.19%. Balad, an Arab sectoral list polled at 1.0-2.75%, took 2.91%."
- },
- {
   "id": "STR-F08",
   "short": "Rahat et al. 2016a",
   "citation": "Gideon Rahat; Reuven Y. Hazan; Pazit Ben-Nun Bloom (2016). Stable Blocs and Multiple Identities: The 2015 Elections in Israel. Representation 52(1):99-117",
@@ -1117,7 +1117,7 @@
  },
  {
   "id": "STR-F09",
-  "short": "Wikipedia contributors (compilation of p & results) 2015",
+  "short": "Wikipedia 2015",
   "citation": "Wikipedia contributors (compilation of published Israeli polls; CEC results) (2015). Opinion polling for the 2015 Israeli legislative election. Wikipedia",
   "url": "https://en.wikipedia.org/wiki/Opinion_polling_for_the_2015_Israeli_legislative_election",
   "group": "Strategic voting and thresholds",
@@ -1131,7 +1131,7 @@
  },
  {
   "id": "STR-F10",
-  "short": "Wikipedia contributors (compilation of p & results) 2019a",
+  "short": "Wikipedia 2019a",
   "citation": "Wikipedia contributors (compilation of published Israeli polls; CEC results) (2019). Opinion polling for the April 2019 Israeli legislative election; April 2019 Israeli legislative election (results). Wikipedia",
   "url": "https://en.wikipedia.org/wiki/Opinion_polling_for_the_April_2019_Israeli_legislative_election",
   "group": "Strategic voting and thresholds",
@@ -1145,7 +1145,7 @@
  },
  {
   "id": "STR-F11",
-  "short": "Wikipedia contributors (compilation of p & results) 2019b",
+  "short": "Wikipedia 2019b",
   "citation": "Wikipedia contributors (compilation of published Israeli polls; CEC results) (2019). Opinion polling for the September 2019 Israeli legislative election. Wikipedia",
   "url": "https://en.wikipedia.org/wiki/Opinion_polling_for_the_September_2019_Israeli_legislative_election",
   "group": "Strategic voting and thresholds",
@@ -1159,7 +1159,7 @@
  },
  {
   "id": "STR-F12",
-  "short": "Wikipedia contributors (compilation of p & results) 2021",
+  "short": "Wikipedia 2021",
   "citation": "Wikipedia contributors (compilation of published Israeli polls; CEC results) (2021). Opinion polling for the 2021 Israeli legislative election. Wikipedia",
   "url": "https://en.wikipedia.org/wiki/Opinion_polling_for_the_2021_Israeli_legislative_election",
   "group": "Strategic voting and thresholds",
@@ -1186,6 +1186,48 @@
   "note": "Backs: Disqualification fights are near-constant and leave no consistent turnout signature: the Central Elections Committee has moved against Arab lists or candidates in most elections since 2003, the Supreme Court reversed every one, and Arab turnout rose after four and fell after three. Configuration, not backlash, tracks turnout. Reuses atlas D2-F24 for 2026."
  },
  {
+  "id": "SEC-F09",
+  "short": "CEC 2026a",
+  "citation": "Central Elections Committee (poll report filed by Afkar Research and Knowledge) (2026). Election survey in Arab society, report of 5 Sep 2026 (CEC ref. 4126). Central Elections Committee for the 26th Knesset",
+  "url": "https://en.idi.org.il/articles/64746",
+  "group": "Sectors and turnout",
+  "status": "official data",
+  "findings": [
+   "SEC-F09"
+  ],
+  "checked": "verified; the figures were corrected against the source",
+  "aliases": [],
+  "note": "Backs: Afkar's September 2026 Arab-sector poll is a mixed-mode stratified sample with low response rates, converted to seats at an assumed 60% turnout. No published Afkar turnout or seat track record was located; IDI has used Afkar for fieldwork (2022 special survey, 2026 first-time voters)."
+ },
+ {
+  "id": "SEC-F11",
+  "short": "CEC 2026c",
+  "citation": "Central Elections Committee (poll reports filed by Kantar, Lazar, Direct Polls, Midgam, Tatika, Midgam Project-StatNet) (2026). Poll reports for the 26th Knesset, refs 4107, 4153, 4162, 4163, 4164, 4165, 4182. Central Elections Committee for the 26th Knesset",
+  "url": "https://www.gov.il/BlobFolder/dynamiccollectorresultitem/knesset_election94/he/Survey_4182.pdf",
+  "group": "Sectors and turnout",
+  "status": "official data",
+  "findings": [
+   "SEC-F11"
+  ],
+  "checked": "verified; the figures were corrected against the source",
+  "aliases": [],
+  "note": "Backs: Most 2026 national polls are Hebrew-language online panels of 500-610 with single-digit to mid-20s response rates, so their Arab subsamples are small and self-selected. Tatika's raw sample was 11% Arab, close to the Arab share of 2022 voters but well below the ~16% Arab share of the electorate. Channel 13's consortium alone runs a separate StatNet phone sample of Arabs (101-221) and converts to seats 'by sector weights in the population'."
+ },
+ {
+  "id": "SEC-F22",
+  "short": "CEC 2026b",
+  "citation": "Central Elections Committee (poll report filed by Shmuel Rosner with Midgam Project, StatNet, Askaria) (2026). Mandates survey, 30 September 2026 (CEC ref. 4182), sector columns. Central Elections Committee for the 26th Knesset",
+  "url": "https://www.gov.il/BlobFolder/dynamiccollectorresultitem/knesset_election94/he/Survey_4182.pdf",
+  "group": "Sectors and turnout",
+  "status": "official data",
+  "findings": [
+   "SEC-F22"
+  ],
+  "checked": "verified against the source",
+  "aliases": [],
+  "note": "Backs: 2026 polls already contain haredi leakage and a new haredi list. In Channel 13's dedicated haredi sample, Shas plus UTJ hold about 73% of decided respondents, against 86% of haredi voters in 2022. The Haredi Public takes 7.8% and Otzma 8.3%. If the small list fades late, as Yahad did in 2019, the gain goes to Shas and UTJ beyond the polls."
+ },
+ {
   "id": "SEC-F16",
   "short": "Cahaner & Malach 2025",
   "citation": "Lee Cahaner, Gilad Malach (2025). Annual Statistical Report on Ultra-Orthodox (Haredi) Society in Israel 2025 (executive summary). Israel Democracy Institute",
@@ -1200,46 +1242,18 @@
   "note": "Backs: The haredi population grows about 4.2% a year, but the haredi lists' realised vote share has grown about 0.2 points a year (about +1 seat per four-year term), well below the dossier's '+1.5-2 seats' demographic drift."
  },
  {
-  "id": "SEC-F09",
-  "short": "Central Elections Committee (poll report & Knowledge) 2026",
-  "citation": "Central Elections Committee (poll report filed by Afkar Research and Knowledge) (2026). Election survey in Arab society, report of 5 Sep 2026 (CEC ref. 4126). Central Elections Committee for the 26th Knesset",
-  "url": "https://en.idi.org.il/articles/64746",
+  "id": "SEC-F13",
+  "short": "Cohen 2026",
+  "citation": "Moshe Cohen (interview with Menachem Lazar) (2026). Maariv pollster: Election race, Likud struggles, and threshold battles. The Jerusalem Post (news report)",
+  "url": "https://jpost.com/israel-election-2026/article-908437",
   "group": "Sectors and turnout",
-  "status": "official data",
+  "status": "report",
   "findings": [
-   "SEC-F09"
-  ],
-  "checked": "verified; the figures were corrected against the source",
-  "aliases": [],
-  "note": "Backs: Afkar's September 2026 Arab-sector poll is a mixed-mode stratified sample with low response rates, converted to seats at an assumed 60% turnout. No published Afkar turnout or seat track record was located; IDI has used Afkar for fieldwork (2022 special survey, 2026 first-time voters)."
- },
- {
-  "id": "SEC-F11",
-  "short": "Central Elections Committee (poll report et al. 2026b",
-  "citation": "Central Elections Committee (poll reports filed by Kantar, Lazar, Direct Polls, Midgam, Tatika, Midgam Project-StatNet) (2026). Poll reports for the 26th Knesset, refs 4107, 4153, 4162, 4163, 4164, 4165, 4182. Central Elections Committee for the 26th Knesset",
-  "url": "https://www.gov.il/BlobFolder/dynamiccollectorresultitem/knesset_election94/he/Survey_4182.pdf",
-  "group": "Sectors and turnout",
-  "status": "official data",
-  "findings": [
-   "SEC-F11"
-  ],
-  "checked": "verified; the figures were corrected against the source",
-  "aliases": [],
-  "note": "Backs: Most 2026 national polls are Hebrew-language online panels of 500-610 with single-digit to mid-20s response rates, so their Arab subsamples are small and self-selected. Tatika's raw sample was 11% Arab, close to the Arab share of 2022 voters but well below the ~16% Arab share of the electorate. Channel 13's consortium alone runs a separate StatNet phone sample of Arabs (101-221) and converts to seats 'by sector weights in the population'."
- },
- {
-  "id": "SEC-F22",
-  "short": "Central Elections Committee (poll report et al. 2026a",
-  "citation": "Central Elections Committee (poll report filed by Shmuel Rosner with Midgam Project, StatNet, Askaria) (2026). Mandates survey, 30 September 2026 (CEC ref. 4182), sector columns. Central Elections Committee for the 26th Knesset",
-  "url": "https://www.gov.il/BlobFolder/dynamiccollectorresultitem/knesset_election94/he/Survey_4182.pdf",
-  "group": "Sectors and turnout",
-  "status": "official data",
-  "findings": [
-   "SEC-F22"
+   "SEC-F13"
   ],
   "checked": "verified against the source",
   "aliases": [],
-  "note": "Backs: 2026 polls already contain haredi leakage and a new haredi list. In Channel 13's dedicated haredi sample, Shas plus UTJ hold about 73% of decided respondents, against 86% of haredi voters in 2022. The Haredi Public takes 7.8% and Otzma 8.3%. If the small list fades late, as Yahad did in 2019, the gain goes to Shas and UTJ beyond the polls."
+  "note": "Backs: Houses embed different Arab turnout assumptions, so 'polls weight Arabs to 2022 turnout' is true for some firms only. Maariv's pollster says Arab lists would reach 17 seats at Jewish-level turnout while his polls show about 12; Afkar converts at 60%; Channel 13 shows 13-15."
  },
  {
   "id": "SEC-F19",
@@ -1257,7 +1271,7 @@
  },
  {
   "id": "SEC-F14",
-  "short": "Goldenberg & Press) 2022",
+  "short": "Goldenberg & McNeil 2022",
   "citation": "Tia Goldenberg, Sam McNeil (Associated Press) (2022). Arab voters key to breaking deadlock in Israeli election. Associated Press (news report, syndicated copy)",
   "url": "https://abc17news.com/news/ap-national-news/2022/10/26/arab-voters-key-to-breaking-deadlock-in-israeli-election/",
   "group": "Sectors and turnout",
@@ -1327,7 +1341,7 @@
  },
  {
   "id": "SEC-F12",
-  "short": "Israel National Election Studies (Tel Av 2025",
+  "short": "INES 2025",
   "citation": "Israel National Election Studies (Tel Aviv University) (2025). Our Data (study design notes by election). INES, Tel Aviv University",
   "url": "https://socsci4.tau.ac.il/mu2/ines/data/our-data/",
   "group": "Sectors and turnout",
@@ -1368,18 +1382,18 @@
   "note": "Backs: Haredi turnout is high and nearly flat. 2022 rebounded to the 2019-20 level after a 2021 dip; it was not a surge. Reuses atlas D2-F12 (corrected) and D2-F22."
  },
  {
-  "id": "SEC-F13",
-  "short": "Moshe Cohen (interview with Menachem Laz 2026",
-  "citation": "Moshe Cohen (interview with Menachem Lazar) (2026). Maariv pollster: Election race, Likud struggles, and threshold battles. The Jerusalem Post (news report)",
-  "url": "https://jpost.com/israel-election-2026/article-908437",
+  "id": "SEC-F25",
+  "short": "Own measurement 2026g",
+  "citation": "SEC desk computation from Central Elections Committee official locality results (project files data/processed/kalpi_localities.parquet, kalpi_sectors.csv, bayes_draws.parquet) (2026). Arab-cluster turnout, list share and concentration, Knesset elections 2019-2022; 2026 production seat draws. Central Elections Committee results (media21-25.bechirot.gov.il) via the project's kalpi layer (dossier s.9)",
+  "url": "https://media25.bechirot.gov.il/",
   "group": "Sectors and turnout",
-  "status": "report",
+  "status": "official data",
   "findings": [
-   "SEC-F13"
+   "SEC-F25"
   ],
-  "checked": "verified against the source",
+  "checked": "verified; the figures were corrected against the source",
   "aliases": [],
-  "note": "Backs: Houses embed different Arab turnout assumptions, so 'polls weight Arabs to 2022 turnout' is true for some firms only. Maariv's pollster says Arab lists would reach 17 seats at Jewish-level turnout while his polls show about 12; Afkar converts at 60%; Channel 13 shows 13-15."
+  "note": "Backs: The Arab capacity ceiling is loose. Its formula implicitly assumes every Arab-town voter backs an Arab list and uses a 0.78 concentration. Measured values (at most 94% in-sector Arab-list share; concentration 0.81-0.85) and 2020's record, scaled to the 72% maximum turnout, put the physical bound near 14.8-15.4% of the vote, not 16.3%. Turnout must be compared on one basis: envelopes add about 3 points to Arab and 7.5-10 points to Jewish and settlement turnout (atlas D2-F04)."
  },
  {
   "id": "SEC-F04",
@@ -1466,20 +1480,6 @@
   "note": "Backs: The under-count is Ra'am-shaped, not proportional: sector surveys admit they miss Ra'am's Negev Bedouin base, sector pollsters' Ra'am scenarios were wrong in 2021, and national final polls under-counted Ra'am in both cycles it ran alone."
  },
  {
-  "id": "SEC-F25",
-  "short": "SEC desk computation from Central Electi et al. 2026",
-  "citation": "SEC desk computation from Central Elections Committee official locality results (project files data/processed/kalpi_localities.parquet, kalpi_sectors.csv, bayes_draws.parquet) (2026). Arab-cluster turnout, list share and concentration, Knesset elections 2019-2022; 2026 production seat draws. Central Elections Committee results (media21-25.bechirot.gov.il) via the project's kalpi layer (dossier s.9)",
-  "url": "https://media25.bechirot.gov.il/",
-  "group": "Sectors and turnout",
-  "status": "official data",
-  "findings": [
-   "SEC-F25"
-  ],
-  "checked": "verified; the figures were corrected against the source",
-  "aliases": [],
-  "note": "Backs: The Arab capacity ceiling is loose. Its formula implicitly assumes every Arab-town voter backs an Arab list and uses a 0.78 concentration. Measured values (at most 94% in-sector Arab-list share; concentration 0.81-0.85) and 2020's record, scaled to the 72% maximum turnout, put the physical bound near 14.8-15.4% of the vote, not 16.3%. Turnout must be compared on one basis: envelopes add about 3 points to Arab and 7.5-10 points to Jewish and settlement turnout (atlas D2-F04)."
- },
- {
   "id": "SEC-F23",
   "short": "Shanan & Eilat 2021",
   "citation": "Mahmoud Shanan, Omri Eilat (2021). From a Community to a Society: Trends in Druze Voting Patterns in the Knesset Elections, 1996-2020 (Bayan, 18 Mar 2021). Moshe Dayan Center, Tel Aviv University",
@@ -1534,20 +1534,6 @@
   "checked": "verified against the source",
   "aliases": [],
   "note": "Backs: Investiture rules decide whether minority governments are a live option. A requirement to hold an investiture vote does not by itself reduce minority cabinets; only an absolute-majority decision rule does. Israel's investiture needs only a simple majority of those voting, held after the government is formed (Akirav 2022; Basic Law s.13(d), atlas D10-F21). The Bennett-Lapid government was approved 60-59-1."
- },
- {
-  "id": "COA-F11",
-  "short": "Döring & Philip Manow et al. (ParlGov project) 2026",
-  "citation": "Holger Döring; Philip Manow et al. (ParlGov project) (2026). ParlGov: Parliaments and governments database, development version (view_cabinet, view_election; Israel). parlgov.org",
-  "url": "https://parlgov.org/data/parlgov-development_csv-utf-8/view_cabinet.csv",
-  "group": "Coalition formation",
-  "status": "reference work",
-  "findings": [
-   "COA-F11"
-  ],
-  "checked": "verified; the figures were corrected against the source",
-  "aliases": [],
-  "note": "Backs: Failed formation is rare in the Israeli record. Of 25 Knesset elections from 1949 to 2022, 23 produced a government; the only two that did not were April and September 2019. Since 1996 the count is 10 of 12. In the parliamentary era since 2003 it is 8 of 10. Formation takes about seven weeks and has lengthened. Every government since 2009 took 49 days or more from election to start date, and 2020-22 took 58-82 days."
  },
  {
   "id": "COA-F24",
@@ -1627,7 +1613,7 @@
  },
  {
   "id": "COA-F18",
-  "short": "Israel Democracy Institute 2026",
+  "short": "IDI 2026",
   "citation": "Israel Democracy Institute (2026). United Torah Judaism (party page). Israel Democracy Institute, Israeli Elections and Parties",
   "url": "https://thenationalnews.com/world/mena/livni-s-coalition-bid-ends-in-failure-1.518766",
   "group": "Coalition formation",
@@ -1641,7 +1627,7 @@
  },
  {
   "id": "COA-F09",
-  "short": "Kalshi & Polymarket (exchange market data) 2026",
+  "short": "Kalshi & Polymarket 2026",
   "citation": "Kalshi; Polymarket (exchange market data) (2026). Prime Minister of Israel after the 2026 election? (KXISRAELPM-26OCT27); Prime Minister of Israel after the next election?. Kalshi trade API; Polymarket gamma API (retrieved 15 Oct 2026)",
   "url": "https://api.elections.kalshi.com/trade-api/v2/markets?event_ticker=KXISRAELPM-26OCT27",
   "group": "Coalition formation",
@@ -1666,6 +1652,20 @@
   "checked": "verified; the figures were corrected against the source",
   "aliases": [],
   "note": "Backs: A poll-driven coalition-formation forecast has a peer-reviewed analogue. Kayser, Orlowski & Rehmert combine monthly polls with an empirical formation model chosen by out-of-sample testing to estimate each party's probability of entering government. Held out of sample, the model picks the cabinet that actually formed in about 48% of formation opportunities, against at most 45% for the competitor specifications."
+ },
+ {
+  "id": "COA-F13",
+  "short": "Knesset 2023",
+  "citation": "State of Israel (Knesset), unofficial English translation (2023). Basic Law: The Government (consolidated text, amendments through 15 Aug 2023). Knesset of Israel",
+  "url": "https://main.knesset.gov.il/EN/activity/Documents/BasicLawsPDF/BasicLawTheGovernment.pdf",
+  "group": "Coalition formation",
+  "status": "official data",
+  "findings": [
+   "COA-F13"
+  ],
+  "checked": "verified against the source",
+  "aliases": [],
+  "note": "Backs: Basic Law: The Government sets the sequence that the tree collapses into one step. After consultations the President tasks an MK within 7 days, choosing by recommendations and list size; neither binds him. That MK has 28 days, extendable by 14. A second MK may then get 28 days. After that, a 21-day window lets 61 MKs name a candidate in writing, who gets 14 days. Failure means deemed dissolution, with an election within about 90 days (atlas D10-F16, verified). The first mandate need not go to the largest list: Netanyahu got it in 2009 with 65 recommendations to Livni's 28, although Kadima had "
  },
  {
   "id": "COA-F25",
@@ -1724,6 +1724,20 @@
   "note": "Backs: The incumbency advantage in government formation is conditional. Coalitions are more likely to form when their parties have recently governed together, but the incumbent's advantage disappears completely when partners became mired in public conflict or lost seats. A cabinet that collapsed through internal conflict is one-tenth as likely to re-form immediately as one that did not. Seat gains raise every potential coalition's odds, and incumbents' odds about twice as much."
  },
  {
+  "id": "COA-F11",
+  "short": "ParlGov 2026",
+  "citation": "Holger Döring; Philip Manow et al. (ParlGov project) (2026). ParlGov: Parliaments and governments database, development version (view_cabinet, view_election; Israel). parlgov.org",
+  "url": "https://parlgov.org/data/parlgov-development_csv-utf-8/view_cabinet.csv",
+  "group": "Coalition formation",
+  "status": "reference work",
+  "findings": [
+   "COA-F11"
+  ],
+  "checked": "verified; the figures were corrected against the source",
+  "aliases": [],
+  "note": "Backs: Failed formation is rare in the Israeli record. Of 25 Knesset elections from 1949 to 2022, 23 produced a government; the only two that did not were April and September 2019. Since 1996 the count is 10 of 12. In the parliamentary era since 2003 it is 8 of 10. Formation takes about seven weeks and has lengthened. Every government since 2009 took 49 days or more from election to start date, and 2020-22 took 58-82 days."
+ },
+ {
   "id": "COA-F22",
   "short": "Spanje 2010",
   "citation": "Joost van Spanje (2010). Parties beyond the pale: Why some political parties are ostracized by their competitors while others are not. Comparative European Politics 8(3):354-383",
@@ -1736,20 +1750,6 @@
   "checked": "verified against the source",
   "aliases": [],
   "note": "Backs: Mainstream parties shut a party out when they have no pressing need to cooperate with it and can credibly say its ideology is beyond accepted norms. Size and ideology are the main determinants. When mainstream parties do take in formerly excluded partners, office, policy and votes all drive the choice, enabled by electoral shifts and convergence of positions (de Lange 2012, Political Studies 60(4):899-918, doi:10.1111/j.1467-9248.2012.00947.x)."
- },
- {
-  "id": "COA-F13",
-  "short": "State of Israel (Knesset) & translation 2023",
-  "citation": "State of Israel (Knesset), unofficial English translation (2023). Basic Law: The Government (consolidated text, amendments through 15 Aug 2023). Knesset of Israel",
-  "url": "https://main.knesset.gov.il/EN/activity/Documents/BasicLawsPDF/BasicLawTheGovernment.pdf",
-  "group": "Coalition formation",
-  "status": "official data",
-  "findings": [
-   "COA-F13"
-  ],
-  "checked": "verified against the source",
-  "aliases": [],
-  "note": "Backs: Basic Law: The Government sets the sequence that the tree collapses into one step. After consultations the President tasks an MK within 7 days, choosing by recommendations and list size; neither binds him. That MK has 28 days, extendable by 14. A second MK may then get 28 days. After that, a 21-day window lets 61 MKs name a candidate in writing, who gets 14 days. Failure means deemed dissolution, with an election within about 90 days (atlas D10-F16, verified). The first mandate need not go to the largest list: Netanyahu got it in 2009 with 65 recommendations to Livni's 28, although Kadima had "
  },
  {
   "id": "COA-F15",
@@ -1766,22 +1766,8 @@
   "note": "Backs: Minority governments are a normal outcome in parliamentary democracies. They are not a sign of crisis: they form when opposition parties can influence policy and when governing carries an electoral cost (Strøm 1990; Strøm 1984 puts them at about 35% of postwar governments in 15 democracies, atlas D10-F11). With written support agreements they last as long as majority governments (atlas D10-F12). Israel has done this: Rabin's government lost its majority in Sept 1993 and survived about two years on Hadash and Arab Democratic Party votes from outside (atlas D10-F23). Peres's new government of 22"
  },
  {
-  "id": "COA-F10",
-  "short": "Wolfers & Zitzewitz 2004",
-  "citation": "Justin Wolfers; Eric Zitzewitz (2004). Prediction Markets. Journal of Economic Perspectives 18(2):107-126",
-  "url": "https://doi.org/10.1257/0895330041371321",
-  "group": "Coalition formation",
-  "status": "peer-reviewed",
-  "findings": [
-   "COA-F10"
-  ],
-  "checked": "verified against the source",
-  "aliases": [],
-  "note": "Backs: Prediction markets typically produce fairly accurate forecasts that beat most moderately sophisticated benchmarks, and well-designed contracts can reveal probabilities. Market design matters, and thin markets and contract wording limit what prices mean. This makes a liquid, same-definition market a legitimate benchmark for the formation layer, not a target to fit."
- },
- {
   "id": "COA-F16",
-  "short": "staff 2020b",
+  "short": "Times of Israel 2020b",
   "citation": "Times of Israel staff (2020). Netanyahu associates: 'Negligible chance' Gantz will be PM (URL slug: a-year-before-gantz-is-set-to-succeed-netanyahu-both-express-doubt-itll-happen). The Times of Israel, 18 Nov 2020",
   "url": "https://www.timesofisrael.com/a-year-before-gantz-is-set-to-succeed-netanyahu-both-express-doubt-itll-happen/",
   "group": "Coalition formation",
@@ -1795,7 +1781,7 @@
  },
  {
   "id": "COA-F19",
-  "short": "staff 2020c",
+  "short": "Times of Israel 2020c",
   "citation": "Times of Israel staff (2020). Right-wing religious parties renew pledge to back Netanyahu as PM. The Times of Israel, 16 Feb 2020",
   "url": "https://www.timesofisrael.com/right-wing-religious-parties-renew-pledge-to-back-netanyahu-as-pm/",
   "group": "Coalition formation",
@@ -1809,7 +1795,7 @@
  },
  {
   "id": "COA-F20",
-  "short": "staff 2020a",
+  "short": "Times of Israel 2020a",
   "citation": "Times of Israel staff (2020). Blue and White may oust 2 renegade MKs as Gantz-Liberman alliance moves forward. The Times of Israel, 9 Mar 2020",
   "url": "https://www.timesofisrael.com/in-blow-to-gantz-geshers-levy-abekasis-appears-to-doom-minority-coalition-bid/",
   "group": "Coalition formation",
@@ -1820,6 +1806,20 @@
   "checked": "verified; the figures were corrected against the source",
   "aliases": [],
   "note": "Backs: Liberman's vetoes are real but have bent once under pressure. In 2019 his refusal to compromise on the haredi draft law caused Israel's first-ever failure to form a government (atlas D10-F25, corrected). He has not sat with the haredi parties since. In March 2020, facing a fourth election that he called 'the worst of all possible scenarios', he softened his earlier refusal to work with the Joint List while talking with Gantz about a minority government. That government was blocked instead by two of Gantz's own MKs, Hauser and Yoaz Hendel. In 2021 he sat in a coalition with Ra'am inside."
+ },
+ {
+  "id": "COA-F10",
+  "short": "Wolfers & Zitzewitz 2004",
+  "citation": "Justin Wolfers; Eric Zitzewitz (2004). Prediction Markets. Journal of Economic Perspectives 18(2):107-126",
+  "url": "https://doi.org/10.1257/0895330041371321",
+  "group": "Coalition formation",
+  "status": "peer-reviewed",
+  "findings": [
+   "COA-F10"
+  ],
+  "checked": "verified against the source",
+  "aliases": [],
+  "note": "Backs: Prediction markets typically produce fairly accurate forecasts that beat most moderately sophisticated benchmarks, and well-designed contracts can reveal probabilities. Market design matters, and thin markets and contract wording limit what prices mean. This makes a liquid, same-definition market a legitimate benchmark for the formation layer, not a target to fit."
  },
  {
   "id": "COA-F23",
@@ -1848,6 +1848,20 @@
   "checked": "verified against the source",
   "aliases": [],
   "note": "Backs: Terror attacks raise right-bloc support, and more so near an election. A local attack within three months of an election adds about 1.35 points to the right bloc's share of the two-bloc vote in that locality. Fatalities also move places beyond the attacked locality, more strongly closer to the election. At the national level, Berrebi & Klor (2006) find relative support for the right rises after periods of high terrorism and falls after calm."
+ },
+ {
+  "id": "DYN-F08",
+  "short": "CEC 1959a",
+  "citation": "Knesset; text as published by the Central Elections Committee (ref. 2022-000238) (1959). Elections (Propaganda Methods) Law, 5719-1959, section 16 (election polls). Israeli primary legislation",
+  "url": "https://www.gov.il/BlobFolder/guide/knesset25-elections-info/he/survey_section16_acces.pdf",
+  "group": "Campaign dynamics and late movement",
+  "status": "official data",
+  "findings": [
+   "DYN-F08"
+  ],
+  "checked": "verified; the figures were corrected against the source",
+  "aliases": [],
+  "note": "Backs: Israeli law bans publishing any new poll from the end of the Friday before polling day until the polls close. In 2026 that runs from the end of Friday 23 October to 22:00 on Tuesday 27 October. In every cycle 2009-2022 the last published pre-election fieldwork ended 3-4 days before election day, so about four days of opinion movement are never observed by a published poll."
  },
  {
   "id": "DYN-F20",
@@ -1906,6 +1920,20 @@
   "note": "Backs: War can cut support for incumbents. The unexpected 1973 war and its casualties reduced support for incumbent parties and leaders and raised opposition support, despite military victory. Wars over a country's core territory can be politically costly."
  },
  {
+  "id": "DYN-F15",
+  "short": "JPPI 2026",
+  "citation": "Times of Israel staff, reporting the Jewish People Policy Institute survey (2026). 'Battle for the center': Large majority of Israelis already know how they'll vote -- poll. The Times of Israel, 19 Jul 2026",
+  "url": "https://www.timesofisrael.com/battle-for-the-center-large-majority-of-israelis-already-know-how-theyll-vote-poll/",
+  "group": "Campaign dynamics and late movement",
+  "status": "report",
+  "findings": [
+   "DYN-F15"
+  ],
+  "checked": "verified against the source",
+  "aliases": [],
+  "note": "Backs: In July 2026 a JPPI survey found 53% of voters completely sure of their vote, 29% fairly sure and 14% undecided. Certainty was lowest in the centre: 71% of left-identifiers were completely sure, 58% of the right and 44% of the centre."
+ },
+ {
   "id": "DYN-F02",
   "short": "Jennings & Wlezien 2013a",
   "citation": "Will Jennings; Christopher Wlezien (2013). The Timeline of Election Campaigns: A Comparative Perspective (conference paper). Elections, Public Opinion and Parties (EPOP) annual conference, Lancaster, 13-15 Sept 2013",
@@ -1948,22 +1976,22 @@
   "note": "Backs: Proportional allocation of undecided voters, a 'cleaner' ballot question and even allocation produced no significant difference in poll accuracy. Allocating undecideds neither adds to nor detracts from a poll's accuracy."
  },
  {
-  "id": "DYN-F08",
-  "short": "Knesset & text as published by the Central Electio 1959",
-  "citation": "Knesset; text as published by the Central Elections Committee (ref. 2022-000238) (1959). Elections (Propaganda Methods) Law, 5719-1959, section 16 (election polls). Israeli primary legislation",
-  "url": "https://www.gov.il/BlobFolder/guide/knesset25-elections-info/he/survey_section16_acces.pdf",
+  "id": "DYN-F05",
+  "short": "Own measurement 2026f",
+  "citation": "Model's own measurement (DYN desk reading of the shipped late-swing table) (2026). bias_late_swing.csv: final-window vs 3-6-week poll error, 2009-2022. internal: data/processed/bias_late_swing.csv (poll archive and CEC results)",
+  "url": "data/processed/bias_late_swing.csv",
   "group": "Campaign dynamics and late movement",
-  "status": "official data",
+  "status": "report",
   "findings": [
-   "DYN-F08"
+   "DYN-F05"
   ],
-  "checked": "verified; the figures were corrected against the source",
+  "checked": "verified against the source",
   "aliases": [],
-  "note": "Backs: Israeli law bans publishing any new poll from the end of the Friday before polling day until the polls close. In 2026 that runs from the end of Friday 23 October to 22:00 on Tuesday 27 October. In every cycle 2009-2022 the last published pre-election fieldwork ended 3-4 days before election day, so about four days of opinion movement are never observed by a published poll."
+  "note": "Backs: In Israel the final weeks' poll movement is mostly real signal. In 6 of 8 cycles the per-list error of the final-window average is lower than that of the average 3-6 weeks out. The exceptions are 2009 and April 2019, and 2015 barely improved: the three cycles whose decisive move came after the last published poll."
  },
  {
   "id": "DYN-F09",
-  "short": "Model's own measurement (DYN desk comput 2026a",
+  "short": "Own measurement 2026c",
   "citation": "Model's own measurement (DYN desk computation) (2026). Final pre-blackout poll averages vs official results, 2009-2022. internal: data/processed/polls.csv (Wikipedia-sourced poll archive) and data/processed/results.csv (CEC)",
   "url": "data/processed/polls.csv; data/processed/results.csv",
   "group": "Campaign dynamics and late movement",
@@ -1977,7 +2005,7 @@
  },
  {
   "id": "DYN-F19",
-  "short": "Model's own measurement (DYN desk comput 2026b",
+  "short": "Own measurement 2026d",
   "citation": "Model's own measurement (DYN desk computation) (2026). Pool-resolution check: within-pollster bloc drift, Jul-Oct 2026. internal: data/processed/polls.csv (2026 cycle), registry bloc map",
   "url": "data/processed/polls.csv",
   "group": "Campaign dynamics and late movement",
@@ -1991,7 +2019,7 @@
  },
  {
   "id": "DYN-F24",
-  "short": "Model's own measurement (DYN desk event  2026",
+  "short": "Own measurement 2026e",
   "citation": "Model's own measurement (DYN desk event study) (2026). Within-pollster event study of Likud and Netanyahu-bloc seats, Dec 2022-Oct 2026. internal: data/processed/polls.csv (2026 cycle, 780 full seat polls)",
   "url": "data/processed/polls.csv",
   "group": "Campaign dynamics and late movement",
@@ -2002,20 +2030,6 @@
   "checked": "verified; the figures were corrected against the source",
   "aliases": [],
   "note": "Backs: In this cycle's own poll archive, security events moved the Netanyahu bloc little and briefly. The one exception is the October 7 failure. War rallies lifted Likud 1-3 seats for up to five weeks, mostly at its satellites' expense, and were gone within 5-10 weeks. Ordinary two-week bloc movement has sd 1.2 seats."
- },
- {
-  "id": "DYN-F05",
-  "short": "Model's own measurement (DYN desk readin 2026",
-  "citation": "Model's own measurement (DYN desk reading of the shipped late-swing table) (2026). bias_late_swing.csv: final-window vs 3-6-week poll error, 2009-2022. internal: data/processed/bias_late_swing.csv (poll archive and CEC results)",
-  "url": "data/processed/bias_late_swing.csv",
-  "group": "Campaign dynamics and late movement",
-  "status": "report",
-  "findings": [
-   "DYN-F05"
-  ],
-  "checked": "verified against the source",
-  "aliases": [],
-  "note": "Backs: In Israel the final weeks' poll movement is mostly real signal. In 6 of 8 cycles the per-list error of the final-window average is lower than that of the average 3-6 weeks out. The exceptions are 2009 and April 2019, and 2015 barely improved: the three cycles whose decisive move came after the last published poll."
  },
  {
   "id": "DYN-F06",
@@ -2075,7 +2089,7 @@
  },
  {
   "id": "DYN-F18",
-  "short": "Times of Israel staff (citing Fuchs's in 2020",
+  "short": "Times of Israel 2020d",
   "citation": "Times of Israel staff (citing Fuchs's interview with Haaretz) (2020). Top pollster challenges assertion right-wing bloc has been gaining ground. The Times of Israel, 23 Jul 2020",
   "url": "https://www.timesofisrael.com/top-pollster-challenges-assertion-right-wing-bloc-has-been-gaining-ground/",
   "group": "Campaign dynamics and late movement",
@@ -2117,7 +2131,7 @@
  },
  {
   "id": "DYN-F14",
-  "short": "poll) 2026",
+  "short": "mako 2026",
   "citation": "N12 / mako (Ulpan Shishi poll) (2026). 11% still undecided whom to vote for, about 5% don't know which bloc they'll support (Hebrew). N12 / mako",
   "url": "https://mako.co.il/news-politics/2026_q4/Article-2497091942121a1026.htm",
   "group": "Campaign dynamics and late movement",
@@ -2128,20 +2142,6 @@
   "checked": "verified against the source",
   "aliases": [],
   "note": "Backs: The latest 2026 measurement puts 11% of voters undecided, but only 5.4% of those (about 0.6% of all respondents) are torn between the blocs; the rest are choosing within a bloc. Self-reported bloc switching favours the change bloc (5% of Netanyahu-bloc intenders vs 2% the other way). In July, N12 described about 10% undecided, the same share as four years earlier."
- },
- {
-  "id": "DYN-F15",
-  "short": "staff & reporting the Jewish People Policy Insti 2026",
-  "citation": "Times of Israel staff, reporting the Jewish People Policy Institute survey (2026). 'Battle for the center': Large majority of Israelis already know how they'll vote -- poll. The Times of Israel, 19 Jul 2026",
-  "url": "https://www.timesofisrael.com/battle-for-the-center-large-majority-of-israelis-already-know-how-theyll-vote-poll/",
-  "group": "Campaign dynamics and late movement",
-  "status": "report",
-  "findings": [
-   "DYN-F15"
-  ],
-  "checked": "verified against the source",
-  "aliases": [],
-  "note": "Backs: In July 2026 a JPPI survey found 53% of voters completely sure of their vote, 29% fairly sure and 14% undecided. Certainty was lowest in the centre: 71% of left-identifiers were completely sure, 58% of the right and 44% of the centre."
  },
  {
   "id": "EVAL-F22",

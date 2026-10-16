@@ -65,9 +65,13 @@ def main() -> None:
         params["new_lists"] = new_lists_for_cycle(polls, cycle)
         params["nstrad"] = new_straddler_params(exclude_cycle=cycle)
         params["pair_alias"] = _decomp_map(cycle)   # dossier s.40
-        from validate_bayes import arab_turnout_params
+        from validate_bayes import arab_turnout_params, add_calibration_params
         params["arab_tab"] = arab_turnout_params(cycle)   # dossier s.43
         params["arab_lineage"] = bm.arab_lineage_share(exclude_cycle=cycle)   # s.51
+        from validate_model import REGISTERED_PAIRS
+        params["registered_pairs"] = REGISTERED_PAIRS[cycle]   # dossier s.47
+        params["cycle"] = cycle
+        add_calibration_params(params, cycle)              # dossier s.48
         for h in HORIZONS:
             asof = eday - pd.Timedelta(days=h)
             try:
@@ -137,6 +141,8 @@ def main() -> None:
                              "coverage_90_fixed": float(((actual >= lo) & (actual <= hi))[fixed].mean()),
                              "threshold_brier_fixed": float(np.mean((pp[fixed] - (actual[fixed] > 0)) ** 2)),
                              "interval_score_fixed": float(isc[fixed].mean()),
+                             "seat_mae_central_fixed": float(np.abs(project_cycle.last_central - actual)[fixed].mean()),
+                             "n_pairs": len(project_cycle.last_pairs["applied"]),
                              "mean_width": float((hi - lo)[active].mean()),
                              "arab_fam_err": float(seats[:, project_cycle.last_fams == "arab"].sum(axis=1).mean()
                                                    - actual[project_cycle.last_fams == "arab"].sum()),

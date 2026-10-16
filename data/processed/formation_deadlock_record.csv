@@ -1,0 +1,27 @@
+cycle,position,regime,repeat,how_it_ended
+1984,1.0,parliamentary,0.0,"unity with rotation (Peres, then Shamir), inside Peres's first (extended) mandate; right 59, centre 53"
+1992,1.0,parliamentary,0.0,Labor-Meretz 56 + Shas 6; Hadash and ADP outside support; right 59
+2006,1.0,parliamentary,0.0,Kadima-Labor-Meretz 53 + Gil 7 + Shas 12; right 50
+2019a,1.0,parliamentary,1.0,"Knesset dissolved before a government formed; right 60, YB 5 out"
+2019s,2.0,parliamentary,1.0,"two mandates and the 21-day window lapsed; right 55, centre 44"
+2020,3.0,parliamentary,0.0,"Gantz's faction joins Netanyahu (rotation); right 58, centre 47"
+2021,4.0,parliamentary,0.0,"change + Yamina + Ra'am, Bennett PM (second mandate); right 52"
+1999,1.0,direct,0.0,"PM-elect Barak + Shas, UTJ, NRP, Centre, YBA, Meretz; right 54"
+1995m,1.0,midterm,0.0,"Peres II after Rabin's murder: Labor-Meretz-Yi'ud 58-59, Hadash and ADP outside"
+2008m,1.0,midterm,1.0,Livni fails (Shas and Degel refuse); Kadima-Labor-Gil-Meretz 60 -> the 2009 election
+POSTERIOR,,"stage record (post-election, parliamentary, matched event)",,"Beta(2.5, 5.5): mean 0.312, 90% [0.088, 0.593], P(r >= 0.596, pre-s49 production) 0.048"
+POSTERIOR,,+ 1999 (direct election),,"Beta(2.5, 6.5): mean 0.278, 90% [0.076, 0.538], P(r >= 0.596, pre-s49 production) 0.024"
+POSTERIOR,,"+ Oct 2008 (Livni, mid-term)",,"Beta(3.5, 5.5): mean 0.389, 90% [0.150, 0.657], P(r >= 0.596, pre-s49 production) 0.103"
+POSTERIOR,,+ Nov 1995 and Oct 2008 (mid-term),,"Beta(3.5, 6.5): mean 0.350, 90% [0.132, 0.604], P(r >= 0.596, pre-s49 production) 0.055"
+POSTERIOR,,bloc era 2019-21 only,,"Beta(2.5, 2.5): mean 0.500, 90% [0.165, 0.835], P(r >= 0.596, pre-s49 production) 0.340"
+POSTERIOR,,"conventional five (desk/verifier; drops 1992, 2006)",,"Beta(2.5, 3.5): mean 0.417, 90% [0.128, 0.739], P(r >= 0.596, pre-s49 production) 0.185"
+POSTERIOR,,conventional five + Oct 2008,,"Beta(3.5, 3.5): mean 0.500, 90% [0.209, 0.791], P(r >= 0.596, pre-s49 production) 0.310"
+POSITION,,"logistic P(repeat | deadlock, position 1)",,0.376
+POSITION,,"logistic P(repeat | deadlock, position 2)",,0.291
+POSITION,,"logistic P(repeat | deadlock, position 3)",,0.243
+POSITION,,"logistic P(repeat | deadlock, position 4)",,0.223
+POSITION,,logistic slope b: posterior mean,,-0.446
+POSITION,,logistic slope b: P(b < 0),,0.744
+POSITION,,Beta position 1 only: 1 of 4,,0.3
+POSITION,,Beta positions 2-4: 1 of 3,,0.375
+POSITION,,Beta positions 3-4: 0 of 2,,0.167

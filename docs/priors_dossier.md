@@ -2302,6 +2302,933 @@ input is sensitive, re-measured 0.093 -> 0.020 on the atlas record, and
 post-filing polls give a sized bloc-differential turnout intention, with n
 and fieldwork dates.
 
+## 47. Seat-law fidelity (15 Oct, D-12)
+
+**Why.** Desk SYS (data/processed/forecast_research/electoral_system.json)
+and its verifier raised two seat-law challenges: (A) the harness's
+historical surplus pairs are not the agreements registered with the CEC;
+(B) s.81(a) sets the threshold at 3.25% of ALL valid votes, but every
+simulated share vector sums to one over the modelled lists only. The
+verifier added a larger instance of (B): official_forecast.allocate_central
+renormalises the MEDIAN share vector, which sums to ~0.957 because medians
+are not additive.
+
+**Decision (15 Oct).** Part A is adopted as the harness instrument:
+`HARNESS_REG_PAIRS` now defaults ON ('0' restores PAST_PAIRS), and arm
+`past_pairs` grades the old instrument. Part B's code is kept, but
+`simulate.THRESHOLD_ALL_VALID` stays OFF. With HARNESS_REG_PAIRS=0, every
+harness number below reproduces the s.46 restated baseline exactly
+(eve 1.509/1.628/.981/.0474/9.280; D-7 1.520/1.649/.990/.0492/9.430;
+D-21 1.619/1.776/.990/.0542/9.622). Production is bit-identical.
+
+### 47.1 Part A: the registered surplus agreements (instrument; adopted)
+
+**The record.** `validate_model.REGISTERED_PAIRS`, sources in
+`REGISTERED_PAIR_SOURCES`:
+
+| cycle | registered agreements | source |
+|---|---|---|
+| 2009 | Labor-Meretz, Likud-YB, Hadash-Ra'am-Ta'al, UTJ-Shas, JH-NU, Kadima-Greens, Gil-Tzabar, Green Movement-Meimad-Yisrael Hazaka | CEC notice, Yalkut HaPirsumim 5912 (1 Feb 2009), via he.wikipedia 'הסכם עודפים' fn 34-35 and hamichlol fn 57 (same 8 pairs); Gil-Tzabar also JPost 28 Jan 2009 |
+| 2013 | Labor-Yesh Atid, Likud Beytenu-JH, Hadash-Balad, UTJ-Shas, Kadima-Am Shalem, Dor-Social Justice, Hatnua-Meretz | CEC notice (he.wikipedia fn 36); the same seven in en.wikipedia |
+| 2015 | ZU-Meretz, Likud-JH, UTJ-Shas, YB-Kulanu | CEC notice (he.wikipedia fn 37) |
+| 2019a | Labor-Meretz, New Right-YB, Ra'am-Balad-Hadash-Ta'al, Likud-URWP, Shas-UTJ, Kulanu Haverim-Pirates | CEC notice (fn 38); JPost 585334: B&W signed none |
+| 2019s | B&W-YB, Likud-Yamina, Labor-Gesher-Democratic Union, UTJ-Shas, Noam-Otzma | CEC notice (fn 39); JNS (B&W-YB) |
+| 2020 | B&W-Labor-Gesher-Meretz, Likud-Yamina, UTJ-Shas | he.wikipedia (uncited) = Dayan Center, Bayan Oct 2020 |
+| 2021 | Likud-RZ, B&W-New Economic, Yamina-New Hope, YA-YB, Labor-Meretz, UTJ-Shas | he.wikipedia (uncited); Times of Israel (Yamina-New Hope, YA-YB); Ynetnews B17bk9plu (B&W-NEP) |
+| 2022 | YA-National Unity, Labor-Meretz, UTJ-Shas, Likud-RZ, Yesh Kivun-Pirates | he.wikipedia (uncited) = Kenig, IDI 63750 |
+
+**Cross-check by reproduction** (`src/validate_seat_law.py`, new). The
+statute (ss.81-82: threshold on all valid votes, integer quota, floor
+seats, highest averages, pairs pooled only if both pass, inner split) in
+exact arithmetic on the CEC final counts gives the official seats in
+8/8 cycles with the registered pairs, 0 ties. The harness's own allocator
+(`allocate_vector`) gives the same 8/8. The counts are in
+data/cec_final_counts.csv (new; one row per list). 2015-2022 come from the
+CEC station files with the outer envelopes (expc_20..25). 2009 and 2013
+come from the CEC final results as tabulated by Wikipedia, since the
+repo's 2013 file lacks the envelopes. The desk had checked 2015-2022 only.
+The four pairs of two micro-lists (Gil-Tzabar, GM-Meimad-Yisrael Hazaka,
+Kulanu Haverim-Pirates, Yesh Kivun-Pirates) are inert: both partners
+fail. Noam-Otzma 2019s is inert too: Noam is not on the CEC count.
+
+**What the old harness used.** PAST_PAIRS differs from the registered
+list in 7 of 8 cycles (all but 2020). As run, the harness also dropped
+every PAST_PAIRS id that DECOMP had renamed, because `pair_alias` was off.
+Pairs actually pooled, before -> after (eve, D-7 and D-21 alike):
+
+| | 2009 | 2013 | 2015 | 2019a | 2019s | 2020 | 2021 | 2022 | total |
+|---|---|---|---|---|---|---|---|---|---|
+| PAST_PAIRS as run | 2 | 2 | 2 | 1 | 2 | 1 | 3 | 3 | 16 |
+| registered, DECOMP-resolved | 4 | 5 | 4 | 5 | 4 | 3 | 6 | 4 | 35 |
+
+Not applicable after the fix: pairs inside one merged harness block (2009
+JH-NU and Hadash-Ra'am-Ta'al, 2013 Hadash-Balad), plus the inert micro
+pairs above. On the official counts, the old pairs misallocate 10
+list-seats: 2009 Kadima +1 / Labor -1 (new; Labor-Meretz missing), 2015
+Likud +1 / Kulanu -1, 2019s UTJ +1 / B&W -1, and 2021 Likud +1, YA +1,
+Meretz -1, New Hope -1. The registered pairs misallocate none.
+
+**Seat-law error at perfect shares.** Feed the official votes,
+aggregated to each eve window's columns, through the harness's seat law
+and score them against the actual seats. MAE per graded list:
+
+| pairs | 2009 | 2013 | 2015 | 2019a | 2019s | 2020 | 2021 | 2022 | mean |
+|---|---|---|---|---|---|---|---|---|---|
+| PAST as run | .200 | .167 | .182 | 0 | .200 | 0 | .286 | 0 | .129 |
+| registered | 0 | .167 | 0 | 0 | 0 | 0 | 0 | 0 | .021 |
+
+The remaining 2013 error comes from the harness grading the three Arab
+lists as one merged block, not from the pairs.
+
+**Graded, 3 seeds pooled, shipped mask** (median / mean / coverage /
+Brier / interval; central = MAE of the published central-count estimator,
+`seat_mae_central`, new in the eve rows):
+
+| horizon | PAST_PAIRS (s.46 baseline) | registered: THE RESTATED BASELINE | central |
+|---|---|---|---|
+| eve | 1.509/1.628/.981/.0474/9.280 | 1.496/1.626/.981/.0474/9.242 | 1.569 -> 1.519 |
+| D-7 | 1.520/1.649/.990/.0492/9.430 | 1.518/1.648/.986/.0492/9.515 | 1.549 -> 1.583 |
+| D-21 | 1.619/1.776/.990/.0542/9.622 | 1.592/1.789/.987/.0542/9.730 | 1.606 -> 1.614 |
+
+- Eve median folds (|d|<0.1 tie): 1W/7T/0L. 2015 -.136; 2009 +.091 and
+  2022 +.026 are ties. Seed deltas: -.012/+.012/-.040.
+- D-7: 0W/8T/0L. D-21: 2W/5T/1L (2013 -.111, 2019s -.152; 2019a +.119).
+- Brier cannot move: pairs act only among lists that passed.
+- At D-7 and D-21 the interval score rises (+.085 and +.108) and coverage
+  falls slightly (.990 -> .986/.987).
+- The rebased code (default ON) reproduces the registered column at eve
+  seed 0 (1.471/1.627), and past_pairs reproduces the old one
+  (1.484/1.629).
+
+**How much of the graded error was seat-law error.** At perfect shares
+the old pairs cost 0.13 seat per list, about 8.5% of the eve median MAE.
+As graded, swapping in the registered pairs moves the median MAE by -.013
+at the eve (0.9%), -.003 at D-7 and -.026 at D-21. The pair effects are
+±1-seat events, and under forecast error they offset as often as they
+compound. The 2015, 2013 and 2019s folds gain; 2009 loses (Labor-Meretz
+and Kadima-Greens, both true pairs).
+
+**Why adopt it.** This is a correction of the measuring instrument, not a
+model candidate, and the law decides it. The registered pairs are the only
+set that reproduces the official allocations. Future candidates grade
+against the restated column above. There is no 2026 effect: production
+carries the 2026 agreements in SURPLUS_PAIRS.
+
+**Not established.** Signing dates. All pairs are applied at D-21 too,
+though most were signed in the last two to three weeks (s.67(b) deadline:
+day 11), so the D-21 look-ahead noted in s.46.1 remains.
+
+### 47.2 Part B: the threshold denominator (candidate; not shipped)
+
+**Change** (`simulate.THRESHOLD_ALL_VALID`, `UNMODELLED_SHARE = 0.01`):
+- Draws pass on sh x (1 - u) >= 3.25% in `bayes_model.project`,
+  `simulate.simulate_core` and `validate_bayes.project_cycle`.
+- The central count (`allocate_central`; harness `central_raw`) tests the
+  UN-renormalised median x (1 - u). It no longer renormalises the median
+  vector.
+- The seat division among the passing lists (integer quota, d'Hondt on
+  factions) is scale-invariant, so the Bader-Ofer quota needs no change.
+  It is taken over the passing lists only, s.81(b).
+
+**Choice of u = 0.01** (pre-registered before grading):
+- (i) The observation layer reserves exactly 0.01 for unitemized lists
+  in every seat-derived row (`implied_share_obs`). Every complete harness
+  poll's observed shares sum to 0.990. Measured on the big lists, the
+  2015-2022 latents sit 1.00-1.11% above the observed scale.
+- (ii) CEC record of the vote outside each cycle's modelled set (eve
+  window): 2015 1.53%, 2019a 0.81%, 2019s 0.97%, 2020 0.38%, 2021 0.68%,
+  2022 1.50% (3.25%-era mean 0.98%). The 2%-era values are 2009 2.19% and
+  2013 4.12% (`UNMODELLED_REC`).
+- (iii) The desk's micro-list band: lists under 0.3% took 0.28-0.85%.
+- Sensitivity arms: u = .005, the LOO record mean, and the realised value
+  (oracle, diagnostic).
+
+**Graded on the registered pairs** (reg_thr vs reg_pairs, 3 seeds):
+
+| horizon | median | mean | Brier | interval | central | coverage | folds W/T/L |
+|---|---|---|---|---|---|---|---|
+| eve | +.001 | +.003 | +.0007 (.0474 -> .0482) | -.0001 | +.012 | = | 0/7/1 (2021 +.119) |
+| D-7 | +.009 | +.003 | +.0008 | +.021 | +.006 | = | 0/8/0 |
+| D-21 | +.038 | +.001 | +.0006 | +.020 | +.048 | = | 0/7/1 (2019a +.286) |
+
+- It fails both routes at every horizon. The Brier loss sits in 6-7 of 8
+  cycles, led by 2019a and 2021 (+.002 each).
+- Every sensitivity arm loses Brier at every horizon: u = .005 (+.0004),
+  LOO (+.0012/.0013/.0011), and even the realised u (oracle; +.0008).
+- On the old pairs (thr_valid vs past pairs) the result is the same: eve
+  Brier +.0007, D-21 median +.036.
+- The draws' test carries all of the Brier and point-MAE change.
+- The central fix alone (reg_central_raw) changes nothing at D-7 or D-21.
+  At the eve it costs +.012 in one seed of 2019a: Ra'am-Balad's median
+  falls under the line in the central count, and it passed with 3.33%.
+
+**Why the law-correct test scores worse.** On the straddler record
+(validate_threshold, fidelity windows, registered pairs; 24 lists within
+-0.75/+1.5 pp of the line at D-21 and at D-7), 71% passed against a mean
+p_pass of 52%. In the 0.5-0.75 bin, predicted .60-.62 passed .88-.90.
+Mean drift was +0.25 to +0.30 pp. The stack already under-predicts
+straddler survival. The extra 0.03 pp of strictness lowers each
+straddler's p_pass by 0.2-1.3 pp, and straddler Brier rises .181 -> .184
+(D-21) and .173 -> .176 (D-7). In 2026 the latent sits BELOW the observed
+scale on the 13 big lists (by 2.6%), because the six micro columns hold
+2.3% (medians) to 4.2% (means) of projected share. This agrees with the
+verifier: the net sign of the denominator bias is not what the formal
+argument says.
+
+**2026 effect** (production chain on the linked 14 Oct posterior,
+seed offsets +0/+1/+2; u = .01; outputs in scratch):
+- P(NB>=61): 14.2/13.2/13.4 -> 14.2/13.3/13.4.
+- Change bloc alone: 8.3/8.3/8.4 -> 8.6/8.4/8.6.
+- With Ra'am: 27.5/28.6/28.6 -> 27.7/28.8/28.8.
+- Neither: 58.3/58.2/58.0 -> 58.1/57.9/57.8.
+- Pass probabilities: Ra'am .752/.765/.765 -> .745/.758/.759; RZP-Zehut
+  .545/.541/.539 -> .536/.531/.532; Otzma .771 -> .766; Amcha .258 ->
+  .254; Reservists .212 -> .209.
+- PM (seed means): repeat election .455 -> .452, Eisenkot .219 -> .221,
+  Netanyahu unchanged. At u = .0056 every effect is about half as large.
+- Central seats are unchanged at all three seeds: Likud 26, Yashar 23,
+  Together 11, Shas/UTJ/Democrats/YB/JL 9, Otzma 6, Ra'am 5, RZP-Zehut 4.
+- The median vector sums to .9565/.9578/.9580. Renormalising lifts
+  RZP-Zehut from 3.437% to 3.593%; the fix tests 3.403%. RZP-Zehut stays
+  the closest list to a central flip, 0.15 pp above the line.
+
+**Decision: not shipped, flag OFF.** The statute is clear, but the graded
+stack is calibrated on the renormalised scale. That holds for the
+new-straddler constant, which was measured on that pipeline, and for the
+micro columns. Making the threshold law-exact on its own moves pass
+probabilities in the direction the record already punishes. Re-open the
+denominator together with two pieces of work: the straddler re-measurement
+on CEC vote shares (s.46.1), and a candidate for the under-predicted
+survival of established straddlers that this record shows (realised 71%
+vs 52%). Only the joint change can be graded fairly. The central-count
+renormalisation stays as shipped. It flips nothing today, and the harness
+does not favour removing it. The site's sub-threshold-vote figure
+(build_site) follows the same flag.
+
+**Code** (production bit-identical; harness default = registered pairs):
+- validate_model: REGISTERED_PAIRS and REGISTERED_PAIR_SOURCES.
+- validate_bayes: REG_PAIRS (`HARNESS_REG_PAIRS`, default '1') and layers
+  `pairs`, `thr_u` and `central_raw`. Also UNMODELLED_REC,
+  allocate_vector(raw, u), the arms reg_pairs, past_pairs, thr_valid,
+  reg_thr, reg_thr_draws, reg_central_raw, reg_thr_u005, reg_thr_loo and
+  reg_thr_oracle, and the eve `seat_mae_central(_fixed)` and `n_pairs`
+  columns.
+- validate_horizon and validate_threshold pass the registered pairs.
+  validate_horizon also gains `seat_mae_central_fixed` and `n_pairs`.
+- simulate: THRESHOLD_ALL_VALID (OFF), UNMODELLED_SHARE and valid_scale.
+- bayes_model.project (draw test only; the targeting hook is untouched)
+  and official_forecast.allocate_central(all_valid, u).
+- New files: src/validate_seat_law.py and data/cec_final_counts.csv.
+
+## 48. Uncertainty calibration (15 Oct, D-12)
+
+### 48.1 Pre-registration (written before any grade was run)
+
+**Why.** On the s.46 yardstick (CLR latent, ballot-fidelity windows) the
+90% intervals cover .981 / .990 / .990 of list results at eve / D-7 /
+D-21, against a 0.90 target. Desk ERR (forecast_research/poll_error.json)
+names four sizes or shapes in the election-day shock stack that look
+wrong; desk EVAL (forecast_evaluation.json) asks for the residual width to
+be chosen by nested leave-one-cycle-out and for coverage to be scored as
+distance from 0.90, not as "more is safer". This section grades one
+family of candidates on exactly those points.
+
+**Arms.** Every arm is the shipped configuration (s.46 code defaults: CLR,
+fidelity windows, trailing cliff, regB Arab term) with one change set.
+- `base`: shipped, RESID_SCALE 0.9.
+- `A` (t-scale fix): every Student-t shock is scaled to unit variance
+  (x sqrt((df-2)/df) = sqrt(3/5) at T_DF 5), so the bloc swing, the
+  haredi family shock and the Arab turnout draw (which shares the family
+  t draw) have the sd they were measured or declared at, instead of 1.29x
+  it. Production and harness alike (production keeps EVENT_RISK on top).
+- `B` (vote-share residual): the per-list residual (base + slope x size)
+  is re-estimated leave-one-cycle-out from VOTE-SHARE errors of the lists
+  that RAN, instead of seat errors in which threshold deaths enter as 0
+  seats. Units: u = 120 x vote share, the units the projection applies the
+  residual in. Polled side: the final-window (21 days, latest poll per
+  firm) average of each list's implied share under the model's own map
+  (seats/120 x (1 - wasted - 0.01); a 0-seat row at its printed percentage;
+  a 0-seat row with no percentage at HALF the cycle threshold, the
+  midpoint of what the poll reports). Actual side: lists that won seats
+  through the same seat->share map (seats x (1 - W - 0.01), W = the
+  failed lists' CEC share), lists that ran and failed at their CEC vote
+  share (data/ran_vote_shares.csv). A list enters if it ran, its polled
+  share is measured (seats > 0 or a printed percentage) in at least half
+  of its final-window polls, and it won seats or polled >= 0.5 u. Then
+  the same sequence as error_decomposition.decompose: bloc swing and
+  family totals removed proportionally (vote-share totals), anchors
+  removed, and the same two-group (<= 8 / > 8 seats) sd line.
+- `AB`: A and B together.
+- `D` (fat-tailed residual): the residual drawn from a Student t with
+  sd matched (draw x sqrt((df-2)/df)); df estimated leave-one-cycle-out by
+  the method of moments from the excess kurtosis G2 of the training
+  record's residuals standardised by their fitted sd line, df = 4 + 6/G2,
+  clipped to [4.5, 30] (G2 <= 0.2 -> 30). Graded on the shipped stack
+  (seat-space record).
+- Width arms (c), nested: `C0` = base, `CA` = A, `CAB` = A+B, `CABD` =
+  A+B+D (D's df from the vote-share record), each with its residual width
+  chosen by nested leave-one-cycle-out. Grid 0.4 to 1.6 in steps of 0.1,
+  multiplying the arm's own residual sd. Rule: for each held-out cycle,
+  the width with the lowest mean interval score over the other seven
+  cycles, averaged with equal weight over eve (3-seed mean), D-7 and
+  D-21; the held-out cycle is then graded at that width at every horizon.
+  D-56 never enters the choice. The production width is the same rule's
+  choice on all eight cycles.
+- A, B, AB and D are graded at the shipped width 0.9 with no selection.
+
+**Grading.** Eve on 3 seeds (offsets 0/1/2, pooled = seed mean); D-7,
+D-21 and D-56 on 1 seed (offset 0), calendar forward weeks as in
+validate_horizon. Shipped list mask (`*_fixed`: base at 0.9, same seed).
+D-56 is graded on the cycles whose CLR-fidelity caches exist and is
+reported, not gating. Reproduction gate: `base` must reproduce the s.46
+restated eve 1.509/1.628/.981/.0474/9.280 before any arm is read.
+
+**Decision rule.** Primary: the pooled interval score IS (Gneiting &
+Raftery 2007, alpha 0.10, mean over the 8 cycles of the per-list score)
+and the calibration error CE = |pooled 90% coverage - 0.90|; lower is
+better for both, so a coverage drop toward 0.90 is a gain. Secondary:
+median-seat MAE, mean-seat MAE, threshold Brier; reported: the bloc Brier
+for P(NB >= 61) and the per-fold IS wins / ties / losses (|d| < 0.05 a
+tie). An arm PASSES if, at eve (3 seeds pooled), IS is lower than base,
+CE is not higher than base by more than 0.005, and no secondary metric
+is worse by more than its noise floor (twice the seed-to-seed sd of the
+paired difference over the 3 eve seeds, at least 0.010 seats for MAE and
+0.0010 for Brier); and at D-7 and D-21 IS is not worse than base by more
+than 0.05 and CE not higher by more than 0.010. The recommended arm is
+the passing arm with the lowest eve IS; within 0.02 of each other, the
+lower CE, then the lower mean IS over D-7/D-21. A nested arm is judged
+only on its held-out numbers.
+
+**Amendment (17:50, before any grade; the text above was hashed at 17:37,
+sha256 2fdebcf2...).** Building arm B exposed a defect in the shipped
+residual: `decompose()` pools the per-cycle frames with their block-number
+index, so step 4's `resid.loc[<leader label>]` subtracts the seat-leader
+anchor (-1.74 seats) from every cycle's row carrying that label. With
+unique labels the full-sample line is 1.48 + 0.041 x seats instead of
+1.83 + 0.044 (LOO intercepts 1.07-1.67 instead of 1.20-2.19); bloc_sd,
+family terms and anchors are unchanged. B's vote-share record is built
+with unique labels, so B bundles two changes. One arm is added to
+separate them, graded like A/B/AB/D (width 0.9, no selection, same rule):
+- `Bfix`: the seat-error residual with unique labels
+  (`decompose(index_fix=True)`), nothing else changed.
+Arm D's tail df is estimated on the unique-label record in both spaces.
+
+**Amendment 2 (18:05, before any arm was graded).** The s.46 restated
+baseline is the mean of harness seed offsets 0 / 100 / 200 (the main
+restatement run), not 0 / 1 / 2: offsets 0/100/200 reproduce it exactly
+(1.5093 / 1.6284 / .9807 / .0474 / 9.2798; offset 0 bit-identical to the
+committed 17:21 ablation file). The eve grade uses offsets 0/100/200; the
+horizons offset 0. This was checked on the base arm only.
+
+**Amendment 3 (18:20, before any arm was graded; on the coordinator's
+relay of the ERR verifier, verify_poll_error.json).**
+- The verifier found the same decompose() index collision independently
+  (32 of 91 rows hit, label-0 rows three times). `Bfix` above is that
+  "resid_fix" arm. Because RESID_SCALE 0.9 was tuned on the collided
+  width, the width must be re-chosen after the fix: a fifth nested width
+  arm `CBfix` (Bfix + nested width, same grid and rule) is added and
+  graded under the same decision rule.
+- Arm A is kept unchanged and graded by the same rule. The verifier's
+  caveat is recorded in advance: bloc_sd (3.36) is a ddof-1 sd around a
+  +1.66 sample mean; the RMS around zero is 3.55 and the posterior-
+  predictive sd for a new cycle about 4.1-4.2, so the t(5)-on-sd scaling
+  (4.33 in the harness) acts roughly as a parameter-uncertainty allowance
+  and A may make the swing too narrow. The bloc Brier for P(NB >= 61) is
+  the score that speaks to the swing and is reported for every arm; the
+  per-list coverage mostly reflects the residual. The production-only
+  EVENT_RISK 1.2 is not graded here (no harness analogue).
+- Arm D is sized by the record as already specified (df from the
+  standardised residual's G2, not from the raw-error kurtosis of 4-4.6 the
+  desk quoted). Before grading, the full-sample estimator gives G2 2.59 ->
+  df 6.3 on the unique-label seat record and G2 1.25 -> df 8.8 on the
+  vote-share record (the verifier: excess kurtosis about 2 on e3).
+- Arm B's vote-share line before grading: full sample 0.73 + 0.073 x u
+  (n 95; LOO intercepts 0.63-0.89), against the verifier's like-for-like
+  won-seat e3 refit 0.79 + 0.075 and the desk's non-comparable 0.67 +
+  0.097.
+
+### 48.2 Results
+
+**Runs.** `src/calibration_arms.py` (new) projects every arm x width x
+seed with the harness's own `project_cycle` on the cached CLR-fidelity
+posteriors (read only) and scores on the shipped list mask (base at 0.9,
+same seed). Eve: offsets 0/100/200; D-7, D-21, D-56: offset 0, calendar
+forward weeks. All eight D-56 CLR-fidelity caches existed by the run (the
+main session fitted 2020-2022 D-56 at 17:49-18:43). Graded on the code
+of 804ff2d plus the round-three files; re-projected on main 806c6f4 plus
+this patch, base / A@0.4 / AB / Bfix are bit-identical at eve (8 cycles)
+and D-21 (2013, 2021), so the grade carries over.
+
+**Reproduction gate: passed.** base at eve, offsets 0/100/200:
+1.5093 / 1.6284 / .9807 / .0474 / 9.2798 (s.46: 1.509 / 1.628 / .981 /
+.0474 / 9.280).
+
+**Inputs as fitted (leave-one-cycle-out ranges).** Bfix line 1.07-1.67 +
+0.023-0.055 x seats (full 1.48 + 0.041). Vote-share line 0.63-0.89 +
+0.050-0.081 x u (full 0.73 + 0.073; n 81-86 per fold, 95 in all). Tail
+df: seat record 6.1-7.0 (full 6.3), vote record 6.2-11.0 (full 8.8).
+
+**Nested width picks** (held-out cycle -> width; ALL = the production
+choice):
+
+| arm | 2009 | 2013 | 2015 | 2019a | 2019s | 2020 | 2021 | 2022 | ALL |
+|---|---|---|---|---|---|---|---|---|---|
+| C0 (base) | .4 | .4 | .5 | .5 | .6 | .5 | .4 | .6 | .5 |
+| CA (A) | .4 | .4 | .4 | .4 | .6 | .4 | .4 | .4 | .4 |
+| CAB (AB) | .5 | .7 | .9 | .7 | 1.2 | .9 | .6 | .9 | .8 |
+| CABD (ABD) | .5 | .6 | 1.1 | .6 | 1.1 | 1.1 | .6 | 1.1 | .6 |
+| CBfix (Bfix) | .6 | .5 | .6 | .6 | .7 | .6 | .4 | .6 | .6 |
+
+Grid-floor check (diagnostic, not part of the rule): adding widths 0.2
+and 0.3 for base and A leaves every CA pick unchanged (0.4 is interior);
+C0's 2021 fold moves to 0.3.
+
+**Pooled metrics** (median MAE / mean MAE / coverage / threshold Brier /
+interval score IS; CE = |coverage - .90|; bloc = bloc Brier for
+P(NB >= 61); IS folds = wins / ties / losses vs base, |d| < .05 a tie).
+
+Eve (3 seeds):
+
+| arm | median | mean | cov | Brier | IS | CE | bloc | width | IS folds |
+|---|---|---|---|---|---|---|---|---|---|
+| base | 1.509 | 1.628 | .981 | .0474 | 9.280 | .081 | .0439 | 8.06 | - |
+| A | 1.506 | 1.628 | .981 | .0473 | 9.157 | .081 | .0369 | 7.94 | 6/2/0 |
+| B | 1.525 | 1.599 | .972 | .0408 | 8.482 | .072 | .0374 | 6.90 | 7/0/1 |
+| Bfix | 1.518 | 1.623 | .972 | .0446 | 9.015 | .072 | .0401 | 7.62 | 5/2/1 |
+| AB | 1.523 | 1.598 | .968 | .0406 | 8.288 | .068 | .0290 | 6.64 | 7/0/1 |
+| D | 1.504 | 1.619 | .981 | .0461 | 9.212 | .081 | .0441 | 7.99 | 4/4/0 |
+| ABD | 1.500 | 1.596 | .961 | .0403 | 8.388 | .061 | .0293 | 6.54 | 7/0/1 |
+| C0 | 1.517 | 1.607 | .960 | .0418 | 8.728 | .060 | .0344 | 6.54 | 4/0/4 |
+| **CA** | **1.509** | **1.599** | **.960** | **.0411** | **8.061** | **.060** | **.0232** | **5.79** | **5/1/2** |
+| CAB | 1.504 | 1.598 | .915 | .0407 | 9.517 | .015 | .0285 | 6.41 | 4/0/4 |
+| CABD | 1.507 | 1.603 | .911 | .0414 | 9.679 | .011 | .0311 | 6.50 | 5/0/3 |
+| CBfix | 1.524 | 1.603 | .937 | .0409 | 9.072 | .037 | .0341 | 6.47 | 4/0/4 |
+
+D-7 / D-21 / D-56 (offset 0; median / mean / cov / Brier / IS / bloc):
+
+| arm | D-7 | D-21 | D-56 |
+|---|---|---|---|
+| base | 1.495/1.650/.990/.0492/9.454/.0426 | 1.620/1.773/.990/.0538/9.655/.0616 | 2.367/2.432/.922/.0882/14.591/.1119 |
+| A | 1.465/1.650/.978/.0490/9.511/.0359 | 1.630/1.774/.990/.0537/9.460/.0547 | 2.377/2.432/.922/.0884/15.000/.1075 |
+| B | 1.492/1.626/.951/.0441/8.988/.0374 | 1.613/1.736/.944/.0501/9.754/.0588 | 2.391/2.387/.909/.0900/15.212/.1104 |
+| Bfix | 1.508/1.644/.969/.0468/9.285/.0394 | 1.634/1.759/.972/.0518/9.498/.0594 | 2.404/2.415/.916/.0888/15.486/.1112 |
+| AB | 1.505/1.625/.951/.0437/8.762/.0297 | 1.625/1.736/.935/.0499/9.675/.0513 | 2.375/2.387/.909/.0902/14.909/.1056 |
+| D | 1.513/1.638/.990/.0481/9.385/.0434 | 1.577/1.714/.981/.0513/9.654/.0594 | 2.384/2.437/.922/.0882/14.735/.1150 |
+| ABD | 1.477/1.621/.951/.0435/8.810/.0294 | 1.569/1.677/.935/.0476/9.644/.0491 | 2.340/2.393/.909/.0903/14.963/.1105 |
+| C0 | 1.476/1.634/.934/.0451/9.600/.0350 | 1.623/1.750/.924/.0516/9.815/.0567 | 2.378/2.398/.909/.0894/14.837/.1068 |
+| **CA** | **1.481/1.625/.934/.0444/9.126/.0246** | **1.606/1.744/.924/.0516/9.252/.0480** | **2.366/2.395/.899/.0905/16.040/.1033** |
+| CAB | 1.494/1.628/.913/.0443/10.030/.0292 | 1.614/1.740/.901/.0511/10.436/.0516 | 2.382/2.393/.896/.0892/15.164/.1046 |
+| CABD | 1.466/1.631/.913/.0449/10.182/.0317 | 1.560/1.686/.901/.0493/10.456/.0524 | 2.333/2.400/.896/.0883/15.539/.1098 |
+| CBfix | 1.492/1.632/.925/.0444/9.624/.0346 | 1.611/1.745/.935/.0506/9.776/.0565 | 2.378/2.394/.909/.0894/14.914/.1083 |
+
+**Decision rule (as pre-registered).**
+- PASS: Bfix, AB, D, ABD, CA.
+- FAIL: A (D-7 IS +.056 > .05), B (D-21 IS +.099), C0 (D-7 +.146,
+  D-21 +.160), CAB and CABD (eve IS above base; D-7 +.58/+.73, D-21
+  +.78/+.80), CBfix (D-7 +.169, D-21 +.121).
+- Recommended: **CA** (lowest eve IS among the passing arms, 8.061; next
+  AB 8.288, ABD 8.388). Seed sd of CA's paired eve IS difference .11
+  against a gain of 1.22. No secondary metric is worse at eve (median
+  1.5085 vs 1.5093, mean -.030, Brier -.0063).
+
+**Reading.**
+- Over-coverage is not one layer's fault. With the swing and family
+  shocks at their measured sd (A) the interval score still wants the
+  residual at 0.4 of the shipped line (about 0.49 of the corrected line),
+  and eve coverage stays .960 even there. The misses are a few large
+  tail events (2013 Yesh Atid, 2019a, 2021) that no moderate width covers;
+  in the other five cycles every narrowing pays.
+- The t-scale fix (A) improves the bloc Brier at every horizon (.0439 ->
+  .0369 eve, .0426 -> .0359 D-7, .0616 -> .0547 D-21, .1119 -> .1075 D-56)
+  and the eve IS, and fails alone only by .006 at D-7. The verifier's
+  concern (the t(5)-on-sd width acts as a parameter-uncertainty allowance)
+  is not borne out on these eight outcomes, which cannot certify it
+  either way. In production A gives the swing sd 3.36 x 1.2 = 4.03 seats,
+  just under the verifier's 4.1-4.2 predictive figure; in the harness 3.36.
+- The vote-share residual (B) gives the lowest threshold Brier of the
+  stack arms (B .0408 / .0441 at eve / D-7; with A and D .0403 / .0435)
+  but loses the D-21 interval score alone, and
+  its width curve is jagged (a straddler's interval flips between [0, 0]
+  and [0, 5]), so the nested choice on AB is unstable (0.5-1.2) and CAB /
+  CABD lose held-out.
+- The index fix alone (Bfix, width 0.9) passes: IS -.27 / -.17 / -.16 at
+  eve / D-7 / D-21. Re-choosing the width after the fix (CBfix, picks
+  0.4-0.7, ALL 0.6) gains at eve but loses held-out at D-7 and D-21, so
+  under this rule the fix ships, if at all, at 0.9, not with a re-chosen
+  width.
+- Fat tails (D, df about 6) are a small, consistent gain (eve IS -.07,
+  D-21 MAE -.04, D-56 bloc Brier slightly worse) and pass; they do not
+  rescue CABD.
+- CA's costs: IS fold losses at eve (2009 +.6, 2013 +.4), D-7 (2009 +1.5,
+  2013 +.2, 2021 +5.6) and D-21 (2013 +3.6, 2021 +6.2: coverage .64 there); D-56 IS
+  14.59 -> 16.04 (2013 +5.0, 2022 +4.2, 2015 +2.0), which is reported and
+  not gating, but says a narrow stack is wrong eight weeks out.
+
+### 48.3 2026 effect (frozen production posterior; outputs in scratch)
+
+Main 806c6f4 code with this patch, the CLR production posterior of 15 Oct
+19:41 frozen in scratch (sha256 4f502286...), the production chain
+(registration mixture -> official_forecast -> government_formation) with
+every output redirected to a scratch copy of data/processed, projection
+seeds +0 / +1 / +2. Flags off reproduces main's committed mixture draws,
+official forecast and PM table bit for bit.
+
+| | shipped (+0/+1/+2) | CA (+0/+1/+2) | A only (+0) | width 0.4 only (+0) | AB (+0) | Bfix (+0) |
+|---|---|---|---|---|---|---|
+| P(NB >= 61) | 13.0 / 13.1 / 13.5 | 6.6 / 6.2 / 6.4 | 10.7 | 9.5 | 7.8 | 11.8 |
+| change bloc alone | 8.6 / 8.4 / 8.6 | 3.1 / 3.2 / 3.4 | 6.8 | 5.1 | 4.4 | 7.5 |
+| with Ra'am | 28.3 / 28.5 / 28.1 | 24.6 / 25.4 / 24.8 | 26.4 | 27.5 | 25.9 | 28.0 |
+| neither | 58.8 / 58.4 / 58.4 | 68.8 / 68.4 / 68.8 | 62.8 | 63.0 | 66.2 | 60.3 |
+| NB seats, mean [90%] | 52.9 [41-65] | 52.6 [44-61] | 52.9 [43-63] | 52.6 [42-63] | 52.6 [43-62] | 52.8 [42-64] |
+| PM: repeat election | .455 / .454 / .454 | .541 / .538 / .542 | .485 | .501 | .521 | .469 |
+| PM: Netanyahu | .195 / .194 / .196 | .151 / .148 / .149 | .179 | .172 | .159 | .187 |
+| PM: Eisenkot | .221 / .221 / .220 | .186 / .190 / .187 | .209 | .202 | .196 | .216 |
+| mean 90% width, lists >= 3 seats | 9.5 / 9.6 / 9.5 | 7.1 / 7.1 / 7.1 | 9.2 | 7.5 | 8.2 | 8.7 |
+| Otzma pass | .768 / .764 / .768 | .847 / .847 / .847 | .774 | .838 | .833 | .793 |
+| Ra'am pass | .764 / .778 / .768 | .923 / .926 / .928 | .766 | .907 | .896 | .795 |
+| RZP-Zehut pass | .529 / .534 / .540 | .586 / .589 / .594 | .530 | .582 | .579 | .544 |
+| Amcha pass | .247 / .250 / .256 | .226 / .227 / .230 | .247 | .226 | .229 | .239 |
+| Reservists pass | .214 / .222 / .221 | .188 / .194 / .195 | .214 | .188 | .190 | .205 |
+
+Central seats are unchanged under every arm (Likud 26, Yashar 23,
+Together 11, Democrats / Shas / JL / YB / UTJ 9, Otzma 6, Ra'am 5,
+RZP-Zehut 4); the intervals narrow (Likud 17-34 -> 18-32, Yashar 15-30 ->
+17-28, Ra'am 0-9 -> 0-7). CA halves P(NB >= 61) because the bloc's
+central count (52.6) sits eight seats below 61 and both pieces cut the
+tail: at seed +0, A alone -2.3 pts, the width alone -3.5, together -6.4
+(13.0 -> 6.6).
+
+### 48.4 Recommendation and constants
+
+- By the pre-registered rule: ship **CA**:
+  `bayes_model.T_UNIT_VAR = True` and `bayes_model.RESID_SCALE = 0.4`
+  (was 0.9); `RESID_SPACE` stays "seat" and `RESID_T_DF` None; mirror in
+  the harness with `ALL_LAYERS["t_unit"] = True` (the width is
+  `resid_scale`, which defaults to `bm.RESID_SCALE`).
+- What the rule cannot see, for the owner: the effect on the headline is
+  large (P(NB >= 61) about 13 -> 6, deadlock 58 -> 69) and rests on eight
+  bloc outcomes; D-56 says a stack this narrow is wrong at long horizons;
+  two cycles (2013, 2021) lose 4-6 interval-score points at D-7/D-21.
+- The decompose() index collision is a bug whatever is shipped. Fixing it
+  at 0.9 (Bfix) passes on its own, but CA's 0.4 was chosen on the collided
+  line: fixing the index under CA needs the width re-chosen (about 0.49 is
+  the mechanical equivalent; not graded). `decompose(index_fix=...)` is in
+  the patch, default False.
+
+### 48.5 Not established
+
+- WIS over several levels and a discrete PIT (desk EVAL) were not run;
+  the rule uses the 90% interval score only.
+- A width grid on A + Bfix (the fixed line under the t-scale fix) and on
+  D alone was not run; CA's width on the corrected line is unknown.
+- EVENT_RISK (production only) and the anchors-retired e2-vs-e3 residual
+  question (verifier) were not graded.
+- 1 seed at D-7 / D-21 / D-56; the horizon tolerance (.05 IS) is below
+  the eve seed sd of some paired differences (.08-.14), so A's and
+  CBfix's D-7 failures are near noise.
+
+## 49. Formation calibration (15-16 Oct, D-12)
+
+This section does four things:
+
+- rebuilds the formation harness on the shipped parameters and on 17
+  Knessets;
+- adds a post-deadlock stage calibrated to the Israeli record;
+- sets the unity gate (`likud_sans_bibi`) from the record instead of by
+  hand;
+- corrects the COND anchor text.
+
+It uses only desk COA findings that the verifier marked verified or
+corrected (`forecast_research/verify_coalition_formation.json`), plus the
+atlas findings D10-F16 to F28 (`targeting/research/verify_coalition.json`).
+The 2026 runs use a frozen copy of `mixture_draws.parquet`. Its sha256
+begins 2e2eec97 and matches production byte for byte. The formation layer
+reads nothing else from the model.
+
+### 49.1 The harness now grades the shipped tree
+
+The old `validate_formation.py` graded its own, older parameters, while its
+header said they matched the shipped tree (COA-F08, verified). It used
+haredi 0.30, Ra'am joins 0.55, unity 0.15 and a hard-coded pledge-break of
+0.33. The site's "−0.93 vs −0.92" and "−0.92 ... five of eight" came from
+it, and the verifier found that the second sentence mixes two trees. All
+three numbers are retired.
+
+The rebuilt harness imports `BEHAVIOR`, `BEHAVIOR_NEFF`, `PM_ALLOC`, `COND`
+and `simulate_formation`. It uses 200 parameter vectors drawn as in
+`main()`, and 2,000 draws per Knesset. It adds only the historical seat maps
+and the 2026 role each list plays:
+
+- **Likud and the right:** the right's main list plays Likud; the other
+  right lists play RZP.
+- **Haredi parties:** Shas, and Agudah/Degel/UTJ.
+- **Change lists:** the largest plays Yashar; the rest play the Democrats.
+- **Yisrael Beytenu:** plays YB only from 2020, so Liberman's vetoes bite
+  only from then.
+- **Kingmakers:** lists that declared for neither PM candidate, or made
+  joining conditional. Each gets the tree's generic split (0.40 right /
+  0.45 centre) with its own draw.
+- **Arab lists:** the Ra'am lineage (ADP 1988-92, UAL from 1996) plays
+  Ra'am; every other Arab list plays the Joint List.
+
+Roles were fixed before scoring. Gate covariates are centred on the 2026
+draws, as shipped.
+
+Sources: ParlGov development version (view_election, view_cabinet),
+cross-checked with the IDI election pages, for 1977-2006 (atlas D10-F23,
+F24; COA-F11 recomputed); CEC `results.csv` for 2009-2022. Outcomes come
+from the IDI pages and atlas D10-F17, F22, F25, F26 and F28.
+
+1949-1973 is left out. In the dominant-party era the religious parties were
+Mapai's partners and the bloc roles do not exist; all eight elections
+formed a government.
+
+Seven cycles are **certain**: 1977, 1981, 1988, 2003, 2009, 2013 and 2022.
+The bloc alone held 61, so every tree scores P = 1, and they carry weight 0.
+1996 and 1999 elected the PM directly; they carry weight 0.5, in a secondary
+score only. The **primary score** is the mean log P(realized class) over
+eight cycles: 1984, 1992, 2006, 2015, 2019a, 2019s, 2020 and 2021. 1984 is
+class 6 (unity, both leaders kept); a sensitivity row scores it as {1, 6}.
+
+Four trees are scored on common random numbers:
+
+- **production:** the pre-s49 tree, with unity 0.18 (NEFF 20) and no stage;
+- **unity_record:** the record unity prior alone;
+- **stage_only:** the stage with unity at 0.18;
+- **candidate:** the stage plus the record unity prior.
+
+Both record-fitted pieces are scored leave-one-out:
+
+- **the stage:** the Beta for each deadlock cycle is refitted without that
+  cycle's outcome;
+- **the unity prior:** for 1984 and 2020, which are themselves unity
+  governments, it is refitted on 0 of 2, Beta(0.5, 2.5).
+
+### 49.2 The post-deadlock stage
+
+**The event.** A deadlock is a Knesset in which no side reaches 61 with its
+own lists plus the unaligned lists (and Amcha) that sided with it. In code:
+`deadlock = (nb < 61) & (ce_pure + res_c + amcha_ce < 61)`. The ways out
+are haredi crossings, Ra'am's seats, pledge-breaks, unity and minority
+investiture.
+
+**What the stage does.**
+
+- **Outside a deadlock** the outcome is arithmetic (classes 0-3) and
+  nothing changes.
+- **Whether a government forms:** inside a deadlock, the record decides.
+  A government forms with probability 1 − r, where r is drawn from the Beta
+  posterior once per parameter vector.
+- **Which government forms:** the shipped gates decide. Where the gates
+  had sent a draw to a repeat but the stage says a government forms, the
+  gates are re-drawn, with kingmaker and Amcha sides held fixed, until one
+  fires.
+
+Each stage step has its own generator. With `--stage off` and the pre-s49
+unity value, `government_formation.csv`, `pm_probabilities.csv` and
+`government_sensitivity.csv` reproduce production bit for bit (checked). In
+2026, 1,315 of about 1.2 million deadlock draws (0.1%) had no feasible gate
+and stayed repeats.
+
+**The record, on the same event, with the kingmakers' realized sides.**
+
+| deadlock | position in run | outcome | source |
+|---|---|---|---|
+| 1984 | 1 | unity with rotation, inside Peres's first extended mandate | IDI 1984; atlas D10-F24; COA challenge check (CSM 14 Sep 1984) |
+| 1992 | 1 | Labor-Meretz 56 + Shas 6; Hadash and ADP outside | IDI 1992; atlas D10-F23 |
+| 2006 | 1 | Kadima-Labor-Meretz 53 + Gil 7 + Shas 12 | ParlGov Olmert I; atlas D10-F28 (corrected) |
+| 2019a | 1 | **repeat**: the Knesset dissolved first | IDI 2019; atlas D10-F25 |
+| 2019s | 2 | **repeat**: the 21-day window lapsed | IDI; atlas D10-F22 |
+| 2020 | 3 | Gantz's faction joins Netanyahu | IDI 2020; atlas D10-F25 |
+| 2021 | 4 | change + Yamina + Ra'am, second mandate | IDI 2021; atlas D10-F26 |
+
+That is **2 repeats in 7**. With a Jeffreys prior the posterior is
+Beta(2.5, 5.5): mean **0.312**, 90% interval [0.088, 0.593]. The
+pre-s49 tree gave 0.596 on the same 2026 event, which sits at the 95th
+percentile (P = 0.048).
+
+**Why not the verifier's 2 of 5.** The conventional list of five deadlocks
+(1984, 2019a, 2019s, 2020, 2021) is not the tree's event. On the tree's
+arithmetic, 1992 and 2006 are also deadlocks, closed by haredi entry. The
+site's earlier "~0.61" was measured on the desk's own event, and on that
+event the parliamentary record is 2 of 8. The conventional counts are kept
+as sensitivity rows.
+
+| reference class | count | posterior mean [90%] | 2026 P(repeat), central draw |
+|---|---|---|---|
+| **stage record (post-election, parliamentary)** | **2/7** | **0.312 [0.088, 0.593]** | **0.235** |
+| + 1999 (direct election) | 2/8 | 0.278 [0.076, 0.538] | 0.209 |
+| + Oct 2008 (Livni, mid-term) | 3/8 | 0.389 [0.150, 0.657] | 0.292 |
+| + Nov 1995 and Oct 2008 (mid-term) | 3/9 | 0.350 [0.132, 0.604] | 0.264 |
+| bloc era 2019-21 only | 2/4 | 0.500 [0.165, 0.835] | 0.373 |
+| conventional five (event mismatch) | 2/5 | 0.417 [0.128, 0.739] | 0.309 |
+| conventional five + Oct 2008 | 3/6 | 0.500 [0.209, 0.791] | 0.373 |
+
+Mid-term cases are sensitivity rows only, because the stage is about
+post-election formation. Counting the 2008 failure without the 1995
+formation would be one-sided. Sources: The National, 26 Oct 2008 (COA-F18,
+corrected); Wikipedia, 26th government of Israel, 58 seats (COA-F15,
+corrected).
+
+**Position in an election run.** A grid-posterior logistic, with priors
+a ~ N(0, 1.5) and b ~ N(0, 1), gives P(repeat) of 0.376, 0.291, 0.243 and
+0.223 at positions 1 to 4. The slope's mean is −0.45, with P(b < 0) = 0.74.
+Counted directly, 1 of 4 first-election deadlocks repeated, 1 of 3 later
+ones, and 0 of 2 at positions 3-4. Four of the seven cases come from one
+2019-21 run, so the slope is not distinguishable from zero. The stage is
+**not** position-dependent. For 2026, the first-election estimates (0.30
+and 0.38) bracket the pooled 0.31.
+
+**Deadlock depth** is not a covariate either. Repeats came at gaps to 61 of
+1 (2019a) and 6 (2019s). Governments formed at gaps of 1-3 (1984, 1992,
+2006, 2020) and 3-9 (2021). There is no pattern.
+
+### 49.3 The unity gate from the record
+
+`likud_sans_bibi` was a hand value of 0.18 (NEFF 20). Its stated base,
+"unity resolved ~half of deadlocks (1984/1988/2020)", fails on the verified
+record:
+
+- 1988 was not a deadlock: the right-religious bloc held 65 (atlas D10-F24).
+- All three unity governments kept both leaders: 1984 Peres/Shamir with
+  rotation, 1988 Shamir with Peres, 2020 Netanyahu/Gantz (COA-F24,
+  verified; COA-F16).
+- No Israeli party has dropped its sitting leader after an election to
+  form a government (COA-F24). The one comparative case, Spain's PSOE in
+  Oct 2016, came after two failed elections.
+
+It is now **Jeffreys on 0 of 3 unity governments: Beta(0.5, 3.5), mean
+0.125, NEFF 4**. The median is 0.067, the 90% interval [0.0006, 0.444], and
+P(> 0.18) = 0.26.
+
+Two other reference classes were considered:
+
+- **0 of 5 deadlocks where a unity was on the table** (1984, 2019a, 2019s,
+  2020, 2021): Beta(0.5, 5.5), mean 0.083.
+- **0 of 7 stage deadlocks:** Beta(0.5, 7.5), mean 0.0625. In 1992 and 2006
+  haredi entry closed the gap before unity was tested, so those two cases
+  are censored.
+
+The 0-of-3 class is the one COA-F24 verifies directly, and it is the most
+conservative: it moves least from the old value. The narrower classes are
+sensitivity rows. The 0.08 used as a sensitivity row in the first draft of
+this section was the midpoint of the desk's proposed first-election range,
+0.05-0.10 (COA challenge 4). It was not taken from the record. It happens to
+equal the 0-of-5 Jeffreys mean, which replaces it. Herzog's plea-deal and
+unity push stays a tripwire, not a prior.
+
+**COND anchor text corrected (betas unchanged).**
+
+- **Haredi defection:** Shas joined non-Likud premiers in 1992, 1999
+  (directly elected PM) and 2006, and joined the 1984 Peres-led unity
+  government. It declined viable ones in 1990 (Peres), Oct 2008 (Livni,
+  which forced the 2009 election) and Feb 2009 (it recommended Netanyahu
+  although Kadima was largest), and it has joined none since 2006. UTJ
+  joined only Barak in 1999, briefly (COA-F18, corrected).
+- **Unity and deadlock depth:** the anchor "1984/1988" is replaced. 1984
+  is the one deadlock resolved by unity, and it kept both leaders; 1988 was
+  not a deadlock. The +0.35 depth beta therefore has no direct anchor in
+  the record and is kept as judgment.
+
+The haredi priors themselves are unchanged, as the verifier advised. Dossier
+s.3 and s.19 are left as they stood when written; this section supersedes
+their anchor text.
+
+### 49.4 The four trees on the record (leave-one-out)
+
+| score (8 informative cycles unless noted) | production | unity_record | stage_only | candidate |
+|---|---|---|---|---|
+| mean log P(realized class) | −1.572 | −1.580 | −1.589 | **−1.533** |
+| difference from production (bootstrap SE) | | −0.008 (0.038) | −0.016 (0.238) | +0.039 (0.250) |
+| + 1996, 1999 at weight 0.5 | −1.556 | | | −1.484 (+0.072, SE 0.221) |
+| 1984 scored as {1, 6} | −1.472 | | | −1.390 (+0.082, SE 0.260) |
+| YB 2015/2019a in Amcha's role | −1.617 | | | −1.563 (+0.055, SE 0.248) |
+| repeat vs government, 10 non-certain cycles: log / Brier | −0.800 / 0.302 | −0.859 / 0.328 | −0.758 / 0.253 | −0.758 / 0.253 |
+| repeat vs government, all 17: log / Brier | −0.450 / 0.170 | −0.483 / 0.185 | −0.426 / 0.142 | −0.426 / 0.142 |
+| realized class is the top class | 1 of 8 | 1 of 8 | 1 of 8 | 2 of 8 |
+
+A uniform guess over the nine classes scores −2.197.
+
+The record cannot tell the trees apart on nine classes: every difference is
+within one standard error. The candidate is the best of the four on every
+row, and it beats production on the repeat event by both log and Brier.
+
+**What production gets wrong.** On the seven record deadlocks, production
+averages P(repeat | deadlock) **0.602**. That implies 4.2 expected repeats
+against 2 observed; P(≤ 2 repeats) = 0.09 under its own probabilities. Its
+top class was "repeat" in five deadlocks that went on to form a government
+(1984, 1992, 2006, 2020, 2021).
+
+In the calibration table, production's [0.50, 0.70) bin holds 5 forecasts
+with a mean of 0.60, and none was realized. The candidate averages
+P(repeat | deadlock) 0.327, with 2.3 expected repeats (P(≤ 2) = 0.58). Its
+[0.50, 0.70) bin holds 2 forecasts, 1 realized.
+
+**Per cycle, candidate minus production (log):**
+
+| cycle | gain |
+|---|---|
+| 1984 | +0.32 |
+| 1992 | +0.76 |
+| 2006 | +0.25 |
+| 2015 | +0.22 |
+| 2020 | +0.92 |
+| 2021 | +0.02 |
+| 2019a | −1.13 |
+| 2019s | −1.05 |
+
+**The candidate's misses.** In 2019a and 2019s the candidate puts 0.74 and
+0.62 on "Netanyahu + unaligned / defector". Part of that comes from the
+kingmaker (YB) going right. Part comes from the stage handing the formed
+deadlock mass to the pledge-break gate. The pledge-break gate is now the
+largest single recipient of that mass, so it is the next gate to check
+against the record.
+
+Files: `formation_validation.csv`, `formation_validation_classes.csv`,
+`formation_calibration.csv` and `formation_deadlock_record.csv`.
+
+### 49.5 The 2026 effect (frozen mixture draws, 8,000 Knessets × 200 vectors)
+
+| outcome | production | unity_record only | stage_only | **candidate [90%]** |
+|---|---|---|---|---|
+| Netanyahu rightist coalition | 0.120 | 0.120 | 0.120 | 0.120 |
+| Netanyahu + unaligned / defector | 0.084 | 0.084 | 0.165 | **0.213** [0.050, 0.367] |
+| Change coalition (without Ra'am) | 0.083 | 0.083 | 0.083 | 0.083 |
+| Change + unaligned / Amcha | 0.033 | 0.033 | 0.033 | 0.033 |
+| Change + a haredi party | 0.033 | 0.033 | 0.051 | 0.061 |
+| JL-backed minority | 0.017 | 0.020 | 0.023 | 0.031 |
+| Unity (Likud without Netanyahu) | 0.105 | 0.079 | 0.203 | **0.136** [0.002, 0.348] |
+| Repeat election | 0.453 | 0.478 | 0.246 | **0.248** [0.070, 0.486] |
+| Change + Ra'am | 0.073 | 0.070 | 0.075 | 0.075 |
+
+| P(PM) | production | unity_record only | stage_only | **candidate [90%]** |
+|---|---|---|---|---|
+| Netanyahu | 0.204 | 0.204 | 0.285 | **0.333** [0.175, 0.492] |
+| Eisenkot | 0.216 | 0.206 | 0.269 | **0.258** [0.173, 0.347] |
+| none (repeat) | 0.453 | 0.478 | 0.246 | **0.248** [0.070, 0.486] |
+| rotation / Likud successor | 0.061 | 0.048 | 0.110 | **0.079** [0.012, 0.183] |
+| Bennett | 0.055 | 0.053 | 0.071 | 0.069 |
+| Liberman | 0.012 | 0.010 | 0.018 | 0.013 |
+
+**Deadlock numbers, candidate:**
+
+- P(deadlock) is 0.759 on the stage's event and 0.641 on the desk's.
+- P(repeat | deadlock) is 0.326 on the stage's event; the gates alone give
+  0.629.
+- On the desk's event it is 0.298, down from 0.610.
+- P(Reservists' seats counted | the list passes) is 0.299, against 0.251
+  in production.
+
+**Central-draw sensitivity, stage on.** Read P(successor PM) / P(Netanyahu
+PM) / P(Eisenkot PM) at each unity value:
+
+| unity value | successor | Netanyahu | Eisenkot |
+|---|---|---|---|
+| 0.125, shipped | 0.107 | 0.306 | 0.264 |
+| 0.083 | 0.084 | 0.337 | 0.258 |
+| 0.0625 | 0.072 | 0.357 | 0.254 |
+| 0.18 | 0.126 | 0.277 | 0.269 |
+
+Lowering the unity gate moves the freed deadlock mass to the pledge-break,
+not to repeats. Markets are not a target. Kalshi lists no "No one" strike:
+the residual is about 0.01 at mids, range 0-0.15, on thin volume.
+Polymarket resolves differently. Likud-alternative prices are about 0.04
+(Kalshi mids) and 0.006 (Polymarket), and the model's "successor" row is not
+like-for-like with them (COA-F09, corrected).
+
+### 49.6 Site wording drafts (EN / HE)
+
+These are written against the current template text and are not applied.
+The site session has already handled the largest-list "7 of 10" and the
+1993-96 minority line. Citation keys are unchanged.
+
+1. **Formation tree, the COND sentence and the grading sentence.** Replace
+   from "(Shas joined non-Likud prime ministers in 1992, 1999 and 2006, and
+   refused in 2021 ...)" through "... preserved by construction.".
+   - EN: "(Shas joined non-Likud prime ministers in 1992, 1999 and 2006,
+     but declined viable ones in 1990, October 2008 and February 2009, and
+     has joined none since 2006 [COA-F18]), a centrist defection falls as
+     the gap grows (Gantz 2020 at a gap of three), and unity rises with
+     deadlock depth — a judgment: Israel's one deadlock settled by unity,
+     1984, kept both leaders, and 1988 was not a deadlock [COA-F24]. The
+     tree is graded with its shipped parameters on the 17 Knessets since
+     1977. Seven were settled by arithmetic and score 1 under any tree. On
+     the other eight its mean log score is −1.53, against −1.57 before the
+     deadlock stage and −2.20 for a uniform guess over its nine outcomes
+     [COA-F08]. Eight outcomes cannot resolve the conditional effects, so
+     they are retained on institutional grounds, with the marginals
+     preserved by construction."
+   - HE: "(ש״ס הצטרפה לראשי ממשלה שאינם מהליכוד ב־1992, ב־1999 וב־2006,
+     אבל דחתה מועמדים ברי־סיכוי ב־1990, באוקטובר 2008 ובפברואר 2009, ולא
+     הצטרפה לאף אחד מאז 2006 [COA-F18]), עריקה של מפלגת מרכז יורדת ככל
+     שהפער גדל (גנץ 2020 בפער של שלושה), ואחדות עולה עם עומק המבוי הסתום —
+     הערכה שיפוטית: המבוי הסתום היחיד בישראל שהוכרע באחדות, 1984, שמר על
+     שני המנהיגים, ו־1988 לא היה מבוי סתום [COA-F24]. העץ נבחן בפרמטרים
+     שבשימוש על 17 הכנסות מאז 1977. שבע מהן הוכרעו בחשבון המנדטים ומקבלות
+     1 תחת כל עץ. בשמונה האחרות ציון הלוג הממוצע שלו ‎−1.53, לעומת ‎−1.57
+     לפני שלב המבוי הסתום ו־‎−2.20 לניחוש אחיד על תשע התוצאות [COA-F08].
+     שמונה תוצאות אינן יכולות להכריע את האפקטים המותנים, ולכן הם נשמרים
+     על בסיס מוסדי, כשהשוליים נשמרים מעצם הבנייה."
+2. **PM allocation.** Replace "This layer has no current grade ... under
+   way."
+   - EN: "The rebuilt harness grades which government forms, not who leads
+     it, so the allocation within each coalition type has no record grade
+     of its own [COA-F08]."
+   - HE: "המתקן המחודש מדרג איזו ממשלה קמה, לא מי עומד בראשה, ולכן לחלוקה
+     בתוך כל סוג קואליציה אין ציון היסטורי משלה [COA-F08]."
+3. **Outcome 07, precision.**
+   - EN: "... no Israeli government formed after an election has started
+     as a minority; Peres's mid-term government of November 1995 began
+     with 58–59 seats, and Rabin and Peres governed on outside support
+     from Hadash and the Arab Democratic Party in 1993–96 [COA-F15]".
+   - HE: "... ושום ממשלה ישראלית שהוקמה אחרי בחירות לא התחילה כממשלת
+     מיעוט; ממשלת פרס שהוקמה באמצע הקדנציה בנובמבר 1995 התחילה עם 58–59
+     מנדטים, ורבין ופרס משלו בתמיכת חד״ש ומד״ע מבחוץ ב־1993–96 [COA-F15]".
+4. **Outcome 08.**
+   - EN: "Likud drops him (0.125, set from the record: none of the three
+     unity governments, 1984, 1988 and 2020, dropped a leader) — no Israeli
+     party has ever dropped its sitting leader to form a government, and
+     the one comparative case came after two failed elections [COA-F24]".
+   - HE: "הליכוד מוותר עליו (0.125, נקבע מהרשומה: אף אחת משלוש ממשלות
+     האחדות — 1984, 1988, 2020 — לא החליפה מנהיג) — שום מפלגה ישראלית לא
+     הדיחה את מנהיגה המכהן כדי להרכיב ממשלה, והמקרה ההשוואתי היחיד הגיע
+     אחרי שתי מערכות בחירות כושלות [COA-F24]".
+   - Note: `build_site` prints the `data-par` value with two decimals, so
+     0.125 would show as "0.12". It should use three decimals for
+     `likud_sans_bibi`.
+5. **Outcome 09, if the stage ships.**
+   - EN: "in a deadlock the record decides whether a government forms: 2
+     of the 7 parliaments since 1977 in which no side reached 61 with its
+     own lists and the kingmakers that sided with it went to a repeat
+     election, both in 2019 (2 of 5 on the conventional count) [COA-F11];
+     which government forms comes from the gates above. A new election
+     would follow about three months after the last mandate lapses
+     [COA-F13]".
+   - HE: "במבוי סתום הרשומה ההיסטורית קובעת אם תקום ממשלה: 2 מתוך 7 הכנסות
+     מאז 1977 שבהן אף צד לא הגיע ל־61 עם רשימותיו ועם רשימות לשון המאזניים
+     שתמכו בו הלכו לבחירות חוזרות, שתיהן ב־2019 (2 מתוך 5 בספירה המקובלת)
+     [COA-F11]; איזו ממשלה תקום נקבע בשערים שלמעלה. בחירות חדשות היו
+     נערכות כשלושה חודשים אחרי שפג המנדט האחרון [COA-F13]".
+
+### 49.7 Not established
+
+- **Ra'am-Balad, April 2019.** The 2/2 split of its four seats is
+  approximate. No score depends on it.
+- **Era roles are judgment.** The roles and the generic kingmaker rule were
+  fixed before scoring. The Amcha-role variant moves both trees in the same
+  direction.
+- **ParlGov counts only portfolio-holding parties** (COA-F15). Coalition
+  sizes here come from seats and the IDI pages, not from ParlGov sums.
+- **The record is small and clustered.** It has 7 deadlocks, four of them
+  from one 2019-21 run. On nine classes, no test separates the trees. The
+  case for the candidate rests on three things:
+  - the record counted on the tree's own event;
+  - production's systematic repeat over-forecast on that record
+    (P(≤ 2 | production) = 0.09);
+  - the better repeat-event score.
+- **Two gates remain unchecked against the record:** the pledge-break gate
+  (`centre_defects`) and the unity depth beta.
+
 ## 51. Sector family terms (15 Oct, D-12)
 
 Two accuracy candidates for the sector family shocks, graded on the
@@ -2551,3 +3478,18 @@ the harness.**
   Joint List taking the remainder. The flag code stays, OFF.
 
 Both flags remain OFF in this patch.
+
+### 51.6 Decision (16 Oct)
+
+- **hared_e0 shipped** as recommended: `HAREDI_FAMILY_FORM = "e0"` in
+  production and `ALL_LAYERS["haredi_mean"] = "e0"` in the harness, so the
+  harness baseline grades the shipped form from now on. The site states the
+  case for it (a consistency correction), not a measured accuracy gain. The
+  six-seed median is a tie; only Brier and mean MAE move, by about .0002
+  and .002.
+- The haredi under-count the projection draws becomes the raw record mean,
+  0.98 seats, with the e1 sd of 1.77 kept. The site reads both from the
+  parameters payload.
+- arab_raam_split stays OFF. The two follow-up candidates (each list's own
+  shrunk LOO record for the haredi family; a partial Ra'am allocation) are
+  not registered yet.

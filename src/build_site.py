@@ -190,7 +190,7 @@ def build_params(names: dict) -> dict:
         "raam_joins": f(B["raam_joins"], 2), "raam_supports": f(B["raam_supports"], 2),
         "jl_supports": f(B["jl_supports"], 2), "shas_defects": f(B["shas_defects"], 2),
         "utj_defects": f(B["utj_defects"], 2), "liberman_haredi_ok": f(B["liberman_haredi_ok"], 2),
-        "likud_sans_bibi": f(B["likud_sans_bibi"], 2), "centre_defects": f(B["centre_defects"], 2),
+        "likud_sans_bibi": f(B["likud_sans_bibi"], 3), "centre_defects": f(B["centre_defects"], 2),
         "amcha_right_pct": f(B["amcha_right"] * 100, 0), "pm_neff": str(gf.PM_ALLOC_NEFF),
         "num": {
             "bloc": round(float(bm.BLOC_SWING_SD * bm.EVENT_RISK), 2),
@@ -251,8 +251,14 @@ def build_payload() -> dict:
     # shock's clip at zero, so it overstates the list's own polling)
     mshare = dict(zip(ms["list"], ms["share_median"]))
     # vote below the threshold on the vector the central seats use
-    # (official_forecast.allocate_central renormalises the median vector)
-    v = ms["share_median"] / ms["share_median"].sum()
+    # (official_forecast.allocate_central renormalises the median vector;
+    # under simulate.THRESHOLD_ALL_VALID, dossier s.47, it tests the raw
+    # median as a share of all valid votes)
+    import simulate as _sim
+    if _sim.THRESHOLD_ALL_VALID:
+        v = ms["share_median"] * _sim.valid_scale()
+    else:
+        v = ms["share_median"] / ms["share_median"].sum()
     below = round(float(v[v < 0.0325].sum()) * 100, 1)
     polls_all = pd.read_csv(PROCESSED / "polls.csv", parse_dates=["fieldwork_end"])
     p26 = polls_all[polls_all["cycle"].astype(str) == "2026"]

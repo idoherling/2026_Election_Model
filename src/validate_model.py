@@ -16,7 +16,9 @@ Calibration constants (bloc swing sd, family shocks) are re-estimated
 leave-one-cycle-out, so no cycle is graded with numbers that saw its own
 outcome. Debut widening is off here (per-cycle debut sets are not tracked),
 which makes stated intervals slightly conservative. Historical surplus pairs
-are approximations of the registered agreements.
+are approximations of the registered agreements (PAST_PAIRS); the registered
+ones are REGISTERED_PAIRS (dossier s.47), the Bayesian harness's default
+since 15 Oct (HARNESS_REG_PAIRS=0 restores PAST_PAIRS).
 
 Outputs:
     data/processed/model_validation.csv
@@ -50,6 +52,63 @@ PAST_PAIRS = {  # approximations of the registered agreements
     "2021": [("likud", "rzp"), ("shas", "utj"), ("yesh_atid", "blue_white")],
     "2022": [("likud", "rzp"), ("shas", "utj"), ("yesh_atid", "blue_white")],
 }
+# Surplus-vote agreements actually REGISTERED with the CEC (Knesset Elections
+# Law s.67; candidate seat_law_fidelity part A, 2026-10-15, dossier s.47).
+# PAST_PAIRS above differs from these in 7 of 8 cycles, and the Bayesian
+# harness silently dropped six of its entries whose ids DECOMP renamed
+# (pair_alias off). Ids are the era's registry ids (results.csv); the
+# harness resolves them through the cycle's DECOMP map, so every pair whose
+# two lists are separate modelled columns is applied. A pair whose partner
+# is not modelled, or which falls inside one merged block (2009 JH-NU and
+# Hadash-Ra'am-Ta'al, 2013 Hadash-Balad: the harness grades those families
+# as one list), cannot apply. validate_seat_law.py checks that these pairs
+# reproduce the official allocation from the CEC final counts
+# (data/cec_final_counts.csv) in all eight cycles.
+REGISTERED_PAIRS = {
+    "2009": [("labor", "meretz"), ("likud", "yisrael_beytenu"),
+             ("hadash_taal", "raam_taal"), ("utj", "shas"),
+             ("jewish_home", "national_union"), ("kadima", "greens"),
+             ("tzabar", "gil"), ("green_movement_meimad", "yisrael_hazaka")],
+    "2013": [("labor", "yesh_atid"), ("likud", "jewish_home"),
+             ("hadash_taal", "balad"), ("utj", "shas"), ("kadima", "am_shalem"),
+             ("dor_bonei_haaretz", "social_justice"), ("hatnuah", "meretz")],
+    "2015": [("zionist_union", "meretz"), ("likud", "jewish_home"),
+             ("utj", "shas"), ("yisrael_beytenu", "kulanu")],
+    "2019a": [("labor", "meretz"), ("new_right", "yisrael_beytenu"),
+              ("raam_balad", "hadash_taal"), ("likud", "urwp"), ("shas", "utj"),
+              ("kulanu_haverim", "pirates")],
+    "2019s": [("blue_white", "yisrael_beytenu"), ("likud", "yamina"),
+              ("labor_gesher", "dem_union"), ("utj", "shas"), ("noam", "otzma")],
+    "2020": [("blue_white", "labor_gesher_meretz"), ("likud", "yamina"),
+             ("utj", "shas")],
+    "2021": [("likud", "rzp"), ("blue_white", "nep"), ("yamina", "new_hope"),
+             ("yesh_atid", "yisrael_beytenu"), ("labor", "meretz"), ("utj", "shas")],
+    "2022": [("yesh_atid", "blue_white"), ("labor", "meretz"), ("utj", "shas"),
+             ("likud", "rzp"), ("yesh_kivun", "pirates")],
+}
+REGISTERED_PAIR_SOURCES = {
+    "2009": "CEC notice 'הודעה בדבר התקשרויות בין רשימות מועמדים' (18th Knesset), "
+            "Yalkut HaPirsumim 5912, 1 Feb 2009 - cited by he.wikipedia 'הסכם עודפים' "
+            "(fn 34-35) and hamichlol 'הבחירות לכנסת השמונה עשרה' (fn 57), identical "
+            "8 pairs; Gil-Tzabar also JPost 28 Jan 2009 (article 130972)",
+    "2013": "CEC notice, 19th Knesset (he.wikipedia 'הסכם עודפים' fn 36); the same "
+            "seven pairs in en.wikipedia '2013 Israeli legislative election'",
+    "2015": "CEC notice, 20th Knesset (he.wikipedia 'הסכם עודפים' fn 37)",
+    "2019a": "CEC notice, 21st Knesset (he.wikipedia 'הסכם עודפים' fn 38); "
+             "JPost 585334: Blue and White signed no agreement",
+    "2019s": "CEC notice, 22nd Knesset (he.wikipedia 'הסכם עודפים' fn 39); "
+             "B&W-YB also JNS 'Yisrael Beiteinu, Blue and White parties sign vote-sharing deal'",
+    "2020": "he.wikipedia 'הסכם עודפים' (23rd, uncited) = Dayan Center, 'Comments on "
+            "the Electoral Strength of the Joint Arab List' (Bayan, Oct 2020): "
+            "UTJ-Shas, Likud-Yamina, B&W-Labor-Gesher-Meretz",
+    "2021": "he.wikipedia 'הסכם עודפים' (24th, uncited); Times of Israel 'Sa'ar's New "
+            "Hope, Bennett's Yamina sign surplus vote-sharing deal' (and YA-YB the same "
+            "day); Ynetnews B17bk9plu (B&W-New Economic)",
+    "2022": "he.wikipedia 'הסכם עודפים' (25th, uncited) = Kenig, IDI 'How Votes "
+            "Become Knesset Seats' (16 Mar 2026, en.idi.org.il/articles/63750)",
+}
+# Every cycle is also cross-checked by reproduction: the registered pairs
+# give the official seats from the CEC final counts (validate_seat_law.py).
 
 
 def loo_calibration(fam: pd.DataFrame, test_cycle: str):

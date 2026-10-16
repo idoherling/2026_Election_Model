@@ -109,6 +109,37 @@ SURPLUS_PAIRS = [
 # warns). Harness: provably bit-identical (no graded window has a duplicate
 # component or a block in two pairs). OFF = legacy behaviour, bit-for-bit.
 PAIR_RESOLVER_FIX = True
+
+# Threshold denominator (candidate seat_law_fidelity part B, 2026-10-15,
+# dossier s.47). Knesset Elections Law s.81(a): a list passes with 3.25% of
+# ALL valid votes. Every simulated share vector sums to one over the
+# MODELLED lists, so the plain test `sh >= THRESHOLD` measures each list
+# against the modelled pie, i.e. a threshold of 3.25% x (1 - u) of valid
+# votes, u = the vote of the lists the model does not carry. Flag ON: the
+# test is sh x (1 - UNMODELLED_SHARE) >= THRESHOLD, and the official central
+# count tests the UN-renormalised median shares (official_forecast.
+# allocate_central; medians are not additive, the median vector sums to
+# ~0.96). The seat division among passing lists (integer quota, d'Hondt on
+# factions) is scale-invariant and unchanged. u = 0.01: the reserve
+# implied_share_obs gives unitemized lists in every seat-derived poll row;
+# the harness latents sit 1.00-1.11% above the observed scale in 2015-2022;
+# CEC record of the vote outside the modelled lists 0.3-1.5% (s.47).
+# GRADED 15 Oct (s.47.2): loses threshold Brier at eve, D-7 and D-21 (also
+# at u = .005, LOO and the realised u) - the stack already under-predicts
+# straddler survival (71% passed vs 52% stated) - so the flag stays OFF
+# until the straddler layers are re-measured with it.
+THRESHOLD_ALL_VALID = False
+UNMODELLED_SHARE = 0.01
+
+
+def valid_scale(u=None) -> float:
+    """Modelled-pie share -> share of ALL valid votes (1 - u); 1.0 with
+    THRESHOLD_ALL_VALID off. u overrides the module value (harness)."""
+    if u is None:
+        u = UNMODELLED_SHARE if THRESHOLD_ALL_VALID else 0.0
+    return 1.0 - float(u)
+
+
 # The 2026 Bayesian pipeline's vocabulary (bayes_model.prepare_data remaps).
 PAIR_ALIASES_2026 = {"together": "bennett_2026+yesh_atid",
                      "joint_list": "balad+hadash_taal"}
@@ -329,9 +360,10 @@ def simulate_core(avg: pd.DataFrame, pairs: list[tuple[str, str]],
     pair_idx, _, _ = resolve_pairs(pairs, list(avg["components"]))
 
     seats = np.zeros((n_sims, n_lists), dtype=int)
+    vs = valid_scale()   # s.81(a) denominator (THRESHOLD_ALL_VALID, s.47)
     for s in range(n_sims):
         sh = shares[s]
-        passed = sh >= threshold
+        passed = sh * vs >= threshold
         if not passed.any():
             continue
         votes = np.where(passed, sh, 0.0)

@@ -399,14 +399,16 @@ ARAB_FAMILY_FORM = "turnout"      # "turnout" (shipped) | "additive_e0"
 # the harness arm arab_regB is e0 = a + k x implied, fitted on the record
 # (full sample a -0.634, k 0.247). None = shipped (no intercept).
 ARAB_TURNOUT_INTERCEPT = -0.634   # shipped 15 Oct (s.43); seats, se 0.41
-# Sector family terms (2026-10-15, dossier s.51), both OFF by default.
-# HAREDI_FAMILY_FORM "e0" (candidate hared_e0): the haredi family mean is
+# Sector family terms (2026-10-15, dossier s.51). hared_e0 SHIPPED 16 Oct
+# (passed the pre-registered rule; harness-neutral consistency correction,
+# s.51.5); arab_raam_split OFF.
+# HAREDI_FAMILY_FORM "e0" (hared_e0): the haredi family mean is
 # the RAW final-poll family error (decompose()["family_e0"], -0.980 seats)
 # instead of the e1 mean measured after removing the bloc swing (-1.352):
 # the projected bloc swing has mean zero, so the NB over-poll e1 strips out
 # is applied nowhere (the s.43 argument for the Arab term). The sd stays
 # the e1 sd. "e1" = shipped.
-HAREDI_FAMILY_FORM = "e1"         # "e1" (shipped) | "e0"
+HAREDI_FAMILY_FORM = "e0"         # "e0" (shipped 16 Oct) | "e1" (to 15 Oct)
 # ARAB_INTERCEPT_ALLOC "lineage" (candidate arab_raam_split): the regB
 # intercept keeps its family total but is split between the Ra'am lineage
 # and the other Arab lists by their under-count shares on the split-cycle
@@ -484,6 +486,38 @@ ANCHORS_ON = False
 # 0.6-0.8 WORSEN MAE (1.90 at 0.6) through the threshold nonlinearity,
 # and coverage stays ~98% at 0.9 - the over-width lives in other layers.
 RESID_SCALE = 0.9
+# Uncertainty calibration (2026-10-15, dossier s.48) - candidate flags, all
+# at their shipped values here. Mirrored in validate_bayes (layers t_unit /
+# resid_space / resid_df).
+# T_UNIT_VAR: a Student-t(T_DF) draw has sd sqrt(df/(df-2)) = 1.29 at df 5,
+#   so the bloc swing, the haredi family shock and the Arab turnout draw
+#   were 1.29x their measured / declared sd. True scales each t draw to unit
+#   variance (the tails keep df 5). EVENT_RISK stays on top in production.
+# RESID_SPACE: which record the per-list residual line comes from: "seat"
+#   (shipped: decompose(), seat errors, with the pooled-index collision of
+#   s.48), "seat_fix" (the same record, unique labels) or "vote" (vote-share
+#   errors of the lists that ran, error_decomposition.decompose_vote).
+# RESID_T_DF: None = Gaussian residual; a number = Student t with that df,
+#   sd matched (the draw is scaled by sqrt((df-2)/df)).
+T_UNIT_VAR = False
+RESID_SPACE = "seat"
+RESID_T_DF = None
+
+
+def resid_line(space: str | None = None) -> tuple:
+    """(base, slope) of the per-list residual sd in seats (x share x 120),
+    full sample, from the record RESID_SPACE names."""
+    space = RESID_SPACE if space is None else space
+    if space == "seat":
+        return _P["resid_base"], _P["resid_slope"]
+    if space == "seat_fix":
+        q = _decompose(index_fix=True)
+        return q["resid_base"], q["resid_slope"]
+    if space == "vote":
+        from error_decomposition import decompose_vote
+        q = decompose_vote()
+        return q["resid_base"], q["resid_slope"]
+    raise ValueError(f"RESID_SPACE {space!r}")
 # Accuracy round four #2 (2026-09-10): joint width knobs, calibrated on the
 # horizon cache (validate_horizon STACK_GRID x RW_GRID). STACK_SCALE
 # multiplies the election-day shock stack (bloc swing, family shocks, the
@@ -1447,7 +1481,8 @@ def project(data, idata, rng, config="current", config_params=None):
     # Per-list election-day shock: residual final-poll error beyond
     # bloc/family components, calibrated on the backtest.
     base0 = shares.mean(axis=0)
-    sd_list = (LIST_SHOCK_BASE + LIST_SHOCK_SLOPE * base0 * 120) / 120.0 * RESID_SCALE * STACK_SCALE
+    _rb, _rs = (LIST_SHOCK_BASE, LIST_SHOCK_SLOPE) if RESID_SPACE == "seat" else resid_line()
+    sd_list = (_rb + _rs * base0 * 120) / 120.0 * RESID_SCALE * STACK_SCALE
     comps0 = [set(c.split("+")) for c in data["components"]]
     is_new = np.array([bool(cs & NEW_LIST_IDS) for cs in comps0])
     sd_list = np.where(is_new, sd_list * NEW_LIST_MULT, sd_list)
@@ -1460,8 +1495,11 @@ def project(data, idata, rng, config="current", config_params=None):
         # base-weighted layers below (swing, family, certainty, gevalt)
         # then leave the column at zero too
         sd_list = np.where(gone, 0.0, sd_list)
-    shares = np.clip(
-        shares + rng.standard_normal(shares.shape) * sd_list, 0, None)
+    if RESID_T_DF is None:
+        eps = rng.standard_normal(shares.shape)
+    else:   # fat-tailed residual, sd matched (s.48)
+        eps = rng.standard_t(RESID_T_DF, shares.shape) * np.sqrt((RESID_T_DF - 2.0) / RESID_T_DF)
+    shares = np.clip(shares + eps * sd_list, 0, None)
     shares /= shares.sum(axis=1, keepdims=True)
 
     labels = [short_name(c, names) for c in data["components"]]
@@ -1531,7 +1569,9 @@ def project(data, idata, rng, config="current", config_params=None):
     # Industry shocks (unidentifiable from polls).
     base = shares.mean(axis=0)
     is_nb = blocs == "netanyahu_bloc"
-    swing = rng.standard_t(T_DF, N_PROJ) * BLOC_SWING_SD * EVENT_RISK * STACK_SCALE / 120.0
+    # T_UNIT_VAR (s.48): unit-variance t draws, so each shock has its measured sd
+    _tu = float(np.sqrt((T_DF - 2.0) / T_DF)) if T_UNIT_VAR else 1.0
+    swing = rng.standard_t(T_DF, N_PROJ) * _tu * BLOC_SWING_SD * EVENT_RISK * STACK_SCALE / 120.0
     w_nb, w_op = np.where(is_nb, base, 0), np.where(~is_nb, base, 0)
     shares = shares + swing[:, None] * (w_nb / w_nb.sum() - w_op / w_op.sum())
 
@@ -1553,7 +1593,7 @@ def project(data, idata, rng, config="current", config_params=None):
                                 cov[:len(fam_names), :len(fam_names)],
                                 size=N_PROJ)
     mix = np.sqrt(rng.chisquare(T_DF, N_PROJ) / T_DF)
-    tdraws = z / mix[:, None]
+    tdraws = z / mix[:, None] * _tu
     for k, f in enumerate(fam_names):
         mu_f, sd_f = FAMILY_SHOCK[f]
         sd_f = sd_f * STACK_SCALE
@@ -1755,9 +1795,12 @@ def project(data, idata, rng, config="current", config_params=None):
     project.last_labels = list(labels)
     project.last_components = ["+".join(sorted(c)) for c in comps]
     seats = np.zeros((N_PROJ, shares.shape[1]), dtype=int)
+    # s.81(a): 3.25% of ALL valid votes; the shares here sum to one over the
+    # modelled lists (simulate.THRESHOLD_ALL_VALID, dossier s.47; 1.0 = off)
+    vs = _sim.valid_scale()
     for i in range(N_PROJ):
         sh = shares[i]
-        passed = sh >= THRESHOLD
+        passed = sh * vs >= THRESHOLD
         if not passed.any():
             continue
         votes = np.where(passed, sh, 0.0)

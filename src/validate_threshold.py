@@ -68,6 +68,8 @@ def main(layers: dict | None = None) -> pd.DataFrame:
         # since 15 Oct. Pair aliases as in the other two harnesses, under
         # fidelity only (the shipped straddler record was made without them)
         params["arab_tab"] = _vb.arab_turnout_params(cycle)
+        params["registered_pairs"] = _vb.REGISTERED_PAIRS[cycle]   # dossier s.47
+        params["cycle"] = cycle
         if _vb.FIDELITY:
             params["pair_alias"] = _vb._decomp_map(cycle)
         for h in HORIZONS:
