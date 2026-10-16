@@ -1,22 +1,22 @@
 list,bloc,mean,p05,p50,p95,p_pass,p_largest,asof
-Likud,Netanyahu bloc,25.3,17,25,34,1.0,0.635,2026-10-15
-Yashar,Anti-Netanyahu bloc,22.7,15,23,30,1.0,0.363,2026-10-15
-Bennett 2026 + Yesh Atid,Anti-Netanyahu bloc,11.5,7,11,17,0.993,0.002,2026-10-15
-The Democrats,Anti-Netanyahu bloc,9.2,5,9,13,0.983,0.0,2026-10-15
-Balad + Hadash-Ta'al,Arab parties,8.9,5,9,13,0.982,0.0,2026-10-15
-United Torah Judaism,Netanyahu bloc,8.7,6,9,11,0.999,0.0,2026-10-15
+Likud,Netanyahu bloc,25.3,17,25,34,1.0,0.634,2026-10-15
+Yashar,Anti-Netanyahu bloc,22.8,16,23,30,1.0,0.365,2026-10-15
+Bennett 2026 + Yesh Atid,Anti-Netanyahu bloc,11.4,6,11,17,0.992,0.001,2026-10-15
+The Democrats,Anti-Netanyahu bloc,9.2,5,9,13,0.982,0.0,2026-10-15
+Balad + Hadash-Ta'al,Arab parties,9.0,5,9,13,0.984,0.0,2026-10-15
+United Torah Judaism,Netanyahu bloc,8.6,6,9,11,0.998,0.0,2026-10-15
 Shas,Netanyahu bloc,8.5,6,8,11,0.994,0.0,2026-10-15
-Yisrael Beytenu,Anti-Netanyahu bloc,8.2,4,8,12,0.966,0.0,2026-10-15
-Otzma Yehudit,Netanyahu bloc,5.6,0,6,11,0.792,0.0,2026-10-15
-Ra'am,Arab parties,4.8,0,5,9,0.77,0.0,2026-10-15
-Religious Zionist Party,Netanyahu bloc,3.3,0,4,8,0.563,0.0,2026-10-15
-Amcha Yisrael,Netanyahu bloc,1.6,0,0,8,0.253,0.0,2026-10-15
-Reservists – Economic Party,Unaligned,1.4,0,0,8,0.232,0.0,2026-10-15
+Yisrael Beytenu,Anti-Netanyahu bloc,8.2,4,8,12,0.968,0.0,2026-10-15
+Otzma Yehudit,Netanyahu bloc,5.6,0,6,11,0.796,0.0,2026-10-15
+Ra'am,Arab parties,4.7,0,5,9,0.761,0.0,2026-10-15
+Religious Zionist Party,Netanyahu bloc,3.3,0,4,8,0.56,0.0,2026-10-15
+Amcha Yisrael,Netanyahu bloc,1.6,0,0,8,0.252,0.0,2026-10-15
+Reservists – Economic Party,Unaligned,1.4,0,0,7,0.225,0.0,2026-10-15
 The Haredi Public,Netanyahu bloc,0.1,0,0,0,0.012,0.0,2026-10-15
-Code Black – Shield of the Torah World,unknown,0.1,0,0,0,0.015,0.0,2026-10-15
+Code Black – Shield of the Torah World,unknown,0.1,0,0,0,0.024,0.0,2026-10-15
 Blue and White,Unaligned,0.1,0,0,0,0.016,0.0,2026-10-15
-Noam,Netanyahu bloc,0.0,0,0,0,0.004,0.0,2026-10-15
+Noam,Netanyahu bloc,0.0,0,0,0,0.005,0.0,2026-10-15
 Israel First,unknown,0.0,0,0,0,0.006,0.0,2026-10-15
-Ahi – Back to the Roots,unknown,0.0,0,0,0,0.007,0.0,2026-10-15
+Ahi – Back to the Roots,unknown,0.0,0,0,0,0.008,0.0,2026-10-15
 Unity,Unaligned,0.0,0,0,0,0.0,0.0,2026-10-15
 Tzomet Beit Yisrael,unknown,0.0,0,0,0,0.007,0.0,2026-10-15

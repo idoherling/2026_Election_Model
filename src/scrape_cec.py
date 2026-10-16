@@ -99,7 +99,7 @@ PARTY_KEYWORDS = [
     # RZP-Zehut list (matched by its RZP tokens above) or a merger
     # SCENARIO line ("if RZP + Amcha + Zehut united ... 8.9%"), never a
     # list of its own.
-    ("נעם", "noam"),
+    ("נעם", "noam"), ("נועם", "noam"),
     # Filing-day lists (Sept 8): the Reservists-Economic list (Hendel +
     # Zelekha) continues the zionist_home series; pre-merger NEP lines map
     # to the absorbed id so they are not mistaken for the merged list.
@@ -113,7 +113,7 @@ PARTY_KEYWORDS = [
 # Lines that pose a hypothetical ("if X and Y united ...") are scenario
 # tables, not the vote-intention table.
 SCENARIO_TOKENS = ("איחוד", "יתאחדו", "אם יהיה", "אם  יהיה", "להצטרף")
-UNDECIDED_TOKENS = ("יודע לא", "לא יודע", "מתלבט", "החלטתי לא", "לא החלטתי")
+UNDECIDED_TOKENS = ("לא החליט", "טרם החליט", "יודע לא", "לא יודע", "מתלבט", "החלטתי לא", "לא החלטתי")
 # Leader names also appear in PM-suitability tables ("גדי איזנקוט 32%"); a
 # leader-only keyword counts as a party line only when the line names a
 # list ("בראשות" / "בהובלת" / "בהנהגת").
@@ -276,11 +276,22 @@ def parse_pdf(path: Path):
         # a which-government question, not the Unity list)
         if "ממשלת" in ln or "ממשלה" in ln:
             continue
+        # "lists below 1%: Blue and White, Code Black, Noam" (Direct Polls
+        # 4211) names several lists with no percentage of their own
+        if re.search(r"מתחת\s*ל[-־]?\s*\d", ln):
+            continue
         runs = PCT_RUN.findall(ln)
         if not runs:
             # A long list name wraps: the keyword sits on this line and the
             # percentage on the next, which names no party of its own.
             nxt = lines[i + 1] if i + 1 < len(lines) else ""
+            # a name wrapped over THREE lines ("המילואימניקים" / "והכלכלית" /
+            # "2.2%", Direct Polls 4211): skip one keyword-free middle line
+            if (not PCT_RUN.findall(nxt) and i + 2 < len(lines)
+                    and not any(kw in nxt for kw, _ in PARTY_KEYWORDS if kw not in LEADER_KEYWORDS)
+                    and PCT_RUN.findall(lines[i + 2])
+                    and not any(kw in lines[i + 2] for kw, _ in PARTY_KEYWORDS if kw not in LEADER_KEYWORDS)):
+                nxt = nxt + " " + lines[i + 2]
             # the continuation line may carry the leader's name (Maagar:
             # "הרשימה המשותפת בראשות פרופ' יוסף" / "ג׳בארין 6% ...")
             if (any(kw in ln for kw, _ in PARTY_KEYWORDS)

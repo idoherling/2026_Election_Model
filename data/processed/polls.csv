@@ -23742,3 +23742,16 @@ poll_id,cycle,pollster,publisher,fieldwork_end,sample_size,party_id,seats,vote_p
 2026_20261015_tatika,2026,Tatika,Zman Yisrael,2026-10-15,500.0,yashar,26,,True,2026_main,2026,2026_main:0:4
 2026_20261015_tatika,2026,Tatika,Zman Yisrael,2026-10-15,500.0,yisrael_beytenu,9,,True,2026_main,2026,2026_main:0:4
 2026_20261015_tatika,2026,Tatika,Zman Yisrael,2026-10-15,500.0,zionist_home,4,,True,2026_main,2026,2026_main:0:4
+2026_20261015_kantar,2026,Kantar,Israel Hayom,2026-10-15,551.0,yashar,24,,True,manual,manual,https://www.israelhayom.co.il/news/politics/article/21636491
+2026_20261015_kantar,2026,Kantar,Israel Hayom,2026-10-15,551.0,likud,21,,True,manual,manual,https://www.israelhayom.co.il/news/politics/article/21636491
+2026_20261015_kantar,2026,Kantar,Israel Hayom,2026-10-15,551.0,together,12,,True,manual,manual,https://www.israelhayom.co.il/news/politics/article/21636491
+2026_20261015_kantar,2026,Kantar,Israel Hayom,2026-10-15,551.0,otzma,9,,True,manual,manual,https://www.israelhayom.co.il/news/politics/article/21636491
+2026_20261015_kantar,2026,Kantar,Israel Hayom,2026-10-15,551.0,joint_list,9,,True,manual,manual,https://www.israelhayom.co.il/news/politics/article/21636491
+2026_20261015_kantar,2026,Kantar,Israel Hayom,2026-10-15,551.0,yisrael_beytenu,8,,True,manual,manual,https://www.israelhayom.co.il/news/politics/article/21636491
+2026_20261015_kantar,2026,Kantar,Israel Hayom,2026-10-15,551.0,democrats,8,,True,manual,manual,https://www.israelhayom.co.il/news/politics/article/21636491
+2026_20261015_kantar,2026,Kantar,Israel Hayom,2026-10-15,551.0,shas,7,,True,manual,manual,https://www.israelhayom.co.il/news/politics/article/21636491
+2026_20261015_kantar,2026,Kantar,Israel Hayom,2026-10-15,551.0,utj,7,,True,manual,manual,https://www.israelhayom.co.il/news/politics/article/21636491
+2026_20261015_kantar,2026,Kantar,Israel Hayom,2026-10-15,551.0,rzp,6,,True,manual,manual,https://www.israelhayom.co.il/news/politics/article/21636491
+2026_20261015_kantar,2026,Kantar,Israel Hayom,2026-10-15,551.0,raam,5,,True,manual,manual,https://www.israelhayom.co.il/news/politics/article/21636491
+2026_20261015_kantar,2026,Kantar,Israel Hayom,2026-10-15,551.0,zionist_home,4,,True,manual,manual,https://www.israelhayom.co.il/news/politics/article/21636491
+2026_20261015_kantar,2026,Kantar,Israel Hayom,2026-10-15,551.0,amcha_yisrael,0,,True,manual,manual,https://www.israelhayom.co.il/news/politics/article/21636491
