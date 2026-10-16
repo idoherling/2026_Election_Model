@@ -86,6 +86,7 @@ def run(out: Path, horizons, seeds, cycles, tag: str = "") -> None:
         params["pair_alias"] = vb._decomp_map(cycle)
         params["arab_tab"] = vb.arab_turnout_params(cycle)
         params["arab_lineage"] = bm.arab_lineage_share(exclude_cycle=cycle)   # s.51
+        params["haredi_lineage"] = bm.haredi_lineage_share(exclude_cycle=cycle)   # s.54
         vb.add_calibration_params(params, cycle)
         for hz in horizons:
             if hz == "eve":

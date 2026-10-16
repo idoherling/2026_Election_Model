@@ -68,6 +68,7 @@ def main() -> None:
         from validate_bayes import arab_turnout_params, add_calibration_params
         params["arab_tab"] = arab_turnout_params(cycle)   # dossier s.43
         params["arab_lineage"] = bm.arab_lineage_share(exclude_cycle=cycle)   # s.51
+        params["haredi_lineage"] = bm.haredi_lineage_share(exclude_cycle=cycle)   # s.54
         from validate_model import REGISTERED_PAIRS
         params["registered_pairs"] = REGISTERED_PAIRS[cycle]   # dossier s.47
         params["cycle"] = cycle

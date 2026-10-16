@@ -272,6 +272,10 @@ def parse_pdf(path: Path):
         # "שס" inside "שסרבו"
         if "סרבו" in ln or "סירבו" in ln:
             continue
+        # government-preference rows ("ממשלת אחדות 21.8%" in Next Data 4212,
+        # a which-government question, not the Unity list)
+        if "ממשלת" in ln or "ממשלה" in ln:
+            continue
         runs = PCT_RUN.findall(ln)
         if not runs:
             # A long list name wraps: the keyword sits on this line and the

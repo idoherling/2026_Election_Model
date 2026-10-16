@@ -847,7 +847,6 @@ ref,pollster,fieldwork_end,party_id,raw_pct,shown_passing
 4146,Kantar,2026-09-14,haredi_public,0.8,True
 4146,Kantar,2026-09-14,noam,0.5,True
 4146,Kantar,2026-09-14,israel_first,0.5,True
-4146,Kantar,2026-09-14,unity,27.0,True
 4149,Filber,2026-09-15,likud,21.0,True
 4149,Filber,2026-09-15,yashar,17.0,True
 4149,Filber,2026-09-15,shas,7.0,True
@@ -862,7 +861,6 @@ ref,pollster,fieldwork_end,party_id,raw_pct,shown_passing
 4149,Filber,2026-09-15,zionist_home,2.1,True
 4149,Filber,2026-09-15,amcha_yisrael,2.3,True
 4149,Filber,2026-09-15,blue_white,0.4,True
-4149,Filber,2026-09-15,unity,24.0,True
 4150,Filber,2026-09-15,likud,23.1,True
 4150,Filber,2026-09-15,yashar,16.0,True
 4150,Filber,2026-09-15,shas,7.7,True
@@ -877,7 +875,6 @@ ref,pollster,fieldwork_end,party_id,raw_pct,shown_passing
 4150,Filber,2026-09-15,zionist_home,2.1,True
 4150,Filber,2026-09-15,amcha_yisrael,2.3,True
 4150,Filber,2026-09-15,blue_white,0.4,True
-4150,Filber,2026-09-15,unity,24.0,True
 4151,Maagar Mochot,2026-09-15,yashar,15.0,True
 4151,Maagar Mochot,2026-09-15,likud,14.0,True
 4151,Maagar Mochot,2026-09-15,together,12.0,True
@@ -1178,7 +1175,6 @@ ref,pollster,fieldwork_end,party_id,raw_pct,shown_passing
 4192,Filber,2026-10-07,blue_white,1.3,True
 4192,Filber,2026-10-07,haredi_public,0.4,True
 4192,Filber,2026-10-07,ahi,0.1,True
-4192,Filber,2026-10-07,unity,31.0,True
 4197,Lazar,2026-10-07,yashar,15.9,True
 4197,Lazar,2026-10-07,likud,15.2,True
 4197,Lazar,2026-10-07,together,11.2,True
@@ -1226,3 +1222,61 @@ ref,pollster,fieldwork_end,party_id,raw_pct,shown_passing
 4200,Kantar,2026-10-11,haredi_public,0.9,True
 4200,Kantar,2026-10-11,ahi,0.5,True
 4200,Kantar,2026-10-11,code_black,0.7,True
+4202,Midgam,2026-10-12,yashar,18.2,True
+4202,Midgam,2026-10-12,likud,16.1,True
+4202,Midgam,2026-10-12,together,10.4,True
+4202,Midgam,2026-10-12,democrats,7.3,True
+4202,Midgam,2026-10-12,yisrael_beytenu,7.2,True
+4202,Midgam,2026-10-12,otzma,6.4,True
+4202,Midgam,2026-10-12,shas,6.3,True
+4202,Midgam,2026-10-12,balad+hadash_taal,6.2,True
+4202,Midgam,2026-10-12,utj,5.6,True
+4202,Midgam,2026-10-12,rzp,4.8,True
+4202,Midgam,2026-10-12,raam,4.1,True
+4202,Midgam,2026-10-12,zionist_home,3.4,True
+4202,Midgam,2026-10-12,amcha_yisrael,1.8,True
+4207,Lazar,2026-10-12,yashar,15.9,True
+4207,Lazar,2026-10-12,likud,14.9,True
+4207,Lazar,2026-10-12,together,11.2,True
+4207,Lazar,2026-10-12,democrats,8.5,True
+4207,Lazar,2026-10-12,yisrael_beytenu,7.2,True
+4207,Lazar,2026-10-12,otzma,6.3,True
+4207,Lazar,2026-10-12,utj,6.2,True
+4207,Lazar,2026-10-12,balad+hadash_taal,6.4,True
+4207,Lazar,2026-10-12,shas,5.5,True
+4207,Lazar,2026-10-12,rzp,5.4,True
+4207,Lazar,2026-10-12,raam,3.9,True
+4207,Lazar,2026-10-12,zionist_home,3.5,True
+4207,Lazar,2026-10-12,amcha_yisrael,2.8,True
+4207,Lazar,2026-10-12,blue_white,1.1,True
+4207,Lazar,2026-10-12,haredi_public,1.0,True
+4207,Lazar,2026-10-12,noam,0.2,True
+4211,Direct Polls,2026-10-13,likud,20.5,True
+4211,Direct Polls,2026-10-13,yashar,16.4,True
+4211,Direct Polls,2026-10-13,together,9.7,True
+4211,Direct Polls,2026-10-13,otzma,7.2,True
+4211,Direct Polls,2026-10-13,democrats,7.1,True
+4211,Direct Polls,2026-10-13,utj,5.8,True
+4211,Direct Polls,2026-10-13,yisrael_beytenu,5.7,True
+4211,Direct Polls,2026-10-13,shas,5.4,True
+4211,Direct Polls,2026-10-13,balad+hadash_taal,5.2,True
+4211,Direct Polls,2026-10-13,raam,5.0,True
+4211,Direct Polls,2026-10-13,rzp,4.7,True
+4211,Direct Polls,2026-10-13,amcha_yisrael,3.1,True
+4211,Direct Polls,2026-10-13,blue_white,1.0,True
+4212,Filber,2026-10-14,likud,22.1,True
+4212,Filber,2026-10-14,yashar,15.6,True
+4212,Filber,2026-10-14,together,8.5,True
+4212,Filber,2026-10-14,shas,7.7,True
+4212,Filber,2026-10-14,balad+hadash_taal,7.0,True
+4212,Filber,2026-10-14,democrats,6.4,True
+4212,Filber,2026-10-14,utj,6.1,True
+4212,Filber,2026-10-14,otzma,5.9,True
+4212,Filber,2026-10-14,rzp,5.5,True
+4212,Filber,2026-10-14,raam,3.6,True
+4212,Filber,2026-10-14,yisrael_beytenu,4.0,True
+4212,Filber,2026-10-14,zionist_home,3.1,True
+4212,Filber,2026-10-14,amcha_yisrael,2.7,True
+4212,Filber,2026-10-14,blue_white,1.2,True
+4212,Filber,2026-10-14,haredi_public,0.4,True
+4212,Filber,2026-10-14,ahi,0.2,True

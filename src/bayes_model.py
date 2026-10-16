@@ -416,6 +416,10 @@ HAREDI_FAMILY_FORM = "e0"         # "e0" (shipped 16 Oct) | "e1" (to 15 Oct)
 # by base share. The turnout term stays base-proportional (a per-lineage
 # pass-through is not supported by the record, s.51). "base" = shipped.
 ARAB_INTERCEPT_ALLOC = "base"     # "base" (shipped) | "lineage"
+# HAREDI_ALLOC "record" (candidate hared_alloc, dossier s.54): the haredi
+# family MEAN is split between the Shas and UTJ lineages by their LOO
+# under-count shares (haredi_lineage_share); the random part stays by base.
+HAREDI_ALLOC = "base"             # "base" (shipped) | "record"
 
 
 def is_raam_lineage(comp) -> bool:
@@ -448,6 +452,48 @@ def arab_lineage_share(exclude_cycle: str | None = None) -> dict:
     ur, uo = max(0.0, -mr), max(0.0, -mo)
     return {"s_raam": (ur / (ur + uo)) if ur + uo > 0 else None,
             "m_raam": mr, "m_other": mo, "n": len(er)}
+
+
+def haredi_lineage_share(exclude_cycle: str | None = None) -> dict:
+    """Shas's share of the haredi family's under-count (dossier s.54): over
+    the record's cycles (the graded one left out), m_S / m_U = mean raw
+    error of the Shas-lineage rows / the other haredi rows; u = max(0, -m);
+    s_shas = u_S / (u_S + u_U), None when neither is under-counted."""
+    from error_decomposition import _frames, ORDER as _ORD
+    fr = _frames()
+    es, eu = [], []
+    for c in _ORD:
+        if c == exclude_cycle or c not in fr:
+            continue
+        a = fr[c][fr[c]["family"] == "haredi"]
+        iss = a["components"].str.split("+").map(lambda cs: any("shas" in x for x in cs))
+        if len(a) < 2 or not iss.any() or iss.all():
+            continue
+        es.append(float(a.loc[iss, "error"].sum()))
+        eu.append(float(a.loc[~iss, "error"].sum()))
+    if not es:
+        return {"s_shas": None, "m_shas": None, "m_utj": None, "n": 0}
+    ms, mu_ = float(np.mean(es)), float(np.mean(eu))
+    us, uu = max(0.0, -ms), max(0.0, -mu_)
+    return {"s_shas": (us / (us + uu)) if us + uu > 0 else None,
+            "m_shas": ms, "m_utj": mu_, "n": len(es)}
+
+
+def haredi_mean_weights(comps, in_f, base, s_shas):
+    """Allocation of the haredi family mean (sums to 1 over the haredi
+    columns): Shas-lineage columns take s_shas, the others 1 - s_shas, each
+    by base share; base shares when s_shas is None or a lineage is absent."""
+    w_f = np.where(in_f, base, 0.0)
+    w_base = w_f / w_f.sum()
+    if s_shas is None:
+        return w_base
+    iss = np.array([bool(in_f[i]) and any("shas" in x for x in (c if isinstance(c, (set, list)) else str(c).split("+")))
+                    for i, c in enumerate(comps)])
+    iso = np.asarray(in_f, bool) & ~iss
+    if not iss.any() or not iso.any() or w_f[iss].sum() <= 0 or w_f[iso].sum() <= 0:
+        return w_base
+    return (s_shas * np.where(iss, w_f, 0.0) / w_f[iss].sum()
+            + (1.0 - s_shas) * np.where(iso, w_f, 0.0) / w_f[iso].sum())
 
 
 def arab_intercept_weights(comps, in_f, base, s_raam):
@@ -500,6 +546,12 @@ RESID_SCALE = 0.9
 # RESID_T_DF: None = Gaussian residual; a number = Student t with that df,
 #   sd matched (the draw is scaled by sqrt((df-2)/df)).
 T_UNIT_VAR = False
+# House-effect centring (dossier s.53, candidate house_group): "firm" =
+# shipped (the fit's unweighted mean over firms); "operation" = re-centre
+# the endpoint draws on operations (one weight per operation, shared by its
+# firms; phone_mixed firms separate; sector-only firms weigh 0). An exact
+# re-parameterisation of the fitted posterior, applied at projection.
+HOUSE_CENTRE = "firm"
 RESID_SPACE = "seat"
 RESID_T_DF = None
 
@@ -1039,6 +1091,10 @@ def _merge_sector(obs: pd.DataFrame, block_of: dict, asof) -> pd.DataFrame:
     return obs
 
 
+CEC_MATCH_TOL = 0.03        # max list-share gap: a filing 1-3 days from a table poll is the same poll
+CEC_MATCH_TOL_SAME = 0.04   # same-day pairs (or too few common lists to compare)
+
+
 def _merge_cec(obs: pd.DataFrame, block_of: dict, asof) -> pd.DataFrame:
     """Swap in CEC-filed RAW percentages where available.
 
@@ -1104,13 +1160,59 @@ def _merge_cec(obs: pd.DataFrame, block_of: dict, asof) -> pd.DataFrame:
         n_by_ref = {k: float(v) for k, v in _n.items() if pd.notna(v) and 100 <= float(v) <= 20000}
     except (FileNotFoundError, KeyError):
         n_by_ref = {}
-    for ref, g in pcts.groupby("ref"):
+    # Matching (16 Oct): a filing displaces at most ONE table poll - the
+    # same firm's nearest within 3 days whose numbers agree with it (no
+    # list more than CEC_MATCH_TOL apart once both are normalised over the
+    # lists they share) - and a table poll is displaced at most once. The
+    # old rule displaced every same-firm poll within 3 days, so a firm
+    # polling twice a week lost a real poll (Lazar/Walla 4207 of 12 Oct
+    # also displaced Lazar/Maariv of 15 Oct; Next Data 4212 of 14 Oct
+    # displaced Filber's different 12 Oct table).
+    tab = obs[~obs["poll_id"].astype(str).str.startswith("cec")]
+
+    def _fvec(g):
+        fv = {}
+        for r in g.itertuples():
+            comp = remap.get(r.party_id, r.party_id).split("+")[0]
+            if comp in block_of:
+                fv[block_of[comp]] = fv.get(block_of[comp], 0.0) + r.raw_pct
+        return fv
+
+    def _dev(fv, h):
+        tv = h.groupby("block")["share"].sum()
+        common = [b_ for b_ in tv.index if b_ in fv and tv[b_] >= 0.03]
+        if len(common) < 4:
+            return np.nan
+        ft = np.array([fv[b_] for b_ in common]); tt = tv[common].values
+        return float(np.max(np.abs(ft / ft.sum() - tt / tt.sum())))
+
+    groups = sorted(pcts.groupby("ref"), key=lambda kv: (kv[1]["fieldwork_end"].iloc[0], kv[0]))
+    # pass 1: same-day pairs (the filing of a table poll); pass 2: 1-3 days
+    for same_day in (True, False):
+        for ref, g in groups:
+            if ref in disp_by_ref:
+                continue
+            pollster = g["pollster"].iloc[0]
+            fw = g["fieldwork_end"].iloc[0]
+            gapd = (tab["fieldwork_end"] - fw).dt.days.abs()
+            near = tab[(tab["pollster"] == pollster) & ((gapd == 0) if same_day else gapd.between(1, 3))
+                       & ~tab["poll_id"].isin(displaced)]
+            fv = _fvec(g)
+            best = None
+            for pid_, h in near.groupby("poll_id"):
+                dev = _dev(fv, h)
+                gap = abs((h["fieldwork_end"].iloc[0] - fw).days)
+                ok = (dev != dev or dev <= CEC_MATCH_TOL_SAME) if same_day else (dev == dev and dev <= CEC_MATCH_TOL)
+                if ok and (best is None or (gap, dev if dev == dev else 0.0) < best[:2]):
+                    best = (gap, dev if dev == dev else 0.0, pid_)
+            if best:
+                displaced.add(best[2])
+                disp_by_ref[ref] = {best[2]}
+    for ref, g in groups:
+        disp_by_ref.setdefault(ref, set())
+    for ref, g in groups:
         pollster = g["pollster"].iloc[0]
         fw = g["fieldwork_end"].iloc[0]
-        near = obs[(obs["pollster"] == pollster)
-                   & ((obs["fieldwork_end"] - fw).dt.days.abs() <= 3)]
-        displaced |= set(near["poll_id"])
-        disp_by_ref[ref] = set(near["poll_id"])
         for r in g.itertuples():
             comp = remap.get(r.party_id, r.party_id).split("+")[0]
             if comp not in block_of:
@@ -1429,6 +1531,41 @@ def _new_straddler_mask(comps, base) -> np.ndarray:
                      for i, cp in enumerate(comps)], dtype=bool)
 
 
+def operation_weights(firms) -> np.ndarray:
+    """Centring weight per firm for HOUSE_CENTRE "operation" (s.53): 1 /
+    (firms of its operation in the window); pollster_meta's methodology
+    class phone_mixed is not an operation; "(sector)" firms weigh 0."""
+    try:
+        meta = pd.read_csv(PROCESSED_DIR.parent / "pollster_meta.csv")
+        gmap = dict(zip(meta["pollster"], meta["correlation_group"]))
+    except FileNotFoundError:
+        gmap = {}
+    op = [f if gmap.get(f, f) == "phone_mixed" else gmap.get(f, f) for f in firms]
+    n = pd.Series(op).value_counts()
+    return np.array([0.0 if "(sector)" in f else 1.0 / n[o] for f, o in zip(firms, op)])
+
+
+def house_centre_shift(post, data, take) -> np.ndarray:
+    """Per-draw share shift that moves each list's house-effect centre from
+    the fit's unweighted mean over all firms to the operation-weighted mean
+    over the firms that actually poll that list in the window, at the
+    window's last week (dossier s.53): sum_f m_fb w_f (delta_c_fb +
+    slope_c_fb t_end) / sum_f m_fb w_f. A firm's effect on a list it never
+    polls is unidentified and gets no weight. Rows follow `take`."""
+    dc = post["delta_c"].values.reshape(-1, *post["delta_c"].shape[2:])[take]
+    if "slope_c" in post:
+        edges, _ = time_grid()
+        mids = (edges[:-1] + edges[1:]) / 2.0
+        t_end = (mids[-1] - mids.mean()) / WINDOW_DAYS
+        dc = dc + post["slope_c"].values.reshape(-1, *post["slope_c"].shape[2:])[take] * t_end
+    F_, B_ = dc.shape[1], dc.shape[2]
+    m = np.zeros((F_, B_))
+    m[np.asarray(data["firm_i"]), np.asarray(data["block_i"])] = 1.0
+    wm = m * operation_weights(data["firms"])[:, None]
+    den = wm.sum(axis=0)
+    return np.where(den > 0, np.einsum("fb,dfb->db", wm, dc) / np.where(den > 0, den, 1.0), 0.0)
+
+
 def project(data, idata, rng, config="current", config_params=None):
     """Election-day seat draws: RW forward + industry shocks + micro-lists.
 
@@ -1468,6 +1605,9 @@ def project(data, idata, rng, config="current", config_params=None):
     z_full = z_e if clr else np.concatenate([z_e, np.zeros((N_PROJ, 1))], axis=1)
     shares = np.exp(z_full - z_full.max(axis=1, keepdims=True))
     shares /= shares.sum(axis=1, keepdims=True)
+    if HOUSE_CENTRE == "operation":   # dossier s.53
+        shares = np.clip(shares + house_centre_shift(post, data, take), 0, None)
+        shares /= shares.sum(axis=1, keepdims=True)
 
     # Lists with no polls in their final weeks have left the race.
     gone_days = 7 * WITHDRAWN_WEEKS
@@ -1643,6 +1783,12 @@ def project(data, idata, rng, config="current", config_params=None):
             continue
         shock = (-mu_f + tdraws[:, k] * sd_f) / 120.0
         w_f, w_r = np.where(in_f, base, 0), np.where(~in_f, base, 0)
+        if f == "haredi" and HAREDI_ALLOC == "record":
+            # hared_alloc (s.54): the mean by the lineages' record, the
+            # random part by base share
+            h_i = haredi_mean_weights(comps, in_f, base, haredi_lineage_share()["s_shas"])
+            shares = shares + (-mu_f / 120.0) * (h_i - w_r / w_r.sum())
+            shock = tdraws[:, k] * sd_f / 120.0
         shares = shares + shock[:, None] * (w_f / w_f.sum() - w_r / w_r.sum())
 
     # Party anchors: deterministic truth-shifts for Likud and the poll

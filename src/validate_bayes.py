@@ -159,6 +159,10 @@ ABLATIONS = [
     ("reg_thr_oracle", {"pairs": "registered", "thr_u": "oracle", "central_raw": True}),
     # uncertainty calibration (2026-10-15, dossier s.48), at the shipped
     # width; the nested width arms (C0/CA/CAB/CABD) run in calibration_arms.py
+    # house-effect centring on operations (2026-10-16, dossier s.53)
+    ("house_group", {"house_centre": "operation"}),
+    # haredi family mean by each lineage's own record (dossier s.54)
+    ("hared_alloc", {"haredi_alloc": "record"}),
     ("cal_A", {"t_unit": True}),
     ("cal_B", {"resid_space": "vote"}),
     ("cal_Bfix", {"resid_space": "seat_fix"}),
@@ -652,7 +656,13 @@ ALL_LAYERS = {"resid": True, "swing": True, "family": True, "anchors": False,
               # "loo" = Student t, sd matched, df from the LOO kurtosis of
               # the record resid_space reads (bm.RESID_T_DF); a number =
               # that df.
-              "t_unit": False, "resid_space": "seat", "resid_df": None}
+              "t_unit": False, "resid_space": "seat", "resid_df": None,
+              # house-effect centring (dossier s.53): "firm" = shipped;
+              # "operation" = re-centred on operations (bm.HOUSE_CENTRE)
+              "house_centre": bm.HOUSE_CENTRE,
+              # haredi family mean allocation (dossier s.54): "base" =
+              # shipped; "record" = by the lineages' LOO under-count share
+              "haredi_alloc": bm.HAREDI_ALLOC}
 
 # Arab-sector turnout by election (share of eligible Arab citizens voting).
 # Series as compiled in the dossier (s.4, s.24) and the production comment
@@ -879,6 +889,9 @@ def project_cycle(data, idata, eday, threshold, pairs, params,
     z_f = z_e if clr else np.concatenate([z_e, np.zeros((N_PROJ, 1))], axis=1)
     shares = np.exp(z_f - z_f.max(axis=1, keepdims=True))
     shares /= shares.sum(axis=1, keepdims=True)
+    if L["house_centre"] == "operation":   # dossier s.53
+        shares = np.clip(shares + bm.house_centre_shift(post, data, take), 0, None)
+        shares /= shares.sum(axis=1, keepdims=True)
 
     # days_ahead from the real dates, never weeks_override (calendar weeks)
     days_ahead = max((eday - data["asof"]).days, 0)
@@ -970,6 +983,11 @@ def project_cycle(data, idata, eday, threshold, pairs, params,
             continue
         sk = (-mu_f + (zf[:, k] / mixer) * sd_f * L["shock_scale"]) / 120.0
         w_f, w_r = np.where(in_f, base, 0), np.where(~in_f, base, 0)
+        if f == "haredi" and L["haredi_alloc"] == "record":
+            # hared_alloc (s.54): mean by the LOO lineage share, random part by base
+            h_i = bm.haredi_mean_weights(comps, in_f, base, params["haredi_lineage"]["s_shas"])
+            shares = shares + (-mu_f / 120.0) * (h_i - w_r / w_r.sum())
+            sk = (zf[:, k] / mixer) * sd_f * L["shock_scale"] / 120.0
         shares = shares + sk[:, None] * (w_f / w_f.sum() - w_r / w_r.sum())
     # Gevalt coupling, mirrored: zero-sum Likud <-> its bloc's non-haredi
     # satellites (the era's right-flank lists), sd GEVALT_SD seats.
@@ -1152,6 +1170,7 @@ def main() -> None:
             params["pair_alias"] = _decomp_map(cycle)
             params["arab_tab"] = arab_turnout_params(cycle)   # dossier s.43
             params["arab_lineage"] = bm.arab_lineage_share(exclude_cycle=cycle)   # s.51
+            params["haredi_lineage"] = bm.haredi_lineage_share(exclude_cycle=cycle)   # s.54
             params["registered_pairs"] = REGISTERED_PAIRS[cycle]   # dossier s.47
             params["cycle"] = cycle
             add_calibration_params(params, cycle)              # dossier s.48

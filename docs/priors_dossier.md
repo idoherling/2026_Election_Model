@@ -3808,3 +3808,124 @@ parameter vectors).
   elsewhere, instead of one "rotation / Likud successor" bucket.
 - **Timetable.** The site states the statutory calendar (COA-F13) and the
   record's formation times (COA-F11); no timing model is fitted.
+
+## 53. House effects centred on operations, not firms (16 Oct, D-11)
+
+### 53.1 Pre-registration (written before any harness run of this arm)
+
+**Why.** The fit identifies house effects by centring them on the
+unweighted mean over the firms in the window (`delta_c = delta -
+delta.mean(axis=0)`, the slope likewise). Firms that are one operation
+therefore count several times in the centre: in 2026 Filber and Direct
+Polls (the two halves of the 2019 Direct Polls, correlation group
+sms_likud; leans on Likud +7.8 and +5.3 seats) are 2 of 9 firms, and the
+Arab-sector firm Afkar, whose rows are converted to national shares, is a
+ninth. The site says related firms count as one voice; in the centring
+they do not. Centring on operations instead moves the 2026 latent by the
+operation-weighted mean of the firm effects (Likud about -0.5 seat).
+
+**Arm `house_group`.** Each firm weighs 1 / (number of firms of its
+operation in the window); operation = pollster_meta.csv correlation_group,
+except the methodology class phone_mixed, whose firms are separate
+operations; firms whose name marks them as sector-only ("(sector)") weigh
+0. The shift is applied to the endpoint draws as an exact
+re-parameterisation of the fitted posterior: shares + sum_f w_f (delta_c_f
++ slope_c_f x t_end) / sum_f w_f, clipped at zero and renormalised (the
+likelihood mean shares + delta_c + slope_c x t is unchanged). No refit.
+
+**Grading.** The leave-one-out scorecard caches (s.50), shipped 16 Oct
+configuration; eve on seed offsets 0/100/200 (ablation stream), D-7 and
+D-21 on offset 0 (validate_horizon).
+
+**Rule (the standing shipping rule).** Ships if, pooled over the three eve
+seeds, it wins or ties (|d| < 0.1 seat) median MAE in every leave-one-
+cycle-out fold, with mean MAE, threshold Brier and interval score not worse
+beyond their noise floors (0.010 seat, 0.0010, 0.05) and coverage not
+further from 0.90; and D-7 / D-21 do not contradict (no metric worse beyond
+the same floors). Otherwise not shipped, and the site's "one voice" wording
+for the fit is corrected instead.
+
+### 53.2 Result: does not pass
+
+Eve, offsets 0/100/200 pooled, against the shipped arm on the same seeds:
+median MAE 1.4899 vs 1.4927 (every fold a tie: 2013 -.014, 2015 +.015,
+2021 -.024, the rest 0); mean MAE 1.6351 vs 1.6291 (+.006, inside the
+.010 floor); coverage .981 both; threshold Brier .0476 vs .0475; interval
+score 9.296 vs 9.217 (+.078, beyond the .05 floor). D-7: median 1.473 vs
+1.484, interval score 9.474 vs 9.254 (+.220). D-21: median 1.664 vs 1.612
+(+.052), interval 9.697 vs 9.704. Fails on the interval score at eve and
+D-7 and on the median at D-21. **Not shipped**; HOUSE_CENTRE stays "firm"
+and the site's "one voice" wording for the fit is corrected as
+pre-registered (related firms share a group lean; in the centring each
+firm counts once, so the two Filber/Direct Polls halves count twice).
+
+## 54. The haredi under-count allocated by each list's own record (16 Oct, D-11)
+
+### 54.1 Pre-registration (written before any harness run of this arm)
+
+**Why.** s.51.5 named this the next haredi candidate: the shipped family
+mean (hared_e0, 0.98 seats) is spread over Shas and UTJ by base share,
+which on the harness over-feeds UTJ (+0.55) and under-feeds Shas (-0.46).
+The record, error = final poll minus result: Shas -1.11, -0.55, +0.38,
+-2.67, -1.00, -0.25, -0.43, -1.43 (mean -0.88, under-polled in 7 of 8);
+UTJ +0.67, -1.09, +0.50, -1.67, +0.71, +0.38, -0.29, 0.00 (mean -0.10).
+The haredi desk (haredi_2026.json, verification pending) reports the same
+pattern in 2019-22 pollster-cycles and a phone/online mode gap in Channel
+13's haredi samples that is consistent with a Shas-heavy under-count.
+
+**Arm `hared_alloc`.** The family MEAN is allocated by the lineages'
+leave-one-cycle-out under-count shares, the Arab rule applied to the
+haredi family: s_shas = u_S / (u_S + u_U), u = max(0, -mean error) over the
+other seven cycles (Shas lineage = components containing "shas"; the rest
+of the family is the UTJ lineage); base shares when neither is
+under-counted or the window lacks one of the two. The family's random part
+(t draw x sd) stays base-allocated. Production flag HAREDI_ALLOC
+"record"; harness layer haredi_alloc. Expected 2026 effect: Shas about
++0.4, UTJ about -0.4 seat against the shipped allocation.
+
+**Rule.** The s.53 rule: ships if, pooled over eve offsets 0/100/200, it
+wins or ties median MAE (|d| < 0.1) in every leave-one-cycle-out fold with
+mean MAE, threshold Brier and interval score not worse beyond 0.010 /
+0.0010 / 0.05 and coverage not further from 0.90; D-7 and D-21 must not
+contradict.
+
+### 54.2 Result under the registered rule: does not pass (by .012 at D-21)
+
+Eve, offsets 0/100/200 pooled: median MAE 1.4544 vs 1.4927 (-.038; paired
+by seed -.035 / -.045 / -.035), folds 2009 -.091, 2013 +.056 (tie), 2019s
+-.200, 2021 -.071, the rest 0; mean MAE 1.6071 vs 1.6291 (-.022, every
+seed); coverage .981 both; threshold Brier -.0001; interval score 9.256 vs
+9.217 (+.038, inside the .05 floor; by seed +.071 / +.002 / +.042). D-7
+(offset 0): median -.050, mean -.028, Brier -.0001, interval +.013. D-21
+(offset 0): median -.040, mean -.034, Brier -.0001, interval 9.766 vs
+9.704 (+.062, beyond the .05 floor). Under the rule as registered the arm
+**fails** on the D-21 interval score, by .012 on one seed.
+
+## 55. Protocol amendment: the horizon gate on three seeds (16 Oct)
+
+Written AFTER the s.54 result above, and disclosed as such. s.48 measured
+the paired seed-to-seed noise of horizon interval scores at .08-.14, and
+s.48.6 already listed "the horizon gate scored on three seeds" as the next
+protocol step; one seed against a .05 floor cannot tell a .06 loss from
+noise. From now on the D-7 and D-21 metrics in the shipping rule are pooled
+over offsets 0/100/200, as the eve metrics are, with the same floors. The
+amendment applies to every later candidate. It is used here to re-grade
+s.54 (the only open candidate that failed at the horizon gate alone and
+can be re-scored without a refit); CBfix (s.48.6) is the other one and is
+queued. Because the amendment was written after a failing result, s.54 is
+reported both ways on the site if it ships.
+
+### 55.1 s.54 re-graded under the amendment: still does not pass
+
+D-7 and D-21 on offsets 0/100/200 pooled. D-7: median 1.4427 vs 1.4866
+(-.044), mean -.027, Brier -.0001, interval score 9.376 vs 9.360 (+.016,
+inside the floor). D-21: median 1.5631 vs 1.6211 (-.058), mean -.034,
+Brier -.0001, interval score 9.748 vs 9.690 (+.058; by seed +.062 /
++.066 / +.045). The D-21 interval loss is consistent across seeds, so it
+is a real (small) cost, not seed noise, and it exceeds the .05 floor.
+**hared_alloc is not shipped** under the rule as registered or as
+amended. What the grade establishes: putting the haredi under-count on
+Shas improves point accuracy at every horizon (median -.04 to -.06, mean
+-.02 to -.03) and costs a little interval score three weeks out. The site
+states this. HAREDI_ALLOC stays "base". The amendment stands for later
+candidates.
