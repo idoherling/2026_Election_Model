@@ -33,6 +33,11 @@ DESKS = {  # file stem -> registry group
     "coalition_formation": "Coalition formation",
     "campaign_dynamics": "Campaign dynamics and late movement",
     "forecast_evaluation": "Forecast evaluation and computation",
+    # 16 Oct research sweep (owner request): 2026 campaign evidence
+    "events_oct2026": "The 2026 campaign: events and coalition signals",
+    "polls_beyond_vote": "The 2026 campaign: certainty, undecided voters and vote flows",
+    "turnout_2026": "The 2026 campaign: turnout",
+    "haredi_2026": "The 2026 campaign: haredi politics",
 }
 OK = {"verified", "corrected"}
 # Corrected findings whose verifier fixed the wording rather than the numbers

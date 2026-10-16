@@ -1,0 +1,352 @@
+{
+ "desk": "events_oct2026",
+ "verdicts": [
+  {
+   "id": "EVT-F01",
+   "status": "verified",
+   "note": "Opened the Kikar HaShabbat piece. The page shows 13:13 and no date, but the text says today (Friday) is the last day for notices with 11 days to go, so it is 16 Oct. Maariv 18 Aug (article-1357269) separately confirms 16 Oct as the surplus-notice deadline. Kikar lists exactly five signed pacts: Likud-Religious Zionism (signed about ten days earlier), Together-Yisrael Beytenu, Yashar-Democrats, Shas-UTJ and Ra'am-Joint List. Otzma has no partner. Blue and White says it signs with no list that belongs to either bloc. Hendel says he and Winter decided not to sign because Winter would not commit to a Zionist-only government; Winter's side denies approaching Hendel. Yostmann's quote matches ('may prove to be colossal stupidity'), and he also called the decision arrogant. ToI 13 Oct 8:23 pm (Ariela Karmel) matches the Ben-Gvir quote and 'around six seats' for Otzma. The 'Amcha near 3.25%' figure is not in the ToI piece. SURPLUS_PAIRS in src/simulate.py holds the same five pairs. The CEC's own notice was not checked, as the desk also notes.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "EVT-F02",
+   "status": "verified",
+   "note": "JPost 911614 (14 Oct 05:52). Ben Zion's quote matches, and his statement says the risk of missing the threshold 'is high'. Netanyahu: 'I call on the other members of the list to act similarly to ensure a victory for the right.' Smotrich called on Winter 'to announce his withdrawal' and also urged candidates Eran Ben Ari and Lali Deri to follow. JPost speaks of 'signs' near homes and near the children's transport. N12/mako 14 Oct 09:08 (Dafna Liel) gives the billboard text 'דודי, תפרוש! לא מסכנים את המדינה', job offers carried by messengers, and probes of Rabbi Tau's circle about Noam; Noam and Tau's circle say they run to the end. ToI liveblog 14 Oct 4:53 pm has Winter's quote and confirms Ben Zion was No. 8. N12 attributes the campaign to people around Netanyahu; Winter's claim that it is state-funded is his own. Confirmed that registration_scenarios.py has no Amcha-withdrawal event.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "EVT-F03",
+   "status": "verified",
+   "note": "Re-pulled the Polymarket CLOB price history (12-hour points) at 14:13 UTC on 16 Oct. Amcha: 0.645 (3 Oct), 0.655 (4 Oct 00 UTC), 0.505 (6 Oct), 0.52-0.535 (8-11 Oct), 0.485 (12 Oct), 0.41 (13 Oct 00 UTC), 0.315 (13 Oct 12 UTC), 0.28 (14 Oct 00 UTC), back to 0.31-0.33 (14 Oct 12 UTC to 16 Oct 12 UTC), then 0.22 at 14:00 UTC 16 Oct. That last quote has bid 0.16 and ask 0.28 on a leg with $4.8k volume. Kalshi KXISRAELANYSEAT 'People of Israel' is 0.20/0.29 ($4.4k). The Polymarket Amcha ladder has <4 seats at 0.63 (0.58/0.68). polls.csv, fieldwork 1-15 Oct: Amcha appears in 17 of 18 polls, with 4+ seats in 9 and a mean of 2.18; it has 4+ in 4 of the 7 polls since 11 Oct, consistent with the JPost count (JPost not opened). Model p_pass is 0.245 in both official_forecast.csv and mixture_draws. One timing nuance: both 13 Oct steps (0.41, 0.315) came before Ben-Gvir's refusal (8:23 pm IDT = 17:23 UTC). The fall therefore began with the 12-13 Oct polls and the Ben Zion exit, not with the refusal. 'Within 0.02' holds at mids, but neither market is deep enough to tell 0.2 from 0.3.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "EVT-F04",
+   "status": "verified",
+   "note": "JPost 911242 (10 Oct 20:21) has all three Gantz quotes and the 'six mandates' line; it names no partner and no withdrawal terms. JTA/JPost 911622 (14 Oct): if Blue and White passes, Gantz 'would seek to form a unity government that includes both Netanyahu and parties from the opposition's change bloc'. Kikar 16 Oct: no pact with either bloc. polls.csv: 0 seats in 16 of 16 polls (Lazar 15 Oct 1.1%). Re-pulled markets: Polymarket 0.0485 (0.024/0.073, $925) and Kalshi 0.085 (0.05/0.12, $80). Model p_pass 0.011 and PRIORS['blue_white_folds'] = 0.25 are confirmed. The facts hold, but the model_link overstates them (see parameter review). The code set 0.25 on 13 Oct after Gantz's 'I am not withdrawing' (Kan liveblog, cited in registration_scenarios.py), so the 10 Oct statement is already priced. The only new signal is the 16 Oct pact refusal. That refusal costs little: for a list polling about 1%, a surplus pact pays off only if both lists pass. Also, the 8 Oct comment read Blue and White's pact talks with the Reservists as a sign of staying in, so the failure of those talks is not evidence of staying.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "EVT-F05",
+   "status": "verified",
+   "note": "INN 708511 (14 Oct 22:22). The Hebrew matches: a Gur hasid says there is an instruction not to campaign ('הוראה שלא לקיים כל פעילות'), and the aim is to keep Stark out. Some hope it costs UTJ two seats. Belz sources put Gur at 25-30k votes against 55k natural growth. Kipa (14 Oct 22:26) has 'about thirty thousand votes', no Rebbe instruction yet and no Gur campaign headquarters. It does not report an order not to campaign; only INN does. The i24 page did not render. A search summary of the same i24 item confirms the fallback of 'a quiet instruction to vote for Black Color' if they do not vote UTJ, but its date could not be confirmed. Caveats: every source is unnamed, and the numbers come from Belz, Stark's own court, which has a stake in the dispute. INN expects a framework to be found eventually. 25-30k votes is about 0.6-0.7 seats at roughly 41k per seat, as stated. Emess was not opened.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "EVT-F06",
+   "status": "verified",
+   "note": "JPost 911855 (15 Oct 18:25). All quotes match exactly. The minority-government refusal comes from his post on X and carries no condition. The refusal to sit with Netanyahu applies 'as long as Netanyahu remained the party's leader', which fits 'Likud without Netanyahu can be a significant partner'. YB polls 'around nine to 10 seats'. The claim stands, but the model_link's reading does not. It says the pledge 'names and closes the transitional-minority route that the 2020 softening used'. The March 2020 JL-backed Gantz minority government was not framed as transitional. Before it, Liberman had said he would never be part of an Arab-backed government, and he then recommended Gantz together with the Joint List (COA-F20 corrected; ToI 9 Mar 2020; Ynet and al-Monitor March 2020). The 15 Oct pledge is the same kind of categorical statement that bent in 2020.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "EVT-F07",
+   "status": "verified",
+   "note": "JPost 911915 (12:06, updated 14:24). It has 'Gantz II', 'not intended to shift a single vote from the draft dodgers bloc', the '11 days away' line, the 'leadership of October 7' that 'must not continue in office for even one more day', and Gantz's 'ten percent' reply. JPost gives no 61-seat target. That target is in the ToI liveblog of 16 Oct, 3:01 pm: 'a clear majority of more than 61 Zionist seats for change'. Ynetnews bkotdiqsmg (Moran Azulay; undated, 12 Oct by context) confirms Eisenkot: Netanyahu 'cannot serve as prime minister, minister or deputy minister'. Liberman's accusation is his own characterisation, as the desk says.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "EVT-F08",
+   "status": "corrected",
+   "note": "ToI 12 Oct 2:51 am: the remarks were made at a HaDor event on Sunday 11 Oct. Bennett said that if Netanyahu accepted the bloc's 'core tenets', including a state commission of inquiry, 'he's welcome to give me a call', and that he would have 'no problem' with it. He then walked it back: 'We will not sit with him in any formation.' Eisenkot's and Liberman's quotes match. In this article Golan rules Netanyahu out 'not as finance minister, not as water minister, and not as a minister without a portfolio'. Gantz backed Bennett's idea, and Lapid did not respond. The quote 'We will not cooperate with this' appears nowhere. The ToI Herzog article (12 Oct 3:22 pm) has Lapid saying 'We won't participate in this'. That was a reply to the reported Herzog unity push, not to Bennett, and Golan's call for written pledges came in the same Herzog context. The conclusion that all four lists are on record against Netanyahu holds. Note, though, that Bennett's original remark named terms for Netanyahu's entry, which is exactly the conditional opening the pledge-break gate models; he withdrew it within hours.",
+   "corrected_url": "",
+   "corrected_quant": "Lapid (X, 12 Oct, replying to the Herzog unity report): 'I very much hope President Herzog will not try to push for another fake \"unity\" government ... We won't participate in this.' Golan (11 Oct, ToI): no role for Netanyahu, 'not as finance minister, not as water minister, and not as a minister without a portfolio'; on 12 Oct he urged leaders to pledge in writing not to sit with Netanyahu."
+  },
+  {
+   "id": "EVT-F09",
+   "status": "verified",
+   "note": "ToI 12 Oct 3:22 pm. Herzog's remarks come from a pre-recorded interview aired at the Yedioth conference, and his quotes match ('really, truly'; 'again and again and again'). Ynetnews bkotdiqsmg carries the denial as quoted and attributes the report to 'sources in Eisenkot's party'. It also has Golan: 'There will be no unity government with Netanyahu.' Gantz's 'next October 7' line is in ToI. In the ToI liveblog of 15 Oct, 11:40 am, Herzog says at the Israeli embassy in Azerbaijan that elections aren't a 'civil war'. The 'tripwire, not a prior' comment is in government_formation.py as quoted.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "EVT-F10",
+   "status": "corrected",
+   "note": "JPost 911533 (Anna Barsky, 13 Oct 11:50, updated 19:10). Shas and UTJ 'may refrain from recommending either Prime Minister Benjamin Netanyahu or Gadi Eisenkot', 'would prefer to remain in the opposition', and High Court risk may delay their entry. It also reports the idea of a government formed without them that brings them in later. The phrase 'not expected' does not appear; the sources 'do not expect either party to actively seek Netanyahu's replacement'. Every source is unnamed, and the article stresses these are assessments, 'not decisions by the parties' rabbinical leadership'. Mako 420d8b8ce3931a1027 (14 Oct 11:10) has Deri's Hebrew verbatim, from a Kikar interview with Yishai Cohen. Deri said Shas had announced the condition before, and UTJ chair Asher set a similar one. INN 434291 (8 Oct): dozens of protesters blocked arrests in Dimona (Wednesday night) and Bat Yam (about 4:30 am) after a Color Black alert. The article does not say arrests 'resumed'. The 'recommend nobody' line restates a report the model already priced on 10 Oct (code comment: Maariv/JPost 17 Sept, article-908924, and Asher on 29 Sept), so it is not new evidence for haredi entry below 1.",
+   "corrected_url": "",
+   "corrected_quant": "JPost 13 Oct (unnamed haredi sources, 'not decisions by the parties' rabbinical leadership'): Shas and UTJ 'may refrain from recommending' either candidate and 'would prefer to remain in the opposition'; sources 'do not expect either party to actively seek Netanyahu's replacement'."
+  },
+  {
+   "id": "EVT-F11",
+   "status": "verified",
+   "note": "Srugim (12.10.26). The headline quote is 'זה לא יקרה בשום מצב'. Per the subtitle and body, the 'it' is joining a government led by the opposition bloc, including the mandate going to a change-bloc politician or a coalition led by Liberman or Eisenkot. The Gadi/Golan/Arabs quote matches, and the venue was the ynet/Yedioth 'People of the State' conference. Bennett is not named, and Srugim does not say whom Winter recommends. ToI French (12 Oct 20:16) has 'il nous tire dans le dos' and 'responsable de l'effondrement de la droite'. Its 'aller se faire voir' line comes from an earlier TV interview. There Winter pledges to recommend Netanyahu and says he will not join a Netanyahu government without a universal-service law. JPost 911882 (16 Oct 12:46) says he recommends Netanyahu, quotes Netanyahu's 'Don't vote for Winter', and says Winter 'did not explicitly rule out joining an Eisenkot or Liberman government'. The conflict the desk flags is real. Srugim's referent is the outlet's paraphrase, not Winter's words, so 'ruled out any change-bloc-led government' is a strong reading of a one-line quote.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "EVT-F12",
+   "status": "corrected",
+   "note": "Maariv 1374903 (8 Oct 11:04). Both Hebrew quotes and the headline quote match verbatim. Hendel proposes a joint Zionist-only declaration and says he does not boycott Zionist parties. JPost 911020 (8 Oct) has the 'blocking bloc' quote. Kikar 16 Oct has Hendel saying Winter would not commit to a Zionist-only government; the Zelekha claim is Blue and White's and unverified, as the desk says. The count is wrong. polls.csv has the list (party_id zionist_home) at 4+ seats in 8 of 8 polls with fieldwork 11-15 Oct (Kantar 11, Filber 12, Lazar 12, Midgam 12, Maagar Mochot 13, Midgam Project 14, Lazar 15, Tatika 15), not 9 of 9. It has 4+ in 12 of 18 since 1 Oct. The JPost '7 major polls' line was not opened. Naming hazard for market comparisons: Kalshi lists a separate 'Zionist Home-The Reservists' strike (0.02) next to 'Reservists-Economic Party' (0.45).",
+   "corrected_url": "",
+   "corrected_quant": "polls.csv: Reservists-Economic (party_id zionist_home) at 4+ seats in 8 of 8 polls with fieldwork 11-15 Oct, and 12 of 18 since 1 Oct (mean 2.78)."
+  },
+  {
+   "id": "EVT-F13",
+   "status": "verified",
+   "note": "Mako 35e804495aef0a1027 (3 Oct 19:58, updated 21:14). Both Golan quotes match. Asked 'with Ra'am?', he answered 'כן, עם רע\"ם' ('Yes, with Ra'am'), a stronger dissent than the claim states. Liberman: 'לא תקום שום קואליציה עם המפלגות הערביות'. Smotrich's attack is confirmed. AP via WSLS (16 Oct 12:54 am, Sam Metz) confirms Eisenkot 'won't ally with Arab-led parties'. Lapid's line there is from an AP interview in May, not 16 Oct. JTA/JPost 14 Oct confirms Abbas's priority (from an August Ch12 interview) and Jabareen's support 'subject to conditions he did not specify'. Re-pulled Kalshi KXISRAELGOVT: Ra'am 0.07/0.15 ($6.3k), Hadash-Ta'al 0.02, Balad 0.06. It resolves on the first stable government before 1 Jan 2028, so post-repeat governments count. The desk missed Polymarket's 'Which parties will be in the next Israeli government?' (the first government after the 2026 election): Ra'am 0.165 (0.16/0.17, $16.9k leg). Model membership 0.074 / 0.019 / 0.031 is confirmed (government_membership.csv). Both markets sit above the model.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "EVT-F14",
+   "status": "corrected",
+   "note": "JPost 911882 (16 Oct 12:46). The minority-government passage is the reporter's analysis, under the heading 'Eisenkot considers minority government' ('One route Eisenkot envisages ... if the Arab parties simply don't vote'). It contains no Eisenkot quote, so 'openly planning' overstates it. Confirmed: Eisenkot's 'most votes' rule is attributed to him; the four parties 'have yet to agree on a mechanism'; and 'Netanyahu must not be allowed to win by losing ... that will not happen'. The '13 Oct JPost' report on replacing the Speaker and legislating before a government has no URL and could not be found. A Ynetnews piece (Amir Ettinger, hyt1lw95fl, undated; the image path suggests about 8 Sept) reports the bloc coordinating with Ra'am and the JL to replace Ohana right after the election 'as a test' of a minority government. It also mentions possible bills for a state commission and a two-term limit. It does not mention House or Constitution committees or Ra'am external backing. So the plan predates October. Eisenkot's minority doctrine was already in the model (the liberman_minority_ok comment cites ToI 23 Aug).",
+   "corrected_url": "https://www.ynetnews.com/article/hyt1lw95fl",
+   "corrected_quant": "JPost 16 Oct (Keinon, analysis, no Eisenkot quote): 'One route Eisenkot envisages ... is to bring a minority government to the Knesset ... This scenario would be made possible, for instance, if the Arab parties simply don't vote.' Speaker plan: Ynet (Ettinger, about 8 Sept): replace Ohana with Ra'am and JL votes as a test of a minority government; possible bills on a state commission and a two-term PM limit."
+  },
+  {
+   "id": "EVT-F15",
+   "status": "verified",
+   "note": "JPost 911902 (16 Oct 08:42). Lazar Research with Panel4All, fieldwork 14-15 Oct, n=700 Jews and Arabs. Results: 27% another election, 18% unsure, and a 'majority' for unity (55% is the remainder; the article does not print it). Coalition voters: nearly 40% for Netanyahu-led unity, 32% for a repeat. Opposition voters: 54% back unity only under their own bloc's leader. Head-to-heads 48-41, 43-43 and 43-37. Seats: coalition 51 (-1), opposition 51 (-1), Reservists 4, Arab lists 14 (JL 8, Ra'am 6), Likud 18 (-2).",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "EVT-F16",
+   "status": "corrected",
+   "note": "Irish Times (7 Oct 05:45, Mark Weiss) is confirmed. The UAE warning comes from a Haaretz excerpt of the Eldar-Yuval book and the Egyptian warning from The Atlantic and WSJ; it also has Gallant, Netanyahu's 'fake news' and the INSS 75%. Haaretz 11 Oct (Kan/Kantar, n=552) matches every figure. The ToI 15 Oct 9:16 pm headline is confirmed; the body was not read, so Channel 12 as the source is unconfirmed. The Polymarket Likud-largest path is confirmed: 0.415 (1 Oct), 0.545 (4 Oct), 0.495 (7 and 13 Oct), 0.34 (16 Oct). But 'no anti-Netanyahu poll move followed' holds only for the first week. Channel 13 (Madad, n=1,018, ToI liveblog 15 Oct 2:25 am) had the Netanyahu bloc down 4 to 51 and Likud at 18. Lazar 14-15 Oct had the coalition at 51 (-1) and Likud at 18 (-2). The 13-15 Oct move cannot be attributed to the revelations or to anything else. The site sentence should be narrowed to the week after the anniversary.",
+   "corrected_url": "",
+   "corrected_quant": "Kan/Kantar 11 Oct: coalition 53 (+2), Eisenkot bloc 50 (-2). Later polls: Channel 13 (15 Oct) Netanyahu bloc 51 (-4); Lazar/Maariv (14-15 Oct) coalition 51 (-1), Likud 18 (-2). No anti-Netanyahu move in the first week after 7 Oct; the 13-15 Oct move against the bloc has no identified cause."
+  },
+  {
+   "id": "EVT-F17",
+   "status": "corrected",
+   "note": "ToI (9 Oct): the Truth Social post was on Thursday 8 Oct, and the quote matches. In the Channel 12 report (senior US official), US officers had told Zamir to prepare for a 'massive attack on Iran within three weeks', and Zamir said it 'could cause the general election ... to be postponed'. The claim leaves this out. INN flash 695457 (15 Oct 20:28, citing Kan): both quotes match. Re-pulled Polymarket at 14:13 UTC. 'Ceasefire continues': 18 Oct 0.961, 21 Oct 0.935, 31 Oct 0.845 (legs $246k to $2.2m). 'As scheduled' 0.9445 (0.931/0.958; last history point 0.9145 at 14:00; range 0.77-0.95 since 28 Sept; event $62k). Two corrections. (1) The market counts any single qualifying air or missile strike by either side, not an 'exchange'. (2) Interpolating between 21 Oct (0.065) and 31 Oct (0.155) gives about 0.12 by 27 Oct, not 0.08-0.10; the slope is about 0.009/day before and after 21 Oct. The 4-day blackout window (24-27 Oct) carries about 0.035 of that.",
+   "corrected_url": "",
+   "corrected_quant": "Polymarket (16 Oct 14:13 UTC): P(a qualifying Israel or Iran strike) 0.039 by 18 Oct, 0.065 by 21 Oct, 0.155 by 31 Oct; about 0.12 by 27 Oct (interpolated) and about 0.035 inside the 24-27 Oct blackout. Postponement 0.055-0.085 (thin, $62k; 0.05-0.23 since 28 Sept)."
+  },
+  {
+   "id": "EVT-F18",
+   "status": "corrected",
+   "note": "JPost 911404 (12 Oct 11:33, Shir Perets). Investigators took 'some serious steps without his approval' (the desk's 'significant ... go-ahead' is a paraphrase). Ohana sent the letter on Sunday 11 Oct, and it has no formal standing ('a political appeal'). The President's Office says requests are 'generally considered only after legal proceedings have ended'. Lapid's three conditions are not in this article. They date from November-December 2025, when Netanyahu filed (e.g. 'Lapid: Netanyahu's pardon must include admission of guilt, departure from politics'). Kalshi KXNETANYAHUPARDON-26 is 0.01/0.06 ($25k). The Polymarket 31 Dec leg is 0.115 (0.09/0.14) on $16k; the $487k is the whole event across dates.",
+   "corrected_url": "",
+   "corrected_quant": "Kalshi pardon before 1 Nov 2026: 0.01/0.06 (mid 0.035, $25k). Polymarket pardoned by 31 Dec 2026: 0.115 (0.09/0.14), leg volume $16k (event $487k). Lapid's conditions: late 2025, not the cited article."
+  },
+  {
+   "id": "EVT-F19",
+   "status": "verified",
+   "note": "JPost 911903 (16 Oct 08:53). The Newsmax interview was on Thursday 15 Oct, and 'They'd like me to be' and 'I don't trust anybody, honestly' match. 'We haven't even thought about it' and 'I may be doing something' were answers to reporters on Tuesday. 'I wouldn't underestimate Bibi' is not in JPost. It is in the TIME interview, conducted 28 Sept and published about 1 Oct (Axios, 1 Oct). Re-pulled Polymarket: No endorsement 0.645 (0.64/0.65), Likud 0.365 (0.36/0.37), event $67k.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "EVT-F20",
+   "status": "verified",
+   "note": "ToI (5 Oct 2:56 am). The challenge was on Sunday 4 Oct, with moderators chosen by the TV networks. Likud's reply and 'seen as unlikely to agree' are confirmed. The Kan 54% / 38% / 80% debate figures are not in the 5 Oct article. Search confirms they come from Kan 11's Sunday 11 Oct poll, the same one with Yashar 22, Likud 20 and the coalition at 53.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "EVT-F21",
+   "status": "corrected",
+   "note": "Re-pulled Kalshi at 14:12 UTC. KXISRKNESSETCOUNT: '1' 0.71/0.80 (mid 0.755, $596), '2' 0.16/0.22, '3' 0.01/0.11, '4' 0/0.06, '5+' 0/0.05. Legs 3 to 5+ have no volume, and the mids sum to 1.06. The rules are as described (the count stops at the first confidence vote). The '1' leg gives P(repeat) 0.20-0.29 (0.245 at mid), and '3+' is 0.115 at mids, not 'about 0.06'. KXISRAELCONF before 3 Feb 2027 is 0.74/0.84 ($1.2k). Polymarket 'hung parliament' is 0.365 (0.35/0.38); its rules are as described and its range since 28 Sept is 0.325-0.41. KXISRAELPM has 18 strikes, none 'No one', and mids sum to 0.965. The model's 0.251 and 0.326 are confirmed. The central inference fails: the two Kalshi markets disagree, so the count market does not 'correct' COA-F09. The PM market trades about 1,000 times the volume (Netanyahu $444k, Eisenkot $75k, Bennett $51k, Liberman $38k), and its bids sum to 0.87. Selling every PM strike at the bid (buying No) pays if P(no one) is above about 0.13, so the deep market caps a repeat near 0.13 before fees and capital cost. The $596 count leg says 0.20-0.29, and Polymarket's $18k market says 0.365. The three should be reported as a range with the deep market's ceiling, alongside COA-F09, not in its place.",
+   "corrected_url": "",
+   "corrected_quant": "P(repeat) by market (16 Oct 14:12 UTC): Kalshi count market 0.20-0.29 (mid 0.245; '1' leg $596); Kalshi PM residual 0.035 at mids and at most about 0.13 at bids (strikes >$600k); Kalshi no confidence vote by 3 Feb 2027 0.16-0.26; Polymarket hung parliament 0.35-0.38 ($18k). Kalshi count mids: '2' 0.19, '3' 0.06, '4' 0.03, '5+' 0.025 (3+ = 0.115). Model 0.251."
+  },
+  {
+   "id": "EVT-F22",
+   "status": "verified",
+   "note": "Re-pulled Polymarket at 14:13 UTC: Eisenkot 0.4805 (0.479/0.482), Netanyahu 0.305, Bennett 0.125, Liberman 0.0285, volume $46.8m. The rules are as described (any PM sworn in after an early election; 'Other' after 31 Dec 2027). History confirmed: Netanyahu 0.365 on 4-5 Oct; Eisenkot 0.42 at 00 UTC on 11 Oct (0.403 at 12 UTC). Kalshi mids and their 0.965 sum are confirmed, as are pm_probabilities.csv and the conditional 0.447 / 0.338 / 0.089. Kalshi KXISRAELGOVT has Likud at 0.31/0.38. The Likud comparison is not like-for-like: Kalshi counts governments formed after a repeat, up to 1 Jan 2028, which if anything widens the gap. Polymarket's first-government market has Likud at 0.26 (0.25/0.27). A read-only rerun (100 parameter vectors) shows the defector outcome drives most of the gap. At centre_defects 0.05, P(Netanyahu PM | a government forms) falls to about 0.32.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "EVT-F23",
+   "status": "verified",
+   "note": "Re-pulled Kalshi KXISRAELBLOCMAJ: None 0.76/0.83, NB 0.08/0.15, Opposition 0.07/0.14 ($649 / $240 / $121). The rules define the blocs exactly as the model's NB6 and change4, with None = each bloc at 60 or fewer. KXISRAELBLOCMOST: NB 0.50/0.57 (mid 0.535, $54); ties split 50/50. Polymarket: any coalition 0.155 (0.15/0.16, $7.7k), which swung between 0.135 and 0.265 in five days; which bloc 0.60 (0.56/0.64, $4.4k), range 0.40-0.695 since 10 Oct. Polymarket breaks ties by votes. Recomputed from mixture_draws (8,000): 0.136 / 0.078 / 0.214; 0.528 plus 0.033 ties; means 53.1 and 51.8. mixture_blocs.csv has 0.139 / 0.078. The agreement is real, but it is checked against legs with $50-650 of volume.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "EVT-F24",
+   "status": "corrected",
+   "note": "Re-pulled Polymarket winner: Yashar 0.665, Likud 0.34 (0.66/0.67, $890k). The path is confirmed. Kalshi KXLIKUDCOUNT: >23 0.615, >24 0.38 (zero-volume leg). KXYASHARCOUNT: >20 0.665 (zero volume), >23 0.36. The Polymarket Likud ladder and the model figures (25.4 vs 23.2; P(L>Y) 0.601; tie 0.051; p_largest 0.631) are confirmed. Two errors. (1) 'Every network poll of 11-15 Oct had Yashar ahead' is false. Filber/Channel 14 (fieldwork 12 Oct) had Likud 29 and Yashar 20; 7 of the 8 polls with fieldwork 11-15 Oct had Yashar ahead. (2) Marginal seat ladders cannot give P(Likud > Yashar). Medians of about 24 and 22, from legs with $0-1.3k volume, are weak support for the model's 0.60 against the $890k winner market.",
+   "corrected_url": "",
+   "corrected_quant": "Polls with fieldwork 11-15 Oct (polls.csv): Yashar ahead in 7 of 8; Filber/Channel 14 (12 Oct) had Likud 29, Yashar 20."
+  },
+  {
+   "id": "EVT-F25",
+   "status": "corrected",
+   "note": "Market numbers are confirmed at the re-pull. Polymarket: RZP-Zehut 0.875 ($4.3k), Ra'am 0.96 ($557), Reservists 0.46 ($4.4k), Amcha 0.22, B&W 0.0485; Otzma <4 0.013 ($1.1k). Kalshi: RZP-Zehut 0.86/0.95 ($141), Otzma 0.95/1.00 ($200, zero open interest), Ra'am 0.91/0.98 ($229), Reservists 0.41/0.49, Amcha 0.20/0.29, B&W 0.05/0.12. polls.csv is confirmed (RZP 18/18, mean 6.00; Otzma 18/18, 7.89; Ra'am 18/18, 5.17; Reservists 12/18, mean 2.78; Amcha 9/17; B&W 0/16), except the Reservists count since 11 Oct, which is 8/8, not 9/9. Model p_pass is confirmed. My own recomputation of the archive (sums_ok polls, final 21 days, lists in at least half the polls) is close to the desk's: 5-6 seats failed 2/14, 6-7 0/6, 7-9 0/14, and lists at 4+ in every poll failed 3/40 (New Right 5.88, Zehut 5.58, Meretz 4.66). The trailing-cycle count is selected, however. In 2015 and 2019a the right-bloc lists averaging 4-6.3 seats also include Yisrael Beytenu 2015 (5.55, won 6). Counting haredi lists adds Shas 2019a (5.09, won 8) and UTJ 2019a (6.33, won 8). That makes 3 of 6, or 3 of 8, not 3 of 5. All three failures were first-time lists (Yachad 2015, New Right and Zehut 2019a), unlike RZP and Otzma. Likud also trailed in 2020 on the final-3-week mean (33.6 vs 33.8), but that cycle had no right-bloc list in the range.",
+   "corrected_url": "",
+   "corrected_quant": "Likud-trailing cycles (2015, 2019a), right-bloc lists averaging 4-6.3 seats in the final 3 weeks: 3 of 6 failed excluding haredi lists (Yachad 4.2, New Right 5.9 and Zehut 5.6 failed; Yisrael Beytenu 2015 5.6, URWP 6.3 and Kulanu 4.1 passed), and 3 of 8 with Shas and UTJ 2019a. All three failures were first-time lists. Reservists at 4+ in 8 of 8 polls since 11 Oct."
+  },
+  {
+   "id": "EVT-F26",
+   "status": "verified",
+   "note": "Maariv 1377136 (14 Oct 14:42). Confirmed: 7,331,981 eligible, 12,018 stations, about 450m ballots, about 12m envelopes, about 4m outer envelopes, and 38 lists. Sohlberg says 'every shipment that leaves here is checked thoroughly, down to the last pen' and that an election cannot be stolen. Count tables fold to freeze the count in an emergency. JNS (14 Oct): 'more than 800 military polling stations', and early voting from the evening of 20 Oct. ToI liveblog 15 Oct 7:41 am: 101 stations at 99 missions for about 4,800 voters. ToI (2 Sept 5:14 pm, Tal Schneider interviewing Dean Livne): evacuees vote at designated stations, and about half a million double envelopes are counted centrally and broadcast live. Maariv 18 Aug: the ban runs from midnight 23-24 Oct, final results on 4 Nov, surplus deadline 16 Oct. The '~10% of votes' share is the desk's own arithmetic.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "EVT-F27",
+   "status": "verified",
+   "note": "ToI liveblog 15 Oct, 11:40 am (a separate entry from the Herzog/Baku one with the same timestamp). Likud and RZP will send 'nearly 2,000 activists', citing 'a long series of fraud incidents in previous election campaigns'. Livne's quote matches. The desk's advice not to move the Arab turnout term on this is appropriate.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  }
+ ],
+ "challenge_checks": [
+  {
+   "title": "The 'Netanyahu + a change-bloc defector' outcome (0.213) contradicts the 12-16 Oct anti-pacts and both exchanges",
+   "status": "partly",
+   "note": "The market gap is real. Kalshi P(Netanyahu | a government forms) is 0.30 against the model's 0.45, Kalshi has Likud in government at 0.345, and Polymarket's first-government market has Likud at 0.26 against 0.475. But the anti-pacts are mostly not new information. The BEHAVIOR comment already sets 0.12 because 'all four centre parties were founded on never-Bibi - as was Gantz's in 2019'. Gantz refused Netanyahu throughout 2019 and joined him in 2020 at the third election, and Bennett's 2021 government also broke a pledge (COA-F02). The 1/220 comparative rate does not describe Israeli deadlock sequences. Bennett's 11 Oct remark, which set terms for Netanyahu's entry, shows the pledges still leave room for conditions. The structural issue is the post-deadlock stage, not the gate. A read-only rerun of simulate_formation (100 parameter vectors on mixture_draws) gives the defector outcome 0.074 with the stage off and about 0.19-0.21 with it on. Under the stage it takes about 0.41 of resolved-deadlock mass (0.213 / (0.77 x 0.674)), while the Israeli record has a change list joining Netanyahu in 1 of 5 resolved deadlocks (1984 unity, 1992 and 2006 haredi entry, 2020 Gantz, 2021 Ra'am; Jeffreys mean 0.25, 90% interval 0.04-0.56). Cutting centre_defects to 0.05 lowers the outcome only to about 0.115. About 0.05 moves to 'unity without Netanyahu' (0.158 to 0.208), a branch with a 0-of-3 record, and 0.016 to the haredi branch. The desk's alternative (re-weight the stage's allocation) addresses the actual cause; it should be anchored on the record's resolution shares and graded in validate_formation.py."
+  },
+  {
+   "title": "Liberman closed the transitional-minority route",
+   "status": "does not hold",
+   "note": "The 15 Oct quote is verified, but the premise is not. The March 2020 JL-backed Gantz minority government was not framed as transitional. Liberman had said he would never be part of an Arab-backed government, then recommended Gantz alongside the Joint List (COA-F20; ToI 9 Mar 2020; Ynet and al-Monitor March 2020). The 0.25 comment already prices a stated veto ('no minority government, no safety net', N12). The new statement is the same kind of pledge that bent before, made at the first election of a sequence, when pledges are cheapest. Leverage is small and runs the wrong way. In the rerun, 0.25 to 0.12 cuts the JL-backed minority from 0.028 to 0.016 but raises 'Netanyahu + defector' from 0.193 to 0.203 and P(Netanyahu PM) by 0.010, because the stage refills those deadlocks from the other gates."
+  },
+  {
+   "title": "Threshold odds for RZP-Zehut, Otzma, Ra'am and the Reservists sit 15-35 points from the polls and both exchanges",
+   "status": "partly",
+   "note": "The gap is verified, and the polls (18/18 for RZP, Otzma and Ra'am) are the strongest evidence against the model, stronger than the markets. Those carry $141-$4.3k per leg and are not coherent: Kalshi's 'Amcha in the next government' is 0.40/0.42 while 'Amcha wins a seat' is 0.20/0.29, and Polymarket has 0.29 against 0.22. The archive check that the desk says favours the model in Likud-trailing cycles is selected. It is 3 of 6 failures (3 of 8 with haredi lists), not 3 of 5, and all three failures were first-time lists, unlike RZP and Otzma. The archive base rate for 5-7-seat lists is about 0.9. 'Decompose before changing' (TRAIL off, gevalt off, desertion off, one at a time) is the right next step."
+  },
+  {
+   "title": "EVENT_RISK 1.2 versus a market-priced hazard",
+   "status": "partly",
+   "note": "The direction holds, and the DYN verifier reached the same conclusion: 1.2 was set on 30 Aug for several reasons, some now resolved. Election-day variance should only carry events in the blackout window, since polls observe earlier ones. Corrections: the market hazard to 27 Oct is about 0.12, not 0.08-0.10, and about 0.035 of it falls inside the 24-27 Oct blackout. With the effective bloc sd of about 4.33 (t5 scale 3.36), 1.2 adds about 2.9 seats of sd, not 2.2. The 'no move after the anniversary' evidence is weaker than stated, because Channel 13 had the bloc down 4 on 15 Oct. Counter-evidence: Channel 12 reported that US officers were told to prepare a 'massive attack on Iran within three weeks' (early Oct), and the 31 Oct strike price is 0.155. Postponement, priced at 0.055-0.085 on a $62k market, is a separate outcome the model does not represent, and the site note is right to add it."
+  },
+  {
+   "title": "Blue and White's withdrawal prior is stale",
+   "status": "partly",
+   "note": "The code lowered the prior 0.40 to 0.25 on 13 Oct, citing Gantz's own 'I am not withdrawing'. The 10 Oct statement is therefore already priced. The only new evidence is the 16 Oct pact refusal, and that is cheap: for a list at about 1% a surplus pact pays off only if both lists pass. The 8 Oct comment even read the pact talks as a sign of staying. Israel Hayom's scenario, an exit in the final days if the threshold is out of reach, is still live, and 16 of 16 October polls put it out of reach. The code's plan stands: re-check on 20 Oct and collapse via RESOLVED on 23 Oct. Its caution also applies, since the transfer moves Yashar's mean and the global TRAIL switch."
+  },
+  {
+   "title": "A one-sided UTJ downside from Gur's missing vote instruction",
+   "status": "partly",
+   "note": "The facts are verified (INN, Kipa; the i24 fallback via a search summary), but every source is unnamed, and the vote estimates come from Belz, the rival court. INN expects a framework to be found eventually. The proposed conditional event (p 0.3, -0.6 seat if no instruction by 23 Oct) is about -0.18 seat in expectation, small next to LOYAL_SD 1.3. The trigger and the evidence class (a published Gur instruction in HaModia) are well specified."
+  }
+ ],
+ "parameter_review": [
+  {
+   "name": "SURPLUS_PAIRS",
+   "desk_proposal": "no change (five signed pairs)",
+   "verdict": "supported",
+   "note": "Kikar 16 Oct lists exactly the model's five pairs, and Maariv 18 Aug confirms 16 Oct as the deadline. Counter-evidence: none found. The CEC registry was not reachable; re-check the published notice before the final build."
+  },
+  {
+   "name": "blue_white_folds",
+   "desk_proposal": "0.25 -> 0.15",
+   "verdict": "not supported",
+   "note": "0.25 was set on 13 Oct after Gantz's 'I am not withdrawing' (registration_scenarios.py), so the 10 Oct statement is already in it. The new evidence is one cheap signal: a 1% list refusing a surplus pact that only pays if both lists pass. The 8 Oct comment counted pact talks as a signal of staying. Strongest counter-evidence: Israel Hayom's reported exit 'only in the final days if the threshold is out of reach', with 0 of 16 October polls giving a seat. A 0.20 hold would be defensible. Follow the code's plan (re-check 20 Oct, RESOLVED 23 Oct) rather than cutting now, because the transfer moves Yashar's mean and can toggle TRAIL."
+  },
+  {
+   "name": "amcha_withdraws (new event)",
+   "desk_proposal": "absent -> 0.02-0.05",
+   "verdict": "supported",
+   "note": "Winter's 14 Oct vow, Noam's stance and the continuing pressure campaign (signs, job offers; N12) are verified. A low probability fits. Counter-evidence: the campaign is organised and ongoing, and the legal last day for a list withdrawal is unverified (desk open question). If the deadline has passed, the event is moot."
+  },
+  {
+   "name": "liberman_minority_ok",
+   "desk_proposal": "0.25 -> 0.12 (NEFF 20)",
+   "verdict": "not supported",
+   "note": "The quote is verified, but the March 2020 precedent was not a 'transitional' minority. It broke an earlier 'never an Arab-backed government' pledge (COA-F20). The 0.25 comment already prices a stated veto. Strongest counter-evidence: the 2020 reversal came under deadlock at the third election, and the parameter only matters in deadlocks. In the rerun the cut lowers the JL minority (0.028 to 0.016) but raises 'Netanyahu + defector' (0.193 to 0.203) and P(Netanyahu PM) (+0.010), so it moves the model further from the markets. Hold, or trim to 0.20 at most."
+  },
+  {
+   "name": "liberman_haredi_ok",
+   "desk_proposal": "hold 0.20 (or 0.15)",
+   "verdict": "supported",
+   "note": "Verified 15 Oct: 'no Shas, and no United Torah Judaism'. This matches 0 of 5 formations with the haredim since 2019. Hold; 0.15 is not needed on a restated pledge."
+  },
+  {
+   "name": "centre_defects",
+   "desk_proposal": "0.12 -> 0.05 (NEFF 30), or cap its share inside the post-deadlock stage",
+   "verdict": "partly",
+   "note": "Direction supported by the markets (Kalshi P(Netanyahu | formation) 0.30 vs model 0.45; Likud in government 0.26-0.345 vs 0.475) and by the record. A change list joined Netanyahu in 1 of 5 resolved Israeli deadlocks, while the stage gives the defector about 0.41 of resolved-deadlock mass. Not supported by the new statements: they restate the never-Bibi founding pledges the 0.12 already prices, and Gantz refused Netanyahu throughout 2019 before joining him in 2020. Bennett's 11 Oct remark set terms for Netanyahu's entry before he withdrew it. Size: the 0.213 comes mostly from the stage (0.074 with the stage off). In the rerun, 0.05 lowers the outcome to about 0.115 and P(Netanyahu PM | formation) to about 0.32, close to Kalshi. But about 0.05 of the mass moves to 'unity without Netanyahu' (0.158 to 0.208), which has no precedent. Prefer the desk's alternative: allocate the stage's resolutions using the record's shares, graded in validate_formation.py (the 2020 realisation must keep non-zero probability). Otherwise 0.08 (outcome about 0.15) is the most a gate-only change can justify."
+  },
+  {
+   "name": "likud_sans_bibi",
+   "desk_proposal": "hold 0.125",
+   "verdict": "supported",
+   "note": "The Herzog unity report was denied, the pardon is not live before the vote (Kalshi 0.01/0.06), and no Likud figure has floated dropping Netanyahu. Liberman's 'several MKs within Likud' is a prediction, not a signal. Caveat: cutting centre_defects pushes deadlock mass into this branch (rerun 0.158 to 0.208) even with the parameter held, so the two cannot be reviewed separately."
+  },
+  {
+   "name": "amcha_right",
+   "desk_proposal": "hold 0.55-0.60",
+   "verdict": "supported",
+   "note": "Winter re-pledged to recommend Netanyahu (JPost 16 Oct; ToI French 12 Oct) but joins only if a universal-service law passes. The feud deepened ('il nous tire dans le dos'; Netanyahu: 'Don't vote for Winter'). Hold at 0.60, or 0.55 for the feud. The parameter matters only in the roughly 25% of draws where Amcha passes."
+  },
+  {
+   "name": "amcha_center / AMCHA_JOIN_EISENKOT",
+   "desk_proposal": "0.30 -> 0.20 / hold 0.03",
+   "verdict": "partly",
+   "note": "Direction is supported by Srugim 12 Oct, which rules out joining a change-bloc-led government, Liberman-led included. Counter-evidence: JPost 16 Oct says he 'did not explicitly rule out joining an Eisenkot or Liberman government', and Srugim's referent is the outlet's paraphrase. Bennett is never named, and that is the only case where amcha_center applies. Leverage is nil: the rerun at 0.20 changes no outcome at the third decimal. Low priority; hold 0.03."
+  },
+  {
+   "name": "res_right / res_centre / ZIONIST_ONLY",
+   "desk_proposal": "hold 0.12 / 0.70 / {Reservists}",
+   "verdict": "supported",
+   "note": "Hendel's 8 Oct stance is confirmed verbatim, and Winter refused the Zionist-only declaration (Kikar 16 Oct), so the tripwire did not fire. Counter-evidence: Hendel's 'if Netanyahu, Eisenkot and Bennett sit together' grand coalition keeps Netanyahu, which the unity branch (Likud without Netanyahu) does not cover. Blue and White's Zelekha claim is a rival's assertion and should not move res_right."
+  },
+  {
+   "name": "shas_defects / utj_defects / implicit haredi entry under NB>=61",
+   "desk_proposal": "0.05-0.10 / 0.10-0.15 / 0.90-0.95",
+   "verdict": "partly",
+   "note": "Deri's condition is verbatim. The 'recommend nobody' report is unnamed sources, explicitly 'not decisions by the parties' rabbinical leadership', and the same line (17 Sept, Asher 29 Sept) already drove utj_defects 0.26 to 0.15 on 10 Oct. The same sources 'do not expect either party to actively seek Netanyahu's replacement'. A haredi entry below 1 when NB reaches 61 is plausible in principle, but this evidence does not newly support it. Hold the defection gates. If entry below 1 is added, treat it as a design change graded on the record, not as an update from this report."
+  },
+  {
+   "name": "raam_joins / raam_supports / jl_supports",
+   "desk_proposal": "hold 0.40 / 0.60 / 0.45",
+   "verdict": "partly",
+   "note": "Holding is reasonable, but the evidence leans up, not flat. Golan said 'Yes, with Ra'am' inside the government (mako 3 Oct). Kalshi has Ra'am in government at 0.11 (0.07/0.15, $6.3k), and Polymarket's first-government market at 0.165 (0.16/0.17, $16.9k), both above the model's 0.074. Counter-evidence: Eisenkot, Lapid (May) and Liberman refuse Arab parties inside, Kalshi counts post-repeat governments, and both markets are thin."
+  },
+  {
+   "name": "EVENT_RISK",
+   "desk_proposal": "1.2 -> 1.02-1.06 at D-11",
+   "verdict": "partly",
+   "note": "The direction is supported, and the DYN verifier separately found that only blackout-window events belong in the election-day term. The arithmetic needs correcting: the market hazard to 27 Oct is about 0.12 (not 0.08-0.10), about 0.035 of it in the 24-27 Oct blackout, and 1.2 adds about 2.9 seats of sd, not 2.2. Counter-evidence: Channel 12's report that US officers were told to prepare a 'massive attack on Iran within three weeks', a 0.155 strike price by 31 Oct, and a non-security justification (sanctions, trial, undecided first-time voters) never re-assessed. A horizon-scaled value near 1.05-1.10 now, decaying toward 1 at the final build, is defensible. Representing postponement (0.055-0.085) is a separate, valid site note."
+  },
+  {
+   "name": "P(repeat election) [output]",
+   "desk_proposal": "0.251 agrees with Kalshi count market 0.245; replace COA-F09's market benchmark",
+   "verdict": "partly",
+   "note": "The numbers are verified, but the markets conflict. The $596 count leg gives 0.20-0.29 and Polymarket ($18k) 0.365. The deep Kalshi PM market (>$600k) has bids summing to 0.87, which caps a repeat near 0.13 and is 0.035 at mids. Report all three as a range (about 0.04-0.37) with liquidity, and keep COA-F09's reading beside the count market rather than replacing it. The model's 0.251 sits inside the range."
+  },
+  {
+   "name": "PM given formation [output]",
+   "desk_proposal": "flag: model Netanyahu 0.45 / Eisenkot 0.34 / Bennett 0.09 vs Kalshi 0.30 / 0.48 / 0.11",
+   "verdict": "supported",
+   "note": "Recomputed exactly from pm_probabilities.csv and the Kalshi re-pull. This is the deepest market comparison (Kalshi Netanyahu $444k; Polymarket $46.8m), so it is the most credible external flag. The rerun traces most of the gap to the stage's defector allocation: at centre_defects 0.05 the model's conditional Netanyahu is about 0.32."
+  },
+  {
+   "name": "p_pass RZP-Zehut / Otzma / Ra'am / Reservists / Amcha / Blue and White [output]",
+   "desk_proposal": "no change before a decomposition; publish as a declared model bet if TRAIL explains it",
+   "verdict": "partly",
+   "note": "The proposal (decompose first) is right. The framing is not: the desk presents the archive as backing the model in trailing cycles, but that record is 3 of 6 (3 of 8 with haredi lists), not 3 of 5, and all three failures were first-time lists, unlike RZP and Otzma. The all-cycle base rate for 5-7-seat lists is about 0.9, and RZP-Zehut is at 4+ in 18 of 18 October polls. The markets are weaker evidence than the polls: $141-$4.3k per leg, and internally incoherent (Kalshi Amcha in government 0.41 vs Amcha seat 0.245). Expect the decomposition to show RZP's 0.555 as the hardest number to defend."
+  },
+  {
+   "name": "P(Likud largest) [output]",
+   "desk_proposal": "flag, not a fix (TRAIL is a deliberate bet)",
+   "verdict": "partly",
+   "note": "Flagging is right, but the support for the model is weaker than stated. The deep market ($890k) has Likud at 0.34. The Kalshi ladders that 'agree' include zero-volume legs and cannot give the joint P(Likud > Yashar). Correction: 7 of 8 polls with fieldwork 11-15 Oct had Yashar ahead, not every network poll; Channel 14 had Likud 29-20. The model's 0.63 depends on TRAIL firing, so the decomposition above should report P(Likud largest) with TRAIL off."
+  },
+  {
+   "name": "UTJ downside (Gur) [not modelled]",
+   "desk_proposal": "-0.6 seat with p about 0.3 if no Gur instruction by 23 Oct",
+   "verdict": "partly",
+   "note": "The facts are verified but rest on unnamed and partly interested (Belz) sources, and INN expects a framework. The size is plausible (25-30k votes is about 0.6-0.7 seats), and the expected effect is about -0.18 seat. Make it conditional, as proposed, on no instruction appearing in HaModia by 23 Oct; otherwise leave the symmetric family shock alone."
+  },
+  {
+   "name": "Registered voters (turnout layer denominator)",
+   "desk_proposal": "7,331,981 eligible; 12,018 stations",
+   "verdict": "supported",
+   "note": "Verbatim in Maariv 14 Oct 14:42 (CEC logistics centre). Not checked against the turnout layer's constant; a grep of src/ found no 7.33m value, so the owner should confirm which denominator the turnout and targeting layers use."
+  }
+ ],
+ "missing_key_works": [
+  "Polymarket 'Which parties will be in the next Israeli government?' (slug which-parties-will-be-in-the-next-israeli-government; resolves on the first government after the 2026 election; event $61k): Likud 0.26, Yashar 0.565, Ra'am 0.165, Amcha 0.29, Shas 0.32, UTJ 0.375 on 16 Oct. It is a closer like-for-like check on government_membership.csv than Kalshi KXISRAELGOVT, which counts post-repeat governments.",
+  "The depth of Kalshi KXISRAELPM (Netanyahu $444k, Eisenkot $75k) against KXISRKNESSETCOUNT ($596 on the '1' leg). Any market benchmark for P(repeat) should show both and the PM market's bid-sum ceiling (about 0.13).",
+  "Ynetnews, Amir Ettinger, 'With electoral deadlock possible, anti-Netanyahu bloc targets control of Knesset after election' (hyt1lw95fl, about Sept 2026): the earlier source for the Speaker-replacement plan the desk dates to 13 Oct.",
+  "Axios, 1 Oct 2026, '5 takeaways from Trump's combative Time interview', and the TIME interview itself (conducted 28 Sept): the source of 'I wouldn't underestimate Bibi'.",
+  "The record of how Israeli deadlocks resolved (DEADLOCK_RECORD in government_formation.py: 1984 unity, 1992 and 2006 haredi entry, 2020 pledge-break into a Netanyahu government, 2021 Ra'am). It is the reference class for how the post-deadlock stage should split resolutions, and it bears directly on the defector share.",
+  "March 2020 coverage of Liberman recommending Gantz with the Joint List after saying he would never be part of an Arab-backed government (ToI 9 Mar 2020, COA-F20; Ynet 'Rivlin to tap Gantz'; al-Monitor). This is the precedent that the 15 Oct minority pledge has to be weighed against.",
+  "Filber/Channel 14 (fieldwork 12 Oct; Likud 29, Yashar 20), the one network poll in the 11-15 Oct window with Likud ahead."
+ ],
+ "summary": "Events desk (EVT) verification, 16 Oct 2026. All 27 findings checked: 17 verified, 10 corrected, 0 rejected, 0 unverifiable. Every cited URL was opened except the i24 page (its content was confirmed through a search summary). Three references carry no URL and were not found or not opened: the 13 Oct JPost Speaker story, JPost's poll counts and Emess. Polymarket and Kalshi were re-pulled from their public APIs at 14:12-14:14 UTC, and the model numbers were recomputed from the repo files. The news reporting holds up well. Quotes, dates and speakers match. The corrections are mostly about strength: Eisenkot's minority government is the reporter's analysis, not an on-record plan (F14); the haredi 'recommend nobody' line comes from unnamed sources and restates a report the model already priced (F10); Lapid's quote is misworded and responded to Herzog, not Bennett (F08); Lapid's pardon conditions date from 2025 (F18); 'no poll move after the anniversary' holds only for one week, since Channel 13 had the bloc down 4 on 15 Oct (F16); and 'every network poll had Yashar ahead' misses Channel 14's Likud 29-20 (F24). The market findings need the most correction. Kalshi's count market ($596 on the '1' leg) gives P(repeat) 0.20-0.29, but Kalshi's PM market, about 1,000 times deeper, caps a repeat near 0.13, so F21 does not 'correct' COA-F09. The Iran-strike hazard to polling day is about 0.12, not 0.08-0.10 (F17). The threshold and bloc markets trade $50-$4k per leg and are internally incoherent (Kalshi Amcha in government 0.41 vs Amcha seat 0.245). The trailing-cycle threshold record is 3 of 6, not 3 of 5, and all three failures were first-time lists (F25). Parameters: SURPLUS_PAIRS, liberman_haredi_ok, likud_sans_bibi, amcha_right, the Reservists gates and the PM-given-formation flag are supported. blue_white_folds 0.25 to 0.15 is not supported: 0.25 was set on 13 Oct after the same Gantz statements, and refusing a surplus pact costs a 1% list nothing. liberman_minority_ok 0.25 to 0.12 is not supported: the 2020 reversal broke an equally categorical 'never' pledge and was not transitional, and in a read-only rerun the cut raises 'Netanyahu + defector' and P(Netanyahu PM). centre_defects is partly supported. The markets and the record (a change list joined Netanyahu in 1 of 5 resolved deadlocks, against the stage's about 0.41 share) support a lower defector share, but the 12-16 Oct anti-pacts restate pledges the 0.12 already prices. The 0.213 is mostly produced by the post-deadlock stage (0.074 with the stage off). At 0.05 the outcome falls only to about 0.115, and about 0.05 moves into an unprecedented unity-without-Netanyahu branch. Re-weighting the stage's allocation on the record is the better fix. EVENT_RISK decay is partly supported (corrected hazard, blackout-only logic). P(repeat), p_pass and P(Likud largest) are flags whose market side is thinner than the desk states."
+}

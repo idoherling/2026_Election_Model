@@ -1,0 +1,336 @@
+{
+ "desk": "haredi_2026",
+ "verdicts": [
+  {
+   "id": "HAR-F01",
+   "status": "verified",
+   "note": "Davar opened (last updated 08.09.2026 23:42). Slots 1-8 match the quant, with Chomat Torat Yisrael at 4 (Porush) and 6 (Stark). Davar gives three reasons: not being subordinate to the Gerrer Rebbe, separate party funding, and the option to split from UTJ if elected. It also says this is the first third party on the list 'except a few days in 1992' (Peretz, Moriah). YWN opened (9 Sep, 01:19). It says 'Ger, Vizhnitz and Sanz signed separately with Degel HaTorah', and the Shlomei Emunim/Belz 'merely a technical measure' statement is verbatim. In YWN's running text, 9 is Saltz, 10 Ohana, 11 Moshe Roth and 12 Baruchi; its list form has Ohana 9 and Baruchi 10 (Degel) and omits Saltz, as the desk says. Davar adds that Gur demanded Roth's removal as Sanz's representative, which supports reading slot 11 as Agudah. Neither source gives slot 9's faction. The seat splits at 7 and 8 follow. Neither page contains text aimed at AI tools.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "HAR-F02",
+   "status": "verified",
+   "note": "ToI, 6 Sep 02:19. Lando informed Gafni and Maklev by letter, and the statement is verbatim ('due to the need to refresh the Knesset members...'). Gafni and Maklev favoured dialogue with Netanyahu's government, while Lando's associates pushed confrontation after the failed exemption law. Gafni was first elected in 1988. ToI writes 'No major changes are expected within Agudat Yisrael'. Asher heading the slate was 'expected' per Hebrew media on 6 Sep; ToI's 9 Sep slate story confirms he 'will head the joint slate'. No AI-directed text.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "HAR-F03",
+   "status": "verified",
+   "note": "Kikar HaShabbat, 25 Aug (12 Elul), Chanany Breitkopf. Confirmed: 'Gur does not represent us'; a denial of talks with Degel; a possible technical bloc with another party; early contacts with Noam; Zeibert and Degel's Moshe Shipman managing the Degel-Agudah talks; the slot-5 dispute (Gur vs Tzanz); about two weeks to filing. One slip: 'Shomrei Emunim' should read 'Shlomei Emunim'. That the threat was resolved inside UTJ follows from HAR-F01. No AI-directed text.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "HAR-F04",
+   "status": "verified",
+   "note": "N12 (Amit Segal, 16 Aug 13:15). The subhead says UTJ will run 'as a purely technical bloc and split after'. The Jerusalem Faction pitched a hard-line anti-draft party with an 'additional seat' from non-voters, and Bebchik declined. The meeting was at a Peleg activist's home (the surname is rendered inconsistently in the fetched text), and Gafni was expected to split from Goldknopf after the vote. INN (14 Aug 06:25): Rivlin forecasts two factions after the election, and Pindrus says 'These reports are meaningless.' These are August commentary and rumour, labelled as expectations, not decisions. The filed three-party slate (HAR-F01) partly bears them out. No AI-directed text.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "HAR-F05",
+   "status": "verified",
+   "note": "INN, 15 Oct 09:13. The 'instructed not to engage' and 'no public call from the Gerrer Rebbe' quotes are from one anonymous Gur hasid. The 25-30k figure comes from Belz sources and is stated as votes. 'UTJ could potentially lose two Knesset seats' is the article's own, unattributed. The Belz claims (55,000 natural growth; 'won't manage to affect even the seventh seat') and the expectation of a compromise are confirmed. Kikar (Shaul Kahana, 15 Oct) confirms that HaModia has no campaign or calls 'unlike earlier elections', that Goldknopf has missed every official election gathering, and that Belz has its own election-budget share for the first time. Counter-evidence the desk omits: Emes, 15 Oct 16:17 (Pinchas Ben Ziv, https://www.emess.co.il/radio/1944712) says Gur historically starts real election work only in the last week, or at most ten days before polling (the exception was 5773, about two weeks out). Silence 12 days out is therefore not abnormal in itself; the unusual signals are HaModia's silence and the refusal to join the headquarters. No AI-directed text.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "HAR-F06",
+   "status": "corrected",
+   "note": "ynet (Shilo Freid, undated, 'less than two weeks' before the vote) says Gur 'has approximately 30,000 eligible voters', but the same piece also writes '30,000 votes' and '30,000 ballots'. 'Roughly one to one-and-a-half Knesset seats' is a Gur source's claim, and the 'his seat is secure' quote is confirmed. INN's 25-30k (Belz sources) is stated as votes. Recomputed: VALID_VOTES_2026 = 4,823,026 (src/targeting_marginal.py l.53). A seat costs 40,190 votes with no waste, 38,580 at 4% and 37,380 at 7%. In 2022 there were 4,764,742 valid votes and 4,347,342 went to lists that passed (8.8% waste), so a passing seat cost 36,230 (data/cec_final_counts.csv). At 76-79% turnout, 25-30k eligible voters give 19.0-23.7k votes = 0.47-0.63 seats. Gur is a disciplined court, and at 85-90% turnout 30k eligible gives 25.5-27k = 0.63-0.72. If INN's 25-30k are votes, the figure is 0.62-0.80. The core point stands (well under the press's 1-2 seats), but the upper end is understated.",
+   "corrected_url": "",
+   "corrected_quant": "Gur's full abstention is worth about 0.5-0.7 UTJ seats (up to 0.8 if the 25-30k are votes, not eligible voters). Seat price 37.4-40.2k on 4.82M valid votes with 0-7% below-threshold waste; 2022: 36.2k per passing seat."
+  },
+  {
+   "id": "HAR-F07",
+   "status": "verified",
+   "note": "Emes (Shalom Stein, 16 Oct 00:30, updated 00:47). The joint headquarters was agreed that morning for Shlomei Emunim, Belz, Gur and Vizhnitz. Gur will not take part; Shlomei Emunim and Belz go ahead without Gur and Vizhnitz. The article says 'לא נמסרה הוראה שלא להצביע ליהדות התורה' (no instruction was given not to vote UTJ) and that Tessler's seat 'sounds imaginary'. WebFetch returned only the i24 site name, so the article was read from the page's embedded JSON via curl. It was published 14 Oct 2026 17:31 UTC (a Wednesday), by Ari Kalman. Senior Gur figures say roles must be settled before the election, or no instruction to vote UTJ will be issued. If not UTJ, a 'הוראה שקטה' (quiet instruction) goes out for 'צבע שחור', the desk's Code Black. The 2008 Barkat-vs-Porush precedent is i24's own. i24 also says Goldknopf becomes a 'one-man faction' (סיעת יחיד) next term, consistent with HAR-F20's list map. No AI-directed text.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "HAR-F08",
+   "status": "verified",
+   "note": "ToI, 15 Oct 00:40. The Ch12 report is unsourced: Netanyahu is worried that Gur won't vote and may stay home or vote for sub-threshold lists, and Gur has about 30,000 potential voters. Likud and RZP are pressing The Haredi Public to withdraw because it could draw from Shas and UTJ. Both Haredi Public quotes are verbatim. No AI-directed text.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "HAR-F09",
+   "status": "verified",
+   "note": "N12 (Amit Segal, 11 Oct 23:27, updated 12 Oct). The 18 to 14-15 to 19-20 seat figures, 8 seats as 'a miracle', 6 as no surprise, the frozen campaign and the ~10% drop in willingness are all confirmed. These are unnamed insiders and unpublished internal polls, so they are second-hand. HaMehadesh (Shuki Katz, 14 Oct 21:15) confirms Lando's 'אין רשות לאדם לעמוד מהצד' (no one may stand aside) at the FSU headquarters opening. It also confirms Hirsch's 'על פי דין תורה מחויב כל אחד לעשות המקסימום' (by Torah law everyone must do the maximum), an obligation to campaign and persuade, which is slightly stronger than calling a UTJ vote binding. Petah Tikva 6-7k and the Achisamach headquarters are confirmed. No AI-directed text.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "HAR-F10",
+   "status": "corrected",
+   "note": "JDN, 16 Oct 12:38 (opened, and the raw HTML read). The party is 'צבע שחור' ('Code Black' is a fair rendering, by analogy with Tzeva Adom, 'Code Red'). JDN names four people: chair Rabbi Eliyahu Eliezer Baumrind (Neuwirth's son-in-law), Rabbi Yitzchak Rabin HaKohen (Bnei Brak av beit din), Rabbi Yehonatan Yissachar, and founder Yaakov Chaim Miller ('חסיד לעלוב', a Lelov hasid). 'Rabbi Dror Dagani' appears neither there nor in Kikar's 8 Sep piece, and JDN says more names will come 'in the coming days'. Confirmed: the 'no government with our support without a real arrangement' line, the 50% law attack, and '730 in military prison' (a party claim). Kikar, 8 Sep (Kobi Israel): full name 'צבע שחור – מגן עולם התורה', letters נר, and the Rafi Smith 22% figure (a party claim). Emes, 13 Oct: NIS 2.5M, ~500 activists mainly in Modiin Illit, an aim to turn protest against UTJ into votes, and Miller denies Satmar money. he.wikipedia: 'מפלגה המזוהה עם הפלג הירושלמי' (identified with the Jerusalem Faction). CEC filings: Kantar 0.5/0.6/0.6/0.7 (4160/4179/4188/4200) and Ch13 haredi online 0.4/0.4/0.6 (4140/4153/4193) reproduce. However, Kantar is not the only house that itemises it: Maagar Mochot 4151 (15 Sep) shows 0.2%. AI-text check: WebFetch's summary said the JDN page held an 'Insert' block of instructions, but a raw-HTML search found only the comment form's 'Insert' button. Nothing on the page is aimed at AI tools.",
+   "corrected_url": "https://www.jdn.co.il/news/2748998/",
+   "corrected_quant": "Named list (JDN 16 Oct): Baumrind, Rabin HaKohen, Yehonatan Yissachar, Miller (founder); no Dagani. Itemised by Kantar 0.5-0.7% (4 filings) and Maagar Mochot 0.2% (4151, 15 Sep)."
+  },
+  {
+   "id": "HAR-F11",
+   "status": "verified",
+   "note": "Hamichlol opened. Netzah withdrew on 17 Jan 2013 (ו' בשבט), five days out, under a Gur-Auerbach deal. In 2015, an Arena rally two days out declared 'אין לסייע בידי עוברי עבירה' (one may not aid transgressors). About 4,000 supporters cast invalid ballots, and others voted Shas or Yachad; the desk folds both groups into the 4,000. Municipal votes ~14k (2013, 3 cities), ~22k (2018, 6) and ~18k (2024, 6), and the 21st Knesset non-participation, are confirmed. he.wikipedia's 'הפלג הירושלמי' confirms that since the 20th Knesset the faction backs no party and its members do not vote, and that Friedman's minority declares a blanket ban. 14-22k / 4.82M = 0.29-0.46%. Implication for Code Black: Peleg members are already outside UTJ's 2015-2022 baseline, so any Code Black votes from them are new votes, not UTJ losses.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "HAR-F12",
+   "status": "corrected",
+   "note": "Maariv (8 Sep 19:15) confirms Leitner as chair and 'ההנהגה הישנה והמנותקת' (the old, disconnected leadership); it names no candidates. Those come from he.wikipedia, which also confirms Leitner as a Beit Shemesh councillor, the 19 Jul billboards and the 23 Aug run: Leitner, Pardi, Miriam Nechama Yafe, Ziva Renit Glantz. +972 (Eli Bitan, 15 Oct) confirms deputy mayor and the first woman on a haredi slate. ynet/Dialog (9 Oct) confirms an online panel fielded 5-6 Oct, n=543 aged 18-22, weighted, with 'slightly over 3%' = 5 seats and Shas below the threshold among the young. CEC: 12 filings since 20 Sep, mean 0.60, range 0.2-0.9. Ch13 shares reproduce. Overstated: 'mostly an online-sample effect' rests on one phone wave in which 1.8% of 220 is about 4 respondents (6.0% vs 2.1% of decided, z≈2.1). Askaria (JDN, 14 Sep) also reports The Haredi Public rising to about 4-5% of the sector in later measurements (mode not stated; possibly the Ch13 online waves it fields). No AI-directed text.",
+   "corrected_url": "",
+   "corrected_quant": "Haredi Public online vs phone among decided haredim: 6.0% vs 2.1% in ONE phone wave (≈4 of 220 respondents; z≈2.1). Treat as suggestive; it does not establish an online-only effect."
+  },
+  {
+   "id": "HAR-F13",
+   "status": "verified",
+   "note": "Babli (David Klein, 8 Sep) confirms the list order (Elimelech, Eplalo, Rabbi Erez Reuven, Avi Dayan), 'שפוצצו ברגע האחרון' (talks that blew up at the last moment) and the 170k target. he.wikipedia confirms Netivot Feb 2024: 7 of 17 seats against 5 for Shas+UTJ, and the 16 Jun 2026 national announcement. Super Data: 9% of haredim and 12% of under-30s, with no n, method or dates. CEC: Kantar 0.7/0.5 and Filber 0.1. Maagar Mochot 0.3% (4151, 15 Sep) is not cited but sits inside the range. polls.csv: Lazar 1.1 (9 Sep) and 0.8 (17 Sep). Ch13 4193: 'כל התשובות בטקסט חופשי ציינו את תנועת אחי' (every free-text answer named Ahi), 0.8%. No AI-directed text.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "HAR-F14",
+   "status": "verified",
+   "note": "he.wikipedia (offset read) confirms the 20 Aug merger of Tzomet and Yevarkan's Beit Yisrael into 'המחנה השלישי בימין' (the Third Camp on the Right), with Yevarkan, Green and Ashtamker at the top. The ballot letters 'בי' are not in the article; they are only a wiki sort key. CEC Lazar 0.4/0.2/0.3/0.3 (4158/4164/4177/4197) reproduces, and Midgam (4162) and Maagar Mochot (4151) show 0.0. bias_audit.FAMILY['haredi'] = {shas, utj, deri, haredi_public} is confirmed.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "HAR-F15",
+   "status": "verified",
+   "note": "ToI liveblog (Sam Sokol, 20 Aug 17:30). Haaretz's unnamed student: Yosef 'demanded he promise he wouldn't vote for Shas'. Yosef denied it. Rabbi Moshe Maya's letter and the weekly Friday meetings are confirmed. 'Gained a larger say' is ToI's reading of the weekly meetings, with no formal change. Kikar (via ToI) says Yosef explicitly called to support Shas. +972 (15 Oct) confirms that Deri was booed at rallies of the party's own rabbis and that distrust remained. No AI-directed text.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "HAR-F16",
+   "status": "corrected",
+   "note": "ToI, 9 Sep 02:43. The Council of Torah Sages, 'led by former chief rabbi Yitzhak Yosef', overruled Deri on Ben-Tzur, and a source called it 'a blow to Deri'. Also confirmed: Azoulay moved from 7th to 2nd, reservist Dror Amos is 6th, and Shas is at 'seven or eight seats, down from its current 11'. N12 (Ido Solomon, 21 Aug) confirms the 17-seat 1999 peak, 'אולי על חשבון המסורתיים' (perhaps at the expense of the traditional voters), and Deri's absence from billboards that show only Ovadia Yosef. However, the coalition remark is attributed to Rabbi David Yosef and concerns Gadi Eisenkot, not Yitzhak Yosef and Gantz.",
+   "corrected_url": "https://www.mako.co.il/news-n12_magazine/2026_q3/Article-847c6bcea0e10a1026.htm",
+   "corrected_quant": "N12 21 Aug: Rabbi DAVID Yosef thinks Shas should not rule out working with Gadi EISENKOT if he can form a majority government (not Yitzhak Yosef / Gantz)."
+  },
+  {
+   "id": "HAR-F17",
+   "status": "verified",
+   "note": "N12 (Ofer Hadad, 23 Sep 07:54). The Midgam online poll of 15-22 Sep has n=301 of 1,521 invited and MoE ±4.4. Among haredi first-timers: UTJ 45, Shas 20, Otzma 13. The haredi subsample size is not reported. If it is about a sixth of 301 (~50 respondents), the 13% carries roughly ±10 points. Ch13 Otzma among decided haredim: 8.1/6.1/6.8/6.9/9.3/6.3 online against 3.6 phone, and the phone figure is about 7 respondents. Maariv (2 Sep) confirms 'hundreds of local and community groups' and Otzma's 2-4 seats as a party estimate. The claim is suitably hedged ('not clearly larger than in 2022').",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "HAR-F18",
+   "status": "verified",
+   "note": "JPost (Anna Barsky, 17 Sep 14:11, from Maariv). All four quotes are from unnamed haredi sources, and JPost says it is not a formal decision; the desk labels them as moods, which is correct. One slip: NIS 1.2-1.4bn (no more than about 1.5bn) is the estimated cost given by 'sources in the political establishment', not a stated haredi demand. Eisenkot's 3% one-year deferral is confirmed. JPost (13 Oct) confirms 'neither party is inclined to recommend a candidate', that it is unclear whether they would oppose, abstain or be absent on replacing Ohana, and that they would not actively help replace Netanyahu. The sources are unnamed. No AI-directed text.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "HAR-F19",
+   "status": "corrected",
+   "note": "ToI (Ariela Karmel, 14 Oct 21:46). Deri's quote is verbatim, but it carries no 'in law' or 'survives the courts' qualifier, and ToI notes he gave no timeline. Asher (Monday, 12 Oct) said UTJ 'will not enter a government that does not actually pass the law' and 'We do not belong to any bloc'. That is a condition on entering a government, not on any support. The court-proof wording is Rosenthal's. Foreign Policy (Anchal Vohra, 14 Oct) quotes him: 'We will go with whoever commits to passing a conscription law that can withstand High Court scrutiny', with the rabbis to decide after the vote. 'Whoever commits' leaves a door open to a non-Netanyahu PM. JPost (Keshet Neev, 11 Oct) confirms the surplus deal announced Sunday 11 Oct and 'present a united front'. The same ToI piece says Eisenkot 'has previously signaled openness' to haredi parties, particularly Shas, and that a Ch12 report said UTJ would not oppose an Eisenkot government. Both cut against 'Eisenkot closes the centre path'.",
+   "corrected_url": "https://www.timesofisrael.com/deri-says-like-utj-shas-wont-join-next-government-without-a-draft-exemption-law/",
+   "corrected_quant": "Deri (14 Oct): no government with Shas support or participation 'unless the status of yeshiva students is regulated' (no 'law/courts' qualifier, no timeline). Asher (12 Oct): UTJ won't ENTER a government that does not pass the law. 'Survives the High Court' is Rosenthal's (UTJ), conditioned on 'whoever commits'."
+  },
+  {
+   "id": "HAR-F20",
+   "status": "verified",
+   "note": "ToI (29 Sep 05:36) calls it an 'unsourced Channel 12 report' and writes 'The pair represent the Gur Hasidic sect'. That is ToI's error: en.wikipedia confirms Tessler as 'the main representative of the Vizhnitz community' (Agudah conference before April 2019). Asher's denial came 'shortly after the report aired'. Code: src/government_formation.py l.215-216 has UTJ_ABSTAINS = 0.0 and AGUDAH_SHARE = 4/7, with the comment 'Gur's faction, ~4 of 7'. l.560 adds AGUDAH_SHARE x utj_seats to abstentions, i.e. 4.57 MKs at UTJ 8. 4/7 is old Agudah's share of UTJ's 2022 seven (Goldknopf, Porush, Tessler, Eichler). On the filed 2026 slate the registered Agudah holds slots 2 and 8: 1 MK at UTJ 7 and 2 at UTJ 8-10, exactly the two MKs the report named. If Chomat (slots 4 and 6) were counted with old Agudah, the share would be 3/7 or 4/8, but no reporting puts Porush or Stark in the abstention.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "HAR-F21",
+   "status": "verified",
+   "note": "Haaretz (Maanit & Shpigel, 1 Jul) confirms all figures: 165 proactive arrests from 16 Jan to 11 Jun, 16 of them haredi; 81 chance detentions; 294 indictments, of which an estimated 32 were haredi; 92,080 as of 10 May, ~80% haredi (= ~73,660); Tayeb's 'on our way to 90,000'. Code Black's 730 is a party claim (JDN, 16 Oct). No AI-directed text.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "HAR-F22",
+   "status": "verified",
+   "note": "ToI (26 Sep) confirms Kan's 'deterred' report, Haaretz's police sources (suspended in August), the IDF denial and ~80,000 men aged 18-24. JPost (16 Sep) confirms 'earlier this month': unanimous on the defective process, 8 of 9 on substance, frozen by Grosskopf on 15 Jul 'one day after it passed'. ToI (23 Jun) confirms the agreement of Sohlberg, Baharav-Miara and Levy; Ch13 reported the haredi parties asked for it. JPost (8 Oct) confirms the arrests in Beersheba and Eilat, Highway 4 closed, Deri's Modiin Illit event surrounded, 'terrible desecration of God's name', and the Committee's 'crocodile tears' reply. No AI-directed text.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "HAR-F23",
+   "status": "verified",
+   "note": "JDN (Eli Porush, 14 Sep 20:14; raw HTML read) confirms every figure. Askaria says none of the gaps among decided voters is significant; the whole-public drop of 7.7 points is significant. Quote: 'זהו מגזר שמתמהמה – לא מגזר שמתנתק' (a sector that is dawdling, not disconnecting). The estimate is ~1 seat (0.5-1.5), all of it Shas, falling to ~0.5 if undecided voters return. Caveats: the waves do not sit at the same point in the campaign. 2026 was fielded in Sivan, Av and Elul against 2022's Tamuz, Av and Tishrei, so 2022's average includes a wave closer to election day, and part of the rise in undecided may be timing (this supports the 'dawdling' reading). Askaria also fields Ch13's haredi sample, so this survey is not independent of HAR-F25. AI-text check: WebFetch flagged an 'Insert' block of AI instructions, but the raw HTML has only a contact-form 'Insert' button. Nothing is aimed at AI tools.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "HAR-F24",
+   "status": "verified",
+   "note": "Kikar Super Data (Gotthelf; analysis by Gotthelf and Widerman; 14 Oct) confirms all figures (75/69; Shas 13 vs 33-36; UTJ 41 vs 50; Ahi 9/12; 36/33/62/70%) and Widerman's 'המצב לא טוב, והקמפיינים לא עובדים' (the situation isn't good, and the campaigns aren't working). No n, method or dates are given. The '80-88% historical turnout' is Super Data's own framing ('אחוזי הצבעה פנטסטיים של 80% עד 88%', fantastic turnout of 80-88%). It is contradicted by the project's kalpi data (haredi-cluster turnout 72.8-76.8%, 2019a-2022), against which 75% 'definitely' is no drop at all. That strengthens the desk's 'weak evidence' reading. Ch13 4193: 66.2 + 21.2 against 74.6, reproduced.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "HAR-F25",
+   "status": "corrected",
+   "note": "All six filings were re-extracted from data/raw/cec_pdfs (4118, 4140, 4153, 4169, 4182, 4193), and every decided share reproduces to 0.1. Example, 4169 phone: Shas 23.6 and UTJ 50.9 of all respondents, undecided 8.2, won't vote 4.1, giving 26.9 / 58.0 / 84.9. The z values reproduce: same-day 2.13 (decided n ≈193 vs 247) and pooled 3.59. Leaners on 7 Oct (n=43): 30.2/18.6/14.0. Overstated: (1) There is one phone wave (220 respondents, ~193 decided), and the same-day z of 2.1 (p≈0.03) does not allow for the several list and wave comparisons. (2) 'In line with Askaria's phone survey' is not independent, since Askaria fields Ch13's haredi sample. (3) The pooled 1.3 compares a single 23 Sep phone wave with online waves from 2 Sep to 7 Oct, while The Haredi Public rose mid-September. (4) Mode and sampling frame are confounded. (5) The haredi data-collection modes of the national houses are not documented, so 'a mechanism for the recorded under-count' is a hypothesis. Ch13's own seats did not move in the phone week: Shas 7 and UTJ 8 in 4118, 4140, 4169, 4182 and 4193 (7/7 in 4153).",
+   "corrected_url": "",
+   "corrected_quant": "Phone-online gap for Shas+UTJ among decided haredim: 7.9 pts same-day (z 2.1; ~1.0 seat), one phone wave n=220 fielded by the same house as the Askaria benchmark. The pooled 10.1 pts (~1.3 seats) mixes waves across five weeks. A plausible mechanism, not a measured one."
+  },
+  {
+   "id": "HAR-F26",
+   "status": "verified",
+   "note": "Every Shas figure in house_effects_lists_2026.csv reproduces (Filber +1.87 ... Midgam Project -0.98); UTJ house effects run -0.34 to +0.28. cec_party_pcts since 20 Sep: Shas 16 filings, 5.0-8.6, mean 6.23 (5.66 without Filber); UTJ 5.0-6.6, mean 6.01. polls.csv October n=18: Shas 7.72 (7.27 without Filber), UTJ 7.89. Filing 4192 says Filber uses 'מערכת איסוף דיגיטלית אינטרנטית' (a digital internet collection system). The record was recomputed as each pollster's mean over the last 14 days, seat-sum filter 108-122. For 2019a-2022, Shas: n=38, mean -1.67, 0 over / 4 exact / 34 under. UTJ: mean -0.28, 10/16/12. Caveats: (a) Scope. Across all eight model cycles 2009-2022, 6 of 66 Shas pollster-cycles over-polled: 2013 Dialog +0.5 and Maagar Mochot +1.0; 2015 Geocartography +1, Smith +2, Teleseker +0.67 and Unattributed +0.33. 'Never' holds only for 2019a-2022. (b) Under the project's own final-poll rule (each pollster's latest poll within 21 days), 2019a-2022 is 0/13/25 with mean -1.21. (c) The 38 pollster-cycles are five elections. (d) Filber and Tatika have no 2009-2022 record, so 'the record favours the high end' is a family-level statement, not evidence for Filber.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "HAR-F27",
+   "status": "corrected",
+   "note": "Wikipedia 1988 confirms the votes and seats; IDI's 1988 page confirms the 1% threshold. Overstated: (1) Agudah's jump to 5 is widely credited to the Lubavitcher Rebbe's late endorsement. The Christian Science Monitor (3 May 1990, Russell W. Baker) wrote 'With his endorsement they won an unexpected five seats', and Shach's opposition to the Chabad link was among the reasons he founded Degel. So 1988 shows two rabbinic camps mobilising rival electorates under a 1% threshold, not that splitting as such adds seats. (2) The 1984 base of 6 omits Morasha (2 seats, one of them Poalei Agudat Yisrael's).",
+   "corrected_url": "https://www.csmonitor.com/1990/0503/alub.html",
+   "corrected_quant": "1988 haredi seats 13 (Shas 6, Agudah 5, Degel 2) vs 6-7 in 1984 (Agudah 2, Shas 4, plus Morasha's PAI seat); Agudah's +3 is credited to the Lubavitcher Rebbe's late endorsement, not to the split."
+  },
+  {
+   "id": "HAR-F28",
+   "status": "corrected",
+   "note": "Every error reproduces from error_decomposition._frames(). Am Shalem polled 1.75 seats and Yachad-Otzma 4.00; Shas and UTJ per cycle as stated; family e0 mean -0.98; group means +0.11 / -1.81 / -0.28. en.wikipedia confirms that Yachad withdrew on 27 Mar 2019 and 'endorsed United Torah Judaism'; Netzah withdrew on 17 Jan 2013. Vote counts check against cec_final_counts. The grouping is fragile, for five reasons. (1) Shas 2019a (-2.67, the record's largest miss) sits in the 'withdrawal' group although Yachad endorsed UTJ; Shas was polled near the threshold that year. Without it the withdrawal group is UTJ-only: -1.38, n=2. (2) Netzah was never itemised in polls, so its withdrawal could add votes beyond the polls only through people polls had as non-voters. (3) Shas's 2022 (-1.43) and 2009 (-1.11) misses had no splinter event. (4) The 2013 and 2015 splinters polled 1.75-4 seats, while 2026's poll 0.1-0.7%. (5) On the desk's own logic, Ahi, an active splinter on Shas's base, argues for a smaller Shas under-count in 2026, which cuts against challenge 1. 'Ties the family's big misses to withdrawals' should read 'is consistent with'.",
+   "corrected_url": "",
+   "corrected_quant": "Active-splinter list-cycles +0.11 (n=3); withdrawal-beneficiary cycles -1.81 (n=3), but -1.38 (n=2, UTJ only) if Shas 2019a (Yachad endorsed UTJ) is excluded; the largest non-splinter misses (Shas 2022 -1.43, 2009 -1.11) fit neither story."
+  },
+  {
+   "id": "HAR-F29",
+   "status": "verified",
+   "note": "ToI (Raoul Wootliff, 16 Jan 2019) confirms Degel 'vastly outperformed' with nearly twice the municipal seats, the 'procedural' split for separate funding, the equal slate (Agudah odd slots, Degel even), Agudah's ~60% share in 2015, and 'unprecedented historic agreement'. 8 seats in April 2019 is UTJ's best since 1992; it polled 6.33. Limits: the feud was settled three months before the vote, and the same 2019a beat coincides with Yachad's endorsement (HAR-F28). So this shows that a resolved feud did no harm, not that a faction withholding its vote on election day does none. Other pre-filing split threats: 2021 (Degel threatened to break away days before the list deadline, INN 296015, from search results) and 2022 (the Gafni-Goldknopf slate dispute; IDI called the party 'teetering on the edge of dissolution'). UTJ's final-poll errors in those cycles were -0.29 and 0.00.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "HAR-F30",
+   "status": "verified",
+   "note": "BIU CRIS confirms Leon (2015), Israel Affairs 21(2):230-244, doi 10.1080/13537121.2015.1008241. The abstract contains 'emergency election campaign', 'The battle was fought openly and assertively' and 'an uneasy electoral stability'. Only the abstract was read. The 2013 shares check against cec_final_counts: UTJ 195,892 / 3,792,742 = 5.16%; Shas 331,868 = 8.75%. Final polls 5.91 and 10.45 reproduce.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  }
+ ],
+ "challenge_checks": [
+  {
+   "title": "Allocate the haredi family under-count to Shas, not by base share",
+   "status": "partly",
+   "note": "Holds on direction. Shas was under-polled in 7 of 8 cycles (mean -0.88) and UTJ in 3 of 8 (mean -0.10). The pattern survives dropping 2019a (Shas -0.63, UTJ +0.13). The 2019a-2022 pollster-cycle counts reproduce (Shas 0/4/34, mean -1.67). Weaker than stated: (1) the mode-gap split is not robust (same-day 3.8 vs 4.1) and rests on one phone wave; (2) 'no pollster over-polled Shas' is true for 2019a-2022 only; 6 of 66 over-polled across 2009-2022; (3) in 2026 Shas faces an active splinter on its base (Ahi) and an Otzma leak, which by the desk's own HAR-F28 logic predicts a smaller Shas under-count; (4) the unshrunk LOO arm is already pre-registered as s.54 (hared_alloc, HAREDI_ALLOC='record'). It failed the registered rule on the D-21 interval score by .012 on one seed, and a re-grade under the s.55 amendment is pending, so 's.51.5' is not the open arm. At k=8, base Shas 0.49 and record 0.90 give a shrunk share of ≈0.70, which moves about ±0.20 seats; the 0.4 end needs the unshrunk record. Ship only through the harness."
+  },
+  {
+   "title": "A UTJ-specific left tail for an organised Gur abstention",
+   "status": "partly",
+   "note": "Holds on direction. Five outlets independently report Gur withholding on 14-16 Oct (INN, Kikar, Emes, i24, ToI/Ch12). HaModia's silence is 'unlike earlier elections', and the i24 'quiet instruction' for Code Black is confirmed. Size is overstated: the corrected Gur value is 0.5-0.7 seats if fully withheld. Several facts argue for a lower p. (a) Gur historically starts work only 7-10 days before the vote (Emes, 15 Oct), so silence at D-12 is normal. (b) Emes (16 Oct) says no instruction was given not to vote UTJ. (c) The stated aim cannot be reached: blocking Stark at slot 6 needs UTJ ≤5, while Gur is ~0.6 seats with UTJ polling 7.9. Withholding would also sink Agudah's own Tessler at slot 8. The threat reads as leverage over post-election roles, the condition i24 reports. (d) Pre-filing UTJ split threats in 2019a, 2021 and 2022 never cost UTJ against its final polls (-1.67, -0.29, 0.00). (e) 'No call' is not full abstention unless the quiet Code Black instruction is issued. Strongest support for the tail: the 2008 Jerusalem mayoral race, where Gur broke from the haredi candidate. There is no Knesset precedent. Suggested: p ≈0.10 (0.05-0.15) and a loss of 0.3-0.6 seats when it fires, an expected ≈-0.05 seat. Keep the tripwire and plan a refresh around 20-24 Oct, when a Gur call would normally appear."
+  },
+  {
+   "title": "Active haredi splinters through election day: smaller under-count; late withdrawal: larger",
+   "status": "partly",
+   "note": "The arithmetic reproduces, but the grouping depends on placing Shas 2019a under a withdrawal that endorsed UTJ (see HAR-F28). Part (c), no splinter indicator, holds. Part (a), the withdrawal event, is reasonable as disclosed judgement: pressure is confirmed (ToI/Ch12, 15 Oct) and the refusal is public. p ≈0.05 rather than 0.10, and the 0.5/0.5 UTJ/Shas transfer is generous for an anti-establishment list's voters. The expected effect is under 0.05 seat. Part (b), MICRO_REALIZE 0.7, is defensible, but because The Haredi Public is a new protest list without a machine (like NEP and Jewish Home), not because of the phone wave: 1.8% of 220 is about 4 respondents."
+  },
+  {
+   "title": "AGUDAH_SHARE contradicts the filed list order",
+   "status": "holds",
+   "note": "Code confirmed (government_formation.py l.215-216, l.560). 4/7 is old Agudah's share of the 2022 seven. The filed 2026 slate puts the registered Agudat Yisrael at 2 and 8, the very MKs (Goldknopf, Tessler) the single-sourced report named. The map (u>=2)+(u>=8)+(u>=11) follows. Slot 11 (Roth, Sanz) rests on Davar's account of Gur's demand, and slot 9's faction (Saltz) is unknown, which matters only at UTJ ≥9. A second sensitivity variant with old Agudah (slots 2, 4, 6, 8) bounds the answer at 3-4. The effect is confined to the UTJ_ABSTAINS sensitivity row."
+  },
+  {
+   "title": "Haredi entry into a Netanyahu government is conditional, not certain",
+   "status": "partly",
+   "note": "The public conditions are real, but the desk overstates them. Deri's has no 'law' or 'courts' qualifier and no timeline. Asher's is a condition on ENTERING. 'Recommend nobody / a year in opposition' are anonymous moods that JPost says are not decisions. Netanyahu can meet the condition through a coalition agreement and early legislation. On the record, the haredi parties joined every feasible Netanyahu government (1996, 2009, 2015, 2022) and held the bloc through the 2019-2021 deadlocks. A 0.9 sensitivity row is reasonable. The residual should not all go to the post-deadlock stage: the likelier non-entry form is outside support or delayed entry, which still yields a Netanyahu-led government."
+  },
+  {
+   "title": "No new haredi turnout term",
+   "status": "holds",
+   "note": "Askaria finds non-voting flat (~10%) and the change is indecision. Super Data's '80-88% historic turnout' is contradicted by kalpi turnout (72.8-76.8%), so its 75% 'definitely' implies no drop. Ch13's 66.2% 'certain' is an online-sample figure; the one phone wave had 80.0% (4169). The election-day arrest moratorium and the voter-tracking ban pull in opposite directions. A UTJ-specific Gur mixture is the right container for any hedge."
+  }
+ ],
+ "parameter_review": [
+  {
+   "name": "FAMILY_SHOCK['haredi'] mean (seats under-counted by final polls)",
+   "desk_proposal": "Keep 0.98 (raw e0, shipped 16 Oct); literature range 0.5-1.3; describe 0.98 as upper-middle this year",
+   "verdict": "partly",
+   "note": "Keeping 0.98 is supported: it is the shipped, harness-graded value and the per-cycle record reproduces (-0.44, -1.64, +0.88, -4.34, -0.29, +0.13, -0.72, -1.43). The upper end of 1.3 rests on the pooled mode gap, which mixes waves and has one phone wave, so it is not supported. The verified 2026 evidence leans to the lower half: active splinters including Ahi on Shas's base, the voter-tracking ban, a Gur hold-out on UTJ, and Askaria's phone survey putting decided-voter shares near 2022. Counter-evidence for the upper half: Askaria's undecided are mostly former Shas voters, who returned in 2022. Range 0.5-1.1; no change to the headline."
+  },
+  {
+   "name": "Haredi family allocation (Shas share of the family mean)",
+   "desk_proposal": "Allocate by each list's LOO record shrunk to base (n/(n+k), n=8, k=8 → Shas ≈0.70); UTJ -0.2 to -0.4, Shas +0.2 to +0.4",
+   "verdict": "partly",
+   "note": "Direction supported by the list record (Shas 7 of 8 under, robust without 2019a). Size: the shrunk 0.70 moves about ±0.20 seats; ±0.4 needs the unshrunk 0.90, the arm s.54 already graded (failed by .012 at D-21; s.55 re-grade pending). Strongest counter-evidence: Ahi and Otzma compete for Shas's base in 2026, the same-day mode split is even, and the 2019a Shas miss (-2.67) dominates the record mean. Grade the shrunk variant as its own pre-registered arm rather than adopting it."
+  },
+  {
+   "name": "FAMILY_SHOCK['haredi'] sd",
+   "desk_proposal": "Keep 1.77 (e1 sd); a Gur mixture adds skew, not width",
+   "verdict": "supported",
+   "note": "No verified evidence bears on the width. A 0.5-0.7-seat UTJ-only tail at p≈0.1 is small against a t with sd 1.77."
+  },
+  {
+   "name": "UTJ Gur-abstention mixture",
+   "desk_proposal": "Two-point mixture on UTJ: p=0.2 of -20,000 votes (≈-0.55 seat) until a public Gerrer Rebbe call or HaModia ad, then p=0.03; expected ≈-0.11 seat",
+   "verdict": "partly",
+   "note": "Direction supported by five independent reports. 20,000 votes is 0.50-0.54 seats at a 37.4-40.2k seat price, inside the corrected 0.5-0.7 full-withhold range. p=0.2 is too high. Gur normally campaigns only in the last 7-10 days (Emes, 15 Oct). There is no instruction not to vote UTJ (Emes, 16 Oct). The threat cannot achieve its stated aim and would cost Agudah's own slot-8 seat. Most reporting and Belz expect a deal. The record of intra-UTJ threats in 2019a, 2021 and 2022 shows no cost against final polls (-1.67, -0.29, 0.00). Strongest support: the 2008 Jerusalem mayoral defection, HaModia's unprecedented silence, and the refusal to staff the joint headquarters. Suggested p≈0.10 (0.05-0.15), a loss of 0.3-0.6 when it fires, an expected ≈-0.05; keep the tripwire."
+  },
+  {
+   "name": "AGUDAH_SHARE (UTJ seats that abstain if UTJ_ABSTAINS fires)",
+   "desk_proposal": "Replace 4/7 with list order: agudah_seats(u) = (u>=2)+(u>=8)+(u>=11)",
+   "verdict": "supported",
+   "note": "Filed slate (Davar, YWN): registered Agudah at slots 2 and 8, the two MKs the report named. 4/7 is the 2022 old-Agudah share and gives 4.57 abstainers at UTJ 8 against 2 on the filed list. Caveats: slot 11 (Roth/Sanz) is inferred, and slot 9's faction is unknown. Add an old-Agudah variant (slots 2, 4, 6, 8) as the upper bound."
+  },
+  {
+   "name": "UTJ_ABSTAINS",
+   "desk_proposal": "Keep 0.0 headline; 0.15-0.25 sensitivity",
+   "verdict": "supported",
+   "note": "Still one unsourced Ch12 report (ToI, 29 Sep), denied by Asher shortly after it aired. The Gur-Belz rupture makes Agudah-only behaviour more plausible but no more documented."
+  },
+  {
+   "name": "utj_defects",
+   "desk_proposal": "0.08-0.15 for full-list crossing (keep 0.15 or lower)",
+   "verdict": "partly",
+   "note": "Keep 0.15; lowering it is not supported. Rosenthal's 'whoever commits' to a court-proof law (FP, 14 Oct), Asher's 'We do not belong to any bloc', and ToI's note of Ch12's report that UTJ would not oppose an Eisenkot government all keep a centre crossing thinkable. Eisenkot's stated conditions remain the binding obstacle."
+  },
+  {
+   "name": "shas_defects",
+   "desk_proposal": "0.05-0.12 (keep ~0.10)",
+   "verdict": "supported",
+   "note": "Keep 0.10. Yosef's empowerment is confirmed (ToI, 20 Aug and 9 Sep). N12 (21 Aug) has Rabbi David Yosef not ruling out Eisenkot, and ToI (14 Oct) says Eisenkot has signalled openness to Shas. Deri's condition has no timeline. Neither direction is clearly favoured."
+  },
+  {
+   "name": "MICRO_REALIZE['haredi_public']",
+   "desk_proposal": "1.0 → 0.7 (0.6-0.8)",
+   "verdict": "partly",
+   "note": "0.7-0.8 is defensible because The Haredi Public is a new protest list without a turnout machine, closer to NEP and Jewish Home (0.62-0.66) than to a sectarian-core list. The desk's mode argument rests on about 4 phone respondents, and Askaria reports it at 4-5% of the sector later. The effect is negligible (mean 0.1 seat, p_pass 0.012)."
+  },
+  {
+   "name": "P(haredi lists enter Netanyahu VI | NB >= 61)",
+   "desk_proposal": "Sensitivity row 0.85-0.95 (0.9), residual to post-deadlock stage",
+   "verdict": "partly",
+   "note": "Supported as a sensitivity row, not the headline. The verified conditions are weaker than stated (HAR-F19 corrected), and the opposition-for-a-year line is anonymous. On the record, haredi parties joined every feasible Netanyahu government. Route most of the residual to outside support or delayed entry, still a Netanyahu government, not to deadlock."
+  },
+  {
+   "name": "Registration event: The Haredi Public withdraws",
+   "desk_proposal": "p ≈0.05-0.10, share routed to UTJ/Shas",
+   "verdict": "partly",
+   "note": "The pressure and the public refusal are confirmed (ToI, 15 Oct). p≈0.05 is more consistent with an explicit refusal 12 days out. The 0.5/0.5 transfer to UTJ and Shas overstates where anti-establishment voters go (some to Likud or Otzma, or abstention). Expected effect under 0.05 seat."
+  },
+  {
+   "name": "No new haredi turnout term",
+   "desk_proposal": "Do not add; hedge via the Gur mixture",
+   "verdict": "supported",
+   "note": "Askaria's phone survey finds non-voting flat at ~10%. Super Data's 75% 'definitely' matches actual cluster turnout of 72.8-76.8%, so it implies no drop. SEC-F08 says stated certainty does not rank haredi turnout."
+  },
+  {
+   "name": "SURPLUS_PAIRS ('shas','utj')",
+   "desk_proposal": "Confirmed signed (HAR-F19)",
+   "verdict": "supported",
+   "note": "JPost (Keshet Neev, 11 Oct): agreement announced Sunday 11 Oct; 'present a united front in the next Knesset'."
+  }
+ ],
+ "missing_key_works": [
+  "Kalpi-level 2022 results at Gur-concentrated stations (e.g., Ashdod, Arad, Hatzor HaGlilit, Gur blocks in Bnei Brak and Jerusalem). They would size Gur's vote from returns rather than from partisan claims (30k 'eligible' from ynet, 25-30k 'votes' from Belz, '1-1.5 seats' from Gur), and would serve as the post-election test the desk proposes.",
+  "Cahaner & Malach, IDI Statistical Report on Ultra-Orthodox Society (latest edition): haredi eligible voters and the size of the Hasidic courts for 2026.",
+  "Contemporary 2008 Jerusalem mayoral returns in Gur neighbourhoods (Porush vs Barkat). This is the only cited precedent for an organised Gur defection, and its size is unquantified.",
+  "Further Ch13/Askaria PHONE haredi waves after 23 Sep. HAR-F25's mode gap and HAR-F12's Haredi Public claim rest on one phone wave of 220.",
+  "Intra-UTJ feud record before 2019: the 2009 formal Agudah-Degel split before the 18th Knesset lists closed (ynet 3640923; not opened). UTJ was over-polled +0.67 that cycle, a data point against the 'feuds never hurt UTJ' reading.",
+  "Leon (2015), full text. Only the abstract was read, and HAR-F30's 'uneasy stability' reading rests on it."
+ ],
+ "summary": "30 findings checked: 22 verified, 8 corrected, 0 rejected, 0 unverifiable. Every cited URL was opened, with i24 read from its embedded JSON. Every CEC, polls.csv and results computation was re-run from the repo, and all reproduce: the Ch13 decided shares and z values, Shas/UTJ house effects, the pollster-cycle counts, and per-cycle family errors. The main corrections: (1) HAR-F19, the coalition condition. Deri's 14 Oct condition has no 'law' or 'survives the courts' qualifier and no timeline. Asher conditions ENTRY. The court-proof wording is Rosenthal's, and it applies to 'whoever commits'. ToI also notes Eisenkot's openness to Shas and Ch12's report that UTJ would not oppose him. (2) HAR-F25 and HAR-F12, the mode gap. The arithmetic is exact, but it rests on one phone wave (n=220; The Haredi Public ≈4 respondents). The phone sample is fielded by Askaria, so the Askaria match is not independent, and the pooled 1.3 mixes waves. It is a plausible mechanism, about 1.0 seat same-day, not a measured one. (3) HAR-F28, the splinter pattern. Shas 2019a, the record's largest miss, is filed under a withdrawal whose endorsement went to UTJ. Without it the withdrawal group is UTJ-only (-1.38, n=2), and Ahi now counts against a Shas-heavy allocation. Other corrections: the Gur seat value is 0.5-0.7 (up to 0.8), not 0.5-0.65 (F06). David Yosef/Eisenkot, not Yitzhak Yosef/Gantz (F16). Code Black: no Dagani on the published list, and Maagar Mochot also itemised it at 0.2% (F10). The 1988 rise owed much to the Lubavitcher Rebbe's endorsement (F27). 'No pollster over-polled Shas' holds for 2019a-2022 (38 pollster-cycles: 0 over / 4 exact / 34 under, mean -1.67; on the project's latest-poll rule 0/13/25, mean -1.21). It fails for 2009-2022 (6 of 66 over-polled, all in 2013 and 2015), and the 38 cycles are five elections. AGUDAH_SHARE: the code confirms 4/7, the 2022 old-Agudah share. The filed slate supports the list-order map (Agudah slots 2 and 8 = the two MKs the report named). Gur tail: the direction is well supported, but p=0.2 is high. Gur normally starts campaigning in the last 7-10 days. There is no instruction not to vote UTJ. The threat cannot reach its stated aim (Stark at slot 6) and would sink Agudah's own slot-8 seat. Intra-UTJ threats in 2019a, 2021 and 2022 cost UTJ nothing against final polls (-1.67, -0.29, 0.00). Suggested p≈0.10 with a 0.3-0.6-seat loss, an expected ≈-0.05, with the tripwire kept. Allocation: Shas-heavy is supported in direction. The shrunk version moves about ±0.2 seats, and its unshrunk sibling (s.54) is already pending a re-grade. Netanyahu-entry row: fine as a sensitivity row with the residual mostly routed to delayed or outside support. No turnout term. No page contained text aimed at AI tools. WebFetch summaries twice flagged an 'Insert' block on JDN pages; the raw HTML shows only a comment-form button label."
+}

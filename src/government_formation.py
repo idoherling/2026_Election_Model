@@ -213,7 +213,10 @@ ZIONIST_ONLY = {"Reservists – Economic Party"}
 # from its own generator so the rest of the tree's random stream is
 # unchanged.
 UTJ_ABSTAINS = 0.0
-AGUDAH_SHARE = 4 / 7
+# 2026-10-16 (haredi desk HAR-F01/F20, verified): on the filed 2026 slate
+# Agudah holds slots 2 and 8 - the two MKs the abstention report named
+# (Goldknopf, Tessler) - so 2 of UTJ's 8, not the 2022 split's 4 of 7.
+AGUDAH_SHARE = 2 / 8
 
 # PM allocation WITHIN a winning coalition — rotations are the Israeli norm
 # (Bennett was PM with 7 seats in 2021). Probabilities are judgment,

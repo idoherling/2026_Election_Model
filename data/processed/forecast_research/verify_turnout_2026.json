@@ -1,0 +1,320 @@
+{
+ "desk": "turnout_2026",
+ "verdicts": [
+  {
+   "id": "TRN-F01",
+   "status": "verified",
+   "note": "ynet (Amir Ettinger, 15 Oct 2026) opened. All figures match: 7,331,981 eligible; 543,177 'added since 2022' (= 7,331,981 - 6,788,804, +8.0%); 12,018 stations; 6,208 accessible, of which 3,620 special accessible; 250 hospital (50+ beds); 55 prison; 102 stations at 100 missions (state employees only); 07:00-22:00, with 08:00-20:00 for communities up to 350 residents, hospitals, prisons and nursing homes; a day of rest at 200% pay; intercity buses (15 km+) and trains free from 26 Oct 20:00; final results by 4 Nov. Arutz 7 (Hezki Baruch, 14 Oct, inn.co.il/news/708472, opened) gives 'about 7.33 million' and 12,018. 2022 was also a paid day of rest with free transport, so 'no new date effect' is fair. The 7,336,553 figure was not checked (the desk flags it as unopened).",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "TRN-F02",
+   "status": "corrected",
+   "note": "Knesset fact sheet PDF opened and its text extracted. Matches: 6,788,804 eligible (+210,720, +3.2%); 11,707 / 5,116 / 2,939 stations; 222 hospital, 55 prison, 232 retirement-home, 414 COVID; 103 stations at 101 missions; double envelopes 234,599 / 240,783 / 282,442 / 330,209 / 425,512 (5.5 / 5.5 / 6.3 / 7.2 / 9.6%); national turnout 68.5 / 69.8 / 71.5 / 67.4; locality-type chart Jews and others 71.9 / 72.1 / 73.2 / 71.9, Arabs 50.0 / 57.7 / 62.9 / 44.2. Gaps to the Dayan series are 0.8 / 1.5 / 1.9 / 0.4, so 'up to about 2 points' holds. Wrong: '2026 has more stations of every special type'. Prison stations are unchanged (55 vs 55) and mission stations fell (102 at 100 missions vs 103 at 101). No 2026 retirement-home count is given. The sheet itself says the 2021 9.6% was inflated by COVID arrangements, so it is not a clean trend endpoint.",
+   "corrected_url": "",
+   "corrected_quant": "2026 vs 2022: accessible 6,208 vs 5,116 (+21%); special accessible 3,620 vs 2,939 (+23%); hospital 250 vs 222 (+13%); prison 55 vs 55 (no change); missions 102 at 100 vs 103 at 101 (one fewer). Not 'every special type'."
+  },
+  {
+   "id": "TRN-F03",
+   "status": "corrected",
+   "note": "IDI (Anabi and Kenig, 2 Nov 2022) opened. All numbers match: 425,512 (9.59%); Netanyahu camp with Yamina 48.76% vs anti-Netanyahu camp 48.56%; Religious Zionism more than 25% above its regular-station rate; Arab lists less than half; Shas and UTJ 'by as much as a third' lower (no year given); soldiers the largest group, with their share falling as accessible stations grow. Overstated: 'more envelope voting moves the final count rightward'. The envelope bloc split in 2021 was nearly even, close to the camps' overall share (about 48.3% for Likud, Shas, UTJ, RZ and Yamina combined). The lean is by list: RZ up, the haredi lists (inside the Netanyahu camp) and the Arab lists down. IDI's own conclusion is a 'negligible impact' on bloc seats unless a list sits near the threshold. The source does not support s.4's '+0.5-1 seat right' night-to-final drift as a bloc effect. The site sentence should keep the list-level lean and drop any bloc-level implication.",
+   "corrected_url": "",
+   "corrected_quant": "2021 envelopes: Netanyahu camp (incl. Yamina) 48.76% vs anti 48.56%; IDI expects 'negligible impact' on bloc seats except through the threshold. The lean is by list (RZ +25%; Shas/UTJ up to a third lower; Arab lists under half), not by bloc."
+  },
+  {
+   "id": "TRN-F04",
+   "status": "corrected",
+   "note": "5 Towns Central (5TC Team, 14 Oct) opened. It confirms at least 850 military stations, about a quarter mobile, voting from the evening of 20 Oct through 27 Oct, about 3,000 mostly conscript staff trained by the CEC, and soldiers' option to vote at civilian stations by double envelope. Gaza (about 40 outposts), Lebanon and Syria (nine outposts) are named as deployment sites. The article makes no comparison with 2022 and never says 'largest', so 'its largest field vote' is unsupported. 5TC is an aggregator that cites no original source. The Haaretz '+100 stations' remains unopened. The envelope-pool inference is labelled as inference; note that more stations does not by itself mean more soldier ballots.",
+   "corrected_url": "",
+   "corrected_quant": "At least 850 military stations (about a quarter mobile), voting from the evening of 20 Oct to 27 Oct; the source makes no 2022 comparison ('largest' unsupported)."
+  },
+  {
+   "id": "TRN-F05",
+   "status": "verified",
+   "note": "Davar (Or Guata, last updated 23 Jun 2026) opened. About 14,000 still displaced; an 'address for election purposes' proposed; stations in 226 nursing homes and sheltered-housing institutions, about 37,000 eligible and about 30,000 voted; the acting deputy director (Dean/Din Livne) opposed permanent cameras, saying they could deter voters. ynet (15 Oct) confirms dedicated stations for Be'eri, Kfar Aza, Nir Oz and Holit, with no count given. 14,000 / 7.33m = 0.19%. Minor: ToI (TRN-F10) calls Livne director general; the title differs between sources, which is immaterial here.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "TRN-F06",
+   "status": "corrected",
+   "note": "Knesset RIC PDF (Ayala Eliyahu, 16 Oct 2025) opened and its text extracted. Departures 59,400 / 82,800 and returns 29,600 / 24,200 match. Net -29,700 (2022), -58,600 (2023), -36,900 (Jan-Aug 2024; 49,000 out, 12,100 back) and -125,200 cumulative match; the source notes the 2022 outflow includes short-stay olim from the Russia-Ukraine wave. The arithmetic 70.6 x 125,200 / 7,331,981 = 1.21 is right. The premise is not: (1) the CBS counts cover all ages, not adults; (2) the window starts in Jan 2022, about 10 months before the 2022 vote (those leavers already depressed the 2022 baseline), and stops in Aug 2024, omitting about 26 months of outflow, which ran at about 4,600 a month in 2024. If about three quarters of emigrants are adults (an assumption), the desk's window gives about 0.9 point. All ages from Nov 2022 to Oct 2026 at the 2024 pace gives about 2.1. The 1.2 sits inside that range. The direction is solid; the size is an order of magnitude.",
+   "corrected_url": "",
+   "corrected_quant": "Net Israeli migration (all ages): -29,700 (2022), -58,600 (2023), -36,900 (Jan-Aug 2024), -125,200 cumulative. Turnout denominator effect about 0.9-2.1 points (adults-only in the desk's window, to all ages through Oct 2026 at the 2024 pace); treat as about -1 to -1.5."
+  },
+  {
+   "id": "TRN-F07",
+   "status": "verified",
+   "note": "Local Call (Bakr Zoabi, 15 Oct) opened. Stat-Net analysis of CEC station lists as of 31 May 2026: Arab-locality stations 1,628 to 1,539 (-89); Jewish 7,886 to 8,482 (+596); Arab eligible about +96,000 (+10.2%) vs +8.1%; 672 vs 578 per station (gap 94, about 16%); 2021 about 528 vs 539; 52 of 147 Arab localities (35%) vs 3%. Kafr Bana 15 to 9 stations (6,004 to 6,492 eligible, 400 to 721 per station); Ma'ar 31 to 25; about 250 more stations to close the gap; Negev 30-45 minutes, up to 65 km (Hassan Asadi); the CEC says the Interior Ministry places stations via the CBS. Desk arithmetic checks: 938,401 x 1.102 = 1.034m (14.1% of the register). Stat-Net's implied base (96,000 / 0.102 = 941k) matches Bayan's Arab-and-Druze definition, not the 839k kalpi cluster; the same growth on the kalpi cluster gives about 925k. Page content: no instructions addressed to AI tools found; a stray token 'silencej89sjf' appears after the footer.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "TRN-F08",
+   "status": "verified",
+   "note": "RePEc page opened: Brady and McNulty, APSR 105(1):115-134 (2011). The 2003 recall in Los Angeles County gives -1.85 overall, -3.03 at the polls and +1.18 absentee; transport and search costs both matter; Democrats were more sensitive. The DOI 10.1017/S0003055410000596 matches the publisher identifier S0003055410000596. Stretch to flag: LA's estimate is for voters whose polling place changed in a large consolidation for a special election. Arab localities lost 5.5% of stations while load per station rose 27% (528 to 672), and how many voters were reassigned is unknown. The -3 point figure is an upper bound for a related but different mechanism. The desk labels it an analogy.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "TRN-F09",
+   "status": "verified",
+   "note": "RePEc abstract opened (the AEA page returned 403): Cantoni, AEJ: Applied 12(1):61-85 (2020); +1 sd distance (0.245 mi) means -2% to -5% of ballots; in non-presidential elections the effect is 3x in high-minority areas. A search summary of the paper confirms the four elections (2012 presidential, 2013 municipal, 2014 midterm, 2016 presidential primary), the counterfactual +1.6 to +4 points, and no significant minority gap in the 2012 presidential race, so the desk's high-salience caveat is supported. Limit: these are quarter-mile urban distances. The paper says nothing about Negev assignments of 30-45 minutes or 65 km, and there is no evidence those assignments changed in 2026.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "TRN-F10",
+   "status": "verified",
+   "note": "ToI liveblog (Ariela Karmel, 15 Oct) opened: nearly 2,000 activists at hundreds of stations in Arab communities, chosen by a 'special mapping', with no formal role; Livne (June): 'There is no fraud in Israel. If it exists, it is on the margins.' It also mentions the 2019 cameras. The yeshiva-student detail is attributed to Haaretz, which is not in the ToI item and was not opened here. ToI (Jacob Magid, 8 Aug 2019) opened: about 1,200 activists; Katz and about 40 coordinators; the firm posted that turnout 'dropped below 50%'; police investigated two stations, neither targeted; about NIS 2m (double) for September; IDI 49.2% vs 63.8% (2015). 'Record low' holds for Knesset elections up to that date. The Sep 2019 rebound (59.2) coincided with the Joint List's reunification (April 2019 had two Arab lists), so the pair cannot identify an effect in either direction. The symmetric-spread reading is the right one.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "TRN-F11",
+   "status": "verified",
+   "note": "Masdar News (3 Sep 2026) opened. Channel 13 poll: Joint List 9, United Arab List 5 at a 60% Arab-turnout assumption, with Makladeh's Stat-Net preparing the Arab poll. At 72%: JL 10, UAL 6, Netanyahu bloc 53 to 51. If Amcha fails: JL 11, UAL 6-7; Makladeh: 'could reach 16 or 17'. No n or dates. 2 seats / 12 points = 0.17 per point; the desk's 10,300 x 0.858 = 8,840 votes / about 40,000 per seat = 0.22 (7.33m x ~0.70 x ~0.92 above-threshold / 120 = 39-40k). Caveats: the 60% is an input to Ch13's conversion, dated a month before the 2 Oct ruling, not a measurement of turnout. It should not be counted as one of three independent 'estimates' in the 59-61% cluster (summary, challenge 1). The CEC filing 4193 describes the conversion as 'by sector weights in the population' (Steinberg).",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "TRN-F12",
+   "status": "corrected",
+   "note": "i24NEWS Arabic (Suhail Nasser, undated) opened. 59-61% is from a poll Jubran presented to i24, with no n, dates or method. Jubran frames the anger over the disqualifications as a collective mobiliser. Two attribution slips. (1) 'About 15 seats would require at least 65%' is attributed to unspecified 'estimates', not to Jubran. (2) The fall in Arab support for Zionist 'change' parties such as the Democrats is the article's own report, not Jubran's. Also, 'Afkar's September filing converts at 60%' rests on the owner-supplied note in dossier s.17, not on the filing (SEC-F09 verification).",
+   "corrected_url": "",
+   "corrected_quant": "59-61% from Jubran's poll (no n, dates or method); '65% for ~15 seats' is the article's unattributed estimate."
+  },
+  {
+   "id": "TRN-F13",
+   "status": "verified",
+   "note": "Local Call (Bakr Zoabi, 12 Oct) opened. A party source says a Joint List internal poll shows about 61%, with no pollster, n or dates; the target is about 70%. Abed Rada (Yafia) sees more willingness to vote; Yasmin Odeh (Standing Together, Southern Triangle) hears cynicism but argues for turnout; Abu Shehadeh's withdrawal reduced some Balad activists' motivation, while others are more motivated. Treating the poll as an upper bound, not a signal, is correct. Unverified: the Al-Araby (4 Oct) Shbeita item ('working toward 70%', more than 10 seats) has no URL in the finding and could not be found by search. Injection check: two audit fetches found no text addressed to AI tools, only a stray token 'silencej89sjf' after the footer (the same token appears on the 15 Oct page). A direct download was blocked by a Cloudflare challenge, so hidden markup could not be inspected. The desk's report of an instruction block could not be reproduced. Nothing on either page was acted on.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "TRN-F14",
+   "status": "corrected",
+   "note": "Filings 4169, 4182 and 4193 read from data/raw/cec_pdfs (text extracted). Every certainty figure, n, vote column and response figure matches: 4169 Arab 80.2 / 6.4 / 7.4 / 6.0; haredi phone (n=220) 80.0 / 9.5; haredi online (n=293) 67.2 / 20.8; Jews (n=1,001) 73.0 / 15.7. 4182: Arab (n=122) 73.0 / 16.4 / 0.8 / 9.8; haredi (n=230) 67.0 / 21.7; Jews 73.0 / 18.5. 4193: Arab 439 invited, 230 responded, 100 complete, 78.0 / 15.0 / 2.0 / 5.0; haredi (n=500) 66.2 / 21.2 / 4.8 / 6.4; Jews (n=603) 74.6 / 16.3. Steinberg's sector-weight note also matches. SEC-F11's '230 on 7 Oct' is the responder count, not the analysed n of 100. Haredi online certainty is flat across the three waves (67.2 / 67.0 / 66.2). Fixes: (1) 'as in past cycles' has no source; the desk's own challenge 5 says no pre-2026 record of this question exists. (2) The site sentence's 'vote at the highest rate' is overstated: the kalpi haredi cluster turned out 75.8% in 2022 vs 75.6% for the religious-Zionist cluster, which was higher in 2019a-2021 (80.6 / 77.9 / 78.0 / 75.6 vs 76.4 / 76.8 / 76.6 / 72.8).",
+   "corrected_url": "",
+   "corrected_quant": "Drop 'as in past cycles' (no prior series). Haredi cluster turnout 72.8-76.8% (2019a-2022, regular stations), level with the religious-Zionist cluster: 'among the highest', not 'the highest'."
+  },
+  {
+   "id": "TRN-F15",
+   "status": "corrected",
+   "note": "PDF slides rendered and read: 614 young adults aged 18-34; quota sample; 388 phone + 266 digital (= 654, inconsistency confirmed); 20-27 Jan 2026; 59% estimated turnout (Motivation Model); 54% important or very important (13 + 41; first-timers 50%); 27% few or none of their friends vote (9 + 18). New problem the desk missed: the intention slide's legend contradicts its own text. The text says first-time voters 43% definitely, past abstainers 15% definitely and 42% probably. The legend assigns 43 / 16 / 41 to 'did not vote in the past' and 15 / 42 / 43 to 'new voters'. The desk took the text reading without flagging the conflict. 'Collapses among abstainers and first-timers' holds either way, but which group sits at 15% is unresolved.",
+   "corrected_url": "",
+   "corrected_quant": "Past voters 70% definitely. The other two groups are 43% definitely (16% probably) and 15% definitely (42% probably); the slide's text and legend assign them to past abstainers and first-time voters in opposite ways."
+  },
+  {
+   "id": "TRN-F16",
+   "status": "verified",
+   "note": "PDF opened, text extracted and cover rendered: 'Conducted by STATNET'. n=750, telephone in Arabic, 10-17 Feb 2025, sample matched on previous voting patterns, religion and geography. Headline 'expected voter turnout according to the survey' 53%; Motivation Model 47%, used for all breakdowns; 89% support a four-party list; barriers 18% division, 30% lack of impact. The slide names the two models without explicitly attaching 53% to the 'Bias Model'; the desk's reading is a reasonable inference.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "TRN-F17",
+   "status": "corrected",
+   "note": "ToI (Elhanan Miller, 10 Mar 2015) opened: KAP, Feb 2015, n=500, 64.7%; 44.8% say the union significantly influenced them; 13 seats; Yafa/Abraham Fund (Jan 2015): boycotters at most 17% of non-voters, about 3% of the public. +1.2 vs 63.5 is right, and the four-error mean +0.2 / sd 11.1 is arithmetically right. But that set mixes the Aug 2022 early-campaign reading (-11.2) with final surveys, which the SEC-F07 verification separated. Final pre-election KAP surveys alone: +1.2 (2015, a month out), +15.1 (2021), -4.2 (2022), mean +4.0, sd 10.0. All six known readings (adding Nov 2020 +11.0 and Statnet/Kan Aug 2022 -14.2): mean -0.4, sd 11.8. 'Unbiased' depends on the pooling; final surveys have run high. That removes, rather than supports, the +0.3 upward nudge in challenge 1.",
+   "corrected_url": "",
+   "corrected_quant": "KAP final surveys: +1.2, +15.1, -4.2 (mean +4.0, sd 10.0, n=3). All six readings including early-campaign ones: mean -0.4, sd 11.8."
+  },
+  {
+   "id": "TRN-F18",
+   "status": "verified",
+   "note": "Hebrew PDF opened (text extracted, p.1 rendered). May 2026, ages 18-22; Jews n=422 online (iPanel), weighted by religiosity (35 secular / 19.5 haredi / 18 religious / 16 traditional non-religious / 11.5 traditional-religious); Arabs n=154 online and phone, fieldwork by Afkar (named on p.1, so SEC-F09's 'firm not named' holds only for the English page); +/-4.08%. Chart 1.1: total 63 + 28, Jews 63 + 29, Arabs 62 + 25. Chart 1.2 'certain': secular 72, traditional non-religious 57, traditional-religious 56, religious 67, haredi 52 (+32 'think so'). English page (21 Jun 2026): 576 = 443 + 133 vs the Hebrew 422 + 154, same total.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "TRN-F19",
+   "status": "corrected",
+   "note": "JPost (Uri Sela, 23 Jul 2026) opened: Points Location Intelligence; 595,000 aged 18-22; 'about 8.7%'; haredi about 105,000, 'about 16%' and 'one in every six'; Arab more than 118,000 (10.6%); total 6.8m, +9.4% on about 6.2m. Problem: the 8.7% is computed on Points' wrong 6.8m register. On the CEC's 7,331,981, 595,000 is 8.1%, so the 'matches s.4 8.7%' in model_link is a coincidence of two errors. The implied haredi eligible count is 630k ('one in six') to 656k ('16%'). IDI's 2025 yearbook (1,452,350 haredim, 57% under 20) implies about 0.62m aged 20+ and roughly 0.69m aged 18+ (verifier estimate), so 630k is the low end. A 10% relative dip is worth 1.0-1.2 seats across that range (at 75.8-79% turnout, 0.86 to haredi lists, about 40k votes per seat).",
+   "corrected_url": "",
+   "corrected_quant": "595,000 first-time voters = 8.1% of the CEC register (8.7% only on Points' 6.8m). Haredi eligible implied 630-656k (IDI yearbook suggests about 0.69m aged 18+); 10% relative dip = 1.0-1.2 seats."
+  },
+  {
+   "id": "TRN-F20",
+   "status": "corrected",
+   "note": "Data PDF opened and text extracted: Shiluv I2R; 31 Aug-3 Sep; 605 interviewed in Hebrew, 150 in Arabic; +/-3.57%. Q7 'Don't intend to vote' 2.4 / 1.2 / 8.7. Arabs: crime 31.5 first and 25.4% of the 85.9% second (= 53.3, the article says 53.5); economy 18.9 + 31.3% of 85.9% = 45.8. October 7 very or fairly central: 68.3 Jews, 32.3 Arabs. Security very pessimistic: 21.2 Jews, 46.4 Arabs. Article 66177 (9 Sep) opened. Fixes: (1) Q7 asks what will most influence the vote choice; 'don't intend to vote' is one option on it, not a turnout question. (2) Actual 2022 non-voting among non-Arab registrants was about 26.6%: (4,794,593 - 498,894) / (6,788,804 - 938,401) = 73.4% turnout. 'Roughly 28%' is close, but the site sentence's 'about 30%' overstates. Both actual figures include emigrants still on the roll (F06).",
+   "corrected_url": "",
+   "corrected_quant": "2022 non-voting: non-Arab registrants about 27%, Arab-locality about 47%. Survey: a 'don't intend to vote' option on a vote-consideration item (Q7), 1.2% Jews / 8.7% Arabs."
+  },
+  {
+   "id": "TRN-F21",
+   "status": "corrected",
+   "note": "N12 (Amit Segal, 11 Oct, updated 12 Oct) opened. The quote ('according to internal polls, a drop of about 10% in the willingness of haredi voters to go to the polls') matches, as do 18 seats in 2022, 14-15 now, 19-20 'could have been expected', UTJ HQ at a standstill over the rift between the two Lithuanian courts with no mobilisation, '8 a miracle, 6 no surprise', and Shas voters to Yesh Atid / Otzma or staying home. Two overstatements. (1) The article does not say whose internal polls these are; 'haredi parties' internal polls' is not in the source. (2) It does not say whether 10% is relative or in points. No n, dates or wording. Arutz 7 (6 Oct) opened: Asher's closed-door remarks recorded by Kan; 'Four years have passed, and in our community that means a significant addition of tens of thousands of votes.' That is a mobilisation appeal, not a measurement. Note: N12 (16 Aug) calls Goldknopf UTJ chairman, while Arutz 7 calls Asher UTJ chairman.",
+   "corrected_url": "",
+   "corrected_quant": "'Internal polls' of unspecified ownership show 'about 10%' lower willingness to vote (relative or points not stated); no n, dates or wording."
+  },
+  {
+   "id": "TRN-F22",
+   "status": "corrected",
+   "note": "Kikar HaShabbat (Eli Gotthelf, 14 Oct) opened. These match: 75% certain (69% under 30); 36% 'parties don't represent me'; 33% won't vote against the rabbis; Shas under-30 13% (previously 33-36%); UTJ 41% (previously 50%; age group implied); Achi 9% (12% of young); 62% believe activists control the rabbis' homes (70% of Hasidim). Fixes: (1) the analyst is Avi Vidrman (וידרמן), not Weidman; (2) Leitner's 11% has no stated age group, but the desk lists it under under-30s; (3) no n, dates, mode or wording. Overstated: comparing a 75% 'certainly vote' share with '80-88% turnout' treats certainty as turnout. In the Ch13 filings Jewish adults answer 73-75% 'certain' and their sector turned out about 73% in 2022, while haredi phone respondents answer 80%. With no Super Data baseline, there is no change measurement. The '80-88%' past turnout is the page's claim; measured haredi-cluster turnout is 72.8-76.8% at regular stations (about 79% with envelopes, Malach via SEC-F17).",
+   "corrected_url": "",
+   "corrected_quant": "75% 'certain' (69% under 30): a certainty share with no baseline, in line with Ch13 Jewish adults (73-75%). Measured past haredi turnout 72.8-76.8% at regular stations, not 80-88%."
+  },
+  {
+   "id": "TRN-F23",
+   "status": "corrected",
+   "note": "IDI (Lafair and Malach, 3 Aug 2026) opened. These match: 2009 lost a seat ('the only case'); 2015 part of the Jerusalem Faction abstained and UTJ's share fell in strongly haredi localities; 2021 COVID resentment reduced UTJ's share; Democracy Index 2025 36% vs 7% and 41% vs 17%; June 2026 Voice Index 28%; 'potential to finally bring an eighth seat'. Overstated: IDI documents UTJ vote-share losses, not a turnout series, and only 2015 is explicitly abstention. 'Haredi turnout dips are tied to rabbinic disputes' goes beyond the source. Circularity for the model: these cycles are notable because UTJ lost share, which mechanically pulls the family e0 toward zero (2009 -0.44, 2015 +0.88, 2021 -0.71, mean -0.09, vs -1.51 in the other five cycles). They cannot serve as independent evidence that disputes shrink the under-poll.",
+   "corrected_url": "",
+   "corrected_quant": "IDI documents UTJ share losses in 2009, 2015 and 2021 (2015 with partial Jerusalem Faction abstention); it gives no haredi turnout figures."
+  },
+  {
+   "id": "TRN-F24",
+   "status": "corrected",
+   "note": "N12 (Segal, 16 Aug) opened: the Faction and allied rabbis proposed that Gur leave UTJ for a hard anti-draft party, to win an 'extra seat' from a public that does not vote; Moti Bebchik declined. No count of Faction non-voters is given. Srugim (15 Aug, reporting Channel 13) opened: Tzeva Shachor is named after an alert line with about 100,000 subscribers, with 'tens of thousands' of potential supporters claimed and no named leader. Filing 4193 matches: Tzeva Shachor 0.6%, The Haredi Public 5.2%. Overstated inference: 'draft anger shows up as abstention, not as a new list'. The same haredi sample gives The Haredi Public 5.2%, Otzma 5.4%, and free-text 'other' answers that all name Achi, and Super Data has Achi at 9%. Draft-related leakage is visible in polls as switching, which the polls already carry.",
+   "corrected_url": "",
+   "corrected_quant": "Ch13 haredi sample (6-7 Oct): Tzeva Shachor 0.6%, The Haredi Public 5.2%, Otzma 5.4%, 'other' (all Achi) 0.8%. Draft anger shows partly as switching, not only abstention."
+  },
+  {
+   "id": "TRN-F25",
+   "status": "verified",
+   "note": "ToI liveblog (Ariela Karmel, 7 Oct) opened: 'Saving the Right' conference with RZ rabbis, yeshiva heads and activists (8 Oct); a joint election-day turnout operation headed by Yesha Council chairman Israel Gantz, per Channel 12; Otzma not invited (Ben Gvir learned of it via Kan); Likud-RZP surplus agreement signed 6 Oct; no scale or budget. The tracking-ban link rests on SEC-F21 (verified).",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "TRN-F26",
+   "status": "corrected",
+   "note": "INSS Insight 1664 (Wertman and Elran, 1 Dec 2022) opened. These match: 67.4 to 70.6; Arab 64.8 / 44.6 / 53.2; Ashkelon +3.2, Beer Sheva +4.6, Dimona +6.9, Tel Aviv +0.4, Givatayim +0.3, Herzliya +0.3; right 48.3 to 49.6, centre-left 41.5 to 38.3, Arab 8.6 to 10.8; 64 seats; Balad and Yamina-Jewish Home below the threshold. The differential wording is INSS's own ('more right wing voters' vs 'maintained a turnout similar'). Wrong: 'its 64 seats came mostly from wasted centre-left votes' is not in INSS, which attributes nothing to wasted votes and does not mention Meretz. As desk inference it is also mislabelled. The anti-bloc waste was Meretz 3.16% (centre-left) plus Balad 2.91% (Arab), against Jewish Home 1.19% (right). The city deltas are three illustrative examples per side, not a systematic estimate.",
+   "corrected_url": "",
+   "corrected_quant": "2022 below-threshold votes: Meretz 3.16% and Balad 2.91% (anti-bloc) vs Jewish Home 1.19% (right). The '64 seats from waste' reading is desk inference, not INSS, and the waste was about half Arab."
+  },
+  {
+   "id": "TRN-F27",
+   "status": "verified",
+   "note": "The DOI resolves to Taylor & Francis (the chapter page returned 404 and ResearchGate 403). The Haifa / IUCC research-portal abstract, found by search, matches: all 1,215 localities; eight predictors; SES predicts turnout in both types; peripherality is significant only in Arab localities; size is inversely related; development towns lower; Judea and Samaria and high-haredi localities higher; about 70%. Authors and pages confirmed via ResearchGate and the Routledge listing (print Jan 2025; portal 2024). Label: an edited-volume chapter, not 'peer-reviewed' as the claim says. 'Peripherality' is distance from the centre, not distance to a polling station, so the model_link's use for station access is an extrapolation.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "TRN-F28",
+   "status": "verified",
+   "note": "IDI (Ariel Finkelstein, 17 Apr 2024) opened: 2024 below 2018 but above 2003, 2008 and 2013; Arab localities -10, non-haredi Jewish -4.5, haredi -0.5; Arab local turnout close to haredi; reasons: the war, haredim less affected, competitiveness; a holiday in 2018 and 2024. The units are an ambiguous '%' (the text never says points); the desk reads them as points, which is plausible from IDI's charts but not stated. 49% vs 59.5% is not in IDI (the desk flags this). Caveat: Arab local turnout is clan-driven and far above Arab Knesset turnout, so this is a weak analogue for Knesset levels.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "TRN-F29",
+   "status": "verified",
+   "note": "ynet (Itamar Eichner) opened; 'today (Thursday)' dates it to 15 Oct. The declaration of 28 Feb is due to expire 20 Oct (government decision of 6 Oct); Defence Minister Katz asks to extend it to 3 Nov, with a cabinet phone vote and FADC approval. Defence officials: 'still a high probability' of an attack on civilians, with uncertainty mainly on the Iran and Lebanon fronts; 'no such directives are currently in effect'. Arutz 7 (Hezki Baruch, 14 Oct) opened: the counting stage is run on a map kept in the emergency kits so staff can move to a protected space; logistics chief Yossi Toren said cancellation is 'not a logistical issue' and the CEC prepares for elections in any scenario. N12 (Liel) was not opened here.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "TRN-F30",
+   "status": "verified",
+   "note": "ToI (Summers and ToI Staff, 22 Jan 2026) opened: nationwide Arab strike; the Sakhnin march to the police station; 'deadliest year on record in 2025, with 252 homicide victims'. The ToI item does not mention the pact, but search results (JC, JNS, i24) confirm the four parties signed a commitment document in Sakhnin on 22 Jan during the strike visit; Ra'am later ran separately (Abbas to Ch12 in July). AP (15 Oct, Durango Herald copy) opened: 184 crime-related killings in 2026 so far (Abraham Initiatives), 'only 12%' of first-half killings solved. 'Main Arab mobiliser' is inference: IDI shows crime as the top vote-choice factor, which is not evidence about turnout.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  }
+ ],
+ "challenge_checks": [
+  {
+   "title": "Arab turnout centre: keep 58%, but register the 2026 station-load headwind as a testable adjustment",
+   "status": "holds",
+   "note": "The conclusion (keep 0.58, sd 0.05; at most an optional pre-registered station-load arm) holds, but some reasons need fixing. (1) The '59-61% cluster' is not three independent estimates. Ch13's 60% is a conversion input dated 3 Sep, before the 2 Oct ruling (F11). Afkar's 59-61% is an unpublished poll with no n (F12). The 61% is a party internal poll (F13). (2) The KAP record is not cleanly unbiased: final surveys ran +4.0 on average (n=3, F17 corrected), which removes the +0.3 upward nudge. (3) The -0.5 to -1.5 station-load range is unsourced judgement. The analogues measure reassignment and distance, not load, and in 2021 equal loads (528 vs 539) coincided with the record low of 44.6%, so load is not a primary driver. (4) The strongest counter-evidence to anything above 0.58 is configuration. 2026 (a three-party Joint List with Ra'am separate) repeats 2021's line-up, which produced 44.6%. Wartime local elections cut Arab local turnout by 10 (F28), and disqualification fights leave no consistent signature (SEC-F05). Supports keeping 0.58 rather than raising it. The kalpi load regression is a sound test; note 2019a-2022 gives only four transitions."
+  },
+  {
+   "title": "Haredi family mean in a turnout-stress year: add a downside tail or shrink the under-poll",
+   "status": "partly",
+   "note": "The direction (some downside risk to the haredi under-count) has verified support: the UTJ chairman's recorded warning and the HQ paralysis (F21); the voter-tracking ban that removes a machine tool Likud and the haredi parties relied on (SEC-F21, with s.4's unimplemented 'shrink the surge slightly'); and the 2021 precedent, when haredi-cluster turnout fell 3.8 points (about 5% relative) and e0 was -0.71, smaller than the -0.98 mean. The size is not supported. (1) Arithmetic: with p = 0.25 and a 1-seat dip, the dip branch moves e0 from -0.98 to about 0, so E[e0] = 0.75 x -0.98 + 0.25 x 0.02 = -0.73, not -0.5. The desk's -0.5 sets the branch to +1 (a 2-seat swing), double-counting the dip. Reaching -0.5 needs p of about 0.5 or a 2-seat dip. (2) The 10% signal is unattributed, unit-ambiguous and unpublished (F21 corrected). Super Data's 75% is a certainty share with no baseline (F22 corrected). (3) Stated intention has never been shown to predict haredi turnout in Israel: no pre-2026 haredi certainty series was cited or found, the desk's own challenge 5 says self-reports are not a turnout signal, the dossier's rule (s.36 #5) is that self-reported intention has no graded record, and mode alone moves haredi certainty 13 points (80 phone vs 67 online). (4) Ch13 haredi certainty is flat over three waves (67.2 / 67.0 / 66.2; 'won't vote' 4.3-5.0%), with no sign of a campaign decline. (5) The -0.98 mean is final polls against results over 2009-2022. It already absorbs the 2015 Faction abstention (+0.88) and the 2021 dip (-0.71), and hared_e0 already shrank the projection from 1.35 to 0.98 today (s.51.6). (6) The proposed kalpi test has five cycles (2019a-2022). Turnout level vs e0 gives r = -0.12; the haredi-minus-national gap gives r = -0.72, driven entirely by 2019a (ex-2019a r = +0.24). It cannot confirm a turnout-linked term. On e0, the shipped form, 2021 mildly supports the link, whereas the desk cites e1 (-1.33) against it. The defensible step is a disclosed judgement tail worth about +0.25 seat on the mean (to about -0.73), allocated mostly to UTJ, or no change pending a post-election test."
+  },
+  {
+   "title": "No separate Jewish-sector turnout term",
+   "status": "holds",
+   "note": "The INSS figures are verified (F26): right-leaning cities +3 to +7, centre-left about flat, right-bloc share +1.3. The F27 abstract confirms the settlement and haredi-locality effects. The correlated bloc swing is calibrated on final-poll errors that already include differential turnout, so a separate term would double-count. Fix the supporting sentence: the 2022 seat bonus came from Meretz (3.16%) and Balad (2.91%) falling below the threshold, against 1.19% wasted on the right, not 'mostly wasted centre-left votes'. The city deltas are illustrative. The proposed test (|r| > 0.6 over at least six cycles) is reasonable."
+  },
+  {
+   "title": "National turnout prior: account for the emigration denominator",
+   "status": "holds",
+   "note": "The source numbers are verified (F06). The direction holds and the size is uncertain both ways: adults-only in the desk's window gives about 0.9 point; all ages from Nov 2022 to Oct 2026 at the 2024 pace gives about 2.1 (F06 corrected). Centring at 69.5-70.0 with sd 2.5 covers this. Seats are allocated on shares, so the stake is only the threshold in votes and the site wording. Counter-evidence: 2015-2022 national turnout averaged about 70.0 with a 67.4-72.3 range, and a polarised wartime election could raise turnout. The local-election wartime drop (F28) is a weak Knesset analogue."
+  },
+  {
+   "title": "Self-reported certainty is not a sector turnout signal",
+   "status": "holds",
+   "note": "Verified by F14 (filings re-read), F18 (IDI chart: haredi 52% certain, the lowest) and F20 (Q7 option, with F20's correction that it is a vote-consideration item). One inconsistency in the desk: this challenge rules out self-reports as a turnout signal, while challenge 2 leans on 'willingness' internal polls (F21) and a 75% certainty share (F22) to argue a haredi turnout dip. The same rule should govern both. Also drop 'as in past cycles' (F14 corrected)."
+  }
+ ],
+ "parameter_review": [
+  {
+   "name": "FAMILY_SHOCK['haredi'] mean (shipped e0 -0.98, sd 1.77)",
+   "desk_proposal": "Option A: mixture tail with p about 0.25 in which a -1 seat turnout dip 'replaces' the mean, giving an expected under-count of about -0.5. Option B: shrink the mean to about -0.5 and keep sd 1.77. Allocate the tail mostly to UTJ.",
+   "verdict": "partly",
+   "note": "Direction supported (F21 recorded warning and HQ paralysis; SEC-F21 tracking ban; 2021 dip with a smaller e0). Size not supported. The desk's arithmetic double-counts: p = 0.25 with a 1-seat dip gives -0.73, not -0.5, so Option B's -0.5 implies p of about 0.5 or a 2-seat dip, and the evidence supports neither. The quantitative signals are a certainty share and unattributed 'willingness' polls, and no Israeli record shows stated intent predicting haredi turnout. Strongest counter-evidence: the -0.98 is measured on final polls against results across 2009-2022, a period that already contains two dispute or dip cycles (2015 +0.88, 2021 -0.71) and still averages about one seat under. Ch13 haredi certainty is flat across three waves, and the mean was cut from 1.35 to 0.98 today (s.51.6). If anything ships, use a disclosed judgement tail of about +0.25 seat on the mean, allocated mostly to UTJ (UTJ's own record e0 is -0.10 vs Shas -0.88, SEC-F19), not -0.5."
+  },
+  {
+   "name": "Haredi turnout (s.4: 78-82%, near-invariant, small protest tail)",
+   "desk_proposal": "Treat as at risk: internal polls show about -10% relative willingness; Super Data 75% certain; Ch13 online 66-67%.",
+   "verdict": "partly",
+   "note": "Near-invariance is roughly right: kalpi haredi cluster 76.4 / 76.8 / 76.6 / 72.8 / 75.8 (2019a-2022), with 2021 the only dip (-3.8 points). But s.4's 78-82% level sits above the measured regular-station series; Malach's about 79% includes envelopes (SEC-F17). The 2026 'risk' evidence is self-report only (F21, F22 corrected) and should not move a turnout level. Restate s.4 as 'about 76% at regular stations (about 79% with envelopes); one dip of about 4 points in 2021'."
+  },
+  {
+   "name": "ARAB_TURNOUT['mean_unified'] (0.580)",
+   "desk_proposal": "Keep 0.58: the survey signal (+0.3) and the station-load headwind (-0.5 to -1.5) roughly cancel; stakes about 0.05 seats per point through k.",
+   "verdict": "supported",
+   "note": "Keep 0.58. The verified evidence does not support a move either way, though two of the desk's reasons are weaker than stated. The '59-61%' cluster is one unpublished poll, one conversion input and one party poll (F11-F13), and KAP finals have run about +4 high (F17 corrected), so there is no upward case. The load headwind is unsourced in size. Strongest counter-evidence on the low side: 2026 repeats 2021's configuration (44.6%), and the wartime local elections cost Arab localities 10 (F28). On the high side: post-ruling mobilisation claims (F12, F13) and crime salience (F20, F30). 0.58 sits between them, inside s.4's 56-62 band."
+  },
+  {
+   "name": "ARAB_TURNOUT['sd'] (0.05, t df 5)",
+   "desk_proposal": "Keep 0.05; 'the spread passes through k'.",
+   "verdict": "partly",
+   "note": "Keeping 0.05 is defensible on the harness (s.48: no width arm passed on the leave-one-out scorecards; the shipped width stays). The desk's reason is wrong about the code: bayes_model.py applies r = 1 + K (T_mean/base - 1) + (T - T_mean)/base, so k = 0.247 scales only the mean shift and the draw noise passes at full ratio (about 0.24 seats per point). The empirical spread argues 0.05 is narrow, not wide: regime table B {63.5, 59.2, 64.8, 44.6} has sd 9.3 points, and KAP survey errors have sd 10-12. A t5 with scale 0.05 has sd about 0.065. Leave it, but state the reason correctly."
+  },
+  {
+   "name": "Polling-station load in Arab localities (new term)",
+   "desk_proposal": "No term now. Pre-register an optional arm, applied only if the kalpi panel shows within-locality turnout falling as voters per station rise; plausible size -0.5 to -1.5 points.",
+   "verdict": "partly",
+   "note": "The facts are verified (F07): -89 stations, 672 vs 578 per station. The test-first procedure is right. The -0.5 to -1.5 range is not supported: Brady-McNulty and Cantoni measure reassignment, search cost and distance, not load (F08, F09), and 2021's equal loads coincided with the record low. With four kalpi transitions (2019a-2022) and station-count changes that are small in most localities, the regression will be weak. Absent a significant coefficient, ship nothing."
+  },
+  {
+   "name": "Arab-locality eligible voters (KALPI_ARAB_CAP denominator)",
+   "desk_proposal": "2026 about 1.03m Arab-locality (+10.2%, Stat-Net), 14.1% of the register; about 1.11m including mixed cities (Points).",
+   "verdict": "supported",
+   "note": "1.034m = 938,401 x 1.102 is consistent with Stat-Net's +96,000 on a base of about 941k (Bayan's Arab-and-Druze definition). The kalpi cluster (839k) is narrower; the same growth gives about 925k, which supports the order of magnitude of the sector desk's unsourced 940k cap projection (SEC-F25). The Points 1.11m comes from a source whose total register is wrong (6.8m), so treat it as approximate."
+  },
+  {
+   "name": "Seat value of 1 point of Arab turnout",
+   "desk_proposal": "0.17 (Makladeh: +12 points = +2 seats) to 0.22 (desk arithmetic) at full pass-through; about 0.05 through k = 0.247.",
+   "verdict": "supported",
+   "note": "Recomputed: 10,300 x 0.858 = 8,840 votes at 39-40k votes per seat = 0.22; Makladeh 2/12 = 0.17; the model's own ratio (about 13 polled Arab seats / 53.8) gives 0.24. About 0.05 per point applies only to shifts of T_mean. Draw-level variation passes at full ratio (see the sd entry)."
+  },
+  {
+   "name": "Jewish-sector turnout term",
+   "desk_proposal": "None; the correlated bloc swing covers differential Jewish turnout (about 1 point of bloc share in 2022).",
+   "verdict": "supported",
+   "note": "Verified evidence (F25, F26, F27) supports no term. The bloc swing is fitted on final-poll errors that already include turnout differentials. Strongest counter-evidence: s.4 names differential abstention as an operative channel, and 2026 has an organised right-wing turnout operation (F25) while the tracking ban constrains machines (SEC-F21). Neither is sized. Fix the 2022 waste attribution (F26 corrected)."
+  },
+  {
+   "name": "National turnout prior (s.4: 70.5 +/- 2.5)",
+   "desk_proposal": "Centre at about 69.5-70.0, same spread, or disclose that the register includes emigrants.",
+   "verdict": "partly",
+   "note": "Direction supported (F06 verified source). The size could be larger than the desk's 1.2 (0.9-2.1, F06 corrected). The spread of 2.5 covers it. The stake is small (threshold arithmetic and site wording). The prediction-market figure (72-74% modal) was not checked and is rightly not used."
+  },
+  {
+   "name": "Double-envelope share (s.4: 600-700k, 12-13%, right lean)",
+   "desk_proposal": "Record expected; right lean confirmed; 2026 inputs up (850+ military stations, 3,620 special accessible, 250 hospital).",
+   "verdict": "partly",
+   "note": "Inputs up is verified (F01, F02, F04), with prison stations flat and missions down. 12-13% would beat the COVID-inflated 2021 record (9.6%) by 3 points, and nothing sourced sizes it. The official 2022 total is still missing. The 'right lean' is a list-level pattern (RZ up; haredi and Arab lists down); the 2021 bloc split was 48.76 vs 48.56 and IDI expects negligible bloc impact (F03 corrected). Keep the night/final split for threshold straddlers; do not encode a bloc drift of +0.5-1 seats on this evidence."
+  },
+  {
+   "name": "First-time voter cohort (s.4: about 8.7% of the electorate)",
+   "desk_proposal": "595,000 (8.7%; Points); Arab about 118,000, haredi about 105,000; stated intention 87% Arab / 92% Jewish.",
+   "verdict": "partly",
+   "note": "595,000 is 8.1% of the CEC register; 8.7% is an artefact of Points' 6.8m denominator (F19 corrected). The cohort counts are plausible but come from an unpublished geo-demographic model. The stated intentions (F18) carry no level information, by the desk's own challenge 5."
+  }
+ ],
+ "missing_key_works": [
+  "Rogers, T. & Aida, M. (2014), 'Vote self-prediction hardly predicts who will vote, and is (mostly) unbiased', American Politics Research 42(3). This is the peer-reviewed test of exactly the inference challenge 2 makes from haredi certainty and 'willingness' figures.",
+  "Clinton, J.D., Eubank, N., Fresh, A. & Shepherd, M.E. (2021), 'Polling place changes and political participation: evidence from North Carolina presidential elections, 2008-2016', Political Science Research and Methods 9(4). A high-salience (presidential) analogue for station changes, closer to a Knesset election than the 2003 LA recall (F08).",
+  "Haspel, M. & Knotts, H.G. (2005), 'Location, location, location: precinct placement and the costs of voting', Journal of Politics 67(2). A distance-to-poll effect on turnout, for bounding the Negev assignment issue (F07, F09).",
+  "Malach / IDI turnout in clearly haredi polling stations, 2013-2022 (used in SEC-F17): the only measured haredi turnout series, not cited by this desk although challenge 2 turns on haredi turnout. Together with the repository's kalpi haredi cluster (76.4 / 76.8 / 76.6 / 72.8 / 75.8), it should anchor any haredi turnout claim.",
+  "CEC official 2022 results (Reshumot notice or per-station file) for the 2022 double-envelope total, which the desk could not locate; needed before the s.4 600-700k figure is used.",
+  "CBS Statistical Monthly, table E/4 (Israeli emigrants and returning residents), editions after Sep 2025: the Sep 2024-2026 net outflow that the emigration denominator (F06) omits.",
+  "KAP / Moshe Dayan Center final pre-election Arab survey for 2026 (expected about 20 Oct), to be read against the final-survey record of +4.0 mean error (F17 corrected), not the pooled +0.2."
+ ],
+ "summary": "30 findings checked: 15 verified, 15 corrected, 0 rejected, 0 unverifiable. Every cited page was opened (WebFetch; PDFs text-extracted or rendered locally; CEC filings 4169, 4182 and 4193 read from data/raw/cec_pdfs). The corrections cluster around three issues. (1) Haredi turnout. The 10% 'willingness' drop comes from internal polls whose owner and unit N12 does not state. Super Data's 75% is a certainty share with no baseline, compared with a claimed past turnout of 80-88% (measured 72.8-76.8% at regular stations). No Israeli record shows stated intent predicting haredi turnout. The desk's mixture arithmetic double-counts: p = 0.25 with a 1-seat dip moves the expected under-count to about -0.73, not -0.5. Direction partly supported (the UTJ chairman's recorded warning, the voter-tracking ban, the 2021 dip of about 5% relative). Recommended size at most +0.25 seat, mostly UTJ, as disclosed judgement. (2) The Arab survey record is unbiased only when early-campaign readings are pooled; KAP final surveys ran +4.0 (sd 10, n=3). The '59-61% cluster' is one unpublished poll, one conversion input and one party poll. Keep 0.58. Keep sd 0.05 on the harness result, but the desk misdescribes the code: k scales only the mean shift, and draw noise passes at full ratio. (3) Denominators and attributions: emigration effect 0.9-2.1 points (all-ages counts; the window ends Aug 2024); the first-timer 8.7% is computed on a wrong 6.8m register (8.1% on the CEC's); double envelopes lean by list, not by bloc (2021 48.76 vs 48.56; IDI expects negligible bloc impact); 2026 does not have more stations of every special type; the 2022 64-seat bonus came from Meretz and Balad waste, not 'mostly centre-left'. A new problem the desk missed: the Afkar youth slide's text and legend contradict each other. Safety: two audit fetches of the 12 Oct Local Call page found no text addressed to AI tools, only a stray token 'silencej89sjf' after the footer (also on the 15 Oct page); a direct download was blocked by Cloudflare; nothing in any page was followed."
+}

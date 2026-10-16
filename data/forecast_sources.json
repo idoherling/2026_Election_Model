@@ -828,7 +828,7 @@
  },
  {
   "id": "SYS-F06",
-  "short": "Wikipedia 2026",
+  "short": "Wikipedia 2026b",
   "citation": "Hebrew Wikipedia contributors (2026). הסכם עודפים (Surplus-vote agreement) - lists of agreements by Knesset. Wikipedia (he); the 19th-22nd Knesset lists cite CEC notices/PDFs (bechirot21/22.bechirot.gov.il, bechirot20.gov.il); 23rd-25th lists uncited on the page - 25th confirmed by Kenig (IDI 2026), 24th confirmed only by the exact reproduction of the official allocation",
   "url": "https://he.wikipedia.org/wiki/%D7%94%D7%A1%D7%9B%D7%9D_%D7%A2%D7%95%D7%93%D7%A4%D7%99%D7%9D",
   "group": "Israel's electoral system",
@@ -1383,7 +1383,7 @@
  },
  {
   "id": "SEC-F25",
-  "short": "Own measurement 2026g",
+  "short": "Own measurement 2026j",
   "citation": "SEC desk computation from Central Elections Committee official locality results (project files data/processed/kalpi_localities.parquet, kalpi_sectors.csv, bayes_draws.parquet) (2026). Arab-cluster turnout, list share and concentration, Knesset elections 2019-2022; 2026 production seat draws. Central Elections Committee results (media21-25.bechirot.gov.il) via the project's kalpi layer (dossier s.9)",
   "url": "https://media25.bechirot.gov.il/",
   "group": "Sectors and turnout",
@@ -1627,7 +1627,7 @@
  },
  {
   "id": "COA-F09",
-  "short": "Kalshi & Polymarket 2026",
+  "short": "Kalshi & Polymarket 2026b",
   "citation": "Kalshi; Polymarket (exchange market data) (2026). Prime Minister of Israel after the 2026 election? (KXISRAELPM-26OCT27); Prime Minister of Israel after the next election?. Kalshi trade API; Polymarket gamma API (retrieved 15 Oct 2026)",
   "url": "https://api.elections.kalshi.com/trade-api/v2/markets?event_ticker=KXISRAELPM-26OCT27",
   "group": "Coalition formation",
@@ -1837,7 +1837,7 @@
  },
  {
   "id": "COA-F23",
-  "short": "staff 2026",
+  "short": "staff 2026c",
   "citation": "JNS staff (2026). Eisenkot promised Bedouin council heads he'd bring Ra'am into gov't. JNS, 16 Sept 2026",
   "url": "https://www.jns.org/news/israel-news/bennett-lapid-unite-ahead-of-2026-elections",
   "group": "Coalition formation",
@@ -1991,7 +1991,7 @@
  },
  {
   "id": "DYN-F05",
-  "short": "Own measurement 2026f",
+  "short": "Own measurement 2026i",
   "citation": "Model's own measurement (DYN desk reading of the shipped late-swing table) (2026). bias_late_swing.csv: final-window vs 3-6-week poll error, 2009-2022. internal: data/processed/bias_late_swing.csv (poll archive and CEC results)",
   "url": "data/processed/bias_late_swing.csv",
   "group": "Campaign dynamics and late movement",
@@ -2005,7 +2005,7 @@
  },
  {
   "id": "DYN-F09",
-  "short": "Own measurement 2026c",
+  "short": "Own measurement 2026f",
   "citation": "Model's own measurement (DYN desk computation) (2026). Final pre-blackout poll averages vs official results, 2009-2022. internal: data/processed/polls.csv (Wikipedia-sourced poll archive) and data/processed/results.csv (CEC)",
   "url": "data/processed/polls.csv; data/processed/results.csv",
   "group": "Campaign dynamics and late movement",
@@ -2019,7 +2019,7 @@
  },
  {
   "id": "DYN-F19",
-  "short": "Own measurement 2026d",
+  "short": "Own measurement 2026g",
   "citation": "Model's own measurement (DYN desk computation) (2026). Pool-resolution check: within-pollster bloc drift, Jul-Oct 2026. internal: data/processed/polls.csv (2026 cycle), registry bloc map",
   "url": "data/processed/polls.csv",
   "group": "Campaign dynamics and late movement",
@@ -2033,7 +2033,7 @@
  },
  {
   "id": "DYN-F24",
-  "short": "Own measurement 2026e",
+  "short": "Own measurement 2026h",
   "citation": "Model's own measurement (DYN desk event study) (2026). Within-pollster event study of Likud and Netanyahu-bloc seats, Dec 2022-Oct 2026. internal: data/processed/polls.csv (2026 cycle, 780 full seat polls)",
   "url": "data/processed/polls.csv",
   "group": "Campaign dynamics and late movement",
@@ -2492,6 +2492,1213 @@
   "checked": "verified against the source",
   "aliases": [],
   "note": "Backs: In survey experiments, people shown a win probability were more confident about who was ahead and who would win than people shown a vote-share projection with a margin of error, and participants in every format misjudged the chance of winning. In an incentivised voting game, higher win probabilities (but not larger vote-share leads) reduced paying to vote. Small vote-share leads map to large win probabilities, which readers misread."
+ },
+ {
+  "id": "EVT-F03",
+  "short": "Kalshi & Polymarket 2026f",
+  "citation": "Polymarket; Kalshi (exchange market data) (2026). Which parties will win a seat in the 2026 Knesset elections? / Which lists will win a Knesset seat? (KXISRAELANYSEAT-26OCT27). Polymarket gamma and CLOB APIs; Kalshi trade API (retrieved 16 Oct 2026 13:44 UTC)",
+  "url": "https://gamma-api.polymarket.com/events?slug=which-parties-will-win-a-seat-in-the-2026-knesset-elections ; https://api.elections.kalshi.com/trade-api/v2/markets?event_ticker=KXISRAELANYSEAT-26OCT27",
+  "group": "The 2026 campaign: events and coalition signals",
+  "status": "report",
+  "findings": [
+   "EVT-F03"
+  ],
+  "checked": "verified against the source",
+  "aliases": [],
+  "note": "Backs: The market and poll record over the fortnight puts Amcha where the model has it, but the trend runs against it. Polymarket's 'Amcha wins a seat' fell from 0.645 (3-4 Oct) to 0.225 (16 Oct). The steps came after the 6 Oct polls, Ben-Gvir's 13 Oct refusal and the 13-14 Oct withdrawal. October polls are split: 9 of 17 put Amcha at 4 or more seats."
+ },
+ {
+  "id": "EVT-F21",
+  "short": "Kalshi & Polymarket 2026a",
+  "citation": "Kalshi; Polymarket (exchange market data) (2026). How many Israeli elections until a government forms? (KXISRKNESSETCOUNT-26AUG28); When will the Knesset approve a new government? (KXISRAELCONF-27FEB03); Israeli election results in a hung parliament?. Kalshi trade API; Polymarket gamma/CLOB APIs, retrieved 16 Oct 2026 13:44-14:00 UTC",
+  "url": "https://api.elections.kalshi.com/trade-api/v2/markets?event_ticker=KXISRKNESSETCOUNT-26AUG28 ; https://api.elections.kalshi.com/trade-api/v2/markets?event_ticker=KXISRAELCONF-27FEB03 ; https://gamma-api.polymarket.com/events?slug=israeli-election-results-in-a-hung-parliament",
+  "group": "The 2026 campaign: events and coalition signals",
+  "status": "report",
+  "findings": [
+   "EVT-F21"
+  ],
+  "checked": "verified; the figures were corrected against the source",
+  "aliases": [],
+  "note": "Backs: A Kalshi market that counts Knesset elections until a government forms prices a repeat election at about 25%, the same as the model's shipped 0.251. Under the post-deadlock stage, then, the model's repeat probability agrees with Kalshi's direct contract. This corrects COA-F09's 3-15%, which was inferred from Kalshi's PM strikes; that PM event has no 'No one' strike, so the gap in its sum understates a repeat. Polymarket's 'hung parliament' contract (a new election called before any government forms) is higher at 0.365. Corrected against the source: P(repeat) by market (16 Oct 14:12 UTC): Kalshi count market 0.20-0.29 (mid 0.245; '1' leg $596); Kalshi PM residual 0.035 at mids and at most about 0.13 at bids (strikes >$600k); Kalshi no confidence vote by 3 Feb 2027 0.16-0.26; Polymarket hung parliament 0.35-0.38 ($18k). Kalshi count mids: '2' 0.19, '3' 0.06, '4' 0.03, '5+' 0.025 (3+ = 0.11"
+ },
+ {
+  "id": "EVT-F22",
+  "short": "Kalshi & Polymarket 2026e",
+  "citation": "Polymarket; Kalshi (exchange market data) (2026). Prime Minister of Israel after the next election? ; Prime Minister of Israel after the 2026 election? (KXISRAELPM-26OCT27). Polymarket gamma/CLOB APIs; Kalshi trade API, retrieved 16 Oct 2026",
+  "url": "https://gamma-api.polymarket.com/events?slug=who-will-be-the-next-prime-minister-of-israel-after-the-next-election ; https://api.elections.kalshi.com/trade-api/v2/markets?event_ticker=KXISRAELPM-26OCT27",
+  "group": "The 2026 campaign: events and coalition signals",
+  "status": "report",
+  "findings": [
+   "EVT-F22"
+  ],
+  "checked": "verified against the source",
+  "aliases": [],
+  "note": "Backs: On who becomes PM, both exchanges are far more pro-Eisenkot and less pro-Netanyahu than the model. Conditional on a government forming, Kalshi gives Eisenkot about 0.48 and Netanyahu about 0.30; the model gives Eisenkot 0.34 and Netanyahu 0.45. Over the fortnight Polymarket's Netanyahu price fell from 0.365 (5 Oct) to 0.305, and Eisenkot recovered from 0.42 (11 Oct) to 0.483."
+ },
+ {
+  "id": "EVT-F23",
+  "short": "Kalshi & Polymarket 2026c",
+  "citation": "Kalshi; Polymarket (exchange market data) (2026). Which bloc will win a Knesset majority? (KXISRAELBLOCMAJ-26OCT27); Which bloc will win the most Knesset seats? (KXISRAELBLOCMOST-26OCT27); Any coalition wins a majority?; Which bloc wins more seats?. Kalshi trade API; Polymarket gamma API, retrieved 16 Oct 2026",
+  "url": "https://api.elections.kalshi.com/trade-api/v2/markets?event_ticker=KXISRAELBLOCMAJ-26OCT27 ; https://api.elections.kalshi.com/trade-api/v2/markets?event_ticker=KXISRAELBLOCMOST-26OCT27 ; https://gamma-api.polymarket.com/events?slug=israel-election-any-coalition-wins-a-majority ; https://gamma-api.polymarket.com/events?slug=israel-election-which-bloc-wins-more-seats",
+  "group": "The 2026 campaign: events and coalition signals",
+  "status": "report",
+  "findings": [
+   "EVT-F23"
+  ],
+  "checked": "verified against the source",
+  "aliases": [],
+  "note": "Backs: On bloc arithmetic, the markets agree with the model. Defining the blocs as the model does (NB = Likud, Otzma, RZP-Zehut, Amcha, UTJ, Shas; change = Yashar, Together, Democrats, YB), Kalshi prices NB>=61 at 0.115, change>=61 at 0.105 and neither at 0.795. The model gives 0.136 / 0.078 / 0.786. On which bloc wins more seats, Kalshi has NB 0.53 against the model's 0.528 (plus 0.033 ties). Polymarket is more NB-leaning (0.61) and gives either bloc a majority 0.155."
+ },
+ {
+  "id": "EVT-F24",
+  "short": "Kalshi & Polymarket 2026d",
+  "citation": "Polymarket; Kalshi (exchange market data) (2026). Israeli Legislative Election Winner; Israeli legislative election: how many seats will Likud / Yashar win? (KXLIKUDCOUNT-26OCT27, KXYASHARCOUNT-26OCT27). Polymarket gamma/CLOB APIs; Kalshi trade API, retrieved 16 Oct 2026",
+  "url": "https://gamma-api.polymarket.com/events?slug=israeli-legislative-election-winner ; https://api.elections.kalshi.com/trade-api/v2/markets?event_ticker=KXLIKUDCOUNT-26OCT27 ; https://api.elections.kalshi.com/trade-api/v2/markets?event_ticker=KXYASHARCOUNT-26OCT27",
+  "group": "The 2026 campaign: events and coalition signals",
+  "status": "report",
+  "findings": [
+   "EVT-F24"
+  ],
+  "checked": "verified; the figures were corrected against the source",
+  "aliases": [],
+  "note": "Backs: On which list finishes first, the markets disagree with each other, and the model sides with the minority. Polymarket's deep 'winner' market (most seats, $886k) moved from Likud 0.545 (4 Oct) to Yashar 0.665 (16 Oct). Kalshi's seat ladders imply Likud's median about 24 against Yashar's about 22, closer to the model's P(Likud > Yashar) 0.601. Every network poll of 11-15 Oct had Yashar ahead. Corrected against the source: Polls with fieldwork 11-15 Oct (polls.csv): Yashar ahead in 7 of 8; Filber/Channel 14 (12 Oct) had Likud 29, Yashar 20."
+ },
+ {
+  "id": "EVT-F14",
+  "short": "Keinon 2026",
+  "citation": "Herb Keinon (2026). Israel election: Benjamin Netanyahu rallies the Right as Gadi Eisenkot eyes PM role. The Jerusalem Post, 16 Oct 2026",
+  "url": "https://www.ynetnews.com/article/hyt1lw95fl",
+  "group": "The 2026 campaign: events and coalition signals",
+  "status": "report",
+  "findings": [
+   "EVT-F14"
+  ],
+  "checked": "verified; the figures were corrected against the source",
+  "aliases": [],
+  "note": "Backs: Eisenkot is openly planning for a minority government that would pass if the Arab parties abstain. He argues that the leader of the change list with the most votes should be the bloc's PM candidate, but the four change parties have not agreed a selection rule. He has warned Netanyahu that a caretaker strategy ('winning by losing') 'will not happen'. Opposition planning reported on 13 Oct goes further: replace Speaker Ohana and legislate before a government is sworn in. Corrected against the source: JPost 16 Oct (Keinon, analysis, no Eisenkot quote): 'One route Eisenkot envisages ... is to bring a minority government to the Knesset ... This scenario would be made possible, for instance, if the Arab parties simply don't vote.' Speaker plan: Ynet (Ettinger, about 8 Sept): replace Ohana with Ra'am and JL votes as a test of a minority government; possible bills on a state commission and a two"
+ },
+ {
+  "id": "EVT-F25",
+  "short": "Own measurement 2026e",
+  "citation": "Kalshi; Polymarket; model's own measurement (2026). Which lists will win a Knesset seat? (KXISRAELANYSEAT-26OCT27); Which parties will win a seat in the 2026 Knesset elections?; final-3-week threshold record 2009-2022. Kalshi/Polymarket APIs (16 Oct 2026); internal: data/processed/polls.csv, results.csv, mixture_draws.parquet",
+  "url": "https://api.elections.kalshi.com/trade-api/v2/markets?event_ticker=KXISRAELANYSEAT-26OCT27 ; https://gamma-api.polymarket.com/events?slug=which-parties-will-win-a-seat-in-the-2026-knesset-elections ; data/processed/polls.csv",
+  "group": "The 2026 campaign: events and coalition signals",
+  "status": "report",
+  "findings": [
+   "EVT-F25"
+  ],
+  "checked": "verified; the figures were corrected against the source",
+  "aliases": [],
+  "note": "Backs: On thresholds, markets and every October poll put RZP-Zehut, Otzma and Ra'am far safer than the model does, and the Reservists far likelier to pass. Seat-win prices: RZP-Zehut 0.875-0.905 vs model 0.555; Otzma 0.975-0.987 vs 0.783; Ra'am 0.945-0.96 vs 0.764; Reservists 0.45-0.46 vs 0.209. Amcha (0.225-0.245 vs 0.245) and Blue and White (0.047-0.085 vs 0.011) roughly agree. The archive supports the markets on the all-cycle base rate and the model in Likud-trailing cycles. Corrected against the source: Likud-trailing cycles (2015, 2019a), right-bloc lists averaging 4-6.3 seats in the final 3 weeks: 3 of 6 failed excluding haredi lists (Yachad 4.2, New Right 5.9 and Zehut 5.6 failed; Yisrael Beytenu 2015 5.6, URWP 6.3 and Kulanu 4.1 passed), and 3 of 8 with Shas and UTJ 2019a. All three failures were first-time lists. Reservists at 4+ in 8 of 8 polls since 11 Oct."
+ },
+ {
+  "id": "EVT-F18",
+  "short": "Perets 2026",
+  "citation": "Shir Perets (2026). Benjamin Netanyahu trial: Ohana sends Isaac Herzog pardon request with no legal basis. The Jerusalem Post, 12 Oct 2026",
+  "url": "https://www.jpost.com/israel-news/politics-and-diplomacy/article-911404",
+  "group": "The 2026 campaign: events and coalition signals",
+  "status": "report",
+  "findings": [
+   "EVT-F18"
+  ],
+  "checked": "verified; the figures were corrected against the source",
+  "aliases": [],
+  "note": "Backs: Netanyahu's trial reached former attorney general Mandelblit's testimony on 11 Oct. Speaker Ohana then wrote to Herzog urging a pardon, a letter with no formal standing. The President's Office says clemency is generally considered only after proceedings end. Markets price a pardon before polling day near zero and by year-end at about 12%. Lapid's terms for any pardon are an admission, remorse and immediate retirement. Corrected against the source: Kalshi pardon before 1 Nov 2026: 0.01/0.06 (mid 0.035, $25k). Polymarket pardoned by 31 Dec 2026: 0.115 (0.09/0.14), leg volume $16k (event $487k). Lapid's conditions: late 2025, not the cited article."
+ },
+ {
+  "id": "EVT-F08",
+  "short": "Times of Israel 2026b",
+  "citation": "Times of Israel staff (2026). Bennett suggests Netanyahu could sit in future government, backtracks, says he wasn't serious. The Times of Israel, 12 Oct 2026",
+  "url": "https://www.timesofisrael.com/bennett-suggests-netanyahu-could-be-part-of-future-government-quickly-backtracks/",
+  "group": "The 2026 campaign: events and coalition signals",
+  "status": "report",
+  "findings": [
+   "EVT-F08"
+  ],
+  "checked": "verified; the figures were corrected against the source",
+  "aliases": [],
+  "note": "Backs: On 11 Oct Bennett said Netanyahu could serve as a minister if he accepted the opposition's 'core tenets', including a state commission of inquiry. Within hours he called the remark ironic: 'We will not sit with him in any formation.' Eisenkot, Liberman ('Come hell or high water, we will not sit in a government with Netanyahu'), Lapid ('We will not cooperate with this') and Golan (asked for written pledges) closed ranks. All four change-bloc lists are now publicly anti-pact with Netanyahu. Corrected against the source: Lapid (X, 12 Oct, replying to the Herzog unity report): 'I very much hope President Herzog will not try to push for another fake \"unity\" government ... We won't participate in this.' Golan (11 Oct, ToI): no role for Netanyahu, 'not as finance minister, not as water minister, and not as a minister without a portfolio'; on 12 Oct he urged leaders to pledge in writing not to s"
+ },
+ {
+  "id": "EVT-F09",
+  "short": "Times of Israel 2026d",
+  "citation": "Times of Israel staff (2026). Herzog: I'll work to set up 'stable' government, Israel must avoid repeat elections. The Times of Israel, 12 Oct 2026",
+  "url": "https://www.timesofisrael.com/herzog-ill-work-to-set-up-stable-government-israel-must-avoid-repeat-elections/",
+  "group": "The 2026 campaign: events and coalition signals",
+  "status": "report",
+  "findings": [
+   "EVT-F09"
+  ],
+  "checked": "verified against the source",
+  "aliases": [],
+  "note": "Backs: President Herzog said on 12 Oct he will 'really, truly' do all he can to avoid repeat elections. 'Elections are not a civil war,' he said, adding that everyone will likely accept the results. The same day Ynet reported, from Yashar sources, that he had floated a Netanyahu-Eisenkot unity government. The President's Office replied: 'We categorically deny the report.' Lapid and Golan rejected any unity government with Netanyahu."
+ },
+ {
+  "id": "EVT-F17",
+  "short": "Times of Israel 2026e",
+  "citation": "Times of Israel staff (2026). Trump says US won't hit Iran this month, as Zamir said to warn strike could delay Israel's election. The Times of Israel, 9 Oct 2026",
+  "url": "https://www.timesofisrael.com/trump-says-us-wont-hit-iran-this-month-as-zamir-said-to-warn-strike-could-delay-israels-election/",
+  "group": "The 2026 campaign: events and coalition signals",
+  "status": "report",
+  "findings": [
+   "EVT-F17"
+  ],
+  "checked": "verified; the figures were corrected against the source",
+  "aliases": [],
+  "note": "Backs: Security risk before polling day is elevated but priced as unlikely. On 8 Oct Trump posted that the US would not attack Iran before the 3 Nov midterms. Channel 12 reported that IDF chief Zamir had warned US counterparts that a strike could force the 27 Oct election to be postponed. Kan reported on 15 Oct that the IDF raised its alert level while having no concrete information of an Iranian or Hezbollah attack. Markets put an Israel-Iran strike exchange by 31 Oct at about 15% and a postponement at about 6%. Corrected against the source: Polymarket (16 Oct 14:13 UTC): P(a qualifying Israel or Iran strike) 0.039 by 18 Oct, 0.065 by 21 Oct, 0.155 by 31 Oct; about 0.12 by 27 Oct (interpolated) and about 0.035 inside the 24-27 Oct blackout. Postponement 0.055-0.085 (thin, $62k; 0.05-0.23 since 28 Sept)."
+ },
+ {
+  "id": "EVT-F20",
+  "short": "Times of Israel 2026c",
+  "citation": "Times of Israel staff (2026). Eisenkot challenges Netanyahu to a televised debate before national election. The Times of Israel, 5 Oct 2026",
+  "url": "https://www.timesofisrael.com/eisenkot-challenges-netanyahu-to-a-televised-debate-before-national-election/",
+  "group": "The 2026 campaign: events and coalition signals",
+  "status": "report",
+  "findings": [
+   "EVT-F20"
+  ],
+  "checked": "verified against the source",
+  "aliases": [],
+  "note": "Backs: No leaders' debate is scheduled. Eisenkot challenged Netanyahu on 4 Oct and offered him the choice of channel and format. Likud replied with an attack line ('The government that you will establish with Abbas, Tibi, Yair Golan and Liberman. We won't let that happen'). Netanyahu has avoided debates in past cycles. A Kan poll found 54% support a debate."
+ },
+ {
+  "id": "EVT-F27",
+  "short": "Times of Israel 2026a",
+  "citation": "Times of Israel liveblog (2026). October 15 liveblog: Likud and Religious Zionism to send 2,000 activists to Arab-community polling stations. The Times of Israel, 15 Oct 2026",
+  "url": "https://www.timesofisrael.com/liveblog-october-15-2026/",
+  "group": "The 2026 campaign: events and coalition signals",
+  "status": "report",
+  "findings": [
+   "EVT-F27"
+  ],
+  "checked": "verified against the source",
+  "aliases": [],
+  "note": "Backs: Likud and RZP-Zehut say they will send about 2,000 activists to polling stations in Arab communities, citing 'a long series of fraud incidents'. The CEC's director general had earlier said: 'There is no fraud in Israel. If it exists, it is on the margins.' This brings back the 2019 monitoring fight in the final fortnight."
+ },
+ {
+  "id": "EVT-F16",
+  "short": "Weiss 2026",
+  "citation": "Mark Weiss (2026). Netanyahu faces fresh scrutiny over pre-October 7th warnings. The Irish Times, 7 Oct 2026",
+  "url": "https://www.irishtimes.com/world/2026/10/07/netanyahu-faces-fresh-scrutiny-over-pre-october-7th-warnings/",
+  "group": "The 2026 campaign: events and coalition signals",
+  "status": "report",
+  "findings": [
+   "EVT-F16"
+  ],
+  "checked": "verified; the figures were corrected against the source",
+  "aliases": [],
+  "note": "Backs: The October 7 anniversary brought a new wave of reports on what Netanyahu knew beforehand. Haaretz ran a book excerpt on a UAE warning; The Atlantic and WSJ reported an Egyptian warning; a 15 Oct Channel 12 report said Netanyahu passed up targeting Hamas leaders. 75% of Israelis back a state commission of inquiry. No anti-Netanyahu poll move followed. Kan/Kantar of 11 Oct had the coalition up 2 to 53 and the Eisenkot bloc down 2 to 50. Corrected against the source: Kan/Kantar 11 Oct: coalition 53 (+2), Eisenkot bloc 50 (-2). Later polls: Channel 13 (15 Oct) Netanyahu bloc 51 (-4); Lazar/Maariv (14-15 Oct) coalition 51 (-1), Likud 18 (-2). No anti-Netanyahu move in the first week after 7 Oct; the 13-15 Oct move against the bloc has no identified cause."
+ },
+ {
+  "id": "EVT-F01",
+  "short": "desk 2026b",
+  "citation": "Kikar HaShabbat political desk (2026). 11 days to the election: who signed a surplus agreement, who was left alone, and the Hendel-Winter clash (Hebrew). Kikar HaShabbat, 16 Oct 2026",
+  "url": "https://www.kikar.co.il/political-news/surplus-agreements-elections-hendel-winter-ben-gvi",
+  "group": "The 2026 campaign: events and coalition signals",
+  "status": "report",
+  "findings": [
+   "EVT-F01"
+  ],
+  "checked": "verified against the source",
+  "aliases": [],
+  "note": "Backs: On deadline day (Friday 16 Oct, D-11) the surplus-vote map is exactly the model's five pairs. Signed: Likud with RZP-Zehut, Together with Yisrael Beytenu, Yashar with the Democrats, Shas with UTJ, and Ra'am with the Joint List. Three lists near the threshold have no pact. Otzma has none: Ben-Gvir refused Amcha on 13 Oct, and Likud had already signed with RZP-Zehut. Blue and White says it will sign with no list in either bloc. The Reservists have none, because Hendel would not sign with Winter."
+ },
+ {
+  "id": "EVT-F05",
+  "short": "desk 2026a",
+  "citation": "Arutz Sheva (INN) Hebrew desk (2026). The threat of Gur Hasidism (Hebrew). Arutz Sheva, 14 Oct 2026",
+  "url": "https://www.inn.co.il/news/708511",
+  "group": "The 2026 campaign: events and coalition signals",
+  "status": "report",
+  "findings": [
+   "EVT-F05"
+  ],
+  "checked": "verified against the source",
+  "aliases": [],
+  "note": "Backs: Gur, the largest Hasidic court (about 25,000-30,000 voters, roughly two-thirds of a seat), had issued no instruction to vote UTJ as of 14 Oct. Its activists were ordered not to campaign. The aim, per a Gur source, is to keep Belz's Eliakim Stark (UTJ No. 6) out of the Knesset after the Porush-Stark split from Agudat Yisrael. i24 reports a fallback of a quiet instruction to vote Code Black. Insiders expect a compromise, and Emess notes that instructions usually come about 1.5 weeks before polling day."
+ },
+ {
+  "id": "EVT-F11",
+  "short": "desk 2026f",
+  "citation": "Srugim political desk (2026). Ofer Winter puts an end to the rumours: 'It won't happen under any circumstances' (Hebrew). Srugim, 12 Oct 2026",
+  "url": "https://www.srugim.co.il/101013217-%D7%A2%D7%95%D7%A4%D7%A8-%D7%95%D7%99%D7%A0%D7%98%D7%A8-%D7%A9%D7%9D-%D7%A1%D7%95%D7%A3-%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%D7%95%D7%AA-%D7%96%D7%94-%D7%9C%D7%90-%D7%99%D7%A7%D7%A8%D7%94",
+  "group": "The 2026 campaign: events and coalition signals",
+  "status": "report",
+  "findings": [
+   "EVT-F11"
+  ],
+  "checked": "verified against the source",
+  "aliases": [],
+  "note": "Backs: Winter's two-sided stance is now public and acrimonious, and the model's Eisenkot floor holds. On 12 Oct he ruled out joining any government led by the opposition bloc: 'זה לא יקרה בשום מצב' ('It won't happen under any circumstances'). His reason: 'Gadi is left, with Yair Golan and the Arabs - that is not an option for me.' He still says he will recommend Netanyahu. He also says Netanyahu is 'shooting us in the back' and can 'take a hike' if he prefers the haredim. Netanyahu, 16 Oct: 'Don't vote for Winter.'"
+ },
+ {
+  "id": "EVT-F12",
+  "short": "desk 2026d",
+  "citation": "Maariv political desk (2026). The fog lifts: Yoaz Hendel has decided whom he will sit with in government (Hebrew). Maariv, 8 Oct 2026",
+  "url": "https://www.maariv.co.il/news/politics/article-1374903",
+  "group": "The 2026 campaign: events and coalition signals",
+  "status": "report",
+  "findings": [
+   "EVT-F12"
+  ],
+  "checked": "verified; the figures were corrected against the source",
+  "aliases": [],
+  "note": "Backs: Hendel's Reservists-Economic list stays outside both blocs. On 8 Oct he said: 'We are not in the bloc of Netanyahu and the haredim... and we are not in the bloc of Eisenkot and the Arab parties.' Of a grand coalition he said: 'If Netanyahu, Eisenkot and Bennett sit together, it's clear I'll be part of it.' Winter rejected his Zionist-only pact. Blue and White claims (16 Oct, unsourced) that Zelekha would go to Netanyahu for the finance ministry. Netanyahu attacked Hendel and Zelekha. Corrected against the source: polls.csv: Reservists-Economic (party_id zionist_home) at 4+ seats in 8 of 8 polls with fieldwork 11-15 Oct, and 12 of 18 since 1 Oct (mean 2.78)."
+ },
+ {
+  "id": "EVT-F13",
+  "short": "desk 2026e",
+  "citation": "N12/mako politics desk (2026). Yair Golan: 'Mansour Abbas was a good partner in the previous Knesset' (Hebrew). N12/mako, 3 Oct 2026",
+  "url": "https://www.mako.co.il/news-politics/2026_q4/Article-35e804495aef0a1027.htm",
+  "group": "The 2026 campaign: events and coalition signals",
+  "status": "report",
+  "findings": [
+   "EVT-F13"
+  ],
+  "checked": "verified against the source",
+  "aliases": [],
+  "note": "Backs: On the Arab parties, the Jewish change lists keep a public 'not inside' line, with one dissent. Golan said on 3 Oct that Abbas 'was a good partner in the 24th Knesset' and that 'Jewish-Arab partnership in government is a positive thing'. Liberman answered that no coalition will form with the Arab parties. The Joint List's Jabareen will back any government that ends Netanyahu's rule, 'subject to conditions he did not specify'. Kalshi prices Ra'am in the next government at about 0.11."
+ },
+ {
+  "id": "EVT-F26",
+  "short": "desk 2026c",
+  "citation": "Maariv political desk (2026). 450 million ballots: Israel prepares for election day - 'it is impossible to steal' (Hebrew). Maariv, 14 Oct 2026",
+  "url": "https://www.maariv.co.il/news/politics/article-1377136",
+  "group": "The 2026 campaign: events and coalition signals",
+  "status": "report",
+  "findings": [
+   "EVT-F26"
+  ],
+  "checked": "verified against the source",
+  "aliases": [],
+  "note": "Backs: Election administration figures for 27 Oct. 7,331,981 eligible voters; 12,018 polling stations; about 450m ballots for 38 lists and about 4m outer envelopes. More than 800 military stations, including the first-ever voting by troops across the border, with soldiers' early voting from the evening of 20 Oct. Abroad voting opened 15 Oct at 101 stations in 99 missions (about 4,800 eligible). Evacuees vote by double envelope at designated stations. The poll-publication ban runs from midnight 23/24 Oct to the close of polls, and final results are due 4 Nov."
+ },
+ {
+  "id": "EVT-F02",
+  "short": "staff 2026i",
+  "citation": "Jerusalem Post staff (2026). People of Israel candidate quits Ofer Winter's party amid mounting pressure from right-wing rivals. The Jerusalem Post, 14 Oct 2026",
+  "url": "https://www.jpost.com/israel-election-2026/article-911614",
+  "group": "The 2026 campaign: events and coalition signals",
+  "status": "report",
+  "findings": [
+   "EVT-F02"
+  ],
+  "checked": "verified against the source",
+  "aliases": [],
+  "note": "Backs: Amcha Yisrael's No. 8, Davidi Ben Zion, quit the list on 13 Oct, citing the risk of missing the threshold. Netanyahu and Smotrich publicly urged the rest of the list, and Winter himself, to withdraw. N12 describes an organised pressure campaign: billboards near candidates' homes and job offers to candidates who step aside. The same campaign tested whether Noam could be talked out of the race. Winter vowed on 14 Oct to run to the end, and Noam says it will too."
+ },
+ {
+  "id": "EVT-F04",
+  "short": "staff 2026f",
+  "citation": "Jerusalem Post staff (2026). Despite polling below electoral threshold, Benny Gantz to continue election campaign. The Jerusalem Post, 10 Oct 2026",
+  "url": "https://www.jpost.com/israel-election-2026/article-911242",
+  "group": "The 2026 campaign: events and coalition signals",
+  "status": "report",
+  "findings": [
+   "EVT-F04"
+  ],
+  "checked": "verified against the source",
+  "aliases": [],
+  "note": "Backs: Blue and White is staying in. Gantz said on 10 Oct he is 'staying in the race until the end' and needs no one's permission. On 16 Oct the party refused any surplus pact with either bloc. Gantz's pitch is a unity government that includes Netanyahu if he passes the threshold. It has polled 0 seats in every October poll, and markets give it a 5-9% chance of a seat."
+ },
+ {
+  "id": "EVT-F06",
+  "short": "staff 2026e",
+  "citation": "Jerusalem Post staff (2026). Avigdor Liberman rules out minority government, Benjamin Netanyahu coalition. The Jerusalem Post, 15 Oct 2026",
+  "url": "https://www.jpost.com/israel-election-2026/article-911855",
+  "group": "The 2026 campaign: events and coalition signals",
+  "status": "report",
+  "findings": [
+   "EVT-F06"
+  ],
+  "checked": "verified against the source",
+  "aliases": [],
+  "note": "Backs: On 15 Oct Liberman ruled out supporting any minority government, 'including a minority government for a transitional period'. He repeated that Yisrael Beytenu will not sit with Likud while Netanyahu leads it, and he demanded an all-Zionist coalition: 'No Ra'am, no Joint List, no Shas, and no United Torah Judaism.' He left one door open: 'Likud without Netanyahu can be a significant partner.'"
+ },
+ {
+  "id": "EVT-F07",
+  "short": "staff 2026d",
+  "citation": "Jerusalem Post staff (2026). Avigdor Liberman accuses Gadi Eisenkot of planning to join forces with Netanyahu's Likud. The Jerusalem Post, 16 Oct 2026",
+  "url": "http://www.jpost.com/israel-election-2026/article-911915",
+  "group": "The 2026 campaign: events and coalition signals",
+  "status": "report",
+  "findings": [
+   "EVT-F07"
+  ],
+  "checked": "verified against the source",
+  "aliases": [],
+  "note": "Backs: On 15-16 Oct Liberman accused Eisenkot ('Gantz II') of building Yashar's lead in order to negotiate a government with Netanyahu. Eisenkot's public line is the opposite. On 12 Oct he said Netanyahu 'cannot serve as prime minister, minister or deputy minister'. On 16 Oct he said the 'leadership of October 7' must not stay 'for even one more day', and that the goal is more than 61 Zionist seats for the change bloc."
+ },
+ {
+  "id": "EVT-F10",
+  "short": "staff 2026h",
+  "citation": "Jerusalem Post staff (2026). Israeli election: Haredi parties may refuse to endorse both Benjamin Netanyahu, Gadi Eisenkot. The Jerusalem Post, 13 Oct 2026",
+  "url": "https://www.jpost.com/israel-election-2026/article-911533",
+  "group": "The 2026 campaign: events and coalition signals",
+  "status": "report",
+  "findings": [
+   "EVT-F10"
+  ],
+  "checked": "verified; the figures were corrected against the source",
+  "aliases": [],
+  "note": "Backs: Haredi signals harden around the draft law. On 13 Oct JPost quoted haredi sources: Shas and UTJ may recommend neither Netanyahu nor Eisenkot, and may sit in opposition until a draft settlement survives judicial review. They are 'not expected' to help topple Netanyahu. On 14 Oct Deri made exemption the first condition: no government 'that Shas supports or participates in' without settling yeshiva students' status. Military Police draft-evader arrests resumed on 8 Oct, with crowds blocking arrests in Dimona and Bat Yam. Corrected against the source: JPost 13 Oct (unnamed haredi sources, 'not decisions by the parties' rabbinical leadership'): Shas and UTJ 'may refrain from recommending' either candidate and 'would prefer to remain in the opposition'; sources 'do not expect either party to actively seek Netanyahu's replacement'."
+ },
+ {
+  "id": "EVT-F15",
+  "short": "staff 2026j",
+  "citation": "Jerusalem Post staff (Maariv / Lazar Research poll) (2026). Israelis prefer unity gov't to another election, Benjamin Netanyahu falls behind Gadi Eisenkot. The Jerusalem Post, 16 Oct 2026",
+  "url": "https://www.jpost.com/israel-election-2026/article-911902",
+  "group": "The 2026 campaign: events and coalition signals",
+  "status": "report",
+  "findings": [
+   "EVT-F15"
+  ],
+  "checked": "verified against the source",
+  "aliases": [],
+  "note": "Backs: Voters prefer a unity government to a repeat election, but on partisan terms. In Lazar/Maariv (fieldwork 14-15 Oct, n=700) a majority prefer unity if the vote is inconclusive and 27% prefer another election (18% unsure). Nearly 40% of coalition voters want unity led by Netanyahu (32% prefer a new election). 54% of opposition voters accept unity only under their own bloc's leader. PM suitability: Eisenkot 48, Netanyahu 41."
+ },
+ {
+  "id": "EVT-F19",
+  "short": "staff 2026g",
+  "citation": "Jerusalem Post staff (2026). Donald Trump refuses to endorse Benjamin Netanyahu, claims he does not trust anybody. The Jerusalem Post, 16 Oct 2026",
+  "url": "https://www.jpost.com/israel-election-2026/article-911903",
+  "group": "The 2026 campaign: events and coalition signals",
+  "status": "report",
+  "findings": [
+   "EVT-F19"
+  ],
+  "checked": "verified against the source",
+  "aliases": [],
+  "note": "Backs: Trump has withheld an endorsement of Netanyahu. On 1 Oct he told TIME 'I wouldn't underestimate Bibi', and in a Newsmax interview published 16 Oct he said 'I don't trust anybody, honestly.' Polymarket gives a Likud endorsement 0.365."
+ },
+ {
+  "id": "TRN-F15",
+  "short": "Afkar Research Institute & Initiatives 2026",
+  "citation": "Afkar Research Institute, for The Abraham Initiatives (2026). Voting Trends Among Young Arab Citizens of Israel (February 2026). The Abraham Initiatives",
+  "url": "https://abrahaminitiatives.org/wp-content/uploads/2026/05/Young-Arab-Voters-Survey.pdf",
+  "group": "The 2026 campaign: turnout",
+  "status": "report",
+  "findings": [
+   "TRN-F15"
+  ],
+  "checked": "verified; the figures were corrected against the source",
+  "aliases": [],
+  "note": "Backs: Afkar's survey of young Arabs for the Abraham Initiatives (January 2026, before the lists formed) projects 59% turnout among 18-34s. Stated intention collapses among past abstainers and first-time voters, the groups whose turnout decides the sector. Corrected against the source: Past voters 70% definitely. The other two groups are 43% definitely (16% probably) and 15% definitely (42% probably); the slide's text and legend assign them to past abstainers and first-time voters in opposite ways."
+ },
+ {
+  "id": "TRN-F03",
+  "short": "Anabi & Kenig 2022",
+  "citation": "Or Anabi; Ofer Kenig (2022). Will the Election Results Hinge on the Double-Envelope Ballots?. Israel Democracy Institute, 2 Nov 2022",
+  "url": "https://en.idi.org.il/articles/46196",
+  "group": "The 2026 campaign: turnout",
+  "status": "report",
+  "findings": [
+   "TRN-F03"
+  ],
+  "checked": "verified; the figures were corrected against the source",
+  "aliases": [],
+  "note": "Backs: Double-envelope ballots lean right and away from the Arab and haredi lists, so more envelope voting moves the final count rightward after election night. Soldiers are the largest group. Corrected against the source: 2021 envelopes: Netanyahu camp (incl. Yamina) 48.76% vs anti 48.56%; IDI expects 'negligible impact' on bloc seats except through the threshold. The lean is by list (RZ +25%; Shas/UTJ up to a third lower; Arab lists under half), not by bloc."
+ },
+ {
+  "id": "TRN-F27",
+  "short": "Atmor et al. 2024",
+  "citation": "Nir Atmor; Chen Friedberg; Liran Harsgor (2024). For Whom the Polls Toll? Voter Turnout in the 2022 Elections. In G. Rahat, N. Gidron and M. Shamir (eds.), The Elections in Israel 2022, Routledge (Taylor & Francis), pp. 67-88",
+  "url": "https://doi.org/10.4324/9781032633299-5",
+  "group": "The 2026 campaign: turnout",
+  "status": "book chapter",
+  "findings": [
+   "TRN-F27"
+  ],
+  "checked": "verified against the source",
+  "aliases": [],
+  "note": "Backs: Peer-reviewed locality analysis of 2022 (all 1,215 localities): settlements in Judea and Samaria and localities with many haredim have higher turnout; development towns and larger localities lower. Distance from the centre matters only in Arab localities."
+ },
+ {
+  "id": "TRN-F08",
+  "short": "Brady & McNulty 2011",
+  "citation": "Henry E. Brady; John E. McNulty (2011). Turning Out to Vote: The Costs of Finding and Getting to the Polling Place. American Political Science Review 105(1): 115-134",
+  "url": "https://ideas.repec.org/a/cup/apsrev/v105y2011i01p115-134_00.html",
+  "group": "The 2026 campaign: turnout",
+  "status": "peer-reviewed",
+  "findings": [
+   "TRN-F08"
+  ],
+  "checked": "verified against the source",
+  "aliases": [],
+  "note": "Backs: Peer-reviewed natural-experiment evidence: consolidating polling places cut overall turnout by 1.85 points, and in-person turnout by 3.03 points. Israel has no civilian absentee voting to absorb the loss, so the in-person figure is the closer analogue."
+ },
+ {
+  "id": "TRN-F09",
+  "short": "Cantoni 2020",
+  "citation": "Enrico Cantoni (2020). A Precinct Too Far: Turnout and Voting Costs. American Economic Journal: Applied Economics 12(1): 61-85",
+  "url": "https://doi.org/10.1257/app.20180306",
+  "group": "The 2026 campaign: turnout",
+  "status": "peer-reviewed",
+  "findings": [
+   "TRN-F09"
+  ],
+  "checked": "verified against the source",
+  "aliases": [],
+  "note": "Backs: Peer-reviewed boundary-discontinuity evidence: one standard deviation more distance to the polling place (0.245 miles) cuts ballots cast by 2-5%. The effect is about three times larger in high-minority areas in lower-salience elections."
+ },
+ {
+  "id": "TRN-F29",
+  "short": "Eichner 2026",
+  "citation": "Itamar Eichner (2026). The special situation on the home front will be extended until after the elections: 'still a high probability of an attack' (Hebrew). ynet, 15 Oct 2026",
+  "url": "https://ynet.co.il/news/article/sk11waeroze",
+  "group": "The 2026 campaign: turnout",
+  "status": "report",
+  "findings": [
+   "TRN-F29"
+  ],
+  "checked": "verified against the source",
+  "aliases": [],
+  "note": "Backs: The security backdrop is live but not restrictive. The government is extending the nationwide 'special situation on the home front' to 3 November, past election day, citing a 'high probability' of attack from Iran or Lebanon. No binding civil-defence restrictions are in force, and the CEC has emergency procedures for sirens during voting and counting."
+ },
+ {
+  "id": "TRN-F06",
+  "short": "Eliyahu 2025",
+  "citation": "Ayala Eliyahu (approved by Ido Avgar) (2025). Data on emigration of Israelis - update (Hebrew). Knesset Research and Information Center, 16 Oct 2025, for the Aliyah, Absorption and Diaspora Committee",
+  "url": "https://fs.knesset.gov.il/globaldocs/MMM/72b9451e-2b9d-f011-a864-005056aa9911/2_72b9451e-2b9d-f011-a864-005056aa9911_11_21074.pdf",
+  "group": "The 2026 campaign: turnout",
+  "status": "official data",
+  "findings": [
+   "TRN-F06"
+  ],
+  "checked": "verified; the figures were corrected against the source",
+  "aliases": [],
+  "note": "Backs: Net emigration since 2022 inflates the register's denominator. About 125,000 more Israelis left long-term than returned between January 2022 and August 2024, and those still registered lower measured turnout by about 1.2 points if nothing else changes. Corrected against the source: Net Israeli migration (all ages): -29,700 (2022), -58,600 (2023), -36,900 (Jan-Aug 2024), -125,200 cumulative. Turnout denominator effect about 0.9-2.1 points (adults-only in the desk's window, to all ages through Oct 2026 at the 2024 pace); treat as about -1 to -1.5."
+ },
+ {
+  "id": "TRN-F01",
+  "short": "Ettinger 2026",
+  "citation": "Amir Ettinger (2026). Election guide 2026: what to bring to the polling station, when polls open and when results come (Hebrew). ynet, 15 Oct 2026",
+  "url": "https://www.ynet.co.il/news/elections2026/article/yokra14927061",
+  "group": "The 2026 campaign: turnout",
+  "status": "report",
+  "findings": [
+   "TRN-F01"
+  ],
+  "checked": "verified against the source",
+  "aliases": [],
+  "note": "Backs: The 2026 register is 8% larger than 2022's, with 12,018 polling stations. Election day is a paid national day of rest with free intercity buses and trains, the same arrangement as 2022, so the date itself adds no new turnout effect."
+ },
+ {
+  "id": "TRN-F28",
+  "short": "Finkelstein 2024",
+  "citation": "Ariel Finkelstein (2024). Analysis of the 2024 Local Elections. Israel Democracy Institute, 17 Apr 2024",
+  "url": "https://en.idi.org.il/articles/53620",
+  "group": "The 2026 campaign: turnout",
+  "status": "report",
+  "findings": [
+   "TRN-F28"
+  ],
+  "checked": "verified against the source",
+  "aliases": [],
+  "note": "Backs: The only wartime election held since October 2023, the February 2024 municipal elections, saw turnout fall most among Arabs (-10 points vs 2018) and non-haredi Jews (-4.5), and hardly at all among haredim (-0.5). Election day was a holiday both times."
+ },
+ {
+  "id": "TRN-F22",
+  "short": "Gotthelf 2026",
+  "citation": "Eli Gotthelf (analysis by Avi Weidman) (2026). The haredi voting crisis: a dramatic drop among the young (Hebrew). Kikar HaShabbat, Super Data section, 14 Oct 2026",
+  "url": "https://www.kikar.co.il/super-data/haredi-youth-voting-crisis",
+  "group": "The 2026 campaign: turnout",
+  "status": "report",
+  "findings": [
+   "TRN-F22"
+  ],
+  "checked": "verified; the figures were corrected against the source",
+  "aliases": [],
+  "note": "Backs: A haredi-sector pollster finds only 75% of haredim say they will certainly vote (69% under 30), against 80-88% turnout claimed in past cycles. Young haredi support for Shas has fallen to 13%. Corrected against the source: 75% 'certain' (69% under 30): a certainty share with no baseline, in line with Ch13 Jewish adults (73-75%). Measured past haredi turnout 72.8-76.8% at regular stations, not 80-88%."
+ },
+ {
+  "id": "TRN-F05",
+  "short": "Guata 2026a",
+  "citation": "Or Guata (2026). Cameras at the polls, voting in nursing homes and relief for evacuees: the Knesset begins preparing for the 2026 elections (Hebrew). Davar, 23 Jun 2026",
+  "url": "https://www.davar1.co.il/685407/",
+  "group": "The 2026 campaign: turnout",
+  "status": "report",
+  "findings": [
+   "TRN-F05"
+  ],
+  "checked": "verified against the source",
+  "aliases": [],
+  "note": "Backs: Special-population voting is small in seat terms. About 14,000 people are still displaced; nursing-home stations reached about 30,000 voters last time. Dedicated stations will serve the evacuated Gaza-border communities."
+ },
+ {
+  "id": "TRN-F18",
+  "short": "Hoffman & Baron 2026",
+  "citation": "Tammy Hoffman; Meital Baron (2026). Survey of young people on first-time voting ahead of the 26th Knesset elections (Hebrew report, June 2026); English summary 'First-Time Voters Ahead of the 26th Knesset Elections'. Israel Democracy Institute",
+  "url": "https://www.idi.org.il/media/31221/survey-of-youngsters-on-first-time-voting-toward-the-elections-of-the-26th-knesset.pdf",
+  "group": "The 2026 campaign: turnout",
+  "status": "report",
+  "findings": [
+   "TRN-F18"
+  ],
+  "checked": "verified against the source",
+  "aliases": [],
+  "note": "Backs: IDI's May 2026 first-time-voter survey: 87% of young Arabs and 92% of young Jews say they will or think they will vote. Haredim are again the least certain group."
+ },
+ {
+  "id": "TRN-F10",
+  "short": "Karmel 2026b",
+  "citation": "Ariela Karmel (2026). Likud, Smotrich to station 2,000 activists at Arab polling stations on election day, citing unsubstantiated concerns of fraud. Times of Israel liveblog, 15 Oct 2026",
+  "url": "https://www.timesofisrael.com/liveblog_entry/likud-smotrich-to-station-2000-activists-at-arab-polling-stations-on-election-day-citing-unsubstantiated-concerns-of-fraud",
+  "group": "The 2026 campaign: turnout",
+  "status": "report",
+  "findings": [
+   "TRN-F10"
+  ],
+  "checked": "verified against the source",
+  "aliases": [],
+  "note": "Backs: Likud and Religious Zionism say they will station about 2,000 activists at hundreds of polling stations in Arab communities, on top of the formal observers, citing fraud claims the CEC has rejected. The 2019 precedent cuts both ways. A similar camera operation in April 2019 coincided with a record-low Arab turnout, which its organiser claimed as his doing, though no independent study links the two. Five months later Arab turnout rebounded 10 points."
+ },
+ {
+  "id": "TRN-F25",
+  "short": "Karmel 2026c",
+  "citation": "Ariela Karmel (2026). Netanyahu, Smotrich to join forces on right-wing vote turnout drive; Ben Gvir left out. Times of Israel liveblog, 7 Oct 2026",
+  "url": "https://www.timesofisrael.com/liveblog_entry/netanyahu-smotrich-to-join-forces-on-right-wing-vote-turnout-drive-ben-gvir-left-out/",
+  "group": "The 2026 campaign: turnout",
+  "status": "report",
+  "findings": [
+   "TRN-F25"
+  ],
+  "checked": "verified against the source",
+  "aliases": [],
+  "note": "Backs: Both camps are running organised turnout drives. Likud and Religious Zionism have set up a joint election-day operation to raise right-wing turnout, headed by the Yesha Council chairman, while the High Court's ban on real-time voter tracking (SEC-F21) limits the party machines' traditional tool."
+ },
+ {
+  "id": "TRN-F02",
+  "short": "Knesset 2022",
+  "citation": "Knesset (Spokesperson / Research) (2022). Fact sheet: The 25th Knesset elections, October 2022 (updated). Knesset of Israel",
+  "url": "https://main.knesset.gov.il/EN/Documents/2022-10-24%20Fact%20sheet%2002%20-%2025th%20Knesset%20elections%20-%20updated.pdf",
+  "group": "The 2026 campaign: turnout",
+  "status": "official data",
+  "findings": [
+   "TRN-F02"
+  ],
+  "checked": "verified; the figures were corrected against the source",
+  "aliases": [],
+  "note": "Backs: Against the 2022 baseline, 2026 has more stations of every special type, and double-envelope voting had already grown from 5.5% to 9.6% of ballots between 2015 and 2021. The official CEC-based Arab series differs from the Dayan Center series by up to about 2 points. Corrected against the source: 2026 vs 2022: accessible 6,208 vs 5,116 (+21%); special accessible 3,620 vs 2,939 (+23%); hospital 250 vs 222 (+13%); prison 55 vs 55 (no change); missions 102 at 100 vs 103 at 101 (one fewer). Not 'every special type'."
+ },
+ {
+  "id": "TRN-F23",
+  "short": "Lafair & Malach 2026",
+  "citation": "Avraham Lafair; Gilad Malach (2026). What Motivates Haredi Voters?. Israel Democracy Institute, 3 Aug 2026",
+  "url": "https://en.idi.org.il/articles/65364",
+  "group": "The 2026 campaign: turnout",
+  "status": "report",
+  "findings": [
+   "TRN-F23"
+  ],
+  "checked": "verified; the figures were corrected against the source",
+  "aliases": [],
+  "note": "Backs: IDI's haredi specialists document that internal disputes have cost UTJ before, in 2009, 2015 and 2021, and that haredi party loyalty is far higher than the public's. Haredi turnout dips are tied to rabbinic disputes, not just demography. Corrected against the source: IDI documents UTJ share losses in 2009, 2015 and 2021 (2015 with partial Jerusalem Faction abstention); it gives no haredi turnout figures."
+ },
+ {
+  "id": "TRN-F17",
+  "short": "Miller 2015",
+  "citation": "Elhanan Miller (2015). Arab voter turnout to surge following political union, polls find. Times of Israel, 10 Mar 2015",
+  "url": "https://www.timesofisrael.com/arab-vote-to-surge-following-political-union-polls-find/",
+  "group": "The 2026 campaign: turnout",
+  "status": "report",
+  "findings": [
+   "TRN-F17"
+  ],
+  "checked": "verified; the figures were corrected against the source",
+  "aliases": [],
+  "note": "Backs: The Dayan Center's unity-year forecast for 2015 was close (64.7% expected vs 63.5% actual). With the misses the sector desk recorded, the four KAP forecasts that could be checked have a mean error near zero and a spread of about 11 points: unbiased but very noisy. Corrected against the source: KAP final surveys: +1.2, +15.1, -4.2 (mean +4.0, sd 10.0, n=3). All six readings including early-campaign ones: mean -0.4, sd 11.8."
+ },
+ {
+  "id": "TRN-F12",
+  "short": "Nasser 2026",
+  "citation": "Suhail Nasser (2026). Disqualification of the Arab lists ignites anger: will turnout rise in the elections? (Arabic). i24NEWS Arabic, Oct 2026 (undated page)",
+  "url": "https://www.i24news.tv/ar/%D8%A3%D8%AE%D8%A8%D8%A7%D8%B1/israeli-election-2026/artc-73b05d76",
+  "group": "The 2026 campaign: turnout",
+  "status": "report",
+  "findings": [
+   "TRN-F12"
+  ],
+  "checked": "verified; the figures were corrected against the source",
+  "aliases": [],
+  "note": "Backs: The Afkar institute's director, whose firm fields Arab-sector polls, puts expected Arab turnout at 59-61% after the disqualification fight. He says about 15 Arab seats would need at least 65%. Corrected against the source: 59-61% from Jubran's poll (no n, dates or method); '65% for ~15 seats' is the article's unattributed estimate."
+ },
+ {
+  "id": "TRN-F11",
+  "short": "News 2026",
+  "citation": "Masdar News (reporting Channel 13 / Stat-Net) (2026). Poll: Joint List 9 seats and Arab representation could rise to 17 (Arabic). Masdar News Network, 3 Sep 2026",
+  "url": "https://msdrnews.com/124666/%D8%A7%D8%B3%D8%AA%D8%B7%D9%84%D8%A7%D8%B9-%D8%A7%D9%84%D9%85%D8%B4%D8%AA%D8%B1%D9%83%D8%A9-9-%D9%85%D9%82%D8%A7%D8%B9%D8%AF-%D9%88%D8%A7%D9%84%D8%AA%D9%85%D8%AB%D9%8A%D9%84-%D8%A7%D9%84%D8%B9%D8%B1%D8%A8%D9%8A-%D9%82%D8%AF-%D9%8A%D8%B1%D8%AA%D9%81%D8%B9-%D8%A5%D9%84%D9%89-17",
+  "group": "The 2026 campaign: turnout",
+  "status": "report",
+  "findings": [
+   "TRN-F11"
+  ],
+  "checked": "verified against the source",
+  "aliases": [],
+  "note": "Backs: Channel 13's Arab seat numbers assume 60% Arab turnout, according to the head of Stat-Net, which fields its Arab sample. He says 72% would lift the Arab lists from 14 to 16 seats, about 0.17 seats per point at full pass-through. This answers the sector desk's open question on Channel 13's conversion."
+ },
+ {
+  "id": "TRN-F14",
+  "short": "Project et al. 2026",
+  "citation": "Shmuel Rosner / Midgam Project, Stat-Net, Askaria (for Channel 13 News) (2026). Mandates survey reports to the Central Elections Committee, refs 4169, 4182, 4193. Central Elections Committee for the 26th Knesset, poll filings",
+  "url": "https://www.gov.il/BlobFolder/dynamiccollectorresultitem/knesset_election101/he/Survey_4193.pdf",
+  "group": "The 2026 campaign: turnout",
+  "status": "official data",
+  "findings": [
+   "TRN-F14"
+  ],
+  "checked": "verified; the figures were corrected against the source",
+  "aliases": [],
+  "note": "Backs: Channel 13's sector samples (official CEC filings) give stated certainty of voting by sector over the last three waves. The Arab phone sample's 'certain' share is 73-80%, flat within noise. The haredi share depends on mode: 80% by phone, 66-67% online. Haredim report the least certainty, as in past cycles, so stated certainty cannot rank sectors by turnout. Corrected against the source: Drop 'as in past cycles' (no prior series). Haredi cluster turnout 72.8-76.8% (2019a-2022, regular stations), level with the religious-Zionist cluster: 'among the highest', not 'the highest'."
+ },
+ {
+  "id": "TRN-F21",
+  "short": "Segal 2026c",
+  "citation": "Amit Segal (2026). The figure worrying Netanyahu: the crisis in the haredi parties (Hebrew). N12 (mako), 11 Oct 2026",
+  "url": "https://www.mako.co.il/news-israel-elections/2026/Article-db0ae0d2aac21a1027.htm",
+  "group": "The 2026 campaign: turnout",
+  "status": "report",
+  "findings": [
+   "TRN-F21"
+  ],
+  "checked": "verified; the figures were corrected against the source",
+  "aliases": [],
+  "note": "Backs: Channel 12's analyst reports haredi parties' internal polls showing about a 10% fall in willingness to vote. UTJ's campaign headquarters is paralysed by a rift between the two leading Lithuanian rabbis, and Shas is losing voters over the draft-exemption stance, some of whom are staying home. Corrected against the source: 'Internal polls' of unspecified ownership show 'about 10%' lower willingness to vote (relative or points not stated); no n, dates or wording."
+ },
+ {
+  "id": "TRN-F24",
+  "short": "Segal 2026a",
+  "citation": "Amit Segal (2026). The Jerusalem Faction's attempt to split United Torah Judaism (Hebrew). N12 (mako), 16 Aug 2026",
+  "url": "https://www.mako.co.il/news-israel-elections/2026/Article-7941d48f2f900a1027.htm",
+  "group": "The 2026 campaign: turnout",
+  "status": "report",
+  "findings": [
+   "TRN-F24",
+   "HAR-F04"
+  ],
+  "checked": "verified; the figures were corrected against the source",
+  "aliases": [
+   "HAR-F04"
+  ],
+  "note": "Backs: The Jerusalem Faction (Peleg), which has abstained since 2015, tried in August to split Gur from UTJ into a hard anti-draft list to draw non-voting haredim; Gur refused. A separate anti-draft list (Tzeva Shachor) is on the ballot but polls near zero. No haredi vehicle is drawing new voters in, so draft anger shows up as abstention, not as a new list. Corrected against the source: Ch13 haredi sample (6-7 Oct): Tzeva Shachor 0.6%, The Haredi Public 5.2%, Otzma 5.4%, 'other' (all Achi) 0.8%. Draft anger shows partly as switching, not only abstention. | Two commentators expected UTJ to run as a 'purely technical bloc' and split after the vote, with each faction negotiating its own coalition terms. In mid-August the Jerusalem Faction and allied activists pitched Gur on leaving UTJ to form a hard-line anti-draft party, arguing it would win an extra seat from current non-voters. Gur's Moti Bebc"
+ },
+ {
+  "id": "TRN-F19",
+  "short": "Sela 2026",
+  "citation": "Uri Sela (2026). Israel looks toward record-breaking election season with over half a million first-time voters. Jerusalem Post, 23 Jul 2026",
+  "url": "https://www.jpost.com/israel-news/politics-and-diplomacy/article-903394",
+  "group": "The 2026 campaign: turnout",
+  "status": "report",
+  "findings": [
+   "TRN-F19"
+  ],
+  "checked": "verified; the figures were corrected against the source",
+  "aliases": [],
+  "note": "Backs: A geo-demographic analysis counts a record 595,000 first-time voters (8.7% of the register): about 118,000 Arab (10.6% of the Arab sector) and about 105,000 haredi (one in six haredi eligible voters). The haredi figure implies about 630,000 haredi eligible voters. The source's total register (6.8m) conflicts with the CEC's 7.33m, so treat its counts as approximate. Corrected against the source: 595,000 first-time voters = 8.1% of the CEC register (8.7% only on Points' 6.8m). Haredi eligible implied 630-656k (IDI yearbook suggests about 0.69m aged 18+); 10% relative dip = 1.0-1.2 seats."
+ },
+ {
+  "id": "TRN-F16",
+  "short": "Statnet & Initiatives 2025",
+  "citation": "Statnet, for The Abraham Initiatives (2025). Voting Forecast for the Knesset Among the Arab Society - If Elections Were Held Now (February 2025). The Abraham Initiatives",
+  "url": "https://abrahaminitiatives.org/wp-content/uploads/2025/03/Election-Survey-Results.pdf",
+  "group": "The 2026 campaign: turnout",
+  "status": "report",
+  "findings": [
+   "TRN-F16"
+  ],
+  "checked": "verified against the source",
+  "aliases": [],
+  "note": "Backs: Stat-Net's February 2025 Arab survey for the Abraham Initiatives ran two turnout models on the same data: 53% and 47%. A 6-point spread from modelling choice alone, before the list configuration was known."
+ },
+ {
+  "id": "TRN-F30",
+  "short": "Summers & Staff 2026",
+  "citation": "Charlie Summers and ToI Staff (2026). Arab society stages nationwide strike over police failure to curb violent crime. Times of Israel, 22 Jan 2026",
+  "url": "https://www.timesofisrael.com/arab-society-stages-nationwide-strike-over-police-failure-to-curb-violent-crime/amp/",
+  "group": "The 2026 campaign: turnout",
+  "status": "report",
+  "findings": [
+   "TRN-F30"
+  ],
+  "checked": "verified against the source",
+  "aliases": [],
+  "note": "Backs: Crime is the Arab public's top issue and the 2026 campaign's main Arab mobiliser. A general strike over police failures preceded the four Arab parties' January unity pledge, and killings remain at record levels."
+ },
+ {
+  "id": "TRN-F04",
+  "short": "Team 2026",
+  "citation": "5TC Team (2026). IDF to Deploy 850 Election Stations to Ensure Soldiers Can Vote, Including in Gaza & Lebanon. 5 Towns Central, 14 Oct 2026",
+  "url": "https://5townscentral.com/2026/10/14/idf-to-deploy-850-election-stations-to-ensure-soldiers-can-vote-including-in-gaza-lebanon/",
+  "group": "The 2026 campaign: turnout",
+  "status": "report",
+  "findings": [
+   "TRN-F04"
+  ],
+  "checked": "verified; the figures were corrected against the source",
+  "aliases": [],
+  "note": "Backs: The IDF is running its largest field vote: at least 850 military polling stations, a quarter of them mobile, including positions in Gaza, Lebanon and Syria, with voting from the evening of 20 October. Inference: the soldier envelope pool is likely at least as large as in 2022. Corrected against the source: At least 850 military stations (about a quarter mobile), voting from the evening of 20 Oct to 27 Oct; the source makes no 2022 comparison ('largest' unsupported)."
+ },
+ {
+  "id": "TRN-F26",
+  "short": "Wertman & Elran 2022",
+  "citation": "Ori Wertman; Meir Elran (2022). The Israeli Electorate from the Perspective of the 2022 Elections (INSS Insight No. 1664). Institute for National Security Studies, 1 Dec 2022",
+  "url": "https://www.inss.org.il/publication/israel-elections-2022/",
+  "group": "The 2026 campaign: turnout",
+  "status": "report",
+  "findings": [
+   "TRN-F26"
+  ],
+  "checked": "verified; the figures were corrected against the source",
+  "aliases": [],
+  "note": "Backs: In 2022 turnout rose 3.2 points overall, and the rise was differential: right-leaning cities gained 3-7 points while centre-left cities stayed flat. The right-wing bloc's vote share rose only 1.3 points; its 64 seats came mostly from wasted centre-left votes. Corrected against the source: 2022 below-threshold votes: Meretz 3.16% and Balad 2.91% (anti-bloc) vs Jewish Home 1.19% (right). The '64 seats from waste' reading is desk inference, not INSS, and the waste was about half Arab."
+ },
+ {
+  "id": "TRN-F07",
+  "short": "Zoabi 2026b",
+  "citation": "Bakr Zoabi (reporting a Stat-Net analysis) (2026). Elections 2026: more Arab voters at fewer polling stations (Hebrew). Local Call (Sicha Mekomit), 15 Oct 2026",
+  "url": "https://www.mekomit.co.il/%D7%91%D7%97%D7%99%D7%A8%D7%95%D7%AA-2026-%D7%99%D7%95%D7%AA%D7%A8-%D7%91%D7%95%D7%97%D7%A8%D7%99%D7%9D-%D7%A2%D7%A8%D7%91%D7%99%D7%9D-%D7%A2%D7%9C-%D7%A4%D7%97%D7%95%D7%AA-%D7%A7%D7%9C%D7%A4%D7%99/",
+  "group": "The 2026 campaign: turnout",
+  "status": "report",
+  "findings": [
+   "TRN-F07"
+  ],
+  "checked": "verified against the source",
+  "aliases": [],
+  "note": "Backs: Arab localities have 89 fewer polling stations than in 2022, although their electorate grew about 10%. In 2026 an average Arab-locality station serves 672 voters against 578 in Jewish localities; in 2021 the two were about equal."
+ },
+ {
+  "id": "TRN-F13",
+  "short": "Zoabi 2026a",
+  "citation": "Bakr Zoabi (2026). Existential fear and a strong desire for change: rising willingness to vote in Arab society (Hebrew). Local Call (Sicha Mekomit), 12 Oct 2026",
+  "url": "https://www.mekomit.co.il/%D7%A4%D7%97%D7%93-%D7%A7%D7%99%D7%95%D7%9E%D7%99-%D7%95%D7%A8%D7%A6%D7%95%D7%9F-%D7%A2%D7%96-%D7%91%D7%A9%D7%99%D7%A0%D7%95%D7%99-%D7%A2%D7%9C%D7%99%D7%99%D7%94-%D7%91%D7%A0%D7%9B%D7%95%D7%A0%D7%95/",
+  "group": "The 2026 campaign: turnout",
+  "status": "report",
+  "findings": [
+   "TRN-F13"
+  ],
+  "checked": "verified against the source",
+  "aliases": [],
+  "note": "Backs: The parties' own numbers are higher still: the Joint List's internal poll shows 61% two weeks out, and the list and Hadash both target 70%. Activist reports also cut both ways: more willingness to vote overall, but Balad's base was demobilised when its leader withdrew under threat of disqualification."
+ },
+ {
+  "id": "TRN-F20",
+  "short": "al 2026",
+  "citation": "Tamar Hermann et al. (Viterbi Family Center) (2026). The Israeli Voice Index - August 2026 (data tables); article 'Israelis Reveal Their Main Considerations in Deciding Which Party to Vote for in October' (9 Sep 2026). Israel Democracy Institute",
+  "url": "https://en.idi.org.il/media/32364/august-voice-index-data.pdf",
+  "group": "The 2026 campaign: turnout",
+  "status": "report",
+  "findings": [
+   "TRN-F20"
+  ],
+  "checked": "verified; the figures were corrected against the source",
+  "aliases": [],
+  "note": "Backs: IDI's August 2026 Voice Index: only 1.2% of Jews and 8.7% of Arabs volunteer that they do not intend to vote, against actual non-voting of roughly 28% and 47% in 2022. Crime in Arab society is the top vote factor for Arab respondents. Corrected against the source: 2022 non-voting: non-Arab registrants about 27%, Arab-locality about 47%. Survey: a 'don't intend to vote' option on a vote-consideration item (Q7), 1.2% Jews / 8.7% Arabs."
+ },
+ {
+  "id": "HAR-F18",
+  "short": "Barsky 2026",
+  "citation": "Anna Barsky (2026). Haredi parties preparing for shift in political strategy for 2026 elections. The Jerusalem Post",
+  "url": "https://www.jpost.com/israel-election-2026/article-908924",
+  "group": "The 2026 campaign: haredi politics",
+  "status": "report",
+  "findings": [
+   "HAR-F18"
+  ],
+  "checked": "verified against the source",
+  "aliases": [],
+  "note": "Backs: Haredi sources have floated recommending nobody to the president and sitting in opposition for 'the first year', until a draft law is settled; after that, 'the haredim could enter any government'. These are moods reported by unnamed sources, not decisions by the rabbis. By 13 Oct the line was that they would not actively help replace Netanyahu or Speaker Ohana either."
+ },
+ {
+  "id": "HAR-F03",
+  "short": "Breitkopf 2026",
+  "citation": "Chanany Breitkopf (2026). Senior Agudah figures break the vessels: 'Gur does not represent us; examining a run as a technical bloc - not with Degel' (Hebrew). Kikar HaShabbat",
+  "url": "https://www.kikar.co.il/haredim-news/agudas-yisrael-degel-hatorah-election-crisis",
+  "group": "The 2026 campaign: haredi politics",
+  "status": "report",
+  "findings": [
+   "HAR-F03"
+  ],
+  "checked": "verified against the source",
+  "aliases": [],
+  "note": "Backs: Before filing, Agudah's smaller courts threatened to run apart from Degel. Senior figures in Shomrei Emunim and Belz said Gur 'does not represent us', denied any negotiation with Degel, and said Agudah was examining a technical bloc with another party. Early feelers went to Noam. The threat was resolved by registering Chomat Torat Yisrael inside UTJ (HAR-F01), not by a separate run."
+ },
+ {
+  "id": "HAR-F25",
+  "short": "CEC 2026d",
+  "citation": "Central Elections Committee (poll reports filed by Shmuel Rosner with Midgam Project, StatNet, Askaria) (2026). Mandates surveys for Channel 13, 2 Sep - 7 Oct 2026 (CEC refs 4118, 4140, 4153, 4169, 4182, 4193), haredi-sample columns. Central Elections Committee for the 26th Knesset",
+  "url": "https://www.gov.il/BlobFolder/dynamiccollectorresultitem/knesset_election101/he/Survey_4193.pdf",
+  "group": "The 2026 campaign: haredi politics",
+  "status": "official data",
+  "findings": [
+   "HAR-F25"
+  ],
+  "checked": "verified; the figures were corrected against the source",
+  "aliases": [],
+  "note": "Backs: Channel 13's dedicated haredi samples show a large mode effect for the haredi family. Online haredi respondents give Shas+UTJ 72-78% of decided votes (mean 74.8% over six waves). The one phone wave (23 Sep, n=220) gives 84.9%, in line with Askaria's phone survey (83.2%) and IDI's 2022 vote (86%). With haredim at 10.8% of the vote, the gap is worth 1.0 seat against the same-day online wave (z = 2.1) and 1.3 against the pooled online mean (z = 3.6). That is a concrete mechanism for the recorded haredi under-count. How the gap splits between the two lists is not robust: on the same day it is even (Shas 3.8 points, UTJ 4.1), but against the pooled online waves it is Shas-heavy (6.4 vs 3.7), as it is with Askaria's phone figures (5.5 vs 2.9). The Haredi Public and Otzma are two to three times stronger online. Corrected against the source: Phone-online gap for Shas+UTJ among decided haredim: 7"
+ },
+ {
+  "id": "HAR-F06",
+  "short": "Freid 2026",
+  "citation": "Shilo Freid (2026). Israel's largest Hasidic sect threatens to withhold 30,000 votes in election feud. Ynetnews",
+  "url": "https://www.ynetnews.com/article/ryn11gcpige",
+  "group": "The 2026 campaign: haredi politics",
+  "status": "report",
+  "findings": [
+   "HAR-F06"
+  ],
+  "checked": "verified; the figures were corrected against the source",
+  "aliases": [],
+  "note": "Backs: Gur's vote is worth about half a seat to UTJ, not the one to two seats the press quotes. Gur has about 30,000 eligible voters (ynet). At 2026 seat prices that is roughly 19,000-24,000 votes, or 0.5-0.65 seats. Corrected against the source: Gur's full abstention is worth about 0.5-0.7 UTJ seats (up to 0.8 if the 25-30k are votes, not eligible voters). Seat price 37.4-40.2k on 4.82M valid votes with 0-7% below-threshold waste; 2022: 36.2k per passing seat."
+ },
+ {
+  "id": "HAR-F24",
+  "short": "Gotthelf & Super Data Institute 2026",
+  "citation": "Eli Gotthelf; Super Data Institute (Avi Widerman) (2026). After the arrests, the great rift among young haredim: who will they vote for? (Hebrew). Kikar HaShabbat",
+  "url": "https://www.kikar.co.il/super-data/haredi-youth-voting-crisis",
+  "group": "The 2026 campaign: haredi politics",
+  "status": "report",
+  "findings": [
+   "HAR-F24"
+  ],
+  "checked": "verified against the source",
+  "aliases": [],
+  "note": "Backs: A haredi-community pollster (Super Data) reports that only 75% of haredim say they will definitely vote (69% under 30), against historical turnout of 80-88%. It also reports a youth swing away from Shas (13% from 33-36%) and UTJ (41% from 50%) toward Ahi and Leitner. No sample size, method or field dates are published, and SEC-F08 shows stated certainty does not rank haredi turnout, so this is weak evidence for a turnout drop."
+ },
+ {
+  "id": "HAR-F01",
+  "short": "Guata 2026b",
+  "citation": "Or Guata (2026). For the first time since 1992: the UTJ list includes a third party besides Agudat Yisrael and Degel HaTorah (Hebrew). Davar",
+  "url": "https://www.davar1.co.il/696518/",
+  "group": "The 2026 campaign: haredi politics",
+  "status": "report",
+  "findings": [
+   "HAR-F01"
+  ],
+  "checked": "verified against the source",
+  "aliases": [],
+  "note": "Backs: UTJ is running as one list but three registered parties. On 8 Sept 2026 it filed a joint slate of Degel HaTorah, Agudat Yisrael and a new party, Chomat Torat Yisrael. Meir Porush (Shlomei Emunim) and the Belz representative Elyakim Stark left Agudat Yisrael and registered separately. Per Davar, they did so to avoid being bound by the Gerrer Rebbe, to draw their own party funding and to keep the option of splitting from UTJ in the Knesset. Ger, Vizhnitz and Sanz signed with Degel separately. Davar says no third party has sat on the UTJ list since the 1992 Moriah episode."
+ },
+ {
+  "id": "HAR-F17",
+  "short": "Hadad & Midgam 2026",
+  "citation": "Ofer Hadad (N12); poll by Midgam (Mano Geva) (2026). A surprising figure for Ben-Gvir: the poll of first-time voters (Hebrew). N12 (mako)",
+  "url": "https://www.mako.co.il/news-israel-elections/2026/Article-0f9149c460ac0a1026.htm",
+  "group": "The 2026 campaign: haredi politics",
+  "status": "report",
+  "findings": [
+   "HAR-F17"
+  ],
+  "checked": "verified against the source",
+  "aliases": [],
+  "note": "Backs: Shas competes with Otzma Yehudit and Likud for young haredi and traditional voters. The leak to Otzma among self-identified haredim is visible in 2026 polls but is not clearly larger than in 2022. Otzma itself claims a pool of 2-4 seats of haredim 'not locked' to the haredi parties."
+ },
+ {
+  "id": "HAR-F23",
+  "short": "JDN 2026",
+  "citation": "JDN (reporting Askaria data) (2026). New poll of haredi voters: the undecided doubled, Shas weakens and UTJ stays put (Hebrew). JDN",
+  "url": "https://www.jdn.co.il/news/2728310/",
+  "group": "The 2026 campaign: haredi politics",
+  "status": "report",
+  "findings": [
+   "HAR-F23"
+  ],
+  "checked": "verified against the source",
+  "aliases": [],
+  "note": "Backs: The only phone-based, repeated haredi-sector survey with a 2022 baseline finds an electorate that is undecided rather than defecting. Among decided haredi voters, UTJ+Shas hold 83.2% against 85.6% at the same point in 2022, a difference that is not statistically significant. The undecided share has more than doubled. The firm estimates the haredi parties at about 1 seat (0.5-1.5) below 2022, all of it Shas, and less if undecided voters return as they did in 2022."
+ },
+ {
+  "id": "HAR-F20",
+  "short": "Karmel & Staff 2026",
+  "citation": "Ariela Karmel, ToI Staff (2026). Angry with PM, Haredi MKs said planning to allow formation of Eisenkot-led government. The Times of Israel",
+  "url": "https://www.timesofisrael.com/mad-at-pm-haredi-mks-said-planning-to-allow-formation-of-eisenkot-led-government/",
+  "group": "The 2026 campaign: haredi politics",
+  "status": "report",
+  "findings": [
+   "HAR-F20"
+  ],
+  "checked": "verified against the source",
+  "aliases": [],
+  "note": "Backs: The single report of an Agudah abstention on an Eisenkot-led minority government still has no second source; Asher denied it the same night. The report named Goldknopf and Tessler as Gur, but Tessler represents Vizhnitz. Under the filed list order, Agudat Yisrael holds slots 2 and 8. Its Knesset faction is therefore 1 seat if UTJ wins 7 and 2 if UTJ wins 8-10, far below the 4/7 share the formation tree assumes."
+ },
+ {
+  "id": "HAR-F19",
+  "short": "Karmel 2026a",
+  "citation": "Ariela Karmel (2026). Deri says like UTJ, Shas won't join next government without a draft exemption law. The Times of Israel",
+  "url": "https://www.timesofisrael.com/deri-says-like-utj-shas-wont-join-next-government-without-a-draft-exemption-law/",
+  "group": "The 2026 campaign: haredi politics",
+  "status": "report",
+  "findings": [
+   "HAR-F19"
+  ],
+  "checked": "verified; the figures were corrected against the source",
+  "aliases": [],
+  "note": "Backs: Both party leaders have now made the same condition public for ANY government: no support or participation until the status of yeshiva students is regulated in a law that survives the courts. Asher: 'We do not belong to any bloc.' The two parties signed a surplus-vote agreement on 11 Oct. Corrected against the source: Deri (14 Oct): no government with Shas support or participation 'unless the status of yeshiva students is regulated' (no 'law/courts' qualifier, no timeline). Asher (12 Oct): UTJ won't ENTER a government that does not pass the law. 'Survives the High Court' is Rosenthal's (UTJ), conditioned on 'whoever commits'."
+ },
+ {
+  "id": "HAR-F13",
+  "short": "Klein 2026",
+  "citation": "David Klein (2026). The Ahi party announces an independent run for the Knesset - full details (Hebrew). Babli",
+  "url": "https://www.babli.co.il/news/achi-party-independent-run-knesset-elections",
+  "group": "The 2026 campaign: haredi politics",
+  "status": "report",
+  "findings": [
+   "HAR-F13"
+  ],
+  "checked": "verified against the source",
+  "aliases": [],
+  "note": "Backs: Ahi is the haredi-adjacent list the brief leaves out. It is the movement of the late Rabbi Yoram Abergel, a Sephardi traditional-haredi network based in Netivot, headed by Yuval Elimelech. It runs alone by decision of Rabbi Chaim (HaIDA) Abergel, targets about 170,000 votes, and draws on Shas's southern, traditional base. A haredi-sector survey puts it at 9% of haredim. National polls give it 0.1-1.1%."
+ },
+ {
+  "id": "HAR-F30",
+  "short": "Leon 2015",
+  "citation": "Nissim Leon (2015). An uneasy stability: the Haredi parties' emergency campaign for the 2013 elections. Israel Affairs 21(2): 230-244",
+  "url": "https://doi.org/10.1080/13537121.2015.1008241",
+  "group": "The 2026 campaign: haredi politics",
+  "status": "peer-reviewed",
+  "findings": [
+   "HAR-F30"
+  ],
+  "checked": "verified against the source",
+  "aliases": [],
+  "note": "Backs: Peer-reviewed work on 2013 describes the haredi parties' 'emergency campaign' to hold voters once treated as automatic. The open, assertive battle between UTJ and Shas produced 'an uneasy electoral stability' rather than defection. The same pattern fits 2026: insiders and sector surveys report anxiety and indecision, while phone-based measures of decided haredi voters are close to 2022."
+ },
+ {
+  "id": "HAR-F16",
+  "short": "Levaton et al. 2026",
+  "citation": "Stav Levaton, Ariela Karmel, Emanuel Fabian (2026). Israel's election takes shape as 38 parties submit slates, in battle between pro- and anti-Netanyahu blocs. The Times of Israel",
+  "url": "https://www.mako.co.il/news-n12_magazine/2026_q3/Article-847c6bcea0e10a1026.htm",
+  "group": "The 2026 campaign: haredi politics",
+  "status": "report",
+  "findings": [
+   "HAR-F16"
+  ],
+  "checked": "verified; the figures were corrected against the source",
+  "aliases": [],
+  "note": "Backs: Yosef's new power is real. Shas's Council of Torah Sages, led by Yosef, overruled Deri's attempt to drop MK Yoav Ben-Tzur. Shas put a reservist, Dror Amos, sixth to soften its anti-draft image. Commentators describe a shrinking traditional base: Deri's face is absent from billboards, which show only Ovadia Yosef. Corrected against the source: N12 21 Aug: Rabbi DAVID Yosef thinks Shas should not rule out working with Gadi EISENKOT if he can form a majority government (not Yitzhak Yosef / Gantz)."
+ },
+ {
+  "id": "HAR-F21",
+  "short": "Maanit & Shpigel 2026",
+  "citation": "Chen Maanit, Noa Shpigel (2026). Only 16 Haredi Draft Dodgers Arrested So Far This Year, AG Tells Top Israeli Court. Haaretz",
+  "url": "https://www.haaretz.com/israel-news/israel-politics/2026-07-01/ty-article/only-16-haredi-draft-dodgers-arrested-this-year-ag-tells-top-israeli-court/0000019f-1a37-da71-abdf-5f7f45530000",
+  "group": "The 2026 campaign: haredi politics",
+  "status": "report",
+  "findings": [
+   "HAR-F21"
+  ],
+  "checked": "verified against the source",
+  "aliases": [],
+  "note": "Backs: Arrests of haredi draft evaders are rare relative to the pool, so the campaign's anger comes from the threat, sanctions and a few arrests rather than from mass enforcement. From mid-January to mid-June 2026, 16 of 165 proactive military-police arrests were haredi, against roughly 74,000 haredi men declared draft dodgers or issued an Order 12."
+ },
+ {
+  "id": "HAR-F12",
+  "short": "Online 2026",
+  "citation": "Maariv Online (2026). Elections 2026: The Haredi Public party's list for the 26th Knesset, led by Moti Leitner (Hebrew). Maariv",
+  "url": "https://www.maariv.co.il/news/elections-2026/article-1364423",
+  "group": "The 2026 campaign: haredi politics",
+  "status": "report",
+  "findings": [
+   "HAR-F12"
+  ],
+  "checked": "verified; the figures were corrected against the source",
+  "aliases": [],
+  "note": "Backs: The Haredi Public is a modern, integrationist haredi list led by Moti Leitner, a Beit Shemesh councillor (deputy mayor per +972). It supports military service tracks, secular education and workforce integration, and has women on its slate. It began in July by demanding a UTJ slot and announced an independent run on 23 Aug. Its national polling is 0.2-0.9%, but its haredi-sample strength is mostly an online-sample effect (HAR-F25). Corrected against the source: Haredi Public online vs phone among decided haredim: 6.0% vs 2.1% in ONE phone wave (≈4 of 220 respondents; z≈2.1). Treat as suggestive; it does not establish an online-only effect."
+ },
+ {
+  "id": "HAR-F26",
+  "short": "Own measurement 2026c",
+  "citation": "Haredi desk computation from project data (polls.csv, results.csv, house_effects_lists_2026.csv, cec_party_pcts.csv) (2026). Shas and UTJ house effects (2026) and pollster-level final-poll errors (2019a-2022). Project data (Wikipedia poll archive; CEC filings; official results)",
+  "url": "data/processed/house_effects_lists_2026.csv; data/processed/polls.csv",
+  "group": "The 2026 campaign: haredi politics",
+  "status": "official data",
+  "findings": [
+   "HAR-F26"
+  ],
+  "checked": "verified against the source",
+  "aliases": [],
+  "note": "Backs: Pollsters disagree on Shas far more than on UTJ, and the record favours the high end. In 2026 house effects on Shas range from +1.87 seats (Filber) to -0.98 (Midgam Project), while UTJ polls sit at 7-8 everywhere. In the five cycles 2019a-2022, no pollster's final two-week average ever over-stated Shas: 34 of 38 pollster-cycles under-stated it and 4 were exact. UTJ's pollster-cycle errors are centred near zero. Filber is online, so mode does not explain the house spread."
+ },
+ {
+  "id": "HAR-F28",
+  "short": "Own measurement 2026d",
+  "citation": "Haredi desk computation from project record; splinter results from Wikipedia (2026). Haredi-list final-poll errors by splinter event, 2009-2022. Project data (polls.csv, results.csv) with Wikipedia election and party pages",
+  "url": "data/processed/polls.csv; data/processed/results.csv; https://en.wikipedia.org/wiki/Yachad_(political_party)",
+  "group": "The 2026 campaign: haredi politics",
+  "status": "official data",
+  "findings": [
+   "HAR-F28"
+  ],
+  "checked": "verified; the figures were corrected against the source",
+  "aliases": [],
+  "note": "Backs: Under a threshold, the record splits by what the splinter does. When a rival haredi list or boycott campaign stayed active through election day, the splinter was over-polled and its votes wasted, and the list it targeted was not under-polled (Shas 2013 -0.55, Shas 2015 +0.38, UTJ 2015 +0.50; mean +0.11). When a splinter withdrew late, the beneficiary beat its polls heavily (UTJ 2013 -1.09 after Netzah withdrew 5 days out; April 2019 UTJ -1.67 and Shas -2.67 after Yachad withdrew 13 days out and endorsed UTJ; mean -1.81). The other 10 list-cycles average -0.28. With n=3 per group this is suggestive only, but it ties the family's big misses to withdrawals, not to infighting as such. Corrected against the source: Active-splinter list-cycles +0.11 (n=3); withdrawal-beneficiary cycles -1.81 (n=3), but -1.38 (n=2, UTJ only) if Shas 2019a (Yachad endorsed UTJ) is excluded; the largest non-splin"
+ },
+ {
+  "id": "HAR-F09",
+  "short": "Segal 2026b",
+  "citation": "Amit Segal (2026). The figure that worries Netanyahu: the crisis in the haredi parties (Hebrew). N12 (mako)",
+  "url": "https://www.mako.co.il/news-israel-elections/2026/Article-db0ae0d2aac21a1027.htm",
+  "group": "The 2026 campaign: haredi politics",
+  "status": "report",
+  "findings": [
+   "HAR-F09"
+  ],
+  "checked": "verified against the source",
+  "aliases": [],
+  "note": "Backs: On 11 Oct, N12 reported that UTJ insiders treat 8 seats as 'a miracle' and would not be surprised by 6. It said the campaign was frozen by a rift between Degel's two leading rabbis, and that internal party polls show haredi willingness to vote down about 10%. Three days later both rabbis publicly called for an all-out UTJ effort: Lando said there is 'no room to stand aside' and Hirsch called a UTJ vote binding under Torah law. New campaign headquarters opened. The Degel side of the rift looks bridged; the Gur side (HAR-F05, F07) does not."
+ },
+ {
+  "id": "HAR-F15",
+  "short": "Sokol 2026",
+  "citation": "Sam Sokol (2026). Shas chief Deri and spiritual leader Yosef mend fences after reported major rift. The Times of Israel (liveblog)",
+  "url": "https://www.timesofisrael.com/liveblog_entry/shas-chief-deri-and-spiritual-leader-yosef-mend-fences-after-reported-major-rift/",
+  "group": "The 2026 campaign: haredi politics",
+  "status": "report",
+  "findings": [
+   "HAR-F15"
+  ],
+  "checked": "verified against the source",
+  "aliases": [],
+  "note": "Backs: Shas's spiritual leader, former chief rabbi Yitzhak Yosef, was reported in August to have privately told students not to vote Shas, after the bloc failed to pass the exemption law. Yosef denied it. He then reconciled with Deri on 20 Aug, gained a larger say in decisions and publicly called for a Shas vote."
+ },
+ {
+  "id": "HAR-F02",
+  "short": "Staff 2026b",
+  "citation": "ToI Staff (2026). Veteran Haredi MK Moshe Gafni to be removed as leader of UTJ's Degel HaTorah faction. The Times of Israel",
+  "url": "https://www.timesofisrael.com/veteran-haredi-mk-moshe-gafni-to-be-removed-as-leader-of-utjs-degel-hatorah-faction/",
+  "group": "The 2026 campaign: haredi politics",
+  "status": "report",
+  "findings": [
+   "HAR-F02"
+  ],
+  "checked": "verified against the source",
+  "aliases": [],
+  "note": "Backs: Degel HaTorah's rabbis removed party chair Moshe Gafni and MK Uri Maklev from the slate. Yaakov Asher replaced Gafni and heads the joint list. Reports tie the shake-up to the failed exemption law and to a dispute over relations with Netanyahu: Gafni and Maklev favoured dialogue and compromise, while Rabbi Dov Lando's camp pushed for confrontation."
+ },
+ {
+  "id": "HAR-F22",
+  "short": "Staff 2026a",
+  "citation": "ToI Staff (2026). 'Deterred' by protests, IDF said to halt proactive arrests of Haredi draft dodgers. The Times of Israel",
+  "url": "https://www.timesofisrael.com/deterred-by-protests-idf-said-to-halt-proactive-arrests-of-haredi-draft-dodgers/",
+  "group": "The 2026 campaign: haredi politics",
+  "status": "report",
+  "findings": [
+   "HAR-F22"
+  ],
+  "checked": "verified against the source",
+  "aliases": [],
+  "note": "Backs: Enforcement eased as the vote approached, but anger stayed visible. Kan reported that proactive arrests stopped in August, which the IDF denies. The High Court unanimously struck down the coalition's arrest-ban law in early September. Election day is arrest-free by agreement. Two arrests in early October set off Peleg protests that blocked Highway 4 and surrounded a Shas campaign event in Modiin Illit."
+ },
+ {
+  "id": "HAR-F08",
+  "short": "Staff et al. 2026",
+  "citation": "ToI Staff, Nava Freiberg, Ariela Karmel (2026). Netanyahu said worried Gur Hasidim won't vote as allies push small parties to drop out. The Times of Israel",
+  "url": "https://www.timesofisrael.com/netanyahu-said-worried-gur-hasidim-wont-vote-as-allies-push-small-parties-to-drop-out",
+  "group": "The 2026 campaign: haredi politics",
+  "status": "report",
+  "findings": [
+   "HAR-F08"
+  ],
+  "checked": "verified against the source",
+  "aliases": [],
+  "note": "Backs: Channel 12 reported that Netanyahu fears Gur will not vote, staying home or casting protest votes for sub-threshold lists. Likud and Religious Zionism are pressing The Haredi Public to withdraw, because it could siphon votes from Shas and UTJ. The Haredi Public refused."
+ },
+ {
+  "id": "HAR-F07",
+  "short": "Stein 2026",
+  "citation": "Shalom Stein (2026). First publication: Gur will not take part in the joint election headquarters (Hebrew). Emes (emess.co.il)",
+  "url": "https://www.emess.co.il/radio/1945065",
+  "group": "The 2026 campaign: haredi politics",
+  "status": "report",
+  "findings": [
+   "HAR-F07"
+  ],
+  "checked": "verified against the source",
+  "aliases": [],
+  "note": "Backs: The Gur rupture moved to the field on 15 Oct. Gur refused to take part in the joint Agudah election headquarters agreed that morning. Shlomei Emunim and Belz then set up their own headquarters without Gur and Vizhnitz. No instruction not to vote UTJ was given. Separately, i24 reports Gur's fallback: if no call to vote UTJ goes out, a 'quiet instruction' to vote Code Black."
+ },
+ {
+  "id": "HAR-F14",
+  "short": "Wikipedia 2026a",
+  "citation": "Hebrew Wikipedia contributors (2026). The elections to the Twenty-Sixth Knesset (Hebrew). Wikipedia (he)",
+  "url": "https://he.wikipedia.org/wiki/%D7%94%D7%91%D7%97%D7%99%D7%A8%D7%95%D7%AA_%D7%9C%D7%9B%D7%A0%D7%A1%D7%AA_%D7%94%D7%A2%D7%A9%D7%A8%D7%99%D7%9D_%D7%95%D7%A9%D7%A9",
+  "group": "The 2026 campaign: haredi politics",
+  "status": "reference work",
+  "findings": [
+   "HAR-F14"
+  ],
+  "checked": "verified against the source",
+  "aliases": [],
+  "note": "Backs: Tzomet Beit Yisrael is not a haredi list. It merges the old secular-right Tzomet party (Moshe Green) with Beit Yisrael, the party of former Likud MK Gadi Yevarkan, under the label 'the Third Camp on the Right'. The model correctly keeps it out of the haredi family."
+ },
+ {
+  "id": "HAR-F27",
+  "short": "Wikipedia 2026c",
+  "citation": "Wikipedia contributors (2026). 1988 Israeli legislative election (results table). Wikipedia",
+  "url": "https://www.csmonitor.com/1990/0503/alub.html",
+  "group": "The 2026 campaign: haredi politics",
+  "status": "reference work",
+  "findings": [
+   "HAR-F27"
+  ],
+  "checked": "verified; the figures were corrected against the source",
+  "aliases": [],
+  "note": "Backs: Before the electoral threshold rose, haredi splits added seats rather than wasting them. In 1988, Rabbi Shach's Degel HaTorah split from Agudat Yisrael and he also backed Shas. Agudah rose from 2 seats to 5, Degel entered with 2 and Shas rose from 4 to 6: the haredi total went from 6 to 13 seats under a 1% threshold. Corrected against the source: 1988 haredi seats 13 (Shas 6, Agudah 5, Degel 2) vs 6-7 in 1984 (Agudah 2, Shas 4, plus Morasha's PAI seat); Agudah's +3 is credited to the Lubavitcher Rebbe's late endorsement, not to the split."
+ },
+ {
+  "id": "HAR-F29",
+  "short": "Wootliff 2019",
+  "citation": "Raoul Wootliff (2019). Ultra-Orthodox factions reunite in 'equal' United Torah Judaism. The Times of Israel",
+  "url": "https://www.timesofisrael.com/ultra-orthodox-factions-reunite-in-equal-united-torah-judaism/",
+  "group": "The 2026 campaign: haredi politics",
+  "status": "report",
+  "findings": [
+   "HAR-F29"
+  ],
+  "checked": "verified against the source",
+  "aliases": [],
+  "note": "Backs: The last big UTJ feud before 2026 ended in UTJ's best result. In the October 2018 local elections Degel and Agudah ran against each other, often acrimoniously, and Degel won almost twice as many council seats. The factions formally split in January 2019 (a 'procedural' move for separate funding), then reunited within a week on an equal 50/50 slate. In April 2019 UTJ won 8 seats, 1.67 above its final polls."
+ },
+ {
+  "id": "HAR-F11",
+  "short": "contributors 2026",
+  "citation": "Hamichlol contributors (2026). Bnei Torah (party) (Hebrew). Hamichlol (Hebrew encyclopaedia)",
+  "url": "https://www.hamichlol.org.il/%D7%91%D7%A0%D7%99_%D7%AA%D7%95%D7%A8%D7%94_(%D7%9E%D7%A4%D7%9C%D7%92%D7%94)",
+  "group": "The 2026 campaign: haredi politics",
+  "status": "reference work",
+  "findings": [
+   "HAR-F11"
+  ],
+  "checked": "verified against the source",
+  "aliases": [],
+  "note": "Backs: The Jerusalem Faction's national electoral record is withdrawal, boycott or abstention. Its 2013 list (Netzah) withdrew five days before the vote after a Gur-Auerbach deal. In 2015 it campaigned against voting UTJ. In 2019 its rabbis announced it would not take part. Its municipal vote is the best measure of its size: 14,000-22,000 votes, about 0.3-0.45% of a national electorate."
+ },
+ {
+  "id": "HAR-F05",
+  "short": "staff 2026a",
+  "citation": "Israel National News (Arutz Sheva) staff (2026). Ger hasidim threaten election boycott to block rival candidate. Israel National News",
+  "url": "https://www.israelnationalnews.com/news/434644",
+  "group": "The 2026 campaign: haredi politics",
+  "status": "report",
+  "findings": [
+   "HAR-F05"
+  ],
+  "checked": "verified against the source",
+  "aliases": [],
+  "note": "Backs: Twelve days before the vote, Gur, UTJ's largest Hasidic bloc, is withholding its campaign. Activists were told not to engage in any election activity, and the Rebbe has made no public call to vote. The stated aim is to keep Belz's Elyakim Stark (slot 6) out of the Knesset. Belz dismisses the threat, and the prevailing expectation is a compromise followed by a Gur vote for UTJ."
+ },
+ {
+  "id": "HAR-F10",
+  "short": "staff 2026b",
+  "citation": "JDN editorial staff (2026). 'Code Black' reveals the top of its list: not politicians, emissaries of the Torah world (Hebrew). JDN",
+  "url": "https://www.jdn.co.il/news/2748998/",
+  "group": "The 2026 campaign: haredi politics",
+  "status": "report",
+  "findings": [
+   "HAR-F10"
+  ],
+  "checked": "verified; the figures were corrected against the source",
+  "aliases": [],
+  "note": "Backs: Code Black – Shield of the Torah World is a single-issue anti-draft list headed by kollel heads, including men labelled deserters. Hebrew Wikipedia identifies it with the Jerusalem Faction. Its stated purpose is to turn protest against UTJ into votes. It says it will back no government without a full arrangement for the whole yeshiva world, and it attacks the established parties over a '50% law'. No rabbinic body has endorsed it. Its polling is negligible outside one pollster. Corrected against the source: Named list (JDN 16 Oct): Baumrind, Rabin HaKohen, Yehonatan Yissachar, Miller (founder); no Dagani. Itemised by Kantar 0.5-0.7% (4 filings) and Maagar Mochot 0.2% (4151, 15 Sep)."
  },
  {
   "id": "DL-15",
