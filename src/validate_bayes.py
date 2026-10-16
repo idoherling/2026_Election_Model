@@ -368,7 +368,45 @@ def harness_frame(polls: pd.DataFrame, cycle: str, eday: pd.Timestamp,
 
 
 def harness_prepare(cyc: pd.DataFrame, asof: pd.Timestamp) -> dict:
-    return prepare_data(cyc, asof, modern_remaps=False, drop_absorbed=not FIDELITY)
+    data = prepare_data(cyc, asof, modern_remaps=False, drop_absorbed=not FIDELITY)
+    cycles = sorted(set(cyc["cycle"].astype(str)))
+    if len(cycles) != 1:
+        raise ValueError(f"a harness window holds one cycle, got {cycles}")
+    data["cycle"] = cycles[0]   # the graded cycle: its leave-one-out scorecard
+    return data
+
+
+# ---------------------------------------------------------------------------
+# Leave-one-cycle-out pollster scorecard (2026-10-16, dossier s.50).
+# fit() gives each firm a precision prior lam ~ LogNormal(log 1/q^2, 0.20)
+# with q from the results-graded scorecard of final-poll errors. The full
+# scorecard grades all eight cycles 2009-2022, so a harness refit of cycle c
+# had c's own final-poll errors in its prior. Harness fits now use the
+# scorecard rebuilt without c (polling_average.quality_map(exclude_cycle)).
+# Production 2026 keeps the full scorecard (all eight cycles are its past).
+#   HARNESS_SCORECARD=loo   (default) harness fits and caches are LOO
+#   HARNESS_SCORECARD=full  the pre-s.50 prior, to grade the legacy caches
+# Each posterior load_or_fit writes carries its scorecard ("loo:<cycle>" or
+# "full") and check_signature refuses a cache fitted under the other one;
+# caches written before s.50 carry none and are "full".
+# ---------------------------------------------------------------------------
+SCORECARD = _os.environ.get("HARNESS_SCORECARD", "loo")
+if SCORECARD not in ("loo", "full"):
+    raise SystemExit(f"HARNESS_SCORECARD={SCORECARD!r}: 'loo' or 'full'")
+
+
+def scorecard_exclude(data: dict) -> str | None:
+    """The cycle left out of the lam-prior scorecard for this window's fit."""
+    if SCORECARD == "full":
+        return None
+    if "cycle" not in data:
+        raise KeyError("harness data carry no 'cycle' (build them with harness_prepare)")
+    return data["cycle"]
+
+
+def scorecard_tag(data: dict) -> str:
+    ex = scorecard_exclude(data)
+    return "full" if ex is None else f"loo:{ex}"
 
 
 def posterior_latent(post) -> str:
@@ -382,11 +420,18 @@ def check_signature(idata, data: dict, nc, latent: str | None = None) -> None:
     written by load_or_fit carry the component list, observation count and
     latent in attrs; legacy caches are checked on the latent's dimension
     (ALR: B-1 columns of "z"; CLR: B columns of "zc"). latent: the latent
-    the caller expects (None = either)."""
+    the caller expects (None = either). The lam-prior scorecard must be the
+    run's (HARNESS_SCORECARD; a cache without the attr predates s.50 and was
+    fitted on the full scorecard)."""
     post = idata.posterior
     lat = posterior_latent(post)
     B = len(data["components"])
     at = dict(post.attrs)
+    want = scorecard_tag(data)
+    if at.get("scorecard", "full") != want:
+        raise RuntimeError(f"cache {nc}: lam prior fitted on scorecard "
+                           f"{at.get('scorecard', 'full (pre-s.50 cache)')}, this run "
+                           f"grades with {want} (HARNESS_SCORECARD / HARNESS_CACHE_DIR)")
     if "components" in at:
         if at["components"] != "|".join(data["components"]) or int(at["n_obs"]) != len(data["y"]):
             raise RuntimeError(f"stale cache {nc}: cached {at['components']} n_obs {at['n_obs']} "
@@ -403,9 +448,12 @@ def check_signature(idata, data: dict, nc, latent: str | None = None) -> None:
 
 def load_or_fit(nc, data: dict, draws: int, tune: int):
     """Cached posterior with a signature check (components, observation count,
-    latent); a missing one is fitted with the current latent and written
-    with its signature (never a non-shared latent into the shared cache)."""
+    latent, lam-prior scorecard); a missing one is fitted with the current
+    latent and the run's scorecard (leave-one-cycle-out by default, s.50)
+    and written with its signature (never a non-shared latent into the
+    shared cache)."""
     import arviz as az
+    import json
     nc = _Path(nc)
     if nc.exists():
         idata = az.from_netcdf(nc)
@@ -415,10 +463,17 @@ def load_or_fit(nc, data: dict, draws: int, tune: int):
             nc.parent.resolve() == SHARED_CACHE.resolve():
         raise SystemExit(f"a {current_latent()} refit may not write {nc.name} into the "
                          f"shared {SHARED_CACHE_LATENT} cache")
-    _, idata = fit(data, draws=draws, tune=tune)
+    excl = scorecard_exclude(data)
+    _, idata = fit(data, draws=draws, tune=tune, scorecard_exclude=excl)
+    q = bm.lam_prior_q(data["firms"], exclude_cycle=excl)
     idata.posterior.attrs.update({"components": "|".join(data["components"]),
                                   "n_obs": int(len(data["y"])),
-                                  "latent": current_latent()})
+                                  "latent": current_latent(),
+                                  "scorecard": scorecard_tag(data),
+                                  "nuts_seed": int(bm.SEED),   # FIT_SEED reseeds
+                                  # the q behind each firm's lam prior (audit)
+                                  "lam_prior_q": json.dumps(
+                                      {f: round(float(v), 3) for f, v in zip(data["firms"], q)})})
     nc.parent.mkdir(parents=True, exist_ok=True)
     az.to_netcdf(idata, nc)
     return idata

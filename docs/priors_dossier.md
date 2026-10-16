@@ -2827,6 +2827,46 @@ tail: at seed +0, A alone -2.3 pts, the width alone -3.5, together -6.4
   the eve seed sd of some paired differences (.08-.14), so A's and
   CBfix's D-7 failures are near noise.
 
+### 48.6 Re-grade on the leak-free harness, and the decision (16 Oct)
+
+The CA recommendation above was graded on the shared cache whose firm
+precision priors included each graded cycle's own final polls (the s.50
+leak), and on the 15 Oct configuration (old surplus pairs, haredi e1). A
+leak can make past averages look sharper than they were, which pushes a
+width chosen on the record towards narrow, so before shipping CA it was
+re-graded under the same pre-registered rule on the s.50 leave-one-out
+scorecard caches and the shipped 16 Oct configuration (registered pairs,
+hared_e0). Arms base / A / Bfix and their nested-width versions; eve on
+offsets 0/100/200, D-7 and D-21 on offset 0; runs in scratch (w48loo,
+w48loo_bfix).
+
+| arm | eve IS | eve CE | D-7 IS | D-21 IS | nested width (all 8) |
+|---|---|---|---|---|---|
+| base (0.9) | 9.217 | .081 | 9.254 | 9.704 | - |
+| A (0.9) | 9.142 | .081 | 9.446 (+.192) | 9.656 | - |
+| CA | 8.858 | .051 | 9.428 (+.174) | 9.940 (+.236) | 0.6 (was 0.4) |
+| Bfix (0.9) | 9.011 | .072 | 9.397 (+.143) | 9.555 | - |
+| CBfix | 8.766 | .051 | 9.271 (+.017) | 9.790 (+.086) | 0.5 |
+| C0 | 8.851 | .051 | 9.338 (+.084) | 9.779 (+.075) | 0.4 |
+
+- **No arm passes.** CA's nested width moves from 0.4 to 0.6, its eve gain
+  shrinks from 1.22 to 0.36, and it loses at D-7 and D-21 beyond the .05
+  tolerance. Bfix fails at D-7; CBfix fails at D-21 by .036 beyond the
+  tolerance, on one seed.
+- **Decision: nothing ships from s.48.** The shipped stack stays
+  (RESID_SCALE 0.9, T_UNIT_VAR off, the seat-space residual line as
+  decompose() fits it). Every s.48 flag stays in the code, OFF. The
+  headline is unchanged.
+- What stands: the 90% intervals cover about 98% of list results at eve
+  and 99% at D-7/D-21 on the leak-free harness, so they are wider than
+  their label; decompose()'s index collision is a real defect, and the
+  shipped width 0.9 was tuned on the collided line, so the shipped total
+  residual is an empirical calibration of that line, not of a correct
+  one. Both are stated on the site as limitations.
+- Next candidate (not registered yet): CBfix with the horizon gate scored
+  on three seeds, since the .05 tolerance at one seed is below the paired
+  seed noise (.08-.14) the s.48 grade measured.
+
 ## 49. Formation calibration (15-16 Oct, D-12)
 
 This section does four things:
@@ -3229,6 +3269,225 @@ The site session has already handled the largest-list "7 of 10" and the
 - **Two gates remain unchecked against the record:** the pledge-break gate
   (`centre_defects`) and the unity depth beta.
 
+## 50. Leave-one-out pollster scorecards in the harness (15-16 Oct, D-11)
+
+**The defect.** `fit()` gives each firm a precision prior
+lam ~ LogNormal(log 1/q^2, 0.20). q comes from `polling_average.quality_map()`,
+which reads backtest_pollsters.csv: each firm's mean total absolute seat
+error of its final polls over ALL eight graded cycles, 2009-2022
+(backtest.py). Every harness refit of cycle c (validate_bayes at the eve,
+validate_horizon at D-h, build_harness_cache) therefore had c's own
+final-poll errors in its prior, a look into the outcome being graded. The
+purest cases are firms graded in one cycle only: Miskar and TNS entered the
+2019a fits, and Sarid the 2013 fits, with priors built entirely from their
+own final poll against that cycle's result. Production 2026 is not
+affected, because all eight cycles are in its past.
+
+**The fix.** It touches the harness only; production is bit-identical.
+- backtest.py also writes data/processed/backtest_pollster_cycles.csv.
+  It has one row per (cycle, pollster, final poll) with the total absolute
+  seat error, which is the scorecard's input. `backtest.scorecard(by_poll,
+  exclude_cycle)` builds the scorecard. backtest_pollsters.csv,
+  backtest_blocks.csv and backtest_summary.csv are unchanged.
+- `polling_average.quality_map(exclude_cycle=c)` rebuilds the scorecard
+  without c. It then applies the same transform (`quality_from_scorecard`:
+  median ratio, sqrt, n/(n+3) shrinkage, clip 0.7-1.3). A firm graded only
+  in c leaves the scorecard and gets the neutral 1.0.
+  `quality_map()` with no argument is the old function. Rebuilt from the
+  per-cycle file with no exclusion, it reproduces all 17 firms' q exactly.
+- `bayes_model.lam_prior_q(firms, exclude_cycle)` and
+  `fit(..., scorecard_exclude=None)`. Production passes nothing.
+- validate_bayes:
+  - `harness_prepare` records the window's cycle, and `load_or_fit` fits
+    with that cycle left out of the scorecard.
+  - `HARNESS_SCORECARD` takes `loo` (the default) or `full` (the pre-s.50
+    prior, for grading legacy caches).
+  - Every posterior written carries the attrs `scorecard` ("loo:<cycle>"
+    or "full"), `lam_prior_q` (JSON, per firm) and `nuts_seed`.
+  - `check_signature` refuses a cache fitted under the other scorecard. A
+    cache without the attr predates s.50 and counts as "full". The check
+    also covers the refit arms (alt_posterior) and validate_threshold.
+- build_harness_cache logs each job's scorecard, fit time, divergences,
+  max r-hat and min ESS.
+
+**How far the prior moved.** In the full scorecard q spans 0.91-1.12.
+Taking the cycle out moves it as follows:
+
+| | 2009 | 2013 | 2015 | 2019a | 2019s | 2020 | 2021 | 2022 |
+|---|---|---|---|---|---|---|---|---|
+| max abs(q_loo - q_full) | .028 | .041 | .010 | .112 | .033 | .045 | .034 | .025 |
+| firms leaving | - | Sarid | - | Miskar, TNS | - | - | - | - |
+
+2019a moves most: Direct Polls 1.025 -> 1.112, Midgam Project 1.000 ->
+1.112, Kantar 1.123 -> 1.077, and Miskar .914 and TNS .930 -> 1.0. The
+prior median of lam is 1/q^2, so it moves by at most about 2 dq (under 9%
+outside 2019a), against a prior sd of 20% on the log scale. The fitted
+posteriors moved even less. Posterior lam medians moved by at most 16%
+(2019a) and at most 8% elsewhere. Endpoint mean shares moved by at most 0.1
+seat in every window except 2019a D-56 (below).
+
+**The cache.** The new cache is data/processed/harness_cache_loo in the
+worktree that built it. It holds 32 windows: eve at 600/600; D-7, D-21 and
+D-56 at 400/400. Settings: BAYES_CLR=1, HARNESS_FIDELITY=1,
+HARNESS_SCORECARD=loo, NUTS seed 20261027.
+- **Build.** It ran 15 Oct 17:42-19:14 on 4 queues: 5,499 s wall for
+  21,758 s of fits (92-3,140 s each). Other sessions held the machine at
+  load 40-70.
+- **Still valid on the current main.** Main then moved twice: first to
+  806c6f4 plus the seat-law patch, then to the s.48 calibration flags and
+  hared_e0. Every window's fit inputs are still identical: y, blocks,
+  weeks, firms, n_resp, noise multipliers, components, and the LOO q.
+  fit() is unchanged, so no refit was needed. The past-cycle rows of
+  polls.csv are identical in 804ff2d, 806c6f4 and the working copy.
+- **Diagnostics.**
+  - The 32 cached fits have 0 divergences, and endpoint-share r-hat is at
+    most 1.01 in 31 of them.
+  - 2021 D-56 had 9 divergences at the default seed. Its one reseed
+    (FIT_SEED 20261028) has 0 divergences and endpoint r-hat 1.01, and is
+    the cached fit.
+  - 2019a D-56's endpoint shares do not mix: r-hat 1.42, and 1.53 for the
+    reseed, which was rejected. D-56 is reported with and without that
+    fold.
+  - The shipped cache, for comparison, has 1 divergence (2020 D-7) and
+    endpoint r-hat at most 1.02 everywhere.
+  - sigma_g and sigma_f r-hat is above 1.05 in nearly every window of
+    both caches: sigma_g in 32 of 32 in both, sigma_f in 23 (LOO) and 22
+    (shipped). This is the known harness-draw mixing of the house-effect
+    scales (s.46), which the projection does not read.
+
+**Reproduction.** No baseline has been published yet for the current code
+(registered pairs, plus hared_e0 since 16 Oct). The leaky column below is
+therefore that code run on the shipped caches with HARNESS_SCORECARD=full.
+Two earlier code states were checked against their published baselines:
+- At the first rebase (registered pairs, haredi e1), the same full-scorecard
+  runs reproduced s.47 exactly at eve, D-7 and D-21. The one rounding
+  difference: the D-7 median is 1.5175, which s.47 prints as 1.518.
+- The 804ff2d-based code with PAST_PAIRS reproduced s.46 and its width
+  grid exactly.
+
+**Restated baseline on the LOO scorecard.** Current code: registered pairs
+and hared_e0, 3 seeds (0/100/200), each run's own mask. Each cell is
+median / mean / coverage / Brier / interval.
+
+| horizon | leaky (shipped caches) | LOO scorecard | LOO - leaky |
+|---|---|---|---|
+| eve | 1.457/1.625/.981/.0472/9.205 | 1.493/1.629/.981/.0475/9.217 | +.036/+.004/0/+.0003/+.012 |
+| D-7 | 1.500/1.649/.990/.0489/9.458 | 1.487/1.648/.990/.0490/9.360 | -.014/-.001/0/+.0001/-.098 |
+| D-21 | 1.608/1.789/.987/.0540/9.739 | 1.621/1.794/.990/.0541/9.690 | +.013/+.005/+.003/+.0001/-.049 |
+| D-56 | 2.368/2.442/.922/.0882/14.684 | 2.381/2.454/.922/.0910/14.697 | +.012/+.012/0/+.0028/+.013 |
+| D-56 without 2019a | 2.152/2.197/.932/.0634/11.805 | 2.156/2.193/.932/.0635/11.816 | +.004/-.004/0/+.0001/+.011 |
+
+Median-MAE delta by fold (LOO - leaky, 3 seeds):
+
+| | 2009 | 2013 | 2015 | 2019a | 2019s | 2020 | 2021 | 2022 |
+|---|---|---|---|---|---|---|---|---|
+| eve | +.061 | +.028 | +.106 | +.095 | 0 | 0 | 0 | 0 |
+| D-7 | 0 | 0 | 0 | 0 | -.067 | -.019 | 0 | -.026 |
+| D-21 | +.030 | +.056 | -.030 | 0 | +.061 | -.037 | 0 | +.026 |
+| D-56 | +.033 | 0 | 0 | +.071 | -.024 | 0 | +.019 | 0 |
+
+- **Seed deltas of the median:**
+  - Eve: +.011/+.051/+.046.
+  - D-7: -.019/-.024/+.002.
+  - D-21: +.033/+.031/-.025.
+  - D-56: +.012/+.003/+.023.
+- **Folds.** Under |d| < 0.1 every fold ties at every horizon except eve
+  2015 (+.106).
+- **Other moves:**
+  - Eve: Brier 2019a +.0012.
+  - D-7: interval 2013 -.53 and 2009 -.12.
+  - D-21: interval 2021 -.43 and 2020 +.11.
+  - D-56: 2019a Brier +.021 and mean +.12, both from the non-mixing fit.
+- **Bloc-majority Brier** (seed-independent main rows): .0432 -> .0441.
+- **The same caches under the first rebase's projection** (registered
+  pairs, haredi e1):
+  - Eve: -.005/+.003/0/+.0002/+.089.
+  - D-7: -.014/-.001/0/+.0001/-.037.
+  - D-21: +.025/+.005/+.003/+.0001/-.045.
+  - D-56: +.019/+.013/0/+.0028/-.065.
+  - Eve folds there: 2009 -.015, 2015 -.015, 2019a -.024.
+
+**Refit-noise check.** The leaky 2009 and 2015 eve fits were refitted with
+NUTS seed 20261028, keeping the full scorecard, and graded the same way.
+- Against the shipped fits: median 0 / 0, mean +.009 / +.002, interval
+  0 / +.064.
+- List means in the seed-independent main rows move by at most .05 / .06
+  seat under the reseed, and by at most .08 / .05 under the LOO scorecard.
+  No list's median moves under either.
+- The LOO fits therefore move the projection by about as much as a
+  different NUTS seed does. In 2015 the q values moved by at most .01, so
+  that window has no leak to remove.
+
+**How much of the harness's accuracy came from the leak: none that the
+harness can resolve.**
+- **Metrics that agree across projection configurations and seeds** give
+  an upper bound for what the leak bought. They are:
+  - mean MAE: +.004 at the eve, -.001 at D-7, +.005 at D-21;
+  - Brier: +.0001 to +.0003 at the eve to D-21;
+  - coverage: equal, or up .003.
+- **The median MAE changes sign.** It is integer-valued per list, so it
+  moves by whole-list flips: +.036 at the eve here against -.005 under the
+  e1 projection, on the same two caches. Its eve rise comes from 2015,
+  2019a and 2009. 2015 is a fold whose prior did not move (q within .01).
+  Neither rise is a leak effect.
+- **2019a, the fold with the purest leak**, has two firms graded on it
+  alone and the largest q shifts. Its list means move by at most .07 seat,
+  the same size as the 2015 reseed.
+- **D-56.** The +.0028 Brier comes entirely from 2019a, whose LOO fit
+  does not mix. Without that fold: +.004/-.004/0/+.0001/+.011.
+- **The reason is the prior's shape.** The sqrt, the shrinkage and the clip
+  keep q within 0.91-1.16, against a lam prior sd of 0.20. The window's
+  own 11-139 polls then decide lam.
+
+**Width grid** (LOO, current code; it does not depend on the seed):
+
+| width | coverage | MAE | Brier | interval |
+|---|---|---|---|---|
+| 0.6 | .960 | 1.610 | .042 | 8.724 |
+| 0.7 | .972 | 1.615 | .044 | 8.813 |
+| 0.8 | .981 | 1.621 | .045 | 8.964 |
+| 0.9 (shipped) | .981 | 1.623 | .047 | 9.077 |
+| 1.0 | .981 | 1.627 | .049 | 9.437 |
+| 1.1 | .990 | 1.632 | .050 | 9.827 |
+
+- **Leaky grid**, same code: interval 8.785 at 0.6 and 9.100 at 0.9.
+- **width_nested_loo** (the held-out effect of the nested pick against
+  0.9):
+  - LOO cache: interval -.200, coverage -.020, MAE -.012, Brier -.0047;
+    folds 5W/3L. Every fold picks 0.6 except 2020, which picks 0.7.
+  - Leaky cache: -.315 / -.020 / -.014 / -.0047; 5W/3L; every fold picks
+    0.6.
+- **The finding stands.** Intervals are wider than they need to be, as
+  s.46 and s.48 found. This grid does not reach s.48's 0.4, and
+  RESID_SCALE is not changed here.
+
+**Owner steps.**
+1. Move harness_cache_loo into data/processed/harness_cache, or point
+   HARNESS_CACHE_DIR at it. Until then, a default harness run
+   (HARNESS_SCORECARD=loo) stops on the scorecard check against the shared
+   pre-s.50 cache. Use HARNESS_SCORECARD=full to grade the legacy caches.
+2. Commit data/processed/backtest_pollster_cycles.csv. quality_map(c) needs
+   it, and `python src/backtest.py` regenerates it.
+3. Re-run validate_bayes (seed 0, into data/processed), so the committed
+   model_validation_*.csv and the site's track record come from the LOO
+   harness. The LOO column above is the new yardstick.
+4. The refit-arm caches (alr_latent, clr_latent) predate s.50. They are
+   skipped as stale by default; grade them with HARNESS_SCORECARD=full or
+   refit them LOO.
+
+**Not done.**
+- **The simple pipeline is still leaky.** validate_model.py builds its
+  averages through `polling_average.poll_weights`, which uses the full
+  scorecard. The simple-vs-Bayes head-to-head therefore still has a leaky
+  comparator. poll_weights needs the same `exclude_cycle`.
+- **LAM_PRIOR_SIGMA.** It was tightened from 0.25 to 0.20 (s.23) on a
+  harness whose prior contained each graded cycle, and was not re-graded
+  here. At the effect sizes above a re-grade is unlikely to move it.
+- **The straddler record.** model_validation_threshold.csv (behind
+  new_straddler_params) was built from pre-s.50 posteriors and was not
+  re-measured.
+- **2019a D-56.** Its LOO posterior is not converged at harness draws.
+
 ## 51. Sector family terms (15 Oct, D-12)
 
 Two accuracy candidates for the sector family shocks, graded on the
@@ -3493,3 +3752,59 @@ Both flags remain OFF in this patch.
 - arab_raam_split stays OFF. The two follow-up candidates (each list's own
   shrunk LOO record for the haredi family; a partial Ra'am allocation) are
   not registered yet.
+
+## 52. Formation outputs: who leads, who sits, what each seat is worth (16 Oct, D-11)
+
+Owner request (16 Oct): improve the formation outcome and next-PM outputs
+by adding options where that makes them more accurate or more informative.
+Nothing here changes a probability the tree already produced; every new
+number is a different cut of the same simulations (8,000 Knessets x 200
+parameter vectors).
+
+- **Outcome split.** The owner's "Netanyahu + unaligned / defector
+  coalition" is now reported as two outcomes: closed by kingmakers / Amcha
+  (code 1) and closed by a change-bloc list breaking its pledge (code 9,
+  the 2020 Gantz path). The gate order is unchanged; the defector gate now
+  writes 9 and the unaligned gate still overrides it. The site keeps the
+  owner's label as the parent row. 16 Oct numbers: 0.5% and 21.3% (sum
+  21.8%, as before). So nearly all of the "Netanyahu + others" path is a
+  pledge-break, not the kingmakers: in most deadlocks the unaligned lists
+  are below the threshold.
+- **Formation harness.** validate_formation.py now codes 2020 as 9 (1996
+  and 2015 stay 1, closed by kingmakers). The finer partition can only
+  lower the realized-class probability: 2015 0.458 -> 0.399 and 1996
+  0.669 -> 0.613 under the production tree; 2020 unchanged (0.164). Mean
+  log score over the informative cycles moves accordingly; the s.49
+  verdicts do not change.
+- **Who leads** (government_groups.csv): Netanyahu-led (0, 1, 9),
+  change-led (2, 3, 4, 5, 8), unity (6), repeat (7), with 90% intervals
+  over the parameter vectors; and "Netanyahu still prime minister when
+  the formation round ends" = Netanyahu-led + repeat, since the outgoing
+  government continues until a new one is constituted (Basic Law: The
+  Government s.30, finding COA-F26, verified by the coordinating session
+  against the WIPO Lex English text). 16 Oct: 33.5 / 27.4 / 14.0 / 25.1;
+  in office 58.6.
+- **What each seat is worth** (government_by_nb.csv): the outcome group
+  by the Netanyahu bloc's seats as the headline counts them (NB_CORE +
+  Amcha + The Haredi Public), clipped to 44 / 68. Netanyahu-led rises
+  from 21% at 51 seats to 46% at 60 and 91% at 61; at 61+ it is not 100%
+  because the headline bloc counts Amcha, whose joining is a drawn gate.
+- **Who sits** (government_membership.csv): membership implied by the
+  gate that formed the government, with no new behavioural assumption:
+  the bloc's own lists (+ Amcha if right-aligned, + kingmakers that sided
+  right) in 0/1/9; the change lists (+ centre-sided kingmakers; the
+  Reservists only with no haredi or Arab partner; Amcha in 2/3/4/6) in
+  2-8; Yisrael Beytenu out of 4 unless Liberman's haredi veto is waived and
+  out of 5 unless his minority veto is; Shas / UTJ in 4 only where their
+  gate fired; Likud in 6; Ra'am in 8; the Joint List and Ra'am as outside
+  support in 5. The outcome-9 pledge-breaker is NOT named: the record
+  says one happens (COA-F02), not which list. A first version that named
+  the smallest list closing the gap (size principle) put The Democrats in
+  most pledge-break governments and, once restricted to lists whose
+  leaders sat with Netanyahu, still handed one party most of a 21% event;
+  both were dropped. The path is reported as its own row.
+- **PM names.** The allocation's last column is reported as "a Likud
+  successor (unity government)" in outcome 6 and "another leader"
+  elsewhere, instead of one "rotation / Likud successor" bucket.
+- **Timetable.** The site states the statutory calendar (COA-F13) and the
+  record's formation times (COA-F11); no timing model is fitted.

@@ -35,6 +35,15 @@ DESKS = {  # file stem -> registry group
     "forecast_evaluation": "Forecast evaluation and computation",
 }
 OK = {"verified", "corrected"}
+# Corrected findings whose verifier fixed the wording rather than the numbers
+# (corrected_quant empty): the claim as the verifier restated it.
+CLAIM_OVERRIDE = {
+    "COA-F01": ("Martin & Stevenson's conditional logit over every potential cabinet estimates large "
+                "effects for a pre-electoral pact (+2.72) and a public refusal to govern together "
+                "(-4.10), alongside incumbency (+1.89) and being the largest party (+1.40) "
+                "(Table 1, M&S Model 7 as reprinted by Glasgow, Golder & Golder 2012). The paper "
+                "reports the coefficients; it does not rank the predictors."),
+}
 
 
 def _norm(s: str) -> str:
@@ -151,10 +160,14 @@ def main() -> None:
                     "checked": [],
                 }
             e["findings"].append(f["id"])
-            e["backs"].append(f.get("claim", ""))
+            claim = CLAIM_OVERRIDE.get(f["id"], f.get("claim", ""))
+            cq = (v.get("corrected_quant") or "").strip()
+            if v.get("status") == "corrected" and cq and f["id"] not in CLAIM_OVERRIDE:
+                claim = f"{claim} Corrected against the source: {cq}"
+            e["backs"].append(claim)
             e["checked"].append(v.get("status"))
             findings[f["id"]] = {
-                "claim": f.get("claim", ""),
+                "claim": CLAIM_OVERRIDE.get(f["id"], f.get("claim", "")),
                 "quant": v.get("corrected_quant") or f.get("quant", ""),
                 "source": k, "status": v.get("status"), "model_link": f.get("model_link", ""),
             }
@@ -177,7 +190,7 @@ def main() -> None:
         e["checked"] = {"verified": "verified against the source",
                         "corrected": "verified; the figures were corrected against the source",
                         "documented": "documented in the decision log"}.get(st, st)
-        e["note"] = "Backs: " + " | ".join(sorted(set(b for b in e["backs"] if b)))[:600]
+        e["note"] = "Backs: " + " | ".join(sorted(set(b for b in e["backs"] if b)))[:900]
         for f in e["findings"]:
             if f in findings:
                 findings[f]["source"] = e["id"]

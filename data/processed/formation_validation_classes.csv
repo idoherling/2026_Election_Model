@@ -1,6 +1,6 @@
 cycle,tree,class,probability,realized,weight
 1977,production,Netanyahu rightist coalition,1.0,1,0.0
-1977,production,Netanyahu + unaligned / defector coalition,0.0,0,0.0
+1977,production,Netanyahu + unaligned / Amcha,0.0,0,0.0
 1977,production,Change coalition (without Ra'am),0.0,0,0.0
 1977,production,Change coalition with unaligned / Amcha,0.0,0,0.0
 1977,production,Change coalition with a haredi party,0.0,0,0.0
@@ -8,8 +8,9 @@ cycle,tree,class,probability,realized,weight
 1977,production,Unity government (Likud without Netanyahu),0.0,0,0.0
 1977,production,Repeat election,0.0,0,0.0
 1977,production,Change coalition with Ra'am,0.0,0,0.0
+1977,production,Netanyahu + a change-bloc defector,0.0,0,0.0
 1977,unity_record,Netanyahu rightist coalition,1.0,1,0.0
-1977,unity_record,Netanyahu + unaligned / defector coalition,0.0,0,0.0
+1977,unity_record,Netanyahu + unaligned / Amcha,0.0,0,0.0
 1977,unity_record,Change coalition (without Ra'am),0.0,0,0.0
 1977,unity_record,Change coalition with unaligned / Amcha,0.0,0,0.0
 1977,unity_record,Change coalition with a haredi party,0.0,0,0.0
@@ -17,8 +18,9 @@ cycle,tree,class,probability,realized,weight
 1977,unity_record,Unity government (Likud without Netanyahu),0.0,0,0.0
 1977,unity_record,Repeat election,0.0,0,0.0
 1977,unity_record,Change coalition with Ra'am,0.0,0,0.0
+1977,unity_record,Netanyahu + a change-bloc defector,0.0,0,0.0
 1977,stage_only,Netanyahu rightist coalition,1.0,1,0.0
-1977,stage_only,Netanyahu + unaligned / defector coalition,0.0,0,0.0
+1977,stage_only,Netanyahu + unaligned / Amcha,0.0,0,0.0
 1977,stage_only,Change coalition (without Ra'am),0.0,0,0.0
 1977,stage_only,Change coalition with unaligned / Amcha,0.0,0,0.0
 1977,stage_only,Change coalition with a haredi party,0.0,0,0.0
@@ -26,8 +28,9 @@ cycle,tree,class,probability,realized,weight
 1977,stage_only,Unity government (Likud without Netanyahu),0.0,0,0.0
 1977,stage_only,Repeat election,0.0,0,0.0
 1977,stage_only,Change coalition with Ra'am,0.0,0,0.0
+1977,stage_only,Netanyahu + a change-bloc defector,0.0,0,0.0
 1977,candidate,Netanyahu rightist coalition,1.0,1,0.0
-1977,candidate,Netanyahu + unaligned / defector coalition,0.0,0,0.0
+1977,candidate,Netanyahu + unaligned / Amcha,0.0,0,0.0
 1977,candidate,Change coalition (without Ra'am),0.0,0,0.0
 1977,candidate,Change coalition with unaligned / Amcha,0.0,0,0.0
 1977,candidate,Change coalition with a haredi party,0.0,0,0.0
@@ -35,8 +38,9 @@ cycle,tree,class,probability,realized,weight
 1977,candidate,Unity government (Likud without Netanyahu),0.0,0,0.0
 1977,candidate,Repeat election,0.0,0,0.0
 1977,candidate,Change coalition with Ra'am,0.0,0,0.0
+1977,candidate,Netanyahu + a change-bloc defector,0.0,0,0.0
 1981,production,Netanyahu rightist coalition,1.0,1,0.0
-1981,production,Netanyahu + unaligned / defector coalition,0.0,0,0.0
+1981,production,Netanyahu + unaligned / Amcha,0.0,0,0.0
 1981,production,Change coalition (without Ra'am),0.0,0,0.0
 1981,production,Change coalition with unaligned / Amcha,0.0,0,0.0
 1981,production,Change coalition with a haredi party,0.0,0,0.0
@@ -44,8 +48,9 @@ cycle,tree,class,probability,realized,weight
 1981,production,Unity government (Likud without Netanyahu),0.0,0,0.0
 1981,production,Repeat election,0.0,0,0.0
 1981,production,Change coalition with Ra'am,0.0,0,0.0
+1981,production,Netanyahu + a change-bloc defector,0.0,0,0.0
 1981,unity_record,Netanyahu rightist coalition,1.0,1,0.0
-1981,unity_record,Netanyahu + unaligned / defector coalition,0.0,0,0.0
+1981,unity_record,Netanyahu + unaligned / Amcha,0.0,0,0.0
 1981,unity_record,Change coalition (without Ra'am),0.0,0,0.0
 1981,unity_record,Change coalition with unaligned / Amcha,0.0,0,0.0
 1981,unity_record,Change coalition with a haredi party,0.0,0,0.0
@@ -53,8 +58,9 @@ cycle,tree,class,probability,realized,weight
 1981,unity_record,Unity government (Likud without Netanyahu),0.0,0,0.0
 1981,unity_record,Repeat election,0.0,0,0.0
 1981,unity_record,Change coalition with Ra'am,0.0,0,0.0
+1981,unity_record,Netanyahu + a change-bloc defector,0.0,0,0.0
 1981,stage_only,Netanyahu rightist coalition,1.0,1,0.0
-1981,stage_only,Netanyahu + unaligned / defector coalition,0.0,0,0.0
+1981,stage_only,Netanyahu + unaligned / Amcha,0.0,0,0.0
 1981,stage_only,Change coalition (without Ra'am),0.0,0,0.0
 1981,stage_only,Change coalition with unaligned / Amcha,0.0,0,0.0
 1981,stage_only,Change coalition with a haredi party,0.0,0,0.0
@@ -62,8 +68,9 @@ cycle,tree,class,probability,realized,weight
 1981,stage_only,Unity government (Likud without Netanyahu),0.0,0,0.0
 1981,stage_only,Repeat election,0.0,0,0.0
 1981,stage_only,Change coalition with Ra'am,0.0,0,0.0
+1981,stage_only,Netanyahu + a change-bloc defector,0.0,0,0.0
 1981,candidate,Netanyahu rightist coalition,1.0,1,0.0
-1981,candidate,Netanyahu + unaligned / defector coalition,0.0,0,0.0
+1981,candidate,Netanyahu + unaligned / Amcha,0.0,0,0.0
 1981,candidate,Change coalition (without Ra'am),0.0,0,0.0
 1981,candidate,Change coalition with unaligned / Amcha,0.0,0,0.0
 1981,candidate,Change coalition with a haredi party,0.0,0,0.0
@@ -71,44 +78,49 @@ cycle,tree,class,probability,realized,weight
 1981,candidate,Unity government (Likud without Netanyahu),0.0,0,0.0
 1981,candidate,Repeat election,0.0,0,0.0
 1981,candidate,Change coalition with Ra'am,0.0,0,0.0
+1981,candidate,Netanyahu + a change-bloc defector,0.0,0,0.0
 1984,production,Netanyahu rightist coalition,0.0,0,1.0
-1984,production,Netanyahu + unaligned / defector coalition,0.1772,0,1.0
+1984,production,Netanyahu + unaligned / Amcha,0.0,0,1.0
 1984,production,Change coalition (without Ra'am),0.0,0,1.0
 1984,production,Change coalition with unaligned / Amcha,0.0,0,1.0
 1984,production,Change coalition with a haredi party,0.0,0,1.0
 1984,production,Centre minority backed by the Joint List,0.0,0,1.0
-1984,production,Unity government (Likud without Netanyahu),0.1444,1,1.0
-1984,production,Repeat election,0.6784,0,1.0
+1984,production,Unity government (Likud without Netanyahu),0.1432,1,1.0
+1984,production,Repeat election,0.6807,0,1.0
 1984,production,Change coalition with Ra'am,0.0,0,1.0
+1984,production,Netanyahu + a change-bloc defector,0.1762,0,1.0
 1984,unity_record,Netanyahu rightist coalition,0.0,0,1.0
-1984,unity_record,Netanyahu + unaligned / defector coalition,0.1772,0,1.0
+1984,unity_record,Netanyahu + unaligned / Amcha,0.0,0,1.0
 1984,unity_record,Change coalition (without Ra'am),0.0,0,1.0
 1984,unity_record,Change coalition with unaligned / Amcha,0.0,0,1.0
 1984,unity_record,Change coalition with a haredi party,0.0,0,1.0
 1984,unity_record,Centre minority backed by the Joint List,0.0,0,1.0
-1984,unity_record,Unity government (Likud without Netanyahu),0.1105,1,1.0
-1984,unity_record,Repeat election,0.7123,0,1.0
+1984,unity_record,Unity government (Likud without Netanyahu),0.1097,1,1.0
+1984,unity_record,Repeat election,0.7141,0,1.0
 1984,unity_record,Change coalition with Ra'am,0.0,0,1.0
+1984,unity_record,Netanyahu + a change-bloc defector,0.1762,0,1.0
 1984,stage_only,Netanyahu rightist coalition,0.0,0,1.0
-1984,stage_only,Netanyahu + unaligned / defector coalition,0.3405,0,1.0
+1984,stage_only,Netanyahu + unaligned / Amcha,0.0,0,1.0
 1984,stage_only,Change coalition (without Ra'am),0.0,0,1.0
 1984,stage_only,Change coalition with unaligned / Amcha,0.0,0,1.0
 1984,stage_only,Change coalition with a haredi party,0.0,0,1.0
 1984,stage_only,Centre minority backed by the Joint List,0.0,0,1.0
-1984,stage_only,Unity government (Likud without Netanyahu),0.2886,1,1.0
+1984,stage_only,Unity government (Likud without Netanyahu),0.2882,1,1.0
 1984,stage_only,Repeat election,0.3708,0,1.0
 1984,stage_only,Change coalition with Ra'am,0.0,0,1.0
+1984,stage_only,Netanyahu + a change-bloc defector,0.341,0,1.0
 1984,candidate,Netanyahu rightist coalition,0.0,0,1.0
-1984,candidate,Netanyahu + unaligned / defector coalition,0.4291,0,1.0
+1984,candidate,Netanyahu + unaligned / Amcha,0.0,0,1.0
 1984,candidate,Change coalition (without Ra'am),0.0,0,1.0
 1984,candidate,Change coalition with unaligned / Amcha,0.0,0,1.0
 1984,candidate,Change coalition with a haredi party,0.0,0,1.0
 1984,candidate,Centre minority backed by the Joint List,0.0,0,1.0
-1984,candidate,Unity government (Likud without Netanyahu),0.1995,1,1.0
+1984,candidate,Unity government (Likud without Netanyahu),0.1992,1,1.0
 1984,candidate,Repeat election,0.3714,0,1.0
 1984,candidate,Change coalition with Ra'am,0.0,0,1.0
+1984,candidate,Netanyahu + a change-bloc defector,0.4294,0,1.0
 1988,production,Netanyahu rightist coalition,1.0,1,0.0
-1988,production,Netanyahu + unaligned / defector coalition,0.0,0,0.0
+1988,production,Netanyahu + unaligned / Amcha,0.0,0,0.0
 1988,production,Change coalition (without Ra'am),0.0,0,0.0
 1988,production,Change coalition with unaligned / Amcha,0.0,0,0.0
 1988,production,Change coalition with a haredi party,0.0,0,0.0
@@ -116,8 +128,9 @@ cycle,tree,class,probability,realized,weight
 1988,production,Unity government (Likud without Netanyahu),0.0,0,0.0
 1988,production,Repeat election,0.0,0,0.0
 1988,production,Change coalition with Ra'am,0.0,0,0.0
+1988,production,Netanyahu + a change-bloc defector,0.0,0,0.0
 1988,unity_record,Netanyahu rightist coalition,1.0,1,0.0
-1988,unity_record,Netanyahu + unaligned / defector coalition,0.0,0,0.0
+1988,unity_record,Netanyahu + unaligned / Amcha,0.0,0,0.0
 1988,unity_record,Change coalition (without Ra'am),0.0,0,0.0
 1988,unity_record,Change coalition with unaligned / Amcha,0.0,0,0.0
 1988,unity_record,Change coalition with a haredi party,0.0,0,0.0
@@ -125,8 +138,9 @@ cycle,tree,class,probability,realized,weight
 1988,unity_record,Unity government (Likud without Netanyahu),0.0,0,0.0
 1988,unity_record,Repeat election,0.0,0,0.0
 1988,unity_record,Change coalition with Ra'am,0.0,0,0.0
+1988,unity_record,Netanyahu + a change-bloc defector,0.0,0,0.0
 1988,stage_only,Netanyahu rightist coalition,1.0,1,0.0
-1988,stage_only,Netanyahu + unaligned / defector coalition,0.0,0,0.0
+1988,stage_only,Netanyahu + unaligned / Amcha,0.0,0,0.0
 1988,stage_only,Change coalition (without Ra'am),0.0,0,0.0
 1988,stage_only,Change coalition with unaligned / Amcha,0.0,0,0.0
 1988,stage_only,Change coalition with a haredi party,0.0,0,0.0
@@ -134,8 +148,9 @@ cycle,tree,class,probability,realized,weight
 1988,stage_only,Unity government (Likud without Netanyahu),0.0,0,0.0
 1988,stage_only,Repeat election,0.0,0,0.0
 1988,stage_only,Change coalition with Ra'am,0.0,0,0.0
+1988,stage_only,Netanyahu + a change-bloc defector,0.0,0,0.0
 1988,candidate,Netanyahu rightist coalition,1.0,1,0.0
-1988,candidate,Netanyahu + unaligned / defector coalition,0.0,0,0.0
+1988,candidate,Netanyahu + unaligned / Amcha,0.0,0,0.0
 1988,candidate,Change coalition (without Ra'am),0.0,0,0.0
 1988,candidate,Change coalition with unaligned / Amcha,0.0,0,0.0
 1988,candidate,Change coalition with a haredi party,0.0,0,0.0
@@ -143,116 +158,129 @@ cycle,tree,class,probability,realized,weight
 1988,candidate,Unity government (Likud without Netanyahu),0.0,0,0.0
 1988,candidate,Repeat election,0.0,0,0.0
 1988,candidate,Change coalition with Ra'am,0.0,0,0.0
+1988,candidate,Netanyahu + a change-bloc defector,0.0,0,0.0
 1992,production,Netanyahu rightist coalition,0.0,0,1.0
-1992,production,Netanyahu + unaligned / defector coalition,0.1594,0,1.0
+1992,production,Netanyahu + unaligned / Amcha,0.0,0,1.0
 1992,production,Change coalition (without Ra'am),0.0,0,1.0
 1992,production,Change coalition with unaligned / Amcha,0.0,0,1.0
-1992,production,Change coalition with a haredi party,0.0809,1,1.0
+1992,production,Change coalition with a haredi party,0.0824,1,1.0
 1992,production,Centre minority backed by the Joint List,0.0,0,1.0
-1992,production,Unity government (Likud without Netanyahu),0.1361,0,1.0
-1992,production,Repeat election,0.6236,0,1.0
+1992,production,Unity government (Likud without Netanyahu),0.1348,0,1.0
+1992,production,Repeat election,0.6245,0,1.0
 1992,production,Change coalition with Ra'am,0.0,0,1.0
+1992,production,Netanyahu + a change-bloc defector,0.1582,0,1.0
 1992,unity_record,Netanyahu rightist coalition,0.0,0,1.0
-1992,unity_record,Netanyahu + unaligned / defector coalition,0.1594,0,1.0
+1992,unity_record,Netanyahu + unaligned / Amcha,0.0,0,1.0
 1992,unity_record,Change coalition (without Ra'am),0.0,0,1.0
 1992,unity_record,Change coalition with unaligned / Amcha,0.0,0,1.0
-1992,unity_record,Change coalition with a haredi party,0.0809,1,1.0
+1992,unity_record,Change coalition with a haredi party,0.0824,1,1.0
 1992,unity_record,Centre minority backed by the Joint List,0.0,0,1.0
-1992,unity_record,Unity government (Likud without Netanyahu),0.0776,0,1.0
-1992,unity_record,Repeat election,0.6821,0,1.0
+1992,unity_record,Unity government (Likud without Netanyahu),0.0768,0,1.0
+1992,unity_record,Repeat election,0.6825,0,1.0
 1992,unity_record,Change coalition with Ra'am,0.0,0,1.0
+1992,unity_record,Netanyahu + a change-bloc defector,0.1582,0,1.0
 1992,stage_only,Netanyahu rightist coalition,0.0,0,1.0
-1992,stage_only,Netanyahu + unaligned / defector coalition,0.2612,0,1.0
+1992,stage_only,Netanyahu + unaligned / Amcha,0.0,0,1.0
 1992,stage_only,Change coalition (without Ra'am),0.0,0,1.0
 1992,stage_only,Change coalition with unaligned / Amcha,0.0,0,1.0
-1992,stage_only,Change coalition with a haredi party,0.14,1,1.0
+1992,stage_only,Change coalition with a haredi party,0.1429,1,1.0
 1992,stage_only,Centre minority backed by the Joint List,0.0,0,1.0
-1992,stage_only,Unity government (Likud without Netanyahu),0.228,0,1.0
+1992,stage_only,Unity government (Likud without Netanyahu),0.2263,0,1.0
 1992,stage_only,Repeat election,0.3708,0,1.0
 1992,stage_only,Change coalition with Ra'am,0.0,0,1.0
+1992,stage_only,Netanyahu + a change-bloc defector,0.2599,0,1.0
 1992,candidate,Netanyahu rightist coalition,0.0,0,1.0
-1992,candidate,Netanyahu + unaligned / defector coalition,0.3217,0,1.0
+1992,candidate,Netanyahu + unaligned / Amcha,0.0,0,1.0
 1992,candidate,Change coalition (without Ra'am),0.0,0,1.0
 1992,candidate,Change coalition with unaligned / Amcha,0.0,0,1.0
-1992,candidate,Change coalition with a haredi party,0.1737,1,1.0
+1992,candidate,Change coalition with a haredi party,0.1767,1,1.0
 1992,candidate,Centre minority backed by the Joint List,0.0,0,1.0
-1992,candidate,Unity government (Likud without Netanyahu),0.1338,0,1.0
+1992,candidate,Unity government (Likud without Netanyahu),0.1328,0,1.0
 1992,candidate,Repeat election,0.3708,0,1.0
 1992,candidate,Change coalition with Ra'am,0.0,0,1.0
+1992,candidate,Netanyahu + a change-bloc defector,0.3197,0,1.0
 1996,production,Netanyahu rightist coalition,0.0,0,0.5
-1996,production,Netanyahu + unaligned / defector coalition,0.6691,1,0.5
+1996,production,Netanyahu + unaligned / Amcha,0.6133,1,0.5
 1996,production,Change coalition (without Ra'am),0.0,0,0.5
 1996,production,Change coalition with unaligned / Amcha,0.0,0,0.5
-1996,production,Change coalition with a haredi party,0.0201,0,0.5
+1996,production,Change coalition with a haredi party,0.0205,0,0.5
 1996,production,Centre minority backed by the Joint List,0.0,0,0.5
-1996,production,Unity government (Likud without Netanyahu),0.0627,0,0.5
-1996,production,Repeat election,0.2481,0,0.5
+1996,production,Unity government (Likud without Netanyahu),0.0621,0,0.5
+1996,production,Repeat election,0.2488,0,0.5
 1996,production,Change coalition with Ra'am,0.0,0,0.5
+1996,production,Netanyahu + a change-bloc defector,0.0554,0,0.5
 1996,unity_record,Netanyahu rightist coalition,0.0,0,0.5
-1996,unity_record,Netanyahu + unaligned / defector coalition,0.6691,1,0.5
+1996,unity_record,Netanyahu + unaligned / Amcha,0.6133,1,0.5
 1996,unity_record,Change coalition (without Ra'am),0.0,0,0.5
 1996,unity_record,Change coalition with unaligned / Amcha,0.0,0,0.5
-1996,unity_record,Change coalition with a haredi party,0.0201,0,0.5
+1996,unity_record,Change coalition with a haredi party,0.0205,0,0.5
 1996,unity_record,Centre minority backed by the Joint List,0.0,0,0.5
-1996,unity_record,Unity government (Likud without Netanyahu),0.0342,0,0.5
-1996,unity_record,Repeat election,0.2765,0,0.5
+1996,unity_record,Unity government (Likud without Netanyahu),0.0339,0,0.5
+1996,unity_record,Repeat election,0.2769,0,0.5
 1996,unity_record,Change coalition with Ra'am,0.0,0,0.5
+1996,unity_record,Netanyahu + a change-bloc defector,0.0554,0,0.5
 1996,stage_only,Netanyahu rightist coalition,0.0,0,0.5
-1996,stage_only,Netanyahu + unaligned / defector coalition,0.7209,1,0.5
+1996,stage_only,Netanyahu + unaligned / Amcha,0.6133,1,0.5
 1996,stage_only,Change coalition (without Ra'am),0.0,0,0.5
 1996,stage_only,Change coalition with unaligned / Amcha,0.0,0,0.5
-1996,stage_only,Change coalition with a haredi party,0.0368,0,0.5
+1996,stage_only,Change coalition with a haredi party,0.0375,0,0.5
 1996,stage_only,Centre minority backed by the Joint List,0.0,0,0.5
-1996,stage_only,Unity government (Likud without Netanyahu),0.1179,0,0.5
+1996,stage_only,Unity government (Likud without Netanyahu),0.1174,0,0.5
 1996,stage_only,Repeat election,0.1244,0,0.5
 1996,stage_only,Change coalition with Ra'am,0.0,0,0.5
+1996,stage_only,Netanyahu + a change-bloc defector,0.1073,0,0.5
 1996,candidate,Netanyahu rightist coalition,0.0,0,0.5
-1996,candidate,Netanyahu + unaligned / defector coalition,0.7581,1,0.5
+1996,candidate,Netanyahu + unaligned / Amcha,0.6133,1,0.5
 1996,candidate,Change coalition (without Ra'am),0.0,0,0.5
 1996,candidate,Change coalition with unaligned / Amcha,0.0,0,0.5
-1996,candidate,Change coalition with a haredi party,0.0476,0,0.5
+1996,candidate,Change coalition with a haredi party,0.0485,0,0.5
 1996,candidate,Centre minority backed by the Joint List,0.0,0,0.5
-1996,candidate,Unity government (Likud without Netanyahu),0.0697,0,0.5
+1996,candidate,Unity government (Likud without Netanyahu),0.0694,0,0.5
 1996,candidate,Repeat election,0.1246,0,0.5
 1996,candidate,Change coalition with Ra'am,0.0,0,0.5
+1996,candidate,Netanyahu + a change-bloc defector,0.1443,0,0.5
 1999,production,Netanyahu rightist coalition,0.0,0,0.5
-1999,production,Netanyahu + unaligned / defector coalition,0.2855,0,0.5
+1999,production,Netanyahu + unaligned / Amcha,0.1838,0,0.5
 1999,production,Change coalition (without Ra'am),0.0,0,0.5
 1999,production,Change coalition with unaligned / Amcha,0.0,0,0.5
-1999,production,Change coalition with a haredi party,0.0869,1,0.5
-1999,production,Centre minority backed by the Joint List,0.0252,0,0.5
-1999,production,Unity government (Likud without Netanyahu),0.0988,0,0.5
-1999,production,Repeat election,0.4189,0,0.5
+1999,production,Change coalition with a haredi party,0.0882,1,0.5
+1999,production,Centre minority backed by the Joint List,0.0251,0,0.5
+1999,production,Unity government (Likud without Netanyahu),0.0978,0,0.5
+1999,production,Repeat election,0.4194,0,0.5
 1999,production,Change coalition with Ra'am,0.0847,0,0.5
+1999,production,Netanyahu + a change-bloc defector,0.101,0,0.5
 1999,unity_record,Netanyahu rightist coalition,0.0,0,0.5
-1999,unity_record,Netanyahu + unaligned / defector coalition,0.2855,0,0.5
+1999,unity_record,Netanyahu + unaligned / Amcha,0.1838,0,0.5
 1999,unity_record,Change coalition (without Ra'am),0.0,0,0.5
 1999,unity_record,Change coalition with unaligned / Amcha,0.0,0,0.5
-1999,unity_record,Change coalition with a haredi party,0.0869,1,0.5
-1999,unity_record,Centre minority backed by the Joint List,0.0252,0,0.5
-1999,unity_record,Unity government (Likud without Netanyahu),0.0559,0,0.5
-1999,unity_record,Repeat election,0.4618,0,0.5
+1999,unity_record,Change coalition with a haredi party,0.0882,1,0.5
+1999,unity_record,Centre minority backed by the Joint List,0.0251,0,0.5
+1999,unity_record,Unity government (Likud without Netanyahu),0.0554,0,0.5
+1999,unity_record,Repeat election,0.4619,0,0.5
 1999,unity_record,Change coalition with Ra'am,0.0847,0,0.5
+1999,unity_record,Netanyahu + a change-bloc defector,0.101,0,0.5
 1999,stage_only,Netanyahu rightist coalition,0.0,0,0.5
-1999,stage_only,Netanyahu + unaligned / defector coalition,0.3547,0,0.5
+1999,stage_only,Netanyahu + unaligned / Amcha,0.1838,0,0.5
 1999,stage_only,Change coalition (without Ra'am),0.0,0,0.5
 1999,stage_only,Change coalition with unaligned / Amcha,0.0,0,0.5
-1999,stage_only,Change coalition with a haredi party,0.1244,1,0.5
+1999,stage_only,Change coalition with a haredi party,0.1266,1,0.5
 1999,stage_only,Centre minority backed by the Joint List,0.0218,0,0.5
-1999,stage_only,Unity government (Likud without Netanyahu),0.1631,0,0.5
+1999,stage_only,Unity government (Likud without Netanyahu),0.1618,0,0.5
 1999,stage_only,Repeat election,0.2631,0,0.5
 1999,stage_only,Change coalition with Ra'am,0.0729,0,0.5
+1999,stage_only,Netanyahu + a change-bloc defector,0.1701,0,0.5
 1999,candidate,Netanyahu rightist coalition,0.0,0,0.5
-1999,candidate,Netanyahu + unaligned / defector coalition,0.3937,0,0.5
+1999,candidate,Netanyahu + unaligned / Amcha,0.1838,0,0.5
 1999,candidate,Change coalition (without Ra'am),0.0,0,0.5
 1999,candidate,Change coalition with unaligned / Amcha,0.0,0,0.5
-1999,candidate,Change coalition with a haredi party,0.1497,1,0.5
-1999,candidate,Centre minority backed by the Joint List,0.0227,0,0.5
-1999,candidate,Unity government (Likud without Netanyahu),0.0957,0,0.5
+1999,candidate,Change coalition with a haredi party,0.1523,1,0.5
+1999,candidate,Centre minority backed by the Joint List,0.0226,0,0.5
+1999,candidate,Unity government (Likud without Netanyahu),0.0948,0,0.5
 1999,candidate,Repeat election,0.2631,0,0.5
 1999,candidate,Change coalition with Ra'am,0.0751,0,0.5
+1999,candidate,Netanyahu + a change-bloc defector,0.2084,0,0.5
 2003,production,Netanyahu rightist coalition,1.0,1,0.0
-2003,production,Netanyahu + unaligned / defector coalition,0.0,0,0.0
+2003,production,Netanyahu + unaligned / Amcha,0.0,0,0.0
 2003,production,Change coalition (without Ra'am),0.0,0,0.0
 2003,production,Change coalition with unaligned / Amcha,0.0,0,0.0
 2003,production,Change coalition with a haredi party,0.0,0,0.0
@@ -260,8 +288,9 @@ cycle,tree,class,probability,realized,weight
 2003,production,Unity government (Likud without Netanyahu),0.0,0,0.0
 2003,production,Repeat election,0.0,0,0.0
 2003,production,Change coalition with Ra'am,0.0,0,0.0
+2003,production,Netanyahu + a change-bloc defector,0.0,0,0.0
 2003,unity_record,Netanyahu rightist coalition,1.0,1,0.0
-2003,unity_record,Netanyahu + unaligned / defector coalition,0.0,0,0.0
+2003,unity_record,Netanyahu + unaligned / Amcha,0.0,0,0.0
 2003,unity_record,Change coalition (without Ra'am),0.0,0,0.0
 2003,unity_record,Change coalition with unaligned / Amcha,0.0,0,0.0
 2003,unity_record,Change coalition with a haredi party,0.0,0,0.0
@@ -269,8 +298,9 @@ cycle,tree,class,probability,realized,weight
 2003,unity_record,Unity government (Likud without Netanyahu),0.0,0,0.0
 2003,unity_record,Repeat election,0.0,0,0.0
 2003,unity_record,Change coalition with Ra'am,0.0,0,0.0
+2003,unity_record,Netanyahu + a change-bloc defector,0.0,0,0.0
 2003,stage_only,Netanyahu rightist coalition,1.0,1,0.0
-2003,stage_only,Netanyahu + unaligned / defector coalition,0.0,0,0.0
+2003,stage_only,Netanyahu + unaligned / Amcha,0.0,0,0.0
 2003,stage_only,Change coalition (without Ra'am),0.0,0,0.0
 2003,stage_only,Change coalition with unaligned / Amcha,0.0,0,0.0
 2003,stage_only,Change coalition with a haredi party,0.0,0,0.0
@@ -278,8 +308,9 @@ cycle,tree,class,probability,realized,weight
 2003,stage_only,Unity government (Likud without Netanyahu),0.0,0,0.0
 2003,stage_only,Repeat election,0.0,0,0.0
 2003,stage_only,Change coalition with Ra'am,0.0,0,0.0
+2003,stage_only,Netanyahu + a change-bloc defector,0.0,0,0.0
 2003,candidate,Netanyahu rightist coalition,1.0,1,0.0
-2003,candidate,Netanyahu + unaligned / defector coalition,0.0,0,0.0
+2003,candidate,Netanyahu + unaligned / Amcha,0.0,0,0.0
 2003,candidate,Change coalition (without Ra'am),0.0,0,0.0
 2003,candidate,Change coalition with unaligned / Amcha,0.0,0,0.0
 2003,candidate,Change coalition with a haredi party,0.0,0,0.0
@@ -287,44 +318,49 @@ cycle,tree,class,probability,realized,weight
 2003,candidate,Unity government (Likud without Netanyahu),0.0,0,0.0
 2003,candidate,Repeat election,0.0,0,0.0
 2003,candidate,Change coalition with Ra'am,0.0,0,0.0
+2003,candidate,Netanyahu + a change-bloc defector,0.0,0,0.0
 2006,production,Netanyahu rightist coalition,0.0,0,1.0
-2006,production,Netanyahu + unaligned / defector coalition,0.0812,0,1.0
+2006,production,Netanyahu + unaligned / Amcha,0.0,0,1.0
 2006,production,Change coalition (without Ra'am),0.0,0,1.0
 2006,production,Change coalition with unaligned / Amcha,0.0,0,1.0
-2006,production,Change coalition with a haredi party,0.1474,1,1.0
-2006,production,Centre minority backed by the Joint List,0.0791,0,1.0
-2006,production,Unity government (Likud without Netanyahu),0.1058,0,1.0
-2006,production,Repeat election,0.4109,0,1.0
+2006,production,Change coalition with a haredi party,0.1493,1,1.0
+2006,production,Centre minority backed by the Joint List,0.0787,0,1.0
+2006,production,Unity government (Likud without Netanyahu),0.1048,0,1.0
+2006,production,Repeat election,0.4112,0,1.0
 2006,production,Change coalition with Ra'am,0.1756,0,1.0
+2006,production,Netanyahu + a change-bloc defector,0.0804,0,1.0
 2006,unity_record,Netanyahu rightist coalition,0.0,0,1.0
-2006,unity_record,Netanyahu + unaligned / defector coalition,0.0812,0,1.0
+2006,unity_record,Netanyahu + unaligned / Amcha,0.0,0,1.0
 2006,unity_record,Change coalition (without Ra'am),0.0,0,1.0
 2006,unity_record,Change coalition with unaligned / Amcha,0.0,0,1.0
-2006,unity_record,Change coalition with a haredi party,0.1474,1,1.0
-2006,unity_record,Centre minority backed by the Joint List,0.0791,0,1.0
-2006,unity_record,Unity government (Likud without Netanyahu),0.0604,0,1.0
-2006,unity_record,Repeat election,0.4563,0,1.0
+2006,unity_record,Change coalition with a haredi party,0.1493,1,1.0
+2006,unity_record,Centre minority backed by the Joint List,0.0787,0,1.0
+2006,unity_record,Unity government (Likud without Netanyahu),0.0598,0,1.0
+2006,unity_record,Repeat election,0.4562,0,1.0
 2006,unity_record,Change coalition with Ra'am,0.1756,0,1.0
+2006,unity_record,Netanyahu + a change-bloc defector,0.0804,0,1.0
 2006,stage_only,Netanyahu rightist coalition,0.0,0,1.0
-2006,stage_only,Netanyahu + unaligned / defector coalition,0.1209,0,1.0
+2006,stage_only,Netanyahu + unaligned / Amcha,0.0,0,1.0
 2006,stage_only,Change coalition (without Ra'am),0.0,0,1.0
 2006,stage_only,Change coalition with unaligned / Amcha,0.0,0,1.0
-2006,stage_only,Change coalition with a haredi party,0.1614,1,1.0
-2006,stage_only,Centre minority backed by the Joint List,0.0599,0,1.0
-2006,stage_only,Unity government (Likud without Netanyahu),0.1555,0,1.0
+2006,stage_only,Change coalition with a haredi party,0.1638,1,1.0
+2006,stage_only,Centre minority backed by the Joint List,0.0596,0,1.0
+2006,stage_only,Unity government (Likud without Netanyahu),0.1542,0,1.0
 2006,stage_only,Repeat election,0.3708,0,1.0
-2006,stage_only,Change coalition with Ra'am,0.1315,0,1.0
+2006,stage_only,Change coalition with Ra'am,0.1314,0,1.0
+2006,stage_only,Netanyahu + a change-bloc defector,0.1202,0,1.0
 2006,candidate,Netanyahu rightist coalition,0.0,0,1.0
-2006,candidate,Netanyahu + unaligned / defector coalition,0.153,0,1.0
+2006,candidate,Netanyahu + unaligned / Amcha,0.0,0,1.0
 2006,candidate,Change coalition (without Ra'am),0.0,0,1.0
 2006,candidate,Change coalition with unaligned / Amcha,0.0,0,1.0
-2006,candidate,Change coalition with a haredi party,0.1895,1,1.0
-2006,candidate,Centre minority backed by the Joint List,0.0611,0,1.0
-2006,candidate,Unity government (Likud without Netanyahu),0.0918,0,1.0
+2006,candidate,Change coalition with a haredi party,0.1921,1,1.0
+2006,candidate,Centre minority backed by the Joint List,0.0607,0,1.0
+2006,candidate,Unity government (Likud without Netanyahu),0.0909,0,1.0
 2006,candidate,Repeat election,0.3708,0,1.0
-2006,candidate,Change coalition with Ra'am,0.1338,0,1.0
+2006,candidate,Change coalition with Ra'am,0.1337,0,1.0
+2006,candidate,Netanyahu + a change-bloc defector,0.1516,0,1.0
 2009,production,Netanyahu rightist coalition,1.0,1,0.0
-2009,production,Netanyahu + unaligned / defector coalition,0.0,0,0.0
+2009,production,Netanyahu + unaligned / Amcha,0.0,0,0.0
 2009,production,Change coalition (without Ra'am),0.0,0,0.0
 2009,production,Change coalition with unaligned / Amcha,0.0,0,0.0
 2009,production,Change coalition with a haredi party,0.0,0,0.0
@@ -332,8 +368,9 @@ cycle,tree,class,probability,realized,weight
 2009,production,Unity government (Likud without Netanyahu),0.0,0,0.0
 2009,production,Repeat election,0.0,0,0.0
 2009,production,Change coalition with Ra'am,0.0,0,0.0
+2009,production,Netanyahu + a change-bloc defector,0.0,0,0.0
 2009,unity_record,Netanyahu rightist coalition,1.0,1,0.0
-2009,unity_record,Netanyahu + unaligned / defector coalition,0.0,0,0.0
+2009,unity_record,Netanyahu + unaligned / Amcha,0.0,0,0.0
 2009,unity_record,Change coalition (without Ra'am),0.0,0,0.0
 2009,unity_record,Change coalition with unaligned / Amcha,0.0,0,0.0
 2009,unity_record,Change coalition with a haredi party,0.0,0,0.0
@@ -341,8 +378,9 @@ cycle,tree,class,probability,realized,weight
 2009,unity_record,Unity government (Likud without Netanyahu),0.0,0,0.0
 2009,unity_record,Repeat election,0.0,0,0.0
 2009,unity_record,Change coalition with Ra'am,0.0,0,0.0
+2009,unity_record,Netanyahu + a change-bloc defector,0.0,0,0.0
 2009,stage_only,Netanyahu rightist coalition,1.0,1,0.0
-2009,stage_only,Netanyahu + unaligned / defector coalition,0.0,0,0.0
+2009,stage_only,Netanyahu + unaligned / Amcha,0.0,0,0.0
 2009,stage_only,Change coalition (without Ra'am),0.0,0,0.0
 2009,stage_only,Change coalition with unaligned / Amcha,0.0,0,0.0
 2009,stage_only,Change coalition with a haredi party,0.0,0,0.0
@@ -350,8 +388,9 @@ cycle,tree,class,probability,realized,weight
 2009,stage_only,Unity government (Likud without Netanyahu),0.0,0,0.0
 2009,stage_only,Repeat election,0.0,0,0.0
 2009,stage_only,Change coalition with Ra'am,0.0,0,0.0
+2009,stage_only,Netanyahu + a change-bloc defector,0.0,0,0.0
 2009,candidate,Netanyahu rightist coalition,1.0,1,0.0
-2009,candidate,Netanyahu + unaligned / defector coalition,0.0,0,0.0
+2009,candidate,Netanyahu + unaligned / Amcha,0.0,0,0.0
 2009,candidate,Change coalition (without Ra'am),0.0,0,0.0
 2009,candidate,Change coalition with unaligned / Amcha,0.0,0,0.0
 2009,candidate,Change coalition with a haredi party,0.0,0,0.0
@@ -359,8 +398,9 @@ cycle,tree,class,probability,realized,weight
 2009,candidate,Unity government (Likud without Netanyahu),0.0,0,0.0
 2009,candidate,Repeat election,0.0,0,0.0
 2009,candidate,Change coalition with Ra'am,0.0,0,0.0
+2009,candidate,Netanyahu + a change-bloc defector,0.0,0,0.0
 2013,production,Netanyahu rightist coalition,1.0,1,0.0
-2013,production,Netanyahu + unaligned / defector coalition,0.0,0,0.0
+2013,production,Netanyahu + unaligned / Amcha,0.0,0,0.0
 2013,production,Change coalition (without Ra'am),0.0,0,0.0
 2013,production,Change coalition with unaligned / Amcha,0.0,0,0.0
 2013,production,Change coalition with a haredi party,0.0,0,0.0
@@ -368,8 +408,9 @@ cycle,tree,class,probability,realized,weight
 2013,production,Unity government (Likud without Netanyahu),0.0,0,0.0
 2013,production,Repeat election,0.0,0,0.0
 2013,production,Change coalition with Ra'am,0.0,0,0.0
+2013,production,Netanyahu + a change-bloc defector,0.0,0,0.0
 2013,unity_record,Netanyahu rightist coalition,1.0,1,0.0
-2013,unity_record,Netanyahu + unaligned / defector coalition,0.0,0,0.0
+2013,unity_record,Netanyahu + unaligned / Amcha,0.0,0,0.0
 2013,unity_record,Change coalition (without Ra'am),0.0,0,0.0
 2013,unity_record,Change coalition with unaligned / Amcha,0.0,0,0.0
 2013,unity_record,Change coalition with a haredi party,0.0,0,0.0
@@ -377,8 +418,9 @@ cycle,tree,class,probability,realized,weight
 2013,unity_record,Unity government (Likud without Netanyahu),0.0,0,0.0
 2013,unity_record,Repeat election,0.0,0,0.0
 2013,unity_record,Change coalition with Ra'am,0.0,0,0.0
+2013,unity_record,Netanyahu + a change-bloc defector,0.0,0,0.0
 2013,stage_only,Netanyahu rightist coalition,1.0,1,0.0
-2013,stage_only,Netanyahu + unaligned / defector coalition,0.0,0,0.0
+2013,stage_only,Netanyahu + unaligned / Amcha,0.0,0,0.0
 2013,stage_only,Change coalition (without Ra'am),0.0,0,0.0
 2013,stage_only,Change coalition with unaligned / Amcha,0.0,0,0.0
 2013,stage_only,Change coalition with a haredi party,0.0,0,0.0
@@ -386,8 +428,9 @@ cycle,tree,class,probability,realized,weight
 2013,stage_only,Unity government (Likud without Netanyahu),0.0,0,0.0
 2013,stage_only,Repeat election,0.0,0,0.0
 2013,stage_only,Change coalition with Ra'am,0.0,0,0.0
+2013,stage_only,Netanyahu + a change-bloc defector,0.0,0,0.0
 2013,candidate,Netanyahu rightist coalition,1.0,1,0.0
-2013,candidate,Netanyahu + unaligned / defector coalition,0.0,0,0.0
+2013,candidate,Netanyahu + unaligned / Amcha,0.0,0,0.0
 2013,candidate,Change coalition (without Ra'am),0.0,0,0.0
 2013,candidate,Change coalition with unaligned / Amcha,0.0,0,0.0
 2013,candidate,Change coalition with a haredi party,0.0,0,0.0
@@ -395,188 +438,209 @@ cycle,tree,class,probability,realized,weight
 2013,candidate,Unity government (Likud without Netanyahu),0.0,0,0.0
 2013,candidate,Repeat election,0.0,0,0.0
 2013,candidate,Change coalition with Ra'am,0.0,0,0.0
+2013,candidate,Netanyahu + a change-bloc defector,0.0,0,0.0
 2015,production,Netanyahu rightist coalition,0.0,0,1.0
-2015,production,Netanyahu + unaligned / defector coalition,0.4584,1,1.0
+2015,production,Netanyahu + unaligned / Amcha,0.3988,1,1.0
 2015,production,Change coalition (without Ra'am),0.0,0,1.0
 2015,production,Change coalition with unaligned / Amcha,0.0,0,1.0
-2015,production,Change coalition with a haredi party,0.0687,0,1.0
-2015,production,Centre minority backed by the Joint List,0.0665,0,1.0
-2015,production,Unity government (Likud without Netanyahu),0.0936,0,1.0
-2015,production,Repeat election,0.3128,0,1.0
+2015,production,Change coalition with a haredi party,0.0693,0,1.0
+2015,production,Centre minority backed by the Joint List,0.0662,0,1.0
+2015,production,Unity government (Likud without Netanyahu),0.0928,0,1.0
+2015,production,Repeat election,0.3137,0,1.0
 2015,production,Change coalition with Ra'am,0.0,0,1.0
+2015,production,Netanyahu + a change-bloc defector,0.0591,0,1.0
 2015,unity_record,Netanyahu rightist coalition,0.0,0,1.0
-2015,unity_record,Netanyahu + unaligned / defector coalition,0.4584,1,1.0
+2015,unity_record,Netanyahu + unaligned / Amcha,0.3988,1,1.0
 2015,unity_record,Change coalition (without Ra'am),0.0,0,1.0
 2015,unity_record,Change coalition with unaligned / Amcha,0.0,0,1.0
-2015,unity_record,Change coalition with a haredi party,0.0687,0,1.0
-2015,unity_record,Centre minority backed by the Joint List,0.0665,0,1.0
-2015,unity_record,Unity government (Likud without Netanyahu),0.0517,0,1.0
-2015,unity_record,Repeat election,0.3547,0,1.0
+2015,unity_record,Change coalition with a haredi party,0.0693,0,1.0
+2015,unity_record,Centre minority backed by the Joint List,0.0662,0,1.0
+2015,unity_record,Unity government (Likud without Netanyahu),0.0513,0,1.0
+2015,unity_record,Repeat election,0.3552,0,1.0
 2015,unity_record,Change coalition with Ra'am,0.0,0,1.0
+2015,unity_record,Netanyahu + a change-bloc defector,0.0591,0,1.0
 2015,stage_only,Netanyahu rightist coalition,0.0,0,1.0
-2015,stage_only,Netanyahu + unaligned / defector coalition,0.5124,1,1.0
+2015,stage_only,Netanyahu + unaligned / Amcha,0.3988,1,1.0
 2015,stage_only,Change coalition (without Ra'am),0.0,0,1.0
 2015,stage_only,Change coalition with unaligned / Amcha,0.0,0,1.0
-2015,stage_only,Change coalition with a haredi party,0.064,0,1.0
-2015,stage_only,Centre minority backed by the Joint List,0.061,0,1.0
-2015,stage_only,Unity government (Likud without Netanyahu),0.1695,0,1.0
+2015,stage_only,Change coalition with a haredi party,0.0646,0,1.0
+2015,stage_only,Centre minority backed by the Joint List,0.0607,0,1.0
+2015,stage_only,Unity government (Likud without Netanyahu),0.1691,0,1.0
 2015,stage_only,Repeat election,0.1932,0,1.0
 2015,stage_only,Change coalition with Ra'am,0.0,0,1.0
+2015,stage_only,Netanyahu + a change-bloc defector,0.1136,0,1.0
 2015,candidate,Netanyahu rightist coalition,0.0,0,1.0
-2015,candidate,Netanyahu + unaligned / defector coalition,0.5689,1,1.0
+2015,candidate,Netanyahu + unaligned / Amcha,0.3988,1,1.0
 2015,candidate,Change coalition (without Ra'am),0.0,0,1.0
 2015,candidate,Change coalition with unaligned / Amcha,0.0,0,1.0
-2015,candidate,Change coalition with a haredi party,0.0698,0,1.0
-2015,candidate,Centre minority backed by the Joint List,0.0634,0,1.0
-2015,candidate,Unity government (Likud without Netanyahu),0.1042,0,1.0
+2015,candidate,Change coalition with a haredi party,0.0705,0,1.0
+2015,candidate,Centre minority backed by the Joint List,0.0631,0,1.0
+2015,candidate,Unity government (Likud without Netanyahu),0.104,0,1.0
 2015,candidate,Repeat election,0.1937,0,1.0
 2015,candidate,Change coalition with Ra'am,0.0,0,1.0
+2015,candidate,Netanyahu + a change-bloc defector,0.1699,0,1.0
 2019a,production,Netanyahu rightist coalition,0.0,0,1.0
-2019a,production,Netanyahu + unaligned / defector coalition,0.5073,0,1.0
+2019a,production,Netanyahu + unaligned / Amcha,0.3988,0,1.0
 2019a,production,Change coalition (without Ra'am),0.0,0,1.0
 2019a,production,Change coalition with unaligned / Amcha,0.0,0,1.0
-2019a,production,Change coalition with a haredi party,0.0024,0,1.0
+2019a,production,Change coalition with a haredi party,0.0025,0,1.0
 2019a,production,Centre minority backed by the Joint List,0.0,0,1.0
-2019a,production,Unity government (Likud without Netanyahu),0.0839,0,1.0
-2019a,production,Repeat election,0.4063,1,1.0
+2019a,production,Unity government (Likud without Netanyahu),0.0832,0,1.0
+2019a,production,Repeat election,0.4077,1,1.0
 2019a,production,Change coalition with Ra'am,0.0,0,1.0
+2019a,production,Netanyahu + a change-bloc defector,0.1078,0,1.0
 2019a,unity_record,Netanyahu rightist coalition,0.0,0,1.0
-2019a,unity_record,Netanyahu + unaligned / defector coalition,0.5073,0,1.0
+2019a,unity_record,Netanyahu + unaligned / Amcha,0.3988,0,1.0
 2019a,unity_record,Change coalition (without Ra'am),0.0,0,1.0
 2019a,unity_record,Change coalition with unaligned / Amcha,0.0,0,1.0
-2019a,unity_record,Change coalition with a haredi party,0.0024,0,1.0
+2019a,unity_record,Change coalition with a haredi party,0.0025,0,1.0
 2019a,unity_record,Centre minority backed by the Joint List,0.0,0,1.0
-2019a,unity_record,Unity government (Likud without Netanyahu),0.0471,0,1.0
-2019a,unity_record,Repeat election,0.4432,1,1.0
+2019a,unity_record,Unity government (Likud without Netanyahu),0.0467,0,1.0
+2019a,unity_record,Repeat election,0.4442,1,1.0
 2019a,unity_record,Change coalition with Ra'am,0.0,0,1.0
+2019a,unity_record,Netanyahu + a change-bloc defector,0.1078,0,1.0
 2019a,stage_only,Netanyahu rightist coalition,0.0,0,1.0
-2019a,stage_only,Netanyahu + unaligned / defector coalition,0.661,0,1.0
+2019a,stage_only,Netanyahu + unaligned / Amcha,0.3988,0,1.0
 2019a,stage_only,Change coalition (without Ra'am),0.0,0,1.0
 2019a,stage_only,Change coalition with unaligned / Amcha,0.0,0,1.0
-2019a,stage_only,Change coalition with a haredi party,0.0063,0,1.0
+2019a,stage_only,Change coalition with a haredi party,0.0065,0,1.0
 2019a,stage_only,Centre minority backed by the Joint List,0.0,0,1.0
-2019a,stage_only,Unity government (Likud without Netanyahu),0.2021,0,1.0
+2019a,stage_only,Unity government (Likud without Netanyahu),0.2018,0,1.0
 2019a,stage_only,Repeat election,0.1306,1,1.0
 2019a,stage_only,Change coalition with Ra'am,0.0,0,1.0
+2019a,stage_only,Netanyahu + a change-bloc defector,0.2622,0,1.0
 2019a,candidate,Netanyahu rightist coalition,0.0,0,1.0
-2019a,candidate,Netanyahu + unaligned / defector coalition,0.7399,0,1.0
+2019a,candidate,Netanyahu + unaligned / Amcha,0.3988,0,1.0
 2019a,candidate,Change coalition (without Ra'am),0.0,0,1.0
 2019a,candidate,Change coalition with unaligned / Amcha,0.0,0,1.0
-2019a,candidate,Change coalition with a haredi party,0.0094,0,1.0
+2019a,candidate,Change coalition with a haredi party,0.0097,0,1.0
 2019a,candidate,Centre minority backed by the Joint List,0.0,0,1.0
-2019a,candidate,Unity government (Likud without Netanyahu),0.1196,0,1.0
+2019a,candidate,Unity government (Likud without Netanyahu),0.1193,0,1.0
 2019a,candidate,Repeat election,0.1312,1,1.0
 2019a,candidate,Change coalition with Ra'am,0.0,0,1.0
+2019a,candidate,Netanyahu + a change-bloc defector,0.3409,0,1.0
 2019s,production,Netanyahu rightist coalition,0.0,0,1.0
-2019s,production,Netanyahu + unaligned / defector coalition,0.4746,0,1.0
+2019s,production,Netanyahu + unaligned / Amcha,0.3988,0,1.0
 2019s,production,Change coalition (without Ra'am),0.0,0,1.0
 2019s,production,Change coalition with unaligned / Amcha,0.0,0,1.0
-2019s,production,Change coalition with a haredi party,0.0456,0,1.0
+2019s,production,Change coalition with a haredi party,0.0465,0,1.0
 2019s,production,Centre minority backed by the Joint List,0.0,0,1.0
-2019s,production,Unity government (Likud without Netanyahu),0.1071,0,1.0
-2019s,production,Repeat election,0.3727,1,1.0
+2019s,production,Unity government (Likud without Netanyahu),0.106,0,1.0
+2019s,production,Repeat election,0.3735,1,1.0
 2019s,production,Change coalition with Ra'am,0.0,0,1.0
+2019s,production,Netanyahu + a change-bloc defector,0.0751,0,1.0
 2019s,unity_record,Netanyahu rightist coalition,0.0,0,1.0
-2019s,unity_record,Netanyahu + unaligned / defector coalition,0.4746,0,1.0
+2019s,unity_record,Netanyahu + unaligned / Amcha,0.3988,0,1.0
 2019s,unity_record,Change coalition (without Ra'am),0.0,0,1.0
 2019s,unity_record,Change coalition with unaligned / Amcha,0.0,0,1.0
-2019s,unity_record,Change coalition with a haredi party,0.0456,0,1.0
+2019s,unity_record,Change coalition with a haredi party,0.0465,0,1.0
 2019s,unity_record,Centre minority backed by the Joint List,0.0,0,1.0
-2019s,unity_record,Unity government (Likud without Netanyahu),0.0596,0,1.0
-2019s,unity_record,Repeat election,0.4202,1,1.0
+2019s,unity_record,Unity government (Likud without Netanyahu),0.059,0,1.0
+2019s,unity_record,Repeat election,0.4205,1,1.0
 2019s,unity_record,Change coalition with Ra'am,0.0,0,1.0
+2019s,unity_record,Netanyahu + a change-bloc defector,0.0751,0,1.0
 2019s,stage_only,Netanyahu rightist coalition,0.0,0,1.0
-2019s,stage_only,Netanyahu + unaligned / defector coalition,0.5612,0,1.0
+2019s,stage_only,Netanyahu + unaligned / Amcha,0.3988,0,1.0
 2019s,stage_only,Change coalition (without Ra'am),0.0,0,1.0
 2019s,stage_only,Change coalition with unaligned / Amcha,0.0,0,1.0
-2019s,stage_only,Change coalition with a haredi party,0.0904,0,1.0
+2019s,stage_only,Change coalition with a haredi party,0.0923,0,1.0
 2019s,stage_only,Centre minority backed by the Joint List,0.0,0,1.0
-2019s,stage_only,Unity government (Likud without Netanyahu),0.2178,0,1.0
+2019s,stage_only,Unity government (Likud without Netanyahu),0.2166,0,1.0
 2019s,stage_only,Repeat election,0.1306,1,1.0
 2019s,stage_only,Change coalition with Ra'am,0.0,0,1.0
+2019s,stage_only,Netanyahu + a change-bloc defector,0.1616,0,1.0
 2019s,candidate,Netanyahu rightist coalition,0.0,0,1.0
-2019s,candidate,Netanyahu + unaligned / defector coalition,0.6212,0,1.0
+2019s,candidate,Netanyahu + unaligned / Amcha,0.3988,0,1.0
 2019s,candidate,Change coalition (without Ra'am),0.0,0,1.0
 2019s,candidate,Change coalition with unaligned / Amcha,0.0,0,1.0
-2019s,candidate,Change coalition with a haredi party,0.1176,0,1.0
+2019s,candidate,Change coalition with a haredi party,0.1196,0,1.0
 2019s,candidate,Centre minority backed by the Joint List,0.0,0,1.0
-2019s,candidate,Unity government (Likud without Netanyahu),0.1303,0,1.0
+2019s,candidate,Unity government (Likud without Netanyahu),0.1295,0,1.0
 2019s,candidate,Repeat election,0.1308,1,1.0
 2019s,candidate,Change coalition with Ra'am,0.0,0,1.0
+2019s,candidate,Netanyahu + a change-bloc defector,0.2212,0,1.0
 2020,production,Netanyahu rightist coalition,0.0,0,1.0
-2020,production,Netanyahu + unaligned / defector coalition,0.1639,1,1.0
+2020,production,Netanyahu + unaligned / Amcha,0.0,0,1.0
 2020,production,Change coalition (without Ra'am),0.0,0,1.0
 2020,production,Change coalition with unaligned / Amcha,0.0,0,1.0
 2020,production,Change coalition with a haredi party,0.0011,0,1.0
 2020,production,Centre minority backed by the Joint List,0.0,0,1.0
-2020,production,Unity government (Likud without Netanyahu),0.1582,0,1.0
-2020,production,Repeat election,0.6768,0,1.0
+2020,production,Unity government (Likud without Netanyahu),0.1569,0,1.0
+2020,production,Repeat election,0.6791,0,1.0
 2020,production,Change coalition with Ra'am,0.0,0,1.0
+2020,production,Netanyahu + a change-bloc defector,0.1629,1,1.0
 2020,unity_record,Netanyahu rightist coalition,0.0,0,1.0
-2020,unity_record,Netanyahu + unaligned / defector coalition,0.1639,1,1.0
+2020,unity_record,Netanyahu + unaligned / Amcha,0.0,0,1.0
 2020,unity_record,Change coalition (without Ra'am),0.0,0,1.0
 2020,unity_record,Change coalition with unaligned / Amcha,0.0,0,1.0
 2020,unity_record,Change coalition with a haredi party,0.0011,0,1.0
 2020,unity_record,Centre minority backed by the Joint List,0.0,0,1.0
-2020,unity_record,Unity government (Likud without Netanyahu),0.1199,0,1.0
-2020,unity_record,Repeat election,0.7151,0,1.0
+2020,unity_record,Unity government (Likud without Netanyahu),0.119,0,1.0
+2020,unity_record,Repeat election,0.717,0,1.0
 2020,unity_record,Change coalition with Ra'am,0.0,0,1.0
+2020,unity_record,Netanyahu + a change-bloc defector,0.1629,1,1.0
 2020,stage_only,Netanyahu rightist coalition,0.0,0,1.0
-2020,stage_only,Netanyahu + unaligned / defector coalition,0.315,1,1.0
+2020,stage_only,Netanyahu + unaligned / Amcha,0.0,0,1.0
 2020,stage_only,Change coalition (without Ra'am),0.0,0,1.0
 2020,stage_only,Change coalition with unaligned / Amcha,0.0,0,1.0
-2020,stage_only,Change coalition with a haredi party,0.0023,0,1.0
+2020,stage_only,Change coalition with a haredi party,0.0024,0,1.0
 2020,stage_only,Centre minority backed by the Joint List,0.0,0,1.0
-2020,stage_only,Unity government (Likud without Netanyahu),0.3119,0,1.0
+2020,stage_only,Unity government (Likud without Netanyahu),0.3115,0,1.0
 2020,stage_only,Repeat election,0.3708,0,1.0
 2020,stage_only,Change coalition with Ra'am,0.0,0,1.0
+2020,stage_only,Netanyahu + a change-bloc defector,0.3152,1,1.0
 2020,candidate,Netanyahu rightist coalition,0.0,0,1.0
-2020,candidate,Netanyahu + unaligned / defector coalition,0.4105,1,1.0
+2020,candidate,Netanyahu + unaligned / Amcha,0.0,0,1.0
 2020,candidate,Change coalition (without Ra'am),0.0,0,1.0
 2020,candidate,Change coalition with unaligned / Amcha,0.0,0,1.0
-2020,candidate,Change coalition with a haredi party,0.0031,0,1.0
+2020,candidate,Change coalition with a haredi party,0.0032,0,1.0
 2020,candidate,Centre minority backed by the Joint List,0.0,0,1.0
-2020,candidate,Unity government (Likud without Netanyahu),0.2149,0,1.0
+2020,candidate,Unity government (Likud without Netanyahu),0.2147,0,1.0
 2020,candidate,Repeat election,0.3715,0,1.0
 2020,candidate,Change coalition with Ra'am,0.0,0,1.0
+2020,candidate,Netanyahu + a change-bloc defector,0.4106,1,1.0
 2021,production,Netanyahu rightist coalition,0.0,0,1.0
-2021,production,Netanyahu + unaligned / defector coalition,0.1137,0,1.0
+2021,production,Netanyahu + unaligned / Amcha,0.0,0,1.0
 2021,production,Change coalition (without Ra'am),0.0,0,1.0
 2021,production,Change coalition with unaligned / Amcha,0.0,0,1.0
-2021,production,Change coalition with a haredi party,0.0219,0,1.0
+2021,production,Change coalition with a haredi party,0.0222,0,1.0
 2021,production,Centre minority backed by the Joint List,0.0279,0,1.0
-2021,production,Unity government (Likud without Netanyahu),0.1319,0,1.0
-2021,production,Repeat election,0.5291,0,1.0
+2021,production,Unity government (Likud without Netanyahu),0.1307,0,1.0
+2021,production,Repeat election,0.5307,0,1.0
 2021,production,Change coalition with Ra'am,0.1756,1,1.0
+2021,production,Netanyahu + a change-bloc defector,0.113,0,1.0
 2021,unity_record,Netanyahu rightist coalition,0.0,0,1.0
-2021,unity_record,Netanyahu + unaligned / defector coalition,0.1137,0,1.0
+2021,unity_record,Netanyahu + unaligned / Amcha,0.0,0,1.0
 2021,unity_record,Change coalition (without Ra'am),0.0,0,1.0
 2021,unity_record,Change coalition with unaligned / Amcha,0.0,0,1.0
-2021,unity_record,Change coalition with a haredi party,0.0219,0,1.0
+2021,unity_record,Change coalition with a haredi party,0.0222,0,1.0
 2021,unity_record,Centre minority backed by the Joint List,0.0279,0,1.0
-2021,unity_record,Unity government (Likud without Netanyahu),0.0743,0,1.0
-2021,unity_record,Repeat election,0.5866,0,1.0
+2021,unity_record,Unity government (Likud without Netanyahu),0.0737,0,1.0
+2021,unity_record,Repeat election,0.5877,0,1.0
 2021,unity_record,Change coalition with Ra'am,0.1756,1,1.0
+2021,unity_record,Netanyahu + a change-bloc defector,0.113,0,1.0
 2021,stage_only,Netanyahu rightist coalition,0.0,0,1.0
-2021,stage_only,Netanyahu + unaligned / defector coalition,0.1926,0,1.0
+2021,stage_only,Netanyahu + unaligned / Amcha,0.0,0,1.0
 2021,stage_only,Change coalition (without Ra'am),0.0,0,1.0
 2021,stage_only,Change coalition with unaligned / Amcha,0.0,0,1.0
-2021,stage_only,Change coalition with a haredi party,0.0218,0,1.0
+2021,stage_only,Change coalition with a haredi party,0.0222,0,1.0
 2021,stage_only,Centre minority backed by the Joint List,0.0275,0,1.0
-2021,stage_only,Unity government (Likud without Netanyahu),0.2188,0,1.0
+2021,stage_only,Unity government (Likud without Netanyahu),0.2182,0,1.0
 2021,stage_only,Repeat election,0.3708,0,1.0
-2021,stage_only,Change coalition with Ra'am,0.1685,1,1.0
+2021,stage_only,Change coalition with Ra'am,0.1687,1,1.0
+2021,stage_only,Netanyahu + a change-bloc defector,0.1926,0,1.0
 2021,candidate,Netanyahu rightist coalition,0.0,0,1.0
-2021,candidate,Netanyahu + unaligned / defector coalition,0.264,0,1.0
+2021,candidate,Netanyahu + unaligned / Amcha,0.0,0,1.0
 2021,candidate,Change coalition (without Ra'am),0.0,0,1.0
 2021,candidate,Change coalition with unaligned / Amcha,0.0,0,1.0
-2021,candidate,Change coalition with a haredi party,0.0245,0,1.0
-2021,candidate,Centre minority backed by the Joint List,0.0295,0,1.0
-2021,candidate,Unity government (Likud without Netanyahu),0.1318,0,1.0
+2021,candidate,Change coalition with a haredi party,0.0249,0,1.0
+2021,candidate,Centre minority backed by the Joint List,0.0294,0,1.0
+2021,candidate,Unity government (Likud without Netanyahu),0.1315,0,1.0
 2021,candidate,Repeat election,0.3716,0,1.0
-2021,candidate,Change coalition with Ra'am,0.1786,1,1.0
+2021,candidate,Change coalition with Ra'am,0.1787,1,1.0
+2021,candidate,Netanyahu + a change-bloc defector,0.2639,0,1.0
 2022,production,Netanyahu rightist coalition,1.0,1,0.0
-2022,production,Netanyahu + unaligned / defector coalition,0.0,0,0.0
+2022,production,Netanyahu + unaligned / Amcha,0.0,0,0.0
 2022,production,Change coalition (without Ra'am),0.0,0,0.0
 2022,production,Change coalition with unaligned / Amcha,0.0,0,0.0
 2022,production,Change coalition with a haredi party,0.0,0,0.0
@@ -584,8 +648,9 @@ cycle,tree,class,probability,realized,weight
 2022,production,Unity government (Likud without Netanyahu),0.0,0,0.0
 2022,production,Repeat election,0.0,0,0.0
 2022,production,Change coalition with Ra'am,0.0,0,0.0
+2022,production,Netanyahu + a change-bloc defector,0.0,0,0.0
 2022,unity_record,Netanyahu rightist coalition,1.0,1,0.0
-2022,unity_record,Netanyahu + unaligned / defector coalition,0.0,0,0.0
+2022,unity_record,Netanyahu + unaligned / Amcha,0.0,0,0.0
 2022,unity_record,Change coalition (without Ra'am),0.0,0,0.0
 2022,unity_record,Change coalition with unaligned / Amcha,0.0,0,0.0
 2022,unity_record,Change coalition with a haredi party,0.0,0,0.0
@@ -593,8 +658,9 @@ cycle,tree,class,probability,realized,weight
 2022,unity_record,Unity government (Likud without Netanyahu),0.0,0,0.0
 2022,unity_record,Repeat election,0.0,0,0.0
 2022,unity_record,Change coalition with Ra'am,0.0,0,0.0
+2022,unity_record,Netanyahu + a change-bloc defector,0.0,0,0.0
 2022,stage_only,Netanyahu rightist coalition,1.0,1,0.0
-2022,stage_only,Netanyahu + unaligned / defector coalition,0.0,0,0.0
+2022,stage_only,Netanyahu + unaligned / Amcha,0.0,0,0.0
 2022,stage_only,Change coalition (without Ra'am),0.0,0,0.0
 2022,stage_only,Change coalition with unaligned / Amcha,0.0,0,0.0
 2022,stage_only,Change coalition with a haredi party,0.0,0,0.0
@@ -602,8 +668,9 @@ cycle,tree,class,probability,realized,weight
 2022,stage_only,Unity government (Likud without Netanyahu),0.0,0,0.0
 2022,stage_only,Repeat election,0.0,0,0.0
 2022,stage_only,Change coalition with Ra'am,0.0,0,0.0
+2022,stage_only,Netanyahu + a change-bloc defector,0.0,0,0.0
 2022,candidate,Netanyahu rightist coalition,1.0,1,0.0
-2022,candidate,Netanyahu + unaligned / defector coalition,0.0,0,0.0
+2022,candidate,Netanyahu + unaligned / Amcha,0.0,0,0.0
 2022,candidate,Change coalition (without Ra'am),0.0,0,0.0
 2022,candidate,Change coalition with unaligned / Amcha,0.0,0,0.0
 2022,candidate,Change coalition with a haredi party,0.0,0,0.0
@@ -611,3 +678,4 @@ cycle,tree,class,probability,realized,weight
 2022,candidate,Unity government (Likud without Netanyahu),0.0,0,0.0
 2022,candidate,Repeat election,0.0,0,0.0
 2022,candidate,Change coalition with Ra'am,0.0,0,0.0
+2022,candidate,Netanyahu + a change-bloc defector,0.0,0,0.0

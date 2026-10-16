@@ -401,6 +401,22 @@
    "model_link": "Design of government_formation.py: actor-level behavioural gates (motivations, vetoes, institutional signatories) layered on seat arithmetic.",
    "stance": "supports",
    "site_use": "Backs 'Seats are not power. Every simulated Knesset runs through an explicit formation sequence'."
+  },
+  {
+   "id": "COA-F26",
+   "claim": "The outgoing government stays in office until a new government is constituted. Under Basic Law: The Government (2001), s.30, when a new Knesset has been elected the outgoing government continues to carry out its functions until the new government is constituted, and a prime minister who has resigned continues pending the new government. So if no government forms and a repeat election is held, the sitting prime minister heads the outgoing government through it.",
+   "quant": "s.30(a)-(b): 'the outgoing Government shall continue to carry out its functions until the new Government is constituted'; s.30(c): a PM who has resigned continues pending the new Government; s.30(d): it may appoint a Knesset Member as a minister in place of one who ceased to serve.",
+   "source": {
+    "authors": "Knesset",
+    "year": 2001,
+    "title": "Basic Law: The Government (English translation), section 30, Continuity of Government",
+    "venue": "WIPO Lex (IL097); Knesset Basic Laws",
+    "doi_or_url": "https://www.wipo.int/wipolex/es/text/495474",
+    "type": "official data"
+   },
+   "model_link": "formation outputs: 'Netanyahu still prime minister after formation' = Netanyahu forms the government + repeat election",
+   "stance": "supports",
+   "site_use": "new claim"
   }
  ],
  "challenges": [

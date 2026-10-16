@@ -36,5 +36,6 @@
  "new_straddlers": [
   "Reservists \u2013 Economic Party",
   "Amcha Yisrael"
- ]
+ ],
+ "holdout_median_err_simple": 0.62
 }

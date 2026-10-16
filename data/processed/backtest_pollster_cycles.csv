@@ -1,0 +1,66 @@
+cycle,pollster,poll_id,total_abs_error
+2009,Dahaf,2009_20090206_dahaf,20.0
+2009,Dialog,2009_20090206_dialoga,18.0
+2009,Geocartography,2009_20090129_geocartography,26.0
+2009,Maagar Mochot,2009_20090205_maagarmochot,17.0
+2009,Midgam,2009_20090206_midgam,18.0
+2009,New Wave,2009_20090205_newwave,22.0
+2009,Panels Politics,2009_20090205_panelspolitics,14.0
+2009,Shvakim Panorama,2009_20090205_shvakimpanorama,22.0
+2009,Teleseker,2009_20090204_teleseker,20.0
+2013,Dahaf,2013_20130118_dahaf,14.0
+2013,Dialog,2013_20130117_dialog,20.0
+2013,Geocartography,2013_20130110_geocartography,22.0
+2013,Maagar Mochot,2013_20130117_maagarmochot,28.0
+2013,Midgam,2013_20130112_midgam,24.0
+2013,New Wave,2013_20130117_newwave,20.0
+2013,Panels Politics,2013_20130117_panelspolitics,20.0
+2013,Sarid,2013_20130110_sarid,26.0
+2013,Smith Consulting,2013_20130111_smithconsulting,26.0
+2013,Teleseker,2013_20130116_teleseker,24.0
+2013,Unattributed,2013_20130111_unattributed,26.0
+2015,Dialog,2015_20150312_dialog,22.0
+2015,Geocartography,2015_20150308_geocartography,20.0
+2015,Maagar Mochot,2015_20150312_maagarmochot,26.0
+2015,Midgam,2015_20150313_midgam,22.0
+2015,Panels Politics,2015_20150313_panelspolitics,22.0
+2015,Smith Consulting,2015_20150312_smithconsulting,22.0
+2015,Teleseker,2015_20150313_telesekera,20.0
+2015,Unattributed,2015_20150313_unattributeda,22.0
+2019a,Dialog,2019a_20190403_dialog,38.0
+2019a,Direct Polls,2019a_20190328_directpolls,40.0
+2019a,Maagar Mochot,2019a_20190405_maagarmochot,46.0
+2019a,Midgam,2019a_20190404_midgama,38.0
+2019a,Midgam Project,2019a_20190405_midgamproject,40.0
+2019a,Miskar,2019a_20190404_miskar,48.0
+2019a,Panels Politics,2019a_20190403_panelspolitics,42.0
+2019a,Smith Consulting,2019a_20190405_smithconsulting,36.0
+2019a,TNS,2019a_20190404_tns,40.0
+2019s,Kantar,2019s_20190912_kantar,14.0
+2019s,Maagar Mochot,2019s_20190911_maagarmochot,12.0
+2019s,Midgam,2019s_20190913_midgam,14.0
+2019s,Midgam Project,2019s_20190913_midgamproject,14.0
+2019s,Panels Politics,2019s_20190912_panelspolitics,16.0
+2019s,Shvakim Panorama,2019s_20190913_shvakimpanorama,14.0
+2019s,Smith Consulting,2019s_20190912_smithconsultinga,8.0
+2020,Direct Polls,2020_20200226_directpolls,8.0
+2020,Kantar,2020_20200227_kantar,8.0
+2020,Maagar Mochot,2020_20200227_maagarmochot,10.0
+2020,Midgam,2020_20200228_midgam,8.0
+2020,Midgam Project,2020_20200228_midgamproject,8.0
+2020,Panels Politics,2020_20200227_panelspolitics,8.0
+2020,Smith Consulting,2020_20200228_smithconsulting,6.0
+2021,Camil Fuchs,2021_20210319_camilfuchs,20.0
+2021,Direct Polls,2021_20210318_directpolls,14.0
+2021,Kantar,2021_20210318_kantar,20.0
+2021,Maagar Mochot,2021_20210318_maagarmochot,26.0
+2021,Midgam,2021_20210319_midgam,20.0
+2021,Panels Politics,2021_20210318_panelspolitics,20.0
+2021,Smith Consulting,2021_20210318_smithconsulting,20.0
+2022,Camil Fuchs,2022_20221028_camilfuchs,20.0
+2022,Direct Polls,2022_20221027_directpolls,14.0
+2022,Kantar,2022_20221027_kantar,14.0
+2022,Maagar Mochot,2022_20221026_maagarmochot,16.0
+2022,Midgam,2022_20221028_midgam,14.0
+2022,Panels Politics,2022_20221027_panelspolitics,12.0
+2022,Smith Consulting,2022_20221027_smithconsulting,12.0

@@ -60,7 +60,9 @@ SECTOR_LABELS = {
     "russian_leaning": "Druze & YB strongholds",
 }
 PM_RENAME = {"none (repeat election)": "No one — repeat election",
-             "rotation / Likud successor": "Rotation / Likud successor"}
+             "rotation / Likud successor": "Rotation / Likud successor",
+             "Likud successor (unity)": "A Likud successor (unity government)",
+             "another leader": "Another leader"}
 
 
 def build_val() -> dict:
@@ -297,6 +299,26 @@ def build_payload() -> dict:
     formation = [{"o": r.outcome, "p": round(float(r.probability), 3)}
                  for r in gf.itertuples()]
 
+    # s.52: who leads, who sits in the government, outcome by bloc seats
+    fgroups, fmember, fcurve = {}, [], []
+    if (PROCESSED / "government_groups.csv").exists():
+        fgroups = {r.group: [round(float(r.probability), 3), round(float(r.p05), 3),
+                             round(float(r.p95), 3)]
+                   for r in pd.read_csv(PROCESSED / "government_groups.csv").itertuples()}
+    if (PROCESSED / "government_membership.csv").exists():
+        mm = pd.read_csv(PROCESSED / "government_membership.csv")
+        fmember = [[r.list, round(float(r.p_in_government), 3),
+                    round(float(r.p_outside_support), 3),
+                    None if pd.isna(r.p_pass) else round(float(r.p_pass), 3)]
+                   for r in mm.itertuples()
+                   if r.p_in_government >= 0.005 or r.p_outside_support >= 0.005]
+    if (PROCESSED / "government_by_nb.csv").exists():
+        cv = pd.read_csv(PROCESSED / "government_by_nb.csv")
+        fcurve = [[int(r.nb_seats), round(float(r.p_seats), 4), int(r.n),
+                   *[None if pd.isna(v) else round(float(v), 3)
+                     for v in (r.p_netanyahu, r.p_change, r.p_unity, r.p_repeat)]]
+                  for r in cv.itertuples()]
+
     pm_df = pd.read_csv(PROCESSED / "pm_probabilities.csv")
     pm = [[PM_RENAME.get(r.pm, r.pm), round(float(r.probability), 3),
            round(float(r.p05), 3), round(float(r.p95), 3)]
@@ -386,6 +408,7 @@ def build_payload() -> dict:
         "asof": str(off["asof"].iloc[0]), "parties": parties, "sub": sub,
         "ledger": ledger, "ratings": ratings,
         "blocs": blocs, "formation": formation, "pm": pm, "events": events,
+        "fgroups": fgroups, "fmember": fmember, "fcurve": fcurve,
         "house": house, "val": build_val(), "below": below, "counts": counts, "fit": fit,
         "drawCols": draw_cols, "draws": draws, "kalpi": kalpi,
     }

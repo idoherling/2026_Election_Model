@@ -63,6 +63,10 @@ SEED = 20261027
 
 NB_CORE = ["Likud", "Otzma Yehudit", "Shas", "United Torah Judaism",
            "Religious Zionist Party", "Noam", "Zehut"]
+# The Netanyahu bloc as the site's headline counts it (template BLOC "nb"):
+# the seat axis of government_by_nb.csv (s.52)
+NB_SITE = NB_CORE + ["Amcha Yisrael", "The Haredi Public"]
+NB_K_LO, NB_K_HI = 44, 68
 CENTRE = ["Yashar", "Bennett 2026 + Yesh Atid", "The Democrats",
           "Yisrael Beytenu"]
 # Kingmakers (owner ruling 2026-09-03): neither list is a change-bloc
@@ -266,9 +270,14 @@ PM_ALLOC_NEFF = 60              # Dirichlet concentration on rotation rows
 # stranger conversions (Cromwell caveat).
 AMCHA_JOIN_EISENKOT = 0.03
 
+# 2026-10-16 (dossier s.52): the owner's "Netanyahu + unaligned / defector
+# coalition" is reported as two outcomes: closed by kingmakers / Amcha (1)
+# and closed by a change-bloc list breaking its pledge (9, the 2020 Gantz
+# path). The site groups them back under the owner's label. Codes 0-8 keep
+# their meaning; the random stream is unchanged.
 OUTCOMES = [
     "Netanyahu rightist coalition",
-    "Netanyahu + unaligned / defector coalition",
+    "Netanyahu + unaligned / Amcha",
     "Change coalition (without Ra'am)",
     "Change coalition with unaligned / Amcha",
     "Change coalition with a haredi party",
@@ -276,7 +285,14 @@ OUTCOMES = [
     "Unity government (Likud without Netanyahu)",
     "Repeat election",
     "Change coalition with Ra'am",
+    "Netanyahu + a change-bloc defector",
 ]
+# Who leads each outcome (site groups, s.52)
+OUTCOME_GROUP = {0: "netanyahu", 1: "netanyahu", 9: "netanyahu",
+                 2: "change", 3: "change", 4: "change", 5: "change", 8: "change",
+                 6: "unity", 7: "repeat"}
+PM_OTHER_UNITY = "Likud successor (unity)"
+PM_OTHER = "another leader"
 
 
 # Configuration-conditional gates (2026-09-03, Fable audit #4). The declared
@@ -461,6 +477,7 @@ def simulate_formation(draws: pd.DataFrame, behavior: dict, seed=SEED,
     zo_seats = np.zeros(n)
     zo_right = np.zeros(n, dtype=bool)
     zo_centre = np.zeros(n, dtype=bool)
+    king_sides = {}   # name -> (right mask, centre mask), for membership (s.52)
     for name, (kr, kc) in (UNALIGNED if unaligned is None
                            else unaligned).items():
         if name not in draws.columns:
@@ -469,6 +486,7 @@ def simulate_formation(draws: pd.DataFrame, behavior: dict, seed=SEED,
         uu = rng.random(n)
         una_r += np.where(uu < behavior[kr], sv, 0)
         cmask = (uu >= behavior[kr]) & (uu < behavior[kr] + behavior[kc])
+        king_sides[name] = (uu < behavior[kr], cmask)
         if name in ZIONIST_ONLY:
             res_c += np.where(cmask, sv, 0)
         else:
@@ -534,7 +552,7 @@ def simulate_formation(draws: pd.DataFrame, behavior: dict, seed=SEED,
 
         outcome = np.full(n, 7)  # default: repeat election
         outcome[(ce_pure + res_c + amcha_ce + likud >= 61) & sans_bibi] = 6
-        outcome[(uu[:, 6] < p_defect) & feasible] = 1
+        outcome[(uu[:, 6] < p_defect) & feasible] = 9   # pledge-break (s.52)
         # minority: sworn by plurality with the JOINT LIST abstaining (the
         # named backer); a Ra'am abstention additionally lowers the bar
         abstaining = (np.where(jl_supports, jl, 0)
@@ -564,9 +582,12 @@ def simulate_formation(draws: pd.DataFrame, behavior: dict, seed=SEED,
         outcome[ce0 >= 61] = 2
         outcome[(nb0 < 61) & (nb >= 61)] = 1
         outcome[nb0 >= 61] = 0
-        return outcome
+        flags = {"shas_on": shas_on, "utj_on": utj_on, "lib_haredi": lib_haredi,
+                 "lib_ok": lib_ok, "raam_supports": raam_supports,
+                 "jl_supports": jl_supports}
+        return outcome, flags
 
-    outcome = gates(u, r_utj, r_lib_ok, r_lib_har, a_abst)
+    outcome, flags = gates(u, r_utj, r_lib_ok, r_lib_har, a_abst)
 
     # --- post-deadlock stage (s.49) ---
     # deadlock: no side reaches 61 with its own lists plus the kingmakers
@@ -586,11 +607,13 @@ def simulate_formation(draws: pd.DataFrame, behavior: dict, seed=SEED,
         for _ in range(STAGE_RESAMPLE):
             if not need.any():
                 break
-            oc2 = gates(srng.random((n, 7)), srng.random(n), srng.random(n),
-                        srng.random(n),
-                        srng.random(n) if a_abst is not None else None)
+            oc2, fl2 = gates(srng.random((n, 7)), srng.random(n), srng.random(n),
+                             srng.random(n),
+                             srng.random(n) if a_abst is not None else None)
             fill = need & (oc2 != 7)
             outcome[fill] = oc2[fill]
+            for k in flags:
+                flags[k] = np.where(fill, fl2[k], flags[k])
             need &= ~fill
         unresolved = int(need.sum())   # no gate can fire: stays a repeat
     # the desk's narrower event (bloc cores only, Ra'am counted with the
@@ -613,7 +636,7 @@ def simulate_formation(draws: pd.DataFrame, behavior: dict, seed=SEED,
     # 3/6 (and, when the list is not ZIONIST_ONLY, also in 4/5/8)
     c_oc = ([3, 6] if "Reservists – Economic Party" in ZIONIST_ONLY
             else [3, 4, 5, 6, 8])
-    counted = ((zo_right & (outcome == 1))
+    counted = ((zo_right & np.isin(outcome, [1, 9]))
                | (zo_centre & np.isin(outcome, c_oc)))
     passed = zo_seats > 0
     simulate_formation.last_res_counted = (
@@ -622,6 +645,7 @@ def simulate_formation(draws: pd.DataFrame, behavior: dict, seed=SEED,
     pm = np.full(n, "none (repeat election)", dtype=object)
     pm[outcome == 0] = "Netanyahu"
     pm[outcome == 1] = "Netanyahu"
+    pm[outcome == 9] = "Netanyahu"
     u_pm = rng.random(n)
     for oc, alloc in pm_alloc.items():
         mask = outcome == oc
@@ -633,6 +657,55 @@ def simulate_formation(draws: pd.DataFrame, behavior: dict, seed=SEED,
     flip = (together > yashar) & np.isin(outcome, [2, 3, 4, 5, 8])
     pm = np.where(flip & (pm == "Eisenkot"), "Bennett",
                   np.where(flip & (pm == "Bennett"), "Eisenkot", pm))
+    # the allocation's last column: a Likud successor in a unity government,
+    # someone outside the named leaders elsewhere (s.52)
+    oth = pm == PM_NAMES[-1]
+    pm = np.where(oth & (outcome == 6), PM_OTHER_UNITY,
+                  np.where(oth, PM_OTHER, pm))
+
+    # --- who sits in the government (s.52): membership implied by the gate
+    # that formed it, with no new behavioural assumption. The pledge-breaker
+    # of outcome 9 is NOT named (the record says that one happens, not who):
+    # it is reported as its own row in government_membership.csv ---
+    cols = list(draws.columns)
+    member = np.zeros((n, len(cols)), dtype=bool)
+    support = np.zeros((n, len(cols)), dtype=bool)
+    sv_all = draws.values
+    has = sv_all > 0
+    j = {c: i for i, c in enumerate(cols)}
+    nb_side = np.isin(outcome, [0, 1, 9])
+    ch_side = np.isin(outcome, [2, 3, 4, 5, 6, 8])
+    for c in NB_CORE:
+        if c in j:
+            member[:, j[c]] = nb_side & has[:, j[c]]
+    if AMCHA in j:
+        member[:, j[AMCHA]] = has[:, j[AMCHA]] & (
+            (nb_side & (amcha_side == 1))
+            | (np.isin(outcome, [2, 3, 4, 6]) & (amcha_side == 2)))
+    for c in CENTRE:
+        if c in j:
+            inn = ch_side.copy()
+            if c == "Yisrael Beytenu":
+                inn &= ~((outcome == 4) & ~flags["lib_haredi"])
+                inn &= ~((outcome == 5) & ~flags["lib_ok"])
+            member[:, j[c]] = inn & has[:, j[c]]
+    for c, (rmask, cmask) in king_sides.items():
+        oc_c = [2, 3, 6] if c in ZIONIST_ONLY else [2, 3, 4, 5, 6, 8]
+        member[:, j[c]] = has[:, j[c]] & ((nb_side & rmask)
+                                          | (np.isin(outcome, oc_c) & cmask))
+    if "Shas" in j:
+        member[:, j["Shas"]] |= (outcome == 4) & flags["shas_on"] & has[:, j["Shas"]]
+    if "United Torah Judaism" in j:
+        member[:, j["United Torah Judaism"]] |= ((outcome == 4) & flags["utj_on"]
+                                                 & has[:, j["United Torah Judaism"]])
+    if "Likud" in j:
+        member[:, j["Likud"]] |= (outcome == 6) & has[:, j["Likud"]]
+    if RAAM in j:
+        member[:, j[RAAM]] = (outcome == 8) & has[:, j[RAAM]]
+        support[:, j[RAAM]] = (outcome == 5) & flags["raam_supports"] & has[:, j[RAAM]]
+    if JOINT_LIST in j:
+        support[:, j[JOINT_LIST]] = (outcome == 5) & flags["jl_supports"] & has[:, j[JOINT_LIST]]
+    simulate_formation.last_member = (cols, member, support)
     return outcome, pm
 
 
@@ -657,7 +730,18 @@ def main(out_dir=None, stage: bool = POST_DEADLOCK_STAGE) -> None:
     prng = np.random.default_rng(SEED + 7)
     r_stage = stage_draws(M, stage)
     oc_mat = np.zeros((M, len(OUTCOMES)))
-    pm_names_all = PM_NAMES + ["Netanyahu", "none (repeat election)"]
+    pm_names_all = PM_NAMES[:-1] + [PM_OTHER_UNITY, PM_OTHER, "Netanyahu",
+                                    "none (repeat election)"]
+    groups = ["netanyahu", "change", "unity", "repeat", "netanyahu_in_office"]
+    grp_mat = np.zeros((M, len(groups)))
+    cols0 = list(draws.columns)
+    mem_sum = np.zeros(len(cols0))
+    sup_sum = np.zeros(len(cols0))
+    # outcome group by the Netanyahu bloc's seats as the headline counts them
+    nb_cols = [c for c in NB_SITE if c in draws.columns]
+    nb_k = np.clip(draws[nb_cols].sum(axis=1).values.astype(int), NB_K_LO, NB_K_HI)
+    kk = nb_k - NB_K_LO
+    curve = np.zeros((NB_K_HI - NB_K_LO + 1, 4))
     pm_mat = np.zeros((M, len(pm_names_all)))
     res_counted = np.zeros(M)
     dl_keys = ["p_deadlock", "p_repeat_deadlock_tree", "p_repeat_deadlock",
@@ -677,6 +761,16 @@ def main(out_dir=None, stage: bool = POST_DEADLOCK_STAGE) -> None:
         cnt = pd.Series(oc).value_counts(normalize=True)
         for i in range(len(OUTCOMES)):
             oc_mat[m, i] = cnt.get(i, 0.0)
+        gi = np.array([["netanyahu", "change", "unity", "repeat"].index(OUTCOME_GROUP[int(o)])
+                       for o in range(len(OUTCOMES))])[oc]
+        for g in range(4):
+            grp_mat[m, g] = (gi == g).mean()
+        grp_mat[m, 4] = ((gi == 0) | (gi == 3)).mean()
+        for g in range(4):
+            curve[:, g] += np.bincount(kk, weights=(gi == g), minlength=curve.shape[0])
+        _c, mem, sup = simulate_formation.last_member
+        mem_sum += mem.mean(axis=0)
+        sup_sum += sup.mean(axis=0)
         pcnt = pd.Series(pmv).value_counts(normalize=True)
         for j, nmn in enumerate(pm_names_all):
             pm_mat[m, j] = pcnt.get(nmn, 0.0)
@@ -692,6 +786,33 @@ def main(out_dir=None, stage: bool = POST_DEADLOCK_STAGE) -> None:
           "vectors x behavioral draws; post-deadlock stage "
           f"{'ON' if stage else 'OFF'}):\n")
     print(table.to_string(index=False))
+
+    # s.52 outputs: who leads, who sits in the government, and the outcome
+    # group by the Netanyahu bloc's seat count
+    gdf = pd.DataFrame({"group": groups,
+                        "probability": grp_mat.mean(axis=0).round(3),
+                        "p05": np.percentile(grp_mat, 5, axis=0).round(3),
+                        "p95": np.percentile(grp_mat, 95, axis=0).round(3)})
+    gdf.to_csv(out_dir / "government_groups.csv", index=False)
+    passp = (draws.values > 0).mean(axis=0)
+    mdf = pd.DataFrame({"list": cols0, "p_pass": passp.round(3),
+                        "p_in_government": (mem_sum / M).round(3),
+                        "p_outside_support": (sup_sum / M).round(3)})
+    mdf["p_in_given_pass"] = np.where(passp > 0, mem_sum / M / np.maximum(passp, 1e-9),
+                                      np.nan).round(3)
+    mdf = mdf.sort_values("p_in_government", ascending=False)
+    mdf.loc[len(mdf)] = ["(a change-bloc list joining Netanyahu)", np.nan,
+                         round(float(oc_mat[:, 9].mean()), 3), 0.0, np.nan]
+    mdf.to_csv(out_dir / "government_membership.csv", index=False)
+    nk = np.bincount(kk, minlength=curve.shape[0]).astype(float)
+    cdf = pd.DataFrame({"nb_seats": np.arange(NB_K_LO, NB_K_HI + 1),
+                        "p_seats": (nk / nk.sum()).round(4), "n": nk.astype(int)})
+    for g, name in enumerate(["netanyahu", "change", "unity", "repeat"]):
+        cdf["p_" + name] = np.where(nk > 0, curve[:, g] / (M * np.maximum(nk, 1)), np.nan).round(3)
+    cdf.to_csv(out_dir / "government_by_nb.csv", index=False)
+    print("\nWho leads (groups):"); print(gdf.to_string(index=False))
+    print("\nP(in the government) by list:"); print(mdf.to_string(index=False))
+    print("\nOutcome group by Netanyahu-bloc seats:"); print(cdf.to_string(index=False))
 
     pm_df = pd.DataFrame({
         "pm": pm_names_all,
@@ -749,7 +870,7 @@ def main(out_dir=None, stage: bool = POST_DEADLOCK_STAGE) -> None:
             row["repeat_deadlock"] = None if rd is None else round(rd, 3)
             row["likud_sans_bibi"] = b["likud_sans_bibi"]
             row["p_successor_pm"] = round(float(
-                (pm_s == "rotation / Likud successor").mean()), 3)
+                (pm_s == PM_OTHER_UNITY).mean()), 3)
         row.update({
             "p_netanyahu_pm": round(float((pm_s == "Netanyahu").mean()), 3),
             "p_eisenkot_pm": round(float((pm_s == "Eisenkot").mean()), 3),

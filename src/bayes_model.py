@@ -1153,9 +1153,24 @@ def _merge_cec(obs: pd.DataFrame, block_of: dict, asof) -> pd.DataFrame:
     return pd.concat([kept, cec_obs], ignore_index=True)
 
 
-def fit(data, draws=800, tune=800, holdout_mask=None, clr=None):
+def lam_prior_q(firms, exclude_cycle=None) -> np.ndarray:
+    """Per-firm accuracy weight q behind the lam prior (median 1/q^2), from
+    the results-graded scorecard. exclude_cycle: the leave-one-cycle-out
+    scorecard without that cycle's final polls - every harness refit of a
+    graded cycle (validate_bayes.load_or_fit, dossier s.50). None = the full
+    scorecard (production 2026: all graded cycles are in its past)."""
+    from polling_average import QUALITY_ALIAS, quality_map
+    qmap = quality_map(exclude_cycle=exclude_cycle)
+    return np.array([qmap.get(QUALITY_ALIAS.get(f, f), 1.0) for f in firms])
+
+
+def fit(data, draws=800, tune=800, holdout_mask=None, clr=None,
+        scorecard_exclude=None):
     """clr: None = the module latent (CLR_LATENT); True/False forces CLR/ALR
-    (the production build's ALR holdout comparison and fallback)."""
+    (the production build's ALR holdout comparison and fallback).
+    scorecard_exclude: a graded cycle whose final-poll errors are left out
+    of the firms' lam prior (lam_prior_q); harness refits pass the cycle
+    they fit, production passes nothing."""
     import pymc as pm
     import pytensor.tensor as pt
 
@@ -1245,9 +1260,9 @@ def fit(data, draws=800, tune=800, holdout_mask=None, clr=None):
         # results-graded accuracy scorecard — the information a within-cycle
         # likelihood cannot see. A firm with a poor final-poll record enters
         # with a wider prior noise; the 2026 data can still update it.
-        from polling_average import QUALITY_ALIAS, quality_map
-        q = np.array([quality_map().get(QUALITY_ALIAS.get(f, f), 1.0)
-                      for f in data["firms"]])
+        # A harness refit of a graded cycle reads the scorecard WITHOUT
+        # that cycle (scorecard_exclude; dossier s.50).
+        q = lam_prior_q(data["firms"], exclude_cycle=scorecard_exclude)
         lam = pm.LogNormal("lam", mu=np.log(1.0 / q ** 2), sigma=LAM_PRIOR_SIGMA,
                            shape=F)
         # Undecided-share effect on informativeness: a filing-reported
@@ -1857,6 +1872,9 @@ def main() -> None:
         "holdout_obs": int(holdout.sum()),
         "holdout_median_err": round(hold_err[lat0], 2),
         **({"holdout_median_err_alr": round(hold_err["alr"], 2)} if CLR_LATENT else {})}
+    if hold_err:   # the simple weighted pipeline on the same 14-day holdout
+        from compare_models import simple_holdout_error
+        fit_summary_holdout["holdout_median_err_simple"] = round(simple_holdout_error(data), 2)
 
     model, idata = fit(data)
     div, rhat, ess = diagnostics(idata)

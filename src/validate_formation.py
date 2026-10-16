@@ -117,9 +117,11 @@ def unity_prior(pre: bool, cycle: str):
             gf.BEHAVIOR_NEFF["likud_sans_bibi"])
 
 # 2026-role seat maps. realized = index into OUTCOMES:
-# 0 NB alone, 1 NB + unaligned/defector, 2 change alone, 3 change +
+# 0 NB alone, 1 NB + unaligned / Amcha, 2 change alone, 3 change +
 # unaligned, 4 change + haredi, 5 JL-backed minority, 6 unity, 7 repeat,
-# 8 change + Ra'am.
+# 8 change + Ra'am, 9 NB + a change-bloc defector (split from 1 on 16 Oct,
+# s.52: 2020 is the pledge-break path; 1996 and 2015 were closed by
+# kingmakers).
 L, R, S, U = "Likud", "Religious Zionist Party", "Shas", "United Torah Judaism"
 Y, D, YB = "Yashar", "The Democrats", "Yisrael Beytenu"
 K1, K2, RA, JL, AM = ("Kingmaker 1", "Kingmaker 2", gf.RAAM, gf.JOINT_LIST,
@@ -184,7 +186,7 @@ HISTORY = {
         L: 32, R: 7, S: 9, U: 7, Y: 33, D: 11, K1: 8, JL: 10, RA: 3},
         note="Yamina 7 (signed the 55 bloc); YB 8 kingmaker; Joint List 13 "
              "(UAL 3). Window lapsed (atlas D10-F22)."),
-    "2020": dict(regime="parliamentary", realized=1, seats={
+    "2020": dict(regime="parliamentary", realized=9, seats={
         L: 36, R: 6, S: 9, U: 7, Y: 33, D: 7, YB: 7, JL: 11, RA: 4},
         note="Yamina 6; LGM 7; YB with Gantz; Joint List 15 (UAL 4). Gantz's "
              "faction joins Netanyahu (atlas D10-F25)."),

@@ -10,8 +10,16 @@ Outputs:
     data/processed/backtest_blocks.csv     per cycle x party-block errors
     data/processed/backtest_summary.csv    per cycle headline metrics
     data/processed/backtest_pollsters.csv  pollster scorecard seed
+    data/processed/backtest_pollster_cycles.csv
+                                           per (pollster, cycle) final-poll
+                                           error, the scorecard's inputs: a
+                                           harness refit of cycle c rebuilds
+                                           the scorecard without c
+                                           (scorecard(), quality_map)
     output/figures/backtest_final_polls.png
 """
+
+from __future__ import annotations   # the venv is Python 3.9 (str | None)
 
 from pathlib import Path
 
@@ -59,6 +67,24 @@ def merge_blocks(party_ids) -> list[set[str]]:
 
 def short_name(party_id: str, names: dict[str, str]) -> str:
     return " + ".join(names.get(p, p) for p in sorted(party_id.split("+")))
+
+
+def scorecard(by_poll: pd.DataFrame, exclude_cycle: str | None = None) -> pd.DataFrame:
+    """Pollster scorecard from the per-(pollster, cycle) final-poll errors:
+    cycles graded and the mean total absolute seat error of the firm's final
+    polls, rounded as backtest_pollsters.csv stores it. exclude_cycle drops
+    that cycle's finals: the leave-one-cycle-out scorecard a harness refit
+    of the cycle uses (dossier s.50). A firm graded only in that cycle
+    leaves the scorecard (neutral weight)."""
+    bp = by_poll[by_poll["pollster"] != "Unattributed"]
+    if exclude_cycle is not None:
+        bp = bp[bp["cycle"].astype(str) != str(exclude_cycle)]
+    return (
+        bp.groupby("pollster")
+        .agg(cycles=("cycle", "nunique"), mean_abs_error=("total_abs_error", "mean"))
+        .round(1)
+        .sort_values(["cycles", "mean_abs_error"], ascending=[False, True])
+    )
 
 
 def main() -> None:
@@ -156,21 +182,17 @@ def main() -> None:
     blocks_df = pd.DataFrame(block_rows)
     summary = pd.DataFrame(summary_rows)
     by_poll = pd.DataFrame(pollster_rows)
-    scorecard = (
-        by_poll[by_poll["pollster"] != "Unattributed"]
-        .groupby("pollster")
-        .agg(cycles=("cycle", "nunique"), mean_abs_error=("total_abs_error", "mean"))
-        .round(1)
-        .sort_values(["cycles", "mean_abs_error"], ascending=[False, True])
-    )
+    card = scorecard(by_poll)
 
     blocks_df.to_csv(PROCESSED_DIR / "backtest_blocks.csv", index=False)
     summary.to_csv(PROCESSED_DIR / "backtest_summary.csv", index=False)
-    scorecard.to_csv(PROCESSED_DIR / "backtest_pollsters.csv")
+    card.to_csv(PROCESSED_DIR / "backtest_pollsters.csv")
+    by_poll.sort_values(["cycle", "pollster", "poll_id"]).to_csv(
+        PROCESSED_DIR / "backtest_pollster_cycles.csv", index=False)
 
     print(summary.to_string(index=False))
     print()
-    print(scorecard[scorecard["cycles"] >= 3].to_string())
+    print(card[card["cycles"] >= 3].to_string())
 
     plot(blocks_df, summary)
     print(f"\nwrote backtest CSVs and {FIG_DIR / 'backtest_final_polls.png'}")

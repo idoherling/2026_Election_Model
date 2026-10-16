@@ -812,7 +812,7 @@
   "model_link": "KALPI_ARAB_CAP 0.163 (839k x 72% / 0.78); ARAB_TURNOUT max 0.72; KALPI_HAREDI_FLOOR 0.066 (Shas+UTJ get only 28% of their votes from the haredi cluster, so the floor is a judgement, not a physical bound)."
  },
  "COA-F01": {
-  "claim": "The standard large-N model of which cabinet forms (Martin & Stevenson 2001, conditional logit over every potential cabinet) finds that pre-electoral pacts and public refusals to govern together ('anti-pacts') are the largest predictors, followed by incumbency and the presence of the largest party. Minority cabinets are penalised where an investiture vote is required. Israel is one of the 14 countries in the sample, and formations where a single party held a majority are excluded.",
+  "claim": "Martin & Stevenson's conditional logit over every potential cabinet estimates large effects for a pre-electoral pact (+2.72) and a public refusal to govern together (-4.10), alongside incumbency (+1.89) and being the largest party (+1.40) (Table 1, M&S Model 7 as reprinted by Glasgow, Golder & Golder 2012). The paper reports the coefficients; it does not rank the predictors.",
   "quant": "220 formation opportunities, 33,256 potential governments, 14 democracies including Israel, mid-1940s to mid-1980s. Model 7 coefficients (as replicated exactly by Glasgow, Golder & Golder 2012, Table 1, p.258): pre-electoral pact +2.72 (SE 0.62), anti-pact -4.10 (1.04), incumbent coalition +1.89 (0.20), largest party +1.40 (0.27), minimal winning +0.55 (0.26), number of parties -0.31 (0.14), minority where investiture required -0.91 (0.34), anti-system party -19.13 (3.71). Log-likelihood -558.74. Sample description: Glasgow, Golder & Golder 2012, p.256. The 2001 original was not opened; all figures come from that exact replication.",
   "source": "COA-F01",
   "status": "corrected",
@@ -985,6 +985,13 @@
   "source": "COA-F25",
   "status": "verified",
   "model_link": "Design of government_formation.py: actor-level behavioural gates (motivations, vetoes, institutional signatories) layered on seat arithmetic."
+ },
+ "COA-F26": {
+  "claim": "The outgoing government stays in office until a new government is constituted. Under Basic Law: The Government (2001), s.30, when a new Knesset has been elected the outgoing government continues to carry out its functions until the new government is constituted, and a prime minister who has resigned continues pending the new government. So if no government forms and a repeat election is held, the sitting prime minister heads the outgoing government through it.",
+  "quant": "s.30(a)-(b): 'the outgoing Government shall continue to carry out its functions until the new Government is constituted'; s.30(c): a PM who has resigned continues pending the new Government; s.30(d): it may appoint a Knesset Member as a minister in place of one who ceased to serve.",
+  "source": "COA-F26",
+  "status": "verified",
+  "model_link": "formation outputs: 'Netanyahu still prime minister after formation' = Netanyahu forms the government + repeat election"
  },
  "DYN-F01": {
   "claim": "Across 45 countries, polls become steadily more informative about the final vote as election day approaches. Early in the cycle they predict parliamentary elections better than presidential ones, and by election day the two are indistinguishable. Differences between PR and plurality systems are small. Whether Israel is in the published dataset could not be confirmed.",

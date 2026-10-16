@@ -191,10 +191,11 @@ def grade(out: Path) -> None:
     # assemble every arm's graded rows: fixed-width arms at the shipped width,
     # nested arms at their held-out choice
     graded, picks = [], {}
-    for arm in ARMS:
+    have = set(d.arm)          # a subset run (--arms) grades only its arms
+    for arm in [a for a in ARMS if a in have]:
         x = d[(d.arm == arm) & (d.width == shipped_w)]
         graded.append(x.assign(label=arm))
-    for lab, arm in GRID_ARMS.items():
+    for lab, arm in [(l, a) for l, a in GRID_ARMS.items() if a in have]:
         picks[lab] = {c: nested_choice(d, arm, c) for c in cycles}
         x = pd.concat([d[(d.arm == arm) & (d.cycle == c) & (d.width == picks[lab][c])]
                        for c in cycles])

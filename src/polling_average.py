@@ -70,21 +70,53 @@ def load_2026() -> pd.DataFrame:
     return polls[(polls["cycle"] == "2026") & polls["sums_ok"]].copy()
 
 
-def quality_map() -> dict[str, float]:
+def quality_from_scorecard(sc: pd.DataFrame) -> dict[str, float]:
+    """Accuracy weight per firm from a scorecard (pollster, cycles,
+    mean_abs_error): sqrt of the industry-median error ratio, shrunk toward
+    1 by cycles graded, clipped."""
+    med = sc["mean_abs_error"].median()
+    q = (med / sc["mean_abs_error"]).pow(0.5)
+    # Shrink toward the industry median by cycles graded: a firm
+    # scored on one or two finals earns only part of its edge
+    # (2026-09-03 weighting audit: Kantar's 4-cycle record was
+    # hitting the clip; and those "finals" were exit polls).
+    k = 3.0
+    q = 1.0 + (q - 1.0) * sc["cycles"] / (sc["cycles"] + k)
+    q = q.clip(0.7, 1.3)
+    return dict(zip(sc["pollster"], q.round(3)))
+
+
+_QUALITY_LOO: dict[str, dict[str, float]] = {}
+
+
+def quality_map(exclude_cycle: str | None = None) -> dict[str, float]:
+    """Firm accuracy weights from the results-graded scorecard.
+
+    exclude_cycle=None (production, and the poll weights everywhere): the
+    full scorecard, backtest_pollsters.csv - every graded cycle 2009-2022.
+    exclude_cycle=c: the scorecard rebuilt from the per-(pollster, cycle)
+    errors without cycle c (backtest_pollster_cycles.csv; same median ratio,
+    sqrt, shrinkage and clip). A harness refit of cycle c must use it, or
+    the firms' precision priors already contain c's final-poll errors
+    (dossier s.50). Missing inputs raise here: an empty map would be a
+    different prior, not the leave-one-out one."""
     global _QUALITY
+    if exclude_cycle is not None:
+        key = str(exclude_cycle)
+        if key not in _QUALITY_LOO:
+            from backtest import scorecard
+            by_poll = pd.read_csv(PROCESSED_DIR / "backtest_pollster_cycles.csv",
+                                  dtype={"cycle": str})
+            if key not in set(by_poll["cycle"]):
+                raise ValueError(f"cycle {key!r} is not in the graded scorecard "
+                                 f"({sorted(by_poll['cycle'].unique())})")
+            _QUALITY_LOO[key] = quality_from_scorecard(
+                scorecard(by_poll, exclude_cycle=key).reset_index())
+        return _QUALITY_LOO[key]
     if _QUALITY is None:
         try:
-            sc = pd.read_csv(PROCESSED_DIR / "backtest_pollsters.csv")
-            med = sc["mean_abs_error"].median()
-            q = (med / sc["mean_abs_error"]).pow(0.5)
-            # Shrink toward the industry median by cycles graded: a firm
-            # scored on one or two finals earns only part of its edge
-            # (2026-09-03 weighting audit: Kantar's 4-cycle record was
-            # hitting the clip; and those "finals" were exit polls).
-            k = 3.0
-            q = 1.0 + (q - 1.0) * sc["cycles"] / (sc["cycles"] + k)
-            q = q.clip(0.7, 1.3)
-            _QUALITY = dict(zip(sc["pollster"], q.round(3)))
+            _QUALITY = quality_from_scorecard(
+                pd.read_csv(PROCESSED_DIR / "backtest_pollsters.csv"))
         except FileNotFoundError:
             _QUALITY = {}
     return _QUALITY

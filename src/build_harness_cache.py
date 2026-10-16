@@ -9,10 +9,14 @@ are exactly those of validate_bayes.main (eve: asof = election day - 1,
 skipped below 8 polls), built through the same harness_frame /
 harness_prepare (so HARNESS_FIDELITY=1 builds ballot-fidelity windows), and
 written by load_or_fit with the cache signature (components, observation
-count, latent). A job whose file exists is signature-checked and skipped. A
-latent other than the shared cache's may never write into
-data/processed/harness_cache (validate_bayes.harness_cache_dir).
-(round three, 2026-10-15, dossier s.46)
+count, latent, lam-prior scorecard). A job whose file exists is
+signature-checked and skipped. A latent other than the shared cache's may
+never write into data/processed/harness_cache
+(validate_bayes.harness_cache_dir). (round three, 2026-10-15, dossier s.46)
+
+Fits use the leave-one-cycle-out pollster scorecard for the cycle they fit
+(HARNESS_SCORECARD=loo, the default; dossier s.50); each job logs its
+divergences, max r-hat and min bulk ESS (bayes_model.diagnostics).
 """
 from __future__ import annotations
 
@@ -59,9 +63,12 @@ def main(jobs: list[str]) -> None:
         if existed:
             print(f"[{job}] exists (signature ok), skipped", flush=True)
             continue
-        div = int(idata.sample_stats["diverging"].sum())
-        print(f"[{job}] {len(data['latent_blocks'])} lists, {data['n_polls']} polls: "
-              f"fit {time.time() - t0:.0f} s, {div} divergences -> {nc}", flush=True)
+        secs = time.time() - t0
+        div, rhat, ess = bm.diagnostics(idata)
+        print(f"[{job}] {len(data['latent_blocks'])} lists, {data['n_polls']} polls, "
+              f"scorecard {idata.posterior.attrs.get('scorecard')}: "
+              f"fit {secs:.0f} s, {div} divergences, max r-hat {rhat:.3f}, "
+              f"min ESS {ess:.0f} -> {nc}", flush=True)
 
 
 if __name__ == "__main__":

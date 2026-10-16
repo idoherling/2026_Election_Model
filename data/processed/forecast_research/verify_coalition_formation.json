@@ -174,6 +174,13 @@
    "note": "The DOI resolves to Fulcrum (University of Michigan Press, Ann Arbor paperback 1998). The description matches: the identity and motivation of actors, coalition membership, durability, payoffs, and 'constitutional bargaining, behavioral, and historical constraints'. '328 pages, 27 tables' was not shown on the Fulcrum page (unconfirmed detail).",
    "corrected_url": "",
    "corrected_quant": ""
+  },
+  {
+   "id": "COA-F26",
+   "status": "verified",
+   "note": "Verified 16 Oct 2026 by the coordinating session (not the desk verifier): opened the WIPO Lex English text of Basic Law: The Government, 2001 (IL097), section 30 'Continuity of Government', subsections (a)-(d); the quoted wording matches. The Knesset's own English PDF excerpt does not reach s.30.",
+   "corrected_url": "",
+   "corrected_quant": ""
   }
  ],
  "challenge_checks": [
