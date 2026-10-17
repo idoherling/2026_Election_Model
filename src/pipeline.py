@@ -277,6 +277,11 @@ def step_tests(p: Pipeline) -> None:
     p.log(f"[ ok ] {name} ({dt:.1f}s): {out[-1] if out else ''}")
 
 
+# Files the page links to or fetches; publish them with the page.
+SUPPORTING_FILES = ("decision-log.html", "annex-data.json",
+                    "election-night.html", "election-night.json")
+
+
 def write_publish_copy(p: Pipeline) -> None:
     html = (SITE / "index.html").read_text(encoding="utf-8")
     head = '<!doctype html>\n<html lang="en">\n'
@@ -284,9 +289,12 @@ def write_publish_copy(p: Pipeline) -> None:
         html = html[len(head):]
     PUBLISH.mkdir(parents=True, exist_ok=True)
     (PUBLISH / "knesset-model-site.html").write_text(html, encoding="utf-8")
-    shutil.copy2(SITE / "decision-log.html", PUBLISH / "decision-log.html")
+    # supporting files published next to the page (the artifact's files map)
+    extra = [n for n in SUPPORTING_FILES if (SITE / n).exists()]
+    for n in extra:
+        shutil.copy2(SITE / n, PUBLISH / n)
     p.log(f"       publish copy: {_rel(PUBLISH / 'knesset-model-site.html')} "
-          f"(+ supporting file decision-log.html)")
+          f"(+ supporting files {', '.join(extra)})")
 
 
 def headline() -> str:

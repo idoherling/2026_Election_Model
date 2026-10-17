@@ -4,6 +4,13 @@ Injects a JSON payload into site/template.html (placeholder __SITE_DATA__)
 and writes output/site/index.html. The payload is also persisted at
 output/site/site_data.json so data refreshes are diffable in git.
 
+The page carries only the report's data inline. The annex-only keys
+(ledger, ratings, sources) go to output/site/annex-data.json, which the
+page fetches when the technical annex first opens; publish it next to
+index.html (and decision-log.html). In their place the inline payload
+gets `cite` / `citeAlias` (the citation index for every id the template
+cites) and `ledgerFit`.
+
 Key -> source:
   asof      official_forecast.csv
   parties   official_forecast.csv (seats/interval/p_pass/p_largest)
@@ -435,17 +442,61 @@ def build_payload() -> dict:
     return out
 
 
+# Annex-only data: the poll ledger, the pollster ratings and the evidence
+# registry (~80% of the payload) are written to output/site/annex-data.json
+# and fetched by the page the first time the technical annex opens. The
+# artifact is published with it as a supporting file next to index.html.
+ANNEX_KEYS = ("ledger", "ratings", "sources")
+ANNEX_FILE = "annex-data.json"
+
+
+def cite_index(tpl: str, sources: list) -> tuple[dict, dict]:
+    """The citation index the page carries inline: every id the template
+    cites (data-s="..."), resolved to its source's short label, full
+    reference and link, so report citations render, hover and link without
+    the annex data; aliases map to their source id."""
+    import re
+    by = {}
+    for s in sources:
+        by[s["id"]] = s
+        for a in s.get("aliases", []):
+            by[a] = s
+    cited = set()
+    for m in re.findall(r"""data-s=\\?["']([^"'\\]+)\\?["']""", tpl):
+        cited |= {x.strip() for x in m.split(",") if x.strip() and "${" not in x}
+    idx, alias = {}, {}
+    for c in sorted(cited):
+        s = by.get(c)
+        if s is None:
+            continue
+        idx[s["id"]] = [s.get("short"), s.get("citation"), s.get("url")]
+        if c != s["id"]:
+            alias[c] = s["id"]
+    return idx, alias
+
+
 def main() -> None:
     payload = build_payload()
     OUT_DIR.mkdir(parents=True, exist_ok=True)
+    # the full payload stays in site_data.json (diffable; build_history reads it back from git)
     blob = json.dumps(payload, separators=(",", ":"), ensure_ascii=False)
     (OUT_DIR / "site_data.json").write_text(blob, encoding="utf-8")
     tpl = TEMPLATE.read_text(encoding="utf-8")
     assert "__SITE_DATA__" in tpl, "template placeholder missing"
-    html = '<!doctype html>\n<html lang="en">\n' + tpl.replace("__SITE_DATA__", blob)
+    annex = {k: payload[k] for k in ANNEX_KEYS}
+    inline = {k: v for k, v in payload.items() if k not in ANNEX_KEYS}
+    inline["cite"], inline["citeAlias"] = cite_index(tpl, payload.get("sources") or [])
+    inline["ledgerFit"] = (payload.get("ledger") or {}).get("fitted")
+    annex_blob = json.dumps(annex, separators=(",", ":"), ensure_ascii=False)
+    (OUT_DIR / ANNEX_FILE).write_text(annex_blob, encoding="utf-8")
+    # "</" inside inline JSON would end the <script> element early
+    inline_blob = json.dumps(inline, separators=(",", ":"), ensure_ascii=False).replace("</", "<\\/")
+    html = '<!doctype html>\n<html lang="en">\n' + tpl.replace("__SITE_DATA__", inline_blob)
     (OUT_DIR / "index.html").write_text(html, encoding="utf-8")
     print(f"built output/site/index.html "
-          f"({len(html)//1024} KB, {len(payload['parties'])} lists, "
+          f"({len(html.encode())//1024} KB, inline data {len(inline_blob.encode())//1024} KB; "
+          f"{ANNEX_FILE} {len(annex_blob.encode())//1024} KB; "
+          f"{len(payload['parties'])} lists, "
           f"{len(payload['sub'])} sub-threshold, asof {payload['asof']})")
 
 

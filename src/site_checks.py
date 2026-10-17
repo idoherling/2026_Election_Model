@@ -136,6 +136,8 @@ def check_hebrew_seats(html: str) -> list[str]:
 
 
 _CITED_TEXT = re.compile(r'"(?:citation|url)":"(?:[^"\\]|\\.)*"')
+# the redesign's inline citation index: "ID":["short","citation","url"]
+_CITE_INDEX = re.compile(r'"(?:[A-Z]{2,4}-F\d+|DL-\d+)":\[(?:"(?:[^"\\]|\\.)*",?)*\]')
 
 
 def check_others(html: str) -> list[str]:
@@ -143,7 +145,7 @@ def check_others(html: str) -> list[str]:
     pollsters' "Others" column. The embedded registry's citation and url
     strings are exempt: they reproduce third-party titles verbatim (Silver
     2016, "...More Bullish Than Others On Trump")."""
-    text = _CITED_TEXT.sub('""', html)
+    text = _CITE_INDEX.sub('""', _CITED_TEXT.sub('""', html))
     hits = [m.start() for m in re.finditer(r"\bOthers\b", text)]
     if not hits:
         return []
