@@ -4443,6 +4443,342 @@ this harness, with the s.56 tolerance):**
 expects about 2.5 defector governments in five resolved deadlocks, and
 one happened.
 
+
+## 57. Near-threshold calibration (17 Oct, D-10)
+
+### 57.1 The gap and where it comes from (diagnostic, run before 57.2)
+
+**The gap.** The site's track record (build_val, D.val.rel; eve, the
+main projection stream of the s.50 LOO harness) puts 20 lists in the
+50-90% pass-probability bins: stated .673, realised .900 (18 of 20
+passed; the two failures, New Right 2019a at 3.22% and Meretz 2022 at
+3.16%, missed by under 0.1 pp). On the graded ablation stream (offsets
+0/100/200, shipped configuration, shipped list mask) the same bins hold
+21.3 lists per seed at the eve (stated .667, realised .844), 18.3 at D-7
+(.680 -> .891) and 19.7 at D-21 (.729 -> .898). The 10-30% bin is
+over-stated (eve .196 -> .100): the stack is too WIDE near the line, not
+only shifted.
+
+**Decomposition by layer.** Every layer ablation already in ABLATIONS
+(validate_bayes), run on the s.50 LOO-scorecard caches (shared cache, read
+only) at the eve, D-7 and D-21, offsets 0/100/200 (scratch runner, same
+streams as validate_bayes / validate_horizon; its shipped rows reproduce
+the s.50 / s.55 baselines exactly: eve 1.4927 / 1.6291 / .9807 / .0475 /
+9.217, D-7 1.4866 / ... / 9.360, D-21 1.6211 / ... / 9.690). The cell is
+the change in the mean pass probability of the lists in the SHIPPED
+50-90% bins (fixed set, pooled over seeds) when the layer is switched off;
+the fixed set's realised rate is .844 / .891 / .898 and its stated rate
+.667 / .680 / .729.
+
+| layer switched off | eve | D-7 | D-21 |
+|---|---|---|---|
+| per-list residual (resid) | +.158 | +.164 | +.145 |
+| trailing-Likud (gevalt_cond) | +.026 | +.043 | +.015 |
+| new-straddler (new_straddler) | +.010 | -.003 | -.004 |
+| gevalt coupling (gevalt, GEVALT_SD 2.0) | +.004 | +.006 | +.006 |
+| family shocks | +.002 | +.002 | -.002 |
+| bloc swing | +.001 | +.004 | +.002 |
+| loyal-sd | -.001 | -.001 | -.002 |
+| withdrawn-list rule (35-day rule, no zero hold) | .000 | .000 | .000 |
+| every layer (latent only) | +.190 | +.189 | +.134 |
+| residual on vote shares (cal_B, s.48 arm B) | +.066 | +.070 | +.072 |
+| residual index fix only (cal_Bfix) | +.022 | +.024 | +.025 |
+
+- **The residual carries almost all of it** (.158 of the .177 eve gap).
+  The other layers that push near-threshold lists down are small: the
+  gevalt coupling .004-.006, the new-straddler layer .010 at the eve and
+  nothing at the horizons, the withdrawn-list rule nothing (it drops no
+  graded list differently). The trailing-Likud layer is second (.015-.043);
+  it is harness-validated and not a target here.
+- **Why the residual is too wide near the line.** decompose() fits the
+  per-list sd on SEAT errors. A list that died at the threshold enters as
+  a miss of its whole polled seat count: New Right 2019a 6.1 seats, Zehut
+  5.6, Meretz 2022 4.4, Otzma-Yachad 2015 4.0 (vote misses 2.0 / 2.0 / 0.5
+  / 0.6 u, u = 120 x share). The projection applies that sd to the vote
+  share and then applies the threshold again, so each death is counted
+  twice. In the small group (<= 8 seats, n 57, unique labels) the eight
+  deaths have RMS 3.77 seats against 1.22 for the 49 lists that won seats;
+  the group sd is 1.69 on seat errors and 1.09 on vote-share errors of the
+  lists that ran (decompose_vote, n 61). This is the s.48 arm-B mechanism.
+- **The straddler record on CEC vote shares, re-measured on the s.50 LOO
+  caches** (validate_threshold, HARNESS_FIDELITY=1, layer OFF, D-56/D-21;
+  scratch output sha256 cce4c050...). First-cycle lists that RAN: n 10,
+  mean drift -0.617 pp, sd 1.314 (D-21 -0.43, n 6; D-56 -0.91, n 4); pass
+  rate .20 against a mean p_pass of .43. The shipped constant (-1.6, sd
+  2.6) is the seat-implied record (failed lists at 0%, three non-runners -
+  Joint List 2019a, IDP 2019s, the Israelis 2021 - counted as total
+  desertion). Established lists that ran: n 32, mean drift +0.50 pp, pass
+  rate .91 against .63; that mean rests on 2021 (without it +0.18; without
+  2021 and the two sector families -0.12), so it is not registered as a
+  candidate.
+
+**Disclosure.** The decomposition ran every ABLATIONS arm on exactly the
+seeds and streams the rule below uses, so the pooled grade of cal_B was
+seen before this registration (median / mean / coverage / Brier /
+interval, shipped first): eve 1.4927 -> 1.5196 / 1.6291 -> 1.6013 / .981
+-> .972 / .0475 -> .0409 / 9.217 -> 8.671; D-7 1.4866 -> 1.4591 / 1.6478
+-> 1.6273 / .990 -> .951 / .0490 -> .0439 / 9.360 -> 9.008; D-21 1.6211
+-> 1.6196 / 1.7943 -> 1.7550 / .990 -> .952 / .0541 -> .0502 / 9.690 ->
+9.526. Its per-fold medians were not examined before 57.2 was hashed.
+Also seen and NOT registered here: no_gevalt (eve 1.4660 / 1.6250 / .981
+/ .0468 / 8.938; it barely touches the near-threshold bins) and cal_Bfix
+(eve 1.4858 / 1.6253 / .972 / .0447 / 9.011). nstrad_ran had never been
+run.
+
+### 57.2 Pre-registration (written before any grade of nstrad_ran and before the fold check of cal_B)
+
+**Candidate 1, `nstrad_ran` (the s.46.1 lead).** The new-straddler layer
+unchanged in form (first-cycle lists - no component polled in an earlier
+cycle - whose projected share sits in [-0.75, +1.5] pp of the threshold;
+a zero-sum draw N(mu, sd) pp against the field), with mu and sd measured
+on the CEC VOTE SHARES of the first-cycle straddlers that RAN, instead of
+the seat-implied record.
+- Record: the rows `new & ran` of validate_threshold under
+  HARNESS_FIDELITY=1 with the layer OFF (an explicit layer-off base), on
+  the s.50 LOO-scorecard caches, D-56 and D-21: the ten rows of 57.1,
+  carried in validate_bayes as NSTRAD_RAN_RECORD with that provenance.
+- LOO: the graded cycle's rows are left out (n >= 3 or the layer is off,
+  as shipped). Fold values: without 2009 -0.271 / 1.409 (n 7), 2013 -0.707
+  / 1.460 (n 8), 2019a -0.478 / 1.427 (n 8), 2021 -1.020 / 0.747 (n 7),
+  the other four -0.617 / 1.314 (n 10).
+- Production: bayes_model.NEW_STRADDLER_RECORD "ran" uses the full record
+  (mu -0.617, sd 1.314, same band); "seat" (default) is shipped. Harness
+  layer `nstrad_record` "ran" (default "seat"), arm `nstrad_ran`.
+
+**Candidate 2, `cal_B` (s.48 arm B, unchanged).** The per-list residual
+line re-estimated leave-one-cycle-out on vote-share errors of the lists
+that ran (error_decomposition.decompose_vote; full sample 0.73 + 0.073 x
+u), at the shipped width 0.9. Production bayes_model.RESID_SPACE "vote";
+harness layer resid_space "vote". It was graded in s.48 on the leaky
+cache with one horizon seed (it failed the D-21 interval score by .099),
+was never re-graded on the s.50 caches, and is re-graded here under the
+s.55 three-seed horizon protocol. Its pooled outcome is known (57.1).
+
+**Grading.** Shipped vs each arm on the s.50 LOO-scorecard caches (shared
+cache, read only; outputs in scratch), shipped list mask (`*_fixed`).
+- Eve: `HARNESS_ABLATIONS=shipped,no_nstrad,nstrad_ran,cal_B
+  HARNESS_SKIP_WIDTH=1 python src/validate_bayes.py`, offsets 0/100/200.
+- D-7 and D-21: `HORIZONS=7,21 HORIZON_SKIP_GRID=1
+  HORIZON_LAYERS='no_nstrad:{"new_straddler": false};nstrad_ran:
+  {"nstrad_record": "ran"};cal_B:{"resid_space": "vote"}' python
+  src/validate_horizon.py`, offsets 0/100/200, against "calendar".
+- The pair, if graded: `nstrad_ran_B` = {"nstrad_record": "ran",
+  "resid_space": "vote"}, same commands.
+- Pooling: per seed the mean over the eight cycles, then the mean over
+  the three seeds. A fold is a cycle, its value the three-seed mean.
+- no_nstrad (layer off) is reported beside nstrad_ran as the explicit
+  layer-off base; it is not part of the rule.
+
+**Rule (s.53 / s.55).** An arm passes if, at EACH of eve, D-7 and D-21:
+- it wins or ties median MAE in every leave-one-cycle-out fold (fold
+  delta < +0.1 seat);
+- pooled mean MAE, threshold Brier and interval score are not worse than
+  shipped by more than 0.010 / 0.0010 / 0.05;
+- pooled 90% coverage is not further from 0.90 than shipped's.
+
+If both arms pass, the pair is graded as one arm (`nstrad_ran_B`) under
+the same rule before both are recommended; if the pair fails, the passing
+arm with the lower eve threshold Brier is recommended alone.
+
+**Reported, not gating.** The reliability table (site bins 0-.1-.3-.5-.7-
+.9-1, three seeds pooled, eve / D-7 / D-21) for shipped and each arm, the
+50-90% row (n, stated, realised), the Brier over the lists shipped puts
+in [0.1, 0.9), per-fold medians, and the 2026 effect: the frozen 16 Oct
+production posterior (m3_idata.nc copied to scratch), the
+BAYES_PROJECT_ONLY projection (bayes_model.project, config "current") at
+the production seed and +1/+2, flags off reproducing main's
+bayes_forecast_2026.csv; p_pass of RZP-Zehut, Otzma, Ra'am, Amcha, the
+Reservists and Blue and White, and the bloc probabilities.
+
+### 57.3 Results: neither arm passes
+
+The 57.2 text (from its heading to the end of the reliability paragraph)
+was hashed at 22:11 and committed before any grade (worktree commit
+60dcaee; sha256 31dd0872bf436576099140637ea15fe14f4c366b9d4f527fff5cc6efd4605b11).
+Runs: the registered commands on the shared s.50 cache (read only),
+HARNESS_OUT_DIR in scratch, at most four processes.
+
+**Reproduction.** With the flags at their shipped values the patched
+harness is bit-identical to the committed s.50 run: at offset 0 every
+shipped and no_nstrad row of model_validation_ablation.csv and the whole
+model_validation_bayes_lists.csv match main's files to the last digit, and
+the three-seed shipped rows are the s.50 / s.55 baselines (eve 1.4927 /
+1.6291 / .9807 / .0475 / 9.217; D-7 1.4866 / 1.6478 / .9896 / .0490 /
+9.360; D-21 1.6211 / 1.7943 / .9896 / .0541 / 9.690). The scratch runner
+behind the reliability tables reproduces the graded rows of every arm
+exactly.
+
+**Pooled, three seeds** (median / mean / coverage / threshold Brier /
+interval; median folds W/T/L at |d| < 0.1):
+
+| horizon | shipped | nstrad_ran | cal_B | no_nstrad (layer off, reported) |
+|---|---|---|---|---|
+| eve | 1.4927/1.6291/.981/.0475/9.217 | 1.4937/1.6391/.981/.0507/9.232 (0/8/0) | 1.5196/1.6013/.972/.0409/8.671 (0/6/2) | 1.4527/1.6303/.981/.0523/9.212 (1/7/0) |
+| D-7 | 1.4866/1.6478/.990/.0490/9.360 | 1.5186/1.6557/.990/.0519/9.330 (0/7/1) | 1.4591/1.6273/.951/.0439/9.008 (1/7/0) | 1.4981/1.6538/.990/.0538/9.356 (1/6/1) |
+| D-21 | 1.6211/1.7943/.990/.0541/9.690 | 1.6256/1.7994/.990/.0570/9.676 (0/8/0) | 1.6196/1.7550/.952/.0502/9.526 (1/7/0) | 1.6568/1.7930/.990/.0577/9.680 (0/7/1) |
+
+- **nstrad_ran fails.** Threshold Brier is worse beyond the .0010 floor at
+  all three horizons (+.0031 / +.0029 / +.0029; +.0027 to +.0032 in every
+  seed), and the D-7 2019a fold loses +.286 on the median. Mean MAE at the
+  eve is +.00999, just inside its floor. The interval score is a tie.
+- **cal_B fails on the eve fold test only.** 2019s +.100 is exactly on the
+  tie boundary and is therefore not a tie: Blue and White's median goes
+  from 32 to 31 seats in all three seeds. 2022 loses +.128: Likud's median
+  goes from 32 to 33, Yesh Atid's from 25 to 26 and UTJ's from 7 to 8 in
+  one or two seeds, against Yisrael Beytenu going from 5 to 6. Every other
+  test passes at every horizon. Beyond the floors, cal_B improves the mean
+  MAE by .028 / .021 / .039, the Brier by .0066 / .0051 / .0039 and the
+  interval score by .546 / .352 / .164. Coverage moves toward .90 (.981 to
+  .972, .990 to .951, .990 to .952). The eve pooled median is worse by .027
+  (seeds +.067 / -.029 / +.042). The s.48 D-21 interval-score loss (+.099
+  on one leaky seed) does not reproduce here (-.164 on three LOO seeds).
+  Both lost folds are one-seat median flips on large lists, not
+  near-threshold misses. With a narrower small-list residual,
+  sub-threshold lists die in more draws, and their seats move to the large
+  lists.
+- The pair was not graded: the rule grades it only if both arms pass.
+
+**Reliability, three seeds pooled** (lists per seed, stated -> realised):
+
+| horizon | arm | 0-.1 | .1-.3 | .3-.5 | .5-.7 | .7-.9 | .9-1 | 50-90% row | gap |
+|---|---|---|---|---|---|---|---|---|---|
+| eve | shipped | 1.0 .089->0 | 10.0 .196->.100 | 3.0 .443->.778 | 14.0 .600->.762 | 7.3 .796->1 | 58.7 .991->1 | 21.3 .667->.844 | +.177 |
+| eve | nstrad_ran | 1.0 .089->0 | 8.7 .213->.115 | 4.3 .410->.538 | 14.0 .607->.762 | 7.3 .795->1 | 58.7 .991->1 | 21.3 .672->.844 | +.172 |
+| eve | cal_B | 6.7 .047->0 | 4.3 .194->.231 | 3.3 .424->.700 | 9.7 .603->.690 | 8.7 .824->1 | 61.3 .995->1 | 18.3 .708->.836 | +.129 |
+| D-7 | shipped | 2.0 .076->0 | 9.0 .206->.111 | 5.7 .445->.647 | 12.0 .615->.833 | 6.3 .801->1 | 59.0 .990->1 | 18.3 .680->.891 | +.211 |
+| D-7 | nstrad_ran | 2.0 .076->0 | 7.7 .229->.087 | 6.0 .418->.667 | 13.0 .612->.769 | 6.7 .805->1 | 58.7 .990->1 | 19.7 .677->.848 | +.170 |
+| D-7 | cal_B | 7.0 .049->0 | 4.3 .211->.308 | 5.0 .423->.600 | 8.7 .621->.885 | 6.7 .815->.850 | 62.3 .993->1 | 15.3 .705->.870 | +.164 |
+| D-21 | shipped | 1.0 .077->0 | 10.3 .207->.097 | 6.7 .413->.600 | 8.0 .597->.875 | 11.7 .819->.914 | 57.3 .992->1 | 19.7 .729->.898 | +.170 |
+| D-21 | nstrad_ran | 1.0 .077->0 | 8.3 .219->.120 | 8.7 .406->.462 | 8.0 .597->.875 | 11.7 .816->.914 | 57.3 .992->1 | 19.7 .727->.898 | +.171 |
+| D-21 | cal_B | 7.0 .057->0 | 6.0 .221->.333 | 5.0 .424->.600 | 5.3 .588->1 | 7.3 .827->.864 | 64.3 .990->.984 | 12.7 .726->.921 | +.195 |
+
+- **Two caveats on the table.**
+  - The 50-90% row is binned by each arm's own probabilities, so cal_B's
+    D-21 row grows. cal_B moves lists out of the band, most of them
+    upward.
+  - On the lists the SHIPPED arm puts in the 50-90% band, cal_B lifts the
+    stated rate from .667 / .680 / .729 to .733 / .750 / .801, against
+    .844 / .891 / .898 realised. It closes about 40% of the gap.
+- **Near-threshold Brier**, over the lists shipped puts in [.1, .9):
+  shipped .143 / .153 / .153, nstrad_ran .153 / .162 / .161, cal_B .126 /
+  .140 / .144.
+- **By class**, for lists projected in the band (rates are per seed):
+  - Established lists, 18-21 per seed, passed .86 / .84 / .89. Shipped
+    gives them .60 / .58 / .61 (Brier .156 / .172 / .190); cal_B gives .66
+    / .62 / .66 (.135 / .160 / .186). nstrad_ran leaves them unchanged.
+  - First-cycle lists, 5-6 per seed, passed .20 / .20 / .17. Shipped gives
+    them .28 / .27 / .24 (Brier .186 / .177 / .158), nstrad_ran .37 / .37 /
+    .32 (.245 / .229 / .201), and layer off .49 / .50 / .40.
+  - The underconfidence is therefore an ESTABLISHED-list problem. The
+    shipped -1.6 / 2.6 is the wrong number for the vote drift. It is still
+    the better-calibrated pass probability for first-cycle lists under
+    this stack: the over-wide residual gives sub-threshold debutants too
+    much chance of crossing, and the over-stated desertion offsets that.
+- **Post-hoc, not part of the rule.** nstrad_ran on top of cal_B is worse
+  than cal_B alone on Brier at every horizon (+.0037 / +.0032 / +.0032).
+  First-cycle p_pass under the pair is .34 / .34 / .26, against .27 / .26
+  / .20 under cal_B. The joint change s.47.2 asked for does not rescue the
+  re-measured constant.
+
+### 57.4 2026 effect (frozen production posterior; outputs in scratch)
+
+The posterior is main's m3_idata.nc of 16 Oct 18:54, copied to scratch
+(sha256 654a4414...). It was run through the BAYES_PROJECT_ONLY path of
+bayes_model.main with bayes_model.PROCESSED_DIR pointed at a scratch copy,
+so the repo's data/processed was never written. Projection seeds were the
+production seed, +1 and +2.
+- **Reproduction.** With the flags off, the run is byte-identical to the
+  committed v45 bayes_forecast_2026.csv and bayes_forecast_blocs.csv.
+- **Main's live files differ.** Main's working-copy bayes_forecast files
+  were rewritten by another process at 17 Oct 22:00 (P(NB>=61) .128), so
+  they are not the reference here. This session wrote nothing outside its
+  worktree and scratch.
+
+| (seeds +0 / +1 / +2) | shipped | nstrad_ran | cal_B |
+|---|---|---|---|
+| RZP-Zehut pass | .560 / .559 / .562 | .549 / .547 / .552 | .618 / .612 / .619 |
+| Otzma pass | .796 / .787 / .796 | .786 / .777 / .782 | .852 / .840 / .850 |
+| Ra'am pass | .761 / .769 / .764 | .754 / .761 / .755 | .880 / .883 / .878 |
+| Amcha pass | .252 / .251 / .245 | .294 / .293 / .289 | .231 / .230 / .225 |
+| Reservists pass | .225 / .225 / .220 | .255 / .259 / .252 | .202 / .204 / .204 |
+| Blue and White pass | .016 / .015 / .016 | .017 / .015 / .017 | .000 / .000 / .000 |
+| P(NB >= 61) | .145 / .131 / .137 | .150 / .137 / .145 | .116 / .106 / .108 |
+| P(change bloc >= 61) | .070 / .072 / .074 | .072 / .073 / .076 | .056 / .059 / .056 |
+| P(neither) | .785 / .797 / .789 | .778 / .790 / .779 | .828 / .835 / .836 |
+| NB seats, mean [90%] | 53.0 [42-65] | 53.1 [41-65] | 52.8 [42-64] |
+
+- **Central seats.** They are unchanged under every arm: Likud 25, Yashar
+  23, Together 11, Democrats / Joint List / UTJ 9, Shas and YB 8 (Shas 9 at
+  one seed of each candidate), Otzma 6, Ra'am 5, RZP-Zehut 4.
+- **nstrad_ran.** Its desertion on Amcha and the Reservists is smaller, so
+  less is redistributed to the field. Amcha and the Reservists rise about
+  4 and 3 points; every other list falls slightly.
+- **cal_B.** It moves the three established satellites toward the
+  polls-and-markets reading of EVT-F25: RZP-Zehut .56 to .62, Otzma .79 to
+  .85, Ra'am .76 to .88. It still sits well short of the markets (.86-.95
+  / .95+ / .91-.98). It lowers the sub-threshold lists and P(NB >= 61):
+  13.8 to 11.0 on the seed mean. Both blocs' majority tails thin, and
+  deadlock rises from 79.0 to 83.3.
+
+### 57.5 Recommendation
+
+- **Nothing ships from s.57.** Under the pre-registered rule neither arm
+  passes. NEW_STRADDLER_RECORD stays "seat" and RESID_SPACE stays "seat",
+  and both flags are in the code at the shipped values. The headline is
+  unchanged.
+- **What the grade establishes.**
+  - The near-threshold underconfidence is real at every horizon: the
+    50-90% band realises .84-.90 against .67-.73 stated.
+  - It belongs to ESTABLISHED lists: those in the band pass .84-.89
+    against .58-.61 stated.
+  - Its main source is the per-list residual: switching the residual off
+    moves the band's stated rate by +.145 to +.164 of a .17-.21 gap, and
+    no other layer moves it by more than .043. Part of the residual's
+    width is threshold deaths counted twice.
+  - The gevalt coupling (+.004 to +.006), the new-straddler layer (+.010
+    at the eve, nothing at the horizons) and the withdrawn-list rule (0)
+    are not the cause.
+  - The vote-share residual (cal_B) is the only arm graded here that
+    narrows the gap without losing a pooled metric beyond its floor. It
+    fails only the eve fold test, on one-seat median flips of large lists
+    (2019s on the boundary, 2022 +.128).
+  - The new-straddler constant re-measured on CEC shares is the honest
+    drift. It is a worse pass-probability calibration, so the shipped
+    -1.6 / 2.6 stays.
+- **For the site.** The track record should keep stating the gap. It can
+  now add that the gap sits with established lists and comes mostly from
+  the width of the per-list residual. The pass probabilities of
+  RZP-Zehut, Otzma and Ra'am are therefore more likely understated than
+  overstated: on the record, established lists stated at 60% passed about
+  85% of the time. No number on the site changes.
+
+### 57.6 Not established
+
+- **cal_B with a re-chosen width, and Bfix on three horizon seeds.**
+  Neither was graded. Bfix is the CBfix item queued since s.48.6; in the
+  57.1 diagnostic its pooled numbers did not lose a floor. A residual that
+  narrows only the small-list group, keeping the large-list widths and
+  medians, would address cal_B's actual failure mode. It is not
+  registered, so it is a new candidate if wanted.
+- **The first-cycle rule is by party id.**
+  - RZP 2021 and Ra'am 2021 count as debutants: both had run inside
+    alliances, and both passed.
+  - Without them the CEC-share first-cycle record is n 8, mean -1.14 pp.
+  - A lineage-based definition is a separate candidate, and its LOO
+    re-grade would need its own layer-off record.
+- **The established-straddler drift** (+0.50 pp, n 32) is not registered.
+  It rests on 2021: +0.18 without that cycle, and -0.12 without 2021 and
+  the two sector families.
+- **no_gevalt.** It looked favourable on the pooled metrics in the
+  diagnostic (eve interval -.28, Brier -.0007). It barely touches the
+  near-threshold band, and it was not graded under the rule.
+- **D-56** was not graded.
+- **The 2026 effect is the plain projection.** The registration mixture,
+  official forecast and formation chain was not run.
+- **Production-only layers are not graded here.** The certainty churn,
+  EVENT_RISK 1.2, NEW_LIST_MULT and the kalpi caps also widen 2026's
+  near-threshold lists and have no harness analogue.
+
 ## 58. Event risk on the remaining calendar (17 Oct, D-10)
 
 A judgment layer, outside the backtest (no harness analogue), so it changes

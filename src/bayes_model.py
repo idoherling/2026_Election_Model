@@ -668,6 +668,16 @@ EXCLUDE_POLLSTERS = {"S.M.L.T."}
 # component polled before this cycle. In 2026: Amcha, Reservists-Economic.
 NEW_STRADDLER_ON = True
 NEW_STRADDLER = {"mu": -1.6, "sd": 2.6, "band": (-0.75, 1.5)}   # pp of the vote
+# Candidate nstrad_ran (2026-10-17, dossier s.57) - flag at the shipped
+# value. NEW_STRADDLER's -1.6 / 2.6 is the seat-implied record (a failed list
+# scored at 0% of the vote, three non-runners counted as total desertion).
+# "ran": the same layer (same band, same zero-sum N(mu, sd) draw) with mu /
+# sd measured on the CEC VOTE SHARES of the first-cycle straddlers that ran
+# (validate_threshold, HARNESS_FIDELITY=1, layer OFF, s.50 LOO caches,
+# D-56/D-21: n 10, mean -0.617, sd 1.314; validate_bayes.NSTRAD_RAN_RECORD).
+# Mirrored in validate_bayes (layer nstrad_record). "seat" = shipped.
+NEW_STRADDLER_RECORD = "seat"     # "seat" (shipped) | "ran"
+NEW_STRADDLER_RAN = {"mu": -0.617, "sd": 1.314, "band": (-0.75, 1.5)}
 # Candidate "amcha_double_count" (2026-10-10, dossier s.41). EVIDENCE class,
 # not harness-validated: neither the fade nor the certainty layer exists in
 # validate_bayes.project_cycle, so NEW_STRADDLER was measured on a base free
@@ -1883,10 +1893,11 @@ def project(data, idata, rng, config="current", config_params=None):
     # projected share sits in the threshold band.
     if NEW_STRADDLER_ON:
         in_band = _new_straddler_mask(comps, base)
+        ns = NEW_STRADDLER_RAN if NEW_STRADDLER_RECORD == "ran" else NEW_STRADDLER   # s.57
         hit = []
         for i, cp in enumerate(comps):
             if in_band[i]:
-                g = rng.normal(NEW_STRADDLER["mu"], NEW_STRADDLER["sd"], N_PROJ) / 100.0
+                g = rng.normal(ns["mu"], ns["sd"], N_PROJ) / 100.0
                 onehot = np.zeros(len(comps)); onehot[i] = 1.0
                 w_r = np.where(onehot == 0, base, 0)
                 shares = shares + g[:, None] * (onehot - w_r / w_r.sum())[None, :]

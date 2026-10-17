@@ -168,6 +168,12 @@ ABLATIONS = [
     ("cal_Bfix", {"resid_space": "seat_fix"}),
     ("cal_AB", {"t_unit": True, "resid_space": "vote"}),
     ("cal_D", {"resid_df": "loo"}),
+    # near-threshold calibration (2026-10-17, dossier s.57; pre-registered
+    # there): the new-straddler layer with its drift measured on CEC vote
+    # shares (the layer-off base is no_nstrad); cal_B above is the second
+    # registered arm; nstrad_ran_B = the pair
+    ("nstrad_ran", {"nstrad_record": "ran"}),
+    ("nstrad_ran_B", {"nstrad_record": "ran", "resid_space": "vote"}),
 ]
 # HORIZON_LAYERS string for the same arms (validate_horizon.py):
 ARAB_HORIZON_LAYERS = ";".join(
@@ -662,7 +668,12 @@ ALL_LAYERS = {"resid": True, "swing": True, "family": True, "anchors": False,
               "house_centre": bm.HOUSE_CENTRE,
               # haredi family mean allocation (dossier s.54): "base" =
               # shipped; "record" = by the lineages' LOO under-count share
-              "haredi_alloc": bm.HAREDI_ALLOC}
+              "haredi_alloc": bm.HAREDI_ALLOC,
+              # new-straddler record (dossier s.57): "seat" = shipped
+              # (model_validation_threshold.csv, seat-implied shares);
+              # "ran" = CEC vote shares of the first-cycle straddlers that
+              # ran (NSTRAD_RAN_RECORD), LOO (bm.NEW_STRADDLER_RECORD)
+              "nstrad_record": bm.NEW_STRADDLER_RECORD}
 
 # Arab-sector turnout by election (share of eligible Arab citizens voting).
 # Series as compiled in the dossier (s.4, s.24) and the production comment
@@ -730,10 +741,37 @@ def new_lists_for_cycle(polls: pd.DataFrame, cycle: str) -> set:
     return {c for c in now if c not in seen}
 
 
-def new_straddler_params(exclude_cycle: str | None = None) -> dict:
+# Candidate nstrad_ran (2026-10-17, dossier s.57): the first-cycle
+# straddler record on CEC VOTE SHARES. validate_threshold.py with
+# HARNESS_FIDELITY=1 and the layer OFF (an explicit layer-off base), on the
+# s.50 leave-one-out-scorecard caches, D-56/D-21; the rows new & ran
+# (actual = the list's CEC share, data/ran_vote_shares.csv). Non-runners
+# (Joint List 2019a, IDP 2019s, the Israelis 2021) are not desertion and
+# are left out. (cycle, horizon, list, projected %, CEC %, drift pp)
+NSTRAD_RAN_RECORD = [
+    ("2009", 56, "greens", 2.395803, 0.37, -2.025803),
+    ("2009", 21, "gil", 1.260910, 0.52, -0.740910),
+    ("2009", 21, "greens", 1.877859, 0.37, -1.507859),
+    ("2013", 21, "am_shalem", 1.841427, 1.20, -0.641427),
+    ("2013", 21, "otzma", 1.635630, 1.76, 0.124370),
+    ("2019a", 56, "gesher", 3.412323, 1.73, -1.682323),
+    ("2019a", 21, "zehut", 3.403746, 2.74, -0.663746),
+    ("2021", 56, "nep", 2.741321, 0.79, -1.951321),
+    ("2021", 56, "rzp", 3.084791, 5.12, 2.035209),
+    ("2021", 21, "raam", 2.909468, 3.79, 0.880532),
+]
+
+
+def new_straddler_params(exclude_cycle: str | None = None, record: str = "seat") -> dict:
     """LOO mean/sd of the realised drift (result - projected share, pp) of
     FIRST-CYCLE lists projected within NSTRAD_BAND at D-56/D-21, from
-    model_validation_threshold.csv (validate_threshold.py)."""
+    model_validation_threshold.csv (validate_threshold.py; record "seat",
+    shipped) or from NSTRAD_RAN_RECORD (record "ran", dossier s.57)."""
+    if record == "ran":
+        x = np.array([r[5] for r in NSTRAD_RAN_RECORD if r[0] != str(exclude_cycle)])
+        if len(x) < 3:
+            return {"mu": 0.0, "sd": 0.0, "n": int(len(x))}
+        return {"mu": float(x.mean()), "sd": float(x.std(ddof=1)), "n": int(len(x))}
     try:
         d = pd.read_csv(PROCESSED_DIR / "model_validation_threshold.csv")
     except FileNotFoundError:
@@ -828,6 +866,13 @@ def add_calibration_params(params: dict, cycle: str) -> dict:
                              "vote": (vt["resid_base"], vt["resid_slope"])}
     params["resid_tail"] = {"seat": seat_tail(exclude_cycle=cycle)["df"],
                             "vote": vt["tail"]["df"]}
+    return params
+
+
+def add_threshold_params(params: dict, cycle: str) -> dict:
+    """Leave-one-cycle-out inputs of the s.57 near-threshold candidates: the
+    new-straddler drift on the CEC-vote-share record (layer nstrad_record)."""
+    params["nstrad_ran"] = new_straddler_params(exclude_cycle=cycle, record="ran")
     return params
 
 
@@ -1017,8 +1062,11 @@ def project_cycle(data, idata, eday, threshold, pairs, params,
     # New-straddler desertion (accuracy round four #1): first-cycle lists
     # whose projected share sits in the threshold band get the LOO-measured
     # mean drift (negative) with its sd, zero-sum against the field.
-    if L["new_straddler"] and params.get("nstrad", {}).get("n", 0) >= 3 and "new_lists" in params:
-        ns = params["nstrad"]
+    # s.57: nstrad_record "ran" reads the CEC-vote-share record's LOO drift
+    ns = params.get("nstrad_ran" if L["nstrad_record"] == "ran" else "nstrad", {})
+    if L["nstrad_record"] == "ran" and "nstrad_ran" not in params:
+        raise KeyError("layer nstrad_record 'ran' needs params['nstrad_ran'] (add_threshold_params)")
+    if L["new_straddler"] and ns.get("n", 0) >= 3 and "new_lists" in params:
         for i, cp in enumerate(comps):
             if not (cp <= params["new_lists"]):
                 continue
@@ -1174,6 +1222,7 @@ def main() -> None:
             params["registered_pairs"] = REGISTERED_PAIRS[cycle]   # dossier s.47
             params["cycle"] = cycle
             add_calibration_params(params, cycle)              # dossier s.48
+            add_threshold_params(params, cycle)                # dossier s.57
             project_cycle.job = f"{cycle}_eve"   # layer 'posterior' (refit arms)
             print(f"[{cycle}] trailing-Likud LOO: mu {params['trail']['mu']:+.2f} sd {params['trail']['sd']:.2f} n {params['trail']['n']}")
             seats, blocs, base, comp_of = project_cycle(

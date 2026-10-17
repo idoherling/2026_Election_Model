@@ -65,7 +65,8 @@ def main() -> None:
         params["new_lists"] = new_lists_for_cycle(polls, cycle)
         params["nstrad"] = new_straddler_params(exclude_cycle=cycle)
         params["pair_alias"] = _decomp_map(cycle)   # dossier s.40
-        from validate_bayes import arab_turnout_params, add_calibration_params
+        from validate_bayes import (arab_turnout_params, add_calibration_params,
+                                    add_threshold_params)
         params["arab_tab"] = arab_turnout_params(cycle)   # dossier s.43
         params["arab_lineage"] = bm.arab_lineage_share(exclude_cycle=cycle)   # s.51
         params["haredi_lineage"] = bm.haredi_lineage_share(exclude_cycle=cycle)   # s.54
@@ -73,6 +74,7 @@ def main() -> None:
         params["registered_pairs"] = REGISTERED_PAIRS[cycle]   # dossier s.47
         params["cycle"] = cycle
         add_calibration_params(params, cycle)              # dossier s.48
+        add_threshold_params(params, cycle)                # dossier s.57
         for h in HORIZONS:
             asof = eday - pd.Timedelta(days=h)
             try:
