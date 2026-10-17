@@ -5566,3 +5566,465 @@ the repo's data/processed was not written.
 - **The formation chain was not run.** The 2026 effect is the plain
   projection; the registration mixture, official forecast and formation
   chain were not run.
+
+## 62. Bayesian stacking of error-stack variants (18 Oct, D-9)
+
+### 62.1 Pre-registration (written before any run of this section)
+
+**Why.** Four graded variants of the election-day error stack each win
+most pooled scores against shipped and fail the strict per-fold rule:
+- cal_B, the vote-share residual (s.57.3: eve folds 2019s +.100 and 2022
+  +.128; every pooled test passes at every horizon);
+- resid_hybrid (s.60.2: eve 2022 +.128 and D-7 2021 +.119; every pooled
+  test passes);
+- cal_A, the t-scale fix (s.48.6, leak-free caches: eve interval score
+  -.075, D-7 +.192 on one horizon seed);
+- Bfix, the decompose() index fix at width 0.9 (s.48.6: D-7 interval
+  score +.143 on one horizon seed; the s.57.1 eve diagnostic lost no
+  floor).
+
+The shipped stack is one point in that space. Bayesian stacking (Yao,
+Vehtari, Simpson & Gelman 2018, "Using stacking to average Bayesian
+predictive distributions", Bayesian Analysis 13(3)) chooses weights on
+the simplex over the candidates' predictive distributions to maximise the
+leave-one-out log score. The mixture can beat every component. Its median
+sits between the components' medians, so it may avoid the whole-seat
+median flips that fail cal_B and resid_hybrid.
+
+**Candidate set (fixed in advance; no arm is added after results).**
+Five harness arms, each at the shipped width RESID_SCALE 0.9 with every
+other layer shipped:
+
+| arm | harness layers | production flags |
+|---|---|---|
+| shipped | {} | T_UNIT_VAR False, RESID_SPACE "seat" |
+| cal_A | {"t_unit": True} | T_UNIT_VAR True |
+| cal_B | {"resid_space": "vote"} | RESID_SPACE "vote" |
+| resid_hybrid | {"resid_space": "hybrid"}, 8.0 seats | RESID_SPACE "hybrid" |
+| Bfix | {"resid_space": "seat_fix"} | RESID_SPACE "seat_fix" |
+
+- CBfix (Bfix with a nested width) is not in the set. Its width differs
+  by fold, so it is not one predictive per cycle.
+- The five arms consume the random stream identically. They change the
+  residual sd line or the t scaling, never which draws are made. At one
+  seed the five projections therefore share their random numbers.
+
+**Disclosure.** The pooled rule metrics of the components are known:
+cal_B (s.57.3), resid_hybrid (s.60.2), Bfix (s.57.1, eve only) and cal_A
+(s.48.6: eve on three seeds, D-7 / D-21 on one seed). No log score, CRPS
+or stacking weight has been computed for any arm. cal_A and Bfix have
+never been run at D-7 / D-21 on three seeds.
+
+**Projections.**
+- Inputs: the s.50 leave-one-out-scorecard caches (the shared harness
+  cache, read only), and the shipped configuration of main 2a8477f.
+- Grid: the eight cycles, at eve, D-7 and D-21, on seed offsets 0 / 100 /
+  200.
+- Streams: eve uses SEED + 11 + offset with the eve forward weeks (the
+  validate_bayes ablation stream). D-h uses SEED + h + offset with the
+  calendar-effective weeks (validate_horizon's "calendar" config).
+- Each arm x cycle x horizon x seed is projected once with project_cycle,
+  N_PROJ 4000, and its seat draws are stored (int8 npz, scratch).
+- Every harness parameter is leave-one-cycle-out: decompose(exclude_cycle),
+  add_calibration_params and the lam-prior scorecard. Each cycle's
+  predictive is therefore already a LOO predictive.
+- **Reproduction gate.** Before any score is read, the stored shipped
+  draws must give the s.57 baselines (eve 1.4927 / 1.6291 / .9807 /
+  .0475 / 9.217; D-7 1.4866 / 1.6478 / .9896 / .0490 / 9.360; D-21 1.6211
+  / 1.7943 / .9896 / .0541 / 9.690). cal_B's and resid_hybrid's draws
+  must give their s.57.3 / s.60.2 rows.
+
+**List set.** The shipped list mask of each cycle, horizon and seed: lists
+with shipped base share >= 0.005 or a realised seat (the `*_fixed` mask).
+Every arm and the stack are scored on it.
+
+**Score.**
+- p_j(y) is the fraction of an arm's 4000 draws (one seed) that give
+  list j exactly y seats.
+- The per-list log score is log max(p_j(y_j), eps), with y_j the
+  realised seats and eps = 1e-4. The floor is below one draw in 4000, so
+  it acts only on a seat count that no draw produced, which then scores
+  log 1e-4 = -9.21.
+- The cycle score S is the sum over the list set. A horizon's score is
+  S averaged over the three seeds.
+- The floor is applied to each arm's pmf before mixing (p~_k =
+  max(p_k, eps)). The mixture's score, sum_j log sum_k w_k p~_kj(y_j), is
+  then concave in w.
+- CRPS is reported, not used for the weights. It is the discrete form
+  sum_{x=0..120} (F_j(x) - 1{x >= y_j})^2, summed over the list set per
+  cycle (lower is better), seed mean.
+
+**Stacking.**
+- The weights w on the five-arm simplex maximise
+  sum_c (1/3) sum_{h in eve, D-7, D-21} mean_seed S_{c,h,s}(w).
+- The optimiser is scipy.optimize (BFGS) on a softmax parametrisation
+  with the analytic gradient, started from equal weights. The objective
+  is concave in w, so the optimum is global. The EM fixed point for
+  mixture weights is run as a check.
+- **Production weights** are fitted on all eight cycles, the three
+  horizons averaged, as s.48's width choice was. They are rounded to
+  three decimals and renormalised on the largest weight. An arm that
+  rounds to zero drops out.
+- **Nested LOO.** For each held-out cycle c, w_(-c) is fitted the same
+  way on the other seven cycles and rounded the same way.
+- **The held-out stacked forecast** is the harness mirror of the
+  production mechanism. One project_cycle pass with layer
+  error_stack = w_(-c) draws each simulation's variant from a dedicated
+  child generator (the SeedSequence of the projection seed, spawn key 62).
+  It applies that variant's residual line and t scaling to that
+  simulation. The rest of the stream is the shipped one.
+- Its seats are graded like any arm's: the rule metrics, the log score
+  and CRPS. Its median seats come from its own draws.
+- Beside it, the exact pmf mixture sum_k w_k p_k from the stored draws is
+  scored. The mirror differs from it only through Monte Carlo and the
+  ensemble-level couplings: the base-share weights of the later layers
+  and the loyal-list shrink.
+
+**Rule (s.53 / s.55, unchanged).** The nested-LOO stacked forecast is
+graded against shipped at each of eve, D-7 and D-21 on offsets 0 / 100 /
+200. Pooling is per seed the mean over the eight cycles, then the mean
+over the seeds. A fold is a cycle, and its value is the three-seed mean.
+The stack passes if, at each horizon:
+- it wins or ties median MAE in every fold (fold delta < +0.1 seat);
+- pooled mean MAE, threshold Brier and interval score are not worse than
+  shipped by more than .010 / .0010 / .05;
+- pooled 90% coverage is not further from .90 than shipped's.
+
+If it passes, ERROR_STACK ships with the production weights. If it fails,
+ERROR_STACK stays None. If the production weights put .99 or more on
+shipped, the question is moot and nothing changes.
+
+**Reported, not gating.**
+- The log score and CRPS per horizon for every arm, for the nested stack
+  (mirror and exact mixture), and for the in-sample stack (all-eight
+  weights scored on the same eight cycles, which is optimistic).
+- Single-arm selection by nested LOO: per fold, the arm with the best
+  training score.
+- The weights of every fold and their stability (range and sd of each
+  weight over the eight folds).
+- The fold table: median MAE per cycle, shipped against the stack, at
+  each horizon.
+- The bloc Brier for P(NB >= 61).
+
+**2026 effect.**
+- The run is the BAYES_PROJECT_ONLY projection on a scratch copy of
+  main's m3_idata.nc (sha256 recorded), with bayes_model.PROCESSED_DIR on
+  a scratch copy. Seeds are the production seed, +1 and +2.
+- Arms: shipped (the flags as on main) against ERROR_STACK = the
+  production weights.
+- Flag-None check: the patched code with the flag at None must reproduce
+  main HEAD's unpatched code on the same posterior byte for byte.
+- Reported: the pass probabilities of RZP-Zehut, Otzma, Ra'am, Amcha,
+  the Reservists and Blue and White; P(NB >= 61), P(change bloc >= 61)
+  and P(neither); the NB mean with its 90% interval; and the central
+  (p50) seats of every list.
+
+### 62.2 Results: the stack does not pass
+
+62.1 was committed alone before any run: worktree commit 557771a, 23:31
+(47af096 after the rebase onto main 651b955, which touched only the
+site), text sha256 e800051f83d4f8ad0e4d4257d8cc986c2e472e2fade09d3785d33ee1c3e0ef2f.
+The runs used `src/stacking.py` (run / fit / run_stack / grade) on the
+shared s.50 cache (read only), with outputs in scratch and at most four
+processes. Each projection takes about 0.65 s.
+
+**Reproduction gate: passed.** The stored shipped draws give the s.57
+baselines to the last digit at all three horizons:
+- eve 1.4927 / 1.6291 / .9807 / .0475 / 9.2173;
+- D-7 1.4866 / 1.6478 / .9896 / .0490 / 9.3600;
+- D-21 1.6211 / 1.7943 / .9896 / .0541 / 9.6900.
+
+cal_B and resid_hybrid give their s.57.3 / s.60.2 rows exactly. cal_A
+and Bfix at seed offset 0 give the s.48.6 one-seed D-7 interval-score
+losses (+.192 and +.143).
+
+**Mirror checks.**
+- Bit for bit, error_stack = {arm: 1} gives each arm's own draws. This
+  holds in the harness (2022 eve, all five arms) and in production
+  (tests/test_stacking.py, synthetic posterior).
+- The one-pass mirror and the exact mixture differ by at most .2 log
+  points and .004 interval score per horizon (table below). The exact
+  mixture's log score and CRPS are those of the pmf mixture sum_k w_k
+  p_k. Its rule metrics come from the stored draws, each simulation
+  taking its assigned arm's draw (the same child generator as the
+  mirror).
+- At equal weights on 2022 eve, 74% of the mirror's draws equal the exact
+  mixture's, and the mean difference is .05 seats per list. The
+  ensemble-level couplings (the base-share weights and the loyal-list
+  shrink) account for the rest.
+
+**Weights** (raw optimum; BFGS and EM agree to 1e-5; shipped and Bfix are
+0.000 in every fit):
+
+| fitted on | cal_A | cal_B | resid_hybrid | cal_B + hybrid |
+|---|---|---|---|---|
+| all eight (production) | .302 | .448 | .250 | .698 |
+| without 2009 | .281 | .508 | .211 | .719 |
+| without 2013 | .293 | .494 | .213 | .707 |
+| without 2015 | .383 | .000 | .617 | .617 |
+| without 2019a | .316 | .622 | .061 | .684 |
+| without 2019s | .378 | .112 | .511 | .622 |
+| without 2020 | .334 | .396 | .270 | .666 |
+| without 2021 | .000 | 1.000 | .000 | 1.000 |
+| without 2022 | .456 | .090 | .454 | .544 |
+
+- **Stability.** It is poor:
+  - cal_B ranges 0 to 1.00 (sd .33 over the eight folds), the hybrid 0 to
+    .62 (sd .22), and cal_A 0 to .46 (sd .14).
+  - cal_B and the hybrid are nearly the same predictive for the small
+    lists, so the split between them is weakly identified. Their sum is
+    steadier, at .54-.72 in seven folds.
+  - One cycle moves everything. Without 2021 the other seven put all the
+    weight on cal_B.
+- **Shipped and Bfix get zero weight.** cal_A is shipped with the swing
+  and family shocks at their measured sd. Its log score beats shipped's
+  in 19 of the 24 cycle-horizons, so it dominates shipped. Bfix sits
+  between shipped and the vote-share arms, and the mixture of those
+  covers it.
+- **Production weights**, rounded as registered: {cal_A .302, cal_B .448,
+  resid_hybrid .250}.
+
+**Pooled, three seeds.** Columns: median MAE / mean MAE / coverage /
+threshold Brier / interval score / log score / CRPS / bloc Brier.
+- The log score and CRPS are the totals over the eight cycles (the sum
+  over lists, seed mean). A higher log score is better; a lower CRPS is
+  better.
+- "stack" is the graded nested-LOO forecast (the mirror). "exact" is the
+  exact pmf mixture with the same fold weights. "in-sample" uses the
+  all-eight weights on the same cycles, so it is optimistic. "select" is
+  the single arm with the best training score in each fold.
+
+| horizon | arm | median | mean | cov | Brier | IS | log | CRPS | bloc |
+|---|---|---|---|---|---|---|---|---|---|
+| eve | shipped | 1.4927 | 1.6291 | .981 | .0475 | 9.217 | -177.14 | 105.91 | .0428 |
+| eve | cal_A | 1.4852 | 1.6291 | .981 | .0473 | 9.142 | -176.25 | 105.45 | .0357 |
+| eve | cal_B | 1.5196 | 1.6013 | .972 | .0409 | 8.671 | -175.16 | 104.10 | .0363 |
+| eve | resid_hybrid | 1.5111 | 1.6000 | .972 | .0410 | 8.815 | -175.81 | 104.18 | .0389 |
+| eve | Bfix | 1.4858 | 1.6253 | .972 | .0447 | 9.011 | -175.34 | 104.77 | .0388 |
+| eve | **stack** | **1.4855** | **1.6130** | **.972** | **.0423** | **9.027** | **-177.60** | **105.19** | **.0367** |
+| eve | exact | 1.4857 | 1.6135 | .972 | .0423 | 9.024 | -177.80 | 105.26 | .0368 |
+| eve | in-sample | 1.4914 | 1.6080 | .972 | .0422 | 8.802 | -174.05 | 104.04 | .0362 |
+| eve | select | 1.4887 | 1.6270 | .972 | .0440 | 9.082 | -178.28 | 105.43 | .0387 |
+| D-7 | shipped | 1.4866 | 1.6478 | .990 | .0490 | 9.360 | -179.49 | 108.59 | .0410 |
+| D-7 | cal_A | 1.4869 | 1.6479 | .978 | .0488 | 9.459 | -179.06 | 108.21 | .0348 |
+| D-7 | cal_B | 1.4591 | 1.6273 | .951 | .0439 | 9.008 | -179.02 | 108.16 | .0355 |
+| D-7 | resid_hybrid | 1.4607 | 1.6250 | .977 | .0439 | 8.970 | -177.66 | 107.38 | .0380 |
+| D-7 | Bfix | 1.4860 | 1.6424 | .960 | .0465 | 9.389 | -178.00 | 107.75 | .0375 |
+| D-7 | **stack** | **1.4748** | **1.6363** | **.955** | **.0450** | **9.424** | **-181.32** | **108.81** | **.0365** |
+| D-7 | exact | 1.4733 | 1.6368 | .955 | .0450 | 9.427 | -181.27 | 108.81 | .0363 |
+| D-7 | in-sample | 1.4740 | 1.6315 | .973 | .0449 | 8.962 | -177.13 | 107.50 | .0357 |
+| D-7 | select | 1.4979 | 1.6453 | .951 | .0461 | 9.621 | -181.55 | 108.67 | .0375 |
+| D-21 | shipped | 1.6211 | 1.7943 | .990 | .0541 | 9.690 | -185.20 | 117.87 | .0593 |
+| D-21 | cal_A | 1.6272 | 1.7955 | .980 | .0540 | 9.663 | -184.44 | 117.38 | .0529 |
+| D-21 | cal_B | 1.6196 | 1.7550 | .952 | .0502 | 9.526 | -184.71 | 117.37 | .0553 |
+| D-21 | resid_hybrid | 1.6181 | 1.7535 | .968 | .0503 | 9.442 | -184.55 | 117.15 | .0579 |
+| D-21 | Bfix | 1.6249 | 1.7795 | .968 | .0519 | 9.599 | -183.59 | 116.81 | .0558 |
+| D-21 | **stack** | **1.6169** | **1.7698** | **.952** | **.0510** | **9.804** | **-186.89** | **117.96** | **.0552** |
+| D-21 | exact | 1.6207 | 1.7710 | .952 | .0510 | 9.800 | -186.78 | 117.93 | .0554 |
+| D-21 | in-sample | 1.6275 | 1.7670 | .961 | .0508 | 9.470 | -183.34 | 116.85 | .0550 |
+| D-21 | select | 1.6189 | 1.7782 | .959 | .0514 | 9.813 | -186.42 | 117.49 | .0558 |
+
+**The rule, applied to the stack: FAIL.** It fails the interval score at
+D-7 and D-21. Every other test passes at every horizon.
+- **Median folds.** All 24 folds are ties (0 / 8 / 0 at each horizon).
+  The largest fold loss is +.095, at D-7 in 2021.
+- **Interval score.** Eve -.190 (seeds -.034 / -.257 / -.279). D-7
+  +.064, beyond the .05 floor (seeds +.223 / +.097 / -.128). D-21 +.114
+  (seeds +.093 / +.139 / +.109).
+- **Other pooled tests.** Mean MAE moves -.016 / -.012 / -.025 and the
+  Brier -.0052 / -.0040 / -.0031. Coverage moves toward .90 (.981 ->
+  .972, .990 -> .955, .990 -> .952). The bloc Brier moves -.0061 /
+  -.0045 / -.0041.
+
+**Fold table** (median MAE, three-seed mean; stack minus shipped, with
+shipped's own value in the first row):
+
+| horizon | | 2009 | 2013 | 2015 | 2019a | 2019s | 2020 | 2021 | 2022 |
+|---|---|---|---|---|---|---|---|---|---|
+| eve | shipped | 1.606 | 1.667 | 1.530 | 2.262 | 1.200 | 0.926 | 1.905 | 0.846 |
+| eve | stack | -.061 | -.028 | -.076 | .000 | +.033 | .000 | +.048 | +.026 |
+| D-7 | shipped | 1.545 | 2.000 | 1.182 | 1.833 | 1.333 | 0.759 | 2.214 | 1.026 |
+| D-7 | stack | -.061 | .000 | .000 | -.036 | .000 | -.056 | +.095 | -.038 |
+| D-21 | shipped | 1.697 | 2.139 | 1.091 | 2.429 | 1.152 | 0.889 | 2.548 | 1.026 |
+| D-21 | stack | -.091 | -.028 | +.030 | .000 | +.030 | +.074 | -.024 | -.026 |
+
+- **The flips are gone.** The mixture's median sits between its
+  components', so cal_B's eve 2019s (+.100) and 2022 (+.128) losses and
+  resid_hybrid's D-7 2021 loss (+.119) become ties (+.033, +.026, +.095).
+  This is the failure mode s.57 and s.60 could not get past.
+- **Why the interval score is lost: 2021.**
+  - The fold that holds out 2021 is pure cal_B (weight 1.000).
+  - cal_B is the worst arm on 2021: Blue and White polled a median of 4
+    seats and won 8. Its log probability is -6.23 / -6.01 / -5.78 under
+    cal_B against -3.08 / -3.05 / -3.20 under shipped. Yamina, Meretz and
+    the Joint List lose too.
+  - The stack's 2021 interval score is +.64 / +3.31 / +3.60 against
+    shipped.
+  - Over the other seven cycles the stack beats shipped by .31 / .40 /
+    .38. The D-21 2013 fold also loses +1.08.
+- **The log score says the same.**
+  - The nested stack's LOO log score is below shipped's at every horizon
+    (-.47 / -1.83 / -1.69), so it is below every component. It is above
+    the single-arm selection at eve and D-7 and below it at D-21.
+  - Without 2021 it is above shipped's (+3.19 / +2.72 / +2.03), but 2021
+    alone costs -3.66 / -4.56 / -3.72.
+  - The in-sample stack beats every component at every horizon. Its gap
+    to the nested stack is 3.5-4.2 log points per horizon, the cost of
+    four free weights fitted on seven cycles.
+  - The bound is the mixture's, not the optimiser's: BFGS and EM reach
+    the same optimum in every fold.
+- **Single-arm selection** picks Bfix in seven folds and cal_B in the
+  2021 fold, so it fails on the same cycle.
+
+**The components under the same rule** (reported; s.62 registered the rule
+for the stack only):
+- cal_A fails D-7 alone: interval score +.099 (seeds +.192 / +.069 /
+  +.035). Every other test passes, and its log score beats shipped's at
+  every horizon (+.89 / +.43 / +.76).
+- cal_B and resid_hybrid fail on the s.57.3 / s.60.2 folds.
+- **Bfix passes every test at every horizon.** It is the only arm here
+  that does.
+  - Eve: median -.007, mean -.004, Brier -.0028, interval -.206,
+    coverage .972.
+  - D-7: median -.001, mean -.005, Brier -.0025, interval +.029 (seeds
+    +.143 / -.067 / +.011), coverage .960.
+  - D-21: median +.004, mean -.015, Brier -.0022, interval -.091,
+    coverage .968.
+  - Folds: 0 / 8 / 0 at each horizon. The closest to the boundary is
+    D-21 2020 at +.093, then eve 2022 at +.051.
+  - Its log score beats shipped's at every horizon (+1.80 / +1.49 /
+    +1.61), it is the best single arm at D-21 on log score and CRPS, and
+    its 2021 loss is small (-.72 / -1.01 / -.89).
+
+### 62.3 2026 effect (frozen production posterior; outputs in scratch)
+
+**Setup.**
+- The posterior is main's m3_idata.nc of 16 Oct 18:54, copied to
+  scratch (sha256 654a4414b4d48a762979e3755bd779d3d8b7c171736efe7f55ecb024df9a7382,
+  the s.57.4 / s.60.3 posterior).
+- The run used the BAYES_PROJECT_ONLY path, with
+  bayes_model.PROCESSED_DIR on a scratch copy; the repo's data/processed
+  was not written. Seeds are the production seed, +1 and +2.
+- **Flag-None check: passed.** With ERROR_STACK None, the patched code is
+  byte-identical to main 2a8477f's unpatched code at all three seeds:
+  bayes_forecast_2026.csv, bayes_forecast_blocs.csv and the draws. At
+  seed +0 both equal the committed bayes_forecast files.
+- The stack uses the production weights {cal_A .302, cal_B .448,
+  resid_hybrid .250}. The realised variant shares are .296-.299 /
+  .449-.459 / .242-.252.
+- The Bfix column is outside the registration. It is added because Bfix
+  passed in 62.2.
+
+| (seeds +0 / +1 / +2) | shipped | stack (production weights) | Bfix (not registered) |
+|---|---|---|---|
+| RZP-Zehut pass | .560 / .559 / .563 | .599 / .600 / .603 | .581 / .578 / .584 |
+| Otzma pass | .799 / .792 / .798 | .837 / .827 / .840 | .822 / .813 / .821 |
+| Ra'am pass | .760 / .769 / .763 | .842 / .851 / .846 | .795 / .797 / .796 |
+| Amcha pass | .252 / .252 / .244 | .236 / .236 / .232 | .241 / .242 / .235 |
+| Reservists pass | .224 / .225 / .219 | .206 / .211 / .208 | .216 / .218 / .214 |
+| Blue and White pass | .016 / .015 / .016 | .005 / .004 / .004 | .006 / .006 / .004 |
+| P(NB >= 61) | .128 / .118 / .126 | .100 / .093 / .094 | .113 / .102 / .108 |
+| P(change bloc >= 61) | .063 / .064 / .064 | .051 / .050 / .050 | .056 / .055 / .056 |
+| P(neither) | .809 / .819 / .810 | .849 / .857 / .856 | .831 / .843 / .836 |
+| NB seats, mean [90%] | 53.0 [42-64] | 52.9 [43-63] | 52.9 [43-63] |
+
+- **Seed means.**
+  - Shipped: RZP-Zehut .561, Otzma .796, Ra'am .764; P(NB >= 61) .124,
+    deadlock .813.
+  - Stack: .601 / .835 / .846; .096 and .854.
+  - Bfix: .581 / .819 / .796; .108 and .837.
+- **Central seats** are unchanged under every arm and seed: Likud 25,
+  Yashar 23, Together 11, the Democrats, the Joint List and UTJ 9, Shas
+  9 / 8 / 8 by seed (the same under each arm), YB 8, Otzma 6, Ra'am 5,
+  RZP-Zehut 4, Amcha and the Reservists 0.
+- **The stack's intervals narrow on the small and middle lists.** YB 4-12
+  -> 5-11, the Democrats 5-13 -> 6-13, the Joint List 5-13 -> 6-12 / 6-13,
+  Otzma 0-11 -> 0-10, Ra'am 0-9 -> 0-8 and Amcha 0-8 -> 0-7. Likud and
+  Yashar barely move.
+- **Size of the move.** The stack moves the established satellites
+  about 70% of the way to resid_hybrid's s.60.3 effect, which has the
+  same baseline. Ra'am goes .764 -> .846, against the hybrid's .883. The
+  stack cuts P(NB >= 61) by about 2.8 points and raises deadlock by about
+  4. Bfix moves the same way, about half as far.
+
+### 62.4 Recommendation under the rule
+
+- **Not shipped.** The nested-LOO stacked forecast fails the
+  pre-registered s.53 / s.55 rule: the interval score is +.064 at D-7 and
+  +.114 at D-21.
+  - ERROR_STACK stays None, and production is bit-identical to main.
+  - The fitted weights are recorded as bayes_model.ERROR_STACK_WEIGHTS.
+    The mechanism is in the code: ERROR_STACK, error_stack_assign, and
+    the harness layer error_stack.
+  - The headline is unchanged.
+- **What the grade establishes.**
+  - Stacking removes the whole-seat median flips that failed cal_B and
+    resid_hybrid: all 24 folds tie. It also improves mean MAE, Brier,
+    coverage and the bloc Brier at every horizon.
+  - With eight cycles the weights are not identified. One cycle (2021,
+    Blue and White doubling from 4 to 8) moves cal_B's weight from .45 to
+    1.00.
+  - The leave-one-out log score of the stack is below shipped's at every
+    horizon, although the in-sample stack beats every component. The
+    in-sample gain is overfitting of four weights to seven cycles. It is
+    not a forecast gain.
+  - Under this record a stack of these five arms cannot be shown to beat
+    shipped.
+- **For the owner: Bfix passes the standing rule.**
+  - On these runs Bfix (the decompose() index fix at the shipped width
+    0.9, RESID_SPACE "seat_fix") passes every test at eve, D-7 and D-21
+    on three seeds. It is the only arm of the five that does.
+  - It was a component here, not s.62's registered candidate, so its
+    grade is known before any registration of it. The streams and the
+    rule are the ones a registration would use, so a re-run would
+    reproduce these numbers exactly.
+  - Its margins are thin: the D-7 interval score is +.029 against a .05
+    floor (seed 0 alone +.143, the s.48.6 failure), and the D-21 2020
+    fold is +.093 against .1.
+  - It fixes a defect (s.48 amendment 1: the label collision subtracts
+    the leader anchor from every cycle's row carrying that label).
+  - 2026 effect: P(NB >= 61) .124 -> .108, RZP-Zehut .56 -> .58, Otzma
+    .80 -> .82, Ra'am .76 -> .80; central seats unchanged.
+  - Shipping it is a one-line change (RESID_SPACE "seat_fix"). It is
+    recommended as the next decision, disclosed as graded inside s.62.
+- **For the site.** No number changes. The s.57 / s.60 statement stands:
+  RZP-Zehut, Otzma and Ra'am are more likely understated than
+  overstated. Every graded correction (cal_B, resid_hybrid, the stack,
+  Bfix) moves them up.
+
+### 62.5 Not established
+
+- **A regularised stack was not registered.** Candidates are a
+  Dirichlet prior on the weights, fewer arms (shipped against one
+  vote-share arm), or hierarchical stacking (Yao, Pirš, Vehtari & Gelman
+  2022). The fold instability says an unregularised stack on eight
+  cycles is too noisy.
+- **Not graded:**
+  - per-horizon weights;
+  - a bloc-level score in the objective (the weights see only per-list
+    seats);
+  - D-56.
+- **The 2026 effect is the plain projection.** The registration
+  mixture, official forecast and formation chain were not run.
+- **Production-only layers** (EVENT_RISK_HORIZON, NEW_LIST_MULT, the
+  certainty churn and the kalpi caps) act identically under every
+  variant and have no harness analogue.
+
+### 62.5 Decision (18 Oct): Bfix ships
+
+The stack (the registered candidate) does not ship. Its component Bfix -
+the decompose() index-collision fix at the shipped width (RESID_SPACE
+"seat_fix"; line 1.48 + 0.041 x seats instead of 1.83 + 0.044) - was
+graded here on three seeds at eve, D-7 and D-21, the s.55 protocol, and
+passes the standing s.53/s.55 rule at every horizon: interval score -.206 /
++.029 / -.091, Brier and mean MAE better at every horizon, every median
+fold a tie. This is the three-seed re-grade s.48.6 queued for this family
+(it had failed at D-7 on one seed, +.143). Provenance disclosed: the
+three-seed result was produced inside s.62, not under its own
+pre-registration, and the margins are thin (D-7 interval +.029 against .05;
+D-21 2020 fold +.093 against the .1 tie bound). Shipped because it corrects
+a real defect and passes the rule; the harness mirror (ALL_LAYERS
+resid_space) now reads bm.RESID_SPACE, so later candidates grade against
+it. Effect on 2026 (frozen 16 Oct posterior, three seeds): P(NB>=61) .124 ->
+.108; RZP-Zehut pass .561 -> .581, Otzma .796 -> .819, Ra'am .764 -> .796;
+central seats unchanged.

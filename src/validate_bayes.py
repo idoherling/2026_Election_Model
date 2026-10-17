@@ -177,6 +177,9 @@ ABLATIONS = [
     # hybrid residual for small lists (2026-10-17, dossier s.60; pre-
     # registered there): base0 x 120 <= 8 on the vote-share line
     ("resid_hybrid", {"resid_space": "hybrid"}),
+    # stacking of error-stack variants (dossier s.62): layer error_stack
+    # takes fold-specific weights, so it is graded by src/stacking.py
+    # (nested leave-one-cycle-out), not as a fixed arm here
 ]
 # HORIZON_LAYERS string for the same arms (validate_horizon.py):
 ARAB_HORIZON_LAYERS = ";".join(
@@ -665,7 +668,7 @@ ALL_LAYERS = {"resid": True, "swing": True, "family": True, "anchors": False,
               # "loo" = Student t, sd matched, df from the LOO kurtosis of
               # the record resid_space reads (bm.RESID_T_DF); a number =
               # that df.
-              "t_unit": False, "resid_space": "seat", "resid_df": None,
+              "t_unit": False, "resid_space": bm.RESID_SPACE, "resid_df": None,
               # resid_hybrid (dossier s.60): resid_space "hybrid" puts lists
               # with base0 x 120 <= resid_hybrid_seats on the vote-share
               # line, the rest on the seat line (bm.RESID_HYBRID_SEATS)
@@ -680,7 +683,12 @@ ALL_LAYERS = {"resid": True, "swing": True, "family": True, "anchors": False,
               # (model_validation_threshold.csv, seat-implied shares);
               # "ran" = CEC vote shares of the first-cycle straddlers that
               # ran (NSTRAD_RAN_RECORD), LOO (bm.NEW_STRADDLER_RECORD)
-              "nstrad_record": bm.NEW_STRADDLER_RECORD}
+              "nstrad_record": bm.NEW_STRADDLER_RECORD,
+              # error-stack stacking (dossier s.62): None = shipped; {arm:
+              # weight} (arms of bm.ERROR_STACK_ARMS) draws each simulation's
+              # variant (resid_space x t_unit, LOO lines) by the weights from
+              # the child generator bm.error_stack_assign (bm.ERROR_STACK)
+              "error_stack": bm.ERROR_STACK}
 
 # Arab-sector turnout by election (share of eligible Arab citizens voting).
 # Series as compiled in the dossier (s.4, s.24) and the production comment
@@ -915,6 +923,21 @@ def allocate_vector(v, threshold, pair_idx, raw: bool = False, u: float = 0.0):
     return out
 
 
+def stack_resid_sd(params, base0, space, resid_scale, hybrid_seats):
+    """One error-stack variant's per-list residual sd (share units) on the
+    LOO lines: the expressions project_cycle uses for resid_space = space
+    (dossier s.62)."""
+    r_base, r_slope = params["resid_base"], params["resid_slope"]
+    if space not in ("seat", "hybrid"):
+        r_base, r_slope = params["resid_lines"][space]
+    sd = (r_base + r_slope * base0 * 120) / 120.0 * resid_scale
+    if space == "hybrid":
+        v_base, v_slope = params["resid_lines"]["vote"]
+        sd = np.where(base0 * 120 <= hybrid_seats,
+                      (v_base + v_slope * base0 * 120) / 120.0 * resid_scale, sd)
+    return sd
+
+
 def project_cycle(data, idata, eday, threshold, pairs, params,
                   bloc_overrides, rng, resid_scale=None, layers=None,
                   weeks_override=None):
@@ -969,6 +992,21 @@ def project_cycle(data, idata, eday, threshold, pairs, params,
         v_base, v_slope = params["resid_lines"]["vote"]
         sd_list = np.where(base0 * 120 <= L["resid_hybrid_seats"],
                            (v_base + v_slope * base0 * 120) / 120.0 * resid_scale, sd_list)
+    # error-stack mixture (dossier s.62, bm.ERROR_STACK): each simulation's
+    # variant from the child generator; sd_list becomes (N_PROJ, B) and the
+    # t scale a per-simulation vector. The parent stream is untouched.
+    stack_tu = None
+    project_cycle.last_error_stack = None
+    if L["error_stack"]:
+        if L["resid_space"] != "seat" or L["t_unit"]:
+            raise ValueError("layer error_stack owns resid_space and t_unit: leave them shipped")
+        names, arm = bm.error_stack_assign(rng, L["error_stack"], N_PROJ)
+        sd_list = np.stack([stack_resid_sd(params, base0, bm.ERROR_STACK_ARMS[a]["resid_space"],
+                                           resid_scale, L["resid_hybrid_seats"])
+                            for a in names])[arm]
+        stack_tu = np.array([float(np.sqrt((T_DF - 2.0) / T_DF))
+                             if bm.ERROR_STACK_ARMS[a]["t_unit"] else 1.0 for a in names])[arm]
+        project_cycle.last_error_stack = {a: float((arm == k).mean()) for k, a in enumerate(names)}
     if L["resid_relcap"] is not None:
         sd_list = np.minimum(sd_list, L["resid_relcap"] * base0)
     if L["gone_zero"]:
@@ -996,6 +1034,8 @@ def project_cycle(data, idata, eday, threshold, pairs, params,
     is_nb = blocs == "netanyahu_bloc"
     # t-scale fix (dossier s.48, arm A): a t(df) draw has sd sqrt(df/(df-2))
     tu = float(np.sqrt((T_DF - 2.0) / T_DF)) if L["t_unit"] else 1.0
+    if stack_tu is not None:   # s.62: each simulation's variant's t scale
+        tu = stack_tu
     if L["swing"] and is_nb.any() and (~is_nb).any():
         sw = rng.standard_t(T_DF, N_PROJ) * tu * swing_sd * L["shock_scale"] / 120.0
         w_nb, w_op = np.where(is_nb, base, 0), np.where(~is_nb, base, 0)

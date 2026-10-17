@@ -617,7 +617,10 @@ T_UNIT_VAR = False
 # firms; phone_mixed firms separate; sector-only firms weigh 0). An exact
 # re-parameterisation of the fitted posterior, applied at projection.
 HOUSE_CENTRE = "firm"
-RESID_SPACE = "seat"
+# 18 Oct (s.62.5): "seat_fix" ships - decompose()'s index collision fixed
+# (line 1.48 + 0.041 x seats instead of 1.83 + 0.044), width unchanged; it
+# passed the s.53/s.55 rule at eve, D-7 and D-21 on three seeds (s.62).
+RESID_SPACE = "seat_fix"
 RESID_T_DF = None
 # Candidate resid_hybrid (2026-10-17, dossier s.60) - flag at the shipped
 # value. RESID_SPACE "hybrid": a list whose PRE-SHOCK base share (base0, the
@@ -645,6 +648,66 @@ def resid_line(space: str | None = None) -> tuple:
         q = decompose_vote()
         return q["resid_base"], q["resid_slope"]
     raise ValueError(f"RESID_SPACE {space!r}")
+
+
+# Bayesian stacking of error-stack variants (2026-10-18, dossier s.62) -
+# flag at the shipped value. ERROR_STACK None = the shipped stack; a dict
+# {arm: weight} (weights on the simplex, arms from ERROR_STACK_ARMS) makes
+# project() draw each simulation's variant - its residual line and its
+# t scaling - by those weights, so the seat draws sample the stacked
+# predictive sum_k w_k p_k. The variant draws come from a dedicated child
+# generator (error_stack_assign), so the parent stream is the shipped one;
+# with ERROR_STACK None nothing is drawn and project() is unchanged. While
+# ERROR_STACK is set the variants own the two dimensions: RESID_SPACE must
+# be "seat" and T_UNIT_VAR False. Mirrored in validate_bayes (layer
+# error_stack); weights fitted by src/stacking.py.
+ERROR_STACK = None
+# arm -> the harness layers it sets (resid_space, t_unit), the s.62 candidate set
+ERROR_STACK_ARMS = {
+    "shipped": {"resid_space": "seat", "t_unit": False},
+    "cal_A": {"resid_space": "seat", "t_unit": True},
+    "cal_B": {"resid_space": "vote", "t_unit": False},
+    "resid_hybrid": {"resid_space": "hybrid", "t_unit": False},
+    "Bfix": {"resid_space": "seat_fix", "t_unit": False},
+}
+ERROR_STACK_KEY = 62      # spawn key of the variant generator
+# The s.62 production weights (all eight cycles, eve / D-7 / D-21 log
+# score averaged); ERROR_STACK = ERROR_STACK_WEIGHTS would ship them. NOT
+# shipped: the nested-LOO stacked forecast fails the s.53 / s.55 rule on
+# the D-7 and D-21 interval score (+.064 / +.114), s.62.2.
+ERROR_STACK_WEIGHTS = {"cal_A": 0.302, "cal_B": 0.448, "resid_hybrid": 0.25}
+
+
+def error_stack_assign(rng, stack: dict, n: int) -> tuple:
+    """(arm names, each simulation's arm index) for an ERROR_STACK dict. The
+    indices come from a child generator derived from rng's seed sequence
+    (spawn key ERROR_STACK_KEY): rng's own state is neither read nor
+    advanced, and the same seed gives the same assignment."""
+    names = list(stack)
+    bad = [a for a in names if a not in ERROR_STACK_ARMS]
+    if bad:
+        raise ValueError(f"ERROR_STACK arms {bad} not in ERROR_STACK_ARMS")
+    w = np.array([float(stack[a]) for a in names])
+    if (w < 0).any() or not np.isclose(w.sum(), 1.0, atol=1e-6):
+        raise ValueError(f"ERROR_STACK weights {stack} are not on the simplex")
+    ss = rng.bit_generator.seed_seq
+    child = np.random.default_rng(np.random.SeedSequence(
+        ss.entropy, spawn_key=tuple(ss.spawn_key) + (ERROR_STACK_KEY,)))
+    return names, child.choice(len(names), size=n, p=w / w.sum())
+
+
+def stack_resid_sd(base0, space: str) -> np.ndarray:
+    """The per-list residual sd (share units, before NEW_LIST_MULT and the
+    caps) of one error-stack variant: the same expressions project() uses
+    for RESID_SPACE = space."""
+    _rb, _rs = ((LIST_SHOCK_BASE, LIST_SHOCK_SLOPE) if space in ("seat", "hybrid")
+                else resid_line(space))
+    sd = (_rb + _rs * base0 * 120) / 120.0 * RESID_SCALE * STACK_SCALE
+    if space == "hybrid":
+        _vb, _vs = resid_line("vote")
+        sd = np.where(base0 * 120 <= RESID_HYBRID_SEATS,
+                      (_vb + _vs * base0 * 120) / 120.0 * RESID_SCALE * STACK_SCALE, sd)
+    return sd
 # Accuracy round four #2 (2026-09-10): joint width knobs, calibrated on the
 # horizon cache (validate_horizon STACK_GRID x RW_GRID). STACK_SCALE
 # multiplies the election-day shock stack (bloc swing, family shocks, the
@@ -1733,6 +1796,22 @@ def project(data, idata, rng, config="current", config_params=None):
         # the boundary test per list: {components: (base0 x 120, on the vote line)}
         project.last_resid_small = {c: (round(float(s), 2), bool(m)) for c, s, m in
                                     zip(data["components"], base0 * 120, _small)}
+    # Error-stack mixture (dossier s.62): each simulation's variant by the
+    # ERROR_STACK weights, from a child generator (the parent stream is the
+    # shipped one); sd_list becomes a per-simulation matrix and the t scale
+    # a per-simulation vector. ERROR_STACK None: nothing here runs.
+    _stack_tu = None
+    project.last_error_stack = None
+    if ERROR_STACK:
+        if RESID_SPACE != "seat" or T_UNIT_VAR:
+            raise ValueError("ERROR_STACK owns the residual line and the t scaling: "
+                             "set RESID_SPACE 'seat' and T_UNIT_VAR False")
+        _names, _arm = error_stack_assign(rng, ERROR_STACK, N_PROJ)
+        sd_list = np.stack([stack_resid_sd(base0, ERROR_STACK_ARMS[a]["resid_space"])
+                            for a in _names])[_arm]
+        _stack_tu = np.array([float(np.sqrt((T_DF - 2.0) / T_DF))
+                              if ERROR_STACK_ARMS[a]["t_unit"] else 1.0 for a in _names])[_arm]
+        project.last_error_stack = {a: float((_arm == k).mean()) for k, a in enumerate(_names)}
     comps0 = [set(c.split("+")) for c in data["components"]]
     is_new = np.array([bool(cs & NEW_LIST_IDS) for cs in comps0])
     sd_list = np.where(is_new, sd_list * NEW_LIST_MULT, sd_list)
@@ -1821,6 +1900,8 @@ def project(data, idata, rng, config="current", config_params=None):
     is_nb = blocs == "netanyahu_bloc"
     # T_UNIT_VAR (s.48): unit-variance t draws, so each shock has its measured sd
     _tu = float(np.sqrt((T_DF - 2.0) / T_DF)) if T_UNIT_VAR else 1.0
+    if _stack_tu is not None:   # s.62: each simulation's variant's t scale
+        _tu = _stack_tu
     if EVENT_RISK_HORIZON:
         # graded E-day scale + event walk over the unobserved days (s.58)
         swing = rng.standard_t(T_DF, N_PROJ) * _tu * BLOC_SWING_SD * STACK_SCALE / 120.0
@@ -1852,7 +1933,7 @@ def project(data, idata, rng, config="current", config_params=None):
                                 cov[:len(fam_names), :len(fam_names)],
                                 size=N_PROJ)
     mix = np.sqrt(rng.chisquare(T_DF, N_PROJ) / T_DF)
-    tdraws = z / mix[:, None] * _tu
+    tdraws = z / mix[:, None] * (_tu if _stack_tu is None else _tu[:, None])
     for k, f in enumerate(fam_names):
         mu_f, sd_f = FAMILY_SHOCK[f]
         sd_f = sd_f * STACK_SCALE

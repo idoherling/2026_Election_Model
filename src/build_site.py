@@ -177,7 +177,10 @@ def build_params(names: dict) -> dict:
     icpt = bm.ARAB_TURNOUT_INTERCEPT
     comp = {"balad+hadash_taal": "Balad + Hadash-Ta'al"}
     loyal = [[comp.get(k, names.get(k, k)), f(v, 1)] for k, v in bm.LOYAL_SD.items()]
-    resid = lambda s: (P["resid_base"] + P["resid_slope"] * s) * bm.RESID_SCALE
+    # the residual line production uses (RESID_SPACE; s.62.5 ships the
+    # index-fixed line)
+    _rb, _rs = bm.resid_line() if hasattr(bm, "resid_line") else (P["resid_base"], P["resid_slope"])
+    resid = lambda s: (_rb + _rs * s) * bm.RESID_SCALE
     out = {
         # election-day stack
         "bloc_sd": f(bm.BLOC_SWING_SD, 2), "t_df": str(bm.T_DF),
@@ -194,7 +197,7 @@ def build_params(names: dict) -> dict:
         "arab_k": f(bm.ARAB_TURNOUT_K, 2),
         "arab_icpt": f(abs(icpt), 2) if icpt is not None else None,
         "kalpi_rho": f(bm.KALPI_FAMILY_RHO, 1),
-        "resid_base": f(P["resid_base"], 2), "resid_slope": f(P["resid_slope"], 3),
+        "resid_base": f(_rb, 2), "resid_slope": f(_rs, 3),
         "resid_scale": f(bm.RESID_SCALE, 2).rstrip("0").rstrip("."),
         "new_list_mult": f(bm.NEW_LIST_MULT, 2),
         "loyal": loyal,
