@@ -57,6 +57,21 @@ two scored cycles that are themselves unity governments (1984, 2020), the
 unity prior becomes Jeffreys on 0 of 2, Beta(0.5, 2.5) (1988 is a certain
 cycle and is not scored).
 
+s.56 (2026-10-17, pre-registered in s.56.1) adds the record-resolution arm
+and its registered variants, each the shipped tree ("candidate" above, =
+what s.49 shipped) with STAGE_RESOLUTION = "record":
+  stage_record  decisive: type counts from the parliamentary record
+  rec_1999      + 1999 (direct election)           reported, not decisive
+  rec_midterm   + 1995m (2008m is a repeat)        reported, not decisive
+  rec_both      + 1999 and 1995m                   reported, not decisive
+  rec_insample  decisive counts without leave-one-out (sizes the
+                singleton-class penalty)            reported, not decisive
+Leave-one-cycle-out: a scored cycle's own resolution is removed from the
+type counts. The decision rule (s.56.1) is printed at the end of main():
+mean log P(realized) and the multi-class Brier on the eight informative
+cycles not worse than the shipped tree, and no realized 2019-2022 outcome
+below S56_TOLERANCE x its shipped probability.
+
 Outputs:
   data/processed/formation_validation.csv          per-cycle scores
   data/processed/formation_validation_classes.csv  9-class forecasts
@@ -68,7 +83,9 @@ Outputs:
 
 from __future__ import annotations
 
+import argparse
 import warnings
+from pathlib import Path
 
 import numpy as np
 import pandas as pd
@@ -77,8 +94,10 @@ from scipy import stats
 import government_formation as gf
 from government_formation import (OUTCOMES, SEED, STAGE_SEED_OFFSET,
                                   DEADLOCK_RECORD, CONVENTIONAL_DEADLOCKS,
+                                  RESOLUTION_SEED_OFFSET, RESOLUTION_TYPES,
                                   deadlock_posterior, draw_behavior,
-                                  draw_pm_alloc, simulate_formation)
+                                  draw_pm_alloc, resolution_posterior,
+                                  simulate_formation)
 from scrape_polls import PROCESSED_DIR
 
 warnings.filterwarnings("ignore")
@@ -102,6 +121,24 @@ VARIANTS = {"production": dict(pre=True, stage=False),
             "unity_record": dict(pre=False, stage=False),
             "stage_only": dict(pre=True, stage=True),
             "candidate": dict(pre=False, stage=True)}
+# s.56: the record-resolution arm and its registered variants. res = the
+# regimes whose resolved deadlocks enter the type counts; loo = remove the
+# scored cycle's own resolution from them.
+_P, _DR, _MT = "parliamentary", "direct", "midterm"
+VARIANTS.update({
+    "stage_record": dict(pre=False, stage=True, res=(_P,), loo=True),
+    "rec_1999": dict(pre=False, stage=True, res=(_P, _DR), loo=True),
+    "rec_midterm": dict(pre=False, stage=True, res=(_P, _MT), loo=True),
+    "rec_both": dict(pre=False, stage=True, res=(_P, _DR, _MT), loo=True),
+    "rec_insample": dict(pre=False, stage=True, res=(_P,), loo=False),
+})
+SHIPPED = "candidate"          # what s.49 shipped is the s.56 comparator
+S56_ARM = "stage_record"
+S56_VARIANTS = ("rec_1999", "rec_midterm", "rec_both", "rec_insample")
+# s.56.1 tolerance, fixed before running: no realized 2019-2022 outcome may
+# fall below this fraction of its shipped probability
+S56_TOLERANCE = 0.75
+S56_RECENT = ("2019a", "2019s", "2020", "2021", "2022")
 
 
 def unity_prior(pre: bool, cycle: str):
@@ -225,11 +262,12 @@ def centres_2026() -> dict:
     return dict(simulate_formation.last_centres)
 
 
-def forecast(df, centres, r_draws=None, unity=None):
+def forecast(df, centres, r_draws=None, unity=None, s_draws=None):
     """Mean 9-class forecast over M parameter vectors (main()'s scheme), and
     the mean share of draws that are deadlocks. unity = (mean, NEFF): the
     unity gate's value is drawn from its own generator, so every variant
-    shares the other parameters' draws (common random numbers)."""
+    shares the other parameters' draws (common random numbers). s_draws:
+    per-vector record type shares (s.56; None = the gates resolve)."""
     prng = np.random.default_rng(SEED + 7)
     urng = np.random.default_rng(SEED + 31)
     probs = np.zeros(len(OUTCOMES))
@@ -242,6 +280,8 @@ def forecast(df, centres, r_draws=None, unity=None):
             b["likud_sans_bibi"] = float(urng.beta(p * n, (1 - p) * n))
         if r_draws is not None:
             b["repeat_deadlock"] = r_draws[m]
+        if s_draws is not None:
+            b["resolution_shares"] = s_draws[m]
         oc, _ = simulate_formation(df, b, seed=SEED + m, pm_alloc=pa,
                                    centres=centres, unaligned=KINGMAKERS)
         probs += np.bincount(oc, minlength=len(OUTCOMES)) / len(oc)
@@ -252,6 +292,20 @@ def forecast(df, centres, r_draws=None, unity=None):
 def stage_r(a_b):
     a, b = a_b
     return np.random.default_rng(SEED + STAGE_SEED_OFFSET).beta(a, b, size=M)
+
+
+def resolution_s(alpha):
+    """Per-vector record type shares, as government_formation.main() draws
+    them (same generator, so every record tree shares its uniforms)."""
+    return list(np.random.default_rng(SEED + RESOLUTION_SEED_OFFSET)
+                .dirichlet(alpha, size=M))
+
+
+def type_alpha(spec, cyc):
+    """The s.56 Dirichlet for a tree spec at a scored cycle: the cycle's own
+    resolution is removed when the spec is leave-one-out."""
+    return resolution_posterior(exclude=(cyc,) if spec.get("loo", True) else (),
+                                regimes=spec["res"])
 
 
 def run(centres, role_variant=None, variants=VARIANTS):
@@ -278,15 +332,22 @@ def run(centres, role_variant=None, variants=VARIANTS):
                "realized_set_alt": (",".join(str(i) for i in sorted(h["alt"]))
                                     if "alt" in h else "")}
         for v, spec in variants.items():
+            s_d = None
+            if spec.get("res") is not None:
+                al = type_alpha(spec, cyc)
+                s_d = resolution_s(al)
+                row[f"type_alpha_{v}"] = ",".join(f"{x:g}" for x in al)
             p, dl = forecast(df, centres,
                              stage_r(a_b) if spec["stage"] else None,
-                             unity_prior(spec["pre"], cyc))
+                             unity_prior(spec["pre"], cyc), s_d)
             row["p_deadlock_draws"] = round(dl, 3)
             row[f"p_realized_{v}"] = p[k]
             row[f"p_repeat_{v}"] = p[7]
             row[f"top_{v}"] = OUTCOMES[int(np.argmax(p))]
             row[f"p_alt_{v}"] = (sum(p[i] for i in h["alt"]) if "alt" in h
                                  else np.nan)
+            # multi-class Brier over the ten outcome classes (s.56)
+            row[f"brier_{v}"] = float(((p - np.eye(len(OUTCOMES))[k]) ** 2).sum())
             for i, o in enumerate(OUTCOMES):
                 classes.append({"cycle": cyc, "tree": v, "class": o,
                                 "probability": round(float(p[i]), 4),
@@ -321,7 +382,27 @@ def scores(df: pd.DataFrame, a="production", b="candidate", col="realized",
     out["diff"] = out["log_b"] - out["log_a"]
     out["diff_se"] = float(np.std(diffs))
     out["p_diff_le_0"] = float(np.mean(np.array(diffs) <= 0))
+    # multi-class Brier on the same cycles and weights (s.56; lower is
+    # better). Not defined for the {1, 6} alternative scoring.
+    if col == "realized" and f"brier_{a}" in df and f"brier_{b}" in df:
+        out["brier_a"] = float((w * df[f"brier_{a}"].values).sum() / w.sum())
+        out["brier_b"] = float((w * df[f"brier_{b}"].values).sum() / w.sum())
     return out
+
+
+def s56_tolerance(df: pd.DataFrame, arm=S56_ARM, ref=SHIPPED) -> pd.DataFrame:
+    """s.56.1 condition 3: every realized 2019-2022 outcome keeps at least
+    S56_TOLERANCE of its shipped probability, above the Monte Carlo floor."""
+    floor = 0.5 / (N * M)
+    out = []
+    for c in S56_RECENT:
+        r = df[df.cycle == c].iloc[0]
+        p_ref, p_arm = float(r[f"p_realized_{ref}"]), float(r[f"p_realized_{arm}"])
+        ratio = p_arm / p_ref if p_ref > 0 else np.nan
+        out.append({"cycle": c, "realized": r["realized"], "p_shipped": p_ref,
+                    f"p_{arm}": p_arm, "ratio": ratio,
+                    "pass": bool(p_arm > floor and ratio >= S56_TOLERANCE)})
+    return pd.DataFrame(out)
 
 
 def binary_repeat(df: pd.DataFrame, trees) -> dict:
@@ -425,7 +506,9 @@ def record_table() -> pd.DataFrame:
     return pd.concat([t, pd.DataFrame(post)], ignore_index=True)
 
 
-def main() -> None:
+def main(out_dir=None) -> None:
+    out_dir = Path(out_dir) if out_dir is not None else PROCESSED_DIR
+    out_dir.mkdir(parents=True, exist_ok=True)
     C = centres_2026()
     print("2026 centring constants:", {k: round(v, 3) for k, v in C.items()})
     trees = list(VARIANTS)
@@ -435,15 +518,25 @@ def main() -> None:
         for c in ("p_realized", "p_repeat", "p_alt"):
             per_r[f"{c}_{t}"] = per_r[f"{c}_{t}"].round(4)
         per_r[f"log_{t}"] = log_(per[f"p_realized_{t}"]).round(3)
-    per_r.to_csv(PROCESSED_DIR / "formation_validation.csv", index=False)
-    classes.to_csv(PROCESSED_DIR / "formation_validation_classes.csv",
+        per_r[f"brier_{t}"] = per_r[f"brier_{t}"].round(4)
+    per_r.to_csv(out_dir / "formation_validation.csv", index=False)
+    classes.to_csv(out_dir / "formation_validation_classes.csv",
                    index=False)
+    s49 = ("production", "unity_record", "stage_only", "candidate")
     show = (["cycle", "regime", "weight", "realized", "p_deadlock_draws"]
-            + [f"p_realized_{t}" for t in trees]
+            + [f"p_realized_{t}" for t in s49]
             + ["p_repeat_production", "p_repeat_candidate", "top_production"])
     print("\nP(realized class) by tree; P(repeat), pre-s49 production vs the "
           "s.49 candidate (leave-one-out):\n")
     print(per_r[show].to_string(index=False))
+    show56 = (["cycle", "weight", "realized", f"p_realized_{SHIPPED}"]
+              + [f"p_realized_{t}" for t in (S56_ARM,) + S56_VARIANTS]
+              + [f"p_repeat_{SHIPPED}", f"p_repeat_{S56_ARM}",
+                 f"top_{S56_ARM}", f"type_alpha_{S56_ARM}"])
+    print("\ns.56: P(realized class), shipped (s.49 candidate) vs the record-"
+          "resolution arm and its registered variants (leave-one-cycle-out "
+          "type counts except rec_insample):\n")
+    print(per_r[show56].to_string(index=False))
 
     summ = []
     for b in ("unity_record", "stage_only", "candidate"):
@@ -455,13 +548,52 @@ def main() -> None:
         per[f"p_realized_{t}"]) for t in trees})
     summ.append(dict(score="1984 scored as {1, 6} (grand coalition)",
                      **scores(alt)))
-    sub = {k: VARIANTS[k] for k in ("production", "candidate")}
+    sub = {k: VARIANTS[k] for k in ("production", "candidate", S56_ARM)}
     per_a, _ = run(C, role_variant="amcha", variants=sub)
     summ.append(dict(score="YB 2015/2019a in Amcha's role", **scores(per_a)))
+    # s.56: the record-resolution arm against the shipped tree
+    s56_primary = scores(per, a=SHIPPED, b=S56_ARM)
+    summ.append(dict(score=f"s.56 primary: {S56_ARM} vs shipped",
+                     **s56_primary))
+    for v in S56_VARIANTS:
+        summ.append(dict(score=f"s.56 variant: {v} vs shipped",
+                         **scores(per, a=SHIPPED, b=v)))
+    for v in (S56_ARM, "rec_1999"):
+        summ.append(dict(score=f"s.56 + 1996, 1999 at weight 0.5: {v}",
+                         **scores(per, a=SHIPPED, b=v, weights="all")))
+    summ.append(dict(score=f"s.56 1984 scored as {{1, 6}}: {S56_ARM}",
+                     **scores(alt, a=SHIPPED, b=S56_ARM)))
+    summ.append(dict(score=f"s.56 YB 2015/2019a in Amcha's role: {S56_ARM}",
+                     **scores(per_a, a=SHIPPED, b=S56_ARM)))
     summ = pd.DataFrame(summ)
     print("\nMean log P(realized class), 8 informative cycles unless noted "
-          "(uniform over 9 = -2.197):\n")
+          "(uniform over 9 = -2.197); Brier = multi-class, lower is better:\n")
     print(summ.round(3).to_string(index=False))
+
+    # s.56.1 decision rule (registered before any run)
+    tol = s56_tolerance(per)
+    c1 = s56_primary["log_b"] >= s56_primary["log_a"]
+    c2 = s56_primary["brier_b"] <= s56_primary["brier_a"]
+    c3 = bool(tol["pass"].all())
+    verdict = "SHIP" if (c1 and c2 and c3) else "DO NOT SHIP"
+    print(f"\ns.56 tolerance (realized 2019-2022 outcomes must keep >= "
+          f"{S56_TOLERANCE} of the shipped probability):\n")
+    print(tol.round(4).to_string(index=False))
+    print(f"\ns.56 decision rule ({S56_ARM} vs shipped, leave-one-cycle-out):"
+          f"\n  1. mean log {s56_primary['log_b']:.4f} vs "
+          f"{s56_primary['log_a']:.4f} (diff {s56_primary['diff']:+.4f}, SE "
+          f"{s56_primary['diff_se']:.3f}): {'pass' if c1 else 'FAIL'}"
+          f"\n  2. multi-class Brier {s56_primary['brier_b']:.4f} vs "
+          f"{s56_primary['brier_a']:.4f}: {'pass' if c2 else 'FAIL'}"
+          f"\n  3. tolerance: {'pass' if c3 else 'FAIL'} "
+          f"({', '.join(tol.cycle[~tol['pass']]) or 'none below'})"
+          f"\n  verdict: {verdict}")
+    s56_out = tol.assign(table="s.56 tolerance").rename(
+        columns={"pass": "tolerance_pass"})
+    s56_out = pd.concat([s56_out, pd.DataFrame([dict(
+        table="s.56 decision", criterion_log=bool(c1),
+        criterion_brier=bool(c2), criterion_tolerance=c3, verdict=verdict)])],
+        ignore_index=True)
 
     br = binary_repeat(per, trees)
     print("\nRepeat vs government (1996/1999 at 0.5):")
@@ -475,30 +607,47 @@ def main() -> None:
         print(f"{t}: realized class is the top class in {top} of {len(inf)} "
               "informative cycles")
 
-    cal = calibration(classes, ["production", "candidate"])
+    cal = calibration(classes, ["production", "candidate", S56_ARM])
     rep = per[["cycle", "regime", "realized"]
               + [f"p_repeat_{t}" for t in trees]].copy()
     rep["table"] = "P(repeat) by cycle"
     summ_out = summ.assign(table="mean log score").round(4)
     br_out = pd.DataFrame([dict(table="repeat vs government (binary)",
                                 **{k: round(v, 4) for k, v in br.items()})])
-    pd.concat([cal, rep.round(4), summ_out, br_out], ignore_index=True).to_csv(
-        PROCESSED_DIR / "formation_calibration.csv", index=False)
+    pd.concat([cal, rep.round(4), summ_out, br_out, s56_out.round(4)],
+              ignore_index=True).to_csv(
+        out_dir / "formation_calibration.csv", index=False)
     print("\nCalibration, 9-class forecasts on the informative cycles:\n")
     print(cal.to_string(index=False))
 
     rec = record_table()
     pc = position_check()
+    # s.56: the type record behind the record-resolution arm
+    typ = []
+    for lab, regs in (("type counts: parliamentary (decisive)", (_P,)),
+                      ("type counts: + 1999", (_P, _DR)),
+                      ("type counts: + mid-term", (_P, _MT)),
+                      ("type counts: + 1999 + mid-term", (_P, _DR, _MT))):
+        al = resolution_posterior(regimes=regs)
+        typ.append({"cycle": "TYPES", "regime": lab, "how_it_ended": "; ".join(
+            f"{OUTCOMES[t]} {a:g} ({a / al.sum():.3f})"
+            for t, a in zip(RESOLUTION_TYPES, al))})
+    typ = pd.DataFrame(typ)
     pd.concat([rec, pc.rename(columns={"quantity": "regime",
                                        "value": "how_it_ended"})
-               .assign(cycle="POSITION")], ignore_index=True).to_csv(
-        PROCESSED_DIR / "formation_deadlock_record.csv", index=False)
+               .assign(cycle="POSITION"), typ], ignore_index=True).to_csv(
+        out_dir / "formation_deadlock_record.csv", index=False)
     print("\nThe record behind the stage:\n")
     print(rec.to_string(index=False))
     print("\nPosition in an election run:\n")
     print(pc.to_string(index=False))
+    print("\ns.56 type record (Dirichlet alpha = 0.5 + counts; mean share):\n")
+    print(typ[["regime", "how_it_ended"]].to_string(index=False))
     print("\n" + SOURCES)
 
 
 if __name__ == "__main__":
-    main()
+    ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
+    ap.add_argument("--out", default=None,
+                    help="output directory (default data/processed)")
+    main(ap.parse_args().out)

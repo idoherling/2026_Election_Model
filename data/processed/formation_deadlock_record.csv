@@ -25,3 +25,7 @@ POSITION,,logistic slope b: P(b < 0),,0.744
 POSITION,,Beta position 1 only: 1 of 4,,0.3
 POSITION,,Beta positions 2-4: 1 of 3,,0.375
 POSITION,,Beta positions 3-4: 0 of 2,,0.167
+TYPES,,type counts: parliamentary (decisive),,Unity government (Likud without Netanyahu) 1.5 (0.200); Change coalition with a haredi party 2.5 (0.333); Netanyahu + a change-bloc defector 1.5 (0.200); Change coalition with Ra'am 1.5 (0.200); Centre minority backed by the Joint List 0.5 (0.067)
+TYPES,,type counts: + 1999,,Unity government (Likud without Netanyahu) 1.5 (0.176); Change coalition with a haredi party 3.5 (0.412); Netanyahu + a change-bloc defector 1.5 (0.176); Change coalition with Ra'am 1.5 (0.176); Centre minority backed by the Joint List 0.5 (0.059)
+TYPES,,type counts: + mid-term,,Unity government (Likud without Netanyahu) 1.5 (0.176); Change coalition with a haredi party 2.5 (0.294); Netanyahu + a change-bloc defector 1.5 (0.176); Change coalition with Ra'am 1.5 (0.176); Centre minority backed by the Joint List 1.5 (0.176)
+TYPES,,type counts: + 1999 + mid-term,,Unity government (Likud without Netanyahu) 1.5 (0.158); Change coalition with a haredi party 3.5 (0.368); Netanyahu + a change-bloc defector 1.5 (0.158); Change coalition with Ra'am 1.5 (0.158); Centre minority backed by the Joint List 1.5 (0.158)
