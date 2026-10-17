@@ -144,6 +144,18 @@ def build_params(names: dict) -> dict:
     def f(x, d):
         return f"{float(x):.{d}f}"
 
+    # s.58: the event-risk factor at this build's horizon (unpolled days
+    # between the asof and the pre-election blackout)
+    try:
+        _asof = pd.to_datetime(pd.read_csv(PROCESSED / "bayes_forecast_2026.csv")["asof"].iloc[0])
+        _days = max((pd.Timestamp(bm.ELECTION_DAY_2026) - _asof).days, 0)
+    except Exception:
+        _days = 0
+    if getattr(bm, "EVENT_RISK_HORIZON", False):
+        _, _ev_h, _ev_m = bm.event_walk(_days, 10, np.random.default_rng(0))
+    else:
+        _ev_h, _ev_m = 0, float(bm.EVENT_RISK)
+
     def sg(x, d):
         x = float(x)
         return ("+" if x > 0 else "−" if x < 0 else "") + f"{abs(x):.{d}f}"
@@ -160,6 +172,8 @@ def build_params(names: dict) -> dict:
         # election-day stack
         "bloc_sd": f(bm.BLOC_SWING_SD, 2), "t_df": str(bm.T_DF),
         "event_risk": f(bm.EVENT_RISK, 2).rstrip("0").rstrip("."),
+        # s.58: event risk on the unpolled days before the blackout
+        "event_days": str(_ev_h), "event_mult": f(_ev_m, 3),
         "haredi_under": f(-fam["haredi"][0], 2), "haredi_sd": f(fam["haredi"][1], 2),
         "haredi_under_raw": f(-fe0["haredi"][0], 2) if "haredi" in fe0 else None,
         # the mean the projection actually applies (s.51: "e1" shipped, "e0" candidate)
@@ -195,7 +209,7 @@ def build_params(names: dict) -> dict:
         "likud_sans_bibi": f(B["likud_sans_bibi"], 3), "centre_defects": f(B["centre_defects"], 2),
         "amcha_right_pct": f(B["amcha_right"] * 100, 0), "pm_neff": str(gf.PM_ALLOC_NEFF),
         "num": {
-            "bloc": round(float(bm.BLOC_SWING_SD * bm.EVENT_RISK), 2),
+            "bloc": round(float(bm.BLOC_SWING_SD * _ev_m), 2),
             "haredi_sd": round(float(fam["haredi"][1]), 2),
             "resid4": round(float(resid(4)), 2), "resid25": round(float(resid(25)), 2),
             "resid4_new": round(float(resid(4) * bm.NEW_LIST_MULT), 2),

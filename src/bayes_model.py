@@ -80,6 +80,51 @@ N_PROJ = 8_000          # posterior projection draws
 EVENT_RISK = 1.2
 SEED = 20261027
 T_DF = 5
+# ---- Event risk on the remaining calendar (2026-10-15, dossier s.58; ported 17 Oct from the s.52 draft of 15 Oct) ----
+# Flag OFF. EVENT_RISK above multiplies the ELECTION-DAY bloc swing,
+# which is the measured final-poll error. That swing is a t(5) draw with
+# scale BLOC_SWING_SD 3.36, so its effective sd is 4.33 seats. The 1.2
+# multiplier was set at D-58 (30 Aug) and never decays: it adds about 2.9
+# seats of bloc sd at every horizon, the final build included. Verified
+# findings: campaign-dynamics DYN-F24 (corrected) and its challenge "Scale
+# event risk with the remaining horizon"; the poll-error challenge
+# "EVENT_RISK sits on a measurement-error term that never decays" (holds).
+# The polls observe events that happen before the blackout, and those
+# events enter the forecast through the refit. The swing was fitted on
+# final-poll errors, so it already covers the blackout. The only days
+# not covered are those between the build's asof and the blackout.
+# EVENT_RISK_HORIZON = True:
+#   - the E-day swing keeps its graded scale (multiplier 1.0);
+#   - a compound-Poisson walk of NB-bloc event jumps runs over
+#     h = days to election - EVENT_BLACKOUT_DAYS. Rate and sizes come
+#     from the verified within-pollster event record of this cycle
+#     (DYN-F24 corrected; DYN-F22 corrected for October 7).
+# Variance is 0.1375 seats^2 per day, frequency-weighted (0.023 without
+# the October-7 class). The mean is +0.0006 seats per day, effectively
+# none. The equivalent swing multiplier is sqrt(1 + 0.1375 h / 4.33^2):
+#   1.18 at D-58 (h = 54);
+#   1.03 at the 14 Oct asof (h = 9);
+#   exactly 1.0 at the final build (asof = last pre-blackout fieldwork).
+# The jumps come from a jumped child generator, so the rest of the
+# projection's random stream is unchanged (common random numbers).
+EVENT_RISK_HORIZON = True   # ON since 17 Oct (dossier s.58); False = the constant EVENT_RISK
+EVENT_BLACKOUT_DAYS = 4     # last fieldwork D-4 in 7 of 8 cycles, D-3 in 2020 (DYN-F08)
+EVENT_DAYS_WINDOW = 1096    # 8 listed events in about 36 months, 0.0073/day (DYN-F24)
+# NB-bloc seats, 0-35 days, within pollster, 28-day pre-event baseline
+# (DYN-F24 as re-run by the verifier). The five events are:
+#   Lebanon Sep 2024: +1.9 or +2.4 by date convention, midpoint used;
+#   Iran missiles Oct 2024: +1.6;
+#   Iran war Jun 2025: +0.9;
+#   Gaza ceasefire Oct 2025: +3.1;
+#   Iran war Feb 2026: +0.7.
+# Iran Apr 2024 and the Lebanon ceasefire (Nov 2024) count toward the
+# rate, but their sizes did not reproduce, so they are not in this list.
+EVENT_JUMPS_ORDINARY = (2.15, 1.6, 0.9, 3.1, 0.7)
+EVENT_N_ORDINARY = 7
+# October 7 2023, NB at 0-35 days. One firm only (Lazar); at 35-70 days,
+# 3 firms give -8.7 (DYN-F22 corrected).
+EVENT_JUMP_LARGE = -11.2
+EVENT_N_LARGE = 1
 
 # First-cycle de-novo lists carry wider final-poll error: measured on the
 # own 9-cycle DB, new-list final-30d sd 2.83 vs 2.14 established (D-60
@@ -329,6 +374,26 @@ def campaign_vol_weight(dte: float) -> float:
     if dte <= 77:
         return 1.25
     return 1.13
+
+
+def event_walk(days_ahead: int, n: int, rng) -> tuple:
+    """EVENT_RISK_HORIZON: NB-bloc seat jumps from security events in the
+    unobserved pre-blackout days (compound Poisson; see EVENT_RISK_HORIZON).
+    Draws from a jumped child of `rng`, so `rng` itself is not advanced.
+    Returns (jumps in NB seats, h days, equivalent swing multiplier)."""
+    h = max(int(days_ahead) - EVENT_BLACKOUT_DAYS, 0)
+    erng = np.random.Generator(rng.bit_generator.jumped())
+    jo = np.asarray(EVENT_JUMPS_ORDINARY, float)
+    k_o = erng.poisson(EVENT_N_ORDINARY / EVENT_DAYS_WINDOW * h, n)
+    k_l = erng.poisson(EVENT_N_LARGE / EVENT_DAYS_WINDOW * h, n)
+    jumps = k_l * EVENT_JUMP_LARGE
+    for j in range(1, int(k_o.max(initial=0)) + 1):
+        jumps = jumps + np.where(k_o >= j, erng.choice(jo, n), 0.0)
+    var_day = (EVENT_N_ORDINARY * np.mean(jo ** 2)
+               + EVENT_N_LARGE * EVENT_JUMP_LARGE ** 2) / EVENT_DAYS_WINDOW
+    sig2 = BLOC_SWING_SD ** 2 * T_DF / (T_DF - 2)   # t(5) scale -> variance
+    return jumps, h, float(np.sqrt(1 + var_day * h / sig2))
+
 
 LOYAL_SD = {
     "shas": 1.5,             # measured 0.92, worst downside ever -0.4
@@ -1726,7 +1791,16 @@ def project(data, idata, rng, config="current", config_params=None):
     is_nb = blocs == "netanyahu_bloc"
     # T_UNIT_VAR (s.48): unit-variance t draws, so each shock has its measured sd
     _tu = float(np.sqrt((T_DF - 2.0) / T_DF)) if T_UNIT_VAR else 1.0
-    swing = rng.standard_t(T_DF, N_PROJ) * _tu * BLOC_SWING_SD * EVENT_RISK * STACK_SCALE / 120.0
+    if EVENT_RISK_HORIZON:
+        # graded E-day scale + event walk over the unobserved days (s.58)
+        swing = rng.standard_t(T_DF, N_PROJ) * _tu * BLOC_SWING_SD * STACK_SCALE / 120.0
+        ev, ev_h, ev_m = event_walk(days_ahead, N_PROJ, rng)
+        swing = swing + ev / 120.0
+        project.last_event_days, project.last_event_mult = ev_h, ev_m
+        project.last_event_p_any = float((ev != 0).mean())
+    else:
+        swing = rng.standard_t(T_DF, N_PROJ) * _tu * BLOC_SWING_SD * EVENT_RISK * STACK_SCALE / 120.0
+        project.last_event_days, project.last_event_mult = None, EVENT_RISK
     w_nb, w_op = np.where(is_nb, base, 0), np.where(~is_nb, base, 0)
     shares = shares + swing[:, None] * (w_nb / w_nb.sum() - w_op / w_op.sum())
 

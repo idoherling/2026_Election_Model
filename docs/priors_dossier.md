@@ -3929,3 +3929,42 @@ Shas improves point accuracy at every horizon (median -.04 to -.06, mean
 -.02 to -.03) and costs a little interval score three weeks out. The site
 states this. HAREDI_ALLOC stays "base". The amendment stands for later
 candidates.
+
+## 58. Event risk on the remaining calendar (17 Oct, D-10)
+
+A judgment layer, outside the backtest (no harness analogue), so it changes
+only on cited, verified evidence. Ported from the 15 Oct draft (judgment
+layers, scratch judgment_layers_s52.patch; never merged) onto the current
+code.
+
+**What changed.** `EVENT_RISK = 1.2` multiplied the election-day bloc
+swing at every horizon, the final build included; it was set at D-58 and
+never decayed. With `EVENT_RISK_HORIZON = True` the swing keeps its graded
+scale (t(5) on BLOC_SWING_SD 3.36, sd 4.33 seats) and a compound-Poisson
+walk of Netanyahu-bloc jumps runs over h = days to election minus the
+4-day blackout. Rate: 8 events in 1,096 days (DYN-F24, corrected); sizes:
+the within-pollster 0-35 day effects of the five events that reproduced
+(+2.15, +1.6, +0.9, +3.1, +0.7 seats) and October 7 (-11.2, one firm;
+DYN-F22, corrected); blackout D-4 (DYN-F08, corrected). The walk draws
+from a jumped child generator, so the rest of the projection's stream is
+unchanged.
+
+**Why.** Events before the blackout are observed by the polls and enter
+through the refit; the swing was fitted on final-poll errors and already
+covers the blackout. Only the unpolled days between the asof and the
+blackout are new risk. The verified hazard arithmetic (DYN-F24) gives an
+equivalent multiplier of 1.005-1.036 at D-12; the events verifier
+(verify_events_oct2026.json, EVENT_RISK review: "partly") judged 1.05-1.10
+now, falling to 1 by the final build, defensible.
+
+**Effect** (production posterior of 16 Oct, Bayesian projection before the
+registration mixture, two seeds): equivalent multiplier 1.029 at h = 8;
+P(NB>=61) 14.5 / 13.1 -> 12.8 / 11.8; NB mean 53.0 unchanged; 90% NB
+interval 42-65 -> 42-64. At twice the record rate (markets price an Israel
+or Iran strike before polling day at about 0.12, EVT-F17, roughly twice the
+base rate): multiplier 1.057, P(NB>=61) 13.0 / 12.0.
+
+**Not established.** The event record is short (eight events, three years)
+and one size (October 7) rests on a single firm at 0-35 days. The sign of
+any event is not fixed (DYN-F21, DYN-F22). Shipped as a disclosed judgment;
+the post-election review grades it.
