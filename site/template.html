@@ -1,5 +1,6 @@
 <meta charset="utf-8">
 <title>The Knesset Model</title>
+<script>try{var t=localStorage.getItem("ktheme");if(t==="light"||t==="dark")document.documentElement.dataset.theme=t}catch(e){}</script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="A pre-registered probabilistic forecast of Israel's October 27, 2026 Knesset election: seat distributions, coalition arithmetic, and government-formation odds from a Bayesian model of the full Israeli poll archive and official polling-station results.">
 <meta property="og:type" content="website">
@@ -46,7 +47,9 @@
     --p-zh:#a3b53c; --p-bw:#0DAAFF; --p-amcha:#9d7bd8; --p-unity:#9aa196;
   }
 }
-:root[data-theme="dark"]{
+:root{color-scheme:light dark}
+:root[data-theme="light"]{color-scheme:light}
+:root[data-theme="dark"]{color-scheme:dark;
   --paper:#101010; --card:#101010; --ink:#f2efe8; --ink2:#c9c5bc; --muted:#8f8b82;
   --line:#f2efe8; --line2:#f2efe8; --dead:#5c594f;
   --accent:#5b8ded; --blue:#6b9fe8; --hit:#f2efe814;
@@ -105,7 +108,7 @@ section,.chapter{scroll-margin-top:48px}
 table.ledger tr.nofit td{opacity:.5}
 table.ledger td .why{font-size:10.5px;color:var(--muted);margin-inline-start:6px}
 table.ledger td.dim,table.rt td.dim{color:var(--muted)}
-th.sort{cursor:pointer;user-select:none} th.sort:hover{color:var(--accent)} th.sort[aria-sort]::after{content:" ↕";color:var(--muted)}
+th.sort{cursor:pointer;user-select:none} .sortbtn{background:none;border:0;padding:0;margin:0;font:inherit;color:inherit;letter-spacing:inherit;text-transform:inherit;text-align:inherit;cursor:pointer} th.sort:hover{color:var(--accent)} th.sort[aria-sort]::after{content:" ↕";color:var(--muted)}
 th.sort[aria-sort="ascending"]::after{content:" ↑"} th.sort[aria-sort="descending"]::after{content:" ↓"}
 table.rt th,table.rt td{padding:8px 10px;font-size:13px;border-bottom:1px solid var(--hit);vertical-align:top}
 table.rt th{font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;text-align:start}
@@ -117,6 +120,9 @@ table.rt .bar{display:inline-block;height:8px;background:var(--accent);vertical-
   .nav,#langbtn,#themebtn,#btt,#tip,.presets,.skip,.contents .xall,.chapter > h3 .tgl{display:none !important}
   .pg-report,.pg-method{display:block !important}
   .chapter.closed .chbody{display:block !important}
+  :root,:root:not([data-theme="light"]),:root[data-theme="dark"]{--paper:#fff;--card:#fff;--ink:#000;--ink2:#222;--muted:#555;--line:#000;--line2:#000;--hit:#0000000f;--field:#fff;--field-ink:#000}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .cover{padding:0 0 12px}.cover-year{display:none}
   body{background:#fff;color:#000}
   .card,.sheet,.chapter,.tile{break-inside:avoid}
   a{color:inherit;text-decoration:none}
@@ -130,15 +136,17 @@ table.rt .bar{display:inline-block;height:8px;background:var(--accent);vertical-
   text-transform:uppercase;letter-spacing:.22em;display:block;margin-top:4px}
 .dateline{font-family:"IBM Plex Mono","IBM Plex Sans Hebrew",monospace;font-size:11.5px;color:var(--ink2);
   text-align:right;text-transform:uppercase;letter-spacing:.06em}
-.dateline b{color:var(--ink);font-weight:600}
+.dateline b{color:var(--ink);font-weight:600;white-space:nowrap}
 
 /* nav — index strip */
 .nav{position:sticky;top:0;z-index:40;background:var(--paper);border-bottom:2px solid var(--ink);
   overflow-x:auto;white-space:nowrap}
 .nav .wrap{display:flex;gap:0;padding:0 24px}
+.nav a[href^="#page:"]{position:sticky;inset-inline-end:0;background:var(--paper);border-inline-start:2px solid var(--ink)}
 .nav a{display:inline-block;padding:11px 13px;font-size:12px;font-weight:600;color:var(--ink);
   text-decoration:none;letter-spacing:.1em;text-transform:uppercase;border-bottom:4px solid transparent}
 .nav a:hover{border-bottom-color:var(--accent)}
+.nav a:focus-visible{outline-offset:-3px}
 
 /* hero — the cover */
 .hero{padding:0 0 8px}
@@ -147,7 +155,7 @@ table.rt .bar{display:inline-block;height:8px;background:var(--accent);vertical-
 @media(min-width:1128px){.cover{margin:0}}
 .cover-meta{display:flex;gap:26px;flex-wrap:wrap;font-family:"IBM Plex Mono","IBM Plex Sans Hebrew",monospace;
   font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;margin-bottom:26px}
-.cover-year{position:absolute;right:-8px;bottom:-56px;font-weight:700;
+.cover-year{position:absolute;inset-inline-end:-8px;bottom:-56px;font-weight:700;
   font-size:clamp(180px,30vw,340px);line-height:1;letter-spacing:-.05em;
   color:var(--field-ink);opacity:.18;user-select:none;pointer-events:none;
   font-variant-numeric:tabular-nums}
@@ -156,9 +164,9 @@ table.rt .bar{display:inline-block;height:8px;background:var(--accent);vertical-
 .hero .standfirst{max-width:60ch;color:var(--ink2);font-size:18px;line-height:1.55;margin:26px 0 4px}
 .tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:0;
   margin:30px 0 8px;border:3px solid var(--ink)}
-.tile{background:var(--card);border-right:3px solid var(--ink);padding:16px 18px 14px;box-shadow:none}
-.tile:last-child{border-right:0}
-@media(max-width:700px){.tile{border-right:0;border-bottom:3px solid var(--ink)}.tile:last-child{border-bottom:0}}
+.tile{background:var(--card);border-inline-end:3px solid var(--ink);padding:16px 18px 14px;box-shadow:none}
+.tile:last-child{border-inline-end:0}
+@media(max-width:700px){.tile{border-inline-end:0;border-bottom:3px solid var(--ink)}.tile:last-child{border-bottom:0}}
 .tile .k{font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.16em;color:var(--ink2)}
 .tile .v{font-family:"IBM Plex Sans",sans-serif;font-weight:700;font-size:52px;line-height:1;
   margin-top:8px;letter-spacing:-.03em;font-variant-numeric:tabular-nums;color:var(--ink)}
@@ -197,11 +205,11 @@ section h2{font-size:clamp(26px,3.8vw,40px);font-weight:700;margin:10px 0 12px;l
 .petek{flex:none;min-width:30px;padding:0 4px;height:22px;background:var(--paper);
   border:2px solid var(--ink);display:inline-flex;align-items:center;justify-content:center;
   font-family:"IBM Plex Sans Hebrew","IBM Plex Sans",sans-serif;font-weight:700;font-size:12px;line-height:1}
-.petek{color:var(--pc,var(--muted));border-bottom:5px solid var(--pc,var(--dead))}
+.petek{color:var(--ink);border-bottom:5px solid var(--pc,var(--dead))}
 .petek.dead{color:var(--muted)}
 .trackwrap{position:relative;height:26px}
 .track{position:absolute;inset:11px 0;background:var(--hit)}
-.band{position:absolute;top:9px;height:8px;opacity:.4;background:var(--pc,var(--dead))}
+.band{position:absolute;top:9px;height:8px;opacity:.55;background:var(--pc,var(--dead))}
 .dot{position:absolute;top:6px;width:14px;height:14px;border:2px solid var(--paper);
   transform:translateX(-50%);background:var(--pc,var(--dead))}
 .dot.dead{background:var(--paper);border:2px solid var(--pc,var(--dead))}
@@ -254,7 +262,7 @@ svg text{font-family:"IBM Plex Mono","IBM Plex Sans Hebrew",monospace;fill:var(-
 .ftiles{margin:22px 0 4px}
 .ftiles .tile .v{font-size:40px}
 .ftiles .tile.una .v{color:var(--ink2)}
-.ftiles .tile.rep .v{color:var(--dead)}
+.ftiles .tile.rep .v{color:var(--muted)}
 .ftiles .tile .s{font-size:12.5px;color:var(--muted);margin-top:6px;line-height:1.4}
 .outc .grp{display:grid;grid-template-columns:1fr 56px;gap:14px;padding:12px 0 3px;border-top:1px solid var(--line);
   font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(--ink2)}
@@ -298,18 +306,21 @@ body[data-view="method"] .annexhead{display:block;padding:34px 0 0}
 .contents a:hover{color:var(--accent)}
 .contents a .fol{font-family:"IBM Plex Mono","IBM Plex Sans Hebrew",monospace;font-size:12px;color:var(--muted);font-weight:600;min-width:20px}
 .chapter > h3{cursor:pointer;user-select:none}
+.chapter > h3 > .chbtn{display:flex;flex:1;align-items:baseline;gap:16px;background:none;border:0;padding:0;margin:0;font:inherit;color:inherit;letter-spacing:inherit;text-align:start;cursor:pointer}
 .chapter > h3:hover{color:var(--accent)}
 .chapter > h3 .tgl{margin-inline-start:auto;font-family:"IBM Plex Mono","IBM Plex Sans Hebrew",monospace;font-size:20px;font-weight:500;color:var(--muted)}
 .chapter.closed .chbody{display:none}
 .chbody{padding-top:2px}
 .nav a.active{background:var(--ink);color:var(--paper)}
-#btt{position:fixed;right:18px;bottom:18px;width:46px;height:46px;border:0;background:var(--ink);
+#btt{position:fixed;inset-inline-end:18px;bottom:18px;width:46px;height:46px;border:0;background:var(--ink);
   color:var(--paper);font:700 20px "IBM Plex Sans";cursor:pointer;display:none;z-index:60}
 #btt.show{display:block}
+@media(max-width:640px){#btt.show{display:none}}
 #btt:hover{background:var(--accent)}
 @media(max-width:640px){
   .he .row{grid-template-columns:104px 1fr 46px;font-size:12px;gap:8px}
-  .ivl,.axisrow{grid-template-columns:minmax(112px,150px) 1fr 72px;gap:0 8px}
+  .ivl,.axisrow{grid-template-columns:minmax(104px,140px) 1fr 84px;gap:0 8px}
+  .ivl .val{font-size:12px;white-space:nowrap}
   .thr .row{grid-template-columns:minmax(112px,160px) 1fr 52px;gap:8px}
 }
 
@@ -322,6 +333,8 @@ body[data-view="method"] .annexhead{display:block;padding:34px 0 0}
 .trfig svg{width:100%;height:auto;display:block}
 .trfig figcaption{font-size:12.5px;color:var(--muted);margin-top:6px;line-height:1.45}
 #trTbl td,#trTbl th{font-size:13.5px}
+#trTbl td.num{text-align:right;font-family:"IBM Plex Mono","IBM Plex Sans Hebrew",monospace;font-variant-numeric:tabular-nums}
+html[dir="rtl"] #trTbl td.num,html[dir="rtl"] #trTbl th.num{text-align:left}
 a.cite{font-size:.82em;color:var(--accent);text-decoration:none;border-bottom:1px dotted var(--accent)}
 a.cite .cs{white-space:nowrap}
 a.cite:hover{border-bottom-style:solid}
@@ -367,7 +380,7 @@ html[dir="rtl"] .evtbl th,html[dir="rtl"] .evtbl td{text-align:right}
 table{border-collapse:collapse;width:100%;font-size:14px}
 .tblwrap{overflow-x:auto}
 th{font-size:11px;text-transform:uppercase;letter-spacing:.12em;color:var(--ink);
-  text-align:left;font-weight:700;padding:8px 12px 6px;border-bottom:3px solid var(--ink)}
+  text-align:start;font-weight:700;padding:8px 12px 6px;border-bottom:3px solid var(--ink)}
 td{padding:9px 12px;border-bottom:1px solid var(--ink)}
 tbody tr:hover td{background:var(--hit)}
 td.mono,th.num{text-align:right}
@@ -424,6 +437,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
 </style>
 
 
+<a class="skip" href="#main">Skip to content</a>
 <header class="masthead"><div class="wrap">
   <div class="brand">The Knesset Model<small>A pre-registered forecast of Israel's 2026 election</small></div>
   <div style="display:flex;align-items:center;gap:18px">
@@ -437,10 +451,11 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
 
 <nav class="nav" aria-label="Sections"><div class="wrap" id="navwrap"></div></nav>
 
+<main>
 <div class="hero pg-report" id="main"><div class="wrap">
   <div class="cover">
     <div class="cover-meta"><span>Forecast No. 1</span><span>26th Knesset</span><span>Election · 27 Oct 2026</span></div>
-    <div class="cover-year">26</div>
+    <div class="cover-year" aria-hidden="true">26</div>
     <h1>Forecast for the 26th Knesset election.</h1>
   </div>
   <p class="standfirst">A probabilistic forecast of Israel's election on October 27, 2026: seats,
@@ -509,7 +524,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
       <button id="segNb" aria-pressed="false">Netanyahu bloc</button>
       <button id="segAnti" aria-pressed="true">Anti bloc</button>
     </div>
-    <svg id="hist" viewBox="0 0 940 260" role="img" aria-label="Distribution of simulated bloc seat totals" style="width:100%;height:auto;display:block;margin-top:12px"></svg>
+    <svg id="hist" viewBox="0 0 940 260" role="img" aria-label="Distribution of simulated bloc seat totals" aria-describedby="histCap" style="width:100%;height:auto;display:block;margin-top:12px"></svg>
     <figcaption id="histCap" style="margin-top:6px"></figcaption>
   </div>
 </div></section>
@@ -614,7 +629,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
 </div></section>
 
 <div class="annexhead"><div class="wrap"><div>
-  <b>Technical annex — methodology &amp; track record</b>
+  <h1 style="font-size:20px;letter-spacing:-.01em;text-transform:uppercase">Technical annex — methodology &amp; track record</h1>
   <a href="#" id="backToReport">← Back to the forecast</a>
 </div></div></div>
 
@@ -1308,6 +1323,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
   </div>
 </div></section>
 
+</main>
 <footer><div class="wrap">
   <div>The Knesset Model · pre-registered public forecast · methodology frozen before election day<br>
   Poll data: Wikipedia archives + CEC legal filings · Fit: PyMC/NUTS · All parameters cited in the repository</div>
@@ -1315,7 +1331,6 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
 </div></footer>
 
 <button id="btt" aria-label="Back to top" title="Back to top">↑</button>
-<a class="skip" href="#main">Skip to content</a>
 <div id="tip" role="status"></div>
 
 <script>
@@ -1758,6 +1773,7 @@ document.querySelector(".skip").textContent = HEB_MODE ? "דלג לתוכן" : "
 (function(){
   const b = document.getElementById("langbtn");
   b.textContent = HEB_MODE ? "English" : "עברית";
+  b.lang = HEB_MODE ? "en" : "he";
   b.addEventListener("click", () => {
     try { localStorage.setItem("klang", HEB_MODE ? "en" : "he"); } catch(e){}
     location.reload();
@@ -1787,7 +1803,9 @@ const tip = $("#tip");
 function showTip(ev, html){ tip.innerHTML = html; tip.style.opacity = 1;
   const x = Math.min(ev.clientX + 14, innerWidth - 280); tip.style.left = x + "px";
   tip.style.top = (ev.clientY + 16) + "px"; }
-function hideTip(){ tip.style.opacity = 0; }
+function hideTip(ev){ if (ev && ev.pointerType === "touch") return; tip.style.opacity = 0; }
+// touch pointers fire pointerleave right after pointerup: keep a tapped tooltip up until the reader scrolls
+addEventListener("scroll", () => { tip.style.opacity = 0; }, {passive: true});
 
 /* ---- hemicycle ---- */
 (function(){
@@ -1843,6 +1861,7 @@ function hideTip(){ tip.style.opacity = 0; }
      style="font:700 42px 'IBM Plex Sans',sans-serif;fill:var(--ink)">120</text>
    <text x="${cx}" y="267" text-anchor="middle">${HEB_MODE?"מנדטים · אחוז חסימה 3.25%":"seats · 3.25% threshold"}</text>`;
   svg.innerHTML = html;
+  svg.setAttribute("aria-label", (HEB_MODE ? "120 המנדטים החזויים: " : "120 projected seats: ") + seated.map(p => nm(p.name) + " " + p.seats).join(", "));
   const strip = document.getElementById("hemiBlocs");
   if (strip) strip.innerHTML = blocSeq.map(b =>
     `<span><i style="display:inline-block;width:10px;height:10px;background:var(--bloc-${b});margin-right:7px;vertical-align:-1px"></i>${BLOC_NAME[b].toUpperCase()} · ${blocCounts[b]||0}</span>`).join("");
@@ -1852,7 +1871,7 @@ function hideTip(){ tip.style.opacity = 0; }
     } else hideTip(); });
   svg.addEventListener("pointerleave", hideTip);
   $("#hemiLegend").innerHTML = seated.map(p=>
-    `<span><i class="sw" style="background:var(--p-${PVAR[p.name]||"unity"})${BLOC[p.name]==="arab"?";background:transparent;border:2.5px solid var(--p-"+(PVAR[p.name]||"unity")+")":""}"></i>${nm(p.name)}</span>`).join("");
+    `<span><i class="sw" style="background:var(--p-${PVAR[p.name]||"unity"})${BLOC[p.name]==="arab"?";background:transparent;border:2.5px solid var(--p-"+(PVAR[p.name]||"unity")+")":""}"></i>${nm(p.name)} <b class="mono">${p.seats}</b></span>`).join("");
 })();
 
 /* ---- interval chart ---- */
@@ -1865,10 +1884,10 @@ function hideTip(){ tip.style.opacity = 0; }
     if (!grp.length) return;
     if (!grp.length) return;
     const tot = grp.reduce((a,p)=>a+p.seats,0);
-    html += `<div class="blochead"><i class="sw" style="background:var(--bloc-${bloc==="arab"?"arab":bloc});width:10px;height:10px;display:inline-block;margin-right:8px;vertical-align:-1px"></i>${BLOC_NAME[bloc]} · ${tot} ${HEB_MODE?"מנדטים":"seats"}</div>`;
+    html += `<div class="blochead"><i class="sw" style="background:var(--bloc-${bloc==="arab"?"arab":bloc});width:10px;height:10px;display:inline-block;margin-inline-end:8px;vertical-align:-1px"></i>${BLOC_NAME[bloc]} · ${tot} ${HEB_MODE?"מנדטים":"seats"}</div>`;
     grp.forEach(p=>{
       const dead = p.seats===0, st = dead ? "--pc:var(--dead)" : pc(p.name);
-      html += `<div class="r" data-p="${p.name}" tabindex="0">
+      html += `<div class="r" data-p="${p.name}">
         <div class="nm"><span class="petek${dead?" dead":""}" style="${pc(p.name)}">${heb(p.name)}</span><span class="t">${nm(p.name)}</span></div>
         <div class="trackwrap">
           ${[0,10,20,30].map(g=>`<span class="gridline" style="left:${X(g)}%"></span>`).join("")}
@@ -1944,7 +1963,10 @@ function sums(cols){ const idx = cols.map(c=>colIdx[c]).filter(i=>i!=null);
 const NBCOLS = COLS.filter(c=>BLOC[c]==="nb"), ANTICOLS = COLS.filter(c=>BLOC[c]==="anti");
 
 function drawHist(svgSel, data, color, h, capSel, label){
-  const svg = $(svgSel), W = 940, Hh = h, padL = 30, padB = 24;
+  const svg = $(svgSel), cw = svg.getBoundingClientRect().width,
+        W = cw ? Math.round(Math.min(940, Math.max(280, cw))) : 940,
+        Hh = W < 600 ? Math.round(h * 0.7) : h, padL = 30, padB = 24;
+  svg.setAttribute("viewBox", `0 0 ${W} ${Hh}`);
   const lo = 30, hi = 80;
   const bins = new Array(hi-lo+1).fill(0);
   data.forEach(v => { const b = Math.min(Math.max(v,lo),hi)-lo; bins[b]++; });
@@ -1954,7 +1976,7 @@ function drawHist(svgSel, data, color, h, capSel, label){
   bins.forEach((c,i)=>{ const v = lo+i, bh = c/max*(Hh-padB-14);
     html += `<rect x="${(padL+i*bw+1).toFixed(1)}" y="${(Hh-padB-bh).toFixed(1)}"
       width="${(bw-2).toFixed(1)}" height="${bh.toFixed(1)}" rx="0"
-      fill="${v>=61?`var(--${color})`:"var(--dead)"}" fill-opacity="${v>=61?1:.55}"
+      fill="${v>=61?`var(--${color})`:"var(--muted)"}" fill-opacity="${v>=61?1:.8}"
       data-v="${v}" data-c="${c}"/>`; });
   const x61 = padL + (61-lo)*bw;
   html += `<line x1="${x61}" y1="6" x2="${x61}" y2="${Hh-padB}" stroke="var(--ink)" stroke-width="1.4" stroke-dasharray="4 3"/>
@@ -2065,7 +2087,7 @@ renderBlocHist("anti");
       <div class="bar"><i style="width:${p / mx * 100}%;--pc:${COL[grp]}"></i></div>
       <div class="pct mono" style="text-align:right;font-size:13.5px">${pct(p)}</div></div>`; }).join("");
   /* next prime minister */
-  const pmx = D.pm[0][1];
+  const pmx = Math.max(...D.pm.map(r => r[3] != null ? r[3] : r[1]));
   $("#pm").innerHTML = D.pm.map(([n,p,lo,hi])=>`<div class="row">
     <div class="lab">${HEB_MODE?(HE_MISC.PM[n]||HE_MISC.PM[n.charAt(0).toUpperCase()+n.slice(1)]||n):n}</div>
     <div class="bar" style="overflow:visible"><i style="width:${p/pmx*100}%;--pc:${n.includes("repeat")?"var(--dead)":n.includes("Netanyahu")||n.includes("Likud successor")?"var(--bloc-nb)":"var(--bloc-anti)"}"></i>${
@@ -2077,7 +2099,7 @@ renderBlocHist("anti");
   /* what each seat is worth: outcome group by the Netanyahu bloc's seats */
   const C = (D.fcurve || []).filter(r => r[2] > 0);
   if (C.length > 3) {
-    const W = 520, H = 260, pl = 38, pr = 12, pt = 12, pb = 40;
+    const cw = $("#fCurve").clientWidth, W = cw ? Math.round(Math.min(640, Math.max(300, cw))) : 520, H = W < 420 ? 220 : 260, pl = 38, pr = 12, pt = 12, pb = 40;
     const x0 = C[0][0], x1 = C[C.length - 1][0];
     const X = k => pl + (k - x0) / (x1 - x0) * (W - pl - pr), Y = p => pt + (1 - p) * (H - pt - pb);
     const step = (W - pl - pr) / (x1 - x0), maxs = Math.max(...C.map(r => r[1]));
@@ -2238,17 +2260,21 @@ renderBlocHist("anti");
     ch.appendChild(body);
     const tgl = document.createElement("span");
     tgl.className = "tgl"; tgl.setAttribute("aria-hidden", "true");
-    h.appendChild(tgl);
-    h.setAttribute("role", "button");
-    h.setAttribute("tabindex", "0");
+    // the h3 stays a heading; the toggle is a real <button> inside it
+    const btn = document.createElement("button");
+    btn.type = "button"; btn.className = "chbtn";
+    while (h.firstChild) btn.appendChild(h.firstChild);
+    btn.appendChild(tgl); h.appendChild(btn);
+    // Expand all, the contents links and the citation opener still write aria-expanded on the h3: mirror it
+    new MutationObserver(() => btn.setAttribute("aria-expanded", h.getAttribute("aria-expanded")))
+      .observe(h, {attributes: true, attributeFilter: ["aria-expanded"]});
     const set = open => { ch.classList.toggle("closed", !open);
       tgl.textContent = open ? "−" : "+";
       h.setAttribute("aria-expanded", open); };
     set(i === 0);
     const flip = () => set(ch.classList.contains("closed"));
-    h.addEventListener("click", flip);
-    h.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " "){ e.preventDefault(); flip(); }});
-    deck.push({ id: ch.id, title: h.childNodes[0].textContent.trim() });
+    btn.addEventListener("click", flip);
+    deck.push({ id: ch.id, title: btn.childNodes[0].textContent.trim() });
   });
   if (chs.length){
     const box = document.createElement("nav");
@@ -2323,18 +2349,23 @@ renderBlocHist("anti");
     || h === "#evidence" || h === "#limitations" || h === "#sources"
     || h === "#page:method" || /^#ch-/.test(h);
   const h0 = location.hash;
-  if (isAnnex(h0)) setView("method", h0 === "#page:method" ? "#method" : h0);
+  if (isAnnex(h0)) setView("method", h0 === "#page:method" ? null : h0);
   else setView("report", (h0 && /^#[A-Za-z][\w-]*$/.test(h0) && document.querySelector(h0)) ? h0 : null);
   addEventListener("hashchange", () => { const h = location.hash;
     if (isAnnex(h) && document.body.dataset.view !== "method")
-      setView("method", h === "#page:method" ? "#method" : h); });
+      setView("method", h === "#page:method" ? null : h); });
   const spy = () => {
     const links = [...navwrap.querySelectorAll("a")];
     const targets = links.map(a => { const h = a.getAttribute("href");
       return h.startsWith("#page:") ? null : document.querySelector(h); });
     let cur = null;
     targets.forEach(s => { if (s && s.getBoundingClientRect().top < 120) cur = s; });
-    links.forEach((a, i) => a.classList.toggle("active", !!cur && targets[i] === cur));
+    let moved = false;
+    links.forEach((a, i) => { const on = !!cur && targets[i] === cur;
+      if (on !== a.classList.contains("active")) moved = true; a.classList.toggle("active", on); });
+    const act = moved && navwrap.querySelector("a.active"), bar = navwrap.closest(".nav");
+    if (act && bar.scrollWidth > bar.clientWidth){ const r = act.getBoundingClientRect(), b = bar.getBoundingClientRect();
+      bar.scrollLeft += (r.left + r.width / 2) - (b.left + b.width / 2); }
   };
   addEventListener("scroll", spy, { passive: true }); spy();
 
@@ -2374,9 +2405,9 @@ renderBlocHist("anti");
       if (va == null && vb == null) return 0; if (va == null) return 1; if (vb == null) return -1;
       return (typeof va === "string" ? va.localeCompare(vb) : va - vb) * sortDir; });
     tbl.innerHTML = "<thead><tr>" + cols.map(([k,l]) =>
-      `<th class="sort" data-k="${k}" ${k===sortK?`aria-sort="${sortDir>0?"ascending":"descending"}"`:'aria-sort="none"'}>${l}</th>`).join("") + "</tr></thead><tbody>" +
+      `<th class="sort" data-k="${k}" ${k===sortK?`aria-sort="${sortDir>0?"ascending":"descending"}"`:'aria-sort="none"'}><button type="button" class="sortbtn">${l}</button></th>`).join("") + "</tr></thead><tbody>" +
       rows.map(f => `<tr class="firm" data-f="${f.f}" tabindex="0">
-        <td><b>${H ? (HE_FIRM[f.f] || f.f) : f.f}</b></td><td class="dim">${[H ? (HE_WHO[f.principal] || f.principal) : f.principal, H ? hePub(f.outlet) : f.outlet].filter(Boolean).join(" · ") || T.none}</td>
+        <td><b><bdi>${H ? (HE_FIRM[f.f] || f.f) : f.f}</bdi></b></td><td class="dim">${[H ? (HE_WHO[f.principal] || f.principal) : f.principal, H ? hePub(f.outlet) : f.outlet].filter(Boolean).join(" · ") || T.none}</td>
         <td class="dim">${f.group ? (GROUP_LBL[H ? "he" : "en"][f.group] || f.group) : T.none}</td><td class="num">${f.n_cycles}</td>
         <td class="num">${f.final_mae != null ? `<i class="bar" style="width:${(f.final_mae/mx*70).toFixed(0)}px"></i>` : ""}${num(f.final_mae)}</td>
         <td class="num">${num(f.month_mae)}</td><td class="num">${num(f.lean_abs,1)}</td>
@@ -2400,6 +2431,8 @@ renderBlocHist("anti");
     const link = f.n26 > 0 ? `<a href="#polls" data-firm="${f.f}" class="toLedger">${T.ledger} ↗</a>` : "";
     tr.insertAdjacentHTML("afterend", `<tr class="detail"><td colspan="${cols.length}">${inner}${link ? `<div style="margin-top:8px">${link}</div>` : ""}</td></tr>`);
   });
+  tbl.addEventListener("keydown", ev => {
+    if ((ev.key === "Enter" || ev.key === " ") && ev.target.matches && ev.target.matches("tr.firm")){ ev.preventDefault(); ev.target.click(); } });
   const srcs = Object.entries(R.cycles).filter(([c,s]) => s.archive)
     .sort().map(([c,s]) => `<a href="${s.archive}" target="_blank" rel="noopener">${c}</a>`).join(" · ");
   document.getElementById("ratingsSrc").innerHTML = T.src + T.srcTxt + " " + (H ? "ארכיוני הסקרים:" : "Poll archives:") + " " + srcs +
@@ -2426,7 +2459,7 @@ renderBlocHist("anti");
   const ctl = document.getElementById("ledgerCtl");
   ctl.innerHTML = `<select id="lgFirm" aria-label="${T.firm}"><option value="">${T.all}</option>${firms.map(f=>`<option value="${f}">${H ? (HE_FIRM[f] || f) : f}</option>`).join("")}</select>
     <input type="search" id="lgQ" placeholder="${T.search}" aria-label="${T.search}">
-    <label><input type="checkbox" id="lgAdj"> ${T.adj}</label><span class="cnt" id="lgCnt"></span>`;
+    <label><input type="checkbox" id="lgAdj"> ${T.adj}</label><span class="cnt" id="lgCnt" role="status"></span>`;
   const tbl = document.getElementById("ledgerTbl");
   const colName = c => H ? c.he : (SHORT[c.en] || c.en);
   let sortK = "d", sortDir = -1;
@@ -2441,9 +2474,9 @@ renderBlocHist("anti");
     document.getElementById("lgCnt").textContent = `${rows.length} ${T.of} ${L.rows.length} ${T.polls} · ${nFit} ${T.fitted}`;
     const head = [["d",T.date],["f",T.firm],["p",T.pub],["n",T.n]].concat(L.cols.map((c,i)=>["s"+i, colName(c)])).concat([["w",T.w],["cec",T.cec],["src",T.src]]);
     tbl.innerHTML = "<thead><tr>" + head.map(([k,l]) =>
-      `<th class="sort" data-k="${k}" ${k===sortK?`aria-sort="${sortDir>0?"ascending":"descending"}"`:'aria-sort="none"'}>${l}</th>`).join("") + "</tr></thead><tbody>" +
+      `<th class="sort" data-k="${k}" ${k===sortK?`aria-sort="${sortDir>0?"ascending":"descending"}"`:'aria-sort="none"'}><button type="button" class="sortbtn">${l}</button></th>`).join("") + "</tr></thead><tbody>" +
       rows.map(r => { const hf = (L.house[r.f] || {});
-        return `<tr${r.x ? ' class="nofit"' : ""}><td class="num">${r.d}</td><td>${H ? (HE_FIRM[r.f] || r.f) : r.f}${r.x ? `<span class="why">${T.why[r.x] || r.x}</span>` : ""}</td><td class="dim">${H ? hePub(r.p) : r.p}</td><td class="num dim">${r.n ?? "–"}</td>` +
+        return `<tr${r.x ? ' class="nofit"' : ""}><td class="num">${r.d}</td><td><bdi>${H ? (HE_FIRM[r.f] || r.f) : r.f}</bdi>${r.x ? `<span class="why">${T.why[r.x] || r.x}</span>` : ""}</td><td class="dim">${H ? hePub(r.p) : r.p}</td><td class="num dim">${r.n ?? "–"}</td>` +
         L.cols.map((c,i) => { const v = r.s[i]; if (v == null) return `<td class="num dim">–</td>`;
           const a = adj && hf[c.id] != null ? v - hf[c.id] : v;
           return `<td class="num">${adj ? a.toFixed(1) : (Number.isInteger(v) ? v : v.toFixed(1))}</td>`; }).join("") +
@@ -2452,7 +2485,7 @@ renderBlocHist("anti");
         `<td>${r.src ? `<a href="${r.src}" target="_blank" rel="noopener">${T.source}</a>` : ((r.a || L.archive[r.pg]) ? `<a href="${r.a || L.archive[r.pg]}" target="_blank" rel="noopener">${T.archive}</a>` : "")}</td></tr>`; }).join("") + "</tbody>";
   }
   render();
-  ctl.addEventListener("input", render); ctl.addEventListener("change", render);
+  let lgT; ctl.addEventListener("input", ev => { clearTimeout(lgT); lgT = setTimeout(render, ev.target.id === "lgQ" ? 180 : 0); });
   tbl.addEventListener("click", ev => { const th = ev.target.closest("th.sort"); if (!th) return;
     const k = th.dataset.k; sortDir = (k === sortK) ? -sortDir : (k === "d" ? -1 : 1); sortK = k; render(); });
   document.getElementById("ledgerNote").textContent = T.note;
@@ -2525,7 +2558,7 @@ renderBlocHist("anti");
     const xs = pts.map((p,i) => x0 + 20 + i * ((W - x0 - 40) / Math.max(1, pts.length - 1)) - bw/2);
     let g = `<svg viewBox="0 0 ${W} ${Hh}" role="img" aria-label="${T.covT}">`; set("trCovT", T.covT);
     [80,90,100].forEach(v => g += `<line x1="${x0}" x2="${W-6}" y1="${y(v)}" y2="${y(v)}" stroke="var(--muted)" stroke-width="${v===90?1.4:0.5}" ${v===90?'stroke-dasharray="4 3"':''}/><text x="${x0-6}" y="${y(v)+4}" text-anchor="end" style="font-size:10.5px;fill:var(--muted)">${v}%</text>`);
-    pts.forEach((p,i) => { g += `<rect x="${xs[i]}" y="${y(p[1])}" width="${bw}" height="${y0 - y(p[1])}" fill="var(--accent)"/><text x="${xs[i]+bw/2}" y="${y(p[1])-4}" text-anchor="middle" style="font-size:11px;fill:var(--ink)">${p[1].toFixed(1)}%</text><text x="${xs[i]+bw/2}" y="${y0+15}" text-anchor="middle" style="font-size:11px;fill:var(--muted)">${T.days(p[0])}</text>`; });
+    pts.forEach((p,i) => { g += `<rect x="${xs[i]}" y="${Math.min(y(p[1]), y(90))}" width="${bw}" height="${Math.abs(y(90) - y(p[1]))}" fill="var(--accent)"/><text x="${xs[i]+bw/2}" y="${y(p[1])-4}" text-anchor="middle" style="font-size:11px;fill:var(--ink)">${p[1].toFixed(1)}%</text><text x="${xs[i]+bw/2}" y="${y0+15}" text-anchor="middle" style="font-size:11px;fill:var(--muted)">${T.days(p[0])}</text>`; });
     set("trCov", g + "</svg>"); set("trCovCap", T.covCap);
   }
   // reliability diagram
@@ -2534,7 +2567,7 @@ renderBlocHist("anti");
     const S=300, p0=36, sz=S-p0-10, X=v=>p0+v*sz, Y=v=>10+(1-v)*sz;
     const nmax = Math.max(...R.map(r=>r.n));
     let g = `<svg viewBox="0 0 ${S} ${S+12}" role="img" aria-label="${T.relT}">`; set("trRelT", T.relT);
-    [0,.5,1].forEach(v => { g += `<text x="${p0-6}" y="${Y(v)+4}" text-anchor="end" style="font-size:10.5px;fill:var(--muted)">${v*100}%</text><text x="${X(v)}" y="${S+6}" text-anchor="middle" style="font-size:10.5px;fill:var(--muted)">${v*100}%</text>`; });
+    [0,.5,1].forEach(v => { g += `<text x="${p0-6}" y="${Y(v)+4}" text-anchor="end" style="font-size:10.5px;fill:var(--muted)">${v*100}%</text><text x="${X(v)}" y="${S+6}" text-anchor="${v === 1 ? "end" : "middle"}" style="font-size:10.5px;fill:var(--muted)">${v*100}%</text>`; });
     g += `<rect x="${p0}" y="10" width="${sz}" height="${sz}" fill="none" stroke="var(--muted)" stroke-width="0.6"/><line x1="${X(0)}" y1="${Y(0)}" x2="${X(1)}" y2="${Y(1)}" stroke="var(--muted)" stroke-dasharray="4 3"/>`;
     R.forEach(r => { const rad = 4 + 10 * Math.sqrt(r.n / nmax); g += `<circle cx="${X(r.pred)}" cy="${Y(r.obs)}" r="${rad}" fill="var(--accent)" fill-opacity=".75"><title>${Math.round(r.lo*100)}–${Math.round(r.hi*100)}%: n=${r.n}, predicted ${(r.pred*100).toFixed(0)}%, passed ${(r.obs*100).toFixed(0)}%</title></circle>`; });
     set("trRel", g + "</svg>"); set("trRelCap", T.relCap);
@@ -2819,6 +2852,7 @@ renderBlocHist("anti");
     if (!a.textContent.trim()) a.innerHTML = "[" + hits.map(h => { const t = esc(h.short || h.id);
       return t.length <= 32 ? `<span class="cs">${t}</span>` : t; }).join("; ") + "]";
     a.href = "#src-" + hits[0].id;
+    if (HEB_MODE) a.lang = "en";
     a.title = hits.map(h => h.citation).join("\n");
   });
   const box = document.getElementById("srcList");
