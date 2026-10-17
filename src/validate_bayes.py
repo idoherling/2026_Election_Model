@@ -174,6 +174,9 @@ ABLATIONS = [
     # registered arm; nstrad_ran_B = the pair
     ("nstrad_ran", {"nstrad_record": "ran"}),
     ("nstrad_ran_B", {"nstrad_record": "ran", "resid_space": "vote"}),
+    # hybrid residual for small lists (2026-10-17, dossier s.60; pre-
+    # registered there): base0 x 120 <= 8 on the vote-share line
+    ("resid_hybrid", {"resid_space": "hybrid"}),
 ]
 # HORIZON_LAYERS string for the same arms (validate_horizon.py):
 ARAB_HORIZON_LAYERS = ";".join(
@@ -663,6 +666,10 @@ ALL_LAYERS = {"resid": True, "swing": True, "family": True, "anchors": False,
               # the record resid_space reads (bm.RESID_T_DF); a number =
               # that df.
               "t_unit": False, "resid_space": "seat", "resid_df": None,
+              # resid_hybrid (dossier s.60): resid_space "hybrid" puts lists
+              # with base0 x 120 <= resid_hybrid_seats on the vote-share
+              # line, the rest on the seat line (bm.RESID_HYBRID_SEATS)
+              "resid_hybrid_seats": bm.RESID_HYBRID_SEATS,
               # house-effect centring (dossier s.53): "firm" = shipped;
               # "operation" = re-centred on operations (bm.HOUSE_CENTRE)
               "house_centre": bm.HOUSE_CENTRE,
@@ -952,9 +959,16 @@ def project_cycle(data, idata, eday, threshold, pairs, params,
     # residual line (dossier s.48): the shipped seat record, its unique-label
     # fix, or the vote-share record of the lists that ran (all LOO)
     r_base, r_slope = params["resid_base"], params["resid_slope"]
-    if L["resid_space"] != "seat":
+    if L["resid_space"] not in ("seat", "hybrid"):
         r_base, r_slope = params["resid_lines"][L["resid_space"]]
     sd_list = (r_base + r_slope * base0 * 120) / 120.0 * resid_scale
+    if L["resid_space"] == "hybrid":
+        # resid_hybrid (dossier s.60): lists at most resid_hybrid_seats on the
+        # pre-shock base share take the LOO vote-share line, the rest the
+        # LOO seat line (bm.RESID_SPACE "hybrid")
+        v_base, v_slope = params["resid_lines"]["vote"]
+        sd_list = np.where(base0 * 120 <= L["resid_hybrid_seats"],
+                           (v_base + v_slope * base0 * 120) / 120.0 * resid_scale, sd_list)
     if L["resid_relcap"] is not None:
         sd_list = np.minimum(sd_list, L["resid_relcap"] * base0)
     if L["gone_zero"]:

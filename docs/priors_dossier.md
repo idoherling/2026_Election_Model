@@ -4817,3 +4817,253 @@ base rate): multiplier 1.057, P(NB>=61) 13.0 / 12.0.
 and one size (October 7) rests on a single firm at 0-35 days. The sign of
 any event is not fixed (DYN-F21, DYN-F22). Shipped as a disclosed judgment;
 the post-election review grades it.
+
+## 60. Hybrid residual for small lists (17-18 Oct, D-10)
+
+### 60.1 Pre-registration (written before any run of this arm)
+
+**Why.** s.57 found the near-threshold underconfidence in established
+lists. Its main source is the per-list residual. decompose() fits the
+residual sd on seat errors, so each threshold death is a whole-list miss,
+and the projection then applies the threshold again: deaths are counted
+twice. That double count lives only in the small group (<= 8 seats).
+The vote-share residual (cal_B, s.48 arm B) removes it, but it changes
+every list's width. Under the s.53 rule its only failures were the eve
+folds 2019s (+.100) and 2022 (+.128), both one-seat median flips on
+large lists (Blue and White 32 -> 31; Likud, Yesh Atid, UTJ).
+
+**Disclosure.** The coordinator proposed this arm after the s.57 results.
+The cal_B grade is known; this arm's has never been run. The boundary is
+decompose()'s own two-group split (actual seats <= 8). It was fixed in
+the proposal, before any run, and is not tuned.
+
+**Arm `resid_hybrid`.** Every list draws the shipped per-list residual,
+eps x sd_list with eps ~ N(0, 1) and width RESID_SCALE 0.9 (x
+STACK_SCALE in production). Only the line that gives sd_list changes:
+- lists whose PRE-SHOCK base share satisfies base0 x 120 <= 8 take the
+  vote-share line (decompose_vote: lists that ran, u = 120 x share);
+- every other list keeps the shipped seat line (decompose()).
+
+Everything else is shipped. That includes NEW_LIST_MULT, the zero hold
+for dropped lists, the 0.5% scoring mask and, in production,
+EVENT_RISK_HORIZON. base0 is the mean share of the forward-walked latent
+draws after the withdrawn-list drop and before any shock, the quantity
+both projections already call base0. The same test applies at every
+horizon.
+- Production: bayes_model.RESID_SPACE "hybrid", with RESID_HYBRID_SEATS
+  = 8.0. Both lines are full sample: seat 1.830 + 0.0438 x seats, vote
+  0.732 + 0.0730 x u. RESID_SPACE "seat" (the default) is shipped.
+- Harness: layer resid_space "hybrid", resid_hybrid_seats 8.0, arm
+  `resid_hybrid`. Both lines are leave-one-cycle-out, the vote line from
+  add_calibration_params and the seat line from decompose(exclude_cycle).
+
+**LOO lines** (estimation inputs, computed before registration; seat
+line / vote line, each as base + slope):
+
+| left out | seat line | vote line | at 4 seats: seat / vote | at 8 seats: seat / vote |
+|---|---|---|---|---|
+| none (production) | 1.830 + .0438 | 0.732 + .0730 | 2.00 / 1.02 | 2.18 / 1.32 |
+| 2009 | 1.679 + .0474 | 0.678 + .0781 | 1.87 / 0.99 | 2.06 / 1.30 |
+| 2013 | 1.597 + .0345 | 0.885 + .0495 | 1.73 / 1.08 | 1.87 / 1.28 |
+| 2015 | 2.009 + .0333 | 0.671 + .0703 | 2.14 / 0.95 | 2.27 / 1.23 |
+| 2019a | 1.199 + .0558 | 0.634 + .0746 | 1.42 / 0.93 | 1.64 / 1.23 |
+| 2019s | 1.934 + .0353 | 0.776 + .0748 | 2.07 / 1.07 | 2.22 / 1.37 |
+| 2020 | 1.827 + .0405 | 0.724 + .0810 | 1.99 / 1.05 | 2.15 / 1.37 |
+| 2021 | 2.194 + .0406 | 0.753 + .0723 | 2.36 / 1.04 | 2.52 / 1.33 |
+| 2022 | 1.865 + .0478 | 0.765 + .0752 | 2.06 / 1.07 | 2.25 / 1.37 |
+
+The sd is discontinuous at the boundary (about 1.3 below, 2.2 above,
+before the 0.9 width). The design accepts that and does not smooth it.
+
+**Grading.** Shipped vs `resid_hybrid` on the s.50 LOO-scorecard caches
+(the shared cache, read only; outputs in scratch), on the shipped list
+mask (`*_fixed`).
+- Eve: `HARNESS_ABLATIONS=shipped,resid_hybrid HARNESS_SKIP_WIDTH=1
+  python src/validate_bayes.py`, offsets 0/100/200.
+- D-7 and D-21: `HORIZONS=7,21 HORIZON_SKIP_GRID=1
+  HORIZON_LAYERS='resid_hybrid:{"resid_space": "hybrid"}' python
+  src/validate_horizon.py`, offsets 0/100/200, against "calendar".
+- Pooling: per seed the mean over the eight cycles, then the mean over
+  the three seeds. A fold is a cycle, its value the three-seed mean.
+- Reproduction gate: the shipped rows must equal the s.57 baselines (eve
+  1.4927 / 1.6291 / .9807 / .0475 / 9.217; D-7 1.4866 / 1.6478 / .9896 /
+  .0490 / 9.360; D-21 1.6211 / 1.7943 / .9896 / .0541 / 9.690). The
+  harness has no event-risk term, so EVENT_RISK_HORIZON does not enter.
+
+**Rule (s.53 / s.55, unchanged).** The arm passes if, at EACH of eve, D-7
+and D-21 (offsets 0/100/200):
+- it wins or ties median MAE in every leave-one-cycle-out fold (fold
+  delta < +0.1 seat);
+- pooled mean MAE, threshold Brier and interval score are not worse than
+  shipped by more than .010 / .0010 / .05;
+- pooled 90% coverage is not further from .90 than shipped's.
+
+**Reported, not gating.**
+- The reliability rows for the 50-90% and 10-30% bands, binned on each
+  arm's own probabilities, three seeds pooled, eve / D-7 / D-21, with n,
+  stated and realised.
+- The fixed-set rate: the lists the SHIPPED arm puts in 50-90%.
+- The near-threshold Brier and the by-class straddler Brier
+  (established / first-cycle), as in s.57.3.
+- Per-fold medians.
+- cal_B's s.57 numbers beside the arm, for reference.
+- The 2026 effect. The run is the BAYES_PROJECT_ONLY projection on a
+  scratch copy of main's m3_idata.nc, with bayes_model.PROCESSED_DIR on a
+  scratch copy. The baseline is the shipped configuration, which since
+  s.58 carries EVENT_RISK_HORIZON = True; with the flag off the run must
+  reproduce the committed v46 bayes_forecast_2026.csv. Seeds are the
+  production seed, +1 and +2. Reported: the pass probabilities of
+  RZP-Zehut, Otzma, Ra'am, Amcha, the Reservists and Blue and White; the
+  bloc probabilities; and which 2026 lists fall under the 8-seat
+  boundary.
+
+### 60.2 Result: does not pass
+
+60.1 was committed alone before any run: worktree commit c939a67, 22:57,
+text sha256 9a38d2c6816421d4a9385de1bbdff68a4e6f7f233637ec7a9a0921ae67447859.
+Runs used the registered commands on the shared s.50 cache (read only),
+with HARNESS_OUT_DIR in scratch and at most four processes.
+- **Reproduction gate: passed.** The shipped rows equal the s.57
+  baselines at all three horizons.
+- **Flags off.** With the flags off, the patched harness and production
+  are unchanged.
+
+**Pooled, three seeds** (median / mean / coverage / threshold Brier /
+interval; median folds W/T/L at |d| < 0.1; cal_B from s.57.3 for
+reference):
+
+| horizon | shipped | resid_hybrid | cal_B (s.57) |
+|---|---|---|---|
+| eve | 1.4927/1.6291/.981/.0475/9.217 | 1.5111/1.6000/.972/.0410/8.815 (1/6/1) | 1.5196/1.6013/.972/.0409/8.671 (0/6/2) |
+| D-7 | 1.4866/1.6478/.990/.0490/9.360 | 1.4607/1.6250/.977/.0439/8.970 (1/6/1) | 1.4591/1.6273/.951/.0439/9.008 (1/7/0) |
+| D-21 | 1.6211/1.7943/.990/.0541/9.690 | 1.6181/1.7535/.968/.0503/9.442 (1/7/0) | 1.6196/1.7550/.952/.0502/9.526 (1/7/0) |
+
+- **Two fold losses fail it.** 2022 at the eve loses +.128 and 2021 at D-7
+  loses +.119. Every pooled test passes at every horizon:
+  - mean MAE -.029 / -.023 / -.041;
+  - Brier -.0066 / -.0051 / -.0039;
+  - interval score -.402 / -.390 / -.248;
+  - coverage .981 -> .972, .990 -> .977, .990 -> .968;
+  - bloc Brier -.0039 / -.0030 / -.0014.
+  The eve pooled median is +.018 (seeds +.048 / -.011 / +.019); D-7 is
+  -.026 and D-21 -.003.
+- **The failing folds.**
+  - 2022 eve repeats cal_B's loss to the digit. Likud goes 32 -> 33
+    (actual 32) and Yesh Atid 25 -> 26 (actual 24), both on the SEAT line.
+    UTJ (6.6 share-seats, vote line) goes 7 -> 8. Yisrael Beytenu goes 5
+    -> 6 the right way.
+  - 2021 D-7 is new. The Joint List sits at 8.04 share-seats, just above
+    the boundary, on the seat line, and goes 8 -> 9 (actual 6) in all
+    three seeds. Likud goes 30 -> 31 (actual 30) in two seeds.
+  - 2019s, cal_B's other eve loss, is now a tie (+.067; Blue and White
+    loses the seat in two seeds instead of three).
+- **What this settles.** cal_B's large-list flips did not come from the
+  large lists' own widths. The hybrid keeps those lists on the seat line,
+  and their medians still move. The flips come from the small lists: a
+  narrower small-list residual kills sub-threshold lists in more draws and
+  trims passing small lists' upper tails, and the freed seats land in the
+  large lists' medians. Under the whole-seat median fold test this cost is
+  intrinsic to narrowing the small-list residual. A residual-only change
+  cannot avoid it by shielding the large lists.
+
+**Reliability rows**, three seeds pooled (lists per seed, stated ->
+realised; each arm binned on its own probabilities):
+
+| horizon | arm | 10-30% | 50-90% | fixed set (shipped 50-90%) |
+|---|---|---|---|---|
+| eve | shipped | 10.0 .196 -> .100 | 21.3 .667 -> .844 | .667 -> .844 |
+| eve | resid_hybrid | 4.3 .195 -> .231 | 18.0 .703 -> .833 | .733 -> .844 |
+| eve | cal_B | 4.3 .194 -> .231 | 18.3 .708 -> .836 | .733 -> .844 |
+| D-7 | shipped | 9.0 .206 -> .111 | 18.3 .680 -> .891 | .680 -> .891 |
+| D-7 | resid_hybrid | 4.3 .212 -> .308 | 15.3 .705 -> .870 | .749 -> .891 |
+| D-7 | cal_B | 4.3 .211 -> .308 | 15.3 .705 -> .870 | .750 -> .891 |
+| D-21 | shipped | 10.3 .207 -> .097 | 19.7 .729 -> .898 | .729 -> .898 |
+| D-21 | resid_hybrid | 6.0 .222 -> .333 | 12.7 .725 -> .921 | .800 -> .898 |
+| D-21 | cal_B | 6.0 .221 -> .333 | 12.7 .726 -> .921 | .801 -> .898 |
+
+- **Near the threshold the hybrid behaves like cal_B.** Every
+  near-threshold list is small.
+  - The 10-30% band flips from over-stated to slightly under-stated, on 4-6
+    lists per seed.
+  - On the shipped 50-90% lists the hybrid closes about 40% of the gap.
+- **Near-threshold Brier** (shipped's [.1, .9) lists): .126 / .140 / .144,
+  against shipped's .143 / .153 / .153.
+- **By class:**
+  - established lists .135 / .160 / .186, against shipped's .156 / .172 /
+    .190;
+  - first-cycle lists .187 / .177 / .151, against shipped's .186 / .177 /
+    .158.
+
+### 60.3 2026 effect (frozen production posterior; outputs in scratch)
+
+The posterior is main's m3_idata.nc, 16 Oct 18:54, sha256 654a4414....
+It is the same posterior as s.57.4, copied to scratch. The run used the
+BAYES_PROJECT_ONLY path with bayes_model.PROCESSED_DIR on a scratch copy;
+the repo's data/processed was not written.
+- **Baseline.** The baseline is shipped with EVENT_RISK_HORIZON = True
+  (factor 1.029 at h = 8 days). With the flags off the run is
+  byte-identical to the committed v46 bayes_forecast_2026.csv and
+  bayes_forecast_blocs.csv.
+- **Seeds.** Production seed, +1 and +2.
+
+| (seeds +0 / +1 / +2) | shipped (event-risk horizon) | resid_hybrid | change, seed mean |
+|---|---|---|---|
+| RZP-Zehut pass | .560 / .559 / .563 | .618 / .613 / .622 | .561 -> .618 |
+| Otzma pass | .799 / .792 / .798 | .855 / .842 / .853 | .796 -> .850 |
+| Ra'am pass | .760 / .769 / .763 | .882 / .885 / .882 | .764 -> .883 |
+| Amcha pass | .252 / .252 / .244 | .230 / .231 / .225 | .249 -> .229 |
+| Reservists pass | .224 / .225 / .219 | .200 / .203 / .204 | .223 -> .202 |
+| Blue and White pass | .016 / .015 / .016 | .000 / .000 / .000 | .016 -> .000 |
+| P(NB >= 61) | .128 / .118 / .126 | .108 / .099 / .101 | .124 -> .103 |
+| P(change bloc >= 61) | .063 / .064 / .064 | .056 / .055 / .057 | .064 -> .056 |
+| P(neither) | .809 / .819 / .810 | .835 / .846 / .842 | .813 -> .841 |
+| NB seats, mean [90%] | 53.0 [42-64] | 52.9 [43-63] | |
+
+- **Which lists fall under the boundary** (base0 x 120, seed +0):
+  - On the vote line: Otzma 7.56, Ra'am 4.94, RZP-Zehut 5.58, Shas 7.17,
+    UTJ 7.16, YB 7.35, the Joint List (Balad + Hadash-Ta'al) 7.88, Amcha
+    3.74, the Reservists 3.58, Blue and White 1.0, and every micro-list.
+  - On the seat line: Likud 20.59, Yashar 20.71, Together 11.33 and the
+    Democrats 8.47.
+  - The Joint List and the Democrats sit within half a seat of the
+    boundary.
+- **Central seats** are unchanged except Shas at seed +2 (8 -> 9). Under
+  both arms Shas is 8 or 9 depending on the seed.
+- **Intervals narrow on the small lists.** YB 4-12 -> 6-11, the Joint
+  List 5-13 -> 6-12, Otzma 0-11 -> 0-10, Ra'am 0-9 -> 0-8, RZP-Zehut 0-8
+  -> 0-7.
+- **In 2026 the hybrid and cal_B are nearly the same change.** Only the
+  four largest lists keep the seat line, and the satellites move as under
+  cal_B (s.57.4).
+
+### 60.4 Recommendation
+
+- **Not shipped.** Under the pre-registered s.53 / s.55 rule
+  resid_hybrid fails: eve 2022 +.128 and D-7 2021 +.119.
+  `RESID_SPACE` stays "seat". `RESID_HYBRID_SEATS` (8.0) and the harness
+  layer stay in the code, unused by default. The headline is unchanged.
+- **What the grade establishes.**
+  - The vote-share residual's near-threshold gain survives the hybrid
+    intact: the 50-90% band, the Brier and the by-class Brier are the same
+    as cal_B's.
+  - Its interval score is better than cal_B's at D-7 and D-21.
+  - Its fold failures are not the large lists' widths but the seats that
+    small-list deaths free up. Any small-list narrowing will meet the
+    whole-seat median fold test on the large lists.
+  - Passing would take a change outside the residual, or an owner
+    decision on the fold test. Neither is registered here.
+- **For the site.** The s.57 statement stands. The pass probabilities of
+  RZP-Zehut, Otzma and Ra'am are more likely understated than overstated.
+  The graded arm that would correct part of it (to about .62 / .85 / .88)
+  costs a one-seat median flip in two of eight past folds.
+
+### 60.5 Not established
+
+- **The boundary discontinuity is not graded** (about 1.3 vs 2.2 seats of
+  sd at 8 share-seats). In 2026 the Joint List and the Democrats sit next
+  to it, and the 2021 D-7 loss is a list just above it. A smooth blend
+  was not registered.
+- **D-56** was not run.
+- **The formation chain was not run.** The 2026 effect is the plain
+  projection; the registration mixture, official forecast and formation
+  chain were not run.

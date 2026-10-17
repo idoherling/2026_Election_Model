@@ -619,6 +619,16 @@ T_UNIT_VAR = False
 HOUSE_CENTRE = "firm"
 RESID_SPACE = "seat"
 RESID_T_DF = None
+# Candidate resid_hybrid (2026-10-17, dossier s.60) - flag at the shipped
+# value. RESID_SPACE "hybrid": a list whose PRE-SHOCK base share (base0, the
+# forward-walked latent mean after the withdrawn-list drop) is at most
+# RESID_HYBRID_SEATS x 1/120 draws the vote-share residual line
+# (decompose_vote, full sample 0.73 + 0.073 u); every other list keeps the
+# shipped seat line (1.83 + 0.044 x seats). The threshold-death double count
+# (s.57) sits in decompose()'s small group (<= 8 seats); large lists keep
+# their graded width. Mirrored in validate_bayes (resid_space "hybrid",
+# resid_hybrid_seats).
+RESID_HYBRID_SEATS = 8.0
 
 
 def resid_line(space: str | None = None) -> tuple:
@@ -1711,8 +1721,18 @@ def project(data, idata, rng, config="current", config_params=None):
     # Per-list election-day shock: residual final-poll error beyond
     # bloc/family components, calibrated on the backtest.
     base0 = shares.mean(axis=0)
-    _rb, _rs = (LIST_SHOCK_BASE, LIST_SHOCK_SLOPE) if RESID_SPACE == "seat" else resid_line()
+    _rb, _rs = ((LIST_SHOCK_BASE, LIST_SHOCK_SLOPE) if RESID_SPACE in ("seat", "hybrid")
+                else resid_line())
     sd_list = (_rb + _rs * base0 * 120) / 120.0 * RESID_SCALE * STACK_SCALE
+    project.last_resid_small = None
+    if RESID_SPACE == "hybrid":   # dossier s.60: small lists on the vote-share line
+        _vb, _vs = resid_line("vote")
+        _small = base0 * 120 <= RESID_HYBRID_SEATS
+        sd_list = np.where(_small, (_vb + _vs * base0 * 120) / 120.0 * RESID_SCALE * STACK_SCALE,
+                           sd_list)
+        # the boundary test per list: {components: (base0 x 120, on the vote line)}
+        project.last_resid_small = {c: (round(float(s), 2), bool(m)) for c, s, m in
+                                    zip(data["components"], base0 * 120, _small)}
     comps0 = [set(c.split("+")) for c in data["components"]]
     is_new = np.array([bool(cs & NEW_LIST_IDS) for cs in comps0])
     sd_list = np.where(is_new, sd_list * NEW_LIST_MULT, sd_list)
