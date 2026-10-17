@@ -43,10 +43,13 @@ ARMS = {
     "AB": {"t_unit": True, "resid_space": "vote"},
     "D": {"resid_df": "loo"},
     "ABD": {"t_unit": True, "resid_space": "vote", "resid_df": "loo"},
+    # hierarchical error model (dossier s.61): its residual width multiplier
+    # is the layer hier_width (the fixed arm at bm.HIER_RESID_SCALE, 1.0)
+    "H1": {"error_model": "hierarchical"},
 }
 # nested width arms (CBfix added by amendment 3, s.48.1: the width re-chosen
-# after the decompose() index fix)
-GRID_ARMS = {"C0": "base", "CA": "A", "CAB": "AB", "CABD": "ABD", "CBfix": "Bfix"}
+# after the decompose() index fix; H2 = H1 with the nested width, s.61.1)
+GRID_ARMS = {"C0": "base", "CA": "A", "CAB": "AB", "CABD": "ABD", "CBfix": "Bfix", "H2": "H1"}
 WIDTHS = [round(0.4 + 0.1 * i, 1) for i in range(13)]               # 0.4 .. 1.6
 CHOICE_HORIZONS = ["eve", "7", "21"]                                  # D-56 never chooses
 METRICS = ["seat_mae_median", "seat_mae", "coverage_90", "threshold_brier", "interval_score"]
@@ -56,6 +59,17 @@ def _jobs(arm_widths):
     for arm, flags in ARMS.items():
         for w in arm_widths(arm):
             yield arm, w, flags
+
+
+def _is_hier(flags) -> bool:
+    return flags.get("error_model") == "hierarchical"
+
+
+def fixed_width(arm: str, shipped_w: float) -> float:
+    """The width a fixed (non-nested) arm is graded at: the shipped
+    RESID_SCALE, or bm.HIER_RESID_SCALE on a hierarchical arm (s.61)."""
+    import bayes_model as bm
+    return float(bm.HIER_RESID_SCALE) if _is_hier(ARMS.get(arm, {})) else shipped_w
 
 
 def run(out: Path, horizons, seeds, cycles, tag: str = "") -> None:
@@ -71,7 +85,7 @@ def run(out: Path, horizons, seeds, cycles, tag: str = "") -> None:
     grid_bases = set(GRID_ARMS.values())
 
     def arm_widths(arm):
-        return WIDTHS if arm in grid_bases else [shipped_w]
+        return WIDTHS if arm in grid_bases else [fixed_width(arm, shipped_w)]
 
     polls = pd.read_csv(PROCESSED_DIR / "polls.csv", parse_dates=["fieldwork_end"])
     results = pd.read_csv(PROCESSED_DIR / "results.csv")
@@ -111,11 +125,13 @@ def run(out: Path, horizons, seeds, cycles, tag: str = "") -> None:
                 order = [("base", shipped_w, {})] + [j for j in _jobs(arm_widths)
                                                      if not (j[0] == "base" and j[1] == shipped_w)]
                 for arm, w, flags in order:
+                    # a hierarchical arm's width is its hier_width layer (s.61)
+                    lay = dict(flags, hier_width=w) if _is_hier(flags) else flags
                     seats, blocs, base, comp_of = vb.project_cycle(
                         data, idata, eday, vb.CYCLE_THRESHOLD.get(cycle, THRESHOLD),
                         vb.PAST_PAIRS[cycle], params, vb.VAL_BLOC_OVERRIDES.get(cycle),
                         np.random.default_rng(seed), resid_scale=w,
-                        weeks_override=wk, layers=flags)
+                        weeks_override=wk, layers=lay)
                     actual = np.zeros(seats.shape[1])
                     for r in res.itertuples():
                         hit = {comp_of[c] for c in r.party_id.split("+") if c in comp_of}
@@ -194,7 +210,7 @@ def grade(out: Path) -> None:
     graded, picks = [], {}
     have = set(d.arm)          # a subset run (--arms) grades only its arms
     for arm in [a for a in ARMS if a in have]:
-        x = d[(d.arm == arm) & (d.width == shipped_w)]
+        x = d[(d.arm == arm) & (d.width == fixed_width(arm, shipped_w))]
         graded.append(x.assign(label=arm))
     for lab, arm in [(l, a) for l, a in GRID_ARMS.items() if a in have]:
         picks[lab] = {c: nested_choice(d, arm, c) for c in cycles}

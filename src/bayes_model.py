@@ -632,6 +632,23 @@ RESID_T_DF = None
 # their graded width. Mirrored in validate_bayes (resid_space "hybrid",
 # resid_hybrid_seats).
 RESID_HYBRID_SEATS = 8.0
+# Hierarchical error model (2026-10-18, dossier s.61) - flag at the shipped
+# value. "moments" = the shipped stack: decompose()'s moment estimates
+# plugged in as fixed values (bloc swing t(5) x BLOC_SWING_SD, the haredi
+# family t draw x sd around the e0 mean, the residual line x RESID_SCALE x
+# NEW_LIST_MULT). "hierarchical" = src/error_model.py's joint PyMC posterior
+# of the vote-share error record (full sample, cached under
+# data/processed/error_model/): each simulation takes one joint posterior
+# draw of the hyperparameters and draws a NEW election's bloc error beta ~
+# N(mu_beta, sigma_beta), haredi family effect phi ~ N(mu_h, sigma_h) and
+# per-list residual eps ~ t(nu, 0, exp(a + b log(size/8) + gamma x
+# first-cycle)), replacing those three layers. The width is estimated, so
+# the residual takes HIER_RESID_SCALE (1.0), not RESID_SCALE, and gamma
+# replaces NEW_LIST_MULT. The Arab family keeps the graded turnout term; the
+# event walk, STACK_SCALE and every other layer are unchanged. Mirrored in
+# validate_bayes (layers error_model / hier_width, arm hier_H1).
+ERROR_MODEL = "moments"            # "moments" (shipped) | "hierarchical"
+HIER_RESID_SCALE = 1.0
 
 
 def resid_line(space: str | None = None) -> tuple:
@@ -1824,7 +1841,23 @@ def project(data, idata, rng, config="current", config_params=None):
         # base-weighted layers below (swing, family, certainty, gevalt)
         # then leave the column at zero too
         sd_list = np.where(gone, 0.0, sd_list)
-    if RESID_T_DF is None:
+    project.last_hier_new = None
+    if ERROR_MODEL == "hierarchical":
+        if ERROR_STACK:
+            raise ValueError("ERROR_MODEL 'hierarchical' and ERROR_STACK both own the error stack")
+        # dossier s.61: one joint posterior draw per simulation (_hj, reused
+        # by the bloc and haredi terms below); the residual of a NEW election
+        # in u = 120 x share, on the pre-shock base share
+        import error_model as _em
+        _hy = _em.production_hyper()
+        _hj = _em.draw_index(_hy, N_PROJ, rng)
+        _new = _em.first_cycle_mask(data["components"], "2026")
+        project.last_hier_new = [c for c, m in zip(data["components"], _new) if m]
+        eps = _em.resid_draws(_hy, _hj, base0 * 120, _new, rng) * HIER_RESID_SCALE * STACK_SCALE
+        if GONE_STAY_ZERO:
+            eps = np.where(gone[None, :], 0.0, eps)
+        sd_list = 1.0 / 120.0
+    elif RESID_T_DF is None:
         eps = rng.standard_normal(shares.shape)
     else:   # fat-tailed residual, sd matched (s.48)
         eps = rng.standard_t(RESID_T_DF, shares.shape) * np.sqrt((RESID_T_DF - 2.0) / RESID_T_DF)
@@ -1902,7 +1935,19 @@ def project(data, idata, rng, config="current", config_params=None):
     _tu = float(np.sqrt((T_DF - 2.0) / T_DF)) if T_UNIT_VAR else 1.0
     if _stack_tu is not None:   # s.62: each simulation's variant's t scale
         _tu = _stack_tu
-    if EVENT_RISK_HORIZON:
+    if ERROR_MODEL == "hierarchical":
+        # s.61: a new election's bloc error (error space, polled - actual),
+        # so the truth moves by -beta; the event walk stays on top
+        _bz = rng.standard_normal(N_PROJ) * STACK_SCALE * (1.0 if EVENT_RISK_HORIZON else EVENT_RISK)
+        swing = -_em.bloc_draws(_hy, _hj, _bz) / 120.0
+        if EVENT_RISK_HORIZON:
+            ev, ev_h, ev_m = event_walk(days_ahead, N_PROJ, rng)
+            swing = swing + ev / 120.0
+            project.last_event_days, project.last_event_mult = ev_h, ev_m
+            project.last_event_p_any = float((ev != 0).mean())
+        else:
+            project.last_event_days, project.last_event_mult = None, EVENT_RISK
+    elif EVENT_RISK_HORIZON:
         # graded E-day scale + event walk over the unobserved days (s.58)
         swing = rng.standard_t(T_DF, N_PROJ) * _tu * BLOC_SWING_SD * STACK_SCALE / 120.0
         ev, ev_h, ev_m = event_walk(days_ahead, N_PROJ, rng)
@@ -1938,6 +1983,14 @@ def project(data, idata, rng, config="current", config_params=None):
         mu_f, sd_f = FAMILY_SHOCK[f]
         sd_f = sd_f * STACK_SCALE
         in_f = fams == f
+        if f == "haredi" and ERROR_MODEL == "hierarchical":
+            # s.61: a new election's haredi family effect phi (error space);
+            # the normal part of the correlated draw keeps the kalpi rho
+            # with the Arab turnout draw
+            phi = _em.haredi_draws(_hy, _hj, z[:, k] * STACK_SCALE)
+            w_f, w_r = np.where(in_f, base, 0), np.where(~in_f, base, 0)
+            shares = shares + (-phi / 120.0)[:, None] * (w_f / w_f.sum() - w_r / w_r.sum())
+            continue
         if f == "haredi" and HAREDI_FAMILY_FORM == "e0":
             mu_f = _P["family_e0"]["haredi"][0]    # raw-e0 mean, e1 sd kept (s.51)
         if f == "arab" and ARAB_FAMILY_FORM == "additive_e0":

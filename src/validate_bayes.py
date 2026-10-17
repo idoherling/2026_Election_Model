@@ -180,6 +180,11 @@ ABLATIONS = [
     # stacking of error-stack variants (dossier s.62): layer error_stack
     # takes fold-specific weights, so it is graded by src/stacking.py
     # (nested leave-one-cycle-out), not as a fixed arm here
+    # hierarchical Bayesian error model (2026-10-18, dossier s.61; pre-
+    # registered there): H1 = bloc, haredi family and residual from the LOO
+    # posterior predictive at width 1.0 (H2, the nested width, runs in
+    # calibration_arms.py)
+    ("hier_H1", {"error_model": "hierarchical"}),
 ]
 # HORIZON_LAYERS string for the same arms (validate_horizon.py):
 ARAB_HORIZON_LAYERS = ";".join(
@@ -688,7 +693,14 @@ ALL_LAYERS = {"resid": True, "swing": True, "family": True, "anchors": False,
               # weight} (arms of bm.ERROR_STACK_ARMS) draws each simulation's
               # variant (resid_space x t_unit, LOO lines) by the weights from
               # the child generator bm.error_stack_assign (bm.ERROR_STACK)
-              "error_stack": bm.ERROR_STACK}
+              "error_stack": bm.ERROR_STACK,
+              # hierarchical error model (dossier s.61): "moments" = shipped;
+              # "hierarchical" = the bloc swing, haredi family shock and
+              # residual drawn from the posterior predictive of a new election
+              # under the leave-the-graded-cycle-out fit (error_model.py);
+              # hier_width multiplies that residual (resid_scale is not read
+              # on that branch; bm.HIER_RESID_SCALE, 1.0: the width is estimated)
+              "error_model": bm.ERROR_MODEL, "hier_width": bm.HIER_RESID_SCALE}
 
 # Arab-sector turnout by election (share of eligible Arab citizens voting).
 # Series as compiled in the dossier (s.4, s.24) and the production comment
@@ -1011,8 +1023,28 @@ def project_cycle(data, idata, eday, threshold, pairs, params,
         sd_list = np.minimum(sd_list, L["resid_relcap"] * base0)
     if L["gone_zero"]:
         sd_list = np.where(gone, 0.0, sd_list)
+    hier = L["error_model"] == "hierarchical"
+    if hier:
+        if L["error_stack"]:
+            raise ValueError("layers error_model 'hierarchical' and error_stack both own the stack")
+        # dossier s.61 (bm.ERROR_MODEL "hierarchical"): the leave-the-graded-
+        # cycle-out posterior; one joint hyperparameter draw per simulation
+        # (hj), reused by the bloc and haredi terms below
+        import error_model as _em
+        cyc_h = params.get("cycle") or str(project_cycle.job or "").split("_")[0]
+        if params.get("hier", {}).get("cycle") != cyc_h:
+            params["hier"] = _em.harness_params(cyc_h)
+        hy = params["hier"]["hyper"]
+        hj = _em.draw_index(hy, N_PROJ, rng)
+        h_new = _em.first_cycle_mask(data["components"], cyc_h)
     if L["resid"]:
-        if L["resid_df"] is None:
+        if hier:
+            eps = (_em.resid_draws(hy, hj, base0 * 120, h_new, rng)
+                   * L["hier_width"] * L["shock_scale"])
+            if L["gone_zero"]:
+                eps = np.where(gone[None, :], 0.0, eps)
+            sd_list = 1.0 / 120.0
+        elif L["resid_df"] is None:
             eps = rng.standard_normal(shares.shape)
         else:
             # fat-tailed residual, sd matched (dossier s.48, arm D)
@@ -1037,7 +1069,10 @@ def project_cycle(data, idata, eday, threshold, pairs, params,
     if stack_tu is not None:   # s.62: each simulation's variant's t scale
         tu = stack_tu
     if L["swing"] and is_nb.any() and (~is_nb).any():
-        sw = rng.standard_t(T_DF, N_PROJ) * tu * swing_sd * L["shock_scale"] / 120.0
+        if hier:   # s.61: a new election's bloc error (error space: truth moves by -beta)
+            sw = -_em.bloc_draws(hy, hj, rng.standard_normal(N_PROJ) * L["shock_scale"]) / 120.0
+        else:
+            sw = rng.standard_t(T_DF, N_PROJ) * tu * swing_sd * L["shock_scale"] / 120.0
         w_nb, w_op = np.where(is_nb, base, 0), np.where(~is_nb, base, 0)
         shares = shares + sw[:, None] * (w_nb / w_nb.sum() - w_op / w_op.sum())
     # Family shocks with the kalpi-measured haredi<->arab correlation,
@@ -1055,6 +1090,13 @@ def project_cycle(data, idata, eday, threshold, pairs, params,
             break
         mu_f, sd_f = shocks[f]
         in_f = fams == f
+        if f == "haredi" and hier:
+            # s.61: a new election's haredi family effect (normal part of the
+            # correlated draw, so the kalpi rho with the Arab draw is kept)
+            phi = _em.haredi_draws(hy, hj, zf[:, k] * L["shock_scale"])
+            w_f, w_r = np.where(in_f, base, 0), np.where(~in_f, base, 0)
+            shares = shares + (-phi / 120.0)[:, None] * (w_f / w_f.sum() - w_r / w_r.sum())
+            continue
         if f == "haredi" and L["haredi_mean"] == "e0":
             mu_f = params["family_e0"]["haredi"][0]   # hared_e0 (s.51): LOO raw mean, e1 sd
         if f == "arab" and L["arab_mode"] == "add_e0":

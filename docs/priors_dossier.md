@@ -6028,3 +6028,728 @@ resid_space) now reads bm.RESID_SPACE, so later candidates grade against
 it. Effect on 2026 (frozen 16 Oct posterior, three seeds): P(NB>=61) .124 ->
 .108; RZP-Zehut pass .561 -> .581, Otzma .796 -> .819, Ra'am .764 -> .796;
 central seats unchanged.
+
+## 61. Hierarchical Bayesian error model (18 Oct, D-9)
+
+### 61.1 Pre-registration (written before any harness run of these arms)
+
+**Why.** The election-day error stack is a set of moment estimates from
+eight cycles (about 90 list-cycle errors), plugged in as fixed values:
+the bloc swing t(5) x BLOC_SWING_SD 3.36, the haredi family t x 1.77 around
+the e0 mean -0.98, and the per-list residual (1.83 + 0.044 x seats) x
+RESID_SCALE 0.9 (x NEW_LIST_MULT 1.35 in production). Four defects are on
+the record:
+- decompose() has the pooled-index collision (s.48);
+- its seat-error widths count threshold deaths twice (s.57);
+- RESID_SCALE 0.9 was tuned on the collided line (s.48.6);
+- parameter uncertainty is not propagated: the ERR verifier's
+  posterior-predictive bloc sd for a new cycle is about 4.1-4.2 against
+  the plugged-in 3.36.
+
+This section replaces the three layers with one joint hierarchical model of
+final-poll error, in the spirit of Shirani-Mehr, Rothschild, Goel & Gelman
+(2018, JASA) and Heidemanns, Gelman & Morris (2020), and grades it under
+the standing rule.
+
+**The record** is decompose_vote's: error_decomposition._vote_frames,
+reused unchanged. It holds 95 list-cycles of lists that ran, 9-14 per
+cycle. Each error is the final-window polled share minus the actual share,
+in u = 120 x share. I checked its construction.
+- Labels are unique (reset_index per cycle, ignore_index on concat), so
+  the s.48 collision does not exist here.
+- A list that died at the threshold enters at its VOTE miss (Meretz 2022
+  +0.49 u, not 4.4 seats), so there is no double count.
+- For lists that won seats, both sides go through the same seat-to-share
+  map: polled is seats/120 x (1 - wasted - 0.01), actual is seats x (1 - W
+  - 0.01). Actual_u therefore carries d'Hondt rounding. It is kept,
+  because the polled side is built the same way.
+- The errors do not sum to zero. Per cycle they sum to +0.24 to +2.36 u
+  (mean +1.39): the modelled lists are over-polled together by the share
+  of the unpolled lists. The model gives this its own nuisance term
+  (kappa, below), so it does not bias the other components.
+
+**The model** (src/error_model.py), for list l in cycle c:
+
+    e_cl = beta_c s_cl + phi^h_c f^h_cl + phi^a_c f^a_cl + kappa_c g_cl + eps_cl
+    eps_cl ~ Student-t(nu, 0, sigma_l),
+    log sigma_l = a + b log(size_l / 8) + gamma new_l
+
+- **Loadings are exactly the projection's.** Let w be the polled share,
+  clipped at 0.1 as in decompose().
+  - The bloc loading s is +w/W_NB on the Netanyahu bloc and -w/W_rest
+    elsewhere. It is zero-sum, and beta_c is the NB-side total error in u.
+  - The family loadings f^h and f^a are +w/W_fam on the family and
+    -w/W_others elsewhere. This is the zero-sum allocation that
+    project() and project_cycle() use for family shocks.
+  - g = w/W_all is the common proportional error.
+- **The bloc is the harness's.** It is the registry bloc plus
+  VAL_BLOC_OVERRIDES on the DECOMP-expanded components: the bloc the
+  projection moves and P(NB >= 61) counts. It differs from decompose()'s
+  family bloc (right + haredi) on nine rows: Yisrael Beytenu 2019a-2022,
+  Zehut 2019a, Yamina 2019s and 2021, New Hope 2021. On this definition
+  the NB-side totals are +2.67 / +5.72 / -1.75 / -4.05 / +2.60 / +1.68 /
+  -0.27 / +0.85 (mean +0.93, sd 2.99); on decompose()'s they are mean
+  +1.47, sd 2.99.
+- **Size and first-cycle covariates.**
+  - size = polled u, floored at 0.5. The record's smallest is 1.7 u, and
+    the projection floors base0 x 120 at the same 0.5.
+  - new = a first-cycle list: none of its components was on an earlier
+    ballot (results.csv, ran_vote_shares.csv). Components are expanded
+    by DECOMP / DECOMP_FIDELITY plus four lineage facts:
+    - Yamina 2019s = New Right + URWP;
+    - the Joint List 2019s = Hadash-Ta'al + Balad + Ra'am;
+    - RZP 2021 = Tkuma + Otzma + Noam;
+    - the Democrats 2026 = Labor + Meretz.
+  - 2009 has no earlier cycle in the record: every list it polled had
+    run in 2006, so none is flagged.
+  - The record has 10 first-cycle rows: Hatnuah, Yesh Atid, Am Shalem and
+    Otzma 2013; Kulanu 2015; New Right, Zehut and Gesher 2019a; New Hope
+    and NEP 2021.
+  - In 2026 the rule flags Yashar, Amcha, the Reservists and the micro
+    lists. NEW_LIST_IDS has the same substantive lists, plus Unity, which
+    has withdrawn.
+- **Cycle effects are hierarchical and non-centred.**
+  - beta_c = mu_beta + sigma_beta z_c.
+  - phi^h_c = mu_h + sigma_h z^h_c.
+  - phi^a_c = mu_a + sigma_a z^a_c.
+  - kappa_c = mu_k + sigma_k z^k_c.
+  - Each z is N(0, 1).
+- **Priors** (weakly informative, in u):
+  - mu_beta ~ N(0, 3), sigma_beta ~ HalfNormal(5);
+  - mu_h, mu_a, mu_k ~ N(0, 3); sigma_h, sigma_a, sigma_k ~ HalfNormal(3);
+  - a ~ N(0, 1), the log scale of an 8-u list;
+  - b ~ N(0.5, 0.5), centred on sampling-theory sd proportional to
+    sqrt(share);
+  - gamma ~ N(0, 0.5);
+  - nu = 2 + Gamma(2, 0.1), which keeps the variance finite (mean 22).
+- **Anchors are not in the model.** They are retired in production
+  (ANCHORS_ON False), so Likud's and the leader's misses stay in the
+  residual, which is the stack the projection runs.
+
+**Scale: u = 120 x share, not logit.**
+- Every shock the projection applies is additive in u. The bloc swing
+  and the family shocks are zero-sum allocations of a u total, and the
+  residual is added to the share vector before the threshold.
+- On the logit scale a zero-sum total cannot be allocated additively.
+  Fitting on logits would also change what the projection does, not only
+  how the parameters are estimated.
+- The reason to prefer logits is heteroscedasticity, and b models it
+  directly. With b ~ 0.5 the residual behaves like a logit-scale error.
+- The record is measured in u.
+
+**The Arab family stays with the graded turnout term.** It enters the fit
+only as a nuisance: phi^a is estimated so that the Arab lists' correlated
+error does not leak into beta (Arab lists load on the non-NB side) or into
+the residual scale. It is never drawn at projection.
+- The turnout term was graded and shipped (s.43, regB). It carries
+  information an exchangeable phi cannot:
+  - the regime, unified vs split, through the LOO regime mean of
+    turnout;
+  - the regression of the family error on the ratio-implied error.
+- On the record the regimes have opposite signs: unified under-counts
+  (mean -1.35 seats), split over-counts (+1.35). An exchangeable N(mu_a,
+  sigma_a) would centre the 2026 draw near zero with an inflated sd, and
+  would discard the 2026 regime (unified Joint List).
+- The haredi effect keeps the kalpi coupling to the Arab draw. The haredi
+  draw uses the normal part z of the same correlated bivariate draw
+  (KALPI_FAMILY_RHO 0.5) whose t version drives the Arab turnout draw.
+
+**Projection (H1).** Each simulation does three things.
+1. It takes one joint posterior draw j of (mu_beta, sigma_beta, mu_h,
+   sigma_h, a, b, gamma, nu).
+2. It draws a NEW election from the posterior predictive:
+   - beta = mu_beta_j + sigma_beta_j z;
+   - phi^h = mu_h_j + sigma_h_j z^h;
+   - eps_l = sigma_l(j) x t(nu_j), with size = base0 x 120 (the pre-shock
+     projected share, the quantity the shipped residual uses), floored
+     at 0.5, and new by the same rule as the fit.
+3. The truth moves by -beta, -phi and -eps (error space), at the stack's
+   existing positions and with the existing base-share loadings.
+
+What changes and what stays:
+- **Replaced:** the bloc swing (t(5) x BLOC_SWING_SD), the haredi family
+  shock (t x sd around the e0 mean), and the residual line x RESID_SCALE
+  (and NEW_LIST_MULT in production; gamma replaces it).
+- **The width multiplier is 1.0,** because the width is now estimated
+  (bm.HIER_RESID_SCALE, harness layer hier_width).
+- **Unchanged:**
+  - the Arab turnout term;
+  - the gevalt coupling, trailing-Likud, new-straddler, loyal-sd and
+    kalpi caps;
+  - the withdrawn-list zero hold;
+  - in production, EVENT_RISK_HORIZON's event walk (added to -beta),
+    STACK_SCALE (on the random parts) and the certainty layer.
+- **Code:**
+  - production: bayes_model.ERROR_MODEL, "moments" (shipped) or
+    "hierarchical";
+  - harness: ALL_LAYERS error_model / hier_width, arm `hier_H1`;
+  - calibration_arms: arms H1 / H2.
+
+Flag off, production and harness are bit-identical to main.
+
+**Leave-one-cycle-out.** The harness grades cycle c with the fit that
+leaves c's record out: 8 fits, plus the full-sample fit that production
+uses. They are cached as netcdf under data/processed/error_model/, keyed by
+a hash of the record, the priors, the sampler settings and the spec.
+
+**Sampler and gates.**
+- Settings: NUTS, 4 chains x 1,000 draws after 1,500 tuning steps,
+  target_accept 0.95, seed 20261027.
+- Gates: 0 divergences, r-hat <= 1.01 and bulk ESS >= 400, on every
+  parameter except the raw non-centred z's (cycle effects, hyper-
+  parameters, nu).
+- A failing fit gets one retry at tune 3,000 and target_accept 0.99. A
+  fold that still fails is reported and its cycle is graded as a failure
+  of the arm.
+
+All nine fits passed on the first run, and so did the three nested
+variants below: 0 divergences, r-hat at most 1.004, bulk ESS at least
+1,310.
+
+**Prior predictive checks** (2,000 draws on the full record's design; no
+outcome used; observed values in brackets):
+- the sd of beta across eight cycles: median 3.2, 90% interval 0.4-10.3
+  [record's NB-total sd 2.99];
+- |e| (median / 90th / 99th percentile):
+  - lists < 4 u: 0.66 / 2.9 / 9.7 [0.46 / 1.36 / 1.61];
+  - 4-12 u: 1.1 / 4.4 / 12.0 [0.82 / 2.19 / 5.67];
+  - > 12 u: 2.5 / 8.5 / 26 [1.1 / 4.2 / 6.4];
+- the share of simulated |e| above 20 u is 0.7% (above 10 u, 2.9%);
+- nu: 5.6 / 18.6 / 48 (5th / 50th / 95th).
+
+The priors cover the record with room on both sides. They put little mass
+on errors a Knesset poll has never made.
+
+**Estimation inputs** (computed before registration; no harness run of any
+arm). Full-sample posterior means [90% HDI]:
+- mu_beta +0.38 [-1.81, 2.33], sigma_beta 1.40 [0.01, 2.99];
+- mu_h -1.14 [-2.44, 0.15], sigma_h 0.91;
+- a 0.26, b 0.65 [0.45, 0.85], gamma 0.42 [0.05, 0.86] (first-cycle
+  scale x1.52);
+- nu 16.5 [2.7, 32.4], mostly prior.
+
+Posterior-predictive sds for a new election (u = seats):
+
+| | shipped (production) | H1, full sample | H1, LOO fold range |
+|---|---|---|---|
+| bloc beta | 4.34 (t(5) x 3.36) | 2.20 (mean +0.38) | 1.85-2.58 |
+| haredi family | 2.28 (t x 1.77), mean -0.98 | 1.39, mean -1.14 | 1.20-1.61 |
+| residual, 4 seats | 1.81 | 0.94 | 0.88-1.05 |
+| residual, 25 seats | 2.63 | 3.13 | 2.62-3.62 |
+| residual, 4 / 25, first-cycle | 2.44 / 3.55 (x1.35) | 1.51 / 5.03 | |
+
+- **Before any grade, the model says:**
+  - The correlated bloc error is SMALLER than the moment estimate.
+    Once the residual scale rises with size (b 0.65), the NB-side total's
+    variance is mostly the large lists' own misses: Likud 2015 -7.0,
+    2019a -4.4. The moment estimator assigns that variance to the swing
+    and then also measures it in the residual.
+  - The small-list residual is about half the shipped one, as in cal_B.
+  - Large and first-cycle lists are wider than shipped.
+- **This is not the verifier's prediction.** The verifier's 4.1-4.2
+  figure is a predictive sd of the eight NB-side totals themselves, with
+  the bloc as the only correlated term. Here that total's variance is
+  split between beta and the lists' residuals.
+
+**Arms.**
+- `H1` (primary). The hierarchical errors replace the bloc, haredi family
+  and residual layers, at width 1.0 (hier_width = bm.HIER_RESID_SCALE),
+  leave-one-cycle-out.
+- `H2` (secondary, reported). H1 plus the s.48 nested width selection:
+  - The grid is hier_width 0.4 to 1.6 in steps of 0.1, multiplying the
+    hierarchical residual.
+  - For each held-out cycle, the width is the one with the lowest mean
+    interval score over the other seven cycles. Each cycle's score is
+    its seed mean, and the per-horizon pooled scores are averaged with
+    equal weight over eve, D-7 and D-21 (three seeds at every horizon,
+    s.55).
+  - The held-out cycle is then graded at that width.
+  - The production width is the same rule's choice on all eight cycles.
+  - The error-model fit is the held-out cycle's LOO fit throughout, as
+    s.48 did with the decompose() parameters.
+
+**Grading.** The s.50 LOO-scorecard caches (the shared harness cache, read
+only); outputs in scratch; at most four processes; the shipped list mask
+(`*_fixed`).
+- **H1 at the eve:** `HARNESS_ABLATIONS=shipped,hier_H1
+  HARNESS_SKIP_WIDTH=1 python src/validate_bayes.py`, with
+  HARNESS_SEED_OFFSET 0 / 100 / 200.
+- **H1 at D-7 and D-21:** `HORIZONS=7,21 HORIZON_SKIP_GRID=1
+  HORIZON_LAYERS='hier_H1:{"error_model": "hierarchical"}' python
+  src/validate_horizon.py`, offsets 0 / 100 / 200, against "calendar".
+- **H2:** `python src/calibration_arms.py run OUT --arms H1 --horizons
+  eve,7,21 --seeds 0,100,200`. These are the same streams as above:
+  SEED + 11 + offset at the eve, SEED + h + offset at D-h, calendar
+  weeks.
+  - The nested picks are calibration_arms' nested_choice.
+  - H2's held-out rows are graded under the rule below against the base
+    rows of the same run.
+  - The runner's base rows must equal the validate_bayes /
+    validate_horizon shipped rows, and its H1 rows at width 1.0 must
+    equal the hier_H1 rows.
+- **Pooling:** per seed, the mean over the eight cycles, then the mean
+  over the three seeds. A fold is a cycle, and its value is the
+  three-seed mean.
+- **Reproduction gate:** the shipped rows must equal the s.57 / s.60
+  baselines:
+  - eve 1.4927 / 1.6291 / .9807 / .0475 / 9.217;
+  - D-7 1.4866 / 1.6478 / .9896 / .0490 / 9.360;
+  - D-21 1.6211 / 1.7943 / .9896 / .0541 / 9.690.
+
+**Rule (the s.53 / s.55 rule, unchanged).** An arm passes if, at EACH of
+eve, D-7 and D-21 (offsets 0/100/200 pooled):
+- it wins or ties median MAE in every leave-one-cycle-out fold (fold
+  delta < +0.1 seat);
+- pooled mean MAE, threshold Brier and interval score are not worse than
+  shipped by more than .010 / .0010 / .05;
+- pooled 90% coverage is not further from .90 than shipped's.
+
+H1 is the decision. If H1 passes, H1 is recommended. If H1 fails and H2
+passes, H2 is recommended at its all-eight-cycles width. If both fail,
+nothing ships.
+
+**Reported, not decisive.**
+- **CRPS** for the discrete seat distribution: sum over k of (F(k) -
+  1{y <= k})^2, averaged over the list mask, then cycles, then seeds.
+- **The PIT histogram:** the randomised PIT F(y-1) + V (F(y) - F(y-1)),
+  V ~ U(0, 1), in 10 bins, pooled over lists, cycles and seeds.
+- **The reliability rows** for 10-30% and 50-90%, binned on each arm's
+  own probabilities with n, stated and realised, plus the fixed set (the
+  lists shipped puts in 50-90%).
+- **The bloc Brier** for P(NB >= 61).
+
+These come from a scratch runner on exactly the graded streams, which must
+reproduce the graded rows.
+
+**Also reported:**
+- posterior summaries;
+- posterior predictive coverage of each cycle's errors, both in-sample
+  and from the leave-the-cycle-out new-election predictive;
+- LOO-PSIS (arviz.loo, pointwise) against nested variants on the full
+  record: no size slope (b = 0), Gaussian residual, no first-cycle term.
+  These justify the structure. They do not change the graded arm.
+
+**2026 effect.** The run is BAYES_PROJECT_ONLY on a scratch copy of main's
+m3_idata.nc (16 Oct 18:54), with bayes_model.PROCESSED_DIR on a scratch
+copy and seeds +0 / +1 / +2.
+- With the flag off, the run must reproduce the committed
+  bayes_forecast_2026.csv and bayes_forecast_blocs.csv.
+- Reported:
+  - p_pass for RZP-Zehut, Otzma, Ra'am, Amcha, the Reservists and Blue
+    and White;
+  - the bloc probabilities and central seats;
+  - the posterior-predictive bloc sd and the residual sd at 4 and 25
+    seats, against the shipped values.
+
+**Amendment 1 (18 Oct, after a first grade; on the coordinator's relay).**
+- **What happened.** Main's shipped configuration moved at 91bc933
+  (s.62.5): RESID_SPACE "seat_fix" ships. That is decompose()'s
+  index-collision fix at width 0.9, line 1.484 + 0.0408 x seats, and the
+  harness ALL_LAYERS resid_space now reads bm.RESID_SPACE.
+- **Disclosure.** H1 and H2 had already been graded once on the 2a8477f
+  code, against the old shipped "seat" line. The registered commands were
+  used, and that reproduction gate passed to the digit. Neither arm passed
+  that grade.
+- **What the amendment changes.** The rule's comparator is the shipped
+  configuration, so the verdict is taken against the NEW shipped.
+  - The worktree is rebased onto 91bc933. Section 61 now sits after s.62
+    with its text unchanged.
+  - Every registered command is re-run on the rebased code.
+  - The reproduction gate becomes s.62.2's Bfix rows (median / mean /
+    coverage / Brier / IS):
+    - eve 1.4858 / 1.6253 / .972 / .0447 / 9.011;
+    - D-7 1.4860 / 1.6424 / .960 / .0465 / 9.389;
+    - D-21 1.6249 / 1.7795 / .968 / .0519 / 9.599.
+  - The flag-off 2026 check is against the 91bc933 bayes_forecast files.
+  - Both comparisons are reported.
+- **What it does not change.** The arms, the model, the fits, the rule
+  and the decision order are unchanged. H1 replaces the residual whatever
+  line ships, so its own draws do not depend on the base. They are the
+  same parent stream, and only the shipped list mask moves.
+- **New shipped residual sds** (in place of the "shipped" column above):
+  1.48 at 4 seats and 2.25 at 25 (first-cycle x1.35: 2.00 / 3.04).
+
+### 61.2 Results
+
+**Provenance.**
+- **Pre-registration.** 61.1, up to amendment 1, was committed alone
+  before any harness run of either arm: worktree commit 5410b80 on
+  2a8477f, 17 Oct 23:48. Its text sha256 is
+  0a85652b707265fc2dc31fb642a34a832bc4e6dbed16b393dac0d84c5d40063f.
+  Rebased onto 91bc933 it is afe173e, with the same text, placed after
+  s.62.
+- **Implementation.** It was committed next (922f8cf, rebased 2d7a62d).
+  The harness was first run on it.
+- **Amendment 1.** It was committed alone after the first grade and
+  before the re-grade: 8e34297, text sha256 3b7bc34d515fa0e1....
+- **Runs.**
+  - The registered commands on the shared s.50 LOO-scorecard cache, read
+    only.
+  - HARNESS_OUT_DIR in scratch, at most four harness processes.
+  - The error-model posteriors in data/processed/error_model/
+    (gitignored; `python src/error_model.py fit` rebuilds them).
+
+**Sampler gates: passed in every fit, on the first run.**
+
+| fit | n | divergences | max r-hat | min bulk ESS |
+|---|---|---|---|---|
+| full sample (production) | 95 | 0 | 1.004 | 1,655 |
+| LOO folds (8) | 81-86 | 0 | 1.002-1.004 | 1,411-1,946 |
+| full sample: no size slope / Gaussian / no first-cycle term | 95 | 0 | 1.003-1.004 | 1,311-1,717 |
+
+**Posterior summaries.**
+- The full-sample values are in 61.1.
+- Across the eight LOO fits, the posterior means are:
+  - sigma_beta 1.10-1.67 (the 95th percentiles reach 2.9-4.3);
+  - b 0.54-0.77;
+  - gamma 0.17 (without 2013, whose Yesh Atid -7.5 carries it) to 0.47;
+  - nu 10-21, which is prior-dominated (90% intervals about 4-45).
+- **The cycle bloc effects beta_c are all shrunk to -0.5..+0.8** (sd about
+  1.7 each). The NB-side totals range from -4.0 to +5.7, but the model
+  attributes most of that range to the bloc's own lists, whose misses run
+  in OPPOSITE directions inside it:
+  - 2015: Likud -7.0, Jewish Home +4.0;
+  - 2019a: Likud -4.4, URWP +1.8, New Right +2.0.
+
+  The pattern is the gevalt transfer, which a common bloc factor does
+  not describe. The moment estimator books it as swing and then measures
+  it again in the residual.
+- **The haredi effects phi^h_c are -0.7 to -1.8 in all eight cycles.**
+  The polls under-count the haredi family every time.
+
+**Posterior predictive checks against the record.**
+- **In-sample 90% coverage** (each cycle's own effects): 87 of 95 errors
+  (.916). By cycle it runs from .82 (2015) to 1.00 (2019s, 2022).
+- **Leave-the-cycle-out new-election 90% coverage**: 85 of 95 (.895).
+  - 2009 .90, 2013 .93, 2015 .82, 2019a .71, 2019s 1.00, 2020 .89, 2021
+    .93, 2022 1.00.
+  - 2019a is the weak cycle. Its misses are the large lists (Likud -4.4,
+    Blue and White -4.1), Labor +3.8 and Shas -2.2.
+- **The NB-side total** under the LOO predictive has PIT .63 / .82 / .28
+  / .10 / .65 / .55 / .39 / .47 (2009 to 2022). None is outside (.05,
+  .95).
+- **The largest standardised LOO miss** is 3.4 (Yesh Atid 2013). The t
+  tail carries it.
+
+**LOO-PSIS** (arviz.loo, pointwise, full record):
+
+| model | elpd_loo | p_loo | d_elpd vs full | se of d | Pareto k > .7 |
+|---|---|---|---|---|---|
+| full (size slope, t, first-cycle) | -177.9 | 12.4 | 0 | - | 0 |
+| no first-cycle term | -178.2 | 10.9 | -0.3 | 1.8 | 0 |
+| Gaussian residual | -179.1 | 12.0 | -1.1 | 1.0 | 1 |
+| no size slope | -187.1 | 21.3 | -9.2 | 5.0 | 0 |
+
+- **The size slope is what the record supports most:** 9.2 elpd, 1.8
+  se.
+- **The Student-t is a small gain:** 1.1 elpd (1.1 se). The Gaussian
+  fit has one influential point (k > .7, Yesh Atid 2013) that the t
+  absorbs.
+- **The first-cycle term is a wash on the record:** 0.3 elpd, 0.2 se.
+  It stays as registered, because the stack H1 replaces carries a
+  first-cycle width term (NEW_LIST_MULT).
+- Pointwise LOO conditions on each cycle's effects, so it scores the
+  residual structure. The leave-cycle-out PPC above checks the
+  cycle-level predictive.
+
+**Reproduction gates: passed.**
+- **Old shipped** (2a8477f, "seat"): the shipped rows equal the s.57 /
+  s.60 baselines to the digit (eve 1.4927 / 1.6291 / .9807 / .0475 /
+  9.2173; D-7 1.4866 / 1.6478 / .9896 / .0490 / 9.3600; D-21 1.6211 /
+  1.7943 / .9896 / .0541 / 9.6900). At offset 0, model_validation_bayes
+  .csv and model_validation_bayes_lists.csv are byte-identical to main's.
+- **New shipped** (91bc933, "seat_fix"): the shipped rows equal s.62.2's
+  Bfix rows (eve 1.4858 / 1.6253 / .9717 / .0447 / 9.0108; D-7 1.4860 /
+  1.6424 / .9604 / .0465 / 9.3891; D-21 1.6249 / 1.7795 / .9683 / .0519
+  / 9.5994).
+- **calibration_arms runner:** its base rows and its H1 rows at width
+  1.0 equal the registered rows, 144 of 144 with max difference 0, on
+  both bases.
+
+**H1 against the NEW shipped (the verdict).** Pooled over three seeds.
+Each cell is median / mean / coverage / Brier / IS, then the bloc Brier
+for P(NB >= 61); folds are W/T/L at |d| < .1.
+
+| horizon | shipped (seat_fix) | H1 | folds | result |
+|---|---|---|---|---|
+| eve | 1.4858 / 1.6253 / .972 / .0447 / 9.011; .0388 | 1.5393 / 1.6105 / .972 / .0405 / 8.672; .0277 | 0/8/0 | passes |
+| D-7 | 1.4860 / 1.6424 / .960 / .0465 / 9.389; .0375 | 1.4827 / 1.6382 / .958 / .0437 / 9.087; .0280 | 2/5/1 | fails: 2015 +.121 |
+| D-21 | 1.6249 / 1.7795 / .968 / .0519 / 9.599; .0558 | 1.6753 / 1.7695 / .975 / .0498 / 9.244; .0425 | 0/7/1 | fails: 2015 +.182; coverage .975 vs .968 |
+
+**H1 against the OLD shipped** (seat; the first grade, reported):
+
+| horizon | shipped (seat) | H1 | folds | result |
+|---|---|---|---|---|
+| eve | 1.4927 / 1.6291 / .981 / .0475 / 9.217; .0428 | as above | 0/5/3 | fails: 2019s +.100, 2021 +.119, 2022 +.103 |
+| D-7 | 1.4866 / 1.6478 / .990 / .0490 / 9.360; .0410 | as above | 1/6/1 | fails: 2015 +.121 |
+| D-21 | 1.6211 / 1.7943 / .990 / .0541 / 9.690; .0593 | as above | 0/6/2 | fails: 2015 +.182, 2020 +.185 |
+
+The H1 rows are the same on both bases. The hierarchical branch does not
+read the residual line, so on the shipped list mask the cells are
+identical.
+
+- **Where H1 fails.** Against the new shipped it passes every eve test,
+  with all eight folds ties (largest +.095, 2021), and every pooled test
+  at D-7. It fails three tests:
+  - the 2015 fold at D-7;
+  - the 2015 fold at D-21;
+  - the D-21 coverage test: .975 against .968. Shipped's seat_fix had
+    already brought D-21 coverage from .990 to .968.
+- **Beyond the floors, H1 improves at the eve / D-7 / D-21:**
+  - mean MAE -.015 / -.004 / -.010;
+  - threshold Brier -.0042 / -.0028 / -.0021;
+  - interval score -.34 / -.30 / -.36;
+  - bloc Brier -.0111 / -.0095 / -.0133 (-29% / -25% / -24%).
+- **The pooled median is worse** at the eve (+.053; by seed +.075 /
+  +.039 / +.047) and at D-21 (+.050), and level at D-7 (-.003).
+- **The 2015 fold** is one-seat median flips on large lists, the
+  mechanism s.60.2 described:
+  - At D-7 the Joint List goes 13 -> 14 (actual 13) in all three seeds,
+    and Labor-Hatnuah 24 -> 25 (actual 24) in one.
+  - At D-21 Labor-Hatnuah goes 24 -> 25 (actual 24) and Likud 26 -> 25
+    (actual 30) in all three seeds.
+  - Meanwhile the small lists' pass probabilities move under the
+    narrower small-list residual (D-7: Meretz .75 -> .83, Yisrael
+    Beytenu .71 -> .74, Kulanu .99 -> .97, Otzma-Yachad .45 -> .43).
+  - The Likud move is consistent with the predictive bloc mean (+0.38
+    seats of NB over-polling) and the narrower swing.
+- **Against the old shipped,** the eve folds 2019s / 2021 / 2022 lose too.
+  Blue and White goes 32 -> 31 (2019s); New Hope, the Joint List and Yesh
+  Atid gain a seat (2021); Yesh Atid and UTJ gain one (2022). These are
+  the cal_B / hybrid flips of s.57.3 and s.60.2. Against seat_fix,
+  which narrows every list a little, they become ties.
+
+**H2 (the nested width).**
+- **The picks** (held-out cycle -> hier_width) are 2009 0.6, 2013 0.8,
+  2015 / 2019a / 2019s / 2020 0.9, 2021 0.6, 2022 0.9. They are the
+  same on both bases.
+- **The all-eight choice is 0.9.** The training interval score, averaged
+  over the three horizons, is lowest at 0.9 (8.81, against 9.00 at 1.0).
+  The horizons differ: eve 0.9, D-7 0.7, D-21 0.8.
+
+| horizon | shipped (seat_fix) | H2 (held-out widths) | folds | result |
+|---|---|---|---|---|
+| eve | 1.4858 / 1.6253 / .972 / .0447 / 9.011; .0388 | 1.5308 / 1.6019 / .931 / .0395 / 9.321; .0248 | 0/8/0 | fails: IS +.310 |
+| D-7 | 1.4860 / 1.6424 / .960 / .0465 / 9.389; .0375 | 1.4925 / 1.6367 / .934 / .0436 / 9.596; .0257 | 2/5/1 | fails: 2015 +.167; IS +.207 |
+| D-21 | 1.6249 / 1.7795 / .968 / .0519 / 9.599; .0558 | 1.6758 / 1.7677 / .923 / .0501 / 9.732; .0400 | 0/7/1 | fails: 2015 +.182; IS +.132 |
+
+- **H2 fails at every horizon.** The held-out picks of 0.6 for 2009 and
+  2021 are too narrow for those two cycles.
+  - The 2021 fold's interval score rises by +3.9 at every horizon, and
+    2009's by +1.7 / +1.6 at the eve and D-7.
+  - The pooled loss is beyond the floor in every seed at the eve and D-7
+    (D-21 by seed: +.20 / +.18 / +.01).
+  - Coverage falls to .92-.93.
+- **Against the old shipped H2 also fails:**
+  - eve: the 2019s fold +.100 and IS +.104;
+  - D-7: 2015 +.167 and IS +.236;
+  - D-21: the 2015 and 2020 folds.
+- **Reported, not an arm under the rule: H1 at the all-eight width 0.9.**
+  It passes the eve (IS 8.382, -.63) and fails D-7 and D-21 on the 2015
+  fold alone.
+
+**Reported, not decisive.** These come from the scratch runner on the
+graded streams. It reproduces all 216 graded rows (arm x horizon x cycle
+x seed) exactly.
+
+| | eve | D-7 | D-21 |
+|---|---|---|---|
+| CRPS, shipped / H1 / H2 | 1.0848 / 1.0807 / 1.0847 | 1.1171 / 1.1169 / 1.1310 | 1.1941 / 1.1943 / 1.2062 |
+| bloc Brier, shipped / H1 / H2 | .0388 / .0277 / .0248 | .0375 / .0280 / .0257 | .0558 / .0425 / .0400 |
+| mean 90% width, shipped / H1 / H2 | 7.61 / 7.24 / 6.57 | 7.55 / 7.24 / 6.53 | 7.92 / 7.52 / 6.97 |
+
+- **CRPS is a tie for H1** (-.004 / -.000 / +.000). The fold differences
+  are within ±.05. H2 is worse at D-7 and D-21 (+.014 / +.012).
+- **PIT** (randomised, 10 bins, about 94 lists per seed). Under
+  calibration the outer two bins hold .20 and the middle four (.3-.7)
+  hold .40.
+
+  | horizon | arm | outer two bins | middle four |
+  |---|---|---|---|
+  | eve | shipped / H1 / H2 | .117 / .170 / .202 | .440 / .418 / .383 |
+  | D-7 | shipped / H1 / H2 | .117 / .181 / .213 | .447 / .408 / .383 |
+  | D-21 | shipped / H1 / H2 | .144 / .200 / .207 | .421 / .372 / .340 |
+
+  - Shipped's PIT is hump-shaped (over-dispersed forecasts).
+  - H1's is close to uniform at the eve and D-7, and slightly U-shaped
+    at D-21.
+  - H2's is uniform to slightly U-shaped.
+- **Reliability** (lists per seed, stated -> realised, each arm's own
+  bins). The fixed set is the lists shipped puts in 50-90%.
+
+  | horizon | arm | 10-30% | 50-90% | fixed set |
+  |---|---|---|---|---|
+  | eve | shipped | 8.0, .193 -> .125 | 19.7, .677 -> .847 | .677 -> .847 |
+  | eve | H1 | 5.0, .189 -> .200 | 17.7, .697 -> .830 | .725 -> .847 |
+  | eve | H2 | 6.0, .202 -> .333 | 15.3, .686 -> .804 | .745 -> .847 |
+  | D-7 | shipped | 9.0, .181 -> .111 | 18.3, .704 -> .891 | .704 -> .891 |
+  | D-7 | H1 | 6.0, .211 -> .333 | 14.0, .681 -> .857 | .751 -> .891 |
+  | D-21 | shipped | 10.0, .200 -> .100 | 17.3, .731 -> .885 | .731 -> .885 |
+  | D-21 | H1 | 7.0, .206 -> .286 | 12.7, .726 -> .842 | .778 -> .885 |
+
+  - On the fixed set H1 closes 28% / 25% / 31% of the near-threshold
+    underconfidence gap that s.57 diagnosed.
+  - Its 10-30% band goes from over-stated to calibrated at the eve
+    (.19 -> .20). At D-7 and D-21 it is under-stated (.21 -> .33, .21 ->
+    .29), on 6-7 lists per seed.
+  - The Brier on shipped's [.1, .9) lists is .150 / .147 / .162 for
+    shipped and .138 / .139 / .156 for H1.
+
+### 61.3 2026 effect (frozen production posterior; outputs in scratch)
+
+**Setup.**
+- The posterior is main's m3_idata.nc of 16 Oct 18:54 (sha256
+  654a4414...), copied to scratch. It is the same posterior as s.57.4,
+  s.60.3 and s.62.3.
+- The run is the BAYES_PROJECT_ONLY path of bayes_model.main with
+  bayes_model.PROCESSED_DIR on a scratch copy of data/processed, so the
+  repo's data/processed was never written. The seeds are the production
+  seed, +1 and +2.
+- The full-sample error-model fit is the one the harness LOO fits sit
+  beside.
+- **Reproduction.** With the flag off, the rebased code is byte-identical
+  to 91bc933's committed bayes_forecast_2026.csv, bayes_forecast_blocs.csv
+  and bayes_draws.parquet. Before the rebase it was byte-identical to
+  2a8477f's.
+- **H1's draws** are byte-identical on both bases: the hierarchical
+  branch does not read the residual line.
+
+| (seeds +0 / +1 / +2) | shipped (seat_fix, 91bc933) | H1 | change, seed mean | old shipped (seat), seed mean |
+|---|---|---|---|---|
+| RZP-Zehut pass | .581 / .578 / .584 | .610 / .621 / .616 | .581 -> .616 | .561 |
+| Otzma pass | .822 / .813 / .821 | .839 / .856 / .847 | .819 -> .847 | .796 |
+| Ra'am pass | .795 / .797 / .796 | .877 / .871 / .872 | .796 -> .873 | .764 |
+| Amcha pass | .241 / .242 / .235 | .225 / .228 / .227 | .239 -> .227 | .249 |
+| Reservists pass | .216 / .218 / .214 | .216 / .199 / .203 | .216 -> .206 | .223 |
+| Blue and White pass | .006 / .006 / .004 | .000 / .000 / .000 | .005 -> .000 | .016 |
+| P(NB >= 61) | .113 / .102 / .108 | .059 / .065 / .060 | .108 -> .061 | .124 |
+| P(change bloc >= 61) | .056 / .055 / .056 | .034 / .038 / .042 | .056 -> .038 | .064 |
+| P(neither) | .831 / .843 / .836 | .907 / .896 / .898 | .837 -> .900 | .813 |
+| NB seats, mean [90%] | 52.9 [43-63] | 52.5 [44-61] | sd 6.4 -> 5.25 | 53.0 [42-64] |
+
+**Predictive sds** (seats; 61.1's table, against both shipped lines):
+
+| | shipped seat_fix | old shipped seat | H1 |
+|---|---|---|---|
+| bloc error | 4.34 (t(5) x 3.36) | 4.34 | 2.20 (mean +0.38) |
+| residual, 4 seats | 1.48 | 1.81 | 0.94 |
+| residual, 25 seats | 2.25 | 2.63 | 3.13 |
+| first-cycle, 4 / 25 seats | 2.00 / 3.04 | 2.44 / 3.55 | 1.51 / 5.03 |
+
+- Production adds the event walk (EVENT_RISK_HORIZON) to the bloc under
+  both models. It is unchanged.
+- The NB total's seat sd falls from 6.4 to 5.25, because the swing is
+  half as wide. The wider large-list residual does not make up for it.
+
+**Central seats are unchanged.**
+- Likud 25, Yashar 23, Together 11 (12 at seed +0 under H1), the
+  Democrats 9, the Joint List 9, UTJ 9, YB 8, Otzma 6, Ra'am 5,
+  RZP-Zehut 4, Amcha and the Reservists 0.
+- Shas is 9 in every H1 seed, against 9 / 8 / 8 shipped.
+
+**Intervals.**
+- Small and middle lists narrow: YB 5-12 -> 6-11, the Joint List 6-13
+  -> 6-12/13, RZP-Zehut 0-8 -> 0-7, Amcha 0-8 -> 0-7.
+- Yashar widens (16-29 -> 15-30). It is first-cycle and large, so it
+  takes the widest residual (sd 4.75 at 23 seats, against 2.9 shipped).
+
+**The first-cycle rule** flags Yashar, the Reservists, Amcha, Unity
+(withdrawn, held at zero) and the micro-lists. It does not flag the
+Democrats (Labor + Meretz) or Together (with Yesh Atid).
+
+**Reading.**
+- H1 halves P(NB >= 61) again, from .108 to .061. The bloc's central
+  count is about 8 seats below 61, and two things thin the tail:
+  - the posterior-predictive swing is half as wide (2.2 vs 4.3);
+  - its mean is +0.38 seats of NB over-polling, not zero.
+- The satellites move toward the markets: Ra'am .80 -> .87, Otzma .82 ->
+  .85, RZP-Zehut .58 -> .62. This is the cal_B / hybrid direction
+  (s.57.4, s.60.3), from a model that estimates the small-list width
+  instead of choosing a record.
+- Blue and White's pass probability goes to zero. At 1 seat of polled
+  share, the estimated residual (sd 0.41 at 1 u, against 1.37 shipped)
+  no longer reaches the threshold.
+
+### 61.4 Recommendation under the rule
+
+- **Nothing ships from s.61.** Under the pre-registered s.53 / s.55 rule,
+  as amended, against the shipped seat_fix stack:
+  - H1 fails at D-7 (the 2015 fold, +.121) and at D-21 (the 2015 fold,
+    +.182, and coverage .975 against .968).
+  - H2 fails at every horizon (interval score +.31 / +.21 / +.13, and the
+    2015 fold at D-7 and D-21).
+  - Against the old "seat" stack both fail as well.
+
+  ERROR_MODEL stays "moments". The module (src/error_model.py), the flag,
+  the harness layers (error_model, hier_width), the hier_H1 arm and the
+  calibration_arms H1 / H2 arms stay in the code, off. The headline is
+  unchanged.
+- **What the grade establishes.**
+  - **The joint model is well posed on its own record.** Every fit passes
+    the gates on the first run. The leave-cycle-out predictive covers
+    85 of 95 errors at 90%, and every cycle's NB-side total sits inside
+    its predictive.
+  - **Structure.** The residual's size slope carries most of the
+    record's information (9 elpd). Fat tails are a small gain, and the
+    first-cycle term is neutral.
+  - **The correlated bloc error is about half the shipped swing.** The
+    predictive sd is 2.2 seats against 4.34. The NB-side total moves
+    mostly through Likud and its own satellites moving in opposite
+    directions; the moment estimator books that as swing and measures it
+    again in the residual. The verifier's 4.1-4.2 is not what a joint
+    model with a size-dependent residual gives.
+  - **On the harness, H1 beats the shipped stack beyond the floor on
+    every pooled score at every horizon:**
+    - mean MAE, threshold Brier and interval score;
+    - the bloc Brier for P(NB >= 61), by 24-29%.
+
+    CRPS is level and the PIT is closer to uniform. It closes 25-31% of
+    the established-list underconfidence gap of s.57.
+  - **What it loses is the whole-seat median.** The pooled median is
+    +.05 at the eve and D-21, and one fold (2015) is lost at D-7 and
+    D-21, through one-seat flips on large lists. This is the pattern of
+    cal_B and resid_hybrid (s.57.3, s.60.4): any narrowing of the
+    small-list residual meets the fold test on the large lists.
+- **For the owner** (not decisions this rule can make):
+  - **The fold test.** Three graded residual candidates now win the
+    pooled mean MAE, Brier and interval score at every horizon and fail
+    on the whole-seat median fold test: cal_B, resid_hybrid and H1. H1
+    also fails the D-21 coverage test, by .006. Whether the fold test
+    should bind a change of the uncertainty layer is an owner decision.
+    s.60.4 raised it.
+  - **The 2026 stake.** If H1 shipped:
+    - P(NB >= 61) would go from .108 to .061;
+    - deadlock from .837 to .900;
+    - Ra'am's pass probability from .80 to .87, Otzma's from .82 to
+      .85, RZP-Zehut's from .58 to .62;
+    - central seats unchanged.
+  - **The site** can state that a full hierarchical model of the error
+    record puts the correlated bloc error at about 2 seats (sd). It can
+    also say that the shipped swing (4.3 seats with the t tail) is the
+    conservative choice on these eight outcomes.
+
+### 61.5 Not established
+
+- **A within-bloc (gevalt) factor in the error model.** The record's
+  NB-side errors are negatively correlated between Likud and its
+  satellites, which the model treats as independent residuals. The
+  projection's GEVALT_SD coupling still runs on top under H1, so part of
+  Likud's variance may be counted twice. A bloc-internal zero-sum factor
+  is the natural next term.
+- **The Arab family is not predicted by the model.** A regime covariate
+  (unified vs split) on phi^a would let the hierarchical model own it.
+  The record has two split cycles.
+- **nu is prior-dominated** (posterior 90% about 4-40). The t-vs-normal
+  choice is a small effect on the record.
+- **The first-cycle rule uses four hand-entered lineage facts.** The
+  first-cycle term is neutral on the record.
+- **The vote record's actual side for winners is seat-implied**
+  (d'Hondt rounding). Using CEC vote shares for every list that ran is
+  not done.
+- **Not run:** D-56; the registration mixture, official forecast and
+  formation chain for 2026.
+- **The production-only layers** have no harness analogue and were not
+  graded: the event walk, the certainty churn and the kalpi caps.
+- **The nested width (H2)** was chosen on the harness's interval score
+  with each held-out cycle's own LOO fit, as s.48 did. Re-fitting the
+  error model inside the nested loop (fully nested LOO) was not done.

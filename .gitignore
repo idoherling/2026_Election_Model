@@ -20,3 +20,7 @@ data/processed/harness_cache_*/
 logs/
 output/publish/
 .pytest_cache/
+
+# hierarchical error-model posteriors (src/error_model.py, dossier s.61)
+data/processed/error_model/*.nc
+data/processed/error_model/*.nc.tmp
