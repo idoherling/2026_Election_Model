@@ -4444,6 +4444,18 @@ expects about 2.5 defector governments in five resolved deadlocks, and
 one happened.
 
 
+### 56.5 Note added 17 Oct (engineering test suite)
+
+The test suite (tests/test_formation.py) found a defect in the record path
+graded here: type 4's reachability counts Yisrael Beytenu's seats whatever
+liberman_haredi_ok is, and the detail draw then forces lib_haredi = True,
+so Liberman's veto has no effect on that path (at liberman_haredi_ok = 0
+the fallback even picks a zero-probability combination). The shipped
+"gates" path is unaffected. The defect made the record arm seat a
+change + haredi government more easily; it failed on the 2020 and 2021
+cycles regardless. Fix before any re-grade of this path (strict xfail in
+the suite marks it).
+
 ## 57. Near-threshold calibration (17 Oct, D-10)
 
 ### 57.1 The gap and where it comes from (diagnostic, run before 57.2)
@@ -4817,6 +4829,493 @@ base rate): multiplier 1.057, P(NB>=61) 13.0 / 12.0.
 and one size (October 7) rests on a single firm at 0-35 days. The sign of
 any event is not fixed (DYN-F21, DYN-F22). Shipped as a disclosed judgment;
 the post-election review grades it.
+
+## 59. Deadlock resolution, configuration-aware (17 Oct, D-10)
+
+### 59.1 Pre-registration (written 17 Oct before any run)
+
+This subsection was written and hashed before any s.59 code existed or
+ran. Its sha256 is committed alone and recorded in the patch notes.
+Nothing below 59.1 was known when it was written. The base is main at
+cb4d1a6, with s.56 merged and the harness CSVs refreshed. It contains the
+s.56 numbers quoted here.
+
+**Why.** s.56 confirmed the verifier's diagnosis on the record. Given that
+a deadlock resolves, the shipped gates expect 2.53 defector governments
+across the five historical resolutions, against 1 realized. In 2026 they
+give the defector 0.413 of resolved deadlocks.
+
+The configuration-blind fix (s.56) failed: it overrode what each
+Knesset's configuration made likely. This section tests two other
+answers, each against the shipped tree:
+
+- **Arm A, `stage_mix`:** the record and the gates combined.
+- **Arm B, `defect_08`:** a gate-only cut.
+
+**Common to both arms.**
+
+- **The harness:** s.49/s.56's, unchanged. It runs 17 Knessets, 2,000 rows
+  per cycle and 200 parameter vectors drawn as in `main()`, on common
+  random numbers, with COND centred on the 2026 draws. The stage's
+  whether-draw and the unity prior keep their s.49 leave-one-out.
+- **The shipped tree:** the s.49 tree (`candidate` in the harness), with
+  the stage on and `STAGE_RESOLUTION = "gates"`.
+- **Scores:**
+  - primary: mean log P(realized class) over the eight informative cycles
+    (1984, 1992, 2006, 2015, 2019a, 2019s, 2020, 2021);
+  - multi-class Brier Σ_k (p_k − y_k)² over the same eight cycles;
+  - the s.56 secondary rows: 1996 and 1999 at weight 0.5, YB in Amcha's
+    role, and the binary repeat score.
+
+**Decision rule** (s.56's, unchanged). Each arm is judged on its own
+against the shipped tree, on point estimates:
+
+1. **Log score:** mean log P(realized), 8 informative cycles,
+   leave-one-out: arm ≥ shipped.
+2. **Brier:** multi-class Brier, same cycles, leave-one-out:
+   arm ≤ shipped.
+3. **Tolerance:** for each realized 2019-2022 outcome, P_arm(realized)
+   ≥ 0.75 × P_shipped(realized), and above the Monte Carlo floor. The
+   outcomes are 2019a repeat, 2019s repeat, 2020 defector, 2021 change +
+   Ra'am and 2022 Netanyahu bloc alone.
+
+An arm ships only if all three hold. If both arms pass, the one with the
+higher primary mean log ships, and both are reported. If neither passes,
+`STAGE_RESOLUTION` stays `"gates"` and `centre_defects` stays 0.12. The
+arms are not combined here: an A + B tree would need its own
+registration.
+
+**Arm A: `stage_mix` (`STAGE_RESOLUTION = "mix"`).**
+
+- **Where it acts.** As in s.56: every deadlock draw (s.49.2 event) in
+  which the stage's Beta draw says a government forms. This includes draws
+  the first-pass gates had already resolved. Whether a government forms is
+  unchanged: the same generator and the same uniforms as the shipped
+  stage.
+- **The type draw.** One uniform per draw, from the s.56 generator
+  (`SEED + 5601`), picks the type with
+  P(type t | draw) ∝ w_t × g_t(draw), over the five types (unity 6,
+  change + haredi 4, defector 9, change + Ra'am 8, JL-backed minority 5).
+- **g_t(draw)** is the type's own gate probability in that draw, from the
+  existing behavioural gates, precedence-free. It uses the draw's seats,
+  its kingmaker and Amcha sides and that vector's behavioural values:
+  - **unity:** `p_unity` (`likud_sans_bibi`, with the COND deadlock-depth
+    shift) if `ce_pure + res_c + amcha_ce + Likud >= 61`, else 0;
+  - **defector:** `p_defect` (`centre_defects`, with the COND gap shift)
+    if the tree's `feasible` holds, else 0;
+  - **change + Ra'am:** `raam_joins` if `ce_pure < 61` and
+    `ce_pure + Ra'am >= 61`, else 0;
+  - **change + haredi:** the probability that the haredi gate's
+    condition holds. That is the sum, over the eight combinations of
+    (`shas_on`, `utj_on`, `lib_haredi`) that satisfy `ch_seats >= 61` with
+    a haredi list crossing, of Π Bernoulli(p_shas, p_utj,
+    `liberman_haredi_ok`), with p_shas and p_utj configuration-conditional
+    as shipped;
+  - **JL-backed minority:** `jl_supports` × the sum, over the combinations
+    of (`raam_supports`, `lib_ok`, `utj_abst`) that satisfy the minority
+    condition, of their Bernoulli products. The `utj_abst` probability is
+    `UTJ_ABSTAINS` × (1 − p_utj), which is 0 as shipped.
+
+  Every gate value therefore still moves the numbers: `utj_defects`,
+  `shas_defects`, `likud_sans_bibi`, `centre_defects`, `raam_joins`,
+  `jl_supports` and the Liberman flags. A draw with Σ_t w_t g_t = 0 stays
+  a repeat and is counted as unresolved.
+- **Details and membership.** Exactly as s.56. Type 4 draws its
+  (`shas_on`, `utj_on`, `lib_haredi`) combination in proportion to the
+  same terms whose sum is g_4. Type 5 sets `jl_supports` = true and draws
+  (`raam_supports`, `lib_ok`, `utj_abst`) in proportion to the terms of
+  g_5. The detail uniform comes from the same generator. The membership
+  rule is s.52's, so each government's members reach its arithmetic.
+- **The estimator for w (exact).** The likelihood is the arm's own
+  forecast model. For each resolved historical deadlock c with realized
+  type t_c:
+
+  L_c(w) = E[ w_{t_c} g_{t_c} / Σ_s w_s g_s ]
+
+  The expectation runs over the harness's deadlock draws for cycle c:
+  its 200 parameter vectors × 2,000 rows, with the kingmaker sides drawn
+  as the harness draws them. Rows with Σ_s g_s = 0 are dropped.
+  - **Conditioning on the reachable set.** g_s = 0 for any type
+    unreachable in that draw, so the denominator runs over each cycle's
+    reachable set draw by draw.
+  - **Why not a feasibility-only fit.** Fitting w on a feasibility-only
+    choice model and then multiplying by g would count each gate's
+    propensity twice. That version is registered as a variant below.
+  - **The behavioural inputs to g** are the ones the scored cycle's
+    forecast uses: draw_behavior per vector, with the unity value drawn
+    from that cycle's `unity_prior`. When the scored cycle is 1984 or
+    2020, the fit's g therefore also uses the 0-of-2 unity prior.
+  - **Prior:** w normalised to sum 1, Dirichlet(0.5, 0.5, 0.5, 0.5, 0.5),
+    the multinomial Jeffreys prior. Its mean is uniform, which is "trust
+    the gates' relative rates, without precedence".
+  - **Posterior:** importance sampling. K = 20,000 prior draws (generator
+    `SEED + 5901`), weighted by Π_c L_c(w) over the fit cycles. The M =
+    200 per-vector weight vectors are a multinomial resample from these
+    (generator `SEED + 5902`). The effective sample size is reported. If
+    any fit's ESS is below 200, K is raised to 100,000 for every fit and
+    reported.
+  - **The record:** the five parliamentary resolutions of s.56.1 (1984
+    unity, 1992 and 2006 change + haredi, 2020 defector, 2021 change +
+    Ra'am).
+  - **Leave-one-cycle-out:** when a record cycle is scored, its own term
+    is left out of the fit. Every other scored cycle uses the fit on all
+    five. The 2026 run uses the fit on all five with the shipped unity
+    prior.
+  - **Maximum likelihood was considered and rejected.** Under
+    leave-one-out it sets a singleton class's weight to 0 whenever the
+    other cycles reached that class and did not choose it. 2020's
+    defector would then score the Monte Carlo floor.
+
+**Arm B: `defect_08`.**
+
+- `centre_defects` goes from 0.12 to 0.08, with NEFF unchanged (25):
+  Beta(2, 23). Everything else is shipped, including the stage with gate
+  resolution.
+- **Decisive form:** exactly as it would ship. `draw_behavior` reads
+  `BEHAVIOR` with `centre_defects` = 0.08, so the random stream is the
+  one an edit of `BEHAVIOR` would produce.
+- **2026 run:** `government_formation.py --set centre_defects=0.08` into
+  a scratch directory.
+
+**Registered variants (reported, not decisive).**
+
+- **`mix_feas`.** The weights are fitted on the feasibility-only choice
+  model, L_c(w) = E[ w_{t_c} 1[t_c reachable] / Σ_s w_s 1[s reachable] ],
+  under the same prior, posterior and leave-one-out; the forecast still
+  uses w × g. This addresses the estimator ambiguity.
+- **`mix_insample`.** Arm A with the weights fitted on all five cycles
+  for every scored cycle (no leave-one-out). It measures the
+  singleton-class penalty, as in s.56.
+- **`defect_08_paired`.** Arm B with each vector's `centre_defects` set
+  by quantile coupling to the shipped draw:
+  `Beta(2, 23).ppf(Beta(3, 22).cdf(x))`, every other value untouched. It
+  shows how much of B's difference from shipped is Monte Carlo pairing
+  noise.
+
+**Expectation disclosed in advance.** A back-of-envelope on 2020 puts B's
+defector probability at about 0.78 of shipped, close to the 0.75
+tolerance. The rule is applied as written: point estimate, no margin, no
+re-run with another seed. For A, the leave-one-out penalty on 2020 and
+2021 is expected to be smaller than in s.56, because g keeps 2020's double
+haredi crossing near zero. Its sign is not known.
+
+**Reported for every tree.**
+
+- Per-cycle P(realized).
+- Mean log and Brier, with bootstrap SEs.
+- The tolerance table.
+- Expected-versus-realized resolution counts over the five historical
+  resolutions: Σ_c P(type | a government formed), for the defector,
+  change + haredi, unity, change + Ra'am and minority types. Arm A's
+  counts are reported under leave-one-out (as scored) and in-sample.
+- The posterior mean weights and ESS of each fit.
+- **The 2026 effect** of A and of B, in scratch only, on the committed
+  `mixture_draws.parquet` (sha256 3741588c…): outcomes, groups, PM and
+  membership, against shipped, plus the type shares among resolved
+  deadlocks.
+
+**Bit-identity.**
+
+- With `STAGE_RESOLUTION = "gates"` and no `--set`, all seven formation
+  CSVs must reproduce the committed files byte for byte.
+- `--resolution record` must reproduce the s.56 scratch outputs byte for
+  byte.
+- The harness's nine existing trees must reproduce their committed
+  columns in `formation_validation.csv`.
+
+### 59.2 Results on the record (leave-one-cycle-out)
+
+**Verdict under the s.59.1 rule:**
+
+- **Arm B (`defect_08`) passes all three conditions and ships:**
+  `centre_defects` 0.12 → 0.08, NEFF 25.
+- **Arm A (`stage_mix`) fails all three.** Two of the failures are narrow.
+
+The patch leaves both flags at their shipped values; the coordinator
+flips B (see 59.4).
+
+**Two deviations from 59.1, disclosed.**
+
+- **The input hash.** 59.1 quotes the formation input as sha256
+  3741588c…, which is the v45 file. The base cb4d1a6 carries the v46
+  refit (s.58), sha256
+  28a7423d530a6e8012d5bbf17938af83e8bbf75884dbf12947a1ae9ebfe3d05f. Every
+  s.59 run, harness and 2026 alike, used that committed v46 file. The
+  quoted hash was a transcription error; nothing was run on v45.
+- **The record-mode check.** 59.1 asked `--resolution record` to
+  reproduce the s.56 scratch outputs. Those were made on v45 draws, so
+  the check was run in its intended form instead: the refactored record
+  mode against the unmodified cb4d1a6 code, on the same v46 draws. The
+  two agree byte for byte on all seven CSVs.
+
+**Checks.**
+
+- With the flags at their shipped values, all seven formation CSVs
+  reproduce the committed files byte for byte.
+- The nine existing harness trees reproduce every committed column of
+  `formation_validation.csv` and every original class and calibration
+  row. The coordinator's refresh used the same v46 draws.
+- Membership is consistent under the mix arm. Over 20 vectors × 8,000
+  Knessets, no government's members fail to reach the arithmetic that
+  formed it, and every outcome-4 government has a haredi member.
+- The posterior's effective sample size is 3,216-6,598 for `stage_mix`
+  and at least 2,469 for `mix_feas`. That is above the 200 floor, so
+  K = 20,000 stands.
+
+**P(realized class):**
+
+| cycle | realized | shipped | A `stage_mix` | B `defect_08` | `mix_feas` | `mix_insample` | B paired |
+|---|---|---|---|---|---|---|---|
+| 1984 | unity | 0.195 | 0.166 | **0.247** | 0.103 | 0.272 | 0.246 |
+| 1992 | change + haredi | 0.174 | **0.340** | 0.208 | 0.209 | 0.401 | 0.208 |
+| 2006 | change + haredi | 0.190 | **0.275** | 0.208 | 0.202 | 0.344 | 0.208 |
+| 2015 | Netanyahu + unaligned | 0.399 | 0.399 | 0.398 | 0.399 | 0.399 | 0.399 |
+| 2019a | repeat | 0.131 | 0.131 | 0.134 | 0.131 | 0.131 | 0.134 |
+| 2019s | repeat | 0.131 | 0.131 | 0.132 | 0.131 | 0.131 | 0.132 |
+| 2020 | defector | **0.415** | 0.211 | 0.358 | 0.208 | 0.319 | 0.359 |
+| 2021 | change + Ra'am | **0.179** | 0.113 | 0.184 | 0.105 | 0.169 | 0.184 |
+| 1999 (weight 0.5) | change + haredi | 0.150 | 0.314 | 0.173 | 0.230 | 0.314 | 0.173 |
+
+**Scores and the rule.** Bootstrap SEs are over the scored cycles.
+
+| | shipped | A `stage_mix` | B `defect_08` |
+|---|---|---|---|
+| 1. mean log, 8 cycles, leave-one-out | −1.579 | −1.611 (−0.032, SE 0.142): **fail** | **−1.527 (+0.053, SE 0.039; P(≤ 0) 0.09): pass** |
+| 2. multi-class Brier | 0.835 | 0.837: **fail** | **0.810: pass** |
+| 3. tolerance, arm ÷ shipped: 2019a / 2019s / 2020 / 2021 / 2022 | | 0.995 / 0.998 / **0.510** / **0.634** / 1: **fail** | 1.021 / 1.006 / 0.863 / 1.029 / 1: **pass** |
+| + 1996, 1999 at weight 0.5 | −1.536 / 0.802 | −1.524 / 0.787 | −1.482 / 0.777 |
+| YB 2015/2019a in Amcha's role | −1.624 / 0.864 | −1.656 / 0.866 | −1.572 / 0.840 |
+| repeat vs government, non-certain (log / Brier) | −0.758 / 0.253 | −0.758 / 0.253 | −0.757 / 0.254 |
+| realized class is the top class | 2 of 8 | 1 of 8 | 1 of 8 |
+
+**The reported variants, against shipped:**
+
+| variant | mean log | diff | Brier |
+|---|---|---|---|
+| `mix_feas` | −1.782 | −0.203 | 0.913 |
+| `mix_insample` | −1.399 | +0.180 | 0.740 |
+| `defect_08_paired` | −1.527 | +0.052 | 0.811 |
+
+In-sample, the mix would pass the tolerance as well: 2020 at 0.77× and
+2021 at 0.94×.
+
+**Per-cycle log gain over the shipped tree:**
+
+| cycle | A | B | `mix_insample` |
+|---|---|---|---|
+| 1984 | −0.16 | +0.24 | +0.33 |
+| 1992 | +0.67 | +0.18 | +0.84 |
+| 2006 | +0.37 | +0.10 | +0.60 |
+| 2019a | −0.005 | +0.02 | −0.005 |
+| 2019s | −0.002 | +0.006 | −0.002 |
+| 2020 | −0.67 | −0.15 | −0.26 |
+| 2021 | −0.46 | +0.03 | −0.06 |
+
+2015 is unchanged under every tree.
+
+**Expected versus realized resolutions** over the five resolved
+deadlocks: Σ_c P(type | a government formed).
+
+| type | realized | shipped | A (leave-one-out) | A (in-sample) | B |
+|---|---|---|---|---|---|
+| defector | 1 | **2.54** | 1.71 | 1.63 | 2.15 |
+| change + haredi | 2 | 0.62 | 1.25 | 1.38 | 0.71 |
+| unity | 1 | 1.20 | 1.52 | 1.43 | 1.49 |
+| change + Ra'am | 1 | 0.50 | 0.35 | 0.44 | 0.51 |
+| JL-backed minority | 0 | 0.14 | 0.17 | 0.12 | 0.15 |
+
+**Reading.**
+
+- **A is the better-fitting model but cannot show it out of sample.**
+  With all five cycles in the fit, the posterior mean weights are:
+
+  | type | weight |
+  |---|---|
+  | unity | 0.124 |
+  | change + haredi | 0.364 |
+  | defector | 0.053 |
+  | change + Ra'am | 0.316 |
+  | JL-backed minority | 0.143 |
+
+  The record pushes the defector down and haredi entry and Ra'am up,
+  relative to the gates.
+  - **In-sample** it beats shipped by 0.18 nats and cuts the defector's
+    excess from 1.5 governments to 0.6.
+  - **Under leave-one-out** the singletons cost it, as in s.56 but far
+    less: −0.03 here against −0.46 there. Without 2020, the
+    defector was reachable and not chosen in 1984, 1992, 2006 and 2021,
+    so its weight falls to 0.030 and 2020 keeps 0.51×. Without 2021, the
+    Ra'am weight falls from 0.316 to 0.176 and 2021 keeps 0.63×.
+  - **Five resolutions cannot validate a five-weight model.** The gate
+    factor g makes the loss small, but it cannot be made to vanish.
+  - **The feasibility-only fit is worse** (`mix_feas`, −0.20), as 59.1
+    expected: it counts each gate's propensity twice.
+- **B is a small, consistent gain.**
+  - It gains in 1984, 1992, 2006 and 2021 and loses 0.15 nats in 2020.
+    The bootstrap puts P(diff ≤ 0) at 0.09.
+  - **The quantile-coupled version agrees to 0.001**, so this is not
+    Monte Carlo pairing noise.
+  - **The back-of-envelope in 59.1 was pessimistic.** 2020 keeps 0.86 of
+    its shipped probability, not 0.78.
+  - **It narrows the defector over-forecast only partly:** 2.54 → 2.15
+    against 1 realized.
+- **Caveat on B's largest gain (1984, +0.24).** It rests on s.49's coding
+  of 1984 as class 6, "Likud without Netanyahu". 1984 kept both leaders.
+  Without 1984, B's mean gain over the other seven cycles is still
+  +0.026. This is descriptive, not a registered test.
+- **Caveat on the choice of 0.08.** The verifier proposed it with the
+  record's 1-in-5 in view. The shipped 0.12 was likewise "graded on the
+  2020 realization". So neither value is out-of-sample for its own choice;
+  the registered rule treats them alike.
+
+Files (scratch): `formation_validation.csv`,
+`formation_validation_classes.csv` and `formation_calibration.csv`. The
+calibration file holds the rows "s.59 tolerance", "s.59 decision",
+"s.59 verdict" and "s.59 resolution counts".
+
+### 59.3 The 2026 effect (scratch only; v46 draws, 8,000 Knessets × 200 vectors)
+
+Arm A ran as `--resolution mix`, with the weights fitted on all five
+resolutions. Arm B ran as `--set centre_defects=0.08`. B's run is the
+exact stream the edit of `BEHAVIOR` would ship.
+
+| outcome | shipped | A `stage_mix` | B `defect_08` |
+|---|---|---|---|
+| Netanyahu rightist coalition | 0.095 | 0.095 | 0.095 |
+| Netanyahu + unaligned / Amcha | 0.005 | 0.005 | 0.005 |
+| Change coalition (without Ra'am) | 0.071 | 0.071 | 0.071 |
+| Change + unaligned / Amcha | 0.032 | 0.032 | 0.031 |
+| Change + a haredi party | 0.061 [0.017, 0.132] | 0.148 [0.020, 0.340] | 0.069 [0.018, 0.157] |
+| JL-backed minority | 0.034 | 0.032 | 0.036 |
+| Unity (Likud without Netanyahu) | 0.145 [0.002, 0.369] | 0.165 [0.002, 0.415] | **0.170** [0.003, 0.414] |
+| Repeat election | 0.260 | 0.259 | 0.262 |
+| Change + Ra'am | 0.074 | 0.067 | 0.076 |
+| Netanyahu + a change-bloc defector | 0.225 [0.048, 0.399] | 0.127 [0.005, 0.314] | **0.185** [0.028, 0.380] |
+
+**Which government the resolved deadlocks get:**
+
+| type | shipped | A | B |
+|---|---|---|---|
+| unity | 0.271 | 0.308 | 0.318 |
+| change + haredi | 0.113 | 0.273 | 0.130 |
+| defector | 0.417 | 0.237 | 0.344 |
+| change + Ra'am | 0.137 | 0.123 | 0.142 |
+| JL-backed minority | 0.062 | 0.059 | 0.067 |
+
+Under B, 5,110 draws find no gate in the 60 re-draws, against 1,255
+shipped. They stay repeats, which accounts for repeat +0.002.
+
+**Groups:**
+
+| group | shipped | A | B |
+|---|---|---|---|
+| Netanyahu-led | 0.325 [0.155, 0.500] | 0.227 [0.105, 0.409] | 0.285 [0.129, 0.479] |
+| change-led | 0.270 | 0.349 | 0.283 |
+| unity | 0.145 | 0.165 | 0.170 |
+| repeat | 0.260 | 0.259 | 0.262 |
+| Netanyahu in office | 0.584 | 0.486 | 0.547 |
+
+**Prime minister:**
+
+| PM | shipped | A | B |
+|---|---|---|---|
+| Netanyahu | 0.325 | 0.227 | 0.285 |
+| Eisenkot | 0.251 | 0.306 | 0.269 |
+| none (repeat) | 0.260 | 0.259 | 0.262 |
+| Likud successor (unity) | 0.073 | 0.082 | 0.085 |
+| Bennett | 0.068 | 0.097 | 0.074 |
+| Liberman | 0.013 | 0.014 | 0.015 |
+| another leader | 0.010 | 0.014 | 0.011 |
+
+**Given a government forms:**
+
+| PM | shipped | A | B | Kalshi |
+|---|---|---|---|---|
+| Netanyahu | 0.439 | 0.306 | 0.386 | ~0.30 |
+| Eisenkot | 0.339 | 0.413 | 0.364 | ~0.48 |
+
+Markets are a comparison, not a target.
+
+**Membership: P(in the government).**
+
+| list | shipped | A | B |
+|---|---|---|---|
+| Likud | 0.470 | 0.392 | 0.455 |
+| Yashar | 0.416 | 0.514 | 0.453 |
+| Together (Bennett + Yesh Atid) | 0.415 | 0.513 | 0.452 |
+| The Democrats | 0.413 | 0.509 | 0.449 |
+| Yisrael Beytenu | 0.391 | 0.468 | 0.425 |
+| UTJ | 0.370 | 0.341 | 0.336 |
+| Shas | 0.359 | 0.321 | 0.324 |
+| Otzma Yehudit | 0.289 | 0.207 | 0.256 |
+| RZP | 0.227 | 0.167 | 0.202 |
+| Amcha | 0.076 | 0.063 | 0.070 |
+| Reservists | 0.072 | 0.075 | 0.076 |
+| Ra'am, in government | 0.074 | 0.067 | 0.076 |
+| Ra'am, outside support | 0.021 | 0.020 | 0.022 |
+| Joint List, outside support | 0.033 | 0.032 | 0.036 |
+| the unnamed change-bloc defector row | 0.225 | 0.127 | 0.185 |
+
+Under both arms, Shas and UTJ fall because there are fewer Netanyahu-led
+governments. Under A, part of that is offset by haredi entry into a
+change government.
+
+**The gates still move the numbers under A, as registered.** P(Netanyahu
+PM) at the central draw, with the mix weights at their posterior mean:
+
+| gate value moved | P(Netanyahu PM) |
+|---|---|
+| mix, all gates shipped | 0.202 |
+| `utj_defects` 0.05 / 0.15 / 0.30 | 0.209 / 0.202 / 0.197 |
+| `centre_defects` 0.08 / 0.12 / 0.20 | 0.175 / 0.202 / 0.242 |
+| `likud_sans_bibi` 0.0625 / 0.125 / 0.18 | 0.241 / 0.202 / 0.182 |
+| gates (shipped), same central draw | 0.294 |
+
+**B's cost, as the verifier warned.** Of the 0.040 that B takes from the
+pledge-break, 0.025 goes to unity without Netanyahu, a path with no
+precedent (s.49.3). Unity rises from 0.145 to 0.170. The rest goes to
+haredi entry (+0.008), the minority, Ra'am and repeats.
+
+### 59.4 Recommendation
+
+**Ship B: set `BEHAVIOR["centre_defects"]` = 0.08, with
+`BEHAVIOR_NEFF` unchanged at 25.** It passes every condition of the
+registered rule:
+
+- mean log +0.053;
+- Brier 0.810 against 0.835;
+- every realized 2019-2022 outcome keeps at least 0.86 of its shipped
+  probability.
+
+The edit is one line. The `centre_defects` comment should then cite s.59:
+"0.12 → 0.08 (s.59): the stage's gate re-draw gave the pledge-break 0.42
+of resolved 2026 deadlocks, and on the record the shipped tree expected
+2.5 defector governments in five resolved deadlocks against one realized;
+graded on the formation harness, +0.053 mean log, Brier 0.810 vs 0.835,
+2020 keeps 0.86 of its probability."
+
+After the edit:
+
+- The 2026 outputs equal this section's B run exactly: outcome 9 0.185,
+  P(Netanyahu PM) 0.285, 0.386 given formation.
+- Re-run `validate_formation.py`. The `defect_08` tree becomes identical
+  to the shipped tree, and the s.59 rows then compare the new shipped
+  tree with itself. These pre-flip numbers are the record of the test.
+
+**Keep A off.** `STAGE_RESOLUTION` stays `"gates"`. A is the better model
+in-sample (+0.18), but the registered leave-one-out test fails narrowly
+(−0.03 mean log, Brier +0.002), and the tolerance fails on 2020 and
+2021. The code stays behind the flag. When the record gains a sixth
+resolved deadlock, re-grade it as is; it needs no new registration.
+
+**Disclose on the site with B:**
+
+- The pledge-break rate is now 0.08.
+- The shipped tree still expects about 2.2 defector governments in the
+  five historical resolutions, against one realized. B narrows the
+  over-forecast; it does not remove it.
+- B moves 0.025 to unity without Netanyahu, a path with no precedent.
+- B's largest record gain rests on 1984 being coded as that class.
 
 ## 60. Hybrid residual for small lists (17-18 Oct, D-10)
 

@@ -15,3 +15,8 @@ data/raw/
 data/processed/m3_idata.nc
 data/processed/harness_cache/
 data/processed/harness_cache_*/
+
+# pipeline.py run logs and the publish copy (--publish-check)
+logs/
+output/publish/
+.pytest_cache/

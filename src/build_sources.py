@@ -128,6 +128,18 @@ def _short(src: dict) -> str:
     return f"{first} et al. {yr}"
 
 
+def _year_suffix(k: int) -> str:
+    """APA-style year suffix for the k-th source sharing an author-year
+    label: a, b, ..., z, aa, ab, ... (the old 'abcdefghij'[k] raised
+    IndexError past ten)."""
+    s = ""
+    k += 1
+    while k:
+        k, r = divmod(k - 1, 26)
+        s = chr(ord("a") + r) + s
+    return s
+
+
 def _citation(src: dict) -> str:
     parts = [src.get("authors") or "", f"({src.get('year') or 'n.d.'}).",
              (src.get("title") or "").rstrip(".") + ".", (src.get("venue") or "")]
@@ -211,7 +223,7 @@ def main() -> None:
     for short, es in by_short.items():
         if len(es) > 1:
             for k, e in enumerate(sorted(es, key=lambda e: e["citation"])):
-                e["short"] = short + "abcdefghij"[k]
+                e["short"] = short + _year_suffix(k)
     (ROOT / "data" / "forecast_sources.json").write_text(
         json.dumps(out, ensure_ascii=False, indent=1), encoding="utf-8")
     (ROOT / "data" / "forecast_findings.json").write_text(

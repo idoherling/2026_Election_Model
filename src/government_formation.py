@@ -45,7 +45,10 @@ Formation order per draw (who can actually assemble 61 first):
        / JL-backed minority) is drawn from a Dirichlet posterior on the
        record's resolutions, restricted to the types this Knesset can reach;
        the gates then supply only the details within the type. Off, every
-       output is bit-identical to the s.49 stage.
+       output is bit-identical to the s.49 stage. "mix" (s.59): the type is
+       drawn in proportion to a record weight x the type's own gate
+       probability in that draw (weights fitted on the record's reachable
+       sets in validate_formation.mix_posterior).
 
 Outputs:
     data/processed/government_formation.csv     outcome probabilities
@@ -180,7 +183,12 @@ BEHAVIOR = {
     # among feasible cases 1/3 (2020 yes; 2019a/2019s no); tempered to 0.12
     # for 2026, where all four centre parties were founded on never-Bibi —
     # as was Gantz's in 2019, which is why it isn't zero.
-    "centre_defects": 0.12,
+    # 2026-10-17: 0.12 -> 0.08 (s.59): the stage's gate re-draw gave the
+    # pledge-break 0.42 of resolved 2026 deadlocks, and on the record the
+    # shipped tree expected 2.5 defector governments in five resolved
+    # deadlocks against one realized; graded on the formation harness, +0.053
+    # mean log, Brier 0.810 vs 0.835, 2020 keeps 0.86 of its probability.
+    "centre_defects": 0.08,
     # Kingmaker side priors (declared; residual = sits out / opposition)
     "bw_right": 0.40, "bw_centre": 0.45,
     "unity_right": 0.60, "unity_centre": 0.25,
@@ -412,7 +420,17 @@ def deadlock_posterior(exclude=(), regimes=("parliamentary",), cycles=None,
 # Knesset can reach; the gates supply only the details within the type.
 # The resolution classes are exactly the outcomes a deadlock can reach
 # (0-3 need a side at 61), coded as validate_formation.py codes the record.
+# "mix" (2026-10-17, dossier s.59, pre-registered s.59.1): P(type | draw) is
+# proportional to a record weight w_type x the type's own precedence-free
+# gate probability g_type in that draw, so every behavioural gate still
+# moves the numbers; w is fitted on the record by validate_formation.
+# mix_posterior (Dirichlet(0.5) prior, the arm's own likelihood over each
+# historical cycle's reachable types, importance sampling).
 STAGE_RESOLUTION = "gates"
+RESOLUTION_MODES = ("gates", "record", "mix")
+MIX_K = 20_000                      # prior draws for the importance sampler
+MIX_PRIOR = 0.5                     # Dirichlet (Jeffreys) on normalised w
+MIX_SEED_OFFSET = 5901              # prior draws; + 1 = the resample
 RESOLUTION_TYPES = (6, 4, 9, 8, 5)  # unity, change + haredi, defector,
                                     # change + Ra'am, JL-backed minority
 # the resolved deadlocks of DEADLOCK_RECORD (every row with repeat False);
@@ -459,10 +477,12 @@ def load_draws():
     return d
 
 
-def draw_behavior(rng) -> dict:
-    """One parameter vector from the evidence-quality Beta priors."""
+def draw_behavior(rng, base=None) -> dict:
+    """One parameter vector from the evidence-quality Beta priors. base:
+    replacement central values (default BEHAVIOR); the stream is the one an
+    edit of BEHAVIOR would give (s.59 arm B)."""
     out = {}
-    for k, p in BEHAVIOR.items():
+    for k, p in (BEHAVIOR if base is None else base).items():
         n = BEHAVIOR_NEFF.get(k)
         out[k] = float(rng.beta(p * n, (1 - p) * n)) if n else p
     return out
@@ -488,6 +508,10 @@ def simulate_formation(draws: pd.DataFrame, behavior: dict, seed=SEED,
     behavior["resolution_shares"]: the record's type shares over
     RESOLUTION_TYPES for the stage's resolved deadlocks (s.56; absent or
     None = the gates decide, as shipped). Used only when the stage is on.
+    behavior["resolution_mix"]: s.59 record weights over RESOLUTION_TYPES;
+    the type is drawn in proportion to weight x the type's own gate
+    probability (absent or None = off). The gate probabilities are left in
+    simulate_formation.last_type_g for the record fit.
     """
     rng = np.random.default_rng(seed)
     if pm_alloc is None:
@@ -659,7 +683,8 @@ def simulate_formation(draws: pd.DataFrame, behavior: dict, seed=SEED,
         rep = srng.random(n) < r_dead
         outcome = outcome.copy()
         outcome[deadlock & rep] = 7
-        if shares is None:
+        mix = behavior.get("resolution_mix")
+        if shares is None and mix is None:
             need = deadlock & ~rep & tree_repeat
             for _ in range(STAGE_RESAMPLE):
                 if not need.any():
@@ -674,13 +699,15 @@ def simulate_formation(draws: pd.DataFrame, behavior: dict, seed=SEED,
                 need &= ~fill
             unresolved = int(need.sum())   # no gate can fire: stays a repeat
         else:
-            # s.56 (pre-registered s.56.1): WHICH government forms in every
-            # resolved deadlock - including draws the first-pass gates had
-            # already resolved - comes from the record's type shares,
-            # restricted to the types whose own gate condition can hold here
-            # with every flag of that gate at its favourable value (each
-            # condition is monotone in its flags, so this is exact). Own
-            # generator: the stage's `rep`, the PM draw and every other
+            # s.56 (pre-registered s.56.1) and s.59 (s.59.1): WHICH
+            # government forms in every resolved deadlock - including draws
+            # the first-pass gates had already resolved - is drawn over the
+            # types whose own gate condition can hold here with every flag of
+            # that gate at its favourable value (each condition is monotone
+            # in its flags, so this is exact). "record" (s.56): in proportion
+            # to the record's shares. "mix" (s.59): in proportion to record
+            # weights x each type's own precedence-free gate probability.
+            # Own generator: the stage's `rep`, the PM draw and every other
             # stream are the same uniforms as under "gates".
             trng = np.random.default_rng(seed + RESOLUTION_SEED_OFFSET)
             u_type, u_det = trng.random(n), trng.random(n)
@@ -695,28 +722,20 @@ def simulate_formation(draws: pd.DataFrame, behavior: dict, seed=SEED,
                 (ce_pure < 61) & (ce_pure + (raam - seg) >= 61),       # 8 Ra'am
                 (abst_max > 0) & (ce_pure > (120 - abst_max) / 2),     # 5 minority
             ])
-            w = feas * np.asarray(shares, dtype=float)[None, :]
-            form = deadlock & ~rep
-            none = form & (w.sum(axis=1) <= 0)
-            typ = np.array(RESOLUTION_TYPES)[_pick(w, u_type)]
-            res_ok = form & ~none
-            outcome[res_ok] = typ[res_ok]
-            outcome[none] = 7          # no type reachable: stays a repeat
-            unresolved = int(none.sum())
 
-            # Details within the type: the existing gates CONDITIONED on the
-            # type's condition holding, by exact enumeration of their flags.
+            # The haredi and minority gates' flag combinations: weight =
+            # P(combination) where the gate's condition holds, else 0. Their
+            # row sums are the gates' precedence-free firing probabilities
+            # (s.59 g_4; g_5 before the jl_supports factor), and drawn in
+            # proportion they are the details conditioned on the type firing.
             # The last combination is the all-favourable one (the fallback
-            # for a degenerate all-zero row). Membership reads the flags set
-            # here; other flags keep their first-pass values, which the
-            # membership code does not read for that outcome.
+            # for a degenerate all-zero row).
             bits = [(a, b, c) for a in (0, 1) for b in (0, 1) for c in (0, 1)]
 
             def bern(x, p):
                 return p if x else 1.0 - p
 
-            sel = res_ok & (outcome == 4)
-            if sel.any():
+            def w_haredi():
                 pl = behavior["liberman_haredi_ok"]
                 W = np.zeros((n, len(bits)))
                 for i, (s_, t_, l_) in enumerate(bits):
@@ -724,11 +743,9 @@ def simulate_formation(draws: pd.DataFrame, behavior: dict, seed=SEED,
                     chs = (ch_base if l_ else ch_base - yb) + dh
                     W[:, i] = (((chs >= 61) & (dh > 0))
                                * bern(s_, p_shas) * bern(t_, p_utj) * bern(l_, pl))
-                b4 = np.array(bits, dtype=bool)[_pick(W, u_det)]
-                for col, key in enumerate(("shas_on", "utj_on", "lib_haredi")):
-                    flags[key] = np.where(sel, b4[:, col], flags[key])
-            sel = res_ok & (outcome == 5)
-            if sel.any():
+                return W
+
+            def w_minority():
                 pr = behavior["raam_supports"]
                 pm_ok = behavior["liberman_minority_ok"]
                 pa = p_abst * (1.0 - p_utj) if p_abst > 0 else np.zeros(n)
@@ -738,6 +755,44 @@ def simulate_formation(draws: pd.DataFrame, behavior: dict, seed=SEED,
                     mce = ce_pure if l_ else ce_pure - yb
                     W[:, i] = (((abst > 0) & (mce > (120 - abst) / 2))
                                * bern(r_, pr) * bern(l_, pm_ok) * bern(a_, pa))
+                return W
+
+            W4 = W5 = None
+            if mix is None:
+                w = feas * np.asarray(shares, dtype=float)[None, :]
+            else:
+                W4, W5 = w_haredi(), w_minority()
+                g = np.column_stack([
+                    np.where(feas[:, 0], p_unity, 0.0),                # 6
+                    W4.sum(axis=1),                                    # 4
+                    np.where(feas[:, 2], p_defect, 0.0),               # 9
+                    np.where(feas[:, 3], behavior["raam_joins"], 0.0),  # 8
+                    behavior["jl_supports"] * W5.sum(axis=1),          # 5
+                ])
+                # for the record fit in validate_formation.py (s.59.1)
+                simulate_formation.last_type_g = (g, deadlock)
+                w = g * np.asarray(mix, dtype=float)[None, :]
+            form = deadlock & ~rep
+            none = form & (w.sum(axis=1) <= 0)
+            typ = np.array(RESOLUTION_TYPES)[_pick(w, u_type)]
+            res_ok = form & ~none
+            outcome[res_ok] = typ[res_ok]
+            outcome[none] = 7          # no type reachable: stays a repeat
+            unresolved = int(none.sum())
+
+            # Details within the type: the existing gates CONDITIONED on the
+            # type's condition holding. Membership reads the flags set here;
+            # other flags keep their first-pass values, which the membership
+            # code does not read for that outcome.
+            sel = res_ok & (outcome == 4)
+            if sel.any():
+                W = w_haredi() if W4 is None else W4
+                b4 = np.array(bits, dtype=bool)[_pick(W, u_det)]
+                for col, key in enumerate(("shas_on", "utj_on", "lib_haredi")):
+                    flags[key] = np.where(sel, b4[:, col], flags[key])
+            sel = res_ok & (outcome == 5)
+            if sel.any():
+                W = w_minority() if W5 is None else W5
                 b5 = np.array(bits, dtype=bool)[_pick(W, u_det)]
                 flags["jl_supports"] = np.where(sel, True, flags["jl_supports"])
                 flags["raam_supports"] = np.where(sel, b5[:, 0],
@@ -864,14 +919,25 @@ def resolution_draws(M: int, on: bool, alpha=None):
 
 
 def main(out_dir=None, stage: bool = POST_DEADLOCK_STAGE,
-         resolution: str = STAGE_RESOLUTION) -> None:
+         resolution: str = STAGE_RESOLUTION, behavior_over=None) -> None:
+    """behavior_over: {BEHAVIOR key: central value} replacing shipped values
+    for this run only (s.59 arm B: centre_defects 0.08); the per-vector
+    draws are the ones an edit of BEHAVIOR would give."""
     out_dir = Path(out_dir) if out_dir is not None else PROCESSED_DIR
     out_dir.mkdir(parents=True, exist_ok=True)
     draws = load_draws()
-    if resolution not in ("gates", "record"):
-        raise ValueError(f"STAGE_RESOLUTION must be 'gates' or 'record', "
+    if resolution not in RESOLUTION_MODES:
+        raise ValueError(f"STAGE_RESOLUTION must be one of {RESOLUTION_MODES}, "
                          f"not {resolution!r}")
     by_record = stage and resolution == "record"
+    by_mix = stage and resolution == "mix"
+    base = None
+    if behavior_over:
+        unknown = set(behavior_over) - set(BEHAVIOR)
+        if unknown:
+            raise ValueError(f"not BEHAVIOR keys: {sorted(unknown)}")
+        base = dict(BEHAVIOR, **behavior_over)
+        print(f"BEHAVIOR overrides for this run: {behavior_over}")
 
     # Hierarchical over parameter uncertainty: M parameter vectors from
     # the evidence-quality priors, each evaluated on all seat draws.
@@ -879,6 +945,16 @@ def main(out_dir=None, stage: bool = POST_DEADLOCK_STAGE,
     prng = np.random.default_rng(SEED + 7)
     r_stage = stage_draws(M, stage)
     s_stage = resolution_draws(M, by_record)
+    w_stage, mix_info = [None] * M, None
+    if by_mix:
+        # s.59: record weights fitted on all five resolved deadlocks (the
+        # harness owns the historical seat maps; imported here only)
+        import validate_formation as vf
+        w_stage, mix_info = vf.mix_posterior_2026(M)
+        print(f"s.59 mix weights (posterior mean over "
+              f"{', '.join(OUTCOMES[t] for t in RESOLUTION_TYPES)}): "
+              f"{np.round(mix_info['w_mean'], 3).tolist()}; ESS "
+              f"{mix_info['ess']:.0f} of {MIX_K}")
     res_mat = np.zeros((M, len(RESOLUTION_TYPES)))
     oc_mat = np.zeros((M, len(OUTCOMES)))
     pm_names_all = PM_NAMES[:-1] + [PM_OTHER_UNITY, PM_OTHER, "Netanyahu",
@@ -900,12 +976,14 @@ def main(out_dir=None, stage: bool = POST_DEADLOCK_STAGE,
     dl_mat = np.zeros((M, len(dl_keys)))
     unresolved = 0
     for m in range(M):
-        b = draw_behavior(prng)
+        b = draw_behavior(prng, base)
         pa = draw_pm_alloc(prng)
         if r_stage[m] is not None:
             b["repeat_deadlock"] = r_stage[m]
         if s_stage[m] is not None:
             b["resolution_shares"] = s_stage[m]
+        if w_stage[m] is not None:
+            b["resolution_mix"] = w_stage[m]
         oc, pmv = simulate_formation(draws, b, seed=SEED + m, pm_alloc=pa)
         res_counted[m] = simulate_formation.last_res_counted
         dl = simulate_formation.last_deadlock
@@ -939,7 +1017,9 @@ def main(out_dir=None, stage: bool = POST_DEADLOCK_STAGE,
     print(f"Government formation ({len(draws)} Knessets x {M} parameter "
           "vectors x behavioral draws; post-deadlock stage "
           f"{'ON' if stage else 'OFF'}"
-          f"{'; resolution by record (s.56)' if by_record else ''}):\n")
+          f"{'; resolution by record (s.56)' if by_record else ''}"
+          f"{'; resolution by record x gates (s.59 mix)' if by_mix else ''}"
+          "):\n")
     print(table.to_string(index=False))
 
     # s.52 outputs: who leads, who sits in the government, and the outcome
@@ -1009,12 +1089,28 @@ def main(out_dir=None, stage: bool = POST_DEADLOCK_STAGE,
                 f"resolved_share_{t}", round(float(np.nanmean(res_mat[:, i])), 3),
                 round(float(np.nanpercentile(res_mat[:, i], 5)), 3),
                 round(float(np.nanpercentile(res_mat[:, i], 95)), 3)]
+    # s.59 rows, only under the mix arm
+    if by_mix:
+        dl_df.loc[len(dl_df)] = ["resolution_by_mix", 1.0, np.nan, np.nan]
+        dl_df.loc[len(dl_df)] = ["mix_ess", round(mix_info["ess"], 1),
+                                 np.nan, np.nan]
+        for i, t in enumerate(RESOLUTION_TYPES):
+            dl_df.loc[len(dl_df)] = [
+                f"mix_w_{t}", round(float(mix_info["w_mean"][i]), 4),
+                round(float(np.percentile(np.array(w_stage)[:, i], 5)), 4),
+                round(float(np.percentile(np.array(w_stage)[:, i], 95)), 4)]
+        for i, t in enumerate(RESOLUTION_TYPES):
+            dl_df.loc[len(dl_df)] = [
+                f"resolved_share_{t}", round(float(np.nanmean(res_mat[:, i])), 3),
+                round(float(np.nanpercentile(res_mat[:, i], 5)), 3),
+                round(float(np.nanpercentile(res_mat[:, i], 95)), 3)]
     dl_df.to_csv(out_dir / "government_deadlock.csv", index=False)
     print("\nDeadlock stage (deadlock = no side at 61 with its own lists and "
           "the kingmakers that sided with it):")
     print(dl_df.to_string(index=False))
     if stage:
         how = ("no type reachable under the record draw" if by_record
+               else "no type reachable under the mix draw" if by_mix
                else "the gate re-draws")
         print(f"record: Beta({a_:g}, {b_:g}) = {a_ / (a_ + b_):.3f}; draws "
               f"left unresolved by {how}: {unresolved}")
@@ -1031,19 +1127,22 @@ def main(out_dir=None, stage: bool = POST_DEADLOCK_STAGE,
     r_central = a_ / (a_ + b_) if stage else None
     s_central = (resolution_posterior() / resolution_posterior().sum()
                  if by_record else None)
+    w_central = mix_info["w_mean"] if by_mix else None
 
-    def _sens_row(res_label="record", **over):
-        b = dict(BEHAVIOR, **over)
+    def _sens_row(res_label="record" if not by_mix else "mix", **over):
+        b = dict(BEHAVIOR if base is None else base, **over)
         if "repeat_deadlock" not in over:
             b["repeat_deadlock"] = r_central
         if by_record and "resolution_shares" not in over:
             b["resolution_shares"] = s_central
+        if by_mix and "resolution_mix" not in over:
+            b["resolution_mix"] = w_central
         oc, pm_s = simulate_formation(draws, b)
         row = {"utj_defects": b["utj_defects"],
                "amcha_right": b["amcha_right"],
                "res_right": b["res_right"],
                "utj_abstains": b.get("utj_abstains", UTJ_ABSTAINS)}
-        if by_record:
+        if by_record or by_mix:
             row["resolution"] = res_label
         if stage:
             rd = b.get("repeat_deadlock")
@@ -1100,6 +1199,16 @@ def main(out_dir=None, stage: bool = POST_DEADLOCK_STAGE,
                                   resolution_shares=al / al.sum()))
         rows.append(_sens_row(res_label="gates (shipped)",
                               resolution_shares=None))
+    if by_mix:
+        # s.59: the shipped gate resolution on the same central draw, and
+        # the haredi and pledge-break gates moved under the mix arm
+        rows.append(_sens_row(res_label="gates (shipped)", resolution_mix=None))
+        for cd in (0.08, 0.20):
+            rows.append(_sens_row(res_label=f"mix, centre_defects {cd}",
+                                  centre_defects=cd))
+        for sd in (0.05, 0.25):
+            rows.append(_sens_row(res_label=f"mix, shas_defects {sd}",
+                                  shas_defects=sd))
     sens = pd.DataFrame(rows)
     sens.to_csv(out_dir / "government_sensitivity.csv", index=False)
     print("\nSensitivity (UTJ defection x Amcha alignment; Reservists right "
@@ -1160,10 +1269,18 @@ if __name__ == "__main__":
                     help="output directory (default data/processed)")
     ap.add_argument("--stage", choices=("on", "off"), default=None,
                     help="post-deadlock stage (default POST_DEADLOCK_STAGE)")
-    ap.add_argument("--resolution", choices=("gates", "record"), default=None,
-                    help="which government a resolved deadlock gets (s.56; "
-                         "default STAGE_RESOLUTION)")
+    ap.add_argument("--resolution", choices=RESOLUTION_MODES, default=None,
+                    help="which government a resolved deadlock gets (s.56, "
+                         "s.59; default STAGE_RESOLUTION)")
+    ap.add_argument("--set", action="append", default=[], metavar="KEY=VALUE",
+                    help="replace a BEHAVIOR central value for this run "
+                         "(repeatable; e.g. centre_defects=0.08, s.59 arm B)")
     args = ap.parse_args()
+    over = {}
+    for kv in args.set:
+        k, _, v = kv.partition("=")
+        over[k.strip()] = float(v)
     main(args.out, POST_DEADLOCK_STAGE if args.stage is None
          else args.stage == "on",
-         STAGE_RESOLUTION if args.resolution is None else args.resolution)
+         STAGE_RESOLUTION if args.resolution is None else args.resolution,
+         over or None)

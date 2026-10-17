@@ -22,11 +22,18 @@ Outputs:
     data/processed/cec_filings.csv           one row per filing (metadata +
                                              methodology fields)
     data/processed/cec_party_pcts.csv        filing x party raw percentages
+
+Usage:
+    python src/scrape_cec.py                       download + parse the index
+    python src/scrape_cec.py --discover [--append] probe gov.il for filings the
+                                                   index does not list yet (see
+                                                   the discovery section below)
 """
 
 from __future__ import annotations
 
 import re
+import sys
 from pathlib import Path
 
 import pandas as pd
@@ -243,7 +250,10 @@ def parse_pdf(path: Path):
             if m:
                 meta["undecided_pct"] = float(m.group(1))
         # Sample composition (sector coverage), where the filing reports it.
-        if "חרדי" in ln and "haredi_sample_pct" not in meta:
+        # sample composition only: the Haredi Public list's vote line ("הציבור
+        # החרדי 0 1.0%") is a party line, not the sample's haredi share
+        if ("חרדי" in ln and "haredi_sample_pct" not in meta
+                and not any(kw in ln for kw, _ in PARTY_KEYWORDS)):
             m = PCT.search(ln)
             if m and float(m.group(1)) <= 25:
                 meta["haredi_sample_pct"] = float(m.group(1))
@@ -386,5 +396,363 @@ def main() -> None:
               .to_string(index=False))
 
 
+# ---------------------------------------------------------------------------
+# Filing discovery (python src/scrape_cec.py --discover [--append])
+#
+# The gov.il index behind data/cec_filings_index.psv lags the filings (it
+# sits behind Cloudflare and is refreshed by hand in a browser), while the
+# PDF blobs are openly downloadable at a predictable address:
+#   BLOB with urlname knesset_election{IDX} and fname Survey_{REF}.pdf
+#   (some filings drop the underscore: Survey{REF}.pdf, e.g. 4190, 4209).
+# Discovery probes IDX beyond the last indexed one and REF beyond the last
+# indexed ref, downloads what it finds into data/raw/cec_pdfs/, and reads
+# the editor, publisher and fieldwork date from the PDF text - the steps
+# done by hand on 16 Oct for 4202, 4207 and 4209-4212 (index rows marked
+# "index row added 16 Oct"). Proposed index rows go to stdout for review;
+# --append adds them to the index.
+# ---------------------------------------------------------------------------
+INDEX_COLUMNS = ["ref", "urlname", "fname", "editor", "publisher",
+                 "survey_date", "transfer_date", "notes"]
+INDEX_PATH = DATA / "cec_filings_index.psv"
+
+
+def _with_reversed(labels):
+    """Labels plus their character-reversed forms (some filings extract
+    RTL-scrambled: "רקסה ןימזמ" is "מזמין הסקר")."""
+    return tuple(labels) + tuple(lb[::-1] for lb in labels)
+
+
+EDITOR_LABELS = _with_reversed(("עורך הסקר", "עורכת הסקר", "שערך את הסקר", "הסקר את שערך",
+                                "הגורם שערך", "הגוף שערך"))
+PUBLISHER_LABELS = _with_reversed(("מזמין הסקר", "מזמינת הסקר", "שהזמין את הסקר",
+                                   "הסקר את שהזמין", "הגוף המזמין"))
+DATE_LABELS = _with_reversed(("מועד איסוף", "איסוף הנתונים", "איסוף נתונים", "תאריך ביצוע",
+                              "תאריכי ביצוע", "ביצוע הסקר", "הסקר ביצוע", "תאריך הביצוע",
+                              "בוצע הסקר", "נערך הסקר", "בתאריכים", "מועד ביצוע",
+                              "מועד עריכת", "תאריך עריכת", "תאריכי הסקר", "מועד הסקר"))
+# Editor names as some filings write them -> the index's spelling
+EDITOR_ALIASES = {"next data": "נקסט דאטה", "direct polls": 'דיירקט פולס בע"מ',
+                  "kantar": "קנטאר ישראל", "קאנטר": "קנטאר ישראל",
+                  "tatika": "טאטיקה מחקרים ומדיה", "טאטיקה": "טאטיקה מחקרים ומדיה",
+                  "אפקאר": "אפקאר מחקרים וידע", "מכון dri": "מכון די אר איי"}
+HE_MONTHS = {"ינואר": 1, "פברואר": 2, "מרץ": 3, "מרס": 3, "אפריל": 4, "מאי": 5,
+             "יוני": 6, "יולי": 7, "אוגוסט": 8, "ספטמבר": 9, "אוקטובר": 10,
+             "נובמבר": 11, "דצמבר": 12}
+PUB_STOP = {'בע"מ', "בעמ", "חברת", ",", "-", "ltd", "ltd."}
+
+
+def load_index(path: Path = INDEX_PATH) -> pd.DataFrame:
+    """The filings index as written (dates left as strings, gov.il-shifted)."""
+    return pd.read_csv(path, sep="|", header=None, names=INDEX_COLUMNS,
+                       dtype=str, keep_default_na=False)
+
+
+def _norm_he(s: str) -> str:
+    return (s or "").replace("״", '"').replace("׳", "'").replace("“", '"').replace("”", '"')
+
+
+def pdf_lines(path: Path) -> list[str]:
+    from pypdf import PdfReader
+    reader = PdfReader(str(path))
+    text = "\n".join(p.extract_text() or "" for p in reader.pages)
+    return [_norm_he(ln.strip()) for ln in text.splitlines() if ln.strip()]
+
+
+def _labelled(lines: list[str], labels, exclude=(), wrap: bool = True) -> str:
+    """The first line carrying one of the labels (plus the next line, for
+    values that wrap), or ''."""
+    for i, ln in enumerate(lines[:60]):
+        if any(lb in ln for lb in labels) and not any(x in ln for x in exclude):
+            nxt = lines[i + 1] if wrap and i + 1 < len(lines) else ""
+            return (ln + " " + nxt).strip()
+    return ""
+
+
+def _default_year(lines: list[str]) -> int:
+    years = [int(y) for y in re.findall(r"(?<!\d)(20[2-3]\d)(?!\d)", " ".join(lines[:40]))]
+    return max(years) if years else pd.Timestamp.today().year
+
+
+def _parse_dates(s: str, default_year: int) -> list:
+    """Every date on a line: d/m/yyyy, d.m.yyyy, d-m-yyyy (two-digit years
+    are 20yy), yyyy-mm-dd, "13 באוקטובר2026"; with none of those, dates
+    without a year ("11 באוקטובר", "26/8") take default_year."""
+    out = []
+    for d, m, y in re.findall(r"(?<!\d)(\d{1,2})[./-](\d{1,2})[./-](\d{4}|\d{2})(?!\d)", s):
+        out.append((int(y) + (2000 if len(y) == 2 else 0), int(m), int(d)))
+    for y, m, d in re.findall(r"(?<!\d)(\d{4})-(\d{2})-(\d{2})(?!\d)", s):
+        out.append((int(y), int(m), int(d)))
+    months = "|".join(HE_MONTHS)
+    for d, mon, y in re.findall(rf"(?<!\d)(\d{{1,2}})\s*ב?({months})\s*(\d{{4}})", s):
+        out.append((int(y), HE_MONTHS[mon], int(d)))
+    if not out:
+        for d, mon in re.findall(rf"(?<!\d)(\d{{1,2}})\s*ב?({months})", s):
+            out.append((default_year, HE_MONTHS[mon], int(d)))
+        for d, m in re.findall(r"(?<![\d/.])(\d{1,2})/(\d{1,2})(?![\d/%])", s):
+            out.append((default_year, int(m), int(d)))
+    dates = []
+    for y, m, d in out:
+        try:
+            dates.append(pd.Timestamp(year=y, month=m, day=d))
+        except ValueError:
+            continue
+    return dates
+
+
+def fieldwork_dates(lines: list[str]):
+    """(first, last) date on the fieldwork-date line - or on the two lines
+    after it when the value wraps - or (None, None)."""
+    yr = _default_year(lines)
+    for i, ln in enumerate(lines[:80]):
+        if any(lb in ln for lb in DATE_LABELS):
+            for j in range(i, min(i + 3, len(lines))):
+                ds = _parse_dates(lines[j], yr)
+                if ds:
+                    return min(ds), max(ds)
+    return None, None
+
+
+def fieldwork_end(lines: list[str]):
+    """The last fieldwork date (a multi-day survey is dated by its last day,
+    the convention of the poll archive's fieldwork_end)."""
+    return fieldwork_dates(lines)[1]
+
+
+def _editor_spelling(index: pd.DataFrame) -> dict:
+    """canonical pollster -> the index's most frequent Hebrew editor name."""
+    if index.empty:
+        return {}
+    pol = index["editor"].map(lambda e: EDITOR_MAP.get(e, e))
+    return {p: g.value_counts().index[0] for p, g in index["editor"].groupby(pol)}
+
+
+def _name_tokens(name: str) -> list[str]:
+    return [t for t in re.split(r"[\s,\-–]+", name) if len(t) >= 3 and '"' not in t]
+
+
+def resolve_editor(lines: list[str], index: pd.DataFrame):
+    """(editor as the index spells it, flags). On the editor line: a known
+    editor name, an alias, or every word of a known name (word order is
+    scrambled in some extractions); failing that, a name or alias anywhere
+    in the first 40 lines (flagged)."""
+    known = sorted(set(EDITOR_MAP) | set(index["editor"]) | EXCLUDED_EDITORS, key=len, reverse=True)
+    known = [k for k in known if k]
+    spelling = _editor_spelling(index)
+    line = _labelled(lines, EDITOR_LABELS, exclude=PUBLISHER_LABELS)
+    full = " ".join(lines[:40])
+
+    def alias(scope):
+        low = scope.lower()
+        return next((he for k, he in EDITOR_ALIASES.items() if k in low), None)
+
+    for scope, on_line in ((line, True), (full, False)):
+        if not scope:
+            continue
+        hit = next((k for k in known if k in scope), None) or alias(scope)
+        if hit is None and on_line:
+            hit = next((k for k in sorted(known, key=lambda k: -len(_name_tokens(k)))
+                        if _name_tokens(k) and all(t in scope for t in _name_tokens(k))), None)
+        if hit is not None:
+            return (spelling.get(EDITOR_MAP.get(hit, hit), hit),
+                    [] if on_line else ["editor found outside the editor line"])
+    raw = line
+    for lb in EDITOR_LABELS:
+        raw = raw.replace(lb, "")
+    return raw.strip(" :"), ["CHECK editor: no known editor matched"]
+
+
+def _token_hit(tok: str, text: str) -> bool:
+    if tok.isdigit():
+        return re.search(rf"(?<!\d){tok}(?!\d)", text) is not None
+    return len(tok) >= 2 and tok.lower() in text.lower()
+
+
+def resolve_publisher(lines: list[str], index: pd.DataFrame, editor: str):
+    """(publisher as the index spells it, flags). Each publisher already in
+    the index is scored on the PDF's commissioner line (label removed): the
+    share of its words found there, +0.25 if it appears verbatim, plus half
+    the share of this editor's past filings it accounts for. A publisher
+    with under half its words on the line is not taken; the line's own text
+    is proposed instead, flagged for review."""
+    line = _labelled(lines, PUBLISHER_LABELS)
+    for lb in PUBLISHER_LABELS:
+        line = line.replace(lb, " ")
+    pubs = [p for p in index["publisher"].unique() if p]
+    hist = index.loc[index["editor"] == editor, "publisher"].value_counts(normalize=True)
+    best, best_score, best_overlap = None, 0.0, 0.0
+    for p in pubs:
+        toks = [t.strip("-–.:()'") for t in re.split(r"[\s,]+", _norm_he(p))]
+        toks = [t for t in toks if t and t.lower() not in PUB_STOP]
+        overlap = (sum(_token_hit(t, line) for t in toks) / len(toks)) if toks and line.strip() else 0.0
+        score = overlap + (0.25 if line.strip() and _norm_he(p) in line else 0.0) \
+            + 0.5 * float(hist.get(p, 0.0))
+        if score > best_score:
+            best, best_score, best_overlap = p, score, overlap
+    if best is not None and best_overlap >= 0.5:
+        return best, []
+    if not line.strip() and best is not None:
+        return best, ["CHECK publisher: no commissioner line; guessed from the editor's earlier filings"]
+    raw = _labelled(lines, PUBLISHER_LABELS, wrap=False)
+    for lb in PUBLISHER_LABELS:
+        raw = raw.replace(lb, " ")
+    return " ".join(raw.split()).strip(" :"), ["CHECK publisher: not matched to a known publisher"]
+
+
+def propose_row(ref: str, urlname: str, fname: str, lines: list[str],
+                index: pd.DataFrame, today=None) -> dict:
+    """An index row read from a filing's text, in the index's conventions:
+    survey_date is the fieldwork date minus one day (gov.il's UTC-midnight
+    shift, which main() adds back) and transfer_date is the day after it,
+    marked approximate - as the 16 Oct rows were entered. A multi-day survey
+    is dated by its last day (gov.il's own rows usually carry the first)."""
+    editor, flags = resolve_editor(lines, index)
+    publisher, pflags = resolve_publisher(lines, index, editor)
+    first, fw = fieldwork_dates(lines)
+    flags = flags + pflags
+    if fw is None:
+        flags.append("CHECK fieldwork date: not found")
+    else:
+        if first is not None and first != fw:
+            flags.append(f"fieldwork {first.date()} to {fw.date()}, dated by its last day")
+        dates = pd.to_datetime(index["survey_date"], errors="coerce").dropna()
+        if len(dates) and fw < dates.max() - pd.Timedelta(days=14):
+            flags.append("CHECK fieldwork date: over two weeks before the latest indexed filing")
+    survey = (fw - pd.Timedelta(days=1)) if fw is not None else None
+    today = pd.Timestamp(today) if today is not None else pd.Timestamp.today()
+    note = (f"index row proposed by scrape_cec --discover on {today.date()} from the PDF "
+            f"({'file named without the underscore; ' if not fname.startswith('Survey_') else ''}"
+            f"gov.il index not refreshed); transfer date approximate")
+    if flags:
+        note += "; " + "; ".join(flags)
+    return {"ref": str(ref), "urlname": urlname, "fname": fname, "editor": editor,
+            "publisher": publisher,
+            "survey_date": survey.date().isoformat() if survey is not None else "",
+            "transfer_date": (survey + pd.Timedelta(days=1)).date().isoformat() if survey is not None else "",
+            "notes": note, "flags": flags,
+            "fieldwork_end": fw.date().isoformat() if fw is not None else ""}
+
+
+def row_psv(row: dict) -> str:
+    return "|".join(str(row[c]).replace("|", "/").replace("\n", " ") for c in INDEX_COLUMNS)
+
+
+def fetch_pdf(url: str, timeout: int = 30):
+    """The blob's bytes if it is a PDF, else None (404s and HTML pages)."""
+    try:
+        resp = requests.get(url, headers=UA, timeout=timeout)
+    except requests.RequestException as e:
+        print(f"  probe error {url}: {e}", file=sys.stderr)
+        return None
+    if resp.ok and resp.content[:4] == b"%PDF":
+        return resp.content
+    return None
+
+
+def last_indexed(index: pd.DataFrame) -> tuple[int, int]:
+    """(last IDX in knesset_election{IDX}, last numeric ref)."""
+    idx = []
+    for u in index["urlname"]:
+        m = re.search(r"knesset_election(\d+)$", str(u))
+        if m:
+            idx.append(int(m.group(1)))
+    refs = [int(r) for r in index["ref"] if str(r).isdigit()]
+    return max(idx), max(refs)
+
+
+def discover(index: pd.DataFrame, fetch=fetch_pdf, idx_span: int = 12, ref_span: int = 25,
+             max_misses: int = 2, idx_from=None, ref_from=None, out_dir: Path = PDF_DIR,
+             today=None, log=None) -> list[dict]:
+    """Probe IDX = idx_from.. (default last indexed + 1) against REF in a
+    window above the last indexed ref (both file-name forms); stop after
+    max_misses consecutive IDX with no filing. Each hit is saved to
+    out_dir/<ref>.pdf and turned into a proposed index row."""
+    log = log or (lambda msg: print(msg, file=sys.stderr))
+    last_idx, last_ref = last_indexed(index)
+    idx0 = int(idx_from) if idx_from is not None else last_idx + 1
+    ref0 = int(ref_from) if ref_from is not None else last_ref + 1
+    known = set(index["ref"].astype(str))
+    out_dir = Path(out_dir)
+    found_max = ref0 - 1
+    rows, misses, n_probe = [], 0, 0
+    for idx in range(idx0, idx0 + idx_span):
+        urlname = f"knesset_election{idx}"
+        hit = None
+        for ref in range(ref0, max(ref0, found_max + 1) + ref_span):
+            if str(ref) in known:
+                continue
+            for fname in (f"Survey_{ref}.pdf", f"Survey{ref}.pdf"):
+                n_probe += 1
+                data = fetch(BLOB.format(urlname=urlname, fname=fname))
+                if data:
+                    hit = (ref, fname, data)
+                    break
+            if hit:
+                break
+        if hit is None:
+            misses += 1
+            log(f"  {urlname}: no filing for refs {ref0}-{max(ref0, found_max + 1) + ref_span - 1}")
+            if misses >= max_misses:
+                break
+            continue
+        misses = 0
+        ref, fname, data = hit
+        known.add(str(ref))
+        found_max = max(found_max, ref)
+        out_dir.mkdir(parents=True, exist_ok=True)
+        path = out_dir / f"{ref}.pdf"
+        if not path.exists():
+            path.write_bytes(data)
+        row = propose_row(str(ref), urlname, fname, pdf_lines(path), index, today=today)
+        meta, parties = parse_pdf(path)
+        row["parsed"] = (f"{len(parties)} lists, sum {sum(p['raw_pct'] for p in parties):.1f}%"
+                         if parties else "no party table parsed")
+        log(f"  {urlname}: {fname} ({len(data) // 1024} KB) -> {row['editor']} / "
+            f"{row['publisher']} / fieldwork {row['fieldwork_end'] or '?'}; {row['parsed']}")
+        rows.append(row)
+    log(f"{n_probe} URLs probed, {len(rows)} new filing(s)")
+    return rows
+
+
+def append_rows(rows: list[dict], path: Path = INDEX_PATH) -> None:
+    text = path.read_text(encoding="utf-8")
+    if text and not text.endswith("\n"):
+        text += "\n"
+    text += "".join(row_psv(r) + "\n" for r in rows)
+    path.write_text(text, encoding="utf-8")
+
+
+def discover_main(argv=None) -> int:
+    import argparse
+    ap = argparse.ArgumentParser(description="Probe gov.il for CEC filings not yet in the index.")
+    ap.add_argument("--discover", action="store_true", required=True)
+    ap.add_argument("--append", action="store_true",
+                    help="append the proposed rows to data/cec_filings_index.psv")
+    ap.add_argument("--idx-span", type=int, default=12, help="IDX values to probe (default 12)")
+    ap.add_argument("--ref-span", type=int, default=25,
+                    help="refs to try above the last indexed / last found ref (default 25)")
+    ap.add_argument("--max-misses", type=int, default=2,
+                    help="stop after this many consecutive IDX with no filing (default 2)")
+    ap.add_argument("--idx-from", type=int, default=None)
+    ap.add_argument("--ref-from", type=int, default=None)
+    args = ap.parse_args(argv)
+    index = load_index()
+    last_idx, last_ref = last_indexed(index)
+    print(f"last indexed: knesset_election{last_idx}, ref {last_ref}; probing...", file=sys.stderr)
+    rows = discover(index, idx_span=args.idx_span, ref_span=args.ref_span,
+                    max_misses=args.max_misses, idx_from=args.idx_from, ref_from=args.ref_from)
+    for r in rows:
+        print(row_psv(r))
+    if rows and args.append:
+        append_rows(rows)
+        print(f"appended {len(rows)} row(s) to {INDEX_PATH}; run python src/scrape_cec.py to parse",
+              file=sys.stderr)
+    elif rows:
+        print("review the rows above; rerun with --append to add them, then run "
+              "python src/scrape_cec.py", file=sys.stderr)
+    return 0
+
+
 if __name__ == "__main__":
+    if "--discover" in sys.argv[1:]:
+        sys.exit(discover_main(sys.argv[1:]))
     main()

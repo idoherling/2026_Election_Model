@@ -1613,7 +1613,7 @@
  },
  {
   "id": "COA-F18",
-  "short": "IDI 2026",
+  "short": "IDI 2026a",
   "citation": "Israel Democracy Institute (2026). United Torah Judaism (party page). Israel Democracy Institute, Israeli Elections and Parties",
   "url": "https://thenationalnews.com/world/mena/livni-s-coalition-bid-ends-in-failure-1.518766",
   "group": "Coalition formation",
@@ -1935,7 +1935,7 @@
  },
  {
   "id": "DYN-F15",
-  "short": "JPPI 2026",
+  "short": "JPPI 2026e",
   "citation": "Times of Israel staff, reporting the Jewish People Policy Institute survey (2026). 'Battle for the center': Large majority of Israelis already know how they'll vote -- poll. The Times of Israel, 19 Jul 2026",
   "url": "https://www.timesofisrael.com/battle-for-the-center-large-majority-of-israelis-already-know-how-theyll-vote-poll/",
   "group": "Campaign dynamics and late movement",
@@ -2872,6 +2872,415 @@
   "note": "Backs: Trump has withheld an endorsement of Netanyahu. On 1 Oct he told TIME 'I wouldn't underestimate Bibi', and in a Newsmax interview published 16 Oct he said 'I don't trust anybody, honestly.' Polymarket gives a Likud endorsement 0.365."
  },
  {
+  "id": "PBV-F19",
+  "short": "4210 et al. 2026a",
+  "citation": "CEC filing 4210 (Channel 13 consortium); Avi Wiederman / Super Data (Kikar HaShabbat); Ynet (2026). Channel 13 mandates survey 13 Oct 2026 (CEC 4210, haredi column); 'After the arrests, the great rift among young haredim: whom will they vote for?' (Kikar HaShabbat, 14 Oct 2026); 'In the largest Hasidic court they threaten not to vote' (Ynet, Oct 2026). Central Elections Committee; kikar.co.il; ynet.co.il",
+  "url": "https://www.gov.il/BlobFolder/dynamiccollectorresultitem/knesset_election109/he/Survey_4210.pdf ; https://www.kikar.co.il/super-data/haredi-youth-voting-crisis ; https://www.ynet.co.il/news/elections2026/article/b1lxlb6jzl",
+  "group": "The 2026 campaign: certainty, undecided voters and vote flows",
+  "status": "report",
+  "findings": [
+   "PBV-F19"
+  ],
+  "checked": "verified against the source",
+  "aliases": [],
+  "note": "Backs: Haredi sector samples show the haredi lists holding about two-thirds to three-quarters of decided haredi voters, a new haredi list at 6-8%, and turnout intention among haredim no higher than the Jewish average. A Gur boycott threat puts about 30,000 UTJ votes at risk."
+ },
+ {
+  "id": "PBV-F21",
+  "short": "4210 et al. 2026b",
+  "citation": "CEC filing 4210 (Channel 13 consortium); Bakr Zoabi, Local Call (Sicha Mekomit); JPPI; Ynet / Dialog (2026). Channel 13 mandates survey 13 Oct 2026 (Arab column); 'Existential fear and a strong desire for change: rising willingness to vote in Arab society' (Hebrew, 12 Oct 2026). Central Elections Committee; mekomit.co.il",
+  "url": "https://www.gov.il/BlobFolder/dynamiccollectorresultitem/knesset_election109/he/Survey_4210.pdf ; https://www.mekomit.co.il/%D7%A4%D7%97%D7%93-%D7%A7%D7%99%D7%95%D7%9E%D7%99-%D7%95%D7%A8%D7%A6%D7%95%D7%9F-%D7%A2%D7%96-%D7%91%D7%A9%D7%99%D7%A0%D7%95%D7%99-%D7%A2%D7%9C%D7%99%D7%99%D7%94-%D7%91%D7%A0%D7%9B%D7%95%D7%A0%D7%95/",
+  "group": "The 2026 campaign: certainty, undecided voters and vote flows",
+  "status": "report",
+  "findings": [
+   "PBV-F21"
+  ],
+  "checked": "verified; the figures were corrected against the source",
+  "aliases": [],
+  "note": "Backs: Arab-sector measurements in October show very high stated turnout and choice certainty among those reached by phone, a Joint List internal estimate of 61% turnout, and much lower intention in national online panels. The spread is mostly a question of who gets sampled and of over-reporting. Corrected against the source: 2022 Arab and Druze-locality turnout 53.2% (Mekomit, linked to INSS); late-October 2022 projection 49% (Moshe Dayan Center survey)."
+ },
+ {
+  "id": "PBV-F22",
+  "short": "Ahronoth & Dialog 2026",
+  "citation": "Ynet / Yedioth Ahronoth, poll by Dialog (Amana Pro group) (2026). The young voters' mandates poll: who is crashing and who passes the threshold (Hebrew), 9 Oct 2026. ynet.co.il",
+  "url": "https://www.ynet.co.il/news/elections2026/article/byvn5fp5zl",
+  "group": "The 2026 campaign: certainty, undecided voters and vote flows",
+  "status": "report",
+  "findings": [
+   "PBV-F22"
+  ],
+  "checked": "verified against the source",
+  "aliases": [],
+  "note": "Backs: Young voters (18-22) are fragmented, lean religious-right and Bennett, and are less certain to vote than older Jews. Otzma and RZP-Zehut poll at about double their national seat strength among the young."
+ },
+ {
+  "id": "PBV-F02",
+  "short": "CEC 2026j",
+  "citation": "Shmuel Rosner, Midgam Project (Dr. Ariel Ayalon), StatNet (Yousef Makladeh), Askaria (Dudi Dror); filed with the Central Elections Committee (2026). Mandates survey, 13 October 2026, Channel 13 (CEC ref. 4210): sector sub-samples, turnout certainty, choice certainty, undecided lean, PM preference. Central Elections Committee for the 26th Knesset (poll disclosure under s.16E, Elections (Propaganda Methods) Law)",
+  "url": "https://www.gov.il/BlobFolder/dynamiccollectorresultitem/knesset_election109/he/Survey_4210.pdf",
+  "group": "The 2026 campaign: certainty, undecided voters and vote flows",
+  "status": "official data",
+  "findings": [
+   "PBV-F02"
+  ],
+  "checked": "verified against the source",
+  "aliases": [],
+  "note": "Backs: Channel 13's 13 Oct filing measures turnout certainty and choice certainty separately in four sub-samples. Haredi and Arab respondents are much surer of their choice than Jewish general-population respondents, and young Jews are the least sure. Turnout certainty is similar across groups (71-81%)."
+ },
+ {
+  "id": "PBV-F03",
+  "short": "CEC 2026k",
+  "citation": "Shmuel Rosner, Midgam Project, StatNet, Askaria; filed with the Central Elections Committee (2026). Mandates survey, 13 October 2026, Channel 13 (CEC ref. 4210): undecided-lean follow-up question. Central Elections Committee for the 26th Knesset (poll disclosure under s.16E, Elections (Propaganda Methods) Law)",
+  "url": "https://www.gov.il/BlobFolder/dynamiccollectorresultitem/knesset_election109/he/Survey_4210.pdf",
+  "group": "The 2026 campaign: certainty, undecided voters and vote flows",
+  "status": "official data",
+  "findings": [
+   "PBV-F03"
+  ],
+  "checked": "verified; the figures were corrected against the source",
+  "aliases": [],
+  "note": "Backs: Channel 13's 13 Oct filing contains a new undecided-lean measurement. Of 70 undecided Jewish adults, under half lean toward a bloc-aligned list, and those who do split about 61/39 for the change bloc. The lean is a much weaker anti-Netanyahu tilt than the July N12 measurement the model pools. Haredi and Arab undecideds lean to their own lists. Corrected against the source: Anti share of the bloc-leaned Jewish-adult undecided: 0.615 (SE 0.083, 95% CI 0.45-0.78, about 34 respondents); difference from N12 July (0.775) z about 1.5. Per-side transfer implied by this wave alone: 0.046 of the pool (95% CI -0.03 to 0.13); shipped 0.090. Decided Jewish-adult anti share: 0.519 with micro-lists counted as NB, 0.532 without."
+ },
+ {
+  "id": "PBV-F05",
+  "short": "CEC 2026h",
+  "citation": "Midgam Consulting and Research (Mano Geva) for Channel 12 News; filed with the Central Elections Committee (2026). Channel 12 News poll on mandates and current affairs, 12 Oct 2026 (CEC ref. 4202). Central Elections Committee for the 26th Knesset (poll disclosure under s.16E, Elections (Propaganda Methods) Law)",
+  "url": "https://www.gov.il/BlobFolder/dynamiccollectorresultitem/knesset_election106/he/Survey_4202.pdf",
+  "group": "The 2026 campaign: certainty, undecided voters and vote flows",
+  "status": "official data",
+  "findings": [
+   "PBV-F05"
+  ],
+  "checked": "verified against the source",
+  "aliases": [],
+  "note": "Backs: A third of voters say they will decide in the final days, on election day or in the booth, about the share who say they decided that late in 2022. Late decision is common, but its size is stable across cycles."
+ },
+ {
+  "id": "PBV-F16",
+  "short": "CEC 2026g",
+  "citation": "Midgam Consulting and Research (Mano Geva) for Channel 12 News; filed with the Central Elections Committee (2026). Channel 12 News poll on mandates and current affairs, 12 Oct 2026 (CEC ref. 4202), unity-government items. Central Elections Committee for the 26th Knesset (poll disclosure under s.16E, Elections (Propaganda Methods) Law)",
+  "url": "https://www.gov.il/BlobFolder/dynamiccollectorresultitem/knesset_election106/he/Survey_4202.pdf",
+  "group": "The 2026 campaign: certainty, undecided voters and vote flows",
+  "status": "official data",
+  "findings": [
+   "PBV-F16"
+  ],
+  "checked": "verified against the source",
+  "aliases": [],
+  "note": "Backs: When a unity government's prime minister is named, each side's voters reject the other side's leader by large majorities. Coalition voters reject an Eisenkot-led unity government 61-17; opposition voters reject a Netanyahu-led one 79-8."
+ },
+ {
+  "id": "PBV-F18",
+  "short": "CEC 2026i",
+  "citation": "Next Data for Channel 14 (Akhshav 14); filed with the Central Elections Committee (2026). Channel 14 poll of attitudes and voting intentions, 14 Oct 2026 (CEC ref. 4212). Central Elections Committee for the 26th Knesset (poll disclosure under s.16E, Elections (Propaganda Methods) Law)",
+  "url": "https://www.gov.il/BlobFolder/dynamiccollectorresultitem/knesset_election111/he/Survey_4212.pdf",
+  "group": "The 2026 campaign: certainty, undecided voters and vote flows",
+  "status": "official data",
+  "findings": [
+   "PBV-F18",
+   "PBV-F25"
+  ],
+  "checked": "verified against the source",
+  "aliases": [
+   "PBV-F25"
+  ],
+  "note": "Backs: Channel 14's 14 Oct filing asks the 'no majority' question with options that fit the formation tree's branches. Each 2022 electorate picks its own side's branch: coalition voters want a right-wing government plus an opposition defector, opposition voters a minority government with Arab support or a left government plus a right-identified party. | Missing from polls.csv: Channel 14 / Next Data (Filber), fieldwork 14 Oct 2026, n=568. It shows Together recovering from 7 to 11 seats and the Reservists falling below the threshold within Channel 14's own series."
+ },
+ {
+  "id": "PBV-F24",
+  "short": "CEC 2026f",
+  "citation": "Direct Polls Ltd (Tzuriel Sharon) for i24NEWS; filed with the Central Elections Committee (2026). i24NEWS mandates poll, 13 Oct 2026 (CEC ref. 4211). Central Elections Committee for the 26th Knesset (poll disclosure under s.16E, Elections (Propaganda Methods) Law)",
+  "url": "https://www.gov.il/BlobFolder/dynamiccollectorresultitem/knesset_election110/he/Survey_4211.pdf",
+  "group": "The 2026 campaign: certainty, undecided voters and vote flows",
+  "status": "official data",
+  "findings": [
+   "PBV-F24"
+  ],
+  "checked": "verified against the source",
+  "aliases": [],
+  "note": "Backs: Missing from polls.csv: Direct Polls for i24NEWS, fieldwork 13 Oct 2026, n=1,210. It is filed with the CEC with raw shares, and is the largest-n Direct Polls wave since August."
+ },
+ {
+  "id": "PBV-F27",
+  "short": "CEC 2026e",
+  "citation": "Central Elections Committee for the 26th Knesset (2026). Knesset election polls (listing of poll disclosures, 26th Knesset), refs 4202, 4207, 4209, 4210, 4211, 4212. gov.il",
+  "url": "https://www.gov.il/he/Departments/DynamicCollectors/knesset_election_polls_26?skip=0 ; https://www.gov.il/BlobFolder/dynamiccollectorresultitem/knesset_election108/he/Survey4209.pdf",
+  "group": "The 2026 campaign: certainty, undecided voters and vote flows",
+  "status": "official data",
+  "findings": [
+   "PBV-F27"
+  ],
+  "checked": "verified; the figures were corrected against the source",
+  "aliases": [],
+  "note": "Backs: Six October CEC filings (refs 4202, 4207, 4209, 4210, 4211, 4212) are posted but not in the model's parsed index (cec_filings.csv stops at 4200). Their undecided lines show house definitions ranging from 1.3% to 11.7%, and Lazar's undecided share falling from 13% to about 5% over a month. Corrected against the source: Kantar 11 Oct: no undecided line in CEC 4200 (Q4 not decided 30%). Parse state at 17:21 on 16 Oct: parsed 4202 (undecided read as 6.0, filed 8.1), 4207, 4210, 4211 (spurious B&W 1.0; Reservists 2.2 missing), 4212 (Noam 0.8 missing); not parsed 4209."
+ },
+ {
+  "id": "PBV-F20",
+  "short": "Haredim & reporting a Midgam poll commissioned by  2026",
+  "citation": "Behadrei Haredim (bhol.co.il), reporting a Midgam poll commissioned by the Haredi Public party (2026). Mano Geva in-depth poll: about 40,000 haredim will vote for the Haredi Public; 55,000 undecided (Hebrew), 13 Oct 2026. bhol.co.il",
+  "url": "https://www.mako.co.il/news-israel-elections/2026/Article-cc91389788031a1026.htm",
+  "group": "The 2026 campaign: certainty, undecided voters and vote flows",
+  "status": "report",
+  "findings": [
+   "PBV-F20"
+  ],
+  "checked": "verified; the figures were corrected against the source",
+  "aliases": [],
+  "note": "Backs: The Haredi Public's own commissioned poll of haredim puts its firm support at 6% of haredi respondents, with another 8% considering it. That is roughly 0.6-0.7% of the national vote, in line with national filings that place the list well below the threshold. Corrected against the source: Haredi Public raw share: Midgam 12 Oct 0.1 (mako article, not CEC 4202); Channel 14 14 Oct 0.4 (4212); Channel 14 12 Oct 0.6 weighted (4209); Lazar 12 Oct 1.0 (4207); Channel 13 Jewish adults 1.0 (4210); Direct Polls 13 Oct below 1, no value (4211); Kantar 11 Oct 0.9 (4200)."
+ },
+ {
+  "id": "PBV-F26",
+  "short": "Hayom & ICE 2026",
+  "citation": "Israel Hayom (Kantar poll); ICE (ice.co.il) (2026). 'The Eisenkot bloc strengthens, Winter below the threshold' (Hebrew, Israel Hayom, 15 Oct 2026); 'New mandates poll: Eisenkot strengthens, Netanyahu weakens, Ofer Winter out' (ICE, 15 Oct 2026). israelhayom.co.il; ice.co.il",
+  "url": "https://www.israelhayom.co.il/news/politics/article/21636491 ; https://www.ice.co.il/research/news/article/1133833",
+  "group": "The 2026 campaign: certainty, undecided voters and vote flows",
+  "status": "report",
+  "findings": [
+   "PBV-F26"
+  ],
+  "checked": "verified against the source",
+  "aliases": [],
+  "note": "Backs: Missing from polls.csv: Kantar for Israel Hayom, fieldwork 14-15 Oct 2026, n=551. It shows Yashar at 24 seats, the change bloc at 52 and the right at 50. Its CEC filing had not been posted by 16 Oct."
+ },
+ {
+  "id": "PBV-F17",
+  "short": "Hayom et al. 2026",
+  "citation": "Israel Hayom (Kantar poll); The Jerusalem Post (Lazar/Maariv); The Yeshiva World (Channel 13 items) (2026). 'The Eisenkot bloc strengthens, Winter below the threshold' (Israel Hayom, 15 Oct 2026); 'Coalition, opposition tie at 52 seats ...' (JPost, 9 Oct 2026); 'Election shocker: two Israeli polls ...' (Yeshiva World News, 14 Oct 2026). israelhayom.co.il; jpost.com; theyeshivaworld.com",
+  "url": "https://www.israelhayom.co.il/news/politics/article/21636491 ; https://www.jpost.com/israel-election-2026/article-911139 ; https://www.theyeshivaworld.com/news/israel-news/2610133/election-shocker-two-israeli-polls-show-dramatically-different-results-with-netanyahus-bloc-winning-62-seats-in-one-and-just-51-in-another.html",
+  "group": "The 2026 campaign: certainty, undecided voters and vote flows",
+  "status": "report",
+  "findings": [
+   "PBV-F17"
+  ],
+  "checked": "verified against the source",
+  "aliases": [],
+  "note": "Backs: Change-bloc voters broadly accept some form of reliance on an Arab party. Majorities of both electorates do not believe leaders' pledges to avoid it, while the general public splits roughly evenly or leans against."
+ },
+ {
+  "id": "PBV-F28",
+  "short": "IDI 2022",
+  "citation": "Israel Democracy Institute, Viterbi Family Center for Public Opinion and Policy Research (2022). Israeli Voice Index - August 2022 (data file). Israel Democracy Institute",
+  "url": "https://en.idi.org.il/media/18263/israeli_voice_index_2208_data_eng.pdf",
+  "group": "The 2026 campaign: certainty, undecided voters and vote flows",
+  "status": "report",
+  "findings": [
+   "PBV-F28"
+  ],
+  "checked": "verified; the figures were corrected against the source",
+  "aliases": [],
+  "note": "Backs: Israeli surveys sharply under-report abstention. In August 2022 only 3% of Jewish and 26% of Arab respondents said they did not intend to vote, against national turnout of 70.6% and Arab turnout of 53.2% that November. Self-reported turnout intention cannot be used at face value. Corrected against the source: IDI Aug 2022, 'don't intend to vote' as a residual option, not a turnout question: Q4 all 3.8, Jews 1.8, Arabs 13.8; Q5 Jews 3.0, Arabs 25.9. Comparing these with official abstention (29.4% of the roll; 46.8% in Arab localities) overstates the over-report, because the roll includes non-residents and non-voters are under-sampled."
+ },
+ {
+  "id": "PBV-F23",
+  "short": "IDI 2026b",
+  "citation": "Yogev Karmel, N12 magazine (mako), reporting Israel Democracy Institute research (2026). The new immigrants who could decide the election (Hebrew), 15 Oct 2026. mako.co.il",
+  "url": "https://www.mako.co.il/news-n12_magazine/eb54fba84b900a10/Article-abd09e0908531a1027.htm",
+  "group": "The 2026 campaign: certainty, undecided voters and vote flows",
+  "status": "report",
+  "findings": [
+   "PBV-F23"
+  ],
+  "checked": "verified against the source",
+  "aliases": [],
+  "note": "Backs: Russian-speaking immigrants who arrived since 2014 are about twice as undecided as veteran immigrants, and the post-2022 cohort is far less right-wing. The roughly 130,000 newly eligible ex-Soviet voters are a soft, centre-leaning pool, not a Likud or YB reservoir."
+ },
+ {
+  "id": "PBV-F06",
+  "short": "JPPI 2026a",
+  "citation": "Jewish People Policy Institute (Shmuel Rosner, Noah Slepkov) (2026). JPPI Israeli Society Index, August 2026. Jewish People Policy Institute",
+  "url": "https://jppi.org.il/en/%D7%9E%D7%93%D7%93-%D7%94%D7%97%D7%91%D7%A8%D7%94-%D7%94%D7%99%D7%A9%D7%A8%D7%90%D7%9C%D7%99%D7%AA-%D7%9C%D7%90%D7%95%D7%92%D7%95%D7%A1%D7%98-2026/",
+  "group": "The 2026 campaign: certainty, undecided voters and vote flows",
+  "status": "report",
+  "findings": [
+   "PBV-F06"
+  ],
+  "checked": "verified against the source",
+  "aliases": [],
+  "note": "Backs: JPPI's monthly certainty series shows certainty rising slowly and lowest in the political centre. The centre-right and centre are the softest Jewish segments, the left the firmest. Arab respondents are much less settled: a fifth undecided and 14% not intending to vote."
+ },
+ {
+  "id": "PBV-F14",
+  "short": "JPPI 2026c",
+  "citation": "N12 / mako (Midgam); Jewish People Policy Institute; Next Data for Channel 14 (CEC 4212) (2026). Channel 12 mandates poll: Eisenkot weakens, Hendel and Zelekha pass (Hebrew), 14 Sept 2026; JPPI Israeli Society Index, September 2026; Channel 14 poll 14 Oct 2026 (CEC ref. 4212). mako.co.il; jppi.org.il; Central Elections Committee",
+  "url": "https://www.mako.co.il/news-israel-elections/2026/Article-f91e6c26f80a0a1027.htm ; https://jppi.org.il/en/34481-2/ ; https://www.gov.il/BlobFolder/dynamiccollectorresultitem/knesset_election111/he/Survey_4212.pdf",
+  "group": "The 2026 campaign: certainty, undecided voters and vote flows",
+  "status": "report",
+  "findings": [
+   "PBV-F14"
+  ],
+  "checked": "verified against the source",
+  "aliases": [],
+  "note": "Backs: With all candidates offered, Netanyahu leads because the anti-Netanyahu vote splits. Within the opposition, Eisenkot is the clear choice and most opposition voters want the largest list to lead the bloc."
+ },
+ {
+  "id": "PBV-F15",
+  "short": "JPPI 2026d",
+  "citation": "The Jerusalem Post (Moshe Cohen) and Maariv reporting Lazar Research; Israel Hayom reporting Kantar; Jewish People Policy Institute (2026). 'Israelis prefer unity gov't to another election ...' (JPost, 16 Oct 2026); Maariv mandates poll 16 Oct 2026; 'Toward a dead end? ... the rift between the blocs deepens' (Israel Hayom, 9 Oct 2026); JPPI Israeli Society Index, October 2026 (PDF, pp. 8-11). jpost.com; maariv.co.il; israelhayom.co.il; jppi.org.il",
+  "url": "https://www.jpost.com/israel-election-2026/article-911902 ; https://www.maariv.co.il/news/elections-2026/article-1377736 ; https://www.israelhayom.co.il/news/politics/article/21585461 ; https://jppi.org.il/wp-content/uploads/2026/10/Oct-26-Israeli-Society-Index.pdf",
+  "group": "The 2026 campaign: certainty, undecided voters and vote flows",
+  "status": "report",
+  "findings": [
+   "PBV-F15"
+  ],
+  "checked": "verified; the figures were corrected against the source",
+  "aliases": [],
+  "note": "Backs: Voters want their own camp to govern. When neither bloc wins, preferences between a unity government and repeat elections depend heavily on wording: unity wins when the leader is unnamed, and repeat elections or rejection win when rotation or the other side's leader is spelled out. Corrected against the source: Unnamed-leader items: Lazar 55 unity / 27 repeat; N12 40 support / 37 oppose; Kantar-Israel Hayom repeat preferred by 54% of coalition and 47% of opposition voters (about a third unity). Named or rotation items: N12 17/61 (Eisenkot, coalition voters) and 8/79 (Netanyahu, opposition voters); Klughaft 33/67; JPPI 27/60."
+ },
+ {
+  "id": "PBV-F30",
+  "short": "JPPI 2026b",
+  "citation": "Jewish People Policy Institute (Shmuel Rosner, Noah Slepkov; statistical supervision Prof. David Steinberg) (2026). JPPI Israeli Society Index, October 2026. Jewish People Policy Institute",
+  "url": "https://jppi.org.il/wp-content/uploads/2026/10/Oct-26-Israeli-Society-Index.pdf",
+  "group": "The 2026 campaign: certainty, undecided voters and vote flows",
+  "status": "report",
+  "findings": [
+   "PBV-F30"
+  ],
+  "checked": "verified; the figures were corrected against the source",
+  "aliases": [],
+  "note": "Backs: Recall-based items are unreliable in the 2026 campaign. JPPI shows respondents' recalled 'before the war' self-placement matches past direct measurement, while their 'today' placement overstates the move to the strong right by about 10 points against a direct same-year measurement. Vote-flow tables built on recalled 2022 vote need the same caution. Corrected against the source: JPPI Oct 2026: recalled pre-war strong right 13% = direct July 2025 13% (recall accurate); 'today' 24% vs direct July 2026 14% (change framing overstates by about 10 points)."
+ },
+ {
+  "id": "PBV-F08",
+  "short": "News & Kantar 2026",
+  "citation": "Kan News (Yaara Shapira, Shahar Glick); poll by Kantar (2026). Turnaround in the bloc picture: coalition up to 53 seats, Eisenkot bloc 50 (Hebrew), 11-12 Oct 2026. kan.org.il",
+  "url": "https://www.kan.org.il/content/kan-news/politic/1108256/",
+  "group": "The 2026 campaign: certainty, undecided voters and vote flows",
+  "status": "report",
+  "findings": [
+   "PBV-F08"
+  ],
+  "checked": "verified; the figures were corrected against the source",
+  "aliases": [],
+  "note": "Backs: Kan's 11 Oct poll uses a broader definition of undecided (30%) and finds more coalition intenders still choosing a party (24%) than opposition intenders (20%). It also finds a quarter of respondents intend to vote for a different bloc than last time. This bloc-switching figure is far above N12's measures and is likely a definitional artefact. Corrected against the source: CEC 4200: n=552. Q4 not decided 30% (coalition intenders 24, opposition 20). Q5 (other bloc than last time) yes 26 / no 59 / DK 15 (coalition 26/67/7, opposition 28/65/7). There is no 15% undecided line."
+ },
+ {
+  "id": "PBV-F11",
+  "short": "News 2026a",
+  "citation": "Channel 13 News (13tv.co.il) (2026). 'The undecided poll': where are the floating votes in the election? (Hebrew), 24 Sept 2026. 13tv.co.il",
+  "url": "https://13tv.co.il/item/news/politics/politics/l72gq-905369468/",
+  "group": "The 2026 campaign: certainty, undecided voters and vote flows",
+  "status": "report",
+  "findings": [
+   "PBV-F11"
+  ],
+  "checked": "verified against the source",
+  "aliases": [],
+  "note": "Backs: Channel 13's 'undecided voters' poll (published 24 Sept) measured 'would consider' switching. More than a quarter of Likud supporters consider Otzma, and half of Democrats supporters consider Yashar. Consideration flows are mostly within-bloc, and coalition supporters consider the opposition twice as often as the reverse."
+ },
+ {
+  "id": "PBV-F12",
+  "short": "Next Data for Channel 14 & Moshe Klughaft 2026",
+  "citation": "Next Data (analysis Shlomo Filber) for Channel 14, CEC filing 4209; Moshe Klughaft (column), Israel Hayom (2026). Channel 14 poll of attitudes and voting intentions, 12 Oct 2026 (CEC ref. 4209); 'Prepare the jerrycans ... the drinking potential of the large parties' (Hebrew column, Israel Hayom, 15 Oct 2026). Central Elections Committee; israelhayom.co.il",
+  "url": "https://www.gov.il/BlobFolder/dynamiccollectorresultitem/knesset_election108/he/Survey4209.pdf ; https://www.israelhayom.co.il/news/politics/article/21636592",
+  "group": "The 2026 campaign: certainty, undecided voters and vote flows",
+  "status": "report",
+  "findings": [
+   "PBV-F12"
+  ],
+  "checked": "verified; the figures were corrected against the source",
+  "aliases": [],
+  "note": "Backs: Two polls show a large 'vote for the bloc's largest list' reservoir that is asymmetric by bloc. Coalition voters care far more that their bloc leader's party is the largest. A strategist's poll puts the potential consolidation at 18 seats if Likud and Yashar run neck and neck. Corrected against the source: Klughaft components: 8 (Together+YB to Yashar) + 3 (Democrats; destination ambiguous, literally Netanyahu) + 3 (Otzma to Likud) = 14, not 18. Implied consolidation to Yashar 8-11 seats, to Likud 3-6."
+ },
+ {
+  "id": "PBV-F29",
+  "short": "Rogers & Aida 2013",
+  "citation": "Todd Rogers, Masahiko Aida (2013). Vote Self-Prediction Hardly Predicts Who Will Vote, and Is (Misleadingly) Unbiased. American Politics Research (online first); also HKS Faculty Research Working Paper RWP13-010",
+  "url": "https://doi.org/10.1177/1532673X13496453 ; https://www.hks.harvard.edu/publications/vote-self-prediction-hardly-predicts-who-will-vote-and-misleadingly-unbiased-0 ; https://www.pewresearch.org/politics/2001/05/18/screening-likely-voters-a-survey-experiment/ ; https://doi.org/10.1017/psrm.2016.31",
+  "group": "The 2026 campaign: certainty, undecided voters and vote flows",
+  "status": "peer-reviewed",
+  "findings": [
+   "PBV-F29"
+  ],
+  "checked": "verified against the source",
+  "aliases": [],
+  "note": "Backs: Validation studies find that self-predicted turnout is a weak, biased screen. Many self-predicted voters do not vote and many self-predicted non-voters do; past voting predicts better; and multi-item likely-voter indices beat single 'certain to vote' items."
+ },
+ {
+  "id": "PBV-F01",
+  "short": "Walla & filed with the Central Elections Committ 2026",
+  "citation": "Lazar Research (Dr. Menachem Lazar) for Walla; filed with the Central Elections Committee (2026). Lazar Research poll report for Walla, 13 Oct 2026 (CEC ref. 4207): vote intention and 'certainty (or brittleness) of the vote' by bloc and by list. Central Elections Committee for the 26th Knesset (poll disclosure under s.16E, Elections (Propaganda Methods) Law)",
+  "url": "https://www.gov.il/BlobFolder/dynamiccollectorresultitem/knesset_election107/he/Survey_4207.pdf",
+  "group": "The 2026 campaign: certainty, undecided voters and vote flows",
+  "status": "official data",
+  "findings": [
+   "PBV-F01"
+  ],
+  "checked": "verified; the figures were corrected against the source",
+  "aliases": [],
+  "note": "Backs: The first per-list certainty table of the campaign (Lazar for Walla, 12 Oct) shows choice certainty differs sharply by list and by bloc: coalition voters are far firmer than opposition voters, Together is the softest list, and the Joint List and Likud are the firmest. The model's declared tiers rank several lists differently. Corrected against the source: Per-list n are upper bounds: raw shares are of party-choosers, so multiply by the decided n, not 601. 'Not so + not at all sure': Reservists 13, RZP 9, Democrats 7, Likud 6, Otzma 6, UTJ 6, Together 5, JL 5, Yashar 4, YB 3, Shas 0, Ra'am 0. Mapped values with 95% sampling CIs (shift +1.111): Together 0.48 (0.31-0.60), Yashar 0.67 (0.57-0.75), Democrats 0.66 (0.51-0.77), YB 0.68 (0.52-0.79), Otzma 0.65 (0.47-0.78), Likud 0.87 (0.81-0.91), RZP 0.83 (0.72-0.92), Shas 0.79 (0.66-0.89), UTJ 0.62 (0.43-0.75), JL 0.93 (0.87-0.98), Ra'am 0.62 ("
+ },
+ {
+  "id": "PBV-F13",
+  "short": "Wikipedia 2026d",
+  "citation": "Wikipedia contributors (compilation); primary: CEC filings 4202, 4210, 4212; Kan; The Jerusalem Post (2026). Leadership opinion polling for the 2026 Israeli legislative election (head-to-head tables), with primary filings. Wikipedia; Central Elections Committee; kan.org.il; jpost.com",
+  "url": "https://en.wikipedia.org/wiki/Leadership_opinion_polling_for_the_2026_Israeli_legislative_election ; https://www.jpost.com/israel-election-2026/article-911902",
+  "group": "The 2026 campaign: certainty, undecided voters and vote flows",
+  "status": "reference work",
+  "findings": [
+   "PBV-F13"
+  ],
+  "checked": "verified against the source",
+  "aliases": [],
+  "note": "Backs: On head-to-head suitability for PM, Eisenkot leads Netanyahu in the latest poll of every regular house except Channel 14, and his lead widened in mid-October. Kantar had Netanyahu narrowly ahead as recently as 4 Oct. Bennett runs roughly even with Netanyahu. House differences on the leader question mirror the seat-table house effects."
+ },
+ {
+  "id": "PBV-F10",
+  "short": "mako & poll 2026",
+  "citation": "N12 magazine / mako, Midgam poll (2026). The poll that reveals: only 58% are sure they will vote Likud again (Hebrew), 8 May 2026. mako.co.il",
+  "url": "https://www.mako.co.il/news-n12_magazine/63a5640d65f8c910/Article-9fd5e990a470e91026.htm",
+  "group": "The 2026 campaign: certainty, undecided voters and vote flows",
+  "status": "report",
+  "findings": [
+   "PBV-F10"
+  ],
+  "checked": "verified against the source",
+  "aliases": [],
+  "note": "Backs: In May, only 58% of 2022 Likud voters said they would certainly vote Likud again. The leavers went mostly to the change bloc's centre-right lists or to undecided and abstention rather than to Likud's satellites."
+ },
+ {
+  "id": "PBV-F04",
+  "short": "mako et al. 2026a",
+  "citation": "N12 / mako (Channel 12 News), poll by Midgam Consulting and Research (Mano Geva) (2026). Channel 12 mandates poll: Winter stays far from the threshold (Hebrew), 12 Oct 2026; with CEC filing 4202 and the 7 Sept poll (Article-067c7eb8e9c70a1026). mako.co.il; Central Elections Committee",
+  "url": "https://www.mako.co.il/news-israel-elections/2026/Article-cc91389788031a1026.htm ; https://www.gov.il/BlobFolder/dynamiccollectorresultitem/knesset_election106/he/Survey_4202.pdf ; https://www.mako.co.il/news-israel-elections/2026/Article-067c7eb8e9c70a1026.htm",
+  "group": "The 2026 campaign: certainty, undecided voters and vote flows",
+  "status": "report",
+  "findings": [
+   "PBV-F04"
+  ],
+  "checked": "verified against the source",
+  "aliases": [],
+  "note": "Backs: N12/Midgam's waverer breakdown shows the pool shrinking and almost entirely within-bloc. Between 7 Sept and 12 Oct, the undecided share fell from 11.5% to 8.1%, and voters torn between the blocs fell from 1.2% to 0.2% of the electorate."
+ },
+ {
+  "id": "PBV-F07",
+  "short": "mako et al. 2026b",
+  "citation": "N12 / mako (Midgam); The Jerusalem Post (Moshe Cohen) reporting Maariv/Lazar; Kan News (Yaara Shapira, Shahar Glick) (2026). Channel 12 polls of 7 and 9 Sept 2026 (turnout intention by bloc); 'Coalition, opposition tie at 52 seats ...' (JPost, 9 Oct); Kan News poll of 11 Oct 2026. mako.co.il; jpost.com; kan.org.il",
+  "url": "https://www.mako.co.il/news-israel-elections/2026/Article-067c7eb8e9c70a1026.htm ; https://www.mako.co.il/news-israel-elections/2026/Article-c27dc00e8c680a1026.htm ; https://www.jpost.com/israel-election-2026/article-911139 ; https://www.kan.org.il/content/kan-news/politic/1108256/",
+  "group": "The 2026 campaign: certainty, undecided voters and vote flows",
+  "status": "report",
+  "findings": [
+   "PBV-F07"
+  ],
+  "checked": "verified against the source",
+  "aliases": [],
+  "note": "Backs: Every house that splits self-reported turnout intention by bloc finds opposition voters more likely to say they will vote than coalition voters, by 5 to 7 points. Arab-list voters and undecideds report far lower intention."
+ },
+ {
+  "id": "PBV-F09",
+  "short": "mako et al. 2026c",
+  "citation": "N12 / mako, poll by Midgam Consulting and Research (Mano Geva) (2026). Channel 12 mandates poll: Winter strengthens, the Democrats weaken (Hebrew), 9 Sept 2026. mako.co.il",
+  "url": "https://www.mako.co.il/news-israel-elections/2026/Article-c27dc00e8c680a1026.htm",
+  "group": "The 2026 campaign: certainty, undecided voters and vote flows",
+  "status": "report",
+  "findings": [
+   "PBV-F09"
+  ],
+  "checked": "verified against the source",
+  "aliases": [],
+  "note": "Backs: N12's 9 Sept poll published where five lists' voters came from in 2022. Amcha and Otzma draw from the right's 2022 lists; Yashar, Together and Yisrael Beytenu draw mainly from Yesh Atid and National Unity, with 12-16% from Likud in each."
+ },
+ {
   "id": "TRN-F15",
   "short": "Afkar Research Institute & Initiatives 2026",
   "citation": "Afkar Research Institute, for The Abraham Initiatives (2026). Voting Trends Among Young Arab Citizens of Israel (February 2026). The Abraham Initiatives",
@@ -3125,7 +3534,7 @@
  },
  {
   "id": "TRN-F11",
-  "short": "News 2026",
+  "short": "News 2026b",
   "citation": "Masdar News (reporting Channel 13 / Stat-Net) (2026). Poll: Joint List 9 seats and Arab representation could rise to 17 (Arabic). Masdar News Network, 3 Sep 2026",
   "url": "https://msdrnews.com/124666/%D8%A7%D8%B3%D8%AA%D8%B7%D9%84%D8%A7%D8%B9-%D8%A7%D9%84%D9%85%D8%B4%D8%AA%D8%B1%D9%83%D8%A9-9-%D9%85%D9%82%D8%A7%D8%B9%D8%AF-%D9%88%D8%A7%D9%84%D8%AA%D9%85%D8%AB%D9%8A%D9%84-%D8%A7%D9%84%D8%B9%D8%B1%D8%A8%D9%8A-%D9%82%D8%AF-%D9%8A%D8%B1%D8%AA%D9%81%D8%B9-%D8%A5%D9%84%D9%89-17",
   "group": "The 2026 campaign: turnout",

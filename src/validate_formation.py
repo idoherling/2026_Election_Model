@@ -72,6 +72,15 @@ mean log P(realized) and the multi-class Brier on the eight informative
 cycles not worse than the shipped tree, and no realized 2019-2022 outcome
 below S56_TOLERANCE x its shipped probability.
 
+s.59 (pre-registered in s.59.1) grades two more arms on the same rule:
+  stage_mix   STAGE_RESOLUTION = "mix": P(type | draw) ~ w_type x the
+              type's own gate probability; w from mix_fit (Dirichlet(0.5)
+              prior, the arm's own likelihood over each record cycle's
+              reachable types, importance sampling, leave-one-cycle-out)
+  defect_08   centre_defects 0.12 -> 0.08 (NEFF 25), everything else shipped
+with the reported variants mix_feas, mix_insample and defect_08_paired, and
+the expected-vs-realized resolution counts over the five resolved deadlocks.
+
 Outputs:
   data/processed/formation_validation.csv          per-cycle scores
   data/processed/formation_validation_classes.csv  9-class forecasts
@@ -95,6 +104,8 @@ import government_formation as gf
 from government_formation import (OUTCOMES, SEED, STAGE_SEED_OFFSET,
                                   DEADLOCK_RECORD, CONVENTIONAL_DEADLOCKS,
                                   RESOLUTION_SEED_OFFSET, RESOLUTION_TYPES,
+                                  RESOLUTION_CLASS, MIX_K, MIX_PRIOR,
+                                  MIX_SEED_OFFSET,
                                   deadlock_posterior, draw_behavior,
                                   draw_pm_alloc, resolution_posterior,
                                   simulate_formation)
@@ -139,6 +150,28 @@ S56_VARIANTS = ("rec_1999", "rec_midterm", "rec_both", "rec_insample")
 # fall below this fraction of its shipped probability
 S56_TOLERANCE = 0.75
 S56_RECENT = ("2019a", "2019s", "2020", "2021", "2022")
+# s.59 (pre-registered in s.59.1): two arms against the shipped tree, the
+# same rule and tolerance as s.56.
+#   stage_mix         A, decisive: type ~ w x g, w fitted on the arm's own
+#                     likelihood over each record cycle's reachable types
+#   mix_feas          A with w fitted on reachability alone   (reported)
+#   mix_insample      A without leave-one-out                  (reported)
+#   defect_08         B, decisive: centre_defects 0.08, NEFF 25, as shipped
+#                     it would be (draw_behavior on the edited BEHAVIOR)
+#   defect_08_paired  B by quantile coupling to the shipped draw (reported)
+VARIANTS.update({
+    "stage_mix": dict(pre=False, stage=True, mix="product", loo=True),
+    "mix_feas": dict(pre=False, stage=True, mix="feas", loo=True),
+    "mix_insample": dict(pre=False, stage=True, mix="product", loo=False),
+    "defect_08": dict(pre=False, stage=True,
+                      base=dict(gf.BEHAVIOR, centre_defects=0.08)),
+    "defect_08_paired": dict(pre=False, stage=True, defect_q=(0.08, 25)),
+})
+S59_ARMS = ("stage_mix", "defect_08")
+S59_VARIANTS = ("mix_feas", "mix_insample", "defect_08_paired")
+# the five resolved parliamentary deadlocks the mix weights are fitted on
+MIX_RECORD = tuple(c for c, _p, reg, rep, _h in DEADLOCK_RECORD
+                   if reg == "parliamentary" and not rep)
 
 
 def unity_prior(pre: bool, cycle: str):
@@ -262,31 +295,138 @@ def centres_2026() -> dict:
     return dict(simulate_formation.last_centres)
 
 
-def forecast(df, centres, r_draws=None, unity=None, s_draws=None):
+def forecast(df, centres, r_draws=None, unity=None, s_draws=None,
+             w_draws=None, base=None, defect_q=None, collect_g=False):
     """Mean 9-class forecast over M parameter vectors (main()'s scheme), and
     the mean share of draws that are deadlocks. unity = (mean, NEFF): the
     unity gate's value is drawn from its own generator, so every variant
     shares the other parameters' draws (common random numbers). s_draws:
-    per-vector record type shares (s.56; None = the gates resolve)."""
+    per-vector record type shares (s.56; None = the gates resolve).
+    s.59: w_draws = per-vector mix weights; base = edited BEHAVIOR central
+    values (arm B as it would ship); defect_q = (mean, NEFF) for
+    centre_defects by quantile coupling to the shipped draw (arm B paired);
+    collect_g = also return the deadlock rows' type gate probabilities."""
     prng = np.random.default_rng(SEED + 7)
     urng = np.random.default_rng(SEED + 31)
     probs = np.zeros(len(OUTCOMES))
     dl = 0.0
+    g_rows = []
     for m in range(M):
-        b = draw_behavior(prng)
+        b = draw_behavior(prng, base)
         pa = draw_pm_alloc(prng)
         if unity is not None:
             p, n = unity
             b["likud_sans_bibi"] = float(urng.beta(p * n, (1 - p) * n))
+        if defect_q is not None:
+            p0 = gf.BEHAVIOR["centre_defects"]
+            n0 = gf.BEHAVIOR_NEFF["centre_defects"]
+            p, n = defect_q
+            q = stats.beta.cdf(b["centre_defects"], p0 * n0, (1 - p0) * n0)
+            b["centre_defects"] = float(stats.beta.ppf(q, p * n, (1 - p) * n))
         if r_draws is not None:
             b["repeat_deadlock"] = r_draws[m]
         if s_draws is not None:
             b["resolution_shares"] = s_draws[m]
+        if w_draws is not None:
+            b["resolution_mix"] = w_draws[m]
         oc, _ = simulate_formation(df, b, seed=SEED + m, pm_alloc=pa,
                                    centres=centres, unaligned=KINGMAKERS)
         probs += np.bincount(oc, minlength=len(OUTCOMES)) / len(oc)
         dl += simulate_formation.last_deadlock["p_deadlock"]
+        if collect_g:
+            g, dmask = simulate_formation.last_type_g
+            g_rows.append(g[dmask])
+    if collect_g:
+        return probs / M, dl / M, np.vstack(g_rows)
     return probs / M, dl / M
+
+
+# --- s.59 arm A: the record weights for the mix (pre-registered s.59.1) ---
+_G_CACHE: dict = {}
+_FIT_CACHE: dict = {}
+_PRIOR_W = None
+
+
+def cycle_g(cyc, centres, unity):
+    """The type gate probabilities g (rows = the cycle's deadlock draws over
+    the harness's M vectors x N rows), compressed to unique rows with
+    counts; rows with no reachable type are dropped. The behavioural inputs
+    are the forecast's own (draw_behavior per vector, unity from `unity`)."""
+    key = (cyc, unity)
+    if key not in _G_CACHE:
+        df = frame(HISTORY[cyc]["seats"])
+        _p, _d, G = forecast(df, centres, r_draws=np.zeros(M), unity=unity,
+                             w_draws=[np.ones(len(RESOLUTION_TYPES))] * M,
+                             collect_g=True)
+        G = G[G.sum(axis=1) > 0]
+        U, cnt = np.unique(G, axis=0, return_counts=True)
+        _G_CACHE[key] = (U, cnt.astype(float))
+    return _G_CACHE[key]
+
+
+def _prior_w():
+    global _PRIOR_W
+    if _PRIOR_W is None:
+        _PRIOR_W = np.random.default_rng(SEED + MIX_SEED_OFFSET).dirichlet(
+            np.full(len(RESOLUTION_TYPES), MIX_PRIOR), size=MIX_K)
+    return _PRIOR_W
+
+
+def cycle_lik(U, cnt, t_idx, W, kind="product"):
+    """L_c(w) for every row of W: the arm's own P(realized type | the cycle
+    resolves, w), i.e. the mean over the cycle's draws of w_t g_t / sum_s
+    w_s g_s ("product"), or with g replaced by reachability ("feas")."""
+    G = U if kind == "product" else (U > 0).astype(float)
+    out = np.empty(len(W))
+    for s in range(0, len(W), 2000):
+        Wc = W[s:s + 2000]
+        den = G @ Wc.T
+        num = G[:, [t_idx]] * Wc[:, t_idx][None, :]
+        ok = den > 0
+        r = np.where(ok, num / np.where(ok, den, 1.0), 0.0)
+        out[s:s + 2000] = ((cnt[:, None] * r).sum(axis=0)
+                           / np.maximum((cnt[:, None] * ok).sum(axis=0), 1e-300))
+    return out
+
+
+def mix_fit(fit_cycles, centres, unity, kind="product", m_out=M):
+    """Posterior on the mix weights: Dirichlet(MIX_PRIOR) prior on the
+    normalised w, the product of L_c over fit_cycles, importance sampling on
+    MIX_K prior draws, and a multinomial resample of m_out vectors."""
+    key = (tuple(sorted(fit_cycles)), unity, kind, m_out)
+    if key not in _FIT_CACHE:
+        W = _prior_w()
+        lw = np.zeros(len(W))
+        for c in fit_cycles:
+            U, cnt = cycle_g(c, centres, unity)
+            t_idx = RESOLUTION_TYPES.index(RESOLUTION_CLASS[c])
+            lw += np.log(np.maximum(cycle_lik(U, cnt, t_idx, W, kind), 1e-300))
+        wt = np.exp(lw - lw.max())
+        wt /= wt.sum()
+        ess = 1.0 / float((wt ** 2).sum())
+        idx = np.random.default_rng(SEED + MIX_SEED_OFFSET + 1).choice(
+            len(W), size=m_out, p=wt)
+        _FIT_CACHE[key] = ([W[i] for i in idx],
+                           {"w_mean": (wt[:, None] * W).sum(axis=0), "ess": ess,
+                            "fit": tuple(fit_cycles), "kind": kind})
+    return _FIT_CACHE[key]
+
+
+def mix_weights(spec, cyc, centres):
+    """The arm's per-vector weights for a scored cycle: fitted without the
+    cycle's own resolution when leave-one-out, with g built from the unity
+    prior the cycle's own forecast uses."""
+    fit = [c for c in MIX_RECORD
+           if not (spec.get("loo", True) and c == cyc)]
+    return mix_fit(fit, centres, unity_prior(spec["pre"], cyc), spec["mix"])
+
+
+def mix_posterior_2026(m_out):
+    """For government_formation.main() under STAGE_RESOLUTION = "mix": the
+    weights fitted on all five resolutions with the shipped unity prior."""
+    C = centres_2026()
+    return mix_fit(list(MIX_RECORD), C, unity_prior(False, "2026"), "product",
+                   m_out)
 
 
 def stage_r(a_b):
@@ -332,15 +472,23 @@ def run(centres, role_variant=None, variants=VARIANTS):
                "realized_set_alt": (",".join(str(i) for i in sorted(h["alt"]))
                                     if "alt" in h else "")}
         for v, spec in variants.items():
-            s_d = None
+            s_d = w_d = None
             if spec.get("res") is not None:
                 al = type_alpha(spec, cyc)
                 s_d = resolution_s(al)
                 row[f"type_alpha_{v}"] = ",".join(f"{x:g}" for x in al)
+            if spec.get("mix") is not None:
+                w_d, info = mix_weights(spec, cyc, centres)
+                row[f"mix_w_{v}"] = ",".join(f"{x:.3f}" for x in info["w_mean"])
+                row[f"mix_ess_{v}"] = round(info["ess"], 1)
             p, dl = forecast(df, centres,
                              stage_r(a_b) if spec["stage"] else None,
-                             unity_prior(spec["pre"], cyc), s_d)
-            row["p_deadlock_draws"] = round(dl, 3)
+                             unity_prior(spec["pre"], cyc), s_d, w_d,
+                             spec.get("base"), spec.get("defect_q"))
+            # the share of deadlock draws, from the first tree (s.59 arm B's
+            # edited BEHAVIOR moves the kingmaker draws; the column is the
+            # shipped stream's)
+            row.setdefault("p_deadlock_draws", round(dl, 3))
             row[f"p_realized_{v}"] = p[k]
             row[f"p_repeat_{v}"] = p[7]
             row[f"top_{v}"] = OUTCOMES[int(np.argmax(p))]
@@ -402,6 +550,25 @@ def s56_tolerance(df: pd.DataFrame, arm=S56_ARM, ref=SHIPPED) -> pd.DataFrame:
         out.append({"cycle": c, "realized": r["realized"], "p_shipped": p_ref,
                     f"p_{arm}": p_arm, "ratio": ratio,
                     "pass": bool(p_arm > floor and ratio >= S56_TOLERANCE)})
+    return pd.DataFrame(out)
+
+
+def resolution_counts(classes: pd.DataFrame, trees) -> pd.DataFrame:
+    """Expected vs realized resolution types over the five resolved
+    parliamentary deadlocks (s.59): for each tree, the sum over the cycles
+    of P(type | a government formed), and the realized count."""
+    real = {c: RESOLUTION_CLASS[c] for c in MIX_RECORD}
+    out = []
+    for t in RESOLUTION_TYPES:
+        row = {"type": OUTCOMES[t],
+               "realized": sum(1 for c in MIX_RECORD if real[c] == t)}
+        for tree in trees:
+            g = classes[(classes.tree == tree)
+                        & classes.cycle.astype(str).isin(MIX_RECORD)]
+            pv = g.pivot(index="cycle", columns="class", values="probability")
+            formed = 1.0 - pv["Repeat election"]
+            row[f"expected_{tree}"] = float((pv[OUTCOMES[t]] / formed).sum())
+        out.append(row)
     return pd.DataFrame(out)
 
 
@@ -548,7 +715,8 @@ def main(out_dir=None) -> None:
         per[f"p_realized_{t}"]) for t in trees})
     summ.append(dict(score="1984 scored as {1, 6} (grand coalition)",
                      **scores(alt)))
-    sub = {k: VARIANTS[k] for k in ("production", "candidate", S56_ARM)}
+    sub = {k: VARIANTS[k] for k in ("production", "candidate", S56_ARM)
+           + S59_ARMS}
     per_a, _ = run(C, role_variant="amcha", variants=sub)
     summ.append(dict(score="YB 2015/2019a in Amcha's role", **scores(per_a)))
     # s.56: the record-resolution arm against the shipped tree
@@ -565,6 +733,18 @@ def main(out_dir=None) -> None:
                      **scores(alt, a=SHIPPED, b=S56_ARM)))
     summ.append(dict(score=f"s.56 YB 2015/2019a in Amcha's role: {S56_ARM}",
                      **scores(per_a, a=SHIPPED, b=S56_ARM)))
+    # s.59: both arms and the registered variants against the shipped tree
+    for v in S59_ARMS:
+        summ.append(dict(score=f"s.59 primary: {v} vs shipped",
+                         **scores(per, a=SHIPPED, b=v)))
+    for v in S59_VARIANTS:
+        summ.append(dict(score=f"s.59 variant: {v} vs shipped",
+                         **scores(per, a=SHIPPED, b=v)))
+    for v in S59_ARMS:
+        summ.append(dict(score=f"s.59 + 1996, 1999 at weight 0.5: {v}",
+                         **scores(per, a=SHIPPED, b=v, weights="all")))
+        summ.append(dict(score=f"s.59 YB 2015/2019a in Amcha's role: {v}",
+                         **scores(per_a, a=SHIPPED, b=v)))
     summ = pd.DataFrame(summ)
     print("\nMean log P(realized class), 8 informative cycles unless noted "
           "(uniform over 9 = -2.197); Brier = multi-class, lower is better:\n")
@@ -595,6 +775,52 @@ def main(out_dir=None) -> None:
         criterion_brier=bool(c2), criterion_tolerance=c3, verdict=verdict)])],
         ignore_index=True)
 
+    # s.59.1 decision rule, per arm; if both pass, the higher primary mean
+    # log ships
+    show59 = (["cycle", "weight", "realized", f"p_realized_{SHIPPED}"]
+              + [f"p_realized_{t}" for t in S59_ARMS + S59_VARIANTS]
+              + [f"mix_w_{S59_ARMS[0]}", f"mix_ess_{S59_ARMS[0]}"])
+    print("\ns.59: P(realized class), shipped vs the two arms and their "
+          "registered variants (mix_w = posterior mean weights over unity, "
+          "haredi, defector, Ra'am, minority):\n")
+    print(per_r[show59].to_string(index=False))
+    s59_parts, passed = [], {}
+    for v in S59_ARMS:
+        pr = scores(per, a=SHIPPED, b=v)
+        tl = s56_tolerance(per, arm=v)
+        d1 = pr["log_b"] >= pr["log_a"]
+        d2 = pr["brier_b"] <= pr["brier_a"]
+        d3 = bool(tl["pass"].all())
+        passed[v] = (d1 and d2 and d3, pr["log_b"])
+        print(f"\ns.59 tolerance, {v}:\n")
+        print(tl.round(4).to_string(index=False))
+        print(f"s.59 decision rule ({v} vs shipped, leave-one-cycle-out):"
+              f"\n  1. mean log {pr['log_b']:.4f} vs {pr['log_a']:.4f} (diff "
+              f"{pr['diff']:+.4f}, SE {pr['diff_se']:.3f}): "
+              f"{'pass' if d1 else 'FAIL'}"
+              f"\n  2. multi-class Brier {pr['brier_b']:.4f} vs "
+              f"{pr['brier_a']:.4f}: {'pass' if d2 else 'FAIL'}"
+              f"\n  3. tolerance: {'pass' if d3 else 'FAIL'} "
+              f"({', '.join(tl.cycle[~tl['pass']]) or 'none below'})")
+        s59_parts.append(tl.assign(table=f"s.59 tolerance: {v}").rename(
+            columns={"pass": "tolerance_pass", f"p_{v}": "p_arm"}))
+        s59_parts.append(pd.DataFrame([dict(
+            table=f"s.59 decision: {v}", criterion_log=bool(d1),
+            criterion_brier=bool(d2), criterion_tolerance=d3,
+            verdict="PASS" if (d1 and d2 and d3) else "FAIL")]))
+    ok = [v for v in S59_ARMS if passed[v][0]]
+    ship = max(ok, key=lambda v: passed[v][1]) if ok else None
+    print(f"\ns.59 verdict: "
+          f"{'SHIP ' + ship if ship else 'neither arm passes: DO NOT SHIP'}")
+    s59_parts.append(pd.DataFrame([dict(table="s.59 verdict",
+                                        verdict=ship or "DO NOT SHIP")]))
+    counts = resolution_counts(classes, (SHIPPED,) + S59_ARMS + S59_VARIANTS)
+    print("\ns.59 expected vs realized resolutions over the five resolved "
+          "deadlocks (sum over cycles of P(type | a government formed)):\n")
+    print(counts.round(2).to_string(index=False))
+    s59_parts.append(counts.round(4).assign(table="s.59 resolution counts"))
+    s56_out = pd.concat([s56_out] + s59_parts, ignore_index=True)
+
     br = binary_repeat(per, trees)
     print("\nRepeat vs government (1996/1999 at 0.5):")
     for t in trees:
@@ -607,7 +833,8 @@ def main(out_dir=None) -> None:
         print(f"{t}: realized class is the top class in {top} of {len(inf)} "
               "informative cycles")
 
-    cal = calibration(classes, ["production", "candidate", S56_ARM])
+    cal = calibration(classes, ["production", "candidate", S56_ARM]
+                      + list(S59_ARMS))
     rep = per[["cycle", "regime", "realized"]
               + [f"p_repeat_{t}" for t in trees]].copy()
     rep["table"] = "P(repeat) by cycle"
