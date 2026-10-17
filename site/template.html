@@ -374,6 +374,45 @@ td.mono,th.num{text-align:right}
 .tag{display:inline-block;font:600 10.5px "IBM Plex Sans";text-transform:uppercase;
   letter-spacing:.1em;border:1.5px solid var(--ink);padding:2px 7px;color:var(--ink)}
 
+/* forecast history (#history; src/build_history.py) */
+#history .hi-card{padding:20px 22px 16px}
+#history .hi-card h3{font-size:18px;margin-bottom:6px}
+#history .hi-chart{margin-top:8px;min-height:120px}
+#history .hi-chart svg,.hi-cell svg{width:100%;height:auto;display:block;direction:ltr}
+#history .legend svg{flex:none;direction:ltr}
+.hi-sm{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:18px 24px;margin-top:12px}
+.hi-cell{margin:0;min-width:0}
+.hi-cellh{display:flex;align-items:center;gap:8px;font-size:13.5px;font-weight:600;min-width:0}
+.hi-cellh .t{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1 1 auto;min-width:0}
+.hi-cellh .v{font-size:13px;color:var(--ink2);font-weight:600}
+.hi-cell svg{margin-top:4px}
+#history h3.hi-h{font-size:18px;margin:30px 0 4px}
+.hi-attr th,.hi-attr td{padding:7px 8px;font-size:13px}
+.hi-attr td.num{text-align:end;white-space:nowrap;vertical-align:middle}
+.hi-attr th.num{text-align:end;white-space:normal;vertical-align:bottom}
+.hi-attr .hi-sub{display:block;font-size:12px;color:var(--muted);margin-top:2px;white-space:nowrap}
+.hi-attr td.num{font-family:"IBM Plex Mono","IBM Plex Sans Hebrew",monospace;font-variant-numeric:tabular-nums}
+.hi-moves{margin:6px 0 10px;padding-inline-start:22px;max-width:72ch;font-size:13.5px;color:var(--ink2);line-height:1.55}
+.hi-moves li{margin:6px 0}
+#history .note a{color:var(--ink)}
+#history details{margin-top:20px;border-top:2px solid var(--ink);padding-top:6px}
+#history summary{cursor:pointer;font-weight:700;font-size:12px;letter-spacing:.1em;text-transform:uppercase;min-height:40px;
+  display:flex;align-items:center;gap:8px}
+#history summary:hover{color:var(--accent)}
+.hi-all th,.hi-all td{font-size:12.5px;padding:6px 8px;white-space:nowrap}
+.hi-all td.lab{white-space:normal;min-width:240px;max-width:420px}
+.hi-all td.num{font-family:"IBM Plex Mono","IBM Plex Sans Hebrew",monospace;font-variant-numeric:tabular-nums;text-align:end}
+.hi-k{display:inline-block;width:11px;height:11px;vertical-align:-1px;margin-inline-end:5px;direction:ltr}
+@media(max-width:560px){
+  #history .hi-card{padding:14px 12px 12px}
+  #history .legend{gap:4px 14px;font-size:12px}
+  .hi-sm{grid-template-columns:1fr 1fr;gap:16px 12px}
+  .hi-cellh{font-size:12.5px;gap:6px;min-height:32px}
+  .hi-cellh .t{white-space:normal;line-height:1.2}
+  .hi-attr th,.hi-attr td{padding:6px 4px;font-size:12px}
+  .hi-attr th{letter-spacing:.04em}
+}
+
 /* tooltip */
 #tip{position:fixed;z-index:99;pointer-events:none;background:var(--ink);color:var(--paper);
   font:600 12.5px "IBM Plex Sans";padding:8px 12px;opacity:0;transition:opacity .12s;max-width:260px}
@@ -550,6 +589,28 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
   </div>
   <div class="tblwrap"><table id="trTbl"></table></div>
   <p class="note" id="trNote"></p>
+</div></section>
+
+<section id="history" class="pg-report"><div class="wrap">
+  <p class="eyebrow" id="hiEyebrow">Forecast history</p>
+  <h2 id="hiH2">How the forecast has moved</h2>
+  <p class="lede" id="hiLede">Every build of this forecast since it was first published, read back from the forecast file
+  each build published: the majority odds and the largest lists' central seats, by each build's data date. Two different
+  things move these lines: new polls and events, and changes to the model itself. The markers tell the two apart, and the
+  table below splits each headline's movement between them.</p>
+  <div class="card hi-card"><h3 id="hiBlocsT">Majority odds by data date</h3>
+    <div class="legend" id="hiLegend" style="margin:4px 0 0"></div>
+    <div class="hi-chart" id="hiBlocs"></div>
+    <p class="note" id="hiBlocsCap" style="margin-top:8px"></p></div>
+  <div class="card hi-card" style="margin-top:20px"><h3 id="hiSeatsT">Central seats of the eight largest lists</h3>
+    <div class="hi-sm" id="hiSeats"></div>
+    <p class="note" id="hiSeatsCap" style="margin-top:10px"></p></div>
+  <h3 class="hi-h" id="hiAttrT">Where the movement came from</h3>
+  <p class="note" id="hiAttrCap" style="margin:0 0 8px"></p>
+  <div class="tblwrap"><table class="rt hi-attr" id="hiAttr"></table></div>
+  <div class="note" id="hiNote" style="margin-top:16px"></div>
+  <details id="hiAllBox"><summary id="hiAllSum">Every build</summary>
+    <div class="tblwrap"><table class="rt hi-all" id="hiAll"></table></div></details>
 </div></section>
 
 <div class="annexhead"><div class="wrap"><div>
@@ -2215,13 +2276,13 @@ renderBlocHist("anti");
   const NAVS = HEB_MODE ? {
     report: [["#seats","מנדטים"],["#smallparties","המפלגות הקטנות"],["#threshold","על הסף"],["#blocdist","חשבון הגושים"],
              ["#builder","בונה הקואליציות"],["#formation","הרכבה ורוה״מ"],
-             ["#ground","השטח"],["#track","ביצועי עבר"],["#page:method","מתודולוגיה ←"]],
+             ["#ground","השטח"],["#track","ביצועי עבר"],["#history","היסטוריית התחזית"],["#page:method","מתודולוגיה ←"]],
     method: [["#page:report","→ לתחזית"],["#pollsters","תעשיית הסקרים"],["#ratings","דירוג המכונים"],
              ["#polls","יומן הסקרים"],["#method","הצינור"],["#validation","ביצועי עבר"]]
   } : {
     report: [["#seats","Seats"],["#smallparties","Small parties"],["#threshold","The knife-edges"],["#blocdist","Bloc math"],
              ["#builder","Coalition builder"],["#formation","Formation & PM"],
-             ["#ground","Ground game"],["#track","Track record"],["#page:method","Methodology →"]],
+             ["#ground","Ground game"],["#track","Track record"],["#history","Forecast history"],["#page:method","Methodology →"]],
     method: [["#page:report","← Forecast"],["#pollsters","The polling industry"],["#ratings","Pollster ratings"],
              ["#polls","Poll ledger"],["#method","The pipeline"],["#validation","Track record"]]
   };
@@ -2481,6 +2542,259 @@ renderBlocHist("anti");
     set("trTbl", t + "</tbody>");
   }
   set("trNote", T.note(V.nlists || "—"));
+})();
+
+/* ---- forecast history: how the forecast has moved (src/build_history.py) ---- */
+(function(){
+  const sec = document.getElementById("history"); if (!sec) return;
+  const HI = D.history || {}, L = HI.lists || [];
+  const R = (HI.rows || []).filter(r => r && r.b && r.b[0] != null && r.a);
+  if (R.length < 2){ sec.hidden = true; return; }
+  const he = HEB_MODE;
+  const esc = t => String(t == null ? "" : t).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+  const N = s => `<span class="mono ltr">${s}</span>`;
+  const MON = he ? ["בינואר","בפברואר","במרץ","באפריל","במאי","ביוני","ביולי","באוגוסט","בספטמבר","באוקטובר","בנובמבר","בדצמבר"]
+                 : ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+  const dObj = s => new Date(s + "T12:00:00");
+  const dLong = s => { const d = dObj(s); return `${d.getDate()} ${MON[d.getMonth()]}`; };
+  const dTick = s => { const d = dObj(s); return he ? `${d.getDate()}.${d.getMonth() + 1}` : `${d.getDate()} ${MON[d.getMonth()]}`; };
+  const pts = v => Math.round(v * 100);
+  const sgn = v => v > 0 ? "+" + v : v < 0 ? "−" + Math.abs(v) : "0";
+  const secLinks = s => (s || []).map(n => `<a href="decision-log.html#s${n}" rel="noopener">${he ? "‎§" : "§"}${n}</a>`).join(", ");
+  const secRef = s => s && s.length ? ` (${he ? "יומן ההחלטות, " : "decision log "}${secLinks(s)})` : "";
+  const T = he ? {
+    eyebrow:"היסטוריית התחזית", h2:"איך התחזית השתנתה",
+    lede:"כל בנייה של התחזית מאז פורסמה לראשונה, כפי שנקראה מחדש מקובץ התחזית שכל בנייה פרסמה: סיכויי הרוב והמנדטים המרכזיים של הרשימות הגדולות, לפי תאריך הנתונים של כל בנייה. שני דברים שונים מזיזים את הקווים האלה: סקרים ואירועים חדשים, ושינויים במודל עצמו. הסמנים מבחינים בין השניים, והטבלה שלמטה מחלקת ביניהם את התזוזה של כל נתון בכותרת.",
+    blocsT:"סיכויי הרוב לפי תאריך הנתונים", seatsT:"המנדטים המרכזיים של שמונה הרשימות הגדולות", attrT:"מאין הגיעה התזוזה",
+    blocsCap:"כל נקודה היא הבנייה האחרונה שפורסמה לאותו תאריך נתונים; כמה בניות יכולות לחלוק תאריך אחד. הצורות מסמנות מה השתנה מאז תאריך הנתונים הקודם, והקווים המנוקדים מסמנים תאריכים שכוללים שינוי במודל. רחפו מעל תאריך כדי לראות את הערכים ואת הבניות שמאחוריהם. ההסתברויות מוצגות בנקודות אחוז שלמות, ברמת הדיוק של הכותרת.",
+    seatsCap:s => `הקו הוא מספר המנדטים המרכזי; הרצועה היא רווח ה־90%. כל לוח משתרע על אותם ${N(s)} מנדטים, כך שאפשר להשוות את התזוזות בין הרשימות. הצורות מסמנות מה השתנה, כמו בתרשים שלמעלה. רחפו מעל לוח כדי לראות את הערכים.`,
+    attrCap:"השינוי מהבנייה הראשונה שפורסמה ועד האחרונה, בנקודות אחוז, מסוכם על פני הבניות מכל סוג. הנקודות מעוגלות, ולכן החלקים עשויים שלא להסתכם בדיוק בסך הכול.",
+    ah:["מהבנייה הראשונה לאחרונה", "מודל בלבד", "סקרים או אירועים בלבד", "שניהם"],
+    from:(a, b) => `מ־${N(a)} ל־${N(b)}`,
+    ser:["רוב לגוש נתניהו", "רוב למחנה השינוי בלי מנדטים ערביים", "רוב למחנה השינוי עם רע״ם", "מבוי סתום"],
+    short:["נתניהו", "שינוי", "שינוי + רע״ם", "מבוי סתום"],
+    tipSer:["רוב לגוש נתניהו", "מחנה השינוי לבדו", "מחנה השינוי + רע״ם", "מבוי סתום"],
+    met:["רוב לגוש נתניהו", "רוב למחנה השינוי בלי מנדטים ערביים", "רוב למחנה השינוי עם רע״ם", "מבוי סתום", "נתניהו ראש הממשלה הבא", "בחירות חוזרות"],
+    kind:{polls:"סקרים או אירועים חדשים", model:"שינוי במודל", both:"סקרים או אירועים ושינוי במודל",
+          site:"האתר בלבד, התחזית ללא שינוי", start:"תאריך הנתונים הראשון"},
+    rule:"תאריך שכולל שינוי במודל",
+    moved:n => `בניות שהזיזו את התחזית בתאריך הזה: ${N(n)}`, none:"אף בנייה לא הזיזה את התחזית בתאריך הזה", more:n => `ועוד ${N(n)}`,
+    lastOf:n => `הנקודה היא האחרונה מבין ${N(n)} בניות בתאריך הזה`,
+    seats:"מנדטים מרכזיים", ivl:"רווח 90%", pass:"סיכוי לעבור את אחוז החסימה", dataOf:d => `נתוני ${d}`,
+    uncommitted:"טרם נשמרה במאגר",
+    aria:"סיכויי הרוב לפי תאריך הנתונים, בכל בנייה שפורסמה: רוב לגוש נתניהו, רוב למחנה השינוי בלי מנדטים ערביים ועם רע״ם, ומבוי סתום",
+    ariaSeat:(n, a, b) => `המנדטים המרכזיים של ${n} לפי תאריך הנתונים, מ־${a} ל־${b}`,
+    note:(c, sl, owner) => `<p><b>למה הקווים קופצים.</b> מתוך ${N(c.n)} הבניות שפורסמו אחרי הראשונה, ${N(c.model)} שינו רק את המודל, ${N(c.polls)} הביאו רק סקרים או אירועים חדשים, ${N(c.both)} עשו את שניהם, ו־${N(c.site)} שינו את האתר אבל לא את התחזית. שינוי במודל הוא תיקון, לא רעש: כל שינוי כזה מתועד ביומן ההחלטות עם המדידה שעליה הוא נשען, וסבבי הדיוק בחנו את השינויים שלהם על מבחן־העבר של שמונה מערכות בחירות לפני שהכניסו אותם לתחזית${sl}. הכרעות העריכה על האופן שבו רשימות נספרות, כמו ההכרעה שכחול לבן והמילואימניקים והכלכלית הן רשימות לא משויכות${owner}, הן שיפוט, ומוצגות ככאלה. התזוזות הגדולות ביותר בבנייה אחת:</p>`,
+    src:`<p>מקור: כל נקודה היא קובץ התחזית שפורסם עם אותה בנייה, כפי שנקרא מחדש מהמאגר (מזהי הבניות מופיעים בחלוניות הריחוף ובטבלה שלמטה); הסקרים שמאחורי כל עדכון נמצאים ב<a href="#polls">יומן הסקרים</a>, וכל שינוי במודל נמצא ב<a href="decision-log.html" rel="noopener">יומן ההחלטות</a>.</p>`,
+    allSum:n => `כל הבניות (${n})`,
+    allH:["תאריך הנתונים", "בנייה", "מה השתנה", "רוב לנתניהו", "שינוי לבדו", "שינוי + רע״ם", "מבוי סתום"]
+  } : {
+    eyebrow:"Forecast history", h2:"How the forecast has moved", lede:null,
+    blocsT:"Majority odds by data date", seatsT:"Central seats of the eight largest lists", attrT:"Where the movement came from",
+    blocsCap:"Each point is the last build published for that data date; several builds can share one. Shapes mark what changed since the previous data date, and dotted rules mark the dates that include a model change. Hover a date for its values and the builds behind it. Probabilities are in whole points, the precision the headline carries.",
+    seatsCap:s => `The line is the central seat count; the band is the 90% interval. Every panel spans the same ${s} seats, so the moves compare across lists. Shapes mark what changed, as in the chart above. Hover a panel for the values.`,
+    attrCap:"Change from the first published build to the latest, in percentage points, summed over the builds of each kind. Points are rounded, so the parts may not add exactly to the total.",
+    ah:["First build → latest", "Model only", "Polls or events only", "Both"],
+    from:(a, b) => N(`${a} → ${b}`),
+    ser:["Netanyahu majority", "Change-bloc majority without Arab seats", "Change-bloc majority with Ra'am", "Deadlock"],
+    short:["Netanyahu", "Change", "Change + Ra'am", "Deadlock"],
+    tipSer:["Netanyahu majority", "Change bloc alone", "Change bloc + Ra'am", "Deadlock"],
+    met:["Netanyahu majority", "Change-bloc majority without Arab seats", "Change-bloc majority with Ra'am", "Deadlock", "Netanyahu is the next PM", "Repeat election"],
+    kind:{polls:"New polls or events", model:"Model change", both:"Polls or events and a model change",
+          site:"Site only, forecast unchanged", start:"First data date"},
+    rule:"date that includes a model change",
+    moved:n => `Builds that moved the forecast on this date: ${n}`, none:"No build moved the forecast on this date", more:n => `and ${n} more`,
+    lastOf:n => `The point is the last of ${n} builds on this date`,
+    seats:"Central seats", ivl:"90% interval", pass:"Chance of clearing the threshold", dataOf:d => `Data of ${d}`,
+    uncommitted:"not yet in the repository",
+    aria:"Majority odds by data date for every published build: Netanyahu majority, change-bloc majority without Arab seats and with Ra'am, and deadlock",
+    ariaSeat:(n, a, b) => `${n} central seats by data date, from ${a} to ${b}`,
+    note:(c, sl, owner) => `<p><b>Why the lines jump.</b> Of the ${c.n} builds published after the first, ${c.model} changed only the model, ${c.polls} brought only new polls or events, ${c.both} did both, and ${c.site} changed the site but not the forecast. A model change is a correction, not noise: each one is logged in the decision log with the measurement behind it, and the accuracy rounds graded their changes on the backtest of eight past elections before shipping them${sl}. The editorial rulings on how lists are counted, such as Blue and White and the Reservists–Economic list being unaligned${owner}, are judgments and are stated as such. The largest single-build moves:</p>`,
+    src:`<p>Source: each point is the forecast file published with that build, read back from the repository (build ids are in the tooltips and the table below); the polls behind each update are in the <a href="#polls">poll ledger</a>, and every model change is in the <a href="decision-log.html" rel="noopener">decision log</a>.</p>`,
+    allSum:n => `Every build (${n})`,
+    allH:["Data date", "Build", "What changed", "Netanyahu majority", "Change alone", "Change + Ra'am", "Deadlock"]
+  };
+  const set = (id, html) => { const el = document.getElementById(id); if (el && html != null) el.innerHTML = html; };
+  set("hiEyebrow", T.eyebrow); set("hiH2", T.h2); if (T.lede) set("hiLede", T.lede);
+  set("hiBlocsT", T.blocsT); set("hiSeatsT", T.seatsT); set("hiAttrT", T.attrT);
+  set("hiBlocsCap", T.blocsCap); set("hiAttrCap", T.attrCap);
+
+  // builds of one data date collapse to the last build published for it
+  R.forEach((r, i) => r.i = i);
+  const byA = new Map(), days = [];
+  R.forEach(r => { let d = byA.get(r.a); if (!d){ d = {a: r.a, builds: []}; byA.set(r.a, d); days.push(d); }
+    d.builds.push(r); d.row = r; });
+  days.sort((x, y) => x.a < y.a ? -1 : x.a > y.a ? 1 : 0);
+  days.forEach((d, j) => {
+    d.mv = d.builds.filter(r => r.m && r.i > 0 && r.k !== "site");
+    const ks = new Set(d.mv.map(r => r.k));
+    d.k = j === 0 ? "start" : !ks.size ? "site" : ks.size === 1 ? [...ks][0] : "both";
+    d.prev = j ? days[j - 1].row : null;
+  });
+
+  // marker shapes: circle = new polls or events, diamond = model change, square = both
+  const f1 = v => (+v).toFixed(1);
+  const glyph = (k, x, y, col, s = 1) => {
+    const st = `fill="${col}" stroke="var(--paper)" stroke-width="1"`;
+    if (k === "model"){ const r = 5.4 * s; return `<path d="M${f1(x)},${f1(y - r)}L${f1(x + r)},${f1(y)}L${f1(x)},${f1(y + r)}L${f1(x - r)},${f1(y)}Z" ${st}/>`; }
+    if (k === "both"){ const r = 4 * s; return `<rect x="${f1(x - r)}" y="${f1(y - r)}" width="${f1(2 * r)}" height="${f1(2 * r)}" ${st}/>`; }
+    if (k === "polls") return `<circle cx="${f1(x)}" cy="${f1(y)}" r="${f1(4 * s)}" ${st}/>`;
+    return `<circle cx="${f1(x)}" cy="${f1(y)}" r="${f1(3 * s)}" fill="var(--paper)" stroke="${col}" stroke-width="1.6"/>`;
+  };
+  const kIcon = k => `<svg class="hi-k" viewBox="0 0 12 12" aria-hidden="true">${glyph(k, 6, 6, "currentColor")}</svg>`;
+  const SER = [{i: 0, col: "var(--bloc-nb)"}, {i: 1, col: "var(--bloc-anti)"},
+               {i: 2, col: "var(--bloc-anti)", dash: "6 4"}, {i: 3, col: "var(--muted)"}];
+  SER.forEach((s, j) => { s.lab = T.ser[j]; s.short = T.short[j]; s.tip = T.tipSer[j]; });
+  set("hiLegend", SER.map(s => `<span><svg width="20" height="12" viewBox="0 0 20 12" aria-hidden="true"><line x1="1" y1="6" x2="19" y2="6" stroke="${s.col}" stroke-width="2.4"${s.dash ? ` stroke-dasharray="${s.dash}"` : ""}/></svg>${s.lab}</span>`).join("")
+    + ["polls", "model", "both", "start"].map(k => `<span style="color:var(--ink2)">${kIcon(k).replace('class="hi-k"', 'width="12" height="12"')}${T.kind[k]}</span>`).join("")
+    + `<span><svg width="12" height="14" viewBox="0 0 12 14" aria-hidden="true"><line x1="6" y1="0" x2="6" y2="14" stroke="var(--accent)" stroke-width="1.4" stroke-dasharray="2 3"/></svg>${T.rule}</span>`);
+
+  const buildLine = r => `${kIcon(r.k)}${esc(he ? r.lh : r.l)}${r.c ? ` <span class="mono" style="opacity:.75">${esc(r.c)}</span>` : ` <span style="opacity:.75">(${T.uncommitted})</span>`}`;
+  const buildsTip = d => {
+    let h = d.builds.length > 1 ? `<div style="opacity:.8;margin-top:6px">${T.lastOf(d.builds.length)}</div>` : "";
+    if (!d.mv.length) return h + `<div style="opacity:.8;margin-top:${h ? 2 : 6}px">${T.none}</div>`;
+    const mv = [...d.mv].reverse(), top = mv.slice(0, 3);
+    return h + `<div style="opacity:.8;margin-top:${h ? 2 : 6}px">${T.moved(d.mv.length)}</div>`
+      + top.map(r => `<div style="margin-top:3px;font-weight:500">${buildLine(r)}</div>`).join("")
+      + (mv.length > 3 ? `<div style="opacity:.8;margin-top:3px">${T.more(mv.length - 3)}</div>` : "");
+  };
+  const dTxt = (v, p) => { if (v == null) return "—"; const s = pctH(v);
+    if (p == null) return N(s); const dd = pts(v) - pts(p); return `${N(s)} ${N("(" + sgn(dd) + ")")}`; };
+
+  /* (a) majority odds by data date */
+  function drawBlocs(box, W){
+    const narrow = W < 560;
+    const H = narrow ? 250 : 320, pl = 36, pr = narrow ? 42 : 150, pt = 14, pb = 30;
+    const t0 = +dObj(days[0].a), t1 = +dObj(days[days.length - 1].a);
+    const X = a => pl + (+dObj(a) - t0) / Math.max(1, t1 - t0) * (W - pl - pr);
+    const vals = days.flatMap(d => d.row.b.slice(0, 4)).filter(v => v != null);
+    const top = Math.min(1, Math.ceil((Math.max(...vals) + 0.03) * 10) / 10);
+    const Y = p => pt + (1 - p / top) * (H - pt - pb);
+    const tx = (x, y, t, a = "middle", st = "") => `<text x="${f1(x)}" y="${f1(y)}" text-anchor="${a}" style="font-size:11px;fill:var(--muted)${st}">${t}</text>`;
+    let g = "";
+    const step = top > 0.5 ? 0.2 : 0.1;
+    for (let p = 0; p <= top + 1e-9; p += step)
+      g += `<line x1="${pl}" x2="${f1(W - pr)}" y1="${f1(Y(p))}" y2="${f1(Y(p))}" stroke="var(--line)" stroke-opacity="${p ? .12 : .4}"/>` + tx(pl - 6, Y(p) + 4, Math.round(p * 100) + "%", "end");
+    days.forEach(d => { if (d.k === "model" || d.k === "both")
+      g += `<line x1="${f1(X(d.a))}" x2="${f1(X(d.a))}" y1="${pt}" y2="${H - pb}" stroke="var(--accent)" stroke-opacity=".45" stroke-width="1.2" stroke-dasharray="2 3"/>`; });
+    let lastX = -1e9; const ticks = [];
+    days.forEach((d, j) => { const x = X(d.a);
+      if (x - lastX >= (narrow ? 46 : 58)) { ticks.push([x, d.a]); lastX = x; }
+      else if (j === days.length - 1) { ticks.pop(); ticks.push([x, d.a]); } });
+    ticks.forEach(([x, a]) => g += tx(x, H - pb + 17, dTick(a)));
+    SER.forEach(s => { const p = days.filter(d => d.row.b[s.i] != null).map(d => `${f1(X(d.a))},${f1(Y(d.row.b[s.i]))}`).join(" ");
+      g += `<polyline points="${p}" fill="none" stroke="${s.col}" stroke-width="2.2" stroke-linejoin="round"${s.dash ? ` stroke-dasharray="${s.dash}"` : ""}/>`; });
+    SER.forEach(s => days.forEach(d => { const v = d.row.b[s.i]; if (v != null) g += glyph(d.k, X(d.a), Y(v), s.col); }));
+    // direct labels at the line ends, nudged apart (values first in Hebrew)
+    const lb = days[days.length - 1].row.b;
+    const ends = SER.filter(s => lb[s.i] != null).map(s => ({s, v: lb[s.i], y: Y(lb[s.i]) + 4})).sort((a, b) => a.y - b.y);
+    for (let k = 1; k < ends.length; k++) if (ends[k].y - ends[k - 1].y < 13) ends[k].y = ends[k - 1].y + 13;
+    const over = ends.length ? ends[ends.length - 1].y - (H - pb + 4) : 0;
+    if (over > 0) ends.forEach(e => e.y -= over);
+    ends.forEach(e => { const v = esc(pctH(e.v));
+      g += tx(W - pr + 8, e.y, narrow ? v : he ? `${v} ${esc(e.s.short)}` : `${esc(e.s.short)} ${v}`, "start", ";fill:var(--ink2)"); });
+    g += `<line class="hi-guide" x1="0" x2="0" y1="${pt}" y2="${H - pb}" stroke="var(--ink)" stroke-opacity=".5" visibility="hidden"/>`;
+    days.forEach((d, j) => { const x = X(d.a);
+      const a = j ? (X(days[j - 1].a) + x) / 2 : pl - 6, b = j < days.length - 1 ? (x + X(days[j + 1].a)) / 2 : W - pr + 6;
+      g += `<rect class="hi-hv" data-j="${j}" x="${f1(a)}" y="0" width="${f1(b - a)}" height="${H - pb + 22}" fill="transparent"/>`; });
+    box.innerHTML = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(T.aria)}">${g}</svg>`;
+    const guide = box.querySelector(".hi-guide");
+    box.querySelectorAll(".hi-hv").forEach(el => {
+      el.addEventListener("pointermove", ev => { const d = days[+el.dataset.j]; const x = f1(X(d.a));
+        guide.setAttribute("x1", x); guide.setAttribute("x2", x); guide.setAttribute("visibility", "visible");
+        showTip(ev, `<b>${dLong(d.a)}</b> · ${kIcon(d.k)}${T.kind[d.k]}`
+          + SER.map(s => `<div>${s.tip}: ${dTxt(d.row.b[s.i], d.prev ? d.prev.b[s.i] : null)}</div>`).join("")
+          + buildsTip(d)); });
+      el.addEventListener("pointerleave", () => { hideTip(); guide.setAttribute("visibility", "hidden"); }); });
+  }
+
+  /* (b) central seats of the largest lists: small multiples on one shared span */
+  const lim = L.map((n, j) => { const lo = [], hi = [];
+    days.forEach(d => { const c = d.row.se[j]; if (c == null) return;
+      lo.push(d.row.lo[j] != null ? d.row.lo[j] : c); hi.push(d.row.hi[j] != null ? d.row.hi[j] : c); });
+    return lo.length ? [Math.min(...lo), Math.max(...hi)] : null; });
+  const span = Math.max(6, Math.ceil(Math.max(...lim.filter(Boolean).map(([a, b]) => b - a)) + 2));
+  set("hiSeatsCap", T.seatsCap(span));
+  function drawSeats(box){
+    const lastRow = days[days.length - 1].row;
+    box.innerHTML = L.map((n, j) => lim[j] ? `<figure class="hi-cell" style="${pc(n)}"><div class="hi-cellh"><span class="petek">${heb(n)}</span><span class="t">${esc(nm(n))}</span><span class="v mono">${lastRow.se[j] != null ? lastRow.se[j] : "—"}</span></div><div class="hi-svg" data-j="${j}"></div></figure>` : "").join("");
+    box.querySelectorAll(".hi-svg").forEach(el => {
+      const j = +el.dataset.j, n = L[j], [lo, hi] = lim[j];
+      const W = Math.max(120, Math.round(el.clientWidth || 160)), H = 132, pl = 24, pr = 6, pt = 6, pb = 18;
+      const y0 = Math.max(0, Math.floor((lo + hi) / 2 - span / 2)), y1 = y0 + span;
+      const t0 = +dObj(days[0].a), t1 = +dObj(days[days.length - 1].a);
+      const X = a => pl + (+dObj(a) - t0) / Math.max(1, t1 - t0) * (W - pl - pr);
+      const Y = v => pt + (1 - (v - y0) / (y1 - y0)) * (H - pt - pb);
+      const D2 = days.filter(d => d.row.se[j] != null);
+      const tx = (x, y, t, a) => `<text x="${f1(x)}" y="${f1(y)}" text-anchor="${a}" style="font-size:10px;fill:var(--muted)">${t}</text>`;
+      let g = `<line x1="${pl}" x2="${W - pr}" y1="${f1(Y(y0))}" y2="${f1(Y(y0))}" stroke="var(--line)" stroke-opacity=".3"/>`
+        + `<line x1="${pl}" x2="${W - pr}" y1="${f1(Y(y1))}" y2="${f1(Y(y1))}" stroke="var(--line)" stroke-opacity=".12"/>`
+        + tx(pl - 4, Y(y0) + 3, y0, "end") + tx(pl - 4, Y(y1) + 7, y1, "end")
+        + tx(pl, H - 4, dTick(days[0].a), "start") + tx(W - pr, H - 4, dTick(days[days.length - 1].a), "end");
+      const band = D2.map(d => `${f1(X(d.a))},${f1(Y(d.row.hi[j] != null ? d.row.hi[j] : d.row.se[j]))}`)
+        .concat([...D2].reverse().map(d => `${f1(X(d.a))},${f1(Y(d.row.lo[j] != null ? d.row.lo[j] : d.row.se[j]))}`)).join(" ");
+      g += `<polygon points="${band}" fill="var(--pc)" fill-opacity=".16"/>`;
+      g += `<polyline points="${D2.map(d => `${f1(X(d.a))},${f1(Y(d.row.se[j]))}`).join(" ")}" fill="none" stroke="var(--pc)" stroke-width="2" stroke-linejoin="round"/>`;
+      const sc = Math.min(0.8, (W - pl - pr) / Math.max(1, days.length) / 11);
+      D2.forEach(d => g += glyph(d.k, X(d.a), Y(d.row.se[j]), "var(--pc)", sc));
+      D2.forEach((d, k) => { const x = X(d.a);
+        const a = k ? (X(D2[k - 1].a) + x) / 2 : 0, b = k < D2.length - 1 ? (x + X(D2[k + 1].a)) / 2 : W;
+        g += `<rect class="hi-hv" data-d="${days.indexOf(d)}" x="${f1(a)}" y="0" width="${f1(b - a)}" height="${H}" fill="transparent"/>`; });
+      el.innerHTML = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(T.ariaSeat(nm(n), D2[0].row.se[j], D2[D2.length - 1].row.se[j]))}">${g}</svg>`;
+      el.querySelectorAll(".hi-hv").forEach(z => {
+        z.addEventListener("pointermove", ev => { const d = days[+z.dataset.d], r = d.row;
+          const p = d.prev && d.prev.se[j] != null ? r.se[j] - d.prev.se[j] : null;
+          showTip(ev, `<b>${esc(nm(n))}</b> · ${dLong(d.a)} · ${kIcon(d.k)}${T.kind[d.k]}`
+            + `<div>${T.seats}: ${N(r.se[j])}${p != null ? " " + N("(" + sgn(p) + ")") : ""}</div>`
+            + (r.lo[j] != null ? `<div>${T.ivl}: ${N(r.lo[j] + "–" + r.hi[j])}</div>` : "")
+            + (r.pp[j] != null ? `<div>${T.pass}: ${N(esc(pctH(r.pp[j])))}</div>` : "")
+            + buildsTip(d)); });
+        z.addEventListener("pointerleave", hideTip); });
+    });
+  }
+
+  /* where the movement came from: build-to-build changes summed by kind */
+  const MET = [r => r.b[0], r => r.b[1], r => r.b[2], r => r.b[3], r => (r.pm || [])[0], r => (r.pm || [])[3]];
+  const attr = MET.map(get => { const s = {model: 0, polls: 0, both: 0}; let first = null, last = null;
+    R.forEach((r, i) => { const v = get(r); if (v == null) return; if (first == null) first = v;
+      if (i && last != null && s[r.k] != null) s[r.k] += v - last; last = v; });
+    return {first, last, s}; });
+  set("hiAttr", `<thead><tr>${T.ah.map((h, i) => `<th${i ? ' class="num"' : ""}>${h}</th>`).join("")}</tr></thead><tbody>`
+    + attr.map((a, i) => a.first == null ? "" : `<tr><td>${T.met[i]}<span class="hi-sub">${T.from(esc(pctH(a.first)), esc(pctH(a.last)))} ${N("(" + sgn(pts(a.last) - pts(a.first)) + ")")}</span></td>`
+      + ["model", "polls", "both"].map(k => `<td class="num">${N(sgn(Math.round(a.s[k] * 100)))}</td>`).join("") + "</tr>").join("") + "</tbody>");
+
+  /* the note: what the counts say, the largest moves with their decision-log sections, the source */
+  const cnt = {n: R.length, model: 0, polls: 0, both: 0, site: 0};
+  R.forEach((r, i) => { if (i && cnt[r.k] != null) cnt[r.k]++; });
+  cnt.n = R.length - 1;
+  const moves = [];
+  // per build: its largest bloc move and its largest PM move; builds ranked by the larger of the two
+  R.forEach((r, i) => { if (!i || !r.m) return; const p = R[i - 1], best = [null, null];
+    MET.forEach((get, m) => { const a = get(p), b = get(r); if (a == null || b == null) return;
+      const dd = Math.abs(pts(b) - pts(a)), g = m < 4 ? 0 : 1;
+      if (!best[g] || dd > best[g].dd) best[g] = {dd, m, a, b}; });
+    const top = Math.max(...best.map(x => x ? x.dd : 0));
+    const show = best.filter(x => x && (x.dd === top || x.dd >= 3)).sort((x, y) => y.dd - x.dd);
+    if (top > 0) moves.push({r, dd: top, show}); });
+  moves.sort((x, y) => y.dd - x.dd);
+  const mvHtml = moves.slice(0, 5).map(({r, show}) => `<li><b>${show.map(({m, a, b}) => `${T.met[m]} ${T.from(esc(pctH(a)), esc(pctH(b)))}`).join("; ")}</b> · ${T.dataOf(dLong(r.a))} · ${kIcon(r.k)}${esc(he ? r.lh : r.l)}${r.c ? ` <span class="mono" style="color:var(--muted)">${esc(r.c)}</span>` : ""}${secRef(r.s)}</li>`).join("");
+  set("hiNote", T.note(cnt, secRef([28, 36, 41, 46]), secRef([22, 32])) + `<ol class="hi-moves">${mvHtml}</ol>` + T.src);
+
+  /* every build, newest first (the charts' data as a table) */
+  set("hiAllSum", T.allSum(R.length));
+  set("hiAll", `<thead><tr>${T.allH.map((h, i) => `<th${i > 2 ? ' class="num"' : ""}>${h}</th>`).join("")}</tr></thead><tbody>`
+    + [...R].reverse().map(r => `<tr><td class="mono">${N(r.a)}</td><td class="mono">${r.c ? esc(r.c) : "—"}</td>`
+      + `<td class="lab">${kIcon(r.i ? r.k : "start")}${esc(he ? r.lh : r.l)}${secRef(r.s)}${r.i && r.k === "site" ? ` <span style="color:var(--muted)">(${T.kind.site})</span>` : ""}</td>`
+      + [0, 1, 2, 3].map(k => `<td class="num">${r.b[k] == null ? "—" : N(esc(pctH(r.b[k])))}</td>`).join("") + "</tr>").join("") + "</tbody>");
+
+  /* draw at the container's own width (re-drawn when it changes, e.g. phone rotation) */
+  let lastW = 0;
+  const render = () => { const box = document.getElementById("hiBlocs"), w = Math.round(box.clientWidth);
+    if (!w || Math.abs(w - lastW) < 2) return; lastW = w;
+    drawBlocs(box, w); drawSeats(document.getElementById("hiSeats")); };
+  if (window.ResizeObserver) new ResizeObserver(() => render()).observe(document.getElementById("hiBlocs"));
+  else addEventListener("resize", render);
+  render();
 })();
 
 /* ---- evidence registry: inline citations and the sources chapter ---- */

@@ -38,6 +38,9 @@ Key -> source:
             verified evidence registry every inline citation resolves to
   ledger    site_ledger.build_ledger — every 2026 poll with its sources
   ratings   site_ledger.build_ratings — per-firm track record
+  history   forecast_history.csv (src/build_history.py: every committed
+            site_data.json, classified polls / model / both / site), plus
+            this build when its headline differs from the last committed one
 """
 from __future__ import annotations
 
@@ -417,7 +420,7 @@ def build_payload() -> dict:
     src_path = ROOT / "data" / "forecast_sources.json"
     sources = json.loads(src_path.read_text(encoding="utf-8")) if src_path.exists() else []
 
-    return {
+    out = {
         "sources": sources, "params": build_params(names),
         "asof": str(off["asof"].iloc[0]), "parties": parties, "sub": sub,
         "ledger": ledger, "ratings": ratings,
@@ -426,6 +429,10 @@ def build_payload() -> dict:
         "house": house, "val": build_val(), "below": below, "counts": counts, "fit": fit,
         "drawCols": draw_cols, "draws": draws, "kalpi": kalpi,
     }
+    # how the forecast has moved: every published build (src/build_history.py)
+    from build_history import history_payload
+    out["history"] = history_payload(out)
+    return out
 
 
 def main() -> None:
