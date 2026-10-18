@@ -523,6 +523,69 @@ td.mono,th.num{text-align:right}
   .hi-attr th{letter-spacing:.04em}
 }
 
+/* model explorer (#models; src/model_variants.py, src/build_variants.py) */
+#models .mx-ctl{display:flex;flex-wrap:wrap;gap:8px;margin:2px 0 16px}
+#models .mx-ctl button{border:2px solid var(--ink);background:var(--paper);color:var(--ink);cursor:pointer;
+  font:600 12.5px "IBM Plex Sans","IBM Plex Sans Hebrew",sans-serif;letter-spacing:.02em;padding:7px 12px;min-height:40px}
+#models .mx-ctl button:hover{border-color:var(--accent)}
+#models .mx-ctl button.st-advanced{border-color:var(--accent);box-shadow:inset 0 -4px 0 var(--accent)}
+#models .mx-chip.advanced{color:var(--accent)}
+#models .mx-ctl button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+#models .mx-ctl .mx-resume{border:0;background:none;color:var(--accent);text-decoration:underline;text-underline-offset:3px;padding:7px 4px}
+#models .mx-panel{padding:20px 22px 16px}
+#models .mx-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 12px}
+#models .mx-head h3{font-size:21px}
+#models .mx-chip{display:inline-block;font:700 10.5px "IBM Plex Sans","IBM Plex Sans Hebrew",sans-serif;letter-spacing:.1em;
+  text-transform:uppercase;border:1.5px solid currentColor;padding:2px 7px;color:var(--ink2)}
+#models .mx-chip.official{color:var(--accent)}
+#models .mx-desc{max-width:72ch;color:var(--ink2);font-size:14.5px;line-height:1.6;margin:10px 0 4px}
+#models .mx-verdict{font-size:13px;color:var(--muted);margin:0 0 16px;max-width:72ch}
+#models .mx-tiles{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:2px;background:var(--ink);border:2px solid var(--ink)}
+#models .mx-t{background:var(--card);padding:12px 14px 10px;min-width:0}
+#models .mx-t .k{font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--ink2);line-height:1.3}
+#models .mx-t .v{font-family:"IBM Plex Sans",sans-serif;font-weight:700;font-size:30px;line-height:1.05;margin-top:6px;font-variant-numeric:tabular-nums;color:var(--ink)}
+#models .mx-t.nb .v{color:var(--bloc-nb)} #models .mx-t.anti .v{color:var(--bloc-anti)}
+#models .mx-t .s{font-size:12px;color:var(--muted);margin-top:4px}
+#models .mx-up{color:var(--ink);font-weight:600;white-space:nowrap}
+#models h4{font-size:14px;font-weight:700;margin:22px 0 8px;letter-spacing:.02em}
+#models .mx-gov{display:grid;grid-template-columns:minmax(76px,120px) 1fr;gap:6px 12px;align-items:center;font-size:13px}
+#models .mx-bar{display:flex;height:18px;gap:2px;min-width:0}
+#models .mx-bar i{display:block;height:100%;min-width:0}
+#models .mx-bar i.rep{background:repeating-linear-gradient(135deg,var(--muted) 0 2px,transparent 2px 7px);box-shadow:inset 0 0 0 1.5px var(--muted)}
+#models .mx-gl{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:12.5px;color:var(--ink2);margin-top:10px}
+#models .mx-gl > span{display:inline-flex;align-items:center;gap:6px}
+#models .mx-seats td,#models .mx-seats th{padding:6px 8px;font-size:13px;white-space:nowrap}
+#models .mx-seats td.nm{white-space:normal}
+#models .mx-pk{display:inline-flex;margin-inline-end:6px}
+#models .mx-seats td.num,#models .mx-seats th.num{text-align:end}
+#models td.mx-diff{background:color-mix(in srgb, var(--accent) 16%, transparent);color:var(--ink);font-weight:700}
+#models .mx-thr .row{display:grid;grid-template-columns:minmax(104px,200px) 1fr 50px 50px;gap:10px;align-items:center;padding:5px 0;font-size:13px}
+#models .mx-thr .row.hd{font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);padding-bottom:0}
+#models .mx-thr .bar{overflow:visible}
+#models .mx-thr .bar b{position:absolute;top:-3px;bottom:-3px;width:2px;background:var(--ink);margin-left:-1px}
+#models .mx-thr .pct{text-align:end;font-family:"IBM Plex Mono","IBM Plex Sans Hebrew",monospace}
+#models .mx-thr .pct.o{color:var(--muted)}
+#models .mx-h{font-size:18px;margin:30px 0 10px}
+#models .mx-score th,#models .mx-score td{white-space:nowrap}
+#models .mx-score td.num,#models .mx-score th.num{text-align:end}
+#models .mx-score td.best{font-weight:700;color:var(--ink);position:relative}
+#models .mx-score tr.sel td{background:var(--hit)}
+#models .mx-score .sub{display:block;font-size:11.5px;color:var(--muted);font-weight:400;white-space:normal}
+#models .mx-vh{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+html[dir="rtl"] #models .mx-seats td.num,html[dir="rtl"] #models .mx-score td.num{text-align:left}
+@media(max-width:700px){#models .mx-tiles{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:560px){
+  #models .mx-panel{padding:16px 12px 12px}
+  #models .mx-t{padding:10px 10px 8px} #models .mx-t .v{font-size:25px}
+  #models .mx-seats td,#models .mx-seats th{padding:6px 4px;font-size:12px}
+  #models .mx-seats th{white-space:normal;letter-spacing:.04em;vertical-align:bottom}
+  #models .mx-pk{display:none}
+  #models .mx-thr .row{grid-template-columns:minmax(0,1.3fr) minmax(48px,1fr) 40px 40px;gap:6px;font-size:12px}
+  #models .mx-score th,#models .mx-score td{padding:6px 4px;font-size:11.5px}
+  #models .mx-score th{white-space:normal;letter-spacing:.04em;vertical-align:bottom}
+  #models .mx-score td:first-child{white-space:normal}
+}
+
 /* tooltip */
 #tip{position:fixed;z-index:99;pointer-events:none;background:var(--ink);color:var(--paper);
   font:600 12.5px "IBM Plex Sans";padding:8px 12px;opacity:0;transition:opacity .12s;max-width:260px}
@@ -596,6 +659,18 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
   </figure>
   </div>
 </div></div>
+
+<section id="models" class="pg-report"><div class="wrap">
+  <p class="eyebrow" id="mxEyebrow">Choose a model</p>
+  <h2 id="mxH2">The official forecast and the alternatives it was tested against</h2>
+  <p class="lede" id="mxLede"></p>
+  <div class="mx-ctl" id="mxCtl" role="group" aria-label="Choose a model"></div>
+  <div class="card mx-panel" id="mxPanel" aria-live="polite"></div>
+  <h3 class="mx-h" id="mxScoreT">How each model scored on the backtest</h3>
+  <div class="mx-ctl mx-hz" id="mxHz" role="group" aria-label="Backtest horizon"></div>
+  <div class="tblwrap"><table class="rt mx-score" id="mxScore"></table></div>
+  <p class="note" id="mxScoreNote"></p>
+</div></section>
 
 <section id="seats" class="pg-report"><div class="wrap">
   <p class="eyebrow">Seat forecast</p>
@@ -2538,6 +2613,197 @@ onWidth($("#hist"), () => renderBlocHist(histWhich));
     : `<b>When.</b> If a government forms, the record says it takes about seven weeks: every government since 2009 took 49 days or more, and those of 2020–22 took 58–82 days <a class="cite" data-s="COA-F11"></a>. On the statutory calendar, results are due about 4 November, the first mandate runs to about 9 December (23 December with the extension), a second to about 23 January 2027, and the window for 61 signatures to about 13 February; if that fails, the Knesset dissolves and a repeat election falls between April and May 2027 <a class="cite" data-s="COA-F13"></a>, with the outgoing government in office until then <a class="cite" data-s="COA-F26"></a>.`;
 })();
 
+/* ---- model explorer (#models): src/model_variants.py -> src/build_variants.py -> D.models ----
+   The official model stays the headline; picking another one changes this panel only. The page
+   always loads on the official model unless the URL says ?model=<id>; the last pick is remembered
+   (localStorage "kmodel") and offered back, never applied on load. */
+(function(){
+  const sec = document.getElementById("models");
+  if (!sec) return;
+  const M = D.models, V = (M && M.variants) || [];
+  const byId = Object.fromEntries(V.map(v => [v.id, v]));
+  const OFF = byId.official;
+  if (!OFF){ sec.hidden = true; return; }
+  const he = HEB_MODE, L = he ? "he" : "en";
+  const T = he ? {
+    eyebrow: "בחרו מודל", h2: "התחזית הרשמית והחלופות שנבחנו מולה", ctl: "בחירת מודל", hz: "אופק מבחן־העבר",
+    lede: "תחזית הכותרת מגיעה מהמודל הרשמי. האחרים הם החלופות שנבחנו מולו: קודם כול המודל ההיררכי המתקדם של רקורד השגיאות, שעדיף על המודל הרשמי בכל ציון תקין אך נכשל בשני מבחנים שנרשמו מראש, ואחריו מועמדים שנכשלו בהפרש קטן בכלל, המודל הרשמי כפי שהיה לפני התיקון האחרון שלו, שכבה מפורסמת שכובתה, ונקודת הייחוס של ממוצע סקרים פשוט. כל חלופה בייסיאנית מורצת דרך אותה הקרנה, אותה תערובת הרשמה, אותה ספירה מרכזית ואותו עץ הרכבה כמו המודל הרשמי; הממוצע הפשוט עובר דרך אותה ספירה מרכזית ואותו עץ הרכבה. בחרו מודל כדי לראות היכן הוא שונה מהתחזית הרשמית; שאר העמוד נשאר על המודל הרשמי.",
+    resume: "נצפה לאחרונה: ", official: "רשמי", model: "המודל הזה", pts: "נק׳",
+    chip: {official: "רשמי · עבר את הכלל", advanced: "החלופה המובילה · לא עברה את הכלל", previous: "פורסם עד 18 באוקטובר", failed: "נכשל בכלל בהפרש קטן", layer: "שכבה מפורסמת, כבויה", benchmark: "נקודת ייחוס", candidate: "טרם נבחן"},
+    tiles: [["nb", "nb", "רוב לגוש נתניהו"], ["anti", "anti", "רוב למחנה השינוי, בלי מנדטים ערביים"],
+            ["antiRaam", "anti", "רוב למחנה השינוי, עם רע״ם"], ["neither", "", "מבוי סתום"]],
+    pick: "בחרו מודל אחר למעלה כדי להשוות אותו לתחזית הרשמית.",
+    gov: "מי מוביל את הממשלה הבאה", seats: "מנדטים: ספירה מרכזית ורווח 90%", thr: "אחוז החסימה: הסיכוי לעבור 3.25%",
+    thrNone: "אין רשימה שהסיכוי שלה לעבור נמצא בין 10% ל־95% בשום אחד מהשניים.",
+    G: {netanyahu: "נתניהו בראש הממשלה", change: "מנהיג ממחנה השינוי", unity: "אחדות בלי נתניהו", repeat: "בחירות חוזרות"},
+    list: "רשימה", central: "מרכזי", ivl: "רווח 90%",
+    diffNote: "תא מודגש: הפרש של מנדט אחד או יותר מהמודל הרשמי.",
+    govNote: (k, n) => `כל ריצת הרכבה של מודל משתמשת ב־<span class="mono">${k}</span> מתוך <span class="mono">${n}</span> וקטורי הפרמטרים ההתנהגותיים של מודל ההרכבה, אותם וקטורים לכל המודלים; כל פס הוא הנתון הרשמי שפורסם, בתוספת ההפרש של אותו מודל מהמודל הרשמי על אותם וקטורים.`,
+    scoreT: "איך כל מודל הצליח במבחן־העבר",
+    H: {eve: "ערב הבחירות", "D-7": "שבוע לפני", "D-21": "שלושה שבועות לפני"},
+    cols: ["מודל", "שגיאה חציונית", "שגיאה ממוצעת", "כיסוי 90%", "ברייר אחוז החסימה", "ציון הרווח"],
+    best: "הטוב ביותר", nodata: "אין ציון על הבסיס הזה",
+    key: "שגיאה חציונית וממוצעת: מנדטים לרשימה. כיסוי: חלק התוצאות שנפלו בתוך רווח ה־90%, הטוב ביותר הוא הקרוב ביותר ל־90%. ברייר אחוז החסימה: ציון להסתברויות של הרשימות לעבור או ליפול. ציון הרווח: רוחב הרווח ועוד קנס על כל החטאה. בכל העמודות מלבד הכיסוי, נמוך יותר טוב יותר; ★ מסמן את הטוב ביותר בכל עמודה, ו־— מסמן ציון שאין על אותו בסיס.",
+    rule: b => `המודל הרשמי הוא זה שעבר את הכלל שנרשם מראש: שינוי נכנס רק אם, בערב הבחירות, שבוע ושלושה שבועות לפני, הוא מנצח או משתווה בשגיאה החציונית בכל אחת משמונה מערכות הבחירות הקודמות, אינו מפסיד באף ציון אחר מעבר לסף סובלנות קטן וקבוע, ושומר על כיסוי קרוב ל־90% לפחות כמו קודם <a class="cite" data-s="EVAL-F17"></a> (<a href="decision-log.html#s55" rel="noopener">יומן ההחלטות, ‎§55</a>). מודל יכול להוביל עמודה כאן ועדיין להיכשל: המודל ההיררכי המתקדם מנצח בכל ציון תקין, אבל מפסיד בקפל החציון של 2015 שבוע ושלושה שבועות לפני ובמבחן הכיסוי שלושה שבועות לפני (<a href="decision-log.html#s61" rel="noopener">‎§61</a>); השיורי לפי נתחי קולות והשיורי ההיברידי הפסידו כל אחד במערכת עבר אחת או שתיים בכמנדט אחד בחציון של רשימה (<a href="decision-log.html#s57" rel="noopener">‎§57</a>, <a href="decision-log.html#s60" rel="noopener">‎§60</a>), והשילוב המשוקלל והזעזועים הצרים יותר הפסידו בציון הרווח שבוע ושלושה שבועות לפני (<a href="decision-log.html#s62" rel="noopener">‎§62</a>, <a href="decision-log.html#s48" rel="noopener">‎§48</a>). קו השיורי הישן הוא המודל הרשמי לפני התיקון של 18 באוקטובר, התצוגה בלי הזינוק המאוחר מכבה שכבה שעברה את הכלל, והממוצע הפשוט הוא נקודת הייחוס, שנבחן במערך בדיקה אחר. כל הציונים: ${b} <a class="cite" data-s="EVAL-F01,EVAL-F02"></a>.`
+  } : {
+    eyebrow: "Choose a model", h2: "The official forecast and the alternatives it was tested against", ctl: "Choose a model", hz: "Backtest horizon",
+    lede: "The headline forecast comes from the official model. The others are the alternatives it was graded against: first the advanced hierarchical model of the error record, which beats the official model on every proper score but fails two pre-registered tests, then candidates that narrowly failed the rule, the official model as it stood before its last correction, a shipped layer switched off, and the simple poll-average benchmark. Each Bayesian alternative is run through the same projection, registration mixture, central count and formation tree as the official model; the simple average goes through the same central count and formation tree. Pick one to see where it differs from the official forecast; the rest of the page stays on the official model.",
+    resume: "Last viewed: ", official: "Official", model: "This model", pts: "pts",
+    chip: {official: "Official · passed the rule", advanced: "Leading alternative · did not pass", previous: "Published until 18 October", failed: "Failed the rule narrowly", layer: "A shipped layer, switched off", benchmark: "Benchmark", candidate: "Not graded yet"},
+    tiles: [["nb", "nb", "Netanyahu majority"], ["anti", "anti", "Change-bloc majority, without Arab seats"],
+            ["antiRaam", "anti", "Change-bloc majority, with Ra'am"], ["neither", "", "Deadlock"]],
+    pick: "Pick another model above to compare it with the official forecast.",
+    gov: "Who leads the next government", seats: "Seats: central count and 90% interval", thr: "Threshold: the chance of passing 3.25%",
+    thrNone: "No list has a pass probability between 10% and 95% in either model.",
+    G: {netanyahu: "Netanyahu leads", change: "A change-bloc leader", unity: "Unity without Netanyahu", repeat: "Repeat election"},
+    list: "List", central: "Central", ivl: "90% interval",
+    diffNote: "Highlighted cell: a difference of one seat or more from the official model.",
+    govNote: (k, n) => `Each model's formation run uses ${k} of the formation model's ${n} behavioural parameter vectors, the same ones for every model; each bar is the published official figure plus that model's difference from the official model on those vectors.`,
+    scoreT: "How each model scored on the backtest",
+    H: {eve: "Election eve", "D-7": "A week out", "D-21": "Three weeks out"},
+    cols: ["Model", "Median error", "Mean error", "90% coverage", "Threshold Brier", "Interval score"],
+    best: "best", nodata: "no score on this basis",
+    key: "Median and mean error: seats per list. Coverage: the share of results inside the 90% interval, best when closest to 90%. Threshold Brier: the lists' pass-or-fail probabilities, scored. Interval score: the interval's width plus a penalty for every miss. Lower is better in every column but coverage; ★ marks the best in each column, and — a score that does not exist on the same basis.",
+    rule: b => `The official model is the one that passed the pre-registered rule: a change ships only if, at the eve and one and three weeks out, it wins or ties the median error in every one of the eight past elections, loses none of the other scores beyond a small fixed tolerance, and keeps coverage at least as close to 90% <a class="cite" data-s="EVAL-F17"></a> (<a href="decision-log.html#s55" rel="noopener">decision log §55</a>). A model can top a column here and still fail: the advanced hierarchical model wins every proper score but loses the 2015 median fold a week and three weeks out and the three-week coverage test (<a href="decision-log.html#s61" rel="noopener">§61</a>); the vote-share and hybrid residuals each lost one or two past elections by about a seat on a list's median (<a href="decision-log.html#s57" rel="noopener">§57</a>, <a href="decision-log.html#s60" rel="noopener">§60</a>), and the stack and the narrower shocks lost the interval score a week and three weeks out (<a href="decision-log.html#s62" rel="noopener">§62</a>, <a href="decision-log.html#s48" rel="noopener">§48</a>). The old residual line is the official model before its 18 October correction, the view without the late surge switches off a layer that passed, and the simple average is the benchmark, scored on a different harness. Every score: ${b} <a class="cite" data-s="EVAL-F01,EVAL-F02"></a>.`
+  };
+  // citations inside re-rendered markup resolve here (the page's own pass runs once, at load)
+  // the page's inline citation index (D.cite / D.citeAlias, build_site.cite_index, which also reads the
+  // variant texts); the full registry arrives only with the annex data
+  const SRC = {};
+  Object.entries(D.cite || {}).forEach(([id, c]) => { SRC[id] = {id, short: c[0], citation: c[1], url: c[2]}; });
+  Object.entries(D.citeAlias || {}).forEach(([a, id]) => { if (SRC[id]) SRC[a] = SRC[id]; });
+  const esc = t => String(t || "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  const cites = root => root.querySelectorAll("a.cite[data-s]").forEach(a => {
+    const hits = [...new Set(a.dataset.s.split(",").map(x => SRC[x.trim()]).filter(Boolean))];
+    if (!hits.length){ a.remove(); return; }
+    if (!a.textContent.trim()) a.innerHTML = "[" + hits.map(h => { const t = esc(h.short || h.id);
+      return t.length <= 32 ? `<span class="cs">${t}</span>` : t; }).join("; ") + "]";
+    a.href = "#src-" + hits[0].id; if (he) a.lang = "en"; a.title = hits.map(h => h.citation).join("\n");
+    a.dataset.ok = "1"; });
+  const mono = x => `<span class="mono">${x}</span>`;
+  const p1 = x => (x * 100).toFixed(1) + "%";
+  const sgn = (d, k) => (d > 0 ? "+" : d < 0 ? "−" : "±") + Math.abs(d).toFixed(k);
+  const ivl = (lo, hi) => lo + "–" + hi;
+  const name = v => v.name[L];
+  $("#mxEyebrow").textContent = T.eyebrow; $("#mxH2").textContent = T.h2;
+  $("#mxLede").textContent = T.lede; $("#mxScoreT").textContent = T.scoreT;
+  $("#mxCtl").setAttribute("aria-label", T.ctl); $("#mxHz").setAttribute("aria-label", T.hz);
+
+  const GK = ["netanyahu", "change", "unity", "repeat"];
+  const GC = Object.assign({}, GOV_COL), GT = Object.assign({}, GOV_TL, T.G);   // the page's who-governs colours
+  // one 100% bar per model, in the colours (and the hatched repeat election) of the page's who-governs bar
+  function govRow(lab, g){
+    const seg = GK.map(k => { const w = (Math.max(0, g[k] || 0) * 100).toFixed(2);
+      return GC[k] ? `<i style="flex:${w} 1 0;background:${GC[k]}"></i>` : `<i class="rep" style="flex:${w} 1 0"></i>`; }).join("");
+    const aria = lab + ": " + GK.map(k => `${GT[k]} ${p1(g[k] || 0)}`).join(", ");
+    return `<div>${lab}</div><div class="mx-bar" role="img" aria-label="${esc(aria)}">${seg}</div>`;
+  }
+  function panel(v){
+    const cmp = v.id !== "official";
+    let h = `<div class="mx-head"><h3>${esc(name(v))}</h3><span class="mx-chip ${v.status}">${T.chip[v.status] || ""}</span></div>
+      <p class="mx-desc">${v.desc[L]}</p><p class="mx-verdict">${v.verdict[L]}${cmp ? "" : " " + T.pick}</p>`;
+    // majority probabilities against official
+    h += `<div class="mx-tiles">` + T.tiles.map(([k, c, lab]) => {
+      const a = v.blocs[k], o = OFF.blocs[k];
+      const s = cmp ? `${T.official} ${mono(p1(o))} · <span class="mx-up">${mono(sgn((a - o) * 100, 1))} ${T.pts}</span>` : "";
+      return `<div class="mx-t ${c}"><div class="k">${lab}</div><div class="v mono">${p1(a)}</div><div class="s">${s}</div></div>`;
+    }).join("") + `</div>`;
+    // who governs
+    h += `<h4>${T.gov}</h4><div class="mx-gov">` + (cmp ? govRow(T.official, OFF.groups) : "")
+      + govRow(cmp ? esc(name(v)) : T.official, v.groups) + `</div><div class="mx-gl">`
+      + GK.map(k => `<span><i class="sw${GC[k] ? "" : " rep"}"${GC[k] ? ` style="background:${GC[k]}"` : ""}></i>${GT[k]} ${mono(p1(v.groups[k] || 0))}${cmp
+        ? ` <span style="color:var(--muted)">(${mono(sgn(((v.groups[k] || 0) - (OFF.groups[k] || 0)) * 100, 1))})</span>` : ""}</span>`).join("")
+      + `</div><p class="note" style="margin-top:8px">${T.govNote(M.vectors, M.production_vectors)}</p>`;
+    // seats: central and 90% interval against official
+    const O = Object.fromEntries(OFF.lists.map(r => [r[0], r])), X = Object.fromEntries(v.lists.map(r => [r[0], r]));
+    const names = [...new Set([...OFF.lists, ...v.lists].filter(r => r[1] > 0 || r[3] > 0).map(r => r[0]))]
+      .sort((a, b) => ((O[b] || [0, 0])[1] - (O[a] || [0, 0])[1]) || ((X[b] || [0, 0])[1] - (X[a] || [0, 0])[1]));
+    h += `<h4>${T.seats}</h4><div class="tblwrap"><table class="rt mx-seats"><thead><tr><th>${T.list}</th>` + (cmp
+      ? `<th class="num">${T.official}</th><th class="num">${T.ivl}</th><th class="num">${esc(name(v))}</th><th class="num">${T.ivl}</th>`
+      : `<th class="num">${T.central}</th><th class="num">${T.ivl}</th>`) + `</tr></thead><tbody>`;
+    names.forEach(n => {
+      const o = O[n] || [n, 0, 0, 0, 0], x = X[n] || [n, 0, 0, 0, 0];
+      h += `<tr><td class="nm"><span class="petek mx-pk" style="${pc(n)}">${heb(n)}</span>${nm(n)}</td>
+        <td class="num mono">${o[1]}</td><td class="num mono">${ivl(o[2], o[3])}</td>`;
+      if (cmp){
+        const dc = Math.abs(x[1] - o[1]) >= 1, di = Math.abs(x[2] - o[2]) >= 1 || Math.abs(x[3] - o[3]) >= 1;
+        h += `<td class="num mono${dc ? " mx-diff" : ""}">${x[1]}</td><td class="num mono${di ? " mx-diff" : ""}">${ivl(x[2], x[3])}</td>`;
+      }
+      h += `</tr>`;
+    });
+    h += `</tbody></table></div>` + (cmp ? `<p class="note" style="margin-top:6px">${T.diffNote}</p>` : "");
+    // threshold pass probabilities between 10% and 95%
+    const tl = [...new Set([...OFF.lists, ...v.lists].filter(r => r[4] >= 0.10 && r[4] <= 0.95).map(r => r[0]))]
+      .sort((a, b) => (X[b] || O[b])[4] - (X[a] || O[a])[4]);
+    h += `<h4>${T.thr}</h4>`;
+    if (!tl.length) h += `<p class="note">${T.thrNone}</p>`;
+    else {
+      h += `<div class="mx-thr"><div class="row hd"><div></div><div></div><div class="pct">${cmp ? T.model : T.official}</div><div class="pct">${cmp ? T.official : ""}</div></div>`;
+      tl.forEach(n => {
+        const o = (O[n] || [n, 0, 0, 0, 0])[4], x = (X[n] || [n, 0, 0, 0, 0])[4];
+        h += `<div class="row"><div>${nm(n)}</div><div class="bar" role="img" aria-label="${esc(nm(n))}: ${Math.round(x * 100)}%${cmp ? ", " + T.official + " " + Math.round(o * 100) + "%" : ""}"><i style="width:${(x * 100).toFixed(1)}%;${pc(n)}"></i>${cmp ? `<b style="left:${(o * 100).toFixed(1)}%"></b>` : ""}</div>
+          <div class="pct">${Math.round(x * 100)}%</div><div class="pct o">${cmp ? Math.round(o * 100) + "%" : ""}</div></div>`;
+      });
+      h += `</div>`;
+    }
+    const P = $("#mxPanel"); P.innerHTML = h; cites(P);
+  }
+
+  /* the scorecard: every model's backtest rows on the official basis, best per column marked */
+  const MET = ["median_mae", "mean_mae", "coverage", "brier", "interval"];
+  const FMT = {median_mae: x => x.toFixed(2), mean_mae: x => x.toFixed(2), coverage: x => (x * 100).toFixed(1) + "%",
+               brier: x => x.toFixed(4), interval: x => x.toFixed(2)};
+  const loss = (k, x) => k === "coverage" ? Math.abs(x - 0.90) : x;
+  let hz = "eve", cur = "official";
+  function score(){
+    const rows = V.map(v => [v, (v.backtest || {})[hz] || null]);
+    const best = {};
+    MET.forEach(k => { const vals = rows.filter(([, r]) => r && r[k] != null).map(([, r]) => loss(k, r[k]));
+      if (vals.length > 1) best[k] = Math.min(...vals); });
+    let h = `<thead><tr>` + T.cols.map((c, i) => `<th${i ? ' class="num"' : ""}>${c}</th>`).join("") + `</tr></thead><tbody>`;
+    rows.forEach(([v, r]) => {
+      h += `<tr${v.id === cur ? ' class="sel"' : ""}><td>${esc(name(v))}<span class="sub">${T.chip[v.status] || ""}</span></td>`;
+      MET.forEach(k => {
+        if (!r || r[k] == null){ h += `<td class="num dim" title="${T.nodata}">—</td>`; return; }
+        const b = best[k] != null && Math.abs(loss(k, r[k]) - best[k]) < 1e-9;
+        h += `<td class="num mono${b ? " best" : ""}">${FMT[k](r[k])}${b ? ` <span aria-hidden="true">★</span><span class="mx-vh">(${T.best})</span>` : ""}</td>`;
+      });
+      h += `</tr>`;
+    });
+    $("#mxScore").innerHTML = h + `</tbody>`;
+  }
+  const note = $("#mxScoreNote");
+  note.innerHTML = `${T.key}<br><br>${T.rule(M.basis[L])}`; cites(note);
+  $("#mxHz").innerHTML = ["eve", "D-7", "D-21"].map(k =>
+    `<button type="button" data-h="${k}" aria-pressed="${k === hz}">${T.H[k]}</button>`).join("");
+  $("#mxHz").addEventListener("click", ev => { const b = ev.target.closest("button[data-h]"); if (!b) return;
+    hz = b.dataset.h; $("#mxHz").querySelectorAll("button").forEach(x => x.setAttribute("aria-pressed", x === b)); score(); });
+
+  /* the control: buttons with aria-pressed; selection in the URL and remembered */
+  const ctl = $("#mxCtl");
+  let stored = null; try { stored = localStorage.getItem("kmodel"); } catch(e){}
+  const qid = new URLSearchParams(location.search).get("model");
+  ctl.innerHTML = V.map(v => `<button type="button" class="st-${v.status}" data-m="${v.id}" aria-pressed="false">${esc(name(v))}</button>`).join("")
+    + (!byId[qid] && stored && stored !== "official" && byId[stored]
+       ? `<button type="button" class="mx-resume" data-m="${stored}">${T.resume}${esc(name(byId[stored]))}</button>` : "");
+  function select(id, push){
+    if (!byId[id]) id = "official";
+    cur = id;
+    ctl.querySelectorAll("button[data-m]").forEach(b => { if (!b.classList.contains("mx-resume")) b.setAttribute("aria-pressed", b.dataset.m === id); });
+    panel(byId[id]); score();
+    if (!push) return;
+    try { localStorage.setItem("kmodel", id); } catch(e){}
+    try { const u = new URL(location.href);
+      if (id === "official") u.searchParams.delete("model"); else u.searchParams.set("model", id);
+      history.replaceState(history.state, "", u.pathname + u.search + u.hash); } catch(e){}   // keep the router's state
+  }
+  ctl.addEventListener("click", ev => { const b = ev.target.closest("button[data-m]"); if (!b) return;
+    const rs = ctl.querySelector(".mx-resume"); if (rs) rs.remove();   // a pick replaces the offer
+    select(b.dataset.m, true);
+    const pb = ctl.querySelector(`button[data-m="${cur}"]:not(.mx-resume)`); if (pb && document.activeElement !== pb && b !== pb) pb.focus(); });
+  select(byId[qid] ? qid : "official", false);
+})();
+
 /* ---- ground game ---- */
 (function(){
   if (!D.kalpi) return;
@@ -3312,13 +3578,13 @@ function ensureAnnex(){
    so Back returns the reader to where they were; #page:method, #src-ID and section anchors still work ---- */
 (function(){
   const NAVS = HEB_MODE ? {
-    report: [["#seats","מנדטים"],["#smallparties","המפלגות הקטנות"],["#threshold","על הסף"],["#blocdist","חשבון הגושים"],
+    report: [...(D.models ? [["#models","מודלים"]] : []),["#seats","מנדטים"],["#smallparties","המפלגות הקטנות"],["#threshold","על הסף"],["#blocdist","חשבון הגושים"],
              ["#builder","בונה הקואליציות"],["#formation","הרכבה ורוה״מ"],
              ["#ground","השטח"],["#track","ביצועי עבר"],["#history","היסטוריית התחזית"],["#page:method","מתודולוגיה ←"]],
     method: [["#page:report","→ לתחזית"],["#pollsters","תעשיית הסקרים"],["#ratings","דירוג המכונים"],
              ["#polls","יומן הסקרים"],["#method","הצינור"],["#validation","ביצועי עבר"]]
   } : {
-    report: [["#seats","Seats"],["#smallparties","Small parties"],["#threshold","The knife-edges"],["#blocdist","Bloc math"],
+    report: [...(D.models ? [["#models","Models"]] : []),["#seats","Seats"],["#smallparties","Small parties"],["#threshold","The knife-edges"],["#blocdist","Bloc math"],
              ["#builder","Coalition builder"],["#formation","Formation & PM"],
              ["#ground","Ground game"],["#track","Track record"],["#history","Forecast history"],["#page:method","Methodology →"]],
     method: [["#page:report","← Forecast"],["#pollsters","The polling industry"],["#ratings","Pollster ratings"],

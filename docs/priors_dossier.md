@@ -6753,3 +6753,32 @@ Democrats (Labor + Meretz) or Together (with Yesh Atid).
 - **The nested width (H2)** was chosen on the harness's interval score
   with each held-out cycle's own LOO fit, as s.48 did. Re-fitting the
   error model inside the nested loop (fully nested LOO) was not done.
+
+## 63. Model explorer, and the trailing-Likud layer re-checked (18 Oct, D-9)
+
+The site's "Choose a model" panel (src/model_variants.py,
+src/build_variants.py) shows the official forecast beside the graded
+alternatives (hierarchical s.61, stacked s.62, vote residual s.57, hybrid
+s.60, t-scale narrow s.48, the pre-fix residual, no trailing-Likud layer,
+the simple average), each through the same chain on the same posterior
+and seeds, with its backtest row on the official row's basis (s.50 LOO
+caches, shipped mask, offsets 0/100/200). The official variant reproduces
+the published headline exactly (the builder exits 1 otherwise); formation
+groups use 50 of production's 200 parameter vectors and are shown as the
+published figure plus the paired difference.
+
+**no_trail on the current configuration** (the s.57.1 runner with the
+trailing-Likud layer off; its shipped rows reproduce the seat_fix rows
+exactly). Median / mean / coverage / threshold Brier / interval score:
+
+| horizon | shipped (seat_fix) | no_trail |
+|---|---|---|
+| eve | 1.4858 / 1.6253 / .972 / .0447 / 9.011 | 1.5657 / 1.6688 / .960 / .0505 / 9.414 |
+| D-7 | see s.62.2 | 1.6205 / 1.7240 / .949 / .0509 / 9.589 |
+| D-21 | see s.62.2 | 1.7345 / 1.8456 / .968 / .0514 / 9.542 |
+
+The layer still earns its place on the current harness: switching it off
+worsens median and mean MAE and Brier at every horizon. In 2026 it is the
+whole difference between the official central seats (Likud 26, Otzma 6,
+RZP-Zehut 4) and the poll-level view (Likud 23, Otzma 8, RZP-Zehut 5)
+that prediction markets lean towards (EVT-F25).

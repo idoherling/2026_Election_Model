@@ -48,6 +48,10 @@ Key -> source:
   history   forecast_history.csv (src/build_history.py: every committed
             site_data.json, classified polls / model / both / site), plus
             this build when its headline differs from the last committed one
+  models    model_variants.json (src/build_variants.py): every model
+            variant's 2026 forecast and backtest scores, for the "Choose a
+            model" explorer; left out when its official variant is not this
+            build's official forecast
 """
 from __future__ import annotations
 
@@ -442,6 +446,9 @@ def build_payload() -> dict:
     # how the forecast has moved: every published build (src/build_history.py)
     from build_history import history_payload
     out["history"] = history_payload(out)
+    models = models_payload(blocs)
+    if models is not None:
+        out["models"] = models
     return out
 
 
@@ -478,6 +485,41 @@ def cite_index(tpl: str, sources: list) -> tuple[dict, dict]:
     return idx, alias
 
 
+def models_payload(blocs: dict) -> dict | None:
+    """The "Choose a model" explorer (data/processed/model_variants.json,
+    src/build_variants.py). Left out, with a warning, when the file is
+    missing or its official variant is not this build's official forecast
+    (a stale file from an earlier posterior)."""
+    p = PROCESSED / "model_variants.json"
+    if not p.exists():
+        print("WARNING no data/processed/model_variants.json: the model explorer is left out")
+        return None
+    m = json.loads(p.read_text(encoding="utf-8"))
+    off = next((v for v in m.get("variants", []) if v["id"] == "official"), None)
+    keys = ("nb", "anti", "antiRaam", "neither", "nb_mean")
+    if off is None or any(abs(float(off["blocs"][k]) - float(blocs[k])) > 1e-9 for k in keys):
+        print("WARNING model_variants.json does not match this build's official forecast "
+              "(run src/build_variants.py): the model explorer is left out")
+        return None
+    out = []
+    for v in m["variants"]:
+        out.append({
+            "id": v["id"], "kind": v["kind"], "status": v["status"],
+            "name": v["name"], "desc": v["desc"], "verdict": v["verdict"],
+            "blocs": v["blocs"],
+            # [name, central seats, 90% lo, 90% hi, P(pass)]
+            "lists": [[r["name"], r["seats"], r["lo"], r["hi"], r["p_pass"]] for r in v["lists"]],
+            "groups": v.get("groups_paired") or {g: x[0] for g, x in v["groups"].items()},
+            "pm": [[PM_RENAME.get(n, n), p] for n, p in (v.get("pm_paired") or
+                                                        [[r[0], r[1]] for r in v["pm"]])][:6],
+            "backtest": v["backtest"],
+        })
+    return {"basis": {"en": m["basis"]["en"], "he": m["basis"]["he"]},
+            "vectors": m["settings"]["formation_vectors"],
+            "production_vectors": m["settings"]["production_vectors"],
+            "variants": out}
+
+
 def main() -> None:
     payload = build_payload()
     OUT_DIR.mkdir(parents=True, exist_ok=True)
@@ -488,7 +530,9 @@ def main() -> None:
     assert "__SITE_DATA__" in tpl, "template placeholder missing"
     annex = {k: payload[k] for k in ANNEX_KEYS}
     inline = {k: v for k, v in payload.items() if k not in ANNEX_KEYS}
-    inline["cite"], inline["citeAlias"] = cite_index(tpl, payload.get("sources") or [])
+    # the model explorer's variant texts (payload "models") cite the registry too
+    cited_text = tpl + json.dumps(payload.get("models") or {}, ensure_ascii=False)
+    inline["cite"], inline["citeAlias"] = cite_index(cited_text, payload.get("sources") or [])
     inline["ledgerFit"] = (payload.get("ledger") or {}).get("fitted")
     annex_blob = json.dumps(annex, separators=(",", ":"), ensure_ascii=False)
     (OUT_DIR / ANNEX_FILE).write_text(annex_blob, encoding="utf-8")

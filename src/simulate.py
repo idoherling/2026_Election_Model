@@ -356,6 +356,9 @@ def simulate_core(avg: pd.DataFrame, pairs: list[tuple[str, str]],
             shares = shares + (-mu / 120.0) * (onehot - w_r / w_r.sum())
     shares = np.clip(shares + noise, 0.0, None)
     shares /= shares.sum(axis=1, keepdims=True)
+    # the final share draws, for a central count off their median
+    # (build_variants: official_forecast.allocate_central on this pipeline)
+    simulate_core.last_shares = shares
 
     pair_idx, _, _ = resolve_pairs(pairs, list(avg["components"]))
 

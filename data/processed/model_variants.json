@@ -1,0 +1,3619 @@
+{
+ "basis": {
+  "id": "loo50_3seed",
+  "technical": "leave-one-cycle-out harness on the s.50 leave-one-out pollster-scorecard caches (CLR latent, ballot-fidelity windows), the shipped list mask (*_fixed), eight cycles 2009-2022; eve, D-7 and D-21 each pooled over harness seed offsets 0/100/200 (s.55 protocol)",
+  "metrics": [
+   "median_mae",
+   "mean_mae",
+   "coverage",
+   "brier",
+   "interval"
+  ],
+  "horizons": [
+   "eve",
+   "D-7",
+   "D-21"
+  ],
+  "en": "the eight elections of 2009–2022, each forecast again from the polls published before it, with every parameter estimated on the other seven elections and the pollster weights graded without it (<a href=\"decision-log.html#s50\" rel=\"noopener\">decision log §50</a>), at the eve, a week out and three weeks out, each the mean of three random seeds (<a href=\"decision-log.html#s55\" rel=\"noopener\">§55</a>); every row on the same harness, past polls and lists as the official row",
+  "he": "שמונה מערכות הבחירות של 2009–2022, שכל אחת מהן נחזתה מחדש מהסקרים שפורסמו לפניה, כשכל פרמטר נאמד על שבע המערכות האחרות ומשקלי הסוקרים דורגו בלעדיה (<a href=\"decision-log.html#s50\" rel=\"noopener\">יומן ההחלטות, ‎§50</a>), בערב הבחירות, שבוע לפני ושלושה שבועות לפני, כל אחד ממוצע של שלושה זרעים אקראיים (<a href=\"decision-log.html#s55\" rel=\"noopener\">‎§55</a>); כל שורה על אותו מערך בדיקה, אותם סקרי עבר ואותן רשימות כמו השורה הרשמית"
+ },
+ "default": "official",
+ "settings": {
+  "formation_vectors": 50,
+  "production_vectors": 200,
+  "note": "formation groups and PM use 50 behavioural parameter vectors (production 200): the first 50 of production's parameter stream, the same for every variant. groups_paired / pm_paired = the published official value + the variant's paired difference from the official on those vectors (the official variant = the published numbers)"
+ },
+ "check": {
+  "blocs": {
+   "nb": {
+    "published": 0.1,
+    "variant": 0.1,
+    "delta": 0.0,
+    "tol": 0.0101
+   },
+   "anti": {
+    "published": 0.059,
+    "variant": 0.059,
+    "delta": 0.0,
+    "tol": 0.0079
+   },
+   "antiRaam": {
+    "published": 0.252,
+    "variant": 0.252,
+    "delta": 0.0,
+    "tol": 0.0146
+   },
+   "neither": {
+    "published": 0.648,
+    "variant": 0.648,
+    "delta": 0.0,
+    "tol": 0.016
+   },
+   "nb_mean": {
+    "published": 52.7,
+    "variant": 52.7,
+    "delta": 0.0,
+    "tol": 0.05
+   }
+  },
+  "groups": {
+   "netanyahu": {
+    "published": 0.278,
+    "variant": 0.254,
+    "delta": -0.024,
+    "tol": 0.0501
+   },
+   "change": {
+    "published": 0.277,
+    "variant": 0.282,
+    "delta": 0.005,
+    "tol": 0.0327
+   },
+   "unity": {
+    "published": 0.173,
+    "variant": 0.201,
+    "delta": 0.028,
+    "tol": 0.066
+   },
+   "repeat": {
+    "published": 0.271,
+    "variant": 0.263,
+    "delta": -0.008,
+    "tol": 0.0636
+   },
+   "netanyahu_in_office": {
+    "published": 0.549,
+    "variant": 0.517,
+    "delta": -0.032,
+    "tol": 0.0636
+   }
+  },
+  "central_seats": {
+   "identical": true,
+   "differences": {}
+  },
+  "ok": true,
+  "problems": []
+ },
+ "variants": [
+  {
+   "id": "official",
+   "kind": "bayes",
+   "status": "official",
+   "name": {
+    "en": "Official",
+    "he": "המודל הרשמי"
+   },
+   "desc": {
+    "en": "The published forecast: every headline number on this page comes from it. A Bayesian state-space model of every 2026 poll and CEC filing is projected to election day through the election-day shocks measured on eight past elections, mixed over the open registration events, and passed through the 3.25% threshold and Bader–Ofer. Each graded layer in it passed the pre-registered shipping rule on the leave-one-cycle-out backtest <a class=\"cite\" data-s=\"DL-28,DL-46\"></a>; the judgment layers the backtest cannot see (the certainty layer, event risk, the capacity bounds) are stated as such (<a href=\"decision-log.html#s55\" rel=\"noopener\">decision log §55</a>). Since 18 October its per-list residual is the corrected line (<a href=\"decision-log.html#s62\" rel=\"noopener\">§62</a>). Its scores are the row every alternative is graded against <a class=\"cite\" data-s=\"EVAL-F17\"></a>.",
+    "he": "התחזית שמתפרסמת: כל מספר בכותרות העמוד מגיע ממנה. מודל מרחב־מצבים בייסיאני של כל סקרי 2026 וכל הדוחות לוועדת הבחירות מוקרן ליום הבחירות דרך זעזועי יום הבחירות שנמדדו בשמונה מערכות בחירות קודמות, מעורבב על פני אירועי ההרשמה הפתוחים, ומועבר דרך אחוז החסימה (<span class=\"ltr\">3.25%</span>) ושיטת באדר־עופר. כל שכבה שנבחנה בו עברה את כלל ההכנסה שנרשם מראש במבחן־העבר בהשמטת־מחזור <a class=\"cite\" data-s=\"DL-28,DL-46\"></a>; השכבות השיפוטיות שמבחן־העבר אינו רואה (שכבת הוודאות, סיכון האירועים, גבולות הקיבולת) מוצהרות ככאלה (<a href=\"decision-log.html#s55\" rel=\"noopener\">יומן ההחלטות, ‎§55</a>). מאז 18 באוקטובר הזעזוע השיורי לכל רשימה בו הוא הקו המתוקן (<a href=\"decision-log.html#s62\" rel=\"noopener\">‎§62</a>). הציונים שלו הם השורה שכל חלופה נמדדת מולה <a class=\"cite\" data-s=\"EVAL-F17\"></a>."
+   },
+   "verdict": {
+    "en": "Passed the pre-registered rule; published.",
+    "he": "עבר את הכלל שנרשם מראש; מתפרסם."
+   },
+   "sections": [
+    46,
+    50,
+    55,
+    62
+   ],
+   "flags": {},
+   "backtest": {
+    "eve": {
+     "median_mae": 1.4858,
+     "mean_mae": 1.6253,
+     "coverage": 0.9717,
+     "brier": 0.0447,
+     "interval": 9.0108
+    },
+    "D-7": {
+     "median_mae": 1.486,
+     "mean_mae": 1.6424,
+     "coverage": 0.9604,
+     "brier": 0.0465,
+     "interval": 9.3891
+    },
+    "D-21": {
+     "median_mae": 1.6249,
+     "mean_mae": 1.7795,
+     "coverage": 0.9683,
+     "brier": 0.0519,
+     "interval": 9.5994
+    }
+   },
+   "backtest_src": "dossier s.62.2 (arm Bfix = RESID_SPACE seat_fix, shipped in s.62.5; three seeds); scratch s62/grade.txt arm 'Bfix' and w57/diag arm 'cal_Bfix' (identical)",
+   "blocs": {
+    "nb": 0.1,
+    "anti": 0.059,
+    "antiRaam": 0.252,
+    "neither": 0.648,
+    "nb_mean": 52.7,
+    "nb_p05": 43,
+    "nb_p95": 63
+   },
+   "lists": [
+    {
+     "name": "Likud",
+     "seats": 26,
+     "lo": 17,
+     "hi": 33,
+     "p_pass": 1.0,
+     "mean": 25.3
+    },
+    {
+     "name": "Yashar",
+     "seats": 23,
+     "lo": 17,
+     "hi": 30,
+     "p_pass": 1.0,
+     "mean": 23.0
+    },
+    {
+     "name": "Bennett 2026 + Yesh Atid",
+     "seats": 12,
+     "lo": 7,
+     "hi": 16,
+     "p_pass": 0.996,
+     "mean": 11.5
+    },
+    {
+     "name": "United Torah Judaism",
+     "seats": 9,
+     "lo": 6,
+     "hi": 11,
+     "p_pass": 0.998,
+     "mean": 8.5
+    },
+    {
+     "name": "The Democrats",
+     "seats": 9,
+     "lo": 6,
+     "hi": 13,
+     "p_pass": 0.993,
+     "mean": 9.2
+    },
+    {
+     "name": "Balad + Hadash-Ta'al",
+     "seats": 9,
+     "lo": 6,
+     "hi": 13,
+     "p_pass": 0.993,
+     "mean": 9.1
+    },
+    {
+     "name": "Shas",
+     "seats": 8,
+     "lo": 6,
+     "hi": 11,
+     "p_pass": 0.996,
+     "mean": 8.5
+    },
+    {
+     "name": "Yisrael Beytenu",
+     "seats": 8,
+     "lo": 5,
+     "hi": 12,
+     "p_pass": 0.985,
+     "mean": 8.3
+    },
+    {
+     "name": "Otzma Yehudit",
+     "seats": 6,
+     "lo": 0,
+     "hi": 10,
+     "p_pass": 0.824,
+     "mean": 5.6
+    },
+    {
+     "name": "Ra'am",
+     "seats": 6,
+     "lo": 0,
+     "hi": 8,
+     "p_pass": 0.796,
+     "mean": 4.8
+    },
+    {
+     "name": "Religious Zionist Party",
+     "seats": 4,
+     "lo": 0,
+     "hi": 8,
+     "p_pass": 0.576,
+     "mean": 3.3
+    },
+    {
+     "name": "Amcha Yisrael",
+     "seats": 0,
+     "lo": 0,
+     "hi": 7,
+     "p_pass": 0.235,
+     "mean": 1.4
+    },
+    {
+     "name": "Reservists – Economic Party",
+     "seats": 0,
+     "lo": 0,
+     "hi": 7,
+     "p_pass": 0.212,
+     "mean": 1.3
+    },
+    {
+     "name": "Code Black – Shield of the Torah World",
+     "seats": 0,
+     "lo": 0,
+     "hi": 0,
+     "p_pass": 0.016,
+     "mean": 0.1
+    },
+    {
+     "name": "Blue and White",
+     "seats": 0,
+     "lo": 0,
+     "hi": 0,
+     "p_pass": 0.004,
+     "mean": 0.0
+    },
+    {
+     "name": "The Haredi Public",
+     "seats": 0,
+     "lo": 0,
+     "hi": 0,
+     "p_pass": 0.003,
+     "mean": 0.0
+    },
+    {
+     "name": "Ahi – Back to the Roots",
+     "seats": 0,
+     "lo": 0,
+     "hi": 0,
+     "p_pass": 0.003,
+     "mean": 0.0
+    },
+    {
+     "name": "Tzomet Beit Yisrael",
+     "seats": 0,
+     "lo": 0,
+     "hi": 0,
+     "p_pass": 0.002,
+     "mean": 0.0
+    },
+    {
+     "name": "Israel First",
+     "seats": 0,
+     "lo": 0,
+     "hi": 0,
+     "p_pass": 0.002,
+     "mean": 0.0
+    },
+    {
+     "name": "Noam",
+     "seats": 0,
+     "lo": 0,
+     "hi": 0,
+     "p_pass": 0.001,
+     "mean": 0.0
+    },
+    {
+     "name": "Unity",
+     "seats": 0,
+     "lo": 0,
+     "hi": 0,
+     "p_pass": 0.0,
+     "mean": 0.0
+    },
+    {
+     "name": "Balad (alone)",
+     "seats": 0,
+     "lo": 0,
+     "hi": 0,
+     "p_pass": 0.0,
+     "mean": 0.0
+    }
+   ],
+   "asof": "2026-10-15",
+   "n_sims": 8000,
+   "groups": {
+    "netanyahu": [
+     0.254,
+     0.116,
+     0.461
+    ],
+    "change": [
+     0.282,
+     0.152,
+     0.39
+    ],
+    "unity": [
+     0.201,
+     0.007,
+     0.454
+    ],
+    "repeat": [
+     0.263,
+     0.064,
+     0.562
+    ],
+    "netanyahu_in_office": [
+     0.517,
+     0.294,
+     0.745
+    ]
+   },
+   "groups_se": {
+    "netanyahu": 0.0167,
+    "change": 0.0109,
+    "unity": 0.022,
+    "repeat": 0.0212,
+    "netanyahu_in_office": 0.0212
+   },
+   "pm": [
+    [
+     "Eisenkot",
+     0.284,
+     0.157,
+     0.415
+    ],
+    [
+     "none (repeat election)",
+     0.263,
+     0.064,
+     0.562
+    ],
+    [
+     "Netanyahu",
+     0.254,
+     0.116,
+     0.461
+    ],
+    [
+     "Likud successor (unity)",
+     0.099,
+     0.003,
+     0.209
+    ],
+    [
+     "Bennett",
+     0.075,
+     0.039,
+     0.108
+    ],
+    [
+     "Liberman",
+     0.015,
+     0.004,
+     0.034
+    ],
+    [
+     "another leader",
+     0.011,
+     0.004,
+     0.019
+    ]
+   ],
+   "outcomes": [
+    [
+     "Netanyahu rightist coalition",
+     0.084
+    ],
+    [
+     "Netanyahu + unaligned / Amcha",
+     0.005
+    ],
+    [
+     "Change coalition (without Ra'am)",
+     0.059
+    ],
+    [
+     "Change coalition with unaligned / Amcha",
+     0.027
+    ],
+    [
+     "Change coalition with a haredi party",
+     0.077
+    ],
+    [
+     "Centre minority backed by the Joint List",
+     0.035
+    ],
+    [
+     "Unity government (Likud without Netanyahu)",
+     0.201
+    ],
+    [
+     "Repeat election",
+     0.263
+    ],
+    [
+     "Change coalition with Ra'am",
+     0.084
+    ],
+    [
+     "Netanyahu + a change-bloc defector",
+     0.165
+    ]
+   ],
+   "vectors": 50,
+   "n_draws": 8000,
+   "groups_paired": {
+    "netanyahu": 0.278,
+    "change": 0.277,
+    "unity": 0.173,
+    "repeat": 0.271,
+    "netanyahu_in_office": 0.549
+   },
+   "pm_paired": [
+    [
+     "Netanyahu",
+     0.278
+    ],
+    [
+     "none (repeat election)",
+     0.271
+    ],
+    [
+     "Eisenkot",
+     0.268
+    ],
+    [
+     "Likud successor (unity)",
+     0.086
+    ],
+    [
+     "Bennett",
+     0.072
+    ],
+    [
+     "Liberman",
+     0.015
+    ],
+    [
+     "another leader",
+     0.011
+    ]
+   ]
+  },
+  {
+   "id": "hierarchical",
+   "kind": "bayes",
+   "status": "advanced",
+   "name": {
+    "en": "Advanced hierarchical model",
+    "he": "המודל ההיררכי המתקדם"
+   },
+   "desc": {
+    "en": "The advanced model. Instead of measuring each election-day error separately and stacking the pieces, it fits the whole error record of the eight past elections at once as a hierarchical Bayesian model: a bloc error, a haredi family error and a Student-t residual whose width grows with the list's size, each estimated with its own uncertainty, and it draws 2026's errors from that model's predictive for a new election <a class=\"cite\" data-s=\"AGG-F08\"></a>. On the backtest it beats the official model on every proper score at every horizon: a lower mean error, threshold Brier score and interval score, and a 24–29% better Brier score for a Netanyahu-bloc majority <a class=\"cite\" data-s=\"EVAL-F01,EVAL-F02\"></a>. It is not the official forecast because it fails two of the pre-registered tests: in 2015 it misses a large list's median by one more seat a week and three weeks out, and three weeks out its 90% intervals cover 97.5% of results against the official 96.8%, further from 90% (<a href=\"decision-log.html#s61\" rel=\"noopener\">decision log §61</a>). It puts the correlated bloc error at about half the official swing, so it gives either side a majority less often.",
+    "he": "המודל המתקדם. במקום למדוד כל שגיאה של יום הבחירות בנפרד ולחבר את החלקים זה על גבי זה, הוא מתאים בבת אחת את כל רקורד השגיאות של שמונה מערכות הבחירות הקודמות כמודל בייסיאני היררכי: שגיאה גושית, שגיאה של המשפחה החרדית ושיורי מהתפלגות t שרוחבו גדל עם גודל הרשימה, כל אחד נאמד עם אי־הוודאות שלו, ואת השגיאות של 2026 הוא מגריל מהתחזית של המודל הזה למערכת בחירות חדשה <a class=\"cite\" data-s=\"AGG-F08\"></a>. במבחן־העבר הוא עדיף על המודל הרשמי בכל ציון תקין ובכל אופק: שגיאה ממוצעת, ציון ברייר של אחוז החסימה וציון רווח נמוכים יותר, וציון ברייר טוב ב־<span class=\"ltr\">24–29%</span> לרוב של גוש נתניהו <a class=\"cite\" data-s=\"EVAL-F01,EVAL-F02\"></a>. הוא אינו התחזית הרשמית משום שהוא נכשל בשניים מהמבחנים שנרשמו מראש: ב־2015 הוא מחטיא את החציון של רשימה גדולה במנדט נוסף שבוע ושלושה שבועות לפני, ושלושה שבועות לפני רווחי ה־90% שלו מכסים <span class=\"ltr\">97.5%</span> מהתוצאות מול <span class=\"ltr\">96.8%</span> במודל הרשמי, רחוק יותר מ־90% (<a href=\"decision-log.html#s61\" rel=\"noopener\">יומן ההחלטות, ‎§61</a>). הוא מעריך את השגיאה הגושית המתואמת בכמחצית מהתנודה של המודל הרשמי, ולכן הוא נותן רוב לאחד הצדדים לעתים רחוקות יותר."
+   },
+   "verdict": {
+    "en": "Wins every proper score at every horizon; fails the 2015 median fold a week out (+0.121) and three weeks out (+0.182), and the three-week coverage test (97.5% against 96.8%).",
+    "he": "מנצח בכל ציון תקין בכל אופק; נכשל בקפל החציון של 2015 שבוע לפני (<span class=\"ltr\">+0.121</span>) ושלושה שבועות לפני (<span class=\"ltr\">+0.182</span>), ובמבחן הכיסוי שלושה שבועות לפני (<span class=\"ltr\">97.5%</span> מול <span class=\"ltr\">96.8%</span>)."
+   },
+   "sections": [
+    61
+   ],
+   "flags": {
+    "bayes_model.ERROR_MODEL": "hierarchical"
+   },
+   "backtest": {
+    "eve": {
+     "median_mae": 1.5393,
+     "mean_mae": 1.6105,
+     "coverage": 0.9717,
+     "brier": 0.0405,
+     "interval": 8.6723
+    },
+    "D-7": {
+     "median_mae": 1.4827,
+     "mean_mae": 1.6382,
+     "coverage": 0.9582,
+     "brier": 0.0437,
+     "interval": 9.0865
+    },
+    "D-21": {
+     "median_mae": 1.6753,
+     "mean_mae": 1.7695,
+     "coverage": 0.9747,
+     "brier": 0.0498,
+     "interval": 9.2435
+    }
+   },
+   "backtest_src": "dossier s.61.2 (arm H1 against the seat_fix shipped stack, three seeds; its shipped rows = the official rows); scratch hier/grade/registered_rows.csv",
+   "blocs": {
+    "nb": 0.062,
+    "anti": 0.039,
+    "antiRaam": 0.246,
+    "neither": 0.692,
+    "nb_mean": 52.5,
+    "nb_p05": 44,
+    "nb_p95": 61
+   },
+   "lists": [
+    {
+     "name": "Likud",
+     "seats": 26,
+     "lo": 17,
+     "hi": 33,
+     "p_pass": 1.0,
+     "mean": 25.0
+    },
+    {
+     "name": "Yashar",
+     "seats": 23,
+     "lo": 15,
+     "hi": 30,
+     "p_pass": 0.999,
+     "mean": 22.9
+    },
+    {
+     "name": "Bennett 2026 + Yesh Atid",
+     "seats": 12,
+     "lo": 7,
+     "hi": 16,
+     "p_pass": 0.999,
+     "mean": 11.6
+    },
+    {
+     "name": "United Torah Judaism",
+     "seats": 9,
+     "lo": 6,
+     "hi": 11,
+     "p_pass": 0.997,
+     "mean": 8.6
+    },
+    {
+     "name": "The Democrats",
+     "seats": 9,
+     "lo": 6,
+     "hi": 13,
+     "p_pass": 0.994,
+     "mean": 9.3
+    },
+    {
+     "name": "Balad + Hadash-Ta'al",
+     "seats": 9,
+     "lo": 6,
+     "hi": 12,
+     "p_pass": 0.994,
+     "mean": 9.1
+    },
+    {
+     "name": "Shas",
+     "seats": 8,
+     "lo": 6,
+     "hi": 11,
+     "p_pass": 0.995,
+     "mean": 8.5
+    },
+    {
+     "name": "Yisrael Beytenu",
+     "seats": 8,
+     "lo": 6,
+     "hi": 11,
+     "p_pass": 0.992,
+     "mean": 8.4
+    },
+    {
+     "name": "Ra'am",
+     "seats": 6,
+     "lo": 0,
+     "hi": 8,
+     "p_pass": 0.872,
+     "mean": 5.0
+    },
+    {
+     "name": "Otzma Yehudit",
+     "seats": 6,
+     "lo": 0,
+     "hi": 10,
+     "p_pass": 0.847,
+     "mean": 5.7
+    },
+    {
+     "name": "Religious Zionist Party",
+     "seats": 4,
+     "lo": 0,
+     "hi": 7,
+     "p_pass": 0.616,
+     "mean": 3.4
+    },
+    {
+     "name": "Amcha Yisrael",
+     "seats": 0,
+     "lo": 0,
+     "hi": 7,
+     "p_pass": 0.23,
+     "mean": 1.4
+    },
+    {
+     "name": "Reservists – Economic Party",
+     "seats": 0,
+     "lo": 0,
+     "hi": 7,
+     "p_pass": 0.214,
+     "mean": 1.2
+    },
+    {
+     "name": "Code Black – Shield of the Torah World",
+     "seats": 0,
+     "lo": 0,
+     "hi": 0,
+     "p_pass": 0.006,
+     "mean": 0.0
+    },
+    {
+     "name": "The Haredi Public",
+     "seats": 0,
+     "lo": 0,
+     "hi": 0,
+     "p_pass": 0.0,
+     "mean": 0.0
+    },
+    {
+     "name": "Tzomet Beit Yisrael",
+     "seats": 0,
+     "lo": 0,
+     "hi": 0,
+     "p_pass": 0.0,
+     "mean": 0.0
+    },
+    {
+     "name": "Ahi – Back to the Roots",
+     "seats": 0,
+     "lo": 0,
+     "hi": 0,
+     "p_pass": 0.0,
+     "mean": 0.0
+    },
+    {
+     "name": "Blue and White",
+     "seats": 0,
+     "lo": 0,
+     "hi": 0,
+     "p_pass": 0.0,
+     "mean": 0.0
+    },
+    {
+     "name": "Noam",
+     "seats": 0,
+     "lo": 0,
+     "hi": 0,
+     "p_pass": 0.0,
+     "mean": 0.0
+    },
+    {
+     "name": "Israel First",
+     "seats": 0,
+     "lo": 0,
+     "hi": 0,
+     "p_pass": 0.0,
+     "mean": 0.0
+    },
+    {
+     "name": "Unity",
+     "seats": 0,
+     "lo": 0,
+     "hi": 0,
+     "p_pass": 0.0,
+     "mean": 0.0
+    },
+    {
+     "name": "Balad (alone)",
+     "seats": 0,
+     "lo": 0,
+     "hi": 0,
+     "p_pass": 0.0,
+     "mean": 0.0
+    }
+   ],
+   "asof": "2026-10-15",
+   "n_sims": 8000,
+   "groups": {
+    "netanyahu": [
+     0.231,
+     0.079,
+     0.452
+    ],
+    "change": [
+     0.275,
+     0.133,
+     0.392
+    ],
+    "unity": [
+     0.213,
+     0.007,
+     0.49
+    ],
+    "repeat": [
+     0.281,
+     0.069,
+     0.596
+    ],
+    "netanyahu_in_office": [
+     0.512,
+     0.271,
+     0.757
+    ]
+   },
+   "groups_se": {
+    "netanyahu": 0.0179,
+    "change": 0.0117,
+    "unity": 0.0234,
+    "repeat": 0.0225,
+    "netanyahu_in_office": 0.0227
+   },
+   "pm": [
+    [
+     "Eisenkot",
+     0.283,
+     0.147,
+     0.424
+    ],
+    [
+     "none (repeat election)",
+     0.281,
+     0.069,
+     0.596
+    ],
+    [
+     "Netanyahu",
+     0.231,
+     0.079,
+     0.452
+    ],
+    [
+     "Likud successor (unity)",
+     0.104,
+     0.003,
+     0.226
+    ],
+    [
+     "Bennett",
+     0.075,
+     0.038,
+     0.108
+    ],
+    [
+     "Liberman",
+     0.015,
+     0.003,
+     0.035
+    ],
+    [
+     "another leader",
+     0.011,
+     0.004,
+     0.02
+    ]
+   ],
+   "outcomes": [
+    [
+     "Netanyahu rightist coalition",
+     0.05
+    ],
+    [
+     "Netanyahu + unaligned / Amcha",
+     0.004
+    ],
+    [
+     "Change coalition (without Ra'am)",
+     0.039
+    ],
+    [
+     "Change coalition with unaligned / Amcha",
+     0.024
+    ],
+    [
+     "Change coalition with a haredi party",
+     0.085
+    ],
+    [
+     "Centre minority backed by the Joint List",
+     0.037
+    ],
+    [
+     "Unity government (Likud without Netanyahu)",
+     0.213
+    ],
+    [
+     "Repeat election",
+     0.281
+    ],
+    [
+     "Change coalition with Ra'am",
+     0.092
+    ],
+    [
+     "Netanyahu + a change-bloc defector",
+     0.177
+    ]
+   ],
+   "vectors": 50,
+   "n_draws": 8000,
+   "groups_paired": {
+    "netanyahu": 0.255,
+    "change": 0.27,
+    "unity": 0.185,
+    "repeat": 0.289,
+    "netanyahu_in_office": 0.544
+   },
+   "pm_paired": [
+    [
+     "none (repeat election)",
+     0.289
+    ],
+    [
+     "Eisenkot",
+     0.267
+    ],
+    [
+     "Netanyahu",
+     0.255
+    ],
+    [
+     "Likud successor (unity)",
+     0.091
+    ],
+    [
+     "Bennett",
+     0.072
+    ],
+    [
+     "Liberman",
+     0.015
+    ],
+    [
+     "another leader",
+     0.011
+    ]
+   ]
+  },
+  {
+   "id": "old_residual",
+   "kind": "bayes",
+   "status": "previous",
+   "name": {
+    "en": "Old residual line",
+    "he": "קו השיורי הישן"
+   },
+   "desc": {
+    "en": "The official model with the per-list residual line it used until 18 October. That line was fitted on the seat errors of eight past elections pooled with a colliding index, so the seat leader's anchor was subtracted from every row that shared its label; the fitted sd was 1.83 + 0.044 × seats instead of 1.48 + 0.041 × seats <a class=\"cite\" data-s=\"ERR-F24\"></a>. The corrected line passed the rule at every horizon on three seeds and replaced it (<a href=\"decision-log.html#s48\" rel=\"noopener\">decision log §48</a>, <a href=\"decision-log.html#s62\" rel=\"noopener\">§62</a>). It is shown so the effect of the fix can be read off.",
+    "he": "המודל הרשמי עם קו הזעזוע השיורי לכל רשימה שבו השתמש עד 18 באוקטובר. הקו הזה הותאם על שגיאות במנדטים משמונה מערכות בחירות שאוחדו עם אינדקס מתנגש, כך שעוגן הרשימה המובילה הופחת מכל שורה שנשאה את אותה תווית; סטיית התקן שהותאמה הייתה <span class=\"ltr\">1.83</span> ועוד <span class=\"ltr\">0.044</span> לכל מנדט של הרשימה, במקום <span class=\"ltr\">1.48</span> ועוד <span class=\"ltr\">0.041</span> <a class=\"cite\" data-s=\"ERR-F24\"></a>. הקו המתוקן עבר את הכלל בכל אופק על שלושה זרעים והחליף אותו (<a href=\"decision-log.html#s48\" rel=\"noopener\">יומן ההחלטות, ‎§48</a>, <a href=\"decision-log.html#s62\" rel=\"noopener\">‎§62</a>). הוא מוצג כדי שאפשר יהיה לראות את השפעת התיקון."
+   },
+   "verdict": {
+    "en": "Published until 18 October; the corrected line passed the rule and replaced it.",
+    "he": "פורסם עד 18 באוקטובר; הקו המתוקן עבר את הכלל והחליף אותו."
+   },
+   "sections": [
+    48,
+    62
+   ],
+   "flags": {
+    "bayes_model.RESID_SPACE": "seat"
+   },
+   "backtest": {
+    "eve": {
+     "median_mae": 1.4927,
+     "mean_mae": 1.6291,
+     "coverage": 0.9807,
+     "brier": 0.0475,
+     "interval": 9.2173
+    },
+    "D-7": {
+     "median_mae": 1.4866,
+     "mean_mae": 1.6478,
+     "coverage": 0.9896,
+     "brier": 0.049,
+     "interval": 9.36
+    },
+    "D-21": {
+     "median_mae": 1.6211,
+     "mean_mae": 1.7943,
+     "coverage": 0.9896,
+     "brier": 0.0541,
+     "interval": 9.69
+    }
+   },
+   "backtest_src": "dossier s.57.3 / s.60.2 / s.62.2 (the then-shipped row, the reproduction gate of all three; three seeds); scratch s62/grade.txt arm 'shipped', w57/diag arm 'shipped'",
+   "blocs": {
+    "nb": 0.115,
+    "anti": 0.071,
+    "antiRaam": 0.254,
+    "neither": 0.63,
+    "nb_mean": 52.8,
+    "nb_p05": 42,
+    "nb_p95": 64
+   },
+   "lists": [
+    {
+     "name": "Likud",
+     "seats": 26,
+     "lo": 17,
+     "hi": 34,
+     "p_pass": 1.0,
+     "mean": 25.3
+    },
+    {
+     "name": "Yashar",
+     "seats": 23,
+     "lo": 16,
+     "hi": 30,
+     "p_pass": 1.0,
+     "mean": 23.0
+    },
+    {
+     "name": "Bennett 2026 + Yesh Atid",
+     "seats": 12,
+     "lo": 7,
+     "hi": 17,
+     "p_pass": 0.994,
+     "mean": 11.5
+    },
+    {
+     "name": "United Torah Judaism",
+     "seats": 9,
+     "lo": 6,
+     "hi": 11,
+     "p_pass": 0.998,
+     "mean": 8.5
+    },
+    {
+     "name": "The Democrats",
+     "seats": 9,
+     "lo": 5,
+     "hi": 13,
+     "p_pass": 0.984,
+     "mean": 9.1
+    },
+    {
+     "name": "Balad + Hadash-Ta'al",
+     "seats": 9,
+     "lo": 5,
+     "hi": 13,
+     "p_pass": 0.982,
+     "mean": 9.0
+    },
+    {
+     "name": "Shas",
+     "seats": 8,
+     "lo": 6,
+     "hi": 11,
+     "p_pass": 0.996,
+     "mean": 8.5
+    },
+    {
+     "name": "Yisrael Beytenu",
+     "seats": 8,
+     "lo": 4,
+     "hi": 12,
+     "p_pass": 0.968,
+     "mean": 8.2
+    },
+    {
+     "name": "Otzma Yehudit",
+     "seats": 6,
+     "lo": 0,
+     "hi": 11,
+     "p_pass": 0.798,
+     "mean": 5.6
+    },
+    {
+     "name": "Ra'am",
+     "seats": 6,
+     "lo": 0,
+     "hi": 9,
+     "p_pass": 0.761,
+     "mean": 4.7
+    },
+    {
+     "name": "Religious Zionist Party",
+     "seats": 4,
+     "lo": 0,
+     "hi": 8,
+     "p_pass": 0.558,
+     "mean": 3.3
+    },
+    {
+     "name": "Amcha Yisrael",
+     "seats": 0,
+     "lo": 0,
+     "hi": 8,
+     "p_pass": 0.245,
+     "mean": 1.5
+    },
+    {
+     "name": "Reservists – Economic Party",
+     "seats": 0,
+     "lo": 0,
+     "hi": 7,
+     "p_pass": 0.22,
+     "mean": 1.4
+    },
+    {
+     "name": "Code Black – Shield of the Torah World",
+     "seats": 0,
+     "lo": 0,
+     "hi": 0,
+     "p_pass": 0.024,
+     "mean": 0.1
+    },
+    {
+     "name": "The Haredi Public",
+     "seats": 0,
+     "lo": 0,
+     "hi": 0,
+     "p_pass": 0.012,
+     "mean": 0.1
+    },
+    {
+     "name": "Blue and White",
+     "seats": 0,
+     "lo": 0,
+     "hi": 0,
+     "p_pass": 0.012,
+     "mean": 0.1
+    },
+    {
+     "name": "Ahi – Back to the Roots",
+     "seats": 0,
+     "lo": 0,
+     "hi": 0,
+     "p_pass": 0.008,
+     "mean": 0.0
+    },
+    {
+     "name": "Israel First",
+     "seats": 0,
+     "lo": 0,
+     "hi": 0,
+     "p_pass": 0.007,
+     "mean": 0.0
+    },
+    {
+     "name": "Tzomet Beit Yisrael",
+     "seats": 0,
+     "lo": 0,
+     "hi": 0,
+     "p_pass": 0.006,
+     "mean": 0.0
+    },
+    {
+     "name": "Noam",
+     "seats": 0,
+     "lo": 0,
+     "hi": 0,
+     "p_pass": 0.005,
+     "mean": 0.0
+    },
+    {
+     "name": "Unity",
+     "seats": 0,
+     "lo": 0,
+     "hi": 0,
+     "p_pass": 0.0,
+     "mean": 0.0
+    },
+    {
+     "name": "Balad (alone)",
+     "seats": 0,
+     "lo": 0,
+     "hi": 0,
+     "p_pass": 0.0,
+     "mean": 0.0
+    }
+   ],
+   "asof": "2026-10-15",
+   "n_sims": 8000,
+   "groups": {
+    "netanyahu": [
+     0.261,
+     0.126,
+     0.464
+    ],
+    "change": [
+     0.287,
+     0.163,
+     0.388
+    ],
+    "unity": [
+     0.197,
+     0.007,
+     0.44
+    ],
+    "repeat": [
+     0.255,
+     0.061,
+     0.544
+    ],
+    "netanyahu_in_office": [
+     0.516,
+     0.299,
+     0.736
+    ]
+   },
+   "groups_se": {
+    "netanyahu": 0.0162,
+    "change": 0.0103,
+    "unity": 0.0214,
+    "repeat": 0.0205,
+    "netanyahu_in_office": 0.0206
+   },
+   "pm": [
+    [
+     "Eisenkot",
+     0.285,
+     0.165,
+     0.412
+    ],
+    [
+     "Netanyahu",
+     0.261,
+     0.126,
+     0.464
+    ],
+    [
+     "none (repeat election)",
+     0.255,
+     0.061,
+     0.544
+    ],
+    [
+     "Likud successor (unity)",
+     0.097,
+     0.003,
+     0.202
+    ],
+    [
+     "Bennett",
+     0.076,
+     0.042,
+     0.112
+    ],
+    [
+     "Liberman",
+     0.015,
+     0.004,
+     0.034
+    ],
+    [
+     "another leader",
+     0.011,
+     0.004,
+     0.018
+    ]
+   ],
+   "outcomes": [
+    [
+     "Netanyahu rightist coalition",
+     0.096
+    ],
+    [
+     "Netanyahu + unaligned / Amcha",
+     0.005
+    ],
+    [
+     "Change coalition (without Ra'am)",
+     0.071
+    ],
+    [
+     "Change coalition with unaligned / Amcha",
+     0.03
+    ],
+    [
+     "Change coalition with a haredi party",
+     0.074
+    ],
+    [
+     "Centre minority backed by the Joint List",
+     0.032
+    ],
+    [
+     "Unity government (Likud without Netanyahu)",
+     0.197
+    ],
+    [
+     "Repeat election",
+     0.255
+    ],
+    [
+     "Change coalition with Ra'am",
+     0.08
+    ],
+    [
+     "Netanyahu + a change-bloc defector",
+     0.16
+    ]
+   ],
+   "vectors": 50,
+   "n_draws": 8000,
+   "groups_paired": {
+    "netanyahu": 0.285,
+    "change": 0.282,
+    "unity": 0.169,
+    "repeat": 0.263,
+    "netanyahu_in_office": 0.548
+   },
+   "pm_paired": [
+    [
+     "Netanyahu",
+     0.285
+    ],
+    [
+     "Eisenkot",
+     0.269
+    ],
+    [
+     "none (repeat election)",
+     0.263
+    ],
+    [
+     "Likud successor (unity)",
+     0.084
+    ],
+    [
+     "Bennett",
+     0.073
+    ],
+    [
+     "Liberman",
+     0.015
+    ],
+    [
+     "another leader",
+     0.011
+    ]
+   ]
+  },
+  {
+   "id": "vote_residual",
+   "kind": "bayes",
+   "status": "failed",
+   "name": {
+    "en": "Vote-share residual",
+    "he": "שיורי לפי נתחי קולות"
+   },
+   "desc": {
+    "en": "The per-list election-day residual re-estimated on the vote-share errors of the lists that ran, instead of their seat errors. In the seat record a list that died at the threshold counts as a miss of its whole polled seat count, and the projection then applies the threshold again, so each death is counted twice <a class=\"cite\" data-s=\"ERR-F22,ERR-F24\"></a>. Graded twice (<a href=\"decision-log.html#s48\" rel=\"noopener\">decision log §48</a>, arm B; <a href=\"decision-log.html#s57\" rel=\"noopener\">§57</a>, cal_B): it improves the mean error, the threshold Brier score and the interval score at every horizon and moves coverage toward 90%, but fails the fold test at the eve, where one-seat median flips on large lists (September 2019 on the boundary, 2022 +0.13) count against it.",
+    "he": "הזעזוע השיורי של יום הבחירות לכל רשימה נאמד מחדש על שגיאות בנתחי הקולות של הרשימות שהתמודדו, במקום על שגיאות במנדטים. ברקורד המנדטים, רשימה שנפלה מתחת לאחוז החסימה נספרת כהחטאה של כל המנדטים שנסקרו לה, וההקרנה מפעילה את אחוז החסימה פעם נוספת, כך שכל נפילה נספרת פעמיים <a class=\"cite\" data-s=\"ERR-F22,ERR-F24\"></a>. החלופה נבחנה פעמיים (<a href=\"decision-log.html#s48\" rel=\"noopener\">יומן ההחלטות, ‎§48</a>, זרוע B; <a href=\"decision-log.html#s57\" rel=\"noopener\">‎§57</a>, cal_B): היא משפרת את השגיאה הממוצעת, את ציון ברייר של אחוז החסימה ואת ציון הרווח בכל אופק ומקרבת את הכיסוי ל־90%, אבל נכשלת במבחן הקפלים בערב הבחירות, שבו היפוכים של מנדט אחד בחציון של רשימות גדולות (ספטמבר 2019 על הגבול, 2022 <span class=\"ltr\">+0.13</span>) נזקפים לחובתה."
+   },
+   "verdict": {
+    "en": "Failed the eve fold test: September 2019 (+0.100, on the boundary) and 2022 (+0.128).",
+    "he": "נכשל במבחן הקפלים בערב הבחירות: ספטמבר 2019 (<span class=\"ltr\">+0.100</span>, על הגבול) ו־2022 (<span class=\"ltr\">+0.128</span>)."
+   },
+   "sections": [
+    48,
+    57
+   ],
+   "flags": {
+    "bayes_model.RESID_SPACE": "vote"
+   },
+   "backtest": {
+    "eve": {
+     "median_mae": 1.5196,
+     "mean_mae": 1.6013,
+     "coverage": 0.9717,
+     "brier": 0.0409,
+     "interval": 8.6709
+    },
+    "D-7": {
+     "median_mae": 1.4591,
+     "mean_mae": 1.6273,
+     "coverage": 0.9514,
+     "brier": 0.0439,
+     "interval": 9.0077
+    },
+    "D-21": {
+     "median_mae": 1.6196,
+     "mean_mae": 1.755,
+     "coverage": 0.9524,
+     "brier": 0.0502,
+     "interval": 9.5263
+    }
+   },
+   "backtest_src": "dossier s.57.3 (cal_B, three seeds); scratch w57/diag arm 'cal_B'",
+   "blocs": {
+    "nb": 0.083,
+    "anti": 0.05,
+    "antiRaam": 0.252,
+    "neither": 0.665,
+    "nb_mean": 52.6,
+    "nb_p05": 43,
+    "nb_p95": 62
+   },
+   "lists": [
+    {
+     "name": "Likud",
+     "seats": 26,
+     "lo": 17,
+     "hi": 33,
+     "p_pass": 1.0,
+     "mean": 25.3
+    },
+    {
+     "name": "Yashar",
+     "seats": 23,
+     "lo": 17,
+     "hi": 29,
+     "p_pass": 1.0,
+     "mean": 23.0
+    },
+    {
+     "name": "Bennett 2026 + Yesh Atid",
+     "seats": 12,
+     "lo": 7,
+     "hi": 16,
+     "p_pass": 0.998,
+     "mean": 11.5
+    },
+    {
+     "name": "United Torah Judaism",
+     "seats": 9,
+     "lo": 6,
+     "hi": 11,
+     "p_pass": 0.999,
+     "mean": 8.5
+    },
+    {
+     "name": "The Democrats",
+     "seats": 9,
+     "lo": 6,
+     "hi": 12,
+     "p_pass": 0.998,
+     "mean": 9.2
+    },
+    {
+     "name": "Balad + Hadash-Ta'al",
+     "seats": 9,
+     "lo": 6,
+     "hi": 12,
+     "p_pass": 0.998,
+     "mean": 9.1
+    },
+    {
+     "name": "Yisrael Beytenu",
+     "seats": 8,
+     "lo": 6,
+     "hi": 11,
+     "p_pass": 0.998,
+     "mean": 8.3
+    },
+    {
+     "name": "Shas",
+     "seats": 8,
+     "lo": 6,
+     "hi": 11,
+     "p_pass": 0.997,
+     "mean": 8.5
+    },
+    {
+     "name": "Ra'am",
+     "seats": 6,
+     "lo": 0,
+     "hi": 8,
+     "p_pass": 0.886,
+     "mean": 5.1
+    },
+    {
+     "name": "Otzma Yehudit",
+     "seats": 6,
+     "lo": 0,
+     "hi": 10,
+     "p_pass": 0.855,
+     "mean": 5.7
+    },
+    {
+     "name": "Religious Zionist Party",
+     "seats": 4,
+     "lo": 0,
+     "hi": 7,
+     "p_pass": 0.609,
+     "mean": 3.3
+    },
+    {
+     "name": "Amcha Yisrael",
+     "seats": 0,
+     "lo": 0,
+     "hi": 7,
+     "p_pass": 0.221,
+     "mean": 1.3
+    },
+    {
+     "name": "Reservists – Economic Party",
+     "seats": 0,
+     "lo": 0,
+     "hi": 7,
+     "p_pass": 0.2,
+     "mean": 1.2
+    },
+    {
+     "name": "Code Black – Shield of the Torah World",
+     "seats": 0,
+     "lo": 0,
+     "hi": 0,
+     "p_pass": 0.009,
+     "mean": 0.0
+    },
+    {
+     "name": "The Haredi Public",
+     "seats": 0,
+     "lo": 0,
+     "hi": 0,
+     "p_pass": 0.0,
+     "mean": 0.0
+    },
+    {
+     "name": "Tzomet Beit Yisrael",
+     "seats": 0,
+     "lo": 0,
+     "hi": 0,
+     "p_pass": 0.0,
+     "mean": 0.0
+    },
+    {
+     "name": "Ahi – Back to the Roots",
+     "seats": 0,
+     "lo": 0,
+     "hi": 0,
+     "p_pass": 0.0,
+     "mean": 0.0
+    },
+    {
+     "name": "Blue and White",
+     "seats": 0,
+     "lo": 0,
+     "hi": 0,
+     "p_pass": 0.0,
+     "mean": 0.0
+    },
+    {
+     "name": "Noam",
+     "seats": 0,
+     "lo": 0,
+     "hi": 0,
+     "p_pass": 0.0,
+     "mean": 0.0
+    },
+    {
+     "name": "Israel First",
+     "seats": 0,
+     "lo": 0,
+     "hi": 0,
+     "p_pass": 0.0,
+     "mean": 0.0
+    },
+    {
+     "name": "Unity",
+     "seats": 0,
+     "lo": 0,
+     "hi": 0,
+     "p_pass": 0.0,
+     "mean": 0.0
+    },
+    {
+     "name": "Balad (alone)",
+     "seats": 0,
+     "lo": 0,
+     "hi": 0,
+     "p_pass": 0.0,
+     "mean": 0.0
+    }
+   ],
+   "asof": "2026-10-15",
+   "n_sims": 8000,
+   "groups": {
+    "netanyahu": [
+     0.247,
+     0.102,
+     0.462
+    ],
+    "change": [
+     0.274,
+     0.14,
+     0.386
+    ],
+    "unity": [
+     0.208,
+     0.008,
+     0.474
+    ],
+    "repeat": [
+     0.272,
+     0.066,
+     0.579
+    ],
+    "netanyahu_in_office": [
+     0.518,
+     0.283,
+     0.753
+    ]
+   },
+   "groups_se": {
+    "netanyahu": 0.0174,
+    "change": 0.0111,
+    "unity": 0.0229,
+    "repeat": 0.0218,
+    "netanyahu_in_office": 0.0219
+   },
+   "pm": [
+    [
+     "Eisenkot",
+     0.281,
+     0.151,
+     0.418
+    ],
+    [
+     "none (repeat election)",
+     0.272,
+     0.066,
+     0.579
+    ],
+    [
+     "Netanyahu",
+     0.247,
+     0.102,
+     0.462
+    ],
+    [
+     "Likud successor (unity)",
+     0.102,
+     0.004,
+     0.219
+    ],
+    [
+     "Bennett",
+     0.073,
+     0.037,
+     0.109
+    ],
+    [
+     "Liberman",
+     0.015,
+     0.004,
+     0.035
+    ],
+    [
+     "another leader",
+     0.011,
+     0.004,
+     0.019
+    ]
+   ],
+   "outcomes": [
+    [
+     "Netanyahu rightist coalition",
+     0.07
+    ],
+    [
+     "Netanyahu + unaligned / Amcha",
+     0.004
+    ],
+    [
+     "Change coalition (without Ra'am)",
+     0.05
+    ],
+    [
+     "Change coalition with unaligned / Amcha",
+     0.024
+    ],
+    [
+     "Change coalition with a haredi party",
+     0.078
+    ],
+    [
+     "Centre minority backed by the Joint List",
+     0.035
+    ],
+    [
+     "Unity government (Likud without Netanyahu)",
+     0.208
+    ],
+    [
+     "Repeat election",
+     0.272
+    ],
+    [
+     "Change coalition with Ra'am",
+     0.088
+    ],
+    [
+     "Netanyahu + a change-bloc defector",
+     0.173
+    ]
+   ],
+   "vectors": 50,
+   "n_draws": 8000,
+   "groups_paired": {
+    "netanyahu": 0.271,
+    "change": 0.269,
+    "unity": 0.18,
+    "repeat": 0.28,
+    "netanyahu_in_office": 0.55
+   },
+   "pm_paired": [
+    [
+     "none (repeat election)",
+     0.28
+    ],
+    [
+     "Netanyahu",
+     0.271
+    ],
+    [
+     "Eisenkot",
+     0.265
+    ],
+    [
+     "Likud successor (unity)",
+     0.089
+    ],
+    [
+     "Bennett",
+     0.07
+    ],
+    [
+     "Liberman",
+     0.015
+    ],
+    [
+     "another leader",
+     0.011
+    ]
+   ]
+  },
+  {
+   "id": "resid_hybrid",
+   "kind": "bayes",
+   "status": "failed",
+   "name": {
+    "en": "Hybrid residual",
+    "he": "שיורי היברידי"
+   },
+   "desc": {
+    "en": "The vote-share residual for lists of up to 8 seats only, the residual's own small-list group, and the shipped seat-error line for every larger list, so the large lists keep their graded width <a class=\"cite\" data-s=\"ERR-F24\"></a>. Near the threshold it behaves like the vote-share residual and it wins every pooled score a week and three weeks out, but it loses two folds, 2022 at the eve (+0.13) and 2021 a week out (+0.12): the seats freed when small lists die land in the large lists' medians (<a href=\"decision-log.html#s60\" rel=\"noopener\">decision log §60</a>).",
+    "he": "הזעזוע השיורי לפי נתחי קולות רק לרשימות של עד 8 מנדטים, קבוצת הרשימות הקטנות של השיורי עצמו, וקו השגיאות במנדטים של המודל הרשמי לכל רשימה גדולה יותר, כך שהרשימות הגדולות שומרות על הרוחב שנבחן <a class=\"cite\" data-s=\"ERR-F24\"></a>. ליד אחוז החסימה הוא מתנהג כמו השיורי לפי נתחי קולות, והוא מנצח בכל ציון מאוחד שבוע ושלושה שבועות לפני, אבל מפסיד בשני קפלים, 2022 בערב הבחירות (<span class=\"ltr\">+0.13</span>) ו־2021 שבוע לפני (<span class=\"ltr\">+0.12</span>): המנדטים שמשתחררים כשרשימות קטנות נופלות עוברים לחציון של הרשימות הגדולות (<a href=\"decision-log.html#s60\" rel=\"noopener\">יומן ההחלטות, ‎§60</a>)."
+   },
+   "verdict": {
+    "en": "Failed two folds: 2022 at the eve (+0.128) and 2021 a week out (+0.119); every pooled score passed.",
+    "he": "נכשל בשני קפלים: 2022 בערב הבחירות (<span class=\"ltr\">+0.128</span>) ו־2021 שבוע לפני (<span class=\"ltr\">+0.119</span>); כל ציון מאוחד עבר."
+   },
+   "sections": [
+    60
+   ],
+   "flags": {
+    "bayes_model.RESID_SPACE": "hybrid"
+   },
+   "backtest": {
+    "eve": {
+     "median_mae": 1.5111,
+     "mean_mae": 1.6,
+     "coverage": 0.9717,
+     "brier": 0.041,
+     "interval": 8.8149
+    },
+    "D-7": {
+     "median_mae": 1.4607,
+     "mean_mae": 1.625,
+     "coverage": 0.9769,
+     "brier": 0.0439,
+     "interval": 8.9701
+    },
+    "D-21": {
+     "median_mae": 1.6181,
+     "mean_mae": 1.7535,
+     "coverage": 0.9678,
+     "brier": 0.0503,
+     "interval": 9.4421
+    }
+   },
+   "backtest_src": "dossier s.60.2 (three seeds); scratch w57/diag60 arm 'resid_hybrid'",
+   "blocs": {
+    "nb": 0.095,
+    "anti": 0.06,
+    "antiRaam": 0.263,
+    "neither": 0.642,
+    "nb_mean": 52.7,
+    "nb_p05": 43,
+    "nb_p95": 63
+   },
+   "lists": [
+    {
+     "name": "Likud",
+     "seats": 26,
+     "lo": 17,
+     "hi": 33,
+     "p_pass": 1.0,
+     "mean": 25.3
+    },
+    {
+     "name": "Yashar",
+     "seats": 23,
+     "lo": 16,
+     "hi": 30,
+     "p_pass": 1.0,
+     "mean": 23.0
+    },
+    {
+     "name": "Bennett 2026 + Yesh Atid",
+     "seats": 12,
+     "lo": 7,
+     "hi": 16,
+     "p_pass": 0.995,
+     "mean": 11.5
+    },
+    {
+     "name": "United Torah Judaism",
+     "seats": 9,
+     "lo": 6,
+     "hi": 11,
+     "p_pass": 0.999,
+     "mean": 8.6
+    },
+    {
+     "name": "Balad + Hadash-Ta'al",
+     "seats": 9,
+     "lo": 6,
+     "hi": 12,
+     "p_pass": 0.998,
+     "mean": 9.1
+    },
+    {
+     "name": "The Democrats",
+     "seats": 9,
+     "lo": 5,
+     "hi": 13,
+     "p_pass": 0.985,
+     "mean": 9.2
+    },
+    {
+     "name": "Yisrael Beytenu",
+     "seats": 8,
+     "lo": 6,
+     "hi": 11,
+     "p_pass": 0.998,
+     "mean": 8.3
+    },
+    {
+     "name": "Shas",
+     "seats": 8,
+     "lo": 6,
+     "hi": 11,
+     "p_pass": 0.997,
+     "mean": 8.5
+    },
+    {
+     "name": "Ra'am",
+     "seats": 6,
+     "lo": 0,
+     "hi": 8,
+     "p_pass": 0.884,
+     "mean": 5.1
+    },
+    {
+     "name": "Otzma Yehudit",
+     "seats": 6,
+     "lo": 0,
+     "hi": 10,
+     "p_pass": 0.854,
+     "mean": 5.7
+    },
+    {
+     "name": "Religious Zionist Party",
+     "seats": 4,
+     "lo": 0,
+     "hi": 7,
+     "p_pass": 0.609,
+     "mean": 3.3
+    },
+    {
+     "name": "Amcha Yisrael",
+     "seats": 0,
+     "lo": 0,
+     "hi": 7,
+     "p_pass": 0.222,
+     "mean": 1.3
+    },
+    {
+     "name": "Reservists – Economic Party",
+     "seats": 0,
+     "lo": 0,
+     "hi": 7,
+     "p_pass": 0.201,
+     "mean": 1.2
+    },
+    {
+     "name": "Code Black – Shield of the Torah World",
+     "seats": 0,
+     "lo": 0,
+     "hi": 0,
+     "p_pass": 0.01,
+     "mean": 0.0
+    },
+    {
+     "name": "The Haredi Public",
+     "seats": 0,
+     "lo": 0,
+     "hi": 0,
+     "p_pass": 0.0,
+     "mean": 0.0
+    },
+    {
+     "name": "Tzomet Beit Yisrael",
+     "seats": 0,
+     "lo": 0,
+     "hi": 0,
+     "p_pass": 0.0,
+     "mean": 0.0
+    },
+    {
+     "name": "Ahi – Back to the Roots",
+     "seats": 0,
+     "lo": 0,
+     "hi": 0,
+     "p_pass": 0.0,
+     "mean": 0.0
+    },
+    {
+     "name": "Blue and White",
+     "seats": 0,
+     "lo": 0,
+     "hi": 0,
+     "p_pass": 0.0,
+     "mean": 0.0
+    },
+    {
+     "name": "Noam",
+     "seats": 0,
+     "lo": 0,
+     "hi": 0,
+     "p_pass": 0.0,
+     "mean": 0.0
+    },
+    {
+     "name": "Israel First",
+     "seats": 0,
+     "lo": 0,
+     "hi": 0,
+     "p_pass": 0.0,
+     "mean": 0.0
+    },
+    {
+     "name": "Unity",
+     "seats": 0,
+     "lo": 0,
+     "hi": 0,
+     "p_pass": 0.0,
+     "mean": 0.0
+    },
+    {
+     "name": "Balad (alone)",
+     "seats": 0,
+     "lo": 0,
+     "hi": 0,
+     "p_pass": 0.0,
+     "mean": 0.0
+    }
+   ],
+   "asof": "2026-10-15",
+   "n_sims": 8000,
+   "groups": {
+    "netanyahu": [
+     0.253,
+     0.111,
+     0.464
+    ],
+    "change": [
+     0.279,
+     0.149,
+     0.386
+    ],
+    "unity": [
+     0.203,
+     0.007,
+     0.459
+    ],
+    "repeat": [
+     0.265,
+     0.064,
+     0.565
+    ],
+    "netanyahu_in_office": [
+     0.518,
+     0.288,
+     0.746
+    ]
+   },
+   "groups_se": {
+    "netanyahu": 0.0169,
+    "change": 0.0107,
+    "unity": 0.0222,
+    "repeat": 0.0213,
+    "netanyahu_in_office": 0.0214
+   },
+   "pm": [
+    [
+     "Eisenkot",
+     0.283,
+     0.157,
+     0.416
+    ],
+    [
+     "none (repeat election)",
+     0.265,
+     0.064,
+     0.565
+    ],
+    [
+     "Netanyahu",
+     0.253,
+     0.111,
+     0.464
+    ],
+    [
+     "Likud successor (unity)",
+     0.099,
+     0.003,
+     0.211
+    ],
+    [
+     "Bennett",
+     0.074,
+     0.038,
+     0.108
+    ],
+    [
+     "Liberman",
+     0.015,
+     0.005,
+     0.035
+    ],
+    [
+     "another leader",
+     0.011,
+     0.004,
+     0.018
+    ]
+   ],
+   "outcomes": [
+    [
+     "Netanyahu rightist coalition",
+     0.081
+    ],
+    [
+     "Netanyahu + unaligned / Amcha",
+     0.004
+    ],
+    [
+     "Change coalition (without Ra'am)",
+     0.06
+    ],
+    [
+     "Change coalition with unaligned / Amcha",
+     0.024
+    ],
+    [
+     "Change coalition with a haredi party",
+     0.075
+    ],
+    [
+     "Centre minority backed by the Joint List",
+     0.032
+    ],
+    [
+     "Unity government (Likud without Netanyahu)",
+     0.203
+    ],
+    [
+     "Repeat election",
+     0.265
+    ],
+    [
+     "Change coalition with Ra'am",
+     0.088
+    ],
+    [
+     "Netanyahu + a change-bloc defector",
+     0.168
+    ]
+   ],
+   "vectors": 50,
+   "n_draws": 8000,
+   "groups_paired": {
+    "netanyahu": 0.277,
+    "change": 0.274,
+    "unity": 0.175,
+    "repeat": 0.273,
+    "netanyahu_in_office": 0.55
+   },
+   "pm_paired": [
+    [
+     "Netanyahu",
+     0.277
+    ],
+    [
+     "none (repeat election)",
+     0.273
+    ],
+    [
+     "Eisenkot",
+     0.267
+    ],
+    [
+     "Likud successor (unity)",
+     0.086
+    ],
+    [
+     "Bennett",
+     0.071
+    ],
+    [
+     "Liberman",
+     0.015
+    ],
+    [
+     "another leader",
+     0.011
+    ]
+   ]
+  },
+  {
+   "id": "stacked",
+   "kind": "bayes",
+   "status": "failed",
+   "name": {
+    "en": "Stacked error models",
+    "he": "שילוב מודלי שגיאה"
+   },
+   "desc": {
+    "en": "Each simulated election draws its error stack from one of three graded alternatives, weighted by Bayesian stacking on the backtest's leave-one-out log score: the t-scale fix .302, the vote-share residual .448 and the hybrid residual .250 <a class=\"cite\" data-s=\"EVAL-F12\"></a>. The mixture's median sits between its components', so the one-seat median flips that failed the residual alternatives become ties in every past election. Graded by nested leave-one-out <a class=\"cite\" data-s=\"EVAL-F15\"></a>, it loses the interval score a week and three weeks out, almost all of it on 2021, and its out-of-sample log score is below every component's: eight elections cannot pin down the weights (<a href=\"decision-log.html#s62\" rel=\"noopener\">decision log §62</a>).",
+    "he": "כל בחירות מדומות מגרילות את שכבת השגיאה שלהן מאחת משלוש חלופות שנבחנו, במשקלים שנקבעו בשיטת stacking בייסיאנית לפי ציון הלוג בהשמטת־מחזור של מבחן־העבר: תיקון סקאלת t <span class=\"ltr\">.302</span>, השיורי לפי נתחי קולות <span class=\"ltr\">.448</span> והשיורי ההיברידי <span class=\"ltr\">.250</span> <a class=\"cite\" data-s=\"EVAL-F12\"></a>. החציון של התערובת נמצא בין החציונים של רכיביה, ולכן היפוכי המנדט האחד בחציון, שהכשילו את חלופות השיורי, הופכים לתיקו בכל מערכת עבר. בבחינה בהשמטת־מחזור מקוננת <a class=\"cite\" data-s=\"EVAL-F15\"></a> היא מפסידה בציון הרווח שבוע ושלושה שבועות לפני, כמעט כולו ב־2021, וציון הלוג שלה מחוץ למדגם נמוך מזה של כל אחד מרכיביה: שמונה מערכות בחירות אינן מספיקות כדי לקבוע את המשקלים (<a href=\"decision-log.html#s62\" rel=\"noopener\">יומן ההחלטות, ‎§62</a>)."
+   },
+   "verdict": {
+    "en": "Failed: the interval score a week out (+0.064) and three weeks out (+0.114); every median fold tied.",
+    "he": "נכשל: ציון הרווח שבוע לפני (<span class=\"ltr\">+0.064</span>) ושלושה שבועות לפני (<span class=\"ltr\">+0.114</span>); כל קפלי החציון בתיקו."
+   },
+   "sections": [
+    62
+   ],
+   "flags": {
+    "bayes_model.ERROR_STACK": "(set)",
+    "bayes_model.RESID_SPACE": "seat",
+    "bayes_model.T_UNIT_VAR": false
+   },
+   "backtest": {
+    "eve": {
+     "median_mae": 1.4855,
+     "mean_mae": 1.613,
+     "coverage": 0.9717,
+     "brier": 0.0423,
+     "interval": 9.0273
+    },
+    "D-7": {
+     "median_mae": 1.4748,
+     "mean_mae": 1.6363,
+     "coverage": 0.9552,
+     "brier": 0.045,
+     "interval": 9.4238
+    },
+    "D-21": {
+     "median_mae": 1.6169,
+     "mean_mae": 1.7698,
+     "coverage": 0.9524,
+     "brier": 0.051,
+     "interval": 9.8036
+    }
+   },
+   "backtest_src": "dossier s.62.2 (the graded nested-LOO stacked forecast, row 'stack', three seeds; production weights = bayes_model.ERROR_STACK_WEIGHTS); scratch s62/grade.txt",
+   "blocs": {
+    "nb": 0.089,
+    "anti": 0.054,
+    "antiRaam": 0.249,
+    "neither": 0.662,
+    "nb_mean": 52.7,
+    "nb_p05": 43,
+    "nb_p95": 62
+   },
+   "lists": [
+    {
+     "name": "Likud",
+     "seats": 26,
+     "lo": 17,
+     "hi": 33,
+     "p_pass": 1.0,
+     "mean": 25.3
+    },
+    {
+     "name": "Yashar",
+     "seats": 23,
+     "lo": 16,
+     "hi": 30,
+     "p_pass": 1.0,
+     "mean": 23.0
+    },
+    {
+     "name": "Bennett 2026 + Yesh Atid",
+     "seats": 12,
+     "lo": 7,
+     "hi": 16,
+     "p_pass": 0.996,
+     "mean": 11.5
+    },
+    {
+     "name": "United Torah Judaism",
+     "seats": 9,
+     "lo": 6,
+     "hi": 11,
+     "p_pass": 0.998,
+     "mean": 8.5
+    },
+    {
+     "name": "Balad + Hadash-Ta'al",
+     "seats": 9,
+     "lo": 6,
+     "hi": 12,
+     "p_pass": 0.994,
+     "mean": 9.1
+    },
+    {
+     "name": "The Democrats",
+     "seats": 9,
+     "lo": 6,
+     "hi": 13,
+     "p_pass": 0.991,
+     "mean": 9.2
+    },
+    {
+     "name": "Shas",
+     "seats": 8,
+     "lo": 6,
+     "hi": 11,
+     "p_pass": 0.996,
+     "mean": 8.5
+    },
+    {
+     "name": "Yisrael Beytenu",
+     "seats": 8,
+     "lo": 5,
+     "hi": 11,
+     "p_pass": 0.99,
+     "mean": 8.3
+    },
+    {
+     "name": "Ra'am",
+     "seats": 6,
+     "lo": 0,
+     "hi": 8,
+     "p_pass": 0.847,
+     "mean": 5.0
+    },
+    {
+     "name": "Otzma Yehudit",
+     "seats": 6,
+     "lo": 0,
+     "hi": 10,
+     "p_pass": 0.838,
+     "mean": 5.7
+    },
+    {
+     "name": "Religious Zionist Party",
+     "seats": 4,
+     "lo": 0,
+     "hi": 8,
+     "p_pass": 0.594,
+     "mean": 3.3
+    },
+    {
+     "name": "Amcha Yisrael",
+     "seats": 0,
+     "lo": 0,
+     "hi": 7,
+     "p_pass": 0.23,
+     "mean": 1.4
+    },
+    {
+     "name": "Reservists – Economic Party",
+     "seats": 0,
+     "lo": 0,
+     "hi": 7,
+     "p_pass": 0.209,
+     "mean": 1.2
+    },
+    {
+     "name": "Code Black – Shield of the Torah World",
+     "seats": 0,
+     "lo": 0,
+     "hi": 0,
+     "p_pass": 0.014,
+     "mean": 0.1
+    },
+    {
+     "name": "The Haredi Public",
+     "seats": 0,
+     "lo": 0,
+     "hi": 0,
+     "p_pass": 0.004,
+     "mean": 0.0
+    },
+    {
+     "name": "Blue and White",
+     "seats": 0,
+     "lo": 0,
+     "hi": 0,
+     "p_pass": 0.004,
+     "mean": 0.0
+    },
+    {
+     "name": "Tzomet Beit Yisrael",
+     "seats": 0,
+     "lo": 0,
+     "hi": 0,
+     "p_pass": 0.002,
+     "mean": 0.0
+    },
+    {
+     "name": "Ahi – Back to the Roots",
+     "seats": 0,
+     "lo": 0,
+     "hi": 0,
+     "p_pass": 0.002,
+     "mean": 0.0
+    },
+    {
+     "name": "Israel First",
+     "seats": 0,
+     "lo": 0,
+     "hi": 0,
+     "p_pass": 0.002,
+     "mean": 0.0
+    },
+    {
+     "name": "Noam",
+     "seats": 0,
+     "lo": 0,
+     "hi": 0,
+     "p_pass": 0.001,
+     "mean": 0.0
+    },
+    {
+     "name": "Unity",
+     "seats": 0,
+     "lo": 0,
+     "hi": 0,
+     "p_pass": 0.0,
+     "mean": 0.0
+    },
+    {
+     "name": "Balad (alone)",
+     "seats": 0,
+     "lo": 0,
+     "hi": 0,
+     "p_pass": 0.0,
+     "mean": 0.0
+    }
+   ],
+   "asof": "2026-10-15",
+   "n_sims": 8000,
+   "groups": {
+    "netanyahu": [
+     0.249,
+     0.107,
+     0.463
+    ],
+    "change": [
+     0.276,
+     0.144,
+     0.386
+    ],
+    "unity": [
+     0.206,
+     0.007,
+     0.468
+    ],
+    "repeat": [
+     0.269,
+     0.065,
+     0.573
+    ],
+    "netanyahu_in_office": [
+     0.518,
+     0.285,
+     0.749
+    ]
+   },
+   "groups_se": {
+    "netanyahu": 0.0172,
+    "change": 0.011,
+    "unity": 0.0226,
+    "repeat": 0.0216,
+    "netanyahu_in_office": 0.0217
+   },
+   "pm": [
+    [
+     "Eisenkot",
+     0.281,
+     0.153,
+     0.415
+    ],
+    [
+     "none (repeat election)",
+     0.269,
+     0.065,
+     0.573
+    ],
+    [
+     "Netanyahu",
+     0.249,
+     0.107,
+     0.463
+    ],
+    [
+     "Likud successor (unity)",
+     0.101,
+     0.003,
+     0.215
+    ],
+    [
+     "Bennett",
+     0.074,
+     0.038,
+     0.11
+    ],
+    [
+     "Liberman",
+     0.015,
+     0.004,
+     0.035
+    ],
+    [
+     "another leader",
+     0.011,
+     0.004,
+     0.018
+    ]
+   ],
+   "outcomes": [
+    [
+     "Netanyahu rightist coalition",
+     0.074
+    ],
+    [
+     "Netanyahu + unaligned / Amcha",
+     0.004
+    ],
+    [
+     "Change coalition (without Ra'am)",
+     0.054
+    ],
+    [
+     "Change coalition with unaligned / Amcha",
+     0.024
+    ],
+    [
+     "Change coalition with a haredi party",
+     0.078
+    ],
+    [
+     "Centre minority backed by the Joint List",
+     0.034
+    ],
+    [
+     "Unity government (Likud without Netanyahu)",
+     0.206
+    ],
+    [
+     "Repeat election",
+     0.269
+    ],
+    [
+     "Change coalition with Ra'am",
+     0.086
+    ],
+    [
+     "Netanyahu + a change-bloc defector",
+     0.171
+    ]
+   ],
+   "vectors": 50,
+   "n_draws": 8000,
+   "groups_paired": {
+    "netanyahu": 0.273,
+    "change": 0.271,
+    "unity": 0.178,
+    "repeat": 0.277,
+    "netanyahu_in_office": 0.55
+   },
+   "pm_paired": [
+    [
+     "none (repeat election)",
+     0.277
+    ],
+    [
+     "Netanyahu",
+     0.273
+    ],
+    [
+     "Eisenkot",
+     0.265
+    ],
+    [
+     "Likud successor (unity)",
+     0.088
+    ],
+    [
+     "Bennett",
+     0.071
+    ],
+    [
+     "Liberman",
+     0.015
+    ],
+    [
+     "another leader",
+     0.011
+    ]
+   ]
+  },
+  {
+   "id": "t_unit_narrow",
+   "kind": "bayes",
+   "status": "failed",
+   "name": {
+    "en": "Narrower shocks",
+    "he": "זעזועים צרים יותר"
+   },
+   "desc": {
+    "en": "Two changes to the width of the election-day shocks. Each Student-t shock is scaled to unit variance, so the bloc swing and the sector shocks have the spread they were measured at instead of 1.29 times it <a class=\"cite\" data-s=\"ERR-F13\"></a>, and the per-list residual is cut to 0.6 of the shipped line, the width chosen by nested leave-one-cycle-out <a class=\"cite\" data-s=\"EVAL-F15\"></a>. It passed on the first harness, whose pollster weights had seen each graded election's final polls; on the leak-free harness its chosen width moved from 0.4 to 0.6 and it loses the interval score a week and three weeks out beyond the tolerance (<a href=\"decision-log.html#s48\" rel=\"noopener\">decision log §48</a>). It was graded on the residual line as fitted before the 18 October fix and runs on that line here; the two horizons were graded on one seed only, so the scorecard leaves them blank.",
+    "he": "שני שינויים ברוחב זעזועי יום הבחירות. כל זעזוע מהתפלגות t מנורמל לשונות אחת, כך שלתנודת הגוש ולזעזועי המגזרים יש הפיזור שבו נמדדו ולא פי <span class=\"ltr\">1.29</span> ממנו <a class=\"cite\" data-s=\"ERR-F13\"></a>, והזעזוע השיורי לכל רשימה מצטמצם ל־<span class=\"ltr\">0.6</span> מהקו של המודל הרשמי, הרוחב שנבחר בהשמטת־מחזור מקוננת <a class=\"cite\" data-s=\"EVAL-F15\"></a>. החלופה עברה במבחן־העבר הראשון, שבו משקלי הסוקרים כבר הכירו את הסקרים הסופיים של כל מערכת שנבחנה; במבחן־העבר הנקי מהדליפה הרוחב שנבחר זז מ־<span class=\"ltr\">0.4</span> ל־<span class=\"ltr\">0.6</span> והיא מפסידה בציון הרווח שבוע ושלושה שבועות לפני מעבר לסף הסובלנות (<a href=\"decision-log.html#s48\" rel=\"noopener\">יומן ההחלטות, ‎§48</a>). היא נבחנה על קו השיורי כפי שהותאם לפני התיקון של 18 באוקטובר ומורצת כאן על אותו קו; שני האופקים האלה נבחנו על זרע אחד בלבד, ולכן כרטיס הציונים משאיר אותם ריקים."
+   },
+   "verdict": {
+    "en": "Failed on the leak-free harness: the interval score a week out (+0.174) and three weeks out (+0.236), beyond the 0.05 tolerance (one seed).",
+    "he": "נכשל במבחן־העבר הנקי: ציון הרווח שבוע לפני (<span class=\"ltr\">+0.174</span>) ושלושה שבועות לפני (<span class=\"ltr\">+0.236</span>), מעבר לסף של <span class=\"ltr\">0.05</span> (זרע אחד)."
+   },
+   "sections": [
+    48
+   ],
+   "flags": {
+    "bayes_model.T_UNIT_VAR": true,
+    "bayes_model.RESID_SCALE": 0.6,
+    "bayes_model.RESID_SPACE": "seat"
+   },
+   "backtest": {
+    "eve": {
+     "median_mae": 1.5184,
+     "mean_mae": 1.617,
+     "coverage": 0.9514,
+     "brier": 0.0421,
+     "interval": 8.8585
+    },
+    "D-7": null,
+    "D-21": null
+   },
+   "backtest_src": "dossier s.48.6 (arm CA = T_UNIT_VAR + nested width, on the pre-fix seat line; eve offsets 0/100/200 on the s.50 caches, its base row = the pre-fix shipped eve row); scratch w48loo/summary.csv. D-7 and D-21 exist on offset 0 only and are left empty",
+   "blocs": {
+    "nb": 0.066,
+    "anti": 0.035,
+    "antiRaam": 0.227,
+    "neither": 0.707,
+    "nb_mean": 52.6,
+    "nb_p05": 44,
+    "nb_p95": 61
+   },
+   "lists": [
+    {
+     "name": "Likud",
+     "seats": 26,
+     "lo": 18,
+     "hi": 33,
+     "p_pass": 1.0,
+     "mean": 25.3
+    },
+    {
+     "name": "Yashar",
+     "seats": 23,
+     "lo": 17,
+     "hi": 29,
+     "p_pass": 1.0,
+     "mean": 23.0
+    },
+    {
+     "name": "Bennett 2026 + Yesh Atid",
+     "seats": 12,
+     "lo": 7,
+     "hi": 16,
+     "p_pass": 0.998,
+     "mean": 11.5
+    },
+    {
+     "name": "United Torah Judaism",
+     "seats": 9,
+     "lo": 6,
+     "hi": 11,
+     "p_pass": 0.999,
+     "mean": 8.5
+    },
+    {
+     "name": "The Democrats",
+     "seats": 9,
+     "lo": 6,
+     "hi": 12,
+     "p_pass": 0.998,
+     "mean": 9.2
+    },
+    {
+     "name": "Balad + Hadash-Ta'al",
+     "seats": 9,
+     "lo": 6,
+     "hi": 12,
+     "p_pass": 0.998,
+     "mean": 9.1
+    },
+    {
+     "name": "Shas",
+     "seats": 8,
+     "lo": 6,
+     "hi": 11,
+     "p_pass": 0.997,
+     "mean": 8.5
+    },
+    {
+     "name": "Yisrael Beytenu",
+     "seats": 8,
+     "lo": 6,
+     "hi": 11,
+     "p_pass": 0.997,
+     "mean": 8.3
+    },
+    {
+     "name": "Ra'am",
+     "seats": 6,
+     "lo": 0,
+     "hi": 8,
+     "p_pass": 0.852,
+     "mean": 4.9
+    },
+    {
+     "name": "Otzma Yehudit",
+     "seats": 6,
+     "lo": 0,
+     "hi": 10,
+     "p_pass": 0.849,
+     "mean": 5.7
+    },
+    {
+     "name": "Religious Zionist Party",
+     "seats": 4,
+     "lo": 0,
+     "hi": 7,
+     "p_pass": 0.594,
+     "mean": 3.2
+    },
+    {
+     "name": "Amcha Yisrael",
+     "seats": 0,
+     "lo": 0,
+     "hi": 7,
+     "p_pass": 0.228,
+     "mean": 1.4
+    },
+    {
+     "name": "Reservists – Economic Party",
+     "seats": 0,
+     "lo": 0,
+     "hi": 7,
+     "p_pass": 0.204,
+     "mean": 1.2
+    },
+    {
+     "name": "Code Black – Shield of the Torah World",
+     "seats": 0,
+     "lo": 0,
+     "hi": 0,
+     "p_pass": 0.012,
+     "mean": 0.1
+    },
+    {
+     "name": "Tzomet Beit Yisrael",
+     "seats": 0,
+     "lo": 0,
+     "hi": 0,
+     "p_pass": 0.001,
+     "mean": 0.0
+    },
+    {
+     "name": "Ahi – Back to the Roots",
+     "seats": 0,
+     "lo": 0,
+     "hi": 0,
+     "p_pass": 0.001,
+     "mean": 0.0
+    },
+    {
+     "name": "Blue and White",
+     "seats": 0,
+     "lo": 0,
+     "hi": 0,
+     "p_pass": 0.001,
+     "mean": 0.0
+    },
+    {
+     "name": "Israel First",
+     "seats": 0,
+     "lo": 0,
+     "hi": 0,
+     "p_pass": 0.001,
+     "mean": 0.0
+    },
+    {
+     "name": "The Haredi Public",
+     "seats": 0,
+     "lo": 0,
+     "hi": 0,
+     "p_pass": 0.0,
+     "mean": 0.0
+    },
+    {
+     "name": "Noam",
+     "seats": 0,
+     "lo": 0,
+     "hi": 0,
+     "p_pass": 0.0,
+     "mean": 0.0
+    },
+    {
+     "name": "Unity",
+     "seats": 0,
+     "lo": 0,
+     "hi": 0,
+     "p_pass": 0.0,
+     "mean": 0.0
+    },
+    {
+     "name": "Balad (alone)",
+     "seats": 0,
+     "lo": 0,
+     "hi": 0,
+     "p_pass": 0.0,
+     "mean": 0.0
+    }
+   ],
+   "asof": "2026-10-15",
+   "n_sims": 8000,
+   "groups": {
+    "netanyahu": [
+     0.237,
+     0.086,
+     0.464
+    ],
+    "change": [
+     0.263,
+     0.125,
+     0.382
+    ],
+    "unity": [
+     0.217,
+     0.007,
+     0.497
+    ],
+    "repeat": [
+     0.282,
+     0.069,
+     0.602
+    ],
+    "netanyahu_in_office": [
+     0.52,
+     0.276,
+     0.765
+    ]
+   },
+   "groups_se": {
+    "netanyahu": 0.0182,
+    "change": 0.0117,
+    "unity": 0.024,
+    "repeat": 0.0226,
+    "netanyahu_in_office": 0.0229
+   },
+   "pm": [
+    [
+     "none (repeat election)",
+     0.282,
+     0.069,
+     0.602
+    ],
+    [
+     "Eisenkot",
+     0.276,
+     0.142,
+     0.418
+    ],
+    [
+     "Netanyahu",
+     0.237,
+     0.086,
+     0.464
+    ],
+    [
+     "Likud successor (unity)",
+     0.107,
+     0.003,
+     0.229
+    ],
+    [
+     "Bennett",
+     0.073,
+     0.035,
+     0.11
+    ],
+    [
+     "Liberman",
+     0.014,
+     0.003,
+     0.035
+    ],
+    [
+     "another leader",
+     0.011,
+     0.004,
+     0.02
+    ]
+   ],
+   "outcomes": [
+    [
+     "Netanyahu rightist coalition",
+     0.053
+    ],
+    [
+     "Netanyahu + unaligned / Amcha",
+     0.003
+    ],
+    [
+     "Change coalition (without Ra'am)",
+     0.035
+    ],
+    [
+     "Change coalition with unaligned / Amcha",
+     0.023
+    ],
+    [
+     "Change coalition with a haredi party",
+     0.084
+    ],
+    [
+     "Centre minority backed by the Joint List",
+     0.036
+    ],
+    [
+     "Unity government (Likud without Netanyahu)",
+     0.217
+    ],
+    [
+     "Repeat election",
+     0.282
+    ],
+    [
+     "Change coalition with Ra'am",
+     0.086
+    ],
+    [
+     "Netanyahu + a change-bloc defector",
+     0.181
+    ]
+   ],
+   "vectors": 50,
+   "n_draws": 8000,
+   "groups_paired": {
+    "netanyahu": 0.261,
+    "change": 0.258,
+    "unity": 0.189,
+    "repeat": 0.29,
+    "netanyahu_in_office": 0.552
+   },
+   "pm_paired": [
+    [
+     "none (repeat election)",
+     0.29
+    ],
+    [
+     "Netanyahu",
+     0.261
+    ],
+    [
+     "Eisenkot",
+     0.26
+    ],
+    [
+     "Likud successor (unity)",
+     0.094
+    ],
+    [
+     "Bennett",
+     0.07
+    ],
+    [
+     "Liberman",
+     0.014
+    ],
+    [
+     "another leader",
+     0.011
+    ]
+   ]
+  },
+  {
+   "id": "no_trail",
+   "kind": "bayes",
+   "status": "layer",
+   "name": {
+    "en": "No late Likud surge",
+    "he": "בלי זינוק מאוחר לליכוד"
+   },
+   "desc": {
+    "en": "The polls and every other layer as published, without the trailing-Likud layer: no late Likud surge when Likud trails or ties the largest list outside its bloc. The layer rests on the three cycles in which Likud trailed in the final week (2015, April and September 2019), when it beat its final polls by +8.8, +6.8 and −0.5 seats, paid mostly by its own bloc's smaller lists <a class=\"cite\" data-s=\"DL-36,DYN-F09,ERR-F19\"></a>. It is a layer check, not a candidate: switched off, the backtest's median and mean seat errors are worse at every horizon, so the layer stays (<a href=\"decision-log.html#s46\" rel=\"noopener\">decision log §46</a>, <a href=\"decision-log.html#s57\" rel=\"noopener\">§57</a>).",
+    "he": "הסקרים וכל שאר השכבות כפי שפורסמו, בלי שכבת הליכוד המפגר: אין זינוק מאוחר לליכוד כשהוא מפגר אחרי הרשימה הגדולה ביותר מחוץ לגוש שלו או שווה לה. השכבה נשענת על שלוש המערכות שבהן הליכוד פיגר בשבוע האחרון (2015, אפריל וספטמבר 2019), ובהן הוא עקף את הסקרים הסופיים שלו ב־<span class=\"ltr\">+8.8</span>, <span class=\"ltr\">+6.8</span> ו־<span class=\"ltr\">−0.5</span> מנדטים, בעיקר על חשבון הרשימות הקטנות של הגוש שלו עצמו <a class=\"cite\" data-s=\"DL-36,DYN-F09,ERR-F19\"></a>. זו בדיקת שכבה ולא מועמד: כשהיא כבויה, השגיאה החציונית והשגיאה הממוצעת במנדטים גרועות יותר בכל אופק, ולכן השכבה נשארת (<a href=\"decision-log.html#s46\" rel=\"noopener\">יומן ההחלטות, ‎§46</a>, <a href=\"decision-log.html#s57\" rel=\"noopener\">‎§57</a>)."
+   },
+   "verdict": {
+    "en": "A shipped layer switched off; worse median and mean error at every horizon.",
+    "he": "שכבה שמתפרסמת, כבויה; שגיאה חציונית וממוצעת גרועות יותר בכל אופק."
+   },
+   "sections": [
+    36,
+    46,
+    57
+   ],
+   "flags": {
+    "bayes_model.TRAIL_ON": false
+   },
+   "backtest": {
+    "eve": {
+     "median_mae": 1.5657,
+     "mean_mae": 1.6688,
+     "coverage": 0.9604,
+     "brier": 0.0505,
+     "interval": 9.4144
+    },
+    "D-7": {
+     "median_mae": 1.6205,
+     "mean_mae": 1.724,
+     "coverage": 0.949,
+     "brier": 0.0509,
+     "interval": 9.5894
+    },
+    "D-21": {
+     "median_mae": 1.7345,
+     "mean_mae": 1.8456,
+     "coverage": 0.9683,
+     "brier": 0.0514,
+     "interval": 9.5424
+    }
+   },
+   "backtest_src": "layer check on the current shipped configuration (RESID_SPACE seat_fix) with the s.57.1 runner (every layer as in validate_bayes / validate_horizon, s.50 caches, offsets 0/100/200, shipped list mask), gevalt_cond off; its shipped rows reproduce the s.62.2 Bfix rows exactly. scratch explorer/notrail. The same check on the pre-fix line is s.57.1's (w57/diag no_trail); s.46's is on the pre-s.50 harness",
+   "blocs": {
+    "nb": 0.107,
+    "anti": 0.051,
+    "antiRaam": 0.226,
+    "neither": 0.667,
+    "nb_mean": 53.2,
+    "nb_p05": 43,
+    "nb_p95": 63
+   },
+   "lists": [
+    {
+     "name": "Yashar",
+     "seats": 23,
+     "lo": 16,
+     "hi": 30,
+     "p_pass": 1.0,
+     "mean": 22.9
+    },
+    {
+     "name": "Likud",
+     "seats": 23,
+     "lo": 16,
+     "hi": 29,
+     "p_pass": 1.0,
+     "mean": 22.5
+    },
+    {
+     "name": "Bennett 2026 + Yesh Atid",
+     "seats": 12,
+     "lo": 7,
+     "hi": 16,
+     "p_pass": 0.996,
+     "mean": 11.4
+    },
+    {
+     "name": "United Torah Judaism",
+     "seats": 9,
+     "lo": 6,
+     "hi": 11,
+     "p_pass": 0.998,
+     "mean": 8.5
+    },
+    {
+     "name": "The Democrats",
+     "seats": 9,
+     "lo": 6,
+     "hi": 13,
+     "p_pass": 0.993,
+     "mean": 9.1
+    },
+    {
+     "name": "Balad + Hadash-Ta'al",
+     "seats": 9,
+     "lo": 6,
+     "hi": 13,
+     "p_pass": 0.993,
+     "mean": 9.0
+    },
+    {
+     "name": "Shas",
+     "seats": 8,
+     "lo": 6,
+     "hi": 11,
+     "p_pass": 0.996,
+     "mean": 8.5
+    },
+    {
+     "name": "Yisrael Beytenu",
+     "seats": 8,
+     "lo": 5,
+     "hi": 12,
+     "p_pass": 0.985,
+     "mean": 8.2
+    },
+    {
+     "name": "Otzma Yehudit",
+     "seats": 8,
+     "lo": 4,
+     "hi": 11,
+     "p_pass": 0.964,
+     "mean": 7.5
+    },
+    {
+     "name": "Ra'am",
+     "seats": 6,
+     "lo": 0,
+     "hi": 8,
+     "p_pass": 0.796,
+     "mean": 4.8
+    },
+    {
+     "name": "Religious Zionist Party",
+     "seats": 5,
+     "lo": 0,
+     "hi": 8,
+     "p_pass": 0.8,
+     "mean": 4.8
+    },
+    {
+     "name": "Amcha Yisrael",
+     "seats": 0,
+     "lo": 0,
+     "hi": 7,
+     "p_pass": 0.232,
+     "mean": 1.4
+    },
+    {
+     "name": "Reservists – Economic Party",
+     "seats": 0,
+     "lo": 0,
+     "hi": 7,
+     "p_pass": 0.212,
+     "mean": 1.3
+    },
+    {
+     "name": "Code Black – Shield of the Torah World",
+     "seats": 0,
+     "lo": 0,
+     "hi": 0,
+     "p_pass": 0.016,
+     "mean": 0.1
+    },
+    {
+     "name": "Blue and White",
+     "seats": 0,
+     "lo": 0,
+     "hi": 0,
+     "p_pass": 0.004,
+     "mean": 0.0
+    },
+    {
+     "name": "The Haredi Public",
+     "seats": 0,
+     "lo": 0,
+     "hi": 0,
+     "p_pass": 0.003,
+     "mean": 0.0
+    },
+    {
+     "name": "Ahi – Back to the Roots",
+     "seats": 0,
+     "lo": 0,
+     "hi": 0,
+     "p_pass": 0.003,
+     "mean": 0.0
+    },
+    {
+     "name": "Tzomet Beit Yisrael",
+     "seats": 0,
+     "lo": 0,
+     "hi": 0,
+     "p_pass": 0.002,
+     "mean": 0.0
+    },
+    {
+     "name": "Noam",
+     "seats": 0,
+     "lo": 0,
+     "hi": 0,
+     "p_pass": 0.002,
+     "mean": 0.0
+    },
+    {
+     "name": "Israel First",
+     "seats": 0,
+     "lo": 0,
+     "hi": 0,
+     "p_pass": 0.002,
+     "mean": 0.0
+    },
+    {
+     "name": "Unity",
+     "seats": 0,
+     "lo": 0,
+     "hi": 0,
+     "p_pass": 0.0,
+     "mean": 0.0
+    },
+    {
+     "name": "Balad (alone)",
+     "seats": 0,
+     "lo": 0,
+     "hi": 0,
+     "p_pass": 0.0,
+     "mean": 0.0
+    }
+   ],
+   "asof": "2026-10-15",
+   "n_sims": 8000,
+   "groups": {
+    "netanyahu": [
+     0.266,
+     0.123,
+     0.484
+    ],
+    "change": [
+     0.261,
+     0.138,
+     0.367
+    ],
+    "unity": [
+     0.208,
+     0.007,
+     0.466
+    ],
+    "repeat": [
+     0.265,
+     0.064,
+     0.564
+    ],
+    "netanyahu_in_office": [
+     0.531,
+     0.3,
+     0.762
+    ]
+   },
+   "groups_se": {
+    "netanyahu": 0.0173,
+    "change": 0.0106,
+    "unity": 0.0226,
+    "repeat": 0.0213,
+    "netanyahu_in_office": 0.0216
+   },
+   "pm": [
+    [
+     "Eisenkot",
+     0.27,
+     0.147,
+     0.399
+    ],
+    [
+     "Netanyahu",
+     0.266,
+     0.123,
+     0.484
+    ],
+    [
+     "none (repeat election)",
+     0.265,
+     0.064,
+     0.564
+    ],
+    [
+     "Likud successor (unity)",
+     0.102,
+     0.004,
+     0.215
+    ],
+    [
+     "Bennett",
+     0.073,
+     0.038,
+     0.107
+    ],
+    [
+     "Liberman",
+     0.014,
+     0.004,
+     0.034
+    ],
+    [
+     "another leader",
+     0.01,
+     0.004,
+     0.018
+    ]
+   ],
+   "outcomes": [
+    [
+     "Netanyahu rightist coalition",
+     0.09
+    ],
+    [
+     "Netanyahu + unaligned / Amcha",
+     0.005
+    ],
+    [
+     "Change coalition (without Ra'am)",
+     0.051
+    ],
+    [
+     "Change coalition with unaligned / Amcha",
+     0.025
+    ],
+    [
+     "Change coalition with a haredi party",
+     0.076
+    ],
+    [
+     "Centre minority backed by the Joint List",
+     0.032
+    ],
+    [
+     "Unity government (Likud without Netanyahu)",
+     0.208
+    ],
+    [
+     "Repeat election",
+     0.265
+    ],
+    [
+     "Change coalition with Ra'am",
+     0.077
+    ],
+    [
+     "Netanyahu + a change-bloc defector",
+     0.171
+    ]
+   ],
+   "vectors": 50,
+   "n_draws": 8000,
+   "groups_paired": {
+    "netanyahu": 0.29,
+    "change": 0.256,
+    "unity": 0.18,
+    "repeat": 0.273,
+    "netanyahu_in_office": 0.563
+   },
+   "pm_paired": [
+    [
+     "Netanyahu",
+     0.29
+    ],
+    [
+     "none (repeat election)",
+     0.273
+    ],
+    [
+     "Eisenkot",
+     0.254
+    ],
+    [
+     "Likud successor (unity)",
+     0.089
+    ],
+    [
+     "Bennett",
+     0.07
+    ],
+    [
+     "Liberman",
+     0.014
+    ],
+    [
+     "another leader",
+     0.01
+    ]
+   ]
+  },
+  {
+   "id": "simple_average",
+   "kind": "simple",
+   "status": "benchmark",
+   "name": {
+    "en": "Simple poll average",
+    "he": "ממוצע סקרים פשוט"
+   },
+   "desc": {
+    "en": "The benchmark: each firm's latest poll averaged with weights for recency, sample size, the firm's graded accuracy and a discount for related firms <a class=\"cite\" data-s=\"DL-23,AGG-F11\"></a>, corrected for house effects and trend, then a correlated-error simulation through the same seat law. It reads the published seat tables only, not the CEC filings, and has no registration mixture, certainty layer or late-surge layers. It is run here on the polls fielded since filing day (9 September), when the ballot was fixed; the file it last wrote predates the ballot. Its own backtest is a different harness, so the scorecard leaves it blank (<a href=\"decision-log.html#s28\" rel=\"noopener\">decision log §28</a>).",
+    "he": "נקודת הייחוס: הסקר האחרון של כל מכון, בממוצע משוקלל לפי עדכניות, גודל מדגם, הדיוק המדורג של המכון והנחה למכונים קשורים <a class=\"cite\" data-s=\"DL-23,AGG-F11\"></a>, מתוקן לאפקטי בית ולמגמה, ואחר כך סימולציה של שגיאות מתואמות דרך אותו חוק חלוקת מנדטים. הוא קורא רק את טבלאות המנדטים שפורסמו, לא את הדוחות לוועדת הבחירות, ואין בו תערובת הרשמה, שכבת ודאות או שכבות של זינוק מאוחר. כאן הוא מורץ על הסקרים שנערכו מאז יום הגשת הרשימות (9 בספטמבר), כשפתק ההצבעה כבר נקבע; הקובץ שכתב לאחרונה קודם לפתק. מבחן־העבר שלו הוא מערך בדיקה אחר, ולכן כרטיס הציונים משאיר אותו ריק (<a href=\"decision-log.html#s28\" rel=\"noopener\">יומן ההחלטות, ‎§28</a>)."
+   },
+   "verdict": {
+    "en": "Benchmark; graded on its own harness (validate_model.py), not on this basis.",
+    "he": "נקודת ייחוס; נבחן במערך בדיקה משלו (validate_model.py), לא על הבסיס הזה."
+   },
+   "sections": [
+    23
+   ],
+   "flags": {},
+   "backtest": {
+    "eve": null,
+    "D-7": null,
+    "D-21": null
+   },
+   "backtest_src": "none on the official basis: the simple pipeline's retro-validation (validate_model.py, model_validation.csv) is a different harness",
+   "blocs": {
+    "nb": 0.182,
+    "anti": 0.077,
+    "antiRaam": 0.225,
+    "neither": 0.594,
+    "nb_mean": 53.3,
+    "nb_p05": 39,
+    "nb_p95": 67
+   },
+   "lists": [
+    {
+     "name": "Likud",
+     "seats": 23,
+     "lo": 16,
+     "hi": 29,
+     "p_pass": 1.0,
+     "mean": 22.4
+    },
+    {
+     "name": "Yashar",
+     "seats": 23,
+     "lo": 15,
+     "hi": 30,
+     "p_pass": 1.0,
+     "mean": 22.7
+    },
+    {
+     "name": "Bennett 2026 + Yesh Atid",
+     "seats": 11,
+     "lo": 6,
+     "hi": 17,
+     "p_pass": 0.983,
+     "mean": 11.4
+    },
+    {
+     "name": "United Torah Judaism",
+     "seats": 9,
+     "lo": 5,
+     "hi": 13,
+     "p_pass": 0.961,
+     "mean": 8.7
+    },
+    {
+     "name": "Balad + Hadash-Ta'al",
+     "seats": 9,
+     "lo": 4,
+     "hi": 13,
+     "p_pass": 0.954,
+     "mean": 8.5
+    },
+    {
+     "name": "Shas",
+     "seats": 9,
+     "lo": 4,
+     "hi": 13,
+     "p_pass": 0.951,
+     "mean": 8.3
+    },
+    {
+     "name": "The Democrats",
+     "seats": 9,
+     "lo": 0,
+     "hi": 14,
+     "p_pass": 0.939,
+     "mean": 8.7
+    },
+    {
+     "name": "Otzma Yehudit",
+     "seats": 8,
+     "lo": 5,
+     "hi": 12,
+     "p_pass": 0.969,
+     "mean": 7.9
+    },
+    {
+     "name": "Yisrael Beytenu",
+     "seats": 8,
+     "lo": 4,
+     "hi": 11,
+     "p_pass": 0.956,
+     "mean": 7.6
+    },
+    {
+     "name": "Religious Zionist Party",
+     "seats": 6,
+     "lo": 0,
+     "hi": 9,
+     "p_pass": 0.852,
+     "mean": 5.7
+    },
+    {
+     "name": "Ra'am",
+     "seats": 5,
+     "lo": 0,
+     "hi": 9,
+     "p_pass": 0.737,
+     "mean": 4.7
+    },
+    {
+     "name": "Reservists – Economic Party",
+     "seats": 0,
+     "lo": 0,
+     "hi": 8,
+     "p_pass": 0.43,
+     "mean": 2.5
+    },
+    {
+     "name": "Amcha Yisrael",
+     "seats": 0,
+     "lo": 0,
+     "hi": 4,
+     "p_pass": 0.054,
+     "mean": 0.2
+    },
+    {
+     "name": "Israel First",
+     "seats": 0,
+     "lo": 0,
+     "hi": 0,
+     "p_pass": 0.041,
+     "mean": 0.2
+    },
+    {
+     "name": "Ahi – Back to the Roots",
+     "seats": 0,
+     "lo": 0,
+     "hi": 0,
+     "p_pass": 0.041,
+     "mean": 0.2
+    },
+    {
+     "name": "Code Black – Shield of the Torah World",
+     "seats": 0,
+     "lo": 0,
+     "hi": 0,
+     "p_pass": 0.04,
+     "mean": 0.2
+    },
+    {
+     "name": "Blue and White",
+     "seats": 0,
+     "lo": 0,
+     "hi": 0,
+     "p_pass": 0.013,
+     "mean": 0.1
+    },
+    {
+     "name": "The Haredi Public",
+     "seats": 0,
+     "lo": 0,
+     "hi": 0,
+     "p_pass": 0.008,
+     "mean": 0.0
+    },
+    {
+     "name": "Noam",
+     "seats": 0,
+     "lo": 0,
+     "hi": 0,
+     "p_pass": 0.003,
+     "mean": 0.0
+    },
+    {
+     "name": "Tzomet Beit Yisrael",
+     "seats": 0,
+     "lo": 0,
+     "hi": 0,
+     "p_pass": 0.001,
+     "mean": 0.0
+    }
+   ],
+   "asof": "2026-10-15",
+   "n_sims": 20000,
+   "polls_from": "2026-09-09",
+   "uncertainty_scale": 1.22,
+   "groups": {
+    "netanyahu": [
+     0.329,
+     0.204,
+     0.513
+    ],
+    "change": [
+     0.264,
+     0.171,
+     0.345
+    ],
+    "unity": [
+     0.187,
+     0.008,
+     0.403
+    ],
+    "repeat": [
+     0.22,
+     0.054,
+     0.466
+    ],
+    "netanyahu_in_office": [
+     0.549,
+     0.352,
+     0.746
+    ]
+   },
+   "groups_se": {
+    "netanyahu": 0.0148,
+    "change": 0.0083,
+    "unity": 0.0195,
+    "repeat": 0.0176,
+    "netanyahu_in_office": 0.0185
+   },
+   "pm": [
+    [
+     "Netanyahu",
+     0.329,
+     0.204,
+     0.513
+    ],
+    [
+     "Eisenkot",
+     0.265,
+     0.167,
+     0.378
+    ],
+    [
+     "none (repeat election)",
+     0.22,
+     0.054,
+     0.466
+    ],
+    [
+     "Likud successor (unity)",
+     0.091,
+     0.004,
+     0.191
+    ],
+    [
+     "Bennett",
+     0.072,
+     0.038,
+     0.102
+    ],
+    [
+     "Liberman",
+     0.014,
+     0.004,
+     0.033
+    ],
+    [
+     "another leader",
+     0.009,
+     0.004,
+     0.015
+    ]
+   ],
+   "outcomes": [
+    [
+     "Netanyahu rightist coalition",
+     0.177
+    ],
+    [
+     "Netanyahu + unaligned / Amcha",
+     0.011
+    ],
+    [
+     "Change coalition (without Ra'am)",
+     0.077
+    ],
+    [
+     "Change coalition with unaligned / Amcha",
+     0.048
+    ],
+    [
+     "Change coalition with a haredi party",
+     0.062
+    ],
+    [
+     "Centre minority backed by the Joint List",
+     0.021
+    ],
+    [
+     "Unity government (Likud without Netanyahu)",
+     0.187
+    ],
+    [
+     "Repeat election",
+     0.22
+    ],
+    [
+     "Change coalition with Ra'am",
+     0.056
+    ],
+    [
+     "Netanyahu + a change-bloc defector",
+     0.141
+    ]
+   ],
+   "vectors": 50,
+   "n_draws": 20000,
+   "groups_paired": {
+    "netanyahu": 0.353,
+    "change": 0.259,
+    "unity": 0.159,
+    "repeat": 0.228,
+    "netanyahu_in_office": 0.581
+   },
+   "pm_paired": [
+    [
+     "Netanyahu",
+     0.353
+    ],
+    [
+     "Eisenkot",
+     0.249
+    ],
+    [
+     "none (repeat election)",
+     0.228
+    ],
+    [
+     "Likud successor (unity)",
+     0.078
+    ],
+    [
+     "Bennett",
+     0.069
+    ],
+    [
+     "Liberman",
+     0.014
+    ],
+    [
+     "another leader",
+     0.009
+    ]
+   ]
+  }
+ ],
+ "skipped": []
+}

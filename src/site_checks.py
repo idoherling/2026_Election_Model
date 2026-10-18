@@ -99,9 +99,11 @@ def check_chapters(html: str) -> list[str]:
 
 def cited_ids(html: str) -> set[str]:
     """Static citation ids in data-s attributes (template-literal ids built
-    at run time, "${...}", are not citations of the registry)."""
+    at run time, "${...}", are not citations of the registry), including
+    those inside the embedded JSON payload, where the quotes are escaped
+    (data-s=\\"ID\\": the model explorer's variant descriptions)."""
     out: set[str] = set()
-    for attr in re.findall(r'data-s="([^"]+)"', html):
+    for attr in re.findall(r'data-s=\\?"([^"\\]+)\\?"', html):
         for x in attr.split(","):
             x = x.strip()
             if x and "${" not in x and x not in PLACEHOLDER_IDS:

@@ -22,7 +22,11 @@ which step failed and why, and exits non-zero.
   3. chain    registration_scenarios -> government_formation ->
               official_forecast -> kalpi_model
   4. site     build_sources -> build_decision_log -> build_history (every
-              committed build read back from git) -> build_site
+              committed build read back from git) -> build_variants (every
+              model variant of src/model_variants.py through the same chain,
+              for the "Choose a model" explorer; --skip build_variants keeps
+              the last file, which build_site drops if it no longer matches
+              the official forecast) -> build_site
   5. checks   src/site_checks.py on output/site/index.html (always): the
               script parses, EN/HE chapter counts match, every citation
               resolves, מנדטים not מושבים, no "Others", every cited finding
@@ -62,7 +66,7 @@ PUBLISH = ROOT / "output" / "publish"
 LOGS = ROOT / "logs"
 
 CHAIN = ["registration_scenarios", "government_formation", "official_forecast", "kalpi_model"]
-SITE_STEPS = ["build_sources", "build_decision_log", "build_history", "build_site"]
+SITE_STEPS = ["build_sources", "build_decision_log", "build_history", "build_variants", "build_site"]
 # files each step must (re)write; a step that exits 0 without them fails
 OUTPUTS = {
     "scrape_polls": [PROCESSED / "polls.csv", PROCESSED / "results.csv"],
@@ -80,6 +84,7 @@ OUTPUTS = {
     "build_sources": [DATA / "forecast_sources.json", DATA / "forecast_findings.json"],
     "build_decision_log": [SITE / "decision-log.html"],
     "build_history": [PROCESSED / "forecast_history.csv"],
+    "build_variants": [PROCESSED / "model_variants.json"],
     "build_site": [SITE / "index.html", SITE / "site_data.json"],
 }
 TAIL = 12          # output lines echoed to the console per step

@@ -56,7 +56,7 @@ The steps run in this order:
 1. refresh (with `--refresh`)
 2. model (with `--refit` or `--project-only`)
 3. chain: `registration_scenarios`, `government_formation`, `official_forecast`, `kalpi_model`
-4. site: `build_sources`, `build_decision_log`, `build_history`, `build_site`
+4. site: `build_sources`, `build_decision_log`, `build_history`, `build_variants`, `build_site`
 5. checks: `src/site_checks.py`, always
 6. headline
 
@@ -118,6 +118,7 @@ python -m pytest            # pytest.ini adds src/ to the path; about 10 s, no M
 | `tests/test_site.py` | the checks of `src/site_checks.py` on `output/site/index.html`, each with a negative control |
 | `tests/test_registry.py` | every finding behind a cited source is verified or corrected, agreeing with its desk verdict, and the DL-n citations point at dossier sections |
 | `tests/test_pipeline.py` | step order, stop on first failure, logging, `--skip`, and the refresh move-aside and restore |
+| `tests/test_variants.py` | the model explorer: `variant_flags` applies and restores module flags (also on an exception, and refuses an unknown flag); the registry's texts cite resolvable ids and existing dossier sections; a placeholder appears once its flag exists; the official variant reproduces the published mixture and central count exactly and the formation groups within Monte Carlo noise (the chain run needs `m3_idata.nc`); citations inside the JSON payload are checked |
 
 Known bugs are pinned as strict `xfail` tests, which turn red when the bug is fixed:
 
@@ -377,6 +378,8 @@ is in `RESEARCH_BRIEF.md` and `CONTENT_BRIEF.md`.
 - `build_site.py` assembles one JSON payload and injects it into `site/template.html` at `__SITE_DATA__`. The payload holds the forecast, mixture, blocs, formation outputs, house effects, validation tables recomputed from the harness CSVs, kalpi sectors, a 2,500-draw sample, the poll ledger and firm ratings (`site_ledger.py`), the registry, and the live model constants quoted in the prose (`build_params`).
 - The output is `output/site/index.html`, plus `site_data.json` so data changes diff in git.
 - `build_history.py` reads every committed `output/site/site_data.json` back from git into `data/processed/forecast_history.csv`. Each build is classed polls / model / both / site, with its dossier sections. `build_site` turns the CSV into the "How the forecast has moved" section (`history_payload`), so `build_history` runs first.
+- `build_variants.py` runs every available model variant of `src/model_variants.py` (the official model, graded alternatives, a layer switched off, the simple benchmark; placeholders appear once their flag exists) through the same chain as the official forecast: the projection with the variant's module flags applied (`variant_flags`, restored afterwards), the registration mixture and the official central count with `PROCESSED_DIR` on a scratch directory, and the formation tree on 50 of production's 200 behavioural parameter vectors. It checks that the official variant reproduces the published headline and writes `data/processed/model_variants.json`, with each variant's backtest rows on the official row's harness and seeds (blank where none exist). `build_site` shows it as the "Choose a model" explorer (`?model=<id>`); the headline stays on the official model.
+  - Adding a variant: append a `Variant` to `model_variants.VARIANTS` with its module flags, dossier section, EN/HE texts and backtest rows, then rerun `build_variants.py` and `build_site.py`.
 - English chapters are HTML. Hebrew chapters come from the template's `HE_CH` table. Hebrew seats are always מנדטים. The site says "small parties", never the pollsters' "Others".
 - `build_decision_log.py` renders `docs/priors_dossier.md` as `output/site/decision-log.html`, with an anchor `#sN` on every section, using marked 4.3.0 from cdnjs.
 - `src/site_checks.py` runs the publish checks: the script parses (`node --check`; set `NODE` if node is not on the PATH), the EN and HE chapter counts match, citations resolve, the Hebrew and "Others" rules hold, and the registry status is clean.
@@ -418,6 +421,8 @@ src/
   build_sources.py         evidence registry from the research desks
   build_site.py            site payload -> output/site/index.html
   build_history.py         every committed build (git) -> forecast_history.csv
+  model_variants.py        model-explorer registry: variants, flags, texts, backtest rows
+  build_variants.py        every variant through the chain -> model_variants.json
   build_decision_log.py    docs/priors_dossier.md -> decision-log.html
   site_ledger.py           poll ledger + pollster ratings for the site
   site_checks.py           publish checks (also run by tests/test_site.py)
