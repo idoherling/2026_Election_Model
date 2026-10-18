@@ -183,6 +183,18 @@ CURATED = {
                 "סיכון האירועים נקשר לימים שבלי סקרים לפני איסור הפרסום"),
     "cb4d1a6": ("site", [56], "A record-based formation split tested and not shipped",
                 "חלוקת הרכבה לפי נתוני העבר נבחנה ולא נכנסה"),
+    "5bdf849": ("site", [], "Forecast history section added",
+                "נוסף פרק היסטוריית התחזית"),
+    "590bd89": ("site", [], "Accessibility and design fixes",
+                "תיקוני נגישות ועיצוב"),
+    "1ca6c85": ("model", [59], "Pledge-break gate recalibrated on the formation record",
+                "שער הפרת ההתחייבות כויל מחדש על נתוני ההרכבה"),
+    "651b955": ("site", [], "Redesign: answer-first top of the page",
+                "עיצוב מחדש: התשובה בראש העמוד"),
+    "91bc933": ("model", [62], "Residual index bug fixed; stacking tested and not shipped",
+                "תוקן באג האינדקס בזעזוע השיורי; ערבוב המודלים נבחן ולא נכנס"),
+    "f2eccf3": ("site", [61, 63], "Model explorer added: the official forecast beside its alternatives",
+                "נוסף בוחר המודלים: התחזית הרשמית לצד החלופות"),
 }
 GENERIC = {
     "polls": ("New polls or events and a refit", "סקרים או אירועים חדשים והתאמה מחדש"),
