@@ -1,0 +1,448 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Knesset Forecast Scorecard</title>
+<meta name="description" content="The frozen forecast of Israel's 27 October 2026 Knesset election, and every alternative model, graded against the official result with proper scoring rules.">
+<meta name="theme-color" content="#161512">
+__EN_ICON__
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="__EN_FONTS__">
+<style>
+/* Design tokens: copied at build time from site/template.html (the main site). */
+__EN_TOKENS__
+:root{--warn:#c2410c;--ok:#1a7a44}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--warn:#ff8a5c;--ok:#3aa268}}
+:root[data-theme="dark"]{--warn:#ff8a5c;--ok:#3aa268}
+*{box-sizing:border-box}
+html,body{background:var(--paper)}
+body{margin:0;color:var(--ink);font:400 16px/1.55 "IBM Plex Sans","Helvetica Neue",Arial,sans-serif;-webkit-font-smoothing:antialiased}
+html[dir="rtl"] body,html[dir="rtl"] h1,html[dir="rtl"] h2{font-family:"IBM Plex Sans Hebrew","IBM Plex Sans",sans-serif;letter-spacing:0}
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+h1,h2,h3{line-height:1.08;letter-spacing:-.015em;margin:0;text-wrap:balance}
+.n,.ltr{direction:ltr;unicode-bidi:isolate}
+.n{font-family:"IBM Plex Mono","IBM Plex Sans Hebrew",ui-monospace,monospace;font-variant-numeric:tabular-nums}
+a{color:var(--ink);text-decoration-color:var(--accent);text-decoration-thickness:2px;text-underline-offset:3px}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.skip{position:absolute;inset-inline-start:8px;top:8px;z-index:100;background:var(--ink);color:var(--paper);padding:10px 14px;font-weight:700;text-decoration:none;clip-path:inset(50%);white-space:nowrap}
+.skip:focus{clip-path:none}
+button,select{font:inherit}
+.masthead{border-top:14px solid var(--ink);border-bottom:3px solid var(--ink);padding:18px 0 14px}
+.masthead .wrap{display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.brand{font-weight:700;font-size:22px;letter-spacing:-.01em;text-transform:uppercase}
+.brand a{text-decoration:none}
+.brand small{font-weight:500;font-size:11px;color:var(--ink2);text-transform:uppercase;letter-spacing:.22em;display:block;margin-top:4px}
+html[dir="rtl"] .brand small{letter-spacing:.04em}
+.ctl{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.ctl button{border:2px solid var(--ink);background:transparent;color:var(--ink);font:700 12px "IBM Plex Sans Hebrew","IBM Plex Sans",sans-serif;padding:7px 14px;cursor:pointer;letter-spacing:.06em;min-height:36px}
+.dateline{font:500 11.5px "IBM Plex Mono","IBM Plex Sans Hebrew",monospace;color:var(--ink2);text-transform:uppercase;letter-spacing:.06em;text-align:end}
+html[dir="rtl"] .dateline{letter-spacing:.02em}
+.eyebrow{font:700 11px "IBM Plex Mono","IBM Plex Sans Hebrew",monospace;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin:0 0 8px}
+html[dir="rtl"] .eyebrow{letter-spacing:.03em}
+section{padding:30px 0 6px}
+section > h2{font-size:clamp(22px,3.2vw,30px);margin-bottom:6px}
+.lede{color:var(--ink2);max-width:66ch;margin:6px 0 16px;font-size:15px}
+.banner{margin:18px 0 0;border:3px solid var(--ink);padding:12px 16px;font-size:14.5px;background:var(--hit)}
+.banner.rehearsal{border-color:var(--accent)}
+.banner.warn{border-color:var(--warn)}
+/* the frozen panel */
+.frozen{border:3px solid var(--ink);padding:16px 18px 18px;margin-top:6px}
+.frozen .k{font:700 10.5px "IBM Plex Mono","IBM Plex Sans Hebrew",monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--ink2)}
+html[dir="rtl"] .frozen .k{letter-spacing:.02em}
+.sha{font:600 clamp(14px,2.2vw,19px)/1.4 "IBM Plex Mono",ui-monospace,monospace;word-break:break-all;overflow-wrap:anywhere;margin:6px 0 14px;direction:ltr;text-align:left;unicode-bidi:isolate}
+.facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px 18px}
+.facts div{min-width:0}
+.facts .v{font-size:14px;margin-top:3px;overflow-wrap:anywhere}
+.cmd{font:500 12.5px "IBM Plex Mono",ui-monospace,monospace;background:var(--hit);padding:8px 10px;margin-top:14px;direction:ltr;text-align:left;overflow-wrap:anywhere}
+.flag{font:600 10.5px "IBM Plex Mono","IBM Plex Sans Hebrew",monospace;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap}
+html[dir="rtl"] .flag{letter-spacing:0}
+.flag.in{color:var(--ok)} .flag.out{color:var(--warn)} .flag.na{color:var(--muted)}
+/* tiles */
+.tiles{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:3px solid var(--ink)}
+.tile{padding:14px 14px 16px 0;border-inline-end:1px solid var(--hit);min-width:0}
+html[dir="rtl"] .tile{padding:14px 0 16px 14px}
+.tile:last-child{border-inline-end:0}
+.tile .k{font:700 11px "IBM Plex Sans","IBM Plex Sans Hebrew",sans-serif;letter-spacing:.08em;text-transform:uppercase;min-height:30px}
+html[dir="rtl"] .tile .k{letter-spacing:0}
+.tile .big{font:600 clamp(30px,4.6vw,46px)/1 "IBM Plex Mono","IBM Plex Sans Hebrew",monospace;margin:10px 0 4px;font-variant-numeric:tabular-nums}
+.tile .s{font-size:12.5px;color:var(--muted);line-height:1.45}
+.tile .res{font-size:13px;margin-top:6px;color:var(--ink)}
+/* seat rows */
+.sheet{border-top:3px solid var(--ink)}
+.shead,.srow{display:grid;grid-template-columns:44px minmax(0,1.4fr) 60px 74px minmax(140px,1.6fr) 60px;gap:0 12px;align-items:center}
+.sheet.res .shead,.sheet.res .srow{grid-template-columns:44px minmax(0,1.4fr) 60px 60px minmax(140px,1.6fr) 96px}
+.shead{font:700 10px "IBM Plex Mono","IBM Plex Sans Hebrew",monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--ink2);padding:10px 0 8px;border-bottom:2px solid var(--ink);align-items:end}
+html[dir="rtl"] .shead{letter-spacing:0}
+.srow{padding:9px 0;border-bottom:1px solid var(--hit)}
+.lt{display:inline-flex;align-items:center;justify-content:center;min-width:38px;height:28px;padding:0 5px;border:2px solid var(--pc,var(--dead));font:700 13px "IBM Plex Sans Hebrew",sans-serif;direction:rtl;color:var(--ink)}
+.nm b{font-weight:600;font-size:15px;display:block;line-height:1.25}
+.nm small{font-size:12px;color:var(--muted)}
+.sv{font:600 21px/1 "IBM Plex Mono","IBM Plex Sans Hebrew",monospace;text-align:center;font-variant-numeric:tabular-nums}
+.sv.sub{font-weight:500;color:var(--ink2);font-size:15px}
+.trk{position:relative;height:22px;direction:ltr}
+.trk .axis{position:absolute;left:0;right:0;top:10px;height:1px;background:var(--hit)}
+.trk .band{position:absolute;top:6px;height:10px;background:var(--hit);outline:1px solid var(--muted)}
+.trk .ctr{position:absolute;top:3px;width:2px;height:16px;margin-left:-1px;background:var(--muted)}
+.trk .dot{position:absolute;top:5px;width:12px;height:12px;margin-left:-6px;border-radius:50%;background:var(--pc,var(--ink))}
+.ivlab{font-size:11.5px;color:var(--muted);margin-top:1px}
+.fl{text-align:end;line-height:1.35}
+.legend{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:12px;color:var(--ink2);margin:10px 0 0}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.lg-dot{width:11px;height:11px;border-radius:50%;background:var(--ink);display:inline-block}
+.lg-band{width:22px;height:9px;background:var(--hit);outline:1px solid var(--muted);display:inline-block}
+.lg-ctr{width:2px;height:14px;background:var(--muted);display:inline-block}
+/* tables */
+.tw{overflow-x:auto;-webkit-overflow-scrolling:touch;border-top:3px solid var(--ink)}
+table.t{border-collapse:collapse;width:100%;font-size:13.5px}
+table.t th{font:700 10px "IBM Plex Mono","IBM Plex Sans Hebrew",monospace;letter-spacing:.08em;text-transform:uppercase;text-align:start;color:var(--ink2);padding:8px 10px 8px 0;border-bottom:2px solid var(--ink);vertical-align:bottom}
+html[dir="rtl"] table.t th{letter-spacing:0;padding:8px 0 8px 10px}
+table.t td{padding:9px 10px 9px 0;border-bottom:1px solid var(--hit);vertical-align:top}
+html[dir="rtl"] table.t td{padding:9px 0 9px 10px}
+table.t td.num,table.t th.num{text-align:end;white-space:nowrap}
+table.t td.num{font-family:"IBM Plex Mono","IBM Plex Sans Hebrew",monospace;font-variant-numeric:tabular-nums}
+table.t td.best{font-weight:700}
+table.t td .sub,table.t th .sub{display:block;font-size:11px;color:var(--muted);font-weight:400}
+table.t th .sub{font-size:9.5px;letter-spacing:.04em;margin-top:2px}
+table.t .mdl{min-width:190px}
+#ordtab td:first-child{min-width:170px} #listtab td:first-child{min-width:120px}
+td.where{min-width:150px;max-width:230px;font-size:13px} .warnt{color:var(--warn)}
+table.t tr.off td{background:color-mix(in srgb,var(--hit) 55%,transparent)}
+.chip{display:inline-block;font:600 10px "IBM Plex Mono","IBM Plex Sans Hebrew",monospace;letter-spacing:.06em;text-transform:uppercase;color:var(--ink2);border:1px solid var(--muted);padding:1px 5px;margin-top:3px;white-space:nowrap}
+html[dir="rtl"] .chip{letter-spacing:0}
+.pick{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:0 0 12px;font-size:14px}
+.pick select{border:2px solid var(--ink);background:var(--paper);color:var(--ink);padding:6px 8px;min-height:36px;max-width:100%}
+/* PIT strip */
+.pit{position:relative;height:46px;margin:6px 0 4px;direction:ltr;border-bottom:1px solid var(--muted)}
+.pit .tail{position:absolute;top:0;bottom:0;background:var(--hit)}
+.pit i{position:absolute;bottom:4px;width:11px;height:11px;margin-left:-5.5px;border-radius:50%;background:var(--pc,var(--ink));opacity:.9}
+.pitax{display:flex;justify-content:space-between;font:500 11px "IBM Plex Mono",monospace;color:var(--muted);direction:ltr}
+.note{font-size:13.5px;color:var(--ink2);max-width:72ch;margin:10px 0 0}
+.honest{border-inline-start:4px solid var(--accent);padding:4px 0 4px 14px;margin:16px 0 0;max-width:72ch;font-size:14.5px}
+html[dir="rtl"] .honest{padding:4px 14px 4px 0}
+.method ul{margin:8px 0 0;padding-inline-start:20px;max-width:78ch}
+.method li{margin:6px 0;font-size:14px;color:var(--ink2)}
+.method li b{color:var(--ink)}
+footer{border-top:14px solid var(--ink);margin-top:46px;padding:22px 0 44px;font-size:12.5px;color:var(--muted)}
+footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+@media (max-width:900px){
+  .tiles{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .tile{border-bottom:1px solid var(--hit)}
+  .tile:nth-child(2n){border-inline-end:0}
+  .facts{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:600px){
+  .wrap{padding:0 16px}
+  .masthead .wrap{align-items:flex-start}
+  .dateline{text-align:start}
+  .facts{grid-template-columns:1fr}
+  .shead,.srow,.sheet.res .shead,.sheet.res .srow{grid-template-columns:40px minmax(0,1fr) 58px 50px;gap:4px 8px}
+  .shead{letter-spacing:0;font-size:9.5px}
+  .shead .h-ivl,.shead .h-fl{display:none}
+  .srow .ivl{grid-column:2 / 5}
+  .srow .fl{grid-column:2 / 5;text-align:start}
+  .lt{min-width:34px;font-size:12px}
+  .sv{font-size:18px}
+  .nm b{font-size:14px}
+}
+@media (prefers-reduced-motion: reduce){*{transition:none !important;animation:none !important}}
+@media print{.ctl,.skip,.pick{display:none !important} body{background:#fff;color:#000}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main" id="skip">Skip to content</a>
+<header class="masthead"><div class="wrap">
+  <div class="brand"><a href="index.html" id="brand">The Knesset Model</a><small id="tagline">Scorecard</small></div>
+  <div class="ctl">
+    <button id="langbtn" type="button"></button>
+    <button id="themebtn" type="button"></button>
+    <div class="dateline" id="dateline"></div>
+  </div>
+</div></header>
+<main id="main" class="wrap">
+  <div id="banner"></div>
+  <section id="frozen-sec" aria-labelledby="h-frozen"><p class="eyebrow" id="e-frozen"></p><h2 id="h-frozen"></h2><p class="lede" id="l-frozen"></p><div class="frozen" id="frozen"></div></section>
+  <section id="said" aria-labelledby="h-said"><p class="eyebrow" id="e-said"></p><h2 id="h-said"></h2><p class="lede" id="l-said"></p>
+    <div class="tiles" id="tiles"></div>
+    <div class="sheet" id="sheet" style="margin-top:22px"><div class="shead" id="shead"></div><div id="srows"></div></div>
+    <div class="legend" id="legend"></div></section>
+  <section id="scores-sec" aria-labelledby="h-scores"><p class="eyebrow" id="e-scores"></p><h2 id="h-scores"></h2><p class="lede" id="l-scores"></p>
+    <div class="tw"><table class="t" id="scoretab"></table></div><div id="honest"></div></section>
+  <section id="ord-sec" aria-labelledby="h-ord"><p class="eyebrow" id="e-ord"></p><h2 id="h-ord"></h2><p class="lede" id="l-ord"></p>
+    <div class="pick"><label for="model" id="pick-l"></label><select id="model"></select></div>
+    <div class="tw"><table class="t" id="ordtab"></table></div>
+    <h3 id="h-pit" style="font-size:17px;margin:22px 0 4px"></h3><p class="note" id="l-pit"></p>
+    <div class="pit" id="pit"></div><div class="pitax"><span>0</span><span>0.05</span><span>0.5</span><span>0.95</span><span>1</span></div>
+    <div class="tw" style="margin-top:18px"><table class="t" id="listtab"></table></div></section>
+  <section id="method" class="method" aria-labelledby="h-method"><p class="eyebrow" id="e-method"></p><h2 id="h-method"></h2><div id="methodbox"></div></section>
+</main>
+<footer><div class="wrap"><div id="foot-l"></div><div id="foot-r" style="text-align:end"></div></div></footer>
+<script>
+const DATA = __SC_DATA__;
+const QS = new URLSearchParams(location.search);
+const LANG = (() => { const q = QS.get("lang"); if (q === "he" || q === "en") return q;
+  try { return localStorage.getItem("klang") || "en"; } catch (e) { return "en"; } })();
+const HE = LANG === "he";
+document.documentElement.lang = HE ? "he" : "en";
+document.documentElement.dir = HE ? "rtl" : "ltr";
+
+const N = x => `<span class="n">${x}</span>`;
+const esc = s => String(s == null ? "" : s).replace(/[&<>"]/g, c => ({"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;"}[c]));
+const T = HE ? {
+  title: "כרטיס הציונים של התחזית", brand: "מודל הכנסת", tagline: "כרטיס הציונים · התחזית שהוקפאה מול התוצאה",
+  skip: "דלגו לתוכן", lang: "English", light: "מצב בהיר", dark: "מצב כהה", built: "נבנה",
+  pre: "התוצאה הרשמית עדיין לא ידועה.", preTxt: "העמוד הזה ידרג את התחזית ואת כל החלופות שלה ברגע שהתוצאה הרשמית תפורסם. עד אז הוא מציג את התחזית כפי שהוקפאה, ואת טביעת האצבע שלה.",
+  rehearsal: "חזרה גנרלית:", rehearsalTxt: `המסלול כולו על הבחירות של ${N("2022")}. התחזית היא תחזית ערב הבחירות של המודל במבחן ההשמטה, שנבנתה מחדש כהתפלגות; ההשוואה לרקורד משמיטה את ${N("2022")}. אלה לא תוצאות ${N("2026")}.`,
+  badHash: "טביעת האצבע אינה תואמת את התוכן שהוקפא.",
+  eFrozen: "רישום מראש", hFrozen: "התחזית שהוקפאה", lFrozen: `לפני הבחירות נשמרו התחזית שמתפרסמת וכל החלופות שבחלונית בחירת המודל בקובץ אחד שנכנס ל־git, ולצידו טביעת אצבע <span class="ltr">sha256</span> של התוכן. כל שינוי אחרי ההקפאה, אפילו של ספרה אחת, משנה את טביעת האצבע.`,
+  sha: `טביעת אצבע (<span class="ltr">sha256</span>)`, asof: "התחזית נכונה ל־", frozenAt: "הוקפאה", status: "מעמד", final: "סופית: הוקפאה בתקופת האיסור על פרסום סקרים, אחרי הבנייה האחרונה", provisional: "זמנית: הוקפאה לפני האיסור על פרסום סקרים; ההקפאה שאחרי הבנייה האחרונה תחליף אותה", commit: "קומיט ב־git", file: "קובץ", models: "מודלים", verified: "טביעת האצבע חושבה מחדש בבניית העמוד, והיא תואמת", israel: "שעון ישראל",
+  eSaid: "התחזית", hSaid: "מה התחזית אמרה", hHappened: "מה התחזית אמרה, ומה קרה",
+  lSaid: `התחזית הרשמית כפי שהוקפאה: הסיכוי של כל גוש ל־${N("61")} מנדטים, מי מרכיב את הממשלה, והמנדטים של כל רשימה עם רווח ${N("90%")}.`,
+  lHappened: `התחזית הרשמית כפי שהוקפאה, ולצידה התוצאה. הנקודה היא התוצאה הרשמית; המלבן הוא רווח ${N("90%")} של התחזית.`,
+  nb: "גוש נתניהו", anti: "מחנה השינוי", antiRaam: "מחנה השינוי + רע״ם", neither: `אף צד לא מגיע ל־${N("61")}`, p61: `סיכוי ל־${N("61+")}`, gov: "מי מרכיב את הממשלה",
+  won: "בפועל", seatsW: "מנדטים", happened: "קרה", notHappened: "לא קרה",
+  colList: "רשימה", colC: "תחזית", colIvl: `רווח ${N("90%")}`, colPass: "עוברת", colY: "בפועל", colFl: "בתוך הטווח?",
+  inside: "בתוך הטווח", outside: "מחוץ לטווח", lgDot: "התוצאה", lgBand: `רווח ${N("90%")} של התחזית`, lgCtr: "ספירה מרכזית",
+  groups: {netanyahu: "ממשלה בראשות נתניהו", change: "ממשלת מחנה השינוי", unity: "ממשלת אחדות (הליכוד בלי נתניהו)", repeat: "בחירות חוזרות"},
+  eScores: "ציונים", hScores: "הציונים של כל מודל", hModels: "המודלים שיקבלו ציון",
+  lScores: `כל מודל מקבל ציון על אותן רשימות ובאותם כללים, שהוקפאו יחד עם התחזית. הדירוג לפי ציון הלוג הממוצע (גבוה יותר עדיף), ואחריו <span class="ltr">CRPS</span>. ההדגשה מסמנת את הטוב ביותר בכל עמודה.`,
+  lModels: "כל מודל שבחלונית בחירת המודל הוקפא עם התחזית שלו, ויקבל ציון על אותן רשימות ובאותם כללים.",
+  thRank: "דירוג", thModel: "מודל", thLog: "ציון לוג", thCrps: `<span class="ltr">CRPS</span>`, thErr: "שגיאת הספירה", thCov: `כיסוי ${N("90%")}`, thBrier: "ברייר חסימה", thNb: `גוש נתניהו ${N("61+")}`, thAnti: `מחנה השינוי ${N("61+")}`, thGov: "ממשלה", thPm: "ראש ממשלה",
+  thBack: "מבחן־העבר: שגיאה חציונית", logSub: "ממוצע לרשימה", crpsSub: "מנדטים", errSub: "מנדטים לרשימה", brSub: "ברייר · לוג",
+  pending: "ממתין", status_: {official: "רשמי", advanced: "חלופה מובילה", previous: "הרשמי הקודם", failed: "לא עבר את הכלל", layer: "שכבה כבויה", benchmark: "נקודת ייחוס", candidate: "מועמד"},
+  honest: n => `<b>בחירות אחת הן הגרלה אחת.</b> הציונים כאן נשענים על ${N(n)} רשימות ממערכת בחירות אחת, והשגיאות שלהן מתואמות: תנודה גושית אחת מזיזה את כולן יחד. מודל שמדורג ראשון אולי פשוט היה בר מזל. ההבדלים בין המודלים כאן קטנים בדרך כלל מהפער בין שתי מערכות בחירות רגילות ברקורד, ולכן הם אינם ראיה לכך שמודל אחד טוב מאחר. הרקורד של שמונה מערכות הבחירות נשאר המדריך הטוב יותר, והתוצאה של ${N("2026")} תצטרף אליו כמערכת התשיעית.`,
+  eOrd: "רגיל או הפתעה", hOrd: "האם הציון הזה רגיל?", lOrd: `כל ציון לצד שתי נקודות ייחוס: אותו ציון בכל אחת משמונה מערכות הבחירות של ${N("2009–2022")}, כשהמודל חזה כל אחת מהן מחדש מערב הבחירות, ומה שהמודל עצמו ציפה לו אם ההתפלגות שלו נכונה. ציון בתוך הטווח של הרקורד הוא תוצאה רגילה; מחוץ לו, הפתעה. התחזית של ${N("2026")} רחבה יותר מרוב התחזיות הקודמות, ולכן ציון יכול ליפול מחוץ לרקורד ועדיין בתוך הטווח של המודל עצמו: קוראים את שתיהן יחד. לכל חלופה מוצגת גם השורה שלה במבחן־העבר.`,
+  pickL: "מודל:", thScore: "ציון", th26: N("2026"), thRec: `ברקורד (טווח, ${N("8")} מערכות)`, meanW: "ממוצע", thSelf: `אם המודל צודק (צפוי; טווח ${N("90%")})`, thWhere: `איפה ${N("2026")}`, thOwn: "מבחן־העבר של המודל",
+  better: (k, n) => `טוב יותר מ־${N(k)} מתוך ${N(n)}`, insideRec: "בתוך הטווח: רגיל", outsideRec: "מחוץ לטווח: הפתעה", aboveRec: "טוב יותר מכל מערכת ברקורד: טוב מהרגיל", belowRec: "גרוע יותר מכל מערכת ברקורד: הפתעה", noRec: "אין רקורד",
+  mLog: "ציון לוג ממוצע לרשימה", mCrps: `<span class="ltr">CRPS</span> ממוצע (מנדטים)`, mErr: "שגיאה מוחלטת של הספירה המרכזית", mCov: `כיסוי רווח ${N("90%")}`, mBrier: "ציון ברייר של אחוז החסימה", mNbBrier: `ברייר: גוש נתניהו ${N("61+")}`, mNbLog: `ציון לוג: גוש נתניהו ${N("61+")}`, mAntiBrier: `ברייר: מחנה השינוי ${N("61+")}`, mAntiLog: `ציון לוג: מחנה השינוי ${N("61+")}`, mGov: "ציון לוג: הממשלה", mPm: "ציון לוג: ראש הממשלה",
+  uniform: v => `ניחוש אחיד בין ארבע האפשרויות: ${v}`, ownMed: "שגיאה חציונית", noOwn: "–",
+  hPit: `ערכי <span class="ltr">PIT</span>`, lPit: `לכל רשימה: ההסתברות שהתחזית נתנה לתוצאה נמוכה יותר, ועוד מחצית ההסתברות לתוצאה עצמה. בתחזית מכוילת הערכים מתפזרים באופן אחיד בין ${N("0")} ל־${N("1")}; ערך באזור המוצלל (מתחת ל־${N("0.05")} או מעל ${N("0.95")}) הוא רשימה שהתוצאה שלה הפתיעה את המודל.`,
+  thY: "בפועל", thC: "תחזית", thLogL: "ציון לוג", thPit: `<span class="ltr">PIT</span>`, thBr: "ברייר", surprise: "הפתעה",
+  eMethod: "שיטה", hMethod: "איך הציונים מחושבים",
+  method: d => [
+    `<b>ציון לוג</b> הוא הלוגריתם של ההסתברות שהמודל נתן למספר המנדטים שהרשימה קיבלה בפועל (גבוה יותר עדיף). מספר מנדטים שאף הגרלה לא הגיעה אליו מקבל ציון של חצי הגרלה (${N("0.5 / " + d.n)}).`,
+    `<b><span class="ltr">CRPS</span></b> משווה את כל ההתפלגות לתוצאה, במנדטים: סכום ההפרשים בריבוע בין ההתפלגות המצטברת של התחזית לבין מדרגה בתוצאה (נמוך יותר עדיף). לתחזית ודאית הוא שווה לשגיאה המוחלטת.`,
+    `<b>ציון הברייר של אחוז החסימה</b> הוא ריבוע ההפרש בין ההסתברות לעבור לבין התוצאה (${N("1")} אם הרשימה עברה, ${N("0")} אם לא), לכל רשימה. <b>הכיסוי</b> הוא חלק הרשימות שהתוצאה שלהן בתוך רווח ${N("90%")} שפורסם. <b>שגיאת הספירה</b> היא ההפרש המוחלט בין הספירה המרכזית שפורסמה לתוצאה.`,
+    `<b>הממוצעים</b> הם על פני הרשימות שהתחזית הרשמית נתנה להן לפחות ${N("1%")} מהקולות, ועל כל רשימה שזכתה במנדטים (הרשימה הקטנה ביותר שנבחנה ברקורד הייתה ${N("1.15%")}); ציון הברייר מוצג גם על פני כל הרשימות.`,
+    `<b>הגושים</b>: ציון ברייר וציון לוג של ההסתברות שפורסמה ל־${N("61")} מנדטים או יותר. <b>הממשלה וראש הממשלה</b> מוזנים ידנית כשהם ידועים, ומקבלים ציון לוג. הסתברות שפורסמה כ־${N("0.000")} מקבלת ציון של ${N("0.0005")}, מחצית יחידת העיגול.`,
+    `<b>הרקורד</b> הוא מבחן ערב הבחירות על שמונה מערכות הבחירות של ${N("2009–2022")}. הוא שומר לכל רשימה רק את הממוצע, החציון, רווח ${N("90%")} וההסתברות לעבור, ולכן ציון הלוג, ה־<span class="ltr">CRPS</span> וה־<span class="ltr">PIT</span> שלו מחושבים על התפלגות שנבנתה מחדש מהנתונים האלה: הסתברות לאפס מנדטים, ומעליה התפלגות נורמלית בדידה שמתאימה לממוצע ולרווח. זה קירוב.`,
+    `<b>ההקפאה</b>: ${N(esc(d.file))} נשמר ב־git לפני הבחירות עם ההתפלגויות של כל מודל, הכללים והרקורד. טביעת האצבע היא <span class="ltr">sha256</span> של ה־<span class="ltr">JSON</span> של התוכן, במפתחות ממוינים ובלי רווחים; ${N("python src/scorecard.py --verify")} מחשב אותה מחדש.`
+  ],
+  footL: "מודל הכנסת · כרטיס הציונים · נבנה על ידי src/scorecard.py", back: "לתחזית המלאה", night: "ליל הבחירות"
+} : {
+  title: "Knesset Forecast Scorecard", brand: "The Knesset Model", tagline: "Scorecard · the frozen forecast against the result",
+  skip: "Skip to content", lang: "עברית", light: "Light", dark: "Dark", built: "Built",
+  pre: "The official result is not known yet.", preTxt: "This page grades the forecast and every alternative to it once the official result is published. Until then it shows the forecast as frozen, and its fingerprint.",
+  rehearsal: "Rehearsal:", rehearsalTxt: "the whole path on the 2022 election. The forecast is the model's 2022 eve forecast from the leave-one-cycle-out harness, rebuilt as a distribution; the record it is compared with leaves 2022 out. These are not 2026 results.",
+  badHash: "The fingerprint does not match the frozen content.",
+  eFrozen: "Pre-registration", hFrozen: "The frozen forecast", lFrozen: "Before the vote, the published forecast and every alternative in the \"Choose a model\" panel were saved to one file and committed to git, with a sha256 fingerprint of the content. Any change after the freeze, even to one digit, changes the fingerprint.",
+  sha: "Fingerprint (sha256)", asof: "Forecast as of", frozenAt: "Frozen", status: "Status", final: "Final: frozen during the poll blackout, after the last build", provisional: "Provisional: frozen before the poll blackout; the freeze after the final build replaces it", commit: "Git commit", file: "File", models: "Models", verified: "fingerprint recomputed when the page was built: it matches", israel: "Israel time",
+  eSaid: "The forecast", hSaid: "What the forecast said", hHappened: "What the forecast said, and what happened",
+  lSaid: "The official forecast as frozen: each bloc's chance of 61 seats, who forms the government, and every list's seats with its 90% interval.",
+  lHappened: "The official forecast as frozen, with the result beside it. The dot is the official result; the box is the forecast's 90% interval.",
+  nb: "Netanyahu bloc", anti: "Change bloc", antiRaam: "Change bloc + Ra'am", neither: "Neither side reaches 61", p61: "chance of 61+", gov: "Who forms the government",
+  won: "actual", seatsW: "seats", happened: "happened", notHappened: "did not happen",
+  colList: "List", colC: "Forecast", colIvl: "90% interval", colPass: "Passes", colY: "Actual", colFl: "Inside?",
+  inside: "inside", outside: "outside", lgDot: "result", lgBand: "forecast 90% interval", lgCtr: "central count",
+  groups: {netanyahu: "Netanyahu-led government", change: "Change-bloc government", unity: "Unity government (Likud without Netanyahu)", repeat: "Repeat election"},
+  eScores: "Scores", hScores: "How every model scored", hModels: "The models that will be graded",
+  lScores: "Every model is scored on the same lists under the same rules, frozen with the forecast. The ranking is by the mean log score (higher is better), then the CRPS. Bold marks the best in each column.",
+  lModels: "Every model in the \"Choose a model\" panel was frozen with its forecast, and will be scored on the same lists under the same rules.",
+  thRank: "Rank", thModel: "Model", thLog: "Log score", thCrps: "CRPS", thErr: "Count error", thCov: "90% coverage", thBrier: "Threshold Brier", thNb: "NB bloc 61+", thAnti: "Change bloc 61+", thGov: "Government", thPm: "PM",
+  thBack: "Backtest: median error", logSub: "mean per list", crpsSub: "seats", errSub: "seats per list", brSub: "Brier · log",
+  pending: "pending", status_: {official: "Official", advanced: "Leading alternative", previous: "Previous official", failed: "Failed the rule", layer: "Layer off", benchmark: "Benchmark", candidate: "Candidate"},
+  honest: n => `<b>One election is one draw.</b> These scores rest on ${N(n)} lists from a single election, and their errors are correlated: one bloc swing moves all of them together. A model that ranks first may simply have been lucky. The differences between models here are usually smaller than the gap between two ordinary elections in the record, so they are not evidence that one model is better than another. The eight-election record remains the better guide; 2026 joins it as the ninth.`,
+  eOrd: "Ordinary or a surprise", hOrd: "Was this score ordinary?", lOrd: "Each score beside two references: the same score in each of the eight elections of 2009–2022, when the model forecast each of them again from its eve, and what the model itself expected if its own distribution is right. A score inside the record's range is an ordinary result; outside it, a surprise. The 2026 forecast is wider than most past ones, so a score can fall outside the record and still inside the model's own range: read the two together. Each alternative also shows its own backtest row.",
+  pickL: "Model:", thScore: "Score", th26: "2026", thRec: "In the record (range, 8 elections)", meanW: "mean", thSelf: "If the model were right (expected; 90% range)", thWhere: "Where 2026 falls", thOwn: "The model's own backtest",
+  better: (k, n) => `better than ${N(k)} of ${N(n)}`, insideRec: "inside the range: ordinary", outsideRec: "outside the range: a surprise", aboveRec: "better than every election in the record: unusually good", belowRec: "worse than every election in the record: a surprise", noRec: "no record",
+  mLog: "Mean log score per list", mCrps: "Mean CRPS (seats)", mErr: "Absolute error of the central count", mCov: "90%-interval coverage", mBrier: "Threshold Brier score", mNbBrier: "Brier: Netanyahu bloc 61+", mNbLog: "Log score: Netanyahu bloc 61+", mAntiBrier: "Brier: change bloc 61+", mAntiLog: "Log score: change bloc 61+", mGov: "Log score: the government", mPm: "Log score: the PM",
+  uniform: v => `a uniform guess over the four outcomes: ${v}`, ownMed: "median error", noOwn: "–",
+  hPit: "PIT values", lPit: "For each list: the probability the forecast gave a lower result, plus half the probability of the result itself. Under a calibrated forecast the values spread evenly between 0 and 1; a value in the shaded tails (below 0.05 or above 0.95) is a list whose result surprised the model.",
+  thY: "Actual", thC: "Forecast", thLogL: "Log score", thPit: "PIT", thBr: "Brier", surprise: "surprise",
+  eMethod: "Method", hMethod: "How the scores are computed",
+  method: d => [
+    `<b>The log score</b> is the logarithm of the probability the model gave the seat count a list actually won (higher is better). A seat count no draw reached is scored at half a draw (${N("0.5 / " + d.n)}).`,
+    `<b>The CRPS</b> compares the whole distribution with the result, in seats: the sum of squared differences between the forecast's cumulative distribution and a step at the result (lower is better). For a certain forecast it equals the absolute error.`,
+    `<b>The threshold Brier score</b> is the squared difference between the probability of passing and the outcome (1 if the list passed, 0 if not), per list. <b>Coverage</b> is the share of lists whose result fell inside the published 90% interval. <b>The count error</b> is the absolute difference between the published central count and the result.`,
+    `<b>The means</b> are over the lists the official forecast put at ${N("1%")} of the vote or more, and every list that won seats (the record's smallest graded list was ${N("1.15%")}); the threshold Brier score is also given over every list.`,
+    `<b>The blocs</b>: the Brier and log scores of the published probability of 61 seats or more. <b>The government and the PM</b> are entered by hand once known and scored by log score. A probability published as ${N("0.000")} is scored at ${N("0.0005")}, half its rounding unit.`,
+    `<b>The record</b> is the eve harness on the eight elections of 2009–2022. It keeps only each list's mean, median, 90% interval and chance of passing, so its log scores, CRPS and PITs are computed on a distribution rebuilt from those: a probability of zero seats and, above it, a discretised normal matching the mean and the interval. This is an approximation.`,
+    `<b>The freeze</b>: ${N(esc(d.file))} was committed to git before the vote with every model's distributions, the rules and the record. The fingerprint is the sha256 of the content's JSON with sorted keys and no spaces; ${N("python src/scorecard.py --verify")} recomputes it.`
+  ],
+  footL: "The Knesset Model · scorecard · built by src/scorecard.py", back: "Full forecast", night: "Election night"
+};
+const $ = id => document.getElementById(id);
+const f = (x, d = 2) => x == null ? "–" : N(Number(x).toFixed(d));
+const pct = (x, d = 0) => x == null ? "–" : N((x * 100).toFixed(d) + "%");
+const tfmt = iso => { if (!iso) return "–"; const d = new Date(iso); if (isNaN(d)) return esc(iso);
+  return "<bdi>" + new Intl.DateTimeFormat(HE ? "he-IL" : "en-GB", {timeZone: "Asia/Jerusalem", day: "numeric", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit"}).format(d) + "</bdi>"; };
+const FZ = DATA.frozen, P = FZ.payload, S = DATA.scores, R = DATA.result;
+const OFF = P.models[0];
+const lname = k => { const e = P.lists[k] || {}; return esc(HE ? (e.he || k) : (e.en || k)); };
+const mname = m => esc(HE ? m.name.he : m.name.en);
+const pcv = k => { const p = (P.lists[k] || {}).pvar; return p ? `--pc:var(--p-${p})` : "--pc:var(--dead)"; };
+const pmName = n => esc(HE ? (DATA.labels.pm_he[n] || n) : (DATA.labels.pm_en[n] || n));
+const SC = S ? Object.fromEntries(S.models.map(m => [m.id, m])) : {};
+
+function renderStatic(){
+  document.title = T.title;
+  $("brand").textContent = T.brand; $("tagline").textContent = T.tagline; $("skip").textContent = T.skip;
+  for (const k of ["frozen", "said", "scores", "ord", "method"]) {
+    const e = $("e-" + k); if (e) e.textContent = T["e" + k[0].toUpperCase() + k.slice(1)];
+  }
+  const set = (id, h) => { $(id).innerHTML = h; };
+  set("h-frozen", T.hFrozen); set("l-frozen", T.lFrozen);
+  set("h-said", S ? T.hHappened : T.hSaid); set("l-said", S ? T.lHappened : T.lSaid);
+  set("h-scores", S ? T.hScores : T.hModels); set("l-scores", S ? T.lScores : T.lModels);
+  set("h-ord", T.hOrd); set("l-ord", T.lOrd); set("pick-l", T.pickL);
+  set("h-pit", T.hPit); set("l-pit", T.lPit);
+  set("h-method", T.hMethod);
+  $("dateline").innerHTML = `${T.built} <b>${tfmt(DATA.generated_utc)}</b><br>${T.israel}`;
+  $("foot-l").textContent = T.footL;
+  $("foot-r").innerHTML = `<a href="index.html">${T.back}</a> · <a href="election-night.html">${T.night}</a>`;
+  const lb = $("langbtn"); lb.textContent = T.lang;
+  lb.onclick = () => { try { localStorage.setItem("klang", HE ? "en" : "he"); } catch (e) {}
+    const u = new URL(location.href); u.searchParams.delete("lang"); location.href = u.toString(); };
+  const tb = $("themebtn");
+  const eff = () => document.documentElement.dataset.theme || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+  try { const s = localStorage.getItem("ktheme"); if (s === "light" || s === "dark") { document.documentElement.dataset.theme = s; document.documentElement.style.colorScheme = s; } } catch (e) {}
+  const lab = () => { tb.textContent = eff() === "dark" ? T.light : T.dark; };
+  lab();
+  tb.onclick = () => { const n = eff() === "dark" ? "light" : "dark"; document.documentElement.dataset.theme = n;
+    document.documentElement.style.colorScheme = n; try { localStorage.setItem("ktheme", n); } catch (e) {} lab(); };
+}
+
+function renderBanner(){
+  let h = "";
+  if (DATA.mode === "rehearsal") h += `<div class="banner rehearsal"><b>${T.rehearsal}</b> ${T.rehearsalTxt}</div>`;
+  else if (!S) h += `<div class="banner"><b>${T.pre}</b> ${T.preTxt}</div>`;
+  if (!FZ.verified) h += `<div class="banner warn"><b>${T.badHash}</b></div>`;
+  $("banner").innerHTML = h;
+}
+
+function renderFrozen(){
+  const pv = P.provenance || {};
+  const head = pv.git_head ? pv.git_head.slice(0, 12) : "–";
+  const facts = [
+    [T.asof, `<bdi>${N(esc(P.asof))}</bdi>`],
+    [T.frozenAt, tfmt(P.frozen_utc)],
+    [T.status, P.final ? T.final : T.provisional],
+    [T.commit, N(esc(head))],
+    [T.file, FZ.file ? N(esc(FZ.file)) : "–"],
+    [T.models, N(P.models.length)],
+  ];
+  $("frozen").innerHTML = `<div class="k">${T.sha}</div><div class="sha">${esc(FZ.sha256)}</div>` +
+    `<div class="facts">${facts.map(([k, v]) => `<div><div class="k">${k}</div><div class="v">${v}</div></div>`).join("")}</div>` +
+    (FZ.file ? `<div class="cmd">python src/scorecard.py --verify ${esc(FZ.file)}</div>` : "") +
+    `<div class="note">${FZ.verified ? `<span class="flag in">✓</span> ${T.verified}` : `<span class="flag out">✗</span> ${T.badHash}`}</div>`;
+}
+
+function tile(k, p, extra, res){
+  return `<div class="tile"><div class="k">${k}</div><div class="big">${p == null ? "–" : pct(p)}</div><div class="s">${extra}</div>${res || ""}</div>`;
+}
+
+function renderSaid(){
+  const b = OFF.blocs || {}, ba = S ? S.blocs_actual : null;
+  const res = (seats, p) => ba ? `<div class="res">${T.won}: ${N(seats)} ${T.seatsW} · ${seats >= 61 ? T.happened : T.notHappened}</div>` : "";
+  let h = tile(T.nb, b.nb, `${T.p61}${b.nb_mean != null ? ` · ${N(b.nb_mean)} [${N(b.nb_p05 + "–" + b.nb_p95)}]` : ""}`, ba ? res(ba.nb) : "");
+  h += tile(T.anti, b.anti, T.p61, ba ? res(ba.anti) : "");
+  h += tile(T.antiRaam, b.antiRaam, T.p61, ba ? res(ba.antiRaam) : "");
+  if (OFF.groups) {
+    const top = Object.entries(OFF.groups).filter(([g]) => T.groups[g]).sort((x, y) => y[1] - x[1]);
+    const gov = S && S.government ? `<div class="res">${T.won}: ${esc(T.groups[S.government])}</div>` : "";
+    h += `<div class="tile"><div class="k">${T.gov}</div><div class="s" style="margin-top:10px">${top.map(([g, p]) => `${esc(T.groups[g])} ${pct(p)}`).join("<br>")}</div>${gov}</div>`;
+  } else {
+    h += tile(T.neither, b.neither, "", "");
+  }
+  $("tiles").innerHTML = h;
+  const keys = Object.keys(P.lists).filter(k => (OFF.central[k] || 0) > 0 || ((OFF.interval[k] || [0, 0])[1] > 0) || (R && (R.seats[k] || 0) > 0));
+  const maxv = Math.max(10, ...keys.map(k => Math.max((OFF.interval[k] || [0, 0])[1], R ? (R.seats[k] || 0) : 0))) + 2;
+  const x = v => (100 * v / maxv).toFixed(2) + "%";
+  $("sheet").classList.toggle("res", !!S);
+  $("shead").innerHTML = `<div></div><div>${T.colList}</div><div style="text-align:center">${T.colC}</div><div style="text-align:center">${S ? T.colY : T.colPass}</div><div class="h-ivl">${T.colIvl}</div><div class="h-fl" style="text-align:end">${S ? T.colFl : ""}</div>`;
+  const ol = S ? SC.official.lists : {};
+  $("srows").innerHTML = keys.map(k => {
+    const e = P.lists[k] || {}, iv = OFF.interval[k] || [0, 0], c = OFF.central[k] || 0;
+    const y = R ? (R.seats[k] || 0) : null, sl = ol[k];
+    let trk = `<div class="trk" style="${pcv(k)}"><i class="axis"></i><i class="band" style="left:${x(iv[0])};width:${x(iv[1] - iv[0])}"></i><i class="ctr" style="left:${x(c)}"></i>${y != null ? `<i class="dot" style="left:${x(y)}"></i>` : ""}</div>`;
+    const pass = sl ? null : (() => { const pm = OFF.pmf[k]; if (!pm) return 0; const n = pm.slice(1).reduce((a, v) => a + v, 0); return pm[0] > 0 ? 1 : 1 - pm[1] / n; })();
+    const fl = S ? (sl.covered ? `<span class="flag in">${T.inside}</span>` : `<span class="flag out">${T.outside} ${y > iv[1] ? "↑" : "↓"}</span>`) : "";
+    return `<div class="srow"><div><span class="lt" style="${pcv(k)}">${esc(e.letter || "")}</span></div>` +
+      `<div class="nm"><b>${lname(k)}</b></div><div class="sv${S ? " sub" : ""}">${N(c)}</div>` +
+      `<div class="sv">${S ? N(y) : `<span style="font-size:14px">${pct(pass)}</span>`}</div>` +
+      `<div class="ivl">${trk}<div class="ivlab">${T.colIvl} ${N(iv[0] + "–" + iv[1])}</div></div><div class="fl">${fl}</div></div>`;
+  }).join("");
+  $("legend").innerHTML = `<span><i class="lg-band"></i>${T.lgBand}</span><span><i class="lg-ctr"></i>${T.lgCtr}</span>` + (S ? `<span><i class="lg-dot"></i>${T.lgDot}</span>` : "");
+}
+
+const status = m => `<span class="chip">${esc(T.status_[m.status] || m.status)}</span>`;
+const own = m => { const e = m.backtest && m.backtest.eve; return e ? e : null; };
+
+function renderScores(){
+  const ms = P.models;
+  if (!S) {
+    $("scoretab").innerHTML = `<thead><tr><th class="mdl">${T.thModel}</th><th class="num">${T.thNb}</th><th class="num">${T.thAnti}</th><th class="num">${T.thBack}</th></tr></thead><tbody>` +
+      ms.map(m => `<tr class="${m.id === "official" ? "off" : ""}"><td class="mdl">${mname(m)}<br>${status(m)}</td><td class="num">${pct((m.blocs || {}).nb, 1)}</td><td class="num">${pct((m.blocs || {}).anti, 1)}</td><td class="num">${own(m) ? f(own(m).median_mae, 2) : "–"}</td></tr>`).join("") + "</tbody>";
+    $("ord-sec").hidden = true;
+    return;
+  }
+  const rows = S.ranking.map(id => [P.models.find(m => m.id === id), SC[id]]);
+  const best = (get, hi) => { const v = rows.map(([, s]) => get(s)).filter(x => x != null); return v.length ? (hi ? Math.max(...v) : Math.min(...v)) : null; };
+  const cell = (s, get, hi, d) => { const v = get(s), b = best(get, hi); return `<td class="num${v != null && v === b ? " best" : ""}">${f(v, d)}</td>`; };
+  const bl = (s, k) => s.blocs[k] ? `<td class="num">${f(s.blocs[k].brier, 3)}<span class="sub">${f(s.blocs[k].log, 2)}</span></td>` : `<td class="num">–</td>`;
+  const one = (x) => x ? `<td class="num">${f(x.log, 2)}<span class="sub">${pct(x.p, 1)}</span></td>` : `<td class="num">${T.pending}</td>`;
+  $("scoretab").innerHTML = `<thead><tr><th class="num">${T.thRank}</th><th class="mdl">${T.thModel}</th><th class="num">${T.thLog}<span class="sub">${T.logSub}</span></th><th class="num">${T.thCrps}<span class="sub">${T.crpsSub}</span></th><th class="num">${T.thErr}<span class="sub">${T.errSub}</span></th><th class="num">${T.thCov}</th><th class="num">${T.thBrier}</th><th class="num">${T.thNb}<span class="sub">${T.brSub}</span></th><th class="num">${T.thAnti}<span class="sub">${T.brSub}</span></th><th class="num">${T.thGov}</th><th class="num">${T.thPm}</th></tr></thead><tbody>` +
+    rows.map(([m, s]) => `<tr class="${m.id === "official" ? "off" : ""}"><td class="num">${N(s.rank)}</td><td class="mdl">${mname(m)}<br>${status(m)}</td>` +
+      cell(s, x => x.summary.log, true, 3) + cell(s, x => x.summary.crps, false, 3) + cell(s, x => x.summary.abs_err, false, 2) +
+      `<td class="num">${pct(s.summary.coverage)}</td>` + cell(s, x => x.summary.brier, false, 4) +
+      bl(s, "nb") + bl(s, "anti") + one(s.formation) + one(s.pm) + "</tr>").join("") + "</tbody>";
+  $("honest").innerHTML = `<p class="honest">${T.honest(S.scored.length)}</p>`;
+  const sel = $("model");
+  sel.innerHTML = rows.map(([m]) => `<option value="${esc(m.id)}">${mname(m)}</option>`).join("");
+  sel.value = "official";
+  sel.onchange = () => renderOrd(sel.value);
+  renderOrd("official");
+}
+
+function renderOrd(id){
+  const m = P.models.find(x => x.id === id), s = SC[id], rec = P.record || {};
+  const ob = own(m);
+  const where = e => {
+    if (!e) return T.noRec;
+    if (e.inside) return T.insideRec + (e.beats != null ? `<span class="sub">${T.better(e.beats, e.n)}</span>` : "");
+    if (e.beats != null && e.beats === e.n) return `<b>${T.aboveRec}</b>`;
+    if (e.beats === 0) return `<b class="warnt">${T.belowRec}</b>`;
+    return `<b>${T.outsideRec}</b>`;
+  };
+  const sx = s.expect_self || {};
+  const selfCell = (e, d) => !e ? "–" : f(e.mean, d) + (e.p05 != null ? `<span class="sub">${N(Number(e.p05).toFixed(d) + " – " + Number(e.p95).toFixed(d))}${e.inside === false ? ` · <b class="flag out">${T.outside}</b>` : (e.inside ? ` · <span class="flag in">${T.inside}</span>` : "")}</span>` : "");
+  const line = (lab, v, d, e, se, ownv) => `<tr><td>${lab}</td><td class="num">${f(v, d)}</td><td class="num">${e ? N(Number(e.min).toFixed(d) + " – " + Number(e.max).toFixed(d)) + `<span class="sub">${T.meanW} ${f(e.mean, d)}</span>` : "–"}</td><td class="where">${where(e)}</td><td class="num">${selfCell(se, d)}</td><td class="num">${ownv == null ? T.noOwn : ownv}</td></tr>`;
+  const x = s.expect;
+  let h = `<thead><tr><th>${T.thScore}</th><th class="num">${T.th26}</th><th class="num">${T.thRec}</th><th>${T.thWhere}</th><th class="num">${T.thSelf}</th><th class="num">${T.thOwn}</th></tr></thead><tbody>`;
+  h += line(T.mLog, s.summary.log, 3, x.log, sx.log, null);
+  h += line(T.mCrps, s.summary.crps, 3, x.crps, sx.crps, null);
+  h += line(T.mErr, s.summary.abs_err, 2, x.abs_err, sx.abs_err, ob ? `${f(ob.median_mae, 2)}<span class="sub">${T.ownMed}</span>` : null);
+  h += line(T.mCov, s.summary.coverage, 2, x.coverage, sx.coverage, ob ? f(ob.coverage, 2) : null);
+  h += line(T.mBrier, s.summary.brier, 4, x.brier, sx.brier, ob ? f(ob.brier, 4) : null);
+  if (s.blocs.nb) { h += line(T.mNbBrier, s.blocs.nb.brier, 3, x.nb_brier, sx.nb_brier, null); h += line(T.mNbLog, s.blocs.nb.log, 3, x.nb_log, sx.nb_log, null); }
+  if (s.blocs.anti) { h += line(T.mAntiBrier, s.blocs.anti.brier, 3, null, sx.anti_brier, null); h += line(T.mAntiLog, s.blocs.anti.log, 3, null, sx.anti_log, null); }
+  if (s.formation) h += `<tr><td>${T.mGov}</td><td class="num">${f(s.formation.log, 3)}</td><td colspan="4">${esc(T.groups[s.formation.group] || s.formation.group)} · ${pct(s.formation.p, 1)} · ${T.uniform(f(rec.uniform_group_log, 3))}</td></tr>`;
+  if (s.pm) h += `<tr><td>${T.mPm}</td><td class="num">${f(s.pm.log, 3)}</td><td colspan="4">${pmName(s.pm.name)} · ${pct(s.pm.p, 1)}</td></tr>`;
+  $("ordtab").innerHTML = h + "</tbody>";
+  const keys = S.scored;
+  $("pit").innerHTML = `<i class="tail" style="left:0;width:5%"></i><i class="tail" style="left:95%;width:5%"></i>` +
+    keys.map((k, i) => `<i style="left:${(100 * s.lists[k].pit).toFixed(2)}%;bottom:${4 + 12 * (i % 3)}px;${pcv(k)}" title="${lname(k)}"></i>`).join("");
+  $("listtab").innerHTML = `<thead><tr><th>${T.colList}</th><th class="num">${T.thY}</th><th class="num">${T.thC}</th><th class="num">${T.colIvl}</th><th class="num">${T.thLogL}</th><th class="num">${T.thCrps}</th><th class="num">${T.thPit}</th><th class="num">${T.thBr}</th></tr></thead><tbody>` +
+    S.every.filter(k => s.lists[k].scored || s.lists[k].p_pass >= 0.005).map(k => { const r = s.lists[k]; const sur = r.pit < 0.05 || r.pit > 0.95;
+      return `<tr><td>${lname(k)}</td><td class="num">${N(r.y)}</td><td class="num">${N(r.central)}</td><td class="num">${N(r.lo + "–" + r.hi)}</td><td class="num">${r.scored ? f(r.log, 2) : "–"}</td><td class="num">${r.scored ? f(r.crps, 2) : "–"}</td><td class="num">${f(r.pit, 2)}${sur ? `<span class="sub flag out">${T.surprise}</span>` : ""}</td><td class="num">${f(r.brier, 3)}</td></tr>`; }).join("") + "</tbody>";
+}
+
+function renderMethod(){
+  const n = OFF.n_sims || 0;
+  $("methodbox").innerHTML = "<ul>" + T.method({n: n, file: FZ.file || "data/processed/frozen_forecast_<asof>.json"}).map(x => `<li>${x}</li>`).join("") + "</ul>";
+}
+
+renderStatic(); renderBanner(); renderFrozen(); renderSaid(); renderScores(); renderMethod();
+</script>
+</body>
+</html>

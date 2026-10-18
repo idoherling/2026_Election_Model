@@ -118,6 +118,7 @@ python -m pytest            # pytest.ini adds src/ to the path; about 10 s, no M
 | `tests/test_site.py` | the checks of `src/site_checks.py` on `output/site/index.html`, each with a negative control |
 | `tests/test_registry.py` | every finding behind a cited source is verified or corrected, agreeing with its desk verdict, and the DL-n citations point at dossier sections |
 | `tests/test_pipeline.py` | step order, stop on first failure, logging, `--skip`, and the refresh move-aside and restore |
+| `tests/test_scorecard.py` | the post-election scorecard: log score, CRPS (against its kernel form), mid-PIT and Brier on known distributions, and that the log score and CRPS are proper; the frozen file's sha256 verifies and catches a one-draw change; the result readers (CSV, election-night JSON, unknown lists, seats ≠ 120); the 2022 rehearsal reproduces the record's 2022 row; the 2026 freeze is the published forecast draw for draw; the pages pass the owner's rules |
 | `tests/test_variants.py` | the model explorer: `variant_flags` applies and restores module flags (also on an exception, and refuses an unknown flag); the registry's texts cite resolvable ids and existing dossier sections; a placeholder appears once its flag exists; the official variant reproduces the published mixture and central count exactly and the formation groups within Monte Carlo noise (the chain run needs `m3_idata.nc`); citations inside the JSON payload are checked |
 
 Known bugs are pinned as strict `xfail` tests, which turn red when the bug is fixed:
@@ -380,6 +381,8 @@ is in `RESEARCH_BRIEF.md` and `CONTENT_BRIEF.md`.
 - `build_history.py` reads every committed `output/site/site_data.json` back from git into `data/processed/forecast_history.csv`. Each build is classed polls / model / both / site, with its dossier sections. `build_site` turns the CSV into the "How the forecast has moved" section (`history_payload`), so `build_history` runs first.
 - `build_variants.py` runs every available model variant of `src/model_variants.py` (the official model, graded alternatives, a layer switched off, the simple benchmark; placeholders appear once their flag exists) through the same chain as the official forecast: the projection with the variant's module flags applied (`variant_flags`, restored afterwards), the registration mixture and the official central count with `PROCESSED_DIR` on a scratch directory, and the formation tree on 50 of production's 200 behavioural parameter vectors. It checks that the official variant reproduces the published headline and writes `data/processed/model_variants.json`, with each variant's backtest rows on the official row's harness and seeds (blank where none exist). `build_site` shows it as the "Choose a model" explorer (`?model=<id>`); the headline stays on the official model.
   - Adding a variant: append a `Variant` to `model_variants.VARIANTS` with its module flags, dossier section, EN/HE texts and backtest rows, then rerun `build_variants.py` and `build_site.py`.
+  - Each variant's per-list seat distribution is kept as integer counts (`pmf`), for the scorecard.
+- `src/scorecard.py` grades the forecast after the vote (runbook in its docstring). `--freeze`, run once the final pre-blackout build is committed, writes `data/processed/frozen_forecast_<asof>.json` (commit it): the official model's and every variant's per-list seat pmfs, intervals, central counts, bloc probabilities, formation groups and PM, the scoring rules and the backtest expectations, the git commit and a sha256 of the payload (`--verify` recomputes it). `--score --result <CSV | election-night.json | snapshot dir>` grades every model: per-list log score, CRPS, PIT, threshold Brier, 90% coverage and central-count error; Brier and log score of P(Netanyahu bloc ≥ 61) and P(change bloc ≥ 61); `--government` and `--pm` once known. Each score is shown beside the eight-cycle record (`model_validation_bayes_lists.csv`, `model_validation_bayes.csv`) and the model's own expectation. The page is `output/site/scorecard.html` (+ `.json`), linked from the site footer; `--rehearse 2022` runs the whole path on 2022 (`scorecard-rehearsal.html`).
 - English chapters are HTML. Hebrew chapters come from the template's `HE_CH` table. Hebrew seats are always מנדטים. The site says "small parties", never the pollsters' "Others".
 - `build_decision_log.py` renders `docs/priors_dossier.md` as `output/site/decision-log.html`, with an anchor `#sN` on every section, using marked 4.3.0 from cdnjs.
 - `src/site_checks.py` runs the publish checks: the script parses (`node --check`; set `NODE` if node is not on the PATH), the EN and HE chapter counts match, citations resolve, the Hebrew and "Others" rules hold, and the registry status is clean.
@@ -424,6 +427,8 @@ src/
   model_variants.py        model-explorer registry: variants, flags, texts, backtest rows
   build_variants.py        every variant through the chain -> model_variants.json
   build_decision_log.py    docs/priors_dossier.md -> decision-log.html
+  election_night.py        the live count on election night -> election-night.html
+  scorecard.py             freeze the forecast; grade every model on the result -> scorecard.html
   site_ledger.py           poll ledger + pollster ratings for the site
   site_checks.py           publish checks (also run by tests/test_site.py)
   validate_*.py            harnesses: bayes (eve), horizon, threshold, seat_law,
@@ -434,6 +439,7 @@ src/
   compare_models.py, hierarchical_model.py, workflow_bayes.py, arab_scenarios.py,
   turnout_layer.py, knesset_forecast.py, make_trend_chart.py   benchmark / research
 site/template.html         the bilingual page (payload placeholder __SITE_DATA__)
+site/election_night.html, site/scorecard.html   the election-night and scorecard pages
 data/
   party_registry.csv, pollster_meta.csv, cec_filings_index.psv,
   cec_final_counts.csv, manual_polls.csv, sector_polls.csv,

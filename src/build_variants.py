@@ -36,6 +36,10 @@ and official_forecast.csv (same code, posterior and seed), and its formation
 groups sit within Monte Carlo noise of government_groups.csv. The script
 checks this and exits 1 when it fails.
 
+Each variant also keeps its per-list seat distribution over its draws,
+compactly (seat_pmfs: [lowest count, draws at it, at it + 1, ...]), for the
+post-election scorecard (src/scorecard.py --freeze).
+
 Output: data/processed/model_variants.json
 """
 from __future__ import annotations
@@ -72,6 +76,19 @@ SIMPLE_COMPONENTS = {"joint_list": "balad+hadash_taal"}
 
 class CheckFailed(RuntimeError):
     pass
+
+
+def seat_pmfs(draws) -> dict:
+    """Each list's seat distribution over the draws, as integer counts:
+    {list: [lowest seat count, draws at it, at it + 1, ..., at the highest]}.
+    Exact (the draws are integers) and small enough to commit."""
+    d = pd.DataFrame(draws)
+    out = {}
+    for c in d.columns:
+        v = d[c].to_numpy().astype(np.int64)
+        lo = int(v.min())
+        out[str(c)] = [lo] + [int(x) for x in np.bincount(v - lo)]
+    return out
 
 
 # --- formation --------------------------------------------------------------
@@ -204,7 +221,8 @@ def run_bayes(flags: dict, work: Path, M: int, log) -> dict:
              "neither": round(float(mb.p_neither), 3), "nb_mean": round(float(mb.nb_mean), 1),
              "nb_p05": int(mb.nb_p05), "nb_p95": int(mb.nb_p95)}
     return {"blocs": blocs, "lists": lists, "asof": str(off["asof"].iloc[0]),
-            "n_sims": int(len(draws)), **form}
+            "n_sims": int(len(draws)), **form,
+            "pmf": seat_pmfs(pd.read_parquet(work / "mixture_draws.parquet"))}
 
 
 def run_simple(M: int, log) -> dict:
@@ -253,7 +271,8 @@ def run_simple(M: int, log) -> dict:
     form = formation_summary(pd.DataFrame(seats, columns=names), M)
     return {"blocs": blocs, "lists": lists, "asof": asof.date().isoformat(),
             "n_sims": int(len(seats)), "polls_from": FILING_DAY.date().isoformat(),
-            "uncertainty_scale": round(scale, 2), **form}
+            "uncertainty_scale": round(scale, 2), **form,
+            "pmf": seat_pmfs(pd.DataFrame(seats, columns=names))}
 
 
 # --- the reproduction check ---------------------------------------------------

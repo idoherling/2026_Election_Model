@@ -284,7 +284,8 @@ def step_tests(p: Pipeline) -> None:
 
 # Files the page links to or fetches; publish them with the page.
 SUPPORTING_FILES = ("decision-log.html", "annex-data.json",
-                    "election-night.html", "election-night.json")
+                    "election-night.html", "election-night.json",
+                    "scorecard.html", "scorecard.json")   # src/scorecard.py
 
 
 def write_publish_copy(p: Pipeline) -> None:
