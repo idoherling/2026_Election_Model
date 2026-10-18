@@ -1,13 +1,13 @@
 {
- "sha256": "0ecf4f2d67c4299d7cac0e6141ed3b904ae33dc83c0aa830b65616123ef6bbaf",
+ "sha256": "463e7dc05abf3dbfa1ac17c1318f3a09e2f569433d8f4f0389f0e181456ac679",
  "hash": "sha256 of the UTF-8 JSON of payload with sorted keys and separators (',', ':')",
  "payload": {
   "version": 1,
   "cycle": "2026",
   "election_day": "2026-10-27",
   "asof": "2026-10-15",
-  "frozen_utc": "2026-10-18T10:39:03Z",
-  "frozen_israel": "2026-10-18 13:39",
+  "frozen_utc": "2026-10-18T10:42:35Z",
+  "frozen_israel": "2026-10-18 13:42",
   "blackout_from": "2026-10-23",
   "final": false,
   "lists": {
@@ -5889,7 +5889,7 @@
    "uniform_group_log": -1.3863
   },
   "provenance": {
-   "git_head": "8936d697f99ab829eacd7dc7b3a1cb7d6e4ce25f",
+   "git_head": "c2fe2f30edef38bb66e3496d2cae3120441c8704",
    "inputs_dirty": [],
    "inputs": {
     "data/processed/mixture_draws.parquet": "1b737a81c4be4f2973d221e6a44bdb1b35dd25d19055c072377220c6813dc19d",
