@@ -6813,3 +6813,107 @@ a measured flow as soon as a pollster publishes one. Note: the
 Reservists-Economic list polls at 2.1-2.8%, so its share of this vote moves
 its threshold odds, and with Likud and Yashar a seat apart the vector also
 touches the trailing-Likud gate (registration_scenarios comment of 8 Oct).
+
+## 65. Channel 14's weighting, and the SMS pair out of the centre (20 Oct, D-7)
+
+### 65.1 The critique, and what the model already does
+
+A chart circulated on 20 Oct alongside Michael Gilead's post on the
+petition over Channel 14's polls. It says Data Next (Next Data, Shlomo
+Filber; Channel 14) weights 2022 voters 54% coalition / 46% opposition
+against an actual 50.3 / 49.7, and that re-weighting its 19 polls of 29 Jul
+- 18 Oct gives a Netanyahu bloc of 59.0 seats on average, not 62.8 (Likud
+29.8, not 30.9). The baseline checks against the official 2022 result: the
+coalition lists plus Jewish Home took 49.57% of valid votes, the opposition
+lists 48.92%, micro-lists 1.51%, so 50.3 / 49.7 without micro-lists. The
+filings we hold (4212 of 14 Oct, 4228 of 18 Oct) do not state the 54 / 46
+figure. In 4212 the total column is not a mix of the two 2022 groups alone
+(it includes 2022 non-voters); the rows with a large gap between the
+groups imply a coalition weight of 0.50-0.56.
+
+The fit does not take Data Next at face value. Each firm has a house effect
+on each list, centred on the unweighted mean over the window's firms (s.53).
+On the 19 Oct posterior, at the window's end, Filber's effect on the
+Netanyahu-bloc lists is +10.8 seats (90% +9.6 to +12.0; Likud +8.1) and
+Direct Polls' +8.0 (Likud +5.1). The model already subtracts about three
+times the chart's 3.8-seat correction. What remains is the centring: Filber
+is one of the eight national firms in the centre, Direct Polls a second.
+
+### 65.2 Pre-registration (written before any harness run of this arm)
+
+**Arm `house_drop_sms`.** The SMS operation (pollster_meta correlation_group
+sms_likud: Filber, Direct Polls) weighs 0 in the house-effect centre and
+every other firm 1, as an exact re-parameterisation of the fitted posterior
+at projection (bayes_model.drop_operation_weights; HOUSE_CENTRE "drop_sms").
+In the eight past cycles it drops Direct Polls in 2019a, 2019s, 2020, 2021
+and 2022 (4-26 polls each) and is the shipped arm in 2013 and 2015.
+
+**2026 effect (computed before the harness, not a grading input).** Through
+the full chain on the 19 Oct posterior: P(NB >= 61) 9.3 -> 5.4, change
+6.8 -> 13.3, change + Ra'am 28.4 -> 40.3, NB mean 52.4 -> 50.5, Likud 26 ->
+23. With Filber alone out: 7.5 / 10.0 / 34.5, NB mean 51.5, Likud 24.
+
+**Grading.** The standing rule (s.53/s.55): eve on seed offsets 0/100/200
+pooled, D-7 and D-21 on offset 0; ships if it wins or ties (|d| < 0.1
+seat) median MAE in every leave-one-cycle-out fold, with mean MAE,
+threshold Brier and interval score not worse beyond .010 / .0010 / .05 and
+coverage not further from .90, D-7 and D-21 not contradicting. Otherwise
+not shipped, and the site says so beside the critique.
+
+## 66. The Reservists-Economic pledge restated by both co-leaders (20 Oct, D-7)
+
+Since 10 Oct the formation tree counts the Reservists-Economic list's seats
+only in coalitions with no haredi and no Arab partner (ZIONIST_ONLY, from
+Hendel's statement of 23 Aug, JPost 906335), and res_right is the
+probability that the list breaks that pledge to close Netanyahu + Shas +
+UTJ (every feasible right-side close). On 20 Oct, at a joint event, both
+co-leaders restated it: Zelekha - "we will not complete a government for
+Netanyahu"; the haredim "are our brothers, but parties that lead a line of
+separatism and draft evasion are not Zionist, and we will not sit with
+them"; Hendel - a draft for everyone as the condition for forming a
+government (INN 708908, 12:44; HM News 663174, 13:52). The Srugim report of
+the same week (101013605) adds that they will not be the 61st seat of an
+Eisenkot government resting on the Arab parties, which ZIONIST_ONLY
+already encodes.
+
+**Decision (fact update, not a method change).** res_right 0.12 -> 0.08,
+NEFF 12 kept. 0.12 was set on 10 Oct to the generic pledge-break gate of
+the day; s.59 recalibrated that gate to 0.08 on the formation record (17
+Oct) and res_right was not moved with it. The restatement by the second
+co-leader is the occasion, not a reason to go below the record's rate:
+Israeli pledges of this kind have broken (Gantz 2020, Bennett 2021), and a
+joint list of two parties can split after the vote. A 2026 list's
+parameter has no analogue in the formation harness, so the record-graded
+rate is the anchor. The effect, on the 19 Oct posterior through the full
+chain: government led by Netanyahu 26.6 -> 26.6, change 29.8 -> 30.1,
+Netanyahu + unaligned / Amcha 0.4% -> 0.3%; inside the simulation error,
+because the list passes in about a quarter of the draws and is rarely the
+closing seats. Sensitivity rows at 0.12 / 0.20 / 0.30 stay in the annex.
+
+### 65.3 Result: does not pass
+
+Eve, offsets 0/100/200 pooled, against the shipped arm on the same seeds:
+median MAE 1.5235 vs 1.4858 (+.038); per fold 2009 +.091, 2013 0, 2015
++.121 (a loss), 2019a -.048, 2019s -.033, 2020 +.074, 2021 +.071, 2022
++.026; mean MAE 1.6352 vs 1.6253 (+.010, at the floor, worse in every
+seed); coverage .972 both; threshold Brier .0450 vs .0447; interval score
+9.043 vs 9.011 (+.032). The cycle with the most Direct Polls polls, 2022
+(26), is worse in all three seeds (mean MAE +.040): its lean was to the
+right and the result was further right than the field (eve P(NB >= 61)
+.705 shipped, .685 without the pair; the bloc won 64). D-7: mean MAE
++.0025, interval score 9.480 vs 9.397 (+.083, beyond the .05 floor).
+D-21: mean MAE +.005, interval +.030, threshold Brier -.0005. Fails on the
+2015 fold, on mean MAE at the floor, and on the D-7 interval score. (In
+2009, 2013 and 2015, with no SMS firm, the arm still differs slightly from
+the shipped one: like s.53 it centres each list on the firms that poll it.)
+
+**Not shipped**; HOUSE_CENTRE stays "firm". What the record says: in the
+five cycles where the SMS operation polled, taking it out of the centre
+made the eve forecast slightly worse, not better. The house effect already
+removes Channel 14's lean relative to the field (+10.8 seats on the
+Netanyahu bloc in 2026, three times the chart's re-weighting); whether the
+field's centre is itself too far right or left is what the bloc-error
+layer, calibrated on eight cycles, prices. The site states the critique,
+the house effect, and this result (EN/HE), and the explorer does not get a
+variant: an arm that fails on the record is not offered as an alternative
+model.

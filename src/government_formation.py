@@ -210,7 +210,14 @@ BEHAVIOR = {
     # "joins a Zionist-only centre coalition"; the residual sit-out falls
     # 0.25 -> 0.18 (near Gantz's 0.15), so the conditions are not counted
     # twice (once in the gate, once in the residual).
-    "res_right": 0.12, "res_centre": 0.70,
+    # 2026-10-20 (s.66): 0.12 -> 0.08. Both co-leaders restated the rule a
+    # week out (Zelekha, joint event with Hendel: "we will not complete a
+    # government for Netanyahu", the haredi parties "are not Zionist, and we
+    # will not sit with them"; Hendel: a draft for everyone as the condition
+    # for any government; INN 708908, HM News 663174), and 0.08 is the
+    # pledge-break rate the formation record supports (centre_defects, s.59),
+    # which 0.12 predated.
+    "res_right": 0.08, "res_centre": 0.70,
 }
 
 # Lists whose centre-side seats count only in a coalition with no haredi

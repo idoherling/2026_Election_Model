@@ -616,6 +616,8 @@ T_UNIT_VAR = False
 # the endpoint draws on operations (one weight per operation, shared by its
 # firms; phone_mixed firms separate; sector-only firms weigh 0). An exact
 # re-parameterisation of the fitted posterior, applied at projection.
+# "drop_sms" (s.65, candidate house_drop_sms): the SMS operation (Filber /
+# Direct Polls) weighs 0 in the centre, every other firm 1.
 HOUSE_CENTRE = "firm"
 # 18 Oct (s.62.5): "seat_fix" ships - decompose()'s index collision fixed
 # (line 1.48 + 0.041 x seats instead of 1.83 + 0.044), width unchanged; it
@@ -1710,7 +1712,20 @@ def operation_weights(firms) -> np.ndarray:
     return np.array([0.0 if "(sector)" in f else 1.0 / n[o] for f, o in zip(firms, op)])
 
 
-def house_centre_shift(post, data, take) -> np.ndarray:
+def drop_operation_weights(firms, group: str = "sms_likud") -> np.ndarray:
+    """Centring weight per firm for HOUSE_CENTRE "drop_sms" (dossier s.65):
+    0 for the firms of one operation (pollster_meta correlation_group; the
+    SMS pair Filber / Direct Polls), 1 for every other firm, as in the
+    shipped unweighted centre."""
+    try:
+        meta = pd.read_csv(PROCESSED_DIR.parent / "pollster_meta.csv")
+        gmap = dict(zip(meta["pollster"], meta["correlation_group"]))
+    except FileNotFoundError:
+        gmap = {}
+    return np.array([0.0 if gmap.get(f) == group else 1.0 for f in firms])
+
+
+def house_centre_shift(post, data, take, weights=None) -> np.ndarray:
     """Per-draw share shift that moves each list's house-effect centre from
     the fit's unweighted mean over all firms to the operation-weighted mean
     over the firms that actually poll that list in the window, at the
@@ -1726,7 +1741,8 @@ def house_centre_shift(post, data, take) -> np.ndarray:
     F_, B_ = dc.shape[1], dc.shape[2]
     m = np.zeros((F_, B_))
     m[np.asarray(data["firm_i"]), np.asarray(data["block_i"])] = 1.0
-    wm = m * operation_weights(data["firms"])[:, None]
+    w = operation_weights(data["firms"]) if weights is None else np.asarray(weights, float)
+    wm = m * w[:, None]
     den = wm.sum(axis=0)
     return np.where(den > 0, np.einsum("fb,dfb->db", wm, dc) / np.where(den > 0, den, 1.0), 0.0)
 
@@ -1770,8 +1786,9 @@ def project(data, idata, rng, config="current", config_params=None):
     z_full = z_e if clr else np.concatenate([z_e, np.zeros((N_PROJ, 1))], axis=1)
     shares = np.exp(z_full - z_full.max(axis=1, keepdims=True))
     shares /= shares.sum(axis=1, keepdims=True)
-    if HOUSE_CENTRE == "operation":   # dossier s.53
-        shares = np.clip(shares + house_centre_shift(post, data, take), 0, None)
+    if HOUSE_CENTRE in ("operation", "drop_sms"):   # dossier s.53 / s.65
+        w = drop_operation_weights(data["firms"]) if HOUSE_CENTRE == "drop_sms" else None
+        shares = np.clip(shares + house_centre_shift(post, data, take, w), 0, None)
         shares /= shares.sum(axis=1, keepdims=True)
 
     # Lists with no polls in their final weeks have left the race.

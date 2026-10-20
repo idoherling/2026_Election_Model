@@ -161,6 +161,9 @@ ABLATIONS = [
     # width; the nested width arms (C0/CA/CAB/CABD) run in calibration_arms.py
     # house-effect centring on operations (2026-10-16, dossier s.53)
     ("house_group", {"house_centre": "operation"}),
+    # the SMS operation (Filber / Direct Polls) out of the centre (2026-10-20,
+    # dossier s.65; pre-registered there)
+    ("house_drop_sms", {"house_centre": "drop_sms"}),
     # haredi family mean by each lineage's own record (dossier s.54)
     ("hared_alloc", {"haredi_alloc": "record"}),
     ("cal_A", {"t_unit": True}),
@@ -976,8 +979,9 @@ def project_cycle(data, idata, eday, threshold, pairs, params,
     z_f = z_e if clr else np.concatenate([z_e, np.zeros((N_PROJ, 1))], axis=1)
     shares = np.exp(z_f - z_f.max(axis=1, keepdims=True))
     shares /= shares.sum(axis=1, keepdims=True)
-    if L["house_centre"] == "operation":   # dossier s.53
-        shares = np.clip(shares + bm.house_centre_shift(post, data, take), 0, None)
+    if L["house_centre"] in ("operation", "drop_sms"):   # dossier s.53 / s.65
+        w = bm.drop_operation_weights(data["firms"]) if L["house_centre"] == "drop_sms" else None
+        shares = np.clip(shares + bm.house_centre_shift(post, data, take, w), 0, None)
         shares /= shares.sum(axis=1, keepdims=True)
 
     # days_ahead from the real dates, never weeks_override (calendar weeks)

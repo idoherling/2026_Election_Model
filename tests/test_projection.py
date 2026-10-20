@@ -77,3 +77,19 @@ def test_projection_is_seeded(monkeypatch):
     a = bm.project(synthetic_data(), synthetic_posterior(), np.random.default_rng(7))[0]
     b = bm.project(synthetic_data(), synthetic_posterior(), np.random.default_rng(7))[0]
     assert (a == b).all()
+
+
+def test_drop_operation_weights_and_centre_shift():
+    """s.65 arm house_drop_sms: the SMS pair weighs 0 in the centre, every
+    other firm 1; the shift is the weighted mean of the firm effects over
+    the firms that poll each list (an exact re-parameterisation)."""
+    firms = ["Filber", "Direct Polls", "Midgam", "Kantar"]
+    w = bm.drop_operation_weights(firms)
+    assert w.tolist() == [0.0, 0.0, 1.0, 1.0]
+    # delta_c for 1 draw, 4 firms, 2 lists, centred over firms per list
+    dc = np.array([[[.06, .01], [.04, .01], [-.05, -.01], [-.05, -.01]]])
+    post = xr.Dataset({"delta_c": (("chain", "draw", "firm", "list"), dc[None])})
+    data = {"firm_i": [0, 1, 2, 3, 0, 1, 2], "block_i": [0, 0, 0, 0, 1, 1, 1], "firms": firms}
+    shift = bm.house_centre_shift(post, data, np.array([0]), w)
+    # list 0: mean over Midgam, Kantar = -.05; list 1: Kantar never polls it -> Midgam only
+    assert np.allclose(shift, [[-.05, -.01]])

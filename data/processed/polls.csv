@@ -23812,3 +23812,45 @@ poll_id,cycle,pollster,publisher,fieldwork_end,sample_size,party_id,seats,vote_p
 2026_20261019_midgamproject,2026,Midgam Project,Channel 13,2026-10-19,,raam,6,,True,manual,manual,https://www.maariv.co.il/news/politics/article-1379018
 2026_20261019_midgamproject,2026,Midgam Project,Channel 13,2026-10-19,,amcha_yisrael,4,,True,manual,manual,https://www.maariv.co.il/news/politics/article-1379018
 2026_20261019_midgamproject,2026,Midgam Project,Channel 13,2026-10-19,,zionist_home,4,,True,manual,manual,https://www.maariv.co.il/news/politics/article-1379018
+2026_20261018_directpolls,2026,Direct Polls,i24 News,2026-10-18,525.0,likud,25,,True,manual,manual,https://www.i24news.tv/en/news/israeli-elections/artc-i24news-poll-likud-slips-to-25-seats-as-ben-gvir-s-party-reaches-double-digits
+2026_20261018_directpolls,2026,Direct Polls,i24 News,2026-10-18,525.0,yashar,21,,True,manual,manual,https://www.i24news.tv/en/news/israeli-elections/artc-i24news-poll-likud-slips-to-25-seats-as-ben-gvir-s-party-reaches-double-digits
+2026_20261018_directpolls,2026,Direct Polls,i24 News,2026-10-18,525.0,together,13,,True,manual,manual,https://www.i24news.tv/en/news/israeli-elections/artc-i24news-poll-likud-slips-to-25-seats-as-ben-gvir-s-party-reaches-double-digits
+2026_20261018_directpolls,2026,Direct Polls,i24 News,2026-10-18,525.0,otzma,10,,True,manual,manual,https://www.i24news.tv/en/news/israeli-elections/artc-i24news-poll-likud-slips-to-25-seats-as-ben-gvir-s-party-reaches-double-digits
+2026_20261018_directpolls,2026,Direct Polls,i24 News,2026-10-18,525.0,democrats,9,,True,manual,manual,https://www.i24news.tv/en/news/israeli-elections/artc-i24news-poll-likud-slips-to-25-seats-as-ben-gvir-s-party-reaches-double-digits
+2026_20261018_directpolls,2026,Direct Polls,i24 News,2026-10-18,525.0,utj,8,,True,manual,manual,https://www.i24news.tv/en/news/israeli-elections/artc-i24news-poll-likud-slips-to-25-seats-as-ben-gvir-s-party-reaches-double-digits
+2026_20261018_directpolls,2026,Direct Polls,i24 News,2026-10-18,525.0,joint_list,8,,True,manual,manual,https://www.i24news.tv/en/news/israeli-elections/artc-i24news-poll-likud-slips-to-25-seats-as-ben-gvir-s-party-reaches-double-digits
+2026_20261018_directpolls,2026,Direct Polls,i24 News,2026-10-18,525.0,shas,8,,True,manual,manual,https://www.i24news.tv/en/news/israeli-elections/artc-i24news-poll-likud-slips-to-25-seats-as-ben-gvir-s-party-reaches-double-digits
+2026_20261018_directpolls,2026,Direct Polls,i24 News,2026-10-18,525.0,yisrael_beytenu,6,,True,manual,manual,https://www.i24news.tv/en/news/israeli-elections/artc-i24news-poll-likud-slips-to-25-seats-as-ben-gvir-s-party-reaches-double-digits
+2026_20261018_directpolls,2026,Direct Polls,i24 News,2026-10-18,525.0,rzp,6,,True,manual,manual,https://www.i24news.tv/en/news/israeli-elections/artc-i24news-poll-likud-slips-to-25-seats-as-ben-gvir-s-party-reaches-double-digits
+2026_20261018_directpolls,2026,Direct Polls,i24 News,2026-10-18,525.0,raam,6,,True,manual,manual,https://www.i24news.tv/en/news/israeli-elections/artc-i24news-poll-likud-slips-to-25-seats-as-ben-gvir-s-party-reaches-double-digits
+2026_20261018_directpolls,2026,Direct Polls,i24 News,2026-10-18,525.0,amcha_yisrael,0,,True,manual,manual,https://www.i24news.tv/en/news/israeli-elections/artc-i24news-poll-likud-slips-to-25-seats-as-ben-gvir-s-party-reaches-double-digits
+2026_20261018_directpolls,2026,Direct Polls,i24 News,2026-10-18,525.0,zionist_home,0,,True,manual,manual,https://www.i24news.tv/en/news/israeli-elections/artc-i24news-poll-likud-slips-to-25-seats-as-ben-gvir-s-party-reaches-double-digits
+2026_20261018_directpolls,2026,Direct Polls,i24 News,2026-10-18,525.0,blue_white,0,,True,manual,manual,https://www.i24news.tv/en/news/israeli-elections/artc-i24news-poll-likud-slips-to-25-seats-as-ben-gvir-s-party-reaches-double-digits
+2026_20261019_filber,2026,Filber,Channel 14,2026-10-19,454.0,likud,30,,True,manual,manual,https://www.c14.co.il/article/1745051
+2026_20261019_filber,2026,Filber,Channel 14,2026-10-19,454.0,yashar,19,,True,manual,manual,https://www.c14.co.il/article/1745051
+2026_20261019_filber,2026,Filber,Channel 14,2026-10-19,454.0,democrats,10,,True,manual,manual,https://www.c14.co.il/article/1745051
+2026_20261019_filber,2026,Filber,Channel 14,2026-10-19,454.0,together,10,,True,manual,manual,https://www.c14.co.il/article/1745051
+2026_20261019_filber,2026,Filber,Channel 14,2026-10-19,454.0,shas,10,,True,manual,manual,https://www.c14.co.il/article/1745051
+2026_20261019_filber,2026,Filber,Channel 14,2026-10-19,454.0,utj,8,,True,manual,manual,https://www.c14.co.il/article/1745051
+2026_20261019_filber,2026,Filber,Channel 14,2026-10-19,454.0,joint_list,8,,True,manual,manual,https://www.c14.co.il/article/1745051
+2026_20261019_filber,2026,Filber,Channel 14,2026-10-19,454.0,rzp,7,,True,manual,manual,https://www.c14.co.il/article/1745051
+2026_20261019_filber,2026,Filber,Channel 14,2026-10-19,454.0,otzma,7,,True,manual,manual,https://www.c14.co.il/article/1745051
+2026_20261019_filber,2026,Filber,Channel 14,2026-10-19,454.0,yisrael_beytenu,6,,True,manual,manual,https://www.c14.co.il/article/1745051
+2026_20261019_filber,2026,Filber,Channel 14,2026-10-19,454.0,raam,5,,True,manual,manual,https://www.c14.co.il/article/1745051
+2026_20261019_filber,2026,Filber,Channel 14,2026-10-19,454.0,zionist_home,0,,True,manual,manual,https://www.c14.co.il/article/1745051
+2026_20261019_filber,2026,Filber,Channel 14,2026-10-19,454.0,amcha_yisrael,0,,True,manual,manual,https://www.c14.co.il/article/1745051
+2026_20261019_filber,2026,Filber,Channel 14,2026-10-19,454.0,blue_white,0,,True,manual,manual,https://www.c14.co.il/article/1745051
+2026_20261019_lazar,2026,Lazar,Walla,2026-10-19,,yashar,23,,True,manual,manual,https://www.israelnationalnews.com/news/434891
+2026_20261019_lazar,2026,Lazar,Walla,2026-10-19,,likud,19,,True,manual,manual,https://www.israelnationalnews.com/news/434891
+2026_20261019_lazar,2026,Lazar,Walla,2026-10-19,,together,14,,True,manual,manual,https://www.israelnationalnews.com/news/434891
+2026_20261019_lazar,2026,Lazar,Walla,2026-10-19,,democrats,9,,True,manual,manual,https://www.israelnationalnews.com/news/434891
+2026_20261019_lazar,2026,Lazar,Walla,2026-10-19,,yisrael_beytenu,8,,True,manual,manual,https://www.israelnationalnews.com/news/434891
+2026_20261019_lazar,2026,Lazar,Walla,2026-10-19,,shas,8,,True,manual,manual,https://www.israelnationalnews.com/news/434891
+2026_20261019_lazar,2026,Lazar,Walla,2026-10-19,,otzma,8,,True,manual,manual,https://www.israelnationalnews.com/news/434891
+2026_20261019_lazar,2026,Lazar,Walla,2026-10-19,,joint_list,8,,True,manual,manual,https://www.israelnationalnews.com/news/434891
+2026_20261019_lazar,2026,Lazar,Walla,2026-10-19,,utj,7,,True,manual,manual,https://www.israelnationalnews.com/news/434891
+2026_20261019_lazar,2026,Lazar,Walla,2026-10-19,,rzp,6,,True,manual,manual,https://www.israelnationalnews.com/news/434891
+2026_20261019_lazar,2026,Lazar,Walla,2026-10-19,,raam,6,,True,manual,manual,https://www.israelnationalnews.com/news/434891
+2026_20261019_lazar,2026,Lazar,Walla,2026-10-19,,zionist_home,4,,True,manual,manual,https://www.israelnationalnews.com/news/434891
+2026_20261019_lazar,2026,Lazar,Walla,2026-10-19,,amcha_yisrael,0,,True,manual,manual,https://www.israelnationalnews.com/news/434891
+2026_20261019_lazar,2026,Lazar,Walla,2026-10-19,,blue_white,0,,True,manual,manual,https://www.israelnationalnews.com/news/434891
