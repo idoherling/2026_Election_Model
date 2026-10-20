@@ -205,6 +205,8 @@ CURATED = {
                 "סקרי ערוץ 12 וערוץ 13, תשע הגשות; כחול לבן פורשת"),
     "089efdf": ("model", [64], "Owner ruling: Blue and White's voters lean to the unity side",
                 "הכרעת הבעלים: מצביעי כחול לבן נוטים לצד האחדות"),
+    "d401811": ("both", [65, 66], "i24, Channel 14 and Walla polls; Channel 14's weighting tested; Reservists' pledge restated",
+                "סקרי i24, ערוץ 14 ווואלה; השקלול של ערוץ 14 נבחן; התחייבות המילואימניקים חודשה"),
 }
 GENERIC = {
     "polls": ("New polls or events and a refit", "סקרים או אירועים חדשים והתאמה מחדש"),

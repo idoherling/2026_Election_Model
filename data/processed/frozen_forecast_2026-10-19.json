@@ -1,13 +1,13 @@
 {
- "sha256": "c972286ad1c4ca332de19d28138bfb46184f342bfaccc9b1347e7792f3b8f575",
+ "sha256": "b2589a24bf3572a69dcd224266a98e0e1bda4d7d7ec75aaf9db9582718b249fa",
  "hash": "sha256 of the UTF-8 JSON of payload with sorted keys and separators (',', ':')",
  "payload": {
   "version": 1,
   "cycle": "2026",
   "election_day": "2026-10-27",
   "asof": "2026-10-19",
-  "frozen_utc": "2026-10-20T12:27:45Z",
-  "frozen_israel": "2026-10-20 15:27",
+  "frozen_utc": "2026-10-20T12:28:30Z",
+  "frozen_israel": "2026-10-20 15:28",
   "blackout_from": "2026-10-23",
   "final": false,
   "lists": {
@@ -6407,16 +6407,8 @@
    "uniform_group_log": -1.3863
   },
   "provenance": {
-   "git_head": "3b6589aebfe41c499a0867c72ee5681d4ee112ee",
-   "inputs_dirty": [
-    "M data/processed/government_groups.csv",
-    " M data/processed/mixture_blocs.csv",
-    " M data/processed/mixture_draws.parquet",
-    " M data/processed/mixture_shares.csv",
-    " M data/processed/model_variants.json",
-    " M data/processed/official_forecast.csv",
-    " M data/processed/pm_probabilities.csv"
-   ],
+   "git_head": "d40181107ceef08cf618d7f3f9fc5f9fc83e8025",
+   "inputs_dirty": [],
    "inputs": {
     "data/processed/mixture_draws.parquet": "c1f7b4253378211bc9cb693f84d879b0294ca7e2d9d0920edbc5c7776d8d620b",
     "data/processed/official_forecast.csv": "ea5e9c5b8eaec3c0b5041f188ee246e31e2e6913c0af3360abe421c5ee5237b3",
