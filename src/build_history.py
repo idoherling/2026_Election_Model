@@ -195,6 +195,16 @@ CURATED = {
                 "תוקן באג האינדקס בזעזוע השיורי; ערבוב המודלים נבחן ולא נכנס"),
     "f2eccf3": ("site", [61, 63], "Model explorer added: the official forecast beside its alternatives",
                 "נוסף בוחר המודלים: התחזית הרשמית לצד החלופות"),
+    "0c525fe": ("site", [], "Final-week runbook written",
+                "נכתב נוהל השבוע האחרון"),
+    "c2fe2f3": ("site", [], "Scorecard page added: how the forecast will be graded",
+                "נוסף עמוד הציונים: איך התחזית תיבדק"),
+    "5d183bf": ("site", [], "Provisional freeze of the 15 Oct forecast",
+                "הקפאה זמנית של תחזית 15 באוקטובר"),
+    "0a216c4": ("polls", [], "Channel 12 and Channel 13 polls, nine filings; Blue and White withdraws",
+                "סקרי ערוץ 12 וערוץ 13, תשע הגשות; כחול לבן פורשת"),
+    "089efdf": ("model", [64], "Owner ruling: Blue and White's voters lean to the unity side",
+                "הכרעת הבעלים: מצביעי כחול לבן נוטים לצד האחדות"),
 }
 GENERIC = {
     "polls": ("New polls or events and a refit", "סקרים או אירועים חדשים והתאמה מחדש"),
