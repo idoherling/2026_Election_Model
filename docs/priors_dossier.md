@@ -6782,3 +6782,34 @@ worsens median and mean MAE and Brier at every horizon. In 2026 it is the
 whole difference between the official central seats (Likud 26, Otzma 6,
 RZP-Zehut 4) and the poll-level view (Likud 23, Otzma 8, RZP-Zehut 5)
 that prediction markets lean towards (EVT-F25).
+
+## 64. Where Blue and White's withdrawn vote goes (20 Oct, D-7)
+
+Blue and White withdrew on 19 Oct (Gantz: no endorsement; a closing
+message against "only not Bibi" and for a unity government;
+registration_scenarios RESOLVED blue_white_folds True). Its withdrawn vote
+(about 1-1.4% in the last polls) is routed by FOLD_TRANSFER["blue_white"].
+
+**Search for measured data (20 Oct).** None exists yet: Hebrew and English
+press, the verified research desks, and every CEC filing's crosstabs (the
+only Blue and White breakdown, Channel 13 filing 4193 of 5 Oct, n = 7,
+asks vote certainty, not second choice). Israel Hayom (19 Oct) says the
+destinations are "estimates only, not a trend proven in polling data".
+Commentary, none with numbers: JDN's Barometer - mostly the opposition,
+mainly Eisenkot, a small share to Hendel; Filber (Channel 14's pollster) -
+unpublished internal polls show Gantz's remaining supporters prefer
+Netanyahu as PM; Ynet, Srugim, Israel Hayom - Hendel-Zelekha as the
+natural home of a unity message.
+
+**Decision: owner ruling, 20 Oct ("Gantz voters lean unity").** The
+official vector changes from the measured 2022 absorbed-list pattern
+(Yashar .60 / Together .25 / abstain .15; Kolot Nodedim 2021->2022) to
+Yashar .35 / Together .10 / Reservists-Economic .25 / Likud .15 / abstain
+.15. This is an editorial judgment on qualitative evidence, outside the
+backtest (a 2026 registration event has no harness analogue). The 2022
+vector stays in the code (BW_TRANSFER_2022) and on the site as the model
+explorer's "Blue and White voters: 2022 pattern" variant. Replace both with
+a measured flow as soon as a pollster publishes one. Note: the
+Reservists-Economic list polls at 2.1-2.8%, so its share of this vote moves
+its threshold odds, and with Likud and Yashar a seat apart the vector also
+touches the trailing-Likud gate (registration_scenarios comment of 8 Oct).

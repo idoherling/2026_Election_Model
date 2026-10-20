@@ -1,25 +1,25 @@
 list,sector,share_of_list,seats_from_sector
 Likud,arab,0.005,0.13
-Likud,centre_left,0.405,10.16
+Likud,centre_left,0.405,10.24
 Likud,haredi,0.012,0.31
-Likud,mixed,0.296,7.43
+Likud,mixed,0.296,7.49
 Likud,religious_zionist,0.018,0.46
 Likud,russian_leaning,0.001,0.02
-Likud,secular_right,0.263,6.59
+Likud,secular_right,0.263,6.64
 Yashar,arab,0.006,0.15
-Yashar,centre_left,0.581,13.72
+Yashar,centre_left,0.581,13.6
 Yashar,haredi,0.011,0.26
-Yashar,mixed,0.245,5.77
+Yashar,mixed,0.245,5.72
 Yashar,religious_zionist,0.008,0.18
 Yashar,russian_leaning,0.002,0.04
-Yashar,secular_right,0.148,3.49
+Yashar,secular_right,0.148,3.46
 Bennett 2026 + Yesh Atid,arab,0.005,0.06
-Bennett 2026 + Yesh Atid,centre_left,0.612,7.4
+Bennett 2026 + Yesh Atid,centre_left,0.612,7.34
 Bennett 2026 + Yesh Atid,haredi,0.006,0.08
-Bennett 2026 + Yesh Atid,mixed,0.234,2.83
+Bennett 2026 + Yesh Atid,mixed,0.234,2.81
 Bennett 2026 + Yesh Atid,religious_zionist,0.012,0.15
 Bennett 2026 + Yesh Atid,russian_leaning,0.001,0.01
-Bennett 2026 + Yesh Atid,secular_right,0.129,1.56
+Bennett 2026 + Yesh Atid,secular_right,0.129,1.55
 The Democrats,arab,0.03,0.27
 The Democrats,centre_left,0.783,7.04
 The Democrats,haredi,0.002,0.02
@@ -76,6 +76,13 @@ Religious Zionist Party,mixed,0.272,0.98
 Religious Zionist Party,religious_zionist,0.115,0.41
 Religious Zionist Party,russian_leaning,0.0,0.0
 Religious Zionist Party,secular_right,0.223,0.8
+Reservists – Economic Party,arab,0.006,0.01
+Reservists – Economic Party,centre_left,0.615,0.86
+Reservists – Economic Party,haredi,0.005,0.01
+Reservists – Economic Party,mixed,0.236,0.33
+Reservists – Economic Party,religious_zionist,0.006,0.01
+Reservists – Economic Party,russian_leaning,0.002,0.0
+Reservists – Economic Party,secular_right,0.13,0.18
 Amcha Yisrael,arab,0.004,0.01
 Amcha Yisrael,centre_left,0.388,0.54
 Amcha Yisrael,haredi,0.018,0.03
@@ -83,13 +90,6 @@ Amcha Yisrael,mixed,0.293,0.41
 Amcha Yisrael,religious_zionist,0.04,0.06
 Amcha Yisrael,russian_leaning,0.001,0.0
 Amcha Yisrael,secular_right,0.256,0.36
-Reservists – Economic Party,arab,0.006,0.01
-Reservists – Economic Party,centre_left,0.615,0.8
-Reservists – Economic Party,haredi,0.005,0.01
-Reservists – Economic Party,mixed,0.236,0.31
-Reservists – Economic Party,religious_zionist,0.006,0.01
-Reservists – Economic Party,russian_leaning,0.002,0.0
-Reservists – Economic Party,secular_right,0.13,0.17
 The Haredi Public,arab,0.003,0.0
 The Haredi Public,centre_left,0.18,0.0
 The Haredi Public,haredi,0.281,0.0

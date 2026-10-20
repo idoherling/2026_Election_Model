@@ -1,9 +1,9 @@
 quantity,mean,p05,p95
-p_deadlock,0.812,0.799,0.826
-p_repeat_deadlock_tree,0.648,0.399,0.797
-p_repeat_deadlock,0.328,0.091,0.635
-p_deadlock_desk,0.635,0.635,0.635
-p_repeat_desk,0.308,0.083,0.597
+p_deadlock,0.816,0.803,0.831
+p_repeat_deadlock_tree,0.658,0.405,0.807
+p_repeat_deadlock,0.328,0.091,0.637
+p_deadlock_desk,0.661,0.661,0.661
+p_repeat_desk,0.307,0.084,0.595
 record_beta_a,2.5,,
 record_beta_b,5.5,,
 stage_on,1.0,,

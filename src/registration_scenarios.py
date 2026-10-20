@@ -146,10 +146,24 @@ MERGE_RETENTION = 0.90
 # ex-B&W); Blue and White ~ its own 2022 pattern; Unity ~ Likud alumni.
 FOLD_TRANSFER = {
     "zionist_home": [("yashar", 0.55), ("bennett_2026", 0.15), ("likud", 0.20)],
-    "blue_white": [("yashar", 0.60), ("bennett_2026", 0.25)],
+    # 2026-10-20 OWNER RULING ("Gantz voters lean unity"): Blue and White
+    # withdrew on 19 Oct with no endorsement and a closing message against
+    # "only not Bibi"; no poll has measured where its remaining voters go
+    # (Israel Hayom 19 Oct: "estimates only"). Commentary points to Hendel's
+    # unity pitch (Ynet, Srugim, Israel Hayom), to Eisenkot (JDN Barometer)
+    # and, per Filber's unpublished internal polls, to Netanyahu as PM. The
+    # owner set the vector below; the 2022 measured pattern (BW_TRANSFER_2022)
+    # stays as an alternative in the model explorer. Replace both with a
+    # measured flow as soon as a pollster publishes one.
+    "blue_white": [("yashar", 0.35), ("bennett_2026", 0.10),
+                   ("zionist_home", 0.25), ("likud", 0.15)],
     "unity": [("likud", 0.45), ("yashar", 0.25), ("yisrael_beytenu", 0.10),
               ("bennett_2026", 0.10)],
 }
+# Blue and White's measured 2021->2022 absorbed-list pattern (National
+# Unity 70 / Yesh Atid 30 -> Yashar .60 / Together .25, rest abstain): the
+# official vector until the 20 Oct owner ruling; kept for the explorer.
+BW_TRANSFER_2022 = [("yashar", 0.60), ("bennett_2026", 0.25)]
 # Set on filing day to collapse the mixture, e.g.
 # RESOLVED = {"balad_splits": False, "rzp_fate": "merge_otzma", ...}
 # 2026-09-01: Segalovitz-Ra'am deal announced as OFFICIAL — the event is

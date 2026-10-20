@@ -286,6 +286,29 @@ VARIANTS: list[Variant] = [
                       "shipped rows = the official rows); scratch hier/grade/registered_rows.csv"),
     ),
     Variant(
+        id="bw_2022",
+        name_en="Blue and White voters: 2022 pattern", name_he="מצביעי כחול לבן: דפוס 2022",
+        flags=lambda: {"registration_scenarios": {"FOLD_TRANSFER": dict(
+            __import__("registration_scenarios").FOLD_TRANSFER,
+            blue_white=list(__import__("registration_scenarios").BW_TRANSFER_2022))}},
+        sections=(64,), status="previous",
+        desc_en=("The official model with Blue and White's withdrawn vote routed by the list's measured "
+                 "2022 pattern, when its absorbed voters went to National Unity (70%) and Yesh Atid (30%): "
+                 "60% to Yashar and 25% to Together, the rest staying home. It was the official assumption "
+                 "until 20 October, when it was replaced by an editorial judgment that Gantz's last voters "
+                 "lean towards a unity government (" + _dl(64) + "). No poll has yet measured where they go."),
+        desc_he=("המודל הרשמי כשקולות כחול לבן שפרשה מנותבים לפי הדפוס שנמדד אצל הרשימה ב־2022, כשבוחריה "
+                 "שנבלעו עברו למחנה הממלכתי (" + _n("70%") + ") וליש עתיד (" + _n("30%") + "): " + _n("60%")
+                 + " לישר ו־" + _n("25%") + " לביחד, והשאר נשארים בבית. זו הייתה ההנחה הרשמית עד 20 באוקטובר, "
+                 "אז הוחלפה בשיפוט מערכתי שלפיו בוחריו האחרונים של גנץ נוטים לממשלת אחדות (" + _dl(64, True)
+                 + "). אף סקר עוד לא מדד לאן הם הולכים."),
+        verdict_en="Official until 20 October; replaced by an editorial judgment, not by a graded test.",
+        verdict_he="רשמי עד 20 באוקטובר; הוחלף בשיפוט מערכתי, לא במבחן מדורג.",
+        backtest=_OFFICIAL_ROWS,
+        backtest_src=("a 2026 registration judgment the backtest cannot see: its rows are the official "
+                      "rows"),
+    ),
+    Variant(
         id="old_residual",
         name_en="Old residual line", name_he="קו השיורי הישן",
         flags={"bayes_model": {"RESID_SPACE": "seat"}},
