@@ -121,9 +121,12 @@ HAND_ROWS = ("4202", "4207", "4211", "4212")
 
 @pytest.fixture(scope="module")
 def index_before_16oct():
-    """The filings index as it stood before the 16 Oct hand-added rows."""
+    """The filings index as it stood before the 16 Oct hand-added rows (and
+    before any row the discovery itself appended later)."""
     idx = sc.load_index()
-    return idx[~idx["notes"].str.contains("index row added 16 Oct")].reset_index(drop=True)
+    later = idx["notes"].str.contains("index row added 16 Oct|proposed by scrape_cec --discover",
+                                      na=False)
+    return idx[~later].reset_index(drop=True)
 
 
 @pytest.mark.parametrize("ref", HAND_ROWS)

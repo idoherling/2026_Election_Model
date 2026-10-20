@@ -215,6 +215,12 @@ PRIORS["blue_white_folds"] = 0.40
 # possible exit only in the final days if the threshold is out of reach.
 # Lowered to 0.25: a late exit stays live but is no longer the base case.
 PRIORS["blue_white_folds"] = 0.25
+# 2026-10-19: RESOLVED True. Gantz announced Blue and White's withdrawal
+# ("I will not run in the coming elections"), endorsed no candidate and
+# called for a unity government (Kan 1110686; mako 02450f13...; Walla
+# 383958100). Its voters route by the list's measured 2022 vector (Yashar
+# .60 / Together .25, rest abstain): no endorsement, so the vector stands.
+RESOLVED["blue_white_folds"] = True
 
 
 def _col(comps, component):
