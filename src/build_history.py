@@ -207,6 +207,8 @@ CURATED = {
                 "הכרעת הבעלים: מצביעי כחול לבן נוטים לצד האחדות"),
     "d401811": ("both", [65, 66], "i24, Channel 14 and Walla polls; Channel 14's weighting tested; Reservists' pledge restated",
                 "סקרי i24, ערוץ 14 ווואלה; השקלול של ערוץ 14 נבחן; התחייבות המילואימניקים חודשה"),
+    "daed6f0": ("polls", [], "Channel 14 and Channel 16 polls of 20 Oct; five new filings",
+                "סקרי ערוץ 14 וערוץ 16 מ־20 באוקטובר; חמש הגשות חדשות"),
 }
 GENERIC = {
     "polls": ("New polls or events and a refit", "סקרים או אירועים חדשים והתאמה מחדש"),
