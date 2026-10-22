@@ -23772,22 +23772,22 @@ poll_id,cycle,pollster,publisher,fieldwork_end,sample_size,party_id,seats,vote_p
 2026_20261018_kantar,2026,Kantar,Kan 11,2026-10-18,554.0,yashar,23,,True,2026_main,2026,2026_main:1:4
 2026_20261018_kantar,2026,Kantar,Kan 11,2026-10-18,554.0,yisrael_beytenu,8,,True,2026_main,2026,2026_main:1:4
 2026_20261018_kantar,2026,Kantar,Kan 11,2026-10-18,554.0,zionist_home,4,,True,2026_main,2026,2026_main:1:4
-2026_20261019_filber,2026,Filber,Channel 14,2026-10-19,454.0,ahi,0,0.5,True,2026_main,2026,2026_main:0:3
-2026_20261019_filber,2026,Filber,Channel 14,2026-10-19,454.0,amcha_yisrael,0,2.2,True,2026_main,2026,2026_main:0:3
-2026_20261019_filber,2026,Filber,Channel 14,2026-10-19,454.0,democrats,10,,True,2026_main,2026,2026_main:0:3
-2026_20261019_filber,2026,Filber,Channel 14,2026-10-19,454.0,haredi_public,0,0.3,True,2026_main,2026,2026_main:0:3
-2026_20261019_filber,2026,Filber,Channel 14,2026-10-19,454.0,joint_list,8,,True,2026_main,2026,2026_main:0:3
-2026_20261019_filber,2026,Filber,Channel 14,2026-10-19,454.0,likud,30,,True,2026_main,2026,2026_main:0:3
-2026_20261019_filber,2026,Filber,Channel 14,2026-10-19,454.0,noam,0,1.5,True,2026_main,2026,2026_main:0:3
-2026_20261019_filber,2026,Filber,Channel 14,2026-10-19,454.0,otzma,7,,True,2026_main,2026,2026_main:0:3
-2026_20261019_filber,2026,Filber,Channel 14,2026-10-19,454.0,raam,5,,True,2026_main,2026,2026_main:0:3
-2026_20261019_filber,2026,Filber,Channel 14,2026-10-19,454.0,rzp,7,,True,2026_main,2026,2026_main:0:3
-2026_20261019_filber,2026,Filber,Channel 14,2026-10-19,454.0,shas,10,,True,2026_main,2026,2026_main:0:3
-2026_20261019_filber,2026,Filber,Channel 14,2026-10-19,454.0,together,10,,True,2026_main,2026,2026_main:0:3
-2026_20261019_filber,2026,Filber,Channel 14,2026-10-19,454.0,utj,8,,True,2026_main,2026,2026_main:0:3
-2026_20261019_filber,2026,Filber,Channel 14,2026-10-19,454.0,yashar,19,,True,2026_main,2026,2026_main:0:3
-2026_20261019_filber,2026,Filber,Channel 14,2026-10-19,454.0,yisrael_beytenu,6,,True,2026_main,2026,2026_main:0:3
-2026_20261019_filber,2026,Filber,Channel 14,2026-10-19,454.0,zionist_home,0,2.6,True,2026_main,2026,2026_main:0:3
+2026_20261019_filber,2026,Filber,Channel 14,2026-10-19,454.0,ahi,0,0.5,True,2026_main,2026,2026_main:0:5
+2026_20261019_filber,2026,Filber,Channel 14,2026-10-19,454.0,amcha_yisrael,0,2.2,True,2026_main,2026,2026_main:0:5
+2026_20261019_filber,2026,Filber,Channel 14,2026-10-19,454.0,democrats,10,,True,2026_main,2026,2026_main:0:5
+2026_20261019_filber,2026,Filber,Channel 14,2026-10-19,454.0,haredi_public,0,0.3,True,2026_main,2026,2026_main:0:5
+2026_20261019_filber,2026,Filber,Channel 14,2026-10-19,454.0,joint_list,8,,True,2026_main,2026,2026_main:0:5
+2026_20261019_filber,2026,Filber,Channel 14,2026-10-19,454.0,likud,30,,True,2026_main,2026,2026_main:0:5
+2026_20261019_filber,2026,Filber,Channel 14,2026-10-19,454.0,noam,0,1.5,True,2026_main,2026,2026_main:0:5
+2026_20261019_filber,2026,Filber,Channel 14,2026-10-19,454.0,otzma,7,,True,2026_main,2026,2026_main:0:5
+2026_20261019_filber,2026,Filber,Channel 14,2026-10-19,454.0,raam,5,,True,2026_main,2026,2026_main:0:5
+2026_20261019_filber,2026,Filber,Channel 14,2026-10-19,454.0,rzp,7,,True,2026_main,2026,2026_main:0:5
+2026_20261019_filber,2026,Filber,Channel 14,2026-10-19,454.0,shas,10,,True,2026_main,2026,2026_main:0:5
+2026_20261019_filber,2026,Filber,Channel 14,2026-10-19,454.0,together,10,,True,2026_main,2026,2026_main:0:5
+2026_20261019_filber,2026,Filber,Channel 14,2026-10-19,454.0,utj,8,,True,2026_main,2026,2026_main:0:5
+2026_20261019_filber,2026,Filber,Channel 14,2026-10-19,454.0,yashar,19,,True,2026_main,2026,2026_main:0:5
+2026_20261019_filber,2026,Filber,Channel 14,2026-10-19,454.0,yisrael_beytenu,6,,True,2026_main,2026,2026_main:0:5
+2026_20261019_filber,2026,Filber,Channel 14,2026-10-19,454.0,zionist_home,0,2.6,True,2026_main,2026,2026_main:0:5
 2026_20261019_midgam,2026,Midgam,HaHadashot 12,2026-10-19,507.0,amcha_yisrael,0,2.8,True,2026_main,2026,2026_main:1:2
 2026_20261019_midgam,2026,Midgam,HaHadashot 12,2026-10-19,507.0,blue_white,0,1.4,True,2026_main,2026,2026_main:1:2
 2026_20261019_midgam,2026,Midgam,HaHadashot 12,2026-10-19,507.0,democrats,9,,True,2026_main,2026,2026_main:1:2
@@ -23803,19 +23803,35 @@ poll_id,cycle,pollster,publisher,fieldwork_end,sample_size,party_id,seats,vote_p
 2026_20261019_midgam,2026,Midgam,HaHadashot 12,2026-10-19,507.0,yashar,24,,True,2026_main,2026,2026_main:1:2
 2026_20261019_midgam,2026,Midgam,HaHadashot 12,2026-10-19,507.0,yisrael_beytenu,8,,True,2026_main,2026,2026_main:1:2
 2026_20261019_midgam,2026,Midgam,HaHadashot 12,2026-10-19,507.0,zionist_home,0,2.1,True,2026_main,2026,2026_main:1:2
-2026_20261019_midgamproject,2026,Midgam Project,Channel 13,2026-10-19,1016.0,amcha_yisrael,4,,True,2026_main,2026,2026_main:0:2
-2026_20261019_midgamproject,2026,Midgam Project,Channel 13,2026-10-19,1016.0,democrats,9,,True,2026_main,2026,2026_main:0:2
-2026_20261019_midgamproject,2026,Midgam Project,Channel 13,2026-10-19,1016.0,joint_list,9,,True,2026_main,2026,2026_main:0:2
-2026_20261019_midgamproject,2026,Midgam Project,Channel 13,2026-10-19,1016.0,likud,18,,True,2026_main,2026,2026_main:0:2
-2026_20261019_midgamproject,2026,Midgam Project,Channel 13,2026-10-19,1016.0,otzma,7,,True,2026_main,2026,2026_main:0:2
-2026_20261019_midgamproject,2026,Midgam Project,Channel 13,2026-10-19,1016.0,raam,6,,True,2026_main,2026,2026_main:0:2
-2026_20261019_midgamproject,2026,Midgam Project,Channel 13,2026-10-19,1016.0,rzp,7,,True,2026_main,2026,2026_main:0:2
-2026_20261019_midgamproject,2026,Midgam Project,Channel 13,2026-10-19,1016.0,shas,7,,True,2026_main,2026,2026_main:0:2
-2026_20261019_midgamproject,2026,Midgam Project,Channel 13,2026-10-19,1016.0,together,14,,True,2026_main,2026,2026_main:0:2
-2026_20261019_midgamproject,2026,Midgam Project,Channel 13,2026-10-19,1016.0,utj,7,,True,2026_main,2026,2026_main:0:2
-2026_20261019_midgamproject,2026,Midgam Project,Channel 13,2026-10-19,1016.0,yashar,20,,True,2026_main,2026,2026_main:0:2
-2026_20261019_midgamproject,2026,Midgam Project,Channel 13,2026-10-19,1016.0,yisrael_beytenu,8,,True,2026_main,2026,2026_main:0:2
-2026_20261019_midgamproject,2026,Midgam Project,Channel 13,2026-10-19,1016.0,zionist_home,4,,True,2026_main,2026,2026_main:0:2
+2026_20261019_midgamproject,2026,Midgam Project,Channel 13,2026-10-19,1016.0,amcha_yisrael,4,,True,2026_main,2026,2026_main:0:4
+2026_20261019_midgamproject,2026,Midgam Project,Channel 13,2026-10-19,1016.0,democrats,9,,True,2026_main,2026,2026_main:0:4
+2026_20261019_midgamproject,2026,Midgam Project,Channel 13,2026-10-19,1016.0,joint_list,9,,True,2026_main,2026,2026_main:0:4
+2026_20261019_midgamproject,2026,Midgam Project,Channel 13,2026-10-19,1016.0,likud,18,,True,2026_main,2026,2026_main:0:4
+2026_20261019_midgamproject,2026,Midgam Project,Channel 13,2026-10-19,1016.0,otzma,7,,True,2026_main,2026,2026_main:0:4
+2026_20261019_midgamproject,2026,Midgam Project,Channel 13,2026-10-19,1016.0,raam,6,,True,2026_main,2026,2026_main:0:4
+2026_20261019_midgamproject,2026,Midgam Project,Channel 13,2026-10-19,1016.0,rzp,7,,True,2026_main,2026,2026_main:0:4
+2026_20261019_midgamproject,2026,Midgam Project,Channel 13,2026-10-19,1016.0,shas,7,,True,2026_main,2026,2026_main:0:4
+2026_20261019_midgamproject,2026,Midgam Project,Channel 13,2026-10-19,1016.0,together,14,,True,2026_main,2026,2026_main:0:4
+2026_20261019_midgamproject,2026,Midgam Project,Channel 13,2026-10-19,1016.0,utj,7,,True,2026_main,2026,2026_main:0:4
+2026_20261019_midgamproject,2026,Midgam Project,Channel 13,2026-10-19,1016.0,yashar,20,,True,2026_main,2026,2026_main:0:4
+2026_20261019_midgamproject,2026,Midgam Project,Channel 13,2026-10-19,1016.0,yisrael_beytenu,8,,True,2026_main,2026,2026_main:0:4
+2026_20261019_midgamproject,2026,Midgam Project,Channel 13,2026-10-19,1016.0,zionist_home,4,,True,2026_main,2026,2026_main:0:4
+2026_20261020_filber,2026,Filber,Channel 14,2026-10-20,2116.0,ahi,0,0.4,True,2026_main,2026,2026_main:0:3
+2026_20261020_filber,2026,Filber,Channel 14,2026-10-20,2116.0,amcha_yisrael,0,1.9,True,2026_main,2026,2026_main:0:3
+2026_20261020_filber,2026,Filber,Channel 14,2026-10-20,2116.0,democrats,9,,True,2026_main,2026,2026_main:0:3
+2026_20261020_filber,2026,Filber,Channel 14,2026-10-20,2116.0,haredi_public,0,0.9,True,2026_main,2026,2026_main:0:3
+2026_20261020_filber,2026,Filber,Channel 14,2026-10-20,2116.0,joint_list,8,,True,2026_main,2026,2026_main:0:3
+2026_20261020_filber,2026,Filber,Channel 14,2026-10-20,2116.0,likud,30,,True,2026_main,2026,2026_main:0:3
+2026_20261020_filber,2026,Filber,Channel 14,2026-10-20,2116.0,noam,0,0.9,True,2026_main,2026,2026_main:0:3
+2026_20261020_filber,2026,Filber,Channel 14,2026-10-20,2116.0,otzma,8,,True,2026_main,2026,2026_main:0:3
+2026_20261020_filber,2026,Filber,Channel 14,2026-10-20,2116.0,raam,6,,True,2026_main,2026,2026_main:0:3
+2026_20261020_filber,2026,Filber,Channel 14,2026-10-20,2116.0,rzp,7,,True,2026_main,2026,2026_main:0:3
+2026_20261020_filber,2026,Filber,Channel 14,2026-10-20,2116.0,shas,9,,True,2026_main,2026,2026_main:0:3
+2026_20261020_filber,2026,Filber,Channel 14,2026-10-20,2116.0,together,9,,True,2026_main,2026,2026_main:0:3
+2026_20261020_filber,2026,Filber,Channel 14,2026-10-20,2116.0,utj,8,,True,2026_main,2026,2026_main:0:3
+2026_20261020_filber,2026,Filber,Channel 14,2026-10-20,2116.0,yashar,20,,True,2026_main,2026,2026_main:0:3
+2026_20261020_filber,2026,Filber,Channel 14,2026-10-20,2116.0,yisrael_beytenu,6,,True,2026_main,2026,2026_main:0:3
+2026_20261020_filber,2026,Filber,Channel 14,2026-10-20,2116.0,zionist_home,0,2.5,True,2026_main,2026,2026_main:0:3
 2026_20261015_kantar,2026,Kantar,Israel Hayom,2026-10-15,551.0,yashar,24,,True,manual,manual,https://www.israelhayom.co.il/news/politics/article/21636491
 2026_20261015_kantar,2026,Kantar,Israel Hayom,2026-10-15,551.0,likud,21,,True,manual,manual,https://www.israelhayom.co.il/news/politics/article/21636491
 2026_20261015_kantar,2026,Kantar,Israel Hayom,2026-10-15,551.0,together,12,,True,manual,manual,https://www.israelhayom.co.il/news/politics/article/21636491
@@ -23857,20 +23873,6 @@ poll_id,cycle,pollster,publisher,fieldwork_end,sample_size,party_id,seats,vote_p
 2026_20261019_lazar,2026,Lazar,Walla,2026-10-19,,zionist_home,4,,True,manual,manual,https://www.israelnationalnews.com/news/434891
 2026_20261019_lazar,2026,Lazar,Walla,2026-10-19,,amcha_yisrael,0,,True,manual,manual,https://www.israelnationalnews.com/news/434891
 2026_20261019_lazar,2026,Lazar,Walla,2026-10-19,,blue_white,0,,True,manual,manual,https://www.israelnationalnews.com/news/434891
-2026_20261020_filber,2026,Filber,Channel 14,2026-10-20,2116.0,likud,30,,True,manual,manual,https://www.ice.co.il/research/news/article/1134443
-2026_20261020_filber,2026,Filber,Channel 14,2026-10-20,2116.0,yashar,20,,True,manual,manual,https://www.ice.co.il/research/news/article/1134443
-2026_20261020_filber,2026,Filber,Channel 14,2026-10-20,2116.0,shas,9,,True,manual,manual,https://www.ice.co.il/research/news/article/1134443
-2026_20261020_filber,2026,Filber,Channel 14,2026-10-20,2116.0,together,9,,True,manual,manual,https://www.ice.co.il/research/news/article/1134443
-2026_20261020_filber,2026,Filber,Channel 14,2026-10-20,2116.0,democrats,9,,True,manual,manual,https://www.ice.co.il/research/news/article/1134443
-2026_20261020_filber,2026,Filber,Channel 14,2026-10-20,2116.0,otzma,8,,True,manual,manual,https://www.ice.co.il/research/news/article/1134443
-2026_20261020_filber,2026,Filber,Channel 14,2026-10-20,2116.0,utj,8,,True,manual,manual,https://www.ice.co.il/research/news/article/1134443
-2026_20261020_filber,2026,Filber,Channel 14,2026-10-20,2116.0,joint_list,8,,True,manual,manual,https://www.ice.co.il/research/news/article/1134443
-2026_20261020_filber,2026,Filber,Channel 14,2026-10-20,2116.0,rzp,7,,True,manual,manual,https://www.ice.co.il/research/news/article/1134443
-2026_20261020_filber,2026,Filber,Channel 14,2026-10-20,2116.0,yisrael_beytenu,6,,True,manual,manual,https://www.ice.co.il/research/news/article/1134443
-2026_20261020_filber,2026,Filber,Channel 14,2026-10-20,2116.0,raam,6,,True,manual,manual,https://www.ice.co.il/research/news/article/1134443
-2026_20261020_filber,2026,Filber,Channel 14,2026-10-20,2116.0,zionist_home,0,,True,manual,manual,https://www.ice.co.il/research/news/article/1134443
-2026_20261020_filber,2026,Filber,Channel 14,2026-10-20,2116.0,amcha_yisrael,0,,True,manual,manual,https://www.ice.co.il/research/news/article/1134443
-2026_20261020_filber,2026,Filber,Channel 14,2026-10-20,2116.0,blue_white,0,,True,manual,manual,https://www.ice.co.il/research/news/article/1134443
 2026_20261020_maagarmochot,2026,Maagar Mochot,Channel 16,2026-10-20,,yashar,21,,True,manual,manual,https://www.ice.co.il/research/news/article/1134446
 2026_20261020_maagarmochot,2026,Maagar Mochot,Channel 16,2026-10-20,,likud,18,,True,manual,manual,https://www.ice.co.il/research/news/article/1134446
 2026_20261020_maagarmochot,2026,Maagar Mochot,Channel 16,2026-10-20,,together,15,,True,manual,manual,https://www.ice.co.il/research/news/article/1134446
@@ -23885,3 +23887,31 @@ poll_id,cycle,pollster,publisher,fieldwork_end,sample_size,party_id,seats,vote_p
 2026_20261020_maagarmochot,2026,Maagar Mochot,Channel 16,2026-10-20,,amcha_yisrael,4,,True,manual,manual,https://www.ice.co.il/research/news/article/1134446
 2026_20261020_maagarmochot,2026,Maagar Mochot,Channel 16,2026-10-20,,zionist_home,4,,True,manual,manual,https://www.ice.co.il/research/news/article/1134446
 2026_20261020_maagarmochot,2026,Maagar Mochot,Channel 16,2026-10-20,,blue_white,0,,True,manual,manual,https://www.ice.co.il/research/news/article/1134446
+2026_20261021_midgam,2026,Midgam,HaHadashot 12,2026-10-21,505.0,yashar,23,,True,manual,manual,https://www.mako.co.il/news-israel-elections/2026/Article-bf175ad340f51a1027.htm
+2026_20261021_midgam,2026,Midgam,HaHadashot 12,2026-10-21,505.0,likud,19,,True,manual,manual,https://www.mako.co.il/news-israel-elections/2026/Article-bf175ad340f51a1027.htm
+2026_20261021_midgam,2026,Midgam,HaHadashot 12,2026-10-21,505.0,together,15,,True,manual,manual,https://www.mako.co.il/news-israel-elections/2026/Article-bf175ad340f51a1027.htm
+2026_20261021_midgam,2026,Midgam,HaHadashot 12,2026-10-21,505.0,democrats,9,,True,manual,manual,https://www.mako.co.il/news-israel-elections/2026/Article-bf175ad340f51a1027.htm
+2026_20261021_midgam,2026,Midgam,HaHadashot 12,2026-10-21,505.0,joint_list,9,,True,manual,manual,https://www.mako.co.il/news-israel-elections/2026/Article-bf175ad340f51a1027.htm
+2026_20261021_midgam,2026,Midgam,HaHadashot 12,2026-10-21,505.0,shas,8,,True,manual,manual,https://www.mako.co.il/news-israel-elections/2026/Article-bf175ad340f51a1027.htm
+2026_20261021_midgam,2026,Midgam,HaHadashot 12,2026-10-21,505.0,yisrael_beytenu,8,,True,manual,manual,https://www.mako.co.il/news-israel-elections/2026/Article-bf175ad340f51a1027.htm
+2026_20261021_midgam,2026,Midgam,HaHadashot 12,2026-10-21,505.0,otzma,7,,True,manual,manual,https://www.mako.co.il/news-israel-elections/2026/Article-bf175ad340f51a1027.htm
+2026_20261021_midgam,2026,Midgam,HaHadashot 12,2026-10-21,505.0,utj,7,,True,manual,manual,https://www.mako.co.il/news-israel-elections/2026/Article-bf175ad340f51a1027.htm
+2026_20261021_midgam,2026,Midgam,HaHadashot 12,2026-10-21,505.0,rzp,6,,True,manual,manual,https://www.mako.co.il/news-israel-elections/2026/Article-bf175ad340f51a1027.htm
+2026_20261021_midgam,2026,Midgam,HaHadashot 12,2026-10-21,505.0,raam,5,,True,manual,manual,https://www.mako.co.il/news-israel-elections/2026/Article-bf175ad340f51a1027.htm
+2026_20261021_midgam,2026,Midgam,HaHadashot 12,2026-10-21,505.0,amcha_yisrael,4,,True,manual,manual,https://www.mako.co.il/news-israel-elections/2026/Article-bf175ad340f51a1027.htm
+2026_20261021_midgam,2026,Midgam,HaHadashot 12,2026-10-21,505.0,zionist_home,0,,True,manual,manual,https://www.mako.co.il/news-israel-elections/2026/Article-bf175ad340f51a1027.htm
+2026_20261021_midgam,2026,Midgam,HaHadashot 12,2026-10-21,505.0,blue_white,0,,True,manual,manual,https://www.mako.co.il/news-israel-elections/2026/Article-bf175ad340f51a1027.htm
+2026_20261021_midgamproject,2026,Midgam Project,Channel 13,2026-10-21,1084.0,yashar,20,,True,manual,manual,https://13tv.co.il/item/news/politics/politics/ksgoq-905411865/
+2026_20261021_midgamproject,2026,Midgam Project,Channel 13,2026-10-21,1084.0,likud,19,,True,manual,manual,https://13tv.co.il/item/news/politics/politics/ksgoq-905411865/
+2026_20261021_midgamproject,2026,Midgam Project,Channel 13,2026-10-21,1084.0,together,14,,True,manual,manual,https://13tv.co.il/item/news/politics/politics/ksgoq-905411865/
+2026_20261021_midgamproject,2026,Midgam Project,Channel 13,2026-10-21,1084.0,democrats,10,,True,manual,manual,https://13tv.co.il/item/news/politics/politics/ksgoq-905411865/
+2026_20261021_midgamproject,2026,Midgam Project,Channel 13,2026-10-21,1084.0,joint_list,9,,True,manual,manual,https://13tv.co.il/item/news/politics/politics/ksgoq-905411865/
+2026_20261021_midgamproject,2026,Midgam Project,Channel 13,2026-10-21,1084.0,rzp,8,,True,manual,manual,https://13tv.co.il/item/news/politics/politics/ksgoq-905411865/
+2026_20261021_midgamproject,2026,Midgam Project,Channel 13,2026-10-21,1084.0,utj,8,,True,manual,manual,https://13tv.co.il/item/news/politics/politics/ksgoq-905411865/
+2026_20261021_midgamproject,2026,Midgam Project,Channel 13,2026-10-21,1084.0,yisrael_beytenu,8,,True,manual,manual,https://13tv.co.il/item/news/politics/politics/ksgoq-905411865/
+2026_20261021_midgamproject,2026,Midgam Project,Channel 13,2026-10-21,1084.0,otzma,7,,True,manual,manual,https://13tv.co.il/item/news/politics/politics/ksgoq-905411865/
+2026_20261021_midgamproject,2026,Midgam Project,Channel 13,2026-10-21,1084.0,shas,7,,True,manual,manual,https://13tv.co.il/item/news/politics/politics/ksgoq-905411865/
+2026_20261021_midgamproject,2026,Midgam Project,Channel 13,2026-10-21,1084.0,raam,6,,True,manual,manual,https://13tv.co.il/item/news/politics/politics/ksgoq-905411865/
+2026_20261021_midgamproject,2026,Midgam Project,Channel 13,2026-10-21,1084.0,zionist_home,4,,True,manual,manual,https://13tv.co.il/item/news/politics/politics/ksgoq-905411865/
+2026_20261021_midgamproject,2026,Midgam Project,Channel 13,2026-10-21,1084.0,amcha_yisrael,0,,True,manual,manual,https://13tv.co.il/item/news/politics/politics/ksgoq-905411865/
+2026_20261021_midgamproject,2026,Midgam Project,Channel 13,2026-10-21,1084.0,blue_white,0,,True,manual,manual,https://13tv.co.il/item/news/politics/politics/ksgoq-905411865/

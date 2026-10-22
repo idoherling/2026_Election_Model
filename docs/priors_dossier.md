@@ -6917,3 +6917,76 @@ layer, calibrated on eight cycles, prices. The site states the critique,
 the house effect, and this result (EN/HE), and the explorer does not get a
 variant: an arm that fails on the record is not offered as an alternative
 model.
+
+## 67. What the filings say beyond seats (22 Oct, D-5)
+
+Every CEC filing fielded since 1 Oct (37, refs 4175-4241) was read for its
+non-seat questions; the numbers used below were checked against the PDF
+text. Two inputs change; the rest is recorded and not used.
+
+**Used 1: the undecided lean (data/undecided_leans.csv).** Channel 13's
+HaMidgam filings ask undecided respondents which list they lean to now
+(raw, unweighted, Jewish adults; 4182 29-30 Sep n=67, 4193 6-7 Oct n=68,
+4210 13 Oct n=70, 4235 18 Oct n=60). Mapped to blocs (Amcha with the
+Netanyahu bloc, as in the bloc totals; the Reservists-Economic list and
+Blue and White unaligned, so "none"): change bloc .284 / .339 / .300 /
+.350, Netanyahu bloc .254 / .249 / .188 / .233, the rest still undecided.
+The estimator was built to pool each new wave by its leaned n (s.41); the
+four waves (about 146 leaned respondents) join Channel 12's 30 July
+measurement (about 43). The posterior mean of the change-bloc share of the
+leaned pool moves .647 -> .604 against the proportional .52, so the
+expected break of the undecided toward the change bloc shrinks by about a
+third. Caveat: Arab respondents are not in these tables; the comparison
+base .52 is the decided Jewish-list electorate's change share, so the
+like-for-like holds.
+
+**Used 2: certainty of the two lists with no record (CERTAINTY).** 4193
+also tabulates "how sure are you that you will vote for the list you
+named" by list (pooled samples, unweighted). The M entries of the layer
+use a "locked" scale; mapping very sure + w x fairly sure onto it with
+the two lists measured on both scales gives w = .28 (Together: .47 = 31.0
++ w 57.7) and .34 (Amcha: .38 = 20.5 + w 52.2), mean .31. Applied only
+where the layer had a declared placeholder and no record: Yashar .65 ->
+.56 (39.3 / 52.1, n=117), Reservists-Economic .40 -> .26 (8.7 / 56.5,
+n=23). Lists with an election record keep their tiers: Shas reads 61.7%
+very sure but has never missed downward by more than half a seat, and the
+tiers were set on that record (LOYAL_SD), which is what election-day
+movement follows. Walla/Lazar 4207 (12 Oct) asks the same by list but its
+small-list cells disagree with 4193 by up to 40 points (UTJ, Ra'am, RZP),
+so it is not used.
+
+**Effect** (21 Oct posterior, full chain, 200 formation vectors): refit
+alone P(NB >= 61) 8.1, change 6.0, + Ra'am 28.8; with the lean 8.5 / 5.7 /
+27.2; with both 8.9 / 5.5 / 26.7; government led by Netanyahu 26.3 ->
+27.4, change 29.5 -> 27.8; central seats unchanged; Reservists-Economic
+passes .238 -> .225. Neither input has a harness analogue (2026
+measurements, like s.64 and s.66); both enter mechanisms built to take
+them.
+
+**Recorded, not used.**
+- Where Gantz's voters go: Next Data 4238 (20 Oct, n=2,116) asked everyone
+  to guess ("where do you think Gantz's voters will go"): Yashar 38, Likud
+  12, Together 11, Reservists 8, Amcha 5, Democrats 3, other / don't know
+  23. A perception question, not a measured flow; the s.64 ruling stands.
+  (The press reported it as "Yashar absorbs 38% of his voters".)
+- Second choice (4235, all respondents, not by first choice) and Accord's
+  pairings of undecided young voters (4183, 22-34): no flow table by
+  first choice exists for Amcha or the Reservists.
+- Turnout intention: Rosner's "certain to vote" (Jewish 73-75, Haredi
+  66-71, Arab 73-81) and Next Data's 96% are not calibrated to turnout
+  (Arab turnout was about 53% in 2022). Channel 12 (21 Oct) has 76% of
+  Netanyahu-bloc and 82% of change-bloc respondents intending to vote;
+  the seat estimates are already among intending voters.
+- Certainty by bloc (Lazar: totally sure, coalition 54 / opposition 35 on
+  12 Oct; Kantar: decided 86 / 74 on 18 Oct): the asymmetry is already in
+  the layer through the record-based tiers and CHURN_SPLIT.
+- Coalition acceptability (Kantar 4217: 30-35% of Together and Yashar
+  voters reject every role for an Arab party; Lazar 4197) and
+  withdrawal opinion (47-58% want Winter to withdraw): voter opinion, not
+  party behaviour; the formation tree's gates are set on party records.
+- The IDI Israeli Voice Index (early Oct, reported by Calcalist 20-21
+  Oct): traditional-religious voters 46% Netanyahu bloc now against 76% in
+  2022, 17% undecided; traditional non-religious 39% against 60%. A pool of
+  2022 Netanyahu-bloc voters among the undecided is the mechanism behind
+  the trailing-Likud layer (s.63), which is measured on the record and
+  stays as it is.

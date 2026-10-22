@@ -319,9 +319,19 @@ CERTAINTY = {
     "balad": 0.75, "hadash_taal": 0.75, "raam": 0.70,  # J  turnout, not switching
     "likud": 0.78,           # J  N12 Likudnikim panel: high loyalty, some drift
     "otzma": 0.72, "rzp": 0.68, "zehut": 0.68,     # J  merged/right-flank lists
-    "yashar": 0.65, "democrats": 0.70,             # J  new leader vehicle / merged left
-    "zionist_home": 0.40, "blue_white": 0.40, "unity": 0.40,  # J  threshold-straddlers
+    "yashar": 0.56, "democrats": 0.70,             # M  Yashar (s.67); J merged left
+    "zionist_home": 0.26,                          # M  Reservists-Economic (s.67)
+    "blue_white": 0.40, "unity": 0.40,             # J  threshold-straddlers
 }
+# 2026-10-22 (dossier s.67): the two lists with no election record take
+# measured certainty from Channel 13's CEC filing 4193 (6-7 Oct, "how sure
+# are you that you will vote for the list you named", by list): Yashar
+# very sure 39.3 / fairly 52.1 (n=117), Reservists-Economic 8.7 / 56.5
+# (n=23). The scale is mapped onto the M entries' "locked" scale as very
+# sure + w x fairly sure, w = 0.31 from the two lists measured on both
+# (Together .47 = 31.0 + w 57.7; Amcha .38 = 20.5 + w 52.2). Lists with a
+# record keep their J tiers: those encode how each list actually did
+# against its final polls, which outranks a self-report.
 CERTAINTY_DEFAULT = 0.50
 # Soft supporters (1 - certainty) defect at rate d by election day:
 # d ~ Beta(mean 0.25, sd 0.12), JUDGMENT anchored on INES panel switching
