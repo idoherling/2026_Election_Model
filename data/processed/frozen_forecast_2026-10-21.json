@@ -1,0 +1,6400 @@
+{
+ "sha256": "93beda97b3456f0d8852a80022c6af40a8fd4cdd046b0d66e6e92edb21fc5a2e",
+ "hash": "sha256 of the UTF-8 JSON of payload with sorted keys and separators (',', ':')",
+ "payload": {
+  "version": 1,
+  "cycle": "2026",
+  "election_day": "2026-10-27",
+  "asof": "2026-10-21",
+  "frozen_utc": "2026-10-22T08:03:46Z",
+  "frozen_israel": "2026-10-22 11:03",
+  "blackout_from": "2026-10-23",
+  "final": false,
+  "lists": {
+   "Likud": {
+    "en": "Likud",
+    "he": "הליכוד",
+    "letter": "מחל",
+    "bloc": "nb",
+    "pvar": "likud",
+    "components": "likud",
+    "share": 0.19094,
+    "aliases": [
+     "Likud"
+    ]
+   },
+   "Yashar": {
+    "en": "Yashar",
+    "he": "ישר",
+    "letter": "דרך",
+    "bloc": "anti",
+    "pvar": "yashar",
+    "components": "yashar",
+    "share": 0.16608,
+    "aliases": [
+     "Yashar"
+    ]
+   },
+   "Bennett 2026 + Yesh Atid": {
+    "en": "Together",
+    "he": "ביחד",
+    "letter": "רק",
+    "bloc": "anti",
+    "pvar": "together",
+    "components": "bennett_2026+yesh_atid",
+    "share": 0.09866,
+    "aliases": [
+     "Bennett 2026 + Yesh Atid"
+    ]
+   },
+   "The Democrats": {
+    "en": "The Democrats",
+    "he": "הדמוקרטים",
+    "letter": "אמת",
+    "bloc": "anti",
+    "pvar": "dems",
+    "components": "democrats",
+    "share": 0.07235,
+    "aliases": [
+     "The Democrats"
+    ]
+   },
+   "Balad + Hadash-Ta'al": {
+    "en": "Joint List",
+    "he": "הרשימה המשותפת",
+    "letter": "ודם",
+    "bloc": "arab",
+    "pvar": "jl",
+    "components": "balad+hadash_taal",
+    "share": 0.07059,
+    "aliases": [
+     "Balad + Hadash-Ta'al"
+    ]
+   },
+   "Shas": {
+    "en": "Shas",
+    "he": "ש״ס",
+    "letter": "שס",
+    "bloc": "nb",
+    "pvar": "shas",
+    "components": "shas",
+    "share": 0.06748,
+    "aliases": [
+     "Shas"
+    ]
+   },
+   "United Torah Judaism": {
+    "en": "UTJ",
+    "he": "יהדות התורה",
+    "letter": "ג",
+    "bloc": "nb",
+    "pvar": "utj",
+    "components": "utj",
+    "share": 0.06468,
+    "aliases": [
+     "United Torah Judaism"
+    ]
+   },
+   "Yisrael Beytenu": {
+    "en": "Yisrael Beytenu",
+    "he": "ישראל ביתנו",
+    "letter": "ל",
+    "bloc": "anti",
+    "pvar": "yb",
+    "components": "yisrael_beytenu",
+    "share": 0.06435,
+    "aliases": [
+     "Yisrael Beytenu"
+    ]
+   },
+   "Otzma Yehudit": {
+    "en": "Otzma Yehudit",
+    "he": "עוצמה יהודית",
+    "letter": "ב",
+    "bloc": "nb",
+    "pvar": "otzma",
+    "components": "otzma",
+    "share": 0.04934,
+    "aliases": [
+     "Otzma Yehudit"
+    ]
+   },
+   "Ra'am": {
+    "en": "Ra'am",
+    "he": "רע״ם",
+    "letter": "עם",
+    "bloc": "arab",
+    "pvar": "raam",
+    "components": "raam",
+    "share": 0.04584,
+    "aliases": [
+     "Ra'am"
+    ]
+   },
+   "Religious Zionist Party": {
+    "en": "Religious Zionism–Zehut",
+    "he": "הציונות הדתית–זהות",
+    "letter": "ט",
+    "bloc": "nb",
+    "pvar": "rzp",
+    "components": "rzp",
+    "share": 0.03866,
+    "aliases": [
+     "Religious Zionist Party"
+    ]
+   },
+   "Amcha Yisrael": {
+    "en": "Amcha Yisrael",
+    "he": "עמך ישראל",
+    "letter": "ך",
+    "bloc": "nb",
+    "pvar": "amcha",
+    "components": "amcha_yisrael",
+    "share": 0.01764,
+    "aliases": [
+     "Amcha Yisrael"
+    ]
+   },
+   "Reservists – Economic Party": {
+    "en": "Reservists–Economic",
+    "he": "המילואימניקים והכלכלית",
+    "letter": "די",
+    "bloc": "una",
+    "pvar": "zh",
+    "components": "zionist_home",
+    "share": 0.01759,
+    "aliases": [
+     "Reservists – Economic Party"
+    ]
+   },
+   "The Haredi Public": {
+    "en": "The Haredi Public",
+    "he": "הציבור החרדי",
+    "letter": "זך",
+    "bloc": "nb",
+    "pvar": null,
+    "components": "haredi_public",
+    "share": 0.007,
+    "aliases": [
+     "The Haredi Public"
+    ]
+   },
+   "Noam": {
+    "en": "Noam",
+    "he": "נעם",
+    "letter": "ני",
+    "bloc": "nb",
+    "pvar": null,
+    "components": "noam",
+    "share": 0.00654,
+    "aliases": [
+     "Noam"
+    ]
+   },
+   "Code Black – Shield of the Torah World": {
+    "en": "Code Black",
+    "he": "צבע שחור",
+    "letter": "נר",
+    "bloc": "una",
+    "pvar": null,
+    "components": "code_black",
+    "share": 0.00569,
+    "aliases": [
+     "Code Black – Shield of the Torah World"
+    ]
+   },
+   "Ahi – Back to the Roots": {
+    "en": "Ahi",
+    "he": "תנועת אחי",
+    "letter": "צבי",
+    "bloc": "una",
+    "pvar": null,
+    "components": "ahi",
+    "share": 0.00567,
+    "aliases": [
+     "Ahi – Back to the Roots"
+    ]
+   },
+   "Israel First": {
+    "en": "Israel First",
+    "he": "ישראל תחילה",
+    "letter": "י",
+    "bloc": "una",
+    "pvar": null,
+    "components": "israel_first",
+    "share": 0.00548,
+    "aliases": [
+     "Israel First"
+    ]
+   },
+   "Tzomet Beit Yisrael": {
+    "en": "Beit Yisrael",
+    "he": "צומת בית ישראל",
+    "letter": "בי",
+    "bloc": "una",
+    "pvar": null,
+    "components": "beit_yisrael",
+    "share": 0.00543,
+    "aliases": [
+     "Tzomet Beit Yisrael"
+    ]
+   },
+   "Blue and White": {
+    "en": "Blue and White",
+    "he": "כחול לבן",
+    "letter": "כן",
+    "bloc": "una",
+    "pvar": "bw",
+    "components": "blue_white",
+    "share": 0.0,
+    "aliases": [
+     "Blue and White"
+    ]
+   },
+   "Unity": {
+    "en": "Unity",
+    "he": "האחדות",
+    "letter": null,
+    "bloc": "una",
+    "pvar": "unity",
+    "components": "unity",
+    "share": 0.0,
+    "aliases": [
+     "Unity"
+    ]
+   },
+   "Balad (alone)": {
+    "en": "Balad (alone)",
+    "he": "בל״ד",
+    "letter": null,
+    "bloc": "arab",
+    "pvar": "jl",
+    "components": "balad",
+    "share": 0.0,
+    "aliases": [
+     "Balad (alone)"
+    ]
+   }
+  },
+  "raam": "Ra'am",
+  "models": [
+   {
+    "id": "official",
+    "name": {
+     "en": "Official",
+     "he": "המודל הרשמי"
+    },
+    "status": "official",
+    "kind": "bayes",
+    "n_sims": 8000,
+    "pmf": {
+     "Blue and White": [
+      0,
+      8000
+     ],
+     "The Democrats": [
+      0,
+      45,
+      0,
+      0,
+      0,
+      57,
+      212,
+      528,
+      871,
+      1295,
+      1462,
+      1367,
+      1039,
+      631,
+      299,
+      122,
+      52,
+      14,
+      5,
+      1
+     ],
+     "Likud": [
+      7,
+      1,
+      2,
+      2,
+      4,
+      10,
+      12,
+      27,
+      37,
+      52,
+      110,
+      171,
+      232,
+      319,
+      400,
+      517,
+      543,
+      613,
+      654,
+      637,
+      704,
+      600,
+      547,
+      451,
+      386,
+      298,
+      236,
+      162,
+      110,
+      72,
+      44,
+      21,
+      14,
+      7,
+      3,
+      0,
+      0,
+      1,
+      0,
+      0,
+      1
+     ],
+     "Otzma Yehudit": [
+      0,
+      1437,
+      0,
+      0,
+      0,
+      733,
+      1241,
+      1314,
+      1222,
+      895,
+      585,
+      328,
+      156,
+      56,
+      24,
+      4,
+      3,
+      1,
+      0,
+      0,
+      1
+     ],
+     "Ra'am": [
+      0,
+      1239,
+      0,
+      0,
+      0,
+      711,
+      1678,
+      1745,
+      1364,
+      798,
+      328,
+      113,
+      19,
+      4,
+      1
+     ],
+     "Religious Zionist Party": [
+      0,
+      2846,
+      0,
+      0,
+      0,
+      1070,
+      1473,
+      1155,
+      752,
+      413,
+      189,
+      71,
+      20,
+      9,
+      2
+     ],
+     "Shas": [
+      0,
+      32,
+      0,
+      0,
+      0,
+      35,
+      179,
+      534,
+      1214,
+      1743,
+      1823,
+      1312,
+      737,
+      294,
+      72,
+      18,
+      4,
+      2,
+      0,
+      0,
+      1
+     ],
+     "United Torah Judaism": [
+      0,
+      12,
+      0,
+      0,
+      0,
+      29,
+      197,
+      673,
+      1497,
+      2168,
+      1842,
+      1035,
+      387,
+      114,
+      38,
+      4,
+      2,
+      0,
+      1,
+      0,
+      1
+     ],
+     "Yashar": [
+      5,
+      1,
+      0,
+      0,
+      2,
+      3,
+      4,
+      16,
+      34,
+      60,
+      124,
+      183,
+      267,
+      346,
+      546,
+      640,
+      749,
+      824,
+      832,
+      766,
+      709,
+      564,
+      462,
+      345,
+      229,
+      135,
+      65,
+      41,
+      24,
+      15,
+      8,
+      4,
+      1,
+      1
+     ],
+     "Yisrael Beytenu": [
+      0,
+      128,
+      0,
+      0,
+      0,
+      114,
+      447,
+      914,
+      1346,
+      1604,
+      1448,
+      991,
+      599,
+      282,
+      86,
+      27,
+      10,
+      3,
+      1
+     ],
+     "Reservists – Economic Party": [
+      0,
+      6198,
+      0,
+      0,
+      0,
+      438,
+      472,
+      320,
+      240,
+      140,
+      102,
+      39,
+      29,
+      12,
+      7,
+      3
+     ],
+     "Bennett 2026 + Yesh Atid": [
+      0,
+      12,
+      0,
+      0,
+      0,
+      6,
+      22,
+      51,
+      135,
+      269,
+      446,
+      714,
+      922,
+      1121,
+      1118,
+      1021,
+      807,
+      580,
+      386,
+      193,
+      112,
+      50,
+      23,
+      10,
+      1,
+      1
+     ],
+     "Balad + Hadash-Ta'al": [
+      0,
+      38,
+      0,
+      0,
+      0,
+      45,
+      226,
+      538,
+      980,
+      1367,
+      1500,
+      1355,
+      952,
+      617,
+      258,
+      102,
+      20,
+      2
+     ],
+     "Amcha Yisrael": [
+      0,
+      6244,
+      0,
+      0,
+      0,
+      400,
+      458,
+      320,
+      227,
+      161,
+      76,
+      55,
+      39,
+      14,
+      4,
+      2
+     ],
+     "Unity": [
+      0,
+      8000
+     ],
+     "Israel First": [
+      0,
+      7991,
+      0,
+      0,
+      0,
+      8,
+      1
+     ],
+     "Noam": [
+      0,
+      7973,
+      0,
+      0,
+      0,
+      23,
+      4
+     ],
+     "The Haredi Public": [
+      0,
+      7977,
+      0,
+      0,
+      0,
+      18,
+      4,
+      1
+     ],
+     "Ahi – Back to the Roots": [
+      0,
+      7987,
+      0,
+      0,
+      0,
+      11,
+      2
+     ],
+     "Code Black – Shield of the Torah World": [
+      0,
+      7983,
+      0,
+      0,
+      0,
+      14,
+      3
+     ],
+     "Tzomet Beit Yisrael": [
+      0,
+      7990,
+      0,
+      0,
+      0,
+      7,
+      3
+     ],
+     "Balad (alone)": [
+      0,
+      8000
+     ]
+    },
+    "central": {
+     "Likud": 25,
+     "Yashar": 22,
+     "Bennett 2026 + Yesh Atid": 13,
+     "Shas": 9,
+     "Balad + Hadash-Ta'al": 9,
+     "The Democrats": 9,
+     "United Torah Judaism": 8,
+     "Yisrael Beytenu": 8,
+     "Ra'am": 6,
+     "Otzma Yehudit": 6,
+     "Religious Zionist Party": 5,
+     "Reservists – Economic Party": 0,
+     "Amcha Yisrael": 0,
+     "The Haredi Public": 0,
+     "Noam": 0,
+     "Code Black – Shield of the Torah World": 0,
+     "Ahi – Back to the Roots": 0,
+     "Tzomet Beit Yisrael": 0,
+     "Israel First": 0,
+     "Blue and White": 0,
+     "Unity": 0,
+     "Balad (alone)": 0
+    },
+    "interval": {
+     "Likud": [
+      17,
+      33
+     ],
+     "Yashar": [
+      15,
+      28
+     ],
+     "Bennett 2026 + Yesh Atid": [
+      8,
+      17
+     ],
+     "Shas": [
+      6,
+      11
+     ],
+     "Balad + Hadash-Ta'al": [
+      6,
+      12
+     ],
+     "The Democrats": [
+      6,
+      13
+     ],
+     "United Torah Judaism": [
+      6,
+      11
+     ],
+     "Yisrael Beytenu": [
+      5,
+      12
+     ],
+     "Ra'am": [
+      0,
+      9
+     ],
+     "Otzma Yehudit": [
+      0,
+      10
+     ],
+     "Religious Zionist Party": [
+      0,
+      8
+     ],
+     "Reservists – Economic Party": [
+      0,
+      7
+     ],
+     "Amcha Yisrael": [
+      0,
+      7
+     ],
+     "The Haredi Public": [
+      0,
+      0
+     ],
+     "Noam": [
+      0,
+      0
+     ],
+     "Code Black – Shield of the Torah World": [
+      0,
+      0
+     ],
+     "Ahi – Back to the Roots": [
+      0,
+      0
+     ],
+     "Tzomet Beit Yisrael": [
+      0,
+      0
+     ],
+     "Israel First": [
+      0,
+      0
+     ],
+     "Blue and White": [
+      0,
+      0
+     ],
+     "Unity": [
+      0,
+      0
+     ],
+     "Balad (alone)": [
+      0,
+      0
+     ]
+    },
+    "blocs": {
+     "nb": 0.089,
+     "anti": 0.055,
+     "antiRaam": 0.267,
+     "neither": 0.644,
+     "nb_mean": 52.5,
+     "nb_p05": 43,
+     "nb_p95": 62
+    },
+    "groups": {
+     "netanyahu": 0.274,
+     "change": 0.278,
+     "unity": 0.172,
+     "repeat": 0.276,
+     "netanyahu_in_office": 0.55
+    },
+    "pm": [
+     [
+      "none (repeat election)",
+      0.276
+     ],
+     [
+      "Netanyahu",
+      0.274
+     ],
+     [
+      "Eisenkot",
+      0.265
+     ],
+     [
+      "Likud successor (unity)",
+      0.086
+     ],
+     [
+      "Bennett",
+      0.073
+     ],
+     [
+      "Liberman",
+      0.015
+     ],
+     [
+      "another leader",
+      0.011
+     ]
+    ],
+    "backtest": {
+     "eve": {
+      "median_mae": 1.4858,
+      "mean_mae": 1.6253,
+      "coverage": 0.9717,
+      "brier": 0.0447,
+      "interval": 9.0108
+     },
+     "D-7": {
+      "median_mae": 1.486,
+      "mean_mae": 1.6424,
+      "coverage": 0.9604,
+      "brier": 0.0465,
+      "interval": 9.3891
+     },
+     "D-21": {
+      "median_mae": 1.6249,
+      "mean_mae": 1.7795,
+      "coverage": 0.9683,
+      "brier": 0.0519,
+      "interval": 9.5994
+     }
+    },
+    "expect_self": {
+     "log": {
+      "mean": -2.0081,
+      "p05": -2.4505,
+      "p95": -1.6851
+     },
+     "crps": {
+      "mean": 1.4413,
+      "p05": 0.886,
+      "p95": 2.1686
+     },
+     "abs_err": {
+      "mean": 2.0056,
+      "p05": 1.0769,
+      "p95": 3.0769
+     },
+     "coverage": {
+      "mean": 0.9457,
+      "p05": 0.8462,
+      "p95": 1.0
+     },
+     "brier": {
+      "mean": 0.0682,
+      "p05": 0.0217,
+      "p95": 0.1401
+     },
+     "nb_brier": {
+      "mean": 0.0811
+     },
+     "nb_log": {
+      "mean": -0.3002
+     },
+     "anti_brier": {
+      "mean": 0.052
+     },
+     "anti_log": {
+      "mean": -0.213
+     }
+    }
+   },
+   {
+    "id": "hierarchical",
+    "name": {
+     "en": "Advanced hierarchical model",
+     "he": "המודל ההיררכי המתקדם"
+    },
+    "status": "advanced",
+    "kind": "bayes",
+    "n_sims": 8000,
+    "pmf": {
+     "Blue and White": [
+      0,
+      8000
+     ],
+     "The Democrats": [
+      0,
+      36,
+      0,
+      0,
+      0,
+      44,
+      151,
+      389,
+      820,
+      1332,
+      1666,
+      1478,
+      1061,
+      607,
+      250,
+      109,
+      40,
+      14,
+      0,
+      2,
+      0,
+      0,
+      0,
+      1
+     ],
+     "Likud": [
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      4,
+      4,
+      8,
+      8,
+      19,
+      27,
+      35,
+      80,
+      115,
+      181,
+      237,
+      316,
+      438,
+      537,
+      607,
+      655,
+      711,
+      656,
+      646,
+      602,
+      495,
+      413,
+      359,
+      281,
+      200,
+      115,
+      100,
+      67,
+      36,
+      25,
+      8,
+      3,
+      6,
+      1,
+      2,
+      0,
+      0,
+      1
+     ],
+     "Otzma Yehudit": [
+      0,
+      1228,
+      0,
+      0,
+      0,
+      818,
+      1411,
+      1445,
+      1241,
+      873,
+      550,
+      276,
+      96,
+      37,
+      18,
+      3,
+      2,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1
+     ],
+     "Ra'am": [
+      0,
+      679,
+      0,
+      0,
+      0,
+      752,
+      1932,
+      2184,
+      1533,
+      664,
+      210,
+      37,
+      8,
+      0,
+      0,
+      1
+     ],
+     "Religious Zionist Party": [
+      0,
+      2514,
+      0,
+      0,
+      0,
+      1324,
+      1683,
+      1253,
+      724,
+      309,
+      136,
+      36,
+      16,
+      5
+     ],
+     "Shas": [
+      0,
+      24,
+      0,
+      0,
+      0,
+      38,
+      157,
+      495,
+      1161,
+      1941,
+      1913,
+      1333,
+      608,
+      227,
+      73,
+      22,
+      6,
+      0,
+      1,
+      1
+     ],
+     "United Torah Judaism": [
+      0,
+      25,
+      0,
+      0,
+      0,
+      30,
+      153,
+      572,
+      1501,
+      2277,
+      1971,
+      978,
+      362,
+      103,
+      22,
+      4,
+      1,
+      1
+     ],
+     "Yashar": [
+      0,
+      13,
+      0,
+      0,
+      0,
+      3,
+      7,
+      5,
+      9,
+      15,
+      22,
+      23,
+      56,
+      59,
+      89,
+      142,
+      211,
+      290,
+      350,
+      507,
+      592,
+      732,
+      745,
+      782,
+      701,
+      647,
+      552,
+      427,
+      338,
+      237,
+      162,
+      91,
+      68,
+      51,
+      29,
+      21,
+      11,
+      5,
+      3,
+      1,
+      1,
+      1,
+      2
+     ],
+     "Yisrael Beytenu": [
+      0,
+      58,
+      0,
+      0,
+      0,
+      57,
+      283,
+      740,
+      1498,
+      1902,
+      1704,
+      1025,
+      470,
+      166,
+      73,
+      16,
+      6,
+      1,
+      0,
+      0,
+      1
+     ],
+     "Reservists – Economic Party": [
+      0,
+      6295,
+      0,
+      0,
+      0,
+      409,
+      435,
+      353,
+      231,
+      132,
+      73,
+      41,
+      18,
+      7,
+      5,
+      1
+     ],
+     "Bennett 2026 + Yesh Atid": [
+      0,
+      4,
+      0,
+      0,
+      0,
+      6,
+      19,
+      53,
+      113,
+      221,
+      448,
+      625,
+      907,
+      1133,
+      1146,
+      1093,
+      857,
+      589,
+      386,
+      212,
+      100,
+      51,
+      25,
+      7,
+      3,
+      1,
+      1
+     ],
+     "Balad + Hadash-Ta'al": [
+      0,
+      42,
+      0,
+      0,
+      0,
+      41,
+      161,
+      433,
+      881,
+      1419,
+      1662,
+      1464,
+      1012,
+      543,
+      260,
+      62,
+      14,
+      5,
+      1
+     ],
+     "Amcha Yisrael": [
+      0,
+      6303,
+      0,
+      0,
+      0,
+      426,
+      466,
+      311,
+      208,
+      139,
+      63,
+      44,
+      22,
+      15,
+      3
+     ],
+     "Unity": [
+      0,
+      8000
+     ],
+     "Israel First": [
+      0,
+      7999,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1
+     ],
+     "Noam": [
+      0,
+      8000
+     ],
+     "The Haredi Public": [
+      0,
+      8000
+     ],
+     "Ahi – Back to the Roots": [
+      0,
+      7999,
+      0,
+      0,
+      0,
+      1
+     ],
+     "Code Black – Shield of the Torah World": [
+      0,
+      8000
+     ],
+     "Tzomet Beit Yisrael": [
+      0,
+      8000
+     ],
+     "Balad (alone)": [
+      0,
+      8000
+     ]
+    },
+    "central": {
+     "Likud": 25,
+     "Yashar": 22,
+     "Bennett 2026 + Yesh Atid": 13,
+     "Shas": 9,
+     "The Democrats": 9,
+     "Balad + Hadash-Ta'al": 9,
+     "United Torah Judaism": 8,
+     "Yisrael Beytenu": 8,
+     "Ra'am": 6,
+     "Otzma Yehudit": 6,
+     "Religious Zionist Party": 5,
+     "Reservists – Economic Party": 0,
+     "Amcha Yisrael": 0,
+     "The Haredi Public": 0,
+     "Tzomet Beit Yisrael": 0,
+     "Code Black – Shield of the Torah World": 0,
+     "Ahi – Back to the Roots": 0,
+     "Blue and White": 0,
+     "Noam": 0,
+     "Israel First": 0,
+     "Unity": 0,
+     "Balad (alone)": 0
+    },
+    "interval": {
+     "Likud": [
+      17,
+      32
+     ],
+     "Yashar": [
+      14,
+      29
+     ],
+     "Bennett 2026 + Yesh Atid": [
+      8,
+      17
+     ],
+     "Shas": [
+      6,
+      11
+     ],
+     "The Democrats": [
+      6,
+      13
+     ],
+     "Balad + Hadash-Ta'al": [
+      6,
+      12
+     ],
+     "United Torah Judaism": [
+      6,
+      11
+     ],
+     "Yisrael Beytenu": [
+      6,
+      11
+     ],
+     "Ra'am": [
+      0,
+      8
+     ],
+     "Otzma Yehudit": [
+      0,
+      10
+     ],
+     "Religious Zionist Party": [
+      0,
+      8
+     ],
+     "Reservists – Economic Party": [
+      0,
+      7
+     ],
+     "Amcha Yisrael": [
+      0,
+      7
+     ],
+     "The Haredi Public": [
+      0,
+      0
+     ],
+     "Tzomet Beit Yisrael": [
+      0,
+      0
+     ],
+     "Code Black – Shield of the Torah World": [
+      0,
+      0
+     ],
+     "Ahi – Back to the Roots": [
+      0,
+      0
+     ],
+     "Blue and White": [
+      0,
+      0
+     ],
+     "Noam": [
+      0,
+      0
+     ],
+     "Israel First": [
+      0,
+      0
+     ],
+     "Unity": [
+      0,
+      0
+     ],
+     "Balad (alone)": [
+      0,
+      0
+     ]
+    },
+    "blocs": {
+     "nb": 0.045,
+     "anti": 0.034,
+     "antiRaam": 0.261,
+     "neither": 0.694,
+     "nb_mean": 52.1,
+     "nb_p05": 44,
+     "nb_p95": 60
+    },
+    "groups": {
+     "netanyahu": 0.249,
+     "change": 0.27,
+     "unity": 0.184,
+     "repeat": 0.296,
+     "netanyahu_in_office": 0.546
+    },
+    "pm": [
+     [
+      "none (repeat election)",
+      0.296
+     ],
+     [
+      "Eisenkot",
+      0.262
+     ],
+     [
+      "Netanyahu",
+      0.249
+     ],
+     [
+      "Likud successor (unity)",
+      0.093
+     ],
+     [
+      "Bennett",
+      0.073
+     ],
+     [
+      "Liberman",
+      0.015
+     ],
+     [
+      "another leader",
+      0.011
+     ]
+    ],
+    "backtest": {
+     "eve": {
+      "median_mae": 1.5393,
+      "mean_mae": 1.6105,
+      "coverage": 0.9717,
+      "brier": 0.0405,
+      "interval": 8.6723
+     },
+     "D-7": {
+      "median_mae": 1.4827,
+      "mean_mae": 1.6382,
+      "coverage": 0.9582,
+      "brier": 0.0437,
+      "interval": 9.0865
+     },
+     "D-21": {
+      "median_mae": 1.6753,
+      "mean_mae": 1.7695,
+      "coverage": 0.9747,
+      "brier": 0.0498,
+      "interval": 9.2435
+     }
+    },
+    "expect_self": {
+     "log": {
+      "mean": -1.9677
+     },
+     "crps": {
+      "mean": 1.3732
+     },
+     "abs_err": {
+      "mean": 1.8944
+     },
+     "coverage": {
+      "mean": 0.9467
+     },
+     "brier": {
+      "mean": 0.0602
+     },
+     "nb_brier": {
+      "mean": 0.043
+     },
+     "nb_log": {
+      "mean": -0.1835
+     },
+     "anti_brier": {
+      "mean": 0.0328
+     },
+     "anti_log": {
+      "mean": -0.1484
+     }
+    }
+   },
+   {
+    "id": "bw_2022",
+    "name": {
+     "en": "Blue and White voters: 2022 pattern",
+     "he": "מצביעי כחול לבן: דפוס 2022"
+    },
+    "status": "previous",
+    "kind": "bayes",
+    "n_sims": 8000,
+    "pmf": {
+     "Blue and White": [
+      0,
+      8000
+     ],
+     "The Democrats": [
+      0,
+      46,
+      0,
+      0,
+      0,
+      56,
+      222,
+      520,
+      871,
+      1296,
+      1493,
+      1365,
+      1022,
+      624,
+      293,
+      121,
+      52,
+      15,
+      4
+     ],
+     "Likud": [
+      7,
+      1,
+      2,
+      3,
+      3,
+      11,
+      14,
+      27,
+      47,
+      54,
+      132,
+      192,
+      253,
+      325,
+      412,
+      522,
+      565,
+      636,
+      666,
+      652,
+      666,
+      615,
+      508,
+      454,
+      352,
+      287,
+      214,
+      146,
+      94,
+      70,
+      31,
+      26,
+      10,
+      5,
+      2,
+      1,
+      1,
+      0,
+      0,
+      1
+     ],
+     "Otzma Yehudit": [
+      0,
+      1442,
+      0,
+      0,
+      0,
+      743,
+      1235,
+      1327,
+      1213,
+      887,
+      582,
+      329,
+      154,
+      55,
+      24,
+      4,
+      3,
+      1,
+      0,
+      0,
+      1
+     ],
+     "Ra'am": [
+      0,
+      1242,
+      0,
+      0,
+      0,
+      717,
+      1683,
+      1753,
+      1350,
+      796,
+      326,
+      108,
+      20,
+      4,
+      1
+     ],
+     "Religious Zionist Party": [
+      0,
+      2852,
+      0,
+      0,
+      0,
+      1073,
+      1472,
+      1156,
+      752,
+      414,
+      182,
+      69,
+      19,
+      8,
+      3
+     ],
+     "Shas": [
+      0,
+      32,
+      0,
+      0,
+      0,
+      35,
+      185,
+      540,
+      1212,
+      1760,
+      1818,
+      1314,
+      721,
+      286,
+      71,
+      19,
+      5,
+      1,
+      0,
+      0,
+      1
+     ],
+     "United Torah Judaism": [
+      0,
+      13,
+      0,
+      0,
+      0,
+      29,
+      195,
+      676,
+      1523,
+      2157,
+      1844,
+      1022,
+      385,
+      110,
+      37,
+      5,
+      2,
+      1,
+      0,
+      0,
+      1
+     ],
+     "Yashar": [
+      5,
+      1,
+      0,
+      0,
+      2,
+      2,
+      5,
+      13,
+      26,
+      52,
+      112,
+      160,
+      243,
+      332,
+      489,
+      607,
+      710,
+      773,
+      840,
+      773,
+      764,
+      613,
+      473,
+      396,
+      247,
+      157,
+      96,
+      47,
+      25,
+      21,
+      13,
+      5,
+      2,
+      1
+     ],
+     "Yisrael Beytenu": [
+      0,
+      128,
+      0,
+      0,
+      0,
+      118,
+      456,
+      923,
+      1326,
+      1605,
+      1480,
+      981,
+      583,
+      276,
+      83,
+      27,
+      11,
+      2,
+      1
+     ],
+     "Reservists – Economic Party": [
+      0,
+      6373,
+      0,
+      0,
+      0,
+      419,
+      415,
+      298,
+      209,
+      138,
+      69,
+      38,
+      22,
+      11,
+      6,
+      2
+     ],
+     "Bennett 2026 + Yesh Atid": [
+      0,
+      11,
+      0,
+      0,
+      0,
+      3,
+      20,
+      44,
+      117,
+      264,
+      394,
+      627,
+      905,
+      1091,
+      1157,
+      1057,
+      838,
+      607,
+      422,
+      223,
+      118,
+      54,
+      33,
+      12,
+      2,
+      1
+     ],
+     "Balad + Hadash-Ta'al": [
+      0,
+      38,
+      0,
+      0,
+      0,
+      45,
+      230,
+      540,
+      984,
+      1366,
+      1514,
+      1351,
+      958,
+      602,
+      252,
+      98,
+      20,
+      2
+     ],
+     "Amcha Yisrael": [
+      0,
+      6245,
+      0,
+      0,
+      0,
+      404,
+      460,
+      309,
+      231,
+      163,
+      76,
+      53,
+      40,
+      13,
+      5,
+      1
+     ],
+     "Unity": [
+      0,
+      8000
+     ],
+     "Israel First": [
+      0,
+      7991,
+      0,
+      0,
+      0,
+      8,
+      1
+     ],
+     "Noam": [
+      0,
+      7973,
+      0,
+      0,
+      0,
+      23,
+      4
+     ],
+     "The Haredi Public": [
+      0,
+      7977,
+      0,
+      0,
+      0,
+      18,
+      4,
+      1
+     ],
+     "Ahi – Back to the Roots": [
+      0,
+      7987,
+      0,
+      0,
+      0,
+      11,
+      2
+     ],
+     "Code Black – Shield of the Torah World": [
+      0,
+      7983,
+      0,
+      0,
+      0,
+      14,
+      3
+     ],
+     "Tzomet Beit Yisrael": [
+      0,
+      7990,
+      0,
+      0,
+      0,
+      7,
+      3
+     ],
+     "Balad (alone)": [
+      0,
+      8000
+     ]
+    },
+    "central": {
+     "Likud": 25,
+     "Yashar": 22,
+     "Bennett 2026 + Yesh Atid": 13,
+     "Shas": 9,
+     "Balad + Hadash-Ta'al": 9,
+     "The Democrats": 9,
+     "United Torah Judaism": 8,
+     "Yisrael Beytenu": 8,
+     "Ra'am": 6,
+     "Otzma Yehudit": 6,
+     "Religious Zionist Party": 5,
+     "Amcha Yisrael": 0,
+     "Reservists – Economic Party": 0,
+     "The Haredi Public": 0,
+     "Noam": 0,
+     "Code Black – Shield of the Torah World": 0,
+     "Ahi – Back to the Roots": 0,
+     "Tzomet Beit Yisrael": 0,
+     "Israel First": 0,
+     "Blue and White": 0,
+     "Unity": 0,
+     "Balad (alone)": 0
+    },
+    "interval": {
+     "Likud": [
+      17,
+      32
+     ],
+     "Yashar": [
+      16,
+      28
+     ],
+     "Bennett 2026 + Yesh Atid": [
+      8,
+      18
+     ],
+     "Shas": [
+      6,
+      11
+     ],
+     "Balad + Hadash-Ta'al": [
+      6,
+      12
+     ],
+     "The Democrats": [
+      6,
+      13
+     ],
+     "United Torah Judaism": [
+      6,
+      11
+     ],
+     "Yisrael Beytenu": [
+      5,
+      11
+     ],
+     "Ra'am": [
+      0,
+      9
+     ],
+     "Otzma Yehudit": [
+      0,
+      10
+     ],
+     "Religious Zionist Party": [
+      0,
+      8
+     ],
+     "Amcha Yisrael": [
+      0,
+      7
+     ],
+     "Reservists – Economic Party": [
+      0,
+      7
+     ],
+     "The Haredi Public": [
+      0,
+      0
+     ],
+     "Noam": [
+      0,
+      0
+     ],
+     "Code Black – Shield of the Torah World": [
+      0,
+      0
+     ],
+     "Ahi – Back to the Roots": [
+      0,
+      0
+     ],
+     "Tzomet Beit Yisrael": [
+      0,
+      0
+     ],
+     "Israel First": [
+      0,
+      0
+     ],
+     "Blue and White": [
+      0,
+      0
+     ],
+     "Unity": [
+      0,
+      0
+     ],
+     "Balad (alone)": [
+      0,
+      0
+     ]
+    },
+    "blocs": {
+     "nb": 0.082,
+     "anti": 0.064,
+     "antiRaam": 0.297,
+     "neither": 0.621,
+     "nb_mean": 52.2,
+     "nb_p05": 42,
+     "nb_p95": 62
+    },
+    "groups": {
+     "netanyahu": 0.261,
+     "change": 0.299,
+     "unity": 0.164,
+     "repeat": 0.274,
+     "netanyahu_in_office": 0.537
+    },
+    "pm": [
+     [
+      "Eisenkot",
+      0.279
+     ],
+     [
+      "none (repeat election)",
+      0.274
+     ],
+     [
+      "Netanyahu",
+      0.261
+     ],
+     [
+      "Likud successor (unity)",
+      0.083
+     ],
+     [
+      "Bennett",
+      0.076
+     ],
+     [
+      "Liberman",
+      0.015
+     ],
+     [
+      "another leader",
+      0.011
+     ]
+    ],
+    "backtest": {
+     "eve": {
+      "median_mae": 1.4858,
+      "mean_mae": 1.6253,
+      "coverage": 0.9717,
+      "brier": 0.0447,
+      "interval": 9.0108
+     },
+     "D-7": {
+      "median_mae": 1.486,
+      "mean_mae": 1.6424,
+      "coverage": 0.9604,
+      "brier": 0.0465,
+      "interval": 9.3891
+     },
+     "D-21": {
+      "median_mae": 1.6249,
+      "mean_mae": 1.7795,
+      "coverage": 0.9683,
+      "brier": 0.0519,
+      "interval": 9.5994
+     }
+    },
+    "expect_self": {
+     "log": {
+      "mean": -2.0018
+     },
+     "crps": {
+      "mean": 1.4338
+     },
+     "abs_err": {
+      "mean": 1.9928
+     },
+     "coverage": {
+      "mean": 0.9423
+     },
+     "brier": {
+      "mean": 0.0673
+     },
+     "nb_brier": {
+      "mean": 0.0753
+     },
+     "nb_log": {
+      "mean": -0.2836
+     },
+     "anti_brier": {
+      "mean": 0.0599
+     },
+     "anti_log": {
+      "mean": -0.2378
+     }
+    }
+   },
+   {
+    "id": "old_residual",
+    "name": {
+     "en": "Old residual line",
+     "he": "קו השיורי הישן"
+    },
+    "status": "previous",
+    "kind": "bayes",
+    "n_sims": 8000,
+    "pmf": {
+     "Blue and White": [
+      0,
+      8000
+     ],
+     "The Democrats": [
+      0,
+      112,
+      0,
+      0,
+      0,
+      99,
+      321,
+      592,
+      857,
+      1172,
+      1290,
+      1206,
+      974,
+      667,
+      401,
+      167,
+      93,
+      31,
+      16,
+      1,
+      1
+     ],
+     "Likud": [
+      7,
+      2,
+      2,
+      5,
+      5,
+      10,
+      18,
+      32,
+      37,
+      80,
+      112,
+      185,
+      230,
+      349,
+      391,
+      481,
+      544,
+      570,
+      653,
+      607,
+      683,
+      571,
+      516,
+      472,
+      408,
+      302,
+      234,
+      172,
+      135,
+      80,
+      45,
+      30,
+      21,
+      12,
+      3,
+      1,
+      1,
+      0,
+      0,
+      1
+     ],
+     "Otzma Yehudit": [
+      0,
+      1656,
+      0,
+      0,
+      0,
+      708,
+      1124,
+      1202,
+      1132,
+      879,
+      590,
+      374,
+      181,
+      94,
+      39,
+      13,
+      3,
+      4,
+      0,
+      0,
+      1
+     ],
+     "Ra'am": [
+      0,
+      1475,
+      0,
+      0,
+      0,
+      681,
+      1526,
+      1576,
+      1299,
+      813,
+      425,
+      149,
+      45,
+      9,
+      1,
+      1
+     ],
+     "Religious Zionist Party": [
+      0,
+      3055,
+      0,
+      0,
+      0,
+      928,
+      1332,
+      1093,
+      740,
+      445,
+      237,
+      108,
+      41,
+      13,
+      7,
+      1
+     ],
+     "Shas": [
+      0,
+      33,
+      0,
+      0,
+      0,
+      43,
+      183,
+      577,
+      1202,
+      1716,
+      1789,
+      1306,
+      715,
+      324,
+      83,
+      20,
+      8,
+      0,
+      0,
+      1
+     ],
+     "United Torah Judaism": [
+      0,
+      14,
+      0,
+      0,
+      0,
+      29,
+      214,
+      714,
+      1495,
+      2090,
+      1840,
+      1005,
+      413,
+      140,
+      38,
+      5,
+      1,
+      1,
+      0,
+      0,
+      1
+     ],
+     "Yashar": [
+      4,
+      1,
+      0,
+      0,
+      2,
+      3,
+      6,
+      19,
+      22,
+      57,
+      87,
+      150,
+      208,
+      292,
+      354,
+      528,
+      625,
+      692,
+      774,
+      747,
+      715,
+      674,
+      536,
+      475,
+      361,
+      253,
+      172,
+      106,
+      56,
+      32,
+      24,
+      15,
+      7,
+      2,
+      5
+     ],
+     "Yisrael Beytenu": [
+      0,
+      264,
+      0,
+      0,
+      0,
+      200,
+      551,
+      885,
+      1205,
+      1407,
+      1253,
+      966,
+      623,
+      365,
+      183,
+      63,
+      22,
+      8,
+      4,
+      0,
+      1
+     ],
+     "Reservists – Economic Party": [
+      0,
+      6129,
+      0,
+      0,
+      0,
+      404,
+      465,
+      357,
+      233,
+      189,
+      99,
+      59,
+      28,
+      23,
+      8,
+      6
+     ],
+     "Bennett 2026 + Yesh Atid": [
+      0,
+      20,
+      0,
+      0,
+      0,
+      8,
+      31,
+      93,
+      149,
+      321,
+      481,
+      716,
+      883,
+      1036,
+      1005,
+      972,
+      772,
+      602,
+      411,
+      251,
+      119,
+      74,
+      30,
+      19,
+      6,
+      1
+     ],
+     "Balad + Hadash-Ta'al": [
+      0,
+      99,
+      0,
+      0,
+      0,
+      84,
+      337,
+      618,
+      970,
+      1207,
+      1334,
+      1222,
+      915,
+      647,
+      345,
+      153,
+      56,
+      9,
+      4
+     ],
+     "Amcha Yisrael": [
+      0,
+      6158,
+      0,
+      0,
+      0,
+      406,
+      444,
+      342,
+      245,
+      154,
+      113,
+      54,
+      48,
+      23,
+      8,
+      4,
+      1
+     ],
+     "Unity": [
+      0,
+      8000
+     ],
+     "Israel First": [
+      0,
+      7959,
+      0,
+      0,
+      0,
+      29,
+      11,
+      1
+     ],
+     "Noam": [
+      0,
+      7926,
+      0,
+      0,
+      0,
+      49,
+      21,
+      4
+     ],
+     "The Haredi Public": [
+      0,
+      7908,
+      0,
+      0,
+      0,
+      62,
+      24,
+      5,
+      1
+     ],
+     "Ahi – Back to the Roots": [
+      0,
+      7944,
+      0,
+      0,
+      0,
+      41,
+      13,
+      2
+     ],
+     "Code Black – Shield of the Torah World": [
+      0,
+      7943,
+      0,
+      0,
+      0,
+      37,
+      16,
+      4
+     ],
+     "Tzomet Beit Yisrael": [
+      0,
+      7953,
+      0,
+      0,
+      0,
+      37,
+      6,
+      4
+     ],
+     "Balad (alone)": [
+      0,
+      8000
+     ]
+    },
+    "central": {
+     "Likud": 25,
+     "Yashar": 22,
+     "Bennett 2026 + Yesh Atid": 13,
+     "Shas": 9,
+     "Balad + Hadash-Ta'al": 9,
+     "The Democrats": 9,
+     "United Torah Judaism": 8,
+     "Yisrael Beytenu": 8,
+     "Ra'am": 6,
+     "Otzma Yehudit": 6,
+     "Religious Zionist Party": 5,
+     "Reservists – Economic Party": 0,
+     "Amcha Yisrael": 0,
+     "The Haredi Public": 0,
+     "Noam": 0,
+     "Code Black – Shield of the Torah World": 0,
+     "Ahi – Back to the Roots": 0,
+     "Tzomet Beit Yisrael": 0,
+     "Israel First": 0,
+     "Blue and White": 0,
+     "Unity": 0,
+     "Balad (alone)": 0
+    },
+    "interval": {
+     "Likud": [
+      17,
+      33
+     ],
+     "Yashar": [
+      15,
+      29
+     ],
+     "Bennett 2026 + Yesh Atid": [
+      8,
+      18
+     ],
+     "Shas": [
+      6,
+      12
+     ],
+     "Balad + Hadash-Ta'al": [
+      5,
+      13
+     ],
+     "The Democrats": [
+      5,
+      13
+     ],
+     "United Torah Judaism": [
+      6,
+      11
+     ],
+     "Yisrael Beytenu": [
+      4,
+      12
+     ],
+     "Ra'am": [
+      0,
+      9
+     ],
+     "Otzma Yehudit": [
+      0,
+      10
+     ],
+     "Religious Zionist Party": [
+      0,
+      9
+     ],
+     "Reservists – Economic Party": [
+      0,
+      8
+     ],
+     "Amcha Yisrael": [
+      0,
+      8
+     ],
+     "The Haredi Public": [
+      0,
+      0
+     ],
+     "Noam": [
+      0,
+      0
+     ],
+     "Code Black – Shield of the Torah World": [
+      0,
+      0
+     ],
+     "Ahi – Back to the Roots": [
+      0,
+      0
+     ],
+     "Tzomet Beit Yisrael": [
+      0,
+      0
+     ],
+     "Israel First": [
+      0,
+      0
+     ],
+     "Blue and White": [
+      0,
+      0
+     ],
+     "Unity": [
+      0,
+      0
+     ],
+     "Balad (alone)": [
+      0,
+      0
+     ]
+    },
+    "blocs": {
+     "nb": 0.103,
+     "anti": 0.065,
+     "antiRaam": 0.273,
+     "neither": 0.625,
+     "nb_mean": 52.5,
+     "nb_p05": 42,
+     "nb_p95": 63
+    },
+    "groups": {
+     "netanyahu": 0.279,
+     "change": 0.285,
+     "unity": 0.167,
+     "repeat": 0.268,
+     "netanyahu_in_office": 0.548
+    },
+    "pm": [
+     [
+      "Netanyahu",
+      0.279
+     ],
+     [
+      "none (repeat election)",
+      0.268
+     ],
+     [
+      "Eisenkot",
+      0.267
+     ],
+     [
+      "Likud successor (unity)",
+      0.083
+     ],
+     [
+      "Bennett",
+      0.076
+     ],
+     [
+      "Liberman",
+      0.015
+     ],
+     [
+      "another leader",
+      0.011
+     ]
+    ],
+    "backtest": {
+     "eve": {
+      "median_mae": 1.4927,
+      "mean_mae": 1.6291,
+      "coverage": 0.9807,
+      "brier": 0.0475,
+      "interval": 9.2173
+     },
+     "D-7": {
+      "median_mae": 1.4866,
+      "mean_mae": 1.6478,
+      "coverage": 0.9896,
+      "brier": 0.049,
+      "interval": 9.36
+     },
+     "D-21": {
+      "median_mae": 1.6211,
+      "mean_mae": 1.7943,
+      "coverage": 0.9896,
+      "brier": 0.0541,
+      "interval": 9.69
+     }
+    },
+    "expect_self": {
+     "log": {
+      "mean": -2.072
+     },
+     "crps": {
+      "mean": 1.5655
+     },
+     "abs_err": {
+      "mean": 2.1876
+     },
+     "coverage": {
+      "mean": 0.9496
+     },
+     "brier": {
+      "mean": 0.0749
+     },
+     "nb_brier": {
+      "mean": 0.0924
+     },
+     "nb_log": {
+      "mean": -0.3316
+     },
+     "anti_brier": {
+      "mean": 0.0608
+     },
+     "anti_log": {
+      "mean": -0.2405
+     }
+    }
+   },
+   {
+    "id": "vote_residual",
+    "name": {
+     "en": "Vote-share residual",
+     "he": "שיורי לפי נתחי קולות"
+    },
+    "status": "failed",
+    "kind": "bayes",
+    "n_sims": 8000,
+    "pmf": {
+     "Blue and White": [
+      0,
+      8000
+     ],
+     "The Democrats": [
+      0,
+      9,
+      0,
+      0,
+      0,
+      27,
+      109,
+      363,
+      875,
+      1436,
+      1749,
+      1570,
+      1067,
+      531,
+      190,
+      57,
+      12,
+      4,
+      0,
+      1
+     ],
+     "Likud": [
+      7,
+      2,
+      1,
+      1,
+      3,
+      9,
+      11,
+      20,
+      37,
+      57,
+      102,
+      164,
+      228,
+      305,
+      408,
+      513,
+      578,
+      629,
+      693,
+      654,
+      731,
+      582,
+      541,
+      463,
+      378,
+      298,
+      188,
+      170,
+      92,
+      73,
+      33,
+      18,
+      9,
+      2,
+      5,
+      0,
+      1,
+      0,
+      1
+     ],
+     "Otzma Yehudit": [
+      0,
+      1139,
+      0,
+      0,
+      0,
+      813,
+      1369,
+      1474,
+      1327,
+      923,
+      559,
+      256,
+      100,
+      30,
+      6,
+      3,
+      0,
+      0,
+      0,
+      0,
+      1
+     ],
+     "Ra'am": [
+      0,
+      608,
+      0,
+      0,
+      0,
+      768,
+      2102,
+      2291,
+      1486,
+      596,
+      132,
+      15,
+      2
+     ],
+     "Religious Zionist Party": [
+      0,
+      2485,
+      0,
+      0,
+      0,
+      1341,
+      1710,
+      1270,
+      724,
+      317,
+      116,
+      27,
+      8,
+      1,
+      0,
+      1
+     ],
+     "Shas": [
+      0,
+      29,
+      0,
+      0,
+      0,
+      31,
+      155,
+      522,
+      1197,
+      1807,
+      1910,
+      1331,
+      671,
+      270,
+      53,
+      14,
+      5,
+      2,
+      2,
+      0,
+      0,
+      1
+     ],
+     "United Torah Judaism": [
+      0,
+      9,
+      0,
+      0,
+      0,
+      22,
+      165,
+      627,
+      1511,
+      2218,
+      1940,
+      1039,
+      354,
+      82,
+      22,
+      7,
+      1,
+      1,
+      1,
+      0,
+      1
+     ],
+     "Yashar": [
+      6,
+      1,
+      0,
+      2,
+      3,
+      4,
+      13,
+      28,
+      48,
+      115,
+      171,
+      260,
+      370,
+      521,
+      688,
+      772,
+      889,
+      827,
+      820,
+      672,
+      583,
+      465,
+      304,
+      197,
+      109,
+      64,
+      36,
+      20,
+      8,
+      5,
+      2,
+      3
+     ],
+     "Yisrael Beytenu": [
+      0,
+      16,
+      0,
+      0,
+      0,
+      42,
+      240,
+      777,
+      1579,
+      2076,
+      1759,
+      954,
+      403,
+      127,
+      21,
+      3,
+      3
+     ],
+     "Reservists – Economic Party": [
+      0,
+      6328,
+      0,
+      0,
+      0,
+      460,
+      475,
+      292,
+      200,
+      117,
+      66,
+      32,
+      20,
+      5,
+      5
+     ],
+     "Bennett 2026 + Yesh Atid": [
+      0,
+      6,
+      0,
+      0,
+      0,
+      5,
+      16,
+      37,
+      92,
+      244,
+      414,
+      706,
+      952,
+      1178,
+      1233,
+      1086,
+      836,
+      552,
+      355,
+      156,
+      75,
+      36,
+      16,
+      3,
+      2
+     ],
+     "Balad + Hadash-Ta'al": [
+      0,
+      6,
+      0,
+      0,
+      0,
+      15,
+      95,
+      393,
+      895,
+      1577,
+      1811,
+      1526,
+      1006,
+      481,
+      154,
+      39,
+      2
+     ],
+     "Amcha Yisrael": [
+      0,
+      6344,
+      0,
+      0,
+      0,
+      463,
+      429,
+      315,
+      197,
+      116,
+      74,
+      36,
+      21,
+      3,
+      2
+     ],
+     "Unity": [
+      0,
+      8000
+     ],
+     "Israel First": [
+      0,
+      8000
+     ],
+     "Noam": [
+      0,
+      7999,
+      0,
+      0,
+      0,
+      1
+     ],
+     "The Haredi Public": [
+      0,
+      8000
+     ],
+     "Ahi – Back to the Roots": [
+      0,
+      8000
+     ],
+     "Code Black – Shield of the Torah World": [
+      0,
+      8000
+     ],
+     "Tzomet Beit Yisrael": [
+      0,
+      8000
+     ],
+     "Balad (alone)": [
+      0,
+      8000
+     ]
+    },
+    "central": {
+     "Likud": 25,
+     "Yashar": 22,
+     "Bennett 2026 + Yesh Atid": 13,
+     "The Democrats": 9,
+     "Balad + Hadash-Ta'al": 9,
+     "Shas": 9,
+     "United Torah Judaism": 8,
+     "Yisrael Beytenu": 8,
+     "Ra'am": 6,
+     "Otzma Yehudit": 6,
+     "Religious Zionist Party": 5,
+     "Reservists – Economic Party": 0,
+     "Amcha Yisrael": 0,
+     "The Haredi Public": 0,
+     "Tzomet Beit Yisrael": 0,
+     "Code Black – Shield of the Torah World": 0,
+     "Ahi – Back to the Roots": 0,
+     "Blue and White": 0,
+     "Noam": 0,
+     "Israel First": 0,
+     "Unity": 0,
+     "Balad (alone)": 0
+    },
+    "interval": {
+     "Likud": [
+      17,
+      33
+     ],
+     "Yashar": [
+      16,
+      28
+     ],
+     "Bennett 2026 + Yesh Atid": [
+      8,
+      17
+     ],
+     "The Democrats": [
+      6,
+      12
+     ],
+     "Balad + Hadash-Ta'al": [
+      6,
+      12
+     ],
+     "Shas": [
+      6,
+      11
+     ],
+     "United Torah Judaism": [
+      6,
+      11
+     ],
+     "Yisrael Beytenu": [
+      6,
+      11
+     ],
+     "Ra'am": [
+      0,
+      8
+     ],
+     "Otzma Yehudit": [
+      0,
+      9
+     ],
+     "Religious Zionist Party": [
+      0,
+      8
+     ],
+     "Reservists – Economic Party": [
+      0,
+      7
+     ],
+     "Amcha Yisrael": [
+      0,
+      7
+     ],
+     "The Haredi Public": [
+      0,
+      0
+     ],
+     "Tzomet Beit Yisrael": [
+      0,
+      0
+     ],
+     "Code Black – Shield of the Torah World": [
+      0,
+      0
+     ],
+     "Ahi – Back to the Roots": [
+      0,
+      0
+     ],
+     "Blue and White": [
+      0,
+      0
+     ],
+     "Noam": [
+      0,
+      0
+     ],
+     "Israel First": [
+      0,
+      0
+     ],
+     "Unity": [
+      0,
+      0
+     ],
+     "Balad (alone)": [
+      0,
+      0
+     ]
+    },
+    "blocs": {
+     "nb": 0.074,
+     "anti": 0.044,
+     "antiRaam": 0.261,
+     "neither": 0.665,
+     "nb_mean": 52.4,
+     "nb_p05": 43,
+     "nb_p95": 62
+    },
+    "groups": {
+     "netanyahu": 0.27,
+     "change": 0.265,
+     "unity": 0.179,
+     "repeat": 0.285,
+     "netanyahu_in_office": 0.556
+    },
+    "pm": [
+     [
+      "none (repeat election)",
+      0.285
+     ],
+     [
+      "Netanyahu",
+      0.27
+     ],
+     [
+      "Eisenkot",
+      0.259
+     ],
+     [
+      "Likud successor (unity)",
+      0.09
+     ],
+     [
+      "Bennett",
+      0.07
+     ],
+     [
+      "Liberman",
+      0.015
+     ],
+     [
+      "another leader",
+      0.01
+     ]
+    ],
+    "backtest": {
+     "eve": {
+      "median_mae": 1.5196,
+      "mean_mae": 1.6013,
+      "coverage": 0.9717,
+      "brier": 0.0409,
+      "interval": 8.6709
+     },
+     "D-7": {
+      "median_mae": 1.4591,
+      "mean_mae": 1.6273,
+      "coverage": 0.9514,
+      "brier": 0.0439,
+      "interval": 9.0077
+     },
+     "D-21": {
+      "median_mae": 1.6196,
+      "mean_mae": 1.755,
+      "coverage": 0.9524,
+      "brier": 0.0502,
+      "interval": 9.5263
+     }
+    },
+    "expect_self": {
+     "log": {
+      "mean": -1.9131
+     },
+     "crps": {
+      "mean": 1.2859
+     },
+     "abs_err": {
+      "mean": 1.7788
+     },
+     "coverage": {
+      "mean": 0.9539
+     },
+     "brier": {
+      "mean": 0.0573
+     },
+     "nb_brier": {
+      "mean": 0.0685
+     },
+     "nb_log": {
+      "mean": -0.2639
+     },
+     "anti_brier": {
+      "mean": 0.0421
+     },
+     "anti_log": {
+      "mean": -0.1805
+     }
+    }
+   },
+   {
+    "id": "resid_hybrid",
+    "name": {
+     "en": "Hybrid residual",
+     "he": "שיורי היברידי"
+    },
+    "status": "failed",
+    "kind": "bayes",
+    "n_sims": 8000,
+    "pmf": {
+     "Blue and White": [
+      0,
+      8000
+     ],
+     "The Democrats": [
+      0,
+      100,
+      0,
+      0,
+      0,
+      110,
+      306,
+      558,
+      862,
+      1176,
+      1337,
+      1197,
+      1012,
+      666,
+      380,
+      175,
+      82,
+      26,
+      9,
+      3,
+      1
+     ],
+     "Likud": [
+      7,
+      2,
+      1,
+      3,
+      5,
+      8,
+      17,
+      26,
+      43,
+      70,
+      112,
+      196,
+      216,
+      338,
+      402,
+      487,
+      567,
+      598,
+      674,
+      623,
+      685,
+      591,
+      516,
+      450,
+      420,
+      278,
+      213,
+      168,
+      124,
+      66,
+      46,
+      27,
+      18,
+      4,
+      3,
+      1,
+      0,
+      1,
+      0,
+      1
+     ],
+     "Otzma Yehudit": [
+      0,
+      1149,
+      0,
+      0,
+      0,
+      806,
+      1363,
+      1486,
+      1289,
+      936,
+      562,
+      259,
+      109,
+      30,
+      8,
+      2,
+      0,
+      0,
+      0,
+      0,
+      1
+     ],
+     "Ra'am": [
+      0,
+      611,
+      0,
+      0,
+      0,
+      788,
+      2063,
+      2293,
+      1503,
+      584,
+      138,
+      18,
+      2
+     ],
+     "Religious Zionist Party": [
+      0,
+      2494,
+      0,
+      0,
+      0,
+      1321,
+      1696,
+      1281,
+      720,
+      325,
+      122,
+      30,
+      8,
+      2,
+      0,
+      1
+     ],
+     "Shas": [
+      0,
+      27,
+      0,
+      0,
+      0,
+      34,
+      151,
+      519,
+      1177,
+      1827,
+      1928,
+      1298,
+      682,
+      277,
+      54,
+      15,
+      6,
+      3,
+      1,
+      0,
+      1
+     ],
+     "United Torah Judaism": [
+      0,
+      10,
+      0,
+      0,
+      0,
+      22,
+      164,
+      619,
+      1521,
+      2233,
+      1922,
+      1028,
+      361,
+      82,
+      26,
+      7,
+      2,
+      1,
+      1,
+      0,
+      1
+     ],
+     "Yashar": [
+      5,
+      1,
+      1,
+      1,
+      4,
+      6,
+      14,
+      22,
+      52,
+      93,
+      134,
+      198,
+      299,
+      363,
+      571,
+      624,
+      726,
+      792,
+      733,
+      748,
+      638,
+      576,
+      449,
+      350,
+      231,
+      165,
+      87,
+      47,
+      33,
+      22,
+      12,
+      4,
+      2,
+      1,
+      1
+     ],
+     "Yisrael Beytenu": [
+      0,
+      16,
+      0,
+      0,
+      0,
+      43,
+      244,
+      762,
+      1605,
+      2025,
+      1725,
+      981,
+      427,
+      138,
+      27,
+      3,
+      4
+     ],
+     "Reservists – Economic Party": [
+      0,
+      6328,
+      0,
+      0,
+      0,
+      464,
+      463,
+      304,
+      191,
+      125,
+      64,
+      31,
+      18,
+      7,
+      4,
+      1
+     ],
+     "Bennett 2026 + Yesh Atid": [
+      0,
+      17,
+      0,
+      0,
+      0,
+      12,
+      27,
+      87,
+      149,
+      304,
+      477,
+      704,
+      899,
+      1066,
+      1024,
+      985,
+      804,
+      582,
+      386,
+      241,
+      115,
+      68,
+      29,
+      15,
+      7,
+      1,
+      1
+     ],
+     "Balad + Hadash-Ta'al": [
+      0,
+      7,
+      0,
+      0,
+      0,
+      14,
+      103,
+      386,
+      892,
+      1572,
+      1810,
+      1517,
+      996,
+      492,
+      170,
+      39,
+      2
+     ],
+     "Amcha Yisrael": [
+      0,
+      6343,
+      0,
+      0,
+      0,
+      463,
+      424,
+      321,
+      192,
+      119,
+      73,
+      39,
+      20,
+      4,
+      2
+     ],
+     "Unity": [
+      0,
+      8000
+     ],
+     "Israel First": [
+      0,
+      8000
+     ],
+     "Noam": [
+      0,
+      7999,
+      0,
+      0,
+      0,
+      1
+     ],
+     "The Haredi Public": [
+      0,
+      8000
+     ],
+     "Ahi – Back to the Roots": [
+      0,
+      8000
+     ],
+     "Code Black – Shield of the Torah World": [
+      0,
+      8000
+     ],
+     "Tzomet Beit Yisrael": [
+      0,
+      8000
+     ],
+     "Balad (alone)": [
+      0,
+      8000
+     ]
+    },
+    "central": {
+     "Likud": 25,
+     "Yashar": 22,
+     "Bennett 2026 + Yesh Atid": 13,
+     "Balad + Hadash-Ta'al": 9,
+     "Shas": 9,
+     "The Democrats": 9,
+     "United Torah Judaism": 8,
+     "Yisrael Beytenu": 8,
+     "Ra'am": 6,
+     "Otzma Yehudit": 6,
+     "Religious Zionist Party": 5,
+     "Reservists – Economic Party": 0,
+     "Amcha Yisrael": 0,
+     "The Haredi Public": 0,
+     "Tzomet Beit Yisrael": 0,
+     "Code Black – Shield of the Torah World": 0,
+     "Ahi – Back to the Roots": 0,
+     "Blue and White": 0,
+     "Noam": 0,
+     "Israel First": 0,
+     "Unity": 0,
+     "Balad (alone)": 0
+    },
+    "interval": {
+     "Likud": [
+      17,
+      33
+     ],
+     "Yashar": [
+      15,
+      28
+     ],
+     "Bennett 2026 + Yesh Atid": [
+      8,
+      18
+     ],
+     "Balad + Hadash-Ta'al": [
+      6,
+      12
+     ],
+     "Shas": [
+      6,
+      11
+     ],
+     "The Democrats": [
+      5,
+      13
+     ],
+     "United Torah Judaism": [
+      6,
+      11
+     ],
+     "Yisrael Beytenu": [
+      6,
+      11
+     ],
+     "Ra'am": [
+      0,
+      8
+     ],
+     "Otzma Yehudit": [
+      0,
+      10
+     ],
+     "Religious Zionist Party": [
+      0,
+      8
+     ],
+     "Reservists – Economic Party": [
+      0,
+      7
+     ],
+     "Amcha Yisrael": [
+      0,
+      7
+     ],
+     "The Haredi Public": [
+      0,
+      0
+     ],
+     "Tzomet Beit Yisrael": [
+      0,
+      0
+     ],
+     "Code Black – Shield of the Torah World": [
+      0,
+      0
+     ],
+     "Ahi – Back to the Roots": [
+      0,
+      0
+     ],
+     "Blue and White": [
+      0,
+      0
+     ],
+     "Noam": [
+      0,
+      0
+     ],
+     "Israel First": [
+      0,
+      0
+     ],
+     "Unity": [
+      0,
+      0
+     ],
+     "Balad (alone)": [
+      0,
+      0
+     ]
+    },
+    "blocs": {
+     "nb": 0.084,
+     "anti": 0.052,
+     "antiRaam": 0.27,
+     "neither": 0.646,
+     "nb_mean": 52.4,
+     "nb_p05": 43,
+     "nb_p95": 62
+    },
+    "groups": {
+     "netanyahu": 0.274,
+     "change": 0.272,
+     "unity": 0.174,
+     "repeat": 0.279,
+     "netanyahu_in_office": 0.554
+    },
+    "pm": [
+     [
+      "none (repeat election)",
+      0.279
+     ],
+     [
+      "Netanyahu",
+      0.274
+     ],
+     [
+      "Eisenkot",
+      0.26
+     ],
+     [
+      "Likud successor (unity)",
+      0.087
+     ],
+     [
+      "Bennett",
+      0.073
+     ],
+     [
+      "Liberman",
+      0.015
+     ],
+     [
+      "another leader",
+      0.01
+     ]
+    ],
+    "backtest": {
+     "eve": {
+      "median_mae": 1.5111,
+      "mean_mae": 1.6,
+      "coverage": 0.9717,
+      "brier": 0.041,
+      "interval": 8.8149
+     },
+     "D-7": {
+      "median_mae": 1.4607,
+      "mean_mae": 1.625,
+      "coverage": 0.9769,
+      "brier": 0.0439,
+      "interval": 8.9701
+     },
+     "D-21": {
+      "median_mae": 1.6181,
+      "mean_mae": 1.7535,
+      "coverage": 0.9678,
+      "brier": 0.0503,
+      "interval": 9.4421
+     }
+    },
+    "expect_self": {
+     "log": {
+      "mean": -1.9602
+     },
+     "crps": {
+      "mean": 1.3627
+     },
+     "abs_err": {
+      "mean": 1.8868
+     },
+     "coverage": {
+      "mean": 0.952
+     },
+     "brier": {
+      "mean": 0.0584
+     },
+     "nb_brier": {
+      "mean": 0.0769
+     },
+     "nb_log": {
+      "mean": -0.2884
+     },
+     "anti_brier": {
+      "mean": 0.0493
+     },
+     "anti_log": {
+      "mean": -0.2044
+     }
+    }
+   },
+   {
+    "id": "stacked",
+    "name": {
+     "en": "Stacked error models",
+     "he": "שילוב מודלי שגיאה"
+    },
+    "status": "failed",
+    "kind": "bayes",
+    "n_sims": 8000,
+    "pmf": {
+     "Blue and White": [
+      0,
+      8000
+     ],
+     "The Democrats": [
+      0,
+      64,
+      0,
+      0,
+      0,
+      68,
+      219,
+      481,
+      851,
+      1314,
+      1482,
+      1406,
+      1031,
+      589,
+      290,
+      127,
+      54,
+      19,
+      3,
+      2
+     ],
+     "Likud": [
+      7,
+      2,
+      1,
+      2,
+      2,
+      11,
+      13,
+      27,
+      30,
+      63,
+      104,
+      177,
+      233,
+      332,
+      404,
+      497,
+      574,
+      624,
+      659,
+      625,
+      703,
+      607,
+      525,
+      455,
+      406,
+      285,
+      204,
+      170,
+      115,
+      70,
+      40,
+      18,
+      11,
+      5,
+      4,
+      0,
+      0,
+      1,
+      1
+     ],
+     "Otzma Yehudit": [
+      0,
+      1300,
+      0,
+      0,
+      0,
+      766,
+      1333,
+      1397,
+      1255,
+      887,
+      561,
+      294,
+      134,
+      51,
+      15,
+      3,
+      2,
+      1,
+      0,
+      0,
+      1
+     ],
+     "Ra'am": [
+      0,
+      883,
+      0,
+      0,
+      0,
+      741,
+      1921,
+      2057,
+      1416,
+      678,
+      225,
+      62,
+      14,
+      3
+     ],
+     "Religious Zionist Party": [
+      0,
+      2655,
+      0,
+      0,
+      0,
+      1226,
+      1607,
+      1196,
+      732,
+      340,
+      165,
+      56,
+      12,
+      9,
+      1,
+      1
+     ],
+     "Shas": [
+      0,
+      31,
+      0,
+      0,
+      0,
+      36,
+      159,
+      525,
+      1173,
+      1841,
+      1880,
+      1306,
+      676,
+      262,
+      71,
+      26,
+      7,
+      6,
+      0,
+      0,
+      1
+     ],
+     "United Torah Judaism": [
+      0,
+      16,
+      0,
+      0,
+      0,
+      32,
+      175,
+      627,
+      1534,
+      2196,
+      1911,
+      1002,
+      351,
+      118,
+      27,
+      8,
+      1,
+      1,
+      0,
+      0,
+      1
+     ],
+     "Yashar": [
+      5,
+      1,
+      0,
+      1,
+      2,
+      7,
+      6,
+      21,
+      40,
+      64,
+      127,
+      191,
+      280,
+      381,
+      515,
+      647,
+      753,
+      828,
+      761,
+      818,
+      656,
+      588,
+      447,
+      324,
+      226,
+      127,
+      90,
+      37,
+      29,
+      20,
+      7,
+      1,
+      5
+     ],
+     "Yisrael Beytenu": [
+      0,
+      75,
+      0,
+      0,
+      0,
+      93,
+      337,
+      790,
+      1477,
+      1873,
+      1626,
+      948,
+      465,
+      226,
+      63,
+      19,
+      6,
+      0,
+      1,
+      0,
+      1
+     ],
+     "Reservists – Economic Party": [
+      0,
+      6255,
+      0,
+      0,
+      0,
+      445,
+      492,
+      297,
+      211,
+      140,
+      84,
+      38,
+      24,
+      7,
+      5,
+      2
+     ],
+     "Bennett 2026 + Yesh Atid": [
+      0,
+      14,
+      0,
+      0,
+      0,
+      5,
+      24,
+      64,
+      111,
+      276,
+      457,
+      725,
+      905,
+      1116,
+      1113,
+      1025,
+      817,
+      585,
+      356,
+      205,
+      103,
+      57,
+      28,
+      10,
+      3,
+      0,
+      1
+     ],
+     "Balad + Hadash-Ta'al": [
+      0,
+      27,
+      0,
+      0,
+      0,
+      33,
+      168,
+      427,
+      952,
+      1428,
+      1705,
+      1462,
+      987,
+      517,
+      208,
+      69,
+      13,
+      2,
+      2
+     ],
+     "Amcha Yisrael": [
+      0,
+      6275,
+      0,
+      0,
+      0,
+      455,
+      440,
+      326,
+      212,
+      126,
+      79,
+      41,
+      32,
+      8,
+      5,
+      0,
+      1
+     ],
+     "Unity": [
+      0,
+      8000
+     ],
+     "Israel First": [
+      0,
+      7989,
+      0,
+      0,
+      0,
+      9,
+      2
+     ],
+     "Noam": [
+      0,
+      7980,
+      0,
+      0,
+      0,
+      14,
+      6
+     ],
+     "The Haredi Public": [
+      0,
+      7969,
+      0,
+      0,
+      0,
+      23,
+      7,
+      0,
+      1
+     ],
+     "Ahi – Back to the Roots": [
+      0,
+      7985,
+      0,
+      0,
+      0,
+      12,
+      3
+     ],
+     "Code Black – Shield of the Torah World": [
+      0,
+      7980,
+      0,
+      0,
+      0,
+      13,
+      7
+     ],
+     "Tzomet Beit Yisrael": [
+      0,
+      7984,
+      0,
+      0,
+      0,
+      12,
+      2,
+      2
+     ],
+     "Balad (alone)": [
+      0,
+      8000
+     ]
+    },
+    "central": {
+     "Likud": 25,
+     "Yashar": 22,
+     "Bennett 2026 + Yesh Atid": 13,
+     "Balad + Hadash-Ta'al": 9,
+     "Shas": 9,
+     "The Democrats": 9,
+     "United Torah Judaism": 8,
+     "Yisrael Beytenu": 8,
+     "Ra'am": 6,
+     "Otzma Yehudit": 6,
+     "Religious Zionist Party": 5,
+     "Reservists – Economic Party": 0,
+     "Amcha Yisrael": 0,
+     "The Haredi Public": 0,
+     "Tzomet Beit Yisrael": 0,
+     "Code Black – Shield of the Torah World": 0,
+     "Ahi – Back to the Roots": 0,
+     "Noam": 0,
+     "Israel First": 0,
+     "Blue and White": 0,
+     "Unity": 0,
+     "Balad (alone)": 0
+    },
+    "interval": {
+     "Likud": [
+      17,
+      33
+     ],
+     "Yashar": [
+      15,
+      28
+     ],
+     "Bennett 2026 + Yesh Atid": [
+      8,
+      18
+     ],
+     "Balad + Hadash-Ta'al": [
+      6,
+      12
+     ],
+     "Shas": [
+      6,
+      11
+     ],
+     "The Democrats": [
+      6,
+      13
+     ],
+     "United Torah Judaism": [
+      6,
+      11
+     ],
+     "Yisrael Beytenu": [
+      5,
+      11
+     ],
+     "Ra'am": [
+      0,
+      8
+     ],
+     "Otzma Yehudit": [
+      0,
+      10
+     ],
+     "Religious Zionist Party": [
+      0,
+      8
+     ],
+     "Reservists – Economic Party": [
+      0,
+      7
+     ],
+     "Amcha Yisrael": [
+      0,
+      7
+     ],
+     "The Haredi Public": [
+      0,
+      0
+     ],
+     "Tzomet Beit Yisrael": [
+      0,
+      0
+     ],
+     "Code Black – Shield of the Torah World": [
+      0,
+      0
+     ],
+     "Ahi – Back to the Roots": [
+      0,
+      0
+     ],
+     "Noam": [
+      0,
+      0
+     ],
+     "Israel First": [
+      0,
+      0
+     ],
+     "Blue and White": [
+      0,
+      0
+     ],
+     "Unity": [
+      0,
+      0
+     ],
+     "Balad (alone)": [
+      0,
+      0
+     ]
+    },
+    "blocs": {
+     "nb": 0.079,
+     "anti": 0.048,
+     "antiRaam": 0.265,
+     "neither": 0.656,
+     "nb_mean": 52.4,
+     "nb_p05": 43,
+     "nb_p95": 62
+    },
+    "groups": {
+     "netanyahu": 0.27,
+     "change": 0.272,
+     "unity": 0.176,
+     "repeat": 0.281,
+     "netanyahu_in_office": 0.552
+    },
+    "pm": [
+     [
+      "none (repeat election)",
+      0.281
+     ],
+     [
+      "Netanyahu",
+      0.27
+     ],
+     [
+      "Eisenkot",
+      0.261
+     ],
+     [
+      "Likud successor (unity)",
+      0.088
+     ],
+     [
+      "Bennett",
+      0.073
+     ],
+     [
+      "Liberman",
+      0.015
+     ],
+     [
+      "another leader",
+      0.01
+     ]
+    ],
+    "backtest": {
+     "eve": {
+      "median_mae": 1.4855,
+      "mean_mae": 1.613,
+      "coverage": 0.9717,
+      "brier": 0.0423,
+      "interval": 9.0273
+     },
+     "D-7": {
+      "median_mae": 1.4748,
+      "mean_mae": 1.6363,
+      "coverage": 0.9552,
+      "brier": 0.045,
+      "interval": 9.4238
+     },
+     "D-21": {
+      "median_mae": 1.6169,
+      "mean_mae": 1.7698,
+      "coverage": 0.9524,
+      "brier": 0.051,
+      "interval": 9.8036
+     }
+    },
+    "expect_self": {
+     "log": {
+      "mean": -1.98
+     },
+     "crps": {
+      "mean": 1.3878
+     },
+     "abs_err": {
+      "mean": 1.9214
+     },
+     "coverage": {
+      "mean": 0.948
+     },
+     "brier": {
+      "mean": 0.0634
+     },
+     "nb_brier": {
+      "mean": 0.0728
+     },
+     "nb_log": {
+      "mean": -0.2763
+     },
+     "anti_brier": {
+      "mean": 0.0457
+     },
+     "anti_log": {
+      "mean": -0.1926
+     }
+    }
+   },
+   {
+    "id": "t_unit_narrow",
+    "name": {
+     "en": "Narrower shocks",
+     "he": "זעזועים צרים יותר"
+    },
+    "status": "failed",
+    "kind": "bayes",
+    "n_sims": 8000,
+    "pmf": {
+     "Blue and White": [
+      0,
+      8000
+     ],
+     "The Democrats": [
+      0,
+      12,
+      0,
+      0,
+      0,
+      29,
+      119,
+      393,
+      871,
+      1430,
+      1692,
+      1537,
+      1079,
+      561,
+      196,
+      60,
+      16,
+      5
+     ],
+     "Likud": [
+      10,
+      1,
+      5,
+      9,
+      19,
+      21,
+      54,
+      76,
+      123,
+      229,
+      295,
+      397,
+      513,
+      612,
+      674,
+      723,
+      689,
+      735,
+      666,
+      538,
+      462,
+      365,
+      264,
+      205,
+      141,
+      90,
+      47,
+      21,
+      16,
+      4,
+      4,
+      1,
+      1
+     ],
+     "Otzma Yehudit": [
+      0,
+      1224,
+      0,
+      0,
+      0,
+      780,
+      1324,
+      1471,
+      1322,
+      915,
+      545,
+      272,
+      101,
+      33,
+      8,
+      4,
+      0,
+      0,
+      0,
+      1
+     ],
+     "Ra'am": [
+      0,
+      822,
+      0,
+      0,
+      0,
+      724,
+      1971,
+      2091,
+      1475,
+      680,
+      194,
+      39,
+      4
+     ],
+     "Religious Zionist Party": [
+      0,
+      2625,
+      0,
+      0,
+      0,
+      1251,
+      1622,
+      1251,
+      729,
+      341,
+      130,
+      35,
+      12,
+      3,
+      1
+     ],
+     "Shas": [
+      0,
+      24,
+      0,
+      0,
+      0,
+      40,
+      166,
+      512,
+      1227,
+      1806,
+      1842,
+      1341,
+      724,
+      236,
+      63,
+      13,
+      5,
+      0,
+      0,
+      1
+     ],
+     "United Torah Judaism": [
+      0,
+      8,
+      0,
+      0,
+      0,
+      26,
+      162,
+      667,
+      1549,
+      2169,
+      1920,
+      1026,
+      340,
+      105,
+      21,
+      5,
+      1,
+      0,
+      0,
+      1
+     ],
+     "Yashar": [
+      7,
+      1,
+      0,
+      0,
+      2,
+      6,
+      10,
+      28,
+      70,
+      144,
+      204,
+      358,
+      505,
+      678,
+      844,
+      963,
+      914,
+      921,
+      719,
+      609,
+      432,
+      269,
+      163,
+      73,
+      46,
+      23,
+      11,
+      5,
+      2
+     ],
+     "Yisrael Beytenu": [
+      0,
+      38,
+      0,
+      0,
+      0,
+      54,
+      288,
+      833,
+      1527,
+      1965,
+      1649,
+      974,
+      475,
+      154,
+      33,
+      7,
+      2,
+      1
+     ],
+     "Reservists – Economic Party": [
+      0,
+      6263,
+      0,
+      0,
+      0,
+      457,
+      449,
+      319,
+      239,
+      119,
+      74,
+      41,
+      23,
+      9,
+      5,
+      2
+     ],
+     "Bennett 2026 + Yesh Atid": [
+      0,
+      4,
+      0,
+      0,
+      0,
+      5,
+      9,
+      33,
+      82,
+      221,
+      407,
+      668,
+      981,
+      1231,
+      1242,
+      1111,
+      852,
+      575,
+      327,
+      134,
+      75,
+      34,
+      6,
+      1,
+      2
+     ],
+     "Balad + Hadash-Ta'al": [
+      0,
+      4,
+      0,
+      0,
+      0,
+      16,
+      83,
+      374,
+      944,
+      1536,
+      1843,
+      1584,
+      957,
+      464,
+      158,
+      34,
+      3
+     ],
+     "Amcha Yisrael": [
+      0,
+      6296,
+      0,
+      0,
+      0,
+      436,
+      445,
+      313,
+      223,
+      119,
+      82,
+      47,
+      28,
+      8,
+      3
+     ],
+     "Unity": [
+      0,
+      8000
+     ],
+     "Israel First": [
+      0,
+      7999,
+      0,
+      0,
+      0,
+      1
+     ],
+     "Noam": [
+      0,
+      7992,
+      0,
+      0,
+      0,
+      7,
+      1
+     ],
+     "The Haredi Public": [
+      0,
+      7996,
+      0,
+      0,
+      0,
+      3,
+      1
+     ],
+     "Ahi – Back to the Roots": [
+      0,
+      7998,
+      0,
+      0,
+      0,
+      2
+     ],
+     "Code Black – Shield of the Torah World": [
+      0,
+      7994,
+      0,
+      0,
+      0,
+      6
+     ],
+     "Tzomet Beit Yisrael": [
+      0,
+      7998,
+      0,
+      0,
+      0,
+      2
+     ],
+     "Balad (alone)": [
+      0,
+      8000
+     ]
+    },
+    "central": {
+     "Likud": 25,
+     "Yashar": 22,
+     "Bennett 2026 + Yesh Atid": 13,
+     "Balad + Hadash-Ta'al": 9,
+     "The Democrats": 9,
+     "Shas": 9,
+     "United Torah Judaism": 8,
+     "Yisrael Beytenu": 8,
+     "Ra'am": 6,
+     "Otzma Yehudit": 6,
+     "Religious Zionist Party": 5,
+     "Reservists – Economic Party": 0,
+     "Amcha Yisrael": 0,
+     "Code Black – Shield of the Torah World": 0,
+     "Noam": 0,
+     "The Haredi Public": 0,
+     "Tzomet Beit Yisrael": 0,
+     "Ahi – Back to the Roots": 0,
+     "Blue and White": 0,
+     "Israel First": 0,
+     "Unity": 0,
+     "Balad (alone)": 0
+    },
+    "interval": {
+     "Likud": [
+      18,
+      32
+     ],
+     "Yashar": [
+      16,
+      27
+     ],
+     "Bennett 2026 + Yesh Atid": [
+      9,
+      17
+     ],
+     "Balad + Hadash-Ta'al": [
+      6,
+      12
+     ],
+     "The Democrats": [
+      6,
+      12
+     ],
+     "Shas": [
+      6,
+      11
+     ],
+     "United Torah Judaism": [
+      6,
+      11
+     ],
+     "Yisrael Beytenu": [
+      6,
+      11
+     ],
+     "Ra'am": [
+      0,
+      8
+     ],
+     "Otzma Yehudit": [
+      0,
+      10
+     ],
+     "Religious Zionist Party": [
+      0,
+      8
+     ],
+     "Reservists – Economic Party": [
+      0,
+      7
+     ],
+     "Amcha Yisrael": [
+      0,
+      7
+     ],
+     "Code Black – Shield of the Torah World": [
+      0,
+      0
+     ],
+     "Noam": [
+      0,
+      0
+     ],
+     "The Haredi Public": [
+      0,
+      0
+     ],
+     "Tzomet Beit Yisrael": [
+      0,
+      0
+     ],
+     "Ahi – Back to the Roots": [
+      0,
+      0
+     ],
+     "Blue and White": [
+      0,
+      0
+     ],
+     "Israel First": [
+      0,
+      0
+     ],
+     "Unity": [
+      0,
+      0
+     ],
+     "Balad (alone)": [
+      0,
+      0
+     ]
+    },
+    "blocs": {
+     "nb": 0.052,
+     "anti": 0.028,
+     "antiRaam": 0.239,
+     "neither": 0.709,
+     "nb_mean": 52.4,
+     "nb_p05": 44,
+     "nb_p95": 61
+    },
+    "groups": {
+     "netanyahu": 0.258,
+     "change": 0.257,
+     "unity": 0.187,
+     "repeat": 0.296,
+     "netanyahu_in_office": 0.555
+    },
+    "pm": [
+     [
+      "none (repeat election)",
+      0.296
+     ],
+     [
+      "Netanyahu",
+      0.258
+     ],
+     [
+      "Eisenkot",
+      0.256
+     ],
+     [
+      "Likud successor (unity)",
+      0.094
+     ],
+     [
+      "Bennett",
+      0.07
+     ],
+     [
+      "Liberman",
+      0.015
+     ],
+     [
+      "another leader",
+      0.01
+     ]
+    ],
+    "backtest": {
+     "eve": {
+      "median_mae": 1.5184,
+      "mean_mae": 1.617,
+      "coverage": 0.9514,
+      "brier": 0.0421,
+      "interval": 8.8585
+     },
+     "D-7": null,
+     "D-21": null
+    },
+    "expect_self": {
+     "log": {
+      "mean": -1.9164
+     },
+     "crps": {
+      "mean": 1.2872
+     },
+     "abs_err": {
+      "mean": 1.7832
+     },
+     "coverage": {
+      "mean": 0.9506
+     },
+     "brier": {
+      "mean": 0.0609
+     },
+     "nb_brier": {
+      "mean": 0.0493
+     },
+     "nb_log": {
+      "mean": -0.2044
+     },
+     "anti_brier": {
+      "mean": 0.0272
+     },
+     "anti_log": {
+      "mean": -0.1277
+     }
+    }
+   },
+   {
+    "id": "no_trail",
+    "name": {
+     "en": "No late Likud surge",
+     "he": "בלי זינוק מאוחר לליכוד"
+    },
+    "status": "layer",
+    "kind": "bayes",
+    "n_sims": 8000,
+    "pmf": {
+     "Blue and White": [
+      0,
+      8000
+     ],
+     "The Democrats": [
+      0,
+      46,
+      0,
+      0,
+      0,
+      62,
+      230,
+      528,
+      943,
+      1264,
+      1486,
+      1363,
+      1041,
+      576,
+      274,
+      123,
+      48,
+      14,
+      1,
+      1
+     ],
+     "Likud": [
+      0,
+      2,
+      0,
+      0,
+      0,
+      0,
+      1,
+      0,
+      1,
+      1,
+      2,
+      8,
+      15,
+      20,
+      41,
+      73,
+      135,
+      217,
+      326,
+      468,
+      586,
+      700,
+      828,
+      850,
+      865,
+      773,
+      602,
+      507,
+      393,
+      247,
+      159,
+      86,
+      38,
+      30,
+      12,
+      10,
+      1,
+      2,
+      0,
+      0,
+      0,
+      1
+     ],
+     "Otzma Yehudit": [
+      0,
+      306,
+      0,
+      0,
+      0,
+      312,
+      774,
+      1276,
+      1482,
+      1508,
+      1158,
+      712,
+      295,
+      125,
+      34,
+      14,
+      3,
+      0,
+      1
+     ],
+     "Ra'am": [
+      0,
+      1238,
+      0,
+      0,
+      0,
+      749,
+      1704,
+      1743,
+      1358,
+      779,
+      309,
+      100,
+      15,
+      4,
+      1
+     ],
+     "Religious Zionist Party": [
+      0,
+      1190,
+      0,
+      0,
+      0,
+      817,
+      1575,
+      1708,
+      1297,
+      832,
+      390,
+      141,
+      39,
+      9,
+      2
+     ],
+     "Shas": [
+      0,
+      32,
+      0,
+      0,
+      0,
+      36,
+      182,
+      570,
+      1238,
+      1775,
+      1813,
+      1298,
+      700,
+      276,
+      58,
+      14,
+      7,
+      0,
+      0,
+      0,
+      1
+     ],
+     "United Torah Judaism": [
+      0,
+      12,
+      0,
+      0,
+      0,
+      27,
+      210,
+      714,
+      1546,
+      2180,
+      1819,
+      982,
+      371,
+      95,
+      33,
+      7,
+      2,
+      1,
+      0,
+      1
+     ],
+     "Yashar": [
+      8,
+      3,
+      4,
+      3,
+      18,
+      36,
+      57,
+      116,
+      193,
+      267,
+      417,
+      545,
+      670,
+      773,
+      860,
+      775,
+      753,
+      679,
+      555,
+      466,
+      321,
+      214,
+      113,
+      68,
+      42,
+      20,
+      19,
+      5,
+      4,
+      0,
+      0,
+      2,
+      0,
+      1,
+      0,
+      1
+     ],
+     "Yisrael Beytenu": [
+      0,
+      129,
+      0,
+      0,
+      0,
+      120,
+      463,
+      916,
+      1403,
+      1633,
+      1419,
+      983,
+      560,
+      257,
+      81,
+      26,
+      5,
+      4,
+      1
+     ],
+     "Reservists – Economic Party": [
+      0,
+      6197,
+      0,
+      0,
+      0,
+      454,
+      467,
+      324,
+      238,
+      141,
+      92,
+      34,
+      31,
+      13,
+      7,
+      2
+     ],
+     "Bennett 2026 + Yesh Atid": [
+      0,
+      4,
+      0,
+      0,
+      0,
+      7,
+      32,
+      64,
+      147,
+      290,
+      451,
+      731,
+      942,
+      1106,
+      1130,
+      991,
+      800,
+      553,
+      384,
+      197,
+      84,
+      58,
+      15,
+      9,
+      5
+     ],
+     "Balad + Hadash-Ta'al": [
+      0,
+      37,
+      0,
+      0,
+      0,
+      52,
+      226,
+      563,
+      1013,
+      1391,
+      1491,
+      1360,
+      934,
+      589,
+      233,
+      90,
+      19,
+      2
+     ],
+     "Amcha Yisrael": [
+      0,
+      6267,
+      0,
+      0,
+      0,
+      405,
+      456,
+      319,
+      220,
+      138,
+      90,
+      53,
+      32,
+      14,
+      4,
+      2
+     ],
+     "Unity": [
+      0,
+      8000
+     ],
+     "Israel First": [
+      0,
+      7991,
+      0,
+      0,
+      0,
+      8,
+      1
+     ],
+     "Noam": [
+      0,
+      7947,
+      0,
+      0,
+      0,
+      46,
+      7
+     ],
+     "The Haredi Public": [
+      0,
+      7977,
+      0,
+      0,
+      0,
+      18,
+      4,
+      1
+     ],
+     "Ahi – Back to the Roots": [
+      0,
+      7987,
+      0,
+      0,
+      0,
+      11,
+      2
+     ],
+     "Code Black – Shield of the Torah World": [
+      0,
+      7983,
+      0,
+      0,
+      0,
+      14,
+      3
+     ],
+     "Tzomet Beit Yisrael": [
+      0,
+      7990,
+      0,
+      0,
+      0,
+      7,
+      3
+     ],
+     "Balad (alone)": [
+      0,
+      8000
+     ]
+    },
+    "central": {
+     "Likud": 22,
+     "Yashar": 22,
+     "Bennett 2026 + Yesh Atid": 13,
+     "Shas": 9,
+     "Balad + Hadash-Ta'al": 9,
+     "The Democrats": 9,
+     "United Torah Judaism": 8,
+     "Yisrael Beytenu": 8,
+     "Otzma Yehudit": 8,
+     "Religious Zionist Party": 6,
+     "Ra'am": 6,
+     "Reservists – Economic Party": 0,
+     "Amcha Yisrael": 0,
+     "Noam": 0,
+     "The Haredi Public": 0,
+     "Code Black – Shield of the Torah World": 0,
+     "Ahi – Back to the Roots": 0,
+     "Tzomet Beit Yisrael": 0,
+     "Israel First": 0,
+     "Blue and White": 0,
+     "Unity": 0,
+     "Balad (alone)": 0
+    },
+    "interval": {
+     "Likud": [
+      16,
+      28
+     ],
+     "Yashar": [
+      15,
+      28
+     ],
+     "Bennett 2026 + Yesh Atid": [
+      8,
+      17
+     ],
+     "Shas": [
+      6,
+      11
+     ],
+     "Balad + Hadash-Ta'al": [
+      6,
+      12
+     ],
+     "The Democrats": [
+      6,
+      13
+     ],
+     "United Torah Judaism": [
+      6,
+      11
+     ],
+     "Yisrael Beytenu": [
+      5,
+      11
+     ],
+     "Otzma Yehudit": [
+      4,
+      11
+     ],
+     "Religious Zionist Party": [
+      0,
+      9
+     ],
+     "Ra'am": [
+      0,
+      9
+     ],
+     "Reservists – Economic Party": [
+      0,
+      7
+     ],
+     "Amcha Yisrael": [
+      0,
+      7
+     ],
+     "Noam": [
+      0,
+      0
+     ],
+     "The Haredi Public": [
+      0,
+      0
+     ],
+     "Code Black – Shield of the Torah World": [
+      0,
+      0
+     ],
+     "Ahi – Back to the Roots": [
+      0,
+      0
+     ],
+     "Tzomet Beit Yisrael": [
+      0,
+      0
+     ],
+     "Israel First": [
+      0,
+      0
+     ],
+     "Blue and White": [
+      0,
+      0
+     ],
+     "Unity": [
+      0,
+      0
+     ],
+     "Balad (alone)": [
+      0,
+      0
+     ]
+    },
+    "blocs": {
+     "nb": 0.094,
+     "anti": 0.045,
+     "antiRaam": 0.238,
+     "neither": 0.668,
+     "nb_mean": 52.9,
+     "nb_p05": 43,
+     "nb_p95": 63
+    },
+    "groups": {
+     "netanyahu": 0.284,
+     "change": 0.257,
+     "unity": 0.179,
+     "repeat": 0.278,
+     "netanyahu_in_office": 0.564
+    },
+    "pm": [
+     [
+      "Netanyahu",
+      0.284
+     ],
+     [
+      "none (repeat election)",
+      0.278
+     ],
+     [
+      "Eisenkot",
+      0.251
+     ],
+     [
+      "Likud successor (unity)",
+      0.09
+     ],
+     [
+      "Bennett",
+      0.072
+     ],
+     [
+      "Liberman",
+      0.015
+     ],
+     [
+      "another leader",
+      0.01
+     ]
+    ],
+    "backtest": {
+     "eve": {
+      "median_mae": 1.5657,
+      "mean_mae": 1.6688,
+      "coverage": 0.9604,
+      "brier": 0.0505,
+      "interval": 9.4144
+     },
+     "D-7": {
+      "median_mae": 1.6205,
+      "mean_mae": 1.724,
+      "coverage": 0.949,
+      "brier": 0.0509,
+      "interval": 9.5894
+     },
+     "D-21": {
+      "median_mae": 1.7345,
+      "mean_mae": 1.8456,
+      "coverage": 0.9683,
+      "brier": 0.0514,
+      "interval": 9.5424
+     }
+    },
+    "expect_self": {
+     "log": {
+      "mean": -2.0021
+     },
+     "crps": {
+      "mean": 1.3396
+     },
+     "abs_err": {
+      "mean": 1.8465
+     },
+     "coverage": {
+      "mean": 0.9421
+     },
+     "brier": {
+      "mean": 0.0516
+     },
+     "nb_brier": {
+      "mean": 0.0852
+     },
+     "nb_log": {
+      "mean": -0.3117
+     },
+     "anti_brier": {
+      "mean": 0.043
+     },
+     "anti_log": {
+      "mean": -0.1835
+     }
+    }
+   },
+   {
+    "id": "simple_average",
+    "name": {
+     "en": "Simple poll average",
+     "he": "ממוצע סקרים פשוט"
+    },
+    "status": "benchmark",
+    "kind": "simple",
+    "n_sims": 20000,
+    "pmf": {
+     "Amcha Yisrael": [
+      0,
+      19922,
+      0,
+      0,
+      0,
+      53,
+      23,
+      2
+     ],
+     "Blue and White": [
+      0,
+      19749,
+      0,
+      0,
+      0,
+      151,
+      91,
+      9
+     ],
+     "The Democrats": [
+      0,
+      816,
+      0,
+      0,
+      0,
+      298,
+      1028,
+      1515,
+      2148,
+      2656,
+      2737,
+      2755,
+      2179,
+      1672,
+      1071,
+      619,
+      289,
+      126,
+      61,
+      11,
+      15,
+      2,
+      0,
+      1,
+      0,
+      1
+     ],
+     "The Haredi Public": [
+      0,
+      19841,
+      0,
+      0,
+      0,
+      116,
+      37,
+      6
+     ],
+     "Balad + Hadash-Ta'al": [
+      0,
+      556,
+      0,
+      0,
+      0,
+      220,
+      950,
+      1652,
+      2528,
+      3065,
+      3267,
+      2970,
+      2103,
+      1350,
+      724,
+      353,
+      148,
+      61,
+      33,
+      10,
+      5,
+      2,
+      1,
+      0,
+      1,
+      0,
+      1
+     ],
+     "Likud": [
+      0,
+      2,
+      0,
+      0,
+      0,
+      0,
+      1,
+      2,
+      1,
+      3,
+      3,
+      10,
+      16,
+      36,
+      68,
+      124,
+      267,
+      476,
+      743,
+      1114,
+      1427,
+      1912,
+      2270,
+      2358,
+      2209,
+      1956,
+      1561,
+      1201,
+      832,
+      556,
+      367,
+      214,
+      100,
+      82,
+      36,
+      23,
+      13,
+      3,
+      6,
+      3,
+      4,
+      0,
+      1
+     ],
+     "Otzma Yehudit": [
+      0,
+      578,
+      0,
+      0,
+      0,
+      389,
+      1581,
+      2886,
+      3795,
+      3997,
+      3151,
+      2032,
+      993,
+      414,
+      142,
+      34,
+      6,
+      2
+     ],
+     "Ra'am": [
+      0,
+      4250,
+      0,
+      0,
+      0,
+      1153,
+      3865,
+      3987,
+      3221,
+      2023,
+      959,
+      382,
+      99,
+      44,
+      9,
+      6,
+      1,
+      0,
+      0,
+      1
+     ],
+     "Religious Zionist Party": [
+      0,
+      1917,
+      0,
+      0,
+      0,
+      875,
+      3211,
+      4152,
+      4015,
+      3122,
+      1632,
+      722,
+      264,
+      67,
+      16,
+      6,
+      0,
+      1
+     ],
+     "Shas": [
+      0,
+      665,
+      0,
+      0,
+      0,
+      221,
+      1046,
+      1848,
+      2622,
+      3258,
+      3296,
+      2798,
+      1992,
+      1145,
+      632,
+      275,
+      137,
+      35,
+      16,
+      9,
+      2,
+      1,
+      2
+     ],
+     "Bennett 2026 + Yesh Atid": [
+      0,
+      62,
+      0,
+      0,
+      0,
+      11,
+      121,
+      194,
+      373,
+      616,
+      994,
+      1435,
+      1917,
+      2243,
+      2450,
+      2449,
+      2086,
+      1746,
+      1282,
+      911,
+      500,
+      303,
+      159,
+      82,
+      38,
+      16,
+      6,
+      5,
+      1
+     ],
+     "United Torah Judaism": [
+      0,
+      747,
+      0,
+      0,
+      0,
+      242,
+      1172,
+      2051,
+      2911,
+      3450,
+      3209,
+      2693,
+      1727,
+      991,
+      447,
+      210,
+      92,
+      41,
+      12,
+      3,
+      0,
+      1,
+      0,
+      0,
+      0,
+      1
+     ],
+     "Yashar": [
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      1,
+      1,
+      2,
+      8,
+      9,
+      34,
+      45,
+      72,
+      167,
+      242,
+      373,
+      578,
+      793,
+      1133,
+      1346,
+      1598,
+      1847,
+      1944,
+      1893,
+      1763,
+      1612,
+      1258,
+      1086,
+      725,
+      532,
+      381,
+      240,
+      155,
+      62,
+      36,
+      25,
+      19,
+      12,
+      3,
+      2,
+      1,
+      0,
+      0,
+      1
+     ],
+     "Yisrael Beytenu": [
+      0,
+      842,
+      0,
+      0,
+      0,
+      413,
+      1876,
+      3301,
+      4179,
+      3945,
+      2806,
+      1608,
+      674,
+      265,
+      74,
+      15,
+      2
+     ],
+     "Reservists – Economic Party": [
+      0,
+      15968,
+      0,
+      0,
+      0,
+      1232,
+      1608,
+      777,
+      302,
+      91,
+      16,
+      5,
+      0,
+      1
+     ],
+     "Noam": [
+      0,
+      19893,
+      0,
+      0,
+      0,
+      80,
+      24,
+      3
+     ],
+     "Israel First": [
+      0,
+      19409,
+      0,
+      0,
+      0,
+      363,
+      196,
+      28,
+      4
+     ],
+     "Ahi – Back to the Roots": [
+      0,
+      19977,
+      0,
+      0,
+      0,
+      17,
+      5,
+      1
+     ],
+     "Code Black – Shield of the Torah World": [
+      0,
+      19446,
+      0,
+      0,
+      0,
+      367,
+      162,
+      22,
+      3
+     ],
+     "Tzomet Beit Yisrael": [
+      0,
+      19453,
+      0,
+      0,
+      0,
+      340,
+      187,
+      19,
+      1
+     ]
+    },
+    "central": {
+     "Likud": 22,
+     "Yashar": 22,
+     "Bennett 2026 + Yesh Atid": 14,
+     "Balad + Hadash-Ta'al": 9,
+     "Shas": 9,
+     "The Democrats": 9,
+     "Otzma Yehudit": 8,
+     "United Torah Judaism": 8,
+     "Yisrael Beytenu": 7,
+     "Religious Zionist Party": 7,
+     "Ra'am": 5,
+     "Reservists – Economic Party": 0,
+     "Israel First": 0,
+     "Code Black – Shield of the Torah World": 0,
+     "Tzomet Beit Yisrael": 0,
+     "Blue and White": 0,
+     "The Haredi Public": 0,
+     "Noam": 0,
+     "Amcha Yisrael": 0,
+     "Ahi – Back to the Roots": 0
+    },
+    "interval": {
+     "Likud": [
+      16,
+      28
+     ],
+     "Yashar": [
+      16,
+      29
+     ],
+     "Bennett 2026 + Yesh Atid": [
+      8,
+      19
+     ],
+     "Balad + Hadash-Ta'al": [
+      5,
+      13
+     ],
+     "Shas": [
+      5,
+      13
+     ],
+     "The Democrats": [
+      4,
+      14
+     ],
+     "Otzma Yehudit": [
+      5,
+      11
+     ],
+     "United Torah Judaism": [
+      5,
+      12
+     ],
+     "Yisrael Beytenu": [
+      4,
+      11
+     ],
+     "Religious Zionist Party": [
+      0,
+      10
+     ],
+     "Ra'am": [
+      0,
+      9
+     ],
+     "Reservists – Economic Party": [
+      0,
+      6
+     ],
+     "Israel First": [
+      0,
+      0
+     ],
+     "Code Black – Shield of the Torah World": [
+      0,
+      0
+     ],
+     "Tzomet Beit Yisrael": [
+      0,
+      0
+     ],
+     "Blue and White": [
+      0,
+      0
+     ],
+     "The Haredi Public": [
+      0,
+      0
+     ],
+     "Noam": [
+      0,
+      0
+     ],
+     "Amcha Yisrael": [
+      0,
+      0
+     ],
+     "Ahi – Back to the Roots": [
+      0,
+      0
+     ]
+    },
+    "blocs": {
+     "nb": 0.145,
+     "anti": 0.092,
+     "antiRaam": 0.292,
+     "neither": 0.563,
+     "nb_mean": 52.8,
+     "nb_p05": 40,
+     "nb_p95": 65
+    },
+    "groups": {
+     "netanyahu": 0.311,
+     "change": 0.297,
+     "unity": 0.148,
+     "repeat": 0.243,
+     "netanyahu_in_office": 0.555
+    },
+    "pm": [
+     [
+      "Netanyahu",
+      0.311
+     ],
+     [
+      "Eisenkot",
+      0.272
+     ],
+     [
+      "none (repeat election)",
+      0.243
+     ],
+     [
+      "Bennett",
+      0.075
+     ],
+     [
+      "Likud successor (unity)",
+      0.074
+     ],
+     [
+      "Liberman",
+      0.015
+     ],
+     [
+      "another leader",
+      0.01
+     ]
+    ],
+    "backtest": {
+     "eve": null,
+     "D-7": null,
+     "D-21": null
+    },
+    "expect_self": {
+     "log": {
+      "mean": -2.0255
+     },
+     "crps": {
+      "mean": 1.4221
+     },
+     "abs_err": {
+      "mean": 1.9775
+     },
+     "coverage": {
+      "mean": 0.9436
+     },
+     "brier": {
+      "mean": 0.0481
+     },
+     "nb_brier": {
+      "mean": 0.124
+     },
+     "nb_log": {
+      "mean": -0.4139
+     },
+     "anti_brier": {
+      "mean": 0.0835
+     },
+     "anti_log": {
+      "mean": -0.3071
+     }
+    }
+   }
+  ],
+  "rules": {
+   "scored_share": 0.01,
+   "floor_draws": 0.5,
+   "floor_p": 0.0005,
+   "interval": 0.9,
+   "rank_by": [
+    "log",
+    "crps"
+   ],
+   "pit": "mid-PIT F(y-1) + p(y)/2",
+   "crps": "sum over seat counts k of (F(k) - 1{k >= y})^2",
+   "threshold_brier": "(P(seats > 0) - passed)^2",
+   "blocs": {
+    "nb": "Netanyahu bloc >= 61",
+    "anti": "change bloc (without Ra'am) >= 61"
+   },
+   "groups": [
+    "netanyahu",
+    "change",
+    "unity",
+    "repeat"
+   ],
+   "record": "per-cycle values of the same scores on the eight-cycle eve record; log score, CRPS and PIT on pmfs rebuilt from the record's summaries (record_pmf)"
+  },
+  "record": {
+   "source": "data/processed/model_validation_bayes_lists.csv, data/processed/model_validation_bayes.csv (validate_bayes eve harness)",
+   "excluded": [],
+   "cycles": {
+    "2009": {
+     "log": -1.8261,
+     "crps": 1.0928,
+     "abs_err": 1.6364,
+     "coverage": 1.0,
+     "brier": 0.0113,
+     "pit_tails": 0.0,
+     "n": 11
+    },
+    "2013": {
+     "log": -2.1255,
+     "crps": 1.1699,
+     "abs_err": 1.5833,
+     "coverage": 0.9167,
+     "brier": 0.0315,
+     "pit_tails": 0.0833,
+     "n": 12
+    },
+    "2015": {
+     "log": -1.935,
+     "crps": 1.1825,
+     "abs_err": 1.4545,
+     "coverage": 1.0,
+     "brier": 0.0407,
+     "pit_tails": 0.0,
+     "n": 11
+    },
+    "2019a": {
+     "log": -2.0273,
+     "crps": 1.4705,
+     "abs_err": 1.8571,
+     "coverage": 0.9286,
+     "brier": 0.1126,
+     "pit_tails": 0.0714,
+     "n": 14
+    },
+    "2019s": {
+     "log": -1.7444,
+     "crps": 0.873,
+     "abs_err": 1.2,
+     "coverage": 1.0,
+     "brier": 0.0137,
+     "pit_tails": 0.0,
+     "n": 10
+    },
+    "2020": {
+     "log": -1.6982,
+     "crps": 0.7191,
+     "abs_err": 1.0,
+     "coverage": 1.0,
+     "brier": 0.0038,
+     "pit_tails": 0.0,
+     "n": 9
+    },
+    "2021": {
+     "log": -2.1552,
+     "crps": 1.4104,
+     "abs_err": 1.8571,
+     "coverage": 1.0,
+     "brier": 0.0883,
+     "pit_tails": 0.0,
+     "n": 14
+    },
+    "2022": {
+     "log": -1.6395,
+     "crps": 0.8696,
+     "abs_err": 0.8462,
+     "coverage": 1.0,
+     "brier": 0.0752,
+     "pit_tails": 0.0,
+     "n": 13
+    }
+   },
+   "pooled": {
+    "log": -1.9093,
+    "crps": 1.1267,
+    "abs_err": 1.4574,
+    "coverage": 0.9787,
+    "brier": 0.0522,
+    "pit_tails": 0.0213,
+    "n": 94
+   },
+   "nb_bloc": {
+    "cycles": {
+     "2009": {
+      "p": 0.863,
+      "o": true,
+      "brier": 0.0188,
+      "log": -0.1473
+     },
+     "2013": {
+      "p": 0.912,
+      "o": true,
+      "brier": 0.0077,
+      "log": -0.0921
+     },
+     "2015": {
+      "p": 0.243,
+      "o": false,
+      "brier": 0.059,
+      "log": -0.2784
+     },
+     "2019a": {
+      "p": 0.169,
+      "o": false,
+      "brier": 0.0286,
+      "log": -0.1851
+     },
+     "2019s": {
+      "p": 0.059,
+      "o": false,
+      "brier": 0.0035,
+      "log": -0.0608
+     },
+     "2020": {
+      "p": 0.344,
+      "o": false,
+      "brier": 0.1183,
+      "log": -0.4216
+     },
+     "2021": {
+      "p": 0.129,
+      "o": false,
+      "brier": 0.0166,
+      "log": -0.1381
+     },
+     "2022": {
+      "p": 0.684,
+      "o": true,
+      "brier": 0.0999,
+      "log": -0.3798
+     }
+    },
+    "pooled": {
+     "brier": 0.0441,
+     "log": -0.2129
+    }
+   },
+   "uniform_group_log": -1.3863
+  },
+  "provenance": {
+   "git_head": "7b4c130467768dc9f769d422f6595cc466447f5b",
+   "inputs_dirty": [],
+   "inputs": {
+    "data/processed/mixture_draws.parquet": "3cb01f24ea21ceebecfc4adfbed6249298a4b144c4d50f782a3dd3633dba1012",
+    "data/processed/official_forecast.csv": "18a019abbd378fd5b015f631f30cfd96e1cf0c4e1c53cfa0c6f177631d951f21",
+    "data/processed/mixture_blocs.csv": "a06b731360574a8a7a8aad3df3fea2527355b46d81b317ab6963821058e67b51",
+    "data/processed/mixture_shares.csv": "17ab40cc14ddfa3341551cc5e88ca532afae865c0ed5f23c7f61327c2b3b2650",
+    "data/processed/government_groups.csv": "6a19236e7126ce84f8a40981325531d94b77a183d6ec0fa8a96ed9f4c2328b6e",
+    "data/processed/pm_probabilities.csv": "c1eb8171a02a0daf1c33392244c271c32a9b8efbbb0da730772007d8bac50fa1",
+    "data/processed/model_variants.json": "7a9905fc139f565998aef22f958bc89d436051a12372237e440541df695f5eeb",
+    "data/processed/model_validation_bayes_lists.csv": "6ee009ab151271f2a11fcc4fd57be3d59b942644a7b556e94b5e46d0340316eb",
+    "data/processed/model_validation_bayes.csv": "3d12d3dd95c6c7055b3731851dc746950adf7e1a4c697da22ccc6fabd1e69881"
+   },
+   "code": "src/scorecard.py --freeze"
+  }
+ }
+}

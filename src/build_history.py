@@ -209,6 +209,8 @@ CURATED = {
                 "סקרי i24, ערוץ 14 ווואלה; השקלול של ערוץ 14 נבחן; התחייבות המילואימניקים חודשה"),
     "daed6f0": ("polls", [], "Channel 14 and Channel 16 polls of 20 Oct; five new filings",
                 "סקרי ערוץ 14 וערוץ 16 מ־20 באוקטובר; חמש הגשות חדשות"),
+    "7b4c130": ("both", [67], "Channel 12 and 13 polls; the filings' undecided-lean and certainty questions enter the model",
+                "סקרי ערוץ 12 ו־13; שאלות נטיית המתלבטים והוודאות מהדיווחים נכנסות למודל"),
 }
 GENERIC = {
     "polls": ("New polls or events and a refit", "סקרים או אירועים חדשים והתאמה מחדש"),
