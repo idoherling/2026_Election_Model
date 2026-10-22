@@ -6990,3 +6990,50 @@ them.
   2022 Netanyahu-bloc voters among the undecided is the mechanism behind
   the trailing-Likud layer (s.63), which is measured on the record and
   stays as it is.
+
+## 68. Final-week momentum, tested on the record (22 Oct, D-5)
+
+**Question.** Does movement in the polls over the final week (or three
+weeks) carry on past the last polls, so the eve forecast should
+extrapolate it?
+
+**Design.** The eight harness cycles (2009-2022), 94 list-cycles. Momentum
+per list = the model's own latent share (house effects removed) at the eve
+fit minus the same at the D-7 fit (m7) or the D-21 fit (m21), from the
+harness posterior caches, in seats. Error = the result minus the shipped
+eve forecast (mean seats, model_validation_bayes_lists, offset 0). Slope
+of error on momentum within cycle; permutation within cycle (5,000);
+leave-one-cycle-out: the slope from seven cycles applied to the eighth
+(pred + b x momentum). A positive slope = momentum continues; negative =
+reversal. Robustness: raw within-firm momentum (each firm's final-7-day
+mean minus its days 8-21 mean, averaged over firms) against the raw
+final-week average and against the model; and the Netanyahu bloc total.
+
+**Results.**
+- Lists, m7: slope -0.10 (r -.02, permutation p .83); per cycle +2.9
+  (2013) to -3.0 (2015), no stable sign. LOO: mean MAE 1.621 -> 1.668;
+  better in no fold, worse in two (2013 +.28, 2019a +.05). Lists of 4+
+  seats: the same (-0.10, p .85; MAE 1.710 -> 1.770).
+- Lists, m21: slope -0.13 (p .56); LOO 1.621 -> 1.662, better in none.
+- Raw polls, within-firm: slope -0.22 against the raw final-week average
+  (r -.08), -0.10 against the model; per-cycle signs flip.
+- Netanyahu bloc, m7: r -.09 with the bloc's eve error.
+- Netanyahu bloc, m21: r -.51, opposite signs in 7 of 8 (the bloc gained
+  over the final three weeks in 2019s and 2021 and fell short, slid in
+  2015 and 2019a and beat the forecast); exact permutation p .20; LOO bloc
+  MAE 2.00 -> 1.57, better in 5, worse in 3 (2013, 2020, 2021).
+
+**Reading.** No momentum: at the list level, final-week movement does not
+continue past the polls, and adding it makes the out-of-sample forecast
+worse. The one pattern is a weak three-week reversal of the bloc total, the
+"coming home" mechanism the trailing-Likud and gevalt layers already carry;
+it is one of five tests run, on eight points, at p .20, so it does not meet
+the bar and is not applied. For 2026 it would barely matter: on the 21 Oct
+posterior the Netanyahu bloc's latent total moved -0.41 seats over three
+weeks (90% -1.18 to +0.37) and -0.08 over the last week, so the full-sample
+reversal slope (-0.62) would add about +0.25 seat. The fall in P(NB >= 61)
+since mid-October came from model changes and Blue and White's withdrawal,
+not from the polls.
+
+**Decision.** No change; the model's random walk (no drift) stands. Site:
+one sentence in the limitations (EN/HE).
