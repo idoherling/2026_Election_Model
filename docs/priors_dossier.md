@@ -7287,3 +7287,16 @@ should hold everything known before the vote, so the record is re-frozen
 on the build with the withdrawal (the earlier sha stays in git and here),
 and the market blend of s.71 is re-run on it with a fresh price snapshot
 and re-frozen.
+
+**Re-frozen (23 Oct 18:24 IDT).** The forecast of record with the
+withdrawal: data/processed/frozen_forecast_2026-10-22.json, sha256
+c6a954065adcf27ac8ed21c2c0829c8aaaa79e667d65b9631fd87d991d00f113 (final;
+11 models, the s.71 "markets" candidate among them; supersedes 2be4785e of
+13:43). P(NB >= 61) 10.6%, change 4.8%, change + Ra'am 23.0%, neither
+66.4%; Netanyahu-bloc mean 53.0 (90% 43-63); government led by Netanyahu
+29.3 / change 25.5 / unity 17.7 / repeat 27.4; central seats unchanged
+(Likud 25, Yashar 22). The market blend on this base, snapshot 15:22 UTC:
+frozen_market_blend_2026-10-22.json, sha256
+058325597ebd05d163d03a01163b57eaae6a56d30194fbe51cc652b67cca7549
+(supersedes 2398a9cb): NB 8.0, change 7.7, change + Ra'am 28.3, Likud 24,
+effective sample 5,780 of 8,000.

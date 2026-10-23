@@ -213,6 +213,8 @@ CURATED = {
                 "סקרי ערוץ 12 ו־13; שאלות נטיית המתלבטים והוודאות מהדיווחים נכנסות למודל"),
     "f424a3f": ("polls", [69], "The final build before the blackout: the forecast of record",
                 "הבנייה האחרונה לפני איסור הפרסום: התחזית הרשמית"),
+    "4e50426": ("model", [71, 72], "Ahi withdraws (endorses Likud); a model + markets option in the explorer",
+                "אח״י פורשת (ממליצה על הליכוד); אפשרות של מודל + שוקי תחזיות בבוחר המודלים"),
 }
 GENERIC = {
     "polls": ("New polls or events and a refit", "סקרים או אירועים חדשים והתאמה מחדש"),
