@@ -7080,3 +7080,116 @@ successor 8.7, Bennett 7.2; central seats Likud 25, Yashar 22, Together
 5; Amcha passes .217, Reservists-Economic .212. Frozen with sha256 by
 scorecard.py --freeze; no forecast numbers are republished during the
 blackout.
+
+## 70. The new-straddler record, corrected (23 Oct, D-4, during the blackout)
+
+### 70.1 What was wrong with the record (diagnostic, run before 70.2)
+
+The shipped constant (mu -1.6, sd 2.6; s.36) comes from
+model_validation_threshold.csv, built on the pre-s.50 fits and never
+re-measured. Asked on 23 Oct why Zehut and Yachad were missing while two
+lists that never ran were in, the record showed five faults:
+1. **Stale fits.** Zehut 2019a (D-21: 10 polls, 3.9 seats) fell outside
+   the band on the old fit; on the current fits it is a straddler
+   (projected 3.40%, won 2.74%).
+2. **The component rule.** A list is "new" only if every component is new,
+   so Yachad-Ha'am Itanu 2015 (Yishai's new list with Otzma's Marzel) was
+   classed established because Otzma had polled in 2013.
+3. **No history before 2009.** The database starts in 2009, so every 2009
+   id looks new: Gil (7 seats in 2006) and the Greens (ran 2003, 2006)
+   entered as new lists.
+4. **Renamed parties.** "rzp" 2021 is National Union-Tkuma under a new name
+   and "raam" ran in every cycle (alone to 2013, then in joint lists); both
+   look new by id, both passed.
+5. **Scoring.** Failed lists at 0% of the vote and non-runners (IDP 2019s
+   merged, the Israelis 2021 withdrew) as total desertion: their voters
+   moved, they did not vanish. The old record's two passes are also gone:
+   Hatnuah 2013 is not a straddler on the current fits (well above the
+   band), and Yamina September 2019 was not a new vehicle (New Right ran in
+   April).
+
+**The corrected record** (validate_threshold, HARNESS_FIDELITY=1,
+THRESHOLD_VEHICLE=1, layer off, current harness caches, D-56/D-21; the
+vehicle test: KNOWN_ESTABLISHED first, then a joint list is new when its
+strongest new component out-polled its established ones on their own;
+CEC vote shares; non-runners out of the drift). Six new lists that ran in
+the band, all failed: Am Shalem 2013 (1.85 -> 1.20), Otzma LeYisrael 2013
+(1.64 -> 1.76), Yachad 2015 (3.56 -> 2.97), Zehut 2019a (3.40 -> 2.74),
+Gesher 2019a (3.42 -> 1.73), New Economic 2021 (2.72 -> 0.79). Pass 0/6
+against a mean p_pass of .45; drift mean -0.900 pp, sd 0.767. Established
+straddlers that ran: n 35, drift +0.46, pass .89 against .63. (The
+threshold harness had raised KeyError('resid_lines') since s.48; it now
+loads the main harness's calibration and lineage inputs.)
+
+### 70.2 Pre-registration (written before any grade of nstrad_fixed)
+
+**Arm `nstrad_fixed`.** The new-straddler layer unchanged in form (band
+[-0.75, +1.5] pp, a zero-sum N(mu, sd) pp draw against the field), with
+the first-cycle test by vehicle (validate_bayes.is_new_list, vehicle=True)
+and mu / sd from the corrected record, leave-one-cycle-out
+(NSTRAD_FIXED_RECORD; folds: without 2013 -1.218 / 0.691, n 4; 2015
+-0.962 / 0.840, n 5; 2019a -0.763 / 0.855, n 4; 2021 -0.693 / 0.643, n 5;
+the others -0.900 / 0.767, n 6; n < 3 turns the layer off). Production:
+NEW_STRADDLER_RECORD "fixed" (mu -0.900, sd 0.767); the 2026 lists it hits
+(Amcha Yisrael, Reservists-Economic) are the same under both tests.
+
+**Grading.** The standing rule (s.53/s.55): eve on seed offsets
+0/100/200 pooled, D-7 and D-21 on offset 0; ships if it wins or ties (|d|
+< 0.1 seat) median MAE in every leave-one-cycle-out fold, with mean MAE,
+threshold Brier and interval score not worse beyond .010 / .0010 / .05 and
+coverage not further from .90, D-7 and D-21 not contradicting.
+
+**What a pass would and would not do.** The forecast of record (s.69,
+frozen 23 Oct 13:43, sha256 2be4785e...) is not changed and no forecast
+number is published during the blackout. A pass makes "fixed" the default
+for the post-election scoring, where the corrected model is graded as a
+post-freeze model beside the frozen one; a fail keeps the shipped constant
+and this record as the documented correction.
+
+### 70.3 Result: does not pass
+
+70.2 was hashed before any grade (sha256 e344fe3f86261c2ef3ad8fff25161a455f497176c50374bcf1c26572ef73cbff).
+One correction to it, made before reading any horizon fold: it says "D-7
+and D-21 on offset 0", copied from older text; the standing rule since
+s.55 pools the horizons over offsets 0/100/200, and that stricter version
+is what was applied.
+
+**Eve, three seeds pooled:** median MAE 1.4858 -> 1.4481 (-.038), every
+fold a win or tie (2021 -.357; 2013 +.056, inside the tie band); mean MAE
+1.6253 -> 1.5921 (-.033, better in every seed); threshold Brier .0447 ->
+.0414; interval score 9.011 -> 8.899; coverage .972 both. Passes.
+
+**D-7, three seeds pooled:** mean MAE -.034, Brier .0465 -> .0435,
+interval 9.389 -> 9.053; per-fold medians 2019a +.238 (a loss), 2015
++.091 (tie); coverage .960 -> .971, further from .90 (2009 and 2021 each
+gain a covered list). Fails on the 2019a fold and on coverage.
+
+**D-21, three seeds pooled:** mean MAE -.027, Brier .0519 -> .0485,
+interval 9.599 -> 9.545, coverage .968 both; per-fold medians 2015 +.121
+(a loss). Fails on the 2015 fold.
+
+**Not shipped.** NEW_STRADDLER_RECORD stays "seat" (mu -1.6, sd 2.6) and
+the forecast of record is untouched. What the grade establishes: the
+corrected record improves the pooled accuracy and scoring measures at
+every horizon and wins the eve folds, but moves single folds three and
+seven days out the wrong way; under the rule as registered that is a
+fail. The arm is not offered in the model explorer (an arm that fails on
+the record is not offered, s.65).
+
+**2026 effect (information only, not published during the blackout):** on
+the 22 Oct posterior through the full chain, corrected vs shipped: Amcha
+Yisrael passes .160 vs .217, Reservists-Economic .145 vs .212; P(NB >=
+61) 9.5 both; change 5.9 vs 5.3, change + Ra'am 27.5 vs 24.7; government
+led by Netanyahu 27.5 vs 28.2, change 28.3 vs 26.9. The correction makes
+both lists weaker, not stronger: the shipped sd (2.6), inflated by failed
+lists scored at 0% and by the non-runners, gives them an upside tail the
+corrected record (sd 0.77, 0 of 6 passed) does not support.
+
+**Kept in the code** (flag-gated, defaults unchanged): the vehicle test
+and KNOWN_ESTABLISHED (validate_bayes.is_new_list), NSTRAD_FIXED_RECORD,
+NEW_STRADDLER_FIXED / NEW_STRADDLER_VEHICLE, the arm nstrad_fixed, and the
+threshold harness's missing calibration inputs (a bug fix). For the
+post-election review: grade nstrad_fixed on the 2026 outcome beside the
+shipped layer, and revisit the per-fold and coverage tests (four
+candidates have now failed only on single horizon folds or coverage while
+improving the pooled scores).

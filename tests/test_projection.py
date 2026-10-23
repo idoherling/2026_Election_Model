@@ -93,3 +93,23 @@ def test_drop_operation_weights_and_centre_shift():
     shift = bm.house_centre_shift(post, data, np.array([0]), w)
     # list 0: mean over Midgam, Kantar = -.05; list 1: Kantar never polls it -> Midgam only
     assert np.allclose(shift, [[-.05, -.01]])
+
+
+def test_new_list_vehicle_rule():
+    """s.70: the first-cycle test by vehicle. Shipped (vehicle=False) needs
+    every component new; the vehicle test applies KNOWN_ESTABLISHED, then
+    a joint list counts as new when its strongest new component out-polled
+    its established ones on their own."""
+    import validate_bayes as vb
+    p15 = {"cycle": "2015", "new_lists": {"yachad_yishai"},
+           "solo_seats": {"yachad_yishai": 1.55, "otzma": 0.19}}
+    assert not vb.is_new_list({"otzma", "yachad_yishai"}, p15)            # shipped rule
+    assert vb.is_new_list({"otzma", "yachad_yishai"}, p15, vehicle=True)  # Yachad is new
+    weak = dict(p15, solo_seats={"yachad_yishai": 0.1, "otzma": 0.19})
+    assert not vb.is_new_list({"otzma", "yachad_yishai"}, weak, vehicle=True)
+    p09 = {"cycle": "2009", "new_lists": {"gil", "greens"}}
+    assert vb.is_new_list({"gil"}, p09) and not vb.is_new_list({"gil"}, p09, vehicle=True)
+    p21 = {"cycle": "2021", "new_lists": {"rzp", "raam", "nep"}}
+    assert not vb.is_new_list({"raam"}, p21, vehicle=True)
+    assert vb.is_new_list({"nep"}, p21, vehicle=True)
+    assert vb.new_straddler_params(record="fixed")["n"] == 6

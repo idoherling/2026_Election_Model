@@ -23,7 +23,9 @@ from validate_bayes import (ORDER, ELECTION_DAY, CYCLE_THRESHOLD, PAST_PAIRS,
                             VAL_BLOC_OVERRIDES, apply_decomp, decompose,
                             project_cycle, trailing_likud_params, SEED,
                             new_lists_for_cycle, new_straddler_params,
-                            harness_frame, harness_prepare)
+                            harness_frame, harness_prepare,
+                            add_threshold_params, is_new_list,
+                            add_calibration_params)
 from validate_horizon import CACHE, calendar_weeks
 from scrape_polls import PROCESSED_DIR
 from simulate import THRESHOLD
@@ -70,6 +72,12 @@ def main(layers: dict | None = None) -> pd.DataFrame:
         params["arab_tab"] = _vb.arab_turnout_params(cycle)
         params["registered_pairs"] = _vb.REGISTERED_PAIRS[cycle]   # dossier s.47
         params["cycle"] = cycle
+        # the main harness's inputs since s.48/s.51/s.54 (resid_lines and the
+        # lineage shares); without them project_cycle raised KeyError here
+        params["arab_lineage"] = bm.arab_lineage_share(exclude_cycle=cycle)
+        params["haredi_lineage"] = bm.haredi_lineage_share(exclude_cycle=cycle)
+        add_calibration_params(params, cycle)               # s.48
+        add_threshold_params(params, cycle)                 # s.57 / s.70
         if _vb.FIDELITY:
             params["pair_alias"] = _vb._decomp_map(cycle)
         for h in HORIZONS:
@@ -106,7 +114,8 @@ def main(layers: dict | None = None) -> pd.DataFrame:
                 if (proj - thr * 100) < BAND_LO or (proj - thr * 100) > BAND_HI:
                     continue
                 rows.append({"cycle": cycle, "horizon": h, "list": comp,
-                             "new": bool(set(comp.split("+")) <= params["new_lists"]),
+                             "new": is_new_list(set(comp.split("+")), params,
+                                                vehicle=_os.environ.get("THRESHOLD_VEHICLE") == "1"),
                              "threshold": thr * 100, "proj_share": proj,
                              "p_pass": float(pp[i]), "actual_share": actual_share[i],
                              "passed": bool(act_seats[i] > 0) if _vb.FIDELITY

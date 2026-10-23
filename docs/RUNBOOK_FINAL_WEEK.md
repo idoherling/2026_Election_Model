@@ -82,3 +82,8 @@ three seeds and is written into the decision log first.
   changes (three candidates, s.57, s.60 and s.61, failed only the per-fold
   median test), and grade the judgment layers (event risk s.58, the
   formation gates s.59) on the outcome.
+- Grade the corrected new-straddler record (s.70, arm nstrad_fixed: Yachad
+  2015 and Zehut 2019a in, 2009 and renamed parties out, vote shares,
+  non-runners out; failed only on single horizon folds and D-7 coverage)
+  on the Amcha Yisrael and Reservists-Economic results beside the shipped
+  layer, and decide whether it replaces the seat-implied constant.

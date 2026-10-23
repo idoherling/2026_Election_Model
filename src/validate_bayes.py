@@ -177,6 +177,9 @@ ABLATIONS = [
     # registered arm; nstrad_ran_B = the pair
     ("nstrad_ran", {"nstrad_record": "ran"}),
     ("nstrad_ran_B", {"nstrad_record": "ran", "resid_space": "vote"}),
+    # the corrected straddler record (2026-10-23, dossier s.70; pre-registered
+    # there): vehicle classification, current fits, vote shares, non-runners out
+    ("nstrad_fixed", {"nstrad_record": "fixed", "nstrad_vehicle": True}),
     # hybrid residual for small lists (2026-10-17, dossier s.60; pre-
     # registered there): base0 x 120 <= 8 on the vote-share line
     ("resid_hybrid", {"resid_space": "hybrid"}),
@@ -692,6 +695,8 @@ ALL_LAYERS = {"resid": True, "swing": True, "family": True, "anchors": False,
               # "ran" = CEC vote shares of the first-cycle straddlers that
               # ran (NSTRAD_RAN_RECORD), LOO (bm.NEW_STRADDLER_RECORD)
               "nstrad_record": bm.NEW_STRADDLER_RECORD,
+              # s.70: first-cycle test by vehicle (False = every component new)
+              "nstrad_vehicle": bm.NEW_STRADDLER_VEHICLE,
               # error-stack stacking (dossier s.62): None = shipped; {arm:
               # weight} (arms of bm.ERROR_STACK_ARMS) draws each simulation's
               # variant (resid_space x t_unit, LOO lines) by the weights from
@@ -771,6 +776,52 @@ def new_lists_for_cycle(polls: pd.DataFrame, cycle: str) -> set:
     return {c for c in now if c not in seen}
 
 
+_SOLO_CACHE: dict = {}
+
+
+def solo_seats_for_cycle(cycle: str) -> dict:
+    """Mean polled seats of each component polled ALONE in this cycle (raw
+    party ids, before DECOMP): the vehicle test of is_new_list (s.70)."""
+    cycle = str(cycle)
+    if cycle not in _SOLO_CACHE:
+        p = pd.read_csv(PROCESSED_DIR / "polls.csv")
+        p = p[(p["cycle"].astype(str) == cycle) & ~p["party_id"].str.contains("+", regex=False)]
+        _SOLO_CACHE[cycle] = p.groupby("party_id")["seats"].mean().to_dict()
+    return _SOLO_CACHE[cycle]
+
+
+# Party histories the component ids cannot see (dossier s.70), used by the
+# vehicle test only. 2009 is the database's first cycle, so every 2009 id
+# looks new: its band lists Gil (7 seats in 2006) and the Greens (ran 2003,
+# 2006) are established parties, and no 2009 list is classified. 2021: "rzp"
+# is National Union-Tkuma under a new name (URWP 2019a, Yamina 2019s/2020)
+# and "raam" ran in every cycle (alone to 2013, then in joint lists).
+KNOWN_ESTABLISHED = {"2009": "all", "2021": {"rzp", "raam"}}
+
+
+def is_new_list(parts, params: dict, vehicle: bool = False) -> bool:
+    """First-cycle test for a list (its set of component ids). Shipped: every
+    component is new. vehicle (dossier s.70): KNOWN_ESTABLISHED applied
+    first; then a joint list of new and established components is new when
+    its strongest new component polled higher on its own in this cycle than
+    its strongest established one (Yachad 2015: Yishai's list 1.55 seats
+    alone, Otzma 0.19)."""
+    new = params.get("new_lists", set())
+    parts = set(parts)
+    if vehicle:
+        known = KNOWN_ESTABLISHED.get(str(params.get("cycle")), set())
+        if known == "all":
+            return False
+        new = new - set(known)
+    if parts <= new:
+        return True
+    if not vehicle or not (parts & new):
+        return False
+    solo = params.get("solo_seats", {})
+    return (max(solo.get(c, 0.0) for c in parts & new)
+            > max(solo.get(c, 0.0) for c in parts - new))
+
+
 # Candidate nstrad_ran (2026-10-17, dossier s.57): the first-cycle
 # straddler record on CEC VOTE SHARES. validate_threshold.py with
 # HARNESS_FIDELITY=1 and the layer OFF (an explicit layer-off base), on the
@@ -792,13 +843,27 @@ NSTRAD_RAN_RECORD = [
 ]
 
 
+# Corrected straddler record (2026-10-23, dossier s.70): validate_threshold
+# under HARNESS_FIDELITY=1 with THRESHOLD_VEHICLE=1 and the layer OFF, on the
+# current (s.50) harness caches, D-56/D-21; rows new (vehicle test) & ran.
+# (cycle, horizon, list, projected %, CEC %, drift pp)
+NSTRAD_FIXED_RECORD = [
+    ("2013", 21, "am_shalem", 1.846, 1.20, -0.646),
+    ("2013", 21, "otzma", 1.642, 1.76, 0.118),
+    ("2015", 21, "otzma+yachad_yishai", 3.558, 2.97, -0.588),
+    ("2019a", 21, "zehut", 3.405, 2.74, -0.665),
+    ("2019a", 56, "gesher", 3.415, 1.73, -1.685),
+    ("2021", 56, "nep", 2.724, 0.79, -1.934),
+]
+
 def new_straddler_params(exclude_cycle: str | None = None, record: str = "seat") -> dict:
     """LOO mean/sd of the realised drift (result - projected share, pp) of
     FIRST-CYCLE lists projected within NSTRAD_BAND at D-56/D-21, from
     model_validation_threshold.csv (validate_threshold.py; record "seat",
     shipped) or from NSTRAD_RAN_RECORD (record "ran", dossier s.57)."""
-    if record == "ran":
-        x = np.array([r[5] for r in NSTRAD_RAN_RECORD if r[0] != str(exclude_cycle)])
+    if record in ("ran", "fixed"):
+        rec = NSTRAD_RAN_RECORD if record == "ran" else NSTRAD_FIXED_RECORD
+        x = np.array([r[5] for r in rec if r[0] != str(exclude_cycle)])
         if len(x) < 3:
             return {"mu": 0.0, "sd": 0.0, "n": int(len(x))}
         return {"mu": float(x.mean()), "sd": float(x.std(ddof=1)), "n": int(len(x))}
@@ -901,8 +966,12 @@ def add_calibration_params(params: dict, cycle: str) -> dict:
 
 def add_threshold_params(params: dict, cycle: str) -> dict:
     """Leave-one-cycle-out inputs of the s.57 near-threshold candidates: the
-    new-straddler drift on the CEC-vote-share record (layer nstrad_record)."""
+    new-straddler drift on the CEC-vote-share record (layer nstrad_record),
+    and (s.70) the corrected record plus the solo-polling table of the
+    vehicle test."""
     params["nstrad_ran"] = new_straddler_params(exclude_cycle=cycle, record="ran")
+    params["nstrad_fixed"] = new_straddler_params(exclude_cycle=cycle, record="fixed")
+    params["solo_seats"] = solo_seats_for_cycle(cycle)
     return params
 
 
@@ -1163,12 +1232,13 @@ def project_cycle(data, idata, eday, threshold, pairs, params,
     # whose projected share sits in the threshold band get the LOO-measured
     # mean drift (negative) with its sd, zero-sum against the field.
     # s.57: nstrad_record "ran" reads the CEC-vote-share record's LOO drift
-    ns = params.get("nstrad_ran" if L["nstrad_record"] == "ran" else "nstrad", {})
-    if L["nstrad_record"] == "ran" and "nstrad_ran" not in params:
-        raise KeyError("layer nstrad_record 'ran' needs params['nstrad_ran'] (add_threshold_params)")
+    key = {"ran": "nstrad_ran", "fixed": "nstrad_fixed"}.get(L["nstrad_record"], "nstrad")
+    ns = params.get(key, {})
+    if key != "nstrad" and key not in params:
+        raise KeyError(f"layer nstrad_record {L['nstrad_record']!r} needs params[{key!r}] (add_threshold_params)")
     if L["new_straddler"] and ns.get("n", 0) >= 3 and "new_lists" in params:
         for i, cp in enumerate(comps):
-            if not (cp <= params["new_lists"]):
+            if not is_new_list(cp, params, L["nstrad_vehicle"]):   # s.70
                 continue
             rel = base[i] * 100 - threshold * 100
             if NSTRAD_BAND[0] <= rel <= NSTRAD_BAND[1]:

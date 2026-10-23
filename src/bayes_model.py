@@ -780,6 +780,13 @@ NEW_STRADDLER = {"mu": -1.6, "sd": 2.6, "band": (-0.75, 1.5)}   # pp of the vote
 # Mirrored in validate_bayes (layer nstrad_record). "seat" = shipped.
 NEW_STRADDLER_RECORD = "seat"     # "seat" (shipped) | "ran"
 NEW_STRADDLER_RAN = {"mu": -0.617, "sd": 1.314, "band": (-0.75, 1.5)}
+# Candidate nstrad_fixed (2026-10-23, dossier s.70): the corrected record -
+# vehicle classification (Yachad 2015 new), the current harness fits (Zehut
+# 2019a in), CEC vote shares, non-runners out. NEW_STRADDLER_VEHICLE is the
+# harness's first-cycle test; production's 2026 list (NEW_LIST_IDS) is the
+# same under both tests.
+NEW_STRADDLER_FIXED = {"mu": -0.900, "sd": 0.767, "band": (-0.75, 1.5)}   # n 6, all failed
+NEW_STRADDLER_VEHICLE = False
 # Candidate "amcha_double_count" (2026-10-10, dossier s.41). EVIDENCE class,
 # not harness-validated: neither the fade nor the certainty layer exists in
 # validate_bayes.project_cycle, so NEW_STRADDLER was measured on a base free
@@ -2074,7 +2081,8 @@ def project(data, idata, rng, config="current", config_params=None):
     # projected share sits in the threshold band.
     if NEW_STRADDLER_ON:
         in_band = _new_straddler_mask(comps, base)
-        ns = NEW_STRADDLER_RAN if NEW_STRADDLER_RECORD == "ran" else NEW_STRADDLER   # s.57
+        ns = {"ran": NEW_STRADDLER_RAN, "fixed": NEW_STRADDLER_FIXED}.get(
+            NEW_STRADDLER_RECORD, NEW_STRADDLER)   # s.57 / s.70
         hit = []
         for i, cp in enumerate(comps):
             if in_band[i]:
