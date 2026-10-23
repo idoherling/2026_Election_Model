@@ -309,6 +309,40 @@ VARIANTS: list[Variant] = [
                       "rows"),
     ),
     Variant(
+        id="markets",
+        name_en="Model + prediction markets", name_he="המודל + שוקי תחזיות",
+        flags={"market_blend": {"ENABLED": True}},
+        sections=(71,), status="candidate",
+        desc_en=("The official model reweighted toward the prices of the Polymarket seat markets: the "
+                 "seat counts of Likud, Yashar, Together, Shas, Otzma and Yisrael Beytenu, the threshold "
+                 "fate of Religious Zionism, Reservists-Economic and Ra'am, the largest list and two bloc "
+                 "questions (<a href=\"https://polymarket.com/event/israel-election-likud-of-seats\" "
+                 "rel=\"noopener\">Likud seats</a>, <a href=\"https://polymarket.com/event/"
+                 "israeli-legislative-election-winner\" rel=\"noopener\">largest list</a>; prices of 23 "
+                 "October, 15:22 UTC). For each question the target is a blend of model and market, with "
+                 "half weight on markets that traded over $250,000, a quarter on those over $20,000 and "
+                 "0.15 on thinner ones; the model's simulated elections are reweighted as little as the "
+                 "targets require, so every simulation stays a full 120-seat result. Israeli seat markets "
+                 "did not trade in earlier elections, so this cannot be backtested; it is frozen beside "
+                 "the official forecast and graded with it after the result (" + _dl(71) + ")."),
+        desc_he=("המודל הרשמי, משוקלל מחדש לעבר המחירים של שוקי המנדטים ב־Polymarket: מספר המנדטים של "
+                 "הליכוד, ישר, ביחד, ש״ס, עוצמה יהודית וישראל ביתנו, מעבר אחוז החסימה של הציונות הדתית, "
+                 "המילואימניקים והכלכלית ורע״מ, הרשימה הגדולה ושתי שאלות גושים ("
+                 "<a href=\"https://polymarket.com/event/israel-election-likud-of-seats\" rel=\"noopener\">"
+                 "מנדטי הליכוד</a>, <a href=\"https://polymarket.com/event/israeli-legislative-election-winner\" "
+                 "rel=\"noopener\">הרשימה הגדולה</a>; מחירי 23 באוקטובר, " + _n("15:22") + " UTC). לכל שאלה "
+                 "היעד הוא שקלול של המודל והשוק: משקל חצי לשווקים שנסחרו בהם יותר מ־" + _n("$250,000")
+                 + ", רבע לאלה שמעל " + _n("$20,000") + " ו־" + _n("0.15") + " לדלילים יותר; הבחירות "
+                 "המדומות של המודל משוקללות מחדש במידה המינימלית שהיעדים דורשים, כך שכל סימולציה נשארת "
+                 "תוצאה מלאה של 120 מנדטים. שוקי מנדטים בישראל לא נסחרו במערכות הבחירות הקודמות, ולכן "
+                 "אי אפשר לבחון זאת על נתוני העבר; התחזית הוקפאה לצד התחזית הרשמית ותיבחן יחד איתה אחרי "
+                 "התוצאה (" + _dl(71, True) + ")."),
+        verdict_en="Not graded: no earlier Israeli seat markets to test it on; frozen beside the official forecast.",
+        verdict_he="לא נבחן: אין שוקי מנדטים ישראליים מוקדמים לבחון עליהם; הוקפא לצד התחזית הרשמית.",
+        backtest={"eve": None, "D-7": None, "D-21": None},
+        backtest_src="none: no seat-count markets traded in the earlier cycles (dossier s.71)",
+    ),
+    Variant(
         id="old_residual",
         name_en="Old residual line", name_he="קו השיורי הישן",
         flags={"bayes_model": {"RESID_SPACE": "seat"}},

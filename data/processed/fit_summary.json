@@ -31,7 +31,7 @@
  "holdout_median_err_alr": 0.61,
  "holdout_median_err_simple": 0.5,
  "trail_on": true,
- "trail_margin_seats": -0.06,
+ "trail_margin_seats": 0.39,
  "trail_source": "satellites",
  "trail_weight": null,
  "new_straddlers": [

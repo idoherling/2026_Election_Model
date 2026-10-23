@@ -1,18 +1,18 @@
 list,p_pass,p_in_government,p_outside_support,p_in_given_pass
-Likud,1.0,0.456,0.0,0.456
-Bennett 2026 + Yesh Atid,0.999,0.443,0.0,0.444
-Yashar,1.0,0.443,0.0,0.443
-The Democrats,0.994,0.442,0.0,0.445
-Yisrael Beytenu,0.978,0.419,0.0,0.428
-United Torah Judaism,0.998,0.332,0.0,0.333
-Shas,0.996,0.324,0.0,0.325
-Otzma Yehudit,0.823,0.257,0.0,0.313
-Religious Zionist Party,0.66,0.225,0.0,0.342
-Ra'am,0.828,0.08,0.027,0.097
-Reservists – Economic Party,0.212,0.068,0.0,0.32
-Amcha Yisrael,0.217,0.061,0.0,0.281
+Likud,1.0,0.471,0.0,0.471
+Bennett 2026 + Yesh Atid,0.999,0.432,0.0,0.433
+Yashar,1.0,0.432,0.0,0.432
+The Democrats,0.994,0.431,0.0,0.434
+Yisrael Beytenu,0.978,0.408,0.0,0.417
+United Torah Judaism,0.998,0.344,0.0,0.344
+Shas,0.997,0.336,0.0,0.337
+Otzma Yehudit,0.824,0.268,0.0,0.325
+Religious Zionist Party,0.66,0.234,0.0,0.355
+Ra'am,0.829,0.075,0.026,0.091
+Reservists – Economic Party,0.213,0.067,0.0,0.315
+Amcha Yisrael,0.217,0.063,0.0,0.289
 Noam,0.004,0.002,0.0,0.436
-Ahi – Back to the Roots,0.002,0.0,0.0,0.0
+Ahi – Back to the Roots,0.0,0.0,0.0,
 Balad (alone),0.0,0.0,0.0,
 Tzomet Beit Yisrael,0.001,0.0,0.0,0.0
 Code Black – Shield of the Torah World,0.002,0.0,0.0,0.0
@@ -20,6 +20,6 @@ Blue and White,0.0,0.0,0.0,
 The Haredi Public,0.003,0.0,0.0,0.0
 Israel First,0.001,0.0,0.0,0.0
 Unity,0.0,0.0,0.0,
-Balad + Hadash-Ta'al,0.997,0.0,0.039,0.0
+Balad + Hadash-Ta'al,0.997,0.0,0.037,0.0
 Zehut,0.0,0.0,0.0,
-(a change-bloc list joining Netanyahu),,0.199,0.0,
+(a change-bloc list joining Netanyahu),,0.201,0.0,

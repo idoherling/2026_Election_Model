@@ -7259,3 +7259,31 @@ record after the result. In the code: pipeline.py --markets (off by
 default) runs market_blend.py --apply after registration_scenarios, and
 build_variants applies the same blend to every explorer model when
 MARKET_BLEND=1. Publishing it during the blackout is the owner's call.
+
+## 72. Ahi withdraws (23 Oct, D-4)
+
+Ahi (Rabbi Haim Yosef David Abergel's movement, letters צבי) announced on
+23 Oct that it will not run, after Likud agreed to appoint its
+representative a deputy minister in the PM's office; Abergel told his
+followers to vote Likud (INN 709199; Israel Hayom 21693463; Kore 223826;
+Ynet, i24 and HM News the same day). Netanyahu is pressing Amcha Yisrael
+and the Haredi Public to do the same; both refuse so far.
+
+**Model.** registration_scenarios: FOLD_TRANSFER["ahi"] = Likud .60, Shas
+.15 (the rest stay home) and RESOLVED["ahi_folds"] = True. No poll
+measured Ahi's voters; the vector follows the endorsement, with the Shas
+share for the movement's Sephardi-traditional orbit and a quarter staying
+home (an absorbed list keeps ~75-100% of its voters on the heirs in the
+2021->2022 Kolot Nodedim matrix, s.24) - a stated judgment, as s.64.
+
+**Effect** (22 Oct posterior, full chain): Ahi's modelled share 0.56%;
+P(NB >= 61) 9.5 -> 10.6, change 5.3 -> 4.8, change + Ra'am 24.7 -> 23.0;
+Netanyahu-bloc mean 52.6 -> 53.0; Likud mean 25.0 -> 25.4 (central 25);
+government led by Netanyahu 28.2 -> 29.3.
+
+**The record.** The withdrawal came after the 13:43 freeze of s.69 (sha256
+2be4785e...), which therefore did not contain it. A forecast of record
+should hold everything known before the vote, so the record is re-frozen
+on the build with the withdrawal (the earlier sha stays in git and here),
+and the market blend of s.71 is re-run on it with a fresh price snapshot
+and re-frozen.

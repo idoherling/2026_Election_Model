@@ -40,6 +40,9 @@ import pandas as pd
 from scrape_polls import PROCESSED_DIR
 
 RAW_DIR = PROCESSED_DIR.parent / "raw" / "markets"
+# Set by the model explorer's "markets" variant (model_variants.py) so the
+# blend applies to that model only; the pipeline's --markets applies it to all.
+ENABLED = False
 GAMMA = "https://gamma-api.polymarket.com/events?slug={}"
 SEED = 20261027
 # Linear-pool weight on the market, by the event's total traded volume (USD).

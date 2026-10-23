@@ -159,6 +159,13 @@ FOLD_TRANSFER = {
                    ("zionist_home", 0.25), ("likud", 0.15)],
     "unity": [("likud", 0.45), ("yashar", 0.25), ("yisrael_beytenu", 0.10),
               ("bennett_2026", 0.10)],
+    # 2026-10-23 (dossier s.72): Ahi withdrew four days out after a deal with
+    # Likud (a deputy minister in the PM's office); Rabbi Abergel told his
+    # followers to vote Likud (INN 709199, Israel Hayom 21693463, Kore
+    # 223826). No poll measured its voters: the endorsement routes .60 to
+    # Likud, .15 to Shas (the movement's Sephardi-traditional orbit), the
+    # rest stay home - a stated judgment, as s.64.
+    "ahi": [("likud", 0.60), ("shas", 0.15)],
 }
 # Blue and White's measured 2021->2022 absorbed-list pattern (National
 # Unity 70 / Yesh Atid 30 -> Yashar .60 / Together .25, rest abstain): the
@@ -235,6 +242,8 @@ PRIORS["blue_white_folds"] = 0.25
 # 383958100). Its voters route by the list's measured 2022 vector (Yashar
 # .60 / Together .25, rest abstain): no endorsement, so the vector stands.
 RESOLVED["blue_white_folds"] = True
+# 2026-10-23: Ahi withdrew (see FOLD_TRANSFER["ahi"]; dossier s.72).
+RESOLVED["ahi_folds"] = True
 
 
 def _col(comps, component):

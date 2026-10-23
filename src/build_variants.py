@@ -203,8 +203,8 @@ def run_bayes(flags: dict, work: Path, M: int, log) -> dict:
     with variant_flags(flags), chain_output(work):
         with contextlib.redirect_stdout(buf):
             rs.main()
-            if _os.environ.get("MARKET_BLEND") == "1":   # dossier s.71: as the pipeline's --markets
-                import market_blend
+            import market_blend   # dossier s.71: the explorer's "markets" model, or --markets for all
+            if market_blend.ENABLED or _os.environ.get("MARKET_BLEND") == "1":
                 market_blend.apply(work)
             of.main()
             draws = gf.load_draws()
