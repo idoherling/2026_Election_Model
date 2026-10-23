@@ -215,6 +215,8 @@ CURATED = {
                 "הבנייה האחרונה לפני איסור הפרסום: התחזית הרשמית"),
     "4e50426": ("model", [71, 72], "Ahi withdraws (endorses Likud); a model + markets option in the explorer",
                 "אח״י פורשת (ממליצה על הליכוד); אפשרות של מודל + שוקי תחזיות בבוחר המודלים"),
+    "66f3010": ("polls", [73], "The channels' final Friday-evening polls: the forecast of record",
+                "הסקרים האחרונים של הערוצים ביום שישי בערב: התחזית הרשמית"),
 }
 GENERIC = {
     "polls": ("New polls or events and a refit", "סקרים או אירועים חדשים והתאמה מחדש"),
