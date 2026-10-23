@@ -436,6 +436,9 @@ def main() -> None:
     # events (RZP-Zehut pass/fail, centre folds) flow into coalition math.
     pd.DataFrame(seats, columns=labels).to_parquet(
         PROCESSED_DIR / "mixture_draws.parquet")
+    # the share draws behind those seats, row-aligned (market blend, s.71)
+    pd.DataFrame(project.last_share_draws, columns=project.last_labels).to_parquet(
+        PROCESSED_DIR / "mixture_share_draws.parquet")
 
     summary = pd.DataFrame([{
         "p_nb_61": round(float((nb >= 61).mean()), 3),

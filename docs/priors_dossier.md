@@ -7193,3 +7193,69 @@ post-election review: grade nstrad_fixed on the 2026 outcome beside the
 shipped layer, and revisit the per-fold and coverage tests (four
 candidates have now failed only on single horizon folds or coverage while
 improving the pooled scores).
+
+## 71. Prediction markets blended into the forecast (23 Oct, D-4, owner request)
+
+**Request.** The owner asked to incorporate the Polymarket / Kalshi seat
+markets into the forecast.
+
+**Markets (snapshot 2026-10-23 15:07 UTC, public APIs).** Polymarket trades
+the seat counts of Likud ($993k traded), Yashar ($24k), Together ($21k),
+Shas ($11k), Otzma ($12k) and Yisrael Beytenu ($10k); the vote share
+(read as threshold fate) of Reservists-Economic ($12k), RZP-Zehut ($11k)
+and Ra'am ($8k); the largest list ($1.7M); which bloc wins more seats
+($22k); and whether either bloc reaches 61 ($24k). The bloc questions use
+the model's definitions (Amcha with the Netanyahu bloc; the opposition is
+the four Zionist lists). Kalshi lists the same questions with a few hundred
+dollars of volume (Likud above 24: 282 contracts) and is left out. The
+next-PM market ($51.7M) resolves to whoever is eventually sworn in, also
+after a repeat election, and the hung-parliament market prices formation
+behaviour; both are compared, not fitted.
+
+**Where they disagree with the model.** Likud under 25 seats: market 70%,
+model 46%. Largest list: Yashar 69%, model 30%. Passing: RZP 96% vs 66%,
+Reservists-Economic 54% vs 21%, Otzma 97% vs 82%, Ra'am 93% vs 83%. The
+Netanyahu bloc out-seating the four Zionist lists: 40.5% vs 54%. Either
+bloc to 61: 17.5% vs 14.7%. The pattern - a weaker Likud, stronger
+satellites and threshold lists - is where the model's own layers push the
+other way (the trailing-Likud transfer from the satellites, s.63; the
+new-straddler and certainty layers, s.70).
+
+**Method (market_blend.py).** For each fitted question the target is the
+linear pool w x market + (1 - w) x model. The weights on the 8,000 joint
+mixture draws are the minimum-relative-entropy solution matching every
+target (damped iterative proportional fitting); the draws, with their
+share vectors, are then resampled to equal weight, so every simulation
+stays a coherent 120-seat outcome and the official count (median shares
+through the seat law), the bloc odds and the formation tree read them as
+they read the model's. Prices: bid/ask midpoint when the spread is at most
+10 cents, else the last trade, normalised within each question. w by
+traded volume: 0.50 above $250k (Likud seats, the largest list), 0.25
+above $20k (Yashar and Together seats, the two bloc questions), 0.15 below.
+Every target is met exactly; effective sample 5,915 of 8,000.
+
+**Judgment, not a graded layer.** No Israeli seat-count market traded in
+the earlier cycles, so the harness cannot grade the blend or its weights;
+the weights are a stated judgment (equal weight for liquid markets is the
+common default in the forecast-combination literature; thin markets are
+discounted for noise and the favourite-longshot bias).
+
+**Result (22 Oct posterior, full chain).** P(NB >= 61) 9.5 -> 7.7; change
+5.3 -> 7.8; change + Ra'am 24.7 -> 28.3; neither 65.8 -> 63.9;
+Netanyahu-bloc seats mean 52.6 -> 51.7 (90% 41-62); central seats Likud 25
+-> 24, Together 13 -> 14, the rest unchanged; passing RZP .66 -> .70,
+Reservists-Economic .21 -> .27, Otzma .82 -> .84, Amcha .22. Formation (the
+same scratch run for both): government led by Netanyahu 26.2 -> 24.4,
+change 27.3 -> 30.4, unity 20.0 -> 19.2, repeat 26.6 -> 25.9; next PM
+Eisenkot 27.2 -> 29.3, Netanyahu 26.2 -> 24.4. Conditional on a
+government in this Knesset the blend has Eisenkot ~40 / Netanyahu ~33 /
+Bennett ~11, the PM market 49 / 29 / 15.5.
+
+**Status.** The forecast of record (s.69, sha256 2be4785e...) is not
+changed. The blend is frozen separately as
+data/processed/frozen_market_blend_2026-10-22.json (sha256 2398a9cb...,
+23 Oct 18:10 IDT), carrying every price it used, and is graded beside the
+record after the result. In the code: pipeline.py --markets (off by
+default) runs market_blend.py --apply after registration_scenarios, and
+build_variants applies the same blend to every explorer model when
+MARKET_BLEND=1. Publishing it during the blackout is the owner's call.

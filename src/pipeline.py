@@ -80,6 +80,7 @@ OUTPUTS = {
                              PROCESSED / "government_membership.csv", PROCESSED / "government_by_nb.csv",
                              PROCESSED / "pm_probabilities.csv", PROCESSED / "government_deadlock.csv"],
     "official_forecast": [PROCESSED / "official_forecast.csv"],
+    "market_blend": [PROCESSED / "market_blend.json"],
     "kalpi_model": [PROCESSED / "kalpi_sectors.csv", PROCESSED / "kalpi_poststrat_2026.csv"],
     "build_sources": [DATA / "forecast_sources.json", DATA / "forecast_findings.json"],
     "build_decision_log": [SITE / "decision-log.html"],
@@ -344,6 +345,9 @@ def main(argv=None) -> int:
     ap.add_argument("--skip", action="append", default=[], metavar="STEP",
                     help="skip a named step (e.g. kalpi_model); repeatable")
     ap.add_argument("-v", "--verbose", action="store_true", help="echo every output line")
+    ap.add_argument("--markets", action="store_true",
+                    help="blend the latest prediction-market snapshot into the mixture draws "
+                         "(src/market_blend.py, dossier s.71) before the formation and the count")
     argv = sys.argv[1:] if argv is None else list(argv)
     args = ap.parse_args(argv)
 
@@ -365,10 +369,13 @@ def main(argv=None) -> int:
             # registration_scenarios would quietly fit a posterior of its own
             raise StepFailed("no saved posterior data/processed/m3_idata.nc (not in git): "
                              "run with --refit, or copy the posterior in")
+        env = {"MARKET_BLEND": "1"} if args.markets else None
         for s in CHAIN:
             p.run(s, f"{s}.py")
+            if s == "registration_scenarios" and args.markets:
+                p.run("market_blend", "market_blend.py", args=("--apply",))
         for s in SITE_STEPS:
-            p.run(s, f"{s}.py")
+            p.run(s, f"{s}.py", env=env)
         p.timed("checks", lambda: step_checks(p))
         if args.publish_check:
             step_tests(p)

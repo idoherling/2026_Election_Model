@@ -2227,6 +2227,9 @@ def project(data, idata, rng, config="current", config_params=None):
     # vs 1.67 for the mean, in every ablation configuration): threshold
     # deaths skew the means of straddling lists downward.
     project.last_share_median = np.median(shares, axis=0)
+    # The share draws themselves, aligned with the seat draws, so the market
+    # blend (src/market_blend.py, dossier s.71) can resample both together.
+    project.last_share_draws = shares.copy()
     project.last_labels = list(labels)
     project.last_components = ["+".join(sorted(c)) for c in comps]
     seats = np.zeros((N_PROJ, shares.shape[1]), dtype=int)

@@ -47,6 +47,7 @@ from __future__ import annotations
 import argparse
 import contextlib
 import io
+import os as _os
 import json
 import shutil
 import sys
@@ -202,6 +203,9 @@ def run_bayes(flags: dict, work: Path, M: int, log) -> dict:
     with variant_flags(flags), chain_output(work):
         with contextlib.redirect_stdout(buf):
             rs.main()
+            if _os.environ.get("MARKET_BLEND") == "1":   # dossier s.71: as the pipeline's --markets
+                import market_blend
+                market_blend.apply(work)
             of.main()
             draws = gf.load_draws()
         form = formation_summary(draws, M)
