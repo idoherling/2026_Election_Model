@@ -211,6 +211,8 @@ CURATED = {
                 "סקרי ערוץ 14 וערוץ 16 מ־20 באוקטובר; חמש הגשות חדשות"),
     "7b4c130": ("both", [67], "Channel 12 and 13 polls; the filings' undecided-lean and certainty questions enter the model",
                 "סקרי ערוץ 12 ו־13; שאלות נטיית המתלבטים והוודאות מהדיווחים נכנסות למודל"),
+    "f424a3f": ("polls", [69], "The final build before the blackout: the forecast of record",
+                "הבנייה האחרונה לפני איסור הפרסום: התחזית הרשמית"),
 }
 GENERIC = {
     "polls": ("New polls or events and a refit", "סקרים או אירועים חדשים והתאמה מחדש"),
