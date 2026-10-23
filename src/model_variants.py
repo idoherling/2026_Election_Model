@@ -319,7 +319,7 @@ VARIANTS: list[Variant] = [
                  "questions (<a href=\"https://polymarket.com/event/israel-election-likud-of-seats\" "
                  "rel=\"noopener\">Likud seats</a>, <a href=\"https://polymarket.com/event/"
                  "israeli-legislative-election-winner\" rel=\"noopener\">largest list</a>; prices of 23 "
-                 "October, 15:22 UTC). For each question the target is a blend of model and market, with "
+                 "October, 18:47 UTC). For each question the target is a blend of model and market, with "
                  "half weight on markets that traded over $250,000, a quarter on those over $20,000 and "
                  "0.15 on thinner ones; the model's simulated elections are reweighted as little as the "
                  "targets require, so every simulation stays a full 120-seat result. Israeli seat markets "
@@ -330,7 +330,7 @@ VARIANTS: list[Variant] = [
                  "המילואימניקים והכלכלית ורע״מ, הרשימה הגדולה ושתי שאלות גושים ("
                  "<a href=\"https://polymarket.com/event/israel-election-likud-of-seats\" rel=\"noopener\">"
                  "מנדטי הליכוד</a>, <a href=\"https://polymarket.com/event/israeli-legislative-election-winner\" "
-                 "rel=\"noopener\">הרשימה הגדולה</a>; מחירי 23 באוקטובר, " + _n("15:22") + " UTC). לכל שאלה "
+                 "rel=\"noopener\">הרשימה הגדולה</a>; מחירי 23 באוקטובר, " + _n("18:47") + " UTC). לכל שאלה "
                  "היעד הוא שקלול של המודל והשוק: משקל חצי לשווקים שנסחרו בהם יותר מ־" + _n("$250,000")
                  + ", רבע לאלה שמעל " + _n("$20,000") + " ו־" + _n("0.15") + " לדלילים יותר; הבחירות "
                  "המדומות של המודל משוקללות מחדש במידה המינימלית שהיעדים דורשים, כך שכל סימולציה נשארת "

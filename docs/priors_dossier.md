@@ -7300,3 +7300,40 @@ frozen_market_blend_2026-10-22.json, sha256
 058325597ebd05d163d03a01163b57eaae6a56d30194fbe51cc652b67cca7549
 (supersedes 2398a9cb): NB 8.0, change 7.7, change + Ra'am 28.3, Likud 24,
 effective sample 5,780 of 8,000.
+
+## 73. The Friday-evening final polls and the forecast of record (23 Oct, D-4)
+
+The TV channels aired their final polls in the Friday evening newscasts,
+after the freezes of s.69 (13:43) and s.72 (18:24); the runbook had them on
+Friday morning, now corrected. From the publishers (in the browser):
+- Kan 11 / Kantar (broadcast ~20:40; Maariv's report): Yashar 22, Likud 20,
+  Together 14, Joint List 9, Democrats 8, Otzma 8, YB 8, UTJ 8, RZP 7, Shas 7,
+  Ra'am 5, Reservists-Economic 4; Amcha out.
+- Channel 12 / Midgam (21:18): Yashar 23, Likud 21, Together 15, Democrats
+  10, Joint List 9, Shas 8, YB 8, Otzma 8, UTJ 7, RZP 6, Ra'am 5; Amcha 2.5%,
+  Reservists-Economic 2.4% out.
+- Channel 13 / HaMidgam (21:10, n=1,875): Yashar 22, Likud 19, Together 14,
+  Democrats 10, Joint List 9, YB 8, RZP 8, Otzma 8, UTJ 8, Shas 7, Ra'am 7;
+  Amcha 3.1%, Reservists-Economic 3.0% out.
+- i24NEWS / Direct Polls (fieldwork 22 Oct, n=5,124): Likud 26, Yashar 21,
+  Together 12, Joint List 9, Otzma 8, Shas 8, Democrats 8, UTJ 7, RZP 6, YB 6,
+  Ra'am 5, Amcha 4; Reservists-Economic 2.2%.
+- Channel 14 / Next Data: its last poll is Thursday's (22 Oct, in since
+  s.69); no Friday poll on its site.
+
+**Fit.** asof 23 Oct (D-4), 266 polls, CLR, 0 divergences, max r-hat 1.01,
+min ESS 383, holdout 0.62. Event allowance: no unpolled pre-blackout day
+left, multiplier 1.000 (s.58, as the runbook expected at D-4).
+
+**The forecast of record** (Ahi's withdrawal, s.72, included): P(NB >=
+61) 9.9%, change 4.8%, change + Ra'am 22.9%, neither 67.2%; Netanyahu-bloc
+mean 52.9 (90% 43-63); government led by Netanyahu 28.9 / change 25.8 /
+unity 17.7 / repeat 27.6; next PM Netanyahu 28.9, repeat election 27.6,
+Eisenkot 25.1, Likud successor 8.9, Bennett 7.0; central seats Likud 25,
+Yashar 22, Together 13, Joint List 9, Shas 9, Democrats 9, UTJ 8, YB 8,
+Otzma 6, Ra'am 6, RZP 5; Amcha passes .210, Reservists-Economic .204.
+Frozen as frozen_forecast_2026-10-23.json, which supersedes the two 22 Oct
+freezes (2be4785e, c6a95406; both in git). The "markets" model (s.71) on
+the 18:47 UTC snapshot: NB 7.4, change 6.9, change + Ra'am 26.4, Likud 24,
+Together 14, RZP passes .70, Reservists-Economic .25; frozen separately as
+frozen_market_blend_2026-10-23.json.

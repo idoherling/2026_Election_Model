@@ -35,9 +35,12 @@ three seeds and is written into the decision log first.
 
 ## Friday 23 Oct: the final pre-blackout build
 
-- The last legal polls are published on Friday morning (s.16(h) of the
-  Elections (Propaganda Methods) Law; last fieldwork D-4 in seven of eight
-  cycles, DYN-F08). Ingest them as above and refit.
+- The last legal polls come in two waves: the Friday papers (Maariv,
+  Israel Hayom) in the morning, and the TV channels' final polls in the
+  Friday evening newscasts (Kan 11, Channels 12 and 13, i24; 2026: aired
+  20:40-21:20 on 23 Oct). The freeze of record waits for the evening wave
+  (s.73: a 13:43 freeze had to be re-taken twice). Last fieldwork D-4 in
+  seven of eight cycles, DYN-F08. Ingest them as above and refit.
 - With the asof at D-4 the event allowance is exactly 1.0 (s.58). Check
   that the site's annex shows it.
 - Re-check the surplus agreements against the CEC's published list
