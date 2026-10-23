@@ -1601,3 +1601,30 @@ ref,pollster,fieldwork_end,party_id,raw_pct,shown_passing
 4238,Filber,2026-10-20,haredi_public,0.9,True
 4238,Filber,2026-10-20,noam,0.9,True
 4238,Filber,2026-10-20,ahi,0.4,True
+4243,Direct Polls,2026-10-20,likud,19.7,True
+4243,Direct Polls,2026-10-20,yashar,14.7,True
+4243,Direct Polls,2026-10-20,together,9.2,True
+4243,Direct Polls,2026-10-20,democrats,7.1,True
+4243,Direct Polls,2026-10-20,otzma,6.8,True
+4243,Direct Polls,2026-10-20,shas,6.6,True
+4243,Direct Polls,2026-10-20,balad+hadash_taal,6.0,True
+4243,Direct Polls,2026-10-20,utj,5.9,True
+4243,Direct Polls,2026-10-20,rzp,5.7,True
+4243,Direct Polls,2026-10-20,yisrael_beytenu,5.3,True
+4243,Direct Polls,2026-10-20,raam,5.2,True
+4243,Direct Polls,2026-10-20,amcha_yisrael,3.1,True
+4243,Direct Polls,2026-10-20,zionist_home,2.6,True
+4245,Midgam,2026-10-21,yashar,18.4,True
+4245,Midgam,2026-10-21,likud,15.2,True
+4245,Midgam,2026-10-21,together,12.0,True
+4245,Midgam,2026-10-21,democrats,7.3,True
+4245,Midgam,2026-10-21,balad+hadash_taal,7.2,True
+4245,Midgam,2026-10-21,yisrael_beytenu,6.4,True
+4245,Midgam,2026-10-21,shas,6.3,True
+4245,Midgam,2026-10-21,otzma,5.7,True
+4245,Midgam,2026-10-21,utj,5.6,True
+4245,Midgam,2026-10-21,rzp,4.8,True
+4245,Midgam,2026-10-21,raam,4.1,True
+4245,Midgam,2026-10-21,amcha_yisrael,3.4,True
+4245,Midgam,2026-10-21,zionist_home,2.8,True
+4245,Midgam,2026-10-21,haredi_public,1.1,True

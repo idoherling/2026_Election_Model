@@ -1,8 +1,8 @@
 pm,probability,p05,p95
-none (repeat election),0.276,0.076,0.531
-Netanyahu,0.274,0.104,0.467
-Eisenkot,0.265,0.162,0.365
-Likud successor (unity),0.086,0.001,0.212
-Bennett,0.073,0.046,0.107
+Netanyahu,0.282,0.111,0.475
+none (repeat election),0.275,0.076,0.531
+Eisenkot,0.259,0.158,0.354
+Likud successor (unity),0.087,0.001,0.214
+Bennett,0.072,0.047,0.108
 Liberman,0.015,0.004,0.035
-another leader,0.011,0.004,0.02
+another leader,0.01,0.004,0.02

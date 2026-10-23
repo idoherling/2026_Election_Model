@@ -7037,3 +7037,46 @@ not from the polls.
 
 **Decision.** No change; the model's random walk (no drift) stands. Site:
 one sentence in the limitations (EN/HE).
+
+## 69. The final pre-blackout build (23 Oct, D-4)
+
+**Polls.** The last legal polls (published by Friday morning, s.16(h)):
+from the archive, Direct Polls/i24 (13 and 20 Oct), Next Data/Channel 14
+(21 and 22 Oct) and Tatika/Zman Yisrael (22 Oct); from the publishers,
+Lazar/Maariv (19-22 Oct, n=1,048: Yashar 21, Likud 19, Together 15),
+Kantar/Israel Hayom (21-22 Oct, n=1,110: Yashar 23, Likud 21, Together 14)
+and Maagar Mochot/Channel 16 (22 Oct: Yashar 20, Likud 17, Together 14,
+Amcha 4, Reservists-Economic 4). No Thursday poll from Channel 12,
+Channel 13 or Kan; their last (21 and 18 Oct) are in. Four new CEC
+filings (4242 Ch13, 4243 Direct Polls, 4245 Midgam, 4247 DRI). Maariv's
+article carries only the bloc chart; the list table is from ICE's report
+of the same poll (bloc totals are never turned into list numbers).
+
+**Not entered: the DRI Institute filing (4247).** An independent poll of
+an unknown firm (19-21 Oct, n=939, response 0.99% of 95,080 invited) that
+labels the Joint List as Hadash-Ta'al under Odeh and Tibi, i.e. not the
+2026 ballot; the parser reads no list numbers from it, the archive does
+not list it, and a single poll of a firm with no record would mostly
+estimate its own house effect.
+
+**Checks (runbook).** Surplus agreements: the five pairs in
+simulate.SURPLUS_PAIRS (Likud-RZP, Together-YB, Yashar-Democrats,
+Shas-UTJ, Joint List-Ra'am) match Ynet's map of the closed agreements (19
+Oct) and the Hebrew Wikipedia list; Otzma, Amcha and Reservists-Economic
+run without one. Event allowance (s.58): the last fieldwork is 22 Oct
+(D-5), so one unpolled pre-blackout day remains (23 Oct): event_days 1,
+multiplier 1.004 (the runbook's 1.0 assumed a D-4 asof). Winter
+confirmed on 21 Oct that Amcha runs (Haaretz, Ynet).
+
+**Fit.** asof 22 Oct, 262 polls, CLR, 0 divergences, max r-hat 1.02 (at
+the gate), min ESS 419, holdout 0.60.
+
+**The forecast of record.** P(NB >= 61) 9.5%, change 5.3%, change +
+Ra'am 24.7%, neither 65.8%; Netanyahu-bloc seats mean 52.6 (90% 43-63);
+government led by Netanyahu 28.2 / change 26.9 / unity 17.4 / repeat
+27.5; next PM Netanyahu 28.2, repeat election 27.5, Eisenkot 25.9, Likud
+successor 8.7, Bennett 7.2; central seats Likud 25, Yashar 22, Together
+13, Joint List 9, Shas 9, Democrats 9, UTJ 8, YB 8, Ra'am 6, Otzma 6, RZP
+5; Amcha passes .217, Reservists-Economic .212. Frozen with sha256 by
+scorecard.py --freeze; no forecast numbers are republished during the
+blackout.
