@@ -81,6 +81,7 @@ import argparse
 import hashlib
 import json
 import math
+import re
 import subprocess
 import sys
 from datetime import date, datetime, timedelta
@@ -561,7 +562,7 @@ def read_result(path, payload: dict) -> dict:
     path = Path(path)
     reg = payload["lists"]
     table = alias_table(reg)
-    rows, note = [], ""
+    rows, note, meta = [], "", {}
     if path.is_dir():
         if payload["cycle"] != "2026":
             raise ScorecardError("a snapshot directory is a 2026 election-night count")
@@ -607,6 +608,12 @@ def read_result(path, payload: dict) -> dict:
             v = en._to_int(getattr(r, vc)) if vc else None
             rows.append({"label": str(lab).strip(), "votes": v, "seats": int(s or 0)})
         kind = "csv"
+        # "# key: value" header lines carry the page's source line (source_url,
+        # as_of_utc, certified yes|no); other comment lines are ignored
+        for ln in path.read_text(encoding="utf-8").splitlines():
+            m = re.match(r"#\s*(source_url|as_of_utc|certified)\s*:\s*(\S+)", ln)
+            if m:
+                meta[m.group(1)] = m.group(2)
     seats, votes, unmatched = {}, {}, []
     for r in rows:
         if en._norm(r["label"]) in en.REST_ALIASES:
@@ -633,7 +640,9 @@ def read_result(path, payload: dict) -> dict:
               + ", ".join(missing))
     valid = sum(int(r["votes"]) for r in rows if r.get("votes") is not None) or None
     return {"seats": seats, "votes": votes, "valid": valid, "unmatched": unmatched,
-            "source": {"kind": kind, "path": _rel(path), "note": note}}
+            "source": {"kind": kind, "path": _rel(path), "note": note,
+                       "url": meta.get("source_url"), "as_of_utc": meta.get("as_of_utc"),
+                       "certified": meta.get("certified", "").lower() == "yes"}}
 
 
 # --------------------------------------------------------------- scoring

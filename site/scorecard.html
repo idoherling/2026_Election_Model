@@ -118,6 +118,7 @@ html[dir="rtl"] .chip{letter-spacing:0}
 .pit i{position:absolute;bottom:4px;width:11px;height:11px;margin-left:-5.5px;border-radius:50%;background:var(--pc,var(--ink));opacity:.9}
 .pitax{display:flex;justify-content:space-between;font:500 11px "IBM Plex Mono",monospace;color:var(--muted);direction:ltr}
 .note{font-size:13.5px;color:var(--ink2);max-width:72ch;margin:10px 0 0}
+.note.src{display:block}
 .honest{border-inline-start:4px solid var(--accent);padding:4px 0 4px 14px;margin:16px 0 0;max-width:72ch;font-size:14.5px}
 html[dir="rtl"] .honest{padding:4px 14px 4px 0}
 .method ul{margin:8px 0 0;padding-inline-start:20px;max-width:78ch}
@@ -199,6 +200,9 @@ const T = HE ? {
   eSaid: "התחזית", hSaid: "מה התחזית אמרה", hHappened: "מה התחזית אמרה, ומה קרה",
   lSaid: `התחזית הרשמית כפי שהוקפאה: הסיכוי של כל גוש ל־${N("61")} מנדטים, מי מרכיב את הממשלה, והמנדטים של כל רשימה עם רווח ${N("90%")}.`,
   lHappened: `התחזית הרשמית כפי שהוקפאה, ולצידה התוצאה. הנקודה היא התוצאה הרשמית; המלבן הוא רווח ${N("90%")} של התחזית.`,
+  resSrc: (a, t, cert) => cert
+    ? `<b>התוצאה:</b> התוצאות הרשמיות של ועדת הבחירות המרכזית (${a}).`
+    : `<b>התוצאה:</b> הספירה הסופית של ועדת הבחירות המרכזית, נכון ל-${t} (${a}): כל הקלפיות והמעטפות הכפולות. המנדטים לפי חוק הבחירות: אחוז חסימה של ${N("3.25%")} מכלל הקולות הכשרים, חמשת הסכמי העודפים שנחתמו ושיטת באדר-עופר. התוצאות הרשמיות יפורסמו עד ${N("4")} בנובמבר.`,
   nb: "גוש נתניהו", anti: "מחנה השינוי", antiRaam: "מחנה השינוי + רע״ם", neither: `אף צד לא מגיע ל־${N("61")}`, p61: `סיכוי ל־${N("61+")}`, gov: "מי מרכיב את הממשלה",
   won: "בפועל", seatsW: "מנדטים", happened: "קרה", notHappened: "לא קרה",
   colList: "רשימה", colC: "תחזית", colIvl: `רווח ${N("90%")}`, colPass: "עוברת", colY: "בפועל", colFl: "בתוך הטווח?",
@@ -240,6 +244,9 @@ const T = HE ? {
   eSaid: "The forecast", hSaid: "What the forecast said", hHappened: "What the forecast said, and what happened",
   lSaid: "The official forecast as frozen: each bloc's chance of 61 seats, who forms the government, and every list's seats with its 90% interval.",
   lHappened: "The official forecast as frozen, with the result beside it. The dot is the official result; the box is the forecast's 90% interval.",
+  resSrc: (a, t, cert) => cert
+    ? `<b>The result:</b> the Central Elections Committee's certified result (${a}).`
+    : `<b>The result:</b> the Central Elections Committee's final count as of ${t} (${a}): every polling station and the double envelopes. Seats by the election law: the ${N("3.25%")} threshold on all valid votes, the five filed surplus agreements and Bader-Ofer. The certified result is due by ${N("4")} November.`,
   nb: "Netanyahu bloc", anti: "Change bloc", antiRaam: "Change bloc + Ra'am", neither: "Neither side reaches 61", p61: "chance of 61+", gov: "Who forms the government",
   won: "actual", seatsW: "seats", happened: "happened", notHappened: "did not happen",
   colList: "List", colC: "Forecast", colIvl: "90% interval", colPass: "Passes", colY: "Actual", colFl: "Inside?",
@@ -292,7 +299,9 @@ function renderStatic(){
   }
   const set = (id, h) => { $(id).innerHTML = h; };
   set("h-frozen", T.hFrozen); set("l-frozen", T.lFrozen);
-  set("h-said", S ? T.hHappened : T.hSaid); set("l-said", S ? T.lHappened : T.lSaid);
+  const src = R && R.source && R.source.url ? R.source : null;
+  const srcLine = src ? `<span class="note src">${T.resSrc(`<a href="${esc(src.url)}" target="_blank" rel="noopener">${esc(src.url.replace(/^https?:\/\//, "").replace(/[?#].*$/, ""))}</a>`, tfmt(src.as_of_utc), src.certified)}</span>` : "";
+  set("h-said", S ? T.hHappened : T.hSaid); set("l-said", S ? T.lHappened + srcLine : T.lSaid);
   set("h-scores", S ? T.hScores : T.hModels); set("l-scores", S ? T.lScores : T.lModels);
   set("h-ord", T.hOrd); set("l-ord", T.lOrd); set("pick-l", T.pickL);
   set("h-pit", T.hPit); set("l-pit", T.lPit);

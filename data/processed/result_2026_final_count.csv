@@ -1,0 +1,45 @@
+# Final count: the CEC national results page, "results as of 30/10/2026 00:00" (every station and the double envelopes),
+# read in the browser on 30 Oct 2026. Eligible 7,331,981; votes cast 5,716,665; valid 5,690,682; invalid 25,983.
+# Seats by election_night.allocate: 3.25% threshold on all valid votes, the five filed surplus agreements, Bader-Ofer.
+# source_url: https://votes26.bechirot.gov.il/nationalresults?lang=he
+# as_of_utc: 2026-10-29T22:00:00Z
+# certified: no
+list,votes,seats
+מחל,1167458,27
+דרך,913502,21
+רק,531414,12
+ודם,500147,11
+אמת,366352,8
+ל,337413,7
+עם,337253,8
+ב,326624,7
+ג,312604,7
+שס,299506,6
+ט,290451,6
+די,154950,0
+ך,95663,0
+נר,11274,0
+זך,10594,0
+ני,9923,0
+בי,5710,0
+ד,4339,0
+צדק,2084,0
+בד,1465,0
+רץ,1074,0
+צף,1051,0
+י,955,0
+נקי,929,0
+קך,919,0
+ה,902,0
+פה,872,0
+נף,787,0
+קץ,773,0
+בקר,747,0
+קה,712,0
+ק,579,0
+ז,508,0
+נץ,481,0
+יק,412,0
+זץ,255,0
+כן,0,0
+צבי,0,0
