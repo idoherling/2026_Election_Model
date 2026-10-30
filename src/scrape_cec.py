@@ -111,6 +111,9 @@ PARTY_KEYWORDS = [
     # Zelekha) continues the zionist_home series; pre-merger NEP lines map
     # to the absorbed id so they are not mistaken for the merged list.
     ("המילואימניקים", "zionist_home"), ("המילואמיניקים", "zionist_home"),
+    # Tatika writes the list without the article ("מילואימניקים + הכלכלית",
+    # 4225, 4249), which the line above does not match.
+    ("מילואימניקים +", "zionist_home"),
     ("הכלכלית החדשה", "nep"), ("המפלגה הכלכלית", "nep"),
     ("הציבור החרדי", "haredi_public"), ("ישראל תחילה", "israel_first"),
     ("אח\"י", "ahi"), ("חוזרים לשורשים", "ahi"),
@@ -140,7 +143,10 @@ PCT_RUN = re.compile(r"(\d+(?:\.\d{1,2})?)%")
 # sub-sample columns (Jewish adults / young / haredi / Arab), none of
 # which is a national share; a sector-only sample (e.g. Dialog's
 # reservists poll for Yedioth) is a different universe altogether.
-NON_NATIONAL_MARKERS = (r"גולמיים\s+לא\s+משוקללים", r"משרתי\s+מילואים")
+NON_NATIONAL_MARKERS = (r"גולמיים\s+לא\s+משוקללים", r"משרתי\s+מילואים",
+                        # Dialog for Yedioth/ynet (4256): 498 residents of 53 communities
+                        # on the northern border and around Gaza, not a national sample
+                        r"סקר\s+בקרב\s+תושבי\s+ישובי")
 # Editors whose filings never carry a national raw-share table (the
 # Midgam Project consortium files seats + raw sub-samples in every format
 # it has used).

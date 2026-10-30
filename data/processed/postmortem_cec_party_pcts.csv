@@ -1,0 +1,1740 @@
+ref,pollster,fieldwork_end,party_id,raw_pct,shown_passing
+4040,Kantar,2026-08-02,likud,18.4,True
+4040,Kantar,2026-08-02,together,10.5,True
+4040,Kantar,2026-08-02,yashar,18.3,True
+4040,Kantar,2026-08-02,democrats,6.4,True
+4040,Kantar,2026-08-02,zionist_home,3.3,True
+4040,Kantar,2026-08-02,rzp,3.3,True
+4040,Kantar,2026-08-02,otzma,7.2,True
+4040,Kantar,2026-08-02,yisrael_beytenu,7.2,True
+4040,Kantar,2026-08-02,shas,6.4,True
+4040,Kantar,2026-08-02,utj,6.4,True
+4040,Kantar,2026-08-02,balad+hadash_taal,4.8,True
+4040,Kantar,2026-08-02,raam,4.0,True
+4040,Kantar,2026-08-02,amcha_yisrael,3.0,True
+4040,Kantar,2026-08-02,unity,2.8,True
+4042,Tatika,2026-07-29,yashar,18.0,True
+4042,Tatika,2026-07-29,likud,16.4,True
+4042,Tatika,2026-07-29,together,10.6,True
+4042,Tatika,2026-07-29,yisrael_beytenu,8.2,True
+4042,Tatika,2026-07-29,democrats,6.6,True
+4042,Tatika,2026-07-29,shas,6.6,True
+4042,Tatika,2026-07-29,utj,6.6,True
+4042,Tatika,2026-07-29,otzma,5.8,True
+4042,Tatika,2026-07-29,balad+hadash_taal,5.0,True
+4042,Tatika,2026-07-29,rzp,5.0,True
+4042,Tatika,2026-07-29,raam,4.4,True
+4042,Tatika,2026-07-29,zionist_home,3.4,True
+4042,Tatika,2026-07-29,blue_white,3.4,True
+4042,Tatika,2026-07-29,unity,4.0,True
+4046,Midgam,2026-08-03,yashar,18.7,True
+4046,Midgam,2026-08-03,likud,18.6,True
+4046,Midgam,2026-08-03,together,11.2,True
+4046,Midgam,2026-08-03,democrats,8.0,True
+4046,Midgam,2026-08-03,yisrael_beytenu,7.2,True
+4046,Midgam,2026-08-03,utj,6.4,True
+4046,Midgam,2026-08-03,shas,5.7,True
+4046,Midgam,2026-08-03,otzma,5.6,True
+4046,Midgam,2026-08-03,balad+hadash_taal,4.1,True
+4046,Midgam,2026-08-03,rzp,4.0,True
+4046,Midgam,2026-08-03,raam,3.9,True
+4046,Midgam,2026-08-03,zionist_home,3.3,True
+4046,Midgam,2026-08-03,blue_white,1.4,True
+4047,Maagar Mochot,2026-08-03,likud,15.0,True
+4047,Maagar Mochot,2026-08-03,together,10.0,True
+4047,Maagar Mochot,2026-08-03,yashar,16.0,True
+4047,Maagar Mochot,2026-08-03,blue_white,1.2,True
+4047,Maagar Mochot,2026-08-03,rzp,3.0,True
+4047,Maagar Mochot,2026-08-03,otzma,7.0,True
+4047,Maagar Mochot,2026-08-03,shas,6.0,True
+4047,Maagar Mochot,2026-08-03,utj,5.0,True
+4047,Maagar Mochot,2026-08-03,yisrael_beytenu,6.0,True
+4047,Maagar Mochot,2026-08-03,democrats,8.0,True
+4047,Maagar Mochot,2026-08-03,balad+hadash_taal,3.0,True
+4047,Maagar Mochot,2026-08-03,raam,3.0,True
+4047,Maagar Mochot,2026-08-03,zionist_home,3.0,True
+4049,Filber,2026-07-27,shas,22.0,True
+4049,Filber,2026-07-27,yisrael_beytenu,17.0,True
+4049,Filber,2026-07-27,likud,1.0,True
+4049,Filber,2026-07-27,utj,7.8,True
+4054,Lazar,2026-07-29,yashar,18.0,True
+4054,Lazar,2026-07-29,likud,17.8,True
+4054,Lazar,2026-07-29,together,11.5,True
+4054,Lazar,2026-07-29,yisrael_beytenu,7.6,True
+4054,Lazar,2026-07-29,democrats,7.3,True
+4054,Lazar,2026-07-29,utj,6.1,True
+4054,Lazar,2026-07-29,otzma,5.1,True
+4054,Lazar,2026-07-29,shas,5.4,True
+4054,Lazar,2026-07-29,balad+hadash_taal,3.9,True
+4054,Lazar,2026-07-29,raam,3.8,True
+4054,Lazar,2026-07-29,rzp,4.1,True
+4054,Lazar,2026-07-29,zionist_home,3.4,True
+4054,Lazar,2026-07-29,blue_white,0.8,True
+4054,Lazar,2026-07-29,unity,3.8,True
+4055,Lazar,2026-08-05,yashar,16.3,True
+4055,Lazar,2026-08-05,likud,16.0,True
+4055,Lazar,2026-08-05,together,11.2,True
+4055,Lazar,2026-08-05,yisrael_beytenu,5.8,True
+4055,Lazar,2026-08-05,democrats,6.2,True
+4055,Lazar,2026-08-05,otzma,6.3,True
+4055,Lazar,2026-08-05,utj,4.9,True
+4055,Lazar,2026-08-05,shas,4.2,True
+4055,Lazar,2026-08-05,balad+hadash_taal,3.4,True
+4055,Lazar,2026-08-05,raam,3.6,True
+4055,Lazar,2026-08-05,rzp,3.2,True
+4055,Lazar,2026-08-05,zionist_home,3.4,True
+4055,Lazar,2026-08-05,blue_white,1.0,True
+4056,Kantar,2026-08-05,likud,18.7,True
+4056,Kantar,2026-08-05,together,10.6,True
+4056,Kantar,2026-08-05,yashar,17.9,True
+4056,Kantar,2026-08-05,democrats,8.1,True
+4056,Kantar,2026-08-05,zionist_home,3.3,True
+4056,Kantar,2026-08-05,rzp,3.3,True
+4056,Kantar,2026-08-05,otzma,7.3,True
+4056,Kantar,2026-08-05,yisrael_beytenu,7.3,True
+4056,Kantar,2026-08-05,shas,5.7,True
+4056,Kantar,2026-08-05,utj,6.5,True
+4056,Kantar,2026-08-05,balad+hadash_taal,4.1,True
+4056,Kantar,2026-08-05,raam,4.9,True
+4056,Kantar,2026-08-05,blue_white,0.7,True
+4057,Tatika,2026-08-05,yashar,17.6,True
+4057,Tatika,2026-08-05,likud,16.4,True
+4057,Tatika,2026-08-05,together,11.6,True
+4057,Tatika,2026-08-05,yisrael_beytenu,8.4,True
+4057,Tatika,2026-08-05,utj,6.4,True
+4057,Tatika,2026-08-05,democrats,6.4,True
+4057,Tatika,2026-08-05,shas,6.4,True
+4057,Tatika,2026-08-05,otzma,6.0,True
+4057,Tatika,2026-08-05,balad+hadash_taal,5.0,True
+4057,Tatika,2026-08-05,rzp,5.0,True
+4057,Tatika,2026-08-05,raam,4.8,True
+4057,Tatika,2026-08-05,zionist_home,3.0,False
+4057,Tatika,2026-08-05,blue_white,3.0,False
+4059,Maagar Mochot,2026-08-10,likud,14.0,True
+4059,Maagar Mochot,2026-08-10,together,11.0,True
+4059,Maagar Mochot,2026-08-10,yashar,14.0,True
+4059,Maagar Mochot,2026-08-10,blue_white,2.0,True
+4059,Maagar Mochot,2026-08-10,rzp,3.0,True
+4059,Maagar Mochot,2026-08-10,otzma,6.0,True
+4059,Maagar Mochot,2026-08-10,shas,7.0,True
+4059,Maagar Mochot,2026-08-10,utj,5.0,True
+4059,Maagar Mochot,2026-08-10,yisrael_beytenu,6.0,True
+4059,Maagar Mochot,2026-08-10,democrats,8.0,True
+4059,Maagar Mochot,2026-08-10,balad+hadash_taal,3.0,True
+4059,Maagar Mochot,2026-08-10,raam,3.0,True
+4059,Maagar Mochot,2026-08-10,zionist_home,2.0,True
+4059,Maagar Mochot,2026-08-10,unity,2.0,True
+4061,Kantar,2026-08-09,likud,18.3,True
+4061,Kantar,2026-08-09,together,9.9,True
+4061,Kantar,2026-08-09,yashar,17.6,True
+4061,Kantar,2026-08-09,democrats,7.6,True
+4061,Kantar,2026-08-09,rzp,3.8,True
+4061,Kantar,2026-08-09,otzma,6.1,True
+4061,Kantar,2026-08-09,yisrael_beytenu,7.6,True
+4061,Kantar,2026-08-09,shas,6.1,True
+4061,Kantar,2026-08-09,utj,6.1,True
+4061,Kantar,2026-08-09,balad+hadash_taal,3.8,True
+4061,Kantar,2026-08-09,raam,4.6,True
+4061,Kantar,2026-08-09,zionist_home,3.0,True
+4061,Kantar,2026-08-09,blue_white,1.3,True
+4061,Kantar,2026-08-09,unity,1.9,True
+4061,Kantar,2026-08-09,amcha_yisrael,3.0,True
+4064,Midgam,2026-08-10,yashar,18.5,True
+4064,Midgam,2026-08-10,likud,17.2,True
+4064,Midgam,2026-08-10,together,11.5,True
+4064,Midgam,2026-08-10,democrats,8.5,True
+4064,Midgam,2026-08-10,yisrael_beytenu,7.8,True
+4064,Midgam,2026-08-10,utj,6.2,True
+4064,Midgam,2026-08-10,otzma,6.1,True
+4064,Midgam,2026-08-10,shas,5.4,True
+4064,Midgam,2026-08-10,balad+hadash_taal,3.9,True
+4064,Midgam,2026-08-10,raam,3.9,True
+4064,Midgam,2026-08-10,rzp,3.7,True
+4064,Midgam,2026-08-10,zionist_home,2.7,True
+4064,Midgam,2026-08-10,unity,1.3,True
+4064,Midgam,2026-08-10,blue_white,0.8,True
+4068,Direct Polls,2026-08-06,likud,21.6,True
+4068,Direct Polls,2026-08-06,democrats,7.7,True
+4068,Direct Polls,2026-08-06,yisrael_beytenu,7.0,True
+4068,Direct Polls,2026-08-06,utj,6.8,True
+4068,Direct Polls,2026-08-06,balad+hadash_taal,6.1,True
+4068,Direct Polls,2026-08-06,shas,6.1,True
+4068,Direct Polls,2026-08-06,together,5.4,True
+4068,Direct Polls,2026-08-06,raam,4.0,True
+4068,Direct Polls,2026-08-06,unity,1.6,True
+4070,Filber,2026-08-04,likud,23.7,True
+4070,Filber,2026-08-04,yashar,16.8,True
+4070,Filber,2026-08-04,shas,8.4,True
+4070,Filber,2026-08-04,democrats,7.6,True
+4070,Filber,2026-08-04,together,6.1,True
+4070,Filber,2026-08-04,utj,6.2,True
+4070,Filber,2026-08-04,yisrael_beytenu,6.0,True
+4070,Filber,2026-08-04,otzma,4.8,True
+4070,Filber,2026-08-04,rzp,4.4,True
+4070,Filber,2026-08-04,raam,3.9,True
+4070,Filber,2026-08-04,balad+hadash_taal,3.7,True
+4070,Filber,2026-08-04,zionist_home,1.9,True
+4070,Filber,2026-08-04,amcha_yisrael,1.2,True
+4070,Filber,2026-08-04,blue_white,0.5,True
+4070,Filber,2026-08-04,unity,0.5,True
+4071,Filber,2026-08-10,likud,24.5,True
+4071,Filber,2026-08-10,yashar,17.9,True
+4071,Filber,2026-08-10,shas,7.9,True
+4071,Filber,2026-08-10,democrats,7.3,True
+4071,Filber,2026-08-10,yisrael_beytenu,6.0,True
+4071,Filber,2026-08-10,together,5.2,True
+4071,Filber,2026-08-10,utj,5.4,True
+4071,Filber,2026-08-10,rzp,4.6,True
+4071,Filber,2026-08-10,otzma,4.6,True
+4071,Filber,2026-08-10,raam,3.6,True
+4071,Filber,2026-08-10,balad+hadash_taal,3.4,True
+4071,Filber,2026-08-10,nep,1.2,True
+4071,Filber,2026-08-10,zionist_home,1.2,True
+4071,Filber,2026-08-10,unity,0.9,True
+4071,Filber,2026-08-10,amcha_yisrael,0.6,True
+4071,Filber,2026-08-10,blue_white,0.4,True
+4072,Filber,2026-07-29,likud,24.6,True
+4072,Filber,2026-07-29,yashar,16.9,True
+4072,Filber,2026-07-29,shas,7.7,True
+4072,Filber,2026-07-29,democrats,7.7,True
+4072,Filber,2026-07-29,utj,6.2,True
+4072,Filber,2026-07-29,yisrael_beytenu,6.2,True
+4072,Filber,2026-07-29,otzma,5.4,True
+4072,Filber,2026-07-29,together,5.4,True
+4072,Filber,2026-07-29,balad+hadash_taal,4.6,True
+4072,Filber,2026-07-29,rzp,3.9,True
+4072,Filber,2026-07-29,raam,3.9,True
+4072,Filber,2026-07-29,zionist_home,2.1,True
+4072,Filber,2026-07-29,blue_white,1.1,True
+4072,Filber,2026-07-29,amcha_yisrael,1.1,True
+4072,Filber,2026-07-29,unity,0.9,True
+4074,Tatika,2026-08-12,yashar,19.2,True
+4074,Tatika,2026-08-12,likud,16.0,True
+4074,Tatika,2026-08-12,together,10.2,True
+4074,Tatika,2026-08-12,yisrael_beytenu,9.0,True
+4074,Tatika,2026-08-12,democrats,6.8,True
+4074,Tatika,2026-08-12,utj,6.4,True
+4074,Tatika,2026-08-12,shas,6.4,True
+4074,Tatika,2026-08-12,otzma,5.6,True
+4074,Tatika,2026-08-12,balad+hadash_taal,5.2,True
+4074,Tatika,2026-08-12,rzp,4.6,True
+4074,Tatika,2026-08-12,raam,4.6,True
+4074,Tatika,2026-08-12,zionist_home,3.0,False
+4074,Tatika,2026-08-12,blue_white,2.0,False
+4074,Tatika,2026-08-12,unity,1.0,False
+4075,Lazar,2026-08-12,yashar,16.6,True
+4075,Lazar,2026-08-12,likud,14.8,True
+4075,Lazar,2026-08-12,together,11.9,True
+4075,Lazar,2026-08-12,yisrael_beytenu,9.2,True
+4075,Lazar,2026-08-12,democrats,7.6,True
+4075,Lazar,2026-08-12,otzma,5.3,True
+4075,Lazar,2026-08-12,utj,6.3,True
+4075,Lazar,2026-08-12,shas,5.4,True
+4075,Lazar,2026-08-12,balad+hadash_taal,4.0,True
+4075,Lazar,2026-08-12,raam,3.9,True
+4075,Lazar,2026-08-12,rzp,3.3,True
+4075,Lazar,2026-08-12,zionist_home,3.5,True
+4075,Lazar,2026-08-12,blue_white,1.9,True
+4075,Lazar,2026-08-12,unity,1.7,True
+4075,Lazar,2026-08-12,israel_first,0.6,True
+4075,Lazar,2026-08-12,nep,2.5,True
+4076,Direct Polls,2026-08-13,likud,22.9,True
+4076,Direct Polls,2026-08-13,democrats,7.6,True
+4076,Direct Polls,2026-08-13,yisrael_beytenu,6.9,True
+4076,Direct Polls,2026-08-13,utj,6.8,True
+4076,Direct Polls,2026-08-13,shas,6.1,True
+4076,Direct Polls,2026-08-13,together,6.0,True
+4076,Direct Polls,2026-08-13,balad+hadash_taal,4.6,True
+4076,Direct Polls,2026-08-13,raam,4.0,True
+4076,Direct Polls,2026-08-13,unity,1.1,True
+4079,Kantar,2026-08-13,likud,17.5,True
+4079,Kantar,2026-08-13,together,10.7,True
+4079,Kantar,2026-08-13,yashar,17.7,True
+4079,Kantar,2026-08-13,democrats,7.7,True
+4079,Kantar,2026-08-13,rzp,3.3,True
+4079,Kantar,2026-08-13,otzma,7.7,True
+4079,Kantar,2026-08-13,yisrael_beytenu,7.7,True
+4079,Kantar,2026-08-13,shas,5.4,True
+4079,Kantar,2026-08-13,utj,6.2,True
+4079,Kantar,2026-08-13,balad+hadash_taal,4.6,True
+4079,Kantar,2026-08-13,raam,3.9,True
+4079,Kantar,2026-08-13,zionist_home,3.0,True
+4079,Kantar,2026-08-13,blue_white,1.4,True
+4079,Kantar,2026-08-13,unity,1.3,True
+4079,Kantar,2026-08-13,amcha_yisrael,3.1,True
+4080,Midgam,2026-08-17,yashar,17.9,True
+4080,Midgam,2026-08-17,likud,16.4,True
+4080,Midgam,2026-08-17,together,11.0,True
+4080,Midgam,2026-08-17,democrats,8.2,True
+4080,Midgam,2026-08-17,yisrael_beytenu,7.6,True
+4080,Midgam,2026-08-17,otzma,6.0,True
+4080,Midgam,2026-08-17,utj,5.9,True
+4080,Midgam,2026-08-17,shas,5.3,True
+4080,Midgam,2026-08-17,rzp,3.7,True
+4080,Midgam,2026-08-17,balad+hadash_taal,3.7,True
+4080,Midgam,2026-08-17,raam,3.7,True
+4080,Midgam,2026-08-17,unity,1.7,True
+4080,Midgam,2026-08-17,zionist_home,1.5,True
+4080,Midgam,2026-08-17,blue_white,1.4,True
+4080,Midgam,2026-08-17,amcha_yisrael,2.5,True
+4081,Direct Polls,2026-08-18,likud,24.0,True
+4081,Direct Polls,2026-08-18,yashar,18.6,True
+4081,Direct Polls,2026-08-18,democrats,8.5,True
+4081,Direct Polls,2026-08-18,together,7.0,True
+4081,Direct Polls,2026-08-18,utj,6.5,True
+4081,Direct Polls,2026-08-18,yisrael_beytenu,6.2,True
+4081,Direct Polls,2026-08-18,shas,5.9,True
+4081,Direct Polls,2026-08-18,otzma,4.6,True
+4081,Direct Polls,2026-08-18,raam,4.0,True
+4081,Direct Polls,2026-08-18,rzp,3.9,True
+4081,Direct Polls,2026-08-18,balad+hadash_taal,3.8,True
+4081,Direct Polls,2026-08-18,zionist_home,1.1,True
+4085,Filber,2026-08-18,likud,24.3,True
+4085,Filber,2026-08-18,yashar,18.5,True
+4085,Filber,2026-08-18,shas,7.6,True
+4085,Filber,2026-08-18,democrats,7.1,True
+4085,Filber,2026-08-18,otzma,6.4,True
+4085,Filber,2026-08-18,utj,5.3,True
+4085,Filber,2026-08-18,yisrael_beytenu,5.7,True
+4085,Filber,2026-08-18,rzp,4.7,True
+4085,Filber,2026-08-18,together,4.5,True
+4085,Filber,2026-08-18,raam,4.5,True
+4085,Filber,2026-08-18,balad+hadash_taal,3.8,True
+4085,Filber,2026-08-18,nep,1.5,True
+4085,Filber,2026-08-18,zionist_home,1.2,True
+4085,Filber,2026-08-18,amcha_yisrael,0.9,True
+4085,Filber,2026-08-18,blue_white,0.4,True
+4085,Filber,2026-08-18,unity,0.1,True
+4086,Kantar,2026-08-18,likud,17.6,True
+4086,Kantar,2026-08-18,together,10.7,True
+4086,Kantar,2026-08-18,yashar,18.4,True
+4086,Kantar,2026-08-18,democrats,7.7,True
+4086,Kantar,2026-08-18,rzp,3.8,True
+4086,Kantar,2026-08-18,otzma,6.9,True
+4086,Kantar,2026-08-18,yisrael_beytenu,7.0,True
+4086,Kantar,2026-08-18,shas,5.4,True
+4086,Kantar,2026-08-18,utj,6.1,True
+4086,Kantar,2026-08-18,balad+hadash_taal,4.6,True
+4086,Kantar,2026-08-18,raam,3.8,True
+4086,Kantar,2026-08-18,zionist_home,2.9,True
+4086,Kantar,2026-08-18,blue_white,1.4,True
+4086,Kantar,2026-08-18,unity,1.6,True
+4088,Tatika,2026-08-19,yashar,18.2,True
+4088,Tatika,2026-08-19,likud,16.6,True
+4088,Tatika,2026-08-19,together,11.6,True
+4088,Tatika,2026-08-19,yisrael_beytenu,8.6,True
+4088,Tatika,2026-08-19,shas,6.6,True
+4088,Tatika,2026-08-19,utj,6.4,True
+4088,Tatika,2026-08-19,democrats,5.8,True
+4088,Tatika,2026-08-19,balad+hadash_taal,5.6,True
+4088,Tatika,2026-08-19,otzma,5.4,True
+4088,Tatika,2026-08-19,rzp,4.8,True
+4088,Tatika,2026-08-19,raam,4.2,True
+4088,Tatika,2026-08-19,zionist_home,3.0,False
+4088,Tatika,2026-08-19,blue_white,2.4,False
+4088,Tatika,2026-08-19,unity,0.8,False
+4089,Maagar Mochot,2026-08-19,likud,15.0,True
+4089,Maagar Mochot,2026-08-19,together,11.0,True
+4089,Maagar Mochot,2026-08-19,yashar,17.0,True
+4089,Maagar Mochot,2026-08-19,blue_white,1.0,True
+4089,Maagar Mochot,2026-08-19,rzp,3.0,True
+4089,Maagar Mochot,2026-08-19,otzma,6.0,True
+4089,Maagar Mochot,2026-08-19,shas,6.0,True
+4089,Maagar Mochot,2026-08-19,utj,5.0,True
+4089,Maagar Mochot,2026-08-19,yisrael_beytenu,6.0,True
+4089,Maagar Mochot,2026-08-19,democrats,7.0,True
+4089,Maagar Mochot,2026-08-19,balad+hadash_taal,3.0,True
+4089,Maagar Mochot,2026-08-19,raam,3.0,True
+4089,Maagar Mochot,2026-08-19,zionist_home,2.0,True
+4089,Maagar Mochot,2026-08-19,unity,2.0,True
+4089,Maagar Mochot,2026-08-19,nep,1.0,True
+4090,Lazar,2026-08-19,yashar,19.1,True
+4090,Lazar,2026-08-19,likud,14.2,True
+4090,Lazar,2026-08-19,together,11.5,True
+4090,Lazar,2026-08-19,yisrael_beytenu,7.7,True
+4090,Lazar,2026-08-19,democrats,7.4,True
+4090,Lazar,2026-08-19,otzma,6.5,True
+4090,Lazar,2026-08-19,utj,6.2,True
+4090,Lazar,2026-08-19,shas,5.3,True
+4090,Lazar,2026-08-19,balad+hadash_taal,4.5,True
+4090,Lazar,2026-08-19,raam,4.1,True
+4090,Lazar,2026-08-19,rzp,4.0,True
+4090,Lazar,2026-08-19,zionist_home,2.9,True
+4090,Lazar,2026-08-19,nep,1.7,True
+4090,Lazar,2026-08-19,amcha_yisrael,1.5,True
+4090,Lazar,2026-08-19,blue_white,1.1,True
+4090,Lazar,2026-08-19,unity,1.1,True
+4091,Kantar,2026-08-19,likud,17.2,True
+4091,Kantar,2026-08-19,together,10.2,True
+4091,Kantar,2026-08-19,yashar,18.0,True
+4091,Kantar,2026-08-19,democrats,7.8,True
+4091,Kantar,2026-08-19,rzp,3.9,True
+4091,Kantar,2026-08-19,otzma,7.0,True
+4091,Kantar,2026-08-19,yisrael_beytenu,7.8,True
+4091,Kantar,2026-08-19,shas,5.5,True
+4091,Kantar,2026-08-19,utj,6.2,True
+4091,Kantar,2026-08-19,balad+hadash_taal,6.2,True
+4091,Kantar,2026-08-19,raam,3.9,True
+4091,Kantar,2026-08-19,zionist_home,2.5,True
+4091,Kantar,2026-08-19,blue_white,2.1,True
+4091,Kantar,2026-08-19,unity,1.7,True
+4091,Kantar,2026-08-19,amcha_yisrael,3.3,True
+4099,Kantar,2026-08-24,likud,16.7,True
+4099,Kantar,2026-08-24,together,10.7,True
+4099,Kantar,2026-08-24,yashar,18.3,True
+4099,Kantar,2026-08-24,democrats,7.6,True
+4099,Kantar,2026-08-24,rzp,3.8,True
+4099,Kantar,2026-08-24,otzma,6.8,True
+4099,Kantar,2026-08-24,yisrael_beytenu,6.8,True
+4099,Kantar,2026-08-24,shas,5.4,True
+4099,Kantar,2026-08-24,utj,6.1,True
+4099,Kantar,2026-08-24,balad+hadash_taal,5.3,True
+4099,Kantar,2026-08-24,raam,3.8,True
+4099,Kantar,2026-08-24,blue_white,1.8,True
+4099,Kantar,2026-08-24,zionist_home,2.8,True
+4099,Kantar,2026-08-24,unity,1.6,True
+4099,Kantar,2026-08-24,amcha_yisrael,2.5,True
+4102,Filber,2026-08-24,likud,24.8,True
+4102,Filber,2026-08-24,yashar,18.5,True
+4102,Filber,2026-08-24,shas,7.8,True
+4102,Filber,2026-08-24,democrats,6.7,True
+4102,Filber,2026-08-24,otzma,6.3,True
+4102,Filber,2026-08-24,utj,6.1,True
+4102,Filber,2026-08-24,together,5.6,True
+4102,Filber,2026-08-24,yisrael_beytenu,5.1,True
+4102,Filber,2026-08-24,rzp,3.8,True
+4102,Filber,2026-08-24,raam,3.7,True
+4102,Filber,2026-08-24,balad+hadash_taal,4.0,True
+4102,Filber,2026-08-24,amcha_yisrael,2.1,True
+4102,Filber,2026-08-24,zionist_home,1.4,True
+4102,Filber,2026-08-24,nep,1.0,True
+4102,Filber,2026-08-24,blue_white,1.0,True
+4102,Filber,2026-08-24,unity,0.4,True
+4103,Midgam,2026-08-24,yashar,18.7,True
+4103,Midgam,2026-08-24,likud,17.1,True
+4103,Midgam,2026-08-24,together,11.7,True
+4103,Midgam,2026-08-24,democrats,8.4,True
+4103,Midgam,2026-08-24,yisrael_beytenu,7.0,True
+4103,Midgam,2026-08-24,otzma,6.9,True
+4103,Midgam,2026-08-24,utj,6.3,True
+4103,Midgam,2026-08-24,balad+hadash_taal,5.3,True
+4103,Midgam,2026-08-24,shas,5.2,True
+4103,Midgam,2026-08-24,rzp,3.3,True
+4103,Midgam,2026-08-24,raam,3.3,True
+4103,Midgam,2026-08-24,zionist_home,2.9,True
+4103,Midgam,2026-08-24,unity,0.8,True
+4103,Midgam,2026-08-24,blue_white,0.4,True
+4103,Midgam,2026-08-24,amcha_yisrael,3.3,True
+4104,Maagar Mochot,2026-08-25,likud,14.0,True
+4104,Maagar Mochot,2026-08-25,yashar,14.0,True
+4104,Maagar Mochot,2026-08-25,together,11.0,True
+4104,Maagar Mochot,2026-08-25,democrats,7.0,True
+4104,Maagar Mochot,2026-08-25,otzma,6.0,True
+4104,Maagar Mochot,2026-08-25,shas,6.0,True
+4104,Maagar Mochot,2026-08-25,yisrael_beytenu,6.0,True
+4104,Maagar Mochot,2026-08-25,utj,5.0,True
+4104,Maagar Mochot,2026-08-25,balad+hadash_taal,5.0,True
+4104,Maagar Mochot,2026-08-25,amcha_yisrael,4.0,True
+4104,Maagar Mochot,2026-08-25,raam,3.0,True
+4104,Maagar Mochot,2026-08-25,rzp,2.0,True
+4104,Maagar Mochot,2026-08-25,zionist_home,2.0,True
+4104,Maagar Mochot,2026-08-25,unity,2.0,True
+4104,Maagar Mochot,2026-08-25,blue_white,1.0,True
+4104,Maagar Mochot,2026-08-25,nep,1.0,True
+4105,Lazar,2026-08-26,yashar,18.7,True
+4105,Lazar,2026-08-26,likud,14.5,True
+4105,Lazar,2026-08-26,together,12.5,True
+4105,Lazar,2026-08-26,democrats,7.8,True
+4105,Lazar,2026-08-26,yisrael_beytenu,7.4,True
+4105,Lazar,2026-08-26,otzma,5.7,True
+4105,Lazar,2026-08-26,utj,5.3,True
+4105,Lazar,2026-08-26,shas,5.2,True
+4105,Lazar,2026-08-26,balad+hadash_taal,5.9,True
+4105,Lazar,2026-08-26,amcha_yisrael,4.6,True
+4105,Lazar,2026-08-26,raam,4.1,True
+4105,Lazar,2026-08-26,rzp,2.6,True
+4105,Lazar,2026-08-26,zionist_home,2.1,True
+4105,Lazar,2026-08-26,nep,1.2,True
+4105,Lazar,2026-08-26,blue_white,1.2,True
+4105,Lazar,2026-08-26,israel_first,0.9,True
+4105,Lazar,2026-08-26,unity,0.3,True
+4107,Tatika,2026-08-26,yashar,19.6,True
+4107,Tatika,2026-08-26,likud,16.2,True
+4107,Tatika,2026-08-26,together,10.8,True
+4107,Tatika,2026-08-26,yisrael_beytenu,8.0,True
+4107,Tatika,2026-08-26,shas,7.2,True
+4107,Tatika,2026-08-26,utj,6.4,True
+4107,Tatika,2026-08-26,democrats,6.0,True
+4107,Tatika,2026-08-26,balad+hadash_taal,5.0,True
+4107,Tatika,2026-08-26,otzma,5.0,True
+4107,Tatika,2026-08-26,amcha_yisrael,4.4,True
+4107,Tatika,2026-08-26,raam,4.0,True
+4107,Tatika,2026-08-26,rzp,2.8,False
+4107,Tatika,2026-08-26,zionist_home,2.4,False
+4107,Tatika,2026-08-26,blue_white,1.4,False
+4107,Tatika,2026-08-26,unity,0.8,False
+4108,Direct Polls,2026-08-26,likud,20.1,True
+4108,Direct Polls,2026-08-26,democrats,8.2,True
+4108,Direct Polls,2026-08-26,yisrael_beytenu,6.5,True
+4108,Direct Polls,2026-08-26,utj,6.3,True
+4108,Direct Polls,2026-08-26,together,6.2,True
+4108,Direct Polls,2026-08-26,shas,5.7,True
+4108,Direct Polls,2026-08-26,raam,5.3,True
+4108,Direct Polls,2026-08-26,balad+hadash_taal,4.9,True
+4109,Filber,2026-08-27,likud,24.0,True
+4109,Filber,2026-08-27,yashar,17.9,True
+4109,Filber,2026-08-27,shas,7.9,True
+4109,Filber,2026-08-27,democrats,6.9,True
+4109,Filber,2026-08-27,otzma,5.2,True
+4109,Filber,2026-08-27,balad+hadash_taal,5.1,True
+4109,Filber,2026-08-27,utj,5.4,True
+4109,Filber,2026-08-27,together,5.4,True
+4109,Filber,2026-08-27,yisrael_beytenu,4.5,True
+4109,Filber,2026-08-27,raam,3.9,True
+4109,Filber,2026-08-27,amcha_yisrael,3.9,True
+4109,Filber,2026-08-27,rzp,3.3,True
+4109,Filber,2026-08-27,zionist_home,1.1,True
+4109,Filber,2026-08-27,blue_white,0.4,True
+4109,Filber,2026-08-27,noam,0.3,True
+4109,Filber,2026-08-27,unity,0.3,True
+4110,Lazar,2026-08-26,yashar,18.6,True
+4110,Lazar,2026-08-26,likud,14.4,True
+4110,Lazar,2026-08-26,together,12.7,True
+4110,Lazar,2026-08-26,democrats,8.0,True
+4110,Lazar,2026-08-26,yisrael_beytenu,7.2,True
+4110,Lazar,2026-08-26,otzma,5.5,True
+4110,Lazar,2026-08-26,utj,5.0,True
+4110,Lazar,2026-08-26,shas,5.4,True
+4110,Lazar,2026-08-26,balad+hadash_taal,6.0,True
+4110,Lazar,2026-08-26,amcha_yisrael,4.6,True
+4110,Lazar,2026-08-26,raam,4.2,True
+4110,Lazar,2026-08-26,rzp,2.9,True
+4110,Lazar,2026-08-26,zionist_home,1.9,True
+4110,Lazar,2026-08-26,nep,1.2,True
+4110,Lazar,2026-08-26,blue_white,1.3,True
+4110,Lazar,2026-08-26,israel_first,0.6,True
+4110,Lazar,2026-08-26,unity,0.5,True
+4112,Kantar,2026-08-30,likud,16.6,True
+4112,Kantar,2026-08-30,together,11.1,True
+4112,Kantar,2026-08-30,yashar,19.1,True
+4112,Kantar,2026-08-30,democrats,7.1,True
+4112,Kantar,2026-08-30,rzp,4.0,True
+4112,Kantar,2026-08-30,otzma,5.6,True
+4112,Kantar,2026-08-30,amcha_yisrael,3.3,True
+4112,Kantar,2026-08-30,yisrael_beytenu,6.4,True
+4112,Kantar,2026-08-30,shas,5.5,True
+4112,Kantar,2026-08-30,utj,6.4,True
+4112,Kantar,2026-08-30,balad+hadash_taal,6.3,True
+4112,Kantar,2026-08-30,raam,4.0,True
+4112,Kantar,2026-08-30,blue_white,1.5,True
+4112,Kantar,2026-08-30,zionist_home,2.4,True
+4112,Kantar,2026-08-30,unity,0.7,True
+4113,Filber,2026-08-30,likud,23.7,True
+4113,Filber,2026-08-30,yashar,18.4,True
+4113,Filber,2026-08-30,shas,7.7,True
+4113,Filber,2026-08-30,democrats,6.1,True
+4113,Filber,2026-08-30,yisrael_beytenu,5.5,True
+4113,Filber,2026-08-30,otzma,5.5,True
+4113,Filber,2026-08-30,utj,5.6,True
+4113,Filber,2026-08-30,balad+hadash_taal,5.4,True
+4113,Filber,2026-08-30,together,4.4,True
+4113,Filber,2026-08-30,raam,3.8,True
+4113,Filber,2026-08-30,rzp,3.1,True
+4113,Filber,2026-08-30,amcha_yisrael,3.2,True
+4113,Filber,2026-08-30,zionist_home,0.9,True
+4113,Filber,2026-08-30,unity,0.6,True
+4113,Filber,2026-08-30,blue_white,0.5,True
+4113,Filber,2026-08-30,noam,0.5,True
+4115,Midgam,2026-08-31,yashar,17.7,True
+4115,Midgam,2026-08-31,likud,16.7,True
+4115,Midgam,2026-08-31,together,10.8,True
+4115,Midgam,2026-08-31,democrats,7.8,True
+4115,Midgam,2026-08-31,yisrael_beytenu,6.5,True
+4115,Midgam,2026-08-31,utj,5.7,True
+4115,Midgam,2026-08-31,otzma,5.7,True
+4115,Midgam,2026-08-31,shas,5.1,True
+4115,Midgam,2026-08-31,balad+hadash_taal,5.0,True
+4115,Midgam,2026-08-31,raam,3.4,True
+4115,Midgam,2026-08-31,amcha_yisrael,3.3,True
+4115,Midgam,2026-08-31,rzp,2.6,True
+4115,Midgam,2026-08-31,zionist_home,2.6,True
+4115,Midgam,2026-08-31,haredi_public,1.2,True
+4115,Midgam,2026-08-31,nep,1.0,True
+4115,Midgam,2026-08-31,blue_white,0.9,True
+4115,Midgam,2026-08-31,unity,0.5,True
+4116,Direct Polls,2026-09-02,likud,21.2,True
+4116,Direct Polls,2026-09-02,yashar,18.6,True
+4116,Direct Polls,2026-09-02,democrats,7.1,True
+4116,Direct Polls,2026-09-02,together,7.0,True
+4116,Direct Polls,2026-09-02,utj,6.4,True
+4116,Direct Polls,2026-09-02,balad+hadash_taal,5.7,True
+4116,Direct Polls,2026-09-02,otzma,5.7,True
+4116,Direct Polls,2026-09-02,shas,5.6,True
+4116,Direct Polls,2026-09-02,yisrael_beytenu,5.4,True
+4116,Direct Polls,2026-09-02,rzp,4.9,True
+4116,Direct Polls,2026-09-02,raam,4.2,True
+4116,Direct Polls,2026-09-02,amcha_yisrael,4.1,True
+4116,Direct Polls,2026-09-02,zionist_home,1.0,True
+4116,Direct Polls,2026-09-02,unity,1.0,True
+4117,Maagar Mochot,2026-09-01,yashar,15.0,True
+4117,Maagar Mochot,2026-09-01,likud,14.0,True
+4117,Maagar Mochot,2026-09-01,together,13.0,True
+4117,Maagar Mochot,2026-09-01,democrats,7.0,True
+4117,Maagar Mochot,2026-09-01,otzma,6.0,True
+4117,Maagar Mochot,2026-09-01,shas,7.0,True
+4117,Maagar Mochot,2026-09-01,utj,5.0,True
+4117,Maagar Mochot,2026-09-01,yisrael_beytenu,5.0,True
+4117,Maagar Mochot,2026-09-01,balad+hadash_taal,5.0,True
+4117,Maagar Mochot,2026-09-01,rzp,4.0,True
+4117,Maagar Mochot,2026-09-01,amcha_yisrael,4.0,True
+4117,Maagar Mochot,2026-09-01,raam,3.0,True
+4117,Maagar Mochot,2026-09-01,zionist_home,2.0,True
+4117,Maagar Mochot,2026-09-01,nep,2.0,True
+4117,Maagar Mochot,2026-09-01,unity,1.0,True
+4117,Maagar Mochot,2026-09-01,blue_white,1.0,True
+4117,Maagar Mochot,2026-09-01,haredi_public,1.0,True
+4120,Lazar,2026-09-01,yashar,17.6,True
+4120,Lazar,2026-09-01,likud,15.4,True
+4120,Lazar,2026-09-01,together,12.5,True
+4120,Lazar,2026-09-01,democrats,7.9,True
+4120,Lazar,2026-09-01,yisrael_beytenu,7.4,True
+4120,Lazar,2026-09-01,utj,5.5,True
+4120,Lazar,2026-09-01,balad+hadash_taal,5.4,True
+4120,Lazar,2026-09-01,otzma,5.2,True
+4120,Lazar,2026-09-01,shas,5.1,True
+4120,Lazar,2026-09-01,rzp,4.2,True
+4120,Lazar,2026-09-01,raam,4.0,True
+4120,Lazar,2026-09-01,zionist_home,3.0,True
+4120,Lazar,2026-09-01,amcha_yisrael,2.3,True
+4120,Lazar,2026-09-01,nep,2.0,True
+4120,Lazar,2026-09-01,blue_white,0.7,True
+4120,Lazar,2026-09-01,unity,0.7,True
+4120,Lazar,2026-09-01,makom_lekulanu,0.5,True
+4120,Lazar,2026-09-01,haredi_public,0.4,True
+4120,Lazar,2026-09-01,israel_first,0.2,True
+4121,Lazar,2026-09-02,yashar,17.6,True
+4121,Lazar,2026-09-02,likud,15.4,True
+4121,Lazar,2026-09-02,together,12.5,True
+4121,Lazar,2026-09-02,democrats,7.9,True
+4121,Lazar,2026-09-02,yisrael_beytenu,7.4,True
+4121,Lazar,2026-09-02,utj,5.5,True
+4121,Lazar,2026-09-02,balad+hadash_taal,5.4,True
+4121,Lazar,2026-09-02,otzma,5.2,True
+4121,Lazar,2026-09-02,shas,5.1,True
+4121,Lazar,2026-09-02,rzp,4.2,True
+4121,Lazar,2026-09-02,raam,4.0,True
+4121,Lazar,2026-09-02,zionist_home,3.0,True
+4121,Lazar,2026-09-02,amcha_yisrael,2.3,True
+4121,Lazar,2026-09-02,nep,2.0,True
+4121,Lazar,2026-09-02,blue_white,0.7,True
+4121,Lazar,2026-09-02,unity,0.7,True
+4121,Lazar,2026-09-02,makom_lekulanu,0.5,True
+4121,Lazar,2026-09-02,haredi_public,0.4,True
+4121,Lazar,2026-09-02,israel_first,0.2,True
+4123,Kantar,2026-09-02,likud,16.6,True
+4123,Kantar,2026-09-02,together,10.3,True
+4123,Kantar,2026-09-02,yashar,19.0,True
+4123,Kantar,2026-09-02,democrats,7.1,True
+4123,Kantar,2026-09-02,rzp,4.7,True
+4123,Kantar,2026-09-02,otzma,5.5,True
+4123,Kantar,2026-09-02,amcha_yisrael,3.3,True
+4123,Kantar,2026-09-02,yisrael_beytenu,7.1,True
+4123,Kantar,2026-09-02,shas,5.5,True
+4123,Kantar,2026-09-02,utj,6.3,True
+4123,Kantar,2026-09-02,balad+hadash_taal,5.5,True
+4123,Kantar,2026-09-02,raam,4.0,True
+4123,Kantar,2026-09-02,blue_white,1.7,True
+4123,Kantar,2026-09-02,zionist_home,2.7,True
+4123,Kantar,2026-09-02,unity,0.7,True
+4128,Filber,2026-09-03,likud,24.2,True
+4128,Filber,2026-09-03,yashar,16.9,True
+4128,Filber,2026-09-03,together,8.6,True
+4128,Filber,2026-09-03,shas,7.5,True
+4128,Filber,2026-09-03,democrats,7.5,True
+4128,Filber,2026-09-03,utj,6.3,True
+4128,Filber,2026-09-03,rzp,5.5,True
+4128,Filber,2026-09-03,otzma,5.4,True
+4128,Filber,2026-09-03,balad+hadash_taal,5.3,True
+4128,Filber,2026-09-03,yisrael_beytenu,5.2,True
+4128,Filber,2026-09-03,raam,3.25,False
+4128,Filber,2026-09-03,amcha_yisrael,2.7,True
+4128,Filber,2026-09-03,zionist_home,1.3,True
+4128,Filber,2026-09-03,blue_white,1.2,True
+4128,Filber,2026-09-03,noam,0.3,True
+4128,Filber,2026-09-03,unity,0.1,True
+4128,Filber,2026-09-03,haredi_public,0.1,True
+4129,Kantar,2026-09-06,likud,16.3,True
+4129,Kantar,2026-09-06,together,10.6,True
+4129,Kantar,2026-09-06,yashar,18.8,True
+4129,Kantar,2026-09-06,democrats,6.5,True
+4129,Kantar,2026-09-06,rzp,4.9,True
+4129,Kantar,2026-09-06,otzma,5.7,True
+4129,Kantar,2026-09-06,amcha_yisrael,3.3,True
+4129,Kantar,2026-09-06,yisrael_beytenu,5.7,True
+4129,Kantar,2026-09-06,shas,5.7,True
+4129,Kantar,2026-09-06,utj,6.5,True
+4129,Kantar,2026-09-06,zionist_home,3.3,True
+4129,Kantar,2026-09-06,balad+hadash_taal,5.7,True
+4129,Kantar,2026-09-06,raam,4.9,True
+4129,Kantar,2026-09-06,blue_white,1.2,True
+4129,Kantar,2026-09-06,haredi_public,0.9,True
+4129,Kantar,2026-09-06,nep,2.0,True
+4130,Lazar,2026-09-07,yashar,19.4,True
+4130,Lazar,2026-09-07,likud,14.6,True
+4130,Lazar,2026-09-07,together,11.1,True
+4130,Lazar,2026-09-07,democrats,8.5,True
+4130,Lazar,2026-09-07,yisrael_beytenu,7.1,True
+4130,Lazar,2026-09-07,otzma,5.6,True
+4130,Lazar,2026-09-07,utj,5.1,True
+4130,Lazar,2026-09-07,shas,5.0,True
+4130,Lazar,2026-09-07,balad+hadash_taal,5.2,True
+4130,Lazar,2026-09-07,raam,4.4,True
+4130,Lazar,2026-09-07,rzp,4.6,True
+4130,Lazar,2026-09-07,zionist_home,4.3,True
+4130,Lazar,2026-09-07,amcha_yisrael,2.8,True
+4130,Lazar,2026-09-07,blue_white,1.3,True
+4130,Lazar,2026-09-07,noam,0.6,True
+4130,Lazar,2026-09-07,haredi_public,0.4,True
+4134,Maagar Mochot,2026-09-08,yashar,17.0,True
+4134,Maagar Mochot,2026-09-08,likud,15.0,True
+4134,Maagar Mochot,2026-09-08,together,11.0,True
+4134,Maagar Mochot,2026-09-08,otzma,6.0,True
+4134,Maagar Mochot,2026-09-08,shas,7.0,True
+4134,Maagar Mochot,2026-09-08,democrats,7.0,True
+4134,Maagar Mochot,2026-09-08,utj,5.0,True
+4134,Maagar Mochot,2026-09-08,yisrael_beytenu,5.0,True
+4134,Maagar Mochot,2026-09-08,balad+hadash_taal,6.0,True
+4134,Maagar Mochot,2026-09-08,raam,4.0,True
+4134,Maagar Mochot,2026-09-08,rzp,3.0,True
+4134,Maagar Mochot,2026-09-08,amcha_yisrael,3.0,True
+4134,Maagar Mochot,2026-09-08,zionist_home,2.0,True
+4134,Maagar Mochot,2026-09-08,blue_white,1.0,True
+4134,Maagar Mochot,2026-09-08,haredi_public,0.7,True
+4136,Direct Polls,2026-09-09,likud,21.1,True
+4136,Direct Polls,2026-09-09,yashar,17.7,True
+4136,Direct Polls,2026-09-09,together,7.7,True
+4136,Direct Polls,2026-09-09,democrats,7.5,True
+4136,Direct Polls,2026-09-09,utj,6.2,True
+4136,Direct Polls,2026-09-09,otzma,6.1,True
+4136,Direct Polls,2026-09-09,balad+hadash_taal,5.7,True
+4136,Direct Polls,2026-09-09,yisrael_beytenu,5.4,True
+4136,Direct Polls,2026-09-09,shas,5.3,True
+4136,Direct Polls,2026-09-09,rzp,5.0,True
+4136,Direct Polls,2026-09-09,raam,4.5,True
+4136,Direct Polls,2026-09-09,amcha_yisrael,3.4,True
+4136,Direct Polls,2026-09-09,zionist_home,1.4,True
+4136,Direct Polls,2026-09-09,blue_white,1.1,True
+4136,Direct Polls,2026-09-09,noam,1.0,True
+4137,Kantar,2026-09-09,likud,17.0,True
+4137,Kantar,2026-09-09,together,9.7,True
+4137,Kantar,2026-09-09,yashar,19.4,True
+4137,Kantar,2026-09-09,democrats,7.2,True
+4137,Kantar,2026-09-09,zionist_home,3.3,True
+4137,Kantar,2026-09-09,rzp,4.1,True
+4137,Kantar,2026-09-09,otzma,5.7,True
+4137,Kantar,2026-09-09,amcha_yisrael,3.3,True
+4137,Kantar,2026-09-09,yisrael_beytenu,5.7,True
+4137,Kantar,2026-09-09,shas,5.7,True
+4137,Kantar,2026-09-09,utj,6.5,True
+4137,Kantar,2026-09-09,balad+hadash_taal,5.7,True
+4137,Kantar,2026-09-09,raam,4.1,True
+4137,Kantar,2026-09-09,blue_white,0.8,True
+4137,Kantar,2026-09-09,haredi_public,0.9,True
+4137,Kantar,2026-09-09,noam,0.4,True
+4137,Kantar,2026-09-09,israel_first,0.5,True
+4138,Direct Polls,2026-09-09,likud,21.1,True
+4138,Direct Polls,2026-09-09,yashar,17.7,True
+4138,Direct Polls,2026-09-09,together,7.7,True
+4138,Direct Polls,2026-09-09,democrats,7.5,True
+4138,Direct Polls,2026-09-09,utj,6.2,True
+4138,Direct Polls,2026-09-09,otzma,6.1,True
+4138,Direct Polls,2026-09-09,balad+hadash_taal,5.7,True
+4138,Direct Polls,2026-09-09,yisrael_beytenu,5.4,True
+4138,Direct Polls,2026-09-09,shas,5.3,True
+4138,Direct Polls,2026-09-09,rzp,5.0,True
+4138,Direct Polls,2026-09-09,raam,4.5,True
+4138,Direct Polls,2026-09-09,amcha_yisrael,3.4,True
+4138,Direct Polls,2026-09-09,zionist_home,1.4,True
+4138,Direct Polls,2026-09-09,blue_white,1.1,True
+4138,Direct Polls,2026-09-09,noam,1.0,True
+4139,Lazar,2026-09-09,yashar,18.9,True
+4139,Lazar,2026-09-09,likud,14.7,True
+4139,Lazar,2026-09-09,together,12.3,True
+4139,Lazar,2026-09-09,yisrael_beytenu,7.3,True
+4139,Lazar,2026-09-09,democrats,7.4,True
+4139,Lazar,2026-09-09,otzma,5.9,True
+4139,Lazar,2026-09-09,utj,5.4,True
+4139,Lazar,2026-09-09,balad+hadash_taal,5.5,True
+4139,Lazar,2026-09-09,shas,4.9,True
+4139,Lazar,2026-09-09,rzp,4.6,True
+4139,Lazar,2026-09-09,raam,4.7,True
+4139,Lazar,2026-09-09,amcha_yisrael,3.4,True
+4139,Lazar,2026-09-09,zionist_home,2.8,True
+4139,Lazar,2026-09-09,ahi,1.1,True
+4139,Lazar,2026-09-09,blue_white,0.9,True
+4139,Lazar,2026-09-09,haredi_public,0.2,True
+4139,Lazar,2026-09-09,noam,0.2,True
+4141,Midgam,2026-09-07,yashar,19.7,True
+4141,Midgam,2026-09-07,likud,16.6,True
+4141,Midgam,2026-09-07,together,10.3,True
+4141,Midgam,2026-09-07,democrats,8.7,True
+4141,Midgam,2026-09-07,utj,6.1,True
+4141,Midgam,2026-09-07,yisrael_beytenu,6.0,True
+4141,Midgam,2026-09-07,balad+hadash_taal,5.4,True
+4141,Midgam,2026-09-07,shas,5.3,True
+4141,Midgam,2026-09-07,rzp,4.7,True
+4141,Midgam,2026-09-07,otzma,4.7,True
+4141,Midgam,2026-09-07,amcha_yisrael,3.4,True
+4141,Midgam,2026-09-07,raam,3.3,True
+4141,Midgam,2026-09-07,zionist_home,2.7,True
+4141,Midgam,2026-09-07,haredi_public,1.1,True
+4141,Midgam,2026-09-07,blue_white,1.0,True
+4141,Midgam,2026-09-07,noam,0.2,True
+4141,Midgam,2026-09-07,makom_lekulanu,0.1,True
+4141,Midgam,2026-09-07,israel_first,0.0,True
+4141,Midgam,2026-09-07,nep,2.3,True
+4142,Filber,2026-09-07,likud,23.2,True
+4142,Filber,2026-09-07,yashar,17.0,True
+4142,Filber,2026-09-07,democrats,8.5,True
+4142,Filber,2026-09-07,shas,7.9,True
+4142,Filber,2026-09-07,rzp,7.0,True
+4142,Filber,2026-09-07,balad+hadash_taal,6.4,True
+4142,Filber,2026-09-07,otzma,6.2,True
+4142,Filber,2026-09-07,utj,5.7,True
+4142,Filber,2026-09-07,together,5.2,True
+4142,Filber,2026-09-07,yisrael_beytenu,5.0,True
+4142,Filber,2026-09-07,raam,3.9,True
+4142,Filber,2026-09-07,amcha_yisrael,3.0,True
+4142,Filber,2026-09-07,blue_white,0.4,True
+4142,Filber,2026-09-07,haredi_public,0.3,True
+4142,Filber,2026-09-07,noam,0.2,True
+4143,Filber,2026-09-09,likud,24.0,True
+4143,Filber,2026-09-09,yashar,17.0,True
+4143,Filber,2026-09-09,shas,8.0,True
+4143,Filber,2026-09-09,rzp,6.0,True
+4143,Filber,2026-09-09,democrats,6.0,True
+4143,Filber,2026-09-09,otzma,6.0,True
+4143,Filber,2026-09-09,utj,5.0,True
+4143,Filber,2026-09-09,together,5.0,True
+4143,Filber,2026-09-09,yisrael_beytenu,5.0,True
+4143,Filber,2026-09-09,raam,5.0,True
+4143,Filber,2026-09-09,balad+hadash_taal,5.0,True
+4143,Filber,2026-09-09,amcha_yisrael,2.1,True
+4143,Filber,2026-09-09,zionist_home,1.6,True
+4143,Filber,2026-09-09,blue_white,0.2,True
+4143,Filber,2026-09-09,haredi_public,0.1,True
+4144,Lazar,2026-09-09,yashar,18.8,True
+4144,Lazar,2026-09-09,likud,13.9,True
+4144,Lazar,2026-09-09,together,11.7,True
+4144,Lazar,2026-09-09,democrats,9.4,True
+4144,Lazar,2026-09-09,yisrael_beytenu,7.0,True
+4144,Lazar,2026-09-09,otzma,6.2,True
+4144,Lazar,2026-09-09,utj,5.0,True
+4144,Lazar,2026-09-09,shas,5.2,True
+4144,Lazar,2026-09-09,balad+hadash_taal,5.4,True
+4144,Lazar,2026-09-09,raam,4.5,True
+4144,Lazar,2026-09-09,rzp,4.3,True
+4144,Lazar,2026-09-09,amcha_yisrael,3.4,True
+4144,Lazar,2026-09-09,zionist_home,3.0,True
+4144,Lazar,2026-09-09,blue_white,1.1,True
+4144,Lazar,2026-09-09,noam,0.7,True
+4144,Lazar,2026-09-09,haredi_public,0.4,True
+4145,Midgam,2026-09-09,yashar,19.4,True
+4145,Midgam,2026-09-09,likud,16.3,True
+4145,Midgam,2026-09-09,together,9.2,True
+4145,Midgam,2026-09-09,democrats,8.5,True
+4145,Midgam,2026-09-09,yisrael_beytenu,7.0,True
+4145,Midgam,2026-09-09,utj,6.3,True
+4145,Midgam,2026-09-09,shas,5.4,True
+4145,Midgam,2026-09-09,balad+hadash_taal,5.3,True
+4145,Midgam,2026-09-09,otzma,4.6,True
+4145,Midgam,2026-09-09,rzp,4.4,True
+4145,Midgam,2026-09-09,amcha_yisrael,3.9,True
+4145,Midgam,2026-09-09,raam,3.3,True
+4145,Midgam,2026-09-09,zionist_home,2.9,True
+4145,Midgam,2026-09-09,blue_white,1.4,True
+4145,Midgam,2026-09-09,haredi_public,1.0,True
+4145,Midgam,2026-09-09,israel_first,0.3,True
+4145,Midgam,2026-09-09,noam,0.2,True
+4146,Kantar,2026-09-14,likud,16.2,True
+4146,Kantar,2026-09-14,together,9.7,True
+4146,Kantar,2026-09-14,yashar,19.4,True
+4146,Kantar,2026-09-14,democrats,6.4,True
+4146,Kantar,2026-09-14,zionist_home,3.3,True
+4146,Kantar,2026-09-14,rzp,4.8,True
+4146,Kantar,2026-09-14,otzma,6.4,True
+4146,Kantar,2026-09-14,amcha_yisrael,3.3,True
+4146,Kantar,2026-09-14,yisrael_beytenu,6.4,True
+4146,Kantar,2026-09-14,shas,5.6,True
+4146,Kantar,2026-09-14,utj,5.6,True
+4146,Kantar,2026-09-14,balad+hadash_taal,5.6,True
+4146,Kantar,2026-09-14,raam,4.0,True
+4146,Kantar,2026-09-14,blue_white,1.5,True
+4146,Kantar,2026-09-14,haredi_public,0.8,True
+4146,Kantar,2026-09-14,noam,0.5,True
+4146,Kantar,2026-09-14,israel_first,0.5,True
+4149,Filber,2026-09-15,likud,21.0,True
+4149,Filber,2026-09-15,yashar,17.0,True
+4149,Filber,2026-09-15,shas,7.0,True
+4149,Filber,2026-09-15,democrats,7.0,True
+4149,Filber,2026-09-15,otzma,4.0,True
+4149,Filber,2026-09-15,together,6.0,True
+4149,Filber,2026-09-15,rzp,4.0,True
+4149,Filber,2026-09-15,utj,7.0,True
+4149,Filber,2026-09-15,balad+hadash_taal,7.0,True
+4149,Filber,2026-09-15,yisrael_beytenu,5.0,True
+4149,Filber,2026-09-15,raam,4.0,True
+4149,Filber,2026-09-15,zionist_home,2.1,True
+4149,Filber,2026-09-15,amcha_yisrael,2.3,True
+4149,Filber,2026-09-15,noam,0.3,True
+4149,Filber,2026-09-15,blue_white,0.4,True
+4150,Filber,2026-09-15,likud,23.1,True
+4150,Filber,2026-09-15,yashar,16.0,True
+4150,Filber,2026-09-15,shas,7.7,True
+4150,Filber,2026-09-15,democrats,7.1,True
+4150,Filber,2026-09-15,otzma,6.5,True
+4150,Filber,2026-09-15,together,6.0,True
+4150,Filber,2026-09-15,rzp,6.1,True
+4150,Filber,2026-09-15,utj,6.3,True
+4150,Filber,2026-09-15,balad+hadash_taal,5.5,True
+4150,Filber,2026-09-15,yisrael_beytenu,4.6,True
+4150,Filber,2026-09-15,raam,3.6,True
+4150,Filber,2026-09-15,zionist_home,2.1,True
+4150,Filber,2026-09-15,amcha_yisrael,2.3,True
+4150,Filber,2026-09-15,noam,0.3,True
+4150,Filber,2026-09-15,blue_white,0.4,True
+4151,Maagar Mochot,2026-09-15,yashar,15.0,True
+4151,Maagar Mochot,2026-09-15,likud,14.0,True
+4151,Maagar Mochot,2026-09-15,together,12.0,True
+4151,Maagar Mochot,2026-09-15,otzma,7.0,True
+4151,Maagar Mochot,2026-09-15,shas,6.0,True
+4151,Maagar Mochot,2026-09-15,democrats,6.0,True
+4151,Maagar Mochot,2026-09-15,utj,5.0,True
+4151,Maagar Mochot,2026-09-15,yisrael_beytenu,5.0,True
+4151,Maagar Mochot,2026-09-15,balad+hadash_taal,5.0,True
+4151,Maagar Mochot,2026-09-15,raam,4.0,True
+4151,Maagar Mochot,2026-09-15,rzp,4.0,True
+4151,Maagar Mochot,2026-09-15,amcha_yisrael,3.0,True
+4151,Maagar Mochot,2026-09-15,zionist_home,3.0,True
+4151,Maagar Mochot,2026-09-15,blue_white,0.7,True
+4151,Maagar Mochot,2026-09-15,israel_first,0.2,True
+4151,Maagar Mochot,2026-09-15,haredi_public,1.2,True
+4151,Maagar Mochot,2026-09-15,unity,0.0,True
+4151,Maagar Mochot,2026-09-15,noam,0.2,True
+4151,Maagar Mochot,2026-09-15,code_black,0.2,True
+4151,Maagar Mochot,2026-09-15,beit_yisrael,0.0,True
+4158,Lazar,2026-09-16,yashar,17.0,True
+4158,Lazar,2026-09-16,likud,14.9,True
+4158,Lazar,2026-09-16,together,11.0,True
+4158,Lazar,2026-09-16,democrats,7.6,True
+4158,Lazar,2026-09-16,yisrael_beytenu,7.7,True
+4158,Lazar,2026-09-16,otzma,6.3,True
+4158,Lazar,2026-09-16,utj,5.2,True
+4158,Lazar,2026-09-16,shas,5.1,True
+4158,Lazar,2026-09-16,balad+hadash_taal,5.4,True
+4158,Lazar,2026-09-16,raam,4.2,True
+4158,Lazar,2026-09-16,rzp,5.2,True
+4158,Lazar,2026-09-16,amcha_yisrael,3.4,True
+4158,Lazar,2026-09-16,zionist_home,3.5,True
+4158,Lazar,2026-09-16,blue_white,1.1,True
+4158,Lazar,2026-09-16,noam,0.6,True
+4158,Lazar,2026-09-16,haredi_public,0.6,True
+4158,Lazar,2026-09-16,beit_yisrael,0.4,True
+4159,Filber,2026-09-17,likud,24.0,True
+4159,Filber,2026-09-17,yashar,15.4,True
+4159,Filber,2026-09-17,shas,7.9,True
+4159,Filber,2026-09-17,together,6.9,True
+4159,Filber,2026-09-17,utj,6.3,True
+4159,Filber,2026-09-17,otzma,6.1,True
+4159,Filber,2026-09-17,democrats,6.3,True
+4159,Filber,2026-09-17,rzp,5.3,True
+4159,Filber,2026-09-17,yisrael_beytenu,5.5,True
+4159,Filber,2026-09-17,balad+hadash_taal,6.8,True
+4159,Filber,2026-09-17,raam,4.0,True
+4159,Filber,2026-09-17,amcha_yisrael,2.6,True
+4159,Filber,2026-09-17,zionist_home,2.2,True
+4159,Filber,2026-09-17,blue_white,0.4,True
+4159,Filber,2026-09-17,haredi_public,0.3,True
+4160,Kantar,2026-09-16,likud,16.2,True
+4160,Kantar,2026-09-16,together,10.5,True
+4160,Kantar,2026-09-16,yashar,17.8,True
+4160,Kantar,2026-09-16,democrats,7.2,True
+4160,Kantar,2026-09-16,zionist_home,3.3,True
+4160,Kantar,2026-09-16,rzp,4.9,True
+4160,Kantar,2026-09-16,otzma,6.5,True
+4160,Kantar,2026-09-16,amcha_yisrael,3.3,True
+4160,Kantar,2026-09-16,yisrael_beytenu,6.5,True
+4160,Kantar,2026-09-16,shas,5.6,True
+4160,Kantar,2026-09-16,utj,5.7,True
+4160,Kantar,2026-09-16,balad+hadash_taal,5.6,True
+4160,Kantar,2026-09-16,raam,4.0,True
+4160,Kantar,2026-09-16,blue_white,1.2,True
+4160,Kantar,2026-09-16,haredi_public,0.8,True
+4160,Kantar,2026-09-16,noam,0.4,True
+4160,Kantar,2026-09-16,code_black,0.5,True
+4161,Direct Polls,2026-09-17,likud,21.6,True
+4161,Direct Polls,2026-09-17,yashar,17.0,True
+4161,Direct Polls,2026-09-17,democrats,8.0,True
+4161,Direct Polls,2026-09-17,together,7.4,True
+4161,Direct Polls,2026-09-17,yisrael_beytenu,6.4,True
+4161,Direct Polls,2026-09-17,utj,6.1,True
+4161,Direct Polls,2026-09-17,otzma,5.7,True
+4161,Direct Polls,2026-09-17,balad+hadash_taal,5.4,True
+4161,Direct Polls,2026-09-17,shas,5.3,True
+4161,Direct Polls,2026-09-17,rzp,5.2,True
+4161,Direct Polls,2026-09-17,raam,4.2,True
+4161,Direct Polls,2026-09-17,amcha_yisrael,3.7,True
+4161,Direct Polls,2026-09-17,zionist_home,2.2,True
+4161,Direct Polls,2026-09-17,blue_white,1.0,True
+4162,Midgam,2026-09-22,yashar,19.0,True
+4162,Midgam,2026-09-22,likud,16.5,True
+4162,Midgam,2026-09-22,together,10.7,True
+4162,Midgam,2026-09-22,democrats,7.4,True
+4162,Midgam,2026-09-22,yisrael_beytenu,7.3,True
+4162,Midgam,2026-09-22,utj,6.6,True
+4162,Midgam,2026-09-22,shas,5.8,True
+4162,Midgam,2026-09-22,balad+hadash_taal,5.7,True
+4162,Midgam,2026-09-22,otzma,5.0,True
+4162,Midgam,2026-09-22,raam,4.1,True
+4162,Midgam,2026-09-22,rzp,4.0,True
+4162,Midgam,2026-09-22,zionist_home,3.5,True
+4162,Midgam,2026-09-22,amcha_yisrael,3.3,True
+4162,Midgam,2026-09-22,blue_white,0.7,True
+4162,Midgam,2026-09-22,haredi_public,0.3,True
+4162,Midgam,2026-09-22,noam,0.1,True
+4162,Midgam,2026-09-22,beit_yisrael,0.0,True
+4162,Midgam,2026-09-22,israel_first,0.0,True
+4163,Kantar,2026-09-09,likud,17.0,True
+4163,Kantar,2026-09-09,together,9.7,True
+4163,Kantar,2026-09-09,yashar,19.4,True
+4163,Kantar,2026-09-09,democrats,7.2,True
+4163,Kantar,2026-09-09,zionist_home,3.3,True
+4163,Kantar,2026-09-09,rzp,4.1,True
+4163,Kantar,2026-09-09,otzma,5.7,True
+4163,Kantar,2026-09-09,amcha_yisrael,3.3,True
+4163,Kantar,2026-09-09,yisrael_beytenu,5.7,True
+4163,Kantar,2026-09-09,shas,5.7,True
+4163,Kantar,2026-09-09,utj,6.5,True
+4163,Kantar,2026-09-09,balad+hadash_taal,5.7,True
+4163,Kantar,2026-09-09,raam,4.1,True
+4163,Kantar,2026-09-09,blue_white,0.8,True
+4163,Kantar,2026-09-09,haredi_public,0.9,True
+4163,Kantar,2026-09-09,noam,0.4,True
+4163,Kantar,2026-09-09,israel_first,0.5,True
+4164,Lazar,2026-09-23,yashar,15.9,True
+4164,Lazar,2026-09-23,likud,14.4,True
+4164,Lazar,2026-09-23,together,11.0,True
+4164,Lazar,2026-09-23,democrats,9.3,True
+4164,Lazar,2026-09-23,yisrael_beytenu,7.7,True
+4164,Lazar,2026-09-23,otzma,7.2,True
+4164,Lazar,2026-09-23,balad+hadash_taal,5.4,True
+4164,Lazar,2026-09-23,utj,5.0,True
+4164,Lazar,2026-09-23,shas,5.0,True
+4164,Lazar,2026-09-23,rzp,4.8,True
+4164,Lazar,2026-09-23,raam,4.4,True
+4164,Lazar,2026-09-23,amcha_yisrael,3.4,True
+4164,Lazar,2026-09-23,zionist_home,3.4,True
+4164,Lazar,2026-09-23,blue_white,1.3,True
+4164,Lazar,2026-09-23,haredi_public,0.9,True
+4164,Lazar,2026-09-23,noam,0.7,True
+4164,Lazar,2026-09-23,beit_yisrael,0.2,True
+4165,Direct Polls,2026-09-24,likud,20.4,True
+4165,Direct Polls,2026-09-24,yashar,17.5,True
+4165,Direct Polls,2026-09-24,together,7.2,True
+4165,Direct Polls,2026-09-24,democrats,7.0,True
+4165,Direct Polls,2026-09-24,otzma,6.6,True
+4165,Direct Polls,2026-09-24,utj,6.1,True
+4165,Direct Polls,2026-09-24,balad+hadash_taal,5.7,True
+4165,Direct Polls,2026-09-24,yisrael_beytenu,5.6,True
+4165,Direct Polls,2026-09-24,shas,5.3,True
+4165,Direct Polls,2026-09-24,rzp,4.4,True
+4165,Direct Polls,2026-09-24,raam,4.4,True
+4165,Direct Polls,2026-09-24,amcha_yisrael,3.3,True
+4165,Direct Polls,2026-09-24,zionist_home,1.6,True
+4171,Filber,2026-09-23,likud,24.3,True
+4171,Filber,2026-09-23,yashar,17.2,True
+4171,Filber,2026-09-23,shas,8.6,True
+4171,Filber,2026-09-23,democrats,7.2,True
+4171,Filber,2026-09-23,together,5.1,True
+4171,Filber,2026-09-23,rzp,5.5,True
+4171,Filber,2026-09-23,utj,5.1,True
+4171,Filber,2026-09-23,balad+hadash_taal,5.4,True
+4171,Filber,2026-09-23,yisrael_beytenu,5.5,True
+4171,Filber,2026-09-23,otzma,4.5,True
+4171,Filber,2026-09-23,raam,4.0,True
+4171,Filber,2026-09-23,zionist_home,2.2,True
+4171,Filber,2026-09-23,amcha_yisrael,1.9,True
+4171,Filber,2026-09-23,haredi_public,0.5,True
+4171,Filber,2026-09-23,blue_white,0.3,True
+4173,Maagar Mochot,2026-09-29,yashar,16.0,True
+4173,Maagar Mochot,2026-09-29,likud,15.0,True
+4173,Maagar Mochot,2026-09-29,together,11.0,True
+4173,Maagar Mochot,2026-09-29,otzma,7.0,True
+4173,Maagar Mochot,2026-09-29,shas,6.0,True
+4173,Maagar Mochot,2026-09-29,democrats,7.0,True
+4173,Maagar Mochot,2026-09-29,utj,6.0,True
+4173,Maagar Mochot,2026-09-29,yisrael_beytenu,5.0,True
+4173,Maagar Mochot,2026-09-29,balad+hadash_taal,5.0,True
+4173,Maagar Mochot,2026-09-29,raam,4.0,True
+4173,Maagar Mochot,2026-09-29,rzp,5.0,True
+4173,Maagar Mochot,2026-09-29,amcha_yisrael,4.0,True
+4173,Maagar Mochot,2026-09-29,zionist_home,3.0,True
+4173,Maagar Mochot,2026-09-29,blue_white,0.4,True
+4173,Maagar Mochot,2026-09-29,haredi_public,0.6,True
+4175,Filber,2026-09-28,likud,24.0,True
+4175,Filber,2026-09-28,yashar,16.3,True
+4175,Filber,2026-09-28,shas,7.5,True
+4175,Filber,2026-09-28,together,6.9,True
+4175,Filber,2026-09-28,democrats,7.1,True
+4175,Filber,2026-09-28,utj,6.4,True
+4175,Filber,2026-09-28,rzp,5.3,True
+4175,Filber,2026-09-28,otzma,5.1,True
+4175,Filber,2026-09-28,balad+hadash_taal,5.2,True
+4175,Filber,2026-09-28,yisrael_beytenu,4.8,True
+4175,Filber,2026-09-28,raam,3.8,True
+4175,Filber,2026-09-28,zionist_home,2.1,True
+4175,Filber,2026-09-28,amcha_yisrael,1.6,True
+4175,Filber,2026-09-28,blue_white,0.6,True
+4175,Filber,2026-09-28,haredi_public,0.2,True
+4175,Filber,2026-09-28,noam,0.2,True
+4176,Filber,2026-10-01,likud,24.9,True
+4176,Filber,2026-10-01,yashar,16.4,True
+4176,Filber,2026-10-01,shas,7.7,True
+4176,Filber,2026-10-01,democrats,7.1,True
+4176,Filber,2026-10-01,together,6.1,True
+4176,Filber,2026-10-01,utj,6.1,True
+4176,Filber,2026-10-01,rzp,5.2,True
+4176,Filber,2026-10-01,balad+hadash_taal,5.1,True
+4176,Filber,2026-10-01,otzma,5.5,True
+4176,Filber,2026-10-01,yisrael_beytenu,4.7,True
+4176,Filber,2026-10-01,raam,3.6,True
+4176,Filber,2026-10-01,amcha_yisrael,1.7,True
+4176,Filber,2026-10-01,zionist_home,1.2,True
+4176,Filber,2026-10-01,blue_white,0.4,True
+4176,Filber,2026-10-01,haredi_public,0.2,True
+4176,Filber,2026-10-01,noam,0.1,True
+4176,Filber,2026-10-01,ahi,0.1,True
+4177,Lazar,2026-09-30,yashar,15.4,True
+4177,Lazar,2026-09-30,likud,14.8,True
+4177,Lazar,2026-09-30,together,11.3,True
+4177,Lazar,2026-09-30,democrats,8.6,True
+4177,Lazar,2026-09-30,yisrael_beytenu,7.4,True
+4177,Lazar,2026-09-30,otzma,7.6,True
+4177,Lazar,2026-09-30,balad+hadash_taal,6.0,True
+4177,Lazar,2026-09-30,utj,5.5,True
+4177,Lazar,2026-09-30,shas,5.7,True
+4177,Lazar,2026-09-30,rzp,3.9,True
+4177,Lazar,2026-09-30,raam,4.7,True
+4177,Lazar,2026-09-30,amcha_yisrael,3.5,True
+4177,Lazar,2026-09-30,zionist_home,3.6,True
+4177,Lazar,2026-09-30,blue_white,0.7,True
+4177,Lazar,2026-09-30,haredi_public,0.6,True
+4177,Lazar,2026-09-30,noam,0.4,True
+4177,Lazar,2026-09-30,beit_yisrael,0.3,True
+4178,Direct Polls,2026-10-01,likud,22.0,True
+4178,Direct Polls,2026-10-01,yashar,17.1,True
+4178,Direct Polls,2026-10-01,together,7.4,True
+4178,Direct Polls,2026-10-01,democrats,7.1,True
+4178,Direct Polls,2026-10-01,balad+hadash_taal,6.5,True
+4178,Direct Polls,2026-10-01,otzma,6.4,True
+4178,Direct Polls,2026-10-01,utj,6.1,True
+4178,Direct Polls,2026-10-01,yisrael_beytenu,5.6,True
+4178,Direct Polls,2026-10-01,shas,5.5,True
+4178,Direct Polls,2026-10-01,rzp,4.3,True
+4178,Direct Polls,2026-10-01,raam,4.2,True
+4178,Direct Polls,2026-10-01,amcha_yisrael,3.3,True
+4178,Direct Polls,2026-10-01,zionist_home,1.8,True
+4178,Direct Polls,2026-10-01,blue_white,1.0,True
+4179,Kantar,2026-09-27,likud,16.2,True
+4179,Kantar,2026-09-27,together,9.0,True
+4179,Kantar,2026-09-27,yashar,18.6,True
+4179,Kantar,2026-09-27,democrats,7.1,True
+4179,Kantar,2026-09-27,zionist_home,3.6,True
+4179,Kantar,2026-09-27,rzp,5.1,True
+4179,Kantar,2026-09-27,otzma,5.8,True
+4179,Kantar,2026-09-27,amcha_yisrael,3.5,True
+4179,Kantar,2026-09-27,yisrael_beytenu,7.1,True
+4179,Kantar,2026-09-27,shas,5.5,True
+4179,Kantar,2026-09-27,utj,5.7,True
+4179,Kantar,2026-09-27,balad+hadash_taal,5.8,True
+4179,Kantar,2026-09-27,raam,4.4,True
+4179,Kantar,2026-09-27,blue_white,0.7,True
+4179,Kantar,2026-09-27,haredi_public,0.9,True
+4179,Kantar,2026-09-27,noam,0.4,True
+4179,Kantar,2026-09-27,code_black,0.6,True
+4179,Kantar,2026-09-27,nep,4.8,True
+4188,Kantar,2026-10-04,likud,16.2,True
+4188,Kantar,2026-10-04,together,9.4,True
+4188,Kantar,2026-10-04,yashar,18.0,True
+4188,Kantar,2026-10-04,democrats,6.3,True
+4188,Kantar,2026-10-04,zionist_home,3.4,True
+4188,Kantar,2026-10-04,rzp,4.6,True
+4188,Kantar,2026-10-04,otzma,6.3,True
+4188,Kantar,2026-10-04,yisrael_beytenu,6.9,True
+4188,Kantar,2026-10-04,shas,6.3,True
+4188,Kantar,2026-10-04,utj,6.3,True
+4188,Kantar,2026-10-04,balad+hadash_taal,6.3,True
+4188,Kantar,2026-10-04,raam,3.9,True
+4188,Kantar,2026-10-04,amcha_yisrael,2.6,True
+4188,Kantar,2026-10-04,blue_white,1.3,True
+4188,Kantar,2026-10-04,haredi_public,0.9,True
+4188,Kantar,2026-10-04,ahi,0.7,True
+4188,Kantar,2026-10-04,code_black,0.6,True
+4190,Midgam,2026-10-05,yashar,18.7,True
+4190,Midgam,2026-10-05,likud,17.0,True
+4190,Midgam,2026-10-05,together,10.5,True
+4190,Midgam,2026-10-05,democrats,7.2,True
+4190,Midgam,2026-10-05,yisrael_beytenu,7.1,True
+4190,Midgam,2026-10-05,utj,6.5,True
+4190,Midgam,2026-10-05,balad+hadash_taal,6.4,True
+4190,Midgam,2026-10-05,shas,5.7,True
+4190,Midgam,2026-10-05,otzma,5.5,True
+4190,Midgam,2026-10-05,rzp,4.9,True
+4190,Midgam,2026-10-05,raam,4.1,True
+4190,Midgam,2026-10-05,zionist_home,3.4,True
+4190,Midgam,2026-10-05,amcha_yisrael,1.5,True
+4192,Filber,2026-10-07,likud,24.0,True
+4192,Filber,2026-10-07,yashar,17.4,True
+4192,Filber,2026-10-07,shas,7.9,True
+4192,Filber,2026-10-07,democrats,6.7,True
+4192,Filber,2026-10-07,otzma,6.1,True
+4192,Filber,2026-10-07,together,6.2,True
+4192,Filber,2026-10-07,utj,6.3,True
+4192,Filber,2026-10-07,balad+hadash_taal,5.3,True
+4192,Filber,2026-10-07,rzp,4.6,True
+4192,Filber,2026-10-07,yisrael_beytenu,3.9,True
+4192,Filber,2026-10-07,raam,4.0,True
+4192,Filber,2026-10-07,amcha_yisrael,2.2,True
+4192,Filber,2026-10-07,zionist_home,1.8,True
+4192,Filber,2026-10-07,blue_white,1.3,True
+4192,Filber,2026-10-07,noam,0.9,True
+4192,Filber,2026-10-07,haredi_public,0.4,True
+4192,Filber,2026-10-07,ahi,0.1,True
+4197,Lazar,2026-10-07,yashar,15.9,True
+4197,Lazar,2026-10-07,likud,15.2,True
+4197,Lazar,2026-10-07,together,11.2,True
+4197,Lazar,2026-10-07,democrats,8.0,True
+4197,Lazar,2026-10-07,yisrael_beytenu,7.8,True
+4197,Lazar,2026-10-07,otzma,6.2,True
+4197,Lazar,2026-10-07,balad+hadash_taal,4.3,True
+4197,Lazar,2026-10-07,utj,5.9,True
+4197,Lazar,2026-10-07,shas,5.7,True
+4197,Lazar,2026-10-07,rzp,5.2,True
+4197,Lazar,2026-10-07,raam,5.0,True
+4197,Lazar,2026-10-07,amcha_yisrael,3.4,True
+4197,Lazar,2026-10-07,zionist_home,3.6,True
+4197,Lazar,2026-10-07,blue_white,0.9,True
+4197,Lazar,2026-10-07,haredi_public,0.8,True
+4197,Lazar,2026-10-07,noam,0.6,True
+4197,Lazar,2026-10-07,beit_yisrael,0.3,True
+4199,Direct Polls,2026-10-07,likud,19.8,True
+4199,Direct Polls,2026-10-07,yashar,16.0,True
+4199,Direct Polls,2026-10-07,together,8.4,True
+4199,Direct Polls,2026-10-07,democrats,7.9,True
+4199,Direct Polls,2026-10-07,otzma,7.3,True
+4199,Direct Polls,2026-10-07,utj,6.1,True
+4199,Direct Polls,2026-10-07,shas,5.7,True
+4199,Direct Polls,2026-10-07,yisrael_beytenu,5.6,True
+4199,Direct Polls,2026-10-07,balad+hadash_taal,5.4,True
+4199,Direct Polls,2026-10-07,rzp,5.0,True
+4199,Direct Polls,2026-10-07,raam,4.1,True
+4199,Direct Polls,2026-10-07,amcha_yisrael,3.3,True
+4199,Direct Polls,2026-10-07,zionist_home,2.3,True
+4199,Direct Polls,2026-10-07,blue_white,1.0,True
+4200,Kantar,2026-10-11,likud,16.1,True
+4200,Kantar,2026-10-11,together,9.7,True
+4200,Kantar,2026-10-11,yashar,17.7,True
+4200,Kantar,2026-10-11,democrats,6.5,True
+4200,Kantar,2026-10-11,zionist_home,3.3,True
+4200,Kantar,2026-10-11,rzp,4.0,True
+4200,Kantar,2026-10-11,otzma,7.3,True
+4200,Kantar,2026-10-11,amcha_yisrael,3.3,True
+4200,Kantar,2026-10-11,yisrael_beytenu,6.5,True
+4200,Kantar,2026-10-11,shas,5.7,True
+4200,Kantar,2026-10-11,utj,6.5,True
+4200,Kantar,2026-10-11,balad+hadash_taal,6.4,True
+4200,Kantar,2026-10-11,raam,4.0,True
+4200,Kantar,2026-10-11,blue_white,0.9,True
+4200,Kantar,2026-10-11,haredi_public,0.9,True
+4200,Kantar,2026-10-11,ahi,0.5,True
+4200,Kantar,2026-10-11,code_black,0.7,True
+4202,Midgam,2026-10-12,yashar,18.2,True
+4202,Midgam,2026-10-12,likud,16.1,True
+4202,Midgam,2026-10-12,together,10.4,True
+4202,Midgam,2026-10-12,democrats,7.3,True
+4202,Midgam,2026-10-12,yisrael_beytenu,7.2,True
+4202,Midgam,2026-10-12,otzma,6.4,True
+4202,Midgam,2026-10-12,shas,6.3,True
+4202,Midgam,2026-10-12,balad+hadash_taal,6.2,True
+4202,Midgam,2026-10-12,utj,5.6,True
+4202,Midgam,2026-10-12,rzp,4.8,True
+4202,Midgam,2026-10-12,raam,4.1,True
+4202,Midgam,2026-10-12,zionist_home,3.4,True
+4202,Midgam,2026-10-12,amcha_yisrael,1.8,True
+4207,Lazar,2026-10-12,yashar,15.9,True
+4207,Lazar,2026-10-12,likud,14.9,True
+4207,Lazar,2026-10-12,together,11.2,True
+4207,Lazar,2026-10-12,democrats,8.5,True
+4207,Lazar,2026-10-12,yisrael_beytenu,7.2,True
+4207,Lazar,2026-10-12,otzma,6.3,True
+4207,Lazar,2026-10-12,utj,6.2,True
+4207,Lazar,2026-10-12,balad+hadash_taal,6.4,True
+4207,Lazar,2026-10-12,shas,5.5,True
+4207,Lazar,2026-10-12,rzp,5.4,True
+4207,Lazar,2026-10-12,raam,3.9,True
+4207,Lazar,2026-10-12,zionist_home,3.5,True
+4207,Lazar,2026-10-12,amcha_yisrael,2.8,True
+4207,Lazar,2026-10-12,blue_white,1.1,True
+4207,Lazar,2026-10-12,haredi_public,1.0,True
+4207,Lazar,2026-10-12,noam,0.2,True
+4211,Direct Polls,2026-10-13,likud,20.5,True
+4211,Direct Polls,2026-10-13,yashar,16.4,True
+4211,Direct Polls,2026-10-13,together,9.7,True
+4211,Direct Polls,2026-10-13,otzma,7.2,True
+4211,Direct Polls,2026-10-13,democrats,7.1,True
+4211,Direct Polls,2026-10-13,utj,5.8,True
+4211,Direct Polls,2026-10-13,yisrael_beytenu,5.7,True
+4211,Direct Polls,2026-10-13,shas,5.4,True
+4211,Direct Polls,2026-10-13,balad+hadash_taal,5.2,True
+4211,Direct Polls,2026-10-13,raam,5.0,True
+4211,Direct Polls,2026-10-13,rzp,4.7,True
+4211,Direct Polls,2026-10-13,amcha_yisrael,3.1,True
+4211,Direct Polls,2026-10-13,zionist_home,2.2,True
+4212,Filber,2026-10-14,likud,22.1,True
+4212,Filber,2026-10-14,yashar,15.6,True
+4212,Filber,2026-10-14,together,8.5,True
+4212,Filber,2026-10-14,shas,7.7,True
+4212,Filber,2026-10-14,balad+hadash_taal,7.0,True
+4212,Filber,2026-10-14,democrats,6.4,True
+4212,Filber,2026-10-14,utj,6.1,True
+4212,Filber,2026-10-14,otzma,5.9,True
+4212,Filber,2026-10-14,rzp,5.5,True
+4212,Filber,2026-10-14,raam,3.6,True
+4212,Filber,2026-10-14,yisrael_beytenu,4.0,True
+4212,Filber,2026-10-14,zionist_home,3.1,True
+4212,Filber,2026-10-14,amcha_yisrael,2.7,True
+4212,Filber,2026-10-14,blue_white,1.2,True
+4212,Filber,2026-10-14,noam,0.8,True
+4212,Filber,2026-10-14,haredi_public,0.4,True
+4212,Filber,2026-10-14,ahi,0.2,True
+4209,Filber,2026-10-12,likud,23.2,True
+4209,Filber,2026-10-12,yashar,16.0,True
+4209,Filber,2026-10-12,democrats,8.0,True
+4209,Filber,2026-10-12,shas,8.0,True
+4209,Filber,2026-10-12,utj,6.4,True
+4209,Filber,2026-10-12,balad+hadash_taal,6.4,True
+4209,Filber,2026-10-12,rzp,5.6,True
+4209,Filber,2026-10-12,together,5.6,True
+4209,Filber,2026-10-12,otzma,5.6,True
+4209,Filber,2026-10-12,yisrael_beytenu,4.0,True
+4209,Filber,2026-10-12,raam,4.0,True
+4209,Filber,2026-10-12,zionist_home,3.3,True
+4209,Filber,2026-10-12,amcha_yisrael,2.9,True
+4209,Filber,2026-10-12,noam,0.9,True
+4209,Filber,2026-10-12,blue_white,0.6,True
+4209,Filber,2026-10-12,ahi,0.1,True
+4209,Filber,2026-10-12,haredi_public,0.6,True
+4215,Maagar Mochot,2026-10-12,yashar,15.0,True
+4215,Maagar Mochot,2026-10-12,likud,13.0,True
+4215,Maagar Mochot,2026-10-12,together,10.0,True
+4215,Maagar Mochot,2026-10-12,otzma,7.0,True
+4215,Maagar Mochot,2026-10-12,democrats,6.0,True
+4215,Maagar Mochot,2026-10-12,balad+hadash_taal,6.0,True
+4215,Maagar Mochot,2026-10-12,utj,6.0,True
+4215,Maagar Mochot,2026-10-12,yisrael_beytenu,5.0,True
+4215,Maagar Mochot,2026-10-12,shas,5.0,True
+4215,Maagar Mochot,2026-10-12,rzp,4.0,True
+4215,Maagar Mochot,2026-10-12,raam,3.0,True
+4215,Maagar Mochot,2026-10-12,zionist_home,4.0,True
+4215,Maagar Mochot,2026-10-12,amcha_yisrael,3.0,True
+4215,Maagar Mochot,2026-10-12,blue_white,1.2,True
+4215,Maagar Mochot,2026-10-12,haredi_public,1.1,True
+4216,Lazar,2026-10-15,yashar,15.1,True
+4216,Lazar,2026-10-15,likud,14.5,True
+4216,Lazar,2026-10-15,together,11.6,True
+4216,Lazar,2026-10-15,democrats,8.2,True
+4216,Lazar,2026-10-15,yisrael_beytenu,6.4,True
+4216,Lazar,2026-10-15,otzma,6.4,True
+4216,Lazar,2026-10-15,balad+hadash_taal,6.2,True
+4216,Lazar,2026-10-15,utj,5.9,True
+4216,Lazar,2026-10-15,shas,5.6,True
+4216,Lazar,2026-10-15,rzp,5.3,True
+4216,Lazar,2026-10-15,raam,5.4,True
+4216,Lazar,2026-10-15,amcha_yisrael,3.4,True
+4216,Lazar,2026-10-15,zionist_home,3.7,True
+4216,Lazar,2026-10-15,blue_white,1.1,True
+4216,Lazar,2026-10-15,haredi_public,0.5,True
+4216,Lazar,2026-10-15,noam,0.5,True
+4216,Lazar,2026-10-15,beit_yisrael,0.2,True
+4217,Kantar,2026-10-15,likud,16.2,True
+4217,Kantar,2026-10-15,together,9.2,True
+4217,Kantar,2026-10-15,yashar,18.8,True
+4217,Kantar,2026-10-15,democrats,6.2,True
+4217,Kantar,2026-10-15,zionist_home,3.8,True
+4217,Kantar,2026-10-15,rzp,4.7,True
+4217,Kantar,2026-10-15,otzma,7.0,True
+4217,Kantar,2026-10-15,yisrael_beytenu,6.3,True
+4217,Kantar,2026-10-15,shas,5.4,True
+4217,Kantar,2026-10-15,utj,5.5,True
+4217,Kantar,2026-10-15,balad+hadash_taal,6.9,True
+4217,Kantar,2026-10-15,raam,4.0,True
+4217,Kantar,2026-10-15,blue_white,0.8,True
+4217,Kantar,2026-10-15,amcha_yisrael,3.0,True
+4217,Kantar,2026-10-15,haredi_public,0.9,True
+4217,Kantar,2026-10-15,ahi,0.7,True
+4217,Kantar,2026-10-15,code_black,0.6,True
+4228,Filber,2026-10-18,likud,22.4,True
+4228,Filber,2026-10-18,yashar,16.8,True
+4228,Filber,2026-10-18,together,7.9,True
+4228,Filber,2026-10-18,shas,7.5,True
+4228,Filber,2026-10-18,democrats,6.7,True
+4228,Filber,2026-10-18,utj,6.0,True
+4228,Filber,2026-10-18,rzp,5.6,True
+4228,Filber,2026-10-18,balad+hadash_taal,5.2,True
+4228,Filber,2026-10-18,otzma,5.3,True
+4228,Filber,2026-10-18,yisrael_beytenu,4.5,True
+4228,Filber,2026-10-18,raam,4.2,True
+4228,Filber,2026-10-18,amcha_yisrael,2.4,True
+4228,Filber,2026-10-18,zionist_home,2.4,True
+4228,Filber,2026-10-18,blue_white,0.9,True
+4228,Filber,2026-10-18,noam,0.8,True
+4228,Filber,2026-10-18,ahi,0.2,True
+4220,Tatika,2026-09-10,yashar,17.6,True
+4220,Tatika,2026-09-10,likud,17.0,True
+4220,Tatika,2026-09-10,together,11.8,True
+4220,Tatika,2026-09-10,yisrael_beytenu,7.6,True
+4220,Tatika,2026-09-10,shas,7.4,True
+4220,Tatika,2026-09-10,utj,6.8,True
+4220,Tatika,2026-09-10,democrats,6.2,True
+4220,Tatika,2026-09-10,balad+hadash_taal,5.6,True
+4220,Tatika,2026-09-10,otzma,5.0,True
+4220,Tatika,2026-09-10,raam,4.4,True
+4220,Tatika,2026-09-10,rzp,3.6,True
+4220,Tatika,2026-09-10,zionist_home,2.8,True
+4220,Tatika,2026-09-10,amcha_yisrael,2.8,True
+4220,Tatika,2026-09-10,blue_white,1.4,True
+4221,Tatika,2026-09-17,yashar,18.4,True
+4221,Tatika,2026-09-17,likud,16.2,True
+4221,Tatika,2026-09-17,together,10.6,True
+4221,Tatika,2026-09-17,yisrael_beytenu,7.2,True
+4221,Tatika,2026-09-17,shas,7.2,True
+4221,Tatika,2026-09-17,utj,6.8,True
+4221,Tatika,2026-09-17,democrats,6.4,True
+4221,Tatika,2026-09-17,balad+hadash_taal,6.2,True
+4221,Tatika,2026-09-17,otzma,5.4,True
+4221,Tatika,2026-09-17,raam,4.8,True
+4221,Tatika,2026-09-17,rzp,3.6,True
+4221,Tatika,2026-09-17,amcha_yisrael,3.0,True
+4221,Tatika,2026-09-17,zionist_home,2.2,True
+4221,Tatika,2026-09-17,blue_white,2.0,True
+4221,Tatika,2026-09-17,unity,30.0,True
+4222,Tatika,2026-09-24,yashar,18.2,True
+4222,Tatika,2026-09-24,likud,16.8,True
+4222,Tatika,2026-09-24,together,9.8,True
+4222,Tatika,2026-09-24,yisrael_beytenu,7.8,True
+4222,Tatika,2026-09-24,shas,7.8,True
+4222,Tatika,2026-09-24,utj,6.4,True
+4222,Tatika,2026-09-24,democrats,6.4,True
+4222,Tatika,2026-09-24,balad+hadash_taal,6.4,True
+4222,Tatika,2026-09-24,otzma,4.8,True
+4222,Tatika,2026-09-24,raam,4.6,True
+4222,Tatika,2026-09-24,rzp,3.4,True
+4222,Tatika,2026-09-24,amcha_yisrael,3.4,True
+4222,Tatika,2026-09-24,zionist_home,2.6,True
+4222,Tatika,2026-09-24,blue_white,1.6,True
+4223,Tatika,2026-10-01,yashar,17.4,True
+4223,Tatika,2026-10-01,likud,17.4,True
+4223,Tatika,2026-10-01,together,8.6,True
+4223,Tatika,2026-10-01,yisrael_beytenu,8.6,True
+4223,Tatika,2026-10-01,shas,7.4,True
+4223,Tatika,2026-10-01,utj,6.4,True
+4223,Tatika,2026-10-01,democrats,6.4,True
+4223,Tatika,2026-10-01,balad+hadash_taal,6.2,True
+4223,Tatika,2026-10-01,otzma,4.6,True
+4223,Tatika,2026-10-01,raam,4.4,True
+4223,Tatika,2026-10-01,rzp,4.2,True
+4223,Tatika,2026-10-01,zionist_home,3.6,True
+4223,Tatika,2026-10-01,amcha_yisrael,3.4,True
+4223,Tatika,2026-10-01,blue_white,1.4,True
+4224,Tatika,2026-10-08,yashar,18.2,True
+4224,Tatika,2026-10-08,likud,16.0,True
+4224,Tatika,2026-10-08,together,10.0,True
+4224,Tatika,2026-10-08,yisrael_beytenu,8.0,True
+4224,Tatika,2026-10-08,balad+hadash_taal,6.8,True
+4224,Tatika,2026-10-08,shas,6.6,True
+4224,Tatika,2026-10-08,utj,6.4,True
+4224,Tatika,2026-10-08,democrats,6.4,True
+4224,Tatika,2026-10-08,otzma,4.8,True
+4224,Tatika,2026-10-08,raam,4.4,True
+4224,Tatika,2026-10-08,rzp,4.4,True
+4224,Tatika,2026-10-08,amcha_yisrael,3.6,True
+4224,Tatika,2026-10-08,zionist_home,3.2,True
+4224,Tatika,2026-10-08,blue_white,1.2,True
+4225,Tatika,2026-10-15,yashar,19.4,True
+4225,Tatika,2026-10-15,likud,15.8,True
+4225,Tatika,2026-10-15,together,8.6,True
+4225,Tatika,2026-10-15,yisrael_beytenu,7.4,True
+4225,Tatika,2026-10-15,balad+hadash_taal,6.6,True
+4225,Tatika,2026-10-15,shas,6.6,True
+4225,Tatika,2026-10-15,democrats,6.4,True
+4225,Tatika,2026-10-15,utj,6.2,True
+4225,Tatika,2026-10-15,otzma,5.6,True
+4225,Tatika,2026-10-15,rzp,5.0,True
+4225,Tatika,2026-10-15,raam,4.4,True
+4225,Tatika,2026-10-15,zionist_home,4.0,True
+4225,Tatika,2026-10-15,amcha_yisrael,2.8,True
+4225,Tatika,2026-10-15,blue_white,1.2,True
+4229,Direct Polls,2026-10-18,likud,19.1,True
+4229,Direct Polls,2026-10-18,yashar,16.0,True
+4229,Direct Polls,2026-10-18,together,9.9,True
+4229,Direct Polls,2026-10-18,otzma,7.6,True
+4229,Direct Polls,2026-10-18,democrats,7.0,True
+4229,Direct Polls,2026-10-18,utj,6.0,True
+4229,Direct Polls,2026-10-18,balad+hadash_taal,5.9,True
+4229,Direct Polls,2026-10-18,shas,5.7,True
+4229,Direct Polls,2026-10-18,yisrael_beytenu,4.8,True
+4229,Direct Polls,2026-10-18,rzp,4.6,True
+4229,Direct Polls,2026-10-18,raam,4.6,True
+4229,Direct Polls,2026-10-18,amcha_yisrael,2.9,True
+4229,Direct Polls,2026-10-18,zionist_home,2.4,True
+4230,Kantar,2026-10-18,likud,16.2,True
+4230,Kantar,2026-10-18,together,9.1,True
+4230,Kantar,2026-10-18,yashar,18.0,True
+4230,Kantar,2026-10-18,democrats,7.1,True
+4230,Kantar,2026-10-18,zionist_home,3.7,True
+4230,Kantar,2026-10-18,rzp,5.4,True
+4230,Kantar,2026-10-18,otzma,6.2,True
+4230,Kantar,2026-10-18,yisrael_beytenu,6.3,True
+4230,Kantar,2026-10-18,shas,6.2,True
+4230,Kantar,2026-10-18,utj,5.5,True
+4230,Kantar,2026-10-18,balad+hadash_taal,6.3,True
+4230,Kantar,2026-10-18,raam,4.0,True
+4230,Kantar,2026-10-18,amcha_yisrael,3.1,True
+4230,Kantar,2026-10-18,blue_white,1.1,True
+4230,Kantar,2026-10-18,haredi_public,0.8,True
+4230,Kantar,2026-10-18,ahi,0.3,True
+4230,Kantar,2026-10-18,code_black,0.7,True
+4232,Midgam,2026-10-19,yashar,18.5,True
+4232,Midgam,2026-10-19,likud,16.4,True
+4232,Midgam,2026-10-19,together,10.9,True
+4232,Midgam,2026-10-19,democrats,7.0,True
+4232,Midgam,2026-10-19,balad+hadash_taal,6.9,True
+4232,Midgam,2026-10-19,yisrael_beytenu,6.4,True
+4232,Midgam,2026-10-19,shas,6.3,True
+4232,Midgam,2026-10-19,otzma,6.1,True
+4232,Midgam,2026-10-19,rzp,5.5,True
+4232,Midgam,2026-10-19,utj,5.4,True
+4232,Midgam,2026-10-19,raam,4.0,True
+4232,Midgam,2026-10-19,amcha_yisrael,2.8,True
+4232,Midgam,2026-10-19,zionist_home,2.1,True
+4232,Midgam,2026-10-19,blue_white,1.4,True
+4233,Filber,2026-10-19,likud,22.5,True
+4233,Filber,2026-10-19,yashar,14.3,True
+4233,Filber,2026-10-19,together,7.5,True
+4233,Filber,2026-10-19,democrats,7.5,True
+4233,Filber,2026-10-19,shas,7.5,True
+4233,Filber,2026-10-19,utj,6.0,True
+4233,Filber,2026-10-19,balad+hadash_taal,6.0,True
+4233,Filber,2026-10-19,otzma,5.3,True
+4233,Filber,2026-10-19,rzp,5.3,True
+4233,Filber,2026-10-19,yisrael_beytenu,4.5,True
+4233,Filber,2026-10-19,raam,3.8,True
+4233,Filber,2026-10-19,zionist_home,2.6,True
+4233,Filber,2026-10-19,amcha_yisrael,2.2,True
+4233,Filber,2026-10-19,blue_white,2.1,True
+4233,Filber,2026-10-19,noam,1.5,True
+4233,Filber,2026-10-19,ahi,0.5,True
+4233,Filber,2026-10-19,haredi_public,0.3,True
+4237,Maagar Mochot,2026-10-19,yashar,15.0,True
+4237,Maagar Mochot,2026-10-19,likud,13.0,True
+4237,Maagar Mochot,2026-10-19,together,11.0,True
+4237,Maagar Mochot,2026-10-19,balad+hadash_taal,7.0,True
+4237,Maagar Mochot,2026-10-19,otzma,7.0,True
+4237,Maagar Mochot,2026-10-19,democrats,7.0,True
+4237,Maagar Mochot,2026-10-19,utj,5.0,True
+4237,Maagar Mochot,2026-10-19,yisrael_beytenu,6.0,True
+4237,Maagar Mochot,2026-10-19,shas,4.0,True
+4237,Maagar Mochot,2026-10-19,rzp,5.0,True
+4237,Maagar Mochot,2026-10-19,raam,4.0,True
+4237,Maagar Mochot,2026-10-19,amcha_yisrael,3.0,True
+4237,Maagar Mochot,2026-10-19,zionist_home,3.0,True
+4237,Maagar Mochot,2026-10-19,haredi_public,0.6,True
+4240,Filber,2026-10-21,likud,23.3,True
+4240,Filber,2026-10-21,yashar,15.5,True
+4240,Filber,2026-10-21,together,7.7,True
+4240,Filber,2026-10-21,shas,7.7,True
+4240,Filber,2026-10-21,democrats,7.0,True
+4240,Filber,2026-10-21,balad+hadash_taal,6.2,True
+4240,Filber,2026-10-21,otzma,6.2,True
+4240,Filber,2026-10-21,utj,5.4,True
+4240,Filber,2026-10-21,rzp,5.4,True
+4240,Filber,2026-10-21,raam,4.6,True
+4240,Filber,2026-10-21,yisrael_beytenu,3.9,True
+4240,Filber,2026-10-21,zionist_home,2.2,True
+4240,Filber,2026-10-21,amcha_yisrael,1.7,True
+4240,Filber,2026-10-21,noam,0.6,True
+4240,Filber,2026-10-21,haredi_public,0.3,True
+4240,Filber,2026-10-21,ahi,0.2,True
+4241,Lazar,2026-10-19,yashar,15.9,True
+4241,Lazar,2026-10-19,likud,14.5,True
+4241,Lazar,2026-10-19,together,11.6,True
+4241,Lazar,2026-10-19,democrats,7.9,True
+4241,Lazar,2026-10-19,yisrael_beytenu,6.1,True
+4241,Lazar,2026-10-19,otzma,6.4,True
+4241,Lazar,2026-10-19,balad+hadash_taal,6.3,True
+4241,Lazar,2026-10-19,shas,6.1,True
+4241,Lazar,2026-10-19,utj,5.8,True
+4241,Lazar,2026-10-19,rzp,5.4,True
+4241,Lazar,2026-10-19,raam,5.4,True
+4241,Lazar,2026-10-19,zionist_home,3.7,True
+4241,Lazar,2026-10-19,amcha_yisrael,2.9,True
+4241,Lazar,2026-10-19,haredi_public,0.9,True
+4241,Lazar,2026-10-19,noam,0.9,True
+4241,Lazar,2026-10-19,beit_yisrael,0.2,True
+4238,Filber,2026-10-20,likud,22.8,True
+4238,Filber,2026-10-20,yashar,15.3,True
+4238,Filber,2026-10-20,shas,6.7,True
+4238,Filber,2026-10-20,together,6.8,True
+4238,Filber,2026-10-20,democrats,6.9,True
+4238,Filber,2026-10-20,otzma,6.3,True
+4238,Filber,2026-10-20,utj,6.4,True
+4238,Filber,2026-10-20,balad+hadash_taal,6.4,True
+4238,Filber,2026-10-20,rzp,5.6,True
+4238,Filber,2026-10-20,yisrael_beytenu,4.8,True
+4238,Filber,2026-10-20,raam,4.4,True
+4238,Filber,2026-10-20,zionist_home,2.5,True
+4238,Filber,2026-10-20,amcha_yisrael,1.9,True
+4238,Filber,2026-10-20,haredi_public,0.9,True
+4238,Filber,2026-10-20,noam,0.9,True
+4238,Filber,2026-10-20,ahi,0.4,True
+4243,Direct Polls,2026-10-20,likud,19.7,True
+4243,Direct Polls,2026-10-20,yashar,14.7,True
+4243,Direct Polls,2026-10-20,together,9.2,True
+4243,Direct Polls,2026-10-20,democrats,7.1,True
+4243,Direct Polls,2026-10-20,otzma,6.8,True
+4243,Direct Polls,2026-10-20,shas,6.6,True
+4243,Direct Polls,2026-10-20,balad+hadash_taal,6.0,True
+4243,Direct Polls,2026-10-20,utj,5.9,True
+4243,Direct Polls,2026-10-20,rzp,5.7,True
+4243,Direct Polls,2026-10-20,yisrael_beytenu,5.3,True
+4243,Direct Polls,2026-10-20,raam,5.2,True
+4243,Direct Polls,2026-10-20,amcha_yisrael,3.1,True
+4243,Direct Polls,2026-10-20,zionist_home,2.6,True
+4245,Midgam,2026-10-21,yashar,18.4,True
+4245,Midgam,2026-10-21,likud,15.2,True
+4245,Midgam,2026-10-21,together,12.0,True
+4245,Midgam,2026-10-21,democrats,7.3,True
+4245,Midgam,2026-10-21,balad+hadash_taal,7.2,True
+4245,Midgam,2026-10-21,yisrael_beytenu,6.4,True
+4245,Midgam,2026-10-21,shas,6.3,True
+4245,Midgam,2026-10-21,otzma,5.7,True
+4245,Midgam,2026-10-21,utj,5.6,True
+4245,Midgam,2026-10-21,rzp,4.8,True
+4245,Midgam,2026-10-21,raam,4.1,True
+4245,Midgam,2026-10-21,amcha_yisrael,3.4,True
+4245,Midgam,2026-10-21,zionist_home,2.8,True
+4245,Midgam,2026-10-21,haredi_public,1.1,True
+4249,Tatika,2026-10-22,yashar,18.2,True
+4249,Tatika,2026-10-22,likud,16.8,True
+4249,Tatika,2026-10-22,together,9.0,True
+4249,Tatika,2026-10-22,yisrael_beytenu,7.2,True
+4249,Tatika,2026-10-22,balad+hadash_taal,7.0,True
+4249,Tatika,2026-10-22,shas,6.6,True
+4249,Tatika,2026-10-22,democrats,6.2,True
+4249,Tatika,2026-10-22,utj,6.2,True
+4249,Tatika,2026-10-22,otzma,6.4,True
+4249,Tatika,2026-10-22,rzp,5.2,True
+4249,Tatika,2026-10-22,raam,4.6,True
+4249,Tatika,2026-10-22,zionist_home,3.6,True
+4249,Tatika,2026-10-22,amcha_yisrael,3.0,True
+4254,Filber,2026-10-22,likud,23.2,True
+4254,Filber,2026-10-22,yashar,15.1,True
+4254,Filber,2026-10-22,together,8.5,True
+4254,Filber,2026-10-22,shas,7.0,True
+4254,Filber,2026-10-22,utj,6.2,True
+4254,Filber,2026-10-22,democrats,6.3,True
+4254,Filber,2026-10-22,balad+hadash_taal,6.1,True
+4254,Filber,2026-10-22,otzma,6.2,True
+4254,Filber,2026-10-22,rzp,5.2,True
+4254,Filber,2026-10-22,raam,4.8,True
+4254,Filber,2026-10-22,yisrael_beytenu,3.8,True
+4254,Filber,2026-10-22,amcha_yisrael,1.5,True
+4254,Filber,2026-10-22,zionist_home,1.9,True
+4254,Filber,2026-10-22,noam,0.6,True
+4254,Filber,2026-10-22,haredi_public,0.3,True
+4254,Filber,2026-10-22,ahi,0.2,True
+4257,Midgam,2026-10-23,yashar,18.0,True
+4257,Midgam,2026-10-23,likud,16.4,True
+4257,Midgam,2026-10-23,together,11.8,True
+4257,Midgam,2026-10-23,democrats,7.8,True
+4257,Midgam,2026-10-23,balad+hadash_taal,7.0,True
+4257,Midgam,2026-10-23,shas,6.3,True
+4257,Midgam,2026-10-23,otzma,6.2,True
+4257,Midgam,2026-10-23,yisrael_beytenu,6.1,True
+4257,Midgam,2026-10-23,utj,5.5,True
+4257,Midgam,2026-10-23,rzp,4.7,True
+4257,Midgam,2026-10-23,raam,3.9,True
+4257,Midgam,2026-10-23,amcha_yisrael,2.5,True
+4257,Midgam,2026-10-23,zionist_home,2.4,True
+4258,Lazar,2026-10-22,yashar,16.7,True
+4258,Lazar,2026-10-22,likud,14.5,True
+4258,Lazar,2026-10-22,together,12.5,True
+4258,Lazar,2026-10-22,democrats,8.4,True
+4258,Lazar,2026-10-22,balad+hadash_taal,7.2,True
+4258,Lazar,2026-10-22,yisrael_beytenu,6.0,True
+4258,Lazar,2026-10-22,shas,5.8,True
+4258,Lazar,2026-10-22,otzma,5.6,True
+4258,Lazar,2026-10-22,utj,5.5,True
+4258,Lazar,2026-10-22,rzp,5.3,True
+4258,Lazar,2026-10-22,raam,4.1,True
+4258,Lazar,2026-10-22,zionist_home,3.5,True
+4258,Lazar,2026-10-22,amcha_yisrael,3.0,True
+4258,Lazar,2026-10-22,haredi_public,0.9,True
+4258,Lazar,2026-10-22,noam,0.5,True
+4258,Lazar,2026-10-22,beit_yisrael,0.5,True
+4259,Maagar Mochot,2026-10-21,yashar,15.0,True
+4259,Maagar Mochot,2026-10-21,likud,13.0,True
+4259,Maagar Mochot,2026-10-21,together,11.0,True
+4259,Maagar Mochot,2026-10-21,otzma,7.0,True
+4259,Maagar Mochot,2026-10-21,democrats,7.0,True
+4259,Maagar Mochot,2026-10-21,balad+hadash_taal,7.0,True
+4259,Maagar Mochot,2026-10-21,utj,6.0,True
+4259,Maagar Mochot,2026-10-21,shas,5.0,True
+4259,Maagar Mochot,2026-10-21,yisrael_beytenu,5.0,True
+4259,Maagar Mochot,2026-10-21,rzp,5.0,True
+4259,Maagar Mochot,2026-10-21,raam,4.0,True
+4259,Maagar Mochot,2026-10-21,amcha_yisrael,3.2,True
+4259,Maagar Mochot,2026-10-21,zionist_home,3.0,True
+4259,Maagar Mochot,2026-10-21,haredi_public,0.7,True
+4260,Kantar,2026-10-22,likud,15.9,True
+4260,Kantar,2026-10-22,together,11.1,True
+4260,Kantar,2026-10-22,yashar,17.4,True
+4260,Kantar,2026-10-22,democrats,6.3,True
+4260,Kantar,2026-10-22,zionist_home,3.6,True
+4260,Kantar,2026-10-22,rzp,5.4,True
+4260,Kantar,2026-10-22,otzma,6.3,True
+4260,Kantar,2026-10-22,yisrael_beytenu,6.3,True
+4260,Kantar,2026-10-22,shas,5.5,True
+4260,Kantar,2026-10-22,utj,6.3,True
+4260,Kantar,2026-10-22,balad+hadash_taal,7.0,True
+4260,Kantar,2026-10-22,raam,4.0,True
+4260,Kantar,2026-10-22,amcha_yisrael,2.9,True
+4260,Kantar,2026-10-22,haredi_public,0.7,True
+4260,Kantar,2026-10-22,ahi,0.5,True
+4260,Kantar,2026-10-22,code_black,0.8,True
+4261,Kantar,2026-10-22,likud,16.5,True
+4261,Kantar,2026-10-22,together,11.3,True
+4261,Kantar,2026-10-22,yashar,18.3,True
+4261,Kantar,2026-10-22,democrats,6.4,True
+4261,Kantar,2026-10-22,zionist_home,3.7,True
+4261,Kantar,2026-10-22,rzp,4.8,True
+4261,Kantar,2026-10-22,otzma,6.4,True
+4261,Kantar,2026-10-22,yisrael_beytenu,5.6,True
+4261,Kantar,2026-10-22,shas,6.4,True
+4261,Kantar,2026-10-22,utj,5.5,True
+4261,Kantar,2026-10-22,balad+hadash_taal,7.1,True
+4261,Kantar,2026-10-22,raam,4.1,True
+4261,Kantar,2026-10-22,amcha_yisrael,2.7,True
+4261,Kantar,2026-10-22,haredi_public,0.7,True
+4261,Kantar,2026-10-22,ahi,0.2,True
+4261,Kantar,2026-10-22,code_black,0.3,True
