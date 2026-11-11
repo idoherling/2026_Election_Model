@@ -26,6 +26,7 @@ from fractions import Fraction
 import numpy as np
 import pandas as pd
 
+import record
 import simulate as _sim
 import validate_bayes as vb
 from scrape_polls import PROCESSED_DIR
@@ -72,7 +73,7 @@ def statutory(votes: list, valid: int, pair_idx: list, thr: Fraction, seats: int
 
 
 def list_frame(cycle: str) -> pd.DataFrame:
-    d = pd.read_csv(COUNTS, dtype={"cycle": str})
+    d = record.cec_final_counts(dtype={"cycle": str})   # + 2026 under RECORD_2026
     d = d[d["cycle"] == cycle].reset_index(drop=True).copy()
     d["party_id"] = [p if isinstance(p, str) and p else f"_unmodelled_{i}"
                      for i, p in enumerate(d["party_id"])]
@@ -98,7 +99,7 @@ def to_columns(d: pd.DataFrame, comps: list) -> np.ndarray:
 
 
 def main() -> None:
-    results = pd.read_csv(PROCESSED_DIR / "results.csv", dtype={"cycle": str})
+    results = record.results(dtype={"cycle": str})
     rows, wrows, orows = [], [], []
     for cycle in ORDER:
         d = list_frame(cycle)

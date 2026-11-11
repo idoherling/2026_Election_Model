@@ -1,0 +1,141 @@
+{
+ "n_cycles": 8,
+ "bloc_sd": 3.3577078989558564,
+ "haredi_e0_mean": -0.9803391053391053,
+ "haredi_e0_sd": 1.5756349995186252,
+ "haredi_e1_mean": -1.3521431364517633,
+ "haredi_e1_sd": 1.7675074481990194,
+ "arab_e0_mean": -0.6861246392496391,
+ "arab_e0_sd": 1.173416098440194,
+ "arab_e1_mean": -0.3234551404425514,
+ "arab_e1_sd": 1.44894994490562,
+ "resid_seat_fix_base": 1.4842775758947249,
+ "resid_seat_fix_slope": 0.04079481878264164,
+ "resid_vote_base": 0.7321877951365536,
+ "resid_vote_slope": 0.07299749332103005,
+ "haredi_s_shas": 0.8996090156393745,
+ "arab_reg_a": -0.6342750543600353,
+ "arab_reg_k": 0.24705931798274663,
+ "arab_reg_se_a": 0.40602981535111804,
+ "arab_reg_se_k": 0.20921945179681092,
+ "arab_reg_rows": {
+  "2009": {
+   "error": -2.78,
+   "implied": 0.42,
+   "turnout": 0.534,
+   "turnout_prev": 0.563
+  },
+  "2013": {
+   "error": -0.27,
+   "implied": -0.62,
+   "turnout": 0.565,
+   "turnout_prev": 0.534
+  },
+  "2015": {
+   "error": -0.38,
+   "implied": -1.56,
+   "turnout": 0.635,
+   "turnout_prev": 0.565
+  },
+  "2019a": {
+   "error": 1.22,
+   "implied": 2.53,
+   "turnout": 0.492,
+   "turnout_prev": 0.635
+  },
+  "2019s": {
+   "error": -0.71,
+   "implied": -2.5,
+   "turnout": 0.592,
+   "turnout_prev": 0.492
+  },
+  "2020": {
+   "error": -1.0,
+   "implied": -1.32,
+   "turnout": 0.648,
+   "turnout_prev": 0.592
+  },
+  "2021": {
+   "error": 0.0,
+   "implied": 3.12,
+   "turnout": 0.446,
+   "turnout_prev": 0.648
+  },
+  "2022": {
+   "error": -1.57,
+   "implied": -1.74,
+   "turnout": 0.538,
+   "turnout_prev": 0.446
+  }
+ },
+ "arab_T_mean_regime_B": 0.58025,
+ "trail_mu": 5.011904761904762,
+ "trail_sd": 4.880763643273109,
+ "trail_n": 3,
+ "trail_record": {
+  "2009": [
+   3.33,
+   0.38
+  ],
+  "2013": [
+   17.0,
+   -2.62
+  ],
+  "2015": [
+   -3.43,
+   8.79
+  ],
+  "2019a": [
+   -1.0,
+   6.75
+  ],
+  "2019s": [
+   0.5,
+   -0.5
+  ],
+  "2020": [
+   0.91,
+   1.91
+  ],
+  "2021": [
+   12.38,
+   -0.62
+  ],
+  "2022": [
+   6.18,
+   0.82
+  ]
+ },
+ "trail_ramp_mu": 5.580292723149867,
+ "trail_ramp_sd": 4.152203369596434,
+ "trail_ramp_n_eff": 3.4423243712055496,
+ "nstrad_seat_mu": -1.676225760652713,
+ "nstrad_seat_sd": 2.5609599491342925,
+ "nstrad_seat_n": 11,
+ "nstrad_ran_mu": -0.6173277999999999,
+ "nstrad_ran_sd": 1.3139533183015801,
+ "nstrad_ran_n": 10,
+ "nstrad_fixed_mu": -0.9,
+ "nstrad_fixed_sd": 0.7666537680074363,
+ "nstrad_fixed_n": 6,
+ "scorecard_q": {
+  "Camil Fuchs": 1.007,
+  "Dahaf": 1.041,
+  "Dialog": 0.954,
+  "Direct Polls": 1.025,
+  "Geocartography": 0.977,
+  "Kantar": 1.123,
+  "Maagar Mochot": 0.969,
+  "Midgam": 1.016,
+  "Midgam Project": 1.0,
+  "Miskar": 0.914,
+  "New Wave": 0.997,
+  "Panels Politics": 1.028,
+  "Sarid": 0.973,
+  "Shvakim Panorama": 1.029,
+  "Smith Consulting": 1.038,
+  "TNS": 0.93,
+  "Teleseker": 0.993
+ },
+ "unmodelled_mean": 0.015200000000000002
+}

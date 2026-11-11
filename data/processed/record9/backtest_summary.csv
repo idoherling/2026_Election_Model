@@ -1,0 +1,10 @@
+cycle,n_pollsters,n_blocks,mae,total_abs_error,worst_block,worst_error
+2009,9,11,1.65,18.1,Kadima,-4.6
+2013,11,14,1.69,23.7,Yesh Atid,-8.2
+2015,8,11,1.87,20.6,Likud,-8.0
+2019a,9,13,3.0,39.0,Likud,-6.1
+2019s,7,10,1.28,12.8,Otzma Yehudit,3.3
+2020,7,8,0.99,7.9,Labor-Gesher-Meretz,1.7
+2021,7,13,1.49,19.4,Blue and White,-3.4
+2022,7,11,1.16,12.8,Meretz,4.4
+2026,8,13,1.56,20.3,Likud,-5.4

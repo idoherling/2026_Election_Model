@@ -37,6 +37,7 @@ from backtest import (
     FIG_DIR, SURFACE, INK, INK_2, MUTED, GRID, BASELINE,
     merge_blocks, short_name,
 )
+import record
 from normalize import load_party_registry
 from scrape_polls import PROCESSED_DIR
 
@@ -99,13 +100,15 @@ def quality_map(exclude_cycle: str | None = None) -> dict[str, float]:
     sqrt, shrinkage and clip). A harness refit of cycle c must use it, or
     the firms' precision priors already contain c's final-poll errors
     (dossier s.50). Missing inputs raise here: an empty map would be a
-    different prior, not the leave-one-out one."""
+    different prior, not the leave-one-out one.
+    RECORD_2026=1 (src/record.py): both scorecards are the nine-cycle ones
+    in data/processed/record9/ (backtest.py writes them there)."""
     global _QUALITY
     if exclude_cycle is not None:
         key = str(exclude_cycle)
         if key not in _QUALITY_LOO:
             from backtest import scorecard
-            by_poll = pd.read_csv(PROCESSED_DIR / "backtest_pollster_cycles.csv",
+            by_poll = pd.read_csv(record.table("backtest_pollster_cycles.csv"),
                                   dtype={"cycle": str})
             if key not in set(by_poll["cycle"]):
                 raise ValueError(f"cycle {key!r} is not in the graded scorecard "
@@ -116,7 +119,7 @@ def quality_map(exclude_cycle: str | None = None) -> dict[str, float]:
     if _QUALITY is None:
         try:
             _QUALITY = quality_from_scorecard(
-                pd.read_csv(PROCESSED_DIR / "backtest_pollsters.csv"))
+                pd.read_csv(record.table("backtest_pollsters.csv")))
         except FileNotFoundError:
             _QUALITY = {}
     return _QUALITY

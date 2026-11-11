@@ -72,6 +72,13 @@ ELECTION_DAY = {
     "2022": "2022-11-01",
     "2026": None,  # by 2026-10-27
 }
+# RECORD_2026=1 (src/record.py, dossier s.74): 2026 is a graded cycle and the
+# harnesses need its date. None stays the default: a date here changes how
+# scrape() stamps result rows and clamps undated rows on the 2026 pages, and
+# the scraper is not run under the switch (see __main__).
+import record as _record
+if _record.RECORD_2026:
+    ELECTION_DAY["2026"] = _record.ELECTION_DAY_2026
 
 # Official-result baseline rows, e.g. "April 2019 legislative election".
 RESULT_CYCLE = {
@@ -658,6 +665,8 @@ def finalize_results(results: pd.DataFrame) -> pd.DataFrame:
 
 
 if __name__ == "__main__":
+    if _record.RECORD_2026:
+        sys.exit("scrape_polls writes the top-level polls.csv / results.csv: unset RECORD_2026")
     polls_raw, results_raw = scrape()
     polls = finalize(polls_raw)
     fn_rows = footnote_items(polls)

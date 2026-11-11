@@ -193,8 +193,9 @@ def _windows(cycles, horizons):
     import validate_bayes as vb
     from validate_horizon import calendar_weeks
 
+    import record
     polls = pd.read_csv(PROCESSED_DIR / "polls.csv", parse_dates=["fieldwork_end"])
-    results = pd.read_csv(PROCESSED_DIR / "results.csv")
+    results = record.results()
     for cycle in cycles:
         eday = pd.Timestamp(ELECTION_DAY[cycle])
         res = vb.apply_decomp(results[results["cycle"] == cycle], cycle)

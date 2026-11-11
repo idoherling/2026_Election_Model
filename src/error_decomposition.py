@@ -25,11 +25,13 @@ from functools import lru_cache
 import numpy as np
 import pandas as pd
 
+import record
 from backtest import FINAL_WINDOW
 from bias_audit import block_frame, window_polls
 from scrape_polls import ELECTION_DAY, PROCESSED_DIR
 
-ORDER = ["2009", "2013", "2015", "2019a", "2019s", "2020", "2021", "2022"]
+# the graded cycles: 2009-2022, plus 2026 under RECORD_2026=1 (src/record.py)
+ORDER = list(record.CYCLES)
 NB_FAMILIES = {"right", "haredi"}
 
 
@@ -37,7 +39,7 @@ NB_FAMILIES = {"right", "haredi"}
 def _frames():
     polls = pd.read_csv(PROCESSED_DIR / "polls.csv",
                         parse_dates=["fieldwork_end"])
-    results = pd.read_csv(PROCESSED_DIR / "results.csv")
+    results = record.results()
     frames = {}
     for cycle, res in results.groupby("cycle"):
         eday = pd.Timestamp(ELECTION_DAY[cycle])
@@ -173,9 +175,8 @@ def _vote_frames():
     from validate_model import CYCLE_THRESHOLD
     polls = pd.read_csv(PROCESSED_DIR / "polls.csv",
                         parse_dates=["fieldwork_end"])
-    results = pd.read_csv(PROCESSED_DIR / "results.csv", dtype={"cycle": str})
-    ran = pd.read_csv(PROCESSED_DIR.parent / "ran_vote_shares.csv",
-                      dtype={"cycle": str})
+    results = record.results(dtype={"cycle": str})
+    ran = record.ran_vote_shares(dtype={"cycle": str})
     frames = {}
     for cycle, res in results.groupby("cycle"):
         eday = pd.Timestamp(ELECTION_DAY[cycle])
@@ -309,7 +310,7 @@ def seat_tail(exclude_cycle: str | None = None) -> dict:
 
 def main() -> None:
     p = decompose()
-    print("Full-sample error decomposition (8 cycles):")
+    print(f"Full-sample error decomposition ({len(ORDER)} cycles):")
     print(f"  bloc swing sd:      {p['bloc_sd']:.2f} seats")
     for fam, (m, s) in p["family"].items():
         print(f"  {fam:7} family:     mean {m:+.2f}, sd {s:.2f}")
@@ -323,8 +324,9 @@ def main() -> None:
             "resid_base": p["resid_base"], "resid_slope": p["resid_slope"]}
     for fam, (m, s) in p["family"].items():
         flat[f"family_{fam}_mean"], flat[f"family_{fam}_sd"] = m, s
+    record.TABLE_DIR.mkdir(parents=True, exist_ok=True)   # record9/ under RECORD_2026
     pd.Series(flat).round(3).to_csv(
-        PROCESSED_DIR / "error_decomposition.csv")
+        record.table("error_decomposition.csv"))
     print("\nwrote error_decomposition.csv")
 
     print("\nLeave-one-out anchors (stability check):")

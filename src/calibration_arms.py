@@ -88,7 +88,8 @@ def run(out: Path, horizons, seeds, cycles, tag: str = "") -> None:
         return WIDTHS if arm in grid_bases else [fixed_width(arm, shipped_w)]
 
     polls = pd.read_csv(PROCESSED_DIR / "polls.csv", parse_dates=["fieldwork_end"])
-    results = pd.read_csv(PROCESSED_DIR / "results.csv")
+    import record
+    results = record.results()
     out.mkdir(parents=True, exist_ok=True)
     for cycle in cycles:
         eday = pd.Timestamp(ELECTION_DAY[cycle])

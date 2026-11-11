@@ -18,6 +18,7 @@ import pandas as pd
 
 import bayes_model as bm
 import os as _os
+import record
 import validate_bayes as _vb
 from validate_bayes import (ORDER, ELECTION_DAY, CYCLE_THRESHOLD, PAST_PAIRS,
                             VAL_BLOC_OVERRIDES, apply_decomp, decompose,
@@ -48,14 +49,14 @@ RAN_SHARES = PROCESSED_DIR.parent / "ran_vote_shares.csv"
 def main(layers: dict | None = None) -> pd.DataFrame:
     import arviz as az
     polls = pd.read_csv(PROCESSED_DIR / "polls.csv", parse_dates=["fieldwork_end"])
-    results = pd.read_csv(PROCESSED_DIR / "results.csv")
+    results = record.results()
     rows = []
     for cycle in ORDER:
         eday = pd.Timestamp(ELECTION_DAY[cycle])
         thr = CYCLE_THRESHOLD.get(cycle, THRESHOLD)
         res = results[results["cycle"] == cycle]
         if _vb.FIDELITY:
-            rv = pd.read_csv(RAN_SHARES)
+            rv = record.ran_vote_shares()
             rv = rv[rv["cycle"].astype(str) == cycle]
             res = res.drop(columns="vote_pct").merge(rv[["party_id", "vote_pct"]], on="party_id", how="left")
             extra = rv[~rv["party_id"].isin(res["party_id"])]
@@ -133,7 +134,7 @@ def main(layers: dict | None = None) -> pd.DataFrame:
         # those inputs silently: rewriting it takes THRESHOLD_WRITE=1 (a
         # graded re-measurement); otherwise the run goes to HARNESS_OUT_DIR.
         if _os.environ.get("THRESHOLD_WRITE") == "1":
-            df.to_csv(PROCESSED_DIR / "model_validation_threshold.csv", index=False)
+            df.to_csv(record.table("model_validation_threshold.csv"), index=False)
         else:
             df.to_csv(_vb.OUT_DIR / "model_validation_threshold_run.csv", index=False)
     if df.empty:

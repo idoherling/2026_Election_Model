@@ -18,6 +18,7 @@ import numpy as np
 import pandas as pd
 
 import bayes_model as bm
+import record
 from bayes_model import SEED, fit, prepare_data
 from error_decomposition import decompose
 from scrape_polls import ELECTION_DAY, PROCESSED_DIR
@@ -48,7 +49,7 @@ def calendar_weeks(h: int) -> float:
 
 def main() -> None:
     polls = pd.read_csv(PROCESSED_DIR / "polls.csv", parse_dates=["fieldwork_end"])
-    results = pd.read_csv(PROCESSED_DIR / "results.csv")
+    results = record.results()
     rng = np.random.default_rng(SEED)
     rows = []
     for cycle in ORDER:

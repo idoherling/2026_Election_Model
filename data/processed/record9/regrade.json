@@ -1,0 +1,3759 @@
+{
+ "rule": {
+  "tie": 0.1,
+  "floors": {
+   "mean": 0.01,
+   "brier": 0.001,
+   "isc": 0.05
+  },
+  "seeds": [
+   0,
+   100,
+   200
+  ],
+  "horizons": [
+   "eve",
+   "D-7",
+   "D-21"
+  ]
+ },
+ "baseline": {
+  "eight": {
+   "eve": {
+    "med": 1.4858,
+    "mean": 1.6253,
+    "cov": 0.9717,
+    "brier": 0.0447,
+    "isc": 9.0108,
+    "bloc_brier": 0.0388
+   },
+   "D-7": {
+    "med": 1.486,
+    "mean": 1.6424,
+    "cov": 0.9604,
+    "brier": 0.0465,
+    "isc": 9.3891,
+    "bloc_brier": 0.0375
+   },
+   "D-21": {
+    "med": 1.6249,
+    "mean": 1.7795,
+    "cov": 0.9683,
+    "brier": 0.0519,
+    "isc": 9.5994,
+    "bloc_brier": 0.0558
+   }
+  },
+  "nine": {
+   "eve": {
+    "med": 1.4651,
+    "mean": 1.5506,
+    "cov": 0.9749,
+    "brier": 0.0402,
+    "isc": 8.5802,
+    "bloc_brier": 0.0315
+   },
+   "D-7": {
+    "med": 1.4095,
+    "mean": 1.5806,
+    "cov": 0.9648,
+    "brier": 0.0421,
+    "isc": 8.9625,
+    "bloc_brier": 0.0311
+   },
+   "D-21": {
+    "med": 1.5687,
+    "mean": 1.7185,
+    "cov": 0.963,
+    "brier": 0.0469,
+    "isc": 9.2738,
+    "bloc_brier": 0.0481
+   }
+  },
+  "fold_2026": {
+   "eve": {
+    "med": 0.9792,
+    "mean": 1.1271,
+    "cov": 1.0,
+    "brier": 0.0098,
+    "isc": 6.2917,
+    "bloc_brier": 0.0128,
+    "p_nb61": 0.113
+   },
+   "D-7": {
+    "med": 0.9688,
+    "mean": 1.2052,
+    "cov": 1.0,
+    "brier": 0.0112,
+    "isc": 6.4385,
+    "bloc_brier": 0.0125,
+    "p_nb61": 0.1118
+   },
+   "D-21": {
+    "med": 1.0625,
+    "mean": 1.3739,
+    "cov": 1.0,
+    "brier": 0.0099,
+    "isc": 6.0417,
+    "bloc_brier": 0.0197,
+    "p_nb61": 0.1402
+   }
+  }
+ },
+ "arms": [
+  {
+   "arm": "hared_alloc",
+   "group": "haredi",
+   "pass": false,
+   "hz": {
+    "eve": {
+     "pass": false,
+     "why": "isc +0.1641",
+     "d": {
+      "med": -0.0347,
+      "mean": -0.0197,
+      "brier": -0.0,
+      "isc": 0.1641,
+      "bloc_brier": 0.0001
+     },
+     "cov": [
+      0.9749,
+      0.9679
+     ],
+     "folds": {
+      "win": 1,
+      "tie": 8,
+      "loss": 0
+     }
+    },
+    "D-7": {
+     "pass": false,
+     "why": "isc +0.1474",
+     "d": {
+      "med": -0.0212,
+      "mean": -0.0179,
+      "brier": -0.0,
+      "isc": 0.1474,
+      "bloc_brier": 0.0001
+     },
+     "cov": [
+      0.9648,
+      0.9578
+     ],
+     "folds": {
+      "win": 1,
+      "tie": 8,
+      "loss": 0
+     }
+    },
+    "D-21": {
+     "pass": true,
+     "why": "",
+     "d": {
+      "med": -0.0299,
+      "mean": -0.0196,
+      "brier": -0.0,
+      "isc": 0.0453,
+      "bloc_brier": 0.0002
+     },
+     "cov": [
+      0.963,
+      0.9583
+     ],
+     "folds": {
+      "win": 1,
+      "tie": 8,
+      "loss": 0
+     }
+    }
+   },
+   "eight": {
+    "pass": false,
+    "graded": [
+     "eve",
+     "D-7",
+     "D-21"
+    ],
+    "why": {
+     "eve": "",
+     "D-7": "",
+     "D-21": "isc +0.0625"
+    }
+   }
+  },
+  {
+   "arm": "hared_off",
+   "group": "haredi",
+   "pass": false,
+   "hz": {
+    "eve": {
+     "pass": false,
+     "why": "fold 2021 +0.119",
+     "d": {
+      "med": -0.0313,
+      "mean": -0.004,
+      "brier": -0.0003,
+      "isc": 0.0144,
+      "bloc_brier": -0.0012
+     },
+     "cov": [
+      0.9749,
+      0.9749
+     ],
+     "folds": {
+      "win": 3,
+      "tie": 5,
+      "loss": 1
+     }
+    },
+    "D-7": {
+     "pass": false,
+     "why": "fold 2009 +0.182, 2013 +0.139; mean +0.0146; coverage 0.965 to 0.972",
+     "d": {
+      "med": 0.0062,
+      "mean": 0.0146,
+      "brier": -0.0003,
+      "isc": -0.1476,
+      "bloc_brier": -0.0008
+     },
+     "cov": [
+      0.9648,
+      0.9715
+     ],
+     "folds": {
+      "win": 1,
+      "tie": 6,
+      "loss": 2
+     }
+    },
+    "D-21": {
+     "pass": false,
+     "why": "fold 2015 +0.227, 2022 +0.141",
+     "d": {
+      "med": 0.0471,
+      "mean": 0.0015,
+      "brier": -0.0002,
+      "isc": -0.0302,
+      "bloc_brier": -0.0011
+     },
+     "cov": [
+      0.963,
+      0.963
+     ],
+     "folds": {
+      "win": 0,
+      "tie": 7,
+      "loss": 2
+     }
+    }
+   },
+   "eight": {
+    "pass": false,
+    "graded": [
+     "D-7",
+     "D-21"
+    ],
+    "why": {
+     "D-7": "fold 2013 +0.167; mean +0.0359; coverage 0.960 to 0.972",
+     "D-21": "fold 2015 +0.333, 2022 +0.128; isc +0.1661"
+    }
+   }
+  },
+  {
+   "arm": "hared_e1",
+   "group": "haredi",
+   "pass": false,
+   "hz": {
+    "eve": {
+     "pass": true,
+     "why": "",
+     "d": {
+      "med": -0.0157,
+      "mean": -0.0008,
+      "brier": 0.0002,
+      "isc": 0.0175,
+      "bloc_brier": 0.0006
+     },
+     "cov": [
+      0.9749,
+      0.9749
+     ],
+     "folds": {
+      "win": 2,
+      "tie": 7,
+      "loss": 0
+     }
+    },
+    "D-7": {
+     "pass": false,
+     "why": "fold 2009 +0.121",
+     "d": {
+      "med": 0.0289,
+      "mean": -0.0042,
+      "brier": 0.0002,
+      "isc": -0.0124,
+      "bloc_brier": 0.0004
+     },
+     "cov": [
+      0.9648,
+      0.9648
+     ],
+     "folds": {
+      "win": 0,
+      "tie": 8,
+      "loss": 1
+     }
+    },
+    "D-21": {
+     "pass": false,
+     "why": "fold 2015 +0.106",
+     "d": {
+      "med": 0.0164,
+      "mean": 0.0016,
+      "brier": 0.0001,
+      "isc": -0.0508,
+      "bloc_brier": 0.0015
+     },
+     "cov": [
+      0.963,
+      0.963
+     ],
+     "folds": {
+      "win": 0,
+      "tie": 8,
+      "loss": 1
+     }
+    }
+   },
+   "eight": {
+    "pass": true,
+    "graded": [
+     "D-7",
+     "D-21"
+    ],
+    "why": {
+     "D-7": "",
+     "D-21": ""
+    }
+   }
+  },
+  {
+   "arm": "arab_add_e0",
+   "group": "arab",
+   "pass": false,
+   "hz": {
+    "eve": {
+     "pass": false,
+     "why": "fold 2013 +0.111; isc +0.2420",
+     "d": {
+      "med": -0.0461,
+      "mean": 0.0061,
+      "brier": -0.0011,
+      "isc": 0.242,
+      "bloc_brier": 0.0007
+     },
+     "cov": [
+      0.9749,
+      0.9749
+     ],
+     "folds": {
+      "win": 2,
+      "tie": 6,
+      "loss": 1
+     }
+    },
+    "D-7": {
+     "pass": false,
+     "why": "fold 2019s +0.100; isc +0.1929; coverage 0.965 to 0.968",
+     "d": {
+      "med": 0.0078,
+      "mean": 0.0043,
+      "brier": -0.0009,
+      "isc": 0.1929,
+      "bloc_brier": 0.0008
+     },
+     "cov": [
+      0.9648,
+      0.9681
+     ],
+     "folds": {
+      "win": 1,
+      "tie": 8,
+      "loss": 1
+     }
+    },
+    "D-21": {
+     "pass": false,
+     "why": "fold 2019s +0.152; isc +0.1196; coverage 0.963 to 0.969",
+     "d": {
+      "med": 0.0041,
+      "mean": 0.0027,
+      "brier": -0.0009,
+      "isc": 0.1196,
+      "bloc_brier": 0.0007
+     },
+     "cov": [
+      0.963,
+      0.9687
+     ],
+     "folds": {
+      "win": 1,
+      "tie": 7,
+      "loss": 1
+     }
+    }
+   },
+   "eight": {
+    "pass": false,
+    "graded": [
+     "eve",
+     "D-7",
+     "D-21"
+    ],
+    "why": {
+     "eve": "isc +0.1036",
+     "D-7": "isc +0.1188; coverage 0.960 to 0.964",
+     "D-21": "isc +0.1265"
+    }
+   }
+  },
+  {
+   "arm": "arab_turnA",
+   "group": "arab",
+   "pass": false,
+   "hz": {
+    "eve": {
+     "pass": false,
+     "why": "fold 2015 +0.121; isc +0.1658",
+     "d": {
+      "med": -0.036,
+      "mean": -0.0143,
+      "brier": 0.0008,
+      "isc": 0.1658,
+      "bloc_brier": 0.0112
+     },
+     "cov": [
+      0.9749,
+      0.9749
+     ],
+     "folds": {
+      "win": 2,
+      "tie": 6,
+      "loss": 1
+     }
+    },
+    "D-7": {
+     "pass": false,
+     "why": "coverage 0.965 to 0.968",
+     "d": {
+      "med": -0.0178,
+      "mean": -0.0247,
+      "brier": 0.0006,
+      "isc": -0.03,
+      "bloc_brier": 0.0113
+     },
+     "cov": [
+      0.9648,
+      0.9681
+     ],
+     "folds": {
+      "win": 2,
+      "tie": 7,
+      "loss": 0
+     }
+    },
+    "D-21": {
+     "pass": false,
+     "why": "fold 2019s +0.152, 2020 +0.148, 2026 +0.167; isc +0.2446",
+     "d": {
+      "med": -0.0104,
+      "mean": -0.0169,
+      "brier": 0.0002,
+      "isc": 0.2446,
+      "bloc_brier": 0.0129
+     },
+     "cov": [
+      0.963,
+      0.9507
+     ],
+     "folds": {
+      "win": 2,
+      "tie": 4,
+      "loss": 3
+     }
+    }
+   },
+   "eight": {
+    "pass": false,
+    "graded": [
+     "eve",
+     "D-7",
+     "D-21"
+    ],
+    "why": {
+     "eve": "fold 2013 +0.111; brier +0.0033",
+     "D-7": "fold 2013 +0.250; brier +0.0031; coverage 0.960 to 0.972",
+     "D-21": "fold 2013 +0.194; brier +0.0023; isc +0.3481"
+    }
+   }
+  },
+  {
+   "arm": "arab_turnB",
+   "group": "arab",
+   "pass": false,
+   "hz": {
+    "eve": {
+     "pass": false,
+     "why": "fold 2015 +0.121; brier +0.0012; isc +0.2150",
+     "d": {
+      "med": -0.0214,
+      "mean": -0.0161,
+      "brier": 0.0012,
+      "isc": 0.215,
+      "bloc_brier": 0.0069
+     },
+     "cov": [
+      0.9749,
+      0.9749
+     ],
+     "folds": {
+      "win": 2,
+      "tie": 6,
+      "loss": 1
+     }
+    },
+    "D-7": {
+     "pass": false,
+     "why": "fold 2009 +0.182, 2013 +0.250; brier +0.0010; coverage 0.965 to 0.972",
+     "d": {
+      "med": 0.0215,
+      "mean": -0.0159,
+      "brier": 0.001,
+      "isc": -0.1063,
+      "bloc_brier": 0.0073
+     },
+     "cov": [
+      0.9648,
+      0.9715
+     ],
+     "folds": {
+      "win": 1,
+      "tie": 6,
+      "loss": 2
+     }
+    },
+    "D-21": {
+     "pass": false,
+     "why": "fold 2013 +0.250, 2015 +0.106, 2020 +0.148, 2022 +0.103",
+     "d": {
+      "med": 0.0552,
+      "mean": -0.0085,
+      "brier": 0.0007,
+      "isc": -0.0213,
+      "bloc_brier": 0.0097
+     },
+     "cov": [
+      0.963,
+      0.963
+     ],
+     "folds": {
+      "win": 1,
+      "tie": 4,
+      "loss": 4
+     }
+    }
+   },
+   "eight": {
+    "pass": false,
+    "graded": [
+     "eve",
+     "D-7",
+     "D-21"
+    ],
+    "why": {
+     "eve": "fold 2013 +0.139, 2015 +0.242, 2020 +0.148; brier +0.0017",
+     "D-7": "fold 2013 +0.167, 2015 +0.121, 2020 +0.148; brier +0.0016; coverage 0.960 to 0.968",
+     "D-21": "fold 2013 +0.194, 2015 +0.364, 2020 +0.130; brier +0.0011; isc +0.1605"
+    }
+   }
+  },
+  {
+   "arm": "arab_e1_prev",
+   "group": "arab",
+   "pass": false,
+   "hz": {
+    "eve": {
+     "pass": false,
+     "why": "fold 2013 +0.111, 2015 +0.121, 2019s +0.100; mean +0.0204; isc +0.2228",
+     "d": {
+      "med": -0.0248,
+      "mean": 0.0204,
+      "brier": -0.0001,
+      "isc": 0.2228,
+      "bloc_brier": 0.0008
+     },
+     "cov": [
+      0.9749,
+      0.9749
+     ],
+     "folds": {
+      "win": 1,
+      "tie": 5,
+      "loss": 3
+     }
+    },
+    "D-7": {
+     "pass": false,
+     "why": "fold 2019s +0.167; mean +0.0189; isc +0.1630; coverage 0.965 to 0.968",
+     "d": {
+      "med": 0.0137,
+      "mean": 0.0189,
+      "brier": -0.0,
+      "isc": 0.163,
+      "bloc_brier": 0.0006
+     },
+     "cov": [
+      0.9648,
+      0.9681
+     ],
+     "folds": {
+      "win": 1,
+      "tie": 7,
+      "loss": 1
+     }
+    },
+    "D-21": {
+     "pass": false,
+     "why": "fold 2015 +0.136, 2019s +0.242; mean +0.0142; isc +0.1884; coverage 0.963 to 0.966",
+     "d": {
+      "med": 0.0268,
+      "mean": 0.0142,
+      "brier": 0.0001,
+      "isc": 0.1884,
+      "bloc_brier": 0.0014
+     },
+     "cov": [
+      0.963,
+      0.9656
+     ],
+     "folds": {
+      "win": 1,
+      "tie": 6,
+      "loss": 2
+     }
+    }
+   },
+   "eight": {
+    "pass": false,
+    "graded": [
+     "eve",
+     "D-7",
+     "D-21"
+    ],
+    "why": {
+     "eve": "fold 2019a +0.202, 2022 +0.692; mean +0.0206; brier +0.0015; isc +0.0789",
+     "D-7": "fold 2022 +0.603; mean +0.0232; brier +0.0015; coverage 0.960 to 0.968",
+     "D-21": "fold 2015 +0.364, 2019a +0.190, 2019s +0.121, 2022 +0.744; mean +0.0274; brier +0.0017; isc +0.0970"
+    }
+   }
+  },
+  {
+   "arm": "arab_off",
+   "group": "arab",
+   "pass": false,
+   "hz": {
+    "eve": {
+     "pass": false,
+     "why": "fold 2015 +0.152, 2019s +0.333, 2022 +0.590; mean +0.0529; brier +0.0018; isc +0.1940",
+     "d": {
+      "med": 0.1123,
+      "mean": 0.0529,
+      "brier": 0.0018,
+      "isc": 0.194,
+      "bloc_brier": 0.0029
+     },
+     "cov": [
+      0.9749,
+      0.9749
+     ],
+     "folds": {
+      "win": 0,
+      "tie": 6,
+      "loss": 3
+     }
+    },
+    "D-7": {
+     "pass": false,
+     "why": "fold 2013 +0.153, 2019s +0.233, 2020 +0.111, 2022 +0.615; mean +0.0588; brier +0.0018; isc +0.1305; coverage 0.965 to 0.972",
+     "d": {
+      "med": 0.1509,
+      "mean": 0.0588,
+      "brier": 0.0018,
+      "isc": 0.1305,
+      "bloc_brier": 0.003
+     },
+     "cov": [
+      0.9648,
+      0.9715
+     ],
+     "folds": {
+      "win": 0,
+      "tie": 5,
+      "loss": 4
+     }
+    },
+    "D-21": {
+     "pass": false,
+     "why": "fold 2013 +0.139, 2015 +0.379, 2019s +0.242, 2020 +0.148, 2022 +0.692, 2026 +0.188; mean +0.0486; brier +0.0021; isc +0.2458",
+     "d": {
+      "med": 0.196,
+      "mean": 0.0486,
+      "brier": 0.0021,
+      "isc": 0.2458,
+      "bloc_brier": 0.0049
+     },
+     "cov": [
+      0.963,
+      0.963
+     ],
+     "folds": {
+      "win": 0,
+      "tie": 3,
+      "loss": 6
+     }
+    }
+   },
+   "eight": {
+    "pass": false,
+    "graded": [
+     "D-7",
+     "D-21"
+    ],
+    "why": {
+     "D-7": "fold 2019s +0.133, 2022 +0.603; mean +0.0410; brier +0.0022; coverage 0.960 to 0.968",
+     "D-21": "fold 2015 +0.364, 2019a +0.214, 2019s +0.182, 2022 +0.744; mean +0.0381; brier +0.0023; isc +0.1853"
+    }
+   }
+  },
+  {
+   "arm": "no_trail",
+   "group": "trail",
+   "pass": false,
+   "hz": {
+    "eve": {
+     "pass": false,
+     "why": "fold 2015 +0.636, 2019a +0.155, 2026 +0.188; mean +0.0534; brier +0.0051; isc +0.3239",
+     "d": {
+      "med": 0.0828,
+      "mean": 0.0534,
+      "brier": 0.0051,
+      "isc": 0.3239,
+      "bloc_brier": 0.0009
+     },
+     "cov": [
+      0.9749,
+      0.9648
+     ],
+     "folds": {
+      "win": 1,
+      "tie": 5,
+      "loss": 3
+     }
+    },
+    "D-7": {
+     "pass": false,
+     "why": "fold 2015 +0.636, 2019a +0.345, 2020 +0.333, 2026 +0.115; mean +0.0858; brier +0.0037; isc +0.0872",
+     "d": {
+      "med": 0.1181,
+      "mean": 0.0858,
+      "brier": 0.0037,
+      "isc": 0.0872,
+      "bloc_brier": 0.0016
+     },
+     "cov": [
+      0.9648,
+      0.958
+     ],
+     "folds": {
+      "win": 1,
+      "tie": 4,
+      "loss": 4
+     }
+    },
+    "D-21": {
+     "pass": false,
+     "why": "fold 2015 +0.591, 2020 +0.296; mean +0.0591",
+     "d": {
+      "med": 0.0986,
+      "mean": 0.0591,
+      "brier": -0.0004,
+      "isc": 0.0185,
+      "bloc_brier": 0.0012
+     },
+     "cov": [
+      0.963,
+      0.9596
+     ],
+     "folds": {
+      "win": 0,
+      "tie": 7,
+      "loss": 2
+     }
+    }
+   },
+   "eight": {
+    "pass": false,
+    "graded": [
+     "eve",
+     "D-7",
+     "D-21"
+    ],
+    "why": {
+     "eve": "fold 2015 +0.606, 2019a +0.333; mean +0.0435; brier +0.0058; isc +0.4035",
+     "D-7": "fold 2015 +0.636, 2019a +0.369, 2020 +0.370; mean +0.0816; brier +0.0043; isc +0.2003",
+     "D-21": "fold 2015 +0.636, 2020 +0.241; mean +0.0661"
+    }
+   }
+  },
+  {
+   "arm": "trail_full",
+   "group": "trail",
+   "pass": false,
+   "hz": {
+    "eve": {
+     "pass": false,
+     "why": "fold 2019s +0.567; mean +0.0454; brier +0.0017; isc +0.0574",
+     "d": {
+      "med": -0.0192,
+      "mean": 0.0454,
+      "brier": 0.0017,
+      "isc": 0.0574,
+      "bloc_brier": 0.0013
+     },
+     "cov": [
+      0.9749,
+      0.9749
+     ],
+     "folds": {
+      "win": 2,
+      "tie": 6,
+      "loss": 1
+     }
+    },
+    "D-7": {
+     "pass": false,
+     "why": "fold 2019s +0.467, 2020 +0.852; mean +0.0938; brier +0.0044; isc +0.0785",
+     "d": {
+      "med": 0.1354,
+      "mean": 0.0938,
+      "brier": 0.0044,
+      "isc": 0.0785,
+      "bloc_brier": 0.0038
+     },
+     "cov": [
+      0.9648,
+      0.9648
+     ],
+     "folds": {
+      "win": 1,
+      "tie": 6,
+      "loss": 2
+     }
+    },
+    "D-21": {
+     "pass": false,
+     "why": "fold 2020 +0.778; mean +0.0136; brier +0.0024",
+     "d": {
+      "med": 0.0847,
+      "mean": 0.0136,
+      "brier": 0.0024,
+      "isc": 0.0483,
+      "bloc_brier": 0.0011
+     },
+     "cov": [
+      0.963,
+      0.963
+     ],
+     "folds": {
+      "win": 0,
+      "tie": 8,
+      "loss": 1
+     }
+    }
+   },
+   "eight": {
+    "pass": false,
+    "graded": [
+     "eve",
+     "D-7",
+     "D-21"
+    ],
+    "why": {
+     "eve": "fold 2019s +0.500; mean +0.0374; isc +0.0702",
+     "D-7": "fold 2019a +0.131, 2019s +0.533, 2020 +1.000; mean +0.0876; brier +0.0034; isc +0.1178",
+     "D-21": "fold 2020 +0.648; mean +0.0149; brier +0.0027; isc +0.0629"
+    }
+   }
+  },
+  {
+   "arm": "trail_field",
+   "group": "trail",
+   "pass": false,
+   "hz": {
+    "eve": {
+     "pass": false,
+     "why": "fold 2015 +0.273, 2019s +0.100; mean +0.0489; brier +0.0056",
+     "d": {
+      "med": 0.009,
+      "mean": 0.0489,
+      "brier": 0.0056,
+      "isc": 0.0258,
+      "bloc_brier": 0.0125
+     },
+     "cov": [
+      0.9749,
+      0.9749
+     ],
+     "folds": {
+      "win": 1,
+      "tie": 6,
+      "loss": 2
+     }
+    },
+    "D-7": {
+     "pass": false,
+     "why": "fold 2015 +0.424, 2019a +0.286; mean +0.0216; brier +0.0042; isc +0.0767",
+     "d": {
+      "med": 0.0466,
+      "mean": 0.0216,
+      "brier": 0.0042,
+      "isc": 0.0767,
+      "bloc_brier": 0.0232
+     },
+     "cov": [
+      0.9648,
+      0.9648
+     ],
+     "folds": {
+      "win": 2,
+      "tie": 5,
+      "loss": 2
+     }
+    },
+    "D-21": {
+     "pass": false,
+     "why": "fold 2015 +0.348",
+     "d": {
+      "med": 0.0181,
+      "mean": -0.0086,
+      "brier": -0.0004,
+      "isc": 0.0316,
+      "bloc_brier": 0.0155
+     },
+     "cov": [
+      0.963,
+      0.963
+     ],
+     "folds": {
+      "win": 1,
+      "tie": 7,
+      "loss": 1
+     }
+    }
+   },
+   "eight": {
+    "pass": false,
+    "graded": [
+     "D-7",
+     "D-21"
+    ],
+    "why": {
+     "D-7": "fold 2015 +0.545, 2019a +0.250, 2020 +0.148; mean +0.0398; brier +0.0049; isc +0.1437",
+     "D-21": "fold 2015 +0.424; isc +0.0535"
+    }
+   }
+  },
+  {
+   "arm": "trail_ramp_sat",
+   "group": "trail",
+   "pass": true,
+   "hz": {
+    "eve": {
+     "pass": true,
+     "why": "",
+     "d": {
+      "med": -0.0103,
+      "mean": -0.0112,
+      "brier": 0.0008,
+      "isc": -0.0494,
+      "bloc_brier": -0.0001
+     },
+     "cov": [
+      0.9749,
+      0.9749
+     ],
+     "folds": {
+      "win": 0,
+      "tie": 9,
+      "loss": 0
+     }
+    },
+    "D-7": {
+     "pass": true,
+     "why": "",
+     "d": {
+      "med": 0.0,
+      "mean": 0.0,
+      "brier": 0.0,
+      "isc": 0.0,
+      "bloc_brier": 0.0
+     },
+     "cov": [
+      0.9648,
+      0.9648
+     ],
+     "folds": {
+      "win": 0,
+      "tie": 9,
+      "loss": 0
+     }
+    },
+    "D-21": {
+     "pass": true,
+     "why": "",
+     "d": {
+      "med": -0.036,
+      "mean": -0.0571,
+      "brier": -0.002,
+      "isc": 0.0369,
+      "bloc_brier": -0.0013
+     },
+     "cov": [
+      0.963,
+      0.963
+     ],
+     "folds": {
+      "win": 1,
+      "tie": 8,
+      "loss": 0
+     }
+    }
+   },
+   "eight": {
+    "pass": true,
+    "graded": [
+     "eve",
+     "D-7",
+     "D-21"
+    ],
+    "why": {
+     "eve": "",
+     "D-7": "",
+     "D-21": ""
+    }
+   }
+  },
+  {
+   "arm": "tramp_m",
+   "group": "trail",
+   "pass": true,
+   "hz": {
+    "eve": {
+     "pass": true,
+     "why": "",
+     "d": {
+      "med": -0.0756,
+      "mean": -0.0485,
+      "brier": 0.0003,
+      "isc": -0.1166,
+      "bloc_brier": -0.0001
+     },
+     "cov": [
+      0.9749,
+      0.9749
+     ],
+     "folds": {
+      "win": 2,
+      "tie": 7,
+      "loss": 0
+     }
+    },
+    "D-7": {
+     "pass": true,
+     "why": "",
+     "d": {
+      "med": -0.0384,
+      "mean": -0.0205,
+      "brier": -0.0003,
+      "isc": -0.0511,
+      "bloc_brier": -0.0002
+     },
+     "cov": [
+      0.9648,
+      0.9648
+     ],
+     "folds": {
+      "win": 1,
+      "tie": 8,
+      "loss": 0
+     }
+    },
+    "D-21": {
+     "pass": true,
+     "why": "",
+     "d": {
+      "med": -0.0262,
+      "mean": -0.0401,
+      "brier": -0.0009,
+      "isc": -0.0516,
+      "bloc_brier": -0.0004
+     },
+     "cov": [
+      0.963,
+      0.963
+     ],
+     "folds": {
+      "win": 1,
+      "tie": 8,
+      "loss": 0
+     }
+    }
+   },
+   "eight": null
+  },
+  {
+   "arm": "tramp05_m",
+   "group": "trail",
+   "pass": false,
+   "hz": {
+    "eve": {
+     "pass": false,
+     "why": "fold 2015 +0.121; brier +0.0011",
+     "d": {
+      "med": -0.0294,
+      "mean": -0.0177,
+      "brier": 0.0011,
+      "isc": -0.0856,
+      "bloc_brier": 0.0
+     },
+     "cov": [
+      0.9749,
+      0.9749
+     ],
+     "folds": {
+      "win": 2,
+      "tie": 6,
+      "loss": 1
+     }
+    },
+    "D-7": {
+     "pass": true,
+     "why": "",
+     "d": {
+      "med": -0.0234,
+      "mean": -0.0053,
+      "brier": 0.0003,
+      "isc": -0.0393,
+      "bloc_brier": 0.0003
+     },
+     "cov": [
+      0.9648,
+      0.9648
+     ],
+     "folds": {
+      "win": 1,
+      "tie": 8,
+      "loss": 0
+     }
+    },
+    "D-21": {
+     "pass": true,
+     "why": "",
+     "d": {
+      "med": -0.035,
+      "mean": -0.0556,
+      "brier": -0.0018,
+      "isc": -0.0138,
+      "bloc_brier": -0.0007
+     },
+     "cov": [
+      0.963,
+      0.963
+     ],
+     "folds": {
+      "win": 1,
+      "tie": 8,
+      "loss": 0
+     }
+    }
+   },
+   "eight": null
+  },
+  {
+   "arm": "cal_A",
+   "group": "width",
+   "pass": true,
+   "hz": {
+    "eve": {
+     "pass": true,
+     "why": "",
+     "d": {
+      "med": -0.002,
+      "mean": -0.0014,
+      "brier": -0.0002,
+      "isc": -0.1605,
+      "bloc_brier": -0.0066
+     },
+     "cov": [
+      0.9749,
+      0.9715
+     ],
+     "folds": {
+      "win": 0,
+      "tie": 9,
+      "loss": 0
+     }
+    },
+    "D-7": {
+     "pass": true,
+     "why": "",
+     "d": {
+      "med": -0.0086,
+      "mean": -0.0006,
+      "brier": -0.0002,
+      "isc": -0.2181,
+      "bloc_brier": -0.0062
+     },
+     "cov": [
+      0.9648,
+      0.9648
+     ],
+     "folds": {
+      "win": 0,
+      "tie": 9,
+      "loss": 0
+     }
+    },
+    "D-21": {
+     "pass": true,
+     "why": "",
+     "d": {
+      "med": -0.0034,
+      "mean": 0.0003,
+      "brier": -0.0001,
+      "isc": -0.1471,
+      "bloc_brier": -0.0069
+     },
+     "cov": [
+      0.963,
+      0.9603
+     ],
+     "folds": {
+      "win": 0,
+      "tie": 9,
+      "loss": 0
+     }
+    }
+   },
+   "eight": {
+    "pass": true,
+    "graded": [
+     "eve",
+     "D-7",
+     "D-21"
+    ],
+    "why": {
+     "eve": "",
+     "D-7": "",
+     "D-21": ""
+    }
+   }
+  },
+  {
+   "arm": "cal_B",
+   "group": "width",
+   "pass": true,
+   "hz": {
+    "eve": {
+     "pass": true,
+     "why": "",
+     "d": {
+      "med": -0.0015,
+      "mean": -0.0253,
+      "brier": -0.0031,
+      "isc": -0.325,
+      "bloc_brier": -0.0011
+     },
+     "cov": [
+      0.9749,
+      0.9749
+     ],
+     "folds": {
+      "win": 0,
+      "tie": 9,
+      "loss": 0
+     }
+    },
+    "D-7": {
+     "pass": true,
+     "why": "",
+     "d": {
+      "med": 0.0168,
+      "mean": -0.0183,
+      "brier": -0.0022,
+      "isc": -0.2398,
+      "bloc_brier": -0.0006
+     },
+     "cov": [
+      0.9648,
+      0.953
+     ],
+     "folds": {
+      "win": 0,
+      "tie": 9,
+      "loss": 0
+     }
+    },
+    "D-21": {
+     "pass": true,
+     "why": "",
+     "d": {
+      "med": 0.0053,
+      "mean": -0.0254,
+      "brier": -0.0013,
+      "isc": -0.0081,
+      "bloc_brier": 0.0006
+     },
+     "cov": [
+      0.963,
+      0.9454
+     ],
+     "folds": {
+      "win": 0,
+      "tie": 9,
+      "loss": 0
+     }
+    }
+   },
+   "eight": {
+    "pass": true,
+    "graded": [
+     "eve",
+     "D-7",
+     "D-21"
+    ],
+    "why": {
+     "eve": "",
+     "D-7": "",
+     "D-21": ""
+    }
+   }
+  },
+  {
+   "arm": "cal_AB",
+   "group": "width",
+   "pass": false,
+   "hz": {
+    "eve": {
+     "pass": true,
+     "why": "",
+     "d": {
+      "med": -0.0066,
+      "mean": -0.0276,
+      "brier": -0.0035,
+      "isc": -0.5322,
+      "bloc_brier": -0.0082
+     },
+     "cov": [
+      0.9749,
+      0.9749
+     ],
+     "folds": {
+      "win": 0,
+      "tie": 9,
+      "loss": 0
+     }
+    },
+    "D-7": {
+     "pass": true,
+     "why": "",
+     "d": {
+      "med": 0.0225,
+      "mean": -0.0197,
+      "brier": -0.0024,
+      "isc": -0.2082,
+      "bloc_brier": -0.007
+     },
+     "cov": [
+      0.9648,
+      0.941
+     ],
+     "folds": {
+      "win": 0,
+      "tie": 9,
+      "loss": 0
+     }
+    },
+    "D-21": {
+     "pass": false,
+     "why": "isc +0.0641",
+     "d": {
+      "med": -0.0024,
+      "mean": -0.0258,
+      "brier": -0.0015,
+      "isc": 0.0641,
+      "bloc_brier": -0.0065
+     },
+     "cov": [
+      0.963,
+      0.9332
+     ],
+     "folds": {
+      "win": 0,
+      "tie": 9,
+      "loss": 0
+     }
+    }
+   },
+   "eight": {
+    "pass": true,
+    "graded": [
+     "eve",
+     "D-7",
+     "D-21"
+    ],
+    "why": {
+     "eve": "",
+     "D-7": "",
+     "D-21": ""
+    }
+   }
+  },
+  {
+   "arm": "cal_D",
+   "group": "width",
+   "pass": false,
+   "hz": {
+    "eve": {
+     "pass": true,
+     "why": "",
+     "d": {
+      "med": -0.0197,
+      "mean": -0.0118,
+      "brier": -0.0013,
+      "isc": -0.0831,
+      "bloc_brier": -0.0
+     },
+     "cov": [
+      0.9749,
+      0.9749
+     ],
+     "folds": {
+      "win": 0,
+      "tie": 9,
+      "loss": 0
+     }
+    },
+    "D-7": {
+     "pass": true,
+     "why": "",
+     "d": {
+      "med": -0.0018,
+      "mean": -0.0034,
+      "brier": -0.0007,
+      "isc": -0.0648,
+      "bloc_brier": 0.0002
+     },
+     "cov": [
+      0.9648,
+      0.9648
+     ],
+     "folds": {
+      "win": 0,
+      "tie": 9,
+      "loss": 0
+     }
+    },
+    "D-21": {
+     "pass": false,
+     "why": "coverage 0.963 to 0.966",
+     "d": {
+      "med": 0.0008,
+      "mean": -0.0029,
+      "brier": -0.0002,
+      "isc": -0.1591,
+      "bloc_brier": 0.0011
+     },
+     "cov": [
+      0.963,
+      0.9656
+     ],
+     "folds": {
+      "win": 0,
+      "tie": 9,
+      "loss": 0
+     }
+    }
+   },
+   "eight": {
+    "pass": false,
+    "graded": [
+     "eve",
+     "D-7",
+     "D-21"
+    ],
+    "why": {
+     "eve": "",
+     "D-7": "",
+     "D-21": "fold 2015 +0.121; isc +0.0515"
+    }
+   }
+  },
+  {
+   "arm": "resid_hybrid",
+   "group": "width",
+   "pass": false,
+   "hz": {
+    "eve": {
+     "pass": true,
+     "why": "",
+     "d": {
+      "med": 0.0004,
+      "mean": -0.026,
+      "brier": -0.0031,
+      "isc": -0.1344,
+      "bloc_brier": -0.0004
+     },
+     "cov": [
+      0.9749,
+      0.9749
+     ],
+     "folds": {
+      "win": 0,
+      "tie": 9,
+      "loss": 0
+     }
+    },
+    "D-7": {
+     "pass": false,
+     "why": "coverage 0.965 to 0.974",
+     "d": {
+      "med": 0.0297,
+      "mean": -0.0195,
+      "brier": -0.0021,
+      "isc": -0.306,
+      "bloc_brier": -0.0001
+     },
+     "cov": [
+      0.9648,
+      0.9741
+     ],
+     "folds": {
+      "win": 0,
+      "tie": 9,
+      "loss": 0
+     }
+    },
+    "D-21": {
+     "pass": true,
+     "why": "",
+     "d": {
+      "med": 0.0085,
+      "mean": -0.0267,
+      "brier": -0.0013,
+      "isc": -0.2221,
+      "bloc_brier": 0.0017
+     },
+     "cov": [
+      0.963,
+      0.961
+     ],
+     "folds": {
+      "win": 0,
+      "tie": 9,
+      "loss": 0
+     }
+    }
+   },
+   "eight": {
+    "pass": false,
+    "graded": [
+     "eve",
+     "D-7",
+     "D-21"
+    ],
+    "why": {
+     "eve": "",
+     "D-7": "fold 2021 +0.119; coverage 0.960 to 0.977",
+     "D-21": ""
+    }
+   }
+  },
+  {
+   "arm": "hier_H1",
+   "group": "width",
+   "pass": false,
+   "hz": {
+    "eve": {
+     "pass": true,
+     "why": "",
+     "d": {
+      "med": 0.0055,
+      "mean": -0.0154,
+      "brier": -0.0031,
+      "isc": -0.333,
+      "bloc_brier": -0.0096
+     },
+     "cov": [
+      0.9749,
+      0.9749
+     ],
+     "folds": {
+      "win": 0,
+      "tie": 9,
+      "loss": 0
+     }
+    },
+    "D-7": {
+     "pass": false,
+     "why": "coverage 0.965 to 0.968",
+     "d": {
+      "med": 0.0295,
+      "mean": -0.0025,
+      "brier": -0.0018,
+      "isc": -0.3674,
+      "bloc_brier": -0.0081
+     },
+     "cov": [
+      0.9648,
+      0.9681
+     ],
+     "folds": {
+      "win": 0,
+      "tie": 9,
+      "loss": 0
+     }
+    },
+    "D-21": {
+     "pass": false,
+     "why": "fold 2015 +0.106; coverage 0.963 to 0.980",
+     "d": {
+      "med": 0.0311,
+      "mean": -0.013,
+      "brier": -0.0017,
+      "isc": -0.5343,
+      "bloc_brier": -0.0115
+     },
+     "cov": [
+      0.963,
+      0.9805
+     ],
+     "folds": {
+      "win": 0,
+      "tie": 8,
+      "loss": 1
+     }
+    }
+   },
+   "eight": {
+    "pass": false,
+    "graded": [
+     "eve",
+     "D-7",
+     "D-21"
+    ],
+    "why": {
+     "eve": "",
+     "D-7": "fold 2015 +0.121",
+     "D-21": "fold 2015 +0.182; coverage 0.968 to 0.975"
+    }
+   }
+  },
+  {
+   "arm": "no_nstrad",
+   "group": "straddler",
+   "pass": false,
+   "hz": {
+    "eve": {
+     "pass": false,
+     "why": "brier +0.0051",
+     "d": {
+      "med": -0.0454,
+      "mean": 0.0077,
+      "brier": 0.0051,
+      "isc": 0.007,
+      "bloc_brier": -0.001
+     },
+     "cov": [
+      0.9749,
+      0.9749
+     ],
+     "folds": {
+      "win": 1,
+      "tie": 8,
+      "loss": 0
+     }
+    },
+    "D-7": {
+     "pass": false,
+     "why": "fold 2019a +0.440; mean +0.0117; brier +0.0056; coverage 0.965 to 0.972",
+     "d": {
+      "med": 0.0119,
+      "mean": 0.0117,
+      "brier": 0.0056,
+      "isc": -0.1322,
+      "bloc_brier": -0.0008
+     },
+     "cov": [
+      0.9648,
+      0.9715
+     ],
+     "folds": {
+      "win": 1,
+      "tie": 7,
+      "loss": 1
+     }
+    },
+    "D-21": {
+     "pass": false,
+     "why": "fold 2019a +0.262; mean +0.0108; brier +0.0042; coverage 0.963 to 0.972",
+     "d": {
+      "med": 0.0265,
+      "mean": 0.0108,
+      "brier": 0.0042,
+      "isc": -0.172,
+      "bloc_brier": -0.0003
+     },
+     "cov": [
+      0.963,
+      0.9718
+     ],
+     "folds": {
+      "win": 0,
+      "tie": 8,
+      "loss": 1
+     }
+    }
+   },
+   "eight": {
+    "pass": false,
+    "graded": [
+     "eve",
+     "D-7",
+     "D-21"
+    ],
+    "why": {
+     "eve": "brier +0.0049",
+     "D-7": "fold 2019a +0.440; brier +0.0050; coverage 0.960 to 0.971",
+     "D-21": "fold 2019a +0.286; brier +0.0035; coverage 0.968 to 0.972"
+    }
+   }
+  },
+  {
+   "arm": "nstrad_ran",
+   "group": "straddler",
+   "pass": false,
+   "hz": {
+    "eve": {
+     "pass": false,
+     "why": "brier +0.0021",
+     "d": {
+      "med": 0.0021,
+      "mean": 0.0056,
+      "brier": 0.0021,
+      "isc": -0.0197,
+      "bloc_brier": -0.0001
+     },
+     "cov": [
+      0.9749,
+      0.9749
+     ],
+     "folds": {
+      "win": 0,
+      "tie": 9,
+      "loss": 0
+     }
+    },
+    "D-7": {
+     "pass": false,
+     "why": "fold 2019a +0.286; brier +0.0020; coverage 0.965 to 0.972",
+     "d": {
+      "med": 0.0306,
+      "mean": 0.0056,
+      "brier": 0.002,
+      "isc": -0.1323,
+      "bloc_brier": -0.0
+     },
+     "cov": [
+      0.9648,
+      0.9715
+     ],
+     "folds": {
+      "win": 0,
+      "tie": 8,
+      "loss": 1
+     }
+    },
+    "D-21": {
+     "pass": false,
+     "why": "brier +0.0019; coverage 0.963 to 0.969",
+     "d": {
+      "med": -0.0026,
+      "mean": 0.0038,
+      "brier": 0.0019,
+      "isc": -0.1151,
+      "bloc_brier": 0.0004
+     },
+     "cov": [
+      0.963,
+      0.9691
+     ],
+     "folds": {
+      "win": 0,
+      "tie": 9,
+      "loss": 0
+     }
+    }
+   },
+   "eight": {
+    "pass": false,
+    "graded": [
+     "eve",
+     "D-7",
+     "D-21"
+    ],
+    "why": {
+     "eve": "mean +0.0103; brier +0.0032",
+     "D-7": "fold 2019a +0.298; brier +0.0030; coverage 0.960 to 0.968",
+     "D-21": "brier +0.0029; coverage 0.968 to 0.972"
+    }
+   }
+  },
+  {
+   "arm": "nstrad_fixed",
+   "group": "straddler",
+   "pass": false,
+   "hz": {
+    "eve": {
+     "pass": true,
+     "why": "",
+     "d": {
+      "med": -0.0399,
+      "mean": -0.035,
+      "brier": -0.0037,
+      "isc": -0.0146,
+      "bloc_brier": -0.0014
+     },
+     "cov": [
+      0.9749,
+      0.9749
+     ],
+     "folds": {
+      "win": 1,
+      "tie": 8,
+      "loss": 0
+     }
+    },
+    "D-7": {
+     "pass": false,
+     "why": "coverage 0.965 to 0.972",
+     "d": {
+      "med": -0.0304,
+      "mean": -0.0372,
+      "brier": -0.0034,
+      "isc": -0.1709,
+      "bloc_brier": -0.0014
+     },
+     "cov": [
+      0.9648,
+      0.9715
+     ],
+     "folds": {
+      "win": 1,
+      "tie": 8,
+      "loss": 0
+     }
+    },
+    "D-21": {
+     "pass": false,
+     "why": "coverage 0.963 to 0.966",
+     "d": {
+      "med": 0.0137,
+      "mean": -0.0292,
+      "brier": -0.0034,
+      "isc": -0.085,
+      "bloc_brier": -0.0012
+     },
+     "cov": [
+      0.963,
+      0.9656
+     ],
+     "folds": {
+      "win": 0,
+      "tie": 9,
+      "loss": 0
+     }
+    }
+   },
+   "eight": {
+    "pass": false,
+    "graded": [
+     "eve",
+     "D-7",
+     "D-21"
+    ],
+    "why": {
+     "eve": "",
+     "D-7": "fold 2019a +0.238; coverage 0.960 to 0.971",
+     "D-21": "fold 2015 +0.121"
+    }
+   }
+  },
+  {
+   "arm": "ramp_A",
+   "group": "sets",
+   "pass": true,
+   "hz": {
+    "eve": {
+     "pass": true,
+     "why": "",
+     "d": {
+      "med": -0.0185,
+      "mean": -0.0127,
+      "brier": 0.0005,
+      "isc": -0.1976,
+      "bloc_brier": -0.0068
+     },
+     "cov": [
+      0.9749,
+      0.9715
+     ],
+     "folds": {
+      "win": 0,
+      "tie": 9,
+      "loss": 0
+     }
+    },
+    "D-7": {
+     "pass": true,
+     "why": "",
+     "d": {
+      "med": -0.0086,
+      "mean": -0.0006,
+      "brier": -0.0002,
+      "isc": -0.2181,
+      "bloc_brier": -0.0062
+     },
+     "cov": [
+      0.9648,
+      0.9648
+     ],
+     "folds": {
+      "win": 0,
+      "tie": 9,
+      "loss": 0
+     }
+    },
+    "D-21": {
+     "pass": true,
+     "why": "",
+     "d": {
+      "med": -0.0357,
+      "mean": -0.0572,
+      "brier": -0.0023,
+      "isc": -0.1105,
+      "bloc_brier": -0.0082
+     },
+     "cov": [
+      0.963,
+      0.9603
+     ],
+     "folds": {
+      "win": 1,
+      "tie": 8,
+      "loss": 0
+     }
+    }
+   },
+   "eight": null
+  },
+  {
+   "arm": "ramp_B",
+   "group": "sets",
+   "pass": true,
+   "hz": {
+    "eve": {
+     "pass": true,
+     "why": "",
+     "d": {
+      "med": -0.0138,
+      "mean": -0.036,
+      "brier": -0.0024,
+      "isc": -0.3209,
+      "bloc_brier": -0.0011
+     },
+     "cov": [
+      0.9749,
+      0.9749
+     ],
+     "folds": {
+      "win": 1,
+      "tie": 8,
+      "loss": 0
+     }
+    },
+    "D-7": {
+     "pass": true,
+     "why": "",
+     "d": {
+      "med": 0.0168,
+      "mean": -0.0183,
+      "brier": -0.0022,
+      "isc": -0.2398,
+      "bloc_brier": -0.0006
+     },
+     "cov": [
+      0.9648,
+      0.953
+     ],
+     "folds": {
+      "win": 0,
+      "tie": 9,
+      "loss": 0
+     }
+    },
+    "D-21": {
+     "pass": true,
+     "why": "",
+     "d": {
+      "med": -0.025,
+      "mean": -0.0826,
+      "brier": -0.0036,
+      "isc": 0.0076,
+      "bloc_brier": -0.001
+     },
+     "cov": [
+      0.963,
+      0.9478
+     ],
+     "folds": {
+      "win": 1,
+      "tie": 8,
+      "loss": 0
+     }
+    }
+   },
+   "eight": null
+  },
+  {
+   "arm": "ramp_AB",
+   "group": "sets",
+   "pass": true,
+   "hz": {
+    "eve": {
+     "pass": true,
+     "why": "",
+     "d": {
+      "med": -0.0189,
+      "mean": -0.0388,
+      "brier": -0.0027,
+      "isc": -0.5281,
+      "bloc_brier": -0.0082
+     },
+     "cov": [
+      0.9749,
+      0.9749
+     ],
+     "folds": {
+      "win": 1,
+      "tie": 8,
+      "loss": 0
+     }
+    },
+    "D-7": {
+     "pass": true,
+     "why": "",
+     "d": {
+      "med": 0.0225,
+      "mean": -0.0197,
+      "brier": -0.0024,
+      "isc": -0.2082,
+      "bloc_brier": -0.007
+     },
+     "cov": [
+      0.9648,
+      0.941
+     ],
+     "folds": {
+      "win": 0,
+      "tie": 9,
+      "loss": 0
+     }
+    },
+    "D-21": {
+     "pass": true,
+     "why": "",
+     "d": {
+      "med": -0.0284,
+      "mean": -0.0835,
+      "brier": -0.0039,
+      "isc": -0.0126,
+      "bloc_brier": -0.0081
+     },
+     "cov": [
+      0.963,
+      0.9401
+     ],
+     "folds": {
+      "win": 1,
+      "tie": 8,
+      "loss": 0
+     }
+    }
+   },
+   "eight": null
+  },
+  {
+   "arm": "tramp_A",
+   "group": "sets",
+   "pass": true,
+   "hz": {
+    "eve": {
+     "pass": true,
+     "why": "",
+     "d": {
+      "med": -0.0782,
+      "mean": -0.0499,
+      "brier": 0.0001,
+      "isc": -0.2964,
+      "bloc_brier": -0.0068
+     },
+     "cov": [
+      0.9749,
+      0.9715
+     ],
+     "folds": {
+      "win": 2,
+      "tie": 7,
+      "loss": 0
+     }
+    },
+    "D-7": {
+     "pass": true,
+     "why": "",
+     "d": {
+      "med": -0.0384,
+      "mean": -0.0221,
+      "brier": -0.0006,
+      "isc": -0.293,
+      "bloc_brier": -0.0065
+     },
+     "cov": [
+      0.9648,
+      0.9648
+     ],
+     "folds": {
+      "win": 1,
+      "tie": 8,
+      "loss": 0
+     }
+    },
+    "D-21": {
+     "pass": true,
+     "why": "",
+     "d": {
+      "med": -0.0262,
+      "mean": -0.0406,
+      "brier": -0.0011,
+      "isc": -0.1843,
+      "bloc_brier": -0.0075
+     },
+     "cov": [
+      0.963,
+      0.9603
+     ],
+     "folds": {
+      "win": 1,
+      "tie": 8,
+      "loss": 0
+     }
+    }
+   },
+   "eight": null
+  },
+  {
+   "arm": "tramp_B",
+   "group": "sets",
+   "pass": true,
+   "hz": {
+    "eve": {
+     "pass": true,
+     "why": "",
+     "d": {
+      "med": -0.081,
+      "mean": -0.0738,
+      "brier": -0.0029,
+      "isc": -0.382,
+      "bloc_brier": -0.001
+     },
+     "cov": [
+      0.9749,
+      0.9749
+     ],
+     "folds": {
+      "win": 2,
+      "tie": 7,
+      "loss": 0
+     }
+    },
+    "D-7": {
+     "pass": true,
+     "why": "",
+     "d": {
+      "med": -0.024,
+      "mean": -0.0401,
+      "brier": -0.0026,
+      "isc": -0.2871,
+      "bloc_brier": -0.0008
+     },
+     "cov": [
+      0.9648,
+      0.953
+     ],
+     "folds": {
+      "win": 1,
+      "tie": 8,
+      "loss": 0
+     }
+    },
+    "D-21": {
+     "pass": true,
+     "why": "",
+     "d": {
+      "med": -0.0372,
+      "mean": -0.0663,
+      "brier": -0.0024,
+      "isc": -0.1147,
+      "bloc_brier": -0.0
+     },
+     "cov": [
+      0.963,
+      0.9478
+     ],
+     "folds": {
+      "win": 2,
+      "tie": 7,
+      "loss": 0
+     }
+    }
+   },
+   "eight": null
+  },
+  {
+   "arm": "tramp_AB",
+   "group": "sets",
+   "pass": true,
+   "hz": {
+    "eve": {
+     "pass": true,
+     "why": "",
+     "d": {
+      "med": -0.0846,
+      "mean": -0.0761,
+      "brier": -0.0032,
+      "isc": -0.5766,
+      "bloc_brier": -0.0081
+     },
+     "cov": [
+      0.9749,
+      0.9726
+     ],
+     "folds": {
+      "win": 2,
+      "tie": 7,
+      "loss": 0
+     }
+    },
+    "D-7": {
+     "pass": true,
+     "why": "",
+     "d": {
+      "med": -0.0188,
+      "mean": -0.0423,
+      "brier": -0.0029,
+      "isc": -0.2773,
+      "bloc_brier": -0.0073
+     },
+     "cov": [
+      0.9648,
+      0.941
+     ],
+     "folds": {
+      "win": 1,
+      "tie": 8,
+      "loss": 0
+     }
+    },
+    "D-21": {
+     "pass": true,
+     "why": "",
+     "d": {
+      "med": -0.0267,
+      "mean": -0.0673,
+      "brier": -0.0026,
+      "isc": -0.0799,
+      "bloc_brier": -0.0072
+     },
+     "cov": [
+      0.963,
+      0.9378
+     ],
+     "folds": {
+      "win": 1,
+      "tie": 8,
+      "loss": 0
+     }
+    }
+   },
+   "eight": null
+  }
+ ],
+ "passing": [
+  "trail_ramp_sat",
+  "tramp_m",
+  "cal_A",
+  "cal_B",
+  "ramp_A",
+  "ramp_B",
+  "ramp_AB",
+  "tramp_A",
+  "tramp_B",
+  "tramp_AB"
+ ],
+ "chosen": {
+  "arm": "tramp_AB",
+  "flags": {
+   "production": {
+    "T_UNIT_VAR": true,
+    "RESID_SPACE": "vote",
+    "TRAIL_RAMP_ON": true,
+    "TRAIL_RAMP": {
+     "lo": -1.0,
+     "hi": 2.0,
+     "mode": "mean",
+     "mu": 5.49,
+     "sd": 3.86
+    }
+   },
+   "harness": {
+    "t_unit": true,
+    "resid_space": "vote",
+    "trail_mode": "ramp",
+    "trail_lo": -1.0,
+    "trail_hi": 2.0,
+    "trail_wcal": true
+   },
+   "harness_2026": {
+    "t_unit": false,
+    "resid_space": "seat_fix",
+    "trail_mode": "mean",
+    "trail_lo": 0.5,
+    "trail_hi": 2.0,
+    "trail_wcal": false
+   }
+  },
+  "vs_2026": {
+   "arm": "tramp_AB",
+   "vs": "shipped",
+   "pass": true,
+   "graded": [
+    "eve",
+    "D-7",
+    "D-21"
+   ],
+   "hz": {
+    "eve": {
+     "pass": true,
+     "why": "",
+     "d": {
+      "med": -0.0846,
+      "mean": -0.0761,
+      "brier": -0.0032,
+      "isc": -0.5766,
+      "bloc_brier": -0.0081
+     },
+     "cov": [
+      0.9749,
+      0.9726
+     ],
+     "folds": {
+      "win": 2,
+      "tie": 7,
+      "loss": 0
+     }
+    },
+    "D-7": {
+     "pass": true,
+     "why": "",
+     "d": {
+      "med": -0.0188,
+      "mean": -0.0423,
+      "brier": -0.0029,
+      "isc": -0.2773,
+      "bloc_brier": -0.0073
+     },
+     "cov": [
+      0.9648,
+      0.941
+     ],
+     "folds": {
+      "win": 1,
+      "tie": 8,
+      "loss": 0
+     }
+    },
+    "D-21": {
+     "pass": true,
+     "why": "",
+     "d": {
+      "med": -0.0267,
+      "mean": -0.0673,
+      "brier": -0.0026,
+      "isc": -0.0799,
+      "bloc_brier": -0.0072
+     },
+     "cov": [
+      0.963,
+      0.9378
+     ],
+     "folds": {
+      "win": 1,
+      "tie": 8,
+      "loss": 0
+     }
+    }
+   }
+  },
+  "pooled": {
+   "eve": {
+    "med": 1.3805,
+    "mean": 1.4745,
+    "cov": 0.9726,
+    "brier": 0.037,
+    "isc": 8.0037,
+    "bloc_brier": 0.0234
+   },
+   "D-7": {
+    "med": 1.3907,
+    "mean": 1.5384,
+    "cov": 0.941,
+    "brier": 0.0392,
+    "isc": 8.6852,
+    "bloc_brier": 0.0238
+   },
+   "D-21": {
+    "med": 1.542,
+    "mean": 1.6512,
+    "cov": 0.9378,
+    "brier": 0.0443,
+    "isc": 9.1939,
+    "bloc_brier": 0.0409
+   }
+  },
+  "fold_2026": {
+   "eve": {
+    "med": 0.9062,
+    "mean": 1.07,
+    "cov": 0.9792,
+    "brier": 0.0053,
+    "isc": 5.5208,
+    "bloc_brier": 0.005,
+    "p_nb61": 0.0707
+   },
+   "D-7": {
+    "med": 0.9167,
+    "mean": 1.1472,
+    "cov": 1.0,
+    "brier": 0.0066,
+    "isc": 5.3125,
+    "bloc_brier": 0.0047,
+    "p_nb61": 0.0686
+   },
+   "D-21": {
+    "med": 1.0625,
+    "mean": 1.2586,
+    "cov": 0.9167,
+    "brier": 0.0065,
+    "isc": 6.9375,
+    "bloc_brier": 0.0089,
+    "p_nb61": 0.0943
+   }
+  },
+  "path": [
+   {
+    "arm": "tramp_m",
+    "vs": "shipped",
+    "pass": true,
+    "graded": [
+     "eve",
+     "D-7",
+     "D-21"
+    ],
+    "hz": {
+     "eve": {
+      "pass": true,
+      "why": "",
+      "d": {
+       "med": -0.0756,
+       "mean": -0.0485,
+       "brier": 0.0003,
+       "isc": -0.1166,
+       "bloc_brier": -0.0001
+      },
+      "cov": [
+       0.9749,
+       0.9749
+      ],
+      "folds": {
+       "win": 2,
+       "tie": 7,
+       "loss": 0
+      }
+     },
+     "D-7": {
+      "pass": true,
+      "why": "",
+      "d": {
+       "med": -0.0384,
+       "mean": -0.0205,
+       "brier": -0.0003,
+       "isc": -0.0511,
+       "bloc_brier": -0.0002
+      },
+      "cov": [
+       0.9648,
+       0.9648
+      ],
+      "folds": {
+       "win": 1,
+       "tie": 8,
+       "loss": 0
+      }
+     },
+     "D-21": {
+      "pass": true,
+      "why": "",
+      "d": {
+       "med": -0.0262,
+       "mean": -0.0401,
+       "brier": -0.0009,
+       "isc": -0.0516,
+       "bloc_brier": -0.0004
+      },
+      "cov": [
+       0.963,
+       0.963
+      ],
+      "folds": {
+       "win": 1,
+       "tie": 8,
+       "loss": 0
+      }
+     }
+    }
+   },
+   {
+    "arm": "tramp_B",
+    "vs": "tramp_m",
+    "pass": true,
+    "graded": [
+     "eve",
+     "D-7",
+     "D-21"
+    ],
+    "hz": {
+     "eve": {
+      "pass": true,
+      "why": "",
+      "d": {
+       "med": -0.0054,
+       "mean": -0.0253,
+       "brier": -0.0032,
+       "isc": -0.2654,
+       "bloc_brier": -0.0009
+      },
+      "cov": [
+       0.9749,
+       0.9749
+      ],
+      "folds": {
+       "win": 0,
+       "tie": 9,
+       "loss": 0
+      }
+     },
+     "D-7": {
+      "pass": true,
+      "why": "",
+      "d": {
+       "med": 0.0144,
+       "mean": -0.0196,
+       "brier": -0.0023,
+       "isc": -0.2359,
+       "bloc_brier": -0.0006
+      },
+      "cov": [
+       0.9648,
+       0.953
+      ],
+      "folds": {
+       "win": 0,
+       "tie": 9,
+       "loss": 0
+      }
+     },
+     "D-21": {
+      "pass": true,
+      "why": "",
+      "d": {
+       "med": -0.011,
+       "mean": -0.0262,
+       "brier": -0.0014,
+       "isc": -0.0631,
+       "bloc_brier": 0.0004
+      },
+      "cov": [
+       0.963,
+       0.9478
+      ],
+      "folds": {
+       "win": 0,
+       "tie": 9,
+       "loss": 0
+      }
+     }
+    }
+   },
+   {
+    "arm": "tramp_AB",
+    "vs": "tramp_B",
+    "pass": true,
+    "graded": [
+     "eve",
+     "D-7",
+     "D-21"
+    ],
+    "hz": {
+     "eve": {
+      "pass": true,
+      "why": "",
+      "d": {
+       "med": -0.0035,
+       "mean": -0.0023,
+       "brier": -0.0004,
+       "isc": -0.1946,
+       "bloc_brier": -0.0071
+      },
+      "cov": [
+       0.9749,
+       0.9726
+      ],
+      "folds": {
+       "win": 0,
+       "tie": 9,
+       "loss": 0
+      }
+     },
+     "D-7": {
+      "pass": true,
+      "why": "",
+      "d": {
+       "med": 0.0052,
+       "mean": -0.0022,
+       "brier": -0.0003,
+       "isc": 0.0098,
+       "bloc_brier": -0.0064
+      },
+      "cov": [
+       0.953,
+       0.941
+      ],
+      "folds": {
+       "win": 0,
+       "tie": 9,
+       "loss": 0
+      }
+     },
+     "D-21": {
+      "pass": true,
+      "why": "",
+      "d": {
+       "med": 0.0105,
+       "mean": -0.001,
+       "brier": -0.0002,
+       "isc": 0.0348,
+       "bloc_brier": -0.0072
+      },
+      "cov": [
+       0.9478,
+       0.9378
+      ],
+      "folds": {
+       "win": 0,
+       "tie": 9,
+       "loss": 0
+      }
+     }
+    }
+   }
+  ],
+  "asides": [
+   {
+    "arm": "tramp_A",
+    "vs": "tramp_m",
+    "pass": true,
+    "graded": [
+     "eve",
+     "D-7",
+     "D-21"
+    ],
+    "hz": {
+     "eve": {
+      "pass": true,
+      "why": "",
+      "d": {
+       "med": -0.0026,
+       "mean": -0.0014,
+       "brier": -0.0002,
+       "isc": -0.1797,
+       "bloc_brier": -0.0066
+      },
+      "cov": [
+       0.9749,
+       0.9715
+      ],
+      "folds": {
+       "win": 0,
+       "tie": 9,
+       "loss": 0
+      }
+     },
+     "D-7": {
+      "pass": true,
+      "why": "",
+      "d": {
+       "med": 0.0,
+       "mean": -0.0016,
+       "brier": -0.0003,
+       "isc": -0.2419,
+       "bloc_brier": -0.0063
+      },
+      "cov": [
+       0.9648,
+       0.9648
+      ],
+      "folds": {
+       "win": 0,
+       "tie": 9,
+       "loss": 0
+      }
+     },
+     "D-21": {
+      "pass": true,
+      "why": "",
+      "d": {
+       "med": 0.0,
+       "mean": -0.0005,
+       "brier": -0.0002,
+       "isc": -0.1326,
+       "bloc_brier": -0.0071
+      },
+      "cov": [
+       0.963,
+       0.9603
+      ],
+      "folds": {
+       "win": 0,
+       "tie": 9,
+       "loss": 0
+      }
+     }
+    }
+   },
+   {
+    "arm": "tramp_AB",
+    "vs": "tramp_A",
+    "pass": false,
+    "graded": [
+     "eve",
+     "D-7",
+     "D-21"
+    ],
+    "hz": {
+     "eve": {
+      "pass": false,
+      "why": "coverage 0.972 to 0.973",
+      "d": {
+       "med": -0.0064,
+       "mean": -0.0263,
+       "brier": -0.0033,
+       "isc": -0.2802,
+       "bloc_brier": -0.0014
+      },
+      "cov": [
+       0.9715,
+       0.9726
+      ],
+      "folds": {
+       "win": 0,
+       "tie": 9,
+       "loss": 0
+      }
+     },
+     "D-7": {
+      "pass": true,
+      "why": "",
+      "d": {
+       "med": 0.0196,
+       "mean": -0.0201,
+       "brier": -0.0024,
+       "isc": 0.0158,
+       "bloc_brier": -0.0007
+      },
+      "cov": [
+       0.9648,
+       0.941
+      ],
+      "folds": {
+       "win": 0,
+       "tie": 9,
+       "loss": 0
+      }
+     },
+     "D-21": {
+      "pass": false,
+      "why": "isc +0.1044",
+      "d": {
+       "med": -0.0005,
+       "mean": -0.0267,
+       "brier": -0.0014,
+       "isc": 0.1044,
+       "bloc_brier": 0.0003
+      },
+      "cov": [
+       0.9603,
+       0.9378
+      ],
+      "folds": {
+       "win": 0,
+       "tie": 9,
+       "loss": 0
+      }
+     }
+    }
+   },
+   {
+    "arm": "tramp_AB",
+    "vs": "ramp_AB",
+    "pass": false,
+    "graded": [
+     "eve",
+     "D-7",
+     "D-21"
+    ],
+    "hz": {
+     "eve": {
+      "pass": true,
+      "why": "",
+      "d": {
+       "med": -0.0656,
+       "mean": -0.0373,
+       "brier": -0.0005,
+       "isc": -0.0485,
+       "bloc_brier": 0.0
+      },
+      "cov": [
+       0.9749,
+       0.9726
+      ],
+      "folds": {
+       "win": 2,
+       "tie": 7,
+       "loss": 0
+      }
+     },
+     "D-7": {
+      "pass": true,
+      "why": "",
+      "d": {
+       "med": -0.0413,
+       "mean": -0.0225,
+       "brier": -0.0005,
+       "isc": -0.0691,
+       "bloc_brier": -0.0003
+      },
+      "cov": [
+       0.941,
+       0.941
+      ],
+      "folds": {
+       "win": 1,
+       "tie": 8,
+       "loss": 0
+      }
+     },
+     "D-21": {
+      "pass": false,
+      "why": "fold 2019a +0.131; mean +0.0161; brier +0.0013",
+      "d": {
+       "med": 0.0017,
+       "mean": 0.0161,
+       "brier": 0.0013,
+       "isc": -0.0673,
+       "bloc_brier": 0.0009
+      },
+      "cov": [
+       0.9401,
+       0.9378
+      ],
+      "folds": {
+       "win": 1,
+       "tie": 7,
+       "loss": 1
+      }
+     }
+    }
+   },
+   {
+    "arm": "ramp_AB",
+    "vs": "tramp_AB",
+    "pass": false,
+    "graded": [
+     "eve",
+     "D-7",
+     "D-21"
+    ],
+    "hz": {
+     "eve": {
+      "pass": false,
+      "why": "fold 2019s +0.300, 2020 +0.185; mean +0.0373; coverage 0.973 to 0.975",
+      "d": {
+       "med": 0.0656,
+       "mean": 0.0373,
+       "brier": 0.0005,
+       "isc": 0.0485,
+       "bloc_brier": -0.0
+      },
+      "cov": [
+       0.9726,
+       0.9749
+      ],
+      "folds": {
+       "win": 0,
+       "tie": 7,
+       "loss": 2
+      }
+     },
+     "D-7": {
+      "pass": false,
+      "why": "fold 2019s +0.217; mean +0.0225; isc +0.0691",
+      "d": {
+       "med": 0.0413,
+       "mean": 0.0225,
+       "brier": 0.0005,
+       "isc": 0.0691,
+       "bloc_brier": 0.0003
+      },
+      "cov": [
+       0.941,
+       0.941
+      ],
+      "folds": {
+       "win": 0,
+       "tie": 8,
+       "loss": 1
+      }
+     },
+     "D-21": {
+      "pass": false,
+      "why": "fold 2019s +0.106; isc +0.0673; coverage 0.938 to 0.940",
+      "d": {
+       "med": -0.0017,
+       "mean": -0.0161,
+       "brier": -0.0013,
+       "isc": 0.0673,
+       "bloc_brier": -0.0009
+      },
+      "cov": [
+       0.9378,
+       0.9401
+      ],
+      "folds": {
+       "win": 1,
+       "tie": 7,
+       "loss": 1
+      }
+     }
+    }
+   },
+   {
+    "arm": "tramp_m",
+    "vs": "trail_ramp_sat",
+    "pass": false,
+    "graded": [
+     "eve",
+     "D-7",
+     "D-21"
+    ],
+    "hz": {
+     "eve": {
+      "pass": true,
+      "why": "",
+      "d": {
+       "med": -0.0653,
+       "mean": -0.0373,
+       "brier": -0.0004,
+       "isc": -0.0672,
+       "bloc_brier": -0.0001
+      },
+      "cov": [
+       0.9749,
+       0.9749
+      ],
+      "folds": {
+       "win": 2,
+       "tie": 7,
+       "loss": 0
+      }
+     },
+     "D-7": {
+      "pass": true,
+      "why": "",
+      "d": {
+       "med": -0.0384,
+       "mean": -0.0205,
+       "brier": -0.0003,
+       "isc": -0.0511,
+       "bloc_brier": -0.0002
+      },
+      "cov": [
+       0.9648,
+       0.9648
+      ],
+      "folds": {
+       "win": 1,
+       "tie": 8,
+       "loss": 0
+      }
+     },
+     "D-21": {
+      "pass": false,
+      "why": "fold 2019a +0.143; mean +0.0170; brier +0.0011",
+      "d": {
+       "med": 0.0098,
+       "mean": 0.017,
+       "brier": 0.0011,
+       "isc": -0.0885,
+       "bloc_brier": 0.0009
+      },
+      "cov": [
+       0.963,
+       0.963
+      ],
+      "folds": {
+       "win": 0,
+       "tie": 8,
+       "loss": 1
+      }
+     }
+    }
+   },
+   {
+    "arm": "trail_ramp_sat",
+    "vs": "tramp_m",
+    "pass": false,
+    "graded": [
+     "eve",
+     "D-7",
+     "D-21"
+    ],
+    "hz": {
+     "eve": {
+      "pass": false,
+      "why": "fold 2019s +0.333, 2020 +0.204; mean +0.0373; isc +0.0672",
+      "d": {
+       "med": 0.0653,
+       "mean": 0.0373,
+       "brier": 0.0004,
+       "isc": 0.0672,
+       "bloc_brier": 0.0001
+      },
+      "cov": [
+       0.9749,
+       0.9749
+      ],
+      "folds": {
+       "win": 0,
+       "tie": 7,
+       "loss": 2
+      }
+     },
+     "D-7": {
+      "pass": false,
+      "why": "fold 2019s +0.267; mean +0.0205; isc +0.0511",
+      "d": {
+       "med": 0.0384,
+       "mean": 0.0205,
+       "brier": 0.0003,
+       "isc": 0.0511,
+       "bloc_brier": 0.0002
+      },
+      "cov": [
+       0.9648,
+       0.9648
+      ],
+      "folds": {
+       "win": 0,
+       "tie": 8,
+       "loss": 1
+      }
+     },
+     "D-21": {
+      "pass": false,
+      "why": "isc +0.0885",
+      "d": {
+       "med": -0.0098,
+       "mean": -0.017,
+       "brier": -0.0011,
+       "isc": 0.0885,
+       "bloc_brier": -0.0009
+      },
+      "cov": [
+       0.963,
+       0.963
+      ],
+      "folds": {
+       "win": 1,
+       "tie": 8,
+       "loss": 0
+      }
+     }
+    }
+   },
+   {
+    "arm": "cal_B",
+    "vs": "cal_A",
+    "pass": false,
+    "graded": [
+     "eve",
+     "D-7",
+     "D-21"
+    ],
+    "hz": {
+     "eve": {
+      "pass": false,
+      "why": "coverage 0.972 to 0.975",
+      "d": {
+       "med": 0.0006,
+       "mean": -0.0239,
+       "brier": -0.0029,
+       "isc": -0.1645,
+       "bloc_brier": 0.0055
+      },
+      "cov": [
+       0.9715,
+       0.9749
+      ],
+      "folds": {
+       "win": 0,
+       "tie": 9,
+       "loss": 0
+      }
+     },
+     "D-7": {
+      "pass": true,
+      "why": "",
+      "d": {
+       "med": 0.0254,
+       "mean": -0.0177,
+       "brier": -0.002,
+       "isc": -0.0216,
+       "bloc_brier": 0.0055
+      },
+      "cov": [
+       0.9648,
+       0.953
+      ],
+      "folds": {
+       "win": 0,
+       "tie": 9,
+       "loss": 0
+      }
+     },
+     "D-21": {
+      "pass": false,
+      "why": "isc +0.1390",
+      "d": {
+       "med": 0.0087,
+       "mean": -0.0256,
+       "brier": -0.0012,
+       "isc": 0.139,
+       "bloc_brier": 0.0075
+      },
+      "cov": [
+       0.9603,
+       0.9454
+      ],
+      "folds": {
+       "win": 0,
+       "tie": 9,
+       "loss": 0
+      }
+     }
+    }
+   },
+   {
+    "arm": "cal_A",
+    "vs": "cal_B",
+    "pass": false,
+    "graded": [
+     "eve",
+     "D-7",
+     "D-21"
+    ],
+    "hz": {
+     "eve": {
+      "pass": false,
+      "why": "mean +0.0239; brier +0.0029; isc +0.1645",
+      "d": {
+       "med": -0.0006,
+       "mean": 0.0239,
+       "brier": 0.0029,
+       "isc": 0.1645,
+       "bloc_brier": -0.0055
+      },
+      "cov": [
+       0.9749,
+       0.9715
+      ],
+      "folds": {
+       "win": 0,
+       "tie": 9,
+       "loss": 0
+      }
+     },
+     "D-7": {
+      "pass": false,
+      "why": "mean +0.0177; brier +0.0020; coverage 0.953 to 0.965",
+      "d": {
+       "med": -0.0254,
+       "mean": 0.0177,
+       "brier": 0.002,
+       "isc": 0.0216,
+       "bloc_brier": -0.0055
+      },
+      "cov": [
+       0.953,
+       0.9648
+      ],
+      "folds": {
+       "win": 0,
+       "tie": 9,
+       "loss": 0
+      }
+     },
+     "D-21": {
+      "pass": false,
+      "why": "mean +0.0256; brier +0.0012; coverage 0.945 to 0.960",
+      "d": {
+       "med": -0.0087,
+       "mean": 0.0256,
+       "brier": 0.0012,
+       "isc": -0.139,
+       "bloc_brier": -0.0075
+      },
+      "cov": [
+       0.9454,
+       0.9603
+      ],
+      "folds": {
+       "win": 0,
+       "tie": 9,
+       "loss": 0
+      }
+     }
+    }
+   },
+   {
+    "arm": "tramp_AB",
+    "vs": "cal_AB",
+    "pass": false,
+    "graded": [
+     "eve",
+     "D-7",
+     "D-21"
+    ],
+    "hz": {
+     "eve": {
+      "pass": true,
+      "why": "",
+      "d": {
+       "med": -0.078,
+       "mean": -0.0485,
+       "brier": 0.0003,
+       "isc": -0.0444,
+       "bloc_brier": 0.0001
+      },
+      "cov": [
+       0.9749,
+       0.9726
+      ],
+      "folds": {
+       "win": 2,
+       "tie": 7,
+       "loss": 0
+      }
+     },
+     "D-7": {
+      "pass": true,
+      "why": "",
+      "d": {
+       "med": -0.0413,
+       "mean": -0.0225,
+       "brier": -0.0005,
+       "isc": -0.0691,
+       "bloc_brier": -0.0003
+      },
+      "cov": [
+       0.941,
+       0.941
+      ],
+      "folds": {
+       "win": 1,
+       "tie": 8,
+       "loss": 0
+      }
+     },
+     "D-21": {
+      "pass": false,
+      "why": "coverage 0.933 to 0.938",
+      "d": {
+       "med": -0.0243,
+       "mean": -0.0415,
+       "brier": -0.0011,
+       "isc": -0.144,
+       "bloc_brier": -0.0007
+      },
+      "cov": [
+       0.9332,
+       0.9378
+      ],
+      "folds": {
+       "win": 1,
+       "tie": 8,
+       "loss": 0
+      }
+     }
+    }
+   }
+  ],
+  "own_baseline": {
+   "eve": {
+    "med": 1.3896,
+    "mean": 1.4854,
+    "cov": 0.9724,
+    "brier": 0.0371,
+    "isc": 8.0589,
+    "bloc_brier": 0.0234
+   },
+   "D-7": {
+    "med": 1.393,
+    "mean": 1.5412,
+    "cov": 0.941,
+    "brier": 0.0392,
+    "isc": 8.6983,
+    "bloc_brier": 0.0238
+   },
+   "D-21": {
+    "med": 1.5499,
+    "mean": 1.6605,
+    "cov": 0.9372,
+    "brier": 0.0443,
+    "isc": 9.2453,
+    "bloc_brier": 0.0409
+   }
+  },
+  "own_vs_2026": {
+   "arm": "shipped",
+   "vs": "cfg_2026",
+   "pass": true,
+   "graded": [
+    "eve",
+    "D-7",
+    "D-21"
+   ],
+   "hz": {
+    "eve": {
+     "pass": true,
+     "why": "",
+     "d": {
+      "med": -0.0854,
+      "mean": -0.0766,
+      "brier": -0.0033,
+      "isc": -0.5858,
+      "bloc_brier": -0.0081
+     },
+     "cov": [
+      0.9749,
+      0.9724
+     ],
+     "folds": {
+      "win": 2,
+      "tie": 7,
+      "loss": 0
+     }
+    },
+    "D-7": {
+     "pass": true,
+     "why": "",
+     "d": {
+      "med": -0.019,
+      "mean": -0.0424,
+      "brier": -0.0029,
+      "isc": -0.2801,
+      "bloc_brier": -0.0073
+     },
+     "cov": [
+      0.9648,
+      0.941
+     ],
+     "folds": {
+      "win": 1,
+      "tie": 8,
+      "loss": 0
+     }
+    },
+    "D-21": {
+     "pass": true,
+     "why": "",
+     "d": {
+      "med": -0.0267,
+      "mean": -0.0681,
+      "brier": -0.0026,
+      "isc": -0.0732,
+      "bloc_brier": -0.0072
+     },
+     "cov": [
+      0.963,
+      0.9372
+     ],
+     "folds": {
+      "win": 1,
+      "tie": 8,
+      "loss": 0
+     }
+    }
+   }
+  }
+ },
+ "constants": [
+  {
+   "key": "bloc_sd",
+   "label": "Bloc swing, standard deviation",
+   "unit": "seats",
+   "eight": 3.3577078989558564,
+   "nine": 3.182345031331565
+  },
+  {
+   "key": "haredi_e0_mean",
+   "label": "Haredi family error, mean (the lift is its negative)",
+   "unit": "seats",
+   "eight": -0.9803391053391053,
+   "nine": -0.6075236491903158
+  },
+  {
+   "key": "haredi_e1_sd",
+   "label": "Haredi family error, standard deviation",
+   "unit": "seats",
+   "eight": 1.7675074481990194,
+   "nine": 2.0617278166179736
+  },
+  {
+   "key": "haredi_s_shas",
+   "label": "Share of the haredi lift given to Shas by its lineage record",
+   "unit": "share",
+   "eight": 0.8996090156393745,
+   "nine": 0.9703097680862998
+  },
+  {
+   "key": "arab_e0_mean",
+   "label": "Arab lists, mean final-poll error",
+   "unit": "seats",
+   "eight": -0.6861246392496391,
+   "nine": -1.137666345999679
+  },
+  {
+   "key": "arab_e1_sd",
+   "label": "Arab lists, standard deviation",
+   "unit": "seats",
+   "eight": 1.44894994490562,
+   "nine": 1.9962471784288984
+  },
+  {
+   "key": "arab_reg_k",
+   "label": "Arab turnout pass-through",
+   "unit": "ratio",
+   "eight": 0.24705931798274663,
+   "nine": 0.4713825415788459
+  },
+  {
+   "key": "arab_reg_se_k",
+   "label": "Arab turnout pass-through, standard error",
+   "unit": "ratio",
+   "eight": 0.20921945179681092,
+   "nine": 0.15850966408423803
+  },
+  {
+   "key": "arab_reg_a",
+   "label": "Arab turnout regression, intercept",
+   "unit": "seats",
+   "eight": -0.6342750543600353,
+   "nine": -0.7278821374794351
+  },
+  {
+   "key": "arab_T_mean_regime_B",
+   "label": "Arab turnout, mean of the cycles with a joint list",
+   "unit": "share",
+   "eight": 0.58025,
+   "nine": 0.6182000000000001
+  },
+  {
+   "key": "trail_mu",
+   "label": "Trailing-Likud beat, cliff record: mean",
+   "unit": "seats",
+   "eight": 5.011904761904762,
+   "nine": 5.011904761904762
+  },
+  {
+   "key": "trail_sd",
+   "label": "Trailing-Likud beat, cliff record: standard deviation",
+   "unit": "seats",
+   "eight": 4.880763643273109,
+   "nine": 4.880763643273109
+  },
+  {
+   "key": "trail_ramp_mu",
+   "label": "Trailing-Likud beat, ramp record: mean",
+   "unit": "seats",
+   "eight": 5.580292723149867,
+   "nine": 5.490461348968238
+  },
+  {
+   "key": "trail_ramp_sd",
+   "label": "Trailing-Likud beat, ramp record: standard deviation",
+   "unit": "seats",
+   "eight": 4.152203369596434,
+   "nine": 3.857986473934223
+  },
+  {
+   "key": "trail_ramp_n_eff",
+   "label": "Trailing-Likud ramp record, effective cycles",
+   "unit": "cycles",
+   "eight": 3.4423243712055496,
+   "nine": 4.030686235036441
+  },
+  {
+   "key": "nstrad_seat_mu",
+   "label": "New list near the threshold, drift: mean",
+   "unit": "points",
+   "eight": -1.676225760652713,
+   "nine": -1.5847857661141007
+  },
+  {
+   "key": "nstrad_seat_sd",
+   "label": "New list near the threshold, drift: standard deviation",
+   "unit": "points",
+   "eight": 2.5609599491342925,
+   "nine": 2.3167835067680396
+  },
+  {
+   "key": "nstrad_seat_n",
+   "label": "New list near the threshold, cases",
+   "unit": "lists",
+   "eight": 11,
+   "nine": 14
+  },
+  {
+   "key": "resid_seat_fix_base",
+   "label": "Per-list residual, seat record: base",
+   "unit": "seats",
+   "eight": 1.4842775758947249,
+   "nine": 1.3674465367516662
+  },
+  {
+   "key": "resid_seat_fix_slope",
+   "label": "Per-list residual, seat record: slope per seat",
+   "unit": "ratio",
+   "eight": 0.04079481878264164,
+   "nine": 0.04530741109052547
+  },
+  {
+   "key": "resid_vote_base",
+   "label": "Per-list residual, vote-share record: base",
+   "unit": "seats",
+   "eight": 0.7321877951365536,
+   "nine": 0.6321261950264738
+  },
+  {
+   "key": "resid_vote_slope",
+   "label": "Per-list residual, vote-share record: slope per seat",
+   "unit": "ratio",
+   "eight": 0.07299749332103005,
+   "nine": 0.08254045728126802
+  },
+  {
+   "key": "unmodelled_mean",
+   "label": "Vote share outside the modelled lists, mean",
+   "unit": "share",
+   "eight": 0.015200000000000002,
+   "nine": 0.01407777777777778
+  }
+ ],
+ "arab_rows": {
+  "2009": {
+   "error": -2.78,
+   "implied": 0.42,
+   "turnout": 0.534,
+   "turnout_prev": 0.563
+  },
+  "2013": {
+   "error": -0.27,
+   "implied": -0.62,
+   "turnout": 0.565,
+   "turnout_prev": 0.534
+  },
+  "2015": {
+   "error": -0.38,
+   "implied": -1.56,
+   "turnout": 0.635,
+   "turnout_prev": 0.565
+  },
+  "2019a": {
+   "error": 1.22,
+   "implied": 2.53,
+   "turnout": 0.492,
+   "turnout_prev": 0.635
+  },
+  "2019s": {
+   "error": -0.71,
+   "implied": -2.5,
+   "turnout": 0.592,
+   "turnout_prev": 0.492
+  },
+  "2020": {
+   "error": -1.0,
+   "implied": -1.32,
+   "turnout": 0.648,
+   "turnout_prev": 0.592
+  },
+  "2021": {
+   "error": 0.0,
+   "implied": 3.12,
+   "turnout": 0.446,
+   "turnout_prev": 0.648
+  },
+  "2022": {
+   "error": -1.57,
+   "implied": -1.74,
+   "turnout": 0.538,
+   "turnout_prev": 0.446
+  },
+  "2026": {
+   "error": -4.75,
+   "implied": -6.14,
+   "turnout": 0.77,
+   "turnout_prev": 0.538
+  }
+ },
+ "trail_record": {
+  "2009": [
+   3.33,
+   0.38
+  ],
+  "2013": [
+   17.0,
+   -2.62
+  ],
+  "2015": [
+   -3.43,
+   8.79
+  ],
+  "2019a": [
+   -1.0,
+   6.75
+  ],
+  "2019s": [
+   0.5,
+   -0.5
+  ],
+  "2020": [
+   0.91,
+   1.91
+  ],
+  "2021": [
+   12.38,
+   -0.62
+  ],
+  "2022": [
+   6.18,
+   0.82
+  ],
+  "2026": [
+   1.13,
+   4.6
+  ]
+ },
+ "scorecard_q": {
+  "eight": {
+   "Camil Fuchs": 1.007,
+   "Dahaf": 1.041,
+   "Dialog": 0.954,
+   "Direct Polls": 1.025,
+   "Geocartography": 0.977,
+   "Kantar": 1.123,
+   "Maagar Mochot": 0.969,
+   "Midgam": 1.016,
+   "Midgam Project": 1.0,
+   "Miskar": 0.914,
+   "New Wave": 0.997,
+   "Panels Politics": 1.028,
+   "Sarid": 0.973,
+   "Shvakim Panorama": 1.029,
+   "Smith Consulting": 1.038,
+   "TNS": 0.93,
+   "Teleseker": 0.993
+  },
+  "nine": {
+   "Camil Fuchs": 1.01,
+   "Dahaf": 1.045,
+   "Dialog": 0.958,
+   "Direct Polls": 1.05,
+   "Filber": 1.02,
+   "Geocartography": 0.981,
+   "Kantar": 1.091,
+   "Lazar": 0.975,
+   "Maagar Mochot": 0.956,
+   "Midgam": 1.019,
+   "Midgam Project": 1.0,
+   "Miskar": 0.915,
+   "New Wave": 1.0,
+   "Panels Politics": 1.033,
+   "Sarid": 0.975,
+   "Shvakim Panorama": 1.032,
+   "Smith Consulting": 1.044,
+   "TNS": 0.931,
+   "Tatika": 0.984,
+   "Teleseker": 0.996
+  }
+ }
+}

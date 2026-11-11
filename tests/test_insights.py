@@ -66,3 +66,22 @@ def test_the_page_renders_and_follows_the_site_rules(payload):
         r = subprocess.run([node, "-e", "new Function(require('fs').readFileSync(0,'utf8'))"],
                            input=script, capture_output=True, text=True)
         assert r.returncode == 0, r.stderr[-400:]
+
+
+def test_the_next_model_section_reports_the_graded_set(payload):
+    """The "model for the next election" section (dossier s.76): the set
+    record.NEXT_CONFIG names, passing the rule on nine cycles, with narrower
+    intervals and a smaller error than the 2026 configuration."""
+    import record
+    m = payload["model9"]
+    assert m["arm"] == "tramp_AB" and m["passes"]
+    assert record.NEXT_CONFIG["harness"]["resid_space"] == "vote" and record.NEXT_CONFIG["harness"]["t_unit"]
+    assert (m["n_single"], m["n_sets"]) == (23, 6)
+    for hz in ("eve", "D-7", "D-21"):
+        assert m["next"][hz]["mean"] < m["cfg"][hz]["mean"] and m["next"][hz]["isc"] < m["cfg"][hz]["isc"]
+        assert 0.90 < m["next"][hz]["cov"] <= m["cfg"][hz]["cov"]
+    assert -m["const"]["haredi_e0_mean"][1] < -m["const"]["haredi_e0_mean"][0]     # the lift shrinks
+    assert m["const"]["arab_reg_k"][1] > m["const"]["arab_reg_k"][0]               # the pass-through grows
+    assert m["fold_2026"]["next"]["mean"] < m["fold_2026"]["cfg"]["mean"]
+    tpl = bi.TEMPLATE.read_text(encoding="utf-8")
+    assert 'id="model"' in tpl and "decision-log.html#s" in tpl and "DATA.model9" in tpl

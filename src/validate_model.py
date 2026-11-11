@@ -29,12 +29,14 @@ from __future__ import annotations
 import numpy as np
 import pandas as pd
 
+import record
 from house_effects import CYCLE_BLOC_OVERRIDES
 from scrape_polls import ELECTION_DAY, PROCESSED_DIR
 from simulate import build_inputs, simulate_core
 
 N_SIMS = 10_000
-ORDER = ["2009", "2013", "2015", "2019a", "2019s", "2020", "2021", "2022"]
+# the graded cycles: 2009-2022, plus 2026 under RECORD_2026=1 (src/record.py)
+ORDER = list(record.CYCLES)
 CYCLE_THRESHOLD = {"2009": 0.02, "2013": 0.02}  # 3.25% from 2015 on
 # Era-correct bloc fixes beyond the shared overrides: New Hope in 2021 ran
 # explicitly never-Netanyahu (it merged into Likud only in 2026).
@@ -109,6 +111,20 @@ REGISTERED_PAIR_SOURCES = {
 }
 # Every cycle is also cross-checked by reproduction: the registered pairs
 # give the official seats from the CEC final counts (validate_seat_law.py).
+if record.RECORD_2026:
+    # 2026 as the ninth graded cycle (dossier s.74). The five agreements
+    # filed with the CEC (simulate.SURPLUS_PAIRS, dossier s.38), in the ids
+    # of results.csv: "together" and "joint_list" resolve through the 2026
+    # DECOMP map in the harness windows and directly on the CEC counts
+    # (simulate.SURPLUS_PAIRS spells the Joint List by its component
+    # "balad"). PAST_PAIRS is the same list: nothing is approximated.
+    REGISTERED_PAIRS["2026"] = [("likud", "rzp"), ("together", "yisrael_beytenu"),
+                                ("yashar", "democrats"), ("shas", "utj"),
+                                ("joint_list", "raam")]
+    PAST_PAIRS["2026"] = list(REGISTERED_PAIRS["2026"])
+    REGISTERED_PAIR_SOURCES["2026"] = ("the five agreements filed with the CEC for the 26th Knesset "
+                                       "(dossier s.38; simulate.SURPLUS_PAIRS); they reproduce the "
+                                       "official seats from the certified count (validate_seat_law.py)")
 
 
 def loo_calibration(fam: pd.DataFrame, test_cycle: str):
@@ -125,7 +141,7 @@ def loo_calibration(fam: pd.DataFrame, test_cycle: str):
 def main() -> None:
     polls = pd.read_csv(PROCESSED_DIR / "polls.csv",
                         parse_dates=["fieldwork_end"])
-    results = pd.read_csv(PROCESSED_DIR / "results.csv")
+    results = record.results()
     fam = pd.read_csv(PROCESSED_DIR / "bias_family.csv", index_col=0)
 
     rows, matched_all, list_rows = [], [], []
@@ -190,9 +206,10 @@ def main() -> None:
         matched_all.append(covered)
 
     out = pd.DataFrame(rows).set_index("cycle")
-    out.to_csv(PROCESSED_DIR / "model_validation.csv")
+    record.TABLE_DIR.mkdir(parents=True, exist_ok=True)   # record9/ under RECORD_2026
+    out.to_csv(record.table("model_validation.csv"))
     pd.DataFrame(list_rows).to_csv(
-        PROCESSED_DIR / "model_validation_lists.csv", index=False)
+        record.table("model_validation_lists.csv"), index=False)
     print("Model retro-validation, final-eve forecasts "
           f"({N_SIMS:,} sims/cycle, leave-one-cycle-out calibration):\n")
     print(out.to_string())

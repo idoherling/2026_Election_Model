@@ -24,3 +24,5 @@ output/publish/
 # hierarchical error-model posteriors (src/error_model.py, dossier s.61)
 data/processed/error_model/*.nc
 data/processed/error_model/*.nc.tmp
+# the same under RECORD_2026=1 (src/record.py)
+data/processed/record9/error_model/

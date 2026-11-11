@@ -227,6 +227,23 @@ def night_2022() -> list:
             for r in t.itertuples()]
 
 
+def model9() -> dict:
+    """The model for the next election (dossier s.76): the nine-cycle
+    regrade's summary, from data/processed/record9/regrade.json
+    (src/regrade9.py)."""
+    r = json.loads((PROCESSED / "record9" / "regrade.json").read_text(encoding="utf-8"))
+    ch = r["chosen"]
+    const = {c["key"]: [c["eight"], c["nine"]] for c in r["constants"]}
+    return {"arm": ch["arm"], "passes": bool(ch["vs_2026"]["pass"] and all(g["pass"] for g in ch["path"])),
+            "n_single": sum(a["group"] != "sets" for a in r["arms"]),
+            "n_sets": sum(a["group"] == "sets" for a in r["arms"]),
+            "passing_single": [a["arm"] for a in r["arms"] if a["pass"] and a["group"] != "sets"],
+            "cfg": r["baseline"]["nine"], "next": ch["pooled"], "eight": r["baseline"]["eight"],
+            "fold_2026": {"cfg": r["baseline"]["fold_2026"]["eve"], "next": ch["fold_2026"]["eve"]},
+            "const": {k: const[k] for k in ("haredi_e0_mean", "haredi_e1_sd", "arab_reg_k", "bloc_sd",
+                                            "trail_ramp_mu", "nstrad_seat_n")}}
+
+
 def build() -> dict:
     sc = json.loads((OUT_DIR / "scorecard.json").read_text(encoding="utf-8"))
     p = _polls()
@@ -237,7 +254,8 @@ def build() -> dict:
             "likud": {"months": likud_months(p), "record": LIKUD_RECORD, "result": 27},
             "shas": shas_record(rk), "scorecard": scorecard(sc),
             "night": night_path(), "night22": night_2022(),
-            "next": json.loads((PROCESSED / "formation_tracker.json").read_text(encoding="utf-8"))}
+            "next": json.loads((PROCESSED / "formation_tracker.json").read_text(encoding="utf-8")),
+            "model9": model9()}
 
 
 def render(payload: dict) -> str:

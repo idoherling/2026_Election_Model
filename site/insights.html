@@ -144,7 +144,24 @@ table.t td.dir{white-space:nowrap;font:600 12px "IBM Plex Mono","IBM Plex Sans H
 td.dir.up{color:var(--ok)} td.dir.dn{color:var(--warn)}
 details{margin-top:16px}
 summary{cursor:pointer;font-weight:600;font-size:14.5px}
-.honest{border-inline-start:4px solid var(--accent);padding:4px 0 4px 14px;margin:16px 0 0;max-width:72ch;font-size:14px}
+.honest{border-inline-start:4px solid var(--accent);padding:4px 0;padding-inline-start:14px;margin:16px 0 0;max-width:72ch;font-size:14px}
+.model{padding:28px 0 6px;border-top:3px solid var(--ink);margin-top:30px}
+.model h2{font-size:clamp(20px,2.6vw,26px);margin-bottom:8px}
+.model > p{max-width:70ch;font-size:15.5px}
+.model .cols{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:20px 38px;margin-top:16px}
+.model .cols > div{min-width:0}
+.model ul{margin:8px 0 0;padding-inline-start:20px}
+.model li{margin:8px 0;font-size:14.5px}
+.model .k + ul{margin-top:6px}
+.model .k{margin-top:18px}
+.model .cols > div > .k:first-child{margin-top:0}
+table.t.s{min-width:0}
+table.t.s td:nth-child(n+2),table.t.s th:nth-child(n+2){text-align:end;white-space:nowrap;font-variant-numeric:tabular-nums}
+table.t.s td:nth-child(n+2){font:500 13px "IBM Plex Mono","IBM Plex Sans Hebrew",monospace}
+table.t.s td:last-child{font-weight:600}
+table.t.s caption{caption-side:top;text-align:start;font-weight:600;font-size:14px;padding-bottom:4px}
+.model .note{font-size:13px;color:var(--muted);margin-top:10px;max-width:60ch}
+@media (max-width:760px){.model .cols{grid-template-columns:minmax(0,1fr)}}
 .after{padding:28px 0 6px;border-top:3px solid var(--ink);margin-top:30px}
 .after h2{font-size:clamp(20px,2.6vw,26px);margin-bottom:8px}
 .after ul{margin:8px 0 0;padding-inline-start:20px;max-width:74ch}
@@ -193,6 +210,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
     <nav class="toc" id="toc" aria-label="Findings"></nav>
   </section>
   <div id="list"></div>
+  <section class="model" id="model"></section>
   <section class="after" id="after"></section>
 </main>
 <footer><div class="wrap"><div id="foot-l"></div><div id="foot-r" style="text-align:end"></div></div></footer>
@@ -288,9 +306,9 @@ const INS = HE ? [
    src: [S_.cec26(), S_.cec22(), S_.cec20()]},
   {id: "arab", nav: "הקול הערבי", h: `ב־${N(AR.n)} סקרים בארבע שנים, הרשימות הערביות מעולם לא עברו ${N(AR.max)} מנדטים. הן זכו ב־${N(AR.result)}.`,
    p: [`כל סקר שפורסם מאז דצמבר ${N(2022)} נמצא בארכיון של הפרויקט. רובם נתנו לרשימות הערביות ${N(10)} מנדטים. עשרת הסקרים האחרונים נתנו להן ${N(14)} עד ${N(16)}. התוצאה נפלה מחוץ לטווח של הארכיון כולו.`,
-       `הסקרים טעו בשיעור ההצבעה. שלוש הרשימות הערביות של ${N(2022)} קיבלו יחד ${N(fmt(B.arab.votes22))} קולות. שתי הרשימות של ${N(2026)} קיבלו ${N(fmt(B.arab.votes26))}, עלייה של ${N(Math.round(100 * (B.arab.votes26 / B.arab.votes22 - 1)) + "%")}, בזמן שמספר הקולות הכולל עלה ב־${N(Math.round(100 * (R.valid / R.valid22 - 1)) + "%")}.`,
+       `הסקרים טעו בשיעור ההצבעה. שלוש הרשימות הערביות של ${N(2022)} קיבלו יחד ${N(fmt(B.arab.votes22))} קולות. שתי הרשימות של ${N(2026)} קיבלו ${N(fmt(B.arab.votes26))}, עלייה של ${N(Math.round(100 * (B.arab.votes26 / B.arab.votes22 - 1)) + "%")}, בזמן שמספר הקולות הכולל עלה ב־${N(Math.round(100 * (R.valid / R.valid22 - 1)) + "%")}. לפי המכון הישראלי לדמוקרטיה, שיעור ההצבעה ביישובים הערביים והדרוזיים היה כ־${N("77%")}, לעומת ${N("53.2%")} ב־${N(2022)}.`,
        `תיקון שיעור ההצבעה של המודל הוסיף לסקרים מנדט אחד בערך (${N(15)} לעומת ${N(RK.avg_arab)}). תיקון גדול יותר נכשל במבחן העבר וקוצץ לפני הבחירות.`],
-   src: [S_.polls(), S_.cec26(), S_.cec22(), S_.dl(43)]},
+   src: [S_.polls(), S_.cec26(), S_.cec22(), A("https://en.idi.org.il/articles/66790", HE ? "המכון הישראלי לדמוקרטיה, 3 בנובמבר" : "Israel Democracy Institute, 3 Nov"), S_.dl(43)]},
   {id: "likud", nav: "הליכוד", h: `שתי קבוצות של סוקרים נתנו לליכוד מספרים שונים בתשעה מנדטים כל השנה. התוצאה נפלה ביניהן.`,
    p: [`מאפריל עד אוקטובר נתנו שני סוקרים, דיירקט פולס ופילבר, לליכוד כתשעה מנדטים יותר מכל השאר. שתי הקבוצות ירדו יחד לאורך הקמפיין. באוקטובר הממוצע של השניים היה ${N(lastM.panels)} ושל שאר הסוקרים ${N(lastM.others)}. הליכוד זכה ב־${N(27)}.`,
        `העבר הזהיר מפני זה. שתי הפעמים שבהן הליכוד עקף את הסקרים האחרונים שלו בפער הגדול ביותר, ב־${N(2015)} (${N(21.2)} בסקרים, ${N(30)} מנדטים) ובאפריל ${N(2019)} (${N(28.2)}, ואז ${N(35)}), היו כשהוא פיגר אחרי הרשימה המובילה. המודל מתקן למקרה כזה בחצי עוצמה. התיקון העלה את הליכוד מ־${N(23)} ל־${N(25)} והחזיר כשני שלישים מהטעות של התעשייה.`,
@@ -334,9 +352,9 @@ const INS = HE ? [
    src: [S_.cec26(), S_.cec22(), S_.cec20()]},
   {id: "arab", nav: "The Arab vote", h: `In ${N(AR.n)} polls over four years, the Arab lists never passed ${N(AR.max)} seats. They won ${N(AR.result)}.`,
    p: [`Every poll published since December ${N(2022)} is in the project's archive. Most gave the Arab lists ${N(10)} seats. The ten final polls gave them ${N(14)} to ${N(16)}. The result fell outside the range of the whole archive.`,
-       `The polls missed on turnout. The three Arab lists of ${N(2022)} won ${N(fmt(B.arab.votes22))} votes between them. The two lists of ${N(2026)} won ${N(fmt(B.arab.votes26))}, a rise of ${N(Math.round(100 * (B.arab.votes26 / B.arab.votes22 - 1)) + "%")}, while the total vote rose ${N(Math.round(100 * (R.valid / R.valid22 - 1)) + "%")}.`,
+       `The polls missed on turnout. The three Arab lists of ${N(2022)} won ${N(fmt(B.arab.votes22))} votes between them. The two lists of ${N(2026)} won ${N(fmt(B.arab.votes26))}, a rise of ${N(Math.round(100 * (B.arab.votes26 / B.arab.votes22 - 1)) + "%")}, while the total vote rose ${N(Math.round(100 * (R.valid / R.valid22 - 1)) + "%")}. The Israel Democracy Institute puts turnout in Arab and Druze localities at about ${N("77%")}, against ${N("53.2%")} in ${N(2022)}.`,
        `The model's turnout adjustment added about one seat to the polls (${N(15)} against ${N(RK.avg_arab)}). A larger correction had failed the backtest and was cut before the election.`],
-   src: [S_.polls(), S_.cec26(), S_.cec22(), S_.dl(43)]},
+   src: [S_.polls(), S_.cec26(), S_.cec22(), A("https://en.idi.org.il/articles/66790", HE ? "המכון הישראלי לדמוקרטיה, 3 בנובמבר" : "Israel Democracy Institute, 3 Nov"), S_.dl(43)]},
   {id: "likud", nav: "Likud", h: "Two sets of pollsters stood nine seats apart on Likud all year. The result landed between them.",
    p: [`From April to October two pollsters, Direct Polls and Filber, had Likud about nine seats higher than everyone else. Both groups drifted down together through the campaign. In October the pair averaged ${N(lastM.panels)} and the rest ${N(lastM.others)}. Likud won ${N(27)}.`,
        `The record carried a warning. Likud's two largest beats of its final polls, in ${N(2015)} (${N(21.2)} in the polls, ${N(30)} seats) and April ${N(2019)} (${N(28.2)}, then ${N(35)}), both came when it trailed the leading list. The model corrects for that case at half strength. The correction lifted Likud from ${N(23)} to ${N(25)} and recovered about two-thirds of the industry's miss.`,
@@ -417,14 +435,56 @@ const AFTER = HE ? {
   li: [`<b>שכבת ההרכבה קיבלה מצב שאחרי הבחירות.</b> אותו עץ רץ עכשיו על המנדטים הרשמיים, עם יומן ראיות מתוארך שמעדכן כל הנחה. זו התחזית שבסעיף ${N(10)}. ${S_.dl(75)}`,
        `<b>התוצאות הרשמיות נכנסו לכרטיס הציונים.</b> חלוקת המנדטים שהמודל מחשב זהה לזו של ועדת הבחירות המרכזית, כל ${N(120)} המנדטים. ${S_.score()}`,
        `<b>שני תיקונים בקריאת דיווחי הסוקרים</b> לוועדת הבחירות, ודירוג הסוקרים לפי אחוזי קולות נכנס לקוד. ${S_.dl(74)}`,
-       `<b>הבא בתור: ${N(2026)} כמערכת הבחירות התשיעית במבחן העבר.</b> תיקון ש״ס, שיעור ההצבעה הערבי, מקור המנדטים של הליכוד ורוחב הטווחים ייבחנו מחדש על תשע מערכות בחירות, לפי כלל ההכנסה למודל, לפני התחזית הבאה. התחזית שהוקפאה אינה משתנה. ${S_.dl(74)}`],
+       `<b>${N(2026)} היא מערכת הבחירות התשיעית במבחן העבר,</b> מאחורי מתג שכבוי כברירת מחדל: התחזית שהוקפאה לפני הבחירות אינה משתנה ועדיין משוחזרת במדויק. ${S_.dl(76)}`],
 } : {
   h: "What changed in the model after the election",
   li: [`<b>The formation layer has a post-election mode.</b> The same tree now runs on the official seats, with a dated evidence ledger that updates each assumption. That is the forecast in finding ${N(10)}. ${S_.dl(75)}`,
        `<b>The official result is on the scorecard.</b> The seat allocation the model computes matches the Central Elections Committee's own, all ${N(120)} seats. ${S_.score()}`,
        `<b>Two fixes to the parser</b> that reads pollsters' filings with the Committee, and the vote-share ranking of pollsters is now in the code. ${S_.dl(74)}`,
-       `<b>Next: ${N(2026)} joins the backtest as the ninth election.</b> The Shas correction, the Arab-turnout term, the source of Likud's late seats and the width of the intervals will be regraded on nine elections, under the model's shipping rule, before the next forecast. The frozen forecast does not change. ${S_.dl(74)}`],
+       `<b>${N(2026)} is the ninth election in the backtest,</b> behind a switch that is off by default: the forecast frozen before the election is unchanged and still reproduces exactly. ${S_.dl(76)}`],
 };
+
+/* ---------- the model for the next election (decision log s.76) ---------- */
+const M9 = DATA.model9;
+const f2 = x => N(Number(x).toFixed(2));
+const MODEL9 = HE ? {
+  h: "המודל לבחירות הבאות", nav: "המודל הבא",
+  p: `תוצאות ${N(2026)} הן עכשיו מערכת הבחירות התשיעית במבחן העבר של המודל. כל תיקון שהחטיא נבחן מחדש על כל התשע, לפי אותו כלל הכנסה למודל ששימש לפני הבחירות: ${N(M9.n_single)} חלופות ו־${N(M9.n_sets)} שילובים. שלושה שינויים עברו וייכנסו לתחזית הבאה. התחזית שהוקפאה לפני הבחירות אינה משתנה.`,
+  chT: "מה משתנה",
+  ch: [`<b>טווחים צרים יותר, בשני תיקונים.</b> טווחי ה־${N("90%")} של המודל הכילו ${N(105)} מתוך ${N(107)} תוצאות, כלומר היו רחבים מדי. הזעזועים האקראיים יידגמו בגודל שנמדד בעבר, אחרי שטעות בכיול הגדילה אותם ב־${N("29%")}. והטעות לכל רשימה תימדד באחוזי קולות, כך שרשימה שנופלת מתחת לאחוז החסימה לא תיספר פעמיים.`,
+       `<b>תיקון הליכוד המאוחר יופעל בהדרגה.</b> עד עכשיו הוא הופעל במלואו כשהיתרון של הליכוד בסקרים ירד לחצי מנדט או פחות, וכובה מעל זה. מעכשיו הוא במלואו כשהליכוד מפגר במנדט או יותר, כבוי כשהוא מוביל בשני מנדטים, ובאמצע חלקי.`],
+  stT: "מה נשאר, בגודל מעודכן",
+  st: [`<b>תיקון ש״ס נשאר, קטן יותר.</b> בלעדיו מבחן העבר גרוע יותר במערכות בחירות קודמות. עם ${N(2026)} בנתונים הוא מוסיף למפלגות החרדיות ${f2(-M9.const.haredi_e0_mean[1])} מנדטים, לעומת ${f2(-M9.const.haredi_e0_mean[0])}, ואי־הוודאות שלו גדלה.`,
+       `<b>רכיב שיעור ההצבעה הערבי נשאר, חזק יותר.</b> החלק משינוי בשיעור ההצבעה שהמודל מעביר לרשימות הערביות עולה מ־${f2(M9.const.arab_reg_k[0])} ל־${f2(M9.const.arab_reg_k[1])}.`,
+       `<b>המקור של המנדטים המאוחרים של הליכוד נשאר.</b> לקיחתם מכל המפה, ולא מהמפלגות הקטנות של הגוש, נבחנה ויצאה גרועה יותר.`,
+       `<b>הכלל לרשימות חדשות סביב אחוז החסימה נשאר.</b> שתי הרשימות החדשות לא עברו, כפי שהכלל צפה. יש עכשיו ${N(M9.const.nstrad_seat_n[1])} מקרים בנתונים.`],
+  cap: `מבחן העבר על תשע מערכות בחירות`, c0: "מדד", c1: `המודל של ${N(2026)}`, c2: "המודל הבא",
+  rows: ["החטאה טיפוסית לרשימה, ערב הבחירות (מנדטים)", "החטאה ממוצעת לרשימה (מנדטים)", `תוצאות בתוך טווח ה־${N("90%")}, ערב הבחירות`, "שבוע לפני הבחירות", "שלושה שבועות לפני", "ציון הטווח: רוחב ועוד קנס על החטאה (נמוך עדיף)", "טעות ריבועית בסיכוי לרוב של גוש נתניהו (נמוך עדיף)"],
+  note: `הרצה חוזרת של ${N(2026)} על סקרים בלבד, כש־${N(2026)} מחוץ לנתונים: ההחטאה הממוצעת לרשימה יורדת מ־${f2(M9.fold_2026.cfg.mean)} ל־${f2(M9.fold_2026.next.mean)} מנדטים, והסיכוי שניתן לרוב של גוש נתניהו מ־${pc(M9.fold_2026.cfg.p_nb61)} ל־${pc(M9.fold_2026.next.p_nb61)}.`,
+  honest: `שלושת השינויים הוצעו ונבחנו כבר באוקטובר, ואינם תגובה לתוצאה אחת. שני תיקוני הטווח נכשלים יחד בלי ההפעלה ההדרגתית ועוברים איתה, סדר האימוץ שלהם משנה, והמרווח שלושה שבועות לפני בחירות דק. הכול מפורט ב${A(URLS.dl(76), "יומן ההחלטות, סעיף " + N(76))}.`,
+} : {
+  h: "The model for the next election", nav: "The next model",
+  p: `The ${N(2026)} result is now the ninth election in the model's backtest. Every correction that missed was retested on all nine, under the same shipping rule used before the election: ${N(M9.n_single)} alternatives and ${N(M9.n_sets)} combinations. Three changes passed and will ship in the next forecast. The forecast frozen before this election is unchanged.`,
+  chT: "What changes",
+  ch: [`<b>Narrower ranges, from two fixes.</b> The model's ${N("90%")} ranges held ${N(105)} of ${N(107)} results, so they were too wide. Random shocks will be drawn at the size the record measured, where a scaling slip had made them ${N("29%")} larger. And each list's error will be measured on vote shares, so a list that falls below the threshold is not counted twice.`,
+       `<b>The late-Likud correction will fade in.</b> Until now it switched on fully when Likud's lead in the polls fell to half a seat or less, and off above that. From now on it is at full strength when Likud trails by a seat or more, off when it leads by two, and partial in between.`],
+  stT: "What stays, resized by the result",
+  st: [`<b>The Shas correction stays, smaller.</b> Removing it makes the backtest worse in earlier elections. With ${N(2026)} in the record it adds ${f2(-M9.const.haredi_e0_mean[1])} seats to the haredi parties, down from ${f2(-M9.const.haredi_e0_mean[0])}, and its uncertainty widens.`,
+       `<b>The Arab turnout term stays, stronger.</b> The share of a turnout change that the model passes through to the Arab lists rises from ${f2(M9.const.arab_reg_k[0])} to ${f2(M9.const.arab_reg_k[1])}.`,
+       `<b>Where Likud's late seats come from stays.</b> Taking them from the whole field, not from the bloc's smaller parties, tested worse.`,
+       `<b>The rule for new lists near the threshold stays.</b> Both new lists failed, as the rule expected. The record now has ${N(M9.const.nstrad_seat_n[1])} cases.`],
+  cap: "Backtest on nine elections", c0: "Measure", c1: `The ${N(2026)} model`, c2: "The next model",
+  rows: ["Typical miss per list, election eve (seats)", "Average miss per list (seats)", `Results inside the ${N("90%")} range, election eve`, "One week before the election", "Three weeks before", "Interval score: width plus a penalty for misses (lower is better)", "Squared error on the chance of a Netanyahu-bloc majority (lower is better)"],
+  note: `A poll-only rerun of ${N(2026)}, with ${N(2026)} left out of the record: the average miss per list falls from ${f2(M9.fold_2026.cfg.mean)} to ${f2(M9.fold_2026.next.mean)} seats, and the chance given to a Netanyahu-bloc majority from ${pc(M9.fold_2026.cfg.p_nb61)} to ${pc(M9.fold_2026.next.p_nb61)}.`,
+  honest: `All three changes were proposed and tested in October; none is a reaction to one result. The two range fixes fail together without the gradual trigger and pass with it, the order in which they are adopted matters, and the margin three weeks before an election is thin. Everything is in ${A(URLS.dl(76), "decision log §" + N(76))}.`,
+};
+function figModel(){
+  const c = M9.cfg, n = M9.next, p1 = x => N((100 * x).toFixed(1) + "%"), f3 = x => N(Number(x).toFixed(3));
+  const cells = [[f2(c.eve.med), f2(n.eve.med)], [f2(c.eve.mean), f2(n.eve.mean)], [p1(c.eve.cov), p1(n.eve.cov)],
+    [p1(c["D-7"].cov), p1(n["D-7"].cov)], [p1(c["D-21"].cov), p1(n["D-21"].cov)], [f2(c.eve.isc), f2(n.eve.isc)], [f3(c.eve.bloc_brier), f3(n.eve.bloc_brier)]];
+  return `<div class="tw"><table class="t s"><caption>${MODEL9.cap}</caption><thead><tr><th scope="col">${MODEL9.c0}</th><th scope="col">${MODEL9.c1}</th><th scope="col">${MODEL9.c2}</th></tr></thead><tbody>${
+    MODEL9.rows.map((r, i) => `<tr><td>${r}</td><td>${cells[i][0]}</td><td>${cells[i][1]}</td></tr>`).join("")}</tbody></table></div>`;
+}
 
 /* ---------- figures ---------- */
 const SVGNS = "http://www.w3.org/2000/svg";
@@ -589,7 +649,7 @@ function render(){
     <div class="segs" role="img" aria-label="${esc(seg.map(([k, name]) => name + " " + B[k].seats26).join(", "))}">${seg.map(([k, , hollow]) => `<i class="${hollow ? "hollow" : ""}" style="flex:${B[k].seats26} 1 0"></i>`).join("")}<span class="mark" style="inset-inline-start:${(100 * 61 / 120).toFixed(2)}%"></span></div>
     <div class="cap"><span>${T.stripCap} ${A(URLS.cec26, HE ? "ועדת הבחירות המרכזית" : "Central Elections Committee")}</span><span>${T.stripTurn}</span></div>`;
   const all = INS.concat([NEXT]);
-  $("toc").innerHTML = all.map((s, i) => `<a href="#${s.id}">${N(i + 1)} ${esc(s.nav)}</a>`).join("");
+  $("toc").innerHTML = all.map((s, i) => `<a href="#${s.id}">${N(i + 1)} ${esc(s.nav)}</a>`).join("") + `<a href="#model">${esc(MODEL9.nav)}</a>`;
   let h = "";
   INS.forEach((s, i) => {
     const body = (s.list ? `<ul>${s.list.map(x => `<li>${x}</li>`).join("")}</ul>` : "") + s.p.map(x => `<p>${x}</p>`).join("");
@@ -605,6 +665,11 @@ function render(){
       <p class="honest">${NEXT.honest}</p></div>
     <p class="src">${T.sources}: ${NEXT.src.join(" · ")}</p></div></article>`;
   $("list").innerHTML = h;
+  $("model").innerHTML = `<h2>${MODEL9.h}</h2><p>${MODEL9.p}</p>
+    <div class="cols"><div><p class="k">${MODEL9.chT}</p><ul>${MODEL9.ch.map(x => `<li>${x}</li>`).join("")}</ul>
+      <p class="k">${MODEL9.stT}</p><ul>${MODEL9.st.map(x => `<li>${x}</li>`).join("")}</ul></div>
+      <div>${figModel()}<p class="note">${MODEL9.note}</p><p class="honest">${MODEL9.honest}</p></div></div>
+    <p class="src">${T.sources}: ${[S_.dl(76), S_.dl(74), S_.score()].join(" · ")}</p>`;
   $("after").innerHTML = `<h2>${AFTER.h}</h2><ul>${AFTER.li.map(x => `<li>${x}</li>`).join("")}</ul>`;
   $("foot-l").textContent = T.footL;
   $("foot-r").innerHTML = `<a href="index.html">${T.back}</a> · <a href="scorecard.html">${T.score}</a> · <a href="election-night.html">${T.night}</a> · <a href="decision-log.html">${T.log}</a>`;

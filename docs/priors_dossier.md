@@ -7397,7 +7397,7 @@ from seven of its filings (4220-4225, 4249); Dialog's 4256 is a sample of
 (cec_filings.csv, cec_party_pcts.csv) stay as at the freeze so the frozen
 chain reproduces; the re-parse is in postmortem_cec_*.csv.
 
-**2026 as the ninth cycle: scoped, not run.** A read-only pass through the
+**2026 as the ninth cycle: scoped here, run in s.76.** A read-only pass through the
 harness (11 Nov) lists what a ninth graded cycle needs: ELECTION_DAY and
 validate_model.ORDER; PAST_PAIRS / REGISTERED_PAIRS (the five pairs,
 joint_list for balad); validate_bayes DECOMP (together, joint_list),
@@ -7476,3 +7476,355 @@ same question. As in s.71 the market is reported, not fitted. The strengths
 in the ledger are judgment; this is scenario analysis, like the layer it
 extends, and it is graded with --government / --pm when the outcome is
 known.
+
+## 76. 2026 as the ninth cycle, and the model for the next election (11 Nov)
+
+s.74 scoped 2026 as a ninth graded cycle and left it for a branch of its
+own. It is now run, on main, behind a switch that is off by default: the
+record gains 2026, the harness baseline is restated on nine cycles, every
+correction the result called into question is regraded under the standing
+rule (s.53, amended s.55), and the configuration for the next election is
+fixed. The frozen forecast of record (s.73) is untouched, and with the
+switch unset the code is the eight-cycle code to the bit.
+
+### 76.1 The switch
+
+- `RECORD_2026=1` (src/record.py) makes 2026 a graded cycle: the cycle
+  lists of validate_model, error_decomposition, error_model and
+  validate_bayes, the election date, the five filed surplus agreements,
+  DECOMP (Together = Bennett 2026 + Yesh Atid; the Joint List = Balad +
+  Hadash-Ta'al), the withdrawals (Blue and White 19 Oct, Ahi 23 Oct), the
+  unmodelled share (0.0051), Arab turnout, regime table B, the
+  established-list set and three straddler rows. Every 2026 entry sits in
+  an `if RECORD_2026:` block.
+- The 2026 result rows live in data/record_2026/ (results, ran vote
+  shares, CEC counts; built from the certified result by `python
+  src/record.py --build`) and are appended by loaders only under the
+  switch. They are never written into data/processed/results.csv, which
+  the scraper rewrites and every default reader loads.
+- Every table derived from nine cycles is read from and written to
+  data/processed/record9/ (the pollster scorecard, the error
+  decomposition, the straddler record, the error-model posteriors, the
+  harness outputs). The top-level tables stay the eight-cycle ones, so
+  scorecard.py still grades 2026 against a record that does not contain
+  it.
+- `MODEL_CONFIG=next`, which needs `RECORD_2026=1`, turns on the
+  configuration of 76.4 in production (three flags in bayes_model) and in
+  the harness mirror (validate_bayes.ALL_LAYERS), so "shipped" then means
+  the model for the next election in both. `MODEL_CONFIG=2026`, the
+  default, is the configuration of the forecast of record; the harness arm
+  cfg_2026 spells it out.
+- **Default-off is inert.** A fingerprint of the default path (the cycle
+  lists, every per-cycle table, decompose() in all forms, 23 record
+  constants of bayes_model, the scorecards, every fold's leave-one-out
+  inputs, the fit inputs of the 32 cached windows and production's 2026
+  inputs) has the same sha256 before the first edit and after the last
+  (3ba8a360...e9b655). No tracked data file changed and the 114 existing
+  posterior files are byte-identical. The eight-cycle harness re-run
+  equals s.62.2's official rows to four decimals at the eve, D-7 and
+  D-21. Under the switch, validate_seat_law.py reproduces the 120 official
+  seats from the certified count with the five filed pairs.
+- The scraper refuses to run under the switch (a 2026 election date
+  changes how it stamps result rows). hierarchical_model is pinned to the
+  eight past cycles: 2026 is its live cycle.
+
+### 76.2 The 2026 fold and the nine-cycle baseline
+
+Four new fits in the shared harness cache, each on the scorecard without
+2026 (which is the committed eight-cycle scorecard), 16 lists, ballot
+fidelity, CLR (`RECORD_2026=1 python src/build_harness_cache.py 2026_eve
+2026_D7 2026_D21 2026_D56`):
+
+| window | polls | draws | fit, s | divergences | max r-hat | endpoint r-hat | min bulk ESS |
+|---|---|---|---|---|---|---|---|
+| eve | 238 | 600 | 1,558 | 0 | 1.01 | 1.00 | 476 |
+| D-7 | 230 | 400 | 1,427 | 0 | 1.01 | 1.00 | 340 |
+| D-21 | 214 | 400 | 235 | 0 | 1.02 | 1.01 | 219 |
+| D-56 | 190 | 400 | 150 | 0 | 1.03 | 1.01 | 180 |
+
+The 2026 fold is the harness's instrument, not the forecast of record: it
+reads the poll tables only (no CEC filings, sector stream, certainty layer,
+event risk, mixture or markets). At the eve all 16 lists are inside their
+90% intervals; Likud 24.7 against 27, Shas 8.8 against 6, Ra'am 5.1
+against 8, the Joint List 9.1 against 11; P(NB >= 61) .113 against 53
+seats.
+
+The 2026 configuration, three seeds (offsets 0 / 100 / 200), shipped list
+mask. Each cell: median MAE / mean MAE / 90% coverage / threshold Brier /
+interval score.
+
+| | eve | D-7 | D-21 |
+|---|---|---|---|
+| eight cycles (equals s.62.2) | 1.486 / 1.625 / 0.972 / 0.0447 / 9.011 | 1.486 / 1.642 / 0.960 / 0.0465 / 9.389 | 1.625 / 1.780 / 0.968 / 0.0519 / 9.599 |
+| nine cycles | 1.465 / 1.551 / 0.975 / 0.0402 / 8.580 | 1.409 / 1.581 / 0.965 / 0.0421 / 8.963 | 1.569 / 1.718 / 0.963 / 0.0469 / 9.274 |
+| the 2026 fold alone | 0.979 / 1.127 / 1.000 / 0.0098 / 6.292 | 0.969 / 1.205 / 1.000 / 0.0112 / 6.439 | 1.062 / 1.374 / 1.000 / 0.0099 / 6.042 |
+| nine cycles, the next configuration | 1.381 / 1.474 / 0.973 / 0.0370 / 8.004 | 1.391 / 1.538 / 0.941 / 0.0392 / 8.685 | 1.542 / 1.651 / 0.938 / 0.0443 / 9.194 |
+| the 2026 fold, the next configuration | 0.906 / 1.070 / 0.979 / 0.0053 / 5.521 | 0.917 / 1.147 / 1.000 / 0.0066 / 5.312 | 1.062 / 1.259 / 0.917 / 0.0065 / 6.938 |
+
+2026 is an easier cycle than the record's average, so the pooled scores
+improve by its own row; the eight old folds also move, because 2026 joins
+each one's leave-one-out pool (pooled over them at the eve: median +.040,
+mean -.022, Brier -.0007, interval -.145; largest single moves 2019a
+median +.345, 2019s -.200). The bloc-majority Brier falls from .0388 to
+.0315 at the eve (.0375 to .0311 at D-7, .0558 to .0481 at D-21).
+
+### 76.3 The regrade of what 2026 called into question
+
+Every arm against the 2026 configuration on nine cycles. The rule as s.70.3
+applied it: at each of the eve, D-7 and D-21, pooled over the three seeds,
+a candidate wins or ties (|d| < 0.1 seat) median MAE in every
+leave-one-cycle-out fold, with mean MAE, threshold Brier and interval score
+not worse beyond .010 / .0010 / .05 and coverage no further from .90. A
+fold at exactly +.100 is a loss and "further from .90" is strict. The last
+column is the same arm on the eight-cycle record with today's code.
+
+| arm | what it is | nine cycles | binding test | eight cycles, today's code |
+|---|---|---|---|---|
+| hared_alloc | haredi lift split by each party's own record (s.54) | fail | eve: interval +0.1641; D-7: interval +0.1474 | fail |
+| hared_off | no haredi lift (new arm) | fail | eve: fold 2021 +0.119; D-7: fold 2009 +0.182, 2013 +0.139; mean +0.0146; coverage 0.965 to 0.972; D-21: fold 2015 +0.227, 2022 +0.141 | fail (D-7, D-21 only) |
+| hared_e1 | haredi lift at the pre-16-Oct mean (new arm) | fail | D-7: fold 2009 +0.121; D-21: fold 2015 +0.106 | pass at D-7 and D-21 (eve not run) |
+| arab_add_e0 | Arab term as a flat mean (s.43) | fail | eve: fold 2013 +0.111; interval +0.2420; D-7: fold 2019s +0.100; interval +0.1929; coverage 0.965 to 0.968; D-21: fold 2019s +0.152; interval +0.1196; coverage 0.963 to 0.969 | fail |
+| arab_turnA | turnout term, regime table A (s.43) | fail | eve: fold 2015 +0.121; interval +0.1658; D-7: coverage 0.965 to 0.968; D-21: fold 2019s +0.152, 2020 +0.148, 2026 +0.167; interval +0.2446 | fail |
+| arab_turnB | turnout term, table B, earlier form (s.43) | fail | eve: fold 2015 +0.121; Brier +0.0012; interval +0.2150; D-7: fold 2009 +0.182, 2013 +0.250; Brier +0.0010; coverage 0.965 to 0.972; D-21: fold 2013 +0.250, 2015 +0.106, 2020 +0.148, 2022 +0.103 | fail |
+| arab_e1_prev | the Arab term shipped before 10 Oct (s.43) | fail | eve: fold 2013 +0.111, 2015 +0.121, 2019s +0.100; mean +0.0204; interval +0.2228; D-7: fold 2019s +0.167; mean +0.0189; interval +0.1630; coverage 0.965 to 0.968; D-21: fold 2015 +0.136, 2019s +0.242; mean +0.0142; interval +0.1884; coverage 0.963 to 0.966 | fail |
+| arab_off | no Arab term (new arm) | fail | eve: fold 2015 +0.152, 2019s +0.333, 2022 +0.590; mean +0.0529; Brier +0.0018; interval +0.1940; D-7: fold 2013 +0.153, 2019s +0.233, 2020 +0.111, 2022 +0.615; mean +0.0588; Brier +0.0018; interval +0.1305; coverage 0.965 to 0.972; D-21: fold 2013 +0.139, 2015 +0.379, 2019s +0.242, 2020 +0.148, 2022 +0.692, 2026 +0.188; mean +0.0486; Brier +0.0021; interval +0.2458 | fail (D-7, D-21 only) |
+| no_trail | no trailing-Likud layer (s.36, s.63) | fail | eve: fold 2015 +0.636, 2019a +0.155, 2026 +0.188; mean +0.0534; Brier +0.0051; interval +0.3239; D-7: fold 2015 +0.636, 2019a +0.345, 2020 +0.333, 2026 +0.115; mean +0.0858; Brier +0.0037; interval +0.0872; D-21: fold 2015 +0.591, 2020 +0.296; mean +0.0591 | fail |
+| trail_full | trailing-Likud at full strength (s.36) | fail | eve: fold 2019s +0.567; mean +0.0454; Brier +0.0017; interval +0.0574; D-7: fold 2019s +0.467, 2020 +0.852; mean +0.0938; Brier +0.0044; interval +0.0785; D-21: fold 2020 +0.778; mean +0.0136; Brier +0.0024 | fail |
+| trail_field | trailing-Likud taken from the whole field (new arm; the geometry before s.41) | fail | eve: fold 2015 +0.273, 2019s +0.100; mean +0.0489; Brier +0.0056; D-7: fold 2015 +0.424, 2019a +0.286; mean +0.0216; Brier +0.0042; interval +0.0767; D-21: fold 2015 +0.348 | fail (D-7, D-21 only) |
+| trail_ramp_sat | ramp from the cliff's margin to +2, the cliff's record (s.41) | **pass** | none | pass |
+| tramp_m | the ramp pre-registered in s.46: -1 to +2, same-weight record | **pass** | none | not run |
+| tramp05_m | ramp 0.5 to +2, same-weight record (s.46) | fail | eve: fold 2015 +0.121; Brier +0.0011 | not run |
+| cal_A | t shocks at unit variance (s.48) | **pass** | none | pass |
+| cal_B | vote-share residual line (s.57) | **pass** | none | pass |
+| cal_AB | both (s.48) | fail | D-21: interval +0.0641 | pass |
+| cal_D | t-distributed residual, df from the record (s.48) | fail | D-21: coverage 0.963 to 0.966 | fail |
+| resid_hybrid | vote-share line for small lists only (s.60) | fail | D-7: coverage 0.965 to 0.974 | fail |
+| hier_H1 | hierarchical error model (s.61) | fail | D-7: coverage 0.965 to 0.968; D-21: fold 2015 +0.106; coverage 0.963 to 0.980 | fail |
+| no_nstrad | no new-straddler layer (s.36) | fail | eve: Brier +0.0051; D-7: fold 2019a +0.440; mean +0.0117; Brier +0.0056; coverage 0.965 to 0.972; D-21: fold 2019a +0.262; mean +0.0108; Brier +0.0042; coverage 0.963 to 0.972 | fail |
+| nstrad_ran | straddler drift on CEC vote shares (s.57) | fail | eve: Brier +0.0021; D-7: fold 2019a +0.286; Brier +0.0020; coverage 0.965 to 0.972; D-21: Brier +0.0019; coverage 0.963 to 0.969 | fail |
+| nstrad_fixed | the corrected straddler record (s.70) | fail | D-7: coverage 0.965 to 0.972; D-21: coverage 0.963 to 0.966 | fail |
+
+- **The haredi lift stays.** Switching it off loses the 2021 fold at the
+  eve and folds at both horizons, although 2026 itself is better without
+  it (-.188 at the eve). The split by lineage (hared_alloc) now fails on
+  the interval score at the eve and D-7; on eight cycles it failed at
+  D-21. What changes is the size, through the record (76.5).
+- **The Arab turnout term stays.** With no Arab term the 2022 fold loses
+  .59 seats of median error at the eve and six of nine folds lose at
+  D-21. Every alternative form fails as before.
+- **The trailing-Likud layer stays, and its donors stay.** Without the
+  layer the 2015, April 2019 and 2026 folds lose (2026 +.188 at the eve:
+  the fold is better with the layer although it cost Otzma and RZP a seat
+  each). Taking the seats from the whole field fails on 2015. The ramp
+  passes (76.4).
+- **Width.** The t-scale fix and the vote-share residual each pass alone.
+  Together, with nothing else changed, they fail at D-21 on the interval
+  score by .014 beyond the floor. cal_D and the hybrid line fail on the
+  strict coverage test alone; the hierarchical model on coverage and one
+  fold.
+- **New lists near the threshold: unchanged.** The corrected record
+  (s.70) no longer loses a fold; it fails on coverage alone (.965 to .972
+  at D-7).
+
+**Not caused by 2026.** trail_ramp_sat, cal_A, cal_B and cal_AB also pass
+on the eight-cycle record with today's code. Their October fails were
+graded against the baseline before 18 Oct (the residual line before
+seat_fix) and, for cal_A, with the horizons on one seed (s.48.6). Among the
+arms graded at all three horizons on both records, the only verdict 2026
+changes is cal_AB's, from pass to fail. hared_e1, graded on eight cycles
+at the horizons only, passed there and now loses one fold at each.
+
+### 76.4 The set that ships
+
+**Procedure.** Fixed after the single-arm grades above were read and
+before any combination was graded; not hashed, so this is a disclosed
+procedure and not a blind pre-registration. (1) A set of changes is one
+candidate: it ships if it passes the standing rule against the 2026
+configuration on nine cycles at the eve, D-7 and D-21. (2) Among passing
+sets the larger one is preferred; between sets of the same size, the one
+better on more of the twelve pooled comparisons (mean MAE, threshold
+Brier, interval score and distance of coverage from .90, at three
+horizons). Added after the first round was read: (3) the set must have an
+order of adoption in which every step passes the rule against the step
+before it.
+
+**Rounds.** Round one combined the round-five ramp (trail_ramp_sat) with
+each width fix and with both, and ran s.46's pre-registered ramp (tramp_m:
+weight 1 where Likud trails by a seat or more, 0 where it leads by two,
+the beat re-estimated with the same weights) for information. tramp_m
+passed with larger gains at the eve and D-7, so round two combined it the
+same way. Each cell: change in median MAE / mean MAE / threshold Brier /
+interval score against the 2026 configuration, then the set's coverage.
+
+| set | eve | D-7 | D-21 | verdict |
+|---|---|---|---|---|
+| trail_ramp_sat | -0.010 / -0.011 / +0.0008 / -0.049 / 0.975 | +0.000 / +0.000 / +0.0000 / +0.000 / 0.965 | -0.036 / -0.057 / -0.0020 / +0.037 / 0.963 | pass |
+| tramp_m | -0.076 / -0.049 / +0.0003 / -0.117 / 0.975 | -0.038 / -0.021 / -0.0003 / -0.051 / 0.965 | -0.026 / -0.040 / -0.0009 / -0.052 / 0.963 | pass |
+| cal_A | -0.002 / -0.001 / -0.0002 / -0.161 / 0.972 | -0.009 / -0.001 / -0.0002 / -0.218 / 0.965 | -0.003 / +0.000 / -0.0001 / -0.147 / 0.960 | pass |
+| cal_B | -0.002 / -0.025 / -0.0031 / -0.325 / 0.975 | +0.017 / -0.018 / -0.0022 / -0.240 / 0.953 | +0.005 / -0.025 / -0.0013 / -0.008 / 0.945 | pass |
+| cal_AB | -0.007 / -0.028 / -0.0035 / -0.532 / 0.975 | +0.022 / -0.020 / -0.0024 / -0.208 / 0.941 | -0.002 / -0.026 / -0.0015 / +0.064 / 0.933 | fail |
+| ramp_A | -0.018 / -0.013 / +0.0005 / -0.198 / 0.972 | -0.009 / -0.001 / -0.0002 / -0.218 / 0.965 | -0.036 / -0.057 / -0.0023 / -0.111 / 0.960 | pass |
+| ramp_B | -0.014 / -0.036 / -0.0024 / -0.321 / 0.975 | +0.017 / -0.018 / -0.0022 / -0.240 / 0.953 | -0.025 / -0.083 / -0.0036 / +0.008 / 0.948 | pass |
+| ramp_AB | -0.019 / -0.039 / -0.0027 / -0.528 / 0.975 | +0.022 / -0.020 / -0.0024 / -0.208 / 0.941 | -0.028 / -0.084 / -0.0039 / -0.013 / 0.940 | pass |
+| tramp_A | -0.078 / -0.050 / +0.0001 / -0.296 / 0.972 | -0.038 / -0.022 / -0.0006 / -0.293 / 0.965 | -0.026 / -0.041 / -0.0011 / -0.184 / 0.960 | pass |
+| tramp_B | -0.081 / -0.074 / -0.0029 / -0.382 / 0.975 | -0.024 / -0.040 / -0.0026 / -0.287 / 0.953 | -0.037 / -0.066 / -0.0024 / -0.115 / 0.948 | pass |
+| tramp_AB | -0.085 / -0.076 / -0.0032 / -0.577 / 0.973 | -0.019 / -0.042 / -0.0029 / -0.277 / 0.941 | -0.027 / -0.067 / -0.0026 / -0.080 / 0.938 | pass |
+
+**Chosen: tramp_AB**, the three changes together.
+- T_UNIT_VAR True (cal_A, s.48): every Student-t shock at the standard
+  deviation it was measured at, not 1.29 times it.
+- RESID_SPACE "vote" (cal_B, s.57): the per-list residual line from
+  vote-share errors of lists that ran (0.63 + 0.083 x seats on nine
+  cycles), so a threshold death is not counted twice.
+- TRAIL_RAMP_ON True (tramp_m, s.46): TRAIL_RAMP lo -1.0, hi +2.0, mu 5.49,
+  sd 3.86 (the same-weight record on nine cycles; 2026 enters at weight
+  .29 with a Likud beat of +4.6; n_eff 4.0). The 0.5-seat cliff of s.46.3
+  is gone: at the old cliff the weight is .5.
+
+It is the largest passing set, it has the best eve scores of any passing
+set, and
+against ramp_AB it is better on nine of the twelve pooled comparisons,
+worse on two (mean MAE and Brier at D-21) and level on one. An order in
+which every step passes:
+
+| step | against | eve | D-7 | D-21 | verdict |
+|---|---|---|---|---|---|
+| tramp_m | the 2026 configuration | -0.076 / -0.049 / +0.0003 / -0.117 / 0.975 | -0.038 / -0.021 / -0.0003 / -0.051 / 0.965 | -0.026 / -0.040 / -0.0009 / -0.052 / 0.963 | pass |
+| tramp_B | tramp_m | -0.005 / -0.025 / -0.0032 / -0.265 / 0.975 | +0.014 / -0.020 / -0.0023 / -0.236 / 0.953 | -0.011 / -0.026 / -0.0014 / -0.063 / 0.948 | pass |
+| tramp_AB | tramp_B | -0.004 / -0.002 / -0.0004 / -0.195 / 0.973 | +0.005 / -0.002 / -0.0003 / +0.010 / 0.941 | +0.011 / -0.001 / -0.0002 / +0.035 / 0.938 | pass |
+
+**Effect** (nine cycles, three seeds, the 2026 configuration's mask): eve
+median MAE 1.465 to 1.381, mean 1.551 to 1.475, threshold Brier .0402 to
+.0370, interval score 8.58 to 8.00, coverage .975 to .973, bloc-majority
+Brier .0315 to .0234; D-7 coverage .965 to .941 and D-21 .963 to .938,
+with every other pooled score better at both. In the 2026 fold at the
+eve: mean error per list 1.13 to 1.07, interval score 6.29 to 5.52,
+P(NB >= 61) .113 to .071, 47 of 48 list-seeds inside the interval instead
+of 48.
+
+**Disclosures.**
+- The order matters. Adding the vote-share residual to tramp_m + cal_A
+  fails (eve coverage .972 to .973; D-21 interval score +.104), although
+  mean MAE and Brier improve at every horizon; adding cal_A to tramp_m +
+  cal_B passes. The same holds with the other ramp.
+- Without a ramp the two width fixes fail together at D-21 (interval
+  +.064); with either ramp they pass (-.013, -.080). One list crossing an
+  interval edge moves the pooled interval score by about .1, so the margin
+  at D-21 is thin. Coverage at D-21 is .938, still above .90.
+- Neither ramp replaces the other under the rule: tramp_m against
+  trail_ramp_sat wins the eve and D-7 and fails D-21 (2019a fold +.143,
+  mean +.017); the reverse fails all three horizons.
+- The three seeds are projection seeds; the fits are fixed. The combined
+  sets and tramp_m were not graded on the eight-cycle record.
+
+**The mirror, checked.** Under `RECORD_2026=1 MODEL_CONFIG=next` the
+harness's "shipped" equals the arm tramp_AB, and cfg_2026 equals the 2026
+configuration, exactly, on every own-mask column at the eve, D-7 and D-21
+on the three seeds. The shipped-mask columns differ in the 2026 fold only:
+the mask is defined by whatever "shipped" is, and one micro-list crosses
+the 0.5% scoring cut-off. On its own mask the next configuration's
+baseline, the one later candidates grade against, is eve 1.390 / 1.485 / 0.972 / 0.0371 / 8.059;
+D-7 1.393 / 1.541 / 0.941 / 0.0392 / 8.698; D-21 1.550 / 1.661 / 0.937 / 0.0443 / 9.245.
+
+**Production, information only.** bayes_model.project() on the saved 23
+Oct posterior runs under all three settings. The record now contains the
+2026 result, so these are not forecasts: default P(NB >= 61) .098; nine
+cycles, the 2026 configuration, .084 (Joint List central 9 to 10); the
+next configuration .052, central Likud 25 to 24, Shas 9 to 8, Yashar 22 to
+21, mean 90% interval width 5.19 to 5.05 to 4.38 seats, ramp weight .62
+at a margin of +0.13 seats.
+
+### 76.5 What the record now says
+
+The constants production derives from the record, on eight and on nine
+cycles (`python src/regrade9.py --constants`, with and without the
+switch). Errors are polled minus actual.
+
+| constant | eight cycles | nine cycles |
+|---|---|---|
+| Bloc swing, standard deviation (seats) | 3.36 | 3.18 |
+| Haredi family error, mean (the lift is its negative) (seats) | -0.98 | -0.61 |
+| Haredi family error, standard deviation (seats) | 1.77 | 2.06 |
+| Share of the haredi lift given to Shas by its lineage record (share) | 0.900 | 0.970 |
+| Arab lists, mean final-poll error (seats) | -0.69 | -1.14 |
+| Arab lists, standard deviation (seats) | 1.45 | 2.00 |
+| Arab turnout pass-through (ratio) | 0.247 | 0.471 |
+| Arab turnout pass-through, standard error (ratio) | 0.209 | 0.159 |
+| Arab turnout regression, intercept (seats) | -0.63 | -0.73 |
+| Arab turnout, mean of the cycles with a joint list (share) | 0.580 | 0.618 |
+| Trailing-Likud beat, cliff record: mean (seats) | 5.01 | 5.01 |
+| Trailing-Likud beat, cliff record: standard deviation (seats) | 4.88 | 4.88 |
+| Trailing-Likud beat, ramp record: mean (seats) | 5.58 | 5.49 |
+| Trailing-Likud beat, ramp record: standard deviation (seats) | 4.15 | 3.86 |
+| Trailing-Likud ramp record, effective cycles (cycles) | 3.44 | 4.03 |
+| New list near the threshold, drift: mean (points) | -1.68 | -1.58 |
+| New list near the threshold, drift: standard deviation (points) | 2.56 | 2.32 |
+| New list near the threshold, cases (lists) | 11 | 14 |
+| Per-list residual, seat record: base (seats) | 1.48 | 1.37 |
+| Per-list residual, seat record: slope per seat (ratio) | 0.041 | 0.045 |
+| Per-list residual, vote-share record: base (seats) | 0.73 | 0.63 |
+| Per-list residual, vote-share record: slope per seat (ratio) | 0.073 | 0.083 |
+| Vote share outside the modelled lists, mean (share) | 0.015 | 0.014 |
+
+- The haredi lift falls from 0.98 to 0.61 seats and its spread widens:
+  2026 is the first cycle since 2015 in which the final polls over-stated
+  Shas (+1.8; the two haredi parties together +2.3).
+- The Arab turnout pass-through nearly doubles and is now estimated at
+  three standard errors (0.47, se 0.16; it was 0.25, se 0.21). The 2026
+  row: turnout .538 to .77, implied error -6.1 seats, realised -4.75.
+- The trailing-Likud cliff record is unchanged: 2026's final-week margin
+  was +1.13 seats, above the 0.5-seat cliff, with a beat of +4.6. It
+  enters the ramp record at weight .29.
+- Two more failed new lists (Reservists-Economic 2.73%, Amcha 1.68%) make
+  the straddler record 14 cases.
+- Pollster accuracy weights (the scorecard's q, higher is better):
+  Direct Polls 1.025 -> 1.05; Filber none -> 1.02; Kantar 1.123 -> 1.091; Midgam 1.016 -> 1.019; Maagar Mochot 0.969 -> 0.956; Lazar none -> 0.975; Tatika none -> 0.984; Panels Politics 1.028 -> 1.033.
+
+### 76.6 Not established
+
+- **Arab turnout .77** is the Israel Democracy Institute's provisional
+  figure for Arab and Druze localities (Rudnitzky and Abu Hadoba-Frieh, 3
+  Nov 2026; its 2022 figure on that basis is 53.2%), against the kalpi
+  layer's own measure for 2022 (.538). It drives the largest constant
+  change. Replace it with the kalpi measure when the CEC's final station
+  file is in the repo.
+- The 32 existing harness fits are reused. Their firm priors are the
+  seven-other-cycles scorecards and do not contain 2026's final polls; the
+  cache signature compares the tag only.
+- The D-21 and D-56 fits of 2026 mix less well than the eve fit (bulk ESS
+  219 and 180); not reseeded. D-56 is used for the straddler rows only.
+- KNOWN_ESTABLISHED for 2026 names bennett_2026 beside together, because
+  the harness column is the DECOMP expansion. No grade depends on it.
+- The 2026 rows of the seat-implied straddler record come from fidelity
+  windows; its 51 earlier rows came from the legacy windows.
+- The simple pipeline (validate_model.py) runs under the switch but its
+  2026 window is not vetted; its two tables are not in record9/.
+- Four tests fail under `RECORD_2026=1` by construction (two assert
+  eight-cycle row counts, one re-runs the frozen forecast, one asserts the
+  default state). The suite is run with the switch unset.
+- Three arms now fail on the strict coverage test alone while improving
+  the pooled scores (cal_D, resid_hybrid, nstrad_fixed), and hier_H1 does
+  at D-7.
+  The note of s.70.3 stands: revisit that test before the next cycle.
+- Out of scope here: house-effect centring, event risk, the markets blend
+  and the formation layer.
+
+### 76.7 To set up the next cycle
+
+1. Make nine cycles the default: move the data/record_2026 rows into
+   results.csv, ran_vote_shares.csv and cec_final_counts.csv, promote the
+   record9 tables to the top level, set the three flags of
+   record.NEXT_CONFIG as bayes_model's defaults, and delete the switch.
+   The eight-cycle assertions in the tests change with it (95 record rows
+   to 111; six fixed-straddler rows to nine).
+2. Rebuild the scorecards (backtest.py) and the error-model posteriors;
+   refit the 32 old harness windows if their firm priors should see 2026.
+3. Point the cycle plumbing at the new election (ELECTION_DAY, the party
+   registry, the scraper's pages, the frozen-forecast names).
+4. Regrade anything new against the baseline of 76.4 ("shipped" under
+   `RECORD_2026=1 MODEL_CONFIG=next`).
+
+Reproduce: the run commands are in the docstring of src/regrade9.py; the
+per-seed rows are data/processed/record9/regrade_rows.csv and `python
+src/regrade9.py` rebuilds regrade.json from them
+(tests/test_record9.py).

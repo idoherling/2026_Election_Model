@@ -64,11 +64,14 @@ from functools import lru_cache
 import numpy as np
 import pandas as pd
 
+import record as _record
 from scrape_polls import PROCESSED_DIR
 
-ERROR_MODEL_DIR = PROCESSED_DIR / "error_model"
+# RECORD_2026=1 (src/record.py): the nine-cycle posteriors live under record9/
+ERROR_MODEL_DIR = _record.TABLE_DIR / "error_model"
 SPEC_VERSION = "s61-v1"
-ORDER = ["2009", "2013", "2015", "2019a", "2019s", "2020", "2021", "2022"]
+# the graded cycles: 2009-2022, plus 2026 under RECORD_2026=1
+ORDER = list(_record.CYCLES)
 SIZE_REF = 8.0      # u: `a` is the log residual scale of an 8-seat list
 SIZE_FLOOR = 0.5    # u: the record's smallest polled size; projection floors here
 PRIORS = {
@@ -124,9 +127,9 @@ def ballot_ids_before(cycle: str) -> frozenset:
     DECOMP/LINEAGE-expanded. 2009 has no earlier cycle in the record: every
     list it polled had run in 2006 under the same or a predecessor name, so
     nothing in 2009 is first-cycle (empty-set sentinel handled by the caller)."""
-    res = pd.read_csv(PROCESSED_DIR / "results.csv", dtype={"cycle": str})
-    ran = pd.read_csv(PROCESSED_DIR.parent / "ran_vote_shares.csv", dtype={"cycle": str})
-    allc = ORDER + ["2026"]
+    res = _record.results(dtype={"cycle": str})
+    ran = _record.ran_vote_shares(dtype={"cycle": str})
+    allc = _record.PAST_CYCLES + ["2026"]
     upto = allc[:allc.index(cycle)] if cycle in allc else ORDER
     ids = set()
     for c in upto:

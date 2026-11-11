@@ -24,6 +24,7 @@ import numpy as np
 import pandas as pd
 
 import bayes_model as bm
+import record as _record
 from bayes_model import SEED, T_DF, WITHDRAWN_WEEKS, fit, prepare_data
 from error_decomposition import decompose
 from bias_audit import FAMILY_OF
@@ -192,6 +193,42 @@ ABLATIONS = [
     # calibration_arms.py)
     ("hier_H1", {"error_model": "hierarchical"}),
 ]
+if _record.RECORD_2026:
+    # Post-election arms, graded on the nine-cycle record (dossier s.74).
+    # Appended only under RECORD_2026=1, so the eight-cycle arm list and
+    # ARAB_HORIZON_LAYERS are unchanged by default.
+    ABLATIONS += [
+        # haredi family mean off (no lift; the family's random part kept),
+        # and the pre-16-Oct e1 mean (the arm hared_e0 is the shipped e0)
+        ("hared_off", {"haredi_mean": "off"}),
+        ("hared_e1", {"haredi_mean": "e1"}),
+        # no Arab term: no turnout mechanism and no additive mean, the
+        # family's random part (e1 sd) kept
+        ("arab_off", {"arab_mode": "off"}),
+        # the trailing-Likud transfer taken from the whole field (the
+        # geometry before 13 Oct, s.41) at the shipped cliff
+        ("trail_field", dict(_CLIFF, trail_source="field")),
+        # the arms that pass alone on nine cycles, combined (dossier s.76):
+        # the ramp (trail_ramp_sat) with the t-scale fix (cal_A), with the
+        # vote-share residual (cal_B), and with both
+        ("ramp_A", dict(_CLIFF, trail_mode="ramp", trail_hi=2.0, t_unit=True)),
+        ("ramp_B", dict(_CLIFF, trail_mode="ramp", trail_hi=2.0, resid_space="vote")),
+        ("ramp_AB", dict(_CLIFF, trail_mode="ramp", trail_hi=2.0, t_unit=True,
+                         resid_space="vote")),
+        # the same with the pre-registered ramp of s.46 (tramp_m: weight 1
+        # at a margin of -1 seat, 0 at +2, the beat re-estimated with the
+        # same weight), which production carries as TRAIL_RAMP
+        ("tramp_A", {"trail_mode": "ramp", "trail_lo": -1.0, "trail_hi": 2.0,
+                     "trail_wcal": True, "t_unit": True}),
+        ("tramp_B", {"trail_mode": "ramp", "trail_lo": -1.0, "trail_hi": 2.0,
+                     "trail_wcal": True, "resid_space": "vote"}),
+        ("tramp_AB", {"trail_mode": "ramp", "trail_lo": -1.0, "trail_hi": 2.0,
+                      "trail_wcal": True, "t_unit": True, "resid_space": "vote"}),
+        # the configuration of the 2026 forecast of record, spelled out: equal
+        # to "shipped" by default, the replaced configuration under
+        # MODEL_CONFIG=next (record.NEXT_CONFIG)
+        ("cfg_2026", dict(_record.NEXT_CONFIG["harness_2026"])),
+    ]
 # HORIZON_LAYERS string for the same arms (validate_horizon.py):
 ARAB_HORIZON_LAYERS = ";".join(
     f"{n}:{__import__('json').dumps(f)}" for n, f in ABLATIONS if n.startswith("arab_"))
@@ -232,6 +269,13 @@ DECOMP = {
              "otzma_noam": "noam+otzma"},
     "2022": {"otzma_noam": "noam+otzma"},
 }
+if _record.RECORD_2026:
+    # 2026 as a graded cycle (dossier s.74): the identities production
+    # applies in prepare_data(modern_remaps=True), which the harness turns
+    # off - Together = Bennett 2026 + Yesh Atid, the Joint List = Balad +
+    # Hadash-Ta'al without Ra'am (simulate.PAIR_ALIASES_2026).
+    DECOMP["2026"] = {"together": "bennett_2026+yesh_atid",
+                      "joint_list": "balad+hadash_taal"}
 
 
 from pathlib import Path as _Path
@@ -301,7 +345,7 @@ def harness_cache_dir(write: bool = False) -> _Path:
 
 
 CACHE_DIR = harness_cache_dir()
-OUT_DIR = _Path(_os.environ.get("HARNESS_OUT_DIR", str(PROCESSED_DIR)))
+OUT_DIR = _Path(_os.environ.get("HARNESS_OUT_DIR", str(_record.TABLE_DIR)))   # record9/ under RECORD_2026
 FILING_DAYS = 47          # lists are filed on D-47 (Knesset Elections Law s.57(i))
 DECOMP_FIDELITY = {
     "2020": {"yamina": "jewish_home+national_union+new_right",
@@ -310,6 +354,11 @@ DECOMP_FIDELITY = {
 }
 # Post-filing withdrawals: the list stops being on the ballot from this date.
 WITHDRAWALS = {"2019s": {"zehut": "2019-08-29"}}   # Feiglin withdrew for Likud
+if _record.RECORD_2026:
+    # Blue and White withdrew on 19 Oct (dossier s.64), Ahi on 23 Oct (s.72);
+    # both stayed on the printed ballot and won no votes. Without the dates
+    # both are live columns of the eve window (last polled D-7 / D-4).
+    WITHDRAWALS["2026"] = {"blue_white": "2026-10-19", "ahi": "2026-10-23"}
 
 
 def _decomp_map(cycle: str) -> dict:
@@ -570,6 +619,11 @@ REG_PAIRS = _os.environ.get("HARNESS_REG_PAIRS", "1") == "1"
 # unpolled lists; 3.25%-era mean 0.98%.)
 UNMODELLED_REC = {"2009": 0.0219, "2013": 0.0412, "2015": 0.0153, "2019a": 0.008,
                   "2019s": 0.0097, "2020": 0.0038, "2021": 0.0068, "2022": 0.0149}
+if _record.RECORD_2026:
+    # 2026 (certified count, data/record_2026/cec_final_counts.csv): Code
+    # Black, Israel First and the 18 lists no pollster itemised, outside the
+    # eve window's 16 columns (validate_seat_law.py under RECORD_2026=1)
+    UNMODELLED_REC["2026"] = 0.0051
 
 
 def unmodelled_u(spec, cycle: str) -> float:
@@ -709,6 +763,12 @@ ALL_LAYERS = {"resid": True, "swing": True, "family": True, "anchors": False,
               # hier_width multiplies that residual (resid_scale is not read
               # on that branch; bm.HIER_RESID_SCALE, 1.0: the width is estimated)
               "error_model": bm.ERROR_MODEL, "hier_width": bm.HIER_RESID_SCALE}
+if _record.NEXT:
+    # The next-election configuration (dossier s.76; RECORD_2026=1
+    # MODEL_CONFIG=next): the mirror of the flags record.NEXT_CONFIG sets in
+    # bayes_model, so "shipped" is the model for the next election here too
+    # and the arm cfg_2026 is the configuration it replaced.
+    ALL_LAYERS.update(_record.NEXT_CONFIG["harness"])
 
 # Arab-sector turnout by election (share of eligible Arab citizens voting).
 # Series as compiled in the dossier (s.4, s.24) and the production comment
@@ -726,6 +786,16 @@ ARAB_TURNOUT_REC = {"2006": 0.563, "2009": 0.534, "2013": 0.565, "2015": 0.635,
 # structure 2026 has: the Joint List without Ra'am).
 ARAB_REGIMES = {"A": {"2015", "2019s", "2020"},
                 "B": {"2015", "2019s", "2020", "2021"}}
+if _record.RECORD_2026:
+    # 2026: about 77% in Arab and Druze localities, mixed cities excluded,
+    # provisional (Israel Democracy Institute, Rudnitzky and Abu Hadoba-Frieh,
+    # 3 Nov 2026, en.idi.org.il/articles/66790; IDI's 2022 figure on that
+    # basis is 53.2%). The series above is IDI / Dayan Center figures, so
+    # this is the consistent source; the kalpi layer's Arab-locality measure
+    # (the 0.538 used for 2022) awaits the CEC's final station file.
+    ARAB_TURNOUT_REC["2026"] = 0.77
+    # the Joint List without Ra'am: structural table B only
+    ARAB_REGIMES["B"] = ARAB_REGIMES["B"] | {"2026"}
 
 
 def arab_turnout_params(cycle: str) -> dict:
@@ -797,6 +867,18 @@ def solo_seats_for_cycle(cycle: str) -> dict:
 # is National Union-Tkuma under a new name (URWP 2019a, Yamina 2019s/2020)
 # and "raam" ran in every cycle (alone to 2013, then in joint lists).
 KNOWN_ESTABLISHED = {"2009": "all", "2021": {"rzp", "raam"}}
+if _record.RECORD_2026:
+    # 2026: The Democrats are Labor + Meretz, Together carries Yesh Atid
+    # and the Joint List Hadash-Ta'al and Balad: a merger or joint list
+    # that contains an established party is not first-cycle (the rule of
+    # error_model.first_cycle_mask). "together" and "joint_list" are the
+    # poll-table ids; the harness column is their DECOMP expansion, so
+    # "bennett_2026" is named too - otherwise the solo-polling test below
+    # classes Together as Bennett's new vehicle (20.6 seats alone against
+    # Yesh Atid's 11.4). No effect on any grade: Together is nowhere near
+    # the band. Yashar, Reservists-Economic (zionist_home) and Amcha
+    # Yisrael are new.
+    KNOWN_ESTABLISHED["2026"] = {"democrats", "together", "joint_list", "bennett_2026"}
 
 
 def is_new_list(parts, params: dict, vehicle: bool = False) -> bool:
@@ -855,6 +937,21 @@ NSTRAD_FIXED_RECORD = [
     ("2019a", 56, "gesher", 3.415, 1.73, -1.685),
     ("2021", 56, "nep", 2.724, 0.79, -1.934),
 ]
+if _record.RECORD_2026:
+    # 2026 (dossier s.74): the same measurement on the 2026 D-56 / D-21
+    # windows - HARNESS_FIDELITY=1, the layer OFF, CEC vote shares; rows new
+    # & ran. The id test and the vehicle test (KNOWN_ESTABLISHED) pick the
+    # same rows, so both records gain them; the seat-implied record gains
+    # them in data/processed/record9/model_validation_threshold.csv.
+    # Reservists-Economic at D-56 is not a row: projected 2.06%, below the
+    # band (2.5%). Both lists failed (2.73% and 1.68%).
+    _NSTRAD_2026 = [
+        ("2026", 56, "amcha_yisrael", 4.418, 1.68, -2.738),
+        ("2026", 21, "zionist_home", 2.766, 2.73, -0.036),
+        ("2026", 21, "amcha_yisrael", 2.655, 1.68, -0.975),
+    ]
+    NSTRAD_RAN_RECORD += _NSTRAD_2026
+    NSTRAD_FIXED_RECORD += _NSTRAD_2026
 
 def new_straddler_params(exclude_cycle: str | None = None, record: str = "seat") -> dict:
     """LOO mean/sd of the realised drift (result - projected share, pp) of
@@ -868,7 +965,7 @@ def new_straddler_params(exclude_cycle: str | None = None, record: str = "seat")
             return {"mu": 0.0, "sd": 0.0, "n": int(len(x))}
         return {"mu": float(x.mean()), "sd": float(x.std(ddof=1)), "n": int(len(x))}
     try:
-        d = pd.read_csv(PROCESSED_DIR / "model_validation_threshold.csv")
+        d = pd.read_csv(_record.table("model_validation_threshold.csv"))   # record9/ under RECORD_2026
     except FileNotFoundError:
         return {"mu": 0.0, "sd": 0.0, "n": 0}
     if "new" not in d.columns:
@@ -1172,8 +1269,12 @@ def project_cycle(data, idata, eday, threshold, pairs, params,
             continue
         if f == "haredi" and L["haredi_mean"] == "e0":
             mu_f = params["family_e0"]["haredi"][0]   # hared_e0 (s.51): LOO raw mean, e1 sd
+        elif f == "haredi" and L["haredi_mean"] == "off":
+            mu_f = 0.0                                # hared_off (s.74): no lift, e1 sd
         if f == "arab" and L["arab_mode"] == "add_e0":
             mu_f = params["family_e0"]["arab"][0]
+        elif f == "arab" and L["arab_mode"] == "off":
+            mu_f = 0.0                                # arab_off (s.74): no Arab term, e1 sd
         elif f == "arab" and L["arab_mode"] == "turnout":
             # production's ARAB_TURNOUT branch, per-cycle base and LOO mean
             at = params["arab_tab"]
@@ -1366,7 +1467,7 @@ project_cycle.job = None   # "<cycle>_eve" / "<cycle>_D<h>": set by the harness 
 def main() -> None:
     polls = pd.read_csv(PROCESSED_DIR / "polls.csv",
                         parse_dates=["fieldwork_end"])
-    results = pd.read_csv(PROCESSED_DIR / "results.csv")
+    results = _record.results()   # + the 2026 rows under RECORD_2026
     rng = np.random.default_rng(SEED)
 
     rows, covered_all, list_rows, width_rows, abl_rows = [], [], [], [], []
@@ -1523,12 +1624,13 @@ def main() -> None:
         if FIDELITY:
             raise SystemExit(f"only {len(rows)} of {len(ORDER)} cycles scored")
     out = pd.DataFrame(rows).set_index("cycle")
+    OUT_DIR.mkdir(parents=True, exist_ok=True)
     out.to_csv(OUT_DIR / "model_validation_bayes.csv")
     pd.DataFrame(list_rows).to_csv(
         OUT_DIR / "model_validation_bayes_lists.csv", index=False)
     pooled = np.concatenate(covered_all)
     p61, hap = out["p_bloc_61"], out["bloc_61_happened"].astype(float)
-    print("\n== BAYESIAN MODEL, eight-cycle grade ==")
+    print(f"\n== BAYESIAN MODEL, {_record.N_WORD}-cycle grade ==")
     print(out.to_string())
     print(f"\npooled 90% coverage: {pooled.mean():.1%} "
           f"({int(pooled.sum())}/{len(pooled)})")
@@ -1537,7 +1639,7 @@ def main() -> None:
     print(f"pooled seat MAE {out['seat_mae'].mean():.2f}")
 
     try:
-        simple = pd.read_csv(PROCESSED_DIR / "model_validation.csv",
+        simple = pd.read_csv(_record.table("model_validation.csv"),
                              index_col=0)
         both = pd.DataFrame({
             "mae_bayes": out["seat_mae"], "mae_simple": simple["seat_mae"],

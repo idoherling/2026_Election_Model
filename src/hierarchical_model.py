@@ -55,7 +55,10 @@ from polling_average import ELECTION_DAY_2026
 from scrape_polls import ELECTION_DAY, PROCESSED_DIR
 from simulate import THRESHOLD, SURPLUS_PAIRS, dhondt
 from validate_bayes import DECOMP, apply_decomp
-from validate_model import CYCLE_THRESHOLD, ORDER, PAST_PAIRS, VAL_BLOC_OVERRIDES
+from validate_model import CYCLE_THRESHOLD, PAST_PAIRS, VAL_BLOC_OVERRIDES
+# the historical cycles of the joint fit: 2026 is its live cycle, so never
+# the ninth graded one here (RECORD_2026, src/record.py)
+from record import PAST_CYCLES as ORDER
 
 warnings.filterwarnings("ignore")
 

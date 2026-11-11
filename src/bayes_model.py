@@ -849,6 +849,17 @@ TRAIL_SAT_EXCLUDE = {"amcha_yisrael"}
 # cliff's record; TRAIL["scale"] (0.5) applies to both gates.
 TRAIL_RAMP_ON = False
 TRAIL_RAMP = {"lo": -1.0, "hi": 2.0, "mode": "mean", "mu": 5.58, "sd": 4.15}
+# The configuration for the next election (dossier s.76; src/record.py).
+# RECORD_2026=1 MODEL_CONFIG=next sets the flags that passed the shipping
+# rule on the nine-cycle record, as one set (record.NEXT_CONFIG; the
+# harness arm tramp_AB). Unset, the default, nothing here runs and every
+# flag keeps the value the frozen 2026 forecast was built with.
+import record as _record
+if _record.NEXT:
+    T_UNIT_VAR = _record.NEXT_CONFIG["production"]["T_UNIT_VAR"]
+    RESID_SPACE = _record.NEXT_CONFIG["production"]["RESID_SPACE"]
+    TRAIL_RAMP_ON = _record.NEXT_CONFIG["production"]["TRAIL_RAMP_ON"]
+    TRAIL_RAMP = dict(_record.NEXT_CONFIG["production"]["TRAIL_RAMP"])
 
 
 def trail_weight(margin, lo, hi):

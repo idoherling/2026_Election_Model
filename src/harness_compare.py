@@ -25,7 +25,8 @@ import pandas as pd
 from pathlib import Path
 
 import os
-P = Path(os.environ.get("HARNESS_OUT_DIR") or Path(__file__).resolve().parent.parent / "data" / "processed")   # HARNESS_OUT_DIR: ballot-fidelity runs write apart
+import record
+P = Path(os.environ.get("HARNESS_OUT_DIR") or record.TABLE_DIR)   # HARNESS_OUT_DIR: ballot-fidelity runs write apart; record9/ under RECORD_2026
 
 
 def main(cand: str, hmode: str | None = None, fixed: bool = False) -> None:
@@ -43,7 +44,7 @@ def main(cand: str, hmode: str | None = None, fixed: bool = False) -> None:
               f"comparing on the common cycles only: {sorted(common)}")
         base, c = base.loc[common], c.loc[common]
     d = (c - base).round(3)
-    print(f"=== eight-cycle harness: {cand} vs shipped (candidate - shipped) ===")
+    print(f"=== {record.N_WORD}-cycle harness: {cand} vs shipped (candidate - shipped) ===")
     print(pd.concat({"shipped": base.round(3), "cand": c.round(3), "delta": d}, axis=1).to_string())
     pooled = pd.DataFrame({"shipped": base.mean(), "cand": c.mean(), "delta": (c.mean() - base.mean())}).round(3)
     print("\npooled:"); print(pooled.to_string())

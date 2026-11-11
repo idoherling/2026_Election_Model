@@ -26,6 +26,7 @@ from pathlib import Path
 import matplotlib.pyplot as plt
 import pandas as pd
 
+import record
 from normalize import load_party_registry
 from scrape_polls import ELECTION_DAY, PROCESSED_DIR
 
@@ -89,7 +90,7 @@ def scorecard(by_poll: pd.DataFrame, exclude_cycle: str | None = None) -> pd.Dat
 
 def main() -> None:
     polls = pd.read_csv(PROCESSED_DIR / "polls.csv", parse_dates=["fieldwork_end"])
-    results = pd.read_csv(PROCESSED_DIR / "results.csv")
+    results = record.results()
     names = dict(zip(load_party_registry()["party_id"], load_party_registry()["name_en"]))
 
     block_rows, summary_rows, pollster_rows = [], [], []
@@ -184,16 +185,22 @@ def main() -> None:
     by_poll = pd.DataFrame(pollster_rows)
     card = scorecard(by_poll)
 
-    blocks_df.to_csv(PROCESSED_DIR / "backtest_blocks.csv", index=False)
-    summary.to_csv(PROCESSED_DIR / "backtest_summary.csv", index=False)
-    card.to_csv(PROCESSED_DIR / "backtest_pollsters.csv")
+    # RECORD_2026=1 (src/record.py): the nine-cycle scorecard goes to
+    # data/processed/record9/, where quality_map reads it under the switch
+    record.TABLE_DIR.mkdir(parents=True, exist_ok=True)
+    blocks_df.to_csv(record.table("backtest_blocks.csv"), index=False)
+    summary.to_csv(record.table("backtest_summary.csv"), index=False)
+    card.to_csv(record.table("backtest_pollsters.csv"))
     by_poll.sort_values(["cycle", "pollster", "poll_id"]).to_csv(
-        PROCESSED_DIR / "backtest_pollster_cycles.csv", index=False)
+        record.table("backtest_pollster_cycles.csv"), index=False)
 
     print(summary.to_string(index=False))
     print()
     print(card[card["cycles"] >= 3].to_string())
 
+    if record.RECORD_2026:   # the published figure is the eight-cycle one
+        print(f"\nwrote backtest CSVs to {record.TABLE_DIR}")
+        return
     plot(blocks_df, summary)
     print(f"\nwrote backtest CSVs and {FIG_DIR / 'backtest_final_polls.png'}")
 
