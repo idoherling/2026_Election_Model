@@ -520,8 +520,28 @@ def models_payload(blocs: dict) -> dict | None:
             "variants": out}
 
 
+def result_block():
+    """The official result for the page's post-election banner, read from the
+    scored scorecard (None until the scorecard holds a result)."""
+    try:
+        d = json.loads((OUT_DIR / "scorecard.json").read_text(encoding="utf-8"))
+        seats, lists = d["result"]["seats"], d["frozen"]["payload"]["lists"]
+    except (OSError, ValueError, KeyError, TypeError):
+        return None
+    blocs = {}
+    for name, n in seats.items():
+        b = (lists.get(name) or {}).get("bloc")
+        blocs[b] = blocs.get(b, 0) + int(n)
+    src = d["result"].get("source") or {}
+    return {"nb": blocs.get("nb", 0), "anti": blocs.get("anti", 0), "arab": blocs.get("arab", 0),
+            "url": src.get("url"), "certified": bool(src.get("certified"))}
+
+
 def main() -> None:
     payload = build_payload()
+    res = result_block()
+    if res:
+        payload["result"] = res
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     # the full payload stays in site_data.json (diffable; build_history reads it back from git)
     blob = json.dumps(payload, separators=(",", ":"), ensure_ascii=False)

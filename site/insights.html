@@ -1,0 +1,634 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Knesset Model Insights</title>
+<meta name="description" content="Ten findings from forecasting Israel's 27 October 2026 Knesset election, and a forecast of what happens next.">
+<meta name="theme-color" content="#161512">
+__EN_ICON__
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="__EN_FONTS__">
+<style>
+/* Layout: one ranked column. Each finding is a numbered row: the claim and its
+   evidence on one side, one figure on the other; the tenth is a full-width panel.
+   Design tokens: copied at build time from site/template.html (the main site). */
+__EN_TOKENS__
+:root{--warn:#c2410c;--ok:#1a7a44;--soft:#14141226}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--warn:#ff8a5c;--ok:#3aa268;--soft:#f2efe82e}}
+:root[data-theme="dark"]{--warn:#ff8a5c;--ok:#3aa268;--soft:#f2efe82e}
+*{box-sizing:border-box}
+html,body{background:var(--paper)}
+body{margin:0;color:var(--ink);font:400 16px/1.55 "IBM Plex Sans","Helvetica Neue",Arial,sans-serif;-webkit-font-smoothing:antialiased}
+html[dir="rtl"] body,html[dir="rtl"] h1,html[dir="rtl"] h2,html[dir="rtl"] h3{font-family:"IBM Plex Sans Hebrew","IBM Plex Sans",sans-serif;letter-spacing:0}
+.wrap{max-width:1080px;margin:0 auto;padding-left:max(24px,env(safe-area-inset-left,0px));padding-right:max(24px,env(safe-area-inset-right,0px))}
+h1,h2,h3{line-height:1.1;letter-spacing:-.015em;margin:0;text-wrap:balance}
+p{margin:0}
+.n,.ltr{direction:ltr;unicode-bidi:isolate}
+.n{font-family:"IBM Plex Mono","IBM Plex Sans Hebrew",ui-monospace,monospace;font-variant-numeric:tabular-nums}
+a{color:var(--ink);text-decoration-color:var(--accent);text-decoration-thickness:2px;text-underline-offset:3px}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.skip{position:absolute;inset-inline-start:8px;top:8px;z-index:100;background:var(--ink);color:var(--paper);padding:10px 14px;font-weight:700;text-decoration:none;clip-path:inset(50%);white-space:nowrap}
+.skip:focus{clip-path:none}
+button{font:inherit}
+.masthead{border-top:14px solid var(--ink);border-bottom:3px solid var(--ink);padding:18px 0 14px}
+.masthead .wrap{display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.brand{font-weight:700;font-size:22px;letter-spacing:-.01em;text-transform:uppercase}
+.brand a{text-decoration:none}
+.brand small{font-weight:500;font-size:11px;color:var(--ink2);text-transform:uppercase;letter-spacing:.22em;display:block;margin-top:4px}
+html[dir="rtl"] .brand small{letter-spacing:.04em}
+.ctl{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.ctl button{border:2px solid var(--ink);background:transparent;color:var(--ink);font:700 12px "IBM Plex Sans Hebrew","IBM Plex Sans",sans-serif;padding:7px 14px;cursor:pointer;letter-spacing:.06em;min-height:36px}
+.dateline{font:500 11.5px "IBM Plex Mono","IBM Plex Sans Hebrew",monospace;color:var(--ink2);text-transform:uppercase;letter-spacing:.06em;text-align:end}
+html[dir="rtl"] .dateline{letter-spacing:.02em}
+.eyebrow{font:700 11px "IBM Plex Mono","IBM Plex Sans Hebrew",monospace;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin:0 0 8px}
+html[dir="rtl"] .eyebrow{letter-spacing:.03em}
+.k{font:700 10.5px "IBM Plex Mono","IBM Plex Sans Hebrew",monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--ink2)}
+html[dir="rtl"] .k{letter-spacing:.02em}
+
+/* opening */
+.open{padding:30px 0 8px}
+.open h1{font-size:clamp(30px,5vw,50px);max-width:18ch}
+.open .lede{color:var(--ink2);max-width:64ch;margin-top:14px;font-size:17px}
+.strip{margin:26px 0 0}
+.strip .labs,.strip .segs{display:flex;gap:2px}
+.strip .labs > div{min-width:0;padding-bottom:6px}
+.strip .labs b{display:block;font:600 clamp(20px,3.2vw,30px)/1 "IBM Plex Mono","IBM Plex Sans Hebrew",monospace;font-variant-numeric:tabular-nums}
+.strip .labs span{display:block;font-size:12.5px;color:var(--ink2);margin-top:3px}
+.strip .segs{position:relative;height:18px}
+.strip .segs i{display:block;background:var(--ink);height:100%}
+.strip .segs i.hollow{background:transparent;border:2px solid var(--ink)}
+.strip .mark{position:absolute;top:-7px;bottom:-7px;width:0;border-inline-start:2px dashed var(--accent)}
+.strip .cap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:12.5px;color:var(--muted);margin-top:10px}
+.toc{display:flex;flex-wrap:wrap;gap:6px 18px;margin:22px 0 0;padding:12px 0 0;border-top:1px solid var(--soft);font-size:13.5px}
+.toc a{text-decoration-thickness:1px}
+
+/* a finding */
+.ins{display:grid;grid-template-columns:64px minmax(0,1fr) minmax(0,1fr);gap:0 28px;padding:30px 0 26px;border-top:3px solid var(--ink);margin-top:26px;scroll-margin-top:10px}
+.ins.wide{grid-template-columns:64px minmax(0,1fr)}
+.ins .num{font:600 44px/1 "IBM Plex Mono",ui-monospace,monospace;font-variant-numeric:tabular-nums;color:var(--accent)}
+.ins .txt{min-width:0}
+.ins h2{font-size:clamp(21px,2.6vw,27px);margin-bottom:12px}
+.ins .txt p{max-width:62ch;margin-top:10px;font-size:15.5px}
+.ins .txt p:first-of-type{margin-top:0}
+.ins ul{margin:10px 0 0;padding-inline-start:20px;max-width:62ch}
+.ins li{margin:8px 0;font-size:15px}
+.ins li b{font-weight:600}
+.src{font-size:12.5px;color:var(--muted);margin-top:14px;max-width:62ch;line-height:1.6}
+.src a{color:var(--ink2);text-decoration-thickness:1px}
+figure{margin:0;min-width:0}
+.fig{border-top:1px solid var(--ink);padding-top:10px}
+.fig h3{font-size:14px;font-weight:600;letter-spacing:0;line-height:1.3}
+.fig .sub{font-size:12.5px;color:var(--muted);margin-top:2px}
+.fig figcaption{font-size:12px;color:var(--muted);margin-top:8px;line-height:1.5}
+.legend{display:flex;gap:6px 16px;flex-wrap:wrap;font-size:12px;color:var(--ink2);margin-top:8px}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-inline-end:6px;vertical-align:-1px;background:var(--ink)}
+.legend i.o{background:var(--paper);border:2px solid var(--ink2)}
+.legend i.a{background:var(--accent)}
+.legend i.g{background:var(--muted)}
+.legend i.band{border-radius:0;width:18px;height:6px;background:var(--soft);vertical-align:1px}
+svg.ch{display:block;width:100%;height:auto;direction:ltr;margin-top:8px;overflow:visible}
+svg.ch text{font:500 11px "IBM Plex Mono","IBM Plex Sans Hebrew",monospace;fill:var(--ink2)}
+svg.ch text.v{fill:var(--ink);font-weight:600}
+svg.ch text.lab{font:600 11.5px "IBM Plex Sans","IBM Plex Sans Hebrew",sans-serif;fill:var(--ink)}
+svg.ch .grid{stroke:var(--soft);stroke-width:1;fill:none}
+svg.ch .axis{stroke:var(--ink);stroke-width:1;fill:none}
+svg.ch .hit{fill:transparent;stroke:none}
+/* row charts (label | track | value): HTML, so they mirror in Hebrew */
+.rows{margin-top:10px;display:grid;gap:7px}
+.row{display:grid;grid-template-columns:minmax(96px,34%) minmax(0,1fr) auto;gap:0 10px;align-items:center;font-size:13px;min-height:22px}
+.rows.db .row{grid-template-columns:minmax(84px,26%) minmax(0,1fr) auto}
+.row .lb{min-width:0;overflow-wrap:anywhere;line-height:1.25}
+.row .lb small{display:block;color:var(--muted);font-size:11.5px}
+.row .tr{position:relative;height:14px}
+.row .tr .bar{position:absolute;inset-block:2px;inset-inline-start:0;background:var(--muted);border-start-end-radius:4px;border-end-end-radius:4px}
+.row .tr .band{position:absolute;inset-block:4px;background:var(--soft)}
+.row .tr .tick{position:absolute;top:-3px;bottom:-3px;width:0;border-inline-start:2px dashed var(--ink)}
+.row .tr .rail{position:absolute;top:50%;height:2px;margin-top:-1px;background:var(--ink2)}
+.row .tr .dot{position:absolute;top:50%;width:12px;height:12px;margin:-6px -6px 0;border-radius:50%;background:var(--ink);box-shadow:0 0 0 2px var(--paper)}
+.row .tr .dot.o{background:var(--paper);border:2px solid var(--ink2);box-shadow:none}
+.row .vl{font:600 12.5px "IBM Plex Mono","IBM Plex Sans Hebrew",monospace;font-variant-numeric:tabular-nums;white-space:nowrap;text-align:end;min-width:44px}
+.row .vl small{font-weight:500;color:var(--muted)}
+.row.hl .bar,.row.hl .dot{background:var(--accent)}
+.row.hl .lb{font-weight:600}
+.row[data-tip]{cursor:default}
+.rank{margin-top:10px;display:grid;gap:0;font-size:13px}
+.rank > div{display:grid;grid-template-columns:26px minmax(0,1fr) auto;gap:0 10px;padding:5px 0;border-bottom:1px solid var(--soft)}
+.rank .hl{font-weight:600}
+.rank .hl span:first-child{color:var(--accent)}
+.stat{display:flex;gap:6px 22px;flex-wrap:wrap;margin-top:12px}
+.stat div{min-width:0}
+.stat b{display:block;font:600 26px/1.1 "IBM Plex Mono","IBM Plex Sans Hebrew",monospace;font-variant-numeric:tabular-nums}
+.stat span{font-size:12px;color:var(--muted)}
+
+/* the forecast */
+.next{border:3px solid var(--ink);padding:18px 20px 20px;margin-top:18px}
+.next .cols{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:22px 34px}
+.next .cols > div{min-width:0}
+.next .row{grid-template-columns:minmax(110px,38%) minmax(0,1fr) auto;font-size:14px;min-height:26px}
+.next .row .tr{height:18px}
+.next .row .bar{background:var(--ink)}
+.next .row.hl .bar{background:var(--accent)}
+.next p{font-size:14.5px;max-width:64ch;margin-top:10px}
+.tl{list-style:none;margin:10px 0 0;padding:0;display:grid;gap:0}
+.tl li{display:grid;grid-template-columns:108px minmax(0,1fr);gap:0 12px;padding:7px 0;border-bottom:1px solid var(--soft);font-size:13.5px;margin:0}
+.tl li b{font:600 12px "IBM Plex Mono","IBM Plex Sans Hebrew",monospace;color:var(--ink2)}
+.tw{overflow-x:auto;margin-top:10px}
+table.t{border-collapse:collapse;width:100%;font-size:13px;min-width:620px}
+table.t th{font:700 10px "IBM Plex Mono","IBM Plex Sans Hebrew",monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--ink2);text-align:start;padding:8px 10px 6px 0;border-bottom:2px solid var(--ink);vertical-align:bottom}
+html[dir="rtl"] table.t th{letter-spacing:0;padding:8px 0 6px 10px}
+table.t td{padding:7px 10px 7px 0;border-bottom:1px solid var(--soft);vertical-align:top}
+html[dir="rtl"] table.t td{padding:7px 0 7px 10px}
+table.t tr.grp td{font-weight:600;border-bottom:1px solid var(--ink);padding-top:14px}
+table.t td.dir{white-space:nowrap;font:600 12px "IBM Plex Mono","IBM Plex Sans Hebrew",monospace}
+td.dir.up{color:var(--ok)} td.dir.dn{color:var(--warn)}
+details{margin-top:16px}
+summary{cursor:pointer;font-weight:600;font-size:14.5px}
+.honest{border-inline-start:4px solid var(--accent);padding:4px 0 4px 14px;margin:16px 0 0;max-width:72ch;font-size:14px}
+.after{padding:28px 0 6px;border-top:3px solid var(--ink);margin-top:30px}
+.after h2{font-size:clamp(20px,2.6vw,26px);margin-bottom:8px}
+.after ul{margin:8px 0 0;padding-inline-start:20px;max-width:74ch}
+.after li{margin:7px 0;font-size:15px}
+footer{border-top:14px solid var(--ink);margin-top:46px;padding:22px 0 44px;font-size:12.5px;color:var(--muted)}
+footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+#tip{position:fixed;z-index:50;pointer-events:none;background:var(--ink);color:var(--paper);font-size:12.5px;line-height:1.4;padding:7px 10px;max-width:260px;opacity:0;transition:opacity .08s}
+#tip.on{opacity:1}
+@media (max-width:900px){
+  .ins,.ins.wide{grid-template-columns:48px minmax(0,1fr)}
+  .ins figure{grid-column:2;margin-top:20px}
+  .ins .num{font-size:34px}
+  .next .cols{grid-template-columns:1fr}
+}
+@media (max-width:600px){
+  .wrap{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+  .masthead .wrap{align-items:flex-start}
+  .dateline{text-align:start}
+  .ins,.ins.wide{grid-template-columns:1fr;gap:0}
+  .ins .num{font-size:30px;margin-bottom:6px}
+  .ins figure{grid-column:1}
+  .next{padding:14px 14px 16px}
+  .tl li{grid-template-columns:86px minmax(0,1fr)}
+  .strip .labs span{font-size:11.5px}
+}
+@media (prefers-reduced-motion: reduce){*{transition:none !important;animation:none !important}}
+@media print{.ctl,.skip{display:none !important} body{background:#fff;color:#000}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main" id="skip">Skip to content</a>
+<header class="masthead"><div class="wrap">
+  <div class="brand"><a href="index.html" id="brand">The Knesset Model</a><small id="tagline">Insights</small></div>
+  <div class="ctl">
+    <button id="langbtn" type="button"></button>
+    <button id="themebtn" type="button"></button>
+    <div class="dateline" id="dateline"></div>
+  </div>
+</div></header>
+<main id="main" class="wrap">
+  <section class="open">
+    <p class="eyebrow" id="e-open"></p>
+    <h1 id="h1"></h1>
+    <p class="lede" id="lede"></p>
+    <div class="strip" id="strip"></div>
+    <nav class="toc" id="toc" aria-label="Findings"></nav>
+  </section>
+  <div id="list"></div>
+  <section class="after" id="after"></section>
+</main>
+<footer><div class="wrap"><div id="foot-l"></div><div id="foot-r" style="text-align:end"></div></div></footer>
+<div id="tip" role="status"></div>
+<script>
+const DATA = __IN_DATA__;
+const QS = new URLSearchParams(location.search);
+const LANG = (() => { const q = QS.get("lang"); if (q === "he" || q === "en") return q;
+  try { return localStorage.getItem("klang") || "en"; } catch (e) { return "en"; } })();
+const HE = LANG === "he";
+document.documentElement.lang = HE ? "he" : "en";
+document.documentElement.dir = HE ? "rtl" : "ltr";
+const $ = id => document.getElementById(id);
+const N = x => `<span class="n">${x}</span>`;
+const esc = s => String(s == null ? "" : s).replace(/[&<>"]/g, c => ({"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;"}[c]));
+const fmt = x => Number(x).toLocaleString("en-US");
+const pc = (p, d = 0) => N((100 * p).toFixed(d) + "%");
+const sgn = (x, d = 0) => (x > 0 ? "+" : x < 0 ? "−" : "") + Math.abs(x).toFixed(d);
+const A = (href, text) => `<a href="${esc(href)}"${/^https?:/.test(href) ? ' target="_blank" rel="noopener"' : ""}>${text}</a>`;
+const dfmt = s => { const full = /^\d{4}-\d{2}-\d{2}$/.test(s), d = new Date(full ? s + "T12:00:00Z" : s + "-15T12:00:00Z");
+  return "<bdi>" + new Intl.DateTimeFormat(HE ? "he-IL" : "en-GB", full ? {day: "numeric", month: "short", year: "numeric"} : {month: "long", year: "numeric"}).format(d) + "</bdi>"; };
+
+const R = DATA.result, B = R.blocs, AR = DATA.arab, RK = DATA.ranking, SC = DATA.scorecard, NX = DATA.next, PA = DATA.pacts;
+const MODEL = RK.rows.find(r => r.kind === "model"), DIRECT = RK.rows.find(r => r.firm === "Direct Polls");
+const FILBER = RK.rows.find(r => r.firm === "Filber");
+const PM = NX.now.pm, OC = Object.fromEntries(NX.now.outcomes), OC0 = Object.fromEntries(NX.result_only.outcomes);
+const HAREDI = "Change coalition with a haredi party";
+const PMP = k => (PM[k] || {p: 0}).p;
+const lastM = DATA.likud.months[DATA.likud.months.length - 1];
+const SHAS26 = DATA.shas[DATA.shas.length - 1].err;
+const COV = [SC.coverage.record[0] + SC.coverage.y2026[0], SC.coverage.record[1] + SC.coverage.y2026[1]];
+const N17 = DATA.night.find(r => r.pct > 10) || DATA.night[0];
+const N22 = DATA.night22.find(r => r.pct > 20 && r.pct < 30) || DATA.night22[1];
+const SENS = k => NX.sensitivity[k].Eisenkot.p;
+const URLS = {
+  cec26: "https://votes26.bechirot.gov.il/nationalresults?lang=he", cec22: "https://votes25.bechirot.gov.il/nationalresults",
+  cec20: "https://votes23.bechirot.gov.il/nationalresults", polls: "index.html#polls", track: "index.html#track",
+  score: "scorecard.html", night: "election-night.html", dl: n => `decision-log.html#s${n}`
+};
+const OUT_HE = {"i24 News": "i24NEWS", "Channel 12": "חדשות 12", "Channel 13": "חדשות 13", "Channel 14": "ערוץ 14", "Channel 16": "ערוץ 16",
+  "Kan 11": "כאן 11", "Israel Hayom": "ישראל היום", "Maariv": "מעריב", "Walla": "וואלה", "Zman Yisrael": "זמן ישראל"};
+const FIRM_HE = {"Direct Polls": "דיירקט פולס", "Filber": "פילבר", "Kantar": "קנטאר", "Midgam": "מדגם", "Midgam Project": "פרויקט המדגם",
+  "Tatika": "טאטיקה", "Lazar": "לזר", "Maagar Mochot": "מאגר מוחות"};
+const PM_HE = {"Eisenkot": "איזנקוט", "Netanyahu": "נתניהו", "none (repeat election)": "בחירות חוזרות", "Likud successor (unity)": "ראש ממשלה אחר מהליכוד",
+  "Bennett": "בנט", "Liberman": "ליברמן", "another leader": "מנהיג אחר"};
+const PM_EN = {"none (repeat election)": "Repeat election", "Likud successor (unity)": "A Likud successor", "another leader": "Another leader"};
+const PAR = {
+  liberman_haredi_ok: ["Liberman sits with the haredi parties", "ליברמן יושב עם המפלגות החרדיות"],
+  liberman_minority_ok: ["Liberman accepts a government that leans on Arab abstention", "ליברמן מקבל ממשלה שנשענת על הימנעות הרשימות הערביות"],
+  utj_defects: ["UTJ joins an Eisenkot government", "יהדות התורה מצטרפת לממשלת איזנקוט"],
+  shas_follows: ["Shas joins, given that UTJ does", "ש״ס מצטרפת, בהינתן שיהדות התורה מצטרפת"],
+  raam_supports: ["Ra'am backs it from outside", "רע״ם תומכת מבחוץ"],
+  jl_supports: ["The Joint List backs it from outside", "הרשימה המשותפת תומכת מבחוץ"],
+  centre_defects: ["A change-bloc list joins a Netanyahu government", "רשימה ממחנה השינוי מצטרפת לממשלת נתניהו"],
+  likud_sans_bibi: ["Likud joins without Netanyahu at the head", "הליכוד מצטרף בלי נתניהו בראש"]
+};
+const PAR_ORDER = ["utj_defects", "shas_follows", "liberman_haredi_ok", "liberman_minority_ok", "raam_supports", "jl_supports", "centre_defects", "likud_sans_bibi"];
+
+const T = HE ? {
+  title: "תובנות מודל הכנסת", brand: "מודל הכנסת", tagline: "תובנות · מה למדנו, ומה צפוי עכשיו", skip: "דלגו לתוכן",
+  lang: "English", light: "מצב בהיר", dark: "מצב כהה", asof: "נכון ל־", eOpen: "אחרי הבחירות",
+  h1: "עשרה דברים שהתחזית הזאת למדה",
+  lede: `מודל הכנסת חזה את הבחירות של ${N(27)} באוקטובר ${N(2026)} והקפיא את המספרים ארבעה ימים לפני ההצבעה. בעמוד הזה עשר התובנות שכדאי לשמור: מהתוצאות, מהסקרים ומהטעויות של המודל עצמו. העשירית היא תחזית למה שיקרה עכשיו.`,
+  stripNb: "גוש נתניהו", stripAnti: "מחנה השינוי", stripArab: "הרשימות הערביות", stripCap: `הכנסת ה־${N(26)}, תוצאות רשמיות. הקו המקווקו: ${N(61)} מנדטים, רוב.`,
+  stripTurn: `שיעור הצבעה ${N(R.turnout.toFixed(1) + "%")} (${N(2022)}: ${N(R.turnout22 + "%")})`,
+  sources: "מקורות", seats: "מנדטים", result: "התוצאה", model: "המודל", polls: "סקרים",
+  footL: "מודל הכנסת · תובנות · נבנה על ידי src/build_insights.py", back: "לתחזית המלאה", score: "כרטיס הציונים", night: "ליל הבחירות", log: "יומן ההחלטות",
+  cec26: "ועדת הבחירות המרכזית, תוצאות 2026", cec22: "ועדת הבחירות המרכזית, תוצאות 2022", cec20: "תוצאות מרץ 2020", pollsL: "יומן הסקרים של האתר", trackL: "ביצועי העבר של המודל",
+  dl: n => `יומן ההחלטות, סעיף ${N(n)}`, scoreL: "כרטיס הציונים", nightL: "עמוד ליל הבחירות",
+} : {
+  title: "Knesset Model Insights", brand: "The Knesset Model", tagline: "Insights · what we learned, and what happens next", skip: "Skip to content",
+  lang: "עברית", light: "Light", dark: "Dark", asof: "As of", eOpen: "After the election",
+  h1: "Ten things this forecast learned",
+  lede: `The Knesset Model forecast Israel's election of ${N(27)} October ${N(2026)} and froze its numbers four days before the vote. This page keeps the ten findings worth keeping: from the result, from the polls and from the model's own mistakes. The tenth is a forecast of what happens next.`,
+  stripNb: "Netanyahu bloc", stripAnti: "Change bloc", stripArab: "Arab lists", stripCap: `The ${N(26)}th Knesset, official result. Dashed line: ${N(61)} seats, a majority.`,
+  stripTurn: `Turnout ${N(R.turnout.toFixed(1) + "%")} (${N(2022)}: ${N(R.turnout22 + "%")})`,
+  sources: "Sources", seats: "seats", result: "Result", model: "The model", polls: "polls",
+  footL: "The Knesset Model · insights · built by src/build_insights.py", back: "Full forecast", score: "Scorecard", night: "Election night", log: "Decision log",
+  cec26: "Central Elections Committee, 2026 result", cec22: "Central Elections Committee, 2022 result", cec20: "March 2020 result", pollsL: "the site's poll ledger", trackL: "the model's track record",
+  dl: n => `decision log §${N(n)}`, scoreL: "the scorecard", nightL: "the election-night page",
+};
+const S_ = {cec26: () => A(URLS.cec26, T.cec26), cec22: () => A(URLS.cec22, T.cec22), cec20: () => A(URLS.cec20, T.cec20), polls: () => A(URLS.polls, T.pollsL),
+  track: () => A(URLS.track, T.trackL), score: () => A(URLS.score, T.scoreL), night: () => A(URLS.night, T.nightL), dl: n => A(URLS.dl(n), T.dl(n))};
+const outName = r => r.kind === "model" ? T.model : (HE ? `${OUT_HE[r.outlet] || r.outlet} · ${FIRM_HE[r.firm] || r.firm}` : `${r.outlet} · ${r.firm}`);
+const pmName = k => HE ? (PM_HE[k] || k) : (PM_EN[k] || k);
+
+/* ---------- the ten findings: [id, short label, title, paragraphs, sources] ---------- */
+const INS = HE ? [
+  {id: "blocs", nav: "אף אחד לא ניצח", h: "גוש נתניהו איבד את הרוב. המחנה שהוקם כדי להחליף אותו הוסיף שני מנדטים.",
+   p: [`גוש נתניהו ירד מ־${N(B.nb.seats22)} מנדטים ל־${N(B.nb.seats26)}. מחנה השינוי, ארבע המפלגות שרצו כדי להחליף אותו, עלה מ־${N(B.anti.seats22)} ל־${N(B.anti.seats26)}, וחלקו בקולות ירד מעט, מ־${N(B.anti.share22.toFixed(1) + "%")} ל־${N(B.anti.share26.toFixed(1) + "%")}.`,
+       `תשעה מתוך אחד־עשר המנדטים שאיבד הגוש עברו לרשימות הערביות. הן זכו ב־${N(B.arab.seats26)} מנדטים, שיא של כל הזמנים. השיא הקודם היה ${N(AR.previous_record)}, במרץ ${N(2020)}.`,
+       `שיעור ההצבעה היה ${N(R.turnout.toFixed(1) + "%")}, לעומת ${N(R.turnout22 + "%")} ב־${N(2022)}.`],
+   src: [S_.cec26(), S_.cec22(), S_.cec20()]},
+  {id: "arab", nav: "הקול הערבי", h: `ב־${N(AR.n)} סקרים בארבע שנים, הרשימות הערביות מעולם לא עברו ${N(AR.max)} מנדטים. הן זכו ב־${N(AR.result)}.`,
+   p: [`כל סקר שפורסם מאז דצמבר ${N(2022)} נמצא בארכיון של הפרויקט. רובם נתנו לרשימות הערביות ${N(10)} מנדטים. עשרת הסקרים האחרונים נתנו להן ${N(14)} עד ${N(16)}. התוצאה נפלה מחוץ לטווח של הארכיון כולו.`,
+       `הסקרים טעו בשיעור ההצבעה. שלוש הרשימות הערביות של ${N(2022)} קיבלו יחד ${N(fmt(B.arab.votes22))} קולות. שתי הרשימות של ${N(2026)} קיבלו ${N(fmt(B.arab.votes26))}, עלייה של ${N(Math.round(100 * (B.arab.votes26 / B.arab.votes22 - 1)) + "%")}, בזמן שמספר הקולות הכולל עלה ב־${N(Math.round(100 * (R.valid / R.valid22 - 1)) + "%")}.`,
+       `תיקון שיעור ההצבעה של המודל הוסיף לסקרים מנדט אחד בערך (${N(15)} לעומת ${N(RK.avg_arab)}). תיקון גדול יותר נכשל במבחן העבר וקוצץ לפני הבחירות.`],
+   src: [S_.polls(), S_.cec26(), S_.cec22(), S_.dl(43)]},
+  {id: "likud", nav: "הליכוד", h: `שתי קבוצות של סוקרים נתנו לליכוד מספרים שונים בתשעה מנדטים כל השנה. התוצאה נפלה ביניהן.`,
+   p: [`מאפריל עד אוקטובר נתנו שני סוקרים, דיירקט פולס ופילבר, לליכוד כתשעה מנדטים יותר מכל השאר. שתי הקבוצות ירדו יחד לאורך הקמפיין. באוקטובר הממוצע של השניים היה ${N(lastM.panels)} ושל שאר הסוקרים ${N(lastM.others)}. הליכוד זכה ב־${N(27)}.`,
+       `העבר הזהיר מפני זה. שתי הפעמים שבהן הליכוד עקף את הסקרים האחרונים שלו בפער הגדול ביותר, ב־${N(2015)} (${N(21.2)} בסקרים, ${N(30)} מנדטים) ובאפריל ${N(2019)} (${N(28.2)}, ואז ${N(35)}), היו כשהוא פיגר אחרי הרשימה המובילה. המודל מתקן למקרה כזה בחצי עוצמה. התיקון העלה את הליכוד מ־${N(23)} ל־${N(25)} והחזיר כשני שלישים מהטעות של התעשייה.`,
+       `את המנדטים האלה הוא לקח מהרשימות הקטנות של הימין בגוש, עוצמה יהודית והציונות הדתית, כפי שרמז העבר של ${N(2015)}. הפעם הם באו בעיקר מש״ס. בגרסת המודל בלי התיקון, שתי הרשימות האלה נחזו במדויק.`],
+   src: [S_.polls(), S_.dl(36), S_.score()]},
+  {id: "shas", nav: "ש״ס", h: "טעות הסקרים הקבועה ביותר בישראל התהפכה.",
+   p: [`בשבע מתוך שמונה מערכות הבחירות מ־${N(2009)} עד ${N(2022)} נתנו הסקרים האחרונים לש״ס פחות מנדטים משקיבלה. כל מודל שנבנה על העבר הזה מוסיף לש״ס מנדטים, וכל אחת־עשרה הגרסאות של המודל הזה נתנו לה ${N(9)}.`,
+       `ב־${N(2026)} הסקרים נתנו לש״ס ${N(RK.avg_shas)} והיא זכתה ב־${N(6)}. התיקון דחף לכיוון הלא נכון, וש״ס הייתה הרשימה שבה התחזית טעתה הכי הרבה: התוצאה נפלה ב־${N("5%")} התחתונים של הטווח שהמודל נתן לה.`,
+       `ש״ס לבדה איבדה חמישה מתוך אחד־עשר המנדטים שאיבד גוש נתניהו (מ־${N(11)} ל־${N(6)}).`],
+   src: [S_.dl(54), S_.track(), S_.score()]},
+  {id: "threshold", nav: "אחוז החסימה", h: "רבע מיליון קולות מחאה לא הכניסו אף חבר כנסת.",
+   p: [`המילואימניקים והכלכלית קיבלה ${N(R.wasted["די"].share.toFixed(2) + "%")} ועמך ישראל ${N(R.wasted["ך"].share.toFixed(2) + "%")}. שתיהן נשארו מתחת לאחוז החסימה, ${N("3.25%")}, ולכן ${N(fmt(R.wasted_votes))} קולות (${N(R.wasted_share.toFixed(2) + "%")}) לא זכו באף מנדט. זה שווה ערך לכחמישה מנדטים.`,
+       `אלה קולות שגוש נתניהו היה זקוק להם. בבחירות שבהן נוספו ${N(fmt(Math.round((R.valid - R.valid22) / 1000) * 1000))} קולות כשרים לעומת ${N(2022)}, מפלגות הגוש הוסיפו ${N(fmt(Math.round((B.nb.votes26 - B.nb.votes22) / 1000) * 1000))}. מפלגות מחנה השינוי הוסיפו ${N(fmt(Math.round((B.anti.votes26 - B.anti.votes22) / 1000) * 1000))} והרשימות הערביות ${N(fmt(Math.round((B.arab.votes26 - B.arab.votes22) / 1000) * 1000))}.`,
+       `העבר חזה את זה. מתוך שש רשימות חדשות שהיו קרובות לאחוז החסימה בסקרים בין ${N(2009)} ל־${N(2022)}, אף אחת לא עברה. המודל נתן לכל אחת משתי הרשימות סיכוי של כאחד לחמישה. שישה מתוך עשרת הסקרים האחרונים נתנו למילואימניקים ארבעה מנדטים, ושניים נתנו ארבעה לעמך ישראל.`],
+   src: [S_.cec26(), S_.cec22(), S_.dl(70), S_.score(), S_.polls()]},
+  {id: "ranking", nav: "המודל מול הסוקרים", h: "סוקר אחד גבר על המודל במנדטים. אף אחד לא גבר עליו בגושים.",
+   p: [`סופרים כמה מנדטים כל תחזית החטיאה, בכל הרשימות יחד. דיירקט פולס, עבור i24NEWS, החטיאה ${N(DIRECT.err)}; המודל ${N(MODEL.err)}; עשרת הסקרים האחרונים ${N(RK.avg_err.toFixed(0))} בממוצע. גם באחוזי הקולות הסדר בראש זהה: הסקר האחרון של דיירקט פולס טעה ב־${N(RK.share_mae.direct_polls)} נקודות לרשימה, והמודל ב־${N(RK.share_mae.model)}.`,
+       `בשאלה שמכריעה מי ירכיב ממשלה, המודל היה לבד. הוא נתן לגוש נתניהו ${N(53)} מנדטים, בדיוק התוצאה, וצדק לגבי כל הרשימות שעל אחוז החסימה. דיירקט פולס נתנה לעמך ישראל ארבעה מנדטים, ולכן הגוש אצלה היה גבוה בשישה. פילבר נתן לגוש ${N(53 + FILBER.nb)}, כלומר רוב.`],
+   src: [S_.score(), S_.polls(), S_.dl(74)]},
+  {id: "variants", nav: "המודל מול עצמו", h: "המודל הזהיר סיים באמצע הטבלה מול החלופות של עצמו.",
+   p: [`האתר פרסם ${N(SC.n)} גרסאות של המודל והקפיא את כולן לפני ההצבעה. מול התוצאה, הגרסה הרשמית דורגה במקום ה־${N(SC.official_rank)}. ממוצע סקרים משוקלל פשוט דורג שני. הגרסה ששולבה עם מחירי שוקי התחזיות דורגה תשיעית: השווקים הורידו את הליכוד ל־${N(24)}.`,
+       `הפערים קטנים, ומערכת בחירות אחת אינה מספיקה כדי לדרג מודלים. הלקח הברור יותר נוגע לרוחב הטווחים. בשמונה מערכות הבחירות שנבחנו לאחור ובזו הנוכחית, ${N(COV[0])} מתוך ${N(COV[1])} תוצאות נפלו בתוך טווחים שנבנו כדי להכיל ${N("90%")}. הטווחים רחבים מדי, והגרסה עם הטווחים הצרים יותר דורגה ראשונה.`],
+   src: [S_.score(), S_.dl(48), S_.dl(71)]},
+  {id: "night", nav: "ליל הבחירות", h: "בליל הבחירות הספירה היטיבה עם גוש נתניהו במשך שעות, כמו ב־2022.",
+   p: [`הקלפיות אינן נספרות בסדר אקראי. כש־${N(N17.pct.toFixed(0) + "%")} מהקולות נספרו, הספירה הגולמית נתנה לגוש נתניהו ${N(N17.nb)} מנדטים ולרשימות הערביות ${N(N17.arab)}. המספרים הסופיים היו ${N(53)} ו־${N(19)}. ב־${N(2022)} הספירה הגולמית עמדה על ${N(N22.nb)} אחרי רבע מהקולות, והתוצאה הסופית הייתה ${N(N22.official)}.`,
+       `גם התחזית של הפרויקט מהבוקר שאחרי הבחירות החטיאה ארבעה מנדטים: הקולות שעוד לא נספרו נטו לרשימות הערביות ולביחד יותר משהנחנו.`,
+       `הסכם עודפים אחד הכריע מנדט. בלי ההסכם בין הרשימה המשותפת לרע״ם, רע״ם הייתה מקבלת ${N(PA.moved["עם"][0])} מנדטים וש״ס ${N(PA.moved["שס"][0])}. המנדט הקרוב ביותר בכנסת הזאת הוכרע ב־${N(fmt(PA.closest))} קולות.`],
+   src: [S_.night(), S_.cec26(), S_.dl(47), S_.dl(74)]},
+  {id: "bugs", nav: "הטעויות שלנו", h: "הטעויות החמורות ביותר של המודל היו בצנרת.",
+   list: [`<b>באג בזיהוי מילים קרא את המילה ישראל כשם הרשימה ישר.</b> שם הרשימה ישר הוא תחילת המילה ישראל, ולכן שני דיווחים נכנסו למודל עם ישר ב־${N("4.4%")} וב־${N("9.0%")}, חלק קטן ממה שהסוקרים דיווחו. ${S_.dl(39)}`,
+          `<b>מדגמים דורגו כאילו היו סקרים אחרונים.</b> המדגמים של ערוצי הטלוויזיה מיום הבחירות נספרו כסקר האחרון של הסוקרים שלהם, ואחד המכונים קיבל על הבסיס הזה את רמת האמון הגבוהה ביותר. ${S_.dl(23)}`,
+          `<b>שני הסכמי עודפים חתומים לא הופעלו.</b> עד ${N(13)} באוקטובר הקוד השמיט בשקט את ההסכם בין הרשימה המשותפת לרע״ם ואת ההסכם בין ביחד לישראל ביתנו. הראשון הכריע בסוף מנדט אמיתי. ${S_.dl(41)}`,
+          `<b>דליפה ייפתה את השיפור המבטיח ביותר.</b> דירוגי הסוקרים במבחן העבר כללו את הסקרים האחרונים של אותה מערכת בחירות עצמה. אחרי שהדליפה נסגרה, אף שיפור לא עבר את המבחן, והשינוי שהיה מקטין בחצי את ההסתברות המרכזית לא נכנס למודל. ${S_.dl(48)}`,
+          `<b>שורה אחת של סוקר אחד לא נקראה.</b> הקוד החמיץ את שורת המילואימניקים בשבעה דיווחים של טאטיקה. זה התגלה רק אחרי הבחירות. ${S_.dl(74)}`],
+   p: [`כל אחת מהטעויות התגלתה כשבדקנו את הצנרת מול המקורות שלה, וכל אחת מתועדת ביומן ההחלטות.`], src: []},
+] : [
+  {id: "blocs", nav: "Nobody won", h: "The Netanyahu bloc lost its majority. The bloc built to replace it gained two seats.",
+   p: [`The Netanyahu bloc fell from ${N(B.nb.seats22)} seats to ${N(B.nb.seats26)}. The change bloc, the four parties that ran to replace him, went from ${N(B.anti.seats22)} to ${N(B.anti.seats26)}, and its share of the vote slipped from ${N(B.anti.share22.toFixed(1) + "%")} to ${N(B.anti.share26.toFixed(1) + "%")}.`,
+       `Nine of the eleven seats the bloc lost went to the Arab lists. They won ${N(B.arab.seats26)}, the most in Israel's history. The previous record was ${N(AR.previous_record)}, in March ${N(2020)}.`,
+       `Turnout was ${N(R.turnout.toFixed(1) + "%")}, up from ${N(R.turnout22 + "%")} in ${N(2022)}.`],
+   src: [S_.cec26(), S_.cec22(), S_.cec20()]},
+  {id: "arab", nav: "The Arab vote", h: `In ${N(AR.n)} polls over four years, the Arab lists never passed ${N(AR.max)} seats. They won ${N(AR.result)}.`,
+   p: [`Every poll published since December ${N(2022)} is in the project's archive. Most gave the Arab lists ${N(10)} seats. The ten final polls gave them ${N(14)} to ${N(16)}. The result fell outside the range of the whole archive.`,
+       `The polls missed on turnout. The three Arab lists of ${N(2022)} won ${N(fmt(B.arab.votes22))} votes between them. The two lists of ${N(2026)} won ${N(fmt(B.arab.votes26))}, a rise of ${N(Math.round(100 * (B.arab.votes26 / B.arab.votes22 - 1)) + "%")}, while the total vote rose ${N(Math.round(100 * (R.valid / R.valid22 - 1)) + "%")}.`,
+       `The model's turnout adjustment added about one seat to the polls (${N(15)} against ${N(RK.avg_arab)}). A larger correction had failed the backtest and was cut before the election.`],
+   src: [S_.polls(), S_.cec26(), S_.cec22(), S_.dl(43)]},
+  {id: "likud", nav: "Likud", h: "Two sets of pollsters stood nine seats apart on Likud all year. The result landed between them.",
+   p: [`From April to October two pollsters, Direct Polls and Filber, had Likud about nine seats higher than everyone else. Both groups drifted down together through the campaign. In October the pair averaged ${N(lastM.panels)} and the rest ${N(lastM.others)}. Likud won ${N(27)}.`,
+       `The record carried a warning. Likud's two largest beats of its final polls, in ${N(2015)} (${N(21.2)} in the polls, ${N(30)} seats) and April ${N(2019)} (${N(28.2)}, then ${N(35)}), both came when it trailed the leading list. The model corrects for that case at half strength. The correction lifted Likud from ${N(23)} to ${N(25)} and recovered about two-thirds of the industry's miss.`,
+       `It took those seats from the bloc's smaller right-wing lists, Otzma Yehudit and Religious Zionism, as the ${N(2015)} record suggested. This time they came mostly from Shas. The version of the model without the correction had both of those lists exactly right.`],
+   src: [S_.polls(), S_.dl(36), S_.score()]},
+  {id: "shas", nav: "Shas", h: "Israel's most reliable polling error reversed.",
+   p: [`In seven of the eight elections from ${N(2009)} to ${N(2022)}, the final polls gave Shas fewer seats than it won. Any model built on that record adds seats to Shas, and all eleven versions of this one had it at ${N(9)}.`,
+       `In ${N(2026)} the polls had Shas at ${N(RK.avg_shas)} and it won ${N(6)}. The correction pushed the wrong way, and Shas was the forecast's worst list: the result fell in the lowest ${N("5%")} of the range the model gave it.`,
+       `Shas alone lost five of the eleven seats the Netanyahu bloc gave up (${N(11)} to ${N(6)}).`],
+   src: [S_.dl(54), S_.track(), S_.score()]},
+  {id: "threshold", nav: "The threshold", h: "A quarter of a million protest votes elected nobody.",
+   p: [`The Reservists–Economic list won ${N(R.wasted["די"].share.toFixed(2) + "%")} and Amcha Yisrael ${N(R.wasted["ך"].share.toFixed(2) + "%")}. Both fell short of the ${N("3.25%")} threshold, so ${N(fmt(R.wasted_votes))} votes (${N(R.wasted_share.toFixed(2) + "%")}) won no seats. That is about five seats' worth.`,
+       `These were votes the Netanyahu bloc needed. In an election with ${N(fmt(Math.round((R.valid - R.valid22) / 1000) * 1000))} more valid votes than ${N(2022)}, its parties added ${N(fmt(Math.round((B.nb.votes26 - B.nb.votes22) / 1000) * 1000))}. The change bloc's parties added ${N(fmt(Math.round((B.anti.votes26 - B.anti.votes22) / 1000) * 1000))} and the Arab lists ${N(fmt(Math.round((B.arab.votes26 - B.arab.votes22) / 1000) * 1000))}.`,
+       `The record said this would happen. Of six first-time lists that polled near the threshold between ${N(2009)} and ${N(2022)}, none passed. The model gave each of the two about one chance in five. Six of the ten final polls gave the Reservists four seats, and two gave Amcha four.`],
+   src: [S_.cec26(), S_.cec22(), S_.dl(70), S_.score(), S_.polls()]},
+  {id: "ranking", nav: "Model against pollsters", h: "One pollster beat the model on seats. None beat it on the blocs.",
+   p: [`Count the seats each forecast missed, across all lists. Direct Polls, for i24 News, missed ${N(DIRECT.err)}; the model ${N(MODEL.err)}; the ten final polls ${N(RK.avg_err.toFixed(0))} on average. On vote shares the order at the top is the same: Direct Polls' final poll was off by ${N(RK.share_mae.direct_polls)} points per list and the model by ${N(RK.share_mae.model)}.`,
+       `On the question that decides who governs, the model stood alone. It had the Netanyahu bloc at ${N(53)}, the exact result, and got every threshold call right. Direct Polls gave Amcha four seats and so had the bloc six too high. Filber had it at ${N(53 + FILBER.nb)}, a majority.`],
+   src: [S_.score(), S_.polls(), S_.dl(74)]},
+  {id: "variants", nav: "Model against itself", h: "The careful model finished mid-table among its own alternatives.",
+   p: [`The site published ${N(SC.n)} versions of the model and froze them all before the vote. Graded on the result, the official one ranked ${N(SC.official_rank)}th. A plain weighted poll average ranked second. The version blended with prediction-market prices ranked ninth: the markets pulled Likud down to ${N(24)}.`,
+       `The gaps are small, and one election cannot rank models. The clearer lesson is about width. Across the eight backtested elections and this one, ${N(COV[0])} of ${N(COV[1])} list results fell inside intervals built to hold ${N("90%")}. The intervals are too wide, and the version with narrower ones ranked first.`],
+   src: [S_.score(), S_.dl(48), S_.dl(71)]},
+  {id: "night", nav: "Election night", h: "On election night the count flattered the Netanyahu bloc for hours, as it did in 2022.",
+   p: [`Polling stations do not report in random order. With ${N(N17.pct.toFixed(0) + "%")} of the vote counted, the raw count gave the Netanyahu bloc ${N(N17.nb)} seats and the Arab lists ${N(N17.arab)}. The final figures were ${N(53)} and ${N(19)}. In ${N(2022)} the raw count stood at ${N(N22.nb)} a quarter of the way through, against a final ${N(N22.official)}.`,
+       `The project's own morning-after projection also missed four seats: the votes still out leaned more to the Arab lists and to Together than we assumed.`,
+       `One surplus-vote agreement decided a seat. Without the Joint List's agreement with Ra'am, Ra'am would have ${N(PA.moved["עם"][0])} seats and Shas ${N(PA.moved["שס"][0])}. The closest seat in this Knesset was decided by ${N(fmt(PA.closest))} votes.`],
+   src: [S_.night(), S_.cec26(), S_.dl(47), S_.dl(74)]},
+  {id: "bugs", nav: "Our own errors", h: "The model's worst errors were in its plumbing.",
+   list: [`<b>A keyword bug read "Israel" as "Yashar".</b> The list's Hebrew name, ישר, is the start of the word ישראל, so two filings entered the model with Yashar at ${N("4.4%")} and ${N("9.0%")}, a fraction of what the pollsters had reported. ${S_.dl(39)}`,
+          `<b>Exit polls were graded as final polls.</b> The broadcasters' election-day exit polls were scored as their pollsters' last pre-election polls, and one firm received the highest level of trust on that basis. ${S_.dl(23)}`,
+          `<b>Two signed surplus-vote agreements were never applied.</b> Until ${N(13)} October the code silently dropped the Joint List's agreement with Ra'am and Together's with Yisrael Beytenu. The first went on to decide a real seat. ${S_.dl(41)}`,
+          `<b>A leak flattered the most promising improvement.</b> The pollster ratings used in the backtest included each election's own final polls. With the leak closed, no candidate passed the test, and the change that would have halved the headline probability was not shipped. ${S_.dl(48)}`,
+          `<b>One pollster's line went unread.</b> The parser missed the Reservists' line in seven of Tatika's filings. This was found only after the election. ${S_.dl(74)}`],
+   p: [`Each was found by checking the pipeline against its sources, and each is written up in the decision log.`], src: []},
+];
+
+const NEXT = HE ? {
+  id: "next", nav: "מה צפוי עכשיו", h: `מה צפוי עכשיו: המנדט בידי איזנקוט, והסיכוי שלו הוא כאחד לשלושה.`,
+  p: [`ב־${N(8)} בנובמבר הטיל הנשיא הרצוג על גדי איזנקוט להרכיב ממשלה בתוך ${N(28)} ימים, אחרי ש־${N(67)} חברי כנסת המליצו עליו ו־${N(46)} על נתניהו. לארבע המפלגות של מחנה השינוי יש ${N(48)} מנדטים. המסלול שנמצא במשא ומתן מוסיף את שתי המפלגות החרדיות, יהדות התורה (${N(7)}) וש״ס (${N(6)}), ומגיע בדיוק ל־${N(61)}.`,
+      `עץ ההרכבה כפי שהיה לפני הבחירות, כשמריצים אותו על המנדטים הרשמיים, נותן למסלול הזה ${pc(OC0[HAREDI])}. הוא העריך שהסיכוי שאביגדור ליברמן יסכים לשבת עם המפלגות החרדיות הוא אחד לחמישה. ב־${N(6)} בנובמבר הודיע ליברמן שיתפשר על חוק הגיוס.`,
+      `הרצנו את אותו עץ על המנדטים הרשמיים ועדכנו כל הנחה לפי מה שהמפלגות אמרו ועשו מאז. ${N(NX.ledger.length)} הפריטים, כל אחד עם תאריך ומקור, מפורטים למטה.`],
+  figT: "מי יעמוד בראש הממשלה הבאה", figS: `הערכת המודל נכון ל־${dfmt(NX.as_of)}. הפס הבהיר: טווח ${N("5%–95%")} על פני ההנחות.`,
+  figC: `ההסתברות לבחירות חוזרות באה מהעבר: שתיים משבע הכנסות התקועות של ישראל חזרו לקלפי, שתיהן ב־${N(2019)}.`,
+  mk: `שוקי התחזיות נותנים לאיזנקוט ${pc(NX.market.prices.Eisenkot)} ולנתניהו ${pc(NX.market.prices.Netanyahu)} (${A(NX.market.url, "Polymarket")}, ${N("$" + Math.round(NX.market.volume_usd / 1e6) + "m")} מחזור). השאלה של השוק רחבה משלנו: הוא משלם לפי ראש הממשלה הבא שיושבע עד סוף ${N(2027)}, גם אחרי בחירות חוזרות. לפני הבחירות שילוב מחירי השוק הרע את תחזית המנדטים, ולכן אנחנו מציגים אותם לצד ההערכה ולא בתוכה.`,
+  moveT: "מה יזיז את התחזית",
+  move: [`<b>נוסח של חוק גיוס שרבני יהדות התורה יקבלו.</b> זה המנוף הגדול ביותר: צעד אחד נוסף של ראיות מעלה את איזנקוט ל־${pc(SENS("UTJ one moderate step likelier"))}.`,
+         `<b>ש״ס.</b> אם תלך אחרי יהדות התורה, המסלול מגיע ל־${N(61)}. אם מניחים שש״ס מחליטה לבדה, כפי שהניח העץ לפני הבחירות, איזנקוט יורד ל־${pc(SENS("Shas drawn independently (the tree's 0.10)"))}.`,
+         `<b>הקו האדום השלישי של ליברמן.</b> הוא פוסל ממשלה שתלויה בהימנעות של הרשימה המשותפת או של רע״ם. עם יהדות התורה בלבד יש לגוש ${N(55)} מנדטים, והוא יזדקק בדיוק לזה.`,
+         `<b>הצעת רוטציה מנתניהו, או סדק בליכוד.</b> אף מפלגה בישראל לא הדיחה מעולם מנהיג מכהן כדי להרכיב ממשלה.`],
+  tlT: "לוח הזמנים", ledT: `יומן הראיות: ${N(NX.ledger.length)} פריטים`, ledS: "כל פריט מזיז הנחה אחת של העץ. חלש מכפיל את יחס הסיכויים ב־1.5, בינוני ב־2.5, חזק ב־5.",
+  thDate: "תאריך", thWhat: "מה קרה", thDir: "השפעה", thSrc: "מקור", up: "מעלה", dn: "מוריד", str: {weak: "חלש", moderate: "בינוני", strong: "חזק"},
+  prior: "לפני", post: "אחרי", srcL: "מקור",
+  honest: `זהו ניתוח תרחישים עם הנחות גלויות, לא אומדן סטטיסטי. עוצמת הראיות היא שיקול דעת שלנו. השיטה מפורטת ב${A(URLS.dl(75), "יומן ההחלטות, סעיף " + N(75))}, והתחזית תדורג מול התוצאה ב${A(URLS.score, "כרטיס הציונים")}.`,
+  src: [A(NX.sources.toi_mandate, "Times of Israel, 8 בנובמבר"), A(NX.sources.jns_recs, "JNS, ההמלצות"), A(NX.sources.jpost_liberman, "Jerusalem Post, הקווים האדומים של ליברמן"), A(NX.sources.toi_talks, "Times of Israel, המגעים עם החרדים"), S_.dl(75)],
+} : {
+  id: "next", nav: "What happens next", h: "What happens next: Eisenkot has the mandate, and about one chance in three.",
+  p: [`On ${N(8)} November President Herzog gave Gadi Eisenkot ${N(28)} days to form a government, after ${N(67)} MKs recommended him and ${N(46)} recommended Netanyahu. The change bloc's four parties hold ${N(48)} seats. The route under negotiation adds the two haredi parties, United Torah Judaism (${N(7)}) and Shas (${N(6)}), and reaches exactly ${N(61)}.`,
+      `Run on the official seats, the formation tree as it stood before the election gives that route ${pc(OC0[HAREDI])}. It put Avigdor Liberman's consent to sit with the haredi parties at one chance in five. On ${N(6)} November Liberman said he would compromise on the draft law.`,
+      `We ran the same tree on the official seats and updated each assumption on what the parties have said and done since. The ${N(NX.ledger.length)} items, each dated and sourced, are listed below.`],
+  figT: "Who heads the next government", figS: `The model's estimate as of ${dfmt(NX.as_of)}. Pale band: the ${N("5%–95%")} range across the assumptions.`,
+  figC: `The repeat-election figure comes from the record: two of Israel's seven deadlocked Knessets went back to the voters, both in ${N(2019)}.`,
+  mk: `Prediction markets price Eisenkot at ${pc(NX.market.prices.Eisenkot)} and Netanyahu at ${pc(NX.market.prices.Netanyahu)} (${A(NX.market.url, "Polymarket")}, ${N("$" + Math.round(NX.market.volume_usd / 1e6) + "m")} traded). The market's question is wider than ours: it pays on the next prime minister sworn in by the end of ${N(2027)}, including after a repeat election. Before the election, blending market prices made the seat forecast worse, so we show them beside the estimate and not inside it.`,
+  moveT: "What would move the forecast",
+  move: [`<b>A draft-law text that UTJ's rabbis accept.</b> This is the largest lever: one more step of evidence takes Eisenkot to ${pc(SENS("UTJ one moderate step likelier"))}.`,
+         `<b>Shas.</b> If it follows UTJ, the route reaches ${N(61)}. If Shas is assumed to decide alone, as the tree assumed before the election, Eisenkot falls to ${pc(SENS("Shas drawn independently (the tree's 0.10)"))}.`,
+         `<b>Liberman's third red line.</b> He rules out a government that depends on the Joint List or Ra'am abstaining. With UTJ alone the bloc has ${N(55)} seats and would need exactly that.`,
+         `<b>A rotation offer from Netanyahu, or a break inside Likud.</b> No Israeli party has ever dropped its sitting leader to form a government.`],
+  tlT: "The calendar", ledT: `The evidence ledger: ${N(NX.ledger.length)} items`, ledS: "Each item moves one assumption of the tree. Weak multiplies the odds by 1.5, moderate by 2.5, strong by 5.",
+  thDate: "Date", thWhat: "What happened", thDir: "Effect", thSrc: "Source", up: "raises", dn: "lowers", str: {weak: "weak", moderate: "moderate", strong: "strong"},
+  prior: "before", post: "after", srcL: "source",
+  honest: `This is scenario analysis with stated assumptions, not a statistical estimate. The strength of each item is our judgment. The method is in ${A(URLS.dl(75), "decision log §" + N(75))}, and the forecast will be graded against the outcome on ${A(URLS.score, "the scorecard")}.`,
+  src: [A(NX.sources.toi_mandate, "Times of Israel, 8 Nov"), A(NX.sources.jns_recs, "JNS, the recommendations"), A(NX.sources.jpost_liberman, "Jerusalem Post, Liberman's red lines"), A(NX.sources.toi_talks, "Times of Israel, talks with the haredi parties"), S_.dl(75)],
+};
+
+const AFTER = HE ? {
+  h: "מה השתנה במודל אחרי הבחירות",
+  li: [`<b>שכבת ההרכבה קיבלה מצב שאחרי הבחירות.</b> אותו עץ רץ עכשיו על המנדטים הרשמיים, עם יומן ראיות מתוארך שמעדכן כל הנחה. זו התחזית שבסעיף ${N(10)}. ${S_.dl(75)}`,
+       `<b>התוצאות הרשמיות נכנסו לכרטיס הציונים.</b> חלוקת המנדטים שהמודל מחשב זהה לזו של ועדת הבחירות המרכזית, כל ${N(120)} המנדטים. ${S_.score()}`,
+       `<b>שני תיקונים בקריאת דיווחי הסוקרים</b> לוועדת הבחירות, ודירוג הסוקרים לפי אחוזי קולות נכנס לקוד. ${S_.dl(74)}`,
+       `<b>הבא בתור: ${N(2026)} כמערכת הבחירות התשיעית במבחן העבר.</b> תיקון ש״ס, שיעור ההצבעה הערבי, מקור המנדטים של הליכוד ורוחב הטווחים ייבחנו מחדש על תשע מערכות בחירות, לפי כלל ההכנסה למודל, לפני התחזית הבאה. התחזית שהוקפאה אינה משתנה. ${S_.dl(74)}`],
+} : {
+  h: "What changed in the model after the election",
+  li: [`<b>The formation layer has a post-election mode.</b> The same tree now runs on the official seats, with a dated evidence ledger that updates each assumption. That is the forecast in finding ${N(10)}. ${S_.dl(75)}`,
+       `<b>The official result is on the scorecard.</b> The seat allocation the model computes matches the Central Elections Committee's own, all ${N(120)} seats. ${S_.score()}`,
+       `<b>Two fixes to the parser</b> that reads pollsters' filings with the Committee, and the vote-share ranking of pollsters is now in the code. ${S_.dl(74)}`,
+       `<b>Next: ${N(2026)} joins the backtest as the ninth election.</b> The Shas correction, the Arab-turnout term, the source of Likud's late seats and the width of the intervals will be regraded on nine elections, under the model's shipping rule, before the next forecast. The frozen forecast does not change. ${S_.dl(74)}`],
+};
+
+/* ---------- figures ---------- */
+const SVGNS = "http://www.w3.org/2000/svg";
+function svg(w, h, body, label){ return `<svg class="ch" viewBox="0 0 ${w} ${h}" role="img" aria-label="${esc(label)}">${body}</svg>`; }
+const tipAttr = t => ` data-tip="${esc(t)}"`;
+
+function figBlocs(){
+  const max = 70, x = v => (100 * v / max).toFixed(2) + "%";
+  const rows = [["nb", T.stripNb], ["anti", T.stripAnti], ["arab", T.stripArab]].map(([k, name]) => {
+    const a = B[k].seats22, b = B[k].seats26, lo = Math.min(a, b), hi = Math.max(a, b);
+    const tip = `${name}: ${a} → ${b} ${T.seats} (${sgn(b - a)})`;
+    return `<div class="row"${tipAttr(tip)}><div class="lb">${esc(name)}</div><div class="tr"><i class="rail" style="inset-inline-start:${x(lo)};width:${x(hi - lo)}"></i><i class="dot o" style="inset-inline-start:${x(a)}"></i><i class="dot" style="inset-inline-start:${x(b)}"></i></div><div class="vl">${N(a)} → ${N(b)} <small>${N(sgn(b - a))}</small></div></div>`;
+  }).join("");
+  return `<h3>${HE ? "מנדטים לפי מחנה" : "Seats by camp"}</h3><div class="rows db">${rows}</div>
+    <div class="legend"><span><i class="o"></i>${N(2022)}</span><span><i></i>${N(2026)}</span></div>
+    <figcaption>${HE ? `הסולם: ${N(0)} עד ${N(70)} מנדטים.` : `Scale: ${N(0)} to ${N(70)} seats.`}</figcaption>`;
+}
+
+function figArab(){
+  const W = 440, H = 230, L = 34, Rr = 12, Tp = 26, Bt = 34, lo = 4, hi = 19, n = hi - lo + 1;
+  const bw = (W - L - Rr) / n, max = Math.max(...Object.values(AR.hist)), y = v => Tp + (H - Tp - Bt) * (1 - v / max);
+  let b = "";
+  for (const t of [100, 200, 300, 400]) b += `<line class="grid" x1="${L}" x2="${W - Rr}" y1="${y(t)}" y2="${y(t)}"/><text x="${L - 6}" y="${y(t) + 4}" text-anchor="end">${t}</text>`;
+  for (let s = lo; s <= hi; s++) {
+    const c = AR.hist[s] || 0, x0 = L + (s - lo) * bw;
+    if (c) { const hgt = Math.max(2, H - Bt - y(c));
+      b += `<rect x="${(x0 + 1).toFixed(1)}" y="${(H - Bt - hgt).toFixed(1)}" width="${(bw - 2).toFixed(1)}" height="${hgt.toFixed(1)}" rx="3" fill="var(--muted)"/>`;
+      if (c !== max) b += `<text class="v" x="${(x0 + bw / 2).toFixed(1)}" y="${(H - Bt - hgt - 5).toFixed(1)}" text-anchor="middle">${c}</text>`;
+      b += `<rect class="hit" x="${x0.toFixed(1)}" y="${Tp}" width="${bw.toFixed(1)}" height="${H - Tp - Bt}"${tipAttr(HE ? `${s} מנדטים: ${c} סקרים` : `${s} seats: ${c} polls`)}/>`; }
+    if (s % 2 === 0 || s === hi) b += `<text x="${(x0 + bw / 2).toFixed(1)}" y="${H - Bt + 15}" text-anchor="middle">${s}</text>`;
+  }
+  const xr = L + (AR.result - lo + .5) * bw;
+  b += `<line class="axis" x1="${L}" x2="${W - Rr}" y1="${H - Bt}" y2="${H - Bt}"/>`;
+  b += `<line x1="${xr}" x2="${xr}" y1="${Tp - 4}" y2="${H - Bt}" stroke="var(--accent)" stroke-width="2" stroke-dasharray="5 4"/>`;
+  b += `<text class="lab" x="${xr + 4}" y="${Tp - 10}" text-anchor="end" style="fill:var(--accent)">${HE ? "התוצאה" : "Result"}: ${AR.result}</text>`;
+  const top = +Object.keys(AR.hist).find(k => AR.hist[k] === max);
+  b += `<text x="${(L + (top - lo + .5) * bw).toFixed(1)}" y="${y(max) - 6}" text-anchor="middle" class="v">${max}</text>`;
+  b += `<text x="${(L + W - Rr) / 2}" y="${H - 4}" text-anchor="middle">${HE ? "מנדטים לרשימות הערביות בסקר" : "Seats for the Arab lists in the poll"}</text>`;
+  return `<h3>${HE ? `${fmt(AR.n)} סקרים, לפי מספר המנדטים שנתנו לרשימות הערביות` : `${fmt(AR.n)} polls, by the seats they gave the Arab lists`}</h3>
+    <p class="sub">${HE ? "מספר הסקרים" : "Number of polls"} · ${dfmt(AR.from)} – ${dfmt("2026-10-23")}</p>` +
+    svg(W, H, b, HE ? "היסטוגרמה של מנדטי הרשימות הערביות בסקרים" : "Histogram of the Arab lists' seats in the polls");
+}
+
+function figLikud(){
+  const M = DATA.likud.months, W = 440, H = 240, L = 30, Rr = 44, Tp = 14, Bt = 30, lo = 16, hi = 36;
+  const xs = i => L + (W - L - Rr) * i / (M.length - 1), y = v => Tp + (H - Tp - Bt) * (1 - (v - lo) / (hi - lo));
+  let b = "";
+  for (const t of [20, 25, 30, 35]) b += `<line class="grid" x1="${L}" x2="${W - Rr}" y1="${y(t)}" y2="${y(t)}"/><text x="${L - 6}" y="${y(t) + 4}" text-anchor="end">${t}</text>`;
+  const mo = s => new Intl.DateTimeFormat(HE ? "he-IL" : "en-GB", {month: "short"}).format(new Date(s + "-15T12:00:00Z"));
+  M.forEach((m, i) => { b += `<text x="${xs(i)}" y="${H - Bt + 16}" text-anchor="middle">${esc(mo(m.month))}</text>`; });
+  b += `<line class="axis" x1="${L}" x2="${W - Rr}" y1="${H - Bt}" y2="${H - Bt}"/>`;
+  const yr = y(DATA.likud.result);
+  b += `<line x1="${L}" x2="${W - Rr + 6}" y1="${yr}" y2="${yr}" stroke="var(--ink)" stroke-width="1.5" stroke-dasharray="5 4"/>`;
+  b += `<text class="lab" x="${xs(2)}" y="${yr - 6}" text-anchor="middle">${HE ? "התוצאה" : "Result"}: ${DATA.likud.result}</text>`;
+  const line = (key, col) => `<polyline fill="none" stroke="${col}" stroke-width="2" stroke-linejoin="round" points="${M.map((m, i) => xs(i).toFixed(1) + "," + y(m[key]).toFixed(1)).join(" ")}"/>` +
+    M.map((m, i) => `<circle cx="${xs(i).toFixed(1)}" cy="${y(m[key]).toFixed(1)}" r="4" fill="${col}" stroke="var(--paper)" stroke-width="2"/>`).join("");
+  b += line("others", "var(--muted)") + line("panels", "var(--accent)");
+  const last = M[M.length - 1];
+  b += `<text class="v" x="${W - Rr + 10}" y="${y(last.panels) + 4}">${last.panels}</text><text class="v" x="${W - Rr + 10}" y="${y(last.others) + 4}">${last.others}</text>`;
+  b += `<text class="lab" x="${xs(4)}" y="${y(M[4].panels) - 10}" text-anchor="middle">${HE ? "דיירקט פולס ופילבר" : "Direct Polls and Filber"}</text>`;
+  b += `<text class="lab" x="${xs(3.5)}" y="${y(M[3].others) + 18}" text-anchor="middle">${HE ? "שאר הסוקרים" : "The rest"}</text>`;
+  M.forEach((m, i) => { const w = (W - L - Rr) / (M.length - 1);
+    b += `<rect class="hit" x="${(xs(i) - w / 2).toFixed(1)}" y="${Tp}" width="${w.toFixed(1)}" height="${H - Tp - Bt}"${tipAttr(`${mo(m.month)}: ${HE ? "דיירקט פולס ופילבר" : "Direct Polls and Filber"} ${m.panels} · ${HE ? "שאר הסוקרים" : "the rest"} ${m.others}`)}/>`; });
+  return `<h3>${HE ? "הליכוד בסקרים, ממוצע חודשי" : "Likud in the polls, monthly average"}</h3><p class="sub">${HE ? "מנדטים" : "Seats"} · ${N(2026)}</p>` +
+    svg(W, H, b, HE ? "הליכוד בסקרים לפי קבוצת סוקרים" : "Likud in the polls by pollster group") +
+    `<div class="legend"><span><i class="a"></i>${HE ? "דיירקט פולס ופילבר" : "Direct Polls and Filber"}</span><span><i class="g"></i>${HE ? "שאר הסוקרים" : "The rest of the pollsters"}</span></div>`;
+}
+
+function figShas(){
+  const S = DATA.shas, W = 440, H = 220, L = 34, Rr = 10, Tp = 22, Bt = 30, lo = -3, hi = 2.5;
+  const bw = (W - L - Rr) / S.length, y = v => Tp + (H - Tp - Bt) * (1 - (v - lo) / (hi - lo)), y0 = y(0);
+  const lab = c => HE ? ({"2019a": "אפר׳ 19", "2019s": "ספט׳ 19"}[c] || c) : ({"2019a": "Apr 19", "2019s": "Sep 19"}[c] || c);
+  let b = "";
+  for (const t of [-2, -1, 1, 2]) b += `<line class="grid" x1="${L}" x2="${W - Rr}" y1="${y(t)}" y2="${y(t)}"/><text x="${L - 6}" y="${y(t) + 4}" text-anchor="end">${t > 0 ? "+" : "−"}${Math.abs(t)}</text>`;
+  S.forEach((r, i) => { const x0 = L + i * bw + 5, w = bw - 10, top = Math.min(y0, y(r.err)), hgt = Math.abs(y(r.err) - y0), cur = r.cycle === "2026";
+    b += `<rect x="${x0.toFixed(1)}" y="${top.toFixed(1)}" width="${w.toFixed(1)}" height="${hgt.toFixed(1)}" rx="3" fill="${cur ? "var(--accent)" : "var(--muted)"}"/>`;
+    b += `<text class="v" x="${(x0 + w / 2).toFixed(1)}" y="${(r.err >= 0 ? top - 5 : top + hgt + 13).toFixed(1)}" text-anchor="middle">${sgn(r.err, 1)}</text>`;
+    b += `<text x="${(x0 + w / 2).toFixed(1)}" y="${H - 8}" text-anchor="middle"${cur ? ' class="v"' : ""}>${esc(lab(r.cycle))}</text>`;
+    b += `<rect class="hit" x="${(L + i * bw).toFixed(1)}" y="${Tp}" width="${bw.toFixed(1)}" height="${H - Tp - Bt}"${tipAttr(`${lab(r.cycle)}: ${HE ? "הסקרים פחות התוצאה" : "polls minus result"} ${sgn(r.err, 1)}`)}/>`; });
+  b += `<line class="axis" x1="${L}" x2="${W - Rr}" y1="${y0}" y2="${y0}"/>`;
+  return `<h3>${HE ? "ש״ס: הסקרים האחרונים פחות התוצאה" : "Shas: final polls minus the result"}</h3><p class="sub">${HE ? "מנדטים. מתחת לקו: הסקרים נתנו פחות מדי." : "Seats. Below the line: the polls gave too few."}</p>` +
+    svg(W, H, b, HE ? "טעות הסקרים בש״ס לפי מערכת בחירות" : "Shas polling error by election");
+}
+
+function figThreshold(){
+  const max = 4, x = v => (100 * v / max).toFixed(2) + "%";
+  const rows = [["די", HE ? "המילואימניקים והכלכלית" : "Reservists–Economic"], ["ך", HE ? "עמך ישראל" : "Amcha Yisrael"]].map(([l, name]) => {
+    const w = R.wasted[l];
+    return `<div class="row"${tipAttr(`${name}: ${w.share.toFixed(2)}% · ${fmt(w.votes)} ${HE ? "קולות" : "votes"}`)}><div class="lb">${esc(name)}<small>${N(fmt(w.votes))} ${HE ? "קולות" : "votes"}</small></div><div class="tr"><i class="bar" style="width:${x(w.share)}"></i><i class="tick" style="inset-inline-start:${x(3.25)}"></i></div><div class="vl">${N(w.share.toFixed(2) + "%")}</div></div>`;
+  }).join("");
+  return `<h3>${HE ? "חלק בקולות מול אחוז החסימה" : "Share of the vote against the threshold"}</h3><div class="rows">${rows}</div>
+    <figcaption>${HE ? `הקו המקווקו: אחוז החסימה, ${N("3.25%")} (${N(fmt(R.threshold_votes))} קולות). הסולם: ${N("0–4%")}.` : `Dashed line: the threshold, ${N("3.25%")} (${N(fmt(R.threshold_votes))} votes). Scale: ${N("0–4%")}.`}</figcaption>
+    <div class="stat"><div><b>${N(fmt(R.wasted_votes))}</b><span>${HE ? "קולות לשתי הרשימות" : "votes for the two lists"}</span></div><div><b>${N(R.wasted_share.toFixed(2) + "%")}</b><span>${HE ? "מהקולות הכשרים" : "of valid votes"}</span></div><div><b>${N(RK.res4 + "/" + RK.n)}</b><span>${HE ? "סקרים אחרונים שנתנו למילואימניקים 4 מנדטים" : "final polls with the Reservists at 4 seats"}</span></div></div>`;
+}
+
+function figRanking(){
+  const max = Math.max(...RK.rows.map(r => r.err)), x = v => (100 * v / max).toFixed(2) + "%";
+  const rows = RK.rows.map(r => {
+    const nb = `${HE ? "גוש נתניהו" : "Netanyahu bloc"} ${sgn(r.nb)}`;
+    return `<div class="row${r.kind === "model" ? " hl" : ""}"${tipAttr(`${outName(r)}: ${r.err} ${T.seats} · ${nb}`)}><div class="lb">${esc(outName(r))}</div><div class="tr"><i class="bar" style="width:${x(r.err)}"></i></div><div class="vl">${N(r.err)} <small>${N(sgn(r.nb))}</small></div></div>`;
+  }).join("");
+  return `<h3>${HE ? "מנדטים שהוחטאו, בכל הרשימות יחד" : "Seats missed, summed over all lists"}</h3><p class="sub">${HE ? "הסקר האחרון של כל גוף תקשורת, והמודל. המספר הקטן: הטעות בגוש נתניהו." : "Each outlet's last poll, and the model. Small figure: the error on the Netanyahu bloc."}</p><div class="rows">${rows}</div>`;
+}
+
+function figVariants(){
+  const rows = SC.variants.map(v => `<div class="${v.id === "official" ? "hl" : ""}"><span>${N(v.rank)}</span><span>${esc(HE ? v.he : v.en)}</span><span>${N(v.log.toFixed(3))}</span></div>`).join("");
+  return `<h3>${HE ? "אחת־עשרה הגרסאות, לפי ציון" : "The eleven versions, by score"}</h3><p class="sub">${HE ? "ציון לוגריתמי ממוצע לרשימה; קרוב יותר לאפס טוב יותר." : "Mean log score per list; closer to zero is better."}</p><div class="rank">${rows}</div>
+    <div class="stat"><div><b>${N(COV[0] + "/" + COV[1])}</b><span>${HE ? "תוצאות בתוך טווחי ה־90%, תשע מערכות בחירות" : "results inside the 90% intervals, nine elections"}</span></div></div>`;
+}
+
+function figNight(){
+  const P = DATA.night.concat([{pct: 100, nb: B.nb.seats26, arab: B.arab.seats26}]), W = 440, H = 230, L = 30, Rr = 14, Tp = 16, Bt = 34, lo = 50, hi = 68;
+  const x = v => L + (W - L - Rr) * v / 100, y = v => Tp + (H - Tp - Bt) * (1 - (v - lo) / (hi - lo));
+  let b = "";
+  for (const t of [50, 55, 60, 65]) b += `<line class="grid" x1="${L}" x2="${W - Rr}" y1="${y(t)}" y2="${y(t)}"/><text x="${L - 6}" y="${y(t) + 4}" text-anchor="end">${t}</text>`;
+  for (const t of [0, 25, 50, 75, 100]) b += `<text x="${x(t)}" y="${H - Bt + 15}" text-anchor="middle">${t}%</text>`;
+  b += `<line class="axis" x1="${L}" x2="${W - Rr}" y1="${H - Bt}" y2="${H - Bt}"/>`;
+  b += `<line x1="${L}" x2="${W - Rr}" y1="${y(61)}" y2="${y(61)}" stroke="var(--ink)" stroke-width="1.5" stroke-dasharray="5 4"/><text class="lab" x="${W - Rr}" y="${y(61) - 6}" text-anchor="end">${HE ? "רוב: 61" : "Majority: 61"}</text>`;
+  const counted = P.slice(0, -1), fin = P[P.length - 1], lastC = counted[counted.length - 1];
+  b += `<polyline fill="none" stroke="var(--accent)" stroke-width="2" stroke-linejoin="round" points="${counted.map(p => x(p.pct).toFixed(1) + "," + y(p.nb).toFixed(1)).join(" ")}"/>`;
+  b += `<line x1="${x(lastC.pct)}" y1="${y(lastC.nb)}" x2="${x(fin.pct)}" y2="${y(fin.nb)}" stroke="var(--accent)" stroke-width="2" stroke-dasharray="2 5"/>`;
+  P.forEach((p, i) => { const isFin = i === P.length - 1;
+    b += `<circle cx="${x(p.pct).toFixed(1)}" cy="${y(p.nb).toFixed(1)}" r="${isFin ? 5 : 4}" fill="${isFin ? "var(--ink)" : "var(--accent)"}" stroke="var(--paper)" stroke-width="2"/>`;
+    b += `<circle class="hit" cx="${x(p.pct).toFixed(1)}" cy="${y(p.nb).toFixed(1)}" r="13"${tipAttr(HE ? `${p.pct}% נספרו: גוש נתניהו ${p.nb}, הרשימות הערביות ${p.arab}` : `${p.pct}% counted: Netanyahu bloc ${p.nb}, Arab lists ${p.arab}`)}/>`; });
+  b += `<text class="v" x="${x(counted[1].pct) + 8}" y="${y(counted[1].nb) - 6}">${counted[1].nb}</text>`;
+  b += `<text class="lab" x="${x(100) - 2}" y="${y(fin.nb) + 18}" text-anchor="end">${HE ? "סופי" : "Final"}: ${fin.nb}</text>`;
+  b += `<text x="${(L + W - Rr) / 2}" y="${H - 3}" text-anchor="middle">${HE ? "חלק הקולות שנספרו" : "Share of the vote counted"}</text>`;
+  return `<h3>${HE ? "גוש נתניהו בספירה הגולמית, ליל הבחירות 2026" : "The Netanyahu bloc on the raw count, election night 2026"}</h3><p class="sub">${HE ? "מנדטים לפי הקולות שנספרו עד אותו רגע" : "Seats on the votes counted so far"}</p>` +
+    svg(W, H, b, HE ? "מנדטי גוש נתניהו לאורך הספירה" : "Netanyahu-bloc seats through the count") +
+    `<figcaption>${HE ? "הקו המנוקד: מהתמונה האחרונה ששמרנו בלילה ועד התוצאה הסופית." : "Dotted segment: from the last snapshot we kept that night to the final result."}</figcaption>`;
+}
+
+function figNext(){
+  const order = Object.keys(PM).sort((a, b) => PM[b].p - PM[a].p).filter(k => PM[k].p >= 0.005);
+  const max = Math.max(...order.map(k => PM[k].hi)), x = v => (100 * v / max).toFixed(2) + "%";
+  const rows = order.map((k, i) => { const v = PM[k];
+    return `<div class="row"${tipAttr(`${pmName(k)}: ${(100 * v.p).toFixed(0)}% (${(100 * v.lo).toFixed(0)}–${(100 * v.hi).toFixed(0)}%)`)}><div class="lb">${esc(pmName(k))}</div><div class="tr"><i class="band" style="inset-inline-start:${x(v.lo)};width:${x(v.hi - v.lo)}"></i><i class="bar" style="width:${x(v.p)}"></i></div><div class="vl">${pc(v.p)}</div></div>`; }).join("");
+  return `<figure class="fig"><h3>${NEXT.figT}</h3><p class="sub">${NEXT.figS}</p><div class="rows">${rows}</div>
+    <div class="legend"><span><i class="band"></i>${HE ? "טווח " + N("5%–95%") : N("5%–95%") + " range"}</span></div><figcaption>${NEXT.figC}</figcaption></figure>`;
+}
+
+function ledger(){
+  const by = {}; NX.ledger.forEach(e => (by[e.param] = by[e.param] || []).push(e));
+  let h = `<table class="t"><thead><tr><th>${NEXT.thDate}</th><th>${NEXT.thWhat}</th><th>${NEXT.thDir}</th><th>${NEXT.thSrc}</th></tr></thead><tbody>`;
+  for (const k of PAR_ORDER) { if (!by[k]) continue; const v = NX.parameters[k];
+    h += `<tr class="grp"><td colspan="4">${esc(PAR[k][HE ? 1 : 0])}: ${pc(v.prior)} → ${pc(v.posterior)}</td></tr>`;
+    for (const e of by[k].sort((a, b) => a.date < b.date ? -1 : 1)) {
+      const host = e.url.replace(/^https?:\/\/(www\.)?/, "").split("/")[0];
+      h += `<tr><td>${dfmt(e.date)}</td><td>${esc(HE ? e.he : e.en)}</td><td class="dir ${e.dir > 0 ? "up" : "dn"}">${e.dir > 0 ? "↑" : "↓"} ${e.dir > 0 ? NEXT.up : NEXT.dn} · ${NEXT.str[e.strength]}</td><td>${A(e.url, `<span class="ltr">${esc(host)}</span>`)}</td></tr>`; } }
+  return h + "</tbody></table>";
+}
+
+const FIGS = {blocs: figBlocs, arab: figArab, likud: figLikud, shas: figShas, threshold: figThreshold, ranking: figRanking, variants: figVariants, night: figNight};
+
+function render(){
+  document.title = T.title;
+  $("brand").textContent = T.brand; $("tagline").textContent = T.tagline; $("skip").textContent = T.skip;
+  $("e-open").textContent = T.eOpen; $("h1").innerHTML = T.h1; $("lede").innerHTML = T.lede;
+  $("dateline").innerHTML = `${T.asof} <b>${dfmt(DATA.as_of)}</b>`;
+  const seg = [["nb", T.stripNb, false], ["anti", T.stripAnti, true], ["arab", T.stripArab, false]];
+  $("strip").innerHTML = `<div class="labs">${seg.map(([k, name]) => `<div style="flex:${B[k].seats26} 1 0"><b>${B[k].seats26}</b><span>${esc(name)}</span></div>`).join("")}</div>
+    <div class="segs" role="img" aria-label="${esc(seg.map(([k, name]) => name + " " + B[k].seats26).join(", "))}">${seg.map(([k, , hollow]) => `<i class="${hollow ? "hollow" : ""}" style="flex:${B[k].seats26} 1 0"></i>`).join("")}<span class="mark" style="inset-inline-start:${(100 * 61 / 120).toFixed(2)}%"></span></div>
+    <div class="cap"><span>${T.stripCap} ${A(URLS.cec26, HE ? "ועדת הבחירות המרכזית" : "Central Elections Committee")}</span><span>${T.stripTurn}</span></div>`;
+  const all = INS.concat([NEXT]);
+  $("toc").innerHTML = all.map((s, i) => `<a href="#${s.id}">${N(i + 1)} ${esc(s.nav)}</a>`).join("");
+  let h = "";
+  INS.forEach((s, i) => {
+    const body = (s.list ? `<ul>${s.list.map(x => `<li>${x}</li>`).join("")}</ul>` : "") + s.p.map(x => `<p>${x}</p>`).join("");
+    const src = s.src.length ? `<p class="src">${T.sources}: ${s.src.join(" · ")}</p>` : "";
+    const fig = FIGS[s.id] ? `<figure class="fig">${FIGS[s.id]()}</figure>` : "";
+    h += `<article class="ins${fig ? "" : " wide"}" id="${s.id}"><div class="num">${i + 1}</div><div class="txt"><h2>${s.h}</h2>${body}${src}</div>${fig}</article>`;
+  });
+  const tl = NX.timeline.map(t => `<li><b>${dfmt(t.date)}</b><span>${esc(HE ? t.he : t.en)}</span></li>`).join("");
+  h += `<article class="ins wide" id="next"><div class="num">${INS.length + 1}</div><div class="txt"><h2>${NEXT.h}</h2>${NEXT.p.map(x => `<p>${x}</p>`).join("")}
+    <div class="next"><div class="cols"><div>${figNext()}<p>${NEXT.mk}</p></div>
+      <div><p class="k">${NEXT.moveT}</p><ul>${NEXT.move.map(x => `<li>${x}</li>`).join("")}</ul><p class="k" style="margin-top:18px">${NEXT.tlT}</p><ul class="tl">${tl}</ul></div></div>
+      <details><summary>${NEXT.ledT}</summary><p style="font-size:13px;color:var(--muted)">${NEXT.ledS}</p><div class="tw">${ledger()}</div></details>
+      <p class="honest">${NEXT.honest}</p></div>
+    <p class="src">${T.sources}: ${NEXT.src.join(" · ")}</p></div></article>`;
+  $("list").innerHTML = h;
+  $("after").innerHTML = `<h2>${AFTER.h}</h2><ul>${AFTER.li.map(x => `<li>${x}</li>`).join("")}</ul>`;
+  $("foot-l").textContent = T.footL;
+  $("foot-r").innerHTML = `<a href="index.html">${T.back}</a> · <a href="scorecard.html">${T.score}</a> · <a href="election-night.html">${T.night}</a> · <a href="decision-log.html">${T.log}</a>`;
+  const lb = $("langbtn"); lb.textContent = T.lang;
+  lb.onclick = () => { try { localStorage.setItem("klang", HE ? "en" : "he"); } catch (e) {}
+    const u = new URL(location.href); u.searchParams.delete("lang"); location.href = u.toString(); };
+  const tb = $("themebtn");
+  const eff = () => document.documentElement.dataset.theme || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+  try { const s = localStorage.getItem("ktheme"); if (s === "light" || s === "dark") { document.documentElement.dataset.theme = s; document.documentElement.style.colorScheme = s; } } catch (e) {}
+  const lab = () => { tb.textContent = eff() === "dark" ? T.light : T.dark; };
+  lab();
+  tb.onclick = () => { const n = eff() === "dark" ? "light" : "dark"; document.documentElement.dataset.theme = n;
+    document.documentElement.style.colorScheme = n; try { localStorage.setItem("ktheme", n); } catch (e) {} lab(); };
+  /* hover and focus tooltips for every mark that carries data-tip */
+  const tip = $("tip");
+  const show = (el, ev) => { tip.textContent = el.dataset.tip; tip.classList.add("on");
+    const r = el.getBoundingClientRect(), px = ev && ev.clientX != null ? ev.clientX : r.left + r.width / 2, py = ev && ev.clientY != null ? ev.clientY : r.top;
+    const w = tip.offsetWidth, hh = tip.offsetHeight;
+    tip.style.left = Math.max(8, Math.min(innerWidth - w - 8, px - w / 2)) + "px"; tip.style.top = Math.max(8, py - hh - 14) + "px"; };
+  document.querySelectorAll("[data-tip]").forEach(el => {
+    el.addEventListener("mousemove", e => show(el, e)); el.addEventListener("mouseleave", () => tip.classList.remove("on"));
+    el.addEventListener("focus", () => show(el)); el.addEventListener("blur", () => tip.classList.remove("on")); });
+}
+render();
+</script>
+</body>
+</html>

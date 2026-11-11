@@ -1490,6 +1490,10 @@ def build_once(args, cyc: Cycle, out: Path) -> dict:
         count.manual_pct = args.pct_counted
     payload = build_payload(count, cyc, mode=mode, check=check, stale=stale,
                             refresh=args.refresh_seconds, json_name=out.with_suffix(".json").name)
+    if getattr(args, "official", None) and count is not None:
+        # the certified result: the page says so, links its source and stops polling
+        payload["official"] = {"url": args.official}
+        payload["refresh_seconds"] = 0
     write_page(payload, out)
     return payload
 
@@ -1528,6 +1532,8 @@ def main(argv=None) -> None:
     ap.add_argument("--manual", metavar="CSV", help="manual vote table: list,votes")
     ap.add_argument("--valid", type=int, help="total valid votes for a partial manual table")
     ap.add_argument("--pct-counted", type=float, help="percent counted to display (manual)")
+    ap.add_argument("--official", metavar="URL",
+                    help="the count is the CEC's official final result; URL is its source")
     ap.add_argument("--snapshot", metavar="DIR", help="rebuild from a cached snapshot directory")
     ap.add_argument("--pairs", help='override surplus pairs as letters, e.g. "מחל-ט,רק-ל"')
     ap.add_argument("--no-fetch", action="store_true", help="write the pre-count page without network")

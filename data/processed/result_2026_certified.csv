@@ -1,0 +1,44 @@
+# Certified result: the CEC national results page, headed "official final results" (תוצאות סופיות רשמיות),
+# read in the browser on 11 Nov 2026. Eligible 7,331,981; voted 5,717,397 (77.98%); valid 5,691,426; invalid 25,971.
+# Seats are the CEC's own column on that page; election_night.allocate on these votes gives the same 120.
+# source_url: https://votes26.bechirot.gov.il/nationalresults?lang=he
+# certified: yes
+list,votes,seats
+מחל,1167591,27
+דרך,913629,21
+רק,532018,12
+ודם,500755,11
+אמת,366278,8
+עם,337720,8
+ל,337450,7
+ב,326793,7
+ג,312632,7
+שס,299533,6
+ט,290549,6
+די,155199,0
+ך,95764,0
+נר,11271,0
+זך,10604,0
+ני,9928,0
+בי,5713,0
+ד,4077,0
+צדק,2086,0
+בד,1438,0
+צף,1049,0
+י,933,0
+קך,918,0
+פה,871,0
+קץ,778,0
+נקי,761,0
+בקר,747,0
+קה,712,0
+רץ,580,0
+ק,569,0
+נף,524,0
+ז,501,0
+נץ,482,0
+יק,399,0
+ה,322,0
+זץ,252,0
+כן,0,0
+צבי,0,0

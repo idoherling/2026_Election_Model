@@ -7337,3 +7337,142 @@ freezes (2be4785e, c6a95406; both in git). The "markets" model (s.71) on
 the 18:47 UTC snapshot: NB 7.4, change 6.9, change + Ra'am 26.4, Likud 24,
 Together 14, RZP passes .70, Reservists-Economic .25; frozen separately as
 frozen_market_blend_2026-10-23.json.
+
+## 74. The result, the grading and the post-mortem (28 Oct - 11 Nov)
+
+**The result.** The CEC's national page carried the final count on 30 Oct
+and the official result ("תוצאות סופיות רשמיות") by 11 Nov: 5,717,397
+voted of 7,331,981 (77.98%; 2022: 70.6%), 5,691,426 valid. Likud 27, Yashar
+21, Together 12, Joint List 11, Democrats 8, Ra'am 8, YB 7, Otzma 7, UTJ 7,
+Shas 6, RZP 6; Reservists-Economic 2.73% and Amcha 1.68% below the line
+(250,963 votes, 4.41%). Netanyahu bloc 53 (64 in 2022), change bloc 48
+(46), Arab lists 19 (10; the previous record was 15, in 2020). The official
+count differs from the 30 Oct one by 744 votes and no seat.
+data/processed/result_2026_certified.csv; the CEC's own seat column equals
+election_night.allocate on its votes (threshold, the five filed pairs,
+Bader-Ofer), all 120. The closest seat is 3,884 votes (Ra'am's eighth). The
+pairs moved one seat: with no agreements Ra'am has 7 and Shas 7; the Joint
+List - Ra'am agreement makes it 8 and 6 (build_insights.pacts).
+
+**The grading** (scorecard.py --score on the official result; the frozen
+forecast e9c77a1b untouched). Official: 13 of 13 lists inside the 90%
+intervals, count error 16 seats (1.23 per list), mean log score -1.796,
+5th of the 11 frozen models (narrower shocks -1.769, simple poll average
+-1.775, no late Likud surge -1.778, vote-share residual -1.787; markets
+blend 9th, -1.823), inside the model's own expected range on every score
+and better than 5 of the 8 record cycles (6 of 8 on the Netanyahu-bloc
+Brier). Netanyahu bloc central 53 = result; change bloc 52 against 48; Arab
+lists 15 against 19. Government and PM not yet gradable (s.75).
+
+**Against the pollsters** (each outlet's last poll, fieldwork from 14 Oct).
+Sum of absolute seat errors over the 13 graded lists: i24/Direct Polls 14,
+the model 16, Channel 14/Filber 18, Israel Hayom/Kantar, Channel 12/Midgam
+and Channel 13 22, Tatika and Kan/Kantar 24, Lazar (Maariv, Walla) 26,
+Channel 16/Maagar Mochot 32; mean of the ten 23.0. Netanyahu-bloc error:
+the model 0, Direct +6 (Amcha at 4 seats), Filber +9 (62). Threshold calls:
+six of ten gave Reservists-Economic 4 seats, two gave Amcha 4; the model,
+Filber, Midgam and Channel 13 made none wrong. Industry means: Likud 21.3
+(27), Shas 7.8 (6), Arab lists 14.2 (19). On raw percentages (CEC filings;
+nine found by scrape_cec --discover on 30 Oct; data/processed/
+postmortem_cec_*.csv; src/postmortem_shares.py): Direct Polls' final poll 0.78
+points per list, the model 0.95, the rest 1.14-1.51. In 790 polls from 23
+Dec 2022 the Arab lists never exceeded 16 seats.
+
+**Where the model missed.**
+- Shas 9 in every one of the eleven models against 6 (PIT .054): the
+  haredi under-count of the record (Shas under-polled in 7 of 8 cycles,
+  s.54) reversed; the final polls over-stated it by 1.8.
+- The Arab lists: the turnout term (s.43) added about one seat to the
+  polls; the result was 4.8 above them.
+- The trailing-Likud layer (s.36, s.41) moved Likud 23 -> 25 (result 27,
+  polls 21.3) and took the seats from Otzma (7 -> 6) and RZP (6 -> 5); the
+  no_trail model had both right. The gain came mostly out of Shas.
+- Width: with the record's 92 of 94, 105 of 107 list results now sit
+  inside intervals built for 90%.
+
+**Parser** (commit 70c3930). Tatika writes the Reservists-Economic list
+without the article ("מילואימניקים + הכלכלית"), so the list was missing
+from seven of its filings (4220-4225, 4249); Dialog's 4256 is a sample of
+53 border communities and is marked non-national. The model's inputs
+(cec_filings.csv, cec_party_pcts.csv) stay as at the freeze so the frozen
+chain reproduces; the re-parse is in postmortem_cec_*.csv.
+
+**2026 as the ninth cycle: scoped, not run.** A read-only pass through the
+harness (11 Nov) lists what a ninth graded cycle needs: ELECTION_DAY and
+validate_model.ORDER; PAST_PAIRS / REGISTERED_PAIRS (the five pairs,
+joint_list for balad); validate_bayes DECOMP (together, joint_list),
+WITHDRAWALS (blue_white 19 Oct, ahi 23 Oct), UNMODELLED_REC,
+ARAB_TURNOUT_REC (needs the realised Arab-sector turnout from the CEC's
+final station file, not yet in the repo), ARAB_REGIMES B, KNOWN_ESTABLISHED;
+results.csv, ran_vote_shares.csv and cec_final_counts.csv rows; four new
+fits (2026_eve, D7, D21, D56). Three things make it a job for its own
+branch: error_decomposition.ORDER feeds bayes_model at import, so the
+production constants move and the frozen chain stops reproducing;
+backtest.py rewrites the pollster scorecard that production's priors read;
+and scorecard.py reads the record tables, so a nine-cycle table in
+data/processed would grade 2026 against a record that contains it. Every
+existing fold's leave-one-out parameters change too, so the baseline must
+be restated before any arm is compared. To regrade then, under the s.53 /
+s.55 rule: the haredi mean and its allocation (hared_alloc, a no-lift
+arm), the Arab term (arab_*), the trailing-Likud donors (no_trail, a
+whole-field arm), the width candidates (cal_*, resid_hybrid, hier_H1) and
+nstrad_fixed (s.70; 2026 adds two failed new lists, 0 of 8). The 2026 row
+that would enter (final poll per outlet): haredi +2.3 seats (record mean
+-0.98), Arab lists -4.8 (-0.69), Likud -5.7.
+
+## 75. What happens next: the formation tree after the vote (11 Nov)
+
+**The situation.** Herzog's consultations (4-5 Nov): 67 MKs for Eisenkot
+(the change bloc's 48, the Joint List's 11, Ra'am's 8), 46 for Netanyahu
+(Likud, Otzma, Shas, RZP), UTJ's 7 for nobody. Eisenkot received the
+mandate on 8 Nov: 28 days to 6 Dec, up to 14 more (20 Dec). Liberman's red
+lines (6 Nov): Netanyahu's premiership ends; no further election; no
+government that relies on the Joint List or Ra'am abstaining; and he will
+"be flexible and compromise" on the draft law. Eisenkot and Liberman
+agreed on 9 Nov to open talks with Shas and UTJ; a softened draft law with
+a 12-18 month transitional arrangement is reported on offer. Shas denies
+("complete fake news") and recommended Netanyahu. Yashar cancelled its
+first meeting with Likud after Netanyahu's Knesset speech of 10 Nov.
+Sources in src/formation_tracker.py SRC, each read on 11 Nov.
+
+**The frozen tree on the official seats.** Repeat election .34, Netanyahu
+with a change-bloc defector .36, unity without Netanyahu at the head .29,
+change bloc + a haredi party .02; next PM Netanyahu .36, none (repeat) .34,
+Likud successor .15, Eisenkot .11. The route now being negotiated (48 + UTJ
+7 + Shas 6 = 61) is the .02: it needs both haredi parties and Liberman's
+consent, which the tree held at .15, .10 and .20 and drew independently.
+The record itself points the other way: a non-Likud premier adding a haredi
+party is the commonest resolution of an Israeli deadlock (2.5 of 7.5,
+RESOLUTION_CLASS, s.56), and the resolution-by-record arm that would have
+carried that was not shipped (s.56, s.59).
+
+**The tracker** (src/formation_tracker.py; tests/test_formation_tracker.py).
+The same tree on the official seats, with each behavioural assumption moved
+on the odds scale by a ledger of dated, sourced observations (weak x1.5,
+moderate x2.5, strong x5; 21 items): liberman_haredi_ok .20 -> .76,
+utj_defects .15 -> .42, liberman_minority_ok .25 -> .12, centre_defects
+.08 -> .055, likud_sans_bibi .125 -> .054, raam_supports .60 -> .88,
+jl_supports .45 -> .80. Two additions: Shas enters as "joins, given UTJ
+does" (prior .45 on the record of Shas and non-Likud premiers who needed
+it: joined 1992, 1999, 2006; refused 1990, 2008, 2021; .25 after the
+ledger), because a draft arrangement UTJ accepts removes Shas's main
+reason to refuse; and a change-led government formed under Eisenkot's
+mandate is led by Eisenkot (.92). The deadlock stage is unchanged: whether
+a government forms comes from the record (2 repeats in 7).
+
+**Numbers (11 Nov).** Next PM: Eisenkot .34 (5-95% over parameter vectors
+.07-.62), none / repeat election .33 (.09-.62), Netanyahu .22, Likud
+successor .06, Bennett .02, Liberman .02. Types: change + haredi .33,
+repeat .33, Netanyahu + defector .22, unity .13. Sensitivities: UTJ at its
+prior, Eisenkot .23; Liberman's haredi consent at its prior, .22; Shas
+drawn independently at the tree's .10, .24; UTJ one moderate step
+likelier, .39. Not in the tree: a 55-seat government with UTJ sworn in on
+Arab abstention (Liberman's third red line; weight about .01).
+
+**Beside it.** Polymarket (11 Nov 08:44 UTC, $91m traded): Eisenkot .575,
+Netanyahu .24, Liberman .05, Bennett .03; its contract pays on the next PM
+sworn in by the end of 2027, after a repeat election too, so it is not the
+same question. As in s.71 the market is reported, not fitted. The strengths
+in the ledger are judgment; this is scenario analysis, like the layer it
+extends, and it is graded with --government / --pm when the outcome is
+known.

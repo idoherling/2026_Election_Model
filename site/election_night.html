@@ -207,6 +207,7 @@ const T = HE ? {
   rehearsalNote: "אלה מספרי 2022, לא תוצאות 2026. עמודת ההשוואה היא תחזית המודל לערב הבחירות 2022 (מבחן השמטה), ולצידה התוצאה הרשמית.",
   waiting: "הספירה טרם החלה.", waitingTxt: "הקלפיות נסגרות ב־22:00 שעון ישראל ב־27 באוקטובר. הקובץ החי של ועדת הבחירות המרכזית עדיין לא פורסם",
   checked: "נבדק", forecastBelow: "התחזית מוצגת למטה.",
+  finalT: "הספירה הסתיימה.", officialTxt: a => `אלה התוצאות הסופיות הרשמיות שפרסמה ועדת הבחירות המרכזית (${a}), כולל המעטפות הכפולות. התחזית מול התוצאות: <a href="scorecard.html">כרטיס הציונים</a>.`, sOfficial: "תוצאות סופיות רשמיות", sEnvIn: "נספרו", sEnvInSub: "כלולות בתוצאות הסופיות",
   stale: "תקלה בקובץ החי", staleShowing: "מוצגת הספירה התקינה האחרונה מ־", staleNone: "אין ספירה תקינה קודמת.",
   sCounted: "נספרו", sCountedSub: "מהקולות הכשרים הצפויים (הערכה)", sStations: "קלפיות", sStationsSub: "קלפיות רגילות דיווחו, מתוך",
   sEnv: "מעטפות כפולות", sEnvNone: "טרם נספרו", sEnvSub: "נספרות אחרי ליל הבחירות; כ־10% מהקולות", sEnvCounted: "קולות במעטפות נספרו, מתוך כ־",
@@ -251,6 +252,7 @@ const T = HE ? {
   rehearsalNote: "These are 2022 numbers, not 2026 results. The comparison column is the model's own 2022 eve forecast (leave-one-cycle-out harness), with the official result beside it.",
   waiting: "The count has not started.", waitingTxt: "Polls close at 22:00 Israel time on 27 October. The Central Elections Committee's live file is not published yet",
   checked: "checked", forecastBelow: "The forecast is shown below.",
+  finalT: "The count is complete.", officialTxt: a => `These are the official final results published by the Central Elections Committee (${a}), double envelopes included. The forecast graded against them: <a href="scorecard.html">the scorecard</a>.`, sOfficial: "official final results", sEnvIn: "counted", sEnvInSub: "included in the final results",
   stale: "Feed problem", staleShowing: "Showing the last good count, from ", staleNone: "No earlier good count.",
   sCounted: "Counted", sCountedSub: "of the expected valid votes (estimate)", sStations: "Polling stations", sStationsSub: "regular stations reported, of",
   sEnv: "Double envelopes", sEnvNone: "not yet", sEnvSub: "counted after election night; about 10% of the vote", sEnvCounted: "envelope votes counted, of about",
@@ -337,6 +339,10 @@ function renderBanner(d){
     const c = (d.source.check || []).map(x => `${lv[x.level] || esc(x.level)} ${x.status == null ? "–" : N(x.status)}`).join(" · ");
     h += `<div class="banner"><b>${T.waiting}</b> ${T.waitingTxt}${c ? ` (${c}; ${T.checked} ${tfmt(d.generated_utc)})` : ""}. ${T.forecastBelow}</div>`;
   }
+  if (d.official) {
+    const u = d.official.url, a = `<a href="${esc(u)}" target="_blank" rel="noopener">${esc(u.replace(/^https?:\/\//, "").replace(/[?#].*$/, ""))}</a>`;
+    h += `<div class="banner"><b>${T.finalT}</b> ${T.officialTxt(a)}</div>`;
+  }
   if (d.stale) {
     h += `<div class="banner stale"><b>${T.stale}</b> (${tfmt(d.stale.since)}): ${esc(d.stale.problem)}. ${d.stale.showing ? T.staleShowing + tfmt(d.stale.showing) + "." : T.staleNone}</div>`;
   }
@@ -345,16 +351,19 @@ function renderBanner(d){
 
 function renderStatus(d){
   const p = d.progress, live = d.mode !== "waiting";
-  const lvl = {station: T.sLevelStation, locality: T.sLevelLocality, national: T.sLevelNational, manual: T.sLevelManual}[d.source.level] || "";
+  let lvlOfficial = null;
+  const lvl0 = {station: T.sLevelStation, locality: T.sLevelLocality, national: T.sLevelNational, manual: T.sLevelManual}[d.source.level] || "";
   const pv = p.manual_pct != null ? p.manual_pct / 100 : p.pct_votes;
-  const extra = p.cec_pct != null ? `<br>${pp(p.cec_pct, 1)} ${T.sCec}` : (p.manual_pct != null ? `<br>${T.sManual}` : "");
+  const extra = d.official ? "" : p.cec_pct != null ? `<br>${pp(p.cec_pct, 1)} ${T.sCec}` : (p.manual_pct != null ? `<br>${T.sManual}` : "");
+  if (d.official) lvlOfficial = T.sOfficial;
+  const lvl = lvlOfficial || lvl0;
   const st = p.stations != null ? `<div class="v sm">${N(fmt(p.stations))}</div><div class="s">${T.sStationsSub} ${N(fmt(p.stations_expected))}</div>`
     : `<div class="v sm">–</div><div class="s">${lvl}</div>`;
   const envC = p.envelope_valid || 0;
-  const env = envC > 0 ? `<div class="v sm">${pct(p.envelope_expected ? envC / p.envelope_expected : null, 0)}</div><div class="s">${N(fmt(envC))} ${T.sEnvCounted} ${N(fmt(p.envelope_expected))}</div>`
+  const env = d.official ? `<div class="v sm">${T.sEnvIn}</div><div class="s">${T.sEnvInSub}</div>` : envC > 0 ? `<div class="v sm">${pct(p.envelope_expected ? envC / p.envelope_expected : null, 0)}</div><div class="s">${N(fmt(envC))} ${T.sEnvCounted} ${N(fmt(p.envelope_expected))}</div>`
     : `<div class="v sm">${T.sEnvNone}</div><div class="s">${T.sEnvSub}</div>`;
   $("status").innerHTML =
-    `<div class="stat"><div class="k">${T.sCounted}</div><div class="v">${live ? pct(pv, 1) : "–"}</div><div class="s">${T.sCountedSub}${extra}</div>${live && pv != null ? `<div class="meter"><i style="width:${Math.min(100, pv * 100).toFixed(1)}%"></i></div>` : ""}</div>` +
+    `<div class="stat"><div class="k">${T.sCounted}</div><div class="v">${live ? pct(pv, 1) : "–"}</div><div class="s">${d.official ? T.sOfficial : T.sCountedSub}${extra}</div>${live && pv != null ? `<div class="meter"><i style="width:${Math.min(100, pv * 100).toFixed(1)}%"></i></div>` : ""}</div>` +
     `<div class="stat"><div class="k">${T.sStations}</div>${st}</div>` +
     `<div class="stat"><div class="k">${T.sEnv}</div>${env}</div>` +
     `<div class="stat"><div class="k">${T.sValid}</div><div class="v sm">${live ? N(fmt(p.valid)) : "–"}</div><div class="s">${T.sValidSub}${lvl ? " · " + lvl : ""}</div></div>`;
@@ -479,9 +488,10 @@ function render(){
 
 /* self-refresh: re-read the small JSON the script writes; re-render when it changes */
 let lastCheck = null, fails = 0;
-const REFRESH = (() => { const q = QS.get("refresh"); if (q != null && !isNaN(+q)) return +q; return DATA.refresh_seconds || 120; })();
+const REFRESH = (() => { const q = QS.get("refresh"); if (q != null && !isNaN(+q)) return +q; return DATA.official ? 0 : (DATA.refresh_seconds || 120); })();
 function renderAuto(){
   const el = $("autostat"); if (!el) return;
+  if (DATA.official) { el.textContent = T.sOfficial; return; }
   if (location.protocol === "file:" || !REFRESH) { el.textContent = T.autoOff; return; }
   el.innerHTML = `${T.autoOn} ${N(Math.round(REFRESH / 60 * 10) / 10)} ${T.autoMin}` + (lastCheck ? ` · ${T.lastCheck} ${tfmt(lastCheck.toISOString())}` : "") + (fails ? ` · ${N(fails)}×!` : "");
   isolateNumbers(el);
