@@ -1,0 +1,677 @@
+<title>Change Bloc Victory Guide</title>
+<meta name="description" content="How Israel's change bloc can win the 27 October 2026 election: the strategic levers ranked by modelled value, messaging and media, coalition signals and government formation, and a locality and polling-station field atlas, all grounded in official results, the forecast and peer-reviewed research.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Sans+Hebrew:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+/* Layout concept: an operations atlas in the house style of The Knesset
+   Model - flat paper ground, heavy black rules, square corners, flag-blue
+   accent for interface, data colours reserved for data. Map and table are
+   instruments; prose pages run in a 68ch column. */
+:root{
+  --paper:#f5f3ee; --panel:#fbfaf7; --ink:#141412; --ink2:#3a3835; --muted:#6f6b64;
+  --rule:#141412; --hair:rgba(20,20,18,.13); --hair2:rgba(20,20,18,.07);
+  --accent:#0038b8; --accent-ink:#ffffff; --hit:rgba(0,56,184,.07);
+  --sea:#dfe5e8; --land:#fdfcf9; --land-ext:#e9e6df; --land-wb:#f2efe8; --border-geo:#a9a49a;
+  /* data roles (validated: tier set, camp set and mechanism set pass CVD gates) */
+  --c-change:#eb6834; --c-nb:#2a78d6; --c-arab:#1baf7a; --c-una:#8a867d;
+  --c-gotv:#eb6834; --c-pers:#4a3aa7; --c-resc:#eda100;
+  --t-engine:#eb6834; --t-pers:#4a3aa7; --t-block:#1baf7a; --t-second:#a8a49b; --t-low:#d9d5cc; --t-strong:#5d5a54; --t-none:#9a958c;
+  --l-yashar:#eb6834; --l-together:#2a78d6; --l-dem:#1baf7a; --l-yb:#4a3aa7;
+  --dot-ring:rgba(20,20,18,.45);
+  --div-nb3:#0d366b; --div-nb2:#2a78d6; --div-nb1:#b7d3f6; --div-mid:#dedad2;
+  --div-ch1:#f7c3b0; --div-ch2:#ce4300; --div-ch3:#661800;
+  --seq0:#d3d4f7; --seq1:#b0b0ec; --seq2:#8c89dc; --seq3:#6e67cb; --seq4:#4e3fae; --seq5:#362584;
+  --good:#006300; --bad:#b42318; --warn:#8a5a00;
+  --f-sans:"IBM Plex Sans","Helvetica Neue",Arial,sans-serif;
+  --f-he:"IBM Plex Sans Hebrew","IBM Plex Sans",Arial,sans-serif;
+  --f-mono:"IBM Plex Mono","IBM Plex Sans Hebrew",ui-monospace,Menlo,monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#111111; --panel:#181817; --ink:#f2efe8; --ink2:#cbc7be; --muted:#928e85;
+    --rule:#f2efe8; --hair:rgba(242,239,232,.16); --hair2:rgba(242,239,232,.08);
+    --accent:#6f9cf0; --accent-ink:#0b0b0b; --hit:rgba(111,156,240,.12);
+    --sea:#0f1316; --land:#2a2a27; --land-ext:#1b1b1a; --land-wb:#232321; --border-geo:#5a5850;
+    --c-change:#d95926; --c-nb:#3987e5; --c-arab:#199e70; --c-una:#9aa196;
+    --c-gotv:#d95926; --c-pers:#9085e9; --c-resc:#c98500;
+    --t-engine:#d95926; --t-pers:#9085e9; --t-block:#199e70; --t-second:#6e6b64; --t-low:#57554d; --t-strong:#a8a49b; --t-none:#7a766e;
+    --l-yashar:#d95926; --l-together:#256abf; --l-dem:#199e70; --l-yb:#9085e9;
+    --dot-ring:rgba(242,239,232,.5);
+    --div-nb3:#a8cdff; --div-nb2:#3b80d7; --div-nb1:#1e3e66; --div-mid:#383835;
+    --div-ch1:#5f2c19; --div-ch2:#d0531e; --div-ch3:#f9baa3;
+    --seq0:#3a3870; --seq1:#4f4aa6; --seq2:#6660c6; --seq3:#7c77dc; --seq4:#9e9df1; --seq5:#c3c4fe;
+    --good:#3fbf3f; --bad:#ff7b6b; --warn:#e0a63a;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#111111; --panel:#181817; --ink:#f2efe8; --ink2:#cbc7be; --muted:#928e85;
+  --rule:#f2efe8; --hair:rgba(242,239,232,.16); --hair2:rgba(242,239,232,.08);
+  --accent:#6f9cf0; --accent-ink:#0b0b0b; --hit:rgba(111,156,240,.12);
+  --sea:#0f1316; --land:#2a2a27; --land-ext:#1b1b1a; --land-wb:#232321; --border-geo:#5a5850;
+  --c-change:#d95926; --c-nb:#3987e5; --c-arab:#199e70; --c-una:#9aa196;
+  --c-gotv:#d95926; --c-pers:#9085e9; --c-resc:#c98500;
+  --t-engine:#d95926; --t-pers:#9085e9; --t-block:#199e70; --t-second:#6e6b64; --t-low:#57554d; --t-strong:#a8a49b; --t-none:#7a766e;
+  --l-yashar:#d95926; --l-together:#256abf; --l-dem:#199e70; --l-yb:#9085e9;
+  --dot-ring:rgba(242,239,232,.5);
+  --div-nb3:#a8cdff; --div-nb2:#3b80d7; --div-nb1:#1e3e66; --div-mid:#383835;
+  --div-ch1:#5f2c19; --div-ch2:#d0531e; --div-ch3:#f9baa3;
+  --seq0:#3a3870; --seq1:#4f4aa6; --seq2:#6660c6; --seq3:#7c77dc; --seq4:#9e9df1; --seq5:#c3c4fe;
+  --good:#3fbf3f; --bad:#ff7b6b; --warn:#e0a63a;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+[id]{scroll-margin-top:72px}
+@media (max-width:860px){[id]{scroll-margin-top:12px}}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto} *{transition:none !important;animation:none !important}}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 16px/1.6 var(--f-sans);-webkit-font-smoothing:antialiased}
+.wrap{max-width:1200px;margin:0 auto;padding-inline:24px}
+@media (max-width:600px){.wrap{padding-inline:16px}}
+h1,h2,h3,h4{margin:0;line-height:1.08;letter-spacing:-.012em;text-wrap:balance}
+p{margin:0}
+a{color:var(--ink);text-decoration-color:var(--accent);text-decoration-thickness:2px;text-underline-offset:3px}
+a:hover{color:var(--accent)}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.he{font-family:var(--f-he)}
+.mono,.num{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+.muted{color:var(--muted)}
+.skip{position:absolute;left:-9999px;top:8px;z-index:200;background:var(--ink);color:var(--paper);padding:10px 14px;font-weight:700;text-decoration:none}
+.skip:focus{left:8px}
+button,select,input{font:inherit;color:inherit}
+
+/* masthead */
+.mast{border-top:14px solid var(--ink);border-bottom:3px solid var(--ink)}
+.mast .wrap{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;flex-wrap:wrap;padding-block:16px 12px}
+.brand{font-weight:700;font-size:21px;text-transform:uppercase;letter-spacing:-.005em;text-decoration:none;color:var(--ink)}
+.brand small{display:block;font-weight:500;font-size:11px;letter-spacing:.22em;color:var(--ink2);margin-top:4px}
+.brand b{color:var(--accent)}
+.dateline{font-family:var(--f-mono);font-size:11.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--ink2);text-align:right;display:flex;gap:14px;align-items:center;flex-wrap:wrap;justify-content:flex-end}
+.dateline b{color:var(--ink);font-weight:600}
+.iconbtn{border:2px solid var(--ink);background:var(--paper);min-height:34px;padding:4px 10px;font:600 11px var(--f-mono);letter-spacing:.1em;text-transform:uppercase;cursor:pointer}
+.iconbtn:hover{background:var(--ink);color:var(--paper)}
+
+/* nav */
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:60;background:var(--paper);border-bottom:2px solid var(--ink)}
+.nav .wrap{display:flex;align-items:stretch;gap:0}
+.nav .links{display:flex;overflow-x:auto;scrollbar-width:none;min-width:0}
+.nav .links::-webkit-scrollbar{display:none}
+@media (max-width:860px){.nav .wrap{flex-direction:column;align-items:stretch}.nav .spacer{display:none}.objsel{border-top:1px solid var(--hair);padding:6px 0 8px}.objsel select{flex:1}.nav .links{flex-wrap:wrap;overflow:visible}.nav a{padding:9px 9px 7px;font-size:11.5px}.nav{position:static}}
+@media (max-width:600px){.dateline span:nth-child(2){display:none}.brand{font-size:18px}}
+.nav a{display:inline-flex;align-items:center;padding:12px 13px 9px;font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;color:var(--ink);border-bottom:4px solid transparent;white-space:nowrap}
+.nav a:hover{border-bottom-color:var(--hair)}
+.nav a[aria-current="page"]{border-bottom-color:var(--accent)}
+.nav .spacer{flex:1 0 12px}
+.objsel{display:flex;align-items:center;gap:8px;padding:6px 0;white-space:nowrap}
+.objsel label{font:600 10.5px var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.objsel select{border:2px solid var(--ink);background:var(--paper);padding:4px 8px;min-height:34px;font-size:13px;font-weight:600}
+
+/* pages */
+.page{display:none}
+.page.on{display:block}
+.pagehead{padding-block:34px 18px;border-bottom:1px solid var(--hair)}
+.eyebrow{font:600 11px var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+.pagehead h1{font-size:clamp(30px,4.6vw,52px);font-weight:700;margin-top:8px;max-width:22ch}
+.pagehead .lede{font-size:18px;line-height:1.55;color:var(--ink2);max-width:68ch;margin-top:14px}
+section.block{padding-block:34px;border-bottom:1px solid var(--hair)}
+section.block:last-child{border-bottom:0}
+.h2{font-size:clamp(22px,2.6vw,30px);font-weight:700}
+.h2 + .sub{color:var(--ink2);margin-top:8px;max-width:72ch}
+.h3{font-size:18px;font-weight:700}
+.prose{max-width:70ch}
+.prose p{margin-top:14px}
+.prose p:first-child{margin-top:0}
+.prose ul,.prose ol{margin:12px 0 0;padding-inline-start:22px}
+.prose li{margin-top:6px}
+.prose h3{font-size:20px;margin-top:30px}
+.prose h4{font-size:15px;margin-top:22px;text-transform:uppercase;letter-spacing:.06em}
+.eq{font-family:var(--f-mono);font-size:13.5px;background:var(--panel);border-inline-start:3px solid var(--accent);padding:10px 14px;margin-top:14px;overflow-x:auto;white-space:pre;line-height:1.7}
+.note{font-size:13.5px;color:var(--ink2);border-top:1px solid var(--hair);padding-top:10px;margin-top:18px;max-width:80ch}
+.cite{font-size:.82em;color:var(--muted);text-decoration:none;border-bottom:1px dotted var(--muted);white-space:nowrap}
+.cite:hover{color:var(--accent);border-color:var(--accent)}
+
+/* tiles */
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(210px,100%),1fr));gap:0;border:3px solid var(--ink);margin-top:22px}
+.tile{padding:18px 18px 16px;border-inline-end:1px solid var(--hair);border-bottom:1px solid var(--hair);min-width:0}
+.tile .k{font:600 10.5px var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.tile .v{font-size:clamp(30px,3.6vw,44px);font-weight:700;letter-spacing:-.02em;line-height:1.05;margin-top:8px}
+.tile .d{font-size:13.5px;color:var(--ink2);margin-top:6px;line-height:1.45}
+
+/* findings */
+.findings{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(320px,100%),1fr));gap:22px 34px;margin-top:22px}
+.finding{border-top:3px solid var(--ink);padding-top:12px;min-width:0}
+.finding h3{font-size:18.5px;font-weight:700}
+.finding p{margin-top:8px;color:var(--ink2);font-size:15.5px}
+.finding.lead{grid-column:1/-1;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.4fr);gap:8px 34px;align-items:start}
+.finding.lead h3{font-size:clamp(22px,2.4vw,28px)}
+.finding.lead p{font-size:17px;margin-top:0}
+@media (max-width:760px){.finding.lead{grid-template-columns:1fr}.finding.lead p{margin-top:8px}}
+.finding .go{display:inline-block;margin-top:10px;font:600 11px var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--accent);text-decoration:none}
+
+/* field sub-navigation */
+.subnav{border-top:1px solid var(--hair);background:var(--panel)}
+.subnav .wrap{display:flex;align-items:center;gap:2px;flex-wrap:wrap;padding-block:2px}
+.subnav .lab{margin-inline-end:10px}
+.subnav a{padding:7px 10px 6px;font:600 11.5px var(--f-sans);letter-spacing:.06em;text-transform:uppercase;text-decoration:none;color:var(--ink2);border-bottom:3px solid transparent}
+.subnav a[aria-current="page"]{color:var(--ink);border-bottom-color:var(--accent)}
+/* levers */
+.levgroup{margin-top:30px}
+.levgroup > h3{font-size:13px;font:600 12px var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
+.levcard{border:2px solid var(--ink);padding:16px 18px;margin-top:14px;background:var(--paper)}
+.levcard h4{font-size:19px}
+.levcard .meta{display:flex;flex-wrap:wrap;gap:6px 14px;font:500 12px var(--f-mono);color:var(--ink2);margin-top:6px}
+.levcard .eff{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(180px,100%),1fr));gap:0;border:1px solid var(--hair);margin-top:12px}
+.levcard .eff div{padding:8px 10px;border-inline-end:1px solid var(--hair2)}
+.levcard .eff b{display:block;font:700 20px var(--f-sans)}
+.levcard .eff span{font:500 11px var(--f-mono);color:var(--muted);letter-spacing:.04em}
+.levcard p{margin-top:8px;font-size:15px;color:var(--ink2)}
+.levcard ul{margin:8px 0 0;padding-inline-start:20px;font-size:14.5px;color:var(--ink2)}
+.levcard li{margin-top:4px}
+.feas{display:inline-block;font:600 10.5px var(--f-mono);letter-spacing:.08em;text-transform:uppercase;padding:1px 6px;border:1.5px solid currentColor}
+.feas.high{color:var(--good)}.feas.medium{color:var(--warn)}.feas.low{color:var(--bad)}
+.kvlist{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr));gap:18px 30px;margin-top:18px}
+.kvlist .card p{margin-top:6px;font-size:15px;color:var(--ink2)}
+
+/* decisions */
+.decisions{counter-reset:dec;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(330px,100%),1fr));gap:0;border:3px solid var(--ink);margin-top:20px}
+.dec{padding:16px 18px;border-inline-end:1px solid var(--hair);border-bottom:1px solid var(--hair);min-width:0}
+.dec h3{font-size:17px;display:flex;gap:10px;align-items:baseline}
+.dec h3::before{counter-increment:dec;content:counter(dec);font:700 13px var(--f-mono);color:var(--paper);background:var(--accent);min-width:22px;height:22px;display:inline-flex;align-items:center;justify-content:center;flex:none}
+.dec p{font-size:14.5px;color:var(--ink2);margin-top:6px}
+.dec .when{font:600 10.5px var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-top:8px;display:block}
+.callout{border:2px solid var(--warn);padding:12px 14px;margin-top:14px;font-size:14px;color:var(--ink2);background:var(--panel)}
+.callout b{color:var(--ink)}
+.scen{border-collapse:collapse;width:100%;font-size:13.5px;margin-top:10px}
+.scen th,.scen td{padding:6px 8px;border-bottom:1px solid var(--hair2);text-align:end;font-family:var(--f-mono)}
+.scen th:first-child,.scen td:first-child{text-align:start;font-family:var(--f-sans)}
+@media (max-width:480px){.scen{font-size:12.5px}.scen th,.scen td{padding:6px 4px}}
+.scen thead th{font:600 10.5px var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink2);border-bottom:2px solid var(--ink)}
+.bars2{display:flex;height:12px;margin-top:8px;background:var(--hair2)}
+.bars2 span{display:block;height:100%}
+.bars2 span + span{border-inline-start:2px solid var(--paper)}
+
+/* chips */
+.chip{display:inline-flex;align-items:center;gap:6px;font:600 11px var(--f-mono);letter-spacing:.06em;text-transform:uppercase;padding:3px 8px;border:1.5px solid currentColor;white-space:nowrap;line-height:1.3}
+.chip .sw{width:9px;height:9px;display:inline-block}
+.tierchip{border-color:var(--hair);color:var(--ink)}
+.segchip{border:0;background:var(--hair2);color:var(--ink2);padding:3px 7px}
+
+/* tables */
+.tblwrap{overflow:auto;border:2px solid var(--ink);max-height:72vh;background:var(--paper)}
+table.t{border-collapse:collapse;width:100%;font-size:13px}
+table.t th,table.t td{padding:7px 10px;border-bottom:1px solid var(--hair2);text-align:start;vertical-align:middle;white-space:nowrap}
+table.t thead th{position:sticky;top:0;background:var(--paper);z-index:2;font:600 10.5px var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink2);border-bottom:2px solid var(--ink);vertical-align:bottom;white-space:normal;min-width:64px}
+table.t td.n{font-family:var(--f-mono);font-variant-numeric:tabular-nums;text-align:end}
+table.t th.n{text-align:end}
+table.t tbody tr{cursor:pointer}
+table.t tbody tr:hover td{background:var(--hit)}
+table.t th button.sb{all:unset;cursor:pointer;display:inline;font:inherit;letter-spacing:inherit;text-transform:inherit;color:inherit}
+table.t th button.sb:hover{color:var(--accent)}
+table.t th button.sb:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+table.t th[aria-sort="descending"] button.sb::after{content:" ↓";color:var(--accent)}
+table.t th[aria-sort="ascending"] button.sb::after{content:" ↑";color:var(--accent)}
+table.t td.loc a{text-decoration:none;color:inherit}
+table.t td.loc a:hover{color:var(--accent)}
+.flag{display:inline-block;font:600 9.5px var(--f-mono);letter-spacing:.06em;text-transform:uppercase;border:1px solid var(--warn);color:var(--warn);padding:0 4px;margin-inline-start:6px;vertical-align:1px;white-space:nowrap}
+.flag.x{border-color:var(--muted);color:var(--muted)}
+table.t td.loc{white-space:normal;min-width:170px}
+table.t td.loc b{font-weight:600}
+table.t td.loc .he{color:var(--muted);font-size:12px;margin-left:4px}
+table.static tbody tr{cursor:default}
+table.static tbody tr:hover td{background:none}
+.minibar{display:flex;height:9px;width:92px;background:var(--hair2)}
+.minibar span{display:block;height:100%}
+.minibar span + span{border-inline-start:2px solid var(--paper)}
+.ibar{display:inline-block;height:8px;background:var(--seq3);vertical-align:middle;margin-inline-end:6px}
+
+/* controls */
+.ctl{display:flex;flex-wrap:wrap;gap:10px 14px;align-items:flex-end;margin:18px 0 12px}
+.ctl .f{display:flex;flex-direction:column;gap:4px;min-width:0}
+.ctl label,.lab{font:600 10.5px var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.ctl select,.ctl input[type=search],.ctl input[type=number]{border:2px solid var(--ink);background:var(--paper);padding:5px 9px;min-height:36px;font-size:13.5px;max-width:100%}
+.ctl input[type=search]{width:220px}
+.seg{display:inline-flex;border:2px solid var(--ink);flex-wrap:wrap}
+.seg button{border:0;background:var(--paper);padding:6px 11px;min-height:34px;font:600 11.5px var(--f-sans);letter-spacing:.04em;cursor:pointer;border-inline-end:1px solid var(--hair)}
+.seg button:last-child{border-inline-end:0}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+.cnt{font:500 12px var(--f-mono);color:var(--muted);margin-inline-start:auto}
+.btn{border:2px solid var(--ink);background:var(--paper);padding:6px 12px;min-height:36px;font:600 12px var(--f-sans);letter-spacing:.04em;cursor:pointer;text-decoration:none;color:var(--ink);display:inline-flex;align-items:center;gap:6px}
+.btn:hover{background:var(--ink);color:var(--paper)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+
+/* map page */
+.mapgrid{display:grid;grid-template-columns:minmax(0,1fr) 360px;border-bottom:2px solid var(--ink);min-height:calc(100vh - 140px)}
+@media (max-width:960px){.mapgrid{grid-template-columns:1fr}}
+.mapcol{position:relative;background:var(--sea);border-inline-end:2px solid var(--ink);min-height:620px;overflow:hidden}
+@media (max-width:960px){.mapcol{border-inline-end:0;border-bottom:2px solid var(--ink);height:62vh;min-height:420px}}
+#mapsvg{display:block;width:100%;height:100%;position:absolute;inset:0;touch-action:none;cursor:grab}
+@media (pointer:coarse){#mapsvg{touch-action:pan-y}}
+.maphint{position:absolute;top:12px;right:12px;z-index:5;background:var(--paper);border:1.5px solid var(--ink);font:500 11px var(--f-mono);padding:3px 7px;display:none}
+@media (pointer:coarse){.maphint{display:block}}
+.legend-float{position:absolute;right:8px;bottom:50px;z-index:5;background:var(--paper);border:1.5px solid var(--ink);padding:5px 7px;max-width:min(290px,78%);display:none;opacity:.94}
+.legend-float .legend{margin-top:0}
+@media (max-width:960px){.legend-float{display:block}
+  .mapcol .mappresets{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none}
+  .mapcol .mappresets::-webkit-scrollbar{display:none}
+  .mapcol .mappresets button{flex:none}}
+.legend-float .legend{font-size:10.5px;line-height:1.3}
+.legend-float .lab{font-size:9.5px}
+.legend-float .cat{display:grid;grid-template-columns:1fr 1fr;gap:3px 8px;margin-top:4px}
+.legend-float .cat i{width:9px;height:9px;flex:none}
+.legend-float .ticks{font-size:9.5px}
+#mapsvg:active{cursor:grabbing}
+.mapzoom{position:absolute;top:12px;left:12px;display:flex;flex-direction:column;gap:6px;z-index:5}
+.mapzoom button{width:36px;height:36px;border:2px solid var(--ink);background:var(--paper);font:700 16px var(--f-mono);cursor:pointer}
+.mappresets{position:absolute;bottom:12px;left:12px;right:12px;display:flex;gap:6px;flex-wrap:wrap;z-index:5}
+.mappresets button{border:1.5px solid var(--ink);background:var(--paper);padding:4px 9px;min-height:30px;font:600 11px var(--f-mono);letter-spacing:.05em;cursor:pointer}
+.mappresets button:hover{background:var(--ink);color:var(--paper)}
+.side{padding:18px 18px 24px;background:var(--paper);overflow:auto;max-height:calc(100vh - 140px)}
+@media (max-width:960px){.side{max-height:none}}
+.side h2{font-size:20px}
+.mlist{display:flex;flex-direction:column;border:2px solid var(--ink);margin-top:8px}
+.mlist button{display:flex;justify-content:space-between;gap:8px;text-align:start;border:0;border-bottom:1px solid var(--hair);background:var(--paper);padding:7px 10px;cursor:pointer;font-size:13px;min-height:34px}
+.mlist button:last-child{border-bottom:0}
+.mlist button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+.mlist button small{font:500 10.5px var(--f-mono);opacity:.75}
+.legend{margin-top:14px;font-size:12.5px}
+.legend .bar{display:flex;height:12px;margin-top:6px}
+.legend .bar span{flex:1}
+.legend .ticks{display:flex;justify-content:space-between;font:500 10.5px var(--f-mono);color:var(--muted);margin-top:3px}
+.legend .cat{display:flex;flex-wrap:wrap;gap:6px 12px;margin-top:6px}
+.legend .cat span{display:inline-flex;align-items:center;gap:6px}
+.legend .cat i{width:11px;height:11px;border-radius:50%;display:inline-block;box-shadow:inset 0 0 0 1px var(--dot-ring)}
+.legend .cat i.ring{box-shadow:none}
+.legend .ticks.pos{position:relative;display:block;height:14px}
+.legend .ticks.pos span{position:absolute;transform:translateX(-50%);white-space:nowrap}
+.legend .ticks.pos span:first-child{transform:none}
+.legend .ticks.pos span:last-child{transform:translateX(-100%)}
+.fchips{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px}
+.fchips button{border:1.5px solid var(--hair);background:var(--paper);padding:3px 7px;font:500 11px var(--f-sans);cursor:pointer;min-height:28px}
+.fchips button[aria-pressed="true"]{border-color:var(--ink);background:var(--ink);color:var(--paper)}
+.selcard{border:2px solid var(--ink);padding:14px;margin-top:16px;background:var(--panel)}
+.selcard h3{font-size:19px}
+.kv{display:grid;grid-template-columns:1fr auto;gap:3px 12px;font-size:13px;margin-top:10px}
+.kv dt{color:var(--ink2)}
+.kv dd{margin:0;font-family:var(--f-mono);text-align:end}
+#tip{position:fixed;z-index:300;pointer-events:none;background:var(--ink);color:var(--paper);padding:9px 11px;font-size:12.5px;line-height:1.45;max-width:290px;display:none;box-shadow:0 2px 0 rgba(0,0,0,.2)}
+#tip b{font-weight:600}
+#tip .r{display:flex;justify-content:space-between;gap:14px}
+#tip .r span:last-child{font-family:var(--f-mono)}
+
+/* profile */
+.prof-head{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:flex-end}
+.prof-head h1{font-size:clamp(32px,5vw,56px)}
+.prof-head .hen{text-align:left;font-family:var(--f-he);font-size:clamp(22px,3vw,32px);color:var(--ink2);font-weight:600}
+.prof-meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.prof-meta .chip{white-space:normal;max-width:100%}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(340px,100%),1fr));gap:26px 34px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(260px,100%),1fr));gap:22px 30px}
+.card{border-top:3px solid var(--ink);padding-top:12px;min-width:0}
+.card h3{font-size:16px;text-transform:uppercase;letter-spacing:.06em}
+.card .sub{font-size:13px;color:var(--muted);margin-top:4px}
+.chart{width:100%;height:auto;display:block;margin-top:10px;overflow:visible}
+.chart text{font-family:var(--f-mono);font-size:10.5px;fill:var(--muted)}
+.chart .lbl{fill:var(--ink);font-size:11px}
+.chart .grid line{stroke:var(--hair2)}
+.chart .axis path,.chart .axis line{stroke:var(--hair)}
+.why{font-size:16px;line-height:1.6;max-width:75ch;margin-top:10px}
+.why b{font-weight:600}
+.idx{display:grid;grid-template-columns:120px 1fr 44px;gap:8px 10px;align-items:center;margin-top:12px;font-size:13px}
+.idx .track{height:10px;background:var(--hair2);position:relative}
+.idx .track span{position:absolute;inset:0 auto 0 0;background:var(--seq3)}
+.idx .val{font-family:var(--f-mono);text-align:end}
+.legend-inline{display:flex;gap:12px;flex-wrap:wrap;font-size:12px;color:var(--ink2);margin-top:8px}
+.legend-inline span{display:inline-flex;align-items:center;gap:5px}
+.legend-inline i{width:12px;height:3px;display:inline-block}
+.legend-inline i.sq{height:10px;width:10px}
+.reco{border:2px solid var(--ink);padding:16px 18px;background:var(--panel);margin-top:12px}
+.reco h4{font:600 11px var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
+.reco ul{margin:8px 0 0;padding-inline-start:20px}
+.reco li{margin-top:5px}
+
+/* segments */
+.segcards{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(340px,100%),1fr));gap:26px 34px;margin-top:22px}
+.segcard{border-top:3px solid var(--ink);padding-top:12px;min-width:0}
+.segcard h3{font-size:19px}
+.segcard .stats{display:flex;flex-wrap:wrap;gap:4px 16px;font:500 12px var(--f-mono);color:var(--ink2);margin-top:6px}
+.segcard dl{margin:10px 0 0;font-size:14px}
+.segcard dt{font:600 10.5px var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:10px}
+.segcard dd{margin:3px 0 0;color:var(--ink2)}
+
+/* playbook */
+.timeline{border:2px solid var(--ink);margin-top:20px}
+.tl-row{display:grid;grid-template-columns:150px 1fr;border-bottom:1px solid var(--hair)}
+.tl-row:last-child{border-bottom:0}
+.tl-row .when{padding:14px;border-inline-end:1px solid var(--hair);font:600 12px var(--f-mono);letter-spacing:.04em}
+.tl-row .when small{display:block;font-weight:500;color:var(--muted);margin-top:3px}
+.tl-row .what{padding:14px 16px;min-width:0}
+.tl-row .what h4{font-size:15.5px}
+.tl-row .what ul{margin:6px 0 0;padding-inline-start:18px;font-size:14px;color:var(--ink2)}
+@media (max-width:640px){.tl-row{grid-template-columns:1fr}.tl-row .when{border-inline-end:0;border-bottom:1px solid var(--hair)}}
+.dontlist{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr));gap:18px 30px;margin-top:18px}
+.dontlist div{border-inline-start:3px solid var(--bad);padding-inline-start:12px}
+.dontlist div.do{border-color:var(--good)}
+.dontlist h4{font-size:15px}
+.dontlist p{font-size:14px;color:var(--ink2);margin-top:4px}
+
+/* planner */
+.plangrid{display:grid;grid-template-columns:320px minmax(0,1fr);gap:30px;margin-top:20px}
+@media (max-width:900px){.plangrid{grid-template-columns:1fr}}
+.planin{border:2px solid var(--ink);padding:16px;background:var(--panel);align-self:start}
+.planin .f{margin-top:14px}
+.planin .f:first-child{margin-top:0}
+.planin input[type=range]{width:100%;accent-color:var(--accent)}
+.planin output{font:600 14px var(--f-mono)}
+.planin .hint{font-size:12.5px;color:var(--muted);margin-top:4px}
+.planin label.cb{display:flex;gap:8px;align-items:flex-start;font-size:13.5px;margin-top:10px}
+
+/* sources */
+.srclist{margin-top:14px;max-width:96ch}
+.srclist li{margin-top:9px;font-size:14.5px;line-height:1.5}
+.srclist .used{font-size:12.5px;color:var(--muted)}
+.srcgroup h3{margin-top:30px}
+
+footer{border-top:3px solid var(--ink);margin-top:40px}
+footer .wrap{padding-block:22px 40px;font-size:13px;color:var(--ink2);display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+@media print{.nav,.iconbtn,.mapzoom,.mappresets,#tip{display:none!important}.page{display:block!important}}
+</style>
+
+<a class="skip" href="#main" id="skiplink">Skip to content</a>
+<header class="mast">
+  <div class="wrap">
+    <a class="brand" href="#summary">The Knesset Model <b>·</b> Victory Guide<small>Change-bloc strategy · 26th Knesset</small></a>
+    <div class="dateline">
+      <span>Election <b>27 Oct 2026</b></span>
+      <span>Forecast: polls to <b id="dl-asof">—</b></span>
+      <span><b id="dl-days">—</b> days to go</span>
+      <button class="iconbtn" id="themebtn" type="button" title="Switch colour theme">Theme</button>
+    </div>
+  </div>
+</header>
+<nav class="nav" aria-label="Sections">
+  <div class="wrap">
+    <div class="links">
+    <a href="#summary" data-route="summary">Summary</a>
+    <a href="#strategy" data-route="strategy">Strategy</a>
+    <a href="#messaging" data-route="messaging">Messaging</a>
+    <a href="#coalition" data-route="coalition">Coalition</a>
+    <a href="#playbook" data-route="field">Field</a>
+    <a href="#method" data-route="method">Methodology</a>
+    <a href="#sources" data-route="sources">Sources</a>
+    </div>
+    <span class="spacer"></span>
+    <div class="objsel"><label for="objective">Objective</label>
+      <select id="objective">
+        <option value="change_govt">Change-led government</option>
+        <option value="block_nb">Deny Netanyahu 61</option>
+        <option value="change_seats">Change-bloc seats</option>
+      </select></div>
+  </div>
+  <div class="subnav" id="subnav" hidden><div class="wrap" role="navigation" aria-label="Field sections">
+    <span class="lab">Field</span>
+    <a href="#playbook" data-sub="playbook">Playbook</a>
+    <a href="#map" data-sub="map">Map</a>
+    <a href="#rankings" data-sub="rankings">Rankings</a>
+    <a href="#segments" data-sub="segments">Segments</a>
+    <a href="#planner" data-sub="planner">Planner</a>
+  </div></div>
+</nav>
+
+<main id="main" tabindex="-1">
+
+<!-- ======================= SUMMARY ======================= -->
+<div class="page" id="p-summary">
+  <div class="wrap">
+    <div class="pagehead">
+      <div class="eyebrow">Executive summary · <span id="sum-eyebrow">the final weeks</span></div>
+      <h1>How the change bloc wins</h1>
+      <p class="lede" id="sum-lede">A guide to the decisions, messages, alliances and field work that can move the 2026 result, each ranked by what the forecast says it is worth and grounded in official data and peer-reviewed research.</p>
+    </div>
+  </div>
+
+  <section class="block"><div class="wrap">
+    <h2 class="h2">The levers, by size</h2>
+    <p class="sub" id="sum-lev-sub"></p>
+    <div id="sum-levchart"></div>
+    <p style="margin-top:12px"><a class="btn" href="#strategy">All levers, with evidence →</a></p>
+  </div></section>
+
+  <section class="block"><div class="wrap">
+    <h2 class="h2">How this election is won</h2>
+    <div class="findings" id="sum-theory"></div>
+  </div></section>
+
+  <section class="block"><div class="wrap">
+    <h2 class="h2">Decisions needed this week</h2>
+    <p class="sub" id="sum-dec-sub">Calls for bloc leadership. Each one changes where the atlas sends the next contact.</p>
+    <div class="decisions" id="sum-decisions"></div>
+  </div></section>
+
+  <section class="block"><div class="wrap">
+    <div class="eyebrow">Field</div>
+    <h2 class="h2" style="margin-top:6px">What a realistic field programme buys</h2>
+    <p class="sub" id="sum-real-sub"></p>
+    <div class="tiles" id="sum-tiles"></div>
+    <div class="grid2" style="margin-top:26px">
+      <div class="card"><h3>Four budgets</h3><p class="sub">Completed contacts before election day, allocated best-first by the planner. Arab localities, polling stations where Arab lists lead, and Druze towns (pending a candidate check) are left out; door teams go only where at least 1,000 positive-value contacts are available.</p><div id="sum-scen"></div></div>
+      <div class="card"><h3>Where the next contacts go</h3><p class="sub" id="sum-next-sub"></p><div class="tblwrap" style="max-height:none;margin-top:10px"><table class="t" id="sum-next"></table></div></div>
+    </div>
+  </div></section>
+
+  <section class="block"><div class="wrap">
+    <h2 class="h2">Field decisions this week</h2>
+    <p class="sub">Calls for the four lists' field directors.</p>
+    <div class="decisions" id="sum-field-dec"></div>
+  </div></section>
+
+  <section class="block"><div class="wrap">
+    <h2 class="h2">Field findings</h2>
+    <p class="sub">The default objective is a change-led government. Switch the objective in the bar above to see how the picture changes when the goal is to deny Netanyahu 61 seats or to maximise change-bloc seats.</p>
+    <div class="findings" id="sum-findings"></div>
+  </div></section>
+
+  <section class="block"><div class="wrap">
+    <h2 class="h2">Swing, turnout and impact: the top ten of each</h2>
+    <p class="sub">Localities with at least 5,000 eligible voters, excluding Arab localities and, until the candidate check, Druze and Circassian towns. <b>Swing</b> ranks by persuadable plus rescuable voters. <b>Turnout</b> ranks by net votes from turnout work, door and supporter lists. <b>Impact</b> ranks by total potential under the selected objective.</p>
+    <div class="grid3" id="sum-three" style="margin-top:18px"></div>
+  </div></section>
+
+  <section class="block"><div class="wrap">
+    <div class="grid2">
+      <div class="card">
+        <h3>Where the field potential sits</h3>
+        <p class="sub">Potential by segment and mechanism under the selected objective, in net votes: the extra votes for an average change-bloc list that would have the same effect on the objective.</p>
+        <div id="sum-segchart"></div>
+      </div>
+      <div class="card">
+        <h3>Don't</h3>
+        <p class="sub">Five rules that follow directly from the model and the law.</p>
+        <div class="dontlist" id="sum-donts" style="grid-template-columns:1fr"></div>
+      </div>
+    </div>
+  </div></section>
+
+  <section class="block"><div class="wrap">
+    <h2 class="h2">The top 20 localities</h2>
+    <p class="sub">Ranked by total potential under the selected objective. Mechanism mix: <span class="legend-inline" style="display:inline-flex"><span><i class="sq" style="background:var(--c-gotv)"></i>turnout</span><span><i class="sq" style="background:var(--c-pers)"></i>persuasion</span><span><i class="sq" style="background:var(--c-resc)"></i>wasted-vote rescue</span></span>. The lead list is the change-bloc list with the largest projected vote there, for splitting turf between the four lists. Ranks are the atlas-wide ranks; Druze and Circassian towns are left out until the candidate check.</p>
+    <div class="tblwrap" style="max-height:none;margin-top:16px"><table class="t" id="sum-top"></table></div>
+    <p style="margin-top:14px"><a class="btn" href="#rankings">All localities →</a> <a class="btn" href="#map">Open the map →</a> <a class="btn" href="#planner">Planner →</a></p>
+  </div></section>
+</div>
+
+<!-- ======================= STRATEGY ======================= -->
+<div class="page" id="p-strategy">
+  <div class="wrap">
+    <div class="pagehead">
+      <div class="eyebrow">Strategy</div>
+      <h1>The levers of victory</h1>
+      <p class="lede" id="st-lede">Every way the change bloc can move the result in the final two weeks, sized by the forecast's own simulations and weighed against the research on whether it can be done.</p>
+    </div>
+    <div id="st-root"></div>
+  </div>
+</div>
+
+<!-- ======================= MESSAGING ======================= -->
+<div class="page" id="p-messaging">
+  <div class="wrap">
+    <div class="pagehead">
+      <div class="eyebrow">Messaging and media</div>
+      <h1>What to say, to whom, through whom</h1>
+      <p class="lede" id="ms-lede">Campaigns move votes mainly by changing which issues voters weigh and what they believe about the candidates, not by changing their views. This page sets out the issues, audiences, messengers and media that the evidence supports.</p>
+    </div>
+    <div id="ms-root"></div>
+  </div>
+</div>
+
+<!-- ======================= COALITION ======================= -->
+<div class="page" id="p-coalition">
+  <div class="wrap">
+    <div class="pagehead">
+      <div class="eyebrow">Coalition</div>
+      <h1>From votes to a government</h1>
+      <p class="lede" id="co-lede">Winning means forming a government. This page covers the coalition signals that move votes before the election and the paths, timeline and risks of the formation that follows.</p>
+    </div>
+    <div id="co-root"></div>
+  </div>
+</div>
+
+<!-- ======================= MAP ======================= -->
+<div class="page" id="p-map">
+  <div class="mapgrid">
+    <div class="mapcol">
+      <svg id="mapsvg" role="img" aria-label="Map of Israeli localities coloured by the selected metric"></svg>
+      <div class="mapzoom"><button type="button" id="zin" aria-label="Zoom in">+</button><button type="button" id="zout" aria-label="Zoom out">−</button></div>
+      <div class="mappresets" id="mappresets"></div>
+      <div class="maphint" aria-hidden="true">Two fingers to pan and zoom</div>
+      <div class="legend-float" id="maplegend-float" aria-hidden="true"></div>
+    </div>
+    <aside class="side" aria-label="Map controls">
+      <h2>Field map</h2>
+      <p class="muted" style="font-size:13px;margin-top:4px">Each circle is a locality, sized by eligible voters. Scroll or pinch to zoom; click a circle for its numbers.</p>
+      <div class="ctl" style="margin-top:12px"><div class="f" style="flex:1"><label for="mapsearch">Find a locality</label><input type="search" id="mapsearch" list="locnames" placeholder="Name in English or Hebrew" style="width:100%" autocomplete="off"><span class="muted" id="mapsearch-msg" role="status" style="font-size:12px;min-height:1em"></span></div></div>
+      <datalist id="locnames"></datalist>
+      <div class="lab">Colour by</div>
+      <div class="mlist" id="mapmetrics"></div>
+      <div class="legend" id="maplegend"></div>
+      <div class="lab" style="margin-top:16px">Show segments</div>
+      <div class="fchips" id="mapsegs"></div>
+      <div class="ctl" style="margin-top:10px"><div class="f"><label for="mapsize">Minimum size</label>
+        <select id="mapsize"><option value="0">All localities</option><option value="1000">1,000+ eligible</option><option value="5000">5,000+ eligible</option><option value="20000">20,000+ eligible</option></select></div></div>
+      <div id="mapsel"></div>
+    </aside>
+  </div>
+</div>
+
+<!-- ======================= RANKINGS ======================= -->
+<div class="page" id="p-rankings">
+  <div class="wrap">
+    <div class="pagehead">
+      <div class="eyebrow">Rankings</div>
+      <h1>Every locality, ranked</h1>
+      <p class="lede">Pick a view for the question you are asking: overall priority, door canvassing, supporter lists, persuasion, wasted-vote rescue, blocking, or efficiency per volunteer-hour. Click any column heading to sort and any locality for its full profile.</p>
+    </div>
+    <div class="ctl">
+      <div class="f"><span class="lab">View</span><div class="seg" id="rk-views" role="group" aria-label="Ranking view"></div></div>
+    </div>
+    <div class="ctl">
+      <div class="f"><label for="rk-search">Search</label><input type="search" id="rk-search" placeholder="Locality"></div>
+      <div class="f"><label for="rk-seg">Segment</label><select id="rk-seg"></select></div>
+      <div class="f"><label for="rk-dist">District</label><select id="rk-dist"></select></div>
+      <div class="f"><label for="rk-tier">Tier</label><select id="rk-tier"></select></div>
+      <div class="f"><label for="rk-size">Size</label><select id="rk-size"><option value="1000">1,000+ eligible</option><option value="5000">5,000+ eligible</option><option value="20000">20,000+ eligible</option><option value="0">All localities</option></select></div>
+      <span class="cnt" id="rk-count"></span>
+      <button class="btn" type="button" id="rk-copy">Copy as CSV</button>
+      <a class="btn" href="localities.csv" target="_blank" rel="noopener">Full data (CSV)</a>
+    </div>
+    <p class="muted" id="rk-desc" style="font-size:13.5px;max-width:90ch;margin-bottom:10px"></p>
+    <div class="tblwrap"><table class="t" id="rk-table"></table></div>
+    <p class="note">Net votes are measured under the objective selected in the bar at the top. Potential is the saturation total: door conversations with 35% of the residents of every polling-station area where a conversation has positive value, plus list calls to identified voters (30% identified, half reached) where it does not; rescue calls run anywhere. Arab localities and polling stations where Arab lists lead are not ranked or planned. Efficiency is net votes per 1,000 completed contacts. Flags: <span class="flag">displaced</span> border communities whose residents may not be home; <span class="flag">low confidence</span> Druze localities, whose vote depends on 2026 candidates; <span class="flag x">not targeted</span> access-restricted villages.</p>
+  </div>
+</div>
+
+<!-- ======================= LOCALITY PROFILE ======================= -->
+<div class="page" id="p-loc"><div class="wrap" id="loc-root"></div></div>
+
+<!-- ======================= SEGMENTS ======================= -->
+<div class="page" id="p-segments">
+  <div class="wrap">
+    <div class="pagehead">
+      <div class="eyebrow">Segments</div>
+      <h1>Sixteen electorates, sixteen playbooks</h1>
+      <p class="lede">Israel's electoral map is sorted by sector, religiosity and class far more than by region. Each locality is assigned to one segment from its census religion, settlement type and 2022 vote. Each segment needs a different mix of turnout work, persuasion and partner support.</p>
+    </div>
+    <section class="block" style="padding-top:22px">
+      <div class="card"><h3>Potential by segment</h3><p class="sub">Net votes under the selected objective, split by mechanism.</p><div id="seg-chart"></div></div>
+    </section>
+    <div class="tblwrap" style="max-height:none"><table class="t static" id="seg-table"></table></div>
+    <div class="segcards" id="seg-cards"></div>
+  </div>
+</div>
+
+<!-- ======================= PLAYBOOK ======================= -->
+<div class="page" id="p-playbook">
+  <div class="wrap">
+    <div class="pagehead">
+      <div class="eyebrow">Field · Playbook</div>
+      <h1>Field playbook: what works, when, and where</h1>
+      <p class="lede">The field-experiment record is clear about what the last two weeks can and cannot do. Personal contact raises turnout; impersonal contact rarely does. Persuasion across blocs is small this late. Insurance messages to voters of lists below the threshold work best when the final polls show those lists below the line.</p>
+    </div>
+    <div id="pb-root"></div>
+  </div>
+</div>
+
+<!-- ======================= PLANNER ======================= -->
+<div class="page" id="p-planner">
+  <div class="wrap">
+    <div class="pagehead">
+      <div class="eyebrow">Planner</div>
+      <h1>Allocate a field budget</h1>
+      <p class="lede">Set how many completed contacts the bloc can deliver before election day and how much of its electorate it has identified. The planner spends the contacts where the next one buys the most: door teams on positive-value polling-station areas, calls to identified voters everywhere else, best first.</p>
+    </div>
+    <div class="plangrid">
+      <div class="planin" id="plan-in"></div>
+      <div id="plan-out" style="min-width:0"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ======================= METHODOLOGY ======================= -->
+<div class="page" id="p-method">
+  <div class="wrap">
+    <div class="pagehead">
+      <div class="eyebrow">Methodology</div>
+      <h1>How the atlas is built</h1>
+      <p class="lede">The atlas rests on four steps: harmonised official results, a 2026 projection for every locality and polling station, a field model calibrated to experiments, and an exchange rate taken from the forecast's own simulations. Every choice below was tested out of sample where the data allowed. Where an idea failed that test, we dropped it and say so.</p>
+    </div>
+    <div id="m-root"></div>
+  </div>
+</div>
+
+<!-- ======================= SOURCES ======================= -->
+<div class="page" id="p-sources">
+  <div class="wrap">
+    <div class="pagehead">
+      <div class="eyebrow">Sources</div>
+      <h1>Data and literature</h1>
+      <p class="lede">Every number on this site comes from official data, from our own forecast model, or from the published work listed here. Literature items were checked against their sources; items marked "reported" come from press coverage rather than peer review, and a few are marked as not independently verified.</p>
+    </div>
+    <div id="src-root"></div>
+  </div>
+</div>
+
+</main>
+
+<footer><div class="wrap">
+  <span>The Knesset Model · Field Atlas. Built <span id="ft-built">—</span> from CEC official results (2013–2022), CBS locality and 2022 census files, and the forecast of <span id="ft-asof">—</span>.</span>
+  <span>Planning tool for field strategy. Probabilities are model estimates, not guarantees. Legal questions go to election counsel.</span>
+</div></footer>
+
+<div id="tip" role="tooltip"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+<script id="atlas-data" type="application/json">/*__DATA__*/null</script>
+<script>
+/*__APP__*/
+</script>

@@ -1,0 +1,169 @@
+{
+ "projection_in_sample_2021_2022": {
+  "mae_C_transfer_pp": 1.49,
+  "mae_C_uniform_pp": 1.77,
+  "mae_R_transfer_pp": 1.43,
+  "mae_R_uniform_pp": 1.92,
+  "mae_A_transfer_pp": 0.54,
+  "mae_A_uniform_pp": 2.2,
+  "mae_C_transfer_big_pp": 1.28,
+  "mae_C_uniform_big_pp": 1.5,
+  "party_mae_pp": {
+   "likud": 0.95,
+   "yesh_atid": 1.05,
+   "rzp": 0.98,
+   "blue_white": 0.87,
+   "shas": 0.52,
+   "utj": 0.31,
+   "yisrael_beytenu": 0.44,
+   "raam": 0.79,
+   "hadash_taal": 0.91,
+   "labor": 0.32,
+   "meretz": 0.45,
+   "balad": 0.99,
+   "jewish_home": 0.45
+  },
+  "n_localities": 1212,
+  "note": "Flow matrix estimated by Kolot Nodedim from the same stations: tests the local-allocation assumption, not national accuracy."
+ },
+ "projection_holdout": {
+  "2020->2021": {
+   "transfer": {
+    "C": 2.5,
+    "R": 2.37,
+    "A": 0.7
+   },
+   "uniform": {
+    "C": 1.18,
+    "R": 1.74,
+    "A": 1.4
+   },
+   "blend": {
+    "C": 1.63,
+    "R": 1.78,
+    "A": 0.68
+   }
+  },
+  "2021->2022": {
+   "transfer": {
+    "C": 1.36,
+    "R": 1.29,
+    "A": 0.64
+   },
+   "uniform": {
+    "C": 1.53,
+    "R": 1.85,
+    "A": 1.17
+   },
+   "blend": {
+    "C": 1.25,
+    "R": 1.39,
+    "A": 0.85
+   }
+  },
+  "note": "Transfer matrix fitted by NNLS on a random half of localities and scored on the other half (3 splits); both methods are given the held-out half's true national totals."
+ },
+ "projection_method": {
+  "camp_blend": 0.5,
+  "druze_pool": 0.6,
+  "note": "Lists projected by the coherent 2022->2026 flow matrix, then each locality's camp totals pulled halfway toward uniform camp swing (lists scaled within camp), then raked to the forecast. The 50/50 blend had the lowest or near-lowest held-out error in both folds; pure transfer failed badly in 2020->21 (C 2.5 pts) and pure swing in 2021->22 (A 1.2 pts)."
+ },
+ "openness_out_of_sample": {
+  "specs": {
+   "volatility only": {
+    "spearman_by_fold": [
+     0.162,
+     0.202
+    ],
+    "mean_spearman": 0.182,
+    "top_bottom_quintile_ratio": [
+     2.16,
+     2.49
+    ]
+   },
+   "footprint only": {
+    "spearman_by_fold": [
+     0.405,
+     0.284
+    ],
+    "mean_spearman": 0.344,
+    "top_bottom_quintile_ratio": [
+     2.85,
+     2.87
+    ]
+   },
+   "balance only": {
+    "spearman_by_fold": [
+     0.39,
+     0.26
+    ],
+    "mean_spearman": 0.325,
+    "top_bottom_quintile_ratio": [
+     2.34,
+     2.69
+    ]
+   },
+   "equal weights": {
+    "spearman_by_fold": [
+     0.447,
+     0.316
+    ],
+    "mean_spearman": 0.381,
+    "top_bottom_quintile_ratio": [
+     3.13,
+     3.44
+    ]
+   },
+   "footprint + balance": {
+    "spearman_by_fold": [
+     0.435,
+     0.296
+    ],
+    "mean_spearman": 0.366,
+    "top_bottom_quintile_ratio": [
+     2.86,
+     2.98
+    ]
+   },
+   "footprint-led": {
+    "spearman_by_fold": [
+     0.444,
+     0.315
+    ],
+    "mean_spearman": 0.379,
+    "top_bottom_quintile_ratio": [
+     3.14,
+     3.41
+    ]
+   }
+  },
+  "chosen": "equal weights",
+  "n_by_fold": {
+   "2020->2021": 556,
+   "2021->2022": 567
+  },
+  "target": "absolute residual right-camp share change t->t+1 (net of national); features from elections <= t"
+ },
+ "composition_out_of_sample": {
+  "naive": {
+   "C": 6.75,
+   "R": 7.89,
+   "A": 4.79
+  },
+  "multiplicative": {
+   "C": 6.56,
+   "R": 8.84,
+   "A": 5.43
+  },
+  "chosen": "naive",
+  "units": "weighted MAE, camp votes per 1,000 eligible, 2021->2022"
+ },
+ "theta": null,
+ "mv_ref_per_vote": {
+  "change_govt": 6.642297569276261e-07,
+  "block_nb": 4.543275273539202e-07,
+  "change_seats": 1.7649797409940643e-05,
+  "change61": 3.4643234369067717e-07,
+  "change_raam61": 8.557501562611083e-07
+ }
+}

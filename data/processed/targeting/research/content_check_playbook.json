@@ -1,0 +1,185 @@
+{
+ "verdict": "Needs revision before publishing. All 212 cite ids exist in the desk files. There are no em-dashes, no not-X-but-Y constructions and no banned stock phrases. Most numbers match MODEL_BRIEF.md or the model output files: 4,400 net votes; 91k rescue voters, worth about 1,100 net votes or 25% of potential; 64% of potential in the top 25 localities; efficiency figures for the Druze towns and Tel Aviv-Yafo; marginal values per 10k votes; 78% pass chances for Ra'am and RZP-Zehut; 41.9% chance of a repeat election. Some figures come from model files that are not in the brief: 38% of polling stations with positive GOTV value, from kalpi.csv; and pass chances of B&W 1%, Democrats 98%, YB 97% and Together 99%, from marginal_values.csv. Add those to the brief or site data so they can be traced. The problems that must be fixed: (1) two dates appear in no file, the 16 Oct surplus-agreement deadline and the 23 Oct poll blackout. (2) Some advice goes against the model. It recommends turnout motivation city-wide in Netanyahu-bloc-leaning cities. It stacks contacts in low-turnout stations without limiting them to positive-value turf. It coordinates on Arab turnout without saying that this serves only the blocking objective. (3) Some advice is legally risky. It mentions 'driver captains' and helping with the trip on election day, quiet coordination with NGOs, and claims that vote history is unavailable. (4) Six claims were rejected or downgraded by the verify_*.json files: the PPA breach finding, double envelopes having shifted seats, free urban buses, the expat-flight compromise, tribal-station turnout of about 20%, and the claim that texts before election day work better. (5) Several poll figures are misattributed. The IDI 53.5% and 40.5% figures are top-two shares. The 65% and 38-26 figures in the north are district-wide. Kiryat Shmona's displacement is described as 'up to 40%'. One sources-file issue that shows up in the playbook: P-F15 and D1-F07 are the same paper and are cited side by side twice. D6-F06 is unverifiable and should be dropped.",
+ "issues": [
+  {
+   "where": "timeline D-11 (Fri 16 Oct), title 'Surplus-agreement deadline' and first action",
+   "problem": "No desk file or the brief gives a surplus-agreement deadline, or any date for one. D5-F18 says only that Likud signed with RZP and not Otzma. Telling the change lists to file pairs is also outside a field playbook. The model's seat simulation (share_draws_meta.json, as of 8 Oct) already assumes a Yashar-Democrats pair.",
+   "fix": "Retitle the D-11 entry 'First ID pass complete; lock message frames'. Delete 'Change lists file their surplus-agreement pairs by today's deadline.' If any surplus line is kept, write: 'Confirm with election counsel that surplus-agreement filings are complete. Likud has signed with RZP and not with Otzma (D5-F18).'"
+  },
+  {
+   "where": "timeline D-4 'Poll blackout begins' ('No new polls may be published from today'); tactics Wasted-vote ('polls go dark on Fri 23 Oct'); dos 'Rescue sub-threshold votes before the blackout' ('by Fri 23 Oct, when polls go dark'); messages Wasted votes ('before 23 Oct')",
+   "problem": "The files do not give the date. P-F30 says only that Israeli law bars publishing polls 'in the final days'. The 23 Oct date is unsupported, and it is repeated four times as fact.",
+   "fix": "Use one hedged phrasing everywhere: 'Israeli law bars publishing polls in the final days before the vote (P-F30). Confirm the exact cut-off with election counsel and finish the main rescue push before it.' Retitle D-4 'Final published polls expected' until counsel confirms the date."
+  },
+  {
+   "where": "timeline D-10 to D-5, last action ('Agree low-visibility coordination with Arab civil-society turnout networks'); election_day 'Keep Arab-sector turnout partner-led and quiet'; messages 'Crime in Arab society (for partner groups)'",
+   "problem": "This goes against the model's main trade-off and carries legal risk. Under the change-led-government objective, Arab-list votes are about zero or negative: Ra'am -0.03 pp and Joint List -0.41 pp per 10k. They are positive only for the blocking objective (+0.82 and +0.75). The timeline item states no objective. 'Low-visibility' coordination between a party and NGOs may also make the NGO an election-active body that must register (D6-F23, the Zazim ruling) and raises party-financing questions. Writing messages for other lists has the same exposure.",
+   "fix": "Timeline: 'Blocking objective only. Do not run or fund Arab GOTV. Share only public information with Arab civil-society networks, and only within limits election counsel sets in writing. Under the change-led-government objective these votes are worth about zero or less (Joint List -0.41 pp per 10k).' Election_day: keep the trade-off sentence and add 'No operational coordination without written clearance from election counsel.' Messages: retitle 'Crime in Arab society (Democrats' Arab outreach; context for partners)' and say the change bloc does not script messages for other lists."
+  },
+  {
+   "where": "messages 'Cost of living', frame ('for turnout motivation in Rishon LeZion, Petah Tikva, Holon and Kfar Saba')",
+   "problem": "This goes against the model. Petah Tikva (change 0.43 vs Netanyahu bloc 0.54) and Holon (0.44 vs 0.53) lean to the Netanyahu bloc, and Rishon is near even. All three are Persuasion battlegrounds. Turnout motivation across these cities nets Netanyahu-bloc votes outside the positive-value stations.",
+   "fix": "Use 'Its main use is persuasion and within-bloc choice in Rishon LeZion, Petah Tikva, Holon and Kfar Saba, plus turnout motivation for identified supporters in positive-value stations only.'"
+  },
+  {
+   "where": "timeline D-10 to D-5, third action ('Stack several contacts ... on supporters in polling-station areas where 2022 turnout was 30-55%. Effects add up to about 8 pp per person')",
+   "problem": "(a) The text never limits low-turnout stations to positive-value turf. Many 30-55% stations are Likud's targets (about 50% Likud on about 35% turnout, D5-F16) or Arab localities. (b) 8 pp is the atlas's planning cap on cumulative lift per person (range 5-12), not what stacking delivers. (c) The model's hump uses resident turnout.",
+   "fix": "Use 'Stack several contacts on identified supporters who are unsure they will vote, in positive-value stations, giving priority where resident turnout was 30-55%. Effects roughly add up across contacts, to a planning cap of about 8 pp per person. They do not spread to neighbours, so plan by household.'"
+  },
+  {
+   "where": "election_day 'Chase lagging target stations' ('every call team and driver captain'); election_day 'Work from pre-election vote plans' ('help with the trip if not'); timeline D-3 to D-1 ('any drivers that election counsel has approved')",
+   "problem": "'Driver captain' and 'help with the trip' assume a party ride operation. Elsewhere the draft calls rides legally sensitive and requires counsel clearance (D6-F23; the expat-flight limits).",
+   "fix": "Replace 'driver captain' with 'call-team lead'. Replace 'help with the trip if not' with 'help them plan the trip (public transport, a family ride). Offer party-organised transport only if election counsel has cleared it.'"
+  },
+  {
+   "where": "tactics 'Social-norm and gratitude messages', israel ('The classic mailer that shows a voter's own vote history is not available here. Parties cannot be told who voted')",
+   "problem": "This overclaims. The High Court ban (D5-F25) covers election-day reports of who has voted. The GOTV desk says it is unclear whether parties may lawfully use pre-election vote-history files, and that legal review is needed.",
+   "fix": "Use 'Parties cannot be told on election day who has voted (D5-F25). Whether vote-history data may be used before election day is unclear. Do not send any message that refers to a voter's own past turnout without written clearance from election counsel.'"
+  },
+  {
+   "where": "tactics 'Relational (friend-to-friend) contact', israel ('The Privacy Protection Authority found Elector, Likud and Yisrael Beytenu in breach.')",
+   "problem": "This is unsupported. The PPA finding appears only in D6-F24's relevance field. verify_israel-geography.json says it is not in the cited ToI article and needs separate sourcing.",
+   "fix": "Delete the sentence, or replace it with 'In 2020 a flaw in Likud's Elector app exposed the voter register of about 6.5 million adults (D6-F24).' Keep the advice to confirm with counsel."
+  },
+  {
+   "where": "timeline 'After the polls close', first action ('and they have shifted seats before')",
+   "problem": "This is unsupported. verify_israel-geography.json (D6-F28) says the seat-shift claim and the 2013 examples are not in the source and need their own citation.",
+   "fix": "Delete 'and they have shifted seats before'. Replace it with: 'They were close to 10% of votes cast in 2022 (D2-F03), enough to move a list across the threshold.' Drop D6-F28 from the cites, or keep it only for 'counted after regular ballots'."
+  },
+  {
+   "where": "election_day 'Displaced northern supporters' ('Up to 40% of Kiryat Shmona's residents had not returned by September')",
+   "problem": "'Up to 40%' presents the low end as a ceiling. CSM gives almost 40% not returned (D5-F20). Ynet says only about 40% returned (D5-F19). AFP found fewer than half present in April (D6-F35). Reported absence runs from about 40% to about 60%.",
+   "fix": "Use 'Between about 40% and 60% of Kiryat Shmona's residents had not returned by September, depending on the report (D5-F19, D5-F20).' Add D5-F19 to the cites. Add 'The 83 special stations served evacuees from all northern communities (D6-F36).'"
+  },
+  {
+   "where": "messages 'Northern rebuilding', who_it_moves and frame",
+   "problem": "(a) The 65% and the 38-26-27 figures come from a Midgam poll of Haifa and Northern District residents (D6-F34). They are not figures for the listed towns. (b) Safed (Zefat) is in the haredi segment with Netanyahu bloc 0.78 and is tiered Opposition stronghold, so it does not belong on a persuasion list. (c) 'These are persuasion messages' contradicts the Druze towns in the same item, which are Turnout engines. (d) Kiryat Shmona's Likud candidate came second in the first round, and the run-off was not checked (D6-F36).",
+   "fix": "Use 'Across the Haifa and Northern districts (Midgam, April 2026), 65% say the state is abandoning the north and the opposition leads 38% to 26% with 27% undecided.' Drop Safed. Change the last sentence to 'In Likud-leaning Jewish towns these are persuasion messages, because generic turnout work there helps Likud. In Druze towns, which are turnout engines, the same frame also drives turnout.' Write 'came second in the first round'."
+  },
+  {
+   "where": "messages 'Crime in Arab society', who_it_moves ('Crime is the top concern for 53.5% (IDI) to about 80% (Statnet), and more than 140 people were killed')",
+   "problem": "IDI's 53.5% is the share naming crime among their top two factors (D5-F21), not the share for whom it is the top concern. The 140 killings were in Arab communities (D5-F32).",
+   "fix": "Use 'Crime is the leading issue. 53.5% name it in their top two (IDI) and about 80% rank it first (Statnet). More than 140 people were killed in Arab communities by late June 2026.'"
+  },
+  {
+   "where": "messages 'Cost of living', who_it_moves ('40.5% of centrists put the economy first'), and messages 'Unity' ('centrists, for whom unity is the top issue (30%)')",
+   "problem": "The IDI 40.5% is a top-two share (D5-F21), not 'first'. As written, the two messages also contradict each other on what centrists' top issue is. They come from different surveys with different questions (IDI top-two factor vs JPPI top issue). Tying the IDI figure to 'Route 4 commuters' also conflates it with all centrists.",
+   "fix": "Cost of living: 'centrist voters (the economy is their leading issue, named by 40.5% in their top two, IDI), including Route 4 commuters'. Unity: 'centrists (unity was their top issue at 30% in JPPI's September index)'."
+  },
+  {
+   "where": "tactics 'Vote-plan scripts', israel ('Urban buses are not free'); election_day 'Get students and young adults home' ('Urban buses are not free')",
+   "problem": "verify_context-2026.json (D5-F28) and verify_israeli-turnout.json (D2-F17) say the JPost article does not mention urban buses. The 'not included' claim is an inference.",
+   "fix": "Use 'The free scheme covers intercity routes over 15 km and all trains. The announcement does not cover city buses, so plan for local fares.'"
+  },
+  {
+   "where": "tactics 'Transport to the polls', effect ('from about 20% to 42%') and israel ('in 2026 expat flights were capped with no services of monetary value')",
+   "problem": "verify_israeli-turnout.json (D2-F10) corrects April 2019 tribal-station turnout to 25.8%, not about 20%. verify_context-2026.json (D5-F29) says the CEC chair's compromise is not in the cited Haaretz article and is unverified.",
+   "fix": "Use 'from about 26% to 42%'. Use 'and in 2026 the CEC chair reportedly capped expat flights and barred services of monetary value (unverified; confirm with counsel)'. Or drop the expat clause and keep the 2019 Zazim ruling (D6-F23), which is verified."
+  },
+  {
+   "where": "timeline D-3 to D-1, first action ('Texts sent before election day beat texts sent on the day'); dos 'Concentrate contact' ('text reminders work best in the 1 to 3 days before the vote'); tactics SMS, israel",
+   "problem": "verify_gotv.json (D3-F09) says the before-election-day advantage was found in only one of the Danish experiments. The 0.7 weight for election-day texts is an atlas planning weight, not a finding. 'Israeli phones are flooded with campaign texts at election time' has no source in any file (the desk says this only of recorded calls).",
+   "fix": "Use 'In one Danish experiment, texts sent before election day beat texts sent on the day. Extra texts added nothing (D3-F09).' Use 'The atlas weights an election-day-only text at 0.7 of a day-before text.' Delete the flooded-phones sentence, or label it a planning assumption."
+  },
+  {
+   "where": "tactics 'Vote-plan scripts', effect ('Replications are mixed (mail 0.5 pp, one phone test null)')",
+   "problem": "verify_gotv.json (D3-F14) records two null phone replications, Cho 2008 and Gerber, Hill & Huber 2015, not one.",
+   "fix": "Use 'Replications are mixed (a mailer gave 0.5 pp, and two phone replications were null).'"
+  },
+  {
+   "where": "tactics 'Door-to-door canvass', effect ('It peaks where 2022 turnout was 30-55%, halves at 70-80%, falls to a quarter above 80%')",
+   "problem": "The wording is ambiguous and reads as relative to the peak. In the model (GOTV_HUMP in targeting_model.py) the base of 1.5 pp is multiplied by about 1.5 at the peak (about 42% resident turnout), 0.5 at about 75% and 0.25 at about 85%. So 70-80% is a third of the peak, not half.",
+   "fix": "Use 'The atlas multiplies this by up to 1.5 where resident turnout was 30-55%, by 0.5 at 70-80% and by 0.25 above 80%, then applies a x1.3 household multiplier.'"
+  },
+  {
+   "where": "tactics 'Election-day polling-place presence and festivals', israel ('rules on activity near polling stations are strict' and 'Likud has fielded about 1,200 observers in a single operation')",
+   "problem": "(a) The files say only that the rules 'may restrict' such activity and that this needs checking (GOTV desk open questions). 'Strict' is unsourced. (b) The 1,200 figure is Likud's 2019 hidden-camera operation in Arab polling stations (D6-F25). Offering it as a benchmark for 'observer coverage' implicitly endorses a surveillance operation aimed at one community.",
+   "fix": "Use 'Election law may restrict activity near polling stations. Clear any event, food or entertainment with election counsel first.' Replace the Likud sentence with 'Staff every contested and mixed station's committee seat and observer slot the law allows.' Keep the 2019 operation only in the 'Observers and lawyers' card as a threat to prepare for. Consider the verdict 'only with counsel clearance' for festivals."
+  },
+  {
+   "where": "timeline Election day ('Mobilise strongholds in the morning, before Likud starts using the turnout releases'); election_day 'Blunt Likud's use of the releases' ('Bank our strongholds in the morning so the vote is in before that message spreads')",
+   "problem": "There is a logic gap. D5-F27 says Likud plans to point to high turnout in opposition strongholds. Heavy morning mobilisation in our strongholds produces exactly those numbers in the first CEC releases, which gives Likud its message earlier and a full day to act on it. 'Strongholds' is also ambiguous.",
+   "fix": "Use 'Bank identified change-bloc supporters early through private contact (calls, texts, relational asks), with no public turnout claims. Expect the first releases to show high turnout in our areas, and have the counter-message to our own supporters ready before 10:00.' Write 'change-bloc strongholds'."
+  },
+  {
+   "where": "election_day 'Keep Arab-sector turnout partner-led and quiet' ('Women and young people are the upside, and they respond to concrete action on crime')",
+   "problem": "The evidence is survey preference: young Arab respondents want concrete plans on crime, housing and jobs (D2-F20). 'Respond to' implies behavioural evidence that does not exist.",
+   "fix": "Use 'Women and young people are the upside (D5-F04). Young Arab voters say they want concrete plans on crime, housing and jobs (D2-F20).'"
+  },
+  {
+   "where": "election_day 'Work from pre-election vote plans' ('the High Court barred polling-station staff from telling parties')",
+   "problem": "D5-F25 says the court barred party representatives at polling stations, not polling-station staff.",
+   "fix": "Use 'the High Court barred party representatives at polling stations from telling their parties which identifiable voters have voted.'"
+  },
+  {
+   "where": "donts 'Do not delegitimise Arab voters' ('so in soft-right turf stress a Zionist-majority path')",
+   "problem": "This sits badly with the model. The forecast gives the change bloc alone 61+ seats in only 5.2% of draws, against 18.8% with Ra'am. A campaign line built on a Zionist-majority path is weak on the model's own numbers.",
+   "fix": "Use 'so in soft-right turf do not build messages around reliance on Ra'am. Lead with competence and a broad government.' Drop 'stress a Zionist-majority path'."
+  },
+  {
+   "where": "donts 'No change-bloc branding on Arab GOTV' ('Likud's 2019 camera campaign is widely judged to have helped lift Arab turnout from 49% to 59%')",
+   "problem": "D3-F32 is low confidence, and its claim states the confound: the Joint List reunified between the two 2019 elections. The draft drops it.",
+   "fix": "Add 'though the Joint List's reunification also contributed and the two effects cannot be separated.'"
+  },
+  {
+   "where": "tactics 'Paid media for persuasion', israel ('Yashar and Together have more room to grow than any message about Netanyahu, who is fully known')",
+   "problem": "P-F11 says voters are more persuadable about less-known candidates. That supports Yashar and its new candidates. Together is led by Bennett and Lapid, who are well known. The sentence also compares parties with messages.",
+   "fix": "Use 'Voters move more on information about less-known figures, such as Eisenkot and Yashar's candidates, than on messages about Netanyahu, whom voters already know well (P-F11).'"
+  },
+  {
+   "where": "dos 'Concentrate contact in the final ten days' ('Effects add up across contacts, so thin coverage wastes volunteers')",
+   "problem": "The conclusion does not follow. Additive effects with no synergy (D3-F24) mean a repeat contact is worth no more than a first one, so additivity alone does not make thin coverage wasteful. The case for stacking is to put contacts where each one is worth most.",
+   "fix": "Use 'Effects add up across contacts with no extra synergy, so put repeat contacts where each one is worth most: identified supporters in high-value turf, up to the atlas cap of about 8 pp per person.' Add D3-F24 to the cites."
+  },
+  {
+   "where": "dos 'Work only turf where turnout nets change votes' ('top 25 localities hold 64% of field potential, led by Tel Aviv-Yafo, Haifa, Rishon LeZion, Ramat Gan and Jerusalem')",
+   "problem": "Under a turnout-only heading, listing Jerusalem (change 0.24 vs Netanyahu bloc 0.72) and Rishon reads as a call for city-wide GOTV. Their potential is mostly persuasion and rescue. Turnout potential in Jerusalem is limited to its positive stations. D6-F06 is also unverifiable (Israel Hayom, HTTP 403).",
+   "fix": "Add 'Field potential combines turnout, persuasion and rescue. In Jerusalem and Rishon LeZion most of it is persuasion and rescue, and turnout work is limited to positive-value stations.' Drop D6-F06 here and in donts 'No untargeted GOTV' (D5-F16 and D5-F17 already support those points)."
+  },
+  {
+   "where": "intro ('A saturation campaign is worth about 4,400 net votes ... in 2022 the blocs were about 30,000 votes apart')",
+   "problem": "Without scale, the comparison can suggest field work closes a large share of the gap. The brief puts 4,400 net votes at about 0.1 seat and +0.2 pp P(change-led government).",
+   "fix": "Add 'That is about 0.1 seat and +0.2 pp on the chance of a change-led government. Under the blocking objective it is about 12,400 net votes (+0.7 pp on denying Netanyahu 61).'"
+  },
+  {
+   "where": "timeline D-4, second action ('In 2015 Likud finished 8-10 seats above its final polls')",
+   "problem": "P-F30's own numbers, final polls of 20-23 and a result of 30, give 7-10 seats.",
+   "fix": "Use 'about 7-10 seats above its final polls (20-23 in the final polls, 30 in the result).'"
+  },
+  {
+   "where": "election_day 'Chase lagging' and donts 'No untargeted GOTV' (38% figure); tactics Wasted-vote (B&W 1% pass); dos 'Watch allies' (98%, 97%, 99%)",
+   "problem": "These figures are correct against model files: kalpi.csv gives 37.7% of stations with positive change-govt GOTV value, and marginal_values.csv gives p_pass 0.01, 0.98, 0.972 and 0.994. MODEL_BRIEF.md does not include them, so readers and the methodology page cannot trace them.",
+   "fix": "Add the four figures to the brief or the site's summary data, with their source file, before publishing."
+  },
+  {
+   "where": "tactics 'Deep canvassing', israel ('An Israeli study found indirect, non-confrontational messages moved hawkish attitudes')",
+   "problem": "P-F31 tested 'paradoxical thinking': messages that agree with and exaggerate pro-conflict views. 'Indirect, non-confrontational' is loose, and the vote outcome was self-reported.",
+   "fix": "Use 'An Israeli field study found that messages exaggerating hawkish views, without challenging them, made attitudes more conciliatory for up to a year. Its vote effect was self-reported (P-F31).'"
+  },
+  {
+   "where": "dos 'Lead persuasion with competence and unity' (cites P-F15 and D1-F07); messages 'Unity' (cites P-F15 and D1-F07); dos 'Use right-credentialed messengers' (D6-F16 and D2-F11)",
+   "problem": "P-F15 and D1-F07 are the same paper (Bassan-Nygate & Weiss 2022). D6-F16 and D2-F11 overlap (Shanan & Eilat, Bayan 2021). The bibliography will list the same work twice in one cite group.",
+   "fix": "Keep one id per work. Use D1-F07 or P-F15 consistently, and D6-F16 for the Druze home-village claim (D2-F11's citation was corrected in verification)."
+  },
+  {
+   "where": "tactics 'Rallies and leader events', israel ('The leader was the main reason for about 19% of votes in 2015')",
+   "problem": "D1-F29 is an INES survey item: the main reason given by respondents. It does not measure votes.",
+   "fix": "Use 'The party leader was the main reason for about 19% of voters in 2015 (INES).'"
+  },
+  {
+   "where": "messages 'Security credibility', who_it_moves and frame",
+   "problem": "'Security leads issue lists for Jewish voters (39%)' leaves out that the economy is at 38%, within the margin of error. 'Where views have moved right' rests on D6-F33, a low-confidence seminar abstract with no magnitudes.",
+   "fix": "Use 'Security narrowly leads for Jewish voters (39% vs 38% for the economy, top-two shares) and clearly leads on the right (47%).' Use 'where a panel study suggests views have moved right (D6-F33, low confidence)'."
+  },
+  {
+   "where": "tactics 'Volunteer phone banks', effect ('Conversational scripts beat standard ones (3.4 vs 1.2 pp in one US test)')",
+   "problem": "The 3.4 vs 1.2 pp result in D3-F07 comes from commercial phone banks, not volunteer calls.",
+   "fix": "Use '(3.4 vs 1.2 pp in a US commercial phone test)'."
+  },
+  {
+   "where": "election_day 'Observers and lawyers in place' ('Keep observers on the count through the double-envelope tally')",
+   "problem": "No file says whether party observers may attend the central double-envelope count.",
+   "fix": "Use 'Keep observers on the count, including the central double-envelope tally where the law allows.'"
+  }
+ ]
+}

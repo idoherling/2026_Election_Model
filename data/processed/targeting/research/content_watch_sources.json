@@ -1,0 +1,77 @@
+[
+ {
+  "where": "sources[7].note (MODEL-FORECAST)",
+  "phrase": "a repeat election is the most likely single outcome",
+  "condition": "F('gov.repeat') > max(F('gov.netanyahu_right'), F('gov.netanyahu_unaligned'), F('gov.change_alone'), F('gov.change_amcha'), F('gov.change_haredi'), F('gov.centre_minority'), F('gov.unity'), F('gov.change_raam'))"
+ },
+ {
+  "where": "sources[183].checked (D7-F01)",
+  "phrase": "come from RZP (...), The Haredi Public (...), Amcha (...), Otzma (...) and Noam (...)",
+  "condition": "F('x.sources.waste_nb_rest') < 0.05 and F('x.sources.waste_RZP') >= F('x.sources.waste_HarediPublic') >= F('x.sources.waste_Amcha') >= max(F('x.sources.waste_Otzma'), F('x.sources.waste_Noam')) and round(F('x.sources.waste_Otzma'), 1) >= round(F('x.sources.waste_Noam'), 1) and F('x.sources.waste_Otzma') >= 0.05 and F('x.sources.waste_Noam') >= 0.05"
+ },
+ {
+  "where": "sources[183].note (D7-F01)",
+  "phrase": "The largest share ... is on the Netanyahu side",
+  "condition": "F('waste.nb') > max(F('waste.other'), F('waste.unaligned'), F('waste.arab'), F('waste.change'))"
+ },
+ {
+  "where": "sources[188].checked (D7-F07)",
+  "phrase": "how the change-camp share is split among the change lists moves the chance of a Netanyahu majority by up to about {{x.sources.split_sens|f:.2f}} points",
+  "condition": "F('x.sources.split_sens') >= 0.005"
+ },
+ {
+  "where": "sources[188].checked (D7-F07)",
+  "phrase": "most of the gain goes to Yashar and Together",
+  "condition": "F('x.sources.bw_dseats_change') > 0 and F('x.sources.bw_dseats_Yashar') + F('x.sources.bw_dseats_Together') > 0.5 * F('x.sources.bw_dseats_change') and F('x.sources.bw_dseats_Yashar') > 0 and F('x.sources.bw_dseats_Together') > 0"
+ },
+ {
+  "where": "sources[188].checked (D7-F07)",
+  "phrase": "the Democrats and Yisrael Beytenu lose a few hundredths of a seat",
+  "condition": "-0.1 < F('x.sources.bw_dseats_Democrats') <= -0.015 and -0.1 < F('x.sources.bw_dseats_YB') <= -0.015"
+ },
+ {
+  "where": "sources[188].checked (D7-F07)",
+  "phrase": "The desk's exchange rate for extra Reservists votes (...) did not match the model brief it cited, which then gave -0.01 and +0.14. The current rate per 10,000 extra Reservists votes is {{mv.Reservists.govt|f:+.2f}} points for a change-led government and {{mv.Reservists.deny|f:+.2f}} points for denying Netanyahu 61 (signed values that must not render as +0.00 or -0.00)",
+  "condition": "abs(F('mv.Reservists.govt')) >= 0.005 and abs(F('mv.Reservists.deny')) >= 0.005"
+ },
+ {
+  "where": "sources[188].note (D7-F07)",
+  "phrase": "The two change-bloc surplus agreements add about {{pairs.seats}} expected seats together",
+  "condition": "F('pairs.seats') >= 0.05"
+ },
+ {
+  "where": "sources[188].note (D7-F07)",
+  "phrase": "cut the chance of a Netanyahu majority by about {{pairs.nb61}} points",
+  "condition": "F('pairs.nb61') >= 0.05"
+ },
+ {
+  "where": "sources[188].note (D7-F07)",
+  "phrase": "A Blue and White withdrawal would cut that chance by about {{lev.bw_withdraws.deny|f:.1f}} points",
+  "condition": "F('lev.bw_withdraws.deny') >= 0.05"
+ },
+ {
+  "where": "sources[188].note (D7-F07)",
+  "phrase": "Reservists-Economic passing lowers the chance of a Netanyahu majority but also cuts the change bloc's own seats",
+  "condition": "F('cond.Reservists.nb61_pass') < F('cond.Reservists.nb61_fail') and F('cond.Reservists.chseats_pass') < F('cond.Reservists.chseats_fail') and F('lev.res_withdraws.deny') < 0 and F('lev.res_withdraws_right.deny') < 0 and F('lev.res_withdraws.seats') > 0 and F('lev.res_withdraws_right.seats') > 0"
+ },
+ {
+  "where": "sources[188].note (D7-F07)",
+  "phrase": "Netanyahu's bloc reaches 61 far more often in simulations where RZP, Otzma or Amcha pass",
+  "condition": "F('cond.RZP.nb61_pass') >= 2 * F('cond.RZP.nb61_fail') and F('cond.Otzma.nb61_pass') >= 2 * F('cond.Otzma.nb61_fail') and F('cond.Amcha.nb61_pass') >= 2 * F('cond.Amcha.nb61_fail')"
+ },
+ {
+  "where": "sources[196].checked (D7-F17)",
+  "phrase": "That gap is a correlation, since a Ra'am failure coincides with low Arab turnout",
+  "condition": "F('cond.Raam.nb61_fail') > F('cond.Raam.nb61_pass')"
+ },
+ {
+  "where": "sources[325].note (D11-F34)",
+  "phrase": "A uniform national rise favours Netanyahu's bloc",
+  "condition": "F('x.sources.national_net_per_point') > 0"
+ },
+ {
+  "where": "sources[325].note (D11-F34)",
+  "phrase": "a small counter-mobilisation can cancel a realistic field programme",
+  "condition": "F('x.sources.breakeven_hi') < 0.5"
+ }
+]

@@ -4,8 +4,26 @@
     {
       "name": "site",
       "runtimeExecutable": "python3",
-      "runtimeArgs": ["-m", "http.server", "8613", "--directory", "output/site"],
+      "runtimeArgs": [
+        "-m",
+        "http.server",
+        "8613",
+        "--directory",
+        "output/site"
+      ],
       "port": 8613
+    },
+    {
+      "name": "atlas",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": [
+        "-m",
+        "http.server",
+        "8614",
+        "--directory",
+        "output/targeting"
+      ],
+      "port": 8614
     }
   ]
 }

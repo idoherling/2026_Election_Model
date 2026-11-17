@@ -1,0 +1,200 @@
+{
+ "verdicts": [
+  {
+   "id": "D2-F01",
+   "status": "verified",
+   "note": "Checked the JVL page. It gives 1949 86.9%; 1955 82.8, 1959 81.6, 1961 83.0, 1965 83.0, 1969 81.7 (range 81.6-83.0); 1973-1999 between 77.4 and 79.7; 2003 68.9; 2006 63.5; 2009 64.7; 2013 63.9; 2015 72.3. The CEC figures of 67.8% for 2003 and 2013 match the Rudnitzky Bayan 28 chart (D2-F02). The desk's explanation that JVL 'uses valid votes' is a guess, not something the source says. JVL's 2013 vote count (3,616,947) does not match either total or valid votes, so call JVL's 2003/2013 figures erroneous and use the CEC figures.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "D2-F02",
+   "status": "corrected",
+   "note": "Bayan 28 (Dec 2022, KAP/Moshe Dayan Center, PDF dated 7 Dec 2022) exists. Its Figure 1 matches the Arab/Druze series exactly (75.0, 62.0, 56.3, 53.4, 56.5, 63.5, 49.2, 59.2, 64.8, 44.6, 53.2), the 55.9% decade average (2013-22), and 938,401 eligible voters in Arab and Druze localities (Table 2). Two errors: (1) the source's national figure for 2021 is 67.2%, not 67.4% (the official CEC figure is 67.44%); (2) the gap to national turnout was 3.7 points in 1999 and 5.8 in 2003, so the range across 1999-2022 is about 4-23 points. The 7-23 range holds only from 2006 onward.",
+   "corrected_url": "https://dayan.org/file-download/download/public/17864",
+   "corrected_quant": "Arab-national gap: 1999 3.7; 2003 5.8; 2006 7.2; 2009 11.3; 2013 11.3; 2015 8.8; 2019a 19.3; 2019s 10.6; 2020 6.7; 2021 22.6 (vs source's 67.2) or 22.8 (vs CEC 67.44); 2022 17.4. Range 3.7-22.8 pts."
+  },
+  {
+   "id": "D2-F03",
+   "status": "verified",
+   "note": "The IDI article by Or Anabi and Ofer Kenig (2 Nov 2022) has exactly the 2019a-2021 table: 240,783 (5.55%), 282,442 (6.32%), 330,209 (7.15%), 425,512 (9.59%). Its list of envelope groups matches, and it says soldiers are the largest group. The article does not give the 2022 figures or say where envelopes are counted. Both are confirmed elsewhere. The Atmor-Friedberg-Harsgor chapter (IDI Hebrew volume, p.127) gives 462,807 envelopes, 9.7% of voters and 6.8% of eligible, with about 3,500 diplomatic-mission votes and about 15,000 prisoners. The CEC 2022 Guide says envelopes are counted by Counting Committees at the Knesset.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "D2-F04",
+   "status": "corrected",
+   "note": "All numbers check out in the chapter (IDI Hebrew volume, Feb 2025, pp.115-148). Table 1 gives without/with envelopes by district: North 59.4/65.6, Haifa 59.0/65.3, Tel Aviv 63.4/69.7, Centre 68.7/75.6, Jerusalem 63.3/71.2, South 62.2/69.3, J&S 75.3/85.3, total 63.8/70.6. Table 2 gives Jewish/mixed 73.0% vs Arab 56.0%; envelopes are 438,034/5,850,403 = 7.5% and 26,933/938,401 = 2.9%. Eilat 53.6% and Arab localities in the Golan subdistrict 27.5% are also confirmed. The chapter confirms the authors petitioned the CEC (chair Justice Solberg) for the locality envelope data. Citation fixes: (1) author order is Nir Atmor, Chen Friedberg, Liran Harsgor; (2) the Hebrew title is 'מי נהר לקלפיות? שיעורי ההצבעה בבחירות 2022'; (3) the English edition title is 'For Whom the Polls Toll? Voter Turnout in the 2022 Elections', DOI 10.4324/9781032633299-5 (Routledge; the DOI resolves to Taylor & Francis); (4) the en.idi.org.il PDF is the Hebrew edition.",
+   "corrected_url": "https://en.idi.org.il/media/27873/the-elections-in-israel-2022.pdf",
+   "corrected_quant": ""
+  },
+  {
+   "id": "D2-F05",
+   "status": "corrected",
+   "note": "Table 4 (p.138) confirms every coefficient. Model 1, Jewish/mixed (N=1,069): SES 0.527; centrality 0.257 (not significant); size -0.734; development town -6.292; kibbutz -4.324; haredi share 0.057 (text says 0.57); J&S 4.910; adj R2 0.159. Model 2, Arab (N=146): SES 1.812; centrality 2.22; size 1.745; adj R2 0.164. Model 3, pooled: Arab -26.314; development town -7.846; kibbutz -4.046; J&S 5.077; adj R2 0.597. The only fix is the citation: authors are Atmor, Friedberg, Harsgor, and the English edition title is 'For Whom the Polls Toll?' (DOI 10.4324/9781032633299-5).",
+   "corrected_url": "https://en.idi.org.il/media/27873/the-elections-in-israel-2022.pdf",
+   "corrected_quant": ""
+  },
+  {
+   "id": "D2-F06",
+   "status": "corrected",
+   "note": "Section 4 of the chapter (p.139) confirms: Jewish/mixed centre-periphery gap of 2.5 (Apr 2019), 3.6 (Sep 2019) and 4.4 (2022). Peripheral Arab localities ranged from 38.7% (2019a) to 52.4% (2020); central Arab localities from 54.5% (2021) to 75.6% (2020). The Arab gap was 25.7 (2019a), 14.2 (2021, the smallest) and 19.6 (2022). The chapter says this time series excludes envelopes. Only the author order and title need fixing, as in D2-F04.",
+   "corrected_url": "https://en.idi.org.il/media/27873/the-elections-in-israel-2022.pdf",
+   "corrected_quant": ""
+  },
+  {
+   "id": "D2-F07",
+   "status": "verified",
+   "note": "Bayan 28 (Rudnitzky) confirms all of it: every 2013-21 rise came only under unity; the 2022 rise came despite three lists; voters had 'three worthwhile options'; 2021 abstainers 'found an address'; boycott declarations were reversed; tactical votes went to Balad; and Balad would likely have passed at 60% Arab turnout. Table 1 gives Ra'am 35.2%, Hadash-Ta'al 28.8%, Balad 21.8% (21.7% in the text), Arab lists 85.8% and Jewish lists 14.2% (14.3% in the text). The IDI 25 Dec 2022 analysis exists (en.idi.org.il/articles/47986). I did not check the 9 Nov 2022 IDI piece.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "D2-F08",
+   "status": "corrected",
+   "note": "The IDI article is real: Arik Rudnitzky, 'Elections for the 25th Knesset: An Analysis of the Results in the Arab Sector', IDI, 25 Dec 2022. It confirms all the town figures (Jaljulya 69.5, Sakhnin 68.4, Kafr Qassem 66.9, Majd al-Kurum 66.7, Kafr Manda 65.2, Kafr Bara 64.8, Tamra 63.5, Tira 62.3, Umm al-Fahm 38.3, Maghar 44, Baqa 47.5, Nazareth 48.3, Shefa-'Amr 51.5). It also confirms southern Triangle 60.8, northern Triangle 46.2, North 53.9, Triangle 52.5, Jerusalem corridor 55.9, and the 'favorite son'/local-candidate effect. Corrections: (1) the title is wrong in the desk's citation; (2) the Negev 51.0% and the eligible-voter counts (573,878; 211,980; 144,860) are from Bayan 28 Table 2, not this IDI article. IDI also notes that Maghar's turnout was low even though Mansour Abbas lives there.",
+   "corrected_url": "https://en.idi.org.il/articles/47986",
+   "corrected_quant": ""
+  },
+  {
+   "id": "D2-F09",
+   "status": "verified",
+   "note": "The Abraham Initiatives policy paper (18 Jan 2024, submitted to the Knesset Interior Committee) confirms: about 40,000 voters; stations 5-65 km away and assigned by tribe; 1-2 hours each way without a car (the Fura example); the 21 Aug 2022 petition rejected on 23 Aug 2022. Appendix B confirms tribal stations at 24.6 (2009), 34.2 (2015), 42.1 (Sep 2019), 32.4 (2021), 38 (2022) and recognised communities at 35.9, 47.0, 52.1, 45.8, 56. Ra'am's 73.9% Negev share is from Bayan 28. I could not retrieve INSS Insight 1661 (guessed URLs returned 404 and the web-search budget ran out), so the INSS township/regional-council/unrecognised figures are unverified.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "D2-F10",
+   "status": "corrected",
+   "note": "The Zazim page 'Moving forward together' (22 May 2019) confirms 50 minibuses, 5,000 voters from unrecognised villages, and a Likud petition two days before the vote. Darawshe's article (Bayan, 27 Nov 2019) confirms that for Sep 2019 Zazim planned 60 vehicles and that about 300 volunteers drove voters in their own cars after Likud asked the CEC chair to stop it. The project's CEC file reproduces the town turnouts exactly: Tel Sheva 30.9->54.9, Laqiya 22.9->46.3, Hura 29.2->45.1, Kuseife 41.3->58.6, Rahat 49.6->59.5. Correction: Abraham Initiatives Appendix B puts April 2019 tribal-station turnout at 25.8%, not about 20%. I could not verify the Adalah figure.",
+   "corrected_url": "https://www.zazim.org.il/en/moving-forward-together/",
+   "corrected_quant": "Tribal stations Apr 2019 25.8% -> Sep 2019 42.1%; recognised Negev Bedouin 37.3% -> 52.1% (Abraham Initiatives App. B). Zazim Sep 2019: 60 vehicles planned, ~300 volunteer drivers."
+  },
+  {
+   "id": "D2-F11",
+   "status": "corrected",
+   "note": "Corrected citation: Mahmoud Shanan & Omri Eilat, 'From a Community to a Society: Trends in Druze Voting Patterns in the Knesset Elections, 1996-2020', Bayan, 18 Mar 2021. It confirms 1996 76.8, 1999 78.9, 2003 64.2, 2006 64.9 and Sep 2019 53.2, plus the weakening of family vote brokering and periphery neglect. It does not cite the Nation-State Law as a cause of falling turnout. That explanation comes from Salim Brake, 'The Druze Vote for the Twentieth, Twenty-First, and Twenty-Second Knesset Elections' (Bayan, Nov 2019, PDF dayan.org/file-download/download/public/16901). Brake gives 57.7 (2015), 60.1 (2019a) and 54.5 (2019s), and Meretz's 64.8% in Beit Jann (15.8% of all Druze votes). The roughly 90% Zionist share (Druze towns, 2022) and about 11,000 Druze votes for National Unity are from Bayan 28. I could not verify the '2021-22 average 48.7% vs 55.9% for 2013-20 (Rudnitzky)' figure, and it looks suspect: in Bayan 28, 55.9% is the Arab+Druze average for 2013-22.",
+   "corrected_url": "https://dayan.org/content/community-society-trends-druze-voting-patterns-knesset-elections-1996-2020",
+   "corrected_quant": "Drop or re-source '2021-22 avg 48.7% vs 55.9%'."
+  },
+  {
+   "id": "D2-F12",
+   "status": "corrected",
+   "note": "The Malach chapter (IDI Hebrew volume, p.371ff) confirms: UTJ voters grew 3.95% a year from 1992 to 2022; Ashkenazi haredi eligible voters grew 4.3% a year gross and 4.1% after mortality; UTJ realised about 95% of its electorate's growth; the shortfall is about 12,000 votes. Nuances: (1) the 95% describes growth relative to demography, not turnout; (2) Malach reports that turnout at clearly haredi polling stations fell from 76% to 72.5% (2013-2022), offset by a 3.5-point rise in envelope voting, leaving about 79% including envelopes in both years; (3) turnout in haredi centres fell about 3.5 points in 2021. The municipal-turnout claim (haredi localities -0.5 points 2018-2024) comes from Finkelstein (IDI, D2-F23), not Malach. The raw 2022 figures (Bnei Brak 76.5, Modiin Illit 82.0, Beitar Illit 81.3, Elad 84.4) match the project's CEC file.",
+   "corrected_url": "https://en.idi.org.il/media/27873/the-elections-in-israel-2022.pdf",
+   "corrected_quant": "Haredi-station turnout 76% (2013) -> 72.5% (2022) regular stations; ~79% incl. envelopes both years."
+  },
+  {
+   "id": "D2-F13",
+   "status": "verified",
+   "note": "Ella Heller, IDI, 16 Mar 2015 confirms clusters 1-2 56.7%, 8-10 74.5%, non-haredi Jewish clusters 1-2 51.6%, and self-reported non-voting of 14.9% (18-22), 18.1% (Arabs), 15.7% (FSU 1989-2012), 16.0% (lower class), 1.4% (haredim). About half of those who said they would not vote did vote, and IDI estimates true turnout at about 75% vs 67.8%. One fix: the 6.8% figure is 'Jews and others', not Jews alone.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "D2-F14",
+   "status": "verified",
+   "note": "The Algemeiner piece (JNS, 28 Jan 2013) reports Yehuda Ben Meir's INSS analysis: 400,000-500,000 registrants abroad, adjusted turnout about 73%, Jewish turnout about 75%, and Arab turnout 56%. The CBS end-2016 estimate of 560-596k Israelis abroad does not appear in this source, and I could not check it (web-search budget exhausted). Source it separately or drop it.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "D2-F15",
+   "status": "corrected",
+   "note": "JPost (Miriam Sela-Eitam, 3 Aug 2026), 'Nearly 270,000 citizens left Israel since 2023, new study shows', reports Ater, Bergman and Zamir (TAU) using CBS data: 86,509, 91,499 and 90,922 for 2023-25 (total 268,930) vs 83,219 for 2013-15; 45-50k long-term leavers in 2025; no locality breakdown. The '+29.1% vs 2022' figure is not in the article. Drop it or source it elsewhere.",
+   "corrected_url": "",
+   "corrected_quant": "Remove '2023 +29.1% vs 2022' (not in cited source)."
+  },
+  {
+   "id": "D2-F16",
+   "status": "corrected",
+   "note": "The eJewishPhilanthropy article is by Justin Hayet, 7 Aug 2026. It confirms the AID Coalition's Fly & Vote, about 31,000 registered with a 70,000 target, that flights are not paid for but 'scholarships' exist in some cases, and the 45% survey figure. It does not cover Likud calling the scheme an 'electoral bribe', Code 51 removals, the High Court dismissal, or the home-polling-station point; it says only that expats removed from the rolls could appeal. Those sub-claims need their own Times of Israel or JTA citations, which I did not verify.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "D2-F17",
+   "status": "corrected",
+   "note": "JPost (Anna Barsky, 20 Sep 2026) confirms for 2026: intercity buses over 15 km and Israel Railways trains free from 20:00 on 26 Oct until service ends; Eilat requires registration through Egged (*2800). The article does not mention urban lines, so 'urban lines are not covered' is an inference. The CEC 2022 Guide confirms the statutory holiday, hours of 07:00-22:00 (08:00-20:00 in small communities), and free intercity transport including trains. I could not verify the 2019 history and costs (Calcalist, NIS 2.4m/3m): no URL was given and search was exhausted.",
+   "corrected_url": "https://jpost.com/israel-election-2026/article-909148",
+   "corrected_quant": ""
+  },
+  {
+   "id": "D2-F18",
+   "status": "verified",
+   "note": "The CEC 'Guide to Knesset Elections' (25th Knesset) confirms voting only at the assigned station, the exceptions by double envelope (impaired mobility, hospitalised, prisoners, soldiers, diplomats, women in shelters, elder-care facilities), and the Population Registry cut-off of 8 Sep 2022 (Elul 2, 5782), 54 days before 1 Nov. I did not check the 2016 IDI/Kenig item.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "D2-F19",
+   "status": "corrected",
+   "note": "The May 2026 survey is confirmed: Rudnitzky, 'Integration and Influence: Survey of Arab Citizens in Israel' (14 May 2026). It gives 53% turnout if the parties run separately (Hadash-Ta'al 5.3, Ra'am 4.6, Balad 1.8) and 67% under a four-party Joint List (16.3 seats, the highest in the series). It also gives 76.9% weak personal security and 77.2% support for an Arab party in the coalition (43.3% any government, 33.9% centre-left). I could not find or verify the Nov 2025 survey (52.4%/61.8%/15.5 seats). A guessed URL returned 404 and search was exhausted. Rani Hassan (Bayan, 22 Feb 2026) does cite a KAP Nov 2025 survey showing 77% support for an Arab party in the coalition.",
+   "corrected_url": "",
+   "corrected_quant": "Nov 2025 figures (52.4/61.8/15.5) unverified; keep May 2026 figures only."
+  },
+  {
+   "id": "D2-F20",
+   "status": "corrected",
+   "note": "The Abraham Initiatives 'Young Arab Voter Survey' (page dated 14 Aug 2026; n=614, Feb 2026) confirms expected turnout of 58.8-61.9% and the demand for concrete plans on crime, housing, jobs and discrimination. The ACI Task Force paper (12 Aug 2026) confirms about 59% for ages 18-34 (no source named) and the point that Arab women are less likely to say they will 'definitely' vote. The Task Force attributes 'women and youth are the greatest potential' to the Abraham Initiatives, not to itself. The Statnet/Abraham 30% and 18% reasons for not voting are not on the cited page and are unverified.",
+   "corrected_url": "https://www.acitaskforce.org/resource/arab-society-and-israels-2026-elections-between-electoral-power-and-political-influence/",
+   "corrected_quant": "Drop or re-source Statnet 30%/18%."
+  },
+  {
+   "id": "D2-F21",
+   "status": "corrected",
+   "note": "The IDI Israeli Voice Index for August 2026 is confirmed (fieldwork 31 Aug-3 Sep 2026; 605 Hebrew and 150 Arabic interviews; ±3.57%). The 8.7% (Arabs) and 1.2% (Jews) are the 'don't intend to vote' option in Q7, which asks what will most influence vote choice. It is not a direct turnout-intention question, and the Arab subsample is small. Crime in Arab society at 31.5% is confirmed. The ArPanel/JPost 66% recall figure, the KAP 49% forecast from Oct 2022, and the Abraham Initiatives 56% from Mar 2019 are unverified. The only 56% forecast I could verify is the Coalition 17/9 internal poll (Haaretz, Aug 2019), which predicted 56% against 59% actual in Sep 2019, an error of -3, not -6.8.",
+   "corrected_url": "https://en.idi.org.il/media/32364/august-voice-index-data.pdf",
+   "corrected_quant": "Voice Index: 8.7% Arab / 1.2% Jewish chose 'don't intend to vote' on a vote-consideration item (Arab n=150). Verified forecast error: Coalition 17/9 56% vs 59% actual (Sep 2019)."
+  },
+  {
+   "id": "D2-F22",
+   "status": "corrected",
+   "note": "This is an internal calculation, and the cited IDI URL contains none of these numbers. Cite the project's CEC file instead. I re-ran it on data/processed/kalpi_localities.parquet, using localities with 1,000+ eligible in all five cycles and my own sector rule. Results: Arab 49.5/59.4/65.1/44.7/53.4; haredi 76.3/76.7/76.5/72.7/75.8; Jewish 65.7/65.1/65.4/62.2/64.2; median max-min range Arab 21.3, haredi 4.6, Jewish 4.5. That is close to the desk's figures, so they are broadly reproducible but depend on how sectors are defined. Inconsistency: the stated Arab 'sector swings' (+12.3, +5.7, -19.8, +8.6) do not follow from the desk's own weighted levels, which imply +11.4, +6.1, -21.6, +9.3. They look like median locality swings (my medians: +12.2, +5.0, -18.6, +8.4). The deviation SDs also depend on method (my run gives Arab 7.5, Jewish 2.3, haredi 1.3).",
+   "corrected_url": "none - internal calculation from project file data/processed/kalpi_localities.parquet (CEC official results)",
+   "corrected_quant": "Arab weighted-series swings: +11.4, +6.1, -21.6, +9.3 pts (stated +12.3/+5.7/-19.8/+8.6 appear to be median locality swings). Label the definition used."
+  },
+  {
+   "id": "D2-F23",
+   "status": "verified",
+   "note": "Finkelstein, 'Analysis of the 2024 Local Elections' (IDI, 17 Apr 2024) confirms local turnout changes from 2018 to 2024 of Arab -10, non-haredi Jewish -4.5 and haredi -0.5. It does not discuss hamulas. The hamula point is confirmed in the Atmor-Friedberg-Harsgor chapter (p.121), which cites Ben-Bassat & Dahan (2012), 'Social Identity and Voting Behavior', Public Choice 151(1-2):193-214, on clan structure driving Arab turnout and higher local-election turnout. Author order should read Atmor, Friedberg, Harsgor.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "D2-F24",
+   "status": "verified",
+   "note": "Times of Israel (Jeremy Sharon & Noam Lehmann, 2 Oct 2026) confirms the CEC barred Ra'am, the Joint List, Cassif and Abou Shahadeh. The Supreme Court overturned the Ra'am and Joint List bans unanimously and Cassif's 7-2 (Mintz and Stein dissenting). Abou Shahadeh withdrew before the ruling after being told a majority would bar him. Darawshe (Bayan, 27 Nov 2019) confirms 49% to 59%, the cameras threat and Odeh's centre-left statement. The ACI Task Force paper (12 Aug 2026) confirms the warning about framing.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "D2-F25",
+   "status": "corrected",
+   "note": "The Abraham Initiatives page is a reprint of a Haaretz article by Judy Maltz (27 Aug 2019), not a Times of Israel report. It confirms Coalition 17/9 (11 Arab civil-society groups, founded by Samer Swaid of the Arab Center for Alternative Planning), hundreds of volunteers, 25 low-turnout towns including Ramle, canvassing outside a church in Ramle, help finding polling stations, Arabic leaflets, billboards, social media, and the internal poll of 56% (actual 59%). I did not verify the 2022 Al-Monitor item or the '40-50% pre-2022 polls' figure.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "D2-F26",
+   "status": "verified",
+   "note": "Hoffman & Baron, 'First-Time Voters on the Way to the Ballot Box' (IDI, 17 Jun 2026) confirms: fieldwork in May 2026; Jewish n=422 (iPanel) and Arab n=154 (Afkar); ±4.08%; 80-95% think or are sure they will vote; about 72% of secular youth 'sure'; 87% of Arab youth intend to vote; 77% political interest among haredi youth. Weights are 35/19.5/18/16/11.5, so traditional totals 27.5%. Note that IDI cites the CBS for about 640,000 first-time voters, so the upper figure is CBS-attributed rather than a press estimate.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "D2-F27",
+   "status": "corrected",
+   "note": "The development-town coefficient of -6.3 is confirmed (Table 4, Model 1). All the raw 2022 figures match the project's CEC file: Bat Yam 50.8, Nof HaGalil 52.8, Haifa 55.5, Kiryat Yam 55.6, Karmiel 57.1, Kiryat Shmona 61.1, Ashkelon 61.9, Beersheba 61.3, Dimona 63.6, Ashdod 64.4, Sderot 65.6, Ofakim 68.6, Netivot 75.5, Hod HaSharon 74.4, Shoham 76.0. Fix the citation: authors are Nir Atmor, Chen Friedberg, Liran Harsgor, and the English edition title is 'For Whom the Polls Toll?' (DOI 10.4324/9781032633299-5). The URL supports the coefficient only; the raw figures are project calculations. The idea that emigration and an older population explain part of the low turnout in FSU-heavy cities is the desk's inference, not a sourced finding.",
+   "corrected_url": "https://en.idi.org.il/media/27873/the-elections-in-israel-2022.pdf",
+   "corrected_quant": ""
+  }
+ ],
+ "missing_key_works": [
+  "Shahin A. Sarsour (2026). 'Between instrumental unity and cumulative political learning: The establishment of the Joint List ahead of the elections for the 26th Knesset in comparison to unification attempts during the period 2015-21'. Bayan, Moshe Dayan Center, 22 Feb 2026. https://dayan.org/content/between-instrumental-unity-and-cumulative-political-learning-establishment-joint-list-ahead. A qualitative account of why unity raises Arab turnout and split lists depress it (the 2019 drop to about 49% as deliberate protest abstention). Directly relevant to the 2026 Joint List reunion. Verified by fetching the page.",
+  "Nir Atmor, Chen Friedberg & Liran Harsgor (2025). 'For Whom the Polls Toll? Voter Turnout in the 2022 Elections', in Rahat, Gidron & Shamir (eds.), The Elections in Israel 2022, Routledge. DOI https://doi.org/10.4324/9781032633299-5 (resolves to Taylor & Francis). This is the English edition of the chapter the desk cites only in Hebrew, with the correct author order. Cite it for an English-language deliverable.",
+  "Arik Rudnitzky (2022). 'Searching for Political Efficacy: The Israeli Arab Vote in the 2019-21 Knesset Elections', Israel Affairs 28(6): 856-877. Peer-reviewed analysis of Arab turnout swings 2019-21: distrust in state institutions, weakening of the Arab parties, and the spread of boycott. Citation verified from the reference list (p.148) of the IDI 2022 volume: https://en.idi.org.il/media/27873/the-elections-in-israel-2022.pdf. I could not retrieve the publisher DOI page (Taylor & Francis returned 403 and the web-search budget was exhausted).",
+  "Maoz Rosenthal, Hani Zubida & David Nachmias (2018, online 2017). 'Voting Locally Abstaining Nationally: Descriptive Representation, Substantive Representation and Minority Voters' Turnout', Ethnic and Racial Studies 41(9): 1632-1650. The core study of why Arab citizens turn out far more in local than in Knesset elections, which bears on D2-F23. Citation verified from the reference list (p.147) of the IDI 2022 volume: https://en.idi.org.il/media/27873/the-elections-in-israel-2022.pdf. DOI not retrieved.",
+  "Nir Atmor & Chen Friedberg (2016). 'Who Turned Out at the Polls? Socioeconomic and Geographic Perspectives on 2015 Voter Turnouts in Israel', Israel Affairs 22(3-4): 597-612. Also Avishai Afriat & Momi Dahan (2010), 'Socioeconomic Bias in Voting for the Knesset', Israel Economic Review 8(1): 1-20. Both are earlier locality-level studies of the SES and centre-periphery turnout gradient, useful to show the 2022 coefficients are stable over time. Citations verified from the reference list (pp.145-146) of the IDI 2022 volume: https://en.idi.org.il/media/27873/the-elections-in-israel-2022.pdf. DOIs not retrieved."
+ ]
+}

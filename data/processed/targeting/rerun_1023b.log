@@ -1,0 +1,274 @@
+share draws: 8000 x 22; forecast pairs [(2, 5), (11, 9), (8, 1), (6, 7), (12, 4)] -> atlas pairs [(2, 5), (11, 9), (8, 1), (6, 7), (3, 13), (12, 4)]
+baseline: {'change61': 0.0542, 'change_raam61': 0.2657, 'block_nb': 0.9093, 'change_seats': 51.8309, 'change_govt': 0.2821}
+  The Democrats                    change61=+0.00298 change_raam61=+0.00849 block_nb=+0.00363 change_seats=+0.16924 change_govt=+0.00723
+  Likud                            change61=-0.00188 change_raam61=-0.00784 block_nb=-0.00389 change_seats=-0.10982 change_govt=-0.00599
+  Otzma Yehudit                    change61=-0.00201 change_raam61=-0.01121 block_nb=-0.00415 change_seats=-0.13516 change_govt=-0.00803
+  Ra'am                            change61=-0.00363 change_raam61=+0.01121 block_nb=+0.00531 change_seats=-0.15596 change_govt=-0.00232
+  Religious Zionist Party          change61=-0.00330 change_raam61=-0.01276 block_nb=-0.00603 change_seats=-0.16788 change_govt=-0.00981
+  Shas                             change61=-0.00253 change_raam61=-0.00849 block_nb=-0.00382 change_seats=-0.10989 change_govt=-0.00489
+  United Torah Judaism             change61=-0.00246 change_raam61=-0.00816 block_nb=-0.00382 change_seats=-0.10853 change_govt=-0.00454
+  Yashar                           change61=+0.00298 change_raam61=+0.00849 block_nb=+0.00363 change_seats=+0.16607 change_govt=+0.00715
+  Yisrael Beytenu                  change61=+0.00194 change_raam61=+0.00894 block_nb=+0.00337 change_seats=+0.17527 change_govt=+0.00609
+  Reservists – Economic Party      change61=-0.00091 change_raam61=-0.00376 block_nb=+0.00156 change_seats=-0.05410 change_govt=-0.00108
+  Bennett 2026 + Yesh Atid         change61=+0.00194 change_raam61=+0.00875 block_nb=+0.00292 change_seats=+0.16334 change_govt=+0.00689
+  Balad + Hadash-Ta'al             change61=-0.00227 change_raam61=-0.00674 block_nb=+0.00330 change_seats=-0.10808 change_govt=-0.00424
+  Amcha Yisrael                    change61=-0.00058 change_raam61=-0.00227 block_nb=-0.00266 change_seats=-0.05216 change_govt=-0.00230
+  Israel First                     change61=+0.00026 change_raam61=+0.00039 block_nb=-0.00006 change_seats=+0.00531 change_govt=+0.00030
+  Noam                             change61=+0.00006 change_raam61=+0.00039 block_nb=-0.00058 change_seats=+0.00415 change_govt=+0.00018
+  The Haredi Public                change61=+0.00026 change_raam61=+0.00032 block_nb=-0.00026 change_seats=+0.00538 change_govt=+0.00028
+  Ahi – Back to the Roots          change61=+0.00019 change_raam61=+0.00032 block_nb=-0.00013 change_seats=+0.00531 change_govt=+0.00030
+  Code Black – Shield of the Torah World change61=+0.00019 change_raam61=+0.00045 block_nb=+0.00000 change_seats=+0.00408 change_govt=+0.00023
+  Tzomet Beit Yisrael              change61=+0.00013 change_raam61=+0.00045 block_nb=+0.00000 change_seats=+0.00570 change_govt=+0.00022
+wrote /Users/idoherling/Polling:Consulting Firm/2026_Election_Model/data/processed/targeting/marginal_values.csv
+{
+ "projection_in_sample_2021_2022": {
+  "mae_C_transfer_pp": 1.49,
+  "mae_C_uniform_pp": 1.77,
+  "mae_R_transfer_pp": 1.43,
+  "mae_R_uniform_pp": 1.92,
+  "mae_A_transfer_pp": 0.54,
+  "mae_A_uniform_pp": 2.2,
+  "mae_C_transfer_big_pp": 1.28,
+  "mae_C_uniform_big_pp": 1.5,
+  "party_mae_pp": {
+   "likud": 0.95,
+   "yesh_atid": 1.05,
+   "rzp": 0.98,
+   "blue_white": 0.87,
+   "shas": 0.52,
+   "utj": 0.31,
+   "yisrael_beytenu": 0.44,
+   "raam": 0.79,
+   "hadash_taal": 0.91,
+   "labor": 0.32,
+   "meretz": 0.45,
+   "balad": 0.99,
+   "jewish_home": 0.45
+  },
+  "n_localities": 1212,
+  "note": "Flow matrix estimated by Kolot Nodedim from the same stations: tests the local-allocation assumption, not national accuracy."
+ },
+ "projection_holdout": {
+  "2020->2021": {
+   "transfer": {
+    "C": 2.5,
+    "R": 2.37,
+    "A": 0.7
+   },
+   "uniform": {
+    "C": 1.18,
+    "R": 1.74,
+    "A": 1.4
+   },
+   "blend": {
+    "C": 1.63,
+    "R": 1.78,
+    "A": 0.68
+   }
+  },
+  "2021->2022": {
+   "transfer": {
+    "C": 1.36,
+    "R": 1.29,
+    "A": 0.64
+   },
+   "uniform": {
+    "C": 1.53,
+    "R": 1.85,
+    "A": 1.17
+   },
+   "blend": {
+    "C": 1.25,
+    "R": 1.39,
+    "A": 0.85
+   }
+  },
+  "note": "Transfer matrix fitted by NNLS on a random half of localities and scored on the other half (3 splits); both methods are given the held-out half's true national totals."
+ },
+ "projection_method": {
+  "camp_blend": 0.5,
+  "druze_pool": 0.6,
+  "note": "Lists projected by the coherent 2022->2026 flow matrix, then each locality's camp totals pulled halfway toward uniform camp swing (lists scaled within camp), then raked to the forecast. The 50/50 blend had the lowest or near-lowest held-out error in both folds; pure transfer failed badly in 2020->21 (C 2.5 pts) and pure swing in 2021->22 (A 1.2 pts)."
+ },
+ "openness_out_of_sample": {
+  "specs": {
+   "volatility only": {
+    "spearman_by_fold": [
+     0.162,
+     0.202
+    ],
+    "mean_spearman": 0.182,
+    "top_bottom_quintile_ratio": [
+     2.16,
+     2.49
+    ]
+   },
+   "footprint only": {
+    "spearman_by_fold": [
+     0.405,
+     0.284
+    ],
+    "mean_spearman": 0.344,
+    "top_bottom_quintile_ratio": [
+     2.85,
+     2.87
+    ]
+   },
+   "balance only": {
+    "spearman_by_fold": [
+     0.39,
+     0.26
+    ],
+    "mean_spearman": 0.325,
+    "top_bottom_quintile_ratio": [
+     2.34,
+     2.69
+    ]
+   },
+   "equal weights": {
+    "spearman_by_fold": [
+     0.447,
+     0.316
+    ],
+    "mean_spearman": 0.381,
+    "top_bottom_quintile_ratio": [
+     3.13,
+     3.44
+    ]
+   },
+   "footprint + balance": {
+    "spearman_by_fold": [
+     0.435,
+     0.296
+    ],
+    "mean_spearman": 0.366,
+    "top_bottom_quintile_ratio": [
+     2.86,
+     2.98
+    ]
+   },
+   "footprint-led": {
+    "spearman_by_fold": [
+     0.444,
+     0.315
+    ],
+    "mean_spearman": 0.379,
+    "top_bottom_quintile_ratio": [
+     3.14,
+     3.41
+    ]
+   }
+  },
+  "chosen": "equal weights",
+  "n_by_fold": {
+   "2020->2021": 556,
+   "2021->2022": 567
+  },
+  "target
+                   name_he           segment  eligible  p26_change  p26_nb  change_govt__area_pot  change_govt__list_pot  change_govt__gotv_pot  change_govt__pers_pot  change_govt__resc_pot  change_govt__potential  change_govt__eff1k  change_govt__per100h                     tier
+locality                                                                                                                                                                                                                                                                                
+5000          תל אביב  יפו     liberal_urban    447576        0.67    0.24                 546.66                  40.70                 538.67                  21.65                  27.04                  587.36                4.72                  1.83           Turnout engine
+4000                  חיפה       mixed_urban    253292        0.54    0.31                 163.04                  18.39                 150.50                  19.30                  11.62                  181.43                2.85                  1.05           Turnout engine
+8300           ראשון לציון       mixed_urban    211845        0.52    0.44                 114.34                  18.41                  79.22                  40.54                  12.99                  132.75                1.99                  0.71           Turnout engine
+8600                רמת גן     liberal_urban    139055        0.62    0.32                 118.65                  10.49                 103.39                  15.95                   9.80                  129.14                2.82                  1.05           Turnout engine
+3000               ירושלים         jerusalem    432125        0.24    0.72                  55.03                  52.89                  76.74                  22.54                   8.64                  107.92                2.47                  0.73           Turnout engine
+6400                הרצליה     liberal_urban     88932        0.66    0.29                  78.79                   7.32                  70.64                   8.53                   6.95                   86.11                2.91                  1.08           Turnout engine
+7400                 נתניה   periphery_likud    195220        0.40    0.57                  40.53                  42.56                  58.33                  17.68                   7.07                   83.09                2.28                  0.54    Supporter-list ground
+7900             פתח תקווה       mixed_urban    197815        0.44    0.52                  52.20                  19.58                  28.35                  33.84                   9.59                   71.77                1.33                  0.41  Persuasion battleground
+6600                 חולון   periphery_likud    159831        0.44    0.51                  47.33                  20.83                  35.44                  24.88                   7.84                   68.16                1.59                  0.48           Turnout engine
+6200                 בת ים  russian_speaking    124742        0.44    0.52                  46.15                  18.88                  47.12                  13.95                   3.96                   65.03                2.20                  0.68           Turnout engine
+8400                רחובות       mixed_urban    111435        0.49    0.47                  50.25                  13.02                  41.16                  16.06                   6.05                   63.27                2.24                  0.77           Turnout engine
+6900               כפר סבא     liberal_urban     81737        0.65    0.30                  50.26                   7.54                  43.02                   8.33                   6.44                   57.80                2.23                  0.80           Turnout engine
+6300               גבעתיים     liberal_urban     49341        0.74    0.20                  47.91                   4.15                  44.64                   3.27                   4.15                   52.06                3.12                  1.16           Turnout engine
+494           דאלית אלכרמל             druze     13249        0.77    0.12                  49.84                   0.94                  48.78                   1.06                   0.94                   50.78               10.46                  3.11           Turnout engine
+8700                 רעננה     liberal_urban     69652        0.60    0.35                  43.64                   5.21                  33.56                  10.22                   5.07                   48.85                2.09                  0.76           Turnout engine
+70                   אשדוד  russian_speaking    181784        0.35    0.62                  27.29                  21.18                  25.33                  17.60                   5.54                   48.47                1.44                  0.38           Turnout engine
+9000               באר שבע   periphery_likud    164728        0.35    0.60                   8.95                  35.87                  24.71                  15.19                   4.92                   44.82                1.76                  0.19    Supporter-list ground
+480                 בית גן             druze      9177        0.81    0.11                  43.46                   0.37                  43.08                   0.39                   0.37                   43.83               13.10                  3.92           Turnout engine
+1200      מודיעיןמכביםרעות     liberal_urban     69212        0.60    0.35                  33.21                   5.71                  21.28                  11.92                   5.71                   38.92                1.67                  0.58           Turnout engine
+2650             רמת השרון     liberal_urban     38282        0.73    0.22                  31.21                   3.48                  28.60                   2.61                   3.48                   34.68                2.68                  0.98           Turnout engine
+9700             הוד השרון     liberal_urban     48723        0.70    0.24                  29.42                   4.64                  25.04                   4.37                   4.64                   34.05                2.07                  0.72           Turnout engine
+502                   ירכא             druze     11387        0.64    0.21                  33.19                   0.51                  32.30                   0.89                   0.51                   33.69                8.11                  2.41           Turnout engine
+1296              כסראסמיע             druze      6066        0.72    0.14                  30.96                   0.23                  30.62                   0.34                   0.23                   31.18               14.10                  4.22           Turnout engine
+7100                אשקלון  russian_speaking    119846        0.37    0.60                  14.77                  16.24                  11.28                  16.15                   3.58                   31.01                1.28                  0.28         Secondary target
+6500                  חדרה   periphery_likud     80141        0.43    0.53                  17.06                  13.87                  17.11                  10.48                   3.34                   30.94                1.79                  0.46         Secondary target
+1295               יאנוחגת             druze      4843        0.73    0.14                  29.72                   0.19                  29.41                   0.31                   0.19                   29.91               16.93                  5.08           Turnout engine
+2600                  אילת   periphery_likud     51974        0.39    0.56                   4.86                  22.31                  22.66                   2.96                   1.55                   27.18                4.17                  0.32         Secondary target
+8200           קרית מוצקין   periphery_likud     40960        0.54    0.42                  22.71                   2.97                  15.60                   7.63                   2.45                   25.67                1.87                  0.67         Secondary target
+534                  עספיא             druze      9560        0.60    0.09                  25.19                   0.40                  24.77                   0.42                   0.40                   25.59                8.30                  2.47           Turnout engine
+1139                כרמיאל  russian_speaking     42065        0.53    0.40                  23.35                   1.91                  16.75                   6.60                   1.91                   25.25                1.85                  0.69         Secondary target
+               name_he         segment  eligible  p26_change  p26_nb  change_govt__area_pot  change_govt__list_pot  change_govt__gotv_pot  change_govt__pers_pot  change_govt__resc_pot  change_govt__potential  change_govt__eff1k  change_govt__per100h                          tier
+locality                                                                                                                                                                                                                                                                               
+1295           יאנוחגת           druze      4843        0.73    0.14                  29.72                   0.19                  29.41                   0.31                   0.19                   29.91               16.93                  5.08                Turnout engine
+508            כפר כמא           druze      2685        0.62    0.09                  14.05                   0.09                  14.01                   0.04                   0.09                   14.14               14.45                  4.33              Secondary target
+1296          כסראסמיע           druze      6066        0.72    0.14                  30.96                   0.23                  30.62                   0.34                   0.23                   31.18               14.10                  4.22                Turnout engine
+543               ראמה  arab_christian      6574        0.28    0.06                   3.75                   1.67                   5.33                   0.01                   0.09                    5.43                9.87                  4.13  Arab-list turf (partner-led)
+480             בית גן           druze      9177        0.81    0.11                  43.46                   0.37                  43.08                   0.39                   0.37                   43.83               13.10                  3.92                Turnout engine
+496             חורפיש           druze      4836        0.77    0.13                   9.98                   0.16                   9.78                   0.20                   0.16                   10.14               11.45                  3.41              Secondary target
+485               גולס           druze      4974        0.76    0.17                  19.02                   0.26                  18.61                   0.41                   0.26                   19.28               10.61                  3.16                Turnout engine
+494       דאלית אלכרמל           druze     13249        0.77    0.12                  49.84                   0.94                  48.78                   1.06                   0.94                   50.78               10.46                  3.11                Turnout engine
+481               מגאר           druze     17008        0.37    0.08                  14.78                   0.11                  14.62                   0.15                   0.11                   14.89                8.76                  2.62                Turnout engine
+534              עספיא           druze      9560        0.60    0.09                  25.19                   0.40                  24.77                   0.42                   0.40                   25.59                8.30                  2.47                Turnout engine
+502               ירכא           druze     11387        0.64    0.21                  33.19                   0.51                  32.30                   0.89                   0.51                   33.69                8.11                  2.41                Turnout engine
+525              סאגור           druze      3223        0.63    0.32                   7.35                   0.12                   6.49                   0.86                   0.12                    7.47                6.36                  1.89                Turnout engine
+change_govt {'area_pot': 2631, 'list_pot': 762, 'gotv_pot': 2543, 'pers_pot': 576, 'resc_pot': 274, 'potential': 3393, 'area_contacts': 1180214, 'list_contacts': 125355}
+block_nb {'area_pot': 9709, 'list_pot': 534, 'gotv_pot': 9667, 'pers_pot': 575, 'resc_pot': 0, 'potential': 10242, 'area_contacts': 1352615, 'list_contacts': 132740}
+change_seats {'area_pot': 3071, 'list_pot': 785, 'gotv_pot': 2814, 'pers_pot': 602, 'resc_pot': 441, 'potential': 3857, 'area_contacts': 1357014, 'list_contacts': 91825}
+tier
+Low yield                       746
+Netanyahu-bloc stronghold       262
+Arab-list turf (partner-led)    127
+Secondary target                 46
+Turnout engine                   25
+Not targeted (access)             5
+Supporter-list ground             3
+Persuasion battleground           1
+Name: count, dtype: int64
+tier_block
+Low yield                       741
+Netanyahu-bloc stronghold       269
+Arab-list turf (partner-led)    127
+Secondary target                 46
+Turnout engine                   20
+Supporter-list ground             6
+Not targeted (access)             5
+Persuasion battleground           1
+Name: count, dtype: int64
+scenario base: done {'150000_0.0': 781.5, '150000_0.3': 1107.0, '400000_0.0': 1402.9, '400000_0.3': 1847.3}
+scenario gotv_low: done {'150000_0.0': 430.6, '150000_0.3': 740.8, '400000_0.0': 796.5, '400000_0.3': 1166.9}
+scenario gotv_high: done {'150000_0.0': 1283.3, '150000_0.3': 1660.5, '400000_0.0': 2269.4, '400000_0.3': 2833.2}
+scenario gotv_flat: done {'150000_0.0': 1559.6, '150000_0.3': 2215.7, '400000_0.0': 3291.5, '400000_0.3': 4402.3}
+scenario gotv_flat_matched: done {'150000_0.0': 636.5, '150000_0.3': 1019.5, '400000_0.0': 1380.0, '400000_0.3': 1912.4}
+scenario gotv_steep: done {'150000_0.0': 556.9, '150000_0.3': 865.2, '400000_0.0': 963.4, '400000_0.3': 1349.9}
+scenario persuasion_high: done {'150000_0.0': 870.8, '150000_0.3': 1211.5, '400000_0.0': 1748.2, '400000_0.3': 2137.6}
+scenario persuasion_zero: done {'150000_0.0': 752.3, '150000_0.3': 1101.8, '400000_0.0': 1302.2, '400000_0.3': 1781.6}
+scenario persuasion_no_side: done {'150000_0.0': 781.5, '150000_0.3': 1134.0, '400000_0.0': 1402.9, '400000_0.3': 1914.1}
+scenario rescue_high: done {'150000_0.0': 781.5, '150000_0.3': 1643.6, '400000_0.0': 1402.9, '400000_0.3': 2383.9}
+scenario rescue_low: done {'150000_0.0': 781.5, '150000_0.3': 919.2, '400000_0.0': 1402.9, '400000_0.3': 1659.5}
+scenario lists_off: done {'150000_0.0': 781.5, '150000_0.3': 1107.0, '400000_0.0': 1402.9, '400000_0.3': 1847.3}
+scenario abroad_high: done {'150000_0.0': 573.6, '150000_0.3': 888.7, '400000_0.0': 1017.4, '400000_0.3': 1424.3}
+scenario cross_pressure_low: done {'150000_0.0': 765.4, '150000_0.3': 1102.8, '400000_0.0': 1349.0, '400000_0.3': 1798.5}
+scenario cross_pressure_high: done {'150000_0.0': 806.3, '150000_0.3': 1151.2, '400000_0.0': 1487.5, '400000_0.3': 1946.8}
+scenario druze_minus20: done {'150000_0.0': 781.5, '150000_0.3': 1107.0, '400000_0.0': 1402.9, '400000_0.3': 1847.3}
+scenario no_blend: done {'150000_0.0': 746.2, '150000_0.3': 1070.3, '400000_0.0': 1347.3, '400000_0.3': 1783.3}
+scenario composition_tilt: done {'150000_0.0': 667.3, '150000_0.3': 1141.6, '400000_0.0': 1079.1, '400000_0.3': 1840.9}
+change_govt {"base": [1.0, 1.0, 25], "gotv_low": [0.989, 0.994, 25], "gotv_high": [0.995, 0.996, 24], "gotv_flat": [0.945, 0.973, 8], "gotv_flat_matched": [0.943, 0.974, 8], "gotv_steep": [0.991, 0.994, 24], "persuasion_high": [0.954, 0.97, 24], "persuasion_zero": [0.993, 0.993, 24], "persuasion_no_side": [0.996, 0.998, 25], "rescue_high": [0.998, 0.999, 25], "rescue_low": [0.999, 1.0, 25], "lists_off": [0.837, 0.901, 25], "abroad_high": [0.997, 0.997, 24], "cross_pressure_low": [0.996, 0.996, 24], "cross_pressure_high": [0.991, 0.994, 25], "druze_minus20": [0.989, 0.975, 13], "no_blend": [0.987, 0.998, 25], "composition_tilt": [0.989, 0.988, 17]}
+block_nb {"base": [1.0, 1.0, 25], "gotv_low": [0.996, 0.992, 25], "gotv_high": [0.998, 0.996, 25], "gotv_flat": [0.953, 0.976, 13], "gotv_flat_matched": [0.948, 0.977, 13], "gotv_steep": [0.995, 0.992, 24], "persuasion_high": [0.976, 0.962, 24], "persuasion_zero": [0.995, 0.989, 24], "persuasion_no_side": [0.998, 0.996, 25], "rescue_high": [1.0, 1.0, 25], "rescue_low": [1.0, 1.0, 25], "lists_off": [0.954, 0.88, 25], "abroad_high": [0.998, 0.995, 25], "cross_pressure_low": [0.997, 0.994, 25], "cross_pressure_high": [0.997, 0.993, 25], "druze_minus20": [0.981, 0.975, 15], "no_blend": [0.999, 0.998, 24], "composition_tilt": [0.989, 0.984, 19]}
+base {'change61': 0.0542, 'change_raam61': 0.2657, 'block_nb': 0.9093, 'change_seats': 51.8309, 'change_govt': 0.2821}
+res_withdraws                votes    84,833  dGovt  +2.64  dDeny61  -0.79  dSeats +0.98
+res_withdraws_right          votes    84,833  dGovt  -0.61  dDeny61  -2.56  dSeats +0.36
+amcha_withdraws              votes    85,063  dGovt  -0.98  dDeny61  +0.50  dSeats +0.01
+pers_likud_0.5               votes    24,115  dGovt  +3.41  dDeny61  +1.49  dSeats +0.67
+pers_likud_1.0               votes    48,230  dGovt  +6.98  dDeny61  +3.05  dSeats +1.33
+pers_likud_2.0               votes    96,461  dGovt +14.02  dDeny61  +4.87  dSeats +2.66
+pers_haredi_0.5              votes    24,115  dGovt  +2.95  dDeny61  +1.44  dSeats +0.67
+ch_turnout_25000             votes    25,000  dGovt  +1.93  dDeny61  +0.80  dSeats +0.43
+ch_turnout_50000             votes    50,000  dGovt  +3.66  dDeny61  +1.58  dSeats +0.84
+haredi_turnout_-10           votes    63,740  dGovt  +3.00  dDeny61  +2.11  dSeats +0.71
+nb_turnout_25000             votes    25,000  dGovt  -1.40  dDeny61  -1.19  dSeats -0.28
+arab_turnout_+5              votes    46,000  dGovt  -1.59  dDeny61  +1.75  dSeats -0.57
+arab_turnout_-5              votes    46,000  dGovt  +1.82  dDeny61  -2.39  dSeats +0.61
+yashar_to_dem_0.5            votes    24,115  dGovt  +0.03  dDeny61  -0.01  dSeats +0.01
+jl_to_raam_0.5               votes    24,115  dGovt  +0.80  dDeny61  +0.45  dSeats -0.09
+wrote /Users/idoherling/Polling:Consulting Firm/2026_Election_Model/data/processed/targeting/levers.json
+exit 0

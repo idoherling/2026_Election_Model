@@ -1,0 +1,249 @@
+{
+ "verdicts": [
+  {
+   "id": "D1-F01",
+   "status": "verified",
+   "note": "Cambridge page confirms Shamir & Arian, 'Collective Identity and Electoral Competition in Israel', APSR 93(2):265-277, June 1999, DOI 10.2307/2585395. The abstract matches the claim. Elsewhere issue voting rose and cleavages declined; in Israel only the rise in issue voting holds, cleavages still structure the vote and overall explanatory power held up. The authors attribute this to identity dilemmas that fuse policy with social loyalties. The design is a longitudinal cleavage analysis for 1969-1996 plus a study of the 1996 election.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "D1-F02",
+   "status": "corrected",
+   "note": "The work exists. I confirmed it through the reference lists of two chapters in the IDI 'Elections in Israel 2022' book (Amitai, Gidron & Yair; Shapira, Harsgor & Yakter). They cite Shamir, Michal, Shira Dvir-Gvirsman & Raphael Ventura (2017), Hebrew title 'Captive in the collective identity cleavage: Right and Left in the 2015 elections', in Shamir & Rahat (eds.), The Elections in Israel 2015, Jerusalem: Israel Democracy Institute, pp. 145-175. Crossref confirms the English edition (Shamir & Rahat eds., Routledge, 23 May 2017, DOI 10.4324/9781315112121). I could not confirm the English chapter title or the pages 139-164: the Routledge page failed to load and Crossref has no chapter records. Confirmed: Amitai, Gidron & Yair (2025, p. ~57) cite this work for the point that economic attitudes do not line up with Israeli left-right. Not verified: the specific claim that the 2015 campaign tied the left to Arabs.",
+   "corrected_url": "https://doi.org/10.4324/9781315112121",
+   "corrected_quant": "Hebrew IDI edition, pp. 145-175 (verified via citations). English Routledge 2017 edition exists; chapter pages unverified."
+  },
+  {
+   "id": "D1-F03",
+   "status": "corrected",
+   "note": "Authorship needs fixing. The chapter is by Yaniv Shapira, Liran Harsgor & Alon Yakter, 'Do We Agree, and on What? Ideological Cleavages and Public Opinion Trends in the 2022 Elections', pp. 77-113, in Gideon Rahat, Noam Gidron & Michal Shamir (eds.), The Elections in Israel 2022 (Hebrew), IDI, February 2025, ISBN 978-965-519-475-3. I extracted the text from the cited PDF. Numbers confirmed: only 35.8% prefer capitalism, and the conclusion says about 65% prefer the socialist approach with a similar share backing civil marriage; about a third oppose civil marriage; the conflict and Supreme Court items best predicted the 2022 vote; gaps between party electorates were stable over the decade. The conclusion says at least 35% of Likud voters take the opposite position to their religious partners on religion in public life and court powers. It describes them as split on concrete steps (civil marriage, weakening the court) but hawkish and united with the bloc on security. Nuance: the body text (p. 90) says most Likud voters take a pluralist position on civil marriage, while the conclusion calls them split.",
+   "corrected_url": "",
+   "corrected_quant": "35.8% prefer capitalist, so about 64-65% socialist; about two-thirds support civil marriage; at least 35% of Likud voters oppose their religious partners on religion in public life and court powers."
+  },
+  {
+   "id": "D1-F04",
+   "status": "corrected",
+   "note": "Authorship needs fixing. The chapter is by Yair Amitai, Noam Gidron & Omer Yair, 'Political Polarization in Israel, 1992-2022', pp. 41-76, in Rahat, Gidron & Shamir (eds.), The Elections in Israel 2022 (Hebrew), IDI, 2025. Every figure checks against the extracted text: bimodality 0.52 in 2022 against the 0.55 cutoff; mean issue correlation excluding economics 0.32 to 0.6 (including economics, 0.13 to 0.32); affective polarisation 2.4 (1992) to 5.3 (1999), easing in 2001-2009, then 6.2 in 2022, +180% on 2009 and the all-time high; US 2016 about 4.7 on the same scale (citing Gidron, Adams & Horne 2020). The chapter also notes Netanyahu becoming the axis of polarisation.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "D1-F05",
+   "status": "corrected",
+   "note": "The interview is real: Bruno Cousin interviewed Noam Gidron, Books & Ideas, 2 January 2026, in partnership with CASBS. It confirms that the October 7 war did not reduce domestic polarisation, that affective polarisation fluctuates around the high 2022 level, and that partisan animosity proved more persistent than expected. The interview does not mention the Israel Polarization Panel. The dataset exists: Gidron, Sheffer & Mor (2022), 'The Israel Polarization Panel Dataset, 2019-2021', Electoral Studies 80:102512. Its Harvard Dataverse record (doi:10.7910/DVN/A6AA4X) describes a 10-wave panel following the same people across Israeli elections (the text says 'five elections') and adds an 11th wave in January 2023. Not verified, because the article abstract was inaccessible: that party-specific polarisation moves with electoral performance and coalition composition. A directly relevant underlying study also exists: Yair, Amitai, Cavari, Efrat & Gidron (2026), SSRN 10.2139/ssrn.6441339.",
+   "corrected_url": "https://doi.org/10.1016/j.electstud.2022.102512",
+   "corrected_quant": "IPP: 10 waves, 2019-2021 (an 11th wave in January 2023). Count of elections stated inconsistently (4 by dates, 'five' in the Dataverse description)."
+  },
+  {
+   "id": "D1-F06",
+   "status": "verified",
+   "note": "Crossref and OpenAlex confirm Gidron, Margalit, Sheffer & Yakir, 'Why masses support democratic backsliding', AJPS 70(2):720-737, published online 23 March 2025 in an April 2026 issue, DOI 10.1111/ajps.12958. The abstract tests five explanations (personalism, affective polarisation, populism, majoritarianism, legal entanglement). Support for the court plan is best explained by prior attachment to the leader and hostility toward partisan opponents, and populism is not associated. Gidron confirms the January and April 2023 panel waves in the Books & Ideas interview. Two details are not in the abstract and remain unverified: that majoritarianism and legal entanglement mattered 'more weakly', and that the analysis is restricted to coalition voters.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "D1-F07",
+   "status": "verified",
+   "note": "Crossref confirms Bassan-Nygate & Weiss, CPS 55(2):287-318, February 2022 (online July 2021). The abstract matches: a natural experiment across seven Israeli election studies shows that salient electoral competition increases affective polarisation, and a survey experiment after the September 2019 (22nd Knesset) election shows that priming a unity government increases cross-party tolerance.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "D1-F08",
+   "status": "verified",
+   "note": "Crossref and OpenAlex confirm Rahat, Hazan & Ben-Nun Bloom, Representation 52(1):99-117, published 2016. The abstract says Likud and the Zionist Union both gained, but nearly all their gains came from within their own blocs. Their identity appeals targeted within-bloc voters and kept bloc boundaries clear. Kulanu was the pivotal exception.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "D1-F09",
+   "status": "verified",
+   "note": "I extracted the text of the authors' manuscript from Kedar's MIT page, which lists it as the 2008 chapter in Arian & Shamir (eds.), The Elections in Israel 2006. All figures match. Instability within blocs grew faster than between blocs. Individual switching was 63% in 2006 against 50% in 1977, and party instability reached 42.7%, the highest ever. Closeness to a party went 64% (1996), 62% (2003), 54% (2006); 'very close' went 37%, 28%, 24%. Kadima's vote was 42% ex-Likud, 23% ex-Labor and 17% ex-Shinui. In December 2005, 53% of 2003 Likud voters who stated an intention said Kadima; 31% actually voted Kadima. 56% of ex-Likud switchers cited personal support for Sharon. Context the desk omits: most of the ex-Likud votes Kadima lost between December and the election went to the Pensioners party, not back to Likud.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "D1-F10",
+   "status": "verified",
+   "note": "IDI article by Tamar Hermann & Or Anabi, 31 August 2022. Fieldwork 21-24 August 2022, n=754 (602 Hebrew, 152 Arabic). Confirmed: half intend to repeat their vote, a quarter are undecided, 6% plan to switch blocs. Among Jews, 78% of opposition voters plan to repeat against 43.5% of coalition voters. 10% of coalition voters plan to vote for an opposition party, 'most of them having voted Yamina'; 4% move the other way. Corrections to wording: the article says 'coalition/opposition', not 'Netanyahu bloc'. The Arab Ra'am-to-Joint-List figure (15% against 1%) pools the July and August surveys (N=302).",
+   "corrected_url": "",
+   "corrected_quant": "Arab Ra'am-to-Joint-List figure based on July plus August 2022 pooled (N=302)."
+  },
+  {
+   "id": "D1-F11",
+   "status": "unverifiable",
+   "note": "The cited URL returns 404. Searching the J Street site for 'frozen political map', 'Israeli election update' and Yael Patir returned nothing. My web-search budget was exhausted, so I checked only by direct fetch. I could not confirm the Channel 12 poll figures (1.3% torn between blocs, 9.8% undecided). Drop the finding or replace it with a primary poll source.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "D1-F12",
+   "status": "verified",
+   "note": "INSS Insight No. 1664, Ori Wertman & Meir Elran, 1 December 2022. Every figure matches: blocs 48.3 to 49.6, 41.5 to 38.3 and 8.6 to 10.8; RZP-Otzma 5.1 to 10.8; turnout 67.4 to 70.6; Dimona +6.9, Be'er Sheva +4.6, Ashkelon +3.2, Tel Aviv +0.4, Givatayim and Herzliya +0.3; Arab votes to Zionist parties 52.3% (1992) to 14.2% (2022). The article attributes the RZP-Otzma rise to Yamina's disappearance. One nuance: 'lost more than 80%' is the fall in Yamina's vote share (6.21% to 1.19%), not a voter-flow estimate.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "D1-F13",
+   "status": "verified",
+   "note": "Ofer Kenig, IDI, 21 April 2021. The text says turnout fell nationwide and fell more steeply in religious and right-wing strongholds, significantly weakening Likud. No figures appear in the text; the data are in image slides.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "D1-F14",
+   "status": "verified",
+   "note": "IDI article by Dr. Ariel Finkelstein. The page currently shows 28 June 2026, probably an update date. Every figure matches: 20 surveys, November 2022-October 2023, 10,694 Jewish voters; coalition share among Haredim 97%, national-religious 80%, traditional 66.5%; secular 74% opposition. Traditional non-religious: Likud 46, Yesh Atid 17, National Unity 14, Shas+UTJ 2. Traditional-religious: Likud 47, RZP-Otzma 17, Shas 10. Secular: Yesh Atid 39, Likud 20, Labor+Meretz 16, National Unity 13. National-religious: RZP-Otzma 45, Likud 22.5. Traditional voters 2021 to 2022: Likud 39 to 46.5, RZP-Otzma 4 to 14, National Unity 18 to 12.5.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "D1-F15",
+   "status": "verified",
+   "note": "I extracted the PDF text. Israeli Democracy Index 2022, Selected Findings, by Tamar Hermann, Or Anabi, Yaron Kaplan & Inna Orly Sapozhnikova (Viterbi Center). Confirmed: Jews 62 right / 24 centre / 11 left. Right identification by age: 18-24 73, 25-34 75, 35-44 62, 45-54 53, 55-64 52, 65+ 46, with the right share rising in every age group over 20 years. By religiosity: Haredim 74.5/12/4, national-religious 82/10/4, traditional 57/26/11, secular 32/32/30. Shares do not sum to 100 because of other responses.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "D1-F16",
+   "status": "verified",
+   "note": "JPPI, Gabriel Abensour, 'Masortim and Masortiyut in Israel', page dated 11/06/2023. Confirmed: INES March 2021 survey, n=1,816; Likud 47% (masorti not-so-religious) and 55% (masorti-religious); Likud voters are 34% secular, 30% masorti not-so-religious, 18% masorti-religious. The source itself says 39% and 22% voted 'Blue and White' and describes that party as having united with Yesh Atid. That describes the 2019-2020 alignment, so the desk's inconsistency flag is justified; the figures may reflect a different election. The author hedges ('may be attributed to') when crediting education and SES rather than ethnicity, citing Dahan; 'mainly' slightly overstates this.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "D1-F17",
+   "status": "verified",
+   "note": "I extracted the text of CESifo WP 10857, 'Voting Gap by Origin', Momi Dahan, December 2023. Confirmed: 440 small Jewish localities classified by their most common surnames plus urban areas; ten elections; 2022 right bloc about 61% in Mizrahi against about 36% in Ashkenazi localities (about 25 points); about 5 points in 2006; the 2022 gap is five times 2006 and more than twice 2009; in all ten elections the gap disappears or shrinks considerably with education and religiosity controls (about 4 points in the full 2022 model). Right vote falls with income and median age. The education coefficient became significantly negative and large in the last six elections. The sample is within 1 point of the national share. I could not confirm the claimed later Israel Economic Review 2025 version; I found only SSRN 10.2139/ssrn.4692409.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "D1-F18",
+   "status": "corrected",
+   "note": "Authorship needs fixing. The chapter is by Nir Atmor, Chen Friedberg & Liran Harsgor, 'Who Flocked to the Polls? Turnout in the 2022 Elections', pp. 115-148, in Rahat, Gidron & Shamir (eds.), IDI 2025. Table 4 of the extracted text confirms the coefficients. Jewish/mixed localities (N=1,069): SES +0.527; periphery not significant; size -0.734; development towns -6.292; kibbutzim -4.324; Haredi % +0.057; Judea and Samaria +4.910; adjusted R² 0.159. Arab localities (N=146): SES +1.812; centrality +2.22; size +1.745; R² 0.164. All localities (N=1,215): development towns -7.846, kibbutzim -4.046, Judea and Samaria +5.077, Arab -26.314, R² 0.597. Also confirmed: 73.0% against 56.0%; centre-periphery gap 2.5, 3.6, 4.4; Arab gap 14.2-25.7; the authors' claim to be the first study to include double envelopes. The running text says 0.57 for the Haredi share, but the table gives .057, which is correct.",
+   "corrected_url": "",
+   "corrected_quant": "All-locality model: kibbutzim -4.0, settlements +5.1 (Jewish-locality model: -4.3 and +4.9)."
+  },
+  {
+   "id": "D1-F19",
+   "status": "verified",
+   "note": "Crossref confirms Atmor, Friedberg & Kenig, 'Special votes and voter turnout in Israel's 2022 elections', Israel Affairs 31(2):198-214, online 25 February 2025, DOI 10.1080/13537121.2025.2469440. The abstract matches: special votes are rising, the data came from a petition to the CEC, and they change turnout gaps across localities and groups. The locality totals come from the turnout table in the companion IDI chapter (Atmor, Friedberg & Harsgor 2025). Jewish/mixed: 5,850,403 eligible, 3,832,892 regular votes, 438,034 double envelopes. Arab: 938,401, 498,894 and 26,933. The derived shares are correct: 7.5% of eligible and 10.3% of votes, against 2.9% of eligible.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "D1-F20",
+   "status": "corrected",
+   "note": "Authorship needs fixing. The religious-Zionist part is Michael Freedman & Nadav G. Shelef, 'From Bennett to Ben Gvir: The Political Behavior of Religious Zionism in the 2019-2022 Elections', pp. 317-344. The UTJ part is Gilad Malach, 'Does the Growth in UTJ's Strength Match Haredi Population Growth?', pp. 371-405. Both are in Rahat, Gidron & Shamir (eds.), IDI 2025. Figures confirmed: religious opposition to a Palestinian state 76% (2019) to 86% (2022) on INES; full-right coalition preference 61% (2019) to 85% (March 2021). UTJ vote grew about 4% a year in 1992-2022 (4.4%, 3.8% and 3.7% across the three sub-periods). It is a 'sect party with dynamic margins': 8-14% of its voters are non-Haredi and could vote elsewhere. Up to 10% in Haredi localities do not vote for Haredi parties, and in 2009 and 2021 the potential exceeded actual votes by about 10%.",
+   "corrected_url": "",
+   "corrected_quant": "UTJ annual growth 4.4% (1992-2003), 3.8% (2003-2013), 3.7% (2013-2022)."
+  },
+  {
+   "id": "D1-F21",
+   "status": "corrected",
+   "note": "Wilson Center, Izabella Tabarovsky, published 4 April 2019, before the April 2019 election. Confirmed: about 15% of the population and about 900,000 people; 16-17 potential seats; Likud adds 3-4 seats on average from this group; generations 1.0 (right of native-born), 1.5 (centrist) and 2.0 (like native-born); 50-60% secular; Khanin and Teper are cited. Not in the article and should be removed: 'about 14 seats at actual turnout' and 'Blue and White about 2 seats in April 2019'. The article predates that election and gives no seat figure for Blue and White.",
+   "corrected_url": "",
+   "corrected_quant": "About 15% of population (about 900k); 16-17 potential seats; Likud +3-4 seats. Remove the '14 seats at actual turnout' and 'Blue and White about 2 seats' figures."
+  },
+  {
+   "id": "D1-F22",
+   "status": "verified",
+   "note": "Dr. Salim Brake, Bayan, Moshe Dayan Center, 27 November 2019. Every figure matches for predominantly Druze localities (absentee ballots excluded): Yisrael Beytenu 23.8/12.6/18.8; Blue and White -/36.0/47.8; Likud 7.8/11.1/9.6; Kulanu 18.4 (2015); Meretz 2.0/15.8/3.2; turnout 57.7/60.1/54.5. The article describes Druze voting as utilitarian and says Druze voted for parties that supported the Nation-State Law.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "D1-F23",
+   "status": "verified",
+   "note": "I extracted the PDF text. Bayan Issue 28, December 2022, Arik Rudnitzky. Confirmed: turnout 53.2% (decade average 55.9%; 44.6% in 2021; 64.8% in 2020); Arab lists 85.8% and Jewish parties 14.3% (under 2 seats); National Unity 3.2% (over 15k votes, about 11k from Druze), Meretz 2.7, Likud 2.2, Yisrael Beytenu 2.0, Yesh Atid 1.7; Zionist parties 90% in Druze towns; Ra'am 66.8% among northern Bedouin and 73.9% in the Negev; Triangle turnout 46.2% (north) against 60.8% (south). Nuance: the source says this was the first decade-high rise in turnout without Arab unity. That is not quite a claim that fragmentation caused the rise.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "D1-F24",
+   "status": "verified",
+   "note": "Metadata: AJPS 53(2):307-323 (2009). I also checked the full text in the authors' PDF (web.mit.edu/okedar/www/materials/AJPS_Bargsted-Kedar.pdf). It confirms that 95% of respondents (1,206 of 1,276) gave coalition expectations for Labor and Likud, and that the perceived probability of a Kadima-Labor coalition was 0.62 (Table 1). Coalition-expectation effects were significant for Labor and Likud only, and insignificant for Meretz, Shas, Israel Beitenu and IL-Mafdal. The effect holds with ideology controls.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "D1-F25",
+   "status": "verified",
+   "note": "OpenAlex confirms Harsgor, Itzkovitch-Malka & Tuttnauer, EPSR 15(1):96-115 (online October 2022, issue 2023), DOI 10.1017/S1755773922000455. The abstract matches: a three-wave Israeli online panel in 2019-2020 finds formateur optimisation, abandonment of parties expected to be left out of the coalition, and a stronger effect when competition between potential formateurs is perceived as close. The abstract also reports policy-balancing motives.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "D1-F26",
+   "status": "corrected",
+   "note": "Kedar, APSR 99(2):185-199 (May 2005) exists, and the policy-balancing claim matches the abstract. The full text (author's PDF) names the four cases as Britain, Canada, Norway and the Netherlands. Israel is not among them, so applying the finding to Israeli within-bloc balancing is an extrapolation. (The Harsgor et al. 2023 panel in D1-F25 does find policy balancing in Israel.)",
+   "corrected_url": "http://web.mit.edu/okedar/www/materials/APSR-05.pdf",
+   "corrected_quant": "Cases: Britain, Canada, Norway, Netherlands (no Israel)."
+  },
+  {
+   "id": "D1-F27",
+   "status": "verified",
+   "note": "OpenAlex confirms the authors in the listed order, CPS 43(1):61-90 (online July 2009, issue January 2010), DOI 10.1177/0010414009341717. The abstract matches: majoritarian contests (US, Mexico, Britain, Israeli PM races) are compared with PR (Israel, Netherlands). A substantial share of voters desert their first preference, patterns are similar across systems, smaller parties lose votes to larger ones in every election, and tactical voting is therefore more common under PR.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "D1-F28",
+   "status": "verified",
+   "note": "IDI, Dr. Assaf Shapira, 8 November 2022 (first published in the Jerusalem Post). Confirmed: an all-time high of about 8.7% wasted, against 0.8% and 1.5% in the two previous elections and about 5% (1992) and 6% (1999); the blocs' vote totals were almost identical but the Netanyahu camp won 64 seats; the threshold had a 'knockout effect'. Nuance: the roughly 300,000 figure is the anti-Netanyahu bloc's total loss through Meretz and Balad, with Balad counted only if included in the bloc.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "D1-F29",
+   "status": "corrected",
+   "note": "I extracted the PDF text. Gideon Rahat, The Decline of the Group and the Rise of the Star(s), IDI Policy Paper 145 (Hebrew), December 2019, ISBN 978-965-519-285-8. Table 2.1 (INES 1977-2015) confirms party identification of 27.9, 32.3, 33.0 and 32.5 for 1977-1988, falling to 13.1 in 2015; party leader 19.2 in 2015 (the item asked about the 'party head'); ratio of party to personal reasons 1.77 in 1977 and 0.45 in 2015. Correction: issue positions ranged from 39.4% (1981) to 64.0% (1999), not about 50-64%. They were still the plurality motive every year.",
+   "corrected_url": "",
+   "corrected_quant": "Issue-position motive 39.4%-64.0% (1977-2015), not 50-64%."
+  },
+  {
+   "id": "D1-F30",
+   "status": "corrected",
+   "note": "Getmansky & Zeitzoff, APSR 108(3):588-604 (2014) is confirmed. The abstract finds the right-wing vote 2-6 points higher in localities within rocket range, driven by threat. The second source is mis-cited: it is published as Yael Elster (2019), 'Rockets and votes', Journal of Economic Behavior & Organization 166:767-784, DOI 10.1016/j.jebo.2019.09.011 (the record lists Tel Aviv University). The abstract (Semantic Scholar) confirms elections 1999-2015, local rocket-damage claims as the measure, about +4 points for the right bloc per extra 1,000 claims, and larger effects for recent, first-time and nearby attacks, driven by actual attacks rather than threat. I could not verify a 2017 Hebrew University working-paper version.",
+   "corrected_url": "https://doi.org/10.1016/j.jebo.2019.09.011",
+   "corrected_quant": ""
+  },
+  {
+   "id": "D1-F31",
+   "status": "verified",
+   "note": "OpenAlex confirms Berrebi & Klor, APSR 102(3):279-301 (2008), DOI 10.1017/S0003055408080246. The abstract matches: a local attack within three months of an election adds about 1.35 points to the right bloc's share of the two-bloc vote; fatalities affect places beyond the attacked locality, more strongly nearer the election and the attack; in left-leaning localities local fatalities raise right support, while fatalities elsewhere raise left support.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "D1-F32",
+   "status": "verified",
+   "note": "The IDI page is titled ''Democracy on the Frontlines' Conference Survey', published 13 January 2025, prepared by Anat Thon Ashkenazy with the Viterbi Center. Fieldwork 31 December 2024 to 6 January 2025, with 1,000 Jewish and 202 Arab respondents. Every figure matches: 8.5% top priority against 40.5% security and 34% cost of living; 55% oppose and 36.5% support (Jews 50.5% oppose); 61% say it is not the time; among right-wing Jews, 40% say not the time and 30% say over-concentration; 59% of the right cite national unity. Only the title differs from the desk's.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "D1-F33",
+   "status": "verified",
+   "note": "I extracted the PDF text. IDI Israeli Voice Index, December 2025; fieldwork 28 December 2025 to 1 January 2026, 602 Hebrew and 150 Arabic interviews. Q5: state commission of inquiry 55.1% (Jews 53.9%) against a government-appointed committee 22.1% (state comptroller 8.0%, don't know 14.8%). Q6, Jews: 12.5% would support a Ra'am-reliant government regardless, 13.9% only if there is no other option, 7.7% only with external support, 57.8% would not, and 8.1% don't know. The 'about 34%' figure is the total supporting under any condition, including the unconditional 12.5%.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "D1-F34",
+   "status": "corrected",
+   "note": "JNS, 7 July 2024. Confirmed: Agam Labs led by Nimrod Nir; about 4,000 adults; August 2023, then roughly every 10 days from 9 October 2023 to May 2024; right about 58 to 60%, left 17 to 13%, centre 25 to about 27%; margin about 4% per round. Not supported by the article and should be removed: the Hebrew University affiliation (not stated), the claim that the shift was mainly on security rather than broad ideology, and the claim of partial reversal. The article instead stresses the collapse of support for a Palestinian state and of the old left.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  }
+ ],
+ "missing_key_works": [
+  "Getmansky, Anna & Chagai M. Weiss (2023). 'Interstate Conflict Can Reduce Support for Incumbents: Evidence from the Israeli Electorate and the Yom Kippur War.' Journal of Conflict Resolution 67(2-3):326-348. https://doi.org/10.1177/00220027221114086. Abstract (OpenAlex): the 1973 war and its casualties reduced support for incumbent parties and leaders and raised opposition support, despite military victory. This is a key counterweight to the rocket and terror right-shift priors when modelling post-October 7 blame in heavily hit localities.",
+  "Getmansky, Anna & Chagai M. Weiss (2023). 'War-Time Military Service Can Affect Partisan Preferences.' Comparative Political Studies 56(10):1475-1505. https://doi.org/10.1177/00104140221141837. A regression discontinuity design on almost 50 years of INES finds that cohorts old enough to serve in the mismanaged 1973 war reported lower long-run Labor support; there is no effect for well-managed wars. Relevant to reservist-heavy cohorts and localities after 2023-2025.",
+  "Yakter, Alon & Liran Harsgor (2023). 'Long-Term Change in Conflict Attitudes: A Dynamic Perspective.' British Journal of Political Science 53(2):460-478. https://doi.org/10.1017/S0007123422000400. Monthly Israeli data for 2001-2020 show that reactions to violent escalation are immediate but brief, while long-term Jewish conflict attitudes follow non-violent signals such as failed negotiations and leadership changes. Useful for discounting short-lived security-shock effects in locality priors.",
+  "Shamir, Michal & Gideon Rahat (eds.) (2022). The Elections in Israel, 2019-2021. Routledge (also open access via OAPEN). https://doi.org/10.4324/9781003267911. This INES-based volume on the four repeat elections, covering volatility, Netanyahu-centred politics and Arab voting, sits between the 2015 and 2022 volumes the desk uses and was not cited.",
+  "Yair, Omer, Yair Amitai, Amnon Cavari, Asif Efrat & Noam Gidron (2026). 'The Persistence of Affective Polarization in Times of Security Threats: Evidence from Post-October 7 Israel.' SSRN working paper. https://doi.org/10.2139/ssrn.6441339. I verified only the title and authors (OpenAlex record, which misspells 'Amitai'); the abstract was not accessible. It is the likely primary source for the post-October 7 claim the desk attributes to an interview (D1-F05), and should be checked and cited directly."
+ ]
+}

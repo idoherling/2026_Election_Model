@@ -1,0 +1,273 @@
+{
+ "verdicts": [
+  {
+   "id": "D10-F01",
+   "status": "corrected",
+   "note": "Method: Crossref and OpenAlex metadata for every DOI; abstracts from OpenAlex/RePEc/MZES; full texts where open (SSOAR, Mannheim, University of Barcelona repository, figshare, Knesset PDF); official and news pages fetched directly. Crossref confirms Duch, May & Armstrong, APSR 104(4):698-719 (Nov 2010), DOI resolves. The OpenAlex abstract confirms 86 voter-preference surveys, 23 countries, frequent coalition-directed voting in multiparty-coalition contexts, and voters anticipating post-election policy bargains. One wording error: the abstract says the surveys span 'a 25-year period', not 'more than 25 years'. No pooled share appears in the abstract, as the desk says. The relevance is a fair inference.",
+   "corrected_claim": "",
+   "corrected_quant": "86 voter-preference surveys, 23 countries, spanning a 25-year period. The abstract reports frequency only qualitatively ('considerable frequency'); no pooled share.",
+   "corrected_url": ""
+  },
+  {
+   "id": "D10-F02",
+   "status": "corrected",
+   "note": "Crossref confirms Meffert & Gschwend, Electoral Studies 29(3):339-349 (2010). Checked against the published full text (SSOAR deposit). Confirmed: n=1,501 national telephone sample plus 450 in Carinthia; fieldwork 18-30 Sept 2006; 11-point party and coalition ratings; 4-point certainty scales; few, mixed coalition signals from parties; ÖVP and SPÖ supporters least likely to vote insincerely. Overstatement: the claim says each mechanism depends on the voter both preferring the coalition and being uncertain of its majority. The paper reports only 'some evidence' of that interaction, and it is not general. (a) Rental votes: ÖVP supporters in Carinthia who were uncertain whether the BZÖ would pass were more likely to vote BZÖ. ÖVP supporters who rated an ÖVP-BZÖ coalition highly were more likely to vote BZÖ whatever their expectations. (b) Wasted vote: BZÖ supporters who did not expect the party to enter parliament were more likely to defect, but the preference-by-expectation interaction was not substantively remarkable. (c) Composition votes: the interaction appears for Green supporters with an SPÖ-Green preference who saw that majority as uncertain. The results are mostly logit tables with simulated plots, not only interaction plots.",
+   "corrected_claim": "A survey before Austria's 2006 election finds support for three kinds of strategic coalition voting. (1) Big-party supporters lend rental votes to a junior partner at risk of missing the 4% threshold: ÖVP supporters in Carinthia who were uncertain whether the BZÖ would pass were more likely to vote BZÖ. (2) Small-party supporters who expect their party to fail avoid a wasted vote. (3) Some voters back a larger party to shape the next coalition, which appears for Green supporters who preferred an SPÖ-Green coalition but saw its majority as uncertain. Coalition preferences and expectations both matter, and the authors find 'some evidence' that they interact. Supporters of the two big parties cast the fewest insincere votes, and the parties sent few, mixed coalition signals.",
+   "corrected_quant": "n=1,501 national sample plus 450 in Carinthia; telephone fieldwork 18-30 Sept 2006; 11-point ratings; 4-point certainty scales. Insincere vote intentions by top-rated party (unique preferences): ÖVP 4.1%, SPÖ 4.2%, Greens 11.0%, FPÖ 17.4%, BZÖ 22.7%, Martin 20.5%. About 1 in 10 Green supporters planned an insincere vote. Effects are reported as logit coefficients and simulated probabilities; no single pooled pp.",
+   "corrected_url": ""
+  },
+  {
+   "id": "D10-F03",
+   "status": "verified",
+   "note": "Crossref confirms Meffert & Gschwend, EJPR 50(5):636-667 (Aug 2011). The abstract (OpenAlex) matches the claim. It describes a laboratory experiment embedded in two real campaigns, with manipulated polls and coalition signals. Active information-seeking compensates for low sophistication. Strategic voting is supported only for a small number of voters, and most insincere votes are explained by other factors. 'Upper bound' is the desk's framing, and a reasonable one.",
+   "corrected_claim": "",
+   "corrected_quant": "",
+   "corrected_url": ""
+  },
+  {
+   "id": "D10-F04",
+   "status": "verified",
+   "note": "Crossref confirms Gschwend, Meffert & Stoetzer, JOP 79(2):642-655 (Apr 2017). The abstract matches the claim. The full text on ZORA is behind a bot wall, but the authors' online appendix (Mannheim) gives the magnitudes, which the desk said it had not retrieved. Suggested quant upgrade, not an error. The two countries are Austria (2006 pre-election study) and Germany (GLES). The relevance is a logical implication of the paper's weighting model.",
+   "corrected_claim": "",
+   "corrected_quant": "Survey vignette experiments in Austria (2006 pre-election study, N per model 1,023-1,164) and Germany (GLES, N 757-787). After a coalition signal, the weight on party (vs coalition) considerations fell from 0.82-0.96 to 0.43-0.70 in Austria (differences 0.25-0.43, all credible) and by 0.09-0.39 in Germany (2 of 4 credible intervals exclude zero). Share switching to a different party under the vignette: 9-11% (Austria) and 19-20% (Germany); further changes are (de)mobilisation (online appendix, Tables 2, 7, 14, 15).",
+   "corrected_url": ""
+  },
+  {
+   "id": "D10-F05",
+   "status": "corrected",
+   "note": "Crossref confirms Bahnsen, Stoetzer & Gschwend, 'Coalition-Directed Voting Under Uncertainty', JOP, DOI 10.1086/736445, published online 29 Apr 2025. It is still forthcoming, with no volume or issue (Crossref; Gschwend CV Feb 2026). Read the accepted manuscript (Mannheim PDF). The direction is confirmed and effect sizes now exist. The causal claim is overstated: the 2021 German vignette shows risk aversion for CDU/CSU but no clear difference for the Greens.",
+   "corrected_claim": "Observational analyses of 17 pre-election studies (13 campaigns, 2009-2021, seven countries: Austria, Belgium, Germany, Netherlands, New Zealand, Spain, Sweden) find that when voters see a party's coalition prospects as more uncertain, they are less likely to vote for it, holding the expected payoff constant. A pre-registered vignette experiment before Germany's 2021 election finds the same causal effect for the CDU/CSU: uncertain prospects lowered support relative to certain prospects with the same expected payoff. It finds no clear effect for the Greens. Voters on average behave as if risk-averse about coalitions.",
+   "corrected_quant": "Meta-analysis: moving a party's coalition-lottery variance from minimum to maximum lowers vote probability by 11.1 pp (linear probability models) and propensity to vote by 0.172 on a 0-1 scale. Vignette (Germany, N=1,577, RespondI panel, 10 Aug-7 Sep 2021): CDU/CSU support falls by about a quarter of a scale point (-0.23 uncertain, -0.27 very uncertain vs certain); Greens show no clear difference.",
+   "corrected_url": "https://doi.org/10.1086/736445 (accepted manuscript: https://www.bwl.uni-mannheim.de/media/Lehrstuehle/sowi/Gschwend/Article/bahnsen-et-al-2025-coalition-directed-voting-under-uncertainty.pdf)"
+  },
+  {
+   "id": "D10-F06",
+   "status": "corrected",
+   "note": "Crossref confirms Falcó-Gimeno & Muñoz, JOP 79(4):1454-1459 (2017). Checked against the published text and appendix (University of Barcelona repository). Confirmed: Valencia, May 2015; PSOE and Cs; a 3x2 design plus placebo (7 groups, about 143 per group); Netquest; 12-18 May; and the manipulation check (Cs-PP expectation 60.27% placebo vs 84.96% under the Cs-PP signal). Errors: (1) the sample is 1,003, not 1,000. (2) Honesty is not reported in the published article. It was planned in the 2015 working paper only. (3) Office-seeking image moved only for Cs and only under the Cs-PSOE signal (appendix D). (4) Only right-leaning signals moved placement: about +0.5 for Cs, and about +0.5 for PSOE significant only at 90%. Left-leaning and rule-out signals did not shift Cs significantly. (5) The PTV effect is heterogeneous and stated as 'especially' for the new party, not 'only'. Relevance overreach: 'Signalling Ra'am will move it left' is not supported, because left-leaning signals produced no significant placement shift in this experiment.",
+   "corrected_claim": "In Valencia's May 2015 regional campaign, an online survey experiment randomly varied coalition signals from an established party (PSOE) and a new one (Ciudadanos): rule out all coalitions, a right-leaning partner, a left-leaning partner, or a placebo. The signals shifted coalition expectations, more so for the new party. Right-leaning signals moved both parties about half a point to the right on a 0-10 scale (PSOE only at the 90% level). Left-leaning and rule-out signals did not significantly move placement. For Cs, the right-leaning signal raised the stated probability of voting among voters to its right and lowered it among voters to its left, and a Cs-PSOE signal made Cs look more office-seeking. PSOE's image barely moved. For Yashar, a rightward signal (unity after Netanyahu) should reposition it. Whether a leftward signal (Ra'am) would reposition it is not established by this study.",
+   "corrected_quant": "N=1,003 (Netquest, 12-18 May 2015), 7 groups (about 143 each). Manipulation check: share expecting a Cs-PP coalition 60.3% (placebo) to 85.0% (Cs-PP signal). Right-leaning signal: Cs placement +0.5 on 0-10; total PTV effect for Cs -0.74 points among voters left of Cs and +1.25 among voters right of Cs (0-10 PTV).",
+   "corrected_url": ""
+  },
+  {
+   "id": "D10-F07",
+   "status": "verified",
+   "note": "Crossref confirms Gschwend & Hooghe, EJPR 47(5):556-577 (2008). The abstract matches the claim. It reports 1,255 Belgian students, party vs coalition ballots, and four drivers: partner dislike, ideological congruence, party size and a high-profile candidate. It also reports that dislike is independent of congruence and that loyalty to cartels rose over 2003-2005. The desk's student-sample caveat is appropriate.",
+   "corrected_claim": "",
+   "corrected_quant": "",
+   "corrected_url": ""
+  },
+  {
+   "id": "D10-F08",
+   "status": "corrected",
+   "note": "Crossref confirms Golder, BJPS 36(2):193-212 (2006), and Debus, Public Choice 138(1-2):45-64 (online 2008, issue Jan 2009). Golder's abstract matches: all potential PEC dyads in 20 parliamentary democracies, 1946-1998, with the stated conditions. Debus's abstract, which the desk had not retrieved, is on the MZES publication page. It finds that pre-electoral commitments (pacts and rejections) significantly affect government formation after controlling for endogeneity, so that part is now confirmed. Error in relevance: the change bloc does not have 'three surplus pairs'. With four lists it can have at most two, and MODEL_BRIEF_v2 lists Together-YB and Yashar-Democrats.",
+   "corrected_claim": "Using all potential party pairs in 20 parliamentary democracies from 1946 to 1998, Golder finds that pre-electoral coalitions are more likely between ideologically compatible parties of similar size, when the expected coalition is large but not too large, in polarised party systems, and under disproportional rules. Debus (2009) uses data on preferred and rejected coalition partners and finds that pre-electoral commitments significantly affect which governments form, after controlling for endogeneity. [Relevance fix: the change bloc has two surplus agreements, Together-YB and Yashar-Democrats, not three.]",
+   "corrected_quant": "",
+   "corrected_url": "https://doi.org/10.1017/S0007123406000123 ; Debus abstract: https://www.mzes.uni-mannheim.de/en/publications/details/pre-electoral-commitments-and-government-formation"
+  },
+  {
+   "id": "D10-F09",
+   "status": "verified",
+   "note": "Crossref confirms Bäck, Hellström, Lindvall & Teorell, WEP 47(1):88-112 (online 2 May 2023). The abstract matches the claim. It covers 17 West European democracies 1945-2019 plus the Swedish 2018-19 case, adds commitment problems as a mechanism, and finds that PECs short of a majority can delay formation and that unfamiliarity can cause breakdowns. Note: the bloc sizes in the relevance (51 vs 55) come from the 10 Oct forecast. The current MODEL_BRIEF_v2 (13 Oct) gives about 52 vs 53, which still supports the point.",
+   "corrected_claim": "",
+   "corrected_quant": "",
+   "corrected_url": ""
+  },
+  {
+   "id": "D10-F10",
+   "status": "verified",
+   "note": "Crossref confirms Ansolabehere, Snyder, Strauss & Ting, AJPS 49(3):550-563 (2005). The abstract matches: coalition governments 1946-2001, a linear posts-to-voting-weight relationship for non-formateurs, a substantial formateur bonus, and support for proposal-power models.",
+   "corrected_claim": "",
+   "corrected_quant": "",
+   "corrected_url": ""
+  },
+  {
+   "id": "D10-F11",
+   "status": "corrected",
+   "note": "Crossref confirms Strøm, CPS 17(2):199-227 (July 1984); note the published title has no subtitle in Crossref. The abstract gives the share as about 35%, not 'roughly a third'. This is a minor precision fix. The rest matches: conventional explanations (crisis, instability, polarisation, factionalisation, bargaining failure) lack support, and minority cabinets form when opposition parties can influence legislation and when governing is an electoral liability.",
+   "corrected_claim": "",
+   "corrected_quant": "Minority cabinets were about 35% of governments in 15 parliamentary democracies since 1945.",
+   "corrected_url": ""
+  },
+  {
+   "id": "D10-F12",
+   "status": "verified",
+   "note": "Crossref confirms Krauss & Thürk, WEP 45(4):767-792 (online 9 Mar 2021). The abstract matches: 471 cabinets, 30 countries, 1977-2019; only minority governments without support agreements face a substantially higher termination risk; contract minorities are as stable as majorities. Suggested quant upgrade, not an error: the online appendix (figshare 14186123) reports hazard ratios in robustness models. The main-text hazard ratios were not retrieved. These support the desk's 'roughly double' judgment.",
+   "corrected_claim": "",
+   "corrected_quant": "471 cabinets, 30 countries, 1977-2019. Online-appendix robustness models (vs majority cabinets): substantive minority (no agreement) HR about 1.4-2.0 (e.g. 1.64-1.88 with economic controls, 1.76-2.00 with decade dummies); contract minority with written support HR about 0.8-1.2, not significant.",
+   "corrected_url": ""
+  },
+  {
+   "id": "D10-F13",
+   "status": "verified",
+   "note": "Crossref confirms Klüver & Spoon, JOP 82(4):1231-1242 (2020). The abstract matches: 307 parties, 219 elections, 28 European countries, 1972-2017; junior partnership 'considerably hurts'; the case study points to unfulfilled promises and voter misperception. The abstract also cites failure to differentiate from the senior partner. No magnitude is retrievable; a later paper's secondhand '6% fewer votes' was not confirmed, so do not use it. Relevance check: Ra'am went from 4 seats (2021) to 5 (2022, 4.1%) per IDI. It is a counter-example to the average penalty. Attributing its gain to Resolution 550 is the desk's inference, not the paper's. Most other junior partners fit the pattern: Labor 7 to 4, Meretz out, Yamina's successor Jewish Home 1.2%.",
+   "corrected_claim": "",
+   "corrected_quant": "",
+   "corrected_url": ""
+  },
+  {
+   "id": "D10-F14",
+   "status": "verified",
+   "note": "Crossref confirms Fortunato, BJPS 49(1):59-80 (online 8 Feb 2017). The abstract matches: six parliamentary democracies; voters punish parties seen as compromising and discount their achievements and promises; the effect is stronger among prior incumbent supporters and the politically disinterested. Note: the relevance cites P(change alone >=61) of about 5% from the 10 Oct forecast. The current MODEL_BRIEF_v2 (13 Oct) says 6.4%.",
+   "corrected_claim": "",
+   "corrected_quant": "",
+   "corrected_url": ""
+  },
+  {
+   "id": "D10-F15",
+   "status": "verified",
+   "note": "Crossref confirms Garmann, European Journal of Political Economy 47:19-35 (2017). The abstract (RePEc summary) matches: a Hesse natural experiment with staggered local elections; turnout falls significantly when two elections are close together; the effect is larger for less important elections. No point estimate was retrieved (paywalled). The Israeli turnout series matches D2-F02. Caveat for the relevance: Kostelka et al. (2023, CPS) find that frequency depresses turnout even in the most important elections (see missing_key_works). 'Expect modest fatigue' should therefore be held loosely.",
+   "corrected_claim": "",
+   "corrected_quant": "",
+   "corrected_url": ""
+  },
+  {
+   "id": "D10-F16",
+   "status": "verified",
+   "note": "Checked against the Knesset PDF (unofficial translation, amendments through 15 Aug 2023). s.7: 7 days from publication of results. s.8: 28 days plus extensions totalling at most 14. s.9: within 3 days, a second MK (28 days, s.9(c)) or notice to the Speaker. s.10: a majority request in writing within 21 days, then 2 days to assign and 14 days to form. s.11: deemed dissolution; election on the last Tuesday before the end of 90 days from the President's announcement. s.12: a dissolution law ends the proceedings. All match. Desk calendar re-computed: results Wed 4 Nov to mandate 11 Nov to 9 Dec to 23 Dec, then second MK 26 Dec to 23 Jan, then 21-day window to 13 Feb, then election Tue 11 May 2027. Fast path: Tue 13 Apr 2027. Both assume the President's announcements fall at the end of each window. Precedents re-computed: 1 Nov to 29 Dec 2022 = 58 days; 23 Mar to 13 Jun 2021 = 82 days.",
+   "corrected_claim": "",
+   "corrected_quant": "",
+   "corrected_url": ""
+  },
+  {
+   "id": "D10-F17",
+   "status": "corrected",
+   "note": "LoC In Custodia Legis (Ruth Levush, 26 Sep 2019) confirms that the Basic Law sets no criteria. It says recommendations and list size influence the President but do not bind him. It does not mention 2009. Ynetnews ('Peres tasks Netanyahu with forming government', 20 Feb 2009) confirms Netanyahu 65 recommendations (Likud, YB, Shas, UTJ, National Union, Jewish Home), Livni 28 (Kadima only), and Labor, Meretz and the Arab parties recommending no one. Kadima 28 vs Likud 27 seats is confirmed by the IDI 2009 election page, not by the cited sources. The statement that this 'departed from the custom of tasking the leader of the largest list' is in none of the cited pages, including IDI 2009. It is accurate as history, but label it a desk observation or source it.",
+   "corrected_claim": "The Basic Law sets no criteria for choosing whom to task. In practice the President weighs who has the best chance of forming a government, guided by recommendations and by list size, neither of which binds him. In February 2009 Kadima finished first (28 seats to Likud's 27), but President Peres tasked Netanyahu, who had 65 recommendations to Livni's 28 (desk observation: the first time since the 1990s that the largest list's leader was passed over).",
+   "corrected_quant": "",
+   "corrected_url": "https://blogs.loc.gov/law/2019/09/here-we-go-again-forming-a-coalition-government-israeli-style/ ; https://www.ynetnews.com/article/3674886 ; seats: https://en.idi.org.il/israeli-elections-and-parties/elections/2009/"
+  },
+  {
+   "id": "D10-F18",
+   "status": "corrected",
+   "note": "The numbers are confirmed, but the primary URL does not support most of the 2019 claim. JPost (Cashman, 23 Sep 2019) gives only the 55-54 headline; Balad, YB and Rivlin's remark are not in the fetched text. Times of Israel (25 Sep 2019) confirms Rivlin's statement that 10 Joint List recommenders said they would not sit with Gantz. This is a direct statement, so 'reportedly' can go. Reporting also confirms that Balad's 3 MKs asked not to be counted and that YB recommended no one. Globes (15 Mar 2020) confirms 61 MKs recommending Gantz, all Joint List factions including Balad (15 seats), and Hauser and Hendel opposing a Joint List-backed government. JNS (6 Apr 2021) confirms 52/45/7/16 and Rivlin's statement that no candidate had a realistic chance.",
+   "corrected_claim": "In September 2019 Netanyahu had 55 recommendations and Gantz 54, after Balad's 3 MKs asked not to be counted in the Joint List's recommendation and Yisrael Beytenu recommended no one. Rivlin said 10 of Gantz's recommenders (Joint List) would not sit with him, and tasked Netanyahu first. In March 2020 parties with 61 MKs, including all Joint List factions (15 seats), recommended Gantz, but two Blue and White MKs (Hauser, Hendel) opposed a Joint List-backed government. In April 2021 the count was Netanyahu 52, Lapid 45, Bennett 7, none 16, and Rivlin said no candidate had a realistic chance of forming a government.",
+   "corrected_quant": "",
+   "corrected_url": "https://www.timesofisrael.com/rivlin-tasks-netanyahu-with-forming-next-government-after-unity-talks-fail/ ; https://www.jpost.com/israel-elections/rivlin-concludes-second-round-of-consultations-602586 ; https://en.globes.co.il/en/article-1001321919 ; https://www.jns.org/israeli-president-tasks-netanyahu-with-forming-next-government"
+  },
+  {
+   "id": "D10-F19",
+   "status": "verified",
+   "note": "Checked against the Knesset PDF. The following match the claim: s.13a (rotation government, PM and Alternate, rotation date in the confidence request); s.13a(c)-(d) (affiliation and voting parity); s.43c-43d (the PM cannot remove the Alternate or the Alternate's ministers); s.43f (the PM's dissolution order needs the Alternate's consent); s.43h (neither may head a constructive no-confidence government); s.43a1, Amendment No. 10 (early rotation the day after a dissolution law passed with at least 2 PM-side MKs voting for it, or on the budget-failure determining day). The 2021 date of Amendment No. 10 is not printed in the PDF. Wording nit in the relevance: no new legislation is needed. A rotation government is formed under the existing s.13a by naming both leaders and the date in the confidence vote, so 'commit to legislate it' should read 'commit to form it under s.13a'. The English text is current only to Aug 2023, as the desk notes.",
+   "corrected_claim": "",
+   "corrected_quant": "",
+   "corrected_url": ""
+  },
+  {
+   "id": "D10-F20",
+   "status": "verified",
+   "note": "IDI Q&A (Rahat & Friedberg, 10 Apr 2022) confirms the following: 61 votes; a written alternative with guidelines, composition and portfolios; partial version 2001 and full version 2014; the purpose of preventing frequent toppling; and a 61-MK motion debated within a week, even in recess. The sentence on self-dissolution by law (61 votes) is not in this source. It is correct under Basic Law: The Knesset s.34-35, so cite that if kept.",
+   "corrected_claim": "",
+   "corrected_quant": "",
+   "corrected_url": ""
+  },
+  {
+   "id": "D10-F21",
+   "status": "corrected",
+   "note": "IDI (Assaf Shapira, 28 Jan 2026) confirms automatic dissolution if the budget is not passed by end-March or within 145 days of a new government, elections about three months later, a single trigger (23rd Knesset, Dec 2020), and the earlier 120-day extension. The investiture vote 60-59 with one Ra'am abstention (13 June 2021) is not in either cited source. Globes and Times of Israel reporting confirm it: Ra'am's Saeed al-Harumi abstained. The Basic Law text, s.13(d), confirms that no special majority is required.",
+   "corrected_claim": "",
+   "corrected_quant": "Investiture 60-59-1 (13 June 2021; Globes/ToI). Budget deadline: 31 March, or 145 days after formation. Triggered once (23rd Knesset, Dec 2020, after a 120-day extension).",
+   "corrected_url": "https://en.idi.org.il/articles/63274 ; investiture: https://en.globes.co.il/en/article-naftali-bennett-sworn-in-as-israels-13th-prime-minister-1001374311"
+  },
+  {
+   "id": "D10-F22",
+   "status": "verified",
+   "note": "The IDI page (Friedberg & Shapira, 18 May 2022) confirms the following: only 6 of 23 Knessets completed their term (2nd, 3rd, 5th, 6th, 7th, 11th); the 22nd Knesset's 21-day window expired on the night of 11-12 Dec 2019, and the Knesset then passed a law advancing the election by eight days; budget-failure dissolution happened once (2020); the 16th Knesset was dissolved by PM order (2005). The 29-30 May 2019 self-dissolution date is not on this page. The IDI 2019 page confirms dissolution less than two months after the April election. Relevance nit: per 2026 reporting, 27 Oct 2026 is a full-term election, so the 25th Knesset completed its term rather than ran 'close to' it.",
+   "corrected_claim": "",
+   "corrected_quant": "",
+   "corrected_url": ""
+  },
+  {
+   "id": "D10-F23",
+   "status": "corrected",
+   "note": "The IDI 1992 page confirms: Labor 44, Meretz 12, Shas 6, Hadash 3, ADP 2; a 61-seat blocking bloc; Rabin refusing to include the Arab parties; 62 coalition MKs plus 5 Arab MKs supporting from outside; turnout 77.4%. +972 (Gerlitz, 31 Oct 2015) confirms Shas leaving in Sept 1993, a 56-MK minority government, and Hadash and the ADP blocking no-confidence motions. CSM (Ford, 24 Sep 1993) confirms Oslo I 61-50 with 8 abstentions, including Shas. Oslo II 61-59 is in none of the cited sources (the 1993 CSM piece predates it). The UN/DPR chronology for Oct 1995 confirms it (6 Oct 1995). Substantive nuance: the government was not 56 MKs throughout. Yi'ud, 3 MKs who broke from Tzomet in Feb 1994, joined Rabin's government (Segev as minister), and its votes carried Oslo II.",
+   "corrected_claim": "In 1992 Labor (44), Meretz (12), Hadash (3) and the Arab Democratic Party (2) formed a 61-seat blocking bloc. Rabin kept the Arab parties out and formed a 62-seat coalition with Shas, with the 5 Arab MKs supporting from outside. After Deri resigned in September 1993, Shas left, and the government fell to 56 MKs, surviving because Hadash and the ADP blocked no-confidence motions. It later grew slightly when Yi'ud (Tzomet breakaways) joined. Oslo I passed 61-50 with 8 abstentions (Shas abstained); Oslo II passed 61-59 on 6 October 1995 with Yi'ud votes.",
+   "corrected_quant": "Coalition 62 + 5 outside; 56 MKs after Sept 1993 (before Yi'ud joined); Oslo I 61-50-8 (23 Sept 1993); Oslo II 61-59 (6 Oct 1995). Turnout 77.4%.",
+   "corrected_url": "https://en.idi.org.il/israeli-elections-and-parties/elections/1992/ ; Oslo II vote: https://www.un.org/unispal/?p=204448"
+  },
+  {
+   "id": "D10-F24",
+   "status": "verified",
+   "note": "The IDI 1984 page confirms Alignment 44 and Likud 41, Peres then Shamir rotation at two years each, 25 ministers, and the largest government to that date. The IDI 1988 page confirms Likud 40 and Alignment 39, a right-religious bloc of 65, unity without rotation, the end in March 1990 after the Alignment joined a no-confidence vote, and a narrow right-religious government in June 1990. Note for D10-F28: the IDI Shas page shows Shas sat in the 1984 unity government, including under Peres.",
+   "corrected_claim": "",
+   "corrected_quant": "",
+   "corrected_url": ""
+  },
+  {
+   "id": "D10-F25",
+   "status": "corrected",
+   "note": "Narrative confirmed: the IDI 2019 page covers Liberman refusing any draft compromise and the Knesset dissolving less than two months after April 2019. IDI 'Dissolving the Knesset' confirms that the 22nd Knesset's 21-day window lapsed. Globes confirms 61 recommendations for Gantz in March 2020. The IDI 2020 page confirms 'after 18 months of political deadlock'. The IDI 2021 page confirms the budget failure and dissolution in Dec 2020 and Blue and White 8 seats in 2021. The figures the desk flagged as not re-verified are now checked against other sources: Blue and White 33 seats in March 2020 (near-final CEC count, AP via Algemeiner), and YB 5 seats (Apr 2019) to 8 seats (Sep 2019, 6.99%; IFES ElectionGuide/Britannica). The hedges can be removed and sources added.",
+   "corrected_claim": "",
+   "corrected_quant": "Four elections, April 2019 to March 2021. Blue and White: 33 seats (2020 joint list) to 8 seats (2021). Yisrael Beytenu: 5 (Apr 2019) to 8 seats (Sep 2019, 6.99%), so the party blamed for the repeat gained.",
+   "corrected_url": "https://en.idi.org.il/israeli-elections-and-parties/elections/2019/ ; https://en.idi.org.il/israeli-elections-and-parties/elections/2021/ ; https://www.algemeiner.com/2020/03/03/with-most-votes-counted-official-israeli-elections-results-show-win-for-netanyahu-but-no-governing-majority/ ; https://electionguide.org/elections/id/3349"
+  },
+  {
+   "id": "D10-F26",
+   "status": "verified",
+   "note": "The IDI 2021 page confirms: Netanyahu bloc 52 (Likud 30, Shas 9, UTJ 7, RZP 6); Yesh Atid 17; Yamina 7; Ra'am 4; an eight-party coalition with Bennett as PM and Lapid to rotate; Lapid became PM on early elections. The IDI 2022 page confirms Ra'am 5 seats (4.1%), Jewish Home 1.2%, Meretz 3.2%, Balad 2.9%. Investiture 60-59-1 is confirmed by Globes and ToI (Saeed al-Harumi abstained). The dissolution law passed on 30 June 2022, with Lapid PM from 1 July (the IDI page says July 1). D1-F10 (10% of change voters moving to the NB) matches israeli-behaviour.json.",
+   "corrected_claim": "",
+   "corrected_quant": "",
+   "corrected_url": ""
+  },
+  {
+   "id": "D10-F27",
+   "status": "corrected",
+   "note": "Resolution 550 is confirmed as a 2022-2026 five-year plan of about NIS 30 bn, more than double its predecessor, adopted Oct 2021. Sources: Globes (10 Jun 2021, NIS 30 bn agreed with Abbas, doubling about NIS 14 bn); Task Force on Arab Citizens; Bank of Israel policy paper (a comprehensive cut to 550 in the 2024 revised budget). 'Decision 4387, July 2026' could not be confirmed: no source found gives that number. What is confirmed (ACRI, petition filed 30 July 2026) is a July 2026 government decision cutting NIS 496.9 m from 550 budgets and moving it to the police and Shin Bet (about NIS 364.5 m to Shin Bet and 132.4 m to police per INN). gov.il still returns 403.",
+   "corrected_claim": "Government Resolution 550 (October 2021) set a five-year economic plan for Arab society for 2022-2026, worth about NIS 30 billion, roughly double its predecessor. The 2024 revised budget cut it substantially. In July 2026 the government moved a further NIS 496.9 million from the plan to the police and Shin Bet (challenged in a Supreme Court petition filed 30 July 2026). The plan expires at the end of 2026.",
+   "corrected_quant": "About NIS 30 bn over 2022-2026. 2024 revised-budget cut (size not retrieved). July 2026 transfer of NIS 496.9 m to police/Shin Bet. The decision number '4387' is unconfirmed; drop it or source it.",
+   "corrected_url": "https://en.globes.co.il/en/article-1001374021 ; https://www.english.acri.org.il/post/budget-cuts-to-equality-budget-increases-to-the-shin-bet ; https://boi.org.il/media/2ewba0ms/pp202402.pdf"
+  },
+  {
+   "id": "D10-F28",
+   "status": "corrected",
+   "note": "The IDI Shas page confirms: Rabin 1992 with Deri resigning in Sept 1993 (fraud indictment) and Shas out until 1996; Barak 1999 with four portfolios, leaving over Meretz disputes and Camp David; out in 2003 rather than sit with Shinui; out 2013-15. Errors and omissions: (1) the quant omits two non-Likud governments Shas joined. It joined the 1984 national unity government, whose first two years were under Peres, and Olmert's Kadima-led government in 2006 with four ministers. The Olmert case fits the desk's 'pivotal and the right had no path' pattern, but it must be listed. (2) AP/PBS (16 July 2025) says the coalition would have 50 seats once the resignations took effect; it gives no '67-seat' starting figure. Other outlets reported 49. AP frames Shas as quitting the coalition. Other reports (MEMO, ToI) say Shas ministers resigned but Shas stayed in the coalition, would not topple it, and kept committee seats. Deri kept attending the security cabinet, not a 'kitchen cabinet'.",
+   "corrected_claim": "Shas sat in the 1984 national unity government (Peres as PM for the first two years), joined Rabin's government in 1992 and Barak's in 1999 (four portfolios), and joined Olmert's Kadima-led government in 2006 (four ministers). It left Rabin's government in 1993 after Deri's indictment and Barak's over disputes with Meretz and Camp David. It stayed out in 2003 rather than sit with Shinui, and in 2013-15. In July 2025 UTJ quit Netanyahu's government over the draft-exemption law and Shas ministers resigned. AP reported the coalition left with 50 of 120 seats (others said 49). Shas said it would stay in the coalition and not help topple it, kept its committee seats, and Deri kept attending the security cabinet.",
+   "corrected_quant": "Shas in non-Likud-led governments: 1984-86 (Peres half of the unity rotation), 1992-93 (Rabin), 1999-2000 (Barak), 2006-09 (Olmert). Opposition: 1993-96, 2003, 2013-15. July 2025: coalition reported at 50 seats (AP) or 49 after the haredi resignations.",
+   "corrected_url": "https://en.idi.org.il/israeli-elections-and-parties/parties/shas ; https://www.pbs.org/newshour/world/another-netanyahu-ally-quits-governing-coalition-leaving-israeli-leader-with-minority-in-parliament ; https://www.middleeastmonitor.com/20250717-israels-shas-party-quits-netanyahus-government-remains-in-ruling-coalition-amid-draft-exemption-crisis/"
+  },
+  {
+   "id": "D10-F29",
+   "status": "verified",
+   "note": "JPost (Anna Barsky, 17 Sep 2026, citing Maariv) confirms every element: the mood not to recommend anyone (not a formal decision); about a year in opposition so a draft law passes without haredi signatures; possible later entry into any government, including Eisenkot's; Eisenkot's mandatory-service condition and his preference for another election over compromise; denials of talks from both sides; doubt that Shas would act without UTJ; funding NIS 1.2-1.4 bn, at most about 1.5 bn. The relevance figure of 'about 39-43' Netanyahu recommendations uses the 10 Oct forecast. On the current MODEL_BRIEF_v2 (13 Oct) medians, Likud+Otzma+RZP is 35.",
+   "corrected_claim": "",
+   "corrected_quant": "",
+   "corrected_url": ""
+  },
+  {
+   "id": "D10-F30",
+   "status": "corrected",
+   "note": "Sources confirmed. JPost (23 Aug 2026, 103FM interview, no individual byline): Hendel wants a Zionist government only, says it is impossible to pass a draft law with the haredim, will not be the 61st seat of a government relying on Arab parties, and says Netanyahu should go. JPost (Keshet Neev, 8 Oct 2026): Hendel urged Winter to sign a surplus agreement and form a blocking bloc against coalitions with haredi or Arab parties; no deal was reported; Otzma accused Likud of seeking unity with Eisenkot. INN (2 Sep 2026): Winter will back Netanyahu but join only if a national-service law passes before swearing-in. Error: the quant says both lists' conditions 'fit only a pure-Zionist change coalition or a unity government'. That holds for the Reservists only. Winter recommends Netanyahu and would join a Netanyahu government once a national-service law passes, and Hendel's 8 Oct appeal shows Winter was then aligned with Netanyahu and the haredim. Amcha seats should be treated as Netanyahu-bloc seats unless Winter changes position.",
+   "corrected_claim": "Reservists-Economic leader Yoaz Hendel (23 Aug 2026) wants a 'Zionist government' only. He will not complete a majority with haredi parties or be the 61st seat of a government that depends on Arab parties, and he says Netanyahu should go. On 8 Oct he urged Ofer Winter (Amcha) to sign a surplus agreement and form a joint 'blocking bloc' against coalitions with haredi or Arab parties; no deal was reported, and in the same report Otzma accused Likud of seeking a unity government with Eisenkot. Winter (2 Sept) will recommend Netanyahu and will join only if a national-service law passes before the government is sworn in.",
+   "corrected_quant": "Forecast pass probabilities: Reservists about 0.20-0.22, Amcha about 0.15 (10 Oct) or 0.29 (13 Oct brief). Reservists' conditions fit only a Zionist-only change coalition or a unity government. Amcha's conditions fit a Netanyahu-led government that passes a national-service law first.",
+   "corrected_url": ""
+  },
+  {
+   "id": "D10-F31",
+   "status": "unverifiable",
+   "note": "Internal notes with no URL. The desk labels this finding 'low' and unverified. Spot checks: (1) Eisenkot's minority-government remark exists, but it is a Channel 12 'Meet the Press' interview reported in a ToI liveblog dated 13 Dec 2025, not ToI 23 Aug 2026. He spoke of 58 seats (not 58-59), said he would make no deals with Arab parties, and said he did not know whether they would abstain. A Sept 2026 Amit Segal column says the plan is unchanged. (2) Liberman's 'no minority government, no safety net' is not found for 2026. 2026 reporting (i24) has him ruling out Arab and haredi parties, and the 'safety net' wording dates from 2019. (3) 'Shura council veto abolished in December 2025' is inaccurate. Abbas announced on 6 Dec 2025 that Ra'am would cut ties with the Shura Council, but JPost (9 Aug 2026) reports the separation still had to pass before the primaries, and no ratification was found. (4) Segalovitz left Yesh Atid and the Knesset in Aug 2026 with a reserved Ra'am slot under negotiation. No final list placement was confirmed; check the CEC list filing. (5) Herzog pushing for unity: not found. (6) 'Every Jewish change list pledges no Arab party inside at the outset' and the Walla 16 Aug conditions were not checked. Keep out of the guide until each item is sourced.",
+   "corrected_claim": "(Verified subset only) Eisenkot said in December 2025 that the Zionist opposition could govern with 58 seats without deals with Arab parties (ToI liveblog, 13 Dec 2025). In December 2025 Ra'am announced it would cut ties with the Islamic Movement's Shura Council; the formal separation was still pending in August 2026. Former Yesh Atid MK Yoav Segalovitz left Yesh Atid in August 2026 amid talks on a reserved Ra'am slot.",
+   "corrected_quant": "",
+   "corrected_url": "https://www.timesofisrael.com/liveblog_entry/eisenkot-says-zionist-opposition-could-form-58-seat-government-gantz-weve-already-been-in-this-movie/ ; https://jpost.com/israel-news/politics-and-diplomacy/article-904965"
+  },
+  {
+   "id": "D10-F32",
+   "status": "corrected",
+   "note": "The cited file does not contain these numbers. Every figure matches MODEL_BRIEF.md (11 Oct, forecast of 8-10 Oct): change alone 5.2%, with Ra'am 18.8%, NB 21.7%, change-led 18.2%, repeat 41.9%. They also match the forecast quoted in this verification task. The cited MODEL_BRIEF_v2.md has been rewritten as 'MODEL BRIEF v4' with the 13 Oct forecast, and its figures differ: Likud 25, Yashar 22, Together 11, Democrats 10, UTJ 9, Shas 9, JL 9, YB 9, Ra'am 6, Otzma 6, RZP 4; P(NB>=61) 12.4%; P(change alone >=61) 6.4%; with Ra'am 26.3%; change-led 21.8%; repeat 48.1%. The exchange rates '-0.08' (Ra'am) and '-0.48' (JL) appear in neither brief. MODEL_BRIEF.md has Ra'am -0.03 and JL -0.41 (pp per 10k votes); v2/v4 has Ra'am -0.03 and JL -0.45 net votes. The recommendation arithmetic on 13 Oct medians is 52 change vs 35 (Likud+Otzma+RZP); 52 vs 53 if Shas and UTJ recommend Netanyahu; 67 vs 53 if both Arab lists recommend the change candidate. Align the whole file (summary, D10-F14, D10-F29, parameters) to whichever forecast the guide publishes.",
+   "corrected_claim": "On the 13 Oct forecast (MODEL_BRIEF v4), the change lists hold about 52 seats, the Netanyahu core about 53 (with Shas and UTJ) and the Arab lists about 15. P(change alone >=61) is 6.4%, P(change + Ra'am >=61) 26.3% and P(NB >=61) 12.4%. The formation model gives a change-led government 21.8% and a repeat election 48.1%. On medians, recommendations would be about 35 for Netanyahu (Likud+Otzma+RZP), plus 18 if Shas and UTJ recommend him, against about 52 for a single change candidate, plus 15 if both Arab lists recommend. Arab-list votes help deny Netanyahu 61 but are about neutral (Ra'am -0.03) or negative (Joint List -0.45 net votes) for a change-led government.",
+   "corrected_quant": "13 Oct brief: P(change alone >=61) 6.4%; with Ra'am 26.3%; P(NB >=61) 12.4%; change-led 21.8%; repeat 48.1%. Recommendations: 52 vs 35 (haredim abstain); 52 vs 53 (haredim recommend Netanyahu); 67 vs 53 (Arab lists also recommend the change candidate). [The 10 Oct values (5.2/18.8/21.7/18.2/41.9) are in MODEL_BRIEF.md if that forecast is the one published.]",
+   "corrected_url": "data/processed/targeting/research/MODEL_BRIEF_v2.md (13 Oct, v4) ; 10 Oct values: data/processed/targeting/research/MODEL_BRIEF.md"
+  }
+ ],
+ "missing_key_works": [
+  "Martin, Lanny W. & Randolph T. Stevenson (2001). Government Formation in Parliamentary Democracies. American Journal of Political Science 45(1):33-50. doi:10.2307/2669358. The standard conditional-logit model of which cabinet forms. It tests pre-electoral pacts, anti-pacts and incumbency. Crossref-verified; the desk said it could not verify it.",
+  "Glasgow, Garrett, Matt Golder & Sona N. Golder (2011). Who 'Wins'? Determining the Party of the Prime Minister. American Journal of Political Science 55(4):937-954. doi:10.1111/j.1540-5907.2011.00524.x. Across 28 European countries, the largest party is often disadvantaged in PM selection and presidents can be influential. This bears directly on D10-F17 and the first-mandate parameter.",
+  "Bäck, Hanna & Patrick Dumont (2008). Making the first move: A two-stage analysis of the role of formateurs in parliamentary government formation. Public Choice 135(3-4):353-373. doi:10.1007/s11127-007-9267-5. Covers who gets the formateur role and how that shapes the outcome (D10-F10, D10-F17).",
+  "Golder, Sona N. (2010). Bargaining Delays in the Government Formation Process. Comparative Political Studies 43(1):3-32. doi:10.1177/0010414009341714. In 16 West European countries 1944-1998, uncertainty always lengthens formation, and complexity does so only under uncertainty. Use it as the base for the formation-duration parameter alongside D10-F09.",
+  "Fortunato, David & Randolph T. Stevenson (2013). Perceptions of Partisan Ideologies: The Effect of Coalition Participation. American Journal of Political Science 57(2):459-477. doi:10.1111/j.1540-5907.2012.00623.x. In 54 surveys from 18 countries, voters see coalition partners as more ideologically similar. This is observational backing for the repositioning logic in D10-F06.",
+  "Adams, James, Lawrence Ezrow & Christopher Wlezien (2016). The Company You Keep: How Voters Infer Party Positions on European Integration from Governing Coalition Arrangements. American Journal of Political Science 60(4):811-823. doi:10.1111/ajps.12231. A second test of 'coalition partners shape perceived position' (D10-F06).",
+  "Kostelka, Filip, Eva Krejcova, Nicolas Sauger & Alexander Wuttke (2023). Election Frequency and Voter Turnout. Comparative Political Studies 56(14):2231-2268. doi:10.1177/00104140231169020. Covers 22 European democracies 1939-2019 with two natural experiments: high election frequency depresses turnout even in the most important elections. Needed to qualify D10-F15 and the repeat_election_turnout_shift parameter.",
+  "Gschwend, Thomas, Lukas F. Stoetzer & Steffen Zittlau (2016). What drives rental votes? How coalition signals facilitate strategic coalition voting. Electoral Studies 44:293-306. doi:10.1016/j.electstud.2016.06.011. Direct evidence that explicit coalition signals enable threshold-insurance votes (D10-F02; relevant to Ra'am at pass 0.78-0.83 and RZP-Zehut).",
+  "Bahnsen, Oke, Thomas Gschwend & Lukas F. Stoetzer (2020). How do coalition signals shape voting behavior? Revealing the mediating role of coalition expectations. Electoral Studies 66:102166. doi:10.1016/j.electstud.2020.102166. A mediation test linking signals to vote choice through expectations (D10-F04, D10-F05).",
+  "Strøm, Kaare (1990). Minority Government and Majority Rule. Cambridge: Cambridge University Press. The book-length treatment behind D10-F11, including the role of outside support and policy influence for support parties (reviewed in APSR 85(3), 1991, doi:10.2307/1963919).",
+  "Shamir, Michal & Gideon Rahat, eds. (2022). The Elections in Israel, 2019-2021. Routledge. doi:10.4324/9781003267911. The peer-reviewed Israeli election-study volume on the four-election deadlock, recommendations and the 2021 change government. The desk relies on IDI web pages for D10-F25 and D10-F26, and this volume fills the academic-source gap flagged in open_questions."
+ ]
+}

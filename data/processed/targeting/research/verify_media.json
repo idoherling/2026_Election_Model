@@ -1,0 +1,294 @@
+{
+ "verdicts": [
+  {
+   "id": "D9-F01",
+   "status": "verified",
+   "note": "Crossref matches doi:10.1038/s41562-022-01487-4: Aggarwal, Allen, Coppock, Frankowski, Messing, Zhang, Barnes, Beasley, Hantman, Zheng, Nature Human Behaviour 7(3): 332-341 (online 12 Jan 2023). I read the full text (author PDF). US$8.9M, an 8-month programme, and about 2M moderate- and low-information persuadable voters all match (treatment audience 1,993,216 of 3,322,027 eligible), in AZ, WI, MI, NC and PA. The pre-registered ATE is -0.06 pp (robust SE 0.12, P = 0.60), and a TOST test shows it is equivalent to zero within +/-1/3 pp (P = 0.013). Biden leaners +0.4 pp (SE 0.2), Trump leaners -0.3 pp (SE 0.3); difference 0.7 pp, P = 0.036. The early-vote result is labelled exploratory. Two small precision points: ads ran on Facebook, Instagram and Outbrain, not only Meta; and the authors' closing sentence is about differential mobilisation effects being modest. The relevance is consistent with the paper.",
+   "corrected_claim": "",
+   "corrected_quant": "",
+   "corrected_url": ""
+  },
+  {
+   "id": "D9-F02",
+   "status": "verified",
+   "note": "Crossref matches: Coppock, Green & Porter, Research & Politics 9(1), doi:10.1177/20531680221076901 (online 2 Mar 2022). Full text checked. ZIP-code randomisation in Florida CDs 15, 16, 26 and 27 (210 ZIPs, 154 fully nested). Ads ran on Facebook and Instagram and were seen more than 1.1M times (three-second views), with over 100,000 full views. The covariate-adjusted effect on Democratic precinct vote share is -0.04 pp (SE 0.85; the unadjusted estimate is +2.1, SE 3.0). Effects on vote margin and turnout were small and not significant (SI). One nuance for the relevance: the two ads were gun-policy contrast videos ('armed teachers', 'lockdown') with no candidate named, not image ads. They were party-level issue ads, so the 'party-brand ads ~0' reading still holds.",
+   "corrected_claim": "",
+   "corrected_quant": "",
+   "corrected_url": ""
+  },
+  {
+   "id": "D9-F03",
+   "status": "corrected",
+   "note": "Crossref matches: Hager, Political Communication 36(3): 376-393, doi:10.1080/10584609.2018.1548529. Full text (KOPS copy) checked. The sponsor was the CDU; there were 189 postal districts (63 per arm) and 17M impressions. The headline numbers are right: +0.7 pp (p = 0.155) and competitors -1.4 pp (p = 0.094). The interpretation is wrong. Table 2 shows the -1.4 pp is the combined PROGRESSIVE bloc (SPD, Greens, Left) on the second vote: the opposing camp, not 'nearest rivals'. Ideologically adjacent parties GAINED: the AfD +0.8 pp (significant, factual arm) and the FDP +0.1/+0.2. The conservative bloc combined rose +1.2 to +1.4 pp. Hager calls this 'advertisement spillover' to same-camp parties, not cannibalisation. The paper itself, not only secondary accounts, reports a negligible turnout effect (+155 and +580 voters versus a 13,500-vote gain). Factual +0.8 (p = 0.098) versus emotional +0.6 (p = 0.338). Cost per vote: EUR 3-7. The summary line ('most of it came from its nearest rivals'), this relevance and the parameter share_of_ad_driven_list_gain_taken_from_allied_lists = 0.5 all rest on this misreading and should be revised.",
+   "corrected_claim": "A CDU Facebook and Google ad campaign in the 2016 Berlin state election was randomised across 189 postal districts into emotional ads, factual ads or no ads. The CDU's vote share rose by 0.7 pp (not significant). The combined progressive bloc (SPD, Greens, Left) fell by 1.4 pp (p = 0.094). Same-camp parties gained: the AfD +0.8 pp (significant in the factual arm) and the FDP slightly. The author calls this spillover to ideological neighbours. Turnout was unaffected. Factual ads did at least as well as emotional ones.",
+   "corrected_quant": "Sponsor +0.7 pp (p = 0.155). Progressive bloc -1.4 pp (RI p = 0.094). Conservative bloc +1.2 to +1.4 pp (p ~0.14-0.16). AfD +0.8 pp in the factual arm. Turnout effect negligible (+155 / +580 voters). 189 districts, 17M impressions, cost EUR 3-7 per vote.",
+   "corrected_url": ""
+  },
+  {
+   "id": "D9-F04",
+   "status": "corrected",
+   "note": "Crossref matches: Broockman & Green, Political Behavior 36(2): 263-289 (online 21 Jun 2013), doi:10.1007/s11109-013-9239-z. The OpenAlex abstract confirms the claim: exposed voters were sometimes more likely to recall the ads but no more likely to recognise or rate the candidates favourably. The Springer full text sits behind a bot challenge, so the J-PAL evaluation page was used for numbers. The J-PAL page is internally inconsistent: its header says 2,984 and 3,577 voters, but its body gives 2,984 live interviews (Study 1) and 3,557 automated interviews (Study 2). It also gives the randomised universes (32,029 and 261,150 registered voters) and the only recall effect (+5.3 pp, Study 2). Study 1 was a little-known Republican state-legislative candidate (ads one month out); Study 2 a viable Democratic congressional candidate (ads one week out).",
+   "corrected_claim": "",
+   "corrected_quant": "Study 1: 32,029 registered voters randomised, 2,984 live-interview respondents, no recall effect. Study 2: 261,150 randomised, 3,557 automated-interview respondents (J-PAL header says 3,577), ad recall +5.3 pp. Name recognition and favourability effects about 0 in both (J-PAL summary; primary tables not accessed).",
+   "corrected_url": ""
+  },
+  {
+   "id": "D9-F05",
+   "status": "corrected",
+   "note": "Crossref matches: Haenschen & Jennings, Political Communication 36(3): 357-375, doi:10.1080/10584609.2018.1548530. The abstract confirms preregistration, the Dallas Morning News partnership, millennials, information plus reminder ads, effects only in competitive districts, and effects on par with live-caller phone campaigns. The US$50,000 cost and 0.9% figure come from Campaigns & Elections, which also gives 73,909 millennial voters (ages 23-35) in 14 districts, half of them competitive. The 0.52 pp figure is confirmed in Haenschen (2023, Political Behavior 45(4): 1661-1681, doi:10.1007/s11109-022-09781-7): '0.52pp, but only among voters in competitive districts'. Correction: 'no effect in uncompetitive districts' is not what the press release says. Virginia Tech's release says that in non-competitive districts 'the effect was the opposite' (a negative point estimate). The full article was not accessed.",
+   "corrected_claim": "",
+   "corrected_quant": "About US$50,000; 73,909 millennials in 14 single-member districts (7 competitive); ads over 2-4 weeks. Effect under 1 pp: '0.9 percent' in press coverage; 0.52 pp in competitive districts per Haenschen (2023). In non-competitive districts the point estimate was reversed (negative), per the university press release.",
+   "corrected_url": ""
+  },
+  {
+   "id": "D9-F06",
+   "status": "verified",
+   "note": "Crossref matches: Bond et al., Nature 489(7415): 295-298, doi:10.1038/nature11421. The PMC full text gives a direct effect on validated voting of 0.39% (s.e.m. 0.17, P = 0.02). It also gives 'about 60,000 voters' directly and 'another 280,000' through contagion, '340,000 additional votes' in total, so the 4.7 ratio is correct. Close friends account for all significant contagion despite being 7% of friendships. Cross-reference: turnout_scale.json already holds the 2012 presidential replication (Jones, Bond, Bakshy, Eckles & Fowler 2017, PLoS ONE 12(4): e0173851). The planning value should be read against that higher-salience estimate rather than the 2010 midterm alone.",
+   "corrected_claim": "",
+   "corrected_quant": "",
+   "corrected_url": ""
+  },
+  {
+   "id": "D9-F07",
+   "status": "corrected",
+   "note": "Crossref matches: Tappin, Wittenberg, Hewitt, Berinsky & Rand, PNAS 120(25): e2216261120, doi:10.1073/pnas.2216261120. Full text (PMC10288628) checked. The calibration phase is 17,013 (Citizenship Act) + 6,408 (UBI) = 23,421, which matches 'over 23,000'. The out-of-sample experiment is n = 5,284. Two errors. (1) The ~70% is the pooled microtargeting strategy (targeting on 1, 2-3 or 4 covariates) against the single-best-message strategy: 5.96 vs 3.48, P = 0.004. It is not specifically 'single-attribute'. The advantage was 'qualitatively largest' for one covariate, but the differences between levels were slight. (2) 'Smaller in the confirmatory experiment' is wrong. The 70% comes FROM the confirmatory out-of-sample experiment (Study 1). The smaller advantage was for the UBI issue and for Study 2, where targeting chose which issue to message on. The parameter note 'smaller in the confirmatory study' should be fixed to match.",
+   "corrected_claim": "In survey experiments on two US policy issues, a machine-learning microtargeting strategy beat showing everyone the single best pretested message by about 70% on average (Study 1, out-of-sample test). The advantage came mainly from one issue. Targeting on one covariate, such as party, did as well as or better than targeting on two to four. When targeting was used to choose which issue to message on (Study 2), the advantage was more limited. Outcomes were policy support, not vote choice.",
+   "corrected_quant": "Calibration phase n = 17,013 + 6,408; out-of-sample experiment n = 5,284. Microtargeting vs single-best-message: 5.96 vs 3.48 (about +70%, P = 0.004); vs naive: over +200%. No gain from more than one covariate.",
+   "corrected_url": ""
+  },
+  {
+   "id": "D9-F08",
+   "status": "verified",
+   "note": "Crossref matches: Lin, Czarnek, Lewis, White, Berinsky, Costello, Pennycook & Rand, Nature 648(8093): 394-401 (online 4 Dec 2025), doi:10.1038/s41586-025-09771-9. Add the volume and pages to the venue. The abstract confirms the US 2024, Canada 2025 and Poland 2025 experiments, effects larger than video-ad benchmarks, fact- and evidence-driven persuasion, and more inaccurate claims by right-candidate models in all three countries. The Cornell release gives the sample sizes and effects: US 'more than 2,300' (the peer-review file gives N = 2,306), Canada 1,530, Poland 2,118; pro-Harris AI moved Trump leaners 3.9 points, pro-Trump AI moved Harris leaners 1.51 points; about 10 points in Canada and Poland. MIT Technology Review instead reports 2.3 points for the pro-Trump effect, so cite the Cornell/paper figure. 'Around one-third of the initial effect persisted over a month later' (US) comes from the Nature peer-review file.",
+   "corrected_claim": "",
+   "corrected_quant": "",
+   "corrected_url": "https://doi.org/10.1038/s41586-025-09771-9"
+  },
+  {
+   "id": "D9-F09",
+   "status": "verified",
+   "note": "Crossref matches: Spenkuch & Toniatti, QJE 133(4): 1981-2036, doi:10.1093/qje/qjy010. The abstract confirms the FCC border design over 2004-12, near-zero aggregate turnout effect, a one-SD partisan ad difference giving about +0.5 pp in the partisan vote-share difference, and an RD showing the mechanism is a change in the partisan composition of the electorate. The 'rule out even moderate effects' wording appears in the 2015-16 working papers; the published abstract says 'almost no impact'. The study is about TV advertising; the relevance correctly flags the extension to online video as an analogy.",
+   "corrected_claim": "",
+   "corrected_quant": "",
+   "corrected_url": ""
+  },
+  {
+   "id": "D9-F10",
+   "status": "corrected",
+   "note": "Crossref matches: Grossman, Margalit & Mitts, JOP 84(4): 1913-1931, doi:10.1086/719415. I read the published article (PDF on guygrossman.com). Confirmed: Yediot readership in the first half of 2007 is the instrument; there is no discernible turnout effect (persuasion rate 7.9%); in 2013 the IV estimate is +0.22 pp right-bloc share per 1 pp of Israel Hayom exposure; the main beneficiary is Likud; and the authors call the localized estimates a likely lower bound. Corrections. (1) The published article does not give 'at least 2 seats across three elections'; that comes from +972's report (14 Sep 2020) of an earlier working paper. The published figure is that moving the instrument from one SD below to one SD above its mean 'contributed about four seats in the post-2007 elections'. A 1-SD instrument shift raises right-bloc share by 1.45 pp (2013) and 1.79 pp (2015); the 25th-to-75th percentile exposure gap gives +2.83 pp (FE) or +2.5 pp (IV). The FD/IV effect is significant in 2013 and 2015 but not in 2009. (2) 'Largest in localities split evenly between left and right' appears only in the +972 summary of the working paper and was not found in the published article. (3) The paper's right bloc includes Yisrael Beytenu, now a change-bloc list. The relevance's link to the atlas's 'Route 4 and mid-cluster places' is an inference, not a finding.",
+   "corrected_claim": "Israel Hayom, a free pro-Netanyahu daily launched in 2007, became Israel's most-read paper. Instrumenting local exposure with Yediot Ahronoth readership in early 2007, the authors find it raised support for the right bloc (mainly Likud) in 2013 and 2015, with a less precise effect in 2009. The effect worked through persuasion (implied persuasion rate 7.9%), not turnout. The authors treat the localized estimates as a lower bound on national impact.",
+   "corrected_quant": "2013 IV: +0.22 pp right-bloc share per +1 pp exposure. A 1-SD shift in the instrument gives +1.45 pp (2013) and +1.79 pp (2015); moving the instrument from -1 SD to +1 SD 'contributed about four seats' after 2007 (published JOP). No turnout effect. The '>= 2 seats over three elections' figure is from the 2020 working paper as reported by +972.",
+   "corrected_url": ""
+  },
+  {
+   "id": "D9-F11",
+   "status": "verified",
+   "note": "Crossref matches: Garthwaite & Moore, Journal of Law, Economics, and Organization 29(2): 355-384, doi:10.1093/jleo/ewr031 (online 10 Feb 2012). The desk entry has no DOI, so add it. Full text checked. Winfrey's influence was measured by O Magazine subscriptions and sales of her book-club titles. The endorsement raised Obama's votes, his contributions and overall turnout (+0.06 pp in the analysed states). Point estimate: 1,015,559 additional Obama votes ('approximately 1 million'). Placebo tests on the 2004 Illinois Senate primary and on 2002-2006 Senate Democratic share were null. The Kellogg PDF URL resolves (200). The relevance's reading of s.8 matches the statute text (see D9-F24).",
+   "corrected_claim": "",
+   "corrected_quant": "",
+   "corrected_url": "https://doi.org/10.1093/jleo/ewr031"
+  },
+  {
+   "id": "D9-F12",
+   "status": "verified",
+   "note": "Crossref matches: Lau, Sigelman & Rovner, JOP 69(4): 1176-1209, doi:10.1111/j.1468-2508.2007.00618.x. The article is closed access (Unpaywall: no OA copy). The abstract confirms that negative campaigning is not an effective way to win votes, that it is more memorable and stimulates knowledge, that there is no reliable evidence it depresses turnout, and that it slightly lowers efficacy, trust and possibly public mood. JSTOR Daily (Gershon, 2015) gives the counts: 111 studies; 57 turnout studies with mixed signs; 11 of 15 knowledge studies positive; only 5 of 43 vote-effect studies found appreciable benefits for the attacker. The 'through mid-2006' cut-off is confirmed by secondary sources. The clause 'at best modestly lowers positive feelings toward the target' could not be checked against the primary text.",
+   "corrected_claim": "",
+   "corrected_quant": "",
+   "corrected_url": ""
+  },
+  {
+   "id": "D9-F13",
+   "status": "verified",
+   "note": "The Ideas for India article (16 Aug 2022, Kevin Carney) was read in full. Over 3,000 participants recruited on Facebook in 25 constituencies around Chennai, Tamil Nadu 2021. Arms: full party group, party-content-only replica, or control; 49% of those invited joined. Knowledge +0.17 SD, driven by confidence in true headlines (+0.48 SD); belief in rumours and false headlines fell but not significantly. Relative rating of the assigned party +0.072 SD, driven by moderates. No effect on affective polarisation. Full-group effects were significantly larger than party-only in aggregate. Caveats the author gives: the party was assigned at random, and Tamil Nadu discourse is less divisive than elsewhere. The working paper / NBER conference listing was not separately checked; source_type 'working paper' is appropriate.",
+   "corrected_claim": "",
+   "corrected_quant": "",
+   "corrected_url": ""
+  },
+  {
+   "id": "D9-F14",
+   "status": "verified",
+   "note": "Crossref matches: Pasquetto, Jahani, Atreja & Baum, PACM HCI 6(CSCW1), Article 117, 35 pp., April 2022, doi:10.1145/3512964. Full text checked. Online survey experiments in India, replicated in Pakistan. Audio debunks drew more interest and corrected beliefs better than text or image versions. Re-sharing was higher from strong ties, in-group (politically agreeing) senders, or both. Caveats for the relevance: outcomes are survey-measured interest, belief and stated re-sharing, not observed forwarding. 'Vertical videos' were not tested; only the audio advantage is supported.",
+   "corrected_claim": "",
+   "corrected_quant": "",
+   "corrected_url": ""
+  },
+  {
+   "id": "D9-F15",
+   "status": "verified",
+   "note": "Crossref matches: Badrinathan, APSR 115(4): 1325-1341 (online 15 Jun 2021), doi:10.1017/S0003055421000459. The abstract confirms N = 1,224, an hour-long in-person training covering inoculation, corrections and verification, no significant average effect, and ruling-party supporters becoming significantly less able to identify pro-attitudinal false stories. The CASI working-paper summary and secondary coverage confirm Bihar and a test about two weeks later (after voting, before results). Related evidence: a later APSR classroom study in Bihar (four-month curriculum) found persistent effects, so the null applies to one-off adult training, which is how the relevance uses it.",
+   "corrected_claim": "",
+   "corrected_quant": "",
+   "corrected_url": ""
+  },
+  {
+   "id": "D9-F16",
+   "status": "corrected",
+   "note": "Crossref matches: Roozenbeek, van der Linden, Goldberg, Rathje & Lewandowsky, Science Advances 8(34): eabo6254, doi:10.1126/sciadv.abo6254. Full text (PMC9401631) checked. Studies 1-6 n = 6,464 (US quota samples); the field study ran on YouTube to US users. Videos were shown to about 5.4M people over 15 days. 967,347 watched one of the two field videos (emotional language, false dichotomies) for 30 s or more. 22,632 answered a test item (11,432 treatment, 11,200 control). Recognition rose about 5%. The effect was h = 0.09, narrowly missing the preregistered SESOI of h = 0.10. Cost was about US$0.05 per 30-s view. Correction: the 18 hours is a MEDIAN (18.4 h), not a mean. Only two of the five technique videos were field-tested.",
+   "corrected_claim": "",
+   "corrected_quant": "Lab: 6 studies, n = 6,464 (US). Field: YouTube, ~5.4M users reached over 15 days, 967,347 watched one of two videos for 30 s or more, and 22,632 answered a test item within 24 h (median 18.4 h after viewing). Recognition +5% on average (h = 0.09 vs SESOI 0.10). About US$0.05 per 30-second view.",
+   "corrected_url": ""
+  },
+  {
+   "id": "D9-F17",
+   "status": "corrected",
+   "note": "Crossref matches: Modirrousta-Galian & Higham, JEP: General 152(9): 2411-2437, doi:10.1037/xge0001395. The accepted manuscript was read. It is a reanalysis of five prior studies of Bad News and Go Viral! using ROC/SDT. The abstract qualifies the result: 'when comparable true and fake news items were used', the games did not improve discrimination and produced more 'false' responses to all items (more conservative responding). The quant clause 'Replications report the same pattern for Bad News' has no source in this paper or the finding. Drop it or cite a specific replication.",
+   "corrected_claim": "",
+   "corrected_quant": "Five prior studies reanalysed with ROC/SDT. Where comparable true and false items were used: discrimination unchanged and a conservative response bias increased.",
+   "corrected_url": ""
+  },
+  {
+   "id": "D9-F18",
+   "status": "verified",
+   "note": "Crossref matches: Walter, Cohen, Holbert & Morag, Political Communication 37(3): 350-375 (online 24 Oct 2019), doi:10.1080/10584609.2019.1668894. The abstract confirms k = 30, N = 20,963 and d = 0.29. Effects weaken with truth scales, partial refutations and campaign-related statements, and are substantially attenuated by prior beliefs, ideology and knowledge.",
+   "corrected_claim": "",
+   "corrected_quant": "",
+   "corrected_url": ""
+  },
+  {
+   "id": "D9-F19",
+   "status": "verified",
+   "note": "Crossref matches: Nyhan, Porter, Reifler & Wood, Political Behavior 42(3): 939-960 (online 21 Jan 2019), doi:10.1007/s11109-019-09528-x. The abstract, via the Southampton repository and search snippets, confirms two 2016 experiments with realistic fact-checks of Trump's convention-speech and debate claims. Factual beliefs became more accurate, including among Trump supporters, with no measurable effect on attitudes toward Trump. The paper gives no single numeric effect, so 'about 0' is a fair label.",
+   "corrected_claim": "",
+   "corrected_quant": "",
+   "corrected_url": ""
+  },
+  {
+   "id": "D9-F20",
+   "status": "corrected",
+   "note": "Crossref matches: Berinsky, BJPolS 47(2): 241-262 (online 19 Jun 2015), doi:10.1017/S0007123415000186. Full text checked. The quoted percentages are wrong for the stated sample. Study 1 had 1,701 respondents; Table 1 (full sample, N = 1,596) gives rumour rejection of: control 50%, rumour only 45%, nonpartisan correction 57%, Republican correction 58%, Democratic correction 54%. Differences among the three corrections are NOT significant (Republican vs nonpartisan p = 0.895). In the attentive sample (N = 876) the Republican correction stands out: 69% vs 60% (nonpartisan) and 60% (Democratic). The desk's 58/51/53 are the wave-1 values of the panel subset re-interviewed a week later (Table 3, N = 696). Persistence: all corrections faded between waves and condition differences lost significance, but Berinsky concludes that 'the Republican correction remained strong, even after weeks'. So 'short-lived advantage' overstates. The repetition (fluency) finding is confirmed. The parameter unlikely_messenger_rebuttal_premium_pp (+7 vs nonpartisan) should be about +1 in the full sample (n.s.) and about +9 in the attentive sample.",
+   "corrected_claim": "Experiments on the US 'death panels' rumour found that merely repeating a rumour increases belief in it. All corrections raised rumour rejection. A correction from an unexpected partisan source (a Republican) was the most effective among attentive respondents; in the full sample the three correction types did not differ significantly. Correction effects faded over the following week, but the Republican correction remained the most effective.",
+   "corrected_quant": "Study 1 (May 2010, n = 1,701). Full sample (N = 1,596), rumour rejection: control 50%, rumour only 45%, nonpartisan 57%, Republican 58%, Democratic 54%. Attentive sample (N = 876): Republican 69% vs nonpartisan 60% and Democratic 60%. Re-interviewed panel (N = 696) wave 1: 58% Republican vs 51% nonpartisan vs 53% Democratic; differences n.s. by wave 2.",
+   "corrected_url": ""
+  },
+  {
+   "id": "D9-F21",
+   "status": "verified",
+   "note": "Crossref matches: Grinberg, Joseph, Friedland, Swire-Thompson & Lazer, Science 363(6425): 374-378, doi:10.1126/science.aau2706. The abstract confirms that 1% of individuals accounted for 80% of fake-news-source exposures and 0.1% for 'nearly 80%' of shares. Heavy engagers were conservative-leaning, older and highly engaged with political news. The Science summary gives 'nearly 6% of all news consumption'. The panel is 16,442 voter-matched accounts. 'Mostly strongly partisan' is a fair gloss of 'conservative leaning ... highly engaged'.",
+   "corrected_claim": "",
+   "corrected_quant": "",
+   "corrected_url": ""
+  },
+  {
+   "id": "D9-F22",
+   "status": "verified",
+   "note": "Crossref matches: Dobber, Metoui, Trilling, Helberger & de Vreese, International Journal of Press/Politics 26(1): 69-91 (online 25 Jul 2020), doi:10.1177/1940161220944364. Full text checked: N = 278. Attitude toward the politician was lower after the deepfake: t(275) = 2.48, p = .01 (H1a supported). The party attitude difference was not significant (H1b rejected). The decline is concentrated among non-CDA voters (t(214) = 3.05, p = .001); CDA voters show none (p = .40). In the microtargeted subgroup (religious Christians who previously voted CDA, a very small n of about 24 controls), both politician and party evaluations were lower. The authors warn this subsample is small.",
+   "corrected_claim": "",
+   "corrected_quant": "",
+   "corrected_url": ""
+  },
+  {
+   "id": "D9-F23",
+   "status": "corrected",
+   "note": "The UK Parliament page (written evidence RGE 11, The Alan Turing Institute) blocks automated fetches behind a JavaScript challenge. Search results reproduce its wording: 'no conclusive evidence that AI-generated mis- or disinformation meaningfully impacted election results across 2024'. The reasons given (low volumes, audiences already aligned) and the indirect harms (confusion over what is real, eroded trust in online sources, deepfake-incited hate against candidates, politicians exploiting AI disinformation) are confirmed. Attribution fix: the '112 national elections, 19 with AI-enabled interference' figure comes from the earlier CETaS briefing 'AI-Enabled Influence Operations: The Threat to the UK General Election' (May 2024, Stockwell et al.). It does not come from the November 2024 'Safeguarding Future Elections' report named in the title field.",
+   "corrected_claim": "",
+   "corrected_quant": "CETaS May 2024 briefing: of 112 national elections held since January 2023 or scheduled for 2024, 19 showed examples of AI-enabled interference. The November 2024 report and the RGE 11 evidence found no conclusive evidence that AI content changed any 2024 result.",
+   "corrected_url": ""
+  },
+  {
+   "id": "D9-F24",
+   "status": "corrected",
+   "note": "Checked against the consolidated Hebrew text (Wikisource raw text, which already includes the 2026 deepfake amendment). Confirmed: s.5(a)(1) bans propaganda on radio and TV in the 60 days before the election, except broadcasts under ss.15, 15A and 16D. Radio broadcasts run only in the final 14 days (s.15(a1)), at 15 min per list + 4 per outgoing MK (s.15(a)). TV runs only in the final 14 days (s.15A(a)), at 7 min + 2 per MK (s.15A(b)), with no broadcasts on fixed rest days (s.15A(c)); content is produced at the list's cost and approved by the CEC chair (s.15A(d)). s.2A1 (2022): an ad must carry the name and contact details of whoever ordered it; paid content counts as an election ad. s.8 bans entertainment (artists, music, singing, films, torches), gifts, and food or alcohol except at private-home gatherings. s.10: printed public ads only on designated boards; newspaper ads at most 40 inches, one per party per paper per day, at most 10,000 inches over three months. s.16E: poll details required, including online; the blackout runs from the end of the Friday before polling until polls close. s.17: six months or a fine. Correction on s.2B: the written-consent rule covers only security-forces members WOUNDED OR KILLED because of their service, and victims of hostile action (or their families). It is not any soldier or reservist. Separately, s.2B(b) bars using the IDF so as to suggest it is identified with a list (support for the IDF itself is allowed). The 6 Aug 2026 Eisenkot ruling rested on uniforms as public property, i.e. s.2A (D9-F26). The relevance line 'reservist and soldier imagery needs individual written consent' overstates the statute. Living soldiers' images raise privacy, IDF-order and s.2A/2B(b) issues, not s.2B(a) consent.",
+   "corrected_claim": "The Elections (Propaganda Methods) Law bans election propaganda on radio and TV in the 60 days before the election, except allocated broadcasts. Those run only in the final 14 days, with no TV broadcasts on fixed rest days. Each list gets 7 TV minutes plus 2 per outgoing MK of its faction, and 15 radio minutes plus 4 per MK. Since 2022 every election ad, including paid content, must carry the name and contact details of whoever ordered it. Propaganda may not use the name or image of a security-forces member wounded or killed because of service, or of a victim of hostile action, without written consent (or the family's if deceased). It may not use the IDF in a way suggesting the IDF is identified with a list, and the committee treats IDF uniforms as public property (s.2A). Propaganda may not be combined with entertainment or artist performances, gifts, or food and alcohol except at private house meetings. Printed public ads are limited to designated boards, and newspaper ads are capped in size and volume. Published polls must include methodological details, including online, and new poll results are banned from the end of the Friday before election day until polls close.",
+   "corrected_quant": "Broadcast window = final 14 days (radio s.15(a1); TV s.15A(a)), roughly 13-26 Oct 2026 with no TV on rest days. TV 7 min + 2 per outgoing MK; radio 15 min + 4 per MK. Newspaper ads at most 40 inches, one per party per paper per day, at most 10,000 inches in the final three months. Penalty: six months' imprisonment or a fine (s.17).",
+   "corrected_url": ""
+  },
+  {
+   "id": "D9-F25",
+   "status": "verified",
+   "note": "The Pearl Cohen alert (30 Jul 2026, Haim Ravia and Dotan Hammer) was fetched. The CEC for the 26th Knesset, chaired by Justice Noam Sohlberg, issued the rules on 26 Jul 2026. Video: label for the full duration, at least 5% of screen height or width (whichever is greater). Audio: read clearly at the start and end at a volume and speed not materially different. Print and images: at least 5% of content height or 10 pt (whichever is greater). Two symbols, one for created and one for materially altered content. A compliant notice creates a presumption of compliance with s.2A2(a). The statute text confirms the temporary provision runs 23.7.2026-26.10.2027, the deepfake definition, and the chair's power to make rules (s.2A2(b)); the rules were published as Elections (Propaganda Methods) Rules 5786-2026. Add the alert's authors to the authors field.",
+   "corrected_claim": "",
+   "corrected_quant": "",
+   "corrected_url": ""
+  },
+  {
+   "id": "D9-F26",
+   "status": "verified",
+   "note": "Times of Israel liveblog (6 Aug 2026, 4:13 pm) confirms that the CEC ordered Eisenkot (Yashar) to remove a video with AI-generated IDF soldiers, on a Likud petition. The reasoning: uniforms are 'intangible public property' and the video 'creates a connection between [Eisenkot] and the IDF'. The same item confirms the February 2026 order against Likud over a manipulated Bennett-Lapid image with Arab leaders, and Netanyahu's AI ad seen as mocking Eisenkot's late son Gal (no committee action reported). Israel National News (26 Jul 2026, 'Precedential ruling against AI election ads') confirms that Sohlberg ordered Smotrich and RZP to remove the AI video showing an Eisenkot-like figure with Mahmoud Abbas, joined by Mansour Abbas. He found it unfair interference and held that the AI caption was insufficient because Facebook users are unlikely to notice it. The ynet and i24 accounts agree; the petitioners were Yashar and the 'Voters in Israel' association. The NIS 8,500 costs figure remains unverified, as the desk itself says.",
+   "corrected_claim": "",
+   "corrected_quant": "",
+   "corrected_url": ""
+  },
+  {
+   "id": "D9-F27",
+   "status": "corrected",
+   "note": "The Times of Israel article was fetched: Sue Surkes, 14 Mar 2019. It confirms that CEC chair Justice Hanan Melcer banned anonymous election ads on all online platforms from 1 March, covering domestic and foreign sources. Facebook required identity verification for ads about political figures, parties or elections, including get-out-the-vote ads. Political ads are kept for seven years in a public ad library showing whether and when an ad ran, the spend, and where it was commissioned from. Two quant and claim elements are NOT in this source. (1) Google's Israel election-ads verification: it is real, but the source is Google's help pages (verification from early June 2020, enforcement from late June 2020). (2) Per-ad audience breakdowns by age, gender and region: this is a current Meta Ad Library feature, not reported in the cited article. The s.2A1 statutory duty (2022) is confirmed in the statute text.",
+   "corrected_claim": "",
+   "corrected_quant": "Anonymous online election ads banned from 1 March 2019 (CEC chair Melcer). Facebook political ads kept for 7 years in a public library showing run dates, spend and where commissioned (ToI). Google Israel election-ads verification since June 2020 (Google Ads policy help). Audience age, gender and region breakdowns are a Meta Ad Library feature not documented in the cited article.",
+   "corrected_url": "https://www.timesofisrael.com/facebook-rolls-out-political-ad-transparency-less-than-a-month-before-polls/ ; https://support.google.com/adspolicy/answer/9873935"
+  },
+  {
+   "id": "D9-F28",
+   "status": "verified",
+   "note": "The Haaretz page was fetched. Its metadata shows the headline 'The money race: How much Israeli politicians are spending on online ads' by Omer Benjakob, published 12 Sep 2026, 23:14, with paywalled body. The free lede confirms: 'For nearly three years' Netanyahu and Likud barely touched Meta ads and campaigned through WhatsApp groups and a Telegram chatbot that leave no public record. 'Two weeks ago' Netanyahu resumed paid Facebook ads and outspent almost every rival within days. Opponents have outspent him online for years. A graphic caption says right-wing parties' ads primarily target men. Spending figures were not retrieved, as the desk says.",
+   "corrected_claim": "",
+   "corrected_quant": "",
+   "corrected_url": ""
+  },
+  {
+   "id": "D9-F29",
+   "status": "verified",
+   "note": "The Comptroller's digital library page (report 10630) and the summary PDF (2026-Digital-Taktzir.pdf, Tammuz 5786 / July 2026) were read. Confirmed: the threat was identified in 2017, and as of March 2026, about nine years on, there is no national inter-organisational policy and no lead body. The state's picture of foreign influence is incomplete. There is no breakdown of takedown requests by foreign-influence category, so platform responsiveness is unknown (requests rose from about 8,600 to over 106,000; 15-25% went unanswered). There is no official channel for the public to report. About 5M SMS were sent by Iran and Hezbollah in Sept 2024, including a fake shelter alert. 58% of Israelis update news often via social networks (ISOC-IL/Technion survey). The audit ran July 2024 - January 2026. The CEC should close its preparedness gap and examine a public reporting channel. Only parts of the report were published, for security reasons. A Times of Israel report confirms the 2019-elections Comptroller finding: signs that parties paid to inflate followers and ran fake accounts, with the parties not identified. The Shin Bet 'Iran main actor' line was not re-checked.",
+   "corrected_claim": "",
+   "corrected_quant": "",
+   "corrected_url": ""
+  },
+  {
+   "id": "D9-F30",
+   "status": "verified",
+   "note": "The IDI English page (26 May 2024; Shwartz Altshuler and Sapozhnikova) matches every number. Main source: Ch12 51%, Ch14 20%, Ch13 and Kan 11 13% each; Ch12 primary or secondary 72.5%. Channel 14 watched by 24% of the right, 4% of the centre, 3.5% of the left. Top online sites: ynet 40%, N12 24%. News via WhatsApp 65%, Telegram 44%, with an average of 15 WhatsApp groups and 10 Telegram channels. Trust in family, friends and work groups above 60%; politician- or journalist-run groups 47% (Telegram) and 39% (WhatsApp). Outlet trust: Kan 60%, Ch12 54%, Ch13 46%, Ch14 35%; 85% of Ch14 viewers trust it. 51% of Ch14 viewers watch no news on Shabbat. IDI's Hebrew release describes the survey as of the Jewish public, which supports 'Jewish sample only'. The 'IDI 2025 survey found the same trust ordering' sentence in the relevance was not checked.",
+   "corrected_claim": "",
+   "corrected_quant": "",
+   "corrected_url": ""
+  },
+  {
+   "id": "D9-F31",
+   "status": "corrected",
+   "note": "The ice.co.il item was fetched (published 10 Apr 2026, 09:31): 'yesterday (Thursday)' Channel 12 news had a 15% rating (411,000 viewers), Channel 14 news 7.8% (223,000) and Channel 13 news 4.8% (145,000). Kan 11 news was not reported. The claim and quant are correct. The relevance overreaches: the source reports viewers, not households. '400,000 households a night' should read 'about 411,000 viewers on one sampled night'.",
+   "corrected_claim": "",
+   "corrected_quant": "",
+   "corrected_url": ""
+  },
+  {
+   "id": "D9-F32",
+   "status": "corrected",
+   "note": "The ISOC-IL page (Wiener and Stegman, 21 Apr 2024) confirms the 2024 numbers. Geocartography, January 2024, 1,004 adults: WhatsApp 98% (95% of users daily), YouTube 98%, Facebook 87% (down from 90%), Telegram 70% (54% in 2023), TikTok 54%. Ages 18-22: Instagram 90%, TikTok 80%, Telegram 77%. Facebook is about 90% in each adult band from 30 to 59. Arab adults: TikTok 71% (58% daily). Corrections. (1) The same 2024 page gives Arab adults' Telegram use as only 66%, with 28% daily, against 70% and 43% for the general population. 'About as much' therefore hides much lower daily use. (2) The 2025 index figures attributed to the Jerusalem Post (26 Oct 2025: Facebook 93%/72% daily, TikTok 71%/61%, Telegram 71%) could not be found in the JPost or ISOC-IL material reachable by search. Treat them as unverified until the article is cited by URL.",
+   "corrected_claim": "",
+   "corrected_quant": "Jan 2024 (n = 1,004 adults, Geocartography): WhatsApp 98% (95% of users daily), YouTube 98%, Facebook 87%, Instagram 75%, Telegram 70% (54% in Jan 2023), TikTok 54%, X 37%. Ages 18-22: Instagram 90%, TikTok 80%, Telegram 77%. Arab adults (2024): TikTok 71% (58% daily), Telegram 66% (28% daily). 2025 JPost figures unverified.",
+   "corrected_url": ""
+  },
+  {
+   "id": "D9-F33",
+   "status": "verified",
+   "note": "The NEWSru.co.il results page (23 Jan 2024; poll of 22-23 Jan) was fetched. 2,981 respondents (2,799 answered all 22 questions). Regular sources: sites 87%, social networks 47%, TV 29%. TV: Channel 9 38% (29% before the war), Ch12 25%, Ch13 14%, Kan 11 12%, Ch14 12%; 37% do not watch TV. Social networks: Facebook 61%, Telegram 47%, Instagram 20%, TikTok 11%. Messengers for news: WhatsApp 54%, Telegram 48%. Russian-language Telegram channels for war news: 40% (18% in summer 2023). Every number matches. The desk's low-confidence label for a self-selected reader poll is appropriate.",
+   "corrected_claim": "",
+   "corrected_quant": "",
+   "corrected_url": ""
+  },
+  {
+   "id": "D9-F34",
+   "status": "verified",
+   "note": "Crossref matches: Yarchi, Baden & Kligler-Vilenchik, Political Communication 38(1-2): 98-139 (online 14 Jul 2020), doi:10.1080/10584609.2020.1785067. The abstract confirms close to a quarter million contributions on Facebook, Twitter and WhatsApp about one Israeli controversy over 16 months. Twitter showed homophilic interaction, aggravated positional polarisation and pronounced hostility; WhatsApp de-polarised over time. One finding the desk omits is relevant to channel choice: Facebook was the LEAST homophilic platform on interactions, positions and emotions.",
+   "corrected_claim": "",
+   "corrected_quant": "",
+   "corrected_url": ""
+  },
+  {
+   "id": "D9-F35",
+   "status": "corrected",
+   "note": "The IDI page (www.idi.org.il/knesset-committees/66390, dated 06 Oct 2026) and the PDF were read. The page lists the authors as Dr. Rachel Aridor Hershkowitz and Dr. Tehilla Shwartz Altshuler, assisted by Dr. Ori Grodzinsky. Confirmed: WhatsApp is a central tool for election activity; one wrongful block can disrupt a whole operation; the paper calls for early preparation and a fast-track review channel between the CEC and Meta. Not in the cited source: WhatsApp telling parties 'it is not a channel for messaging at scale' (India 2019), and 'Brazil's electoral court adopted a ban on mass political messaging'. What the IDI paper does say: WhatsApp reported in 2019 that it bans over 2 million accounts a month for bulk or automated messaging, more than 75% without a recent user report (WhatsApp, 'Stopping Abuse', 6 Feb 2019). Enforcement looks at message rate, group creation, adding users to groups, and messaging non-contacts, the very patterns campaign coordinators produce near election day. In Brazil, Meta and the Superior Electoral Court run a dedicated channel for flagging WhatsApp accounts suspected of mass electoral messaging. About ten Yesh Atid MKs' accounts were blocked in Sept 2023. The relevance (spread sending across real accounts, avoid automation) is well supported.",
+   "corrected_claim": "",
+   "corrected_quant": "WhatsApp (2019, cited by IDI): over 2M accounts banned per month for bulk or automated messaging, more than 75% without a recent user report. Brazil: a dedicated Meta-Superior Electoral Court channel for reporting suspected mass electoral messaging. Sept 2023: about 10 Yesh Atid MKs' WhatsApp accounts blocked.",
+   "corrected_url": ""
+  }
+ ],
+ "missing_key_works": [
+  "Haenschen, Katherine (2023). 'The Conditional Effects of Microtargeted Facebook Advertisements on Voter Turnout.' Political Behavior 45(4): 1661-1681. https://doi.org/10.1007/s11109-022-09781-7 (Crossref and full text checked). Texas, 2018 midterms, N = 871,479 randomised: no main turnout effect across four issue-ad arms; +1.66 pp only for abortion-rights and women's-health ads in competitive congressional districts, concentrated among women. This is the largest individual-level Facebook GOTV test in a higher-salience election. It refines D9-F05: digital turnout effects need message, audience and competitive context aligned.",
+  "Martin, Gregory J. & Ali Yurukoglu (2017). 'Bias in Cable News: Persuasion and Polarization.' American Economic Review 107(9): 2565-2599. https://doi.org/10.1257/aer.20160812 (Crossref and abstract checked). Channel-position instrument: Fox News raises Republican vote share by about 0.3 pp among viewers induced to watch 2.5 more minutes a week, and drives polarisation over time. This is the best causal analogue for Channel 14, which the desk says it ran out of budget to cover.",
+  "DellaVigna, Stefano & Ethan Kaplan (2007). 'The Fox News Effect: Media Bias and Voting.' Quarterly Journal of Economics 122(3): 1187-1234. https://doi.org/10.1162/qjec.122.3.1187 (Crossref and abstract checked). Fox News entry into 9,256 towns, 1996-2000: Republicans +0.4 to 0.7 pp; persuaded 3-28% of viewers. Companion benchmark to D9-F10 for the size of partisan-TV effects.",
+  "Barrera, Oscar, Sergei Guriev, Emeric Henry & Ekaterina Zhuravskaya (2020). 'Facts, alternative facts, and fact checking in times of post-truth politics.' Journal of Public Economics 182: 104123. https://doi.org/10.1016/j.jpubeco.2019.104123 (Crossref and abstract checked). France 2017, n = 2,480: Le Pen's alternative facts were persuasive; fact-checking improved knowledge but did not change policy conclusions or candidate support. It is the European multiparty replication of D9-F19, and it shows rebuttal can raise the salience of the attacker's issue.",
+  "Porter, Ethan & Thomas J. Wood (2021). 'The global effectiveness of fact-checking: Evidence from simultaneous experiments in Argentina, Nigeria, South Africa, and the United Kingdom.' PNAS 118(37): e2104235118. https://doi.org/10.1073/pnas.2104235118 (Crossref and abstract checked). 22 fact-checks; belief in misinformation fell by at least 0.59 points on a 5-point scale, mostly still apparent more than two weeks later. Exposure to misinformation raised false belief by under 0.07. Supplies the durability evidence D9-F18 lacks (the parameter says 'durability not modelled').",
+  "Guess, Andrew M., Michael Lerner, Benjamin Lyons, Jacob M. Montgomery, Brendan Nyhan, Jason Reifler & Neelanjan Sircar (2020). 'A digital media literacy intervention increases discernment between mainstream and false news in the United States and India.' PNAS 117(27): 15536-15545. https://doi.org/10.1073/pnas.1920498117 (Crossref and abstract checked). Short 'tips' raised discernment by 26.5% (US, still measurable weeks later) and 17.5% (educated Indian online sample). There was no effect in a rural northern Indian sample. This is a needed counterweight to D9-F15 before ruling out light-touch literacy prompts for high-education Israeli audiences.",
+  "Allcott, Hunt, Matthew Gentzkow, Winter Mason et al. (2024). 'The effects of Facebook and Instagram on the 2020 election: A deactivation experiment.' PNAS 121(21): e2321584121. https://doi.org/10.1073/pnas.2321584121 (Crossref and abstract checked). 19,857 Facebook and 15,585 Instagram users deactivated for six weeks before the election. Effects on polarisation, candidate favourability and turnout were precisely estimated near zero; online participation fell. Platform-level evidence that supports the desk's null view of broadcast social media.",
+  "Hackenburg, Kobi, Ben M. Tappin, Luke Hewitt, Ed Saunders, Sid Black, Hause Lin, Catherine Fist, Helen Margetts, David G. Rand & Christopher Summerfield (2025). 'The levers of political persuasion with conversational artificial intelligence.' Science 390(6777), 4 Dec 2025. https://doi.org/10.1126/science.aea3884 (Crossref and abstract checked). N = 76,977 (UK), 19 LLMs, 707 issues. Post-training and prompting raised persuasiveness by up to 51% and 27%; personalisation and scale mattered less. Methods that raised persuasion also lowered factual accuracy. This is the companion to D9-F08 and bears on any bloc chatbot."
+ ]
+}

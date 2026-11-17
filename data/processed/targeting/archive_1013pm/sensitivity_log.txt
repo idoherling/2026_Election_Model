@@ -1,0 +1,13 @@
+scenario base: done
+scenario gotv_low: done
+scenario gotv_high: done
+scenario gotv_flat: done
+scenario persuasion_high: done
+scenario persuasion_zero: done
+scenario rescue_high: done
+scenario rescue_low: done
+scenario abroad_high: done
+scenario cross_pressure_high: done
+scenario composition_tilt: done
+change_govt {"base": {"spearman": 1.0, "top25_overlap": 25}, "gotv_low": {"spearman": 0.998, "top25_overlap": 25}, "gotv_high": {"spearman": 0.998, "top25_overlap": 23}, "gotv_flat": {"spearman": 0.989, "top25_overlap": 23}, "persuasion_high": {"spearman": 0.988, "top25_overlap": 24}, "persuasion_zero": {"spearman": 0.978, "top25_overlap": 22}, "rescue_high": {"spearman": 0.997, "top25_overlap": 25}, "rescue_low": {"spearman": 0.998, "top25_overlap": 24}, "abroad_high": {"spearman": 0.999, "top25_overlap": 25}, "cross_pressure_high": {"spearman": 0.998, "top25_overlap": 25}, "composition_tilt": {"spearman": 0.985, "top25_overlap": 23}}
+block_nb {"base": {"spearman": 1.0, "top25_overlap": 25}, "gotv_low": {"spearman": 0.994, "top25_overlap": 20}, "gotv_high": {"spearman": 0.998, "top25_overlap": 24}, "gotv_flat": {"spearman": 0.973, "top25_overlap": 17}, "persuasion_high": {"spearman": 0.978, "top25_overlap": 17}, "persuasion_zero": {"spearman": 0.988, "top25_overlap": 24}, "rescue_high": {"spearman": 0.995, "top25_overlap": 20}, "rescue_low": {"spearman": 0.999, "top25_overlap": 24}, "abroad_high": {"spearman": 0.999, "top25_overlap": 25}, "cross_pressure_high": {"spearman": 0.997, "top25_overlap": 23}, "composition_tilt": {"spearman": 0.98, "top25_overlap": 20}}

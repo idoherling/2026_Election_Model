@@ -1,0 +1,40 @@
+{
+ "baseline": {
+  "change61": 0.05425,
+  "change_raam61": 0.26575,
+  "block_nb": 0.90925,
+  "change_seats": 51.830875,
+  "change_govt": 0.2821229166666666
+ },
+ "delta_share": 0.002,
+ "valid_votes_2026": 4823026,
+ "n_draws": 8000,
+ "m_behavior": 60,
+ "pairs": [
+  [
+   "Likud",
+   "Religious Zionist Party"
+  ],
+  [
+   "Bennett 2026 + Yesh Atid",
+   "Yisrael Beytenu"
+  ],
+  [
+   "Yashar",
+   "The Democrats"
+  ],
+  [
+   "Shas",
+   "United Torah Judaism"
+  ],
+  [
+   "Otzma Yehudit",
+   "Amcha Yisrael"
+  ],
+  [
+   "Balad + Hadash-Ta'al",
+   "Ra'am"
+  ]
+ ],
+ "units": "change in objective per 10,000 additional votes for the list (probabilities as fractions; change_seats in seats)"
+}

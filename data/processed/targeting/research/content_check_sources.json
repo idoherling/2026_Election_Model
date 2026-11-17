@@ -1,0 +1,145 @@
+{
+ "verdict": "The draft mostly holds up, but it needs fixes before it ships. All 183 entries map to real findings: 201 of the 203 desk ids appear, and the 2 left out are D1-F11 (marked unverifiable) and D1-F34. Every DOI I checked resolves to the cited work. The authorship and venue corrections from the verify files are applied (Atmor/Friedberg/Harsgor, Shapira/Harsgor/Yakter, Amitai/Gidron/Yair, Freedman & Shelef, Malach, Elster, Schein et al., Townsley, Le Pennec & Pons). No note breaks the style rules: no em-dash asides, no not-X-but-Y, no colon reveals, no stock phrases. Colons appear only inside published titles. No note contradicts the model or carries legal risk.\n\nThe serious problems are structural:\n- **Legacy ids break.** The live site still cites DATA-CBS, DATA-CENSUS, DATA-KN, DATA-GEO, DATA-SES, DATA-KM and D1-F11. None of these exist in the new draft, so those citations will silently vanish.\n- **Shared ids misroute.** cites() in site/targeting_app.js maps each id to the first entry that contains it. Shared ids therefore send readers to the wrong work, and 9 entries can never be reached from any citation.\n- **Data descriptions are wrong in places.** The SES cluster entry misstates the dataset's coverage and how the model uses it. The data.gov.il URLs use an unconfirmed form.\n- **About eight notes misstate their source.** Examples: UTJ \"turns out nearly all of its potential vote\", Arab respondents \"rarely\" say they will not vote, and the 2015 \"late swing\".\n- **Some status labels and titles disagree with the verify files or the live pages.** I fetched the Israel Hayom and INN articles myself, and both can be upgraded to verified.",
+ "issues": [
+  {
+   "where": "Site-wide citation ids: site/targeting_app.js lines 852-855 (cites DATA-CBS, DATA-CENSUS, DATA-KN, DATA-GEO) and site/targeting_content.json (DATA-SES, DATA-KM)",
+   "problem": "The new draft renames these sources to DATA-CBS-LOCALITIES, DATA-CENSUS-2022, DATA-KOLOT-NODEDIM, DATA-WORLD-ATLAS / DATA-GEOBOUNDARIES, DATA-SES-2019 and MODEL-FORECAST. cites() skips any id it cannot find, so the methodology page's data citations disappear without any error.",
+   "fix": "Add the old ids as aliases in the draft: \"DATA-CBS-LOCALITIES,DATA-CBS\", \"DATA-CENSUS-2022,DATA-CENSUS\", \"DATA-SES-2019,DATA-SES\", \"DATA-KOLOT-NODEDIM,DATA-KN\", \"MODEL-FORECAST,DATA-KM\". For DATA-GEO, either merge world-atlas and geoBoundaries into one entry with that alias, or change app.js line 855 to cites([\"DATA-WORLD-ATLAS\",\"DATA-GEOBOUNDARIES\"])."
+  },
+  {
+   "where": "site/targeting_app.js line 905 (methodology parameter table, row 'Cross-pressured share of soft NB voters') cites D1-F11",
+   "problem": "D1-F11 (J Street brief) is left out of the sources, and verify_israeli-behaviour.json marks it unverifiable (URL returns 404). The citation renders as nothing. Its figure (1.3% of all respondents torn between blocs) also conflicts with the verified D5-F07 (1.3% of the undecided).",
+   "fix": "Replace D1-F11 with D5-F07 in that row (keep D5-F08). Do not add D1-F11 to the bibliography."
+  },
+  {
+   "where": "Shared ids P-F28, P-F29 on the DATA-CEC entry (also on the two Wikipedia entries)",
+   "problem": "CITE_MAP keeps only the first match, so P-F28 and P-F29 resolve to the CEC dataset. The playbook line 'In 2022 final polls showed Meretz at 4-5 seats' (cites P-F28) would link to CEC results, which contain no polls. Neither Wikipedia entry can be reached from any citation.",
+   "fix": "Change the DATA-CEC id to \"DATA-CEC,D2-F22,D2-F27\" and leave P-F28 and P-F29 only on their Wikipedia entries. Where content states official 2022 results, add DATA-CEC to its cites."
+  },
+  {
+   "where": "Shared id D2-F24 on the Darawshe (2019) Bayan entry and on Sharon & Lehmann, Times of Israel, 2 Oct 2026",
+   "problem": "D2-F24 resolves to Darawshe's 2019 article. The 2 Oct 2026 Supreme Court ruling can never be reached from a citation, yet content_draft_segments cites D2-F24 for the Arab lists being on the ballot.",
+   "fix": "Change the Darawshe id to \"D2-F10\" only. D2-F24 will then resolve to the Times of Israel entry."
+  },
+  {
+   "where": "Shared id D2-F17 on DATA-CEC-GUIDE (2022 Guide) and on Barsky, JPost, 20 Sep 2026",
+   "problem": "D2-F17 is mainly the 2026 free-transport decision, but it resolves to the 2022 CEC Guide.",
+   "fix": "Change the guide id to \"DATA-CEC-GUIDE,D2-F18\"."
+  },
+  {
+   "where": "Shared ids D3-F05 and D3-F20 on the Gerber & Green (2017) Handbook entry",
+   "problem": "D3-F05 resolves to the Handbook instead of Gerber, Green & Larimer (2008), and D3-F20 resolves to the Handbook instead of García Bedolla & Michelson (2012). Neither of those two works can be reached. The playbook cites D3-F05 for social-pressure messaging.",
+   "fix": "Change the Handbook id to \"D3-F04,D3-F07,D3-F11\"."
+  },
+  {
+   "where": "Shared ids D1-F05 (two entries), D3-F08 (Malhotra et al.; Dale & Strauss), D2-F23 (Atmor et al. chapter; Finkelstein 2024; Ben-Bassat & Dahan 2012)",
+   "problem": "Each second (or third) work under a shared id can never be reached: the Polarization Panel Dataset, Dale & Strauss, Finkelstein 2024 and Ben-Bassat & Dahan. D2-F23's local-election turnout figures (Arab -10, non-haredi Jewish -4.5) come from Finkelstein, but the id resolves to the Atmor chapter.",
+   "fix": "Remove D2-F23 from the Atmor entry. Give each secondary work a unique alias that content can cite, e.g. \"D1-F05b\", \"D3-F08b\", \"D2-F23b\". Alternatively, change cites() so it renders every entry that matches an id."
+  },
+  {
+   "where": "Shared id D2-F11 on Brake 2019 (first), Bayan 28, Rudnitzky IDI and Shanan & Eilat 2021",
+   "problem": "verify_israeli-turnout.json gives the corrected citation for D2-F11 as Shanan & Eilat (2021). That is the source of the Druze turnout series from 1996 to 2020. The id resolves to Brake (2019) instead.",
+   "fix": "Remove D2-F11 from the Brake, Bayan 28 and Rudnitzky IDI entries and keep it only on Shanan & Eilat. Alternatively, move the Shanan & Eilat entry above Brake."
+  },
+  {
+   "where": "DATA-SES-2019 entry (citation and note)",
+   "problem": "The entry misstates the dataset's coverage and its role in the model. src/targeting_data.py (lines 25-26 and 330-364) loads the 'CBS socio-economic cluster 2019 of localities in regional councils', and the code itself prints 'SES (regional councils)'. The ses_cluster column is never used in src/targeting_model.py. The model builds ses_score from Census wage, academic share, car ownership and employment (lines 265-267). The note 'SES cluster for every locality' is false.",
+   "fix": "Citation: \"Central Bureau of Statistics. Socio-economic cluster of localities in regional councils, 2019. data.gov.il, dataset social_economic_cluster.\" Note: \"Cluster for localities in regional councils. The atlas's SES score comes from 2022 Census income, education, car ownership and employment.\""
+  },
+  {
+   "where": "URLs of DATA-CEC, DATA-CBS-LOCALITIES, DATA-CENSUS-2022, DATA-SES-2019",
+   "problem": "The draft uses guessed paths of the form data.gov.il/he/datasets/<org>/<name>. The org slugs are unconfirmed, and 'cio' for a CBS dataset looks wrong. The project code and the bibliography's own URL list (biblio/final_urls.tsv) both use data.gov.il/dataset/<name>. Both forms returned 403 to my automated check, so neither is verified, but the draft form has no support anywhere in the project.",
+   "fix": "Use https://data.gov.il/dataset/votes-knesset, https://data.gov.il/dataset/localities-in-israel, https://data.gov.il/dataset/2022 and https://data.gov.il/dataset/social_economic_cluster."
+  },
+  {
+   "where": "Malach entry (D1-F20,D2-F12), note 'UTJ already turns out nearly all of its potential vote'",
+   "problem": "This misreads the source. The verifier says the 95% compares UTJ's vote growth with Haredi population growth and says nothing about turnout. Malach also reports that turnout at Haredi stations fell from 76% to 72.5% between 2013 and 2022, offset by envelope votes (about 79% with envelopes), and that non-Haredi voters are 8-14% of UTJ's vote.",
+   "fix": "Note: \"UTJ's vote grew at about 95% of the Haredi electorate's growth, 1992-2022\"."
+  },
+  {
+   "where": "IDI Israeli Voice Index August 2026 data file (D2-F21), note 'Arab respondents rarely say they will not vote'",
+   "problem": "The note contradicts the data. 8.7% of Arab respondents (Arab n=150) chose 'don't intend to vote', against 1.2% of Jews. That option sits on a vote-influence item, not a turnout question.",
+   "fix": "Note: \"8.7% of Arab respondents (n=150) chose 'don't intend to vote', against 1.2% of Jews\"."
+  },
+  {
+   "where": "Israel Hayom 2022 (D6-F06), checked 'partly verified'",
+   "problem": "The verifier could not open the page, but I fetched it. The headline matches the draft's title exactly, and the byline is 'ErezL'. The text names Beit She'an, Tiberias, Dimona, Tirat Carmel, Kiryat Gat, Afula and Ariel as Likud strongholds where it won about 50% in 2021. The label understates the check.",
+   "fix": "Set checked to 'verified' and keep the citation as is. Optionally sharpen the note: \"Likud's final-day 2022 push in seven strongholds\"."
+  },
+  {
+   "where": "Israel National News (D5-F24), citation date and checked 'partly verified'",
+   "problem": "The verifier could not open the page, but I fetched it. It is dated 6 Oct 2026, the headline matches, and the text reports Kan recordings of Yaakov Asher urging activists to raise Haredi turnout.",
+   "fix": "Citation: \"Israel National News (2026, 6 Oct). UTJ chairman warns of haredi voter turnout drop. Arutz Sheva.\" Set checked to 'verified'."
+  },
+  {
+   "where": "Charney & Malkinson 2015 (D6-F11), note 'Tel Aviv neighbourhood voting trends, 1984-2013'",
+   "problem": "The verifier marks the content unverifiable: only the citation was confirmed, and the 1984-2013 span was not.",
+   "fix": "Note: \"Electoral geography of Tel Aviv neighbourhoods\". Keep 'partly verified'."
+  },
+  {
+   "where": "Kipa 2025 (D6-F36), note 'Likud-backed mayoral candidate lost in Kiryat Shmona'",
+   "problem": "The Kipa article covers only the first round, where Likud's Zafrani came second and the race went to a run-off. The final defeat comes from D5-F19.",
+   "fix": "Note: \"Likud-backed candidate came second in the first round of the 2025 mayoral race\"."
+  },
+  {
+   "where": "Kiryat Shmona notes: D5-F20 'Almost 40% ... not yet back', D6-F35 'Fewer than half ... back home', D5-F19",
+   "problem": "The three sources give conflicting return figures. CSM (Sep 2026) says almost 40% have not returned. AFP (Apr 2026) says fewer than half remain. ynet (Aug 2026) says about 40% have returned. Without dates the notes read as contradictions.",
+   "fix": "Date each note, e.g. \"As of Apr 2026, fewer than half had returned\" and \"Sep 2026: almost 40% still not back\". Add \"figures conflict across sources\" to the D5-F19 note."
+  },
+  {
+   "where": "Abraham Initiatives 2024 (D2-F09,D6-F22), note '40,000 Bedouin voters live 5-65 km from their station'",
+   "problem": "The D6-F22 verifier found no 5 km lower bound in the source. Only the 65 km and 60 km examples are confirmed.",
+   "fix": "Note: \"About 40,000 voters in unrecognised villages vote at stations up to 65 km away\"."
+  },
+  {
+   "where": "Peled LibRes blog (D6-F09), year and note",
+   "problem": "The post is undated according to the verifier, but the citation gives (2025). The note leaves out the exception. The coalition won clusters 1-7 except cluster 3, which holds many Arab localities.",
+   "fix": "Year: \"(n.d.)\". Note: \"2022 coalition won SES clusters 1-7 (except 3), opposition 8-10\"."
+  },
+  {
+   "where": "Wikipedia 2015 polling (P-F30), note 'Late 2015 swing to Likud against final polls'",
+   "problem": "The note asserts a cause the source does not show. The page shows only the miss: final polls had Likud at 20-23 seats, and it won 30. The verifier endorses the caveat that this may be poll error.",
+   "fix": "Note: \"Final 2015 polls had Likud at 20-23 seats; it won 30\"."
+  },
+  {
+   "where": "IDI Voice Index December 2025 (D1-F33), note 'Support for an inquiry and for a Ra'am-backed government'",
+   "problem": "The note implies majority support. 57.8% of Jews would not back a government that relies on Ra'am. About 34% would back it under some condition, including 12.5% unconditionally.",
+   "fix": "Note: \"Jewish views on a state inquiry and on a government relying on Ra'am\"."
+  },
+  {
+   "where": "JPost 20 Sep 2026 (D2-F17,D5-F28) citation title; Sabra (D5-F02) title",
+   "problem": "The verifier gives the JPost headline as 'Intercity buses, Israel Railways to be free on election day, Central Elections Committee decides'. The draft's 'declares free public transport' paraphrase also overstates the decision, since urban buses are not covered. The Sabra full title is 'Between 17 seats and the risk of collapse: the Arab parties at a crossroads'.",
+   "fix": "Use the verified headlines in both citations."
+  },
+  {
+   "where": "Hess (D5-F31) vs Haas (D6-F12) entries",
+   "problem": "The two entries spell the author's name differently (Hess, S. / Haas, S.) and the firm differently (Medlan / Madlan). The two articles are probably by the same ynet reporter.",
+   "fix": "Standardise on \"Haas, S.\" and \"Madlan\", or confirm the byline on the Hebrew page."
+  },
+  {
+   "where": "Group 'Official data'",
+   "problem": "The group mixes official data with non-official items: Kolot Nodedim, world-atlas, geoBoundaries and the forecast model.",
+   "fix": "Rename the group 'Data and model inputs', or move those four entries into a 'Tools and model' group."
+  },
+  {
+   "where": "DATA-KOLOT-NODEDIM ('Cain, H.') and DATA-CBS-LOCALITIES ('(2025)')",
+   "problem": "No project file supports the author name. The earlier site content credited 'harelc'. The year was also changed from 2024 to 2025 without a source.",
+   "fix": "Use \"Kolot Nodedim (GitHub: harelc)\" unless the author is confirmed. Keep the year consistent with the file actually downloaded (bycode2023.xlsx)."
+  },
+  {
+   "where": "Gerber & Green (2014) NBER draft (D3-F03)",
+   "problem": "The PDF is marked 'EARLY DRAFT: NOT FOR CITATION'. It is also an earlier version of the same work as the 2017 Handbook entry, so the two entries nearly duplicate each other.",
+   "fix": "Add '(draft marked not for citation)' to the note. Alternatively, cite the published 2017 chapter if it carries the same turnout-band table."
+  },
+  {
+   "where": "Mann & Haenschen (D3-F01) citation",
+   "problem": "The URL points to the VoteAmerica republication, and the citation gives no DOI.",
+   "fix": "Append \"doi:10.1016/j.electstud.2023.102729\" to the citation."
+  },
+  {
+   "where": "Missing desk finding D1-F34 (Agam Labs via JNS, 7 Jul 2024)",
+   "problem": "The finding is verified with corrections but has no bibliography entry. No page cites it yet.",
+   "fix": "Add an entry only if a page cites it. Use the corrected claim, which drops the Hebrew University affiliation and the partial-reversal claim."
+  }
+ ]
+}

@@ -1,0 +1,372 @@
+{
+ "intro": "Winning the most seats does not decide who governs. On the current forecast's central seat counts the four change lists hold about 52 seats and the Netanyahu bloc about 53. Averaged across simulations the change lists hold about 52. In about six simulations in ten, neither the Netanyahu bloc nor the change lists with Ra'am reach 61. Close to half of all simulations end in a repeat election. This page sets out the paths to a change-led government, the signals the bloc should give before 27 Oct, the legal timeline after the vote and what to prepare now.",
+ "outcomes_note": "Each bar is the share of the forecast's simulated Knessets that end in that government. The model first draws seats from the polls (to 21 Oct). It then applies stated assumptions about what parties do after the vote. Does Ra'am join a coalition or back it from outside? Does the Joint List let a minority government stand? Does a haredi party cross, and does Yisrael Beytenu accept those partners? Does Likud drop Netanyahu, and does any list break its pledge? Behaviour after an election cannot be estimated from past data, so these assumptions are judgement. The seat arithmetic is firmer than the behaviour. Read the bars as weighted scenarios, not predictions. Change-led outcomes add up to about 28%, Netanyahu-led outcomes to about 28%, a unity government without Netanyahu to about 17% and a repeat election to about 28%. Across the model's uncertainty about behaviour, the repeat share runs from about 8% to 53%. Eisenkot ends as prime minister in about 27% of simulations, Netanyahu in about 27% and Bennett in about 7%. Bars and seat arithmetic are different things. The change lists and Ra'am reach 61 seats together in about 27% of draws. A government with Ra'am inside is only about 8.8%, because the model assumes Ra'am joins in only some of those cases and that other routes come first. The Strategy page prices its levers with the same formation model on the atlas's draws, where the change-led base is also about 28%. Two things move these bars: seats, which the campaign can still change, and party behaviour after 27 Oct, which signals and preparation can change.",
+ "paths": [
+  {
+   "path": "The four change lists win 61 on their own",
+   "outcome_key": "Change coalition (without Ra'am)",
+   "partners": "Yashar, Together, the Democrats and Yisrael Beytenu. No outside partner is needed.",
+   "how": "On central seats the four lists hold about 52, nine short. They reach 61 alone in about 5.5% of simulations. Votes taken from the Netanyahu bloc raise that chance fastest. In the model, one point of the national vote moving from Likud to the change lists lifts it by about 3.1 points. 50,000 extra change-list votes lift it by about 1.5 points, and a Blue and White withdrawal by about [[MISSING lev.bw_withdraws.ch61]]. If the four lists do reach 61, formation can be quick: one joint recommendation, one mandate and one coalition agreement. A rotation between leaders can be approved in the confidence vote and is enforceable in law.",
+   "obstacles": "Mainly the arithmetic. Each list must also stay above the threshold. Yisrael Beytenu passes in about 98% of draws and the Democrats in about 99%, so the risk inside the bloc is late cannibalisation by the larger lists. In 2022 Yesh Atid took about 18% of Meretz's 2021 voters, about nine times the 4,061 votes by which Meretz missed the threshold. Discipline after the vote matters too. The 2021-22 government lost its majority through defections, and the Knesset dissolved after a year.",
+   "cites": [
+    "MODEL-FORECAST",
+    "D10-F19",
+    "D7-F14",
+    "P-F28",
+    "D10-F26"
+   ]
+  },
+  {
+   "path": "Change lists plus Ra'am as a coalition member",
+   "outcome_key": "Change coalition with Ra'am",
+   "partners": "The four change lists and Ra'am (about 6 seats, clearing the threshold in about 85% of draws). This bar counts Ra'am inside the coalition, as in 2021. Ra'am backing the government from outside is counted in the minority path below, and only when the Joint List also abstains. The model has no Ra'am-only outside-support route.",
+   "how": "On central seats the four lists and Ra'am hold 58, three short. Together they reach 61 in about 27% of draws, nearly five times the change lists' chance alone. The bar is smaller (about 8.8%) because the model assumes Ra'am joins in only some of those cases. Even so, it is the largest of the change-led routes that need a partner. The four lists' own route is about 5.5%. The precedent is 2021. Ra'am became the first independent Arab party in decades to join a governing coalition, and the government won confidence 60-59 with one Ra'am MK abstaining. Ra'am's main gain was Resolution 550, a five-year plan for Arab society worth about NIS 30 billion. It was cut in 2024, NIS 497 million more was moved to the police and Shin Bet in July 2026, and it expires at the end of 2026. Crime leads Arab voters' concerns, and 77% of Arab respondents in May backed an Arab party joining the next coalition. Judgement: a successor plan focused on personal security in Arab towns is the natural agenda for any talks. Whether to offer Ra'am a role, and in what form, is a leadership decision.",
+   "obstacles": "Jewish opinion. In IDI's July survey 61% of Jews opposed including Ra'am, and in Maariv's 7-8 Oct poll 59% of all respondents opposed an Arab party in the coalition. Reservists-Economic says it will not be the 61st seat of a government that depends on Arab parties, so this path and the Reservists path exclude each other. Ra'am must also clear the threshold. It has finished just above the line in each of its last three runs (3.3%, 3.8% and 4.1%). In 2026 it stayed on the ballot only after the Supreme Court overturned the election committee's ban on 2 Oct. Ra'am's vote is Ra'am's own campaign, and the bloc's part is to do no harm: campaigns that paint reliance on Arab parties as illegitimate may depress Arab turnout. The change bloc runs and brands no turnout work among Arab voters. Any support for Arab-sector turnout is a leadership decision, independent, transparent and cleared by election counsel.",
+   "cites": [
+    "MODEL-FORECAST",
+    "D10-F26",
+    "D10-F21",
+    "D10-F27",
+    "D5-F21",
+    "D5-F01",
+    "D8-F15",
+    "D10-F30",
+    "D7-F17",
+    "D5-F04"
+   ]
+  },
+  {
+   "path": "A minority government backed from outside by the Joint List",
+   "outcome_key": "Centre minority backed by the Joint List",
+   "partners": "The four change lists in government. The Joint List (about 9 seats) votes for it or abstains from outside. Ra'am may also back it from outside under a written agreement.",
+   "how": "Investiture needs only more votes for than against: Bennett-Lapid won 60-59 with one abstention. Removing a government then takes 61 votes for a named alternative. On central seats the arithmetic is tight. If both Arab lists abstain, the change lists' 52 still trail the Netanyahu bloc's 53. If one Arab list votes in favour and the other abstains, it passes. It also passes if both abstain and a haredi party abstains too. Joint List chairman Youssef Jabareen has said the party would give a 'safety net' to any government that replaces Netanyahu's, though 'not a blank check'. The precedent is Rabin. After Shas left in 1993 his government fell for a time to 56 MKs and survived because Hadash and the Arab Democratic Party blocked no-confidence motions. Across 30 countries, minority cabinets with written support agreements last about as long as majority cabinets. Those without one face a roughly 1.4 to 2 times higher risk of early collapse.",
+   "obstacles": "Every change list must accept it. In March 2020, 61 MKs including the Joint List recommended Gantz, but two Blue and White MKs refused a Joint List-backed government, and Gantz then joined Netanyahu. One of the two, Yoaz Hendel, now leads Reservists-Economic and again rules out depending on Arab parties. Yisrael Beytenu's 2026 position on outside Arab support is not established in our verified research. The model assumes it would accept such a government only in a minority of cases, and that assumption, more than the arithmetic, keeps this bar near 3.8%. Jewish opinion is hostile: in December 2025, 58% of Jews would not support a government relying on Ra'am even if the blocs tie, and only 7.7% chose 'only with outside support'. The government would also have to pass a budget within 145 days.",
+   "cites": [
+    "MODEL-FORECAST",
+    "D10-F21",
+    "D10-F20",
+    "D8-F15",
+    "D10-F23",
+    "D10-F12",
+    "D10-F18",
+    "D10-F25",
+    "D10-F30",
+    "D1-F33"
+   ]
+  },
+  {
+   "path": "Change lists plus Shas or UTJ",
+   "outcome_key": "Change coalition with a haredi party",
+   "partners": "Shas (about 9 seats) or UTJ (about 8). On central seats Shas alone takes the four lists to 61 and UTJ alone to 60. Without Yisrael Beytenu, both together would give the other three lists 61, the barest majority.",
+   "how": "Haredi parties have sat in governments not led by Likud. Shas was in the 1984 unity government during Peres's term, and joined Rabin in 1992, Barak in 1999 and Olmert in 2006. The record is transactional: they joined when they were pivotal and the right had no path. The price now would be the draft, and here the bloc has public backing. About seven in ten Jews opposed the outgoing Knesset's law freezing arrests of yeshiva students who do not report. Yet 53% in Maariv's 7-8 Oct poll supported a haredi party in the next coalition. Shas and UTJ reportedly lean toward recommending no one and sitting in opposition for about a year, so that the next government passes a draft law without their signatures. They could then consider joining, including an Eisenkot-led government. Judgement: the realistic version of this path is a later expansion of a government formed another way, on an equal-service law the partner accepts.",
+   "obstacles": "The draft is the whole bargain. Eisenkot has made mandatory service a core condition and reportedly prefers another election to compromising on it. The reported haredi plan describes a mood, not a decision. Both sides deny contacts, and sources doubt Shas would move without UTJ. Liberman refused any compromise on the draft in 2019, which led to that year's repeat election, and Reservists-Economic will not complete a majority with haredi parties. The 2019-21 deadlock was never broken by a haredi party switching sides. The model assumes a crossing is rare, which keeps this bar near 6.7%.",
+   "cites": [
+    "MODEL-FORECAST",
+    "D10-F28",
+    "D8-F14",
+    "D8-F15",
+    "D10-F29",
+    "D10-F25",
+    "D10-F30"
+   ]
+  },
+  {
+   "path": "Change lists plus an unaligned list or Amcha",
+   "outcome_key": "Change coalition with unaligned / Amcha",
+   "partners": "Reservists-Economic (clears the threshold in about 23% of draws), Blue and White (about 0%) or Amcha (about 22%). All three are below the line on central seats.",
+   "how": "If the change lists finish a few seats short, a small list that passes could close the gap. Reservists-Economic is a right-of-centre, reservist-branded list. Its leader Yoaz Hendel says Netanyahu should go and wants a 'Zionist government' only. He will not complete a majority with haredi parties or be the 61st seat of a government that depends on Arab parties, and the list has not ruled out working with Netanyahu. Its seats therefore fit only a coalition of the change lists with no haredi or Arab partner, or a unity government. Blue and White's Benny Gantz says he belongs to neither bloc and is running until the end. Amcha's Ofer Winter will recommend Netanyahu and will join only if a national-service law passes before the government is sworn in. Count Amcha as Netanyahu-bloc seats unless he changes position.",
+   "obstacles": "A Reservists pass cuts both ways. In the model, each extra 10,000 Reservists votes raises the chance of denying Netanyahu 61 by about 0.16 points, leaves the change-led chance about unchanged and slightly lowers change seats. If the list withdrew, the effect would depend on where its voters went. If 60% chose change lists, the change-led chance would rise about 2.6 points, though the chance of denying Netanyahu 61 would still fall about 0.8. If most went right, it would fall about 0.6 points and the chance of denying Netanyahu 61 would fall about 2.6. Polls split by house, with some at 4-5 seats and others below the line. So the bloc should neither court nor attack this list. Whether to appeal to its voters at all is a leadership call. If it does, use media and calls to identified voters only, with respect and with the threshold arithmetic. Reach reservists as civilians, never through IDF units, bases or employers.",
+   "cites": [
+    "MODEL-FORECAST",
+    "D10-F30",
+    "D7-F25",
+    "D7-F23"
+   ]
+  },
+  {
+   "path": "A unity government with Likud after Netanyahu",
+   "outcome_key": "Unity government (Likud without Netanyahu)",
+   "partners": "The change lists and a Likud led by someone other than Netanyahu. On central seats they would hold about 77.",
+   "how": "This is about 17% of outcomes, more than any single change-led path. It needs Likud to replace Netanyahu, or Netanyahu to step aside, after a deadlock. The bloc can make the offer credible. Since 2020 a rotation government is set in law. The prime minister cannot dismiss the alternate's ministers, and a dissolution pushed from the prime minister's side, or a failed budget, hands office to the alternate. The 1984 unity rotation was honoured: Peres served two years, then Shamir. The idea is already live on the right. Otzma says Likud refused it a surplus agreement to keep it out of a Likud-Eisenkot unity government. Unity is the centrists' top issue (30%), and in an Israeli experiment priming a unity government raised tolerance across party lines. In the model a rotation or a Likud successor takes the premiership in about 9% of all simulations.",
+   "obstacles": "No recent Israeli deadlock ended this way. The 2019-21 stalemate ended when a centre leader joined Netanyahu (2020) and then through a new coalition with Ra'am (2021), not through Likud changing leader. After Gantz joined Netanyahu his alliance split, and Blue and White fell from 33 seats as a joint list in 2020 to 8 in 2021. Voters punish parties they see as compromising (six democracies), and junior partners lose votes at the next election (28 European countries). Judgement: any offer that can be read as 'with Netanyahu' would cost the bloc votes, so the condition must be explicit.",
+   "cites": [
+    "MODEL-FORECAST",
+    "D10-F19",
+    "D10-F24",
+    "D7-F28",
+    "D5-F22",
+    "D1-F07",
+    "D10-F25",
+    "D10-F14",
+    "D10-F13"
+   ]
+  }
+ ],
+ "signals": [
+  {
+   "title": "What coalition signals do to votes",
+   "text": "Israeli voters weigh coalitions, but signals move a minority of votes, mostly inside each bloc. In 2003 about 1 voter in 10 chose a party other than their favourite for coalition reasons. In 2006 voters deserted parties they expected to be left out of government, but only for the main parties. In the 2019-20 repeat elections voters switched lists to influence who would form the government, more so when the race between candidates for prime minister looked close. Experiments abroad add detail. Explicit signals raised the weight voters gave to coalitions, and 9-11% of Austrian and 19-20% of German respondents changed their vote in vignettes. Uncertainty about a party's coalition prospects costs it votes. Across 17 studies in seven countries, moving from the least to the most uncertain cut the chance of voting for a party by about 11 points. A German experiment found that effect for the CDU/CSU but not for the Greens. Few voters are strictly strategic: 5% in a German experiment, against 24% who voted for a party other than their favourite. Switching stays mostly inside blocs. In N12's 9 Oct poll only about 0.6% of all voters were torn between blocs. Judgement: clear signals will move some votes inside the change bloc and cut what ambiguity costs. They will add few seats to the bloc. Their main value comes after the vote, in formation. No Israeli study has tested the 2026 signals, so a vignette module in the bloc's private tracking poll would give the only direct estimate. Run it with counsel, since the poll law's reporting duties may apply to internal surveys.",
+   "risk": "Most of this evidence is foreign or from earlier Israeli elections, and none of it tests these exact signals. Do not expect a signal alone to change the bloc's seat total.",
+   "cites": [
+    "P-F27",
+    "D1-F24",
+    "D1-F25",
+    "D10-F04",
+    "D10-F05",
+    "D7-F19",
+    "P-F17",
+    "D1-F08",
+    "D5-F08",
+    "D12-F07"
+   ]
+  },
+  {
+   "title": "One candidate for prime minister, one agreed order",
+   "text": "The law sets no criteria for the President. In practice he weighs who can form a government, guided by recommendations and list size, neither of which binds him. In 2009 Kadima won one more seat than Likud, but Netanyahu was tasked with 65 recommendations to Livni's 28. In September 2019 the President said 10 of Gantz's recommenders would not sit with him, and tasked Netanyahu first. The formateur controls the agenda. In cross-national data on coalition governments from 1946 to 2001 (not Israeli), the party that formed the government took more cabinet posts than its seats alone would earn. On central seats one change candidate would have about 52 recommendations. Netanyahu would have about 36 if Shas and UTJ recommend no one, as they reportedly may, or about 53 if they back him. In the forecast Eisenkot ends as prime minister in about 27% of simulations, Netanyahu in about 27% and Bennett in about 7%. More voters trust an Eisenkot-led government than a Netanyahu-led one to fix the October 7 failures (48% to 30%). Among centre-right voters Netanyahu leads as preferred prime minister (44%), with Eisenkot at 21% and Bennett at 20%. Judgement: all four lists should say now that they will recommend the same person. On the current forecast that is Eisenkot, as head of the largest change list, but the name is the leaders' decision. Agree in writing before 27 Oct whether there is a rotation, with whom and from when. The rotation law makes that agreement enforceable.",
+   "risk": "Naming one candidate may pull votes toward his list from the other three. That is cheap while each change list clears the threshold in about 98% of simulations or more, because votes moving between change lists are worth about zero in the model. It becomes dangerous if Yisrael Beytenu or the Democrats slide toward the threshold, as Meretz did in 2022. Watch the polls to Fri 23 Oct and switch to bloc messaging if either slips.",
+   "cites": [
+    "D10-F17",
+    "D10-F18",
+    "D10-F10",
+    "D10-F29",
+    "MODEL-FORECAST",
+    "D5-F08",
+    "D5-F22",
+    "D10-F19",
+    "D7-F14"
+   ]
+  },
+  {
+   "title": "Arab parties: state conditions, never delegitimise",
+   "text": "Most Jewish voters oppose an Arab party in the coalition. 61% of Jews opposed including Ra'am in IDI's July survey, and 59% of all respondents opposed an Arab party in the coalition in Maariv's 7-8 Oct poll. Yet in December 2025 about a third of Jews would accept a government relying on Ra'am if the blocs tie: 12.5% in any case, 13.9% only if there is no other option and 7.7% only with outside support. Among Arab respondents in May, 77% backed an Arab party joining the next coalition. Campaigns that paint reliance on Arab parties as illegitimate may depress Arab turnout. In the model, Ra'am lifts the change lists' chance of 61 from about 6% to about 27%. Judgement: an absolute pledge against any Arab support closes the two routes that make up about 13 of the 28 points of change-led government in the model, and invites a broken promise. Ra'am inside the coalition is about 8.8 of those points, against 5.5 for the four lists on their own. A conditional line keeps both routes open. The change bloc leads the government. Any support is public, in writing and on a published programme. Security policy is not traded. Say which forms are on the table: a seat in the coalition, written outside support, or abstention. Never describe Arab citizens or their parties as illegitimate partners. The exact wording is a leadership decision.",
+   "risk": "This is the Netanyahu bloc's strongest wedge, and the attacks have already started. In February the election committee ordered Likud to remove a manipulated image of Bennett and Lapid joining hands with Arab party leaders. A conditional line will not win voters who oppose any Arab role, but an absolute one would give up Ra'am's seats. With them the four lists reach 61 in about 27% of draws, nearly five times their chance alone. Inoculate now. Warning voters of a coming attack and answering it in advance builds more resistance than a supportive message alone (54 cases, not Israeli). The effect fades after about two weeks, so refresh it in the final week, as the Messaging page sets out.",
+   "cites": [
+    "D8-F15",
+    "D1-F33",
+    "D5-F01",
+    "D5-F04",
+    "MODEL-FORECAST",
+    "D9-F26",
+    "D8-F33"
+   ]
+  },
+  {
+   "title": "Haredi partners and the draft: a policy test, not a ban",
+   "text": "The draft unites the bloc's voters and reaches beyond them. About seven in ten Jews opposed the outgoing Knesset's law freezing arrests of yeshiva students who do not report. In May the draft was the second reason (23%) that 2022 Likud voters gave for considering a switch. In a December 2024 poll, 60% of reservists who fought in the war said they would consider not voting for a party that backs an exemption law. Still, 53% in Maariv's 7-8 Oct poll supported a haredi party in the next coalition. Haredi parties have joined non-Likud governments when they were pivotal. In July 2025 UTJ quit Netanyahu's government over the draft and Shas's ministers resigned, though Shas stayed in the coalition. Shas and UTJ reportedly lean toward recommending no one. Judgement: state the condition, not an exclusion. Any partner must vote for an equal-service law on the bloc's terms, and any party that accepts it can join. This keeps faith with Eisenkot's stated condition, keeps a haredi route open after the vote, and does not push Shas and UTJ back toward recommending Netanyahu. If they recommend no one, the bloc's candidate is far better placed for the first mandate. Speak of haredi citizens with respect. The argument is about equal burden, not about the community.",
+   "risk": "Liberman refused any compromise on the draft in 2019, which led to that year's repeat election, and Reservists-Economic will not complete a majority with haredi parties. Any sign of a softer draft line would cost the bloc credibility with its own voters. All four lists must use identical words.",
+   "cites": [
+    "D8-F14",
+    "D5-F11",
+    "D6-F39",
+    "D8-F15",
+    "D10-F28",
+    "D10-F29",
+    "D10-F25",
+    "D10-F30"
+   ]
+  },
+  {
+   "title": "Unity with Likud: yes after Netanyahu, never under him",
+   "text": "Undecided Jewish voters stress national unity, and unity is the centrists' top issue (30%). In an Israeli experiment, priming a unity government raised tolerance across party lines. A unity government without Netanyahu is about 17% of the forecast's outcomes, and the rotation law makes such a deal enforceable. Coalition signals also tell voters where a party stands. In a Spanish regional campaign, a new party's right-leaning coalition signal moved its image about half a point to the right on a 0-10 scale. It raised the party's appeal among voters to its right and lowered it among voters to its left. Judgement: say plainly that the bloc is open to governing with Likud after Netanyahu and will never serve under him. For Yashar, a new party, the statement also tells soft-right voters where it stands.",
+   "risk": "Gantz joined Netanyahu in 2020, his alliance split, and Blue and White fell from 33 seats as a joint list to 8 in 2021, so any ambiguity will be read as 'with Netanyahu'. The Spanish result suggests some left-leaning voters may move from Yashar to the Democrats, which is worth about zero to the bloc in the model.",
+   "cites": [
+    "D5-F22",
+    "D1-F07",
+    "MODEL-FORECAST",
+    "D10-F19",
+    "D10-F06",
+    "D10-F25"
+   ]
+  },
+  {
+   "title": "Rule out Netanyahu together, set conditions for everyone else",
+   "text": "Voters punish parties they see as compromising (survey data from six democracies), and junior coalition partners lose votes at the next election (28 European countries). In Israel, after Gantz joined Netanyahu in 2020 his alliance split, and Blue and White fell from 33 seats as a joint list to 8 in 2021. Pre-election commitments, both pacts and refusals, also shape which governments form (European data). In the forecast, a Netanyahu government completed by an unaligned list or by a change list breaking its pledge is about 0.3% of outcomes. Judgement: the one absolute pledge the bloc should give, jointly and in the same words, is that no change list will join or support a government led by Netanyahu. Everything else should be stated as conditions. Absolute pledges against the Arab parties, the haredi parties and Likud together would leave the bloc only its own 61 (5.5%) and the small-list route (3.0%), about 9% against about 28% now, and make a broken promise likely.",
+   "risk": "Conditions sound weaker than pledges in a polarised campaign, and rivals will call them cover for deals. The answer is to publish the conditions in plain words, the same in all four lists.",
+   "cites": [
+    "D10-F14",
+    "D10-F13",
+    "D10-F25",
+    "D10-F08",
+    "MODEL-FORECAST"
+   ]
+  }
+ ],
+ "formation": [
+  {
+   "step": "Election night",
+   "when": "Tue 27 Oct, from 22:00",
+   "what": "Polls close at 22:00 at most stations and the ban on new poll results ends, so exit polls appear then. They are estimates, not results. Neither side is likely to have 61 on the night. The bloc should say nothing beyond its agreed joint line.",
+   "cites": [
+    "D12-F07",
+    "D11-F14",
+    "MODEL-FORECAST"
+   ]
+  },
+  {
+   "step": "Count and official results",
+   "when": "Wed 28 Oct to about Wed 4 Nov",
+   "what": "Double-envelope votes (soldiers away from home, patients, diplomats, prisoners and others, about one vote in ten in 2022) are counted centrally after the regular ballots. These votes and count corrections have moved seats before. In April 2019 the final count moved a seat from Likud to UTJ. In September 2019 the election committee annulled six stations, and with corrections and the last envelope batches a seat moved back. Lists near the threshold can rise or fall in the final count, so keep counsel and observers on it until the official results are published. The dates below assume official results on Wed 4 Nov, eight days after the vote. That is a planning assumption, and counsel should confirm the 2026 schedule.",
+   "cites": [
+    "D2-F03",
+    "D12-F18",
+    "D10-F16"
+   ]
+  },
+  {
+   "step": "President's consultations",
+   "when": "Early November, once results are published",
+   "what": "The President consults each Knesset faction and hears whom it recommends. The law sets no criteria, and neither recommendations nor list size bind him. In April 2021 the count was Netanyahu 52, Lapid 45, Bennett 7 and 16 recommending no one, and the President said no candidate had a realistic chance. On central seats a single change candidate would start at about 52, and Netanyahu at about 36 or 53 depending on Shas and UTJ. Arab-list recommendations could lift the change candidate to about 67. In September 2019, though, the President noted that 10 of Gantz's recommenders would not sit with him, and tasked Netanyahu first.",
+   "cites": [
+    "D10-F16",
+    "D10-F17",
+    "D10-F18",
+    "MODEL-FORECAST"
+   ]
+  },
+  {
+   "step": "First mandate",
+   "when": "Tasked by about Wed 11 Nov. 28 days to about Wed 9 Dec, plus up to 14 to about Wed 23 Dec",
+   "what": "The President tasks one MK within 7 days of the published results. That MK has 28 days, and the President can extend by up to 14 more. A government takes office when the Knesset expresses confidence, by a simple majority of those voting. A rotation and its date can be approved in the same vote. Recent governments took 58 days (2022) and 82 days (2021) from election to swearing-in.",
+   "cites": [
+    "D10-F16",
+    "D10-F21",
+    "D10-F19"
+   ]
+  },
+  {
+   "step": "Transfer to a second MK",
+   "when": "Within 3 days, then 28 days to about Sat 23 Jan 2027",
+   "what": "If the first MK fails, the President has 3 days either to task a second MK, who gets 28 days, or to tell the Speaker that no government can be formed.",
+   "cites": [
+    "D10-F16"
+   ]
+  },
+  {
+   "step": "The Knesset's 21 days",
+   "when": "To about Sat 13 Feb 2027",
+   "what": "A majority of MKs can then ask the President in writing, within 21 days, to task a named MK. The President has 2 days to do so, and that MK gets 14 days to form a government. This is the last chance to avoid a new election. In December 2019 the window lapsed and the Knesset passed a dissolution law the same night.",
+   "cites": [
+    "D10-F16",
+    "D10-F22"
+   ]
+  },
+  {
+   "step": "Dissolution and repeat election",
+   "when": "About Tue 13 Apr to Tue 11 May 2027",
+   "what": "If every stage fails, the Knesset is deemed dissolved and the election falls on the last Tuesday before day 90. That is about Tue 13 Apr 2027 if no second MK is tasked, and about Tue 11 May 2027 if every stage is used. It would be a little later if a named MK tries and fails in the last 14 days. The Knesset can also dissolve itself by law at any point, as it did in 2019, less than two months after the April election and before any government had formed.",
+   "cites": [
+    "D10-F16",
+    "D10-F22",
+    "D10-F25"
+   ]
+  },
+  {
+   "step": "After a government is sworn in",
+   "when": "Budget within 145 days",
+   "what": "The budget must pass by 31 March or within 145 days of the government's formation, or the Knesset dissolves automatically, as it did in December 2020. Counsel should confirm which deadline applies to a government formed in early 2027. Removing a government needs 61 votes for a named alternative.",
+   "cites": [
+    "D10-F21",
+    "D10-F20"
+   ]
+  }
+ ],
+ "prepare": [
+  {
+   "title": "Sign the candidate, the order and the recommendation",
+   "text": "The four leaders should sign a short document now: whom they will recommend to the President, whether there is a rotation and in what order, and how portfolios will be split. Then announce the candidate jointly and without delay, as the Strategy page sets out. Recommendations decide the first mandate, the formateur gains in bargaining, and a rotation approved in the confidence vote is enforceable in law. In September 2019 the President noted that 10 of Gantz's recommenders would not sit with him, and tasked Netanyahu first. Each list must be ready to say it will sit in the government it recommends.",
+   "cites": [
+    "D10-F17",
+    "D10-F18",
+    "D10-F10",
+    "D10-F19"
+   ]
+  },
+  {
+   "title": "Write down every list's red lines",
+   "text": "Each list should tell the other three, in writing, which partners it can accept and in which form: a seat in the coalition, outside support under a written agreement, or abstention. March 2020 shows the cost of skipping this. 61 MKs recommended Gantz, two of his own MKs refused a Joint List-backed government, and he joined Netanyahu instead. Yisrael Beytenu's position on outside Arab support matters most and is not established in our verified research. Settle the gaps now, not on 28 Oct.",
+   "cites": [
+    "D10-F18",
+    "D10-F25"
+   ]
+  },
+  {
+   "title": "Draft the agreements the bloc may need",
+   "text": "With counsel, prepare four texts: coalition guidelines, a written outside-support agreement covering confidence votes and the budget, a rotation agreement under the Basic Law, and a budget that can pass within 145 days. Written support agreements are what make minority cabinets about as durable as majority ones in data from 30 countries. Blocs short of a majority can take longer to form a government when partners lack firm commitments or do not know each other (West European evidence). Keep these as internal drafts held by counsel. Share none with another party before the official results, and put nothing in them that goes beyond the bloc's public conditional line.",
+   "cites": [
+    "D10-F12",
+    "D10-F19",
+    "D10-F21",
+    "D10-F09"
+   ]
+  },
+  {
+   "title": "Open, leader-level channels to every possible partner",
+   "text": "Name now who will speak for the bloc after the vote to Ra'am, the Joint List, Shas, UTJ, Reservists-Economic and a post-Netanyahu Likud. These are open political talks between leaders, not data deals. No voter-level data passes between lists without written counsel clearance. The voter register may be used only for the election and must never be passed on. Any shared spending needs both lists' counsel and treasurers, because spending by linked bodies counts as party spending. Any talks with Arab parties are a leadership decision, held openly and cleared by election counsel.",
+   "cites": [
+    "D12-F21",
+    "D12-F06"
+   ]
+  },
+  {
+   "title": "Prepare the two hardest policy texts",
+   "text": "The hardest bargains will be the draft and a successor to Resolution 550, the five-year plan for Arab society worth about NIS 30 billion that expires at the end of 2026. Have the bloc's own texts ready for both, so talks start from its terms. Both can be defended in public. About seven in ten Jews oppose the yeshiva arrest freeze, and crime leads Arab voters' concerns.",
+   "cites": [
+    "D8-F14",
+    "D10-F27",
+    "D5-F21"
+   ]
+  },
+  {
+   "title": "Protect the arithmetic in the final days",
+   "text": "Every path above gets easier with a few more seats taken from the Netanyahu bloc. In the model, one point of the vote moving from Likud to the change lists raises the change-led chance by about 7.0 points. It raises the chance that the change lists and Ra'am reach 61 by about 8.9. Votes moving between change lists are worth about zero. Keep the Democrats and Yisrael Beytenu safely above the threshold, and drop 'largest list' contests inside the bloc if either slips. Do not attack Ra'am or Reservists-Economic. Stay silent about the Netanyahu bloc's threshold problems. Talking them up invites a rescue of its small lists, and that bloc's chance of 61 is much higher in draws where they pass. Foreign studies find that insurance votes flow to a small partner when polls show it just below the line. Such talk also hands Likud a 'gevalt' close. In 2015 right-wing voters appear to have consolidated late behind Likud, and in the model consolidation on the right lowers the change-led chance by about 1 point. The final published polls come on Fri 23 Oct. Creative that quotes them must carry the survey details the law requires and come down before the ban begins at the end of that day. No poll figures appear in campaign material from Sat 24 Oct.",
+   "cites": [
+    "MODEL-FORECAST",
+    "D7-F14",
+    "P-F30",
+    "D7-F29",
+    "D12-F07",
+    "D11-F14",
+    "P-F25",
+    "D7-F18"
+   ]
+  },
+  {
+   "title": "One voice on election night, and a count desk",
+   "text": "Agree now who speaks for the bloc on the night and what they say: the joint candidate, the joint recommendation, and no talk of partners until the official results. Exit polls are estimates, about one vote in ten is counted later in double envelopes, and final counts have moved seats before. Agree one staffing map so every target polling committee has a change-bloc member or, where a list has no seat, its one permitted observer. Observers check the count and the protocol. They do not film voters, report who has voted or watch any community. Keep the count desk open until the official results.",
+   "cites": [
+    "D12-F07",
+    "D2-F03",
+    "D12-F18",
+    "D12-F15",
+    "D5-F25"
+   ]
+  },
+  {
+   "title": "Get ready for a rerun without waiting for one",
+   "text": "Decide now who would lead the bloc in a spring 2027 campaign, and whether the joint candidate and the surplus pairs would carry over. Keep volunteer leaders and consented supporter contacts in good order, on counsel's advice. The voter register itself must be deleted from every system, including vendors', after this election, with written confirmation. Plan to rebuild targeting from the new register.",
+   "cites": [
+    "D12-F21"
+   ]
+  }
+ ],
+ "repeat": {
+  "title": "If no government forms: a repeat election in spring 2027",
+  "text": "A repeat election is the single most likely outcome in the forecast. It ends about 28% of simulations, and between about 8% and 53% across the model's uncertainty about party behaviour. That is about the same as the chance of all change-led outcomes together (28%). What it would mean. The Knesset would be deemed dissolved, and Israel would vote again between mid-April and mid-May 2027. The sitting government stays in office until a new one wins a confidence vote, as Lapid's did from July 2022 until the next government was sworn in that December. Netanyahu's government would therefore stay in office through a rerun. A rerun is not a reset. In the 2019-20 repeats voters moved toward the candidate for prime minister they preferred, and Yisrael Beytenu, blamed for the first repeat, gained seats (5 to 8). Turnout can fall when elections come close together (German evidence), though Israel's swung both ways in 2019-22 (68.5%, 69.8%, 71.5%, 67.4%, 70.6%). The last repeat after a failed formation helped Likud most: between September 2019 and March 2020 it gained about 239,000 votes while total votes rose about 150,000. The early election of 2022 also went against the change camp. Its lists lost 0.8% of their votes while total votes rose 8.1% and the haredi lists grew 19%. About a fifth of Labor's and Yisrael Beytenu's 2021 voters stayed home. How to lower the risk. First, take seats from the Netanyahu bloc. In the model, one point of the vote moving from Likud raises the change lists' chance of 61 alone from about 5.4% to about 9%, and with Ra'am from about 27% to about 35%. Most of those are deadlocks turned into workable majorities. Votes that only deny Netanyahu 61 without adding change seats mostly turn his wins into deadlock. Second, make the formation routes real before the vote: one candidate, one recommendation, written red lines, draft support and rotation agreements, and a draft-law text. In European data, pre-election commitments shape which governments form, and blocs short of a majority form governments more slowly when partners lack commitments. Third, decide in advance which red lines the bloc would hold even at the price of a rerun. The 2019 repeat came from a refusal to compromise on the draft, and Eisenkot reportedly prefers another election to compromising on it. That may be the right call, but it should be a decision, not a surprise. Fourth, use the whole calendar. A second mandate and the Knesset's 21-day window remain after the first mandate, and the haredi parties' reported plan to sit out a year means any haredi deal may come late. Fifth, prepare for the rerun now, as set out above.",
+  "cites": [
+   "MODEL-FORECAST",
+   "D10-F16",
+   "D10-F26",
+   "D1-F25",
+   "D10-F25",
+   "D10-F15",
+   "D2-F02",
+   "D11-F28",
+   "D11-F29",
+   "D7-F14",
+   "D10-F08",
+   "D10-F09",
+   "D10-F29",
+   "D10-F22"
+  ]
+ }
+}

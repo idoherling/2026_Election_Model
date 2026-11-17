@@ -1,0 +1,197 @@
+[
+ {
+  "where": "coalition.intro",
+  "phrase": "In about six simulations in ten, neither the Netanyahu bloc nor the change lists with Ra'am reach 61",
+  "condition": "55 <= F('bloc.neither') < 65"
+ },
+ {
+  "where": "coalition.intro",
+  "phrase": "Close to half of all simulations end in a repeat election",
+  "condition": "43 <= F('gov.repeat') <= 52"
+ },
+ {
+  "where": "coalition.outcomes_note",
+  "phrase": "where the change-led base is {{x.coalition.atlas_base_phrase}}",
+  "condition": "abs(F('atlas.govt') - F('gov.change_led')) < 2",
+  "note": "The extra says 'also about N%' when both round to the same whole number, else 'about A%, close to the G% here'. False means the atlas base is no longer close to the forecast: rerun the atlas on the current forecast."
+ },
+ {
+  "where": "coalition.outcomes_note",
+  "phrase": "A government with Ra'am inside is only about {{gov.change_raam|f:.1f}}%, because the model assumes Ra'am joins in only some of those cases",
+  "condition": "F('gov.change_raam') < 0.5 * F('bloc.chraam61')"
+ },
+ {
+  "where": "coalition.paths[0].how",
+  "phrase": "hold about {{x.coalition.ch_central}}, {{x.coalition.ch_short|words}} short",
+  "condition": "1 <= F('x.coalition.ch_short') <= 12",
+  "note": "'short' is wrong if the four lists reach 61 on central seats (ch_short <= 0); 'words' spells 0-12."
+ },
+ {
+  "where": "coalition.paths[0].how",
+  "phrase": "Votes taken from the Netanyahu bloc raise that chance fastest",
+  "condition": "F('lev.pers_likud_1.0.ch61') / F('lev.pers_likud_1.0.votes') > max(F('lev.ch_turnout_50000.ch61') / F('lev.ch_turnout_50000.votes'), F('lev.bw_withdraws.ch61') / F('lev.bw_withdraws.votes'))"
+ },
+ {
+  "where": "coalition.paths[0].obstacles",
+  "phrase": "so the risk inside the bloc is late cannibalisation by the larger lists",
+  "condition": "min(F('fc.YB.pass'), F('fc.Democrats.pass')) >= 0.9"
+ },
+ {
+  "where": "coalition.paths[1].how",
+  "phrase": "the four lists and Ra'am hold {{x.coalition.chraam_central}}, {{x.coalition.chraam_short|words}} short",
+  "condition": "1 <= F('x.coalition.chraam_short') <= 12"
+ },
+ {
+  "where": "coalition.paths[1].how",
+  "phrase": "Together they reach 61 in about {{bloc.chraam61|f:.0f}}% of draws, {{x.coalition.chraam_vs_ch_times}} the change lists' chance alone",
+  "condition": "F('bloc.ch61') > 0 and F('bloc.chraam61') / F('bloc.ch61') >= 1.1",
+  "note": "x.coalition.chraam_vs_ch_times is generated from the ratio ('more than three times', 'nearly four times', 'about twice'). The condition only guards against a ratio so small that the comparison stops being worth making."
+ },
+ {
+  "where": "coalition.paths[1].how",
+  "phrase": "Even so, it is the largest of the change-led routes that need a partner. The four lists' own route is about {{gov.change_alone|f:.1f}}%",
+  "condition": "F('gov.change_raam') > max(F('gov.change_amcha'), F('gov.change_haredi'), F('gov.centre_minority'))",
+  "note": "Replaces 'the largest single opening on this page', which broke when change alone (8.3) overtook with-Ra'am (7.3) on the 15 Oct refit. The comparison with the change lists' own route is stated with both tokens, so it is true either way. 'Change-led' keeps the unity route (Likud as partner, larger than with-Ra'am) out of the comparison, as paths[5].how says unity is more than any single change-led path."
+ },
+ {
+  "where": "coalition.paths[2].how",
+  "phrase": "If both Arab lists abstain, the change lists' {{x.coalition.ch_central}} still trail the Netanyahu bloc's {{x.coalition.nb_central}}",
+  "condition": "F('x.coalition.ch_central') < F('x.coalition.nb_central')"
+ },
+ {
+  "where": "coalition.paths[2].how",
+  "phrase": "If one Arab list votes in favour and the other abstains, it passes",
+  "condition": "F('x.coalition.ch_central') + min(F('fc.Raam.seats'), F('fc.JL.seats')) > F('x.coalition.nb_central') + F('fc.Reservists.seats') + F('fc.BW.seats')"
+ },
+ {
+  "where": "coalition.paths[2].how",
+  "phrase": "It also passes if both abstain and a haredi party abstains too",
+  "condition": "F('x.coalition.ch_central') > F('x.coalition.nb_central') - min(F('fc.Shas.seats'), F('fc.UTJ.seats')) + F('fc.Reservists.seats') + F('fc.BW.seats')"
+ },
+ {
+  "where": "coalition.paths[4].partners",
+  "phrase": "Blue and White (about 1%)",
+  "condition": "F('fc.BW.pass') >= 0.005"
+ },
+ {
+  "where": "coalition.paths[4].partners",
+  "phrase": "All three are below the line on central seats",
+  "condition": "F('fc.Reservists.seats') == 0 and F('fc.BW.seats') == 0 and F('fc.Amcha.seats') == 0"
+ },
+ {
+  "where": "coalition.paths[4].obstacles",
+  "phrase": "raises the chance of denying Netanyahu 61 by about {{mv.Reservists.deny|f:.2f}} points, leaves the change-led chance about unchanged and slightly lowers change seats",
+  "condition": "F('mv.Reservists.deny') > 0 and abs(F('mv.Reservists.govt')) < 0.1 and -0.1 < F('mv.Reservists.seats') < 0"
+ },
+ {
+  "where": "coalition.paths[4].obstacles",
+  "phrase": "the change-led chance would rise about {{lev.res_withdraws.govt|f:.1f}} points, though the chance of denying Netanyahu 61 would still fall",
+  "condition": "F('lev.res_withdraws.govt') > 0 and F('lev.res_withdraws.deny') < 0"
+ },
+ {
+  "where": "coalition.paths[4].obstacles",
+  "phrase": "If most went right, it would fall about {{lev.res_withdraws_right.govt|abs|f:.1f}} points and the chance of denying Netanyahu 61 would fall",
+  "condition": "F('lev.res_withdraws_right.govt') < 0 and F('lev.res_withdraws_right.deny') < 0",
+  "note": "Was 'about 1.0 point' with a 0.95-1.05 band; now always 'points', so only the directions matter."
+ },
+ {
+  "where": "coalition.paths[5].how",
+  "phrase": "more than any single change-led path",
+  "condition": "F('gov.unity') > max(F('gov.change_alone'), F('gov.change_amcha'), F('gov.change_haredi'), F('gov.centre_minority'), F('gov.change_raam'))"
+ },
+ {
+  "where": "coalition.signals[1].text",
+  "phrase": "On the current forecast that is Eisenkot, as head of the largest change list",
+  "condition": "F('fc.Yashar.seats') > max(F('fc.Together.seats'), F('fc.Democrats.seats'), F('fc.YB.seats'))"
+ },
+ {
+  "where": "coalition.signals[1].risk",
+  "phrase": "That is cheap while each change list clears the threshold in about {{x.coalition.min_change_pass|f:.0f}}% of simulations or more",
+  "condition": "90 <= F('x.coalition.min_change_pass') < 99.5"
+ },
+ {
+  "where": "coalition.signals[1].risk",
+  "phrase": "if Yisrael Beytenu or the Democrats slide toward the threshold",
+  "condition": "max(F('fc.YB.seats'), F('fc.Democrats.seats')) <= min(F('fc.Yashar.seats'), F('fc.Together.seats')) and min(F('fc.YB.pass'), F('fc.Democrats.pass')) <= min(F('fc.Yashar.pass'), F('fc.Together.pass'))"
+ },
+ {
+  "where": "coalition.signals[1].risk",
+  "phrase": "votes moving between change lists are worth about zero in the model",
+  "condition": "abs(F('lev.yashar_to_dem_0.5.govt')) < 0.3 and abs(F('lev.yashar_to_dem_0.5.deny')) < 0.3 and abs(F('lev.yashar_to_dem_0.5.seats')) < 0.1"
+ },
+ {
+  "where": "coalition.signals[2].text",
+  "phrase": "closes the two routes that make up about {{x.coalition.arab_routes|f:.0f}} of the {{gov.change_led|f:.0f}} points of change-led government in the model ... Ra'am inside the coalition is about {{gov.change_raam|f:.1f}} of those points, against {{gov.change_alone|f:.1f}} for the four lists on their own",
+  "condition": "0 < F('gov.centre_minority') and 0 < F('gov.change_raam') and F('x.coalition.arab_routes') < F('gov.change_led')",
+  "note": "Replaces 'including the largest single one' (false once change alone overtook with-Ra'am). 'two routes' needs both Arab-dependent outcomes to be non-zero."
+ },
+ {
+  "where": "coalition.signals[2].risk",
+  "phrase": "an absolute one would give up Ra'am's seats. With them the four lists reach 61 in about {{bloc.chraam61|f:.0f}}% of draws, {{x.coalition.chraam_vs_ch_times}} their chance alone",
+  "condition": "F('bloc.ch61') > 0 and F('bloc.chraam61') / F('bloc.ch61') >= 1.1",
+  "note": "Replaces 'its main route to 61'. On 15 Oct, Ra'am is not the largest government route (7.3 vs 8.3 alone), and in seat terms the change lists + Shas reach 61 in about half of draws, so 'main route' was not defensible. The sentence now states the with-Ra'am vs alone comparison only."
+ },
+ {
+  "where": "coalition.signals[3].text",
+  "phrase": "If they recommend no one, the bloc's candidate is far better placed for the first mandate",
+  "condition": "F('x.coalition.ch_central') - F('x.coalition.nb_central_no_haredi') >= 8"
+ },
+ {
+  "where": "coalition.signals[4].risk",
+  "phrase": "which is worth about zero to the bloc in the model",
+  "condition": "abs(F('lev.yashar_to_dem_0.5.govt')) < 0.3 and abs(F('lev.yashar_to_dem_0.5.deny')) < 0.3 and abs(F('lev.yashar_to_dem_0.5.seats')) < 0.1"
+ },
+ {
+  "where": "coalition.formation[0].what",
+  "phrase": "Neither side is likely to have 61 on the night",
+  "condition": "max(F('bloc.nb61'), F('bloc.chraam61')) < 50"
+ },
+ {
+  "where": "coalition.prepare[5].text",
+  "phrase": "Votes moving between change lists are worth about zero",
+  "condition": "abs(F('lev.yashar_to_dem_0.5.govt')) < 0.3 and abs(F('lev.yashar_to_dem_0.5.deny')) < 0.3 and abs(F('lev.yashar_to_dem_0.5.seats')) < 0.1"
+ },
+ {
+  "where": "coalition.prepare[5].text",
+  "phrase": "Keep the Democrats and Yisrael Beytenu safely above the threshold, and drop 'largest list' contests inside the bloc if either slips",
+  "condition": "max(F('fc.YB.seats'), F('fc.Democrats.seats')) <= min(F('fc.Yashar.seats'), F('fc.Together.seats')) and min(F('fc.YB.pass'), F('fc.Democrats.pass')) <= min(F('fc.Yashar.pass'), F('fc.Together.pass'))"
+ },
+ {
+  "where": "coalition.prepare[5].text",
+  "phrase": "Stay silent about the Netanyahu bloc's threshold problems",
+  "condition": "min(F('fc.RZP.pass'), F('fc.Otzma.pass'), F('fc.Amcha.pass')) < 0.9"
+ },
+ {
+  "where": "coalition.prepare[5].text",
+  "phrase": "that bloc's chance of 61 is much higher in draws where they pass",
+  "condition": "F('cond.RZP.nb61_pass') >= 2 * F('cond.RZP.nb61_fail') and F('cond.Otzma.nb61_pass') >= 2 * F('cond.Otzma.nb61_fail') and F('cond.Amcha.nb61_pass') >= 2 * F('cond.Amcha.nb61_fail')"
+ },
+ {
+  "where": "coalition.prepare[5].text",
+  "phrase": "consolidation on the right lowers the change-led chance by about 1 point",
+  "condition": "-1.5 < F('lev.amcha_withdraws.govt') <= -0.5"
+ },
+ {
+  "where": "coalition.repeat.text",
+  "phrase": "A repeat election is the single most likely outcome in the forecast",
+  "condition": "F('gov.repeat') > max(F('gov.netanyahu_right'), F('gov.netanyahu_unaligned'), F('gov.unity'), max(F('gov.change_alone'), F('gov.change_amcha'), F('gov.change_haredi'), F('gov.centre_minority'), F('gov.change_raam')))"
+ },
+ {
+  "where": "coalition.repeat.text",
+  "phrase": "That is {{x.coalition.repeat_vs_changeled_times}} the chance of all change-led outcomes together",
+  "condition": "F('gov.repeat') / F('gov.change_led') >= 1.1",
+  "note": "Generated ratio phrase ('nearly twice' at 45.3/23.9). False only if the two shares become about equal, when the sentence's point (a rerun is far likelier) no longer holds."
+ },
+ {
+  "where": "coalition.repeat.text",
+  "phrase": "Most of those are deadlocks turned into workable majorities",
+  "condition": "F('lev.pers_likud_1.0.chraam61') > 2 * F('lev.pers_likud_1.0.deny')",
+  "note": "Sufficient lower bound: the deadlock share of the with-Ra'am gain is at least (chraam61 - deny)/chraam61 (51% on 15 Oct). If false, check the share on the atlas draws (NB>=61 to change+Ra'am>=61 in one step is rare) before rewording; only if it is really below half, change 'Most' to 'Many'."
+ },
+ {
+  "where": "coalition.repeat.text",
+  "phrase": "from about {{atlas.ch61|f:.1f}}% to about {{x.coalition.pers1_ch61_after|f:.0f}}%, and with Ra'am from about {{atlas.chraam61|f:.0f}}% to about {{x.coalition.pers1_chraam61_after|f:.0f}}%",
+  "condition": "abs(F('atlas.ch61') - F('bloc.ch61')) < 0.1 and abs(F('atlas.chraam61') - F('bloc.chraam61')) < 0.5",
+  "note": "The lever before/after uses the atlas base; paths[0].how, paths[1].how, signals[2].text and outcomes_note quote the same chances from the forecast (bloc.ch61, bloc.chraam61). False means the page would quote two different 'chance of 61' figures: rerun the atlas on the current forecast."
+ }
+]

@@ -1,0 +1,285 @@
+{
+ "verdicts": [
+  {
+   "id": "D11-F01",
+   "status": "corrected",
+   "note": "The DOI resolves (Crossref: American Politics Research 45(4): 533-559, online 13 Jan 2017; authors, title and venue match). The abstract and J-PAL working paper confirm ITT +0.7 pp (+2.2%), 1.96 million subjects, 17 states, 2014, effects broadly similar across states and larger where salience was lower. The error is the benchmark. This study tested the 'Self' mailer, but the desk compares it with the 8.1 pp effect of the stronger 'Neighbors' mailer. The same Self mailer raised turnout 4.8-4.9 pp in Michigan 2006 (Rogers et al. 2017, p.88; Gerber, Green & Larimer 2008), and the paper puts prior Self effects at 1.6-4.8 pp. So the 2014 effect is about one-seventh of the original, not 'a tenth'. Control turnout was only 31.2%, a low-propensity pool, which matters for transfer to Israeli baselines of 65-80%. Summary point 1 ('0.7 pp ... against 8.1 pp') needs the same fix.",
+   "corrected_claim": "A nonpartisan campaign randomly mailed 'Self' social-pressure mailers to 1.96 million registered voters in 17 states before the 2014 US midterms. Each mailer showed the recipient's own past turnout and compared it with the median registrant in their state. Validated turnout rose 0.7 pp against a control turnout of 31.2%, about one-seventh of the 4.8-4.9 pp effect of the same Self mailer in the low-salience 2006 Michigan primary. Effects were broadly consistent across states and somewhat larger where salience was lower.",
+   "corrected_quant": "ITT +0.7 pp (+2.2% relative to control turnout of 31.2%); N about 1.96 million; 17 states; 2014 general election. Benchmarks: Self mailer, Michigan 2006 primary, +4.8/4.9 pp; prior published Self effects 1.6-4.8 pp. The 8.1 pp figure (D3-F05) is the Neighbors mailer, a different treatment.",
+   "corrected_url": ""
+  },
+  {
+   "id": "D11-F02",
+   "status": "corrected",
+   "note": "The DOI resolves (Electoral Studies 46: 87-100, 2017; authors and title match). The full text is open (author copy at uploads-ssl.webflow.com, 'Rogers, T., Green, D. P., Ternovski, J., & Young, C. F. 2017.pdf'), so the 'paywalled, not extracted' note is wrong and the numbers can be added. The claim's direction is right. Two omissions matter for relevance. (1) Subjects were 664,020 likely Barrett (Democratic) supporters chosen by the progressive Greater Wisconsin Committee, mostly high-propensity voters. (2) Effects were zero above 60% prior propensity. That is the band of change-bloc strongholds at 75-80% turnout, so even where vote history is available this tool does nothing for high-propensity bases.",
+   "corrected_claim": "The 'Neighbors' social-pressure mailer was re-tested on about 650,000 likely Democratic (Barrett) supporters chosen by a progressive group, in the hotly contested June 2012 Wisconsin recall. Pooled across four wordings, it raised turnout 1.0 pp, against 8.1 pp in the low-salience 2006 Michigan primary. Effects were concentrated among voters with a 20-60% prior propensity and were nil above 60%. Recipients also voted more in the November 2012 presidential election. Partisan and nonpartisan wordings performed alike, and recipients were not targeted more often by later campaigns.",
+   "corrected_quant": "Pooled ITT +1.0 pp (SE about 0.3); control turnout about two-thirds; four treatment versions equal (F-test p = 0.36). By prior propensity: 0-20% +0.9 pp; 20-40% +3.3 pp (SE 0.8); 40-60% +3.6 pp (SE 1.0); 60-80% +0.4 pp (n.s.); 80-100% +0.05 pp (n.s.). Downstream November 2012 ITT +0.41 pp (SE 0.19), N = 648,750.",
+   "corrected_url": "https://uploads-ssl.webflow.com/59faaf5b01b9500001e95457/5bc548d77a5af07441cba139_Rogers,%20T.,%20Green,%20D.%20P.,%20Ternovski,%20J.,%20&%20Young,%20C.%20F.%202017.pdf"
+  },
+  {
+   "id": "D11-F03",
+   "status": "verified",
+   "note": "The DOI resolves (JOP 71(1): 178-191, 2009). The abstract (OpenAlex) confirms that high-turnout messages beat low-turnout messages, that the effect is on vote intention and appears only among infrequent and occasional voters, and that the authors warn about elite and media lamentation. The New Jersey 2005 and California 2006 settings are confirmed only by secondary summaries (J-PAL lists NJ and CA). The full text was not retrieved; no magnitudes are claimed. The relevance is consistent with the source except the remark about the 'gevalt' threat component, which is desk interpretation.",
+   "corrected_claim": "",
+   "corrected_quant": "",
+   "corrected_url": ""
+  },
+  {
+   "id": "D11-F04",
+   "status": "verified",
+   "note": "The DOI resolves (Political Behavior 36(2): 451-469; online 12 Jun 2013). The abstract (UNI ScholarWorks and search excerpts) says only messages that included subjects' own vote histories mobilised; less specific information such as community-wide turnout had weaker effects; descriptive norms did little. This matches the claim. No magnitudes are claimed.",
+   "corrected_claim": "",
+   "corrected_quant": "",
+   "corrected_url": ""
+  },
+  {
+   "id": "D11-F05",
+   "status": "verified",
+   "note": "The DOI resolves (Behavioural Public Policy 7(2): 380-394, online 26 Nov 2020). The abstract confirms a large preregistered 2016 presidential replication with no noun-vs-verb effect, including in competitive states. The original 11-14 pp claim is confirmed in the doi:10.1111/pops.12446 abstract (Gerber, Huber & Fang, Political Psychology 39(4): 925-938, online Aug 2017; the field period was Oct-Nov 2015). One omission: there were two earlier large replications, not one. The first is Gerber, Huber, Biggers & Hendry (2016), PNAS 113(26): 7112-7117, doi:10.1073/pnas.1513727113, which also found no effect.",
+   "corrected_claim": "",
+   "corrected_quant": "",
+   "corrected_url": ""
+  },
+  {
+   "id": "D11-F06",
+   "status": "verified",
+   "note": "The DOI resolves (PLoS ONE 12(4): e0173851). The full text confirms 15,060,897 records matched exactly in 13 states; validated turnout 74.08% treated vs 73.91% untreated; an estimate of +0.24 pp (95% CI 0.03-0.44, p = 0.027) controlling for 2010 vote (unadjusted +0.17, n.s.); banner-only +0.12 and feed-only +0.10, both n.s.; about 90,000 direct and 180,000 friend votes; and friend effects about twice the direct effect. One nuance: 15 million is the matched analysis sample, not the number of users shown the message (254 million users were eligible).",
+   "corrected_claim": "",
+   "corrected_quant": "",
+   "corrected_url": ""
+  },
+  {
+   "id": "D11-F07",
+   "status": "verified",
+   "note": "The DOI resolves (Journal of Communication 66(4): 542-563). The abstract confirms three experiments using tagged Facebook status updates that publicised past participation, with 'substantial increases ... greater than ... face-to-face methods'. Secondary coverage (Pacific Standard) confirms Study 1: 293 registered voters, Dallas County, 2014 general election. Messages were sent by seven local Democratic Party activists, so the senders were partisan. Turnout was shame 76%, pride about 68%, control 52% and civic duty 48%, and social pressure by proxy was n.s. The desk can add these group rates, labelled as secondary-reported. The 'low' confidence rating is appropriate.",
+   "corrected_claim": "",
+   "corrected_quant": "",
+   "corrected_url": ""
+  },
+  {
+   "id": "D11-F08",
+   "status": "verified",
+   "note": "The DOI resolves (Nature Human Behaviour 7(3): 332-341). The author copy and abstract confirm US$8.9M, about 2 million voters, five battleground states, 8 months, and no average turnout effect. Biden leaners rose +0.4 pp (s.e. 0.2) and Trump leaners fell -0.3 pp (s.e. 0.3); the difference is 0.7 pp (P = 0.036). Strongest effects were in early voting (exploratory). The authors' errata (seven corrections) leave the turnout estimates unchanged; one corrects the audience to 1,993,216.",
+   "corrected_claim": "",
+   "corrected_quant": "",
+   "corrected_url": ""
+  },
+  {
+   "id": "D11-F09",
+   "status": "verified",
+   "note": "The working-paper PDF resolves (Green & McClellan, Columbia, 7 Feb 2020). Every number matches. It covered 43 captains in four sites (Ohio, San Francisco, Connecticut, Colorado) with about 20 names each, split in half. N = 773 (387 treated, 386 control); control turnout 32%. ITT 13.2 pp (SE 3.2); Ohio 17.1 (4.7); elsewhere 9.5 (4.5); difference 7.6 (6.5). The authors call it the largest ITT in two decades and stress the low-salience caveat. Relevance caveat: Turnout Nation was nonpartisan, and captains were told not to mention parties. A partisan captain programme aimed at 'likely-supportive' friends is a different treatment, and the paper does not test it.",
+   "corrected_claim": "",
+   "corrected_quant": "",
+   "corrected_url": ""
+  },
+  {
+   "id": "D11-F10",
+   "status": "verified",
+   "note": "The DOI resolves (AEJ: Applied 12(3): 287-325). The open author copy confirms 5,413 and 5,387 subjects per arm in 2010. In 2014, postcards went to about 80,000 households (about 125,000 people), with a total sample over 1.38 million including controls. The authors 'can rule out that a close poll ... increases turnout by more than 0.8 pp' and rule out that more than 13% of the closeness-turnout relationship runs through perceptions.",
+   "corrected_claim": "",
+   "corrected_quant": "",
+   "corrected_url": ""
+  },
+  {
+   "id": "D11-F11",
+   "status": "verified",
+   "note": "The DOI resolves (PSRM 2(2): 309-319). The abstract confirms a large field experiment after a tied election for major office: telling citizens the election would be close had little mobilising effect, and any detected effect was among a small set of frequent voters. The Massachusetts state-house tie is correctly flagged as from secondary sources. No magnitudes are claimed.",
+   "corrected_claim": "",
+   "corrected_quant": "",
+   "corrected_url": ""
+  },
+  {
+   "id": "D11-F12",
+   "status": "verified",
+   "note": "The DOI resolves (JEEA 22(2): 876-914; online 16 Jun 2023). The LSE author copy confirms 52 referenda and Geneva daily mail-in data. A one-SD (7.65 pt) closer poll raises turnout about 0.4 pp on each of three days, 1.2 pp in total, which matches the observational 1-2 pp per 10 points. Effects are larger with more newspaper coverage. The effect is asymmetric and raises the underdog's share. Minor: the 'unrepresentative municipalities' result concerns the historical introduction of polls, not the event-study effect. Transfer caveat: these are binary referenda, where closeness is unambiguous.",
+   "corrected_claim": "",
+   "corrected_quant": "",
+   "corrected_url": ""
+  },
+  {
+   "id": "D11-F13",
+   "status": "verified",
+   "note": "The DOI resolves (European Economic Review 77: 65-81). The QUT accepted manuscript states that knowing exit-poll information 'decreases voter turnout by about 11 percentage points' and significantly increases bandwagon voting. The French overseas-territories reform design matches.",
+   "corrected_claim": "",
+   "corrected_quant": "",
+   "corrected_url": ""
+  },
+  {
+   "id": "D11-F14",
+   "status": "corrected",
+   "note": "The gov.il PDF (ref. 2022-000238) resolves. Section 16(h) matches the claim: no publication from the end of the Friday before polling until polls close of any poll not published before; republication must be prominently labelled as not current. 16(e) requires filing methodology with the CEC, and 16(f) requires reporting to the State Comptroller, including the funder. 23 Oct 2026 is a Friday and 27 Oct a Tuesday. One error in the comparative figures: France's one-week ban was cut by Law 2002-214 (19 Feb 2002) to the eve and day of the vote, following a 2001 Cour de cassation ruling. A 2002 table is out of date for a 2026 guide; WAPOR/ESOMAR 2017 is the current comparative source.",
+   "corrected_claim": "",
+   "corrected_quant": "2026 blackout: from the end of Friday 23 October to the close of polls on Tuesday 27 October (22:00 at most stations), about four days. Comparative: France, the eve and day of the vote only (since Law 2002-214); Spain five days; Italy 15 days; no pre-election blackout in the US, UK, Germany or Netherlands. WAPOR/ESOMAR 2017 (133 countries): 32% have no blackout; median blackout 4.5 days among those that have one.",
+   "corrected_url": ""
+  },
+  {
+   "id": "D11-F15",
+   "status": "verified",
+   "note": "The DOI resolves (JOP 82(4): 1530-1544). The abstract (Semantic Scholar/SSRN) confirms experiments showing that forecasts increase certainty, confuse people and decrease turnout, effects stronger for the leading candidate, and the ANES confidence-turnout association. The authors' response to FiveThirtyEight (r-bloggers, Feb 2018) gives 8.6% vs 0.6% confusion and 'about three percentage points less likely to report voting' for those expecting a blowout. Figures match, with the source correctly labelled.",
+   "corrected_claim": "",
+   "corrected_quant": "",
+   "corrected_url": ""
+  },
+  {
+   "id": "D11-F16",
+   "status": "verified",
+   "note": "The DOI resolves (JEEA 16(3): 825-856). The abstract confirms that voting propensity rises with the predicted advantage of the preferred alternative, and that polls lead to more participation by the expected majority and more landslides. No magnitudes are claimed.",
+   "corrected_claim": "",
+   "corrected_quant": "",
+   "corrected_url": ""
+  },
+  {
+   "id": "D11-F17",
+   "status": "verified",
+   "note": "The DOI resolves (Scandinavian Political Studies 40(3): 330-343). The accepted manuscript confirms the YouGov panel, 10-28 January 2014, 3,011 complete responses, five groups, and Social Democrats +/-5 pp and Conservatives +/-2 pp. Gain vs loss p < 0.05 for both parties; joint gain vs control p < 0.05; loss vs control negative, n.s.; no heterogeneity across groups. Note: the gain-vs-loss asymmetry in size is itself not significant (p < 0.5). The relevance's MODEL_BRIEF_v2 point about Reservists is internal and was not checked here.",
+   "corrected_claim": "",
+   "corrected_quant": "",
+   "corrected_url": ""
+  },
+  {
+   "id": "D11-F18",
+   "status": "verified",
+   "note": "The DOI resolves (IJPOR 28(1): 46-72; online Feb 2015). The abstract confirms N = 23,421, no effect of plain poll outcomes, a subtle bandwagon effect from growth framing, and no larger effect among those on the fence.",
+   "corrected_claim": "",
+   "corrected_quant": "",
+   "corrected_url": ""
+  },
+  {
+   "id": "D11-F19",
+   "status": "verified",
+   "note": "The DOI resolves (Research & Politics 4(1), 2017). The abstract confirms CSES Module 3, a negative-partisanship turnout effect of 'about nine percentage points', vote-choice effects of 2-6 pp, and no significant effect for Conservative/Christian Democratic and Liberal parties.",
+   "corrected_claim": "",
+   "corrected_quant": "",
+   "corrected_url": ""
+  },
+  {
+   "id": "D11-F20",
+   "status": "verified",
+   "note": "The DOI resolves (West European Politics 46(4): 732-759; online 30 Jun 2022). The abstract confirms German cross-sections over three decades, a Spanish two-wave panel and an 11-wave Dutch panel. It reports a 'sizeable independent effect' robust to reverse causality and to positive partisanship and ideological polarisation, possibly stronger among the least sophisticated.",
+   "corrected_claim": "",
+   "corrected_quant": "",
+   "corrected_url": ""
+  },
+  {
+   "id": "D11-F21",
+   "status": "verified",
+   "note": "The DOI resolves (JOP 73(1): 156-170). The abstract confirms that anger, more than anxiety or enthusiasm, mobilises, supported by a randomised experiment, a 2008 national survey and pooled ANES 1980-2004.",
+   "corrected_claim": "",
+   "corrected_quant": "",
+   "corrected_url": ""
+  },
+  {
+   "id": "D11-F22",
+   "status": "verified",
+   "note": "The DOI resolves (JOP 69(4): 1176-1209). The abstract confirms no reliable evidence of turnout depression and slightly lower efficacy and trust. Secondary sources quoting the article confirm 111 studies, 57 with turnout outcomes, and partisans-mobilised/independents-demobilised support resting on only nine studies (t = 1.6, p < .07 one-tailed).",
+   "corrected_claim": "",
+   "corrected_quant": "",
+   "corrected_url": ""
+  },
+  {
+   "id": "D11-F23",
+   "status": "verified",
+   "note": "The DOI resolves (AJPS 55(4): 797-813). The abstract confirms both tests (2004 campaign; 1976-2000) and the two conditions for demobilisation: exposure after choosing a candidate, and negativity about that candidate. The relevance (late information to decided, disaffected Likud voters) is a plausible application, not a tested one.",
+   "corrected_claim": "",
+   "corrected_quant": "",
+   "corrected_url": ""
+  },
+  {
+   "id": "D11-F24",
+   "status": "verified",
+   "note": "The DOI resolves (JEBO 121: 99-113). The abstract and highlights (IDEAS/ScienceDirect) confirm two local-election field experiments sending negative or positive letters to candidates' partisans. Negative letters raised turnout relative to positive ones; positive letters lowered turnout relative to control; negative vs control showed no rise. Arceneaux & Nickerson (APR 38(1): 54-83, doi:10.1177/1532673X09331613) is confirmed: their abstract finds no systematic negative-positive difference, and Pacific Standard confirms the 2004 Minnesota and Los Angeles experiments with about 69,000 contacted.",
+   "corrected_claim": "",
+   "corrected_quant": "",
+   "corrected_url": ""
+  },
+  {
+   "id": "D11-F25",
+   "status": "verified",
+   "note": "The DOI resolves (Political Psychology 25(4): 507-523). The abstract confirms three letter versions: threat increased the number of contributions, opportunity did not; opportunity increased signed postcards to President Clinton, threat did not.",
+   "corrected_claim": "",
+   "corrected_quant": "",
+   "corrected_url": ""
+  },
+  {
+   "id": "D11-F26",
+   "status": "corrected",
+   "note": "The DOI resolves (Political Behavior 38(3): 713-746). The HKS abstract confirms 56,000 Wisconsin voters, 2008, canvassing, calls and mail. The backlash findings are explicitly for the canvassing treatment ('Focusing on the canvassing treatment...'). The claim attributes them to 'the appeals' generally. The relevance's advice to use calls instead of doors in NB turf is not supported by this paper, which reports no evidence that persuasion calls work. Rest that advice on P-F01 and P-F14 instead.",
+   "corrected_claim": "A field experiment with about 56,000 Wisconsin voters in the 2008 presidential election tested persuasive canvassing, phone calls and mail. Analysing the canvassing treatment, the authors find that persuasive door appeals reduced response to a follow-up survey among infrequent voters, and possibly reduced candidate support while almost certainly not increasing it. They conclude that campaign contact can provoke a backlash.",
+   "corrected_quant": "",
+   "corrected_url": ""
+  },
+  {
+   "id": "D11-F27",
+   "status": "verified",
+   "note": "Recomputed from the repo's CEC locality files (data/raw/kalpi/expc_21.csv, expc_22.csv). April 2019: Hadash-Ta'al 193,442 + Ra'am-Balad 143,666 = 337,108; September 2019: Joint List 470,211 (+39.5%). Total votes 4,340,253 to 4,465,168 (+2.9%). Likud 1,140,370 + Kulanu 152,756 = 1,293,126 to 1,113,617 (-13.9%). The ToI article (ToI staff, 18 Sep 2019) confirms Arab turnout 49.2% to about 60%, about 1,200 Likud representatives with hidden cameras, the failed camera bill, and MK Miki Zohar saying the effort 'woke up the Arab sector'. The Kaizler Inbar PR firm's Facebook boast of turnout 'below 50%' is widely reported (Haaretz/ToI, April 2019). The Joint List reunification confound is correctly flagged.",
+   "corrected_claim": "",
+   "corrected_quant": "",
+   "corrected_url": ""
+  },
+  {
+   "id": "D11-F28",
+   "status": "corrected",
+   "note": "The list totals are exact against expc_22 and expc_23. Likud 1,113,617 to 1,352,449 (+238,832, +21.4%). Yamina 260,655 + Otzma 83,609 = 344,264 fell to 240,689 + 19,402, a drop of 84,173. Total votes +149,967; Joint List +111,296 (+23.7%); Blue and White +69,167. The geographic statement is wrong. Decomposing Likud's gain by atlas segment (localities.csv) shows a broad, near-uniform rise. Likud grew 18.2% in the Likud-leaning periphery, 19.8% in mixed-urban, 18.4% in liberal-urban, 18.0% in Russian-speaking and 21.4% in Jerusalem. The periphery supplied 23% of the gain against 27% of Likud's September 2019 vote. Aggregate data cannot apportion the rest between returning voters and switchers. The relevance's causal reading ('when it frames an election as existential and targets stronghold non-voters') goes beyond what vote totals show.",
+   "corrected_claim": "Between September 2019 and March 2020, Likud gained more votes than any other list (+238,832), while total votes rose 149,967. The decline of Yamina and Otzma Yehudit (84,173) equals about 35% of Likud's gain. The remainder came from returning or new voters and from other lists in unknown proportions. The gain was broad-based: Likud grew about 18-21% in every large Jewish segment, faster in Haredi, moshav and settlement localities, and envelope votes supplied 12% of the gain. The Joint List also grew strongly.",
+   "corrected_quant": "Official CEC totals: Likud 1,113,617 to 1,352,449 (+238,832; +21.4%). Yamina plus Otzma down 84,173. Total votes +149,967 (+3.4%). Joint List +111,296 (+23.7%). Blue and White +69,167. Likud gain by segment: periphery +54,643 (+18.2%; 23% of gain), mixed-urban +36,734 (+19.8%), liberal-urban +34,066 (+18.4%), envelopes +29,630 (12%), Russian-speaking +21,533 (+18.0%), Jerusalem +12,803 (+21.4%), Haredi +8,034 (+26.5%), settlements-RZ +7,429 (+53%).",
+   "corrected_url": ""
+  },
+  {
+   "id": "D11-F29",
+   "status": "corrected",
+   "note": "Every list total reproduces exactly from expc_24 and expc_25. Haredi 564,399 to 673,158; right 1,566,369 to 1,688,581; change-camp 1,834,885 to 1,820,389 (the locality file has Meretz at 150,793; final CEC 150,696); Arab 379,647 to 511,399; all votes 4,436,365 to 4,794,593. The Davies & Hantman ToI column (7 Nov 2022) exists and says the Haredi parties polled 15 seats and won 18. Two overreaches in the claim. (1) Aggregate list totals cannot show 'not vote switching'. That is Davies & Hantman's interpretation, and Yamina's 2021 vote dispersed across lists. (2) The 64-seat majority also rested on threshold wastage beyond Meretz: Balad was about 15,000 votes short, and the anti-NB side wasted about 289,000 votes (about 7 seats, per Davies & Hantman) against 56,775 for Jewish Home.",
+   "corrected_claim": "From 2021 to 2022, total votes rose 8.1%. Haredi lists grew 19%, right-wing lists 8%, and change-camp lists fell 0.8%; Arab lists rose 35% from a record-low base. Davies & Hantman (ToI) read this as differential turnout rather than persuasion, which aggregate totals are consistent with but cannot prove. It gave the NB about a 30,000-vote lead. Threshold wastage turned that into 64 seats: Meretz about 4,000 votes short, Balad about 15,000 short, roughly 289,000 wasted anti-NB votes.",
+   "corrected_quant": "",
+   "corrected_url": ""
+  },
+  {
+   "id": "D11-F30",
+   "status": "corrected",
+   "note": "The Brookings piece (William A. Galston & Yishai Schwartz, 18 Mar 2015) confirms the poll-ban explanation, the missed late Likud surge, wrong exit polls, and that panic 'appeared to produce real results, especially late on election day'. The JPost piece (Gil Stern Hoffman, 20 Apr 2015) confirms 1,133 voters and 28%. The sponsor is identifiable and should be disclosed: JTA (20 Apr 2015) says the poll was commissioned by New Majority, a group seeking to unseat Netanyahu. JTA also gives the breakdown and the late deciders' destination. The 'Likud at 20-23' figure relies on P-F30 and was not rechecked.",
+   "corrected_claim": "",
+   "corrected_quant": "Final published polls had Likud at 20-23 seats; result 30 (P-F30). Post-election survey of 1,133 voters commissioned by New Majority, an anti-Netanyahu group: 15% decided on election day and 13% in the final days (28%). Of late deciders, 62% voted for right-wing parties, 21% centrist and 16% left-wing (JTA and JPost, 20 Apr 2015).",
+   "corrected_url": ""
+  },
+  {
+   "id": "D11-F31",
+   "status": "verified",
+   "note": "The IDI page (Ariel Finkelstein, dated 28 Jun 2026) confirms 20 surveys from Nov 2022 to Oct 2023 with 10,694 Jewish voters. Haredim: Haredi lists 86% (89% in 2021), UTJ 58%, Shas 28%, RZP-Otzma 7% (4%), Likud 4%. National-religious: RZP-Otzma 45% (30%), Likud about 22.5% (around 23%), Haredi lists 13% (11%). The 'close to turnout ceiling' clause comes from D2-F12 and D2-F04, not this source. Small internal inconsistency: the relevance says 3,150 net NB votes per Haredi point, while D11-F34 (recomputed) gives 3,157 (rounded 3,160).",
+   "corrected_claim": "",
+   "corrected_quant": "",
+   "corrected_url": ""
+  },
+  {
+   "id": "D11-F32",
+   "status": "verified",
+   "note": "INN 433641 (Hezki Baruch, 25 Sep 2026, a Friday) confirms Sohlberg's temporary injunction against the Satmar-affiliated Shekel HaTahor, the Movement for Quality Government petition, $200 'support payments' to those declaring they will not vote, the injunction lasting until further notice, and law enforcement examining finances. The Ynetnews piece 'Top rabbi calls Haredi election boycott a great crime' (Rabbi Dov Lando) exists. The ToI piece 'Haredi turnout high in Likud primary, amid fears they won't vote for party in general election' (Aug 2026) confirms Channel 12's about 7,000 Haredi members of roughly 140,000, some saying they would vote UTJ or Shas.",
+   "corrected_claim": "",
+   "corrected_quant": "",
+   "corrected_url": ""
+  },
+  {
+   "id": "D11-F33",
+   "status": "verified",
+   "note": "The Senate PDF blocks automated access (403), but the HSGAC release and multiple outlets confirm the PSI staff report of 12 Jul 2016 (Portman chair, McCaskill ranking). After the grant ended in November 2014, OneVoice deployed grant-built infrastructure for V15 (voter database, social media, 270 Strategies). There was no evidence that grant funds were spent directly on the election, and State Department oversight was criticised. The 2026 part is confirmed by ToI ('Likud inks compromise with Israeli expat voter effort; 53,000 said planning to fly in for election'), Ynet and Haaretz: settlement before Sohlberg on 6 Oct, no ticket subsidies, no flights beyond the six advertised, NIS 10,000 toward Likud's legal costs. The 53,000 is the organisers' figure, as flagged.",
+   "corrected_claim": "",
+   "corrected_quant": "",
+   "corrected_url": ""
+  },
+  {
+   "id": "D11-F34",
+   "status": "corrected",
+   "note": "The segment arithmetic was recomputed from data/processed/targeting/segments.csv (eligible x 0.01 x (p26_nb - p26_change)). NB-leaning segments: 3,116,849 eligible, +10,767. Change-leaning Jewish: 2,733,554, -6,761. Uniform national +3,134; Jewish excluding Druze +4,006; Haredi +3,157; periphery plus Haredi +5,944. All match. The programme-yield input does not: '745-2,046' appears nowhere in MODEL_BRIEF_v2.md. The brief's realistic planner budgets give 767-2,102 net vote-equivalents across objectives (scenario range 423-4,382). The summary's '745-2,046' and '0.07-0.19 pp' need the same update. Also, Fowler (2015, PSRM) finds marginal voters differ from regular voters by more than 20 points in partisanship. That strengthens the desk's caveat that marginal voters may not vote like their segment's average.",
+   "corrected_claim": "",
+   "corrected_quant": "Per 1 pp turnout rise: NB-leaning segments (Haredi, Jerusalem, Likud-leaning periphery, Russian-speaking, religious-Zionist, settlements, mixed cities; 3.12M eligible) about +10,770 net NB votes. Change-leaning Jewish segments (liberal urban, kibbutz, moshav, mixed urban; 2.73M eligible) about +6,760 net change votes. Uniform national rise +3,130 NB; uniform Jewish-sector rise +4,010 NB. Haredi sector alone +3,160 NB; periphery plus Haredi +5,940 NB. Realistic change-bloc programmes in MODEL_BRIEF_v2 yield 767-2,102 net vote-equivalents (central; scenario range 423-4,382). Break-even NB counter-mobilisation is 0.07-0.20 pp across NB segments (0.04-0.41 on the scenario range), or 0.13-0.35 pp in periphery plus Haredi alone.",
+   "corrected_url": ""
+  }
+ ],
+ "missing_key_works": [
+  "Joel A. Middleton & Donald P. Green (2008). 'Do Community-Based Voter Mobilization Campaigns Work Even in Battleground States? Evaluating the Effectiveness of MoveOn's 2004 Outreach Campaign'. Quarterly Journal of Political Science 3(1): 63-82. doi:10.1561/100.00007019. A regression discontinuity on 46,277 voters in 13 swing states: partisan neighbour-to-neighbour contact raised turnout about 9 pp in a high-salience presidential election. It is the best evidence that relational, partisan contact survives high salience, which D11-F09 (a nonpartisan, low-salience pilot) cannot show. Metadata and abstract checked via OpenAlex.",
+  "Anthony Fowler (2015). 'Regular Voters, Marginal Voters and the Electoral Effects of Turnout'. Political Science Research and Methods 3(2): 205-219. doi:10.1017/psrm.2015.18. Marginal voters, identified through weather and election-timing variation, were more than 20 pp more Democratic than regular voters. This directly tests D11-F34's assumption that marginal voters vote like their segment's average, so that table should carry a sensitivity band. Checked via OpenAlex.",
+  "Alan S. Gerber, Gregory A. Huber, Daniel R. Biggers & David J. Hendry (2016). 'A field experiment shows that subtle linguistic cues might not affect voter behavior'. PNAS 113(26): 7112-7117. doi:10.1073/pnas.1513727113. The first large noun/verb replication (no effect against the 11-14 pp original). D11-F05 mentions only the 2015 Political Psychology replication. Checked via OpenAlex.",
+  "Jens Großer & Arthur J. H. C. Schram (2010). 'Public Opinion Polls, Voter Turnout, and Welfare: An Experimental Study'. American Journal of Political Science 54(3): 700-717. doi:10.1111/j.1540-5907.2010.00455.x. In the lab, polls raise turnout when they show a close race and lower it when they show unequal support, and the rise comes entirely from floating voters. It sits between D11-F12 (underdog) and D11-F16 (expected-majority) and bears on the blackout-window logic. Checked via OpenAlex.",
+  "Katherine Haenschen (2023, online 2022). 'The Conditional Effects of Microtargeted Facebook Advertisements on Voter Turnout'. Political Behavior 45(4): 1661-1681. doi:10.1007/s11109-022-09781-7. A 2018 Texas field experiment with N = 871,479: no average turnout effect. Only abortion-rights and health-care ads in competitive districts raised turnout, by about 1.7 pp, mostly among women. A second large paid-social test alongside D11-F08, showing that effects are conditional on issue and context.",
+  "WAPOR & ESOMAR (2017). 'Freedom to Conduct Opinion Polls: A 2017 Worldwide Update' (and the 2023 update). https://wapor.org/publications/freedom-to-publish-opinion-polls/. The current comparative source on pre-election poll blackouts (133 countries; 32% no blackout; median 4.5 days). It should replace the 2002 IDI table in D11-F14, whose French entry is out of date.",
+  "Simon Davies & Joshua Hantman (2022). 'How Netanyahu and his allies won by a knockout: The data'. The Times of Israel, 7 Nov 2022. https://www.timesofisrael.com/how-netanyahu-and-his-allies-won-by-a-knockout-the-data/. It is cited only in passing in D11-F29, but it should be its own finding (labelled reporting/consultancy analysis). Its figures: NB +11% to 2.36M, anti-NB +5% to 2.33M, Haredi lists +19% (fifth straight election beating their polls), and about 289,000 wasted anti-NB votes (about 7 seats). It is the most direct Israeli account of differential turnout plus threshold wastage."
+ ]
+}

@@ -1,0 +1,234 @@
+{
+ "verdicts": [
+  {
+   "id": "D5-F01",
+   "status": "verified",
+   "note": "Page exists. Dated 14 May 2026, by Arik Rudnitzky, Moshe Dayan Center (TAU) for the Konrad Adenauer Program; fieldwork May 2026. All the numbers match: turnout 53% with separate lists (the page itself says this is similar to the 53.2% of 2022) and 67% with a reunited Joint List (the highest in the program's surveys); Hadash-Ta'al 5.3, Ra'am 4.6, Balad 1.8, Joint List 16.3 seats; 77.2% support an Arab party in the coalition (43.3% any government, 33.9% centre-left); 76.9% weak personal security; 51.8% cite violence in Arab society. Full report PDF: https://dayan.org/file-download/download/public/18837. The individual author is Rudnitzky.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "D5-F02",
+   "status": "verified",
+   "note": "Sabra Magazine, by Majd Daniel, 18 June 2026; Statnet data from Yousef Makladeh. Turnout scenarios match: four-party list about 67% (up to 70% with a successful campaign, 16-17 seats); Hadash-Ta'al-Balad with Ra'am separate about 59% (about 9 seats plus Ra'am 4-5); the then-current set-up 55%; all four separate about 48%. Crime ranked first by about 80%, the Palestinian issue by 6-8%. The article reports no sample size or fieldwork dates, which the desk correctly flagged. The full Hebrew title is 'Between 17 seats and the risk of collapse: the Arab parties at a crossroads'.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "D5-F03",
+   "status": "verified",
+   "note": "Haaretz, by Jack Khoury, 15 June 2026. The 52-54% (separate), 60-63% (joint) and above-70% (strong campaign) estimates all come from Samer Swaid. Taleb el-Sana gives the Negev figures: about 67% in 1999 and barely above 50% in the latest election, no polling station in dozens of unrecognized villages, and about 50 km each way. The article says more than 120 crime deaths in 2026 to date. It also quotes Abu Rahmoun, Zreik, Handaqlu and Haddad Haj Yahya.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "D5-F04",
+   "status": "verified",
+   "note": "Task Force on Arab Citizens of Israel, 12 August 2026, no individual author. The page confirms youth (18-34) expected turnout of about 59% and that women are less likely than men to say they will 'definitely' vote. Coalition support: Ra'am 95.4%, Arab voters of Jewish parties 90.6%, Hadash-Ta'al 77.2%, Balad 67.6%, non-voters 62.6%. The page explicitly says delegitimization 'can deepen political alienation and depress turnout'; it attributes that rhetoric to the governing coalition's campaign. The point that women and youth have the most potential is credited to the Abraham Initiatives, with no link given. The turnout and coalition data come from the May 2026 KAP survey (D5-F01).",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "D5-F05",
+   "status": "verified",
+   "note": "ynet, published 9 October 2026; Dialog for ynet and Yedioth Ahronoth; n=543 Jewish and Arab youth aged 18-22; fieldwork 5-6 October. Every number matches: certain to vote 67% overall, 71% Jewish, 53% Arab; 19% of Arab youth unsure (vs 3% of Jewish youth); undecided 14% (women 20%, men 8%); secular Together 20%, Yashar 18%, Democrats 17%; religious RZP-Zehut 36%, Otzma 22%; security 27%, cost of living 25%; draft 26% vs 6%; October 7 inquiry 22% vs 5%. Shas falls below the threshold in this group; the Haredi Public gets just over 3% (5 seats).",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "D5-F06",
+   "status": "verified",
+   "note": "JPost, 23 September 2026, by Shir Perets. The headline matches the desk's title. Midgam (Mano Geva) via N12; fieldwork 15-22 September, online; n=301; ±4.4. Confirmed: about 550,000 first-time voters (10-12 seats); Yashar 16, Likud 14, B'Yachad/Together 10, UTJ 9, Democrats 7, RZP 6, YB 6, Otzma 5, Hendel-Zelekha 4, undecided 10; 74% right or centre-right; Netanyahu 47 vs Eisenkot 37; 21% expect to vote differently from their parents (59% the same). The author is Shir Perets, not just 'JPost'.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "D5-F07",
+   "status": "corrected",
+   "note": "The N12/mako article by Ofer Hadad and Amit Segal is dated 28 July 2026 (12:28), not 27 July; it may have aired the evening before. Confirmed: about 10% undecided, 8-10 seats, the same share as four years earlier; 25% of undecided cite cost of living and 15% polarization; 12% say the bloc leader decides their vote; 12% cite personal security and crime. The article puts 1.3% of the undecided as potential cross-bloc movers. I could not verify the parenthetical Times of Israel report (31 July, 12%, about 600,000 voters): the web-search budget was exhausted, so treat it as unverified.",
+   "corrected_url": "",
+   "corrected_quant": "About 10% undecided (8-10 seats). Cross-bloc movers 1.3% of the undecided. Undecided: 25% cost of living, 15% polarization. 12% say the bloc leader decides; 12% cite personal safety and crime. ToI 12% figure unverified."
+  },
+  {
+   "id": "D5-F08",
+   "status": "verified",
+   "note": "N12/mako Ulpan Shishi, published 9 October 2026; no pollster named. Confirmed: 11% undecided; 5.4% of the undecided are torn between blocs or don't know (about 0.6% of all respondents); the article says about six seats could decide it. Switching: 5% of Netanyahu-bloc intenders to the change bloc, 2% the reverse, 70% unchanged. October 7 failures not fixed: 67% (14% say fixed); among NB voters 40% vs 31%. Trust: Eisenkot 48% vs Netanyahu 30%. Blocs: anti-Netanyahu including Arab parties 50%, NB including Winter 35%. The 'about 6 seats' is the article's own figure and does not follow from 0.6% of voters; treat it cautiously.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "D5-F09",
+   "status": "verified",
+   "note": "N12 Magazine column by Dafna Liel, published 8 October 2026 and updated 9 October. Full title: 'The change bloc's magic number, and what will tip the scales in the election'. Confirmed: above 76% in the Sharon, Tel Aviv and Haifa; undecided 2.6 (NB) + 1.9 (change) + 1.6 (between) + 4.2 (other) = 10.3; 2022 threshold 154,855 votes; nearly 300,000 votes wasted (Meretz 3.2%, Balad 2.9%); about 250,000 emigrated in four years, fewer than 100,000 returned (Tax Authority data); Arab turnout 44.6% (2021) and 53.2% (2022). The column refers to 'the second 2019 round' (September 2019) without naming the month.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "D5-F10",
+   "status": "corrected",
+   "note": "Midgam (Mano Geva) for N12, data collected 9 September and published 10 September 2026; n=504, ±4.4. The Yashar, Together, YB and Amcha breakdowns match. The Otzma figures are misread. Per the Hebrew text, 37% is a retention rate: Otzma keeps 37% of the 2022 joint Ben Gvir-Smotrich list's voters. The 18% is Otzma's share among people who did not vote last time (the largest of any party), not the share of Otzma's voters who are first-time. Shares of Otzma's own voters are: Shas 15%, Likud 13%, Yesh Atid 8%. Together also includes first-time voters 3%, Jewish Home 2% and ex-YB about 2%. YB also includes Otzma/RZP 6%.",
+   "corrected_url": "",
+   "corrected_quant": "Yashar: Yesh Atid 38, NU 24, Likud 16, YB 6, Labor/Meretz 6, non-voters 6. Together: YA 44, NU 18, Labor/Meretz 13, Likud 13. YB: YB 35, YA 22, NU 13, Likud 12, Labor 11, RZP-Otzma 6. Otzma: keeps 37% of 2022 RZP-Otzma voters; its voters are 15% ex-Shas, 13% ex-Likud, 8% ex-Yesh Atid; it wins 18% of 2022 non-voters (largest share). Amcha: RZP-Otzma 48, Likud 44."
+  },
+  {
+   "id": "D5-F11",
+   "status": "verified",
+   "note": "N12/mako Ulpan Shishi, published 8 May 2026 (updated 9 May); Midgam (Mano Geva), data by iPanel; sample limited to 2022 Likud voters, size not stated. Confirmed: definite Likud 58%; Bennett 10, undecided 8, Yashar 6, won't vote 6, YB 4, Otzma 3, Hendel 2 (also Blue and White 1, RZP 1, other 1). Reasons: October 7 37%, draft 23%, Netanyahu conduct 14%, division 13%.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "D5-F12",
+   "status": "verified",
+   "note": "JPost, by Anna Barsky, 4 October 2026. Confirmed: about 200,000 soft-Likud voters, which officials say they do not expect to switch in full; goal of about two more seats from traditional and moderate religious-Zionist voters, with an internal estimate of 1-1.5 seats already; Matan Kahana (No. 5) heads a headquarters covering Gush Etzion, Efrat, Givat Shmuel and Ariel; YB mapped Likud-best cities, neighbourhoods and polling stations, including Russian-speaking ex-Likud voters; one source said 'everything has been stuck for a month'; Gantz claims more than 5 seats from internal research.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "D5-F13",
+   "status": "verified",
+   "note": "Times of Israel, by Tal Schneider, 1 July 2026. Names Even Yehuda, Kfar Saba, the Morasha Interchange, Petah Tikva, Kiryat Ono, Holon and Rishon LeZion, from the northern Sharon to the southern lowlands. Says Eisenkot is not chasing Tel Aviv liberal votes; the launch was in Hod Hasharon. The headquarters is at the Morasha Interchange, above a Yochananof supermarket.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "D5-F14",
+   "status": "verified",
+   "note": "Times of Israel, by Shalom Yerushalmi (Zman Israel), 21 August 2026. Confirmed: Shas 11 seats in 2022 and 7 in several polls; losing 'tens of thousands of votes' to Otzma, Likud and Yashar; Eisenkot names Kiryat Shmona, Shlomi and Or Yehuda; Deri made peace with Rabbi Yitzhak Yosef, which officials call a temporary patch; a veteran activist puts the base at four seats.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "D5-F15",
+   "status": "verified",
+   "note": "Haaretz, by Hilo Glazer, 11 July 2026. Confirmed: about 40 activists and residents in the Dimona living room of Michal Elmalem Abu, Eisenkot's Dimona campaign manager; a regional manager says they operate in places he never imagined. In the text I could read, Kiryat Bialik appears only in a photo caption. No volunteer totals are given.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "D5-F16",
+   "status": "corrected",
+   "note": "JPost, by Anna Barsky, 24 September 2026. Confirmed: polling stations with about 50% Likud share and about 35% turnout; elderly and distant supporters; worth 2-3 seats; plans to track pre-identified supporters, staff near polling places and a backup phone centre; Elector restrictions mean more ground work. The 'Likud primary turnout 53.5%' is not in this article; drop it or source it separately. Also, the plan to get reports of who has voted was later barred by the High Court on 17 September (see D5-F25), so that part of the plan is now constrained.",
+   "corrected_url": "",
+   "corrected_quant": "Target stations: about 50% Likud share, about 35% turnout. Estimated gain 2-3 seats. (Remove the primary-turnout figure; it is not in the source.)"
+  },
+  {
+   "id": "D5-F17",
+   "status": "verified",
+   "note": "i24NEWS Hebrew, by Amiel Yarhi; the page shows no publication date and says the launch is 'today (Thursday)'. Confirmed: 'Golden Clusters' plan with Netanyahu, Smotrich and Binyamin Regional Council head Yisrael Gantz; Otzma and Ben Gvir not part of it. Tiers 'pure gold', 'gold' and 'silver' were first revealed in September; only 'pure gold' is defined (lowest turnout, high Likud support). The four methods match. Target: 200,000 voters, about 5 seats.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "D5-F18",
+   "status": "verified",
+   "note": "ynet, by Amir Ettinger, 8 October 2026. Confirmed: Netanyahu is focused on Likud turnout in low-turnout areas; Ben Gvir is targeting Likud voters, especially young ones; Shas and Otzma are competing for traditional voters; Together is trying to win back former Yesh Atid voters who moved to Yashar; Likud signed a surplus agreement with RZP and refused one with Otzma.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "D5-F19",
+   "status": "verified",
+   "note": "ynet, by Yair Kraus, 14 August 2026. Confirmed: Likud 58.13% (2020), 51.37% (2021), 49.47% (2022); 2022 RZP 13.67%, Shas 11%, Zionist opposition 22.63%; 'about 40% of residents returned'; more than 350 students left and nearly 100 new children enrolled; Avichai Stern beat the Likud-backed candidate. The conflict with CSM's 'almost 40% not returned' (D5-F20) is real.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "D5-F20",
+   "status": "verified",
+   "note": "Christian Science Monitor, by Dina Kraft, 8 September 2026. The headline reads 'As Israel's capital of the north seeks to recover from war, it's too quiet'; the desk's wording is slightly off. Confirmed: more than 60,000 evacuated; 24,000 residents, 'almost 40%' not yet returned; returnees are often older and poorer; about half the main-street businesses shuttered; about $6 billion earmarked.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "D5-F21",
+   "status": "verified",
+   "note": "IDI Israeli Voice Index, August 2026, published 8 September 2026; fieldwork 31 August-3 September; 605 Hebrew and 150 Arabic respondents; ±3.57. Every number matches: Jews security 39, economy 38, draft 27, religion and state 26, leader 23, judicial reform 18; centre economy 40.5, draft 34, leader 26, security 25; right security 47; left religion and state 39; Arabs crime 53.5, economy 46; October 7 central for 68% of Jews vs 32% of Arabs; 59% see a high chance of domestic interference (Jews 63%, Arabs 43%). Full data PDF: https://www.idi.org.il/media/32283/israeli-voice-index-aug-2026-heb-data.pdf",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "D5-F22",
+   "status": "corrected",
+   "note": "JPPI Israeli Society Index, September 2026, published 14 September; fieldwork 1-3 September; Jewish n=663 (Madad panel) and Arab n=206 (Afkar). Confirmed: 'most important election' 40% (centre-left 60, left 57, centre 55, centre-right 39, right 35, Arabs 23); unity is the centrists' top issue at 30%; centre-right PM preference Netanyahu 44, Eisenkot 21, Bennett 20. One fix: the report says the undecided-voters-want-unity finding comes from the previous month's (August) survey, cited as consistent with this one, not from the September fieldwork. No percentage is given for it.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "D5-F23",
+   "status": "corrected",
+   "note": "The cited URL (/news/elections2026/article/sydameiozg) returns 404. The article loads at /news/article/sydameiozg. ynet, by Amir Ettinger, 4 September 2026; Dialog; n=508 and 484 (re-surveyed after the Smotrich-Feiglin merger); fieldwork 31 August-2 September; ±4.4. Every share matches: RZP-Zehut about 30, Likud 17, Otzma 12, Amcha 6, Yashar 4, Shas 4, Together 3 (down from about 27% in 2021), Tropper-Hendel 3, undecided 13. Issues: security 35, Jewish identity 25, draft 15, settlement 14.",
+   "corrected_url": "https://www.ynet.co.il/news/article/sydameiozg",
+   "corrected_quant": ""
+  },
+  {
+   "id": "D5-F24",
+   "status": "unverifiable",
+   "note": "israelnationalnews.com refused the connection on four attempts, and the web-search budget was exhausted, so I could not reach the Kan recording report or any other copy. The claim is plausible but unconfirmed; keep confidence low-medium until someone checks it.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "D5-F25",
+   "status": "verified",
+   "note": "JPost, by Sarah Ben-Nun, 17 September 2026. Confirmed: unanimous ruling by Willner, Stein and Kabub; overturns the committee's 6 September decision; Sohlberg's original ban was on 4 August. Grounds: no authority under election law, and the Privacy Protection Law. Parties may still urge people to vote, and the ruling is not a blanket ban on Elector or other campaign software.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "D5-F26",
+   "status": "verified",
+   "note": "JPost, by Sarah Ben-Nun, 16 August 2026. Sohlberg ruled that the committee will publish 'aggregate turnout rates for every regular polling station at least four times during Election Day', with the same data to all lists and no named individuals. He also refused Likud's request to reverse the 4 August ban.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "D5-F27",
+   "status": "verified",
+   "note": "i24NEWS English; no author or date shown. Confirmed: Likud plans to use the per-station turnout releases to highlight high turnout in opposition strongholds and Arab communities and so mobilize its supporters. The article says Likud will 'revive' the campaign but does not mention 2015; the 2015 echo is the desk's own, well-known historical context. The article also reports the committee's 19-11 vote to allow real-time reporting of who voted, which the High Court later overturned (D5-F25).",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "D5-F28",
+   "status": "corrected",
+   "note": "JPost, by Anna Barsky, 20 September 2026. The actual headline is 'Intercity buses, Israel Railways to be free on election day, Central Elections Committee decides'. Confirmed: free from 20:00 on the Monday before the election (26 October) until the end of service on election day; intercity lines over 15 km and Israel Railways; Eilat needs advance registration via Egged (*2800). The article covers only intercity services and does not mention urban buses. 'Urban buses are not included' is therefore an inference, not a stated fact.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "D5-F29",
+   "status": "corrected",
+   "note": "Haaretz, by Chen Maanit, 16 September 2026. Confirmed: goal of 50,000-70,000 voters (Michal Dagon); more than 30,000 registered for eligibility checks; several thousand paid a $75 commitment fee; about 1 million Israelis abroad. Likud's petition (against AID, Israeli Base and the Democrats) alleges bribery and a financing-law breach. The article says Israeli law does not allow citizens to vote overseas; it does not frame this as 'no postal vote'. The committee-chair compromise (no extra flights, no transport, lodging or services of monetary value) is not in this article. It needs another source, and I could not find one because the web-search budget was exhausted.",
+   "corrected_url": "",
+   "corrected_quant": "Goal 50,000-70,000 voters; more than 30,000 registered; several thousand paid a $75 fee; about 1 million Israelis abroad. (Compromise ruling unverified.)"
+  },
+  {
+   "id": "D5-F30",
+   "status": "verified",
+   "note": "Times of Israel, by Ariela Karmel, 23 September 2026. Confirmed: Joint List 18-5, Ra'am 18-5, Abou Shahadeh 30-4, Cassif 19-5. The Attorney General's office opposed all the petitions except the one against Abou Shahadeh. The High Court was expected to strike the bans down. Nuance: the turnout-suppression accusation came from Hadash and Maki; the Joint List said the move would disenfranchise more than a million voters. The later Supreme Court ruling (the project log says the petitions were resolved by 8 October) should be cited, but I could not locate its URL.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "D5-F31",
+   "status": "verified",
+   "note": "ynet, by Sa'ar Hess, with Medlan data (CEO Tal Kopel quoted); the article shows no date. Confirmed: 1,044 neighbourhoods in Jewish cities; Likud led 552 (max 58.5%, Shazar, Or Akiva); Yesh Atid led 355 (max 51.5%, Neve Gan/Kiryat Shaul, Ramat HaSharon); UTJ led 64; highest turnout 88.1% (Rova Zayin, Ashdod); Me'a She'arim 23.2%, central Eilat 25.7%, Netanya hotel strip 30%. The lowest overall is Sawahre (East Jerusalem), with no figure, where many residents are not citizens.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "D5-F32",
+   "status": "verified",
+   "note": "+972 Magazine, by Samah Watad, 24 July 2026. Confirmed: Abbas puts Arab support for Zionist parties at '10 to 12 percent, not more' and doubts the Democrats will grow much; Golan's tours of Arab towns and new Arabic Instagram and Facebook pages; more than 140 Palestinian citizens killed this year by late June; Joint List peak of 15 seats (2020). Minor: Somaya Bashir 'placed 10th in the Democrats' primaries'; the final list slot may differ.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  }
+ ],
+ "missing_key_works": [
+  "Rudnitzky, Arik (2022, 25 Oct). 'Survey among Arab voters in Israel ahead of the 25th Knesset Elections.' Moshe Dayan Center / Konrad Adenauer Program, TAU. https://dayan.org/content/survey-among-arab-voters-israel-ahead-25th-knesset-elections . Predicted 49% Arab turnout; the actual figure was 53.2%. Same program and method as D5-F01, so it shows these surveys can understate realized Arab turnout by about 4 points. Useful for calibrating the 53-67% 2026 figures.",
+  "Rudnitzky, Arik (2025, 25 Nov). 'An in-depth survey of the Arab community in Israel following the Israel-Hamas ceasefire.' Moshe Dayan Center / KAP. https://dayan.org/content/depth-survey-arab-community-israel-following-israel-hamas-ceasefire . Expected turnout 52.4% with separate lists vs 61.8% with a reunited Joint List; Hadash-Ta'al 5.3, Ra'am 3.9, Balad 2.6 seats; 77.4% back an Arab party in the coalition. With the May 2026 wave this gives a trend: the joint-list turnout premium rose from about 9 to about 14 points.",
+  "Rosner, Shmuel & Slepkov, Noah (2026, 12 Feb). 'JPPI Israeli Society Index for February 2026.' Jewish People Policy Institute (Arab sample n=207 by Afkar). https://jppi.org.il/en/28964-2/ . Arab respondents' top voting issue is crime and violence (48%), then cost of living (30%); 71% say the state severely neglects crime in Arab society. Supports crime and personal-security messaging in Arab localities.",
+  "Kalla, Joshua L. & Broockman, David E. (2018). 'The Minimal Persuasive Effects of Campaign Contact in General Elections: Evidence from 49 Field Experiments.' American Political Science Review 112(1): 148-166. doi:10.1017/S0003055417000363. https://www.cambridge.org/core/journals/american-political-science-review/article/minimal-persuasive-effects-of-campaign-contact-in-general-elections-evidence-from-49-field-experiments/753665A313C4AB433DBF7110299B7433 . A meta-analysis finding near-zero average persuasion effects of campaign contact in general elections. Gives the academic grounding for the desk's inference (D5-F07/F08) that late cross-bloc persuasion is worth little compared with turnout."
+ ]
+}

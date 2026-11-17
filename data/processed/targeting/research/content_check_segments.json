@@ -1,0 +1,135 @@
+{
+ "verdict": "The draft needs revision before it can be published. The core model numbers are accurate. I checked every segment total, share, potential split, efficiency figure and named-locality number against MODEL_BRIEF.md and the model outputs (/Users/idoherling/Polling:Consulting Firm/2026_Election_Model/data/processed/targeting/localities.csv and kalpi.csv), and they match, including Tel Aviv at 805 net votes (18% of about 4,404) and Druze as the most efficient segment. All 201 cite ids resolve, with no duplicates inside any segment. I found no em-dash asides, colon reveals, not-X-but-Y constructions or stock phrases.\n\nProblems to fix:\n- **Four contradictions with the model:** positive Christian-village stations that do not exist, positive Beit Shemesh and Safed stations that do not exist, Lod's GOTV turf left out, and kibbutzim labelled a turnout engine.\n- **One wrong figure:** tribal-station turnout in April 2019 was about 26%, not about 20%.\n- **One wrong ranking:** Kiryat Arba is described as near the bottom, but it sits at the segment median.\n- **Six claims the desk files do not support:** the Jewish parts of Lod, Ramla and Akko as the most right-leaning electorates; \"no 2026 Druze poll exists\"; UTJ mobilising 95% of its electorate; Negev turnout driving Ra'am's pass chance; Jerusalem city-centre youth figures; and \"Likud will repeat 2015\".\n- **Missing counsel caveats:** bulk SMS, observers after the 17 September High Court ruling, party support for Arab-sector turnout work, the wording on gifts, and kibbutz transport.\n- **Three cited findings could not be verified:** D5-F24, D6-F06 and D6-F11. Their claims need hedging.\n\nNo sources draft was included in this batch, so I could not check the bibliography for duplicates, broken URLs or citation mismatches.",
+ "issues": [
+  {
+   "where": "arab_christian.approach",
+   "problem": "Contradicts the model. The draft says the model marks positive polling stations in Rameh, Fassuta, Eilabun, Mi'ilya and Jish. In fact GOTV potential is 0.0 in Fassuta, Eilabun, Mi'ilya, Jish and Kafr Yasif. Rameh has exactly one positive station out of 11 (kalpi 5, about 75% projected change). The quoted 18-26% are locality-wide change shares, not station shares.",
+   "fix": "Replace the second sentence with: \"The model finds positive turnout turf in one polling station only, in Rameh, where change lists project about 75%. The Democrats can canvass identified supporters there, using Arabic-speaking local volunteers.\" Keep the rest of the paragraph. Drop Fassuta, Eilabun, Mi'ilya and Jish from the approach, and keep them in places only as context."
+  },
+  {
+   "where": "haredi.approach",
+   "problem": "Contradicts the model. The draft recommends 'non-Haredi polling stations the model marks positive in mixed cities such as Beit Shemesh and Safed'. The model has 0 of 133 Beit Shemesh stations and 0 of 43 Safed stations with positive GOTV value, and segment GOTV potential is 0. Separately, '16 net votes at saturation' reads as persuasion only. It is the total: about 8 from persuasion and 8 from wasted-vote rescue.",
+   "fix": "Use: \"Run no GOTV. The model finds no positive turnout turf anywhere in the segment. It scales persuasion to 15% of normal, and persuasion plus wasted-vote rescue add up to 16 net votes at saturation. Limit work to quiet phone persuasion of traditional voters leaving Shas, mainly in Beit Shemesh, Netivot and Safed.\""
+  },
+  {
+   "where": "mixed_city.approach",
+   "problem": "Leaves out the segment's largest GOTV turf. The draft limits Lod and Ramla to persuasion only. The model marks 14 change-majority Jewish stations in Lod as GOTV-positive (stations 71.x, 82.x, 84.x, 85 and 88, at 54-70% projected change). They are worth 6.8 net votes, more than Nof HaGalil (1.7) and Ma'alot-Tarshiha (2.4) combined. Ramla has one marginal positive station and Akko has none.",
+   "fix": "Use: \"Work strictly at polling-station level. Run selective GOTV in the change-majority Jewish stations the model marks positive in Lod (14 stations), Ma'alot-Tarshiha and Nof HaGalil, with Yisrael Beytenu leading in Russian-speaking stations. Run persuasion in right-leaning Jewish stations of Lod and Ramla. Leave Arab stations to Arab lists and civil society.\""
+  },
+  {
+   "where": "arab_bedouin_south.moves",
+   "problem": "Wrong number. The draft says tribal-station turnout rose 'from about 20% to 42%' between the 2019 elections. verify_israeli-turnout (D2-F10) corrects April 2019 to 25.8%, from Abraham Initiatives Appendix B. The roughly 20% figure, attributed to Adalah, is unverified.",
+   "fix": "Change to \"tribal-station turnout rose from about 26% to 42% between the two 2019 elections\"."
+  },
+  {
+   "where": "arab_bedouin_south.moves",
+   "problem": "Two unsupported claims. (1) 'so Negev turnout drives much of its 78% chance of clearing the threshold' is causal language. The forecast does not break Ra'am's pass probability down by region. (2) 'real influence over the next government top[s] Arab voters' concerns' is not in the surveys, which put crime and personal safety on top. Influence is a motivator (D2-F19, D2-F20). The 30% 'lack of political impact' figure is unverified.",
+   "fix": "Use: \"Ra'am won about 74% of the Negev Arab vote in 2022, so Negev turnout bears directly on its threshold risk. The forecast gives Ra'am a 78% chance of passing. Crime and personal safety top Arab voters' concerns, and 77% back an Arab party joining the coalition.\""
+  },
+  {
+   "where": "mixed_city.moves",
+   "problem": "Unsupported claim. verify_israel-geography says the D6-F14 source does not support 'The Jewish parts of Lod, Ramla and Akko are among the most right-leaning large-city electorates'. Ma'alot-Tarshiha does not appear in that source either. The Balad and Hadash-Ta'al splits are 2022 facts, and those parties now run together in the Joint List.",
+   "fix": "Use model numbers instead: \"The model projects the Netanyahu bloc at 53-56% in Lod and Ramla, about two-thirds of the non-Arab vote. The Russian-speaking Jewish neighbourhoods of Nof HaGalil and Ma'alot-Tarshiha are Yisrael Beytenu ground. In 2022, Balad was strongest among Arab voters in Lod and Hadash-Ta'al in Akko and Nof HaGalil. Crime dominates Arab voters' concerns.\" Cite D6-F10 and D1-F21 for the Yisrael Beytenu claim."
+  },
+  {
+   "where": "haredi.moves",
+   "problem": "Repeats a reading the verifier flagged. 'UTJ already mobilises about 95% of its potential electorate' is wrong. Per verify (D2-F12), the 95% is UTJ's vote growth relative to Haredi demographic growth, not a turnout rate. Malach also reports regular-station Haredi turnout falling from 76% to 72.5% (2013-2022), or about 79% with envelopes. Separately, D5-F24 (the UTJ chairman's recording) is marked unverifiable.",
+   "fix": "Use: \"Haredi turnout is high and stable, and UTJ's vote has grown at about 95% of the pace of its electorate since 1992. 97% of Haredi voters backed the coalition parties in 2022. UTJ's chairman was reportedly recorded saying he fears lower turnout. A new Haredi Public list splits the vote, and Shas is losing traditional voters to Otzma, Likud and Yashar.\""
+  },
+  {
+   "where": "druze.moves",
+   "problem": "Stated as fact without support. 'no 2026 Druze poll exists' cannot be backed by the files. context-2026 says Druze polls were among the subtopics the desk never searched because the search budget ran out.",
+   "fix": "Change to \"and the research desk found no 2026 Druze poll\". The russian_speaking segment already uses this wording."
+  },
+  {
+   "where": "kibbutz.role",
+   "problem": "Conflicts with the model's tier labels. No kibbutz is tiered Turnout engine: 235 are Secondary target, 16 Low yield and 4 Opposition stronghold. Readers will see 'Secondary target' on every kibbutz in the table. Also, 'Be'eri, Nir Oz and Kfar Aza remain largely displaced' rests on Tekuma data from September 2025 (D6-F37), not current data.",
+   "fix": "Role: \"A turnout segment of many small, reliably change-voting communities that still turn out below their potential. The model rates most of them Secondary targets.\" In moves, write \"Be'eri, Nir Oz and Kfar Aza were still largely displaced in September 2025\"."
+  },
+  {
+   "where": "settlement_rz.who",
+   "problem": "Wrong ranking. Kiryat Arba (15%) ranks 43rd of 82 by projected change share, about the segment median of 15%. Beit El (11%) is 14th lowest. The bottom of the segment is places like Yitzhar (7%), Maskiyyot and Nahali'el (9%). Both towns are, however, the lowest of the eight largest settlements.",
+   "fix": "Change to \"Kiryat Arba (15%) and Beit El (11%) are the least open of the larger settlements.\""
+  },
+  {
+   "where": "periphery_likud.role",
+   "problem": "Wrong causal reason. Untargeted GOTV backfires because these towns' projected vote is Netanyahu-bloc 59% against 38% change. Likud's own targeting of them is not the cause. As written, the role sentence misstates the model's logic.",
+   "fix": "Use: \"The largest persuasion battleground, where untargeted GOTV nets Netanyahu-bloc votes and feeds Likud's own turnout drive.\""
+  },
+  {
+   "where": "jerusalem.moves / jerusalem.messenger",
+   "problem": "(1) 'Young secular voters in the city centre are moved by the draft (26%) and the October 7 inquiry (22%)' applies a national poll of 18-22-year-olds (D5-F05) to Jerusalem's city centre. (2) The draft places Matan Kahana's religious-Zionist headquarters in Jerusalem. D5-F12 says it covers Gush Etzion, Efrat, Givat Shmuel and Ariel. (3) 'Traditional and moderate religious voters respond to equal burden, October 7 accountability and security competence' is an inference that the cited findings do not cover.",
+   "fix": "(1) \"Nationally, the draft (26%) and the October 7 inquiry (22%) are decisive for young secular voters.\" (2) Messenger: \"Right-credentialed figures such as Eisenkot and Bennett, Yashar religious-Zionist figures such as Matan Kahana, and reservists.\" (3) Add D5-F11 and D6-F39 to cites, or soften to \"are most likely to respond to\"."
+  },
+  {
+   "where": "mixed_urban.moves / mixed_urban.approach",
+   "problem": "(1) 'These cities track the national result most closely' overgeneralises. D6-F12 names seven bellwethers: Rehovot, Petah Tikva, Haifa, Hadera, Netanya, Holon and Rosh HaAyin. Only four are in this 13-city segment, and Hadera, Netanya and Holon are in periphery_likud. (2) The economy (40.5%) and the draft (34%) are top-two factor shares (D5-F21), not both ranked first. (3) 'where the bloc targets above 76%' presents an N12 columnist's estimate (D5-F09) as a confirmed bloc target.",
+   "fix": "(1) \"Rehovot, Petah Tikva, Haifa and Rosh HaAyin are among the cities that track the national result most closely, and pluralities flip here...\" (2) \"Centrist voters name the economy (40.5%) and the draft (34%) among their top two factors.\" (3) \"...Haifa's centre-left Jewish neighbourhoods, where an N12 analysis puts the bloc's target above 76% supporter turnout.\""
+  },
+  {
+   "where": "liberal_urban.who / liberal_urban.moves",
+   "problem": "(1) '45 secular, high-SES cities' is inaccurate. The 45 include small councils and communities such as Metula, Kfar Shmaryahu, Shimshit, Lappid and Savyon. (2) 'the bloc's working target is above 76%' needs attribution, as in the mixed_urban issue.",
+   "fix": "(1) \"45 secular, high-SES localities hold 1.36 million eligible voters...\" (2) \"...and an N12 analysis puts the bloc's target above 76% turnout among its supporters in the Sharon, Tel Aviv and Haifa.\""
+  },
+  {
+   "where": "arab_north_triangle.avoid / .moves / .approach",
+   "problem": "(1) 'Likud plans to use the CEC's station turnout releases to repeat its 2015 message' overstates D5-F27, which says the plan echoes 2015. (2) 'from 44.6% in 2021 to 64.8% in 2020' runs backwards in time. (3) 'Women and young voters hold most of the upside' is stronger than the source, which calls them the largest potential source, attributed to Abraham Initiatives. (4) 'Change-bloc lists should run no GOTV' ignores the model's one exception: Shefa-'Amr, a Secondary target at 17% change with about 2 net GOTV votes.",
+   "fix": "(1) \"Likud plans to use the CEC's station turnout releases to rally its base, an echo of its 2015 message about Arab turnout.\" (2) \"swinging between 64.8% in 2020 and 44.6% in 2021\". (3) \"Women and young voters are the largest source of upside.\" (4) Add: \"The one model exception is a handful of positive stations in Shefa-'Amr, worth about 2 net votes.\""
+  },
+  {
+   "where": "arab_christian.avoid / arab_christian.messenger",
+   "problem": "(1) 'Likud will use any visible Arab turnout surge' turns a reported plan (D5-F27) into a certainty. (2) 'the Democrats' Arab candidates' is plural, but the files name one: Somaya Bashir, 10th on the list (D5-F32).",
+   "fix": "(1) \"...but Likud plans to use visible Arab turnout to rally its base.\" (2) Messenger: \"Local Christian community figures and the Democrats' Arab candidate Somaya Bashir, speaking Arabic.\""
+  },
+  {
+   "where": "arab_bedouin_south.approach/avoid and arab_north_triangle.approach (legal)",
+   "problem": "(1) Change-bloc support for Ra'am's or civil-society turnout work raises party-financing questions, and possibly 'body active in elections' registration (D6-F23). The draft says only 'lawful under party-finance rules' and 'where lawful', with no counsel check. (2) 'Fund no rides, gifts or services of monetary value without written clearance' implies gifts could be cleared. (3) D5-F29's committee compromise is marked unverified, so it should not carry the transport caution. (4) The Bedouin segment omits the objective caveat the Triangle segment gives: Ra'am votes are -0.03 for a change-led government and +0.82 for blocking.",
+   "fix": "(1) Add to both: \"Any funding or in-kind support for another list's or a civil-society group's turnout work needs written approval from election counsel.\" (2) Avoid: \"Offer voters no gifts or services of monetary value. Confirm any ride programme with election counsel in writing.\" (3) Rest the transport caution on D6-F23 and drop D5-F29 from cites, or mark it as unverified. (4) Add to the Bedouin approach: \"Under the formation model, Ra'am votes are worth about -0.03 points for a change-led government and +0.82 for blocking per 10,000, so leadership must set the weight on blocking first.\""
+  },
+  {
+   "where": "liberal_urban.approach (legal)",
+   "problem": "The draft recommends SMS reminders with no legal caveat. The sibling playbook draft lists bulk texting as a legal grey zone that needs counsel, and D3-F05 notes limits on using vote histories. Election-day reminders at scale should match that caution.",
+   "fix": "\"Send one or two SMS reminders 1-3 days before 27 October to identified supporters, in a format confirmed with election counsel. Do not reference individuals' vote history.\" Add D6-F24 to cites."
+  },
+  {
+   "where": "mixed_city.approach and kibbutz.approach (legal)",
+   "problem": "(1) 'Staff polling committees and observers fully' does not mention the 17 September High Court ruling (D5-F25) that party representatives may not tell parties which identifiable voters have voted. (2) The kibbutz advice to help displaced members travel needs a counsel check if it becomes organised rides (D6-F23).",
+   "fix": "(1) \"Staff polling committees and observers fully within CEC rules. Since the High Court's 17 September ruling, they may not report which identifiable voters have voted.\" Add D5-F25 to cites. (2) Kibbutz: \"...help displaced members plan travel to their registered polling station, and confirm any organised transport with election counsel.\" Add D6-F23."
+  },
+  {
+   "where": "druze.approach / .message / .avoid",
+   "problem": "(1) 'In Yarka (31% projected Netanyahu bloc) and Maghar, where Arab lists take most of the vote' reads as if Arab lists dominate both. Yarka projects 54% change, 31% Netanyahu bloc and 11% Arab lists. Maghar projects 53% Arab lists. (2) 'equality under the Nation-State Law' is vague. The verified commitment is an equality clause (D6-F17). (3) 'post-Sweida movement and candidate effects can swing these villages by double digits' blends an evidenced candidate effect with a low-confidence projection (D6-F20).",
+   "fix": "(1) \"In Yarka, where the Netanyahu bloc projects 31%, and Maghar, where Arab lists project 53%, work only the polling stations the model marks positive.\" (2) \"...and an equality clause in the Nation-State Law\". (3) \"...since candidate effects have swung these villages by double digits, and a post-Sweida shift toward Netanyahu is an untested risk.\""
+  },
+  {
+   "where": "mixed_city.who / mixed_city.avoid",
+   "problem": "(1) 'Six mixed Jewish-Arab cities' counts Neve Shalom, a village with 253 eligible voters. (2) 'mixed cities are where station turnout releases are most likely to feed a threat narrative' has no support. D5-F27 refers to opposition strongholds and Arab communities in general.",
+   "fix": "(1) \"Five mixed Jewish-Arab cities and Neve Shalom hold 219,177 eligible voters...\" (2) \"Avoid material that sets Jewish and Arab residents against each other, since visible group-threat narratives mobilise the other side.\""
+  },
+  {
+   "where": "settlement_secular.moves/avoid and periphery_likud cites (unverifiable D6-F06)",
+   "problem": "'Ariel was on Likud's 2022 final-day turnout list' rests on D6-F06. verify_israel-geography marks it unverifiable (Israel Hayom returned 403). 'where ... Likud mobilises' in Ma'ale Adumim has no source.",
+   "fix": "Change to \"Ariel was reportedly among Likud's 2022 final-day turnout targets\", or drop the clause. In avoid, write \"Avoid citywide GOTV in Ariel and Ma'ale Adumim, where the Netanyahu bloc projects 55-70%.\""
+  },
+  {
+   "where": "russian_speaking.approach/avoid, periphery_likud.avoid, mixed_urban.message, kibbutz.avoid, liberal_urban.approach (D6-F11)",
+   "problem": "Several claims are stronger than their sources. (1) 'Contact must be in Russian' ignores D1-F21: the Israeli-born generation votes like other Israelis. (2) 'which partly reflects emigrants and elderly residents' is the desk's own inference (verify D2-F27). (3) 'much of it reflects non-resident registration' overstates D5-F31's 'likely reflects'. (4) 'Concrete information ... persuades better' is a US-based inference (P-F11). (5) 'moving votes between change lists adds no seats' ignores the threshold exception (P summary). (6) D6-F11 is cited for the Tel Aviv south/north split, but its content is unverified.",
+   "fix": "(1) \"Contact older and 1990s-immigrant voters in Russian, through Russian-speaking volunteers.\" (2) \"which may partly reflect emigrants and elderly residents\". (3) \"since it likely reflects non-resident registration\". (4) \"is likely to persuade better\". (5) \"adds almost nothing unless a list is near the threshold\". (6) Keep the polling-station recommendation and back the neighbourhood claim with D5-F31's Medlan neighbourhood data."
+  },
+  {
+   "where": "religious_zionist.approach",
+   "problem": "'finds 31 net votes at saturation' is the total, not persuasion: 17.4 persuasion, 10.3 rescue and 3.1 GOTV. 'Run no GOTV' is defensible, but the model does find small positive turf in 5 of 33 Givat Shmuel stations.",
+   "fix": "\"The model scales persuasion to 60% of normal here, and the whole segment holds 31 net votes at saturation. Its GOTV turf is about 3 votes in a few Givat Shmuel stations, so skip turnout work and keep the investment small.\""
+  },
+  {
+   "where": "All segments that use the 23 October poll cut-off",
+   "problem": "The cut-off date is cited only to P-F25, a Swedish survey experiment. The Israeli rule appears only in the desk's relevance note. The wording also varies between 'before poll publication stops on 23 October' and 'on Friday 23 October', which leaves unclear whether 23 October is the last day polls may be published or the first day of the ban.",
+   "fix": "Use one form everywhere: \"by Friday 23 October, when poll publication ends\". Add the exact cut-off to the election-counsel checklist. Add P-F30 alongside P-F25 for the general ban."
+  },
+  {
+   "where": "Style (all segments)",
+   "problem": "The banned patterns are absent, but the brief asks for short sentences. There are 17 semicolon joins, most of them in 'who' fields. Several fields open with a numeral, for example '38 Negev Bedouin localities hold...'.",
+   "fix": "Split the semicolon joins into two sentences, e.g. \"Jerusalem has 432,125 eligible voters. Turnout was 62% in 2022.\" Recast numeral openers, e.g. \"The segment's 38 Negev Bedouin localities hold 144,860 eligible voters.\""
+  }
+ ]
+}

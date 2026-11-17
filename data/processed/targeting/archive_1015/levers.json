@@ -1,0 +1,420 @@
+{
+ "base": {
+  "change61": 0.083125,
+  "change_raam61": 0.272625,
+  "block_nb": 0.854625,
+  "change_seats": 52.00525,
+  "change_govt": 0.23507708333333335
+ },
+ "valid_votes": 4823026,
+ "pairs": [
+  [
+   "Likud",
+   "Religious Zionist Party"
+  ],
+  [
+   "Bennett 2026 + Yesh Atid",
+   "Yisrael Beytenu"
+  ],
+  [
+   "Yashar",
+   "The Democrats"
+  ],
+  [
+   "Shas",
+   "United Torah Judaism"
+  ],
+  [
+   "Otzma Yehudit",
+   "Amcha Yisrael"
+  ],
+  [
+   "Balad + Hadash-Ta'al",
+   "Ra'am"
+  ]
+ ],
+ "mean_shares": {
+  "Blue and White": 0.006459321175825088,
+  "The Democrats": 0.07236398570133515,
+  "Likud": 0.18991563708486098,
+  "Otzma Yehudit": 0.047765456860596474,
+  "Ra'am": 0.04244117470436952,
+  "Religious Zionist Party": 0.03528125281538867,
+  "Shas": 0.06804087324947947,
+  "United Torah Judaism": 0.06666728215795356,
+  "Yashar": 0.16923088677247664,
+  "Yisrael Beytenu": 0.06751812619807378,
+  "Reservists – Economic Party": 0.016744508905016338,
+  "Bennett 2026 + Yesh Atid": 0.08726019698032526,
+  "Balad + Hadash-Ta'al": 0.06774210355116,
+  "Amcha Yisrael": 0.02018870732268596,
+  "Unity": 0.0,
+  "Israel First": 0.006439240120152451,
+  "Noam": 0.005437348129679327,
+  "The Haredi Public": 0.008191356356832422,
+  "Ahi – Back to the Roots": 0.006894419985775562,
+  "Code Black – Shield of the Torah World": 0.007471605209970619,
+  "Tzomet Beit Yisrael": 0.007946516718042751,
+  "Balad (alone)": 0.0
+ },
+ "scenarios": [
+  {
+   "key": "bw_withdraws",
+   "group": "agreements",
+   "title": "Blue and White withdraws and endorses",
+   "what": "All Blue and White votes move: 60% to Yashar, 25% to Together, 15% abstain (its 2022 transfer pattern, dossier s.38).",
+   "votes": 31153,
+   "result": {
+    "change61": 0.095125,
+    "change_raam61": 0.294625,
+    "block_nb": 0.8655,
+    "change_seats": 52.43125,
+    "change_govt": 0.25217916666666673
+   },
+   "delta": {
+    "change61": 0.011999999999999997,
+    "change_raam61": 0.02200000000000002,
+    "block_nb": 0.010875000000000079,
+    "change_seats": 0.42600000000000193,
+    "change_govt": 0.01710208333333338
+   }
+  },
+  {
+   "key": "res_withdraws",
+   "group": "agreements",
+   "title": "Reservists-Economic withdraws (60% to change lists)",
+   "what": "All Reservists votes move: 60% to change lists in proportion to their size, 40% to Likud (the atlas's rescue assumption).",
+   "votes": 80759,
+   "result": {
+    "change61": 0.105375,
+    "change_raam61": 0.316,
+    "block_nb": 0.845375,
+    "change_seats": 52.950125,
+    "change_govt": 0.24944791666666669
+   },
+   "delta": {
+    "change61": 0.022249999999999992,
+    "change_raam61": 0.043375,
+    "block_nb": -0.00924999999999998,
+    "change_seats": 0.9448750000000032,
+    "change_govt": 0.014370833333333333
+   }
+  },
+  {
+   "key": "res_withdraws_right",
+   "group": "agreements",
+   "title": "Reservists-Economic withdraws (mostly to the right)",
+   "what": "All Reservists votes move: 35% to change lists, 65% to Likud and Otzma. A pessimistic split for a right-of-centre list.",
+   "votes": 80759,
+   "result": {
+    "change61": 0.087875,
+    "change_raam61": 0.283875,
+    "block_nb": 0.824125,
+    "change_seats": 52.336375,
+    "change_govt": 0.2231333333333333
+   },
+   "delta": {
+    "change61": 0.00474999999999999,
+    "change_raam61": 0.011249999999999982,
+    "block_nb": -0.03049999999999997,
+    "change_seats": 0.3311250000000001,
+    "change_govt": -0.011943750000000058
+   }
+  },
+  {
+   "key": "amcha_withdraws",
+   "group": "agreements",
+   "title": "Amcha withdraws (the opponent consolidates)",
+   "what": "All Amcha votes move: 80% to Likud and Otzma, 20% to change lists. Shows what consolidation on the other side would cost.",
+   "votes": 97371,
+   "result": {
+    "change61": 0.0785,
+    "change_raam61": 0.264125,
+    "block_nb": 0.862125,
+    "change_seats": 52.04825,
+    "change_govt": 0.2267833333333333
+   },
+   "delta": {
+    "change61": -0.004625000000000004,
+    "change_raam61": -0.008500000000000008,
+    "block_nb": 0.007500000000000062,
+    "change_seats": 0.043000000000006366,
+    "change_govt": -0.008293750000000044
+   }
+  },
+  {
+   "key": "pers_likud_0.5",
+   "group": "persuasion",
+   "title": "0.5 point of the vote moves from Likud to change lists",
+   "what": "0.5% of the national vote leaves Likud for the four change lists, in proportion to their size.",
+   "votes": 24115,
+   "result": {
+    "change61": 0.10275,
+    "change_raam61": 0.310125,
+    "block_nb": 0.874125,
+    "change_seats": 52.6795,
+    "change_govt": 0.2662354166666666
+   },
+   "delta": {
+    "change61": 0.01962499999999999,
+    "change_raam61": 0.03749999999999998,
+    "block_nb": 0.019500000000000073,
+    "change_seats": 0.6742500000000007,
+    "change_govt": 0.03115833333333326
+   }
+  },
+  {
+   "key": "pers_likud_1.0",
+   "group": "persuasion",
+   "title": "1 point of the vote moves from Likud to change lists",
+   "what": "1% of the national vote leaves Likud for the four change lists, in proportion to their size.",
+   "votes": 48230,
+   "result": {
+    "change61": 0.123125,
+    "change_raam61": 0.350875,
+    "block_nb": 0.892625,
+    "change_seats": 53.356625,
+    "change_govt": 0.29892083333333325
+   },
+   "delta": {
+    "change61": 0.039999999999999994,
+    "change_raam61": 0.07824999999999999,
+    "block_nb": 0.038000000000000034,
+    "change_seats": 1.3513750000000044,
+    "change_govt": 0.0638437499999999
+   }
+  },
+  {
+   "key": "pers_likud_2.0",
+   "group": "persuasion",
+   "title": "2 point of the vote moves from Likud to change lists",
+   "what": "2% of the national vote leaves Likud for the four change lists, in proportion to their size.",
+   "votes": 96461,
+   "result": {
+    "change61": 0.172875,
+    "change_raam61": 0.432875,
+    "block_nb": 0.9245,
+    "change_seats": 54.719125,
+    "change_govt": 0.368775
+   },
+   "delta": {
+    "change61": 0.08975,
+    "change_raam61": 0.16025,
+    "block_nb": 0.06987500000000002,
+    "change_seats": 2.7138750000000016,
+    "change_govt": 0.13369791666666667
+   }
+  },
+  {
+   "key": "pers_haredi_0.5",
+   "group": "persuasion",
+   "title": "0.5 point moves from Shas/UTJ to change lists",
+   "what": "0.5% of the vote leaves Shas and UTJ for the change lists (traditional voters on the draft).",
+   "votes": 24115,
+   "result": {
+    "change61": 0.10325,
+    "change_raam61": 0.311125,
+    "block_nb": 0.875125,
+    "change_seats": 52.687,
+    "change_govt": 0.2649166666666667
+   },
+   "delta": {
+    "change61": 0.02012499999999999,
+    "change_raam61": 0.03849999999999998,
+    "block_nb": 0.020500000000000074,
+    "change_seats": 0.681750000000001,
+    "change_govt": 0.029839583333333336
+   }
+  },
+  {
+   "key": "ch_turnout_25000",
+   "group": "turnout",
+   "title": "25,000 extra change-list votes (turnout)",
+   "what": "25,000 new votes for the four change lists, in proportion to their size.",
+   "votes": 25000,
+   "result": {
+    "change61": 0.09325,
+    "change_raam61": 0.292625,
+    "block_nb": 0.86475,
+    "change_seats": 52.430875,
+    "change_govt": 0.25169166666666665
+   },
+   "delta": {
+    "change61": 0.010124999999999995,
+    "change_raam61": 0.020000000000000018,
+    "block_nb": 0.01012500000000005,
+    "change_seats": 0.4256250000000037,
+    "change_govt": 0.016614583333333294
+   }
+  },
+  {
+   "key": "ch_turnout_50000",
+   "group": "turnout",
+   "title": "50,000 extra change-list votes (turnout)",
+   "what": "50,000 new votes for the four change lists, in proportion to their size.",
+   "votes": 50000,
+   "result": {
+    "change61": 0.106375,
+    "change_raam61": 0.315625,
+    "block_nb": 0.874125,
+    "change_seats": 52.865,
+    "change_govt": 0.2711645833333333
+   },
+   "delta": {
+    "change61": 0.023249999999999993,
+    "change_raam61": 0.04299999999999998,
+    "block_nb": 0.019500000000000073,
+    "change_seats": 0.8597500000000053,
+    "change_govt": 0.03608749999999997
+   }
+  },
+  {
+   "key": "haredi_turnout_-10",
+   "group": "turnout",
+   "title": "Haredi turnout falls 10%",
+   "what": "Shas and UTJ lose 10% of their votes to abstention (UTJ's own reported fear after the draft-law failure).",
+   "votes": 64970,
+   "result": {
+    "change61": 0.105875,
+    "change_raam61": 0.320375,
+    "block_nb": 0.883,
+    "change_seats": 52.7075,
+    "change_govt": 0.268925
+   },
+   "delta": {
+    "change61": 0.022749999999999992,
+    "change_raam61": 0.047750000000000015,
+    "block_nb": 0.02837500000000004,
+    "change_seats": 0.7022500000000065,
+    "change_govt": 0.03384791666666667
+   }
+  },
+  {
+   "key": "nb_turnout_25000",
+   "group": "turnout",
+   "title": "25,000 extra Netanyahu-bloc votes (counter-mobilisation)",
+   "what": "25,000 new votes for the Netanyahu-bloc lists, in proportion to their size: the cost of triggering the other side's turnout.",
+   "votes": 25000,
+   "result": {
+    "change61": 0.075375,
+    "change_raam61": 0.25625,
+    "block_nb": 0.843375,
+    "change_seats": 51.726125,
+    "change_govt": 0.22132083333333336
+   },
+   "delta": {
+    "change61": -0.007750000000000007,
+    "change_raam61": -0.01637500000000003,
+    "block_nb": -0.011249999999999982,
+    "change_seats": -0.2791249999999934,
+    "change_govt": -0.013756249999999998
+   }
+  },
+  {
+   "key": "arab_turnout_+5",
+   "group": "turnout",
+   "title": "Arab turnout +5 points (~46,000 votes)",
+   "what": "Votes added to (or removed from) the Joint List and Ra'am in proportion to their size.",
+   "votes": 46000,
+   "result": {
+    "change61": 0.067,
+    "change_raam61": 0.271125,
+    "block_nb": 0.879625,
+    "change_seats": 51.38,
+    "change_govt": 0.21966875
+   },
+   "delta": {
+    "change61": -0.016125,
+    "change_raam61": -0.0015000000000000013,
+    "block_nb": 0.025000000000000022,
+    "change_seats": -0.6252499999999941,
+    "change_govt": -0.015408333333333357
+   }
+  },
+  {
+   "key": "arab_turnout_-5",
+   "group": "turnout",
+   "title": "Arab turnout -5 points (~46,000 votes)",
+   "what": "Votes added to (or removed from) the Joint List and Ra'am in proportion to their size.",
+   "votes": 46000,
+   "result": {
+    "change61": 0.10375,
+    "change_raam61": 0.273375,
+    "block_nb": 0.83025,
+    "change_seats": 52.63275,
+    "change_govt": 0.2541833333333333
+   },
+   "delta": {
+    "change61": 0.02062499999999999,
+    "change_raam61": 0.0007499999999999729,
+    "block_nb": -0.024374999999999925,
+    "change_seats": 0.6275000000000048,
+    "change_govt": 0.019106249999999964
+   }
+  },
+  {
+   "key": "yashar_to_dem_0.5",
+   "group": "allies",
+   "title": "0.5 point moves from Yashar to the Democrats",
+   "what": "Within-bloc move: 0.5% of the vote shifts from Yashar to the Democrats.",
+   "votes": 24115,
+   "result": {
+    "change61": 0.083125,
+    "change_raam61": 0.27275,
+    "block_nb": 0.855125,
+    "change_seats": 52.01675,
+    "change_govt": 0.23525625
+   },
+   "delta": {
+    "change61": 0.0,
+    "change_raam61": 0.00012499999999998623,
+    "block_nb": 0.000500000000000056,
+    "change_seats": 0.011500000000005173,
+    "change_govt": 0.00017916666666664693
+   }
+  },
+  {
+   "key": "jl_to_raam_0.5",
+   "group": "allies",
+   "title": "0.5 point moves from the Joint List to Ra'am",
+   "what": "Within the Arab lists: 0.5% of the vote shifts from the Joint List to Ra'am (threshold insurance for Ra'am).",
+   "votes": 24115,
+   "result": {
+    "change61": 0.082,
+    "change_raam61": 0.32125,
+    "block_nb": 0.8585,
+    "change_seats": 51.898125,
+    "change_govt": 0.24905833333333335
+   },
+   "delta": {
+    "change61": -0.001125000000000001,
+    "change_raam61": 0.048624999999999974,
+    "block_nb": 0.003875000000000073,
+    "change_seats": -0.10712499999999636,
+    "change_govt": 0.01398125
+   }
+  },
+  {
+   "key": "bw_plus_pers_0.5",
+   "group": "combined",
+   "title": "Blue and White withdraws, and 0.5 point moves from Likud",
+   "what": "The two largest realistic levers together.",
+   "votes": 55269,
+   "result": {
+    "change61": 0.116375,
+    "change_raam61": 0.332625,
+    "block_nb": 0.88425,
+    "change_seats": 53.1045,
+    "change_govt": 0.2846208333333333
+   },
+   "delta": {
+    "change61": 0.03325,
+    "change_raam61": 0.06,
+    "block_nb": 0.029625000000000012,
+    "change_seats": 1.099250000000005,
+    "change_govt": 0.04954374999999997
+   }
+  }
+ ],
+ "note": "Exact under the forecast's seat law and formation model (8,000 draws, 60 behaviour vectors, common random numbers). Effects are model arithmetic for a lever that happens, not forecasts that it will."
+}

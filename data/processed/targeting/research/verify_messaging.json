@@ -1,0 +1,224 @@
+{
+ "verdicts": [
+  {
+   "id": "D8-F01",
+   "status": "verified",
+   "note": "Method: all DOIs resolved on Crossref (title, authors, venue, volume, issue, pages and year match the desk). Abstracts came from Crossref or OpenAlex, and full texts were read where open (Europe PMC XML, author or repository PDFs). IDI, INSS, JPost, ToI and Ynet pages and data PDFs were fetched directly. Crossref: Iyengar, Peters & Kinder, APSR 76(4):848-858, 1982. The abstract confirms two experiments and that TV news 'profoundly affect[s]' which problems viewers rate important, and that problems prominent in the news get more weight in judging presidential performance. No effect size in the abstract, as the desk says. 'News That Matters' (Iyengar & Kinder 1987) is correctly placed."
+  },
+  {
+   "id": "D8-F02",
+   "status": "verified",
+   "note": "Crossref: Lenz, AJPS 53(4):821-837, 2009. The abstract confirms four reanalysed cases with panel data, 'little evidence of priming effects', and the two-step learning-then-adoption mechanism. The relevance text is a reasonable inference."
+  },
+  {
+   "id": "D8-F03",
+   "status": "verified",
+   "note": "Crossref: Petrocik, AJPS 40(3):825-850, 1996. Ansolabehere & Iyengar, POQ 58(3):335-357, 1994. OpenAlex abstracts confirm both. Ansolabehere & Iyengar's 'two studies yield support for the issue-ownership hypothesis, but no evidence of interactive effects between advertising and news'. Petrocik's empirics cover presidential elections 1960-1992 with a 1980 case study. Caveat on relevance: assigning an owned issue to each change-bloc list is an assumption, because no 2026 Israeli ownership poll exists (the desk's own open question)."
+  },
+  {
+   "id": "D8-F04",
+   "status": "corrected",
+   "note": "Crossref: Bélanger & Meguid, Electoral Studies 27(3):477-491, 2008. The publisher withholds the abstract. The authors' 2005 CPSA version confirms individual-level tests on the 1997 and 2000 Canadian federal elections, and that ownership affects the vote only among voters who consider the issue important. The clause 'salience without ownership helps the owner' is not a finding of the paper and garbles it. The paper says nothing about issues no party owns. The relevance inference (security salience helps Likud unless Eisenkot is rated more competent) follows from the paper's logic and is fine.",
+   "corrected_claim": "Using individual-level data from the 1997 and 2000 Canadian federal elections, the authors show that seeing a party as best on an issue predicts the vote only among voters who consider that issue important. Ownership without salience is electorally inert, so raising an issue's salience helps whichever party voters see as best on it.",
+   "corrected_quant": "Conditional (interaction) effect of ownership by salience; individual-level vote-choice models, Canada 1997 and 2000. No single pooled coefficient.",
+   "corrected_url": "https://doi.org/10.1016/j.electstud.2008.01.001"
+  },
+  {
+   "id": "D8-F05",
+   "status": "verified",
+   "note": "Crossref: Walgrave, Lefevere & Nuytemans, Political Communication 26(2):153-172, 2009. The abstract confirms a large online experiment in Belgium with 'five thousand subjects', a fake TV news item with the five main party leaders on six issues, significant ownership shifts, the largest on unowned issues, and the effect on pre-owned issues depending on the item's balance. Caveat: that the draft, the October 7 commission and northern recovery are 'unowned' in Israel in 2026 is unmeasured."
+  },
+  {
+   "id": "D8-F06",
+   "status": "corrected",
+   "note": "Crossref: Seeberg, WEP 43(4):772-794, online 21 Jun 2019. Checked in the accepted manuscript (pure.au.dk). Correct: survey experiments in Denmark (agriculture) and the US (business, climate). Frame and blame both lower the target's ownership score by about 7 percentage points on a 0-1 scale, with blame 'similarly consistent ... and a little stronger'. 7 points is about a fourth of an SD (SD .29-.32). The Holian (2004) Clinton-on-crime example is cited. Two omissions matter. (1) Position accommodation was not merely null: on Danish agriculture it significantly raised the target party's ownership (a net backfire), and it was null on the two US issues. (2) In the polarised US case, the frame and blame effects were larger among the attacking party's own supporters than among the target party's supporters. In Denmark they reached target-party voters as much or more. Israel is closer to the polarised case, so the dent among Likud voters themselves may be smaller than 7 points.",
+   "corrected_claim": "Survey experiments in Denmark (agriculture) and the US (business, climate) tested three ways for a party to erode a rival's issue ownership. Reframing the issue in its own terms and blaming the rival for poor performance both cut the rival's ownership score. Moving toward the rival's position did not help: it had no effect on the two US issues and, on Danish agriculture, significantly raised the rival's ownership. In the polarised US case, the frame and blame effects were larger among the attacker's own supporters than among the target party's supporters.",
+   "corrected_quant": "Frame or blame vs the alternative: target ownership down about 7 percentage points on a 0-1 scale (about one fourth of an SD; SD = .29-.32). Blame 'similarly consistent across cases and a little stronger'. Accommodation: significant increase in the target's ownership on Danish agriculture; null on US business and climate.",
+   "corrected_url": "https://doi.org/10.1080/01402382.2019.1625242 | https://pure.au.dk/ws/files/188713733/Issue_ownership_attack_Accepted_manuscript_2020.pdf"
+  },
+  {
+   "id": "D8-F07",
+   "status": "verified",
+   "note": "Crossref: Teigen, Armed Forces & Society 39(3):415-433, 2013 (online 2012). The abstract confirms manipulated TV ads and handbills from an actual election with party varied, 'markedly higher' defence and security competence ratings regardless of party, and no change in leadership or affect. Note: US experiment."
+  },
+  {
+   "id": "D8-F08",
+   "status": "verified",
+   "note": "IDI press release 12873 (8 Jan 2013; December 2012 Peace Index, fieldwork 31 Dec 2012-2 Jan 2013, n = 601, Jews) confirms security: Netanyahu 53, Liberman 28, Bennett 25, Yachimovich 14. Socio-economic: Yachimovich 45, Netanyahu 36, Lapid 25. Ratings sum past 100, so each leader appears to be rated separately, which the desk should note. ToI (Marissa Newman, 25 Jan 2015, HaMidgam for Channel 10, 'several hundred' respondents) confirms cost of living and social 53%, security 24%. Best on security: Netanyahu 39, Herzog 22. Best on social: Kahlon 31, Herzog 21, Bennett 14, Lapid 11, Netanyahu 10. The same 2015 poll found 38% called a Syria strike security-driven and 37% political, a useful precedent for D8-F12."
+  },
+  {
+   "id": "D8-F09",
+   "status": "verified",
+   "note": "Ynetnews page (Debbie Mohnblatt for The Media Line; no date shown, but it calls the coming vote the fifth since April 2019, so 2022) confirms Lavi (Bar-Ilan): identity and democracy issues since April 2019, and National Unity's security image helps less. Rahat (HUJI/IDI): voters choose a person or ideology first and then credit it with security, with Ben Gvir and Smotrich as non-senior security symbols. Correctly labelled 'reported' expert opinion, not data. National Unity's 12 seats in 2022 is correct."
+  },
+  {
+   "id": "D8-F10",
+   "status": "verified",
+   "note": "Crossref: Sheafer, Shenhav & Goldstein, CPS 44(3):313-338, 2011 (online Oct 2010). The abstract confirms 2009 Knesset data, parties' stories coded from parliamentary speeches, and logistic regressions with demographic and ideology controls in which narrative proximity significantly affects the vote 'for most parties'. The relevance's framing advice is an inference."
+  },
+  {
+   "id": "D8-F11",
+   "status": "corrected",
+   "note": "Crossref: Feinstein & Ben-David, POQ 90(3):657-696, 2026. Checked in the full text (Europe PMC PMC13287526). Findings correct: war support and trust in the security forces tied to threat and anger, and trust in the PM and government tied to blame attribution rooted in views of judicial reform. n = 939 is not the study sample. It is the N of one figure (satisfaction with Netanyahu among three-wave panelists). Wave samples were March-April 2023 n = 1,552, October 2023 n = 1,012 and December 2023 n = 969. Three-wave panel analyses use N = 901-939 depending on the item. Feinstein 2018 (Soc Sci Res 69:65-82): repository abstract confirms ethno-national identification drove the 2014 rally behind Netanyahu. The 2026 paper adds that his approval roughly doubled to about two-thirds in 2014. Hirsch-Hoefler et al. (BJPolS 46(4):845-859): the abstract confirms n = 996 Israelis and n = 631 Palestinians, with distress and threat perceptions mediating exposure to violence and militancy.",
+   "corrected_claim": "A panel of Jewish Israelis surveyed before and after October 7 (March-April, October and December 2023) found strong support for the war and trust in the security forces, while trust in the government and the prime minister stayed low. Support for the war tracked threat perceptions and anger at the enemy. Trust in Netanyahu tracked whether respondents blamed the government or the protest movement, and that blame was rooted in their prior views of judicial reform. In the 2014 Gaza war, by contrast, ethno-national identification produced a rally behind Netanyahu (Feinstein 2018). A separate Israeli-Palestinian panel shows personal exposure to violence raises distress and threat perceptions, and through them militancy (Hirsch-Hoefler et al. 2016).",
+   "corrected_quant": "Feinstein & Ben-David: wave samples n = 1,552 (Mar-Apr 2023), 1,012 (18-22 Oct 2023) and 969 (4-14 Dec 2023), Panel4All; three-wave panel analyses N = 901-939 depending on the item. Hirsch-Hoefler et al.: Israelis n = 996, Palestinians n = 631.",
+   "corrected_url": "https://doi.org/10.1093/poq/nfag014 | https://doi.org/10.1016/j.ssresearch.2017.09.008 | https://doi.org/10.1017/S0007123414000374"
+  },
+  {
+   "id": "D8-F12",
+   "status": "verified",
+   "note": "IDI August 2026 data PDF (32364) read in full. Every number matches. Jews' first factor: security 18.3, economy and cost of living 17.9, party head 15.5, conscription 13.7, religion-state 13.4, judicial reform 6.4. Second factor: security 21.7, economy 21.2, conscription 14.2. Arabs: crime 31.5, economy 18.9. Syria strike (Jews): defence 49.4, election politics 29.6, don't know 21.0; Arabs 57.0 politics. Fieldwork 31 Aug-3 Sep 2026, 605 Hebrew + 150 Arabic, ±3.57%. Note: the security option is worded 'foreign affairs and security'."
+  },
+  {
+   "id": "D8-F13",
+   "status": "verified",
+   "note": "IDI article 62794 (24 Dec 2025) confirms 'no difference who you vote for': 40% agree and 56% disagree overall. Among Jews: Left 15, Centre 36, Right 43. Right puts cost of living first, then October 7. Centre: hostages (28%) and Haredi conscription. Left: hostages (27%) and judicial reform. Five issues at 16-18% each among Jews. 26% closely represented, 'the lowest recorded since 2003'. Caveat: the page gives no fieldwork dates, so the relevance's 'pre-war data' label is unsupported. Call it '2025 data' instead."
+  },
+  {
+   "id": "D8-F14",
+   "status": "verified",
+   "note": "IDI July 2026 data PDF (31733) and article 65483 (Hermann, Yohanani & Kaplan, 6 Aug 2026; title matches) checked. Jews: arrest freeze 17.3 + 8.0 = 25.3 support, 14.3 + 57.2 = 71.5 oppose (57.2 strongly). AG law 35.5 / 52.3. Gender segregation 31.0 / 64.8. Fieldwork 28 Jul-2 Aug 2026, 600 + 151, ±3.58%. The article confirms Left support 5-6% and Centre 14-18% for each law. On the Right, support is lower for the deserter-arrest and segregation laws, with a small majority for the AG law. Haredim show very high support for all three laws, especially the arrest freeze. Total-sample opposition to the freeze is 67% (matches the parameter)."
+  },
+  {
+   "id": "D8-F15",
+   "status": "corrected",
+   "note": "All numbers verified. IDI July 2026 (Q15): Jews 11.2 + 20.8 = 32.0 support and 15.2 + 45.8 = 61.0 oppose Ra'am inclusion. Arabs 27.8 / 60.2. The article confirms majorities in favour only among Strongly Left and Centre-Left. JPost article-911139 (Moshe Cohen, 9 Oct 2026; Lazar/Panel4All for Maariv, 7-8 Oct, n = 700, ±3.7) confirms: Arab party in the coalition 36/59, Haredi party 53/41, certain to vote 86% of the opposition vs 81% of the coalition. Correction: the 'safety net' report is not a Times of Israel headline. It appears as a JPost related-article headline ('Joint List offers safety net to Eisenkot in bid to oust PM') and in a Ynetnews report by Einav Halabi quoting Joint List chairman Youssef Jabareen ('We will provide safety net for any government that replaces Netanyahu', 'not a blank check'; date not shown).",
+   "corrected_claim": "In July 2026, most Jews opposed including Ra'am in the next government even after Mansour Abbas affirmed Israel's Jewish character. Only the strongly left and centre-left camps had majorities in favour. Maariv's poll of 7-8 October 2026 found a clear majority against an Arab party in the next coalition, but a majority for a Haredi party. Joint List chairman Youssef Jabareen told Ynet the party would provide a 'safety net' for any government that replaces Netanyahu's, though 'not a blank check'.",
+   "corrected_quant": "IDI (Jews): 32.0% support Ra'am inclusion, 61.0% oppose; Arabs 27.8% support, 60.2% oppose (28 Jul-2 Aug 2026; n = 600 + 151; ±3.58%). Maariv/Lazar-Panel4All (7-8 Oct 2026; n = 700; ±3.7): Arab party in coalition 36% support, 59% oppose; Haredi party 53% support, 41% oppose; certain to vote 86% of opposition vs 81% of coalition supporters (78% overall).",
+   "corrected_url": "https://en.idi.org.il/media/31733/july-2026-index-data.pdf | https://en.idi.org.il/articles/65483 | https://www.jpost.com/israel-election-2026/article-911139 | https://www.ynetnews.com/article/6bb1zzfy7"
+  },
+  {
+   "id": "D8-F16",
+   "status": "corrected",
+   "note": "All numbers verified. JPost article-910818 ('By MAARIV', 6 Oct 2026, N12 poll; no fieldwork or n given): great deal of responsibility 65% (opposition 91, coalition 27). State commission 66% (93 / 37 / Arab-party voters 80). Effect on vote: very great 15 + great 18 = 33, small 22, not at all 41. Also 47% equally blame the government and the IDF. INSS (24 Sep 2026): commission 75%, coalition 52%. ToI (Bachner, 20 Oct 2023; Lazar/Panel4All, 18-19 Oct, n = 510): 80% say Netanyahu must take public responsibility, Likud 2022 voters 69%. The 'released Mon 5 Oct' date is not shown in the source. Overreach: the 2023 and 2026 figures use different questions ('should publicly take responsibility' vs 'bears a great deal of responsibility') and different groups (2022 Likud voters vs current coalition voters). The 69% to 27% contrast therefore cannot show that Netanyahu-bloc voters 're-sorted'. Present the two as separate snapshots.",
+   "corrected_claim": "Three years on, most Israelis still back a state commission of inquiry. Among coalition voters, support for accountability depends heavily on the wording and on whether Netanyahu is named. In October 2026, 27% of coalition voters said he bears 'a great deal' of responsibility, and 37% (N12) to 52% (INSS) supported a state commission. Two in five voters say October 7 does not affect their vote at all. A different October 2023 question found 69% of 2022 Likud voters said Netanyahu should publicly take responsibility. Because the wording and the group differ, that figure is not a baseline for a trend.",
+   "corrected_quant": "N12 (reported by Maariv/JPost 6 Oct 2026; fieldwork and n not given): Netanyahu bears 'a great deal' of responsibility 65% (opposition 91%, coalition 27%); state commission 66% (opposition 93%, coalition 37%, Arab-party voters 80%); October 7 affects my vote to a very great (15%) or great (18%) extent 33%, small 22%, not at all 41%; 47% blame government and IDF equally. INSS (24 Sep 2026): state commission 75%, coalition voters 52%. Maariv/Lazar-Panel4All (18-19 Oct 2023, n = 510): 80% said Netanyahu should take public responsibility, including 69% of 2022 Likud voters (different question).",
+   "corrected_url": "https://www.jpost.com/israel-news/article-910818 | https://www.inss.org.il/?p=128230 | https://www.timesofisrael.com/poll-80-of-israelis-say-netanyahu-must-take-public-responsibility-for-oct-7-failures/"
+  },
+  {
+   "id": "D8-F17",
+   "status": "corrected",
+   "note": "The INSS page ?p=128230 ('Special Survey: Three Years since October 7', Deitch, Shafran Gittleman, Gitlin & Shani, 24 Sep 2026) confirms IDF 61% vs government 34%. Recurrence from Gaza 59% (from 52%). High trust in IDF investigations 44% (Jews 47%). Security better 38%, worse 32%. Readiness south 54, north 49, Judea and Samaria 33 (from 39). The page gives no fieldwork dates or n. The 'May 2026 INSS: IDF 74%, government 26%' figures are not on the cited page. They come from a separate INSS publication, 'Findings of the National Security Survey: May 2026' (IDF 74%, from 78% in April; government 26%, from 30%; 805 Hebrew + 154 Arabic, iPanel, ±3.16%), which must be cited.",
+   "corrected_claim": "INSS's third-anniversary survey found far more satisfaction with the IDF's conduct of the Gaza war than with the government's. A majority think an October 7-type attack could recur from Gaza. Fewer than half highly trust the IDF's own investigations. Confidence in the IDF's ability to defend Judea and Samaria communities has fallen. INSS's separate May 2026 survey shows the same gap in institutional trust.",
+   "corrected_quant": "INSS Sep 2026: satisfied with IDF conduct 61% vs government 34%; could recur from Gaza 59% (from 52%); high trust in IDF investigations 44% (Jews 47%); security better 38%, worse 32%, no change 26%; IDF readiness south 54%, north 49%, Judea and Samaria 33% (from 39%). INSS May 2026 (n = 805 Hebrew + 154 Arabic, ±3.16%): high trust in IDF 74% (from 78% in April), government 26% (from 30%).",
+   "corrected_url": "https://www.inss.org.il/?p=128230 | https://www.inss.org.il/publication/inss-survey-may-2026/"
+  },
+  {
+   "id": "D8-F18",
+   "status": "corrected",
+   "note": "Crossref: Lau, Sigelman & Rovner, JOP 69(4):1176-1209, 2007. The OpenAlex abstract confirms: no evidence negativity wins votes, more memorable, stimulates knowledge, no reliable turnout depression, slightly lower efficacy and trust. '111 studies' is confirmed by a secondary source (JSTOR Daily), not the abstract. 'Backlash against the sponsor is common' overstates it. Per that summary, of 43 studies testing vote effects, 5 found appreciable gains for the attacker and 5 found backlash hurting the attacker more than the target. The abstract itself describes no net effectiveness, not frequent backlash.",
+   "corrected_claim": "Pooling 111 studies, the authors find no reliable evidence that negative campaigning wins votes. Attacks only modestly lower feelings toward the target, and net gains for attackers are rare: a few studies find backlash that hurts the sponsor more than the target. Negative messages are more memorable and slightly raise campaign knowledge. There is no reliable evidence that they depress turnout, though they slightly lower political efficacy and trust.",
+   "corrected_quant": "111 studies. Net vote effect of negativity not distinguishable from zero; per a secondary summary, of 43 vote-effect studies, 5 showed appreciable attacker gains and 5 showed attacker-damaging backlash. Turnout: no reliable effect (57 studies, mixed). Efficacy and trust: small, consistent negative.",
+   "corrected_url": "https://doi.org/10.1111/j.1468-2508.2007.00618.x | https://daily.jstor.org/negative-political-campaigning-really-bad/"
+  },
+  {
+   "id": "D8-F19",
+   "status": "corrected",
+   "note": "Crossref: Ansolabehere, Iyengar, Simon & Valentino, APSR 88(4):829-838, 1994. Krupnikov, AJPS 55(4):797-813, 2011. Krupnikov's abstract confirms the two conditions (exposure after choosing a candidate, and the attack is on that candidate) and the data (2004 campaign; 1976-2000). Ansolabehere et al.'s abstract reports that negative ads 'dropped intentions to vote by 5%'. I could not confirm in an open full text that this is 5 percentage points, so quote it as reported. The finding is contested: Wattenberg & Brians (1999) found no turnout penalty in NES data and criticised the aggregate replication. The lab estimate should not be used as a field parameter.",
+   "corrected_claim": "In a lab experiment that varied only the tone of otherwise identical ads, negative ads lowered stated intention to vote, alongside lower efficacy. The result was contested by later survey-based work. Later work explains why the wider literature is mixed. Negativity demobilises only when a voter sees it after having picked a preferred candidate and the attack is aimed at that candidate.",
+   "corrected_quant": "Ansolabehere et al.: intention to vote 'dropped ... by 5%' (lab; abstract wording), replicated in aggregate 1992 Senate data; contested by Wattenberg & Brians (1999). Krupnikov: conditional effect, 2004 campaign data and ANES 1976-2000.",
+   "corrected_url": "https://doi.org/10.2307/2082710 | https://doi.org/10.1111/j.1540-5907.2011.00522.x | https://doi.org/10.2307/2586119"
+  },
+  {
+   "id": "D8-F20",
+   "status": "verified",
+   "note": "Crossref: Galasso, Nannicini & Nunnari, AJPS 67(1):5-21, 2023. Full text (PMC10078752) confirms the 2015 Cava de' Tirreni mayoral race with an incumbent and two main challengers. Canvassing plus flyers was randomised across 55 precincts (18 positive, 18 negative, 19 control). The idle candidate gained 3.7 pp (about 13% of its average share). No effect on the incumbent. Note: the perception results (less cooperative, less able to lead a successful government, more extreme) and the strongest backlash come from the survey experiment, where the idle candidate gained 17.1 pp, not from the field experiment."
+  },
+  {
+   "id": "D8-F21",
+   "status": "verified",
+   "note": "Crossref: Rathje, Van Bavel & van der Linden, PNAS 118(26):e2024292118, 2021. Full text (PMC8256037) confirms n = 2,730,215 posts. Odds of a share up 67% per out-group term (exp(b) = 1.67). Angry reactions exp(b) = 2.19. About 4.8x negative-affect and 6.7x moral-emotional language. Out-group-only posts shared more than twice as often as in-group-only posts (exp(b) = 2.32). Observational, US."
+  },
+  {
+   "id": "D8-F22",
+   "status": "verified",
+   "note": "Crossref: Brader, AJPS 49(2):388-405, 2005. Full text (JSTOR copy) confirms Massachusetts adults in summer 1998, during the Democratic gubernatorial primary (Harshbarger vs McGovern). Enthusiasm experiment N = 116: intention to vote +29 pp (p < .05), stability in choice +16 pp (p < .05). Fear experiment N = 118: persuasion +.26 (p < .001), recall of related news +21 pp (p < .02), no significant turnout effect."
+  },
+  {
+   "id": "D8-F23",
+   "status": "verified",
+   "note": "Crossref: Valentino, Brader, Groenendyk, Gregorowicz & Hutchings, JOP 73(1):156-170, 2011. The abstract confirms a randomised experiment, a national 2008 survey and pooled ANES 1980-2004, with anger mobilising more than anxiety or enthusiasm. The anxiety-to-information-seeking contrast follows the paper's Affective Intelligence framing."
+  },
+  {
+   "id": "D8-F24",
+   "status": "verified",
+   "note": "Crossref: Huddy, Mason & Aarøe, APSR 109(1):1-17, 2015. The abstract confirms four studies. Partisan identity predicts campaign activity better than issue strength or ideology. Strong identifiers are angrier under threat of loss and more positive when reassured. Threats to party status arouse more than policy threats. The application to Likud identifiers is an inference."
+  },
+  {
+   "id": "D8-F25",
+   "status": "verified",
+   "note": "Crossref: Tannenbaum et al., Psych Bull 141(6):1178-1204, 2015. The abstract (PMC5789790) confirms 127 articles, 248 samples, N = 27,372, random-effects d = 0.29. Stronger effects with efficacy statements, high severity and susceptibility, and one-time behaviours. 'No identified circumstances under which they backfire'. Arceneaux, AJPS 56(2):271-285, 2012: two experiments, loss-aversion and fear arguments more persuasive even with counterarguments. Caveat: the meta-analysis is mostly health behaviour, so applying it to vote choice is an extrapolation."
+  },
+  {
+   "id": "D8-F26",
+   "status": "verified",
+   "note": "Crossref: Feinberg & Willer, PSPB 41(12):1665-1681, 2015. The abstract confirms six studies and the issues listed. Voelkel & Feinberg, SPPS 9(8):917-924, 2018: full text (PMC6295651) confirms Study 1 on MTurk, N = 397, 28 Aug 2016. Conservatives' likelihood of voting for Trump was 74.62 (fairness, n = 45) vs 55.75 (loyalty, n = 40), b = -18.87, p = .004. Moderates b = -0.45, n.s. Warmth b = -13.82, p = .012. Caveat for the summary: the 19-point effect is loyalty vs fairness critique. There was no no-message control, so 'cut ... by about 19 points' should read 'about 19 points lower than after a fairness-framed critique'."
+  },
+  {
+   "id": "D8-F27",
+   "status": "verified",
+   "note": "Crossref: Xu et al., PSPB online 23 Apr 2026. The abstract confirms 67 papers, k = 399, d = 0.22. Negative framing and social norms enhance the effect, and assertive language undermines it. Kalla, Levine & Broockman, JOP 84(2):1239-1243, 2022: the abstract confirms a preregistered field experiment, 52 canvassers and 1,034 voters, large effects on interest in taking action and some evidence of attitude change. Caveat: the meta-analysis spans non-political behaviours."
+  },
+  {
+   "id": "D8-F28",
+   "status": "verified",
+   "note": "Crossref: Druckman, JOP 63(4):1041-1066, 2001. The abstract confirms two lab experiments and source credibility as a constraint on framing. Nicholson, AJPS 56(1):52-66, 2012: the abstract confirms 2008 survey experiments (McCain and Obama, and a Bush experiment) in which in-party cues do not persuade, out-party cues polarise, and politicians more than party labels act as polarising cues."
+  },
+  {
+   "id": "D8-F29",
+   "status": "corrected",
+   "note": "Crossref: Golby, Feaver & Dropp, AFS 44(1):44-71, 2018. The abstract confirms nearly 12,000 interviews, opposition cues larger than support cues, mediated mainly by legitimacy and less by likely success. Baum & Groeling, Political Behavior 31(2):157-186, 2009: the abstract, now retrieved, confirms that costly rhetoric that harms the speaker's own party is more persuasive than cheap talk, and that a 'hostile' outlet can increase a message's credibility. The design was an experiment plus a national survey on the Iraq War. The '2015 statement by about 186 retired generals' is not in either cited source. JTA reports Commanders for Israel's Security as 186 retired generals, though other outlets say about 200. Add the source.",
+   "corrected_claim": "Survey experiments with nearly 12,000 US respondents found that telling people senior military leaders opposed an intervention raised public opposition. Military endorsements of support moved opinion less. The effect worked mainly through the mission's perceived legitimacy. Baum & Groeling show, with an experiment and a national survey on the Iraq War, that criticism of a war from the president's own party, a costly signal, is more persuasive than opposition criticism, which is discounted as cheap talk. A news outlet seen as hostile can even add credibility to such a message.",
+   "corrected_quant": "Golby et al.: n of about 12,000; opposition cues larger than support cues; mediated mainly by perceived legitimacy, less by perceived success. Baum & Groeling: experiment plus national survey; no pooled effect size in the abstract. Israeli precedent: Commanders for Israel's Security, reported as 186 retired generals and security chiefs (JTA; other outlets say about 200), campaigned against Netanyahu in March 2015, and he won.",
+   "corrected_url": "https://doi.org/10.1177/0095327X16687067 | https://doi.org/10.1007/s11109-008-9074-9 | https://jta.org/?p=969455"
+  },
+  {
+   "id": "D8-F30",
+   "status": "verified",
+   "note": "Crossref: Calfano & Djupe, PRQ 62(2):329-339, 2009. The abstract confirms the GOP religious code is an effective cue for white evangelicals, with no effect on mainline Protestants and Catholics. Caveat: secular and non-religious voters were not tested, so 'secular base voters are unlikely to be put off' is an extrapolation. The desk correctly gives it low confidence and calls it a hypothesis. Numbers 32:6 is quoted correctly."
+  },
+  {
+   "id": "D8-F31",
+   "status": "verified",
+   "note": "Crossref: Iyengar & Westwood, AJPS 59(3):690-707, 2015. The abstract confirms implicit, explicit and behavioural measures, partisan affect as strong as race, and discrimination exceeding racial discrimination. Voelkel et al., Science 386(6719):eadh4764, 2024: the abstract confirms n = 32,059 and 25 treatments, with the strongest animosity reductions from sympathetic out-partisans and common identities. Correcting misperceptions and highlighting the threat of democratic collapse reduced support for undemocratic practices. US samples."
+  },
+  {
+   "id": "D8-F32",
+   "status": "verified",
+   "note": "Crossref: Tappin et al., PNAS 120(25):e2216261120, 2023. The abstract confirms the microtargeting strategy beat alternatives by an average of '70% or more' in Study 1, primarily on one of two issues, with no gain from more than one covariate and a smaller advantage in Study 2. Wittenberg et al., PNAS 118(47):e2114388118: full text (PMC8617416) confirms n = 7,609 (26,584 observations) and 72 clips (48 political ads + 24 COVID clips). The video-vs-text gap on attitudes is 'comparable to, if not smaller than' text-vs-control. Chong & Druckman, APSR 101(4):637-655, 2007: frame quality matters more than frequency, and competition alters but does not eliminate effects."
+  },
+  {
+   "id": "D8-F33",
+   "status": "verified",
+   "note": "Crossref: Banas & Rains, Communication Monographs 77(3):281-311, 2010. The abstract confirms 54 cases. Inoculation beats supportive messages and controls. Refutational-same and refutational-different are equally effective. Resistance is equivalent between immediate and moderate delays, 'with a decay in resistance after two weeks'. Pfau & Burgoon (1988, HCR 15(1):91-111) is correctly credited as the first political-campaign application (1986 US Senate race)."
+  },
+  {
+   "id": "D8-F34",
+   "status": "corrected",
+   "note": "Crossref: Gerber & Rogers, JOP 71(1):178-191, 2009. The abstract confirms two GOTV field experiments, that high-expected-turnout messages beat low-turnout messages, and that the effect is only among infrequent or occasional voters. The full text was not accessible. The 76.3% vs 69% figures come only from a secondary summary (The Decision Lab, which calls it '7% more likely'). They are not confirmed in the paper and should not appear as the paper's estimate. Bryan et al., PNAS 108(31):12653-12656, 2011: three experiments, noun wording raised registration interest and validated turnout. Gerber, Huber, Biggers & Hendry, PNAS 113(26):7112-7117, 2016: the abstract confirms no turnout effect in a large field experiment and that both noun and verb versions are 'less effective than a standard GOTV message'.",
+   "corrected_claim": "In two get-out-the-vote phone experiments around the 2005 New Jersey and 2006 California gubernatorial elections, messages stressing high expected turnout raised voting intention more than messages stressing low turnout, and the effect was confined to infrequent or occasional voters. A celebrated wording trick ('be a voter' instead of 'vote') raised turnout in small studies (Bryan et al. 2011), but a large field replication found no effect, and both versions were less effective than a standard GOTV message.",
+   "corrected_quant": "Gerber & Rogers: direction and occasional-voter moderation as stated in the abstract; the effect size was not verified in the paper (a secondary summary reports 76.3% vs 69% 'certain to vote', unconfirmed). Gerber et al. 2016: 'noun' framing has no effect on validated turnout; both framings are weaker than a standard GOTV message.",
+   "corrected_url": "https://doi.org/10.1017/S0022381608090117 | https://doi.org/10.1073/pnas.1103343108 | https://doi.org/10.1073/pnas.1513727113"
+  },
+  {
+   "id": "D8-F35",
+   "status": "verified",
+   "note": "Crossref: Dahlgaard, Hansen, Hansen & Larsen, SPS 40(3):330-343, 2017. The abstract confirms a large national survey experiment in Denmark. News of a rise or fall for a small or large party moves voting intentions in the same direction, more strongly upward. Effects are consistent across two parties and do not vary across sociodemographic groups."
+  }
+ ],
+ "missing_key_works": [
+  "Hameiri, Boaz, Roni Porat, Daniel Bar-Tal, Atara Bieler & Eran Halperin (2014). 'Paradoxical thinking as a new avenue of intervention to promote peace.' PNAS 111(30):10996-11001. https://doi.org/10.1073/pnas.1407055111. An Israeli field intervention: a long-term paradoxical ad campaign run in a Jewish town before the 2013 election. It produced more conciliatory attitudes, mainly among centre and right respondents, and self-reported voting shifted toward dovish parties, with effects lasting a year. This answers the desk's caveat that no Israeli messaging experiment was found.",
+  "Druckman, James N., Erik Peterson & Rune Slothuus (2013). 'How Elite Partisan Polarization Affects Public Opinion Formation.' American Political Science Review 107(1):57-79. https://doi.org/10.1017/S0003055412000500. Two survey experiments: polarisation strengthens party-endorsement effects and weakens the effect of substantive arguments. A key moderator for transferring D8-F06, F26 and F32 to Israel's highly polarised electorate.",
+  "Fridkin, Kim L. & Patrick J. Kenney (2011). 'Variability in Citizens' Reactions to Different Types of Negative Campaigns.' American Journal of Political Science 55(2):307-325. https://doi.org/10.1111/j.1540-5907.2010.00494.x. 2006 CCES, 1,045 respondents in 21 Senate races: relevant (issue-based) and uncivil attacks move evaluations of the target most, especially among voters with low tolerance for negativity. Irrelevant and uncivil attacks bring backlash on incumbents. Refines D8-F18 into which attacks work.",
+  "Stubager, Rune & Henrik Bech Seeberg (2016). 'What can a party say? How parties' communication can influence voters' issue ownership perceptions.' Electoral Studies 44:162-171. https://doi.org/10.1016/j.electstud.2016.08.013. Danish survey experiments: messages about links to the issue constituency and about performance improve a party's own issue ownership, while emphasis and position messages do not. This is the 'claim' half that pairs with Seeberg's 'attack' (D8-F06).",
+  "Walgrave, Stefaan, Jonas Lefevere & Anke Tresch (2012). 'The Associative Dimension of Issue Ownership.' Public Opinion Quarterly 76(4):771-782. https://doi.org/10.1093/poq/nfs023. Associative ownership (spontaneously linking an issue to a party) is distinct from competence ownership and independently predicts the vote. Relevant to giving each change-bloc list one clear issue.",
+  "Voelkel, Jan G., Joseph S. Mernyk & Robb Willer (2023). 'Moral reframing increases support for economically progressive candidates.' PNAS Nexus 2(6):pgad154. https://doi.org/10.1093/pnasnexus/pgad154. Two experiments (N = 4,138), one preregistered on a national probability sample: binding-value framing (patriotism, family, tradition) raised candidate support among conservatives and moderates. A larger, stronger candidate-level test than D8-F26, which found no effect for moderates.",
+  "Kubin, Emily, Curtis Puryear, Chelsea Schein & Kurt Gray (2021). 'Personal experiences bridge moral and political divides better than facts.' PNAS 118(6):e2008389118. https://doi.org/10.1073/pnas.2008389118. 15 studies: opponents respect views backed by personal, harm-related experience more than views backed by facts. Supports reservist and bereaved-family testimonials over statistics for soft-right audiences (D8-F29, D8-F31).",
+  "Pfau, Michael & Michael Burgoon (1988). 'Inoculation in Political Campaign Communication.' Human Communication Research 15(1):91-111. https://doi.org/10.1111/j.1468-2958.1988.tb00172.x. A field test in a 1986 US Senate race (341 treated, 392 control interviews): inoculation conferred resistance to later attack messages, more so among strong party identifiers. The direct campaign precedent for D8-F33.",
+  "Green, Jane & Sara B. Hobolt (2008). 'Owning the issue agenda: Party strategies and vote choices in British elections.' Electoral Studies 27(3):460-476. https://doi.org/10.1016/j.electstud.2008.02.003. Combines spatial and issue-ownership models for recent British elections: as parties converged ideologically, competence considerations became more important to the vote than ideological position. Relevant where the blocs' security positions overlap and competence is the contested ground (D8-F04, D8-F06).",
+  "Sides, John (2006). 'The Origins of Campaign Agendas.' British Journal of Political Science 36(3):407-436. https://doi.org/10.1017/S0007123406000226. A large database of 1998 US House and Senate campaign ads: party ownership only weakly shapes which issues candidates stress. Candidates often 'trespass' on the other party's issues, and framing those issues in their own terms makes this easier. A needed counterweight to the strict ownership advice in D8-F03, and it supports the reframing route in D8-F06.",
+  "Vavreck, Lynn (2009). The Message Matters: The Economy and Presidential Campaigns. Princeton University Press. The clarifying-vs-insurgent framework: a candidate disadvantaged on the dominant issue wins only by shifting the agenda to an issue where its position is closer to voters and the rival is constrained. The theoretical basis for the desk's draft and accountability agenda.",
+  "Egan, Patrick J. (2013). Partisan Priorities: How Issue Ownership Drives and Distorts American Politics. Cambridge University Press. Ownership reflects which party prioritises an issue more than its performance, and ownership is sticky. Tempers expectations that two weeks of messaging can move ownership (D8-F05, D8-F06).",
+  "Wattenberg, Martin P. & Craig Leonard Brians (1999). 'Negative Campaign Advertising: Demobilizer or Mobilizer?' American Political Science Review 93(4):891-899. https://doi.org/10.2307/2586119. Survey evidence contradicting the demobilisation finding cited in D8-F19. Needed for balance."
+ ]
+}

@@ -1,0 +1,472 @@
+[
+ {
+  "where": "segments[0].role",
+  "phrase": "Important for denying Netanyahu 61, mainly through Ra'am's threshold",
+  "condition": "F('mv.Raam.deny') > 0 and F('fc.Raam.pass') < 0.95 and F('x.segments.negev_raam_share') > F('x.segments.negev_jl_share')"
+ },
+ {
+  "where": "segments[0].role",
+  "phrase": "but slightly negative for a change-led government under the formation model",
+  "condition": "-0.25 < F('mv.Raam.govt') < 0"
+ },
+ {
+  "where": "segments[1].role",
+  "phrase": "a pocket of direct change-list votes, mostly for the Democrats",
+  "condition": "F('x.segments.christian_dem_share') > 50 * F('seg.arab_christian.p26_change')"
+ },
+ {
+  "where": "segments[1].role; segments[1].approach",
+  "phrase": "Turnout here mainly adds Joint List votes, which help deny Netanyahu 61 but hurt a change-led government / because general turnout here adds mostly Joint List votes",
+  "condition": "F('x.segments.christian_jl_share') > 50 and F('mv.JL.deny') > 0 and F('mv.JL.govt') < 0"
+ },
+ {
+  "where": "segments[1].who",
+  "phrase": "with the Democrats leading the change vote in all six",
+  "condition": "F('x.segments.christian_dem_leads') == F('seg.arab_christian.localities') == 6"
+ },
+ {
+  "where": "segments[2].role",
+  "phrase": "holding about half of that objective's potential",
+  "condition": "0.45 <= F('seg.arab_north_triangle.block_nb__share') < 0.55"
+ },
+ {
+  "where": "segments[2].role",
+  "phrase": "but negative for a change-led government under the formation model",
+  "condition": "F('x.segments.north_arab_mix_govt') < 0"
+ },
+ {
+  "where": "segments[2].approach",
+  "phrase": "the chance of denying Netanyahu 61 rises by about ... for Joint List votes and ... for Ra'am votes",
+  "condition": "F('mv.JL.deny') > 0 and F('mv.Raam.deny') > 0"
+ },
+ {
+  "where": "segments[2].approach",
+  "phrase": "the chance of a change-led government falls by about ... for Joint List votes and barely moves for Ra'am votes",
+  "condition": "F('mv.JL.govt') < 0 and abs(F('mv.Raam.govt')) < 0.2"
+ },
+ {
+  "where": "segments[3].role",
+  "phrase": "and the best yield per contact",
+  "condition": "F('x.segments.druze_door_yield_rank') == 1"
+ },
+ {
+  "where": "segments[3].who",
+  "phrase": "Mughar (17,008 eligible) is the largest and the only one where Arab lists lead the projection",
+  "condition": "F('x.segments.druze_arab_lead_is_mughar') == 1"
+ },
+ {
+  "where": "segments[3].approach",
+  "phrase": "Per contact they lead the map on paper: Kisra-Sumei ..., Beit Jann ... and Daliyat al-Karmel ...",
+  "condition": "F('x.segments.druze_eff_top3_match') == 1"
+ },
+ {
+  "where": "segments[3].approach",
+  "phrase": "in the nine villages tiered turnout engines under the default objective: Daliyat al-Karmel, Beit Jann, Yirka, Kisra-Sumei, Yanuh-Jat, Isfiya, Julis, Mughar and Sajur",
+  "condition": "F('x.segments.druze_turnout_engines') == 9 and F('x.segments.druze_te_match') == 1"
+ },
+ {
+  "where": "segments[3].approach",
+  "phrase": "Yashar leads in Daliyat al-Karmel, Yirka, Isfiya, Kisra-Sumei and Sajur, and Yisrael Beytenu in Mughar, Julis and Yanuh-Jat. The Democrats lead Beit Jann's projection",
+  "condition": "F('x.segments.druze_leads_match') == 1"
+ },
+ {
+  "where": "segments[3].approach",
+  "phrase": "Stations where Arab lists lead get no door or list programme: ... of Mughar's 31 stations, ... of Isfiya's 17 and ... of Peqi'in's 8 (complete list)",
+  "condition": "F('x.segments.arab_led_mughar') + F('x.segments.arab_led_isifya') + F('x.segments.arab_led_peqiin') == F('x.segments.druze_arab_led_total')"
+ },
+ {
+  "where": "segments[4].who",
+  "phrase": "and ... of the 28 are tiered Netanyahu-bloc strongholds ... Beit Shemesh is tiered supporter-list ground, because its small value ... comes only from list contact",
+  "condition": "F('x.segments.haredi_strongholds') == F('seg.haredi.localities') - 1 and F('loc.2610.change_govt__tier') == 'Supporter-list ground' and F('loc.2610.change_govt__area_pot') == 0"
+ },
+ {
+  "where": "segments[4].role; segments[4].approach",
+  "phrase": "The only value is a small amount of list contact / The model finds no positive door turf in any station in the segment",
+  "condition": "F('x.segments.haredi_positive') == 0 and F('seg.haredi.change_govt__area_pot') == 0"
+ },
+ {
+  "where": "segments[4].approach",
+  "phrase": "at that level persuasion calls add nothing measurable",
+  "condition": "F('seg.haredi.change_govt__pers_pot') < 0.5"
+ },
+ {
+  "where": "segments[4].approach",
+  "phrase": "mainly in Beit Shemesh, Safed, Bnei Brak and Netivot, plus a little from rescue calls",
+  "condition": "F('x.segments.haredi_top4_list_match') == 1 and F('seg.haredi.change_govt__resc_pot') < 0.25 * F('seg.haredi.change_govt__potential')"
+ },
+ {
+  "where": "segments[4].approach",
+  "phrase": "Yashar leads the change vote in ... of the 28 localities, so its lists should carry this work",
+  "condition": "F('x.segments.haredi_yashar_leads') > F('seg.haredi.localities') / 2"
+ },
+ {
+  "where": "segments[5].role; segments[5].avoid",
+  "phrase": "A Netanyahu-majority city with a large change minority / which net Netanyahu-bloc votes",
+  "condition": "F('seg.jerusalem.p26_nb') > 0.5 and F('seg.jerusalem.p26_change') >= 0.15"
+ },
+ {
+  "where": "segments[5].role; segments[5].approach",
+  "phrase": "tiered a turnout engine under the default objective because door work in its positive polling stations is worth more than its supporter lists / worth more than phone and relational contact citywide",
+  "condition": "F('loc.3000.change_govt__tier') == 'Turnout engine' and F('loc.3000.change_govt__area_pot') > F('loc.3000.change_govt__list_pot')"
+ },
+ {
+  "where": "segments[5].who",
+  "phrase": "Yashar leads the change vote, with the Democrats second",
+  "condition": "F('loc.3000.lead_change_list') == 'Yashar' and F('loc.3000.second_change_list') == 'Democrats'"
+ },
+ {
+  "where": "segments[5].who",
+  "phrase": "The city ranks fifth on the map by change-led-government potential",
+  "condition": "F('loc.3000.change_govt__rank') == 5"
+ },
+ {
+  "where": "segments[5].moves",
+  "phrase": "positive door value in only ... of the city's 706 stations",
+  "condition": "F('x.segments.jerusalem_positive_frac') < 0.35"
+ },
+ {
+  "where": "segments[5].approach",
+  "phrase": "Yashar leads ... of the positive stations and the Democrats ... (complete split)",
+  "condition": "F('x.segments.jerusalem_pos_yashar') + F('x.segments.jerusalem_pos_democrats') == F('x.segments.jerusalem_positive')"
+ },
+ {
+  "where": "segments[5].approach",
+  "phrase": "Jerusalem gets a door team in three of the four realistic change-led-government plans",
+  "condition": "F('x.segments.jerusalem_door_plans') == 3"
+ },
+ {
+  "where": "segments[5].approach",
+  "phrase": "It rises further once supporter lists exist (read: the 400,000-contact, 30%-identified figure against both no-list figures; at 150,000 contacts supporter lists lower it). At 400,000 contacts with 30% of supporters identified it is worth about ... net votes, fourth after Tel Aviv-Yafo, Haifa and Ramat Gan",
+  "condition": "F('x.segments.jerusalem_govt_400k_30') > max(F('x.segments.jerusalem_govt_150k_0'), F('x.segments.jerusalem_govt_400k_0')) and F('x.segments.jerusalem_govt_400k_30_rank') == 4 and F('x.segments.top3_400k_30_match') == 1"
+ },
+ {
+  "where": "segments[6].role; segments[6].approach",
+  "phrase": "change lists lead in ... of 256 / In the ... kibbutzim where the Netanyahu bloc leads the projection (together all kibbutzim)",
+  "condition": "F('x.segments.kibbutz_change_lead') + F('x.segments.kibbutz_nb_lead') == F('seg.kibbutz.localities')"
+ },
+ {
+  "where": "segments[6].role",
+  "phrase": "one is a secondary target and four religious kibbutzim are Netanyahu-bloc strongholds",
+  "condition": "F('x.segments.kibbutz_secondary') == 1 and F('x.segments.kibbutz_strongholds') == 4 and F('x.segments.kibbutz_tiers_other') == 0"
+ },
+ {
+  "where": "segments[6].who",
+  "phrase": "such as Ma'agan Michael, Yagur and Na'an, and Yashar in ..., such as Giv'at Brenner and Gesher HaZiv",
+  "condition": "F('x.segments.kibbutz_examples_match') == 1"
+ },
+ {
+  "where": "segments[6].approach",
+  "phrase": "the Democrats in their ..., Yashar in its ... and Together in its ... (complete split)",
+  "condition": "F('x.segments.kibbutz_lead_other') == 0"
+ },
+ {
+  "where": "segments[6].approach",
+  "phrase": "including the four strongholds",
+  "condition": "F('x.segments.kibbutz_strongholds') == 4 and F('x.segments.kibbutz_strongholds_nb_led') == 1"
+ },
+ {
+  "where": "segments[6].approach; segments[6].role",
+  "phrase": "mostly religious kibbutzim / four religious kibbutzim are Netanyahu-bloc strongholds",
+  "condition": "F('x.segments.kibbutz_nb_lead_religious_frac') > 0.5 and F('x.segments.kibbutz_strongholds_religious') == 1"
+ },
+ {
+  "where": "segments[6].approach",
+  "phrase": "No kibbutz is large enough for the realistic plans to deploy one",
+  "condition": "F('x.segments.kibbutz_door_plans') == 0"
+ },
+ {
+  "where": "segments[6].avoid",
+  "phrase": "puts a 0.5-point shift from Yashar to the Democrats at about zero for a change-led government",
+  "condition": "abs(F('lev.yashar_to_dem_0.5.govt')) < 0.25"
+ },
+ {
+  "where": "segments[7].role",
+  "phrase": "The main turnout engine",
+  "condition": "F('seg.liberal_urban.change_govt__potential') > max(F('seg.mixed_urban.change_govt__potential'), F('seg.periphery_likud.change_govt__potential'), F('seg.druze.change_govt__potential'), F('seg.russian_speaking.change_govt__potential'), F('seg.moshav_rural.change_govt__potential'), F('seg.kibbutz.change_govt__potential'), F('seg.jerusalem.change_govt__potential'))"
+ },
+ {
+  "where": "segments[7].role; segments[7].approach",
+  "phrase": "the top of every realistic contact plan / Tel Aviv-Yafo tops every realistic plan",
+  "condition": "F('x.segments.tel_aviv_tops_all_plans') == 1"
+ },
+ {
+  "where": "segments[7].who",
+  "phrase": "followed by Ramat Gan, Herzliya, Kfar Saba and Givatayim",
+  "condition": "F('x.segments.lib_pot_order_match') == 1"
+ },
+ {
+  "where": "segments[7].moves",
+  "phrase": "the largest pool of Blue and White and Reservists voters on the map",
+  "condition": "F('x.segments.lib_rescue_largest') == 1"
+ },
+ {
+  "where": "segments[7].approach",
+  "phrase": "Tel Aviv-Yafo has the best door efficiency outside the Druze villages",
+  "condition": "F('x.segments.tel_aviv_best_eff_non_druze') == 1"
+ },
+ {
+  "where": "segments[7].approach",
+  "phrase": "Among the segment's other towns of that size, ... come next (generated list of six towns in rank order)",
+  "condition": "F('x.segments.lib_eff_next_n') == 6"
+ },
+ {
+  "where": "segments[7].approach",
+  "phrase": "Yashar leads most positive stations",
+  "condition": "F('x.segments.liberal_pos_yashar_frac') > 0.5"
+ },
+ {
+  "where": "segments[7].approach",
+  "phrase": "Together is the usual runner-up elsewhere",
+  "condition": "F('x.segments.lib_together_usual_second') == 1"
+ },
+ {
+  "where": "segments[7].caveat",
+  "phrase": "Rescue value is positive under the default objective. For Reservists voters it turns negative under the deny-61 objective",
+  "condition": "F('x.segments.rescue_gain_bw_govt') > 0 and F('x.segments.rescue_gain_res_govt') > 0 and F('x.segments.rescue_gain_res_deny') < 0"
+ },
+ {
+  "where": "segments[7].caveat",
+  "phrase": "Published polls split by house. Of the ... polls published since 15 September that list the Reservists, ... put them at 4 seats or more",
+  "condition": "F('polls.res.above') >= 1 and F('polls.res.below') >= 1"
+ },
+ {
+  "where": "segments[8].who",
+  "phrase": "Lod (58,888 eligible) and Ramla (57,383) project ...% change (one figure for both)",
+  "condition": "F('x.segments.lod_ramla_same_change') == 1"
+ },
+ {
+  "where": "segments[8].who",
+  "phrase": "Nof HaGalil (...) and Ma'alot-Tarshiha (...) are closer",
+  "condition": "F('x.segments.nof_maalot_closer') == 1"
+ },
+ {
+  "where": "segments[8].who",
+  "phrase": "... leads the citywide change vote in ... (generated from the five cities' lead lists)",
+  "condition": "F('x.segments.mixed_city_leads') != ''"
+ },
+ {
+  "where": "segments[8].approach",
+  "phrase": "The model marks ... stations positive: ... of Lod's 103, ... in Ma'alot-Tarshiha, ... in Nof HaGalil, ... in Akko and ... in Ramla (complete list)",
+  "condition": "F('x.segments.mixed_city_positive_named_sum') == F('x.segments.mixed_city_positive')"
+ },
+ {
+  "where": "segments[8].approach",
+  "phrase": "Lod is the only mixed city that gets a door team in the realistic plans, and only at 400,000 contacts",
+  "condition": "F('x.segments.lod_only_mixed_door_400k') == 1"
+ },
+ {
+  "where": "segments[8].approach",
+  "phrase": "Yisrael Beytenu leads the change vote in ... of the ..., including ... in Lod, so its volunteers should lead this turf, with Yashar taking the other ...",
+  "condition": "F('x.segments.mixed_city_pos_other') == 0 and F('x.segments.mixed_city_pos_yb') > F('x.segments.mixed_city_positive') / 2 and F('x.segments.lod_positive') >= 1"
+ },
+ {
+  "where": "segments[8].approach",
+  "phrase": "Most of the segment's value, about ... of ... net votes at saturation, comes from calls",
+  "condition": "F('seg.mixed_city.change_govt__list_pot') > 0.5 * F('seg.mixed_city.change_govt__potential')"
+ },
+ {
+  "where": "segments[8].avoid",
+  "phrase": "Avoid citywide turnout drives, which net Netanyahu-bloc votes in Lod and Ramla",
+  "condition": "F('loc.7000.p26_nb') > F('loc.7000.p26_change') and F('loc.8500.p26_nb') > F('loc.8500.p26_change')"
+ },
+ {
+  "where": "segments[9].who",
+  "phrase": "The model projects a narrow change lead",
+  "condition": "0 < F('seg.mixed_urban.p26_change') - F('seg.mixed_urban.p26_nb') < 0.06"
+ },
+ {
+  "where": "segments[9].who",
+  "phrase": "Under the default objective ... (generated: the segment's turnout engines, supporter-list ground and persuasion battlegrounds with their saturation values)",
+  "condition": "F('x.segments.mu_n_top') >= 1"
+ },
+ {
+  "where": "segments[9].approach",
+  "phrase": "Rishon LeZion has the largest persuasion value on the map",
+  "condition": "F('x.segments.rishon_largest_pers') == 1"
+ },
+ {
+  "where": "segments[9].approach",
+  "phrase": "In Petah Tikva persuasion is worth ... turnout (...)..., and it outweighs turnout in ... of the segment's other ... towns, such as ... (generated). Hold persuasion conversations there",
+  "condition": "F('x.segments.mu_pers_led_other_n') >= 1 or F('x.segments.pt_pers_vs_gotv') != 'less than'"
+ },
+ {
+  "where": "segments[9].approach",
+  "phrase": "Haifa is second only to Tel Aviv-Yafo in every realistic plan",
+  "condition": "F('x.segments.haifa_second_all_plans') == 1 and F('x.segments.tel_aviv_tops_all_plans') == 1"
+ },
+ {
+  "where": "segments[9].approach",
+  "phrase": "Yashar leads most positive stations ... with ... Together as the usual runner-up",
+  "condition": "F('x.segments.mixed_urban_pos_yashar_frac') > 0.5 and F('x.segments.mixed_urban_together_usual_second') == 1"
+ },
+ {
+  "where": "segments[10].role",
+  "phrase": "Hundreds of small, mostly change-leaning communities",
+  "condition": "F('x.segments.moshav_change_lead_frac') > 0.5"
+ },
+ {
+  "where": "segments[10].role; segments[10].approach",
+  "phrase": "too small and scattered for door teams / No moshav is large enough for the realistic plans to send one",
+  "condition": "F('x.segments.moshav_door_plans') == 0"
+ },
+ {
+  "where": "segments[10].who",
+  "phrase": "... are tiered low yield ... and ... are Netanyahu-bloc strongholds (all communities)",
+  "condition": "F('x.segments.moshav_low_yield') + F('x.segments.moshav_strongholds') == F('seg.moshav_rural.localities')"
+ },
+ {
+  "where": "segments[10].approach; segments[10].who",
+  "phrase": "Yashar leads the change vote in ... of the 458 communities, ... (rest generated) / and Yashar leads the change vote in ... of them",
+  "condition": "F('x.segments.moshav_lead_yashar') > F('seg.moshav_rural.localities') / 2"
+ },
+ {
+  "where": "segments[11].role",
+  "phrase": "Netanyahu-majority cities",
+  "condition": "F('seg.periphery_likud.p26_nb') > 0.5"
+ },
+ {
+  "where": "segments[11].role; segments[11].who",
+  "phrase": "Value comes from door work in the polling stations the model marks positive and from calls / about ... of it from door work in positive stations and about ... from supporter lists",
+  "condition": "F('seg.periphery_likud.change_govt__area_pot') > 0 and F('seg.periphery_likud.change_govt__list_pot') > 0"
+ },
+ {
+  "where": "segments[11].who",
+  "phrase": "The segment holds the most persuadable voters on the map",
+  "condition": "F('x.segments.persuadable_largest_periphery') == 1"
+ },
+ {
+  "where": "segments[11].who; segments[11].approach",
+  "phrase": "Under the default objective ... (generated tiers) / using its local organisers in towns such as Dimona ... (no door work in strongholds)",
+  "condition": "F('x.segments.periphery_n_top') >= 1 and F('loc.2200.change_govt__tier') == 'Netanyahu-bloc stronghold'"
+ },
+ {
+  "where": "segments[11].who",
+  "phrase": "Kiryat Motzkin (...) and Kiryat Bialik (...) are among the few places where change lists lead",
+  "condition": "F('x.segments.motzkin_bialik_lead') == 1 and F('x.segments.periphery_change_lead_count') <= 8"
+ },
+ {
+  "where": "segments[11].approach",
+  "phrase": "Netanya and Be'er Sheva rise near the top of the realistic plans",
+  "condition": "F('x.segments.netanya_beer_sheva_150k_30_worst_rank') <= 8"
+ },
+ {
+  "where": "segments[11].approach",
+  "phrase": "Door canvassing nets Netanyahu-bloc votes in ... of the segment's ... stations, so send door teams only to the ... the model marks positive",
+  "condition": "F('x.segments.periphery_negative') >= 1 and F('x.segments.periphery_positive') >= 1"
+ },
+ {
+  "where": "segments[11].approach",
+  "phrase": "most of Kiryat Motzkin's and Kiryat Bialik's",
+  "condition": "F('x.segments.motzkin_bialik_pos_min_frac') > 0.5"
+ },
+ {
+  "where": "segments[11].approach",
+  "phrase": "Tiberias has only ... of 65, too few for a door team",
+  "condition": "1 <= F('x.segments.tiberias_positive') <= 5 and F('x.segments.tiberias_door_plans') == 0"
+ },
+ {
+  "where": "segments[11].approach",
+  "phrase": "In supporter-list ground (... under the default objective), phone and relational contact is the main channel",
+  "condition": "F('x.segments.periphery_n_slg') >= 1"
+ },
+ {
+  "where": "segments[11].approach",
+  "phrase": "Yashar leads the change vote throughout",
+  "condition": "F('x.segments.periphery_all_yashar') == 1"
+ },
+ {
+  "where": "segments[12].who",
+  "phrase": "Giv'at Shmuel (...) is the only secondary target",
+  "condition": "F('loc.681.change_govt__tier') == 'Secondary target' and F('x.segments.rz_secondary') == 1"
+ },
+ {
+  "where": "segments[12].approach",
+  "phrase": "The segment's door value is about ... net votes, mostly in ... of Giv'at Shmuel's 33 stations (plan phrase generated)",
+  "condition": "F('x.segments.givat_shmuel_area_frac') > 0.5"
+ },
+ {
+  "where": "segments[12].approach",
+  "phrase": "Yashar leads the change vote in ... communities, Giv'at Shmuel among them, and Together in ..., such as Yad Binyamin and Nof Ayalon (other lists generated)",
+  "condition": "F('x.segments.rz_leads_examples_match') == 1 and F('x.segments.rz_lead_together') >= 2"
+ },
+ {
+  "where": "segments[13].role",
+  "phrase": "Netanyahu-leaning cities",
+  "condition": "F('seg.russian_speaking.p26_nb') > F('seg.russian_speaking.p26_change')"
+ },
+ {
+  "where": "segments[13].who; segments[13].approach",
+  "phrase": "Ashdod (...) and Bat Yam (...) are turnout engines (the segment's only ones), and Karmiel (...) and Nesher (...) lean to the change lists",
+  "condition": "F('x.segments.ru_te_match') == 1 and F('loc.1139.p26_change') > F('loc.1139.p26_nb') and F('loc.2500.p26_change') > F('loc.2500.p26_nb')"
+ },
+ {
+  "where": "segments[13].approach",
+  "phrase": "Bat Yam gets a door team even in the 150,000-contact plan without supporter lists, and Ashdod in the 400,000-contact plans",
+  "condition": "F('x.segments.bat_yam_ashdod_door_match') == 1"
+ },
+ {
+  "where": "segments[13].approach",
+  "phrase": "most of Karmiel's, Nesher's, Kiryat Yam's and Arad's",
+  "condition": "F('x.segments.ru_most_positive_min_frac') > 0.5"
+ },
+ {
+  "where": "segments[13].approach",
+  "phrase": "Yisrael Beytenu leads almost half of Ashdod's positive stations",
+  "condition": "0.4 <= F('x.segments.ashdod_pos_yb_frac') < 0.5"
+ },
+ {
+  "where": "segments[13].approach",
+  "phrase": "about a third of Bat Yam's",
+  "condition": "0.28 <= F('x.segments.bat_yam_pos_yb_frac') < 0.38"
+ },
+ {
+  "where": "segments[13].avoid",
+  "phrase": "untargeted turnout work in Ashdod and Ashkelon, where the Netanyahu bloc projects ...",
+  "condition": "F('x.segments.ashdod_ashkelon_nb_min') > 0.5"
+ },
+ {
+  "where": "segments[14].who",
+  "phrase": "Bet El (...) and Kiryat Arba (...) are the least open of the larger settlements",
+  "condition": "F('x.segments.bet_el_kiryat_arba_least_open') == 1"
+ },
+ {
+  "where": "segments[14].approach",
+  "phrase": "The model finds almost no positive door turf (... of 197 stations), and the segment's whole value ... from list contact",
+  "condition": "F('x.segments.settlement_rz_positive') <= 10 and F('seg.settlement_rz.change_govt__list_pot') > 0.9 * F('seg.settlement_rz.change_govt__potential')"
+ },
+ {
+  "where": "segments[14].approach",
+  "phrase": "Together, which leads the change vote in ... of the 83 settlements, including Efrat, Bet El and Elkana",
+  "condition": "F('x.segments.settlement_rz_together_examples') == 1 and F('x.segments.settlement_rz_lead_together') > F('seg.settlement_rz.localities') / 2"
+ },
+ {
+  "where": "segments[15].role",
+  "phrase": "comes from persuasion in Ariel and Ma'ale Adumim",
+  "condition": "F('x.segments.ariel_maale_top2_pers') == 1"
+ },
+ {
+  "where": "segments[15].who",
+  "phrase": "Kfar HaOranim (...), Har Adar (...), Oranit (...) and Alfei Menashe (...) lean to the change lists",
+  "condition": "F('loc.3796.p26_change') > F('loc.3796.p26_nb') and F('loc.3769.p26_change') > F('loc.3769.p26_nb') and F('loc.3760.p26_change') > F('loc.3760.p26_nb') and F('loc.3750.p26_change') > F('loc.3750.p26_nb')"
+ },
+ {
+  "where": "segments[15].moves; segments[15].approach",
+  "phrase": "Yisrael Beytenu leads the change vote in Ariel / in Ariel, where Yisrael Beytenu leads, and in Ma'ale Adumim, where Yashar leads",
+  "condition": "F('loc.3570.lead_change_list') == 'Yisrael Beytenu' and F('loc.3616.lead_change_list') == 'Yashar'"
+ },
+ {
+  "where": "segments[15].approach",
+  "phrase": "persuasion supplies most of it",
+  "condition": "F('seg.settlement_secular.change_govt__pers_pot') > 0.5 * F('seg.settlement_secular.change_govt__potential')"
+ },
+ {
+  "where": "segments[15].approach",
+  "phrase": "Oranit and Alfei Menashe, where Yashar leads every station, are tiered low yield ... Persuasion is the largest part of their modelled value",
+  "condition": "F('x.segments.oranit_alfei_yashar_all_stations') == 1 and F('loc.3760.change_govt__tier') == 'Low yield' and F('loc.3750.change_govt__tier') == 'Low yield' and F('x.segments.oranit_alfei_pers_largest') == 1"
+ },
+ {
+  "where": "segments[15].avoid",
+  "phrase": "Avoid citywide turnout work in Ariel and Ma'ale Adumim, where the Netanyahu bloc projects ...",
+  "condition": "F('x.segments.ariel_maale_nb_min') > 0.5"
+ }
+]

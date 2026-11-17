@@ -1,0 +1,293 @@
+{
+ "verdicts": [
+  {
+   "id": "D12-F01",
+   "status": "verified",
+   "note": "Checked against the Party Financing Law (raw Hebrew Wikisource text re-downloaded 13 Oct 2026). s.3(a)-(b): one unit per seat, and for an existing faction the mean of its outgoing and incoming seats. The fixed add-on is 1 unit, raised to 1.4 units by a temporary provision for the 26th Knesset. s.4(a)(1): the advance is 70% of a unit per MK, 80% under the 26th-Knesset temporary provision. s.7(b)-(c): 70-unit ceiling; 10 units for up to 5 MKs; 2 units per MK for 6-10; 2 units for each of the first ten MKs plus 1.5 for each further MK; s.7(c)(4): a list without an outgoing faction gets the higher of 10 units or the formula on seats won. s.1 note: unit NIS 1,638,000 from Jan 2026 (YP 2858) and NIS 1,835,000 for 26th-Knesset election expenses (YP 7682). Arithmetic re-done: 41 units = NIS 75.235m; 39.5 units = NIS 72.48m; 32 units = NIS 58.72m. All correct.",
+   "corrected_claim": "",
+   "corrected_quant": "",
+   "corrected_url": ""
+  },
+  {
+   "id": "D12-F02",
+   "status": "corrected",
+   "note": "Checked against the Party Financing Law (raw Hebrew Wikisource text re-downloaded 13 Oct 2026) ss.8, 8c, 9a, 13b(f). Correct: voters only (8(d1)); no corporate (8(a)), anonymous or unverified (8(d2)) or cash (8(d3)) gifts; NIS 1,100 in a regular year and NIS 2,800 in an election year (2026 values); repayment up to twice the gift (8(e)(1)); up to 1 year in prison (9a(a)(3)-(4)); NIS 150,400 cap where public funding is waived (8c); joint list counts as one faction for the election-year cap (13b(f)). Omitted, and material to several 2026 lists: s.8(c1) lets a party NOT represented in the Knesset take five times the cap (NIS 14,000 per household in an election year). 13b(f) applies that 5x cap to a joint list only when all its parties are unrepresented. s.8(c2) lets a list that won no seats take up to ten times the election-year cap (NIS 28,000) in the 12 months after the vote, to pay election debts. The claim's single NIS 2,800 ceiling 'to a party' is therefore wrong for unrepresented parties such as Reservists-Economic and Amcha, and possibly Yashar.",
+   "corrected_claim": "Parties may accept donations only from registered voters; corporate, anonymous or unverified, and cash donations are banned. In an election year a person and household may give a represented party at most NIS 2,800 (2026 value; NIS 1,100 in other years). A party not represented in the outgoing Knesset may take up to five times that (NIS 14,000 in an election year), and a list that wins no seats may take up to ten times the election-year cap (NIS 28,000) per household in the 12 months after the vote, to cover election debts (s.8(c1)-(c2)). The parties of a joint list count as one faction for the cap. An illegal donation must be returned, and the Comptroller may order the party to pay the state up to twice its value; knowingly giving or taking one carries up to 1 year in prison.",
+   "corrected_quant": "2026 caps per person/household: represented party NIS 2,800 (election year) / NIS 1,100 (other years); unrepresented party 5x (NIS 14,000 / NIS 5,500); seatless list after the election up to NIS 28,000 for 12 months for debts. Waiver lists: NIS 150,400. Sanction: up to 2x the illegal donation.",
+   "corrected_url": ""
+  },
+  {
+   "id": "D12-F03",
+   "status": "verified",
+   "note": "Checked against the Party Financing Law (raw Hebrew Wikisource text re-downloaded 13 Oct 2026). s.2(a1): a faction or list with more than 1% of valid votes but no seats gets one unit; 85% after the results and 15% after a positive Comptroller report; any advance is deducted. s.4(a1)-(a3) and (c1)-(c2): bank guarantees and their calling, and repayment of excess advances. Arithmetic checked against the CEC expc_25 file: 2022 valid votes 4,764,742 (4,794,593 cast minus 29,851 invalid); 1% = 47,647; 1.6% = 76,236; 1.3% = 61,942; 0.6% = 28,588. Caveat for the relevance: under the 26th-Knesset temporary provision s.4(a2), a non-faction list may draw an advance of up to 10 units against a guarantee. A list that finishes above 1% with no seats therefore still owes back roughly 9 units, so the one unit lowers its debt rather than paying it money. The relevance's 'our inference' label is appropriate.",
+   "corrected_claim": "",
+   "corrected_quant": "",
+   "corrected_url": ""
+  },
+  {
+   "id": "D12-F04",
+   "status": "verified",
+   "note": "The statutory part (PFL s.10(a), (b), (e)(1)-(2)) matches: accounts due 24 weeks after results, report 24 weeks later, 15% withheld after a non-positive report, one-third of any overspend capped at 20%. ToI 18 Oct 2016 (ToI Staff): Likud and Jewish Home ~NIS 850k each, Joint List NIS 1.2m, YB ~NIS 200k; deficits Yesh Atid NIS 16m, Likud 10m, YB 9m, ~NIS 60m in all. ToI 30 Nov 2021: for Sept 2019, Likud, Labor, Atzmaut and Meretz NIS 200k each, plus NIS 50k on Likud for the 'Leumiada'; signs of paid follower-boosting and fake accounts that could not be tied to parties. All match. Minor points: the Sept 2019 report came about 2.2 years after the vote, not 1.5-2. The same report also fined April 2019 lists (Ta'al 100k, Meretz 75k, Degel 30k), so the summary's 'NIS 50k-1.2m' range should start at NIS 30k.",
+   "corrected_claim": "",
+   "corrected_quant": "",
+   "corrected_url": ""
+  },
+  {
+   "id": "D12-F05",
+   "status": "corrected",
+   "note": "Checked against the Party Financing Law (raw Hebrew Wikisource text re-downloaded 13 Oct 2026) s.10c and the s.1 definition of 'election activity', and the Jewish Press report (JNi.Media, 21 Mar 2017: passed 41-27, sponsor Yoav Kisch, foreign money capped at one third). Correct: registration above NIS 120,400 (2026); publication within 7 days in the election period and 14 otherwise; foreign share at most one third, with a NIS 722,100 total cap when foreign money is taken; auditor above the higher tier. The covered activities are listed correctly (propaganda is limited to propaganda by advertisements). Two inaccuracies. First, the duty to incorporate as an amuta or public-benefit company applies only above four times the threshold (NIS 481,600) under s.10c(c)(1). Below that, a body that is a corporation must be one of those two forms (s.10c(b)(1)); an unincorporated group may register as it is. Second, the bar in s.10c(e)(1) covers any Knesset candidate or holder of a role in party institutions, not only senior officials. Household donation caps: twice NIS 18,100 (NIS 36,200) in the lower tier, NIS 18,100 above the higher tier.",
+   "corrected_claim": "Since the 2017 amendment, any person or group that spends (or raises) more than NIS 120,400 (2026 value) on 'election activity' must first register with the State Comptroller as a body active in elections. If it is a corporation it must be an association or public-benefit company and run a website, and above four times the threshold (NIS 481,600) it must incorporate as such and appoint an auditor. Each donation is published within 7 days during the election period (14 otherwise). Household donations are capped (NIS 36,200; NIS 18,100 above the higher tier), and foreign donations may not exceed one-third of the total. Election activity covers voter databases linking ID to voting intention, election-day transport of voters, direct appeals to voters of particular views, and advertising propaganda. No Knesset candidate or holder of a role in party institutions may hold a senior role in such a body.",
+   "corrected_quant": "Registration threshold NIS 120,400 (2026); incorporation and auditor tier NIS 481,600; household cap NIS 36,200 (lower tier) / NIS 18,100 (upper tier); foreign money at most 1/3 and total at most NIS 722,100 if any is taken; publication within 7 days in the election period. Passed 41-27, 21 Mar 2017 (sponsor Yoav Kisch).",
+   "corrected_url": ""
+  },
+  {
+   "id": "D12-F06",
+   "status": "verified",
+   "note": "PFL s.10a(a): spending by a body linked to a faction counts as faction spending. The IDEA page (ans1031581965, Israel) quotes the same provision. s.13b(a), (b), (d): joint-list parties keep separate or joint accounts and must sign an election-expense agreement. ToI 18 Oct 2016: the Comptroller accepted that Meretz and Zionist Union did not organise or urge attendance at the 7 March rally, so their passive participation was not a donation. For the 15 March rally he held that Likud, Jewish Home, YB and Yachad took an active part and received a prohibited contribution. Yachad is not among the fined parties. Matches. The 'parties are corporate bodies' reasoning in the relevance is correctly labelled as inference.",
+   "corrected_claim": "",
+   "corrected_quant": "",
+   "corrected_url": ""
+  },
+  {
+   "id": "D12-F07",
+   "status": "verified",
+   "note": "Elections (Propaganda Methods) Law s.16e(b)-(h) and s.17, checked in the Wikisource text. Disclosure items (1)-(6); written publishers must also give the questions; unscientific polls must be labelled; the full method goes to the CEC 'as soon as possible'; a Comptroller report with funder and deal details within 20 days; data kept 3 years; blackout from the end of the Friday before polling until polls close, with older polls labelled not current. s.17: 6 months or a fine. 20 days after 27 Oct is 16 Nov 2026. Nuance: the broadcast disclosure duty binds the first broadcaster and anyone re-broadcasting within 24 hours, not 'anyone who publishes'. The relevance about internal polls is right: s.16e(a) defines an election survey by its subject and timing, not by whether it is published.",
+   "corrected_claim": "",
+   "corrected_quant": "",
+   "corrected_url": ""
+  },
+  {
+   "id": "D12-F08",
+   "status": "corrected",
+   "note": "Propaganda Law ss.5, 15, 15a checked. 14-day window for radio (15(a1)) and TV (15a(a)). 7 TV minutes plus 2 per outgoing MK; 15 radio minutes plus 4 per MK. 60-day ban on other broadcast propaganda. KEL s.129 cut-off at 19:00 on the eve. 55-minute illustration correct. One inaccuracy: the statutory rest-day exclusion (s.15a(c)) applies to TV broadcasts only; the radio section has none (the CEC chair may still schedule radio that way). Relevance cross-refs P-F04 and P-F06 exist and fit.",
+   "corrected_claim": "Free campaign broadcasts run only in the 14 days before the election: TV (not on statutory rest days) and radio. Each list gets 7 TV minutes and 15 radio minutes; a list submitted by a party that is a faction in the outgoing Knesset gets 2 extra TV minutes and 4 extra radio minutes per sitting MK. Outside these broadcasts, election propaganda on radio and TV is banned for the 60 days before the vote.",
+   "corrected_quant": "",
+   "corrected_url": ""
+  },
+  {
+   "id": "D12-F09",
+   "status": "corrected",
+   "note": "The claim is correct (Propaganda Law s.8, read with s.2's 90-day period plus election day): entertainment, music, singing, films and torch processions are banned; gifts are banned; food or alcohol only at parties in private homes. Cross-ref D3-F13 (+2.6 to +6.5 pp) exists in gotv.json. Relevance correction: the statement that Likud was 'criticised in 2019' for election-day 'thank-you' gifts at polling places has no source and could not be verified. The closest item found is a search-index summary of a JPost report (17 Sep 2019) that CEC chair Melcer stopped a Likud ice-cream truck handing out free treats; the page text could not be confirmed. Drop the Likud example or replace it with a sourced ruling.",
+   "corrected_claim": "",
+   "corrected_quant": "",
+   "corrected_url": ""
+  },
+  {
+   "id": "D12-F10",
+   "status": "corrected",
+   "note": "Knesset Elections Law ss.122, 123 and 134a checked. Bribe to vote or abstain: 5 years. Promises of work, threats of dismissal, oaths, curses and amulets are covered. A bribe includes 'service or other benefit', given directly or through others, before or after the vote. Driving a voter to and from the polling station is excluded. Intercity transport is state-funded through the CEC. All correct. The 2013 precedent in the quant has no source in the finding. It is supported by a Jerusalem Post report (indexed at the corrected_url; the www URL now returns 404) and does not appear in the cited statute. Then-MK Leon Litinetsky, a YB member at slot 34 on the joint Likud-Yisrael Beytenu list, was recorded by Channel 10 promising state-paid polling-station jobs (NIS 800 per 8 hours) to the activists who brought out the most voters. CEC spokesman Giora Pordes said such promises were illegal and 'appears to be a case of election bribery'. This was a spokesman's preliminary view and a referral to the AG, not a ruling. A related Ynet report of 1 Feb 2013 describes a referral under s.122 over jobs for activists who supplied voter lists.",
+   "corrected_claim": "",
+   "corrected_quant": "s.122 penalty: up to 5 years or a fine. Reported precedent (Jan 2013): Channel 10 recorded then-MK Leon Litinetsky (YB, joint Likud-Beytenu list) promising NIS 800 polling-station jobs to the activists who turned out the most voters; the CEC spokesman called it apparent election bribery and referred it to the AG (outcome not found).",
+   "corrected_url": "https://he.wikisource.org/wiki/חוק_הבחירות_לכנסת ; https://m.jpost.com/diplomacy-and-politics/yisrael-beytenu-candidate-offers-bribes ; https://www.ynetnews.com/articles/0,7340,L-4327952,00.html"
+  },
+  {
+   "id": "D12-F11",
+   "status": "verified",
+   "note": "Propaganda Law checked. s.7: list letters only in the 42 days before election day (27 Oct minus 42 days = 15 Sep 2026). s.10(a)(4): posters only on boards the local authority designates. s.9(b): no pasting, painting or projecting light on buildings, fences, roads or pavements. s.10(a1): homes and party offices may display material subject to by-laws and the Roads (Signage) Law. s.10a applies to signs, s.10b to billboards and buses. s.4: loudspeakers only at assemblies and gatherings. All correct.",
+   "corrected_claim": "",
+   "corrected_quant": "",
+   "corrected_url": ""
+  },
+  {
+   "id": "D12-F12",
+   "status": "verified",
+   "note": "Propaganda Law ss.2a, 2b and 2c match the claim. s.2 makes s.2a apply at all times and s.2b and s.2c only in the 90-day period, which is consistent with the ruling. Ynetnews hr9pi1o9l (Amir Ettinger; date not shown): Sohlberg accepted Likud's petition (Adv. Ilan Bombach) and ordered removal of Eisenkot's AI-generated soldiers video under the permanent public-assets ban, although it predated the IDF ban. INN 431942 (Hezki Baruch, 19 Aug 2026): Bennett ordered to remove only the segments with soldiers and an artillery piece (partial order; public assets and IDF). JPost 909066 (Anna Barsky, 18 Sep 2026): Likud petitioned over three Yashar videos about Netanyahu before 7 October, after a 10:00, 17 Sep ultimatum, alleging misleading editing as 'unfair interference' (s.13); no ruling. A 13 Oct search found no reported ruling yet.",
+   "corrected_claim": "",
+   "corrected_quant": "",
+   "corrected_url": ""
+  },
+  {
+   "id": "D12-F13",
+   "status": "verified",
+   "note": "Propaganda Law s.2a2 (temporary provision 23 Jul 2026 to 26 Oct 2027; definition of 'deep fake'; the chair may set rules) and s.2a1 (name and contact of whoever commissioned the ad, covering paid propaganda) checked. Pearl Cohen alert (Ravia and Hammer, 30 Jul 2026): rules issued 26 Jul 2026 by the CEC under Sohlberg; a text notice or one of two standard symbols; print and images at least the greater of 5% of height or 10 pt; video at least 5% of screen height or width, on screen for the whole duration; audio read at start and end. Matches. The alert does not cover sponsor ID, which comes from the statute and is cited correctly.",
+   "corrected_claim": "",
+   "corrected_quant": "",
+   "corrected_url": ""
+  },
+  {
+   "id": "D12-F14",
+   "status": "verified",
+   "note": "KEL s.126(5): 5 m from the gate, or 10 m from the outer walls where there is no yard or fence; 6 months. s.129: from 19:00 on the eve, no rallies, processions, loudspeakers or radio/TV. s.73: who may be present. IDI Policy Paper 64 (p.49-50 of the Hebrew PDF): reg. 45a of the Elections Regulations bars mobile and radio conversations in the room while a voter is present and during the count, except to run the vote or in an emergency. Cross-refs D5-F25 (17 Sep 2026 High Court ruling), D5-F26 and D2-F17 exist in the context files and match.",
+   "corrected_claim": "",
+   "corrected_quant": "",
+   "corrected_url": ""
+  },
+  {
+   "id": "D12-F15",
+   "status": "corrected",
+   "note": "KEL ss.21, 24 and 79 checked. Correct: CEC sets size and faction mix by D-40 with at least 3 factions (21(a)(1)); D-40 = 17 Sep 2026; factions appoint members, deputies and permanent alternates and may replace them (21(e)-(f)); a session is valid with the secretary present, but counting needs two factions besides the secretary (24(i)(1)); one observer per unrepresented list (24(d)); the protocol is signed by two members including the chair or deputy, plus the secretary, and members and observers may add remarks (79(d)). Observers' booth slip checks and 'factual' remarks come from regulations, as cited by IDI p.50. 11,707 regular stations in 2022 (CEC expb_25 and Comptroller 75C), so 'about 11,700' is right. Inaccuracy: s.21(d) says a committee is formed without a faction only when that faction fails to notify, in time, the names of its representatives who will serve as committee CHAIRS. It is not a general rule for all nominees, so the relevance line 'Unfilled seats are lost by default (s.21(d))' overstates the statute. Timing for other members is left to rules under s.21(h).",
+   "corrected_claim": "The CEC fixes each polling committee's size, faction mix and chair and deputy factions no later than the 40th day before the election, with at least three factions per committee. Factions appoint their members, deputies and permanent alternates and may replace them at any time under the regulations. If a faction does not notify, within the time set by rules, the names of its representatives who will chair committees, the committee is formed without that faction's representatives (s.21(d)). A committee sits validly whenever the secretary is present, but counting needs representatives of at least two factions besides the secretary. A list with no seat on a given committee may send one observer, who may add remarks to the protocol and, under the regulations, check the booth for ballot slips. The protocol is signed by two members, one of them the chair or deputy, and by the secretary.",
+   "corrected_quant": "",
+   "corrected_url": ""
+  },
+  {
+   "id": "D12-F16",
+   "status": "verified",
+   "note": "State Comptroller Report 75C (May 2025), PDF downloaded and read. p.6: tens of thousands of election-week workers and tens of thousands of faction representatives serving as committee members. p.8 fn.10: the 25th-Knesset budget proposal included a second secretary at every station (~NIS 39m) and a camera-carrying integrity inspector (~NIS 31m). p.9: secretary pay raised from NIS 2,279 to NIS 2,868 between the 24th and 25th elections. p.3: eligible voters 6.34m to 6.79m and regular stations ~10,500 to ~11,700. Kipa (4 Aug 2026): NIS 3,000 gross per day minus 18% special tax, and no party membership or activity in the prior 3 years; KEL s.21a(b) confirms the 3-year declaration. Caveat: the second secretary is documented for 2022; whether the CEC repeats it in 2026 was not confirmed, and the 2022 Comptroller audit recommended re-examining it.",
+   "corrected_claim": "",
+   "corrected_quant": "",
+   "corrected_url": ""
+  },
+  {
+   "id": "D12-F17",
+   "status": "verified",
+   "note": "English abstract of the State Comptroller report (May 2022), PDF downloaded. Inspectors up fourfold and cost threefold (NIS 17m to 51m) between the 22nd and 24th elections. 50 of 283 sampled sensitive stations (18%) had no inspector. 56 of 799 stations (7%) needed in-depth examination. Video sent to police from 10 stations (0.08% of ~13,240). 15,500 cameras for NIS 19.3m. 34% of inspectors failed to use the app. No handling data for almost 40% of closed reports. All match. Note: the 18% comes from a Comptroller sample. The executive summary's wording ('its own audit found police-grade evidence at only 10 of about 13,240 stations') overstates: the audit was the Comptroller's, and the 10 stations are police video referrals, not established evidence.",
+   "corrected_claim": "",
+   "corrected_quant": "",
+   "corrected_url": ""
+  },
+  {
+   "id": "D12-F18",
+   "status": "corrected",
+   "note": "ToI (Raoul Wootliff, 16 Apr 2019): the final count moved a seat from Likud (to 35) to UTJ (to 8), which had been 'several hundred ballots shy'. The CEC reviewed the stations New Right cited, 'dozens' per the article, and found 'no substantial errors'. ToI (25 Sep 2019): 6 stations annulled (3 Yarka, 1 Sakhnin, 1 Shfaram, 1 'Arava', i.e. Arraba) over 'real evidence of apparent vote tampering'; partial annulments in Yarka and Sakhnin; Melcer asked the AG to consider seeking a revote. CEC expc_25 recomputation: Meretz 150,793 against a threshold of 154,854, short by 4,061. Inaccuracy: ToI attributes the September 2019 UTJ-to-Likud seat move to the annulments TOGETHER with corrections of statistical anomalies and the last six batches of double-envelope votes, not to the annulments alone. The April 2019 move likewise followed the double-envelope count and corrections.",
+   "corrected_claim": "In April 2019 the final count, including corrections and the double-envelope votes, moved a seat from Likud (to 35) to UTJ (to 8), which had been several hundred ballots shy. The CEC reviewed the dozens of stations New Right challenged and found no substantial errors. In September 2019 the CEC annulled all votes at six stations (three in Yarka, one each in Sakhnin, Shfaram and Arraba) and partly annulled others, citing 'real evidence of apparent vote tampering'. Together with corrections of statistical anomalies and the final double-envelope batches, the adjustment moved a seat from UTJ to Likud. The CEC chair asked the Attorney General to consider seeking a court-ordered revote at those stations.",
+   "corrected_quant": "",
+   "corrected_url": ""
+  },
+  {
+   "id": "D12-F19",
+   "status": "verified",
+   "note": "KEL s.78 checked. A ballot is invalid if not per s.76 or the prescribed size, colour or print; if it carries an identifying mark; if the envelope holds more than one slip (up to 3 identical slips count once); if the envelope was not supplied by the committee; or if the envelope arrived late. Invalid shares recomputed from the CEC expc_21 to expc_25 files: 30,983/4,340,253 = 0.714%; 28,362/4,465,168 = 0.635%; 25,073/4,615,135 = 0.543%; 26,313/4,436,365 = 0.593%; 29,851/4,794,593 = 0.623%. All match. 29,851 is 7.35 times 4,061. Invalid ballots cannot be attributed to any party, so the Meretz comparison is illustrative only.",
+   "corrected_claim": "",
+   "corrected_quant": "",
+   "corrected_url": ""
+  },
+  {
+   "id": "D12-F20",
+   "status": "corrected",
+   "note": "Independently recomputed from expb_25 with the atlas segment map (localities.csv). Regular stations 25,758/4,331,786 = 0.59%; double envelopes 4,093/462,807 = 0.88%. Segment rates: religious-Zionist 0.22, moshav 0.29, kibbutz 0.31, liberal urban 0.35, mixed urban 0.50, Jerusalem 0.56, periphery-Likud 0.67, Haredi 0.74, Russian-speaking 0.80, Bedouin 0.94, Galilee/Triangle 0.98, mixed city 1.07, Druze 1.13. Jewish non-Haredi 0.45-0.60% vs Arab 0.57-1.13% over 2019-2022. Stations at 3% or more invalid: 241, 114, 42, 150, 86. All reproduce. Relevance correction: the ~1,550 figure (0.45 pp x 344,939) is the excess invalid ballots among ALL voters in Russian-speaking-segment localities, not YB's own losses. Only YB's share of those voters' ballots would be YB's loss, and locality-level rates are ecological, so they do not show that Russian-speaking voters themselves spoil more ballots. Reword as 'roughly 1,550 excess invalid ballots across Russian-speaking-segment localities, of which YB's share is a fraction'.",
+   "corrected_claim": "",
+   "corrected_quant": "",
+   "corrected_url": ""
+  },
+  {
+   "id": "D12-F21",
+   "status": "verified",
+   "note": "KEL s.39: register information (name, parent's name, address, ID, plus polling areas and places) is given on a written undertaking to use it only for the election and voter contact. s.118a: 2 years. Bizportal/Takdin article by Lior Etgar (EBN; 1 Jun 2026) summarises the PPA guidance: register-based databases at least 'medium' security; need-based access with two-factor authentication and full logs; training; vendor risk assessment and contracts; vendors are 'holders' with independent liability; deletion from all systems including vendors' with written confirmation; AI inferences covered; privacy offence 5 years. All match. Note: this is a counsel's summary. The PPA's own primary guidance text should be cited if obtainable. The article does not say '26th Knesset', but its context is the upcoming 2026 election.",
+   "corrected_claim": "",
+   "corrected_quant": "",
+   "corrected_url": ""
+  },
+  {
+   "id": "D12-F22",
+   "status": "corrected",
+   "note": "IDI Policy Paper 64 (Mar 2026; English title 'The Algorithmic Campaign...'), PDF read. Amendment 13 lets the PPA impose fines per data subject. The election-period definition runs from the PFL determining day to publication of results (p.132 fn.378). The freeze on supervision and enforcement and the need for CEC-chair approval for stop orders are described on p.55 and p.121. The fine table on pp.122-126 matches the quant: failure to notify a database NIS 150,000 (doubled at 1m+); no security officer, no privacy officer, or a group data request without notice NIS 2/4 per person; processing without or beyond authorisation, or non-compliance with a purpose-limitation order, NIS 4/8 per person; direct mail without the s.17f(a) notice NIS 50/100 per person. Corrections: (1) the comparison 'the 2020 Elector fines were in the tens of thousands of shekels' is not in IDI. It comes from the Etgar/Bizportal piece (D12-F21 source) and from pre-decision Haaretz reporting (via ToI) that fines would not exceed several tens of thousands. Per IDI p.48, only Elector was ultimately fined, so 'fines' should be singular and the amount labelled as reported or expected. (2) 'In force since August 2025' is confirmed by Bizportal, not by IDI.",
+   "corrected_claim": "",
+   "corrected_quant": "Examples from the Amendment 13 fine schedule (IDI pp.122-126): failing to notify a database NIS 150,000 (doubled at 1 million+ people); no security officer, no privacy officer, or a group data request without notice NIS 2 per person (NIS 4 for sensitive data such as political views); processing without or beyond authorisation, or ignoring a purpose-limitation order, NIS 4 per person (NIS 8 sensitive); direct mail without the required notice NIS 50 per person contacted (NIS 100 sensitive). By comparison, the single PPA fine after the 2020 Elector leak (on Elector only) was reported to be in the tens of thousands of shekels (Etgar, Bizportal 2026; pre-decision Haaretz reporting).",
+   "corrected_url": "https://www.idi.org.il/media/32009/the-algorithmic-campaign-voter-privacy-and-the-2026-israeli-elections.pdf ; https://www.bizportal.co.il/takdin/news/article/20033135"
+  },
+  {
+   "id": "D12-F23",
+   "status": "corrected",
+   "note": "IDI Policy Paper 64 checked. p.48: in Jan 2021 the PPA found Likud, YB and Elector breached the law and the security regulations, but said it would fine only Elector, about 11 months after the leak, for lack of power over most breaches. Footnote: PPA determinations of 27 Jan 2021. p.47: about 6.5m voters' records leaked. p.54: the Comptroller's July 2022 party-finance publication found six factions/parties had enriched register data through commercial firms without checking the lawfulness of the purchased data or data subjects' consent. All match. Inaccuracy: the 2022 media item (Seventh Eye, Shuki Tausig, 22 Jul 2022, IDI fn.133) is headlined, in translation, 'we will bring you the phones of everyone who did not vote for the party'. IDI places it alongside reports that parties kept data on who did or did not turn out. 'Phone numbers of supporters who had not voted' is an interpretation the headline does not state.",
+   "corrected_claim": "In January 2021 the PPA found that Likud, Yisrael Beytenu and the app vendor Elector had breached the Privacy Protection Law and its data-security regulations. It said it would fine only Elector, about 11 months after the leak, because it lacked power to fine for most breaches. A July 2022 State Comptroller party-finance publication found that six factions and parties had enriched register data through commercial firms without checking that the data were lawfully obtained or that data subjects had consented. In 2022 a Likud volunteers' conference was reported (Seventh Eye) promising volunteers 'the phones of everyone who did not vote for the party', amid reports that parties retained data on who had turned out in the previous election.",
+   "corrected_quant": "",
+   "corrected_url": ""
+  },
+  {
+   "id": "D12-F24",
+   "status": "verified",
+   "note": "IDI Policy Paper 64 p.53-54: the PPA has made clear that messages from parties, lists or candidates segmented on a personal characteristic are direct mail whatever the format (media, SMS, social networks, messaging apps); unlike the anti-spam law, the direct-mail rules apply to political propaganda; recipients have a right to be deleted. The fine table (p.124, s.17f(a)) lists the notice contents: say it is direct mail, give the controller's identity and address, the data sources, and the right to deletion. NIS 50/100 per person. Matches. Cross-refs D3-F08, D3-F09 and D3-F12 exist in gotv.json and fit.",
+   "corrected_claim": "",
+   "corrected_quant": "",
+   "corrected_url": ""
+  },
+  {
+   "id": "D12-F25",
+   "status": "corrected",
+   "note": "Crossref confirms both articles: Masket, POQ 73(5):1023-1039 (2009), and Masket, Sides & Vavreck, Political Communication 33(2):169-187 (online Jul 2015, issue 2016). The 2009 abstract says Obama office counties saw a disproportionate Democratic increase, enough to flip three states. The 2016 abstract finds an association for Obama offices and none detectable for Romney's, with an aggregate impact too small to decide 2012. Neither abstract gives a coefficient, and the full texts were not accessible. The +0.6 pp (2008) and +0.3 pp (2012) figures and 'no effect for the McCain offices' come from Seth Masket's blog post in Washington Monthly (3 Feb 2013), an all-50-state rerun with county controls. They are not from the peer-reviewed 2016 article, whose estimate may differ. The quant should be attributed accordingly.",
+   "corrected_claim": "",
+   "corrected_quant": "Obama 2008: about +0.6 pp two-party vote in counties with an office; 2012: about +0.3 pp (Masket's 2013 Washington Monthly blog rerun, not the 2016 article's tables); McCain and Romney offices: no significant effect (same blog; the 2016 article reports no detectable Romney effect). Darr & Levendusky: about +1 pp (P-F22).",
+   "corrected_url": "https://doi.org/10.1093/poq/nfp077 ; https://doi.org/10.1080/10584609.2015.1029657 ; https://washingtonmonthly.com/2013/02/03/the-ground-game-in-2012/"
+  },
+  {
+   "id": "D12-F26",
+   "status": "corrected",
+   "note": "The DOI given (10.1093/acprof:oso/9780199336760.001.0001) resolves in Crossref to Hahrie Han, 'How Organizations Develop Activists' (OUP 2014), not to Groundbreakers. Groundbreakers (Elizabeth McKenna and Hahrie Han, OUP 2014; Oxford Scholarship Online 2015) is DOI 10.1093/acprof:oso/9780199394593.001.0001. The descriptive claims (distributed leadership; Han's 'transactional mobilising' plus 'transformational organising') fit both books' known theses. The claim correctly says no causal effect size.",
+   "corrected_claim": "",
+   "corrected_quant": "",
+   "corrected_url": "https://doi.org/10.1093/acprof:oso/9780199394593.001.0001 (Groundbreakers) ; https://doi.org/10.1093/acprof:oso/9780199336760.001.0001 (How Organizations Develop Activists)"
+  },
+  {
+   "id": "D12-F27",
+   "status": "corrected",
+   "note": "Crossref confirms Han, APSR 110(2):296-307 (May 2016). The abstract confirms three field experiments in which a relational context raised petition signing, recruiting and meeting attendance. The APSR full text is paywalled, so the numbers could not be checked against the article. They match only the Commons Library blog summary (Joel Dignam): personal-goal message 'almost three times' petition signing; new-member framing '3x' recruiting; 42% attendance after a debrief call vs 12.5% after a regular call. Cite the blog as the source of the numbers. Relevance correction: the experiment measured attendance at a civic organisation's next meeting. It did not measure volunteer retention through an election-day operation, so 'the most evidence-backed way to keep them through 27 Oct' overstates. Say 'a promising, low-cost practice supported by one US field experiment'.",
+   "corrected_claim": "",
+   "corrected_quant": "As summarised by the Commons Library (not checked against the APSR tables): personalised-goal message almost 3x petition signing; new-member framing about 3x recruiting; meeting attendance 42% after a debrief conversation vs 12.5% after a regular invitation call.",
+   "corrected_url": "https://doi.org/10.1017/S000305541600006X ; https://commonslibrary.org/hahrie-han-on-how-relationships-improve-mobilisation/"
+  },
+  {
+   "id": "D12-F28",
+   "status": "corrected",
+   "note": "Crossref and the abstract confirm Enos & Hersh, APSR 109(2):252-278 (2015). Workers were demographically unrepresentative and ideologically extreme, cared about atypical issues, misunderstood voters' priorities, and there was 'little evidence' that agent-control strategies mitigated this. Claim and quant are accurate. Relevance correction: the article finds that standard management tools did not fix the problem, so recommending 'tight scripts' (an agent-control tool) cuts against it. The supported remedy is selecting messengers, i.e. local, traditional or reservist volunteers for persuasion. The characterisation of change-bloc activists as 'disproportionately secular, educated and drawn from the protest movement' has no source and should be labelled as an assumption.",
+   "corrected_claim": "",
+   "corrected_quant": "",
+   "corrected_url": ""
+  },
+  {
+   "id": "D12-F29",
+   "status": "verified",
+   "note": "Crossref: Gerber, Huber, Biggers & Hendry, PNAS 113(26):7112-7117 (2016). The abstract confirms a large-scale field replication of Bryan et al.: no significant noun-vs-verb difference (point estimate about zero, against Bryan et al.'s 11-14 pp), and both wordings less effective than a short standard GOTV message. Cross-refs D3-F14 and P-F05 exist and fit.",
+   "corrected_claim": "",
+   "corrected_quant": "",
+   "corrected_url": ""
+  },
+  {
+   "id": "D12-F30",
+   "status": "verified",
+   "note": "Crossref: Nickerson & Rogers, JEP 28(2):51-74 (2014). The abstract confirms that campaigns build individual predictive scores for behaviour, support and responsiveness to targeting. The paper treats responsiveness ('persuasion') scores as requiring randomised experiments; it is a review with no single effect size, as stated. The P-F05 cross-ref (tau/mu about 0.5) exists. The relevance is reasonable.",
+   "corrected_claim": "",
+   "corrected_quant": "",
+   "corrected_url": ""
+  },
+  {
+   "id": "D12-F31",
+   "status": "verified",
+   "note": "Crossref: Aggarwal et al. (10 authors), Nature Human Behaviour 7(3):332-341 (online Jan 2023). PubMed abstract: a US$8.9m, 8-month social-media programme aimed at 2 million moderate- and low-information persuadable voters in five battleground states; no average turnout effect; Biden leaners +0.4 pp (s.e. 0.2), Trump leaners -0.3 pp (s.e. 0.3); difference 0.7 pp, P = 0.036. Exact match.",
+   "corrected_claim": "",
+   "corrected_quant": "",
+   "corrected_url": ""
+  },
+  {
+   "id": "D12-F32",
+   "status": "verified",
+   "note": "Crossref: Hyde, World Politics 60(1):37-63 (Oct 2007); the abstract matches the claim. The desk flagged the effect size as unchecked, so it was recomputed from Hyde's replication data on Yale Dataverse (doi:10.60600/YU/KJE1VX; 1,764 station rows), mirroring Table 1 rows 1-2 of the authors' R script. Round 1: Kocharian 48.3% at observed (n=748) vs 54.2% at unobserved (n=1,016), a 5.9 pp difference. Round 2, stations observed only in round 2 vs unobserved in both rounds: 68.7% vs 70.7%, a 2.0 pp difference. 'About 6 points lower in round 1, smaller in round 2' is confirmed. Note: assignment was quasi-random (a natural experiment), not randomised.",
+   "corrected_claim": "",
+   "corrected_quant": "",
+   "corrected_url": ""
+  },
+  {
+   "id": "D12-F33",
+   "status": "verified",
+   "note": "Crossref: Enikolopov, Korovkin, Petrova, Sonin & Zakharov, PNAS 110(2):448-452 (online Dec 2012, issue Jan 2013). PMC3545790 full text: observers randomly assigned to 156 of 3,164 Moscow stations; United Russia -10.8 pp; turnout -6.5 pp; Just Russia +2.2, LDPR +1.7, KPRF +2.9, Yabloko +3.5 (all p<0.01); true UR share about 36% vs 47% official. Exact match. The relevance's '6 stations at 90% or more turnout in 2022' was recomputed from expb_25: 6.",
+   "corrected_claim": "",
+   "corrected_quant": "",
+   "corrected_url": ""
+  },
+  {
+   "id": "D12-F34",
+   "status": "corrected",
+   "note": "Crossref: Callen & Long, AER 105(1):354-381 (2015). The abstract confirms aggregation fraud favouring connected candidates, and that announcing the photo-monitoring technology (letters to polling-centre managers) cut theft of election materials by about 60% and votes for connected candidates by about 25%. Claim and quant are accurate. Relevance correction: 'tallying and transmission errors, the main source of the 2019 seat shifts (D12-F18)' is not supported. Per the ToI reports in D12-F18, the April 2019 shift came with the double-envelope count and corrections, and the September 2019 shift came from annulments for apparent tampering plus anomaly corrections and the final double envelopes. Say instead that 'protocol-to-published-result reconciliation catches tallying and transcription errors, one of several sources of the 2019 adjustments'. The legality of photographing protocols remains open (open question 3).",
+   "corrected_claim": "",
+   "corrected_quant": "",
+   "corrected_url": ""
+  },
+  {
+   "id": "D12-F35",
+   "status": "verified",
+   "note": "Crossref: Asunka, Brierley, Golden, Kramon & Ofosu, BJPolS 49(1):129-151 (online Feb 2017, issue 2019), and Ichino & Schündeln, JOP 74(1):292-307 (2012). Abstracts: in Ghana 2012, observers reduced fraud and violence at monitored stations; in single-party-dominant areas fraud was relocated to unobserved stations, and in competitive areas violence was. In Ghana 2008 registration, observers reduced irregular registration growth (about one-sixth smaller in observed areas) with displacement to nearby areas. Matches the claim, which correctly gives direction only.",
+   "corrected_claim": "",
+   "corrected_quant": "",
+   "corrected_url": ""
+  }
+ ],
+ "missing_key_works": [
+  "Ascencio, Sergio J. & Miguel R. Rueda (2019). 'Partisan Poll Watchers and Electoral Manipulation.' American Political Science Review 113(3): 727-742. https://doi.org/10.1017/S0003055419000108 (Crossref and OpenAlex abstract checked). Uses Mexican Chamber of Deputies polling-station data. The presence of a party's representatives is robustly associated with that party's vote share, and a structural model shows parties send representatives where they expect opponents' representatives, which points to a mainly protective role. This is the closest published evidence on PARTISAN committee members and observers, the Israeli model of vote protection (D12-F15 to D12-F17), rather than the international or NGO observers in D12-F32, D12-F33 and D12-F35.",
+  "Callen, Michael, Clark C. Gibson, Danielle F. Jung & James D. Long (2016). 'Improving Electoral Integrity with Information and Communications Technology.' Journal of Experimental Political Science 3(1): 4-17. https://doi.org/10.1017/XPS.2015.14 (Crossref and abstract checked). A nationwide RCT in Uganda: letters telling polling officials that tallies would be photographed and compared with official results increased lawful posting of tallies and reduced a digit-based fraud indicator. It replicates the D12-F34 mechanism in a second country and is the direct design analogue for a protocol-photo results desk.",
+  "Buzin, Andrei, Kevin Brondum & Graeme Robertson (2016). 'Election observer effects: A field experiment in the Russian Duma election of 2011.' Electoral Studies 44: 184-191. https://doi.org/10.1016/j.electstud.2016.06.018 (Crossref metadata checked; the abstract is elided by the publisher, so no effect sizes are claimed here). A second randomised observer experiment in the same election as D12-F33, and needed before treating the Enikolopov et al. magnitude as a stable upper bound.",
+  "Pachón, Mónica, Royce Carroll & Hernando Barragán (2017). 'Ballot design and invalid votes: Evidence from Colombia.' Electoral Studies 48: 98-110. https://doi.org/10.1016/j.electstud.2017.05.005 (Crossref checked; abstract via the Universidad del Rosario repository listing). Experimental and observational evidence that ballot design drives invalid voting, with larger effects among less-educated voters, and that a more usable ballot cut invalid votes and closed a rural-urban gap. This is peer-reviewed support for the ballot-mechanics reminders recommended in D12-F19 and D12-F20, which currently rest only on the desk's own descriptive CEC analysis.",
+  "Altay, Sacha & Fabrizio Gilardi (2024). 'People are skeptical of headlines labeled as AI-generated, even if true or human-made, because they assume full AI automation.' PNAS Nexus 3(10): pgae403. https://doi.org/10.1093/pnasnexus/pgae403 (Crossref and abstract checked). Two preregistered experiments (N = 4,976, US/UK): an 'AI-generated' label lowered perceived accuracy and willingness to share even true or human-made headlines, an effect about one-third the size of a 'false' label. Relevant to D12-F13: the mandatory 2026 deepfake label carries a credibility cost, so campaigns should weigh synthetic or materially edited creative against that cost, not only against legal risk.",
+  "Bennett, Colin J. (2016). 'Voter databases, micro-targeting, and data protection law: can political parties campaign in Europe as they do in North America?' International Data Privacy Law 6(4): 261-275. https://doi.org/10.1093/idpl/ipw021 (Crossref checked). The standard peer-reviewed treatment of how data-protection regimes constrain party voter files and micro-targeting outside the US. It gives the academic framing that D12-F21 to D12-F24 lack; they rest on statute, a policy paper and a law-firm column.",
+  "Hofnung, Menachem (1996). 'The Public Purse and the Private Campaign: Political Finance in Israel.' Journal of Law and Society 23(1): 132-148. https://doi.org/10.2307/1410471 (Crossref metadata checked; abstract not retrieved). The foundational peer-reviewed study of the Israeli Party Financing Law and its enforcement by the leading scholar of Israeli party finance. It is needed to meet the guide's academic standard for D12-F01 to D12-F06, which currently cite only statute and press reports."
+ ]
+}

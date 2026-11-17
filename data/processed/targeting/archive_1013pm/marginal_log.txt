@@ -1,0 +1,20 @@
+share draws: 8000 x 19
+baseline: {'change61': 0.0521, 'change_raam61': 0.1878, 'block_nb': 0.7827, 'change_seats': 50.4445, 'change_govt': 0.1816}
+  Blue and White                   change61=-0.00006 change_raam61=-0.00039 block_nb=+0.00052 change_seats=-0.00266 change_govt=+0.00010
+  The Democrats                    change61=+0.00220 change_raam61=+0.00557 block_nb=+0.00603 change_seats=+0.16801 change_govt=+0.00505
+  Likud                            change61=-0.00143 change_raam61=-0.00577 block_nb=-0.00570 change_seats=-0.10108 change_govt=-0.00458
+  Otzma Yehudit                    change61=-0.00272 change_raam61=-0.00628 block_nb=-0.00590 change_seats=-0.12486 change_govt=-0.00575
+  Ra'am                            change61=-0.00272 change_raam61=+0.00726 block_nb=+0.00816 change_seats=-0.15000 change_govt=-0.00035
+  Religious Zionist Party          change61=-0.00305 change_raam61=-0.00862 block_nb=-0.00635 change_seats=-0.14961 change_govt=-0.00701
+  Shas                             change61=-0.00136 change_raam61=-0.00590 block_nb=-0.00693 change_seats=-0.10730 change_govt=-0.00369
+  United Torah Judaism             change61=-0.00149 change_raam61=-0.00590 block_nb=-0.00687 change_seats=-0.10659 change_govt=-0.00262
+  Yashar                           change61=+0.00220 change_raam61=+0.00551 block_nb=+0.00564 change_seats=+0.15907 change_govt=+0.00496
+  Yisrael Beytenu                  change61=+0.00227 change_raam61=+0.00583 block_nb=+0.00732 change_seats=+0.17410 change_govt=+0.00388
+  Reservists – Economic Party      change61=-0.00045 change_raam61=-0.00207 block_nb=+0.00253 change_seats=-0.04516 change_govt=+0.00030
+  Bennett 2026 + Yesh Atid         change61=+0.00162 change_raam61=+0.00570 block_nb=+0.00557 change_seats=+0.16075 change_govt=+0.00489
+  Balad + Hadash-Ta'al             change61=-0.00168 change_raam61=-0.00661 block_nb=+0.00745 change_seats=-0.10963 change_govt=-0.00407
+  Amcha Yisrael                    change61=-0.00045 change_raam61=-0.00194 block_nb=-0.00292 change_seats=-0.03732 change_govt=-0.00125
+  Noam                             change61=+0.00026 change_raam61=+0.00019 block_nb=+0.00013 change_seats=+0.00622 change_govt=+0.00022
+  The Haredi Public                change61=+0.00026 change_raam61=+0.00019 block_nb=+0.00013 change_seats=+0.00654 change_govt=+0.00022
+  Israel First                     change61=+0.00019 change_raam61=+0.00019 block_nb=+0.00006 change_seats=+0.00467 change_govt=+0.00021
+wrote /Users/idoherling/Polling:Consulting Firm/2026_Election_Model/data/processed/targeting/marginal_values.csv

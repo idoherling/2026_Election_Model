@@ -1,0 +1,788 @@
+{
+ "intro": "Messaging is the largest lever the bloc can still pull before Tue 27 Oct, but its yield is uncertain: few voters are torn between the blocs, and in US field tests late campaign contact has rarely persuaded anyone. The stakes are large. In the scenario engine, half a point of the national vote (about 24,000 votes) moving from Likud to the four change lists lifts the chance of a change-led government, now about 28%, by 3.4 points. A realistic field programme adds about 0.05 to 0.13 points. The job is therefore to change which issues soft Netanyahu-bloc and traditional voters weigh, through messengers they trust, without waking the other side's base. Each section separates what the research shows from our judgement, and says where the evidence is foreign or missing.",
+ "principles": [
+  {
+   "title": "Win the agenda, not the argument",
+   "text": "Evidence: in US experiments, TV news decided which problems viewers rated important and how much weight those problems carried when they judged the president. Across four Israeli elections, TV coverage drove which issue people named as the top problem and primed their vote intentions. In 62 elections in 10 countries, 17-29% of voters decided in the final two months, and their shifts followed issue priorities and beliefs about candidates, not policy views. Campaign contact within two months of a US general election persuaded almost no one (pooled effect 0.13 points). In N12's 9 Oct poll only about 0.6% of voters were torn between the blocs, and 5% of Netanyahu-bloc intenders said they would switch against 2% the other way. Raising an issue helps the side voters already see as best on it, and only among voters who rate it important (Canada). Model: half a point of the vote moving from Likud to the change lists adds 3.4 points to the chance of a change-led government, and a full point adds 7.0. Judgement: close on the draft and October 7 accountability, keep cost of living as the lead for undecided voters and right-wing voters who name it first, and pair each with a messenger voters trust to deliver on it.",
+   "cites": [
+    "D8-F01",
+    "P-F32",
+    "P-F03",
+    "P-F01",
+    "D5-F08",
+    "D8-F04",
+    "MODEL-FORECAST"
+   ]
+  },
+  {
+   "title": "Contest competence and accountability, not identity",
+   "text": "Evidence: Israeli votes have long been organised by collective identity: territory and security, the Jewish character of the state and religion. In 2009 voters chose parties whose national story matched their own. Support for the 2023 judicial overhaul tracked attachment to Netanyahu and hostility to partisan opponents (Israeli panel, 2023). Before the 2022 election two Israeli political scientists argued that voters credit security to the side they have already chosen, which is why former chiefs of staff gained little. In an Italian field experiment, messages about a mayor's competence and record moved more votes than ideological ones. Voters are easier to move on candidates they know less about (US), and Netanyahu is fully known. In 2006, 31% of 2003 Likud voters voted Kadima, and more than half of those switchers cited Sharon personally. Judgement: argue about who prepared, who failed and who can run the state. Introduce Eisenkot, Bennett and Liberman through their records. Do not fight on identity, where Likud is strongest.",
+   "cites": [
+    "D1-F01",
+    "D8-F10",
+    "D1-F06",
+    "D8-F09",
+    "P-F33",
+    "P-F11",
+    "D1-F09"
+   ]
+  },
+  {
+   "title": "Match the messenger to the audience",
+   "text": "Evidence: a frame moves opinion only when listeners find its source credible, and a named out-party leader pushes partisans away from a policy (US experiments). Criticism from inside a voter's own camp persuades more than criticism from the other side (US). A liberal group's endorsement worked as a negative cue for Republicans in a US field test. Senior military voices move opinion most when they oppose a specific decision, yet about 186 retired Israeli generals and security chiefs campaigned against Netanyahu in 2015 and he won. Campaign volunteers are often unrepresentative of the voters they contact, and standard management did not fix it (US). No Israeli experiment on messengers was found. Judgement: soft-right, traditional and national-religious voters should hear Eisenkot, Bennett, Liberman, Matan Kahana, local traditional figures, and former security chiefs speaking as civilians about specific decisions. Golan and Lapid speak to the base. Choose local, traditional or reservist volunteers for persuasion calls.",
+   "cites": [
+    "D8-F28",
+    "D8-F29",
+    "P-F14",
+    "D12-F28"
+   ]
+  },
+  {
+   "title": "Do not wake the other side",
+   "text": "Evidence: in US experiments, threats to a party's standing made its strong identifiers angrier, and anger mobilises. Strong dislike of a party raises turnout by about 9 points across 17 European PR systems. Israel's own results suggest how big the response can be. After Likud's 2019 hidden-camera campaign in Arab polling stations, Arab-list votes rose 39.5% while all votes rose 2.9%, though the Joint List's reunification also played a part. Likud added about 240,000 votes between September 2019 and March 2020, about a third of it matched by Yamina and Otzma's losses, and aggregate totals cannot say how much was new turnout. From 2021 to 2022 haredi lists grew 19% and right-wing lists 8%, while change-camp lists fell 0.8%, a pattern consistent with differential turnout but not proof of it. Model: 25,000 extra Netanyahu-bloc votes cut the chance of a change-led government by 1.4 points, more than ten times what a realistic field programme adds. Judgement: no triumphalism, no contempt for Likud, haredi, settler or Reservists-Economic voters, and no alarms about any community's turnout. Aim anger at decisions and leaders, never at groups of voters. Tell the bloc's own voters that turnout will be high, not that disaster looms.",
+   "cites": [
+    "D8-F24",
+    "D8-F23",
+    "D11-F19",
+    "D11-F27",
+    "D11-F28",
+    "D11-F29",
+    "MODEL-FORECAST",
+    "D8-F34"
+   ]
+  },
+  {
+   "title": "Four lists, one argument",
+   "text": "Evidence: across 111 studies, attacks only modestly lowered feelings toward the target and rarely won votes for the attacker. In a three-way Italian mayoral race, a challenger's attack on the incumbent hurt the attacker, and the candidate who stayed out gained 3.7 points. In 2022 Yesh Atid took about 18% of Meretz's 2021 voters, roughly nine times the votes by which Meretz then missed the threshold. Model: half a point of the vote moving from Yashar to the Democrats changes the chance of a change-led government by 0.03 points. The Democrats pass the threshold in about 99% of draws and Yisrael Beytenu in about 98%. Judgement: votes taken from an ally are worth almost nothing, and a public fight inside the bloc helps Likud. No paid or earned attacks between Yashar, Together, the Democrats and Yisrael Beytenu, and no 'vote for the biggest list' appeals that could drain an ally. Joint creative needs a written cost split approved by both lists' counsel and treasurers, because spending by linked bodies counts as party spending. No voter-level data passes between lists without written counsel clearance: the voter register is handed over on an undertaking never to pass it on.",
+   "cites": [
+    "D8-F18",
+    "D8-F20",
+    "D7-F14",
+    "MODEL-FORECAST",
+    "D12-F06",
+    "D12-F21"
+   ]
+  },
+  {
+   "title": "Test fast, inoculate early, spend late",
+   "text": "Evidence: in US campaigns' own experiments a single ad's effect was small on average, but ads routinely differed by about 50% from the average, and common theories of what persuades predicted poorly. The authors' simulations put 10-13% of a media budget into testing. Using pretests and machine learning to pick each person's message beat showing everyone the single best message by about 70% in US survey experiments on policy views, mostly on one of two issues, and targeting on more than one trait added nothing. Video added little persuasion over text. Ad persuasion fades fast: a half-life of about four days in a US presidential race and one to two days in smaller races, and about half the ad effect that survived to election day came from the final week. Warning voters of a coming attack and refuting it in advance builds resistance, but it decays after about two weeks (54-study meta-analysis). Wording tricks that worked in small studies failed at scale. Judgement: test 8-12 messages on 2,000-3,000 Jewish respondents with soft Netanyahu-bloc and traditional quotas, with first results by Fri 16 Oct, when the Field timeline locks the frames for scripts and paid media. Inoculate against the predictable attacks now and refresh from Wed 21 Oct. Put most paid persuasion into 21-26 Oct.",
+   "cites": [
+    "P-F05",
+    "D9-F07",
+    "D8-F32",
+    "P-F07",
+    "D8-F33",
+    "D12-F29"
+   ]
+  },
+  {
+   "title": "Threshold arithmetic, said with respect",
+   "text": "Evidence: in 2022 about 289,000 anti-Netanyahu votes were wasted when Meretz and Balad missed the threshold. Final polls misjudge lists near the line in both directions: lists averaging 3.5-4.5 seats in the final three weeks failed 22% of the time. Insurance voting for a small list depends on polls showing it near the line and on a clear coalition signal (experiments abroad). When a list withdraws, its voters scatter by their own views rather than follow their leader: after Zehut withdrew in 2019 in return for Netanyahu's promise, only about 29% of its voters went to Likud (ecological estimates). Model: Blue and White withdrawing and endorsing adds [[MISSING lev.bw_withdraws.govt]] points to the chance of a change-led government. Reservists-Economic withdrawing adds 2.6 points if 60% of its voters go to change lists but costs 0.6 points if most go right, and in both cases it raises Netanyahu's chance of 61. Judgement: rescue messaging is media, digital and calls to identified voters, timed around the final polls on Fri 23 Oct, not door work. Talk about arithmetic, never about people. No attacks on Gantz. Whether to address Reservists-Economic voters at all is a leadership decision. If they are addressed, describe the list as right-of-centre and reservist-led, and its voters as people who share the equal-burden cause.",
+   "cites": [
+    "P-F28",
+    "D7-F16",
+    "P-F25",
+    "D7-F12",
+    "MODEL-FORECAST",
+    "D7-F26"
+   ]
+  }
+ ],
+ "issues": [
+  {
+   "issue": "Security as competence and accountability",
+   "who_it_moves": "Soft-right, traditional and centre-right Jewish voters. In IDI's Aug-Sep survey security was the first-ranked vote factor for 18% of Jews, in the top two for 39%, and in the top two for 47% on the right. Centre-right voters split on prime minister: Netanyahu 44%, Eisenkot 21%, Bennett 20% (JPPI, Sep). 61% were satisfied with the IDF's conduct of the war against 34% for the government, and 59% think an October 7-type attack could recur from Gaza (INSS, Sep). On 9 Oct, 48% trusted an Eisenkot-led government to fix the October 7 failures against 30% for Netanyahu (N12).",
+   "frame": "Evidence: an Israeli panel around October 7 found the threat built trust in the security forces, not in the government or the prime minister, whose standing tracked blame. A military biography raises perceived security competence whatever the party, but not warmth (US experiment). Reframing an issue and blaming the rival's record cut the rival's issue ownership by about 7 points on a 0-1 scale, while moving toward the rival's position did not help and once raised its ownership (Danish and US experiments). In the polarised US case the effect was larger among the attacker's own supporters, so the dent among Likud voters may be smaller. Competence messages beat ideological ones in an Italian field trial. In January 2015 a majority named cost of living and social issues their top concern while Netanyahu kept the security lead, and before the 2013 election he led on security while Labor led on the economy. He won both times. Judgement: compete on security, do not pivot away from it. Present it as preparation, competence and accountability: who saw the warnings, who failed, who will fix it. Praise the soldiers and question the government's decisions, never the reverse. Do not try to out-hawk Likud.",
+   "owner": "Yashar (Eisenkot) leads. Together (Bennett) and Yisrael Beytenu (Liberman) echo it in their own voices. The Democrats keep it to the base.",
+   "risk": "A security incident in the final days can pull the agenda toward Likud: a local terror attack within three months of an election has raised the right bloc's local share by about 1.35 points, and being in rocket range by 2-6 points. Credentials do not override identity, so the frame pays only where Eisenkot is close to Netanyahu on security, and no 2026 poll in our files asks who is best on security. Commission one now, with results before Wed 21 Oct. About three in ten Jews saw a recent strike in Syria as driven by election politics, but the bloc should never make that accusation itself. No uniforms or IDF framing, and written consent for any image of a soldier wounded or killed in service. The CEC has already removed Yashar and Bennett material over military imagery.",
+   "cites": [
+    "D8-F12",
+    "D5-F21",
+    "D5-F22",
+    "D8-F17",
+    "D5-F08",
+    "D8-F11",
+    "D8-F07",
+    "D8-F06",
+    "P-F33",
+    "D8-F08",
+    "D1-F31",
+    "D1-F30",
+    "D8-F09",
+    "D8-F04",
+    "D12-F12"
+   ]
+  },
+  {
+   "issue": "October 7 accountability and the state commission of inquiry",
+   "who_it_moves": "Soft Likud voters. In May, October 7 was the top reason (37%) 2022 Likud voters gave for considering a switch. On 9 Oct, 67% said the failures have not been fixed, including 40% of Netanyahu-bloc voters (N12). Support for a state commission among coalition voters was 37% in an N12 poll reported on 6 Oct and 52% in INSS's September survey, while only 27% of coalition voters said Netanyahu bears 'a great deal' of responsibility. 41% of all voters say October 7 does not affect their vote. The inquiry is decisive for 22% of secular 18-22-year-olds.",
+   "frame": "Evidence: in the same N12 poll more coalition voters backed a state commission (37%) than said Netanyahu bears a great deal of responsibility (27%), so an institutional question reaches further than personal blame. Fear and loss appeals reliably shift attitudes and intentions, more so with a clear action that removes the threat (meta-analysis of 127 papers, mostly outside politics). Attacks rarely win votes, but negative facts are memorable (111-study meta-analysis). Judgement: lead with repair and an independent state commission of inquiry, framed as what families, soldiers and border communities are owed. Pair the loss with the action: 'another four years without a commission, or a vote for a government that sets one up'. Do not ask Likud voters to blame their leader or regret their 2022 vote. Keep the personal-responsibility contrast for the base.",
+   "owner": "Yashar (Eisenkot) leads, with one joint commission pledge in the same words from all four lists. Bereaved and survivor families speak only on their own initiative and with written consent.",
+   "risk": "The issue has become partisan. Likud petitioned the CEC on 18 Sep against three Yashar videos on Netanyahu's conduct before October 7, alleging misleading editing, and no ruling had been reported by 13 Oct. Every factual claim needs a sourced record and fair editing. Using the name or image of the fallen, the wounded or victims without written consent breaks the law and would backfire. Do not claim that Likud voters have changed their minds: the 2023 and 2026 polls asked different questions of different groups.",
+   "cites": [
+    "D5-F11",
+    "D5-F08",
+    "D8-F16",
+    "D5-F05",
+    "D8-F25",
+    "D8-F18",
+    "D12-F12",
+    "D9-F24"
+   ]
+  },
+  {
+   "issue": "The draft and equal burden",
+   "who_it_moves": "The widest cross-bloc wedge. 71.5% of Jews opposed the law freezing arrests of yeshiva students who do not report for service, and among religious groups only Haredim strongly backed it (IDI, Jul-Aug). In a December 2024 poll of 800 reservists who fought, 77% said exemptions are no longer affordable and 60% would consider not voting for a party that backs an exemption law, including 48% of right-wing reservists. The draft was the second reason (23%) 2022 Likud voters gave for considering a switch. It is in the top two issues for 34% of centrists and decisive for 26% of secular 18-22-year-olds. Shas has been losing working-class traditional voters over it.",
+   "frame": "Evidence: threats to a group's standing make its strong identifiers angrier and more active (US). Appeals to an identity that rivals share reduced partisan hostility in a 25-treatment US megastudy. Arguments framed in the listener's own values persuaded more in US experiments (small online samples). Model: half a point of the vote moving from Shas and UTJ to the change lists adds 2.9 points to the chance of a change-led government. Judgement: fairness to the families who serve, a shared burden for every citizen and a real path for yeshiva students to serve. Speak with respect for Torah study and in the language of tradition. 'Torah and service side by side: one burden for every family' is the kind of line to test. Reservists speak as civilians and parents, never in uniform. Present the draft as a policy test for any partner, not a ban on parties (see Coalition).",
+   "owner": "Together (Bennett) and Yisrael Beytenu (Liberman) carry the sharpest version. Yashar (Eisenkot) carries the fairness version to traditional voters. All four lists state the same policy.",
+   "risk": "Contempt for Haredim as a group would mobilise haredi voters. The CEC has enjoined a charity accused of paying Hasidim to stay home, and Degel HaTorah's spiritual leader called campaigns urging Haredim to abstain a 'great crime'. Lowering anyone's turnout is never an aim of this campaign. Keep the draft argument in secular and traditional channels, not in haredi media. A haredi party is one of the bloc's own routes to government (6.7% of outcomes in the formation model). For national-religious voters the draft is the top issue for only 15%. The equal-burden message depends on the reservist constituency, so speak respectfully of Reservists-Economic and its voters.",
+   "cites": [
+    "D8-F14",
+    "D6-F39",
+    "D5-F11",
+    "D5-F21",
+    "D5-F05",
+    "D5-F14",
+    "MODEL-FORECAST",
+    "D8-F24",
+    "D8-F31",
+    "D8-F26",
+    "D8-F30",
+    "D11-F32",
+    "D5-F23"
+   ]
+  },
+  {
+   "issue": "Cost of living and housing",
+   "who_it_moves": "Right-wing Jews put cost of living first, and 43% of them say it makes no difference who you vote for (IDI Democracy Index 2025). It was the top concern of undecided voters (25%, Channel 12, July), the centre's lead issue (economy in the top two for 40.5%) and the second issue for 18-22-year-olds (25%). Among Jews it ties security as the first-ranked vote factor (18%). About 65% of Jews prefer a social-democratic economy. The polls fold housing into cost of living, so there is no separate evidence on housing.",
+   "frame": "Evidence: in January 2015, 53% named cost of living and social issues their top concern, but ownership was split across several parties while Netanyahu held the security lead, and he won. Issue ownership moves most on issues no party owns (Belgian experiment). Economic views do not line up with Israeli left and right. Information-rich messages persuade more than thin ones (US). Judgement: one costed household plan for the whole bloc, on housing, prices and commuting time. Sell it as competence, 'who can actually deliver', not ideology. Link it to the draft: who works, who serves and who pays.",
+   "owner": "All four lists, one shared plan. Yashar leads it for Route 4 commuters and Yisrael Beytenu in Russian-speaking cities.",
+   "risk": "Four lists with four plans split ownership, which is what happened in 2015. Economic messages do not move bloc identity by themselves, so pair the plan with security credibility. Low efficacy on the right means the message must say what will change, not only what is wrong. Promise only what is in published platforms.",
+   "cites": [
+    "D8-F13",
+    "D5-F07",
+    "D5-F21",
+    "D5-F05",
+    "D8-F12",
+    "D1-F03",
+    "D8-F08",
+    "D8-F05",
+    "D1-F02",
+    "P-F11",
+    "D5-F13"
+   ]
+  },
+  {
+   "issue": "Religion and state",
+   "who_it_moves": "The base and secular voters, including secular Likud voters. Religion and state is the first-ranked vote factor for 13% of Jews and the left's top issue (39% in the top two). About two in three Jews support civil marriage, 64.8% opposed the gender-segregation law, and at least 35% of Likud voters take the opposite side to their religious partners on religion in public life. Secular voters are about a third of Likud's electorate. 50-60% of Russian speakers are secular.",
+   "frame": "Evidence: coded religious language reached religious voters without costing support among others in one US experiment (low confidence). Appeals to shared identity reduced partisan hostility (US). Israeli voters choose parties whose national story matches their own. Judgement: a shared Jewish public space every Israeli can live in: civil marriage, no gender segregation in public services, fair rules for all. Speak from tradition, not against religion. Lead with it for the base and for secular Russian speakers. With traditional voters, keep it inside the fairness and draft argument.",
+   "owner": "Yisrael Beytenu and Together lead. The Democrats carry it to the base. Yashar uses the tradition-friendly version.",
+   "risk": "If it sounds like hostility to religion it costs traditional and national-religious voters and hands haredi and religious-Zionist leaders a threat to rally against. It is not a lead message for soft Likud voters.",
+   "cites": [
+    "D8-F12",
+    "D5-F21",
+    "D1-F03",
+    "D8-F14",
+    "D1-F16",
+    "D1-F21",
+    "D8-F30",
+    "D8-F31",
+    "D8-F10",
+    "D8-F24"
+   ]
+  },
+  {
+   "issue": "Governance and the judicial overhaul",
+   "who_it_moves": "Mainly the base. Judicial reform is the first-ranked vote factor for only 6% of Jews (18% in the top two). In January 2025, 8.5% named the overhaul the government's top priority, though 55% opposed it. 40% of right-wing Jews said it was not the time, and 30% agreed it concentrates too much power. A small right-wing majority backed the attorney-general law in July. Undecided voters name polarisation as a top concern (15%), and unity is the centre's top issue (30%).",
+   "frame": "Evidence: support for the 2023 judicial overhaul tracked attachment to Netanyahu and hostility to partisan opponents (Israeli panel, 2023). Campaign attention to an issue often teaches partisans their own side's line rather than changing what they weigh (US panel data). In Israel, salient electoral competition raised partisan hostility, and priming cooperation between parties raised tolerance in a survey experiment. Judgement: for the base, democracy and the rule of law. For everyone else, honest and competent government and national unity, not court powers. Do not lead with the overhaul outside the base.",
+   "owner": "The Democrats and Together carry it to the base. Yashar and Yisrael Beytenu use the governance and unity version.",
+   "risk": "Leading with it turns the vote into a referendum on Netanyahu's camp and activates the attachment that drove support for the overhaul. A tribal showdown raises turnout on both sides, and Likud is already working to bring out supporters in its low-turnout strongholds.",
+   "cites": [
+    "D8-F12",
+    "D5-F21",
+    "D1-F32",
+    "D8-F14",
+    "D5-F07",
+    "D5-F22",
+    "D1-F06",
+    "D8-F02",
+    "D1-F07",
+    "D11-F20",
+    "D5-F16"
+   ]
+  },
+  {
+   "issue": "Coalition with Arab parties: inoculating against Likud's wedge",
+   "who_it_moves": "This is Likud's best wedge with the bloc's persuasion targets. 61% of Jews opposed including Ra'am in the next government (IDI, July), and 59% opposed an Arab party in the coalition while 53% supported a haredi party (Maariv, 7-8 Oct). In December 2025, 57.8% of Jews would not support a government relying on Ra'am, while about a third would under some condition. Model: the change lists alone reach 61 in 5.5% of forecast draws, and in about 27% with Ra'am.",
+   "frame": "Evidence: warning voters of a coming attack and refuting it in advance gives more resistance than supportive messages, and the effect decays after about two weeks (54-study meta-analysis). The CEC has twice ordered fakes of this kind removed: a Likud image of Bennett and Lapid joining hands with Arab party leaders (February) and an RZP AI video of an Eisenkot lookalike with Mahmoud Abbas and Mansour Abbas (July). Repeating a rumour raises belief in it, and a correction from an unexpected same-side source worked best among attentive respondents (US). Uncertainty about a party's coalition prospects costs it votes (studies in seven countries). Judgement: inoculate now and again from Wed 21 Oct, about the fakery, not about Arab politicians: 'Expect AI fakes in the final days. The election committee has already ordered two removed. Here is who will lead a change government, and on what terms.' Use only the conditional line on the Coalition page: the change bloc leads, any outside support is public, in writing and on a published programme, and security policy is not traded. Bennett, Liberman and Eisenkot deliver it. Beyond the prebunk and the agreed line, do not lead paid content with the subject, and never repeat a fake's claim in a headline.",
+   "owner": "Bloc leadership jointly: one agreed line, in the same words, from all four lists. The exact wording is a leadership decision.",
+   "risk": "An absolute pledge would give up Ra'am's seats, which lift the change lists' chance of 61 from about 5.5% to about 27%, and would invite a broken promise. Voters punish parties they see as compromising: Blue and White fell from 33 seats to 8 after Gantz joined Netanyahu in 2020. Language that treats Arab citizens or their votes as illegitimate is wrong and can backfire. After Likud's 2019 camera campaign Arab-list votes rose 39.5%, and the Task Force on Arab Citizens warns that framing reliance on Arab parties as illegitimate deepens alienation. In a 2019 survey experiment, centre-left ads on equality aimed at Arab citizens did not cost support among Jewish voters (one advocacy-linked study, low weight). Never answer the wedge by attacking Arab citizens or their parties.",
+   "cites": [
+    "D8-F15",
+    "D1-F33",
+    "MODEL-FORECAST",
+    "D8-F33",
+    "D9-F26",
+    "D9-F20",
+    "D10-F05",
+    "D10-F14",
+    "D10-F25",
+    "D11-F27",
+    "D2-F24",
+    "D6-F27"
+   ]
+  },
+  {
+   "issue": "The north and the Gaza-envelope communities",
+   "who_it_moves": "Northern Jewish towns, returning residents, and voters elsewhere who identify with them. In April, 65% of Haifa and Northern District residents said the state is abandoning the north and 70% gave the government a poor grade, including 31% of coalition voters. Vote intention there was opposition 38%, coalition 26%, undecided 27% (Midgam, n=505, margin 5.7 points). Kiryat Shmona's Likud share fell from 58% (2020) to 49% (2022). Reports on returns conflict: AFP put fewer than half of Kiryat Shmona's residents at home in April, ynet said about 40% had returned in August, and the Christian Science Monitor said almost 40% had not returned by September. Returnees skew older and poorer. In the Gaza envelope about 90% of evacuees had returned by September 2025, with newcomers mostly in Sderot, while the hardest-hit kibbutzim remain largely displaced. INSS found confidence in IDF readiness at 49% for the north. The atlas flags 49 localities within 5 km of Lebanon and 40 within 7 km of Gaza as displaced.",
+   "frame": "Evidence: Israeli men old enough to serve in the mismanaged 1973 war turned durably against the party that ran it, with no such effect after well-managed wars. But rocket range and actual hits have raised the right's local vote, and a panel study (seminar abstract only) finds persistent rightward shifts since October 7. In development towns, political identity is local and tied to place (qualitative study). Judgement: local and practical. Rebuilding, schools, jobs, health services and a secure border, with accountability for the abandonment, delivered by local people who lived it. In Likud-leaning northern towns this is persuasion, not turnout work.",
+   "owner": "Yashar (Eisenkot has met would-be Shas defectors in Kiryat Shmona and Shlomi), Yisrael Beytenu in Russian-speaking northern cities, and local leaders of all four lists.",
+   "risk": "Exploiting trauma, or using images of victims without written consent. Displaced residents vote at their registered station unless special stations are set for evacuees, as 83 were in the delayed February 2025 northern municipal elections. Confirm the 2026 arrangements with the CEC and counsel before telling anyone where to vote, and give them practical information, including free intercity buses on routes over 15 km from 20:00 on Mon 26 Oct and free trains on election day (Tue 27 Oct), with a ticket collected at a station counter or machine. The bloc does not organise rides. Generic turnout pushes in Likud-leaning towns help Likud, which is targeting its own low-turnout strongholds.",
+   "cites": [
+    "D6-F34",
+    "D5-F19",
+    "D5-F20",
+    "D6-F37",
+    "D8-F17",
+    "MODEL-FORECAST",
+    "D6-F32",
+    "D1-F30",
+    "D6-F33",
+    "D6-F40",
+    "D5-F14",
+    "D9-F24",
+    "D2-F18",
+    "D5-F28",
+    "D5-F16",
+    "D6-F36",
+    "D7-F27",
+    "D6-F35"
+   ]
+  }
+ ],
+ "audiences": [
+  {
+   "audience": "Soft Likud and traditional voters",
+   "size_note": "Yashar puts the soft-Likud pool at about 200,000 voters, a pool rather than an expected gain. In May only 58% of 2022 Likud voters were sure to vote Likud again. About 0.6% of all voters are torn between the blocs (N12, 9 Oct). Traditional voters gave 66.5% of their votes to the coalition parties in 2022. Model: half a point of the vote (about 24,000) moving from Likud to the change lists adds 3.4 points to the chance of a change-led government.",
+   "what_moves": "October 7 (37% of wavering 2022 Likud voters) and the draft (23%), then Netanyahu's conduct (14%) and division (13%). Right-wing Jews put cost of living first. At least 35% of Likud voters disagree with their religious partners on religion in public life and court powers. Among traditional voters Likud's share rose from 39% to 46.5% between 2021 and 2022, so this group moves. A critique framed as loyalty left US conservatives' stated likelihood of voting for Trump about 19 points lower on a 0-100 scale than the same critique framed as fairness (small online sample, no no-message control).",
+   "message": "You can stay who you are and vote for change. A government led by people who served will fix what failed on October 7, share the burden fairly and bring down the cost of living. Loyalty to the country and to those who serve comes first.",
+   "messenger": "Eisenkot, Bennett and Liberman. Former Likud voters and local traditional figures in their own towns. Former security chiefs speaking as civilians about specific decisions.",
+   "channel": "Earned coverage on Channel 12, N12 and ynet. Tested paid video from Wed 21 Oct. Forwards from family and friends on WhatsApp. Persuasion in door conversations in positive-value stations and in calls to identified soft Netanyahu-bloc voters. The atlas shows the most persuasion value in Rishon LeZion, Petah Tikva and Holon (see Field).",
+   "avoid": "Blaming them for their 2022 vote. Mocking Likud voters or traditional and Mizrahi identity. Leading with the judicial overhaul. Golan or Lapid as messengers to this group. Anything that makes Arab-party partnership the topic. Any message meant to keep them home: the aim is their vote, never their abstention.",
+   "cites": [
+    "D5-F12",
+    "D5-F11",
+    "D5-F08",
+    "D1-F14",
+    "MODEL-FORECAST",
+    "D8-F13",
+    "D1-F03",
+    "D8-F26",
+    "D8-F28",
+    "D8-F29",
+    "D9-F30"
+   ]
+  },
+  {
+   "audience": "Haredi-adjacent traditional voters (Shas-leaning)",
+   "size_note": "Shas fell from 11 seats in 2022 to about 7 in several polls, losing tens of thousands of working-class traditional voters to Otzma, Likud and Yashar, and a Shas activist put its hard base at about 4 seats. The current forecast (polls to 21 Oct) has Shas at 9. Traditional-religious voters gave Likud 47%, RZP-Otzma 17% and Shas 10% in 2022. Model: half a point of the vote moving from Shas and UTJ to the change lists adds 2.9 points to the chance of a change-led government.",
+   "what_moves": "The draft crisis, prices and respect. Shas and Otzma are fighting over the same traditional voters, and 15% of Otzma's current voters voted Shas in 2022. Shas has collapsed among 18-22-year-olds. In development towns political identity is local and tied to place (qualitative study). Coded religious language may reach religious voters without costing others (one US experiment, low confidence).",
+   "message": "Torah and service are both Jewish values. A fair share of the burden, respect for tradition and lower living costs for working families, from a government that keeps its promises to the periphery.",
+   "messenger": "Eisenkot in person (he has met would-be Shas defectors in Kiryat Shmona, Shlomi and Or Yehuda), traditional local figures, and rabbis who choose to speak. Not secular-liberal national leaders.",
+   "channel": "House meetings in private homes, with no gifts or catering beyond what election counsel clears. Local WhatsApp groups, local news and the bloc's allocated radio slots.",
+   "avoid": "Contempt for Haredim, rabbis or Shas voters. Secular-versus-religious framing. Taking the draft argument into haredi media. Anything that could read as discouraging haredi voting: lowering anyone's turnout is never an aim, and the CEC has enjoined a group accused of paying Hasidim to stay home.",
+   "cites": [
+    "D5-F14",
+    "MODEL-FORECAST",
+    "D1-F14",
+    "D5-F18",
+    "D5-F10",
+    "D5-F05",
+    "D6-F40",
+    "D8-F30",
+    "D12-F09",
+    "D11-F32",
+    "D8-F24"
+   ]
+  },
+  {
+   "audience": "Russian speakers",
+   "size_note": "About 15% of the population (about 900,000 people), worth 16-17 seats at full turnout, and Likud has drawn about 3-4 seats from them. The atlas's Russian-speaking towns segment has about 580,000 eligible voters in 10 localities, with 2022 turnout of 59% and a 2026 projection of 40% change lists and 56% Netanyahu bloc. Yisrael Beytenu has mapped the polling stations where Likud did best among Russian speakers.",
+   "what_moves": "Generations differ. Adults who immigrated in the 1990s sit to the right of native-born Israelis, those who arrived as teenagers lean centrist, and the Israeli-born second generation votes like other native-born Israelis. 50-60% are secular. FSU immigrants reported more abstention than other Jews in 2013 surveys. No 2026 Russian-language message poll was found, so the message here is judgement: security competence, freedom from religious coercion and an equal burden are the natural ground.",
+   "message": "Security run by professionals, freedom from religious coercion (civil marriage and fair rules for all), an equal burden in the army and lower living costs. Respect for the immigrants who built and defend the country.",
+   "messenger": "Liberman and Yisrael Beytenu's Russian-speaking candidates first, then Russian-speaking figures in Yashar and Together. Second-generation Israelis talking to their parents.",
+   "channel": "Channel 9, Russian-language news sites, Facebook and Russian-language Telegram channels, family WhatsApp groups, and a Russian-language how-to-vote card. In 2022 invalid ballots ran at 0.80% in Russian-speaking-segment localities against 0.35% in liberal cities (a locality-level pattern, not proof about individuals).",
+   "avoid": "Treating Russian speakers as one bloc. Soviet or 'Russians' stereotypes. Talking down to older immigrants. Hebrew-only creative. Change lists competing for the same voters where Yisrael Beytenu leads.",
+   "cites": [
+    "D1-F21",
+    "MODEL-FORECAST",
+    "D5-F12",
+    "D2-F13",
+    "D9-F33",
+    "D12-F20"
+   ]
+  },
+  {
+   "audience": "Young and first-time voters",
+   "size_note": "About 550,000 first-time voters, roughly 10-12 seats (Midgam for N12). Among Jewish first-time voters Yashar had 16% and Likud 14%, with 10% undecided. 74% place themselves right or centre-right, Netanyahu led Eisenkot 47-37, and 21% expect to vote differently from their parents. Among 18-22-year-olds 67% were certain to vote (Jews 71%), and 14% were undecided on a party (young women 20%).",
+   "what_moves": "Security (27%) and cost of living (25%) lead. The draft is decisive for 26% of secular youth against 6% of religious youth, and the October 7 inquiry for 22% against 5%. Among secular 18-22-year-olds Together had 20%, Yashar 18% and the Democrats 17%. Young Jewish adults are the most right-wing age group (73-75% of 18-34s in 2022). Friend-to-friend texting raised turnout about 2-3 points among those assigned and about 8-12 points among those actually messaged (US, 2018). At 18-22, 90% use Instagram, 80% TikTok and 77% Telegram.",
+   "message": "Housing you can afford, a fair share of the burden for those who serve, and an honest inquiry into what went wrong. Your first vote helps decide this. Most people your age are voting.",
+   "messenger": "Friends and classmates, young reservists and students speaking as civilians, the lists' young candidates, and creators who disclose any payment.",
+   "channel": "Instagram, TikTok and Telegram, friend-to-friend messages and campus activity. Practical facts: vote at the polling station of your registered address, intercity buses on routes over 15 km are free from 20:00 on Mon 26 Oct, trains are free on election day with a ticket collected at a station counter or machine, and soldiers vote by double envelope. Special provisions for this election may change where some voters, such as displaced residents, vote, so check with counsel and the CEC's published guidance.",
+   "avoid": "Reaching soldiers or reservists through IDF units, bases, commanders or employers. Uniforms and IDF framing. Children under 15 in any material. Saying the race is lost or that one vote does not matter. Change lists fighting each other over secular youth.",
+   "cites": [
+    "D5-F06",
+    "D2-F26",
+    "D5-F05",
+    "D1-F15",
+    "D3-F12",
+    "D9-F32",
+    "D2-F18",
+    "D5-F28",
+    "D8-F34",
+    "D12-F12",
+    "D7-F27"
+   ]
+  },
+  {
+   "audience": "National-religious moderates",
+   "size_note": "In a Dialog poll of national-religious voters (31 Aug-2 Sep), RZP-Zehut had about 30%, Likud 17%, Otzma 12%, Amcha 6%, Yashar 4% and Together 3%, with 13% undecided. Yashar estimates it already has 1-1.5 seats from religious Zionists and aims for about two more from traditional and moderate religious-Zionist voters. The atlas projects 23% for the change lists in religious-Zionist towns inside the Green Line and 14% in national-religious West Bank settlements.",
+   "what_moves": "Security (35%) and Jewish identity (25%) lead. The draft is the top issue for only 15% and settlement for 14%. The national-religious public moved right between 2019 and 2022, and its preference for a full-right coalition rose from 61% to 85%, though moderates may drift to non-sectoral parties. Among religious reservists who fought, 35% would consider not voting for a party that backs a draft exemption. No data was found on which media reach this group.",
+   "message": "Jewish identity and responsible statecraft together. Security led by people who served, Torah and service side by side, and a government that treats the religious-Zionist community as a partner, not an opponent.",
+   "messenger": "Matan Kahana and religious-Zionist candidates on the change lists, Bennett, and educators, rabbis and religious reservists who choose to speak, as civilians.",
+   "channel": "Yashar's dedicated headquarters for Gush Etzion, Efrat, Givat Shmuel and Ariel, community WhatsApp groups and house meetings.",
+   "avoid": "Attacks on settlers or settlements. Mocking religious life. Leading with the judicial overhaul or civil marriage. Making Arab-party partnership the topic. Expecting large yields in national-religious settlements.",
+   "cites": [
+    "D5-F23",
+    "D5-F12",
+    "MODEL-FORECAST",
+    "D1-F20",
+    "D6-F39"
+   ]
+  },
+  {
+   "audience": "The bloc's own base",
+   "size_note": "The atlas's secular-liberal urban segment has about 1.4 million eligible voters, projected at 65% for the change lists, with 2022 turnout of 67%. Opposition supporters are more certain to vote than coalition supporters (80% against 72% in July, 86% against 81% on 7-8 Oct). An N12 analysis puts the bloc's target at above 76% turnout among its supporters in the Sharon, Tel Aviv and Haifa. Model: 25,000 extra change-list votes add 1.9 points to the chance of a change-led government, and 50,000 add 3.7.",
+   "what_moves": "Messages saying turnout will be high beat messages lamenting low turnout, mainly among occasional voters (US). Telling individuals the race is close moved turnout by at most about 0.8 points (US). Knowing the likely outcome cut turnout by about 11 points in a French natural experiment, and win probabilities make a race look more decided than vote shares do (US). Anger at specific failures mobilises (US). In a 61-million-user US experiment the effect passed on through close friends exceeded the direct effect.",
+   "message": "Nothing is decided. People like you are voting. What is at stake is a commission, a fair draft and the next four years. Make your plan, and remind three friends to vote.",
+   "messenger": "All four leaders to their own voters, then family, friends and local volunteers.",
+   "channel": "Supporters' own WhatsApp and Telegram groups, friend-to-friend messages, earned news, the allocated broadcasts, and the field programme in positive-value stations (see Field).",
+   "avoid": "Public victory talk, which wakes Likud's base. Panic messages. Win probabilities: talk in seats and votes. Leaking internal polls, which counts as publishing a poll during the blackout. Attacks on allied lists. Shareable content that mocks other communities: posts about the out-group are shared about twice as often and draw angry reactions (US).",
+   "cites": [
+    "MODEL-FORECAST",
+    "D6-F38",
+    "D8-F15",
+    "D5-F09",
+    "D8-F34",
+    "D11-F10",
+    "D11-F13",
+    "D11-F15",
+    "D8-F23",
+    "D9-F06",
+    "D8-F24",
+    "D12-F07",
+    "D8-F21"
+   ]
+  },
+  {
+   "audience": "Druze voters (candidate-led)",
+   "size_note": "The atlas's Druze and Circassian segment has about 96,000 eligible voters in 18 localities, with 2022 turnout of about 48%. Zionist parties won about 90% of the vote in Druze towns in 2022. Druze turnout fell from about 80% in 1996 and 1999 to about 50% in 2021 and 2022. The atlas holds Druze towns out of its budgets until a check of the filed CEC lists and a Druze poll, and does not target the Golan Druze villages.",
+   "what_moves": "Druze voting is mainly utilitarian and candidate-led: support goes to parties expected to govern or with a local or family candidate. Kinship and Druze candidates on the list were the strongest predictors in a 2003-2022 study, and parties with a Druze candidate in a winnable slot have usually won the most votes in that candidate's home village. The grievances are Kaminitz-law fines and demolitions, the planning and housing shortage, and the Nation-State Law. One expert suggested Israel's 2025 moves to protect Druze in Syria could shift votes toward Netanyahu (expert view, no polling).",
+   "message": "Equal partnership for those who serve together: planning and zoning relief, an answer on fines and demolitions, and equality under the law. Only commitments that are in the lists' published platforms or cleared by list leadership.",
+   "messenger": "Druze candidates on the change lists and local Druze leaders, such as Yashar's Kamil Abu Rokon, a retired general (his list slot was not verified). Never outside spokespeople speaking for the community.",
+   "channel": "Candidate-led house meetings, local WhatsApp networks, and the Hebrew and Arabic local media the candidates choose.",
+   "avoid": "Calling Druze towns 'change-majority'. Treating Druze voters as one bloc. Promises not in platforms. Any activity in the Golan Druze villages. Headline targets before the candidate check. Change-list Druze candidates attacking each other.",
+   "cites": [
+    "MODEL-FORECAST",
+    "D1-F23",
+    "D6-F18",
+    "D1-F22",
+    "D6-F19",
+    "D6-F16",
+    "D6-F20",
+    "D6-F21"
+   ]
+  },
+  {
+   "audience": "Arab citizens (respectful national messaging only)",
+   "size_note": "Arab and Druze turnout was 53.2% in 2022, and Jewish parties won 14.3% of Arab votes. Ra'am's leader puts Arab support for Zionist parties this year at no more than 10-12%. The atlas publishes no town-level values for Arab localities and plans nothing there. Arab-sector turnout is a leadership decision, not a messaging one.",
+   "what_moves": "Crime and personal safety dominate: 53.5% of Arab respondents put crime in their top two issues (IDI, Aug-Sep), and more than 140 people were killed in Arab communities by late June. Young Arab citizens want concrete plans on crime, housing, jobs and discrimination rather than general talk of partnership. 77% of Arab respondents supported an Arab party joining the next coalition (May). The Supreme Court unanimously overturned the CEC's disqualification of the Joint List and Ra'am on 2 Oct. The Task Force on Arab Citizens warns that framing reliance on Arab parties as illegitimate deepens alienation.",
+   "message": "Equal citizenship and personal safety for every citizen, a serious national plan against crime, and respect in how the bloc speaks about Arab citizens. The same message in Hebrew and in Arabic.",
+   "messenger": "Each list's own Arab and Druze candidates in their own campaigns, such as the Democrats' Arabic outreach. The bloc does not script messages for Arab lists or civil-society groups.",
+   "channel": "The lists' own Arabic-language pages, interviews in Arabic media, and national broadcasts that speak to all citizens.",
+   "avoid": "Any change-bloc-run or branded turnout activity among Arab voters, and any turnout targeting of Arab towns or of stations where Arab lists lead. Rides or anything of value. Delegitimising language. Saying different things in Hebrew and Arabic. Any support for Arab-sector turnout is a leadership decision, independent, transparent and cleared by election counsel.",
+   "cites": [
+    "D1-F23",
+    "D5-F32",
+    "MODEL-FORECAST",
+    "D5-F21",
+    "D2-F20",
+    "D5-F01",
+    "D2-F24"
+   ]
+  }
+ ],
+ "media": [
+  {
+   "channel": "TV and radio: allocated election broadcasts (paid spots are banned)",
+   "role": "The bloc's only campaign airtime on TV and radio. Use it to teach ballot letters, keep the bloc's issues on the agenda and close on turnout. Put the best tested spots late.",
+   "evidence": "TV ads move vote intention a little and briefly. In 59 US experiments the average effect on vote choice was about 0.7 points and not significant. In a randomised Texas test a large TV buy had strong effects that had nearly vanished within about a week, and about half the ad effect that survived to a US election day came from the final week. Broadcast ads in neighbouring US counties changed who voted rather than how many voted. Cheap ads did not raise candidates' name recognition. All of this evidence is foreign.",
+   "rules": "Radio and TV propaganda is banned for 60 days before the vote except the allocated broadcasts, which run 13-26 Oct, with no TV slots on statutory rest days. Each list gets 7 TV and 15 radio minutes, plus 2 TV and 4 radio minutes per MK of its outgoing faction, so a list built on a 24-MK faction gets 55 TV minutes and a list with none gets 7. TV content is approved by the CEC chair. Broadcast propaganda ends at 19:00 on Mon 26 Oct. No IDF framing, and written consent for images of the fallen, the wounded or victims. No poll figures after Fri 23 Oct.",
+   "verdict": "use selectively",
+   "cites": [
+    "P-F04",
+    "P-F06",
+    "P-F07",
+    "D9-F09",
+    "D9-F04",
+    "D9-F24",
+    "D12-F08",
+    "D12-F14",
+    "D12-F12",
+    "D12-F07"
+   ]
+  },
+  {
+   "channel": "Paid digital and social ads (Meta, Google, YouTube)",
+   "role": "Persuasion with tested creative in the final days, threshold-insurance messages for Blue and White voters, and volunteer recruitment. Not a turnout tool.",
+   "evidence": "In the largest field test, an $8.9 million, eight-month Facebook and Instagram programme aimed at about 2 million US persuadable voters had no average effect on turnout. Party-brand ads randomised by ZIP code moved Democratic vote share by -0.04 points (SE 0.85) in Florida. In the closest analogue, a CDU campaign in the 2016 Berlin multiparty election, the sponsor gained 0.7 points (not significant), the opposing camp fell 1.4 points and same-camp parties also gained. Ads did not raise name recognition. In US campaigns' own tests ad effects vary about 50% around the average. In US survey experiments, pretest-based machine-learning targeting beat a single best message by about 70% on policy views, mostly on one issue, with no gain from using more than one trait. Persuasion fades with a half-life of days. All of this evidence is foreign.",
+   "rules": "Every ad, including paid content, names who ordered it and how to contact them. Synthetic or altered content carries the CEC deepfake label for its full length. Political ads on Meta and Google are public in ad libraries with run dates and spend, so assume Likud and journalists read the bloc's ads. No poll figures from Sat 24 Oct.",
+   "verdict": "use selectively",
+   "cites": [
+    "D9-F01",
+    "D9-F02",
+    "D9-F03",
+    "D9-F04",
+    "P-F05",
+    "D9-F07",
+    "P-F07",
+    "D12-F13",
+    "D9-F25",
+    "D9-F27",
+    "D12-F07"
+   ]
+  },
+  {
+   "channel": "WhatsApp, Telegram and relational sharing",
+   "role": "The bloc's main channel for turnout and rapid response. Supporters forward short, tested audio and video to their own family and community groups, and personally ask friends to vote.",
+   "evidence": "In 2024, 65% of Jewish Israelis got news via WhatsApp and 44% via Telegram, and family and friends' groups were trusted by more than 60% against 39-47% for groups run by politicians or journalists. In a 61-million-user US Facebook experiment the effect passed to close friends exceeded the direct effect. In India's Tamil Nadu, party WhatsApp groups moved moderate voters toward the party, mainly through members' own posts, without raising hostility. People reshare debunks from close or like-minded contacts, and audio works best (India and Pakistan). Friend-to-friend texting raised turnout about 2-3 points among those assigned (US). Israeli WhatsApp discussion grew less polarised over time, unlike Twitter. Likud ran its campaign largely through WhatsApp groups and a Telegram chatbot for about three years.",
+   "rules": "Messages from a list segmented by a personal trait count as direct mail under privacy law and need a notice, the database controller, the data source and an opt-out. Volunteers writing to their own contacts is the lower-risk format. WhatsApp bans accounts for bulk or automated sending, and one wrongful block can stall an operation, so spread sending across real volunteer accounts and avoid automation in the final days. No lists of who has not voted. No voter-level data passes between lists without written counsel clearance.",
+   "verdict": "core",
+   "cites": [
+    "D9-F30",
+    "D9-F06",
+    "D9-F13",
+    "D9-F14",
+    "D3-F12",
+    "D9-F34",
+    "D9-F28",
+    "D12-F24",
+    "D9-F35",
+    "D5-F25"
+   ]
+  },
+  {
+   "channel": "Earned media and news (Channel 12/N12, ynet, Kan, Channel 13)",
+   "role": "Set the agenda on the bloc's issues and let leaders claim issue ownership in interviews and news events timed for the evening news.",
+   "evidence": "In 2024 Channel 12 was the main news source for 51% of Jewish Israelis, ynet the main online source for 40%, and Kan the most trusted outlet. Channel 14 was watched by 24% of the right and about 4% of the centre. On one April 2026 night Channel 12's evening news drew about 411,000 viewers, about twice Channel 14's. Across four Israeli elections, TV coverage drove which issue people named as the top problem. A news-style exposure shifted issue ownership in a Belgian experiment, most on issues no party owned. Israel Hayom moved votes to the right through persuasion, about 0.22 points of right-bloc share per point of local exposure in 2013, so the Netanyahu bloc's own media are a structural asset that late campaign spending cannot match.",
+   "rules": "No IDF framing in campaign material. Edited clips need an archived source file: Likud has petitioned against three Yashar videos for misleading editing. Use X to brief journalists, not to persuade. Any poll the bloc releases carries the full disclosure, and none after Fri 23 Oct.",
+   "verdict": "core",
+   "cites": [
+    "D9-F30",
+    "D9-F31",
+    "P-F32",
+    "D8-F05",
+    "D9-F10",
+    "D12-F12",
+    "D9-F34",
+    "D12-F07"
+   ]
+  },
+  {
+   "channel": "Russian-language media",
+   "role": "Yisrael Beytenu's main channel to Russian speakers, plus Russian versions of the bloc's core content and a how-to-vote card.",
+   "evidence": "In a self-selected reader poll of NEWSru.co.il (n=2,981, January 2024, low confidence), news sites were the main source (87%), Channel 9 was the most-watched TV channel (38%), Facebook (61%) and Telegram (47%) led social media, and use of Russian-language Telegram for war news rose from 18% to 40%. Russian speakers are about 15% of the population. Invalid ballots ran higher in Russian-speaking-segment localities (0.80%) than in liberal cities (0.35%) in 2022.",
+   "rules": "The same law as Hebrew content: the 'ordered by' line, deepfake labels and the poll ban. Monitor Russian-language Telegram for misinformation, since the state has no national system to catch it.",
+   "verdict": "core",
+   "cites": [
+    "D9-F33",
+    "D1-F21",
+    "D12-F20",
+    "D9-F29"
+   ]
+  },
+  {
+   "channel": "Arabic-language media",
+   "role": "Each list's own campaign in Arabic and the bloc's national message to all citizens, said the same way in both languages. Not a turnout channel.",
+   "evidence": "Arab adults use TikTok (71%, 58% daily) and Telegram (66%, 28% daily). Arab respondents rank crime first. The Democrats are expanding Arabic social media and touring Arab towns. No verified data on the reach of Arabic-language outlets was found.",
+   "rules": "No change-bloc-run or branded turnout content, and no turnout targeting of Arab towns or of stations where Arab lists lead. Any support for Arab-sector turnout is a leadership decision, independent, transparent and cleared by election counsel. Monitor Arabic networks for misinformation about the bloc.",
+   "verdict": "use selectively",
+   "cites": [
+    "D9-F32",
+    "D5-F21",
+    "D5-F32",
+    "D9-F29"
+   ]
+  },
+  {
+   "channel": "Debates and set-piece interviews",
+   "role": "News-cycle events, not vote movers. Accept on terms that suit the leader, and prepare for the security-incident and Arab-party questions.",
+   "evidence": "Across 62 elections in 10 countries, TV debates had no detectable effect on vote choice. A leader's news performance can shift issue ownership (Belgian experiment). In a multi-candidate race the attacker lost and the bystander gained (Italy). No information on a 2026 debate was verified.",
+   "rules": "No attacks on allied leaders on stage. No IDF props or framing. Answer the Arab-party question only with the agreed joint line.",
+   "verdict": "low value",
+   "cites": [
+    "P-F03",
+    "D8-F05",
+    "D8-F20",
+    "D12-F12"
+   ]
+  },
+  {
+   "channel": "Influencers, creators and endorsements",
+   "role": "Reach young voters on Instagram and TikTok, and give soft-right and Blue and White voters permission to move through voices they already trust.",
+   "evidence": "Oprah Winfrey's 2008 endorsement added an estimated 1 million Obama votes in a primary, where there is no party cue (US). Senior military voices move opinion more when they oppose a specific decision than when they endorse (US). About 90% of 18-22-year-olds use Instagram and 80% TikTok. No Israeli evidence on influencers was found.",
+   "rules": "Paid content is an election ad and needs the 'ordered by' line. Entertainment and performers may not accompany propaganda events, so creators appear in their own posts and statements, not as rally acts. No uniforms or IDF framing, and no children under 15.",
+   "verdict": "use selectively",
+   "cites": [
+    "D9-F11",
+    "D8-F29",
+    "D9-F32",
+    "D9-F24",
+    "D12-F09",
+    "D12-F12"
+   ]
+  },
+  {
+   "channel": "Print, posters and home signs",
+   "role": "A small supplement: printed ads in papers soft-right voters read, and window and balcony signs in supporters' homes.",
+   "evidence": "No evaluation of Israeli print or outdoor ads was found.",
+   "rules": "Newspaper ads are capped at 40 inches, one per party per paper per day, and 10,000 inches in the final three months. Printed public ads go only on boards the local authority designates. No stickers, painting or projections on buildings, fences, roads or pavements. Signs in supporters' own homes are lawful, subject to by-laws.",
+   "verdict": "low value",
+   "cites": [
+    "D9-F24",
+    "D12-F11"
+   ]
+  }
+ ],
+ "rapid_response": [
+  {
+   "title": "Stand up one joint cell now",
+   "text": "Evidence: in July 2026 the State Comptroller found that Israel has no national policy against foreign digital influence, no data on how platforms handle takedown requests and no public reporting channel. Iran and Hezbollah sent about 5 million hostile text messages in September 2024, including a false shelter alert. In the US, 1% of Twitter users saw 80% of fake-news exposures, mostly committed partisans. Political ads on Meta and Google sit in public ad libraries. Judgement: one joint cell, with counsel attached. It watches the ad libraries, Hebrew, Russian and Arabic networks and the main news sites. It acts when a claim reaches Channel 12, Channel 13, ynet or soft-voter and Russian-speaking networks, and ignores content that stays among committed partisans. It keeps a CEC petition template ready to file the same day. The cell's costs are split in writing and approved by each participating list's counsel and treasurer, because spending by linked bodies counts as party spending. It handles no voter-level data.",
+   "cites": [
+    "D9-F29",
+    "D9-F21",
+    "D9-F27",
+    "D12-F13",
+    "D12-F06"
+   ]
+  },
+  {
+   "title": "Prebunk the attacks you can predict",
+   "text": "Evidence: inoculation beats supportive messages and decays after about two weeks (meta-analysis). Short videos explaining manipulation techniques raised recognition by about 5% about a day after viewing, at about 5 US cents per view (YouTube field test). Games that teach scepticism made players rate true news as false too, and a media-literacy course failed in India's 2019 election. Judgement: prebunk named, specific attacks, not 'fake news' in general. The predictable ones are AI images tying change leaders to Arab or Palestinian leaders, the charge of 'the left and reservists' refusal', and election-day claims that the other side is 'flocking to the polls'. Run the first round now and refresh it from Wed 21 Oct, close to when the attacks land.",
+   "cites": [
+    "D8-F33",
+    "D9-F16",
+    "D9-F17",
+    "D9-F15",
+    "D9-F26",
+    "D5-F27"
+   ]
+  },
+  {
+   "title": "Answer with the right voice, and lead with the truth",
+   "text": "Evidence: repeating a rumour increases belief in it. A correction from an unexpected same-side source worked best among attentive respondents in US experiments, and all corrections faded over a week. Fact-checks improve beliefs (d of about 0.29 across 30 studies) but work least on campaign claims, and they did not change support for Trump. People reshare debunks from close or like-minded contacts, and audio works best (India and Pakistan). Judgement: answer attacks aimed at soft-right voters through Bennett, Liberman, Eisenkot and religious or reservist figures. Lead with the true statement and keep the false claim out of the headline. Make flat, complete rebuttals: 'this meeting never happened, here is the CEC ruling'. Send them as short voice notes and vertical videos for supporters to forward. Judge success by whether the claim stops spreading, not by converts.",
+   "cites": [
+    "D9-F20",
+    "D9-F18",
+    "D9-F19",
+    "D9-F14"
+   ]
+  },
+  {
+   "title": "Deepfakes and the CEC",
+   "text": "Evidence: since 23 Jul 2026 election propaganda that is a deepfake must carry a clear label for its full length, in a format the CEC set on 26 Jul. In February the CEC ordered Likud to remove a manipulated image of Bennett and Lapid with Arab party leaders. In July it ordered RZP to delete an AI video of an Eisenkot lookalike with Mahmoud Abbas and Mansour Abbas, ruling that the AI caption was not enough. Petitions work, but only after the content has spread. A Dutch deepfake lowered opinions of the politician it showed. A UK review found no 2024 election result shown to have been changed by AI content. Judgement: keep authenticated source footage of each leader's key appearances, a petition template and a trusted-messenger rebuttal ready. Respond fast and in proportion. Whether the label rule reaches people forwarding content on WhatsApp is untested, so counsel should advise.",
+   "cites": [
+    "D9-F25",
+    "D12-F13",
+    "D9-F26",
+    "D9-F22",
+    "D9-F23"
+   ]
+  },
+  {
+   "title": "Do not hand Likud a petition",
+   "text": "Evidence: the CEC ordered Yashar to remove a video with AI-generated soldiers and Bennett to cut IDF segments from a campaign video, and Likud has petitioned against Yashar or Bennett material at least three times in 2026. The State Comptroller found signs of paid follower-boosting and fake accounts after the 2019 elections, though it could not tie them to parties. Judgement: from now to election day, every asset with uniforms, bases, weapons, the fallen, children or edited news clips goes through counsel the same day, with the source file archived. Every synthetic or altered asset, including volunteer memes the list pays to boost, carries the label and the 'ordered by' line. Never buy followers or run fake accounts. Clean content is also what lets the bloc credibly call out others.",
+   "cites": [
+    "D9-F26",
+    "D12-F12",
+    "D12-F13",
+    "D12-F04",
+    "D9-F29"
+   ]
+  },
+  {
+   "title": "If there is a security incident",
+   "text": "Evidence: after October 7, Israeli trust in the security forces rose while trust in the government and the prime minister stayed low. A local terror attack within three months of an election raised the right bloc's local share by about 1.35 points. About three in ten Jews saw a recent strike in Syria as driven by election politics. Judgement: pause attack content. Leaders stand with the soldiers and the families, speak as responsible statesmen and keep the accountability frame for later. Never suggest an operation is electorally motivated and never criticise the IDF itself. Return to the agenda only when the news cycle allows.",
+   "cites": [
+    "D8-F11",
+    "D1-F31",
+    "D8-F12"
+   ]
+  },
+  {
+   "title": "The poll blackout",
+   "text": "Evidence: no new poll may be published from the end of Fri 23 Oct until polls close at 22:00 on Tue 27 Oct, and older polls may be republished only with a label saying they are not current. Every poll published before then must name who commissioned and ran it, the fieldwork dates, the population, how many were approached and took part, and the margin of error. In 2015 the final polls missed a late Likud surge during the blackout. Closer published polls raised turnout, mostly on the trailing side (Switzerland). Stories about a party rising in the polls moved vote intentions toward it in Danish and Dutch survey experiments, though the Dutch effect was small. Judgement: no poll figures in any material from Sat 24 Oct, and no hints about internal polls, which count as publication. Friday poll-quoting creative carries the full disclosure and is scheduled to stop before Friday ends. Expect the Netanyahu bloc to claim it is losing. Answer with 'decided by a few thousand votes', not with numbers.",
+   "cites": [
+    "D12-F07",
+    "D11-F14",
+    "D11-F30",
+    "P-F30",
+    "D11-F12",
+    "D8-F35",
+    "D11-F18"
+   ]
+  },
+  {
+   "title": "Election day: turnout releases and false alarms",
+   "text": "Evidence: the CEC will publish turnout for every regular polling station at least four times on election day, to all lists at once. Likud plans to use the releases to rally its base by pointing to high turnout in opposition and Arab areas. In 2015 Netanyahu's election-day 'Arab voters in droves' video was pushed to about 700,000 devices, with no causal estimate of its effect. Messages that say turnout is high beat laments about low turnout (US). Hostile foreign actors have sent mass false alerts before. Judgement: never publish 'our strongholds are surging' and never answer with a public counter-alarm. Respond inside supporters' own networks: 'people like you are voting, go now'. Pre-write answers to the predictable rumours (station moved, hours changed, fake alerts) that point voters to official CEC information. No propaganda inside a polling place or within 5 metres of its gate. No lists of who has not voted.",
+   "cites": [
+    "D5-F26",
+    "D5-F27",
+    "D3-F33",
+    "D8-F34",
+    "D11-F03",
+    "D9-F29",
+    "D12-F14",
+    "D5-F25"
+   ]
+  },
+  {
+   "title": "After 22:00: exit polls and the count",
+   "text": "Evidence: double-envelope votes, counted after the regular ballots, were about 10% of votes in Jewish localities in 2022. Final counts moved a seat in April 2019 on a margin of a few hundred votes, and corrections with annulled stations moved another in September 2019. In 2022 the invalid-ballot pool (29,851) was more than seven times Meretz's shortfall. Judgement: one voice for the bloc on the night, no victory or defeat claims on exit polls, and a 'count every vote' message until the double envelopes are in. The bloc's tone is confidence in an accurate count.",
+   "cites": [
+    "D1-F19",
+    "D12-F18",
+    "D12-F19"
+   ]
+  }
+ ],
+ "calendar": [
+  {
+   "when": "Opening days",
+   "dates": "Tue 13 - Thu 15 Oct (D-14 to D-12)",
+   "what": "Allocated broadcasts start on 13 Oct. Field one fast message test (8-12 messages, soft Netanyahu-bloc and traditional quotas) with first results by Fri 16 Oct, and a poll asking who is best on security, with results before Wed 21 Oct. Any jointly funded test or poll needs a written cost split approved by each list's counsel and treasurer and a counsel check on poll-law duties. Its results are never published or leaked. Leaders agree the joint lines: one candidate for prime minister, the conditional line on Arab parties, the draft as a policy test and the commission pledge (see Coalition). First inoculation round against 'Arab-backed government' fakes. Stand up the rapid-response cell with counsel. Recruit relational captains from Thu 15 Oct, each naming about ten friends. Anything here not yet done is done now, before the issue days start on Sun 18 Oct.",
+   "cites": [
+    "D12-F08",
+    "D8-F32",
+    "P-F05",
+    "D8-F33",
+    "D9-F26",
+    "D9-F29",
+    "D12-F06",
+    "D12-F07",
+    "D11-F09"
+   ]
+  },
+  {
+   "when": "Surplus deadline",
+   "dates": "Fri 16 Oct (D-11)",
+   "what": "Last day to file surplus-vote agreements. Present the bloc's pairs (Together with Yisrael Beytenu, Yashar with the Democrats) as one team with one argument. Any Blue and White exit is cleanest before lists are published on Sun 18 Oct. Have endorsement and 'your vote counts toward 61' assets ready, and keep attacks on Gantz off the table.",
+   "cites": [
+    "D7-F27",
+    "MODEL-FORECAST",
+    "D7-F23"
+   ]
+  },
+  {
+   "when": "Issue days",
+   "dates": "Sun 18 - Tue 20 Oct (D-9 to D-7)",
+   "what": "Earned-media pushes on the draft and the October 7 commission, timed for the Channel 12 and 13 evening news and ynet. Broadcast slots and personal contact teach each list's ballot letters, since cheap ads do not build recognition. Together's letters are רק, as approved by the CEC on 27 Sep. Check every list's letters against the CEC's published ballot list before any creative is printed or broadcast. Brief relational captains and check their lists. Take house meetings into traditional and northern towns, led by local figures.",
+   "cites": [
+    "D9-F30",
+    "D9-F31",
+    "P-F32",
+    "D9-F04",
+    "MODEL-FORECAST",
+    "D11-F09",
+    "D3-F12",
+    "D6-F40",
+    "D7-F27"
+   ]
+  },
+  {
+   "when": "Persuasion window opens",
+   "dates": "Wed 21 - Thu 22 Oct (D-6 to D-5)",
+   "what": "Paid persuasion goes live with the tested winners, one targeting trait at a time, through Mon 26 Oct. Refresh the inoculation on the Arab-party wedge and the 'reservists' refusal' attack, because protection fades after about two weeks. Run prebunk videos against election-day turnout scares. Final legal check of every asset for the 'ordered by' line, deepfake labels and military imagery.",
+   "cites": [
+    "P-F07",
+    "D9-F07",
+    "D8-F33",
+    "D9-F16",
+    "D9-F25",
+    "D12-F12"
+   ]
+  },
+  {
+   "when": "Final published polls",
+   "dates": "Fri 23 Oct (D-4)",
+   "what": "The last day new polls may be published. Threshold-insurance messages for Blue and White voters land now, through media, digital and calls to identified voters. Creative that quotes a poll carries the disclosure the law requires and is scheduled to stop before Friday ends. If the change lists are rising, say so plainly. If they are slipping, call it a close race, never a collapse.",
+   "cites": [
+    "D12-F07",
+    "P-F25",
+    "D8-F35",
+    "D11-F12",
+    "D8-F24"
+   ]
+  },
+  {
+   "when": "Blackout weekend",
+   "dates": "Sat 24 - Sun 25 Oct (D-3 to D-2)",
+   "what": "No poll figures anywhere, including hints about internal polls. No TV broadcast slots on Saturday. Messages: 'decided by a few thousand votes', a personal vote plan (when, which station, with whom) and 'remind the friends on your list'. Ballot reminders: one slip, unmarked, in the envelope. Expect a Netanyahu-bloc 'we are losing' alarm, and answer inside supporters' networks.",
+   "cites": [
+    "D11-F14",
+    "D12-F07",
+    "D9-F24",
+    "D3-F14",
+    "D12-F19",
+    "D11-F30"
+   ]
+  },
+  {
+   "when": "Election eve",
+   "dates": "Mon 26 Oct (D-1)",
+   "what": "Rallies, processions, loudspeakers and broadcast propaganda end at 19:00. Intercity buses on routes over 15 km are free from 20:00, and trains are free on election day with a ticket collected at a station counter or machine: push the practical message to young voters and displaced residents registered elsewhere. Supporters post 'I'm voting tomorrow' to their own family and friends' groups. Final rapid-response drill for election day.",
+   "cites": [
+    "D12-F14",
+    "D12-F08",
+    "D5-F28",
+    "D2-F18",
+    "D9-F06"
+   ]
+  },
+  {
+   "when": "Election day",
+   "dates": "Tue 27 Oct, 07:00-22:00",
+   "what": "Most polling stations are open 07:00-22:00. 'I voted' posts and personal messages to close friends. Answer each CEC station-turnout release inside supporters' networks, never with public bragging or counter-alarms. No propaganda within 5 metres of a polling-place gate, and no lists of who has not voted. Exit polls at 22:00: one voice for the bloc and no claims before the count.",
+   "cites": [
+    "D2-F17",
+    "D9-F06",
+    "D11-F06",
+    "D5-F26",
+    "D5-F27",
+    "D12-F14",
+    "D5-F25",
+    "D12-F07"
+   ]
+  },
+  {
+   "when": "The count",
+   "dates": "Wed 28 Oct onward",
+   "what": "Double-envelope votes are counted after the regular ballots, and final counts have moved seats before. Keep a 'count every vote' message and the joint recommendation line until the official results. The President assigns the first mandate within 7 days of the published results (see Coalition).",
+   "cites": [
+    "D1-F19",
+    "D12-F18",
+    "D10-F16"
+   ]
+  }
+ ]
+}

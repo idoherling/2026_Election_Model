@@ -2243,6 +2243,10 @@ def project(data, idata, rng, config="current", config_params=None):
     project.last_share_draws = shares.copy()
     project.last_labels = list(labels)
     project.last_components = ["+".join(sorted(c)) for c in comps]
+    # Full share draws and surplus pairs, for the targeting layer's
+    # marginal-vote valuation (src/targeting_marginal.py).
+    project.last_shares = shares.copy()
+    project.last_pairs = list(pairs)
     seats = np.zeros((N_PROJ, shares.shape[1]), dtype=int)
     # s.81(a): 3.25% of ALL valid votes; the shares here sum to one over the
     # modelled lists (simulate.THRESHOLD_ALL_VALID, dossier s.47; 1.0 = off)

@@ -1,0 +1,256 @@
+{
+ "verdicts": [
+  {
+   "id": "P-F01",
+   "status": "verified",
+   "note": "Method note: the shared WebSearch budget ran out at the start of this check. Every finding was instead checked by fetching pages directly: publisher and DOI landing pages, Crossref/OpenAlex metadata, and full texts where open (eScholarship, Cambridge OA, Harvard/author PDFs, Europe PMC), plus the project's local CEC kalpi files. For this finding, Crossref confirms Kalla & Broockman, APSR 112(1):148-166, DOI 10.1017/S0003055417000363, and the Cambridge URL resolves. All numbers were checked in the author version at eScholarship (https://escholarship.org/uc/item/103775sx, dated July 2017): general elections within 2 months 0.13 [-0.29, 0.55]; precinct-randomized -0.02 pp; personal contact including the new studies 0.58 [-0.50, 1.66]; early contact measured immediately 2.13 [-0.20, 4.45]; measured later -0.59 [-2.52, 1.35]; primaries 4.51 [-1.40, 10.42]; ballot measures 3.23 [1.44, 5.03]; Philadelphia about 11 pp (p=0.01). Caveats: the final-week Philadelphia estimate of 9 pp has p=0.19 (not significant), and the primaries pooled CI includes zero, although the authors describe it as significant.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "P-F02",
+   "status": "corrected",
+   "note": "The citation is correct: Pons, AER 108(6):1322-63, DOI 10.1257/aer.20160524. Checked against the published PDF on the author's site. The 80,000 activists, 5M doors, 791 territories, 4,674 precincts, 5.02M voters, no turnout effect, and the one-half (round 1) and one-fourth (round 2) shares are all correct. Corrections: (1) 3.24 and 2.75 pp are not effects in 'allocated precincts'. They are ITT estimates scaled by differential-intensity multipliers, i.e. effects in precincts covered only because of treatment assignment. The IV effects of being allocated to canvassers are 0.84 and 0.87 pp. (2) The paper reports that Hollande's gains came more from right-wing than from other left candidates, but it cannot reject equal effects (p=0.21), so 'not from other left' overstates it. (3) The 'about half persisted (AEA highlight)' claim was not verified. The low-tradition/novelty explanation is consistent with the paper's discussion of 'novel and surprising visits'. The per-door scaling is the desk's own arithmetic and is consistent with a one-quarter share of a 1.14M margin.",
+   "corrected_url": "",
+   "corrected_quant": "About 80,000 activists and 5M doors. Experimental sample: 791 participating territories (24.3% of 3,260), 966 strata, 4,674 precincts, 5.02M registered voters; estimates using all territories are close to zero. Hollande ITT +0.63/+0.48 pp without controls, +0.44/+0.46 pp with controls. IV effect of allocation to canvassers +0.84/+0.87 pp. Scaled by intensity multipliers: +3.24 pp (round 1) and +2.75 pp (round 2). Sarkozy plus Dupont-Aignan ITT -0.43, scaled -3.14 pp. PS parliamentary candidates +0.94/+0.73 pp (p<0.01); 2014 European elections +0.37 pp (p<0.10). Nationally: Hollande +0.37 pp in round 1 (about half of his 1.45-pt lead) and +0.41 pp in round 2, margin +0.83 pp (about one-fourth of the victory margin). No turnout effect."
+  },
+  {
+   "id": "P-F03",
+   "status": "verified",
+   "note": "Crossref confirms Le Pennec & Pons, QJE 138(2):703-767 (2023), DOI 10.1093/qje/qjad002. The NBER w26572 abstract confirms: 62 elections in 10 countries, 253,000 observations, 17-29% deciding in the final two months, vote changes tracking issue salience and candidate beliefs, stable policy preferences, null effects of debates and of exogenous disasters, and the suggestion that media, activists and other citizens matter more. The cited URL without 'www' refused the connection; https://www.nber.org/papers/w26572 works, and the DOI is the canonical link.",
+   "corrected_url": "https://doi.org/10.1093/qje/qjad002",
+   "corrected_quant": ""
+  },
+  {
+   "id": "P-F04",
+   "status": "verified",
+   "note": "Science Advances 6(36):eabc4046, confirmed via Crossref and the PMC full text. 49 ads, 59 experiments, about 34,000 respondents. Favorability +0.049 on a 1-5 scale; vote +0.7 pp (SE 0.7, not significant); SD of true vote effects 0.02; SATE homogeneity p = 0.09 (favorability) and 0.07 (vote). Battleground, sender, party and tone differences were negligible. Minor caveats: the CATE-based favorability homogeneity test rejects (p=0.0002). The decline over the campaign is weak: negative in 3 of 4 specifications and significant in only 1, and the authors also say the same ad worked about equally well at different times.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "P-F05",
+   "status": "verified",
+   "note": "APSR 118(4):2021-2039, DOI 10.1017/S0003055423001387, all 8 authors confirmed via Crossref. Checked in the open-access PDF: 146 experiments, 617 ads, 51 campaigns, more than 500,000 respondents. Mean effects 2.3, 1.2 and 0.8 pp; SDs of true effects 1.5, 0.5 and 0.3 pp; tau/mu about 0.51; ads commonly 50% more or less effective than average. Optimal testing spend is about 10-13% of the media budget, more when variability is higher. The simulation parameter table lists '$200 per net vote' sourced to Sides, Vavreck & Warshaw.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "P-F06",
+   "status": "corrected",
+   "note": "The citation is correct: APSR 105(1):135-150 (2011), DOI 10.1017/S000305541000047X. The abstract confirms about $2M of TV and radio, about 1,000 tracking interviews per day plus a follow-up one month later, and 'strong but short-lived' effects consistent with priming. The full text was paywalled. Journalist's Resource reports about 6 pp at maximum TV dose, effects uncertain a week later and gone before the March primary. Kalla & Broockman (2018, eScholarship version) code this study as TV immediate 5.44 pp [1.97, 8.91], radio 4.83 [-6.91, 16.57] and later measurement -0.17 [-2.95, 2.61]. The -0.17 figure therefore comes from K&B's coding, and radio was imprecise rather than shown to have 'no effect'. The +4.7 pp figure could not be confirmed. K&B also report that the authors' additional data showed the same ads had no effect closer to election day. That weakens the desk's inference that late ads will produce Perry-sized effects.",
+   "corrected_url": "",
+   "corrected_quant": "About $2M of TV and radio; about 1,000 interviews per day. Maximum TV dose about +6 pp, and K&B's meta-analysis codes the immediate TV effect at 5.44 pp [1.97, 8.91]. Later measurement -0.17 pp [-2.95, 2.61]. Radio 4.83 pp [-6.91, 16.57], imprecise. Effects gone before the March 2006 primary. The 4.7 pp figure is unverified."
+  },
+  {
+   "id": "P-F07",
+   "status": "corrected",
+   "note": "Political Communication 30(4):521-547 (2013), DOI 10.1080/10584609.2013.828143. The eScholarship URL resolves to the paper (checked in the PDF). The claim is accurate, but the quant should cite the published paper directly rather than an earlier version or Journalist's Resource. The paper gives a presidential (2000) half-life of about 4 days and sub-national half-lives of 1-2 days with no discernible long-term survival.",
+   "corrected_url": "https://doi.org/10.1080/10584609.2013.828143",
+   "corrected_quant": "Presidential 2000: half-life about 4 days, and a small effect survives at least 6 weeks. About half of the ad effects surviving to Election Day came from ads in the final week. Sub-national 2006 races: half-lives of 1-2 days, no discernible long-term survival. The '50-75% gone within a week' figure is not verified."
+  },
+  {
+   "id": "P-F08",
+   "status": "verified",
+   "note": "APSR 116(2):702-718, DOI 10.1017/S000305542100112X, checked in the open-access PDF. Design: difference-in-differences and border counties, 2000-2018. Effects are much larger down-ballot (2.5-19x) and work mainly through persuasion. Huber & Arceneaux 2007 (AJPS 51(4):957-977, DOI 10.1111/j.1540-5907.2007.00291.x) confirmed: spillover ads in non-battleground states persuaded but did not mobilize or inform. Detail: SVW's own cost-per-vote estimates are about $365 for president, $200 for Senate and $125 for governor; Hewitt et al. use $200 as the 'typical' value. The effect is about 0.5 pp in presidential races over -3 to +3 SD of ad advantage.",
+   "corrected_url": "https://doi.org/10.1017/S000305542100112X",
+   "corrected_quant": ""
+  },
+  {
+   "id": "P-F09",
+   "status": "verified",
+   "note": "APSR 114(2):410-425 (2020), DOI 10.1017/S0003055419000923, confirmed by abstract: 3 preregistered experiments, 230 canvassers, 6,869 voters, 7 US locations. Experiment 1 targeted immigration attitudes: arguments alone had no effect, while adding narrative exchange gave d=0.08 lasting at least 4 months. Experiments 2-3 targeted transphobia (d=0.08, 0.04). The 2016 Science paper (352(6282):220-224, DOI 10.1126/science.aad9713) is confirmed: 501 voters, 56 canvassers, effects at 3 months; the '~10 thermometer points' figure is not in the abstract and was not independently checked. The 2023 AJPS perspective-getting paper (67(1):185-204, DOI 10.1111/ajps.12657) is confirmed.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "P-F10",
+   "status": "verified",
+   "note": "The press release exists at the cited URL (People's Action, 15 Sep 2020). It reports nearly 700 deep-canvass conversations in MI, MN, NH, NC, PA and WI; +3.1 votes on Biden's margin per 100 conversations; about 102x a typical persuasion program; evaluation by Broockman & Kalla with the New Conversation Initiative. The subgroup figures (independents about 5, independent women about 8.5) are not on the page and are unverified. The desk's low-confidence framing is appropriate.",
+   "corrected_url": "",
+   "corrected_quant": "About 700 conversations; +3.1 votes on margin per 100 conversations; sponsor claims about 102x. Subgroup effects unverified."
+  },
+  {
+   "id": "P-F11",
+   "status": "verified",
+   "note": "AJPS 67(4):833-849, DOI 10.1111/ajps.12724, confirmed via Crossref. The abstract matches: 4 survey experiments, n=113,742, 291 messages; more persuasion about less-known candidates; effects on evaluations and vote choice, including partisan defection; more informative messages persuade more.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "P-F12",
+   "status": "verified",
+   "note": "Nature Human Behaviour 7(4):568-582, DOI 10.1038/s41562-023-01551-7, confirmed via Crossref and abstract: 24 issues, 48 messages, N=4,531, 22,499 observations. Leader cues were often stronger than the messages but did not reduce receptivity to them, and the two acted as independent pieces of information. The desk's caveat that the outcome is policy attitudes, not vote choice, is correct.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "P-F13",
+   "status": "verified",
+   "note": "Book confirmed: Hillygus & Shields, The Persuadable Voter: Wedge Issues in Presidential Campaigns, Princeton UP 2008. The DOI 10.1515/9781400831593 resolves via Crossref. The summary (cross-pressured partisans are the most persuadable and are targeted with wedge issues) fairly reflects the book's central argument. The locality operationalization is the desk's own inference.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "P-F14",
+   "status": "verified",
+   "note": "AJPS 53(4):755-770 (2009), DOI 10.1111/j.1540-5907.2009.00399.x, confirmed. The abstract matches: 2006 field experiment in two competitive Pennsylvania statehouse races; a liberal group canvassed core supporters and likeminded Republicans; Republicans used the endorsement as a negative cue, but it helped some low-awareness Republicans.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "P-F15",
+   "status": "verified",
+   "note": "Comparative Political Studies 55(2):287-318 (online 2021), DOI 10.1177/00104140211024283, confirmed. The abstract matches: a natural experiment across seven Israeli election studies (proximity to election raises affective polarization) and a 22nd Knesset unity-government priming experiment that increased tolerance. The Abramowitz & Webster 2016 reference (Electoral Studies 41:12-22, DOI 10.1016/j.electstud.2015.11.001) is confirmed.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "P-F16",
+   "status": "verified",
+   "note": "APSR 93(2):265-277 (1999), DOI 10.2307/2585395, confirmed. The abstract matches: cleavage voting in Israel was maintained from 1969 to 1996, unlike the general comparative decline, and identity dilemmas fuse policy with social allegiance and reinforce cleavages.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "P-F17",
+   "status": "verified",
+   "note": "Party Politics 21(1):100-114 (online 2013), DOI 10.1177/1354068812472570, confirmed. The abstract matches: 1Vandaag panel of 55,847 respondents across 58 waves (2006-2010); 55% changed preference at least once, mostly within one of two blocs; middle groups most volatile; less-educated voters more likely to switch between dissimilar parties.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "P-F18",
+   "status": "verified",
+   "note": "Cox & McCubbins, JOP 48(2):370-389 (1986), DOI 10.2307/2131098, confirmed. The abstract says risk-averse candidates target their reelection constituency. Nichter, APSR 102(1):19-31 (2008), DOI 10.1017/S0003055408080106, confirmed: turnout buying means rewarding unmobilized supporters.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "P-F19",
+   "status": "verified",
+   "note": "Dixit & Londregan, JOP 58(4):1132-1155 (1996), DOI 10.2307/2960152, confirmed. The abstract states that equal delivery effectiveness gives swing-voter targeting and own-group delivery advantage gives the machine/core outcome. Lindbeck & Weibull, Public Choice 52(3):273-297 (1987), DOI 10.1007/BF00116710, confirmed.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "P-F20",
+   "status": "verified",
+   "note": "Dahlberg & Johansson, APSR 96(1):27-40 (2002), DOI 10.1017/S0003055402004215, confirmed. The abstract supports Lindbeck-Weibull/Dixit-Londregan swing-region targeting with a temporary grant program and finds no support for the core-supporter model. Golden & Min, ARPS 16:73-99, DOI 10.1146/annurev-polisci-052209-121553, confirmed. They inventory more than 150 studies outside the US, and the 'mixed evidence' characterization is fair. Minor: Crossref dates Golden & Min online to 2011, with the volume issued in 2013.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "P-F21",
+   "status": "verified",
+   "note": "Cox, ARPS 18:49-68, DOI 10.1146/annurev-polisci-060414-035915, confirmed. The abstract addresses how disproportionality affects the mean and variance of mobilization. Cox 1999 'Electoral Rules and the Calculus of Mobilization', LSQ 24(3):387ff, DOI 10.2307/440350, confirmed. Karp, Banducci & Bowler, BJPS 38(1):91-112, DOI 10.1017/S0007123408000057, confirmed: parties everywhere target likely participants, and contact is far higher in candidate-based systems than in PR. The design rule in 'relevance' is the desk's inference.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "P-F22",
+   "status": "verified",
+   "note": "American Politics Research 42(3):529-548 (online 2013), DOI 10.1177/1532673X13500520, confirmed. The abstract states field offices raised county vote share by about 1%, netting Obama about 275,000 votes in 2008. The 0.5-1 pp cap in 'relevance' is the desk's extrapolation from observational US data.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "P-F23",
+   "status": "verified",
+   "note": "Cox, Making Votes Count, CUP 1997, DOI 10.1017/CBO9781139174954, confirmed. The abstract says coordination problems and strategic voting arise in all electoral systems. Gschwend, EJPR 46(1):1-23 (2007), DOI 10.1111/j.1475-6765.2006.00641.x, confirmed: wasted-vote or coalition-insurance strategies rather than automatic votes for large parties, with voters varying in their proclivity. Note that Gschwend studies mixed-member rules in Germany, not pure PR.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "P-F24",
+   "status": "verified",
+   "note": "West European Politics 32(3):634-656 (2009), DOI 10.1080/01402380902779147, confirmed. The abstract matches: on the PR vote, adherents of major German parties voted against their preference to help a coalition with the declared junior partner, conditional on expectations about small parties' re-entry chances.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "P-F25",
+   "status": "verified",
+   "note": "Scandinavian Political Studies 40(3):247-264 (online Nov 2016), DOI 10.1111/1467-9477.12087, confirmed. The abstract matches: insurance voting depends on polls showing support below the threshold and on the party's inclusion in a coalition. The abstract does not name the country. Sweden is likely (Lund author, Swedish-language record) but was not confirmed. On 'relevance': the Israeli ban starts at the END of the Friday before election day, so polls can still be published on Friday 23 Oct 2026.",
+   "corrected_url": "",
+   "corrected_quant": "Randomized survey experiments; country not stated in the abstract (probably Sweden)."
+  },
+  {
+   "id": "P-F26",
+   "status": "verified",
+   "note": "Bargsted & Kedar, AJPS 53(2):307-323 (2009), DOI 10.1111/j.1540-5907.2009.00372.x, confirmed. The abstract matches: Israel 2006 coalition expectations had an appreciable but differential effect, controlling for ideological and coalition preferences. Duch, May & Armstrong, APSR 104(4):698-719, DOI 10.1017/S0003055410000420, confirmed: 86 surveys from 23 countries.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "P-F27",
+   "status": "verified",
+   "note": "Party Politics 12(6):691-705 (2006), DOI 10.1177/1354068806068594, confirmed. The abstract matches: Israel 2003; for one voter in ten, coalition preferences were decisive and led them to support a non-preferred party; the least informed were as prone as the most informed.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "P-F28",
+   "status": "corrected",
+   "note": "Results were checked against the project's own CEC kalpi file (data/raw/kalpi/expc_25.csv): valid votes 4,764,742; Meretz 150,793 (3.165%); Balad 138,617 (2.909%); Jewish Home 56,775 (1.192%); combined Meretz plus Balad 289,410. The Wikipedia polling page confirms the final-week polls (fieldwork 25-28 Oct): Meretz 4-5 seats, Balad 1.4-2.75%, Jewish Home 1.5-2.2%. Fix: Balad's result is 2.91%, not 2.90% as the claim says. Calling Balad's 16k shortfall a 'narrow' miss is a stretch. The best source URL for the polls is the polling subpage.",
+   "corrected_url": "https://en.wikipedia.org/wiki/Opinion_polling_for_the_2022_Israeli_legislative_election",
+   "corrected_quant": "Valid votes 4,764,742; threshold 154,854. Meretz 150,793 (3.17%), 4,061 short. Balad 138,617 (2.91%), 16,237 short. Jewish Home 56,775 (1.19%). Final-week polls: Meretz 4-5 seats; Balad 1.4-2.75%; Jewish Home 1.5-2.2%."
+  },
+  {
+   "id": "P-F29",
+   "status": "corrected",
+   "note": "Checked against the project's CEC file (data/raw/kalpi/expc_21.csv): valid votes 4,309,270; New Right 138,598 (3.216%), 1,453 short of the 140,051 threshold; Zehut 118,031 (2.739%). Fix: their combined 256,629 votes are 5.96% of ALL valid votes, not '6% of valid votes from right-wing lists'.",
+   "corrected_url": "",
+   "corrected_quant": "Valid votes 4,309,270; threshold 140,051. New Right 138,598 (3.22%), 1,453 short. Zehut 118,031 (2.74%), 22,020 short. Combined 256,629 = 5.96% of all valid votes."
+  },
+  {
+   "id": "P-F30",
+   "status": "verified",
+   "note": "The Wikipedia 2015 polling page lists 11 final polls (12-13 Mar 2015): Likud 20-23, Jewish Home 11-13, Yachad 4-5. Results: Likud 30, Jewish Home 8, Yachad 0. The interpretive caveat about poll error is appropriate. Polls may be published until the end of the Friday before election day.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "P-F31",
+   "status": "verified",
+   "note": "PNAS 111(30):10996-11001 (2014), DOI 10.1073/pnas.1407055111, confirmed. The abstract matches: a long-term paradoxical intervention produced more conciliatory attitudes, especially among centre and right participants, self-reported dovish voting in 2013, and effects still present 1 year later. Sample size was not verified.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "P-F32",
+   "status": "verified",
+   "note": "Journal of Communication 55(2):347-365 (2005), DOI 10.1111/j.1460-2466.2005.tb02676.x, confirmed. The abstract matches all stages: agenda building, agenda setting from TV coverage, individual-level priming of vote, and a suggested aggregate effect.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "P-F33",
+   "status": "verified",
+   "note": "AER 105(1):322-353 (2015), DOI 10.1257/aer.20131063, confirmed. The abstract matches: an Italian incumbent mayor's campaign; valence messages brought more votes; both messages affected beliefs; voters also updated about the opponent.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "P-F34",
+   "status": "corrected",
+   "note": "Science Advances 5(7):eaaw2612 (2019), DOI 10.1126/sciadv.aaw2612, confirmed. The Europe PMC full text confirms the preregistered meta-analysis of six field experiments finds no overall effect. Fix: seven trials were planned in six countries, but the India study did not take place. The six completed studies are in five countries (Benin, Brazil, Burkina Faso, Mexico, and Uganda twice), not six. The information was nonpartisan incumbent-performance data in developing democracies, delivered by flyers, SMS or video within 2 months of the election. Extrapolating to partisan Israeli campaign materials is a leap.",
+   "corrected_url": "",
+   "corrected_quant": "Six completed RCTs in five countries (7 planned in 6); pooled effect on vote choice about 0."
+  },
+  {
+   "id": "P-F35",
+   "status": "verified",
+   "note": "APSR 102(1):49-57 (2008), DOI 10.1017/S0003055408080039, confirmed. The abstract states both experiments find 60% of the propensity to vote passes to the other household member (GOTV versus recycling placebo). Turnout outcome only, as the desk notes.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  }
+ ],
+ "missing_key_works": [
+  "Spenkuch, Jorg L. & David Toniatti (2018). 'Political Advertising and Election Results.' Quarterly Journal of Economics 133(4):1981-2036. https://doi.org/10.1093/qje/qjy010. Uses FCC-driven border-county variation in presidential TV ads 2004-12: almost no effect on aggregate turnout, but a 1 SD partisan ad advantage raises the partisan vote-share gap by about 0.5 pp. A key causal estimate for paid-media persuasion.",
+  "Aggarwal, Minali, Jennifer Allen, Alexander Coppock, et al. (2023). 'A 2 million-person, campaign-wide field experiment shows how digital advertising affects voter turnout.' Nature Human Behaviour 7(3):332-341. https://doi.org/10.1038/s41562-022-01487-4. A US$8.9M social-media persuasion program aimed at 2M persuadable voters in 5 battleground states (2020): no average turnout effect; +0.4 pp among Biden leaners and -0.3 pp among Trump leaners. Direct evidence on digital persuasion spend.",
+  "Hersh, Eitan D. & Brian F. Schaffner (2013). 'Targeted Campaign Appeals and the Value of Ambiguity.' Journal of Politics 75(2):520-534. https://doi.org/10.1017/S0022381613000182. Survey experiments show voters rarely prefer group-targeted pandering to broad appeals, and 'mistargeted' voters penalize candidates enough to erase the gains from targeting. Relevant to micro-targeted sectoral messaging.",
+  "Enos, Ryan D. & Eitan D. Hersh (2015). 'Party Activists as Campaign Advertisers: The Ground Campaign as a Principal-Agent Problem.' American Political Science Review 109(2):252-278. https://doi.org/10.1017/S0003055415000064. Obama 2012 field workers talking to swing voters were demographically unrepresentative, ideologically extreme and misread voters' priorities. Directly relevant to messenger selection for soft-right targets.",
+  "Coppock, Alexander (2023). Persuasion in Parallel: How Information Changes Minds about Politics. University of Chicago Press. https://doi.org/10.7208/chicago/9780226821832.001.0001. Synthesizes many survey experiments showing persuasive information moves people in the same direction by similar small amounts across subgroups. The theoretical basis for near-1 heterogeneity multipliers."
+ ]
+}

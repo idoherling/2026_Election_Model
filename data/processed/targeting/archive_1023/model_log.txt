@@ -1,0 +1,215 @@
+{
+ "projection_backtest_2021_2022": {
+  "mae_C_transfer_pp": 1.49,
+  "mae_C_uniform_pp": 1.77,
+  "mae_R_transfer_pp": 1.43,
+  "mae_R_uniform_pp": 1.92,
+  "mae_A_transfer_pp": 0.54,
+  "mae_A_uniform_pp": 2.2,
+  "mae_C_transfer_big_pp": 1.28,
+  "mae_C_uniform_big_pp": 1.5,
+  "party_mae_pp": {
+   "likud": 0.95,
+   "yesh_atid": 1.05,
+   "rzp": 0.98,
+   "blue_white": 0.87,
+   "shas": 0.52,
+   "utj": 0.31,
+   "yisrael_beytenu": 0.44,
+   "raam": 0.79,
+   "hadash_taal": 0.91,
+   "labor": 0.32,
+   "meretz": 0.45,
+   "balad": 0.99,
+   "jewish_home": 0.45
+  },
+  "n_localities": 1212,
+  "note": "Flow matrix estimated by Kolot Nodedim from the same stations: tests the local-allocation assumption, not national accuracy."
+ },
+ "openness_out_of_sample": {
+  "specs": {
+   "volatility only": {
+    "spearman_by_fold": [
+     0.161,
+     0.201
+    ],
+    "mean_spearman": 0.181,
+    "top_bottom_quintile_ratio": [
+     2.18,
+     2.49
+    ]
+   },
+   "footprint only": {
+    "spearman_by_fold": [
+     0.405,
+     0.284
+    ],
+    "mean_spearman": 0.344,
+    "top_bottom_quintile_ratio": [
+     2.85,
+     2.87
+    ]
+   },
+   "balance only": {
+    "spearman_by_fold": [
+     0.39,
+     0.26
+    ],
+    "mean_spearman": 0.325,
+    "top_bottom_quintile_ratio": [
+     2.34,
+     2.69
+    ]
+   },
+   "equal weights": {
+    "spearman_by_fold": [
+     0.447,
+     0.315
+    ],
+    "mean_spearman": 0.381,
+    "top_bottom_quintile_ratio": [
+     3.13,
+     3.44
+    ]
+   },
+   "footprint + balance": {
+    "spearman_by_fold": [
+     0.435,
+     0.296
+    ],
+    "mean_spearman": 0.366,
+    "top_bottom_quintile_ratio": [
+     2.86,
+     2.98
+    ]
+   },
+   "footprint-led": {
+    "spearman_by_fold": [
+     0.444,
+     0.314
+    ],
+    "mean_spearman": 0.379,
+    "top_bottom_quintile_ratio": [
+     3.14,
+     3.41
+    ]
+   }
+  },
+  "chosen": "equal weights",
+  "n_by_fold": {
+   "2020->2021": 556,
+   "2021->2022": 567
+  },
+  "target": "absolute residual right-camp share change t->t+1 (net of national); features from elections <= t"
+ },
+ "composition_out_of_sample": {
+  "naive": {
+   "C": 6.73,
+   "R": 7.83,
+   "A": 4.73
+  },
+  "multiplicative": {
+   "C": 6.57,
+   "R": 8.7,
+   "A": 5.31
+  },
+  "chosen": "naive",
+  "units": "weighted MAE, camp votes per 1,000 eligible, 2021->2022"
+ },
+ "mv_ref_per_vote": {
+  "change_govt": 4.783310714347871e-07,
+  "block_nb": 5.965543668223991e-07,
+  "change_seats": 1.6347989750774127e-05,
+  "change61": 2.0824442963950645e-07,
+  "change_raam61": 5.615331289211776e-07
+ }
+}
+                   name_he           segment  eligible  turnout_2022  p26_change  p26_nb  persuadable_share  openness  change_govt__gotv_pot  change_govt__pers_pot  change_govt__resc_pot  change_govt__potential  change_govt__eff1k  block_nb__potential                     tier
+locality                                                                                                                                                                                                                                                                            
+5000          תל אביב  יפו     liberal_urban    447576         0.596       0.644   0.275              0.013     0.895                668.173                 36.670                100.177                 805.019               2.662              943.544           Turnout engine
+4000                  חיפה       mixed_urban    253292         0.555       0.515   0.338              0.017     1.008                191.596                 26.136                 44.804                 262.536               1.640              611.444           Turnout engine
+8300           ראשון לציון       mixed_urban    211845         0.662       0.502   0.460              0.032     1.316                 65.549                 49.549                 52.065                 167.163               1.246              169.407  Persuasion battleground
+8600                רמת גן     liberal_urban    139055         0.652       0.597   0.356              0.020     1.051                100.714                 19.628                 37.701                 158.043               1.573              151.396           Turnout engine
+3000               ירושלים         jerusalem    432125         0.616       0.240   0.724              0.024     0.810                 49.964                 68.642                 37.242                 155.849               0.825              307.066  Persuasion battleground
+7900             פתח תקווה       mixed_urban    197815         0.678       0.430   0.539              0.032     1.160                 22.509                 46.187                 38.960                 107.656               1.019              106.568  Persuasion battleground
+6400                הרצליה     liberal_urban     88932         0.656       0.622   0.333              0.017     0.966                 69.708                 10.661                 25.987                 106.356               1.667               98.247           Turnout engine
+8400                רחובות       mixed_urban    111435         0.689       0.473   0.492              0.030     1.193                 38.511                 25.057                 23.703                  87.272               1.368               84.009  Persuasion battleground
+7400                 נתניה   periphery_likud    195220         0.583       0.399   0.574              0.031     1.078                 18.367                 38.567                 28.765                  85.699               0.928               91.137  Persuasion battleground
+6600                 חולון   periphery_likud    159831         0.641       0.440   0.527              0.032     1.187                 17.483                 35.752                 32.125                  85.359               1.065               79.407  Persuasion battleground
+6900               כפר סבא     liberal_urban     81737         0.699       0.613   0.342              0.018     0.976                 41.653                 11.097                 24.061                  76.812               1.339               70.396  Persuasion battleground
+70                   אשדוד  russian_speaking    181784         0.644       0.354   0.624              0.026     0.933                 17.913                 30.583                 22.299                  70.795               0.854               80.736  Persuasion battleground
+6300               גבעתיים     liberal_urban     49341         0.690       0.705   0.243              0.011     0.860                 46.879                  4.166                 15.561                  66.606               1.797               62.330           Turnout engine
+8700                 רעננה     liberal_urban     69652         0.666       0.567   0.391              0.023     1.089                 30.250                 11.842                 19.443                  61.535               1.264               54.347  Persuasion battleground
+6200                 בת ים  russian_speaking    124742         0.508       0.449   0.519              0.032     1.195                 21.737                 22.182                 15.846                  59.764               0.947               82.000  Persuasion battleground
+9000               באר שבע   periphery_likud    164728         0.613       0.378   0.588              0.031     0.996                  3.040                 34.464                 21.466                  58.969               0.902               62.957  Persuasion battleground
+1200      מודיעיןמכביםרעות     liberal_urban     69212         0.747       0.579   0.378              0.023     1.121                 18.635                 13.535                 22.690                  54.860               1.096               47.885  Persuasion battleground
+494           דאלית אלכרמל             druze     13249         0.551       0.738   0.143              0.017     2.275                 43.771                  1.289                  5.306                  50.366               5.059               60.924           Turnout engine
+480                 בית גן             druze      9177         0.530       0.874   0.072              0.005     1.328                 48.444                  0.266                  0.871                  49.581               7.190               53.945           Turnout engine
+7100                אשקלון  russian_speaking    119846         0.619       0.395   0.580              0.032     1.062                  7.553                 25.752                 15.489                  48.794               0.956               55.196  Persuasion battleground
+9700             הוד השרון     liberal_urban     48723         0.744       0.659   0.293              0.014     0.906                 23.258                  5.562                 17.350                  46.170               1.284               40.046  Persuasion battleground
+2650             רמת השרון     liberal_urban     38282         0.714       0.681   0.271              0.011     0.843                 28.899                  3.360                 12.548                  44.806               1.599               39.831           Turnout engine
+6500                  חדרה   periphery_likud     80141         0.627       0.430   0.536              0.035     1.246                  7.458                 18.865                 13.586                  39.910               1.015               40.230  Persuasion battleground
+2640              ראש העין       mixed_urban     49148         0.776       0.426   0.539              0.037     1.313                  5.778                 15.409                 12.999                  34.186               1.205               29.820  Persuasion battleground
+8200           קרית מוצקין   periphery_likud     40960         0.633       0.520   0.442              0.031     1.296                 11.766                  8.709                  9.624                  30.099               1.106               32.973  Persuasion battleground
+1139                כרמיאל  russian_speaking     42065         0.571       0.522   0.423              0.027     1.243                 15.903                  6.911                  6.778                  29.592               1.025               42.997  Persuasion battleground
+2620             קרית אונו     liberal_urban     31113         0.733       0.631   0.323              0.016     0.963                 12.982                  4.074                 10.389                  27.445               1.195               24.133  Persuasion battleground
+9500           קרית ביאליק   periphery_likud     36757         0.626       0.512   0.450              0.031     1.283                 10.543                  7.667                  8.379                  26.589               1.160               27.839  Persuasion battleground
+534                  עספיא             druze      9560         0.517       0.614   0.103              0.011     1.983                 23.108                  0.559                  2.247                  25.914               3.608               59.835           Turnout engine
+7200              נס ציונה     liberal_urban     34763         0.747       0.589   0.366              0.020     1.041                  8.293                  5.754                 11.762                  25.809               1.075               21.777  Persuasion battleground
+9100                 נהריה   periphery_likud     55086         0.608       0.448   0.517              0.031     1.130                  4.218                 11.264                  9.008                  24.490               0.908               27.807  Persuasion battleground
+1296              כסראסמיע             druze      6066         0.323       0.697   0.174              0.021     2.275                 22.575                  0.445                  1.158                  24.179               5.305               30.665           Turnout engine
+1295               יאנוחגת             druze      4843         0.395       0.725   0.147              0.017     2.275                 21.907                  0.330                  0.783                  23.020               6.326               36.733           Turnout engine
+7800         פרדס חנהכרכור     liberal_urban     32011         0.694       0.547   0.411              0.025     1.165                  8.878                  6.133                  7.746                  22.756               1.133               20.521  Persuasion battleground
+2300            קרית טבעון     liberal_urban     14446         0.675       0.719   0.223              0.010     0.826                 16.693                  1.046                  4.112                  21.851               2.013               20.899           Turnout engine
+7000                   לוד        mixed_city     58888         0.607       0.244   0.534              0.024     0.887                  6.799                  9.248                  4.176                  20.223               0.799               89.439         Secondary target
+6800              קרית אתא   periphery_likud     48568         0.650       0.369   0.605              0.032     1.039                  0.983                 11.023                  7.570                  19.576               0.952               18.865         Secondary target
+496                 חורפיש             druze      4836         0.535       0.734   0.161              0.018     2.253                 17.016                  0.487                  1.791                  19.294               5.310               22.556           Turnout engine
+2660                  יבנה       mixed_urban     37761         0.756       0.394   0.576              0.031     1.049                  1.179                  9.659                  8.370                  19.209               1.162               16.298         Secondary target
+9600               קרית ים  russian_speaking     36834         0.556       0.476   0.494              0.033     1.246                  6.342                  7.184                  4.921                  18.447               0.877               27.329         Secondary target
+                  name_he              segment  eligible  turnout_2022  p26_change  p26_nb  persuadable_share  openness  change_govt__gotv_pot  change_govt__pers_pot  change_govt__resc_pot  change_govt__potential  change_govt__eff1k  block_nb__potential              tier
+locality                                                                                                                                                                                                                                                                       
+480                בית גן                druze      9177         0.530       0.874   0.072              0.005     1.328                 48.444                  0.266                  0.871                  49.581               7.190               53.945    Turnout engine
+508               כפר כמא                druze      2685         0.352       0.589   0.091              0.004     0.892                 12.425                  0.043                  0.454                  12.923               6.406               23.585    Turnout engine
+1295              יאנוחגת                druze      4843         0.395       0.725   0.147              0.017     2.275                 21.907                  0.330                  0.783                  23.020               6.326               36.733    Turnout engine
+4201             מגדל שמס                druze      1338         0.234       0.719   0.216              0.020     1.851                  5.575                  0.071                  0.151                   5.796               5.765                6.544  Secondary target
+496                חורפיש                druze      4836         0.535       0.734   0.161              0.018     2.253                 17.016                  0.487                  1.791                  19.294               5.310               22.556    Turnout engine
+1296             כסראסמיע                druze      6066         0.323       0.697   0.174              0.021     2.275                 22.575                  0.445                  1.158                  24.179               5.305               30.665    Turnout engine
+494          דאלית אלכרמל                druze     13249         0.551       0.738   0.143              0.017     2.275                 43.771                  1.289                  5.306                  50.366               5.059               60.924    Turnout engine
+485                  גולס                druze      4974         0.538       0.731   0.198              0.018     1.777                 15.287                  0.482                  1.012                  16.782               4.490               22.353    Turnout engine
+694            מעגן מיכאל              kibbutz      1738         0.636       0.863   0.090              0.003     0.672                  4.220                  0.040                  0.455                   4.715               3.610                4.482  Secondary target
+534                 עספיא                druze      9560         0.517       0.614   0.103              0.011     1.983                 23.108                  0.559                  2.247                  25.914               3.608               59.835    Turnout engine
+96                   יגור              kibbutz      1401         0.637       0.861   0.093              0.003     0.646                  3.346                  0.032                  0.418                   3.796               3.606                3.576  Secondary target
+4501                  עגר  arab_north_triangle      1844         0.301       0.521   0.236              0.000     2.275                  4.477                  0.000                  0.223                   4.700               3.392                9.885  Secondary target
+176                אפיקים              kibbutz      1068         0.662       0.853   0.106              0.004     0.675                  2.142                  0.030                  0.291                   2.463               3.070                2.308  Secondary target
+917             עצמון שגב         moshav_rural      1003         0.681       0.824   0.125              0.005     0.732                  1.879                  0.037                  0.359                   2.275               3.019                2.083  Secondary target
+382                מכמורת         moshav_rural      1097         0.677       0.810   0.128              0.005     0.740                  1.973                  0.042                  0.426                   2.441               2.962                2.327  Secondary target
+43                  מטולה        liberal_urban      1511         0.543       0.666   0.278              0.015     0.958                  2.728                  0.138                  0.495                   3.362               2.961                3.230  Secondary target
+525                 סאגור                druze      3223         0.533       0.550   0.410              0.061     2.275                  2.593                  1.267                  0.321                   4.181               2.874                4.692    Turnout engine
+1140      מדרשת בן גוריון         moshav_rural      1147         0.672       0.803   0.141              0.006     0.748                  1.998                  0.050                  0.283                   2.331               2.705                2.289  Secondary target
+447                נורדיה         moshav_rural      1531         0.606       0.642   0.304              0.015     0.940                  2.415                  0.158                  0.520                   3.092               2.688                2.956  Secondary target
+5000         תל אביב  יפו        liberal_urban    447576         0.596       0.644   0.275              0.013     0.895                668.173                 36.670                100.177                 805.019               2.662              943.544    Turnout engine
+                segment                                  label  localities  eligible  turnout_2022  s22_C  s22_R  s22_A  p26_change  p26_nb  p26_arab  persuadable_voters  rescue_voters  change_lapsed_votes  openness  change_govt__gotv_pot  change_govt__pers_pot  change_govt__resc_pot  change_govt__potential  change_govt__share  block_nb__gotv_pot  block_nb__pers_pot  block_nb__resc_pot  block_nb__potential  block_nb__share
+0    arab_bedouin_south                   Arab – Negev Bedouin          38    144860         0.510  0.034  0.018  0.939       0.032   0.017     0.950               0.000         86.578              125.260     1.018                  0.702                  0.000                  1.046                   1.748               0.000            1352.005               0.000               0.689             1352.694            0.109
+1        arab_christian            Arab – Christian localities           6     27005         0.590  0.185  0.049  0.758       0.161   0.043     0.790              10.459         85.010              520.425     0.984                  2.747                  0.111                  0.997                   3.856               0.001             145.270               0.111               0.702              146.083            0.012
+2   arab_north_triangle              Arab – Galilee & Triangle          89    671826         0.541  0.042  0.019  0.932       0.039   0.017     0.942               0.000        511.916             6514.107     1.018                 10.545                  0.000                  5.969                  16.515               0.004            5404.633               0.000               4.179             5408.811            0.436
+3                 druze                     Druze & Circassian          18     96043         0.485  0.680  0.136  0.166       0.629   0.156     0.178             682.308       1587.030              283.190     1.739                253.964                  7.441                 18.444                 279.848               0.064             517.297               7.639              14.211              539.147            0.043
+4                haredi                                 Haredi          28    378343         0.747  0.036  0.959  0.001       0.085   0.910     0.002             831.320        712.802             2308.084     0.627                  0.000                  7.886                  8.350                  16.237               0.004               3.364               8.616               5.803               17.784            0.001
+5             jerusalem                              Jerusalem           1    432125         0.616  0.198  0.773  0.019       0.240   0.724     0.023            6326.472       2868.165             3145.510     0.810                 49.964                 68.642                 37.242                 155.849               0.035             210.982              70.680              25.403              307.066            0.025
+6               kibbutz                                Kibbutz         255    143238         0.699  0.827  0.147  0.006       0.784   0.168     0.010             860.389       3681.904             3274.918     0.758                189.030                  9.994                 45.300                 244.324               0.055             187.648               9.247              29.798              226.693            0.018
+7         liberal_urban                  Secular-liberal urban          45   1355203         0.666  0.655  0.315  0.014       0.623   0.320     0.020           14745.054      31091.595            13676.780     0.973               1167.523                165.349                380.149                1713.021               0.389            1353.496             159.600             255.120             1768.216            0.142
+8            mixed_city                 Mixed Jewish–Arab city           6    219177         0.597  0.212  0.561  0.214       0.274   0.473     0.239            2814.849       1449.802             3844.572     0.923                 11.019                 31.756                 17.087                  59.862               0.014             322.983              32.360              13.022              368.365            0.030
+9           mixed_urban            Middle Israel (mixed urban)          13    981121         0.659  0.462  0.499  0.022       0.469   0.471     0.029           18239.061      17363.160            10472.153     1.170                333.955                202.905                210.083                 746.943               0.170             730.550             200.286             147.594             1078.430            0.087
+10         moshav_rural               Moshav & rural community         454    250807         0.733  0.587  0.391  0.004       0.576   0.379     0.008            3583.065       6363.608             5198.980     0.927                142.409                 40.556                 77.611                 260.575               0.059             143.915              38.637              51.205              233.757            0.019
+11      periphery_likud          Periphery & development towns          34   1249570         0.627  0.326  0.656  0.003       0.383   0.588     0.006           24099.634      15929.612            13855.458     1.065                 89.038                268.469                189.937                 547.444               0.124             145.549             269.391             136.277              551.217            0.044
+12    religious_zionist  Religious-Zionist (inside Green Line)         104     77800         0.771  0.164  0.824  0.001       0.265   0.715     0.003            1496.651        850.905              435.620     1.052                  3.125                 17.408                 10.276                  30.810               0.007               3.268              15.938               6.753               25.959            0.002
+13     russian_speaking                 Russian-speaking towns          10    580965         0.594  0.361  0.620  0.003       0.411   0.561     0.006            9762.939       6435.422             7886.093     1.072                 82.931                105.937                 75.227                 264.096               0.060             163.155             111.282              58.680              333.116            0.027
+14        settlement_rz         West Bank – national-religious          82    101984         0.752  0.077  0.911  0.000       0.193   0.795     0.002            1202.723        557.093              743.519     0.928                  0.000                 14.777                  6.904                  21.681               0.005               0.000              13.320               4.601               17.921            0.001
+15   settlement_secular            West Bank – secular & mixed          32     78737         0.698  0.349  0.632  0.001       0.404   0.566     0.004            1740.515       1257.692             1764.647     1.043                  4.823                 20.547                 15.541                  40.912               0.009               6.522              20.030              10.903               37.455            0.003
+tier
+Secondary target           587
+Opposition stronghold      242
+Low yield                  200
+Blocking-partner zone      130
+Persuasion battleground     31
+Turnout engine              25
+Name: count, dtype: int64

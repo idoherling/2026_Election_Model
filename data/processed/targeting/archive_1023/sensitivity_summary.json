@@ -1,0 +1,836 @@
+{
+ "labels": {
+  "base": "Base case",
+  "gotv_low": "Turnout effect about half as large (0.8 instead of 1.5 pts at the reference point)",
+  "gotv_high": "Turnout effect two-thirds larger (2.5 instead of 1.5 pts)",
+  "gotv_flat": "No turnout hump: \u00d70.8 at every turnout level",
+  "gotv_flat_matched": "No turnout hump, same average lift in door turf (\u00d70.32 everywhere)",
+  "gotv_steep": "Steeper hump (effect concentrated at 30-50% turnout)",
+  "persuasion_high": "Persuasion \u00d74 (upper end of field estimates)",
+  "persuasion_zero": "No persuasion effect",
+  "persuasion_no_side": "No turnout side-effect of persuasion calls",
+  "rescue_high": "Rescue \u00d73",
+  "rescue_low": "Rescue \u00d70.3",
+  "lists_off": "No supporter lists (door canvassing only)",
+  "abroad_high": "Residents abroad \u00d71.6",
+  "cross_pressure_low": "Cross-pressured share 10% (national pool about 1%)",
+  "cross_pressure_high": "Cross-pressured share 40% (national pool about 4%)",
+  "druze_minus20": "Druze towns: 20 points moved from change to Netanyahu-bloc lists",
+  "no_blend": "Pure flow-matrix projection (no uniform-swing blend)",
+  "composition_tilt": "Turnout-tilted marginal voters (model rejected out of sample)"
+ },
+ "objectives": {
+  "change_govt": {
+   "scenarios": {
+    "base": {
+     "spearman": 1.0,
+     "top25_overlap": 25,
+     "target": {
+      "spearman": 1.0,
+      "top25_overlap": 25
+     },
+     "door_eff": {
+      "spearman": 1.0,
+      "top25_overlap": 25
+     }
+    },
+    "gotv_low": {
+     "spearman": 0.989,
+     "top25_overlap": 24,
+     "target": {
+      "spearman": 0.994,
+      "top25_overlap": 24
+     },
+     "door_eff": {
+      "spearman": 0.972,
+      "top25_overlap": 25
+     }
+    },
+    "gotv_high": {
+     "spearman": 0.995,
+     "top25_overlap": 24,
+     "target": {
+      "spearman": 0.996,
+      "top25_overlap": 24
+     },
+     "door_eff": {
+      "spearman": 0.975,
+      "top25_overlap": 24
+     }
+    },
+    "gotv_flat": {
+     "spearman": 0.945,
+     "top25_overlap": 21,
+     "target": {
+      "spearman": 0.973,
+      "top25_overlap": 21
+     },
+     "door_eff": {
+      "spearman": 0.853,
+      "top25_overlap": 8
+     }
+    },
+    "gotv_flat_matched": {
+     "spearman": 0.943,
+     "top25_overlap": 21,
+     "target": {
+      "spearman": 0.974,
+      "top25_overlap": 21
+     },
+     "door_eff": {
+      "spearman": 0.848,
+      "top25_overlap": 8
+     }
+    },
+    "gotv_steep": {
+     "spearman": 0.991,
+     "top25_overlap": 23,
+     "target": {
+      "spearman": 0.994,
+      "top25_overlap": 23
+     },
+     "door_eff": {
+      "spearman": 0.975,
+      "top25_overlap": 24
+     }
+    },
+    "persuasion_high": {
+     "spearman": 0.954,
+     "top25_overlap": 22,
+     "target": {
+      "spearman": 0.97,
+      "top25_overlap": 22
+     },
+     "door_eff": {
+      "spearman": 0.72,
+      "top25_overlap": 24
+     }
+    },
+    "persuasion_zero": {
+     "spearman": 0.993,
+     "top25_overlap": 23,
+     "target": {
+      "spearman": 0.993,
+      "top25_overlap": 23
+     },
+     "door_eff": {
+      "spearman": 0.955,
+      "top25_overlap": 24
+     }
+    },
+    "persuasion_no_side": {
+     "spearman": 0.996,
+     "top25_overlap": 25,
+     "target": {
+      "spearman": 0.998,
+      "top25_overlap": 25
+     },
+     "door_eff": {
+      "spearman": 1.0,
+      "top25_overlap": 25
+     }
+    },
+    "rescue_high": {
+     "spearman": 0.998,
+     "top25_overlap": 25,
+     "target": {
+      "spearman": 0.999,
+      "top25_overlap": 25
+     },
+     "door_eff": {
+      "spearman": 1.0,
+      "top25_overlap": 25
+     }
+    },
+    "rescue_low": {
+     "spearman": 0.999,
+     "top25_overlap": 24,
+     "target": {
+      "spearman": 1.0,
+      "top25_overlap": 24
+     },
+     "door_eff": {
+      "spearman": 1.0,
+      "top25_overlap": 25
+     }
+    },
+    "lists_off": {
+     "spearman": 0.837,
+     "top25_overlap": 22,
+     "target": {
+      "spearman": 0.901,
+      "top25_overlap": 22
+     },
+     "door_eff": {
+      "spearman": 1.0,
+      "top25_overlap": 25
+     }
+    },
+    "abroad_high": {
+     "spearman": 0.997,
+     "top25_overlap": 24,
+     "target": {
+      "spearman": 0.997,
+      "top25_overlap": 24
+     },
+     "door_eff": {
+      "spearman": 0.993,
+      "top25_overlap": 24
+     }
+    },
+    "cross_pressure_low": {
+     "spearman": 0.996,
+     "top25_overlap": 23,
+     "target": {
+      "spearman": 0.996,
+      "top25_overlap": 23
+     },
+     "door_eff": {
+      "spearman": 0.965,
+      "top25_overlap": 24
+     }
+    },
+    "cross_pressure_high": {
+     "spearman": 0.991,
+     "top25_overlap": 24,
+     "target": {
+      "spearman": 0.994,
+      "top25_overlap": 24
+     },
+     "door_eff": {
+      "spearman": 0.975,
+      "top25_overlap": 25
+     }
+    },
+    "druze_minus20": {
+     "spearman": 0.989,
+     "top25_overlap": 21,
+     "target": {
+      "spearman": 0.975,
+      "top25_overlap": 21
+     },
+     "door_eff": {
+      "spearman": 0.637,
+      "top25_overlap": 13
+     }
+    },
+    "no_blend": {
+     "spearman": 0.987,
+     "top25_overlap": 25,
+     "target": {
+      "spearman": 0.998,
+      "top25_overlap": 25
+     },
+     "door_eff": {
+      "spearman": 0.998,
+      "top25_overlap": 25
+     }
+    },
+    "composition_tilt": {
+     "spearman": 0.989,
+     "top25_overlap": 22,
+     "target": {
+      "spearman": 0.988,
+      "top25_overlap": 22
+     },
+     "door_eff": {
+      "spearman": 0.879,
+      "top25_overlap": 17
+     }
+    }
+   },
+   "n_always_top25": 16,
+   "n_always_top25_target": 16,
+   "n_ranked": 332,
+   "n_target": 232,
+   "n_door": 165
+  },
+  "block_nb": {
+   "scenarios": {
+    "base": {
+     "spearman": 1.0,
+     "top25_overlap": 25,
+     "target": {
+      "spearman": 1.0,
+      "top25_overlap": 25
+     },
+     "door_eff": {
+      "spearman": 1.0,
+      "top25_overlap": 25
+     }
+    },
+    "gotv_low": {
+     "spearman": 0.996,
+     "top25_overlap": 24,
+     "target": {
+      "spearman": 0.992,
+      "top25_overlap": 24
+     },
+     "door_eff": {
+      "spearman": 0.945,
+      "top25_overlap": 25
+     }
+    },
+    "gotv_high": {
+     "spearman": 0.998,
+     "top25_overlap": 24,
+     "target": {
+      "spearman": 0.996,
+      "top25_overlap": 24
+     },
+     "door_eff": {
+      "spearman": 0.987,
+      "top25_overlap": 25
+     }
+    },
+    "gotv_flat": {
+     "spearman": 0.953,
+     "top25_overlap": 11,
+     "target": {
+      "spearman": 0.976,
+      "top25_overlap": 19
+     },
+     "door_eff": {
+      "spearman": 0.892,
+      "top25_overlap": 13
+     }
+    },
+    "gotv_flat_matched": {
+     "spearman": 0.948,
+     "top25_overlap": 11,
+     "target": {
+      "spearman": 0.977,
+      "top25_overlap": 19
+     },
+     "door_eff": {
+      "spearman": 0.897,
+      "top25_overlap": 13
+     }
+    },
+    "gotv_steep": {
+     "spearman": 0.995,
+     "top25_overlap": 22,
+     "target": {
+      "spearman": 0.992,
+      "top25_overlap": 23
+     },
+     "door_eff": {
+      "spearman": 0.947,
+      "top25_overlap": 24
+     }
+    },
+    "persuasion_high": {
+     "spearman": 0.976,
+     "top25_overlap": 21,
+     "target": {
+      "spearman": 0.962,
+      "top25_overlap": 21
+     },
+     "door_eff": {
+      "spearman": 0.659,
+      "top25_overlap": 24
+     }
+    },
+    "persuasion_zero": {
+     "spearman": 0.995,
+     "top25_overlap": 23,
+     "target": {
+      "spearman": 0.989,
+      "top25_overlap": 24
+     },
+     "door_eff": {
+      "spearman": 0.965,
+      "top25_overlap": 24
+     }
+    },
+    "persuasion_no_side": {
+     "spearman": 0.998,
+     "top25_overlap": 24,
+     "target": {
+      "spearman": 0.996,
+      "top25_overlap": 24
+     },
+     "door_eff": {
+      "spearman": 1.0,
+      "top25_overlap": 25
+     }
+    },
+    "rescue_high": {
+     "spearman": 1.0,
+     "top25_overlap": 25,
+     "target": {
+      "spearman": 1.0,
+      "top25_overlap": 25
+     },
+     "door_eff": {
+      "spearman": 1.0,
+      "top25_overlap": 25
+     }
+    },
+    "rescue_low": {
+     "spearman": 1.0,
+     "top25_overlap": 25,
+     "target": {
+      "spearman": 1.0,
+      "top25_overlap": 25
+     },
+     "door_eff": {
+      "spearman": 1.0,
+      "top25_overlap": 25
+     }
+    },
+    "lists_off": {
+     "spearman": 0.954,
+     "top25_overlap": 24,
+     "target": {
+      "spearman": 0.88,
+      "top25_overlap": 22
+     },
+     "door_eff": {
+      "spearman": 1.0,
+      "top25_overlap": 25
+     }
+    },
+    "abroad_high": {
+     "spearman": 0.998,
+     "top25_overlap": 23,
+     "target": {
+      "spearman": 0.995,
+      "top25_overlap": 24
+     },
+     "door_eff": {
+      "spearman": 0.98,
+      "top25_overlap": 25
+     }
+    },
+    "cross_pressure_low": {
+     "spearman": 0.997,
+     "top25_overlap": 24,
+     "target": {
+      "spearman": 0.994,
+      "top25_overlap": 24
+     },
+     "door_eff": {
+      "spearman": 0.981,
+      "top25_overlap": 25
+     }
+    },
+    "cross_pressure_high": {
+     "spearman": 0.997,
+     "top25_overlap": 24,
+     "target": {
+      "spearman": 0.993,
+      "top25_overlap": 24
+     },
+     "door_eff": {
+      "spearman": 0.948,
+      "top25_overlap": 25
+     }
+    },
+    "druze_minus20": {
+     "spearman": 0.981,
+     "top25_overlap": 25,
+     "target": {
+      "spearman": 0.975,
+      "top25_overlap": 18
+     },
+     "door_eff": {
+      "spearman": 0.72,
+      "top25_overlap": 15
+     }
+    },
+    "no_blend": {
+     "spearman": 0.999,
+     "top25_overlap": 24,
+     "target": {
+      "spearman": 0.998,
+      "top25_overlap": 25
+     },
+     "door_eff": {
+      "spearman": 0.995,
+      "top25_overlap": 24
+     }
+    },
+    "composition_tilt": {
+     "spearman": 0.989,
+     "top25_overlap": 21,
+     "target": {
+      "spearman": 0.984,
+      "top25_overlap": 19
+     },
+     "door_eff": {
+      "spearman": 0.853,
+      "top25_overlap": 19
+     }
+    }
+   },
+   "n_always_top25": 7,
+   "n_always_top25_target": 13,
+   "n_ranked": 332,
+   "n_target": 232,
+   "n_door": 157
+  }
+ },
+ "budgets": {
+  "base": {
+   "change_govt": {
+    "150000_0.0": 781.5,
+    "150000_0.3": 1107.0,
+    "400000_0.0": 1402.9,
+    "400000_0.3": 1847.3
+   },
+   "block_nb": {
+    "150000_0.0": 854.6,
+    "150000_0.3": 999.1,
+    "400000_0.0": 1449.0,
+    "400000_0.3": 1738.9
+   },
+   "change_seats": {
+    "150000_0.0": 832.4,
+    "150000_0.3": 1264.6,
+    "400000_0.0": 1545.7,
+    "400000_0.3": 2051.7
+   }
+  },
+  "gotv_low": {
+   "change_govt": {
+    "150000_0.0": 430.6,
+    "150000_0.3": 740.8,
+    "400000_0.0": 796.5,
+    "400000_0.3": 1166.9
+   },
+   "block_nb": {
+    "150000_0.0": 468.3,
+    "150000_0.3": 577.9,
+    "400000_0.0": 825.2,
+    "400000_0.3": 1004.1
+   },
+   "change_seats": {
+    "150000_0.0": 455.7,
+    "150000_0.3": 889.4,
+    "400000_0.0": 868.3,
+    "400000_0.3": 1339.8
+   }
+  },
+  "gotv_high": {
+   "change_govt": {
+    "150000_0.0": 1283.3,
+    "150000_0.3": 1660.5,
+    "400000_0.0": 2269.4,
+    "400000_0.3": 2833.2
+   },
+   "block_nb": {
+    "150000_0.0": 1406.7,
+    "150000_0.3": 1648.7,
+    "400000_0.0": 2339.4,
+    "400000_0.3": 2798.6
+   },
+   "change_seats": {
+    "150000_0.0": 1368.3,
+    "150000_0.3": 1809.1,
+    "400000_0.0": 2513.9,
+    "400000_0.3": 3077.8
+   }
+  },
+  "gotv_flat": {
+   "change_govt": {
+    "150000_0.0": 1559.6,
+    "150000_0.3": 2215.7,
+    "400000_0.0": 3291.5,
+    "400000_0.3": 4402.3
+   },
+   "block_nb": {
+    "150000_0.0": 1619.0,
+    "150000_0.3": 2241.7,
+    "400000_0.0": 3302.5,
+    "400000_0.3": 4491.0
+   },
+   "change_seats": {
+    "150000_0.0": 1560.0,
+    "150000_0.3": 2252.1,
+    "400000_0.0": 3436.8,
+    "400000_0.3": 4393.8
+   }
+  },
+  "gotv_flat_matched": {
+   "change_govt": {
+    "150000_0.0": 636.5,
+    "150000_0.3": 1019.5,
+    "400000_0.0": 1380.0,
+    "400000_0.3": 1912.4
+   },
+   "block_nb": {
+    "150000_0.0": 661.8,
+    "150000_0.3": 871.0,
+    "400000_0.0": 1385.4,
+    "400000_0.3": 1791.3
+   },
+   "change_seats": {
+    "150000_0.0": 635.4,
+    "150000_0.3": 1131.7,
+    "400000_0.0": 1429.7,
+    "400000_0.3": 2008.3
+   }
+  },
+  "gotv_steep": {
+   "change_govt": {
+    "150000_0.0": 556.9,
+    "150000_0.3": 865.2,
+    "400000_0.0": 963.4,
+    "400000_0.3": 1349.9
+   },
+   "block_nb": {
+    "150000_0.0": 610.8,
+    "150000_0.3": 723.9,
+    "400000_0.0": 998.6,
+    "400000_0.3": 1202.0
+   },
+   "change_seats": {
+    "150000_0.0": 611.4,
+    "150000_0.3": 1034.6,
+    "400000_0.0": 1087.9,
+    "400000_0.3": 1569.6
+   }
+  },
+  "persuasion_high": {
+   "change_govt": {
+    "150000_0.0": 870.8,
+    "150000_0.3": 1211.5,
+    "400000_0.0": 1748.2,
+    "400000_0.3": 2137.6
+   },
+   "block_nb": {
+    "150000_0.0": 948.0,
+    "150000_0.3": 1191.4,
+    "400000_0.0": 1841.4,
+    "400000_0.3": 2128.9
+   },
+   "change_seats": {
+    "150000_0.0": 914.7,
+    "150000_0.3": 1342.7,
+    "400000_0.0": 1866.2,
+    "400000_0.3": 2334.5
+   }
+  },
+  "persuasion_zero": {
+   "change_govt": {
+    "150000_0.0": 752.3,
+    "150000_0.3": 1101.8,
+    "400000_0.0": 1302.2,
+    "400000_0.3": 1781.6
+   },
+   "block_nb": {
+    "150000_0.0": 827.5,
+    "150000_0.3": 985.5,
+    "400000_0.0": 1336.0,
+    "400000_0.3": 1652.9
+   },
+   "change_seats": {
+    "150000_0.0": 806.2,
+    "150000_0.3": 1255.6,
+    "400000_0.0": 1453.1,
+    "400000_0.3": 1991.8
+   }
+  },
+  "persuasion_no_side": {
+   "change_govt": {
+    "150000_0.0": 781.5,
+    "150000_0.3": 1134.0,
+    "400000_0.0": 1402.9,
+    "400000_0.3": 1914.1
+   },
+   "block_nb": {
+    "150000_0.0": 854.6,
+    "150000_0.3": 1063.7,
+    "400000_0.0": 1449.0,
+    "400000_0.3": 1846.8
+   },
+   "change_seats": {
+    "150000_0.0": 832.4,
+    "150000_0.3": 1273.6,
+    "400000_0.0": 1545.7,
+    "400000_0.3": 2086.3
+   }
+  },
+  "rescue_high": {
+   "change_govt": {
+    "150000_0.0": 781.5,
+    "150000_0.3": 1643.6,
+    "400000_0.0": 1402.9,
+    "400000_0.3": 2383.9
+   },
+   "block_nb": {
+    "150000_0.0": 854.6,
+    "150000_0.3": 999.1,
+    "400000_0.0": 1449.0,
+    "400000_0.3": 1738.9
+   },
+   "change_seats": {
+    "150000_0.0": 832.4,
+    "150000_0.3": 2127.1,
+    "400000_0.0": 1545.7,
+    "400000_0.3": 2914.3
+   }
+  },
+  "rescue_low": {
+   "change_govt": {
+    "150000_0.0": 781.5,
+    "150000_0.3": 919.2,
+    "400000_0.0": 1402.9,
+    "400000_0.3": 1659.5
+   },
+   "block_nb": {
+    "150000_0.0": 854.6,
+    "150000_0.3": 999.1,
+    "400000_0.0": 1449.0,
+    "400000_0.3": 1738.9
+   },
+   "change_seats": {
+    "150000_0.0": 832.4,
+    "150000_0.3": 962.7,
+    "400000_0.0": 1545.7,
+    "400000_0.3": 1749.8
+   }
+  },
+  "lists_off": {
+   "change_govt": {
+    "150000_0.0": 781.5,
+    "150000_0.3": 1107.0,
+    "400000_0.0": 1402.9,
+    "400000_0.3": 1847.3
+   },
+   "block_nb": {
+    "150000_0.0": 854.6,
+    "150000_0.3": 999.1,
+    "400000_0.0": 1449.0,
+    "400000_0.3": 1738.9
+   },
+   "change_seats": {
+    "150000_0.0": 832.4,
+    "150000_0.3": 1264.6,
+    "400000_0.0": 1545.7,
+    "400000_0.3": 2051.7
+   }
+  },
+  "abroad_high": {
+   "change_govt": {
+    "150000_0.0": 573.6,
+    "150000_0.3": 888.7,
+    "400000_0.0": 1017.4,
+    "400000_0.3": 1424.3
+   },
+   "block_nb": {
+    "150000_0.0": 622.1,
+    "150000_0.3": 750.6,
+    "400000_0.0": 1048.5,
+    "400000_0.3": 1282.8
+   },
+   "change_seats": {
+    "150000_0.0": 611.4,
+    "150000_0.3": 1041.5,
+    "400000_0.0": 1123.7,
+    "400000_0.3": 1617.9
+   }
+  },
+  "cross_pressure_low": {
+   "change_govt": {
+    "150000_0.0": 765.4,
+    "150000_0.3": 1102.8,
+    "400000_0.0": 1349.0,
+    "400000_0.3": 1798.5
+   },
+   "block_nb": {
+    "150000_0.0": 840.4,
+    "150000_0.3": 987.6,
+    "400000_0.0": 1387.7,
+    "400000_0.3": 1668.4
+   },
+   "change_seats": {
+    "150000_0.0": 817.8,
+    "150000_0.3": 1257.7,
+    "400000_0.0": 1493.4,
+    "400000_0.3": 2010.4
+   }
+  },
+  "cross_pressure_high": {
+   "change_govt": {
+    "150000_0.0": 806.3,
+    "150000_0.3": 1151.2,
+    "400000_0.0": 1487.5,
+    "400000_0.3": 1946.8
+   },
+   "block_nb": {
+    "150000_0.0": 876.3,
+    "150000_0.3": 1078.1,
+    "400000_0.0": 1540.9,
+    "400000_0.3": 1874.4
+   },
+   "change_seats": {
+    "150000_0.0": 853.8,
+    "150000_0.3": 1288.6,
+    "400000_0.0": 1622.7,
+    "400000_0.3": 2129.7
+   }
+  },
+  "druze_minus20": {
+   "change_govt": {
+    "150000_0.0": 781.5,
+    "150000_0.3": 1107.0,
+    "400000_0.0": 1402.9,
+    "400000_0.3": 1847.3
+   },
+   "block_nb": {
+    "150000_0.0": 854.9,
+    "150000_0.3": 999.4,
+    "400000_0.0": 1449.3,
+    "400000_0.3": 1739.2
+   },
+   "change_seats": {
+    "150000_0.0": 832.5,
+    "150000_0.3": 1264.7,
+    "400000_0.0": 1546.0,
+    "400000_0.3": 2052.1
+   }
+  },
+  "no_blend": {
+   "change_govt": {
+    "150000_0.0": 746.2,
+    "150000_0.3": 1070.3,
+    "400000_0.0": 1347.3,
+    "400000_0.3": 1783.3
+   },
+   "block_nb": {
+    "150000_0.0": 810.9,
+    "150000_0.3": 962.0,
+    "400000_0.0": 1376.5,
+    "400000_0.3": 1670.4
+   },
+   "change_seats": {
+    "150000_0.0": 802.7,
+    "150000_0.3": 1231.5,
+    "400000_0.0": 1506.5,
+    "400000_0.3": 1999.2
+   }
+  },
+  "composition_tilt": {
+   "change_govt": {
+    "150000_0.0": 667.3,
+    "150000_0.3": 1141.6,
+    "400000_0.0": 1079.1,
+    "400000_0.3": 1840.9
+   },
+   "block_nb": {
+    "150000_0.0": 735.0,
+    "150000_0.3": 1002.5,
+    "400000_0.0": 1141.5,
+    "400000_0.3": 1707.4
+   },
+   "change_seats": {
+    "150000_0.0": 700.0,
+    "150000_0.3": 1291.6,
+    "400000_0.0": 1178.5,
+    "400000_0.3": 2001.1
+   }
+  }
+ }
+}

@@ -1,0 +1,1651 @@
+{
+ "sources": [
+  {
+   "id": "DATA-CEC,D2-F22,D2-F27,P-F28,P-F29",
+   "group": "Official data",
+   "citation": "Central Elections Committee for the Knesset (2013-2022). Official results by locality and by polling station, elections to the 19th-25th Knesset (dataset votes-knesset). data.gov.il.",
+   "url": "https://data.gov.il/he/datasets/central-election-committee/votes-knesset",
+   "status": "official data",
+   "checked": "verified",
+   "note": "Locality and kalpi results behind every projection"
+  },
+  {
+   "id": "DATA-CEC-GUIDE,D2-F17,D2-F18",
+   "group": "Official data",
+   "citation": "Central Elections Committee for the Knesset (2022). Guide to Knesset Elections (25th Knesset). gov.il.",
+   "url": "https://www.gov.il/BlobFolder/news/elections-25/en/Guide-to-Knesset-Elections-en.pdf",
+   "status": "official data",
+   "checked": "verified",
+   "note": "Assigned stations, double envelopes, hours and registration cut-off"
+  },
+  {
+   "id": "DATA-CBS-LOCALITIES",
+   "group": "Official data",
+   "citation": "Central Bureau of Statistics (2025). Localities in Israel: localities file 2023. data.gov.il.",
+   "url": "https://data.gov.il/he/datasets/lamas/localities-in-israel",
+   "status": "official data",
+   "checked": "verified",
+   "note": "Locality codes, coordinates and settlement type"
+  },
+  {
+   "id": "DATA-CENSUS-2022",
+   "group": "Official data",
+   "citation": "Central Bureau of Statistics (2024). Census of Population and Housing 2022: selected data by locality and statistical area. data.gov.il.",
+   "url": "https://data.gov.il/he/datasets/lamas/2022",
+   "status": "official data",
+   "checked": "verified",
+   "note": "Locality demographics used to build segments"
+  },
+  {
+   "id": "DATA-SES-2019",
+   "group": "Official data",
+   "citation": "Central Bureau of Statistics (2023). Socio-economic cluster of local authorities and localities, 2019. data.gov.il.",
+   "url": "https://data.gov.il/he/datasets/cio/social_economic_cluster",
+   "status": "official data",
+   "checked": "verified",
+   "note": "SES cluster for every locality"
+  },
+  {
+   "id": "DATA-KOLOT-NODEDIM",
+   "group": "Official data",
+   "citation": "Cain, H. (n.d.). Kolot Nodedim: vote transfers between Knesset elections, 2003-2022 (interactive site; code at github.com/harelc/elections-vote-transfer).",
+   "url": "https://kolot-nodedim.netlify.app",
+   "status": "other",
+   "checked": "verified",
+   "note": "Station-level transfer matrices for lineages and the backtest"
+  },
+  {
+   "id": "DATA-WORLD-ATLAS",
+   "group": "Official data",
+   "citation": "Bostock, M. (n.d.). world-atlas: pre-built TopoJSON from Natural Earth. GitHub.",
+   "url": "https://github.com/topojson/world-atlas",
+   "status": "other",
+   "checked": "verified",
+   "note": "Country outlines for the map"
+  },
+  {
+   "id": "DATA-GEOBOUNDARIES",
+   "group": "Official data",
+   "citation": "Runfola, D., et al. (2020). geoBoundaries: A global database of political administrative boundaries. PLoS ONE 15(4): e0231866.",
+   "url": "https://www.geoboundaries.org",
+   "status": "other",
+   "checked": "verified",
+   "note": "District outlines for the map"
+  },
+  {
+   "id": "MODEL-FORECAST",
+   "group": "Official data",
+   "citation": "Herling, I. (2026). The Knesset Model: probabilistic forecast of the 2026 Knesset election (run of 8-10 Oct 2026). GitHub.",
+   "url": "https://github.com/idoherling/2026_Election_Model",
+   "status": "other",
+   "checked": "verified",
+   "note": "Seat forecast, share draws and coalition model behind vote values"
+  },
+  {
+   "id": "D1-F01,P-F16",
+   "group": "Israeli voting behaviour",
+   "citation": "Shamir, M., & Arian, A. (1999). Collective Identity and Electoral Competition in Israel. American Political Science Review 93(2): 265-277.",
+   "url": "https://doi.org/10.2307/2585395",
+   "status": "peer-reviewed",
+   "checked": "verified",
+   "note": "Identity cleavages keep structuring the Israeli vote"
+  },
+  {
+   "id": "D1-F02",
+   "group": "Israeli voting behaviour",
+   "citation": "Shamir, M., Dvir-Gvirsman, S., & Ventura, R. (2017). Taken Captive by the Collective Identity Cleavage: Left and Right in the 2015 Elections. In M. Shamir & G. Rahat (eds.), The Elections in Israel 2015. Routledge.",
+   "url": "https://doi.org/10.4324/9781315112121",
+   "status": "book/chapter",
+   "checked": "partly verified",
+   "note": "Left and right defined by identity and security"
+  },
+  {
+   "id": "D1-F03",
+   "group": "Israeli voting behaviour",
+   "citation": "Shapira, Y., Harsgor, L., & Yakter, A. (2025). Do We Agree, and on What? Ideological Cleavages and Public Opinion Trends in the 2022 Elections. In G. Rahat, N. Gidron & M. Shamir (eds.), The Elections in Israel 2022 (Hebrew), pp. 77-113. Israel Democracy Institute.",
+   "url": "https://en.idi.org.il/media/27873/the-elections-in-israel-2022.pdf",
+   "status": "book/chapter",
+   "checked": "verified",
+   "note": "Economic consensus, deep divides on conflict, religion and courts"
+  },
+  {
+   "id": "D1-F04",
+   "group": "Israeli voting behaviour",
+   "citation": "Amitai, Y., Gidron, N., & Yair, O. (2025). Political Polarization in Israel, 1992-2022. In G. Rahat, N. Gidron & M. Shamir (eds.), The Elections in Israel 2022 (Hebrew), pp. 41-76. Israel Democracy Institute.",
+   "url": "https://en.idi.org.il/media/27873/the-elections-in-israel-2022.pdf",
+   "status": "book/chapter",
+   "checked": "verified",
+   "note": "Affective polarisation at a record high in 2022"
+  },
+  {
+   "id": "D1-F05",
+   "group": "Israeli voting behaviour",
+   "citation": "Gidron, N., interviewed by B. Cousin (2026). On Democratic Backsliding in Israel. Books and Ideas (La Vie des idées), 2 January 2026.",
+   "url": "https://booksandideas.net/On-democratic-backsliding-in-Israel",
+   "status": "other",
+   "checked": "partly verified",
+   "note": "Polarisation stayed near its 2022 peak after 7 October"
+  },
+  {
+   "id": "D1-F05",
+   "group": "Israeli voting behaviour",
+   "citation": "Gidron, N., Sheffer, L., & Mor, G. (2022). The Israel Polarization Panel Dataset, 2019-2021. Electoral Studies 80: 102512.",
+   "url": "https://doi.org/10.1016/j.electstud.2022.102512",
+   "status": "peer-reviewed",
+   "checked": "partly verified",
+   "note": "Ten-wave panel of the same voters across elections"
+  },
+  {
+   "id": "D1-F06",
+   "group": "Israeli voting behaviour",
+   "citation": "Gidron, N., Margalit, Y., Sheffer, L., & Yakir, I. (2026). Why Masses Support Democratic Backsliding. American Journal of Political Science 70(2): 720-737 (online 2025).",
+   "url": "https://doi.org/10.1111/ajps.12958",
+   "status": "peer-reviewed",
+   "checked": "verified",
+   "note": "Overhaul support tracks leader attachment and partisan hostility"
+  },
+  {
+   "id": "D1-F07,P-F15",
+   "group": "Israeli voting behaviour",
+   "citation": "Bassan-Nygate, L., & Weiss, C. M. (2022). Party Competition and Cooperation Shape Affective Polarization: Evidence from Natural and Survey Experiments in Israel. Comparative Political Studies 55(2): 287-318.",
+   "url": "https://doi.org/10.1177/00104140211024283",
+   "status": "peer-reviewed",
+   "checked": "verified",
+   "note": "Unity-government cues raise tolerance across camps"
+  },
+  {
+   "id": "D1-F08",
+   "group": "Israeli voting behaviour",
+   "citation": "Rahat, G., Hazan, R. Y., & Ben-Nun Bloom, P. (2016). Stable Blocs and Multiple Identities: The 2015 Elections in Israel. Representation 52(1): 99-117.",
+   "url": "https://doi.org/10.1080/00344893.2016.1190592",
+   "status": "peer-reviewed",
+   "checked": "verified",
+   "note": "2015 big-party gains came from inside their own bloc"
+  },
+  {
+   "id": "D1-F09",
+   "group": "Israeli voting behaviour",
+   "citation": "Shamir, M., Ventura, R., Arian, A., & Kedar, O. (2008). Kadima: Forward in a Dealigned Party System. In A. Arian & M. Shamir (eds.), The Elections in Israel 2006. Transaction Publishers.",
+   "url": "http://web.mit.edu/okedar/www/materials/Sham-Ven-Ar-Ked.pdf",
+   "status": "book/chapter",
+   "checked": "verified",
+   "note": "Vote switching in 2006 grew fastest within blocs"
+  },
+  {
+   "id": "D1-F10",
+   "group": "Israeli voting behaviour",
+   "citation": "Hermann, T., & Anabi, O. (2022). Only Half of Israelis Intend to Repeat Their 2021 Vote. Israel Democracy Institute (Israeli Voice Index, August 2022).",
+   "url": "https://en.idi.org.il/articles/45839",
+   "status": "report",
+   "checked": "verified",
+   "note": "Only 6% planned to switch blocs in 2022"
+  },
+  {
+   "id": "D1-F12,D6-F04",
+   "group": "Israeli voting behaviour",
+   "citation": "Wertman, O., & Elran, M. (2022). The Israeli Electorate from the Perspective of the 2022 Elections. INSS Insight No. 1664. Institute for National Security Studies.",
+   "url": "https://www.inss.org.il/publication/israel-elections-2022/",
+   "status": "report",
+   "checked": "verified",
+   "note": "Bloc shifts and turnout gains in right-leaning towns, 2021-2022"
+  },
+  {
+   "id": "D1-F13",
+   "group": "Israeli voting behaviour",
+   "citation": "Kenig, O. (2021). Voting Patterns in Knesset Elections 2021 Vs. 2020. Israel Democracy Institute.",
+   "url": "https://en.idi.org.il/articles/34367",
+   "status": "report",
+   "checked": "verified",
+   "note": "2021 turnout fell most in right-wing strongholds"
+  },
+  {
+   "id": "D1-F14,D6-F07",
+   "group": "Israeli voting behaviour",
+   "citation": "Finkelstein, A. (2026). Voting Patterns of Jews in the 2022 Elections by Religious Self-Definition. Israel Democracy Institute (page dated 28 June 2026; pooled surveys November 2022-October 2023).",
+   "url": "https://en.idi.org.il/articles/64807",
+   "status": "report",
+   "checked": "verified",
+   "note": "2022 vote by religiosity among Jewish voters"
+  },
+  {
+   "id": "D1-F15",
+   "group": "Israeli voting behaviour",
+   "citation": "Hermann, T., Anabi, O., Kaplan, Y., & Sapozhnikova, I. O. (2022). The Israeli Democracy Index 2022: Selected Findings. Israel Democracy Institute.",
+   "url": "https://en.idi.org.il/media/20924/democracy-index-summary-v3-2022-003.pdf",
+   "status": "report",
+   "checked": "verified",
+   "note": "Right-wing identification by age and religiosity"
+  },
+  {
+   "id": "D1-F16",
+   "group": "Israeli voting behaviour",
+   "citation": "Abensour, G. (2023). Masortim and Masortiyut in Israel: Identity and Education. Jewish People Policy Institute.",
+   "url": "https://jppi.org.il/en/%D7%94%D7%9E%D7%A1%D7%95%D7%A8%D7%AA%D7%99%D7%9D/s/3.1.3/",
+   "status": "report",
+   "checked": "verified",
+   "note": "Masorti vote and the make-up of Likud's electorate"
+  },
+  {
+   "id": "D1-F17,D6-F08",
+   "group": "Israeli voting behaviour",
+   "citation": "Dahan, M. (2023). Voting Gap by Origin. CESifo Working Paper No. 10857.",
+   "url": "https://www.ifo.de/DocDL/cesifo1_wp10857.pdf",
+   "status": "working paper",
+   "checked": "verified",
+   "note": "Mizrahi-Ashkenazi locality gap shrinks once education is held constant"
+  },
+  {
+   "id": "D1-F21",
+   "group": "Israeli voting behaviour",
+   "citation": "Tabarovsky, I. (2019, 4 Apr). Russian-Speaking Israelis Go to the Polls. Wilson Center, Kennan Institute (The Russia File).",
+   "url": "https://www.wilsoncenter.org/blog-post/russian-speaking-israelis-go-to-the-polls",
+   "status": "report",
+   "checked": "partly verified",
+   "note": "Size and party ties of the Russian-speaking vote"
+  },
+  {
+   "id": "D1-F22,D2-F11,D6-F17",
+   "group": "Israeli voting behaviour",
+   "citation": "Brake, S. (2019, 27 Nov). The Druze Vote for the Twentieth, Twenty-First, and Twenty-Second Knesset Elections. Bayan, Moshe Dayan Center, Tel Aviv University.",
+   "url": "https://dayan.org/content/druze-vote-twentieth-twenty-first-and-twenty-second-knesset-elections",
+   "status": "report",
+   "checked": "verified",
+   "note": "Druze vote follows government prospects and Druze candidates"
+  },
+  {
+   "id": "D1-F24,P-F26",
+   "group": "Israeli voting behaviour",
+   "citation": "Bargsted, M. A., & Kedar, O. (2009). Coalition-Targeted Duvergerian Voting: How Expectations Affect Voter Choice under Proportional Representation. American Journal of Political Science 53(2): 307-323.",
+   "url": "https://doi.org/10.1111/j.1540-5907.2009.00372.x",
+   "status": "peer-reviewed",
+   "checked": "verified",
+   "note": "Israeli voters desert parties expected to sit outside the coalition"
+  },
+  {
+   "id": "D1-F25",
+   "group": "Israeli voting behaviour",
+   "citation": "Harsgor, L., Itzkovitch-Malka, R., & Tuttnauer, O. (2023). Do coalition and formateur expectations affect vote switching? European Political Science Review 15(1): 96-115.",
+   "url": "https://doi.org/10.1017/S1755773922000455",
+   "status": "peer-reviewed",
+   "checked": "verified",
+   "note": "Voters switch to shape who forms the government"
+  },
+  {
+   "id": "D1-F27",
+   "group": "Israeli voting behaviour",
+   "citation": "Abramson, P. R., Aldrich, J. H., Blais, A., Diamond, M., Diskin, A., Indridason, I. H., Lee, D. J., & Levine, R. (2010). Comparing Strategic Voting Under FPTP and PR. Comparative Political Studies 43(1): 61-90.",
+   "url": "https://doi.org/10.1177/0010414009341717",
+   "status": "peer-reviewed",
+   "checked": "verified",
+   "note": "Small lists lose strategic votes under PR, Israel included"
+  },
+  {
+   "id": "D1-F28",
+   "group": "Israeli voting behaviour",
+   "citation": "Shapira, A. (2022, 8 Nov). Wasted Votes, the Electoral Threshold, and the Relationship between Them. Israel Democracy Institute.",
+   "url": "https://en.idi.org.il/articles/46256",
+   "status": "report",
+   "checked": "verified",
+   "note": "Record 8.7% of votes wasted in 2022"
+  },
+  {
+   "id": "D1-F29",
+   "group": "Israeli voting behaviour",
+   "citation": "Rahat, G. (2019). The Decline of the Group and the Rise of the Star(s): From Party Politics to Personal Politics (Hebrew). IDI Policy Paper 145. Israel Democracy Institute.",
+   "url": "https://www.idi.org.il/media/13884/the-decline-of-the-group-and-the-rise-of-the-star-from-party-politics-to-personal-politics.pdf",
+   "status": "report",
+   "checked": "verified",
+   "note": "Party leaders matter more to vote choice since 1977"
+  },
+  {
+   "id": "D1-F30,D6-F29",
+   "group": "Israeli voting behaviour",
+   "citation": "Getmansky, A., & Zeitzoff, T. (2014). Terrorism and Voting: The Effect of Rocket Threat on Voting in Israeli Elections. American Political Science Review 108(3): 588-604.",
+   "url": "https://doi.org/10.1017/S0003055414000288",
+   "status": "peer-reviewed",
+   "checked": "verified",
+   "note": "Rocket range raised the right-wing vote 2-6 points"
+  },
+  {
+   "id": "D1-F30,D6-F31",
+   "group": "Israeli voting behaviour",
+   "citation": "Elster, Y. (2019). Rockets and votes. Journal of Economic Behavior & Organization 166: 767-784.",
+   "url": "https://doi.org/10.1016/j.jebo.2019.09.011",
+   "status": "peer-reviewed",
+   "checked": "verified",
+   "note": "Rocket damage claims predict a shift to the right bloc"
+  },
+  {
+   "id": "D1-F31,D6-F30",
+   "group": "Israeli voting behaviour",
+   "citation": "Berrebi, C., & Klor, E. F. (2008). Are Voters Sensitive to Terrorism? Direct Evidence from the Israeli Electorate. American Political Science Review 102(3): 279-301.",
+   "url": "https://doi.org/10.1017/S0003055408080246",
+   "status": "peer-reviewed",
+   "checked": "verified",
+   "note": "A local attack adds 1.35 points to the right bloc"
+  },
+  {
+   "id": "D1-F32",
+   "group": "Israeli voting behaviour",
+   "citation": "Thon Ashkenazy, A., with the Viterbi Family Center (2025, 13 Jan). 'Democracy on the Frontlines' Conference Survey. Israel Democracy Institute.",
+   "url": "https://en.idi.org.il/articles/57945",
+   "status": "report",
+   "checked": "verified",
+   "note": "Low priority and majority opposition for the judicial overhaul"
+  },
+  {
+   "id": "D1-F33",
+   "group": "Israeli voting behaviour",
+   "citation": "Viterbi Family Center for Public Opinion and Policy Research (2026). Israeli Voice Index, December 2025 (data file). Israel Democracy Institute.",
+   "url": "https://en.idi.org.il/media/29987/dec-2025-voice-index-data.pdf",
+   "status": "report",
+   "checked": "verified",
+   "note": "Support for an inquiry and for a Ra'am-backed government"
+  },
+  {
+   "id": "D1-F20",
+   "group": "Israeli voting behaviour",
+   "citation": "Freedman, M., & Shelef, N. G. (2025). From Bennett to Ben Gvir: The Political Behavior of Religious Zionism in the 2019-2022 Elections. In G. Rahat, N. Gidron & M. Shamir (eds.), The Elections in Israel 2022 (Hebrew), pp. 317-344. Israel Democracy Institute.",
+   "url": "https://en.idi.org.il/media/27873/the-elections-in-israel-2022.pdf",
+   "status": "book/chapter",
+   "checked": "verified",
+   "note": "National-religious voters moved right between 2019 and 2022"
+  },
+  {
+   "id": "P-F27",
+   "group": "Israeli voting behaviour",
+   "citation": "Blais, A., Aldrich, J. H., Indridason, I. H., & Levine, R. (2006). Do Voters Vote For Government Coalitions? Testing Downs' Pessimistic Conclusion. Party Politics 12(6): 691-705.",
+   "url": "https://doi.org/10.1177/1354068806068594",
+   "status": "peer-reviewed",
+   "checked": "verified",
+   "note": "Coalition preferences decided about 1 vote in 10 in 2003"
+  },
+  {
+   "id": "P-F28",
+   "group": "Israeli voting behaviour",
+   "citation": "Wikipedia contributors (accessed 2026). Opinion polling for the 2022 Israeli legislative election. Wikipedia.",
+   "url": "https://en.wikipedia.org/wiki/Opinion_polling_for_the_2022_Israeli_legislative_election",
+   "status": "other",
+   "checked": "verified",
+   "note": "Final 2022 polls before the Meretz and Balad misses"
+  },
+  {
+   "id": "P-F29",
+   "group": "Israeli voting behaviour",
+   "citation": "Wikipedia contributors (accessed 2026). April 2019 Israeli legislative election. Wikipedia (compiling CEC results).",
+   "url": "https://en.wikipedia.org/wiki/April_2019_Israeli_legislative_election",
+   "status": "other",
+   "checked": "verified",
+   "note": "New Right missed the threshold by about 1,450 votes"
+  },
+  {
+   "id": "P-F30",
+   "group": "Israeli voting behaviour",
+   "citation": "Wikipedia contributors (accessed 2026). Opinion polling for the 2015 Israeli legislative election. Wikipedia.",
+   "url": "https://en.wikipedia.org/wiki/Opinion_polling_for_the_2015_Israeli_legislative_election",
+   "status": "other",
+   "checked": "verified",
+   "note": "Late 2015 swing to Likud against final polls"
+  },
+  {
+   "id": "D6-F09",
+   "group": "Israeli voting behaviour",
+   "citation": "Peled, Y. (2025). The Ascendance of Right-Wing Populism in Israel: An Ethno-Class Analysis. LibRes blog, Reichman University (based on his 2025 Nationalism and Ethnic Politics article).",
+   "url": "https://www.runi.ac.il/en/research-institutes/government/libres/blog/the-ascendance-of-right-wing-populism-in-israel-an-ethno-class-analysis",
+   "status": "other",
+   "checked": "verified",
+   "note": "2022 coalition won SES clusters 1-7, opposition 8-10"
+  },
+  {
+   "id": "D6-F10",
+   "group": "Israeli voting behaviour",
+   "citation": "Weinglass, S. (2019, 24 Apr). Demography is voting destiny: Ten takeaways from the 2019 election results. The Times of Israel.",
+   "url": "https://www.timesofisrael.com/demography-is-voting-destiny-ten-takeaways-from-the-2019-election-results/",
+   "status": "press",
+   "checked": "verified",
+   "note": "How April 2019 results sorted by locality type and SES"
+  },
+  {
+   "id": "D6-F11",
+   "group": "Israeli voting behaviour",
+   "citation": "Charney, I., & Malkinson, D. (2015). Between electoral and urban geography: Voting patterns and socio-spatial dynamics in Tel Aviv. Applied Geography 58: 1-6.",
+   "url": "https://doi.org/10.1016/j.apgeog.2015.01.002",
+   "status": "peer-reviewed",
+   "checked": "partly verified",
+   "note": "Tel Aviv neighbourhood voting trends, 1984-2013"
+  },
+  {
+   "id": "D6-F13",
+   "group": "Israeli voting behaviour",
+   "citation": "Harris, A., & Eizen, S. (2022, 22 Nov). Tracking the Religious Zionist Party Bloc in the Settlements. Washington Institute (Fikra Forum).",
+   "url": "https://www.washingtoninstitute.org/policy-analysis/tracking-religious-zionist-party-bloc-settlements",
+   "status": "report",
+   "checked": "verified",
+   "note": "RZP strength in settlements and in soldiers' envelope votes"
+  },
+  {
+   "id": "D6-F14",
+   "group": "Israeli voting behaviour",
+   "citation": "Reichman University (2022, 24 Nov). Arab Voting in 25th Knesset elections: Data Segmentation (appendix; file attributed to M. Milshtein).",
+   "url": "https://www.runi.ac.il/media/op1kbqcw/arab-voting-in-2022-elections-milshtein24-11-25e.pdf",
+   "status": "report",
+   "checked": "partly verified",
+   "note": "Arab vote by list in the mixed cities"
+  },
+  {
+   "id": "D6-F18",
+   "group": "Israeli voting behaviour",
+   "citation": "Eilat, O. (2023, 24 Aug). The Druze Protest in the Summer of 2023. Bayan, Moshe Dayan Center, Tel Aviv University.",
+   "url": "https://dayan.org/content/druze-protest-summer-2023",
+   "status": "report",
+   "checked": "verified",
+   "note": "Druze grievances over planning fines, housing and the Nation-State Law"
+  },
+  {
+   "id": "D6-F19",
+   "group": "Israeli voting behaviour",
+   "citation": "Zeedan, R. (2025). The Druze vote in Israel: between ideology, socioeconomic status, kinship, and the Nation-State Basic Law. Democratization 32(3): 738-758 (online 2024).",
+   "url": "https://doi.org/10.1080/13510347.2024.2414214",
+   "status": "peer-reviewed",
+   "checked": "partly verified",
+   "note": "Kinship and Druze candidates weigh most in Druze vote choice"
+  },
+  {
+   "id": "D6-F20",
+   "group": "Israeli voting behaviour",
+   "citation": "Hellman, R. (2025, 18 Jul). Expert can comment on Israeli moves to defend Syrian Druze, election outlook. KU News, University of Kansas.",
+   "url": "https://news.ku.edu/news/article/expert-can-comment-on-israeli-moves-to-defend-syrian-druze-election-outlook",
+   "status": "other",
+   "checked": "verified",
+   "note": "Low-confidence expert view of a Druze shift to Netanyahu"
+  },
+  {
+   "id": "D6-F32",
+   "group": "Israeli voting behaviour",
+   "citation": "Getmansky, A., & Weiss, C. M. (2023). War-Time Military Service Can Affect Partisan Preferences. Comparative Political Studies 56(10): 1475-1505.",
+   "url": "https://doi.org/10.1177/00104140221141837",
+   "status": "peer-reviewed",
+   "checked": "verified",
+   "note": "1973 war cohort turned lastingly against incumbent Labor"
+  },
+  {
+   "id": "D6-F33",
+   "group": "Israeli voting behaviour",
+   "citation": "Zussman, A. (2026, 11 May). The Effect of War on Economic and Political Preferences. Seminar paper, Department of Economics, Bar-Ilan University.",
+   "url": "https://econ.biu.ac.il/node/7775",
+   "status": "working paper",
+   "checked": "partly verified",
+   "note": "Unpublished panel finding a lasting rightward shift after the war"
+  },
+  {
+   "id": "D6-F39",
+   "group": "Israeli voting behaviour",
+   "citation": "Barsky, A. (2024, 19 Dec). Poll: Most IDF reservists say draft must include ultra-Orthodox Jews. The Jerusalem Post.",
+   "url": "https://jpost.com/israel-news/article-834100",
+   "status": "press",
+   "checked": "verified",
+   "note": "Reservists reject Haredi exemption, including right-wing ones"
+  },
+  {
+   "id": "D6-F40",
+   "group": "Israeli voting behaviour",
+   "citation": "Tzfadia, E., & Yiftachel, O. (2004). Between urban and national: Political mobilization among Mizrahim in Israel's 'development towns'. Cities 21(1): 41-55.",
+   "url": "https://doi.org/10.1016/j.cities.2003.10.006",
+   "status": "peer-reviewed",
+   "checked": "partly verified",
+   "note": "Development-town politics more combative locally than nationally"
+  },
+  {
+   "id": "D1-F18,D2-F04,D2-F05,D2-F06,D2-F23,D2-F27,D6-F01",
+   "group": "Turnout in Israel",
+   "citation": "Atmor, N., Friedberg, C., & Harsgor, L. (2025). Who Flocked to the Polls? Turnout in the 2022 Elections. In G. Rahat, N. Gidron & M. Shamir (eds.), The Elections in Israel 2022 (Hebrew), pp. 115-148. Israel Democracy Institute. English edition: For Whom the Polls Toll? Voter Turnout in the 2022 Elections, Routledge, pp. 67-88 (doi:10.4324/9781032633299-5).",
+   "url": "https://en.idi.org.il/media/27873/the-elections-in-israel-2022.pdf",
+   "status": "book/chapter",
+   "checked": "verified",
+   "note": "Locality turnout model with double envelopes added back"
+  },
+  {
+   "id": "D1-F19,D6-F28",
+   "group": "Turnout in Israel",
+   "citation": "Atmor, N., Friedberg, C., & Kenig, O. (2025). Special votes and voter turnout in Israel's 2022 elections. Israel Affairs 31(2): 198-214.",
+   "url": "https://doi.org/10.1080/13537121.2025.2469440",
+   "status": "peer-reviewed",
+   "checked": "verified",
+   "note": "Double-envelope votes change locality turnout gaps"
+  },
+  {
+   "id": "D1-F20,D2-F12",
+   "group": "Turnout in Israel",
+   "citation": "Malach, G. (2025). Does the Growth in UTJ's Strength Match Haredi Population Growth? In G. Rahat, N. Gidron & M. Shamir (eds.), The Elections in Israel 2022 (Hebrew), pp. 371-405. Israel Democracy Institute.",
+   "url": "https://en.idi.org.il/media/27873/the-elections-in-israel-2022.pdf",
+   "status": "book/chapter",
+   "checked": "verified",
+   "note": "UTJ already turns out nearly all of its potential vote"
+  },
+  {
+   "id": "D1-F23,D2-F02,D2-F07,D2-F08,D2-F11",
+   "group": "Turnout in Israel",
+   "citation": "Rudnitzky, A. (2022). Summary of the 25th Knesset election results in Arab society. Bayan No. 28, Konrad Adenauer Program, Moshe Dayan Center, Tel Aviv University.",
+   "url": "https://dayan.org/file-download/download/public/17864",
+   "status": "report",
+   "checked": "verified",
+   "note": "Arab turnout 1999-2022 and the 2022 Arab vote by list"
+  },
+  {
+   "id": "D2-F08,D2-F11,D6-F15",
+   "group": "Turnout in Israel",
+   "citation": "Rudnitzky, A. (2022, 25 Dec). Elections for the 25th Knesset: An Analysis of the Results in the Arab Sector. Israel Democracy Institute.",
+   "url": "https://en.idi.org.il/articles/47986",
+   "status": "report",
+   "checked": "verified",
+   "note": "Arab turnout by town and the home-town candidate effect"
+  },
+  {
+   "id": "D2-F11,D6-F16",
+   "group": "Turnout in Israel",
+   "citation": "Shanan, M., & Eilat, O. (2021, 18 Mar). From a Community to a Society: Trends in Druze Voting Patterns in the Knesset Elections, 1996-2020. Bayan, Moshe Dayan Center, Tel Aviv University.",
+   "url": "https://dayan.org/content/community-society-trends-druze-voting-patterns-knesset-elections-1996-2020",
+   "status": "report",
+   "checked": "verified",
+   "note": "Three decades of falling Druze turnout"
+  },
+  {
+   "id": "D2-F13,D6-F02",
+   "group": "Turnout in Israel",
+   "citation": "Heller, E. (2015, 16 Mar). Who Doesn't Vote in the Israeli Knesset Elections? Israel Democracy Institute.",
+   "url": "https://en.idi.org.il/articles/5204",
+   "status": "report",
+   "checked": "verified",
+   "note": "Turnout rises with SES cluster"
+  },
+  {
+   "id": "D6-F03",
+   "group": "Turnout in Israel",
+   "citation": "Kenig, O. (2022, 7 Nov). The 2022 Elections: Results Analysis. Israel Democracy Institute.",
+   "url": "https://en.idi.org.il/articles/46229",
+   "status": "report",
+   "checked": "verified",
+   "note": "2022 turnout rose in right-wing strongholds, flat in Tel Aviv"
+  },
+  {
+   "id": "D2-F01",
+   "group": "Turnout in Israel",
+   "citation": "Jewish Virtual Library (n.d.). Voter Turnout in Knesset Elections (compiled from CEC data). American-Israeli Cooperative Enterprise.",
+   "url": "https://www.jewishvirtuallibrary.org/jsource/Politics/voting.html",
+   "status": "other",
+   "checked": "partly verified",
+   "note": "Long-run turnout series with errors for 2003 and 2013"
+  },
+  {
+   "id": "D2-F03",
+   "group": "Turnout in Israel",
+   "citation": "Anabi, O., & Kenig, O. (2022, 2 Nov). Will the Election Results Hinge on the Double-Envelope Ballots? Israel Democracy Institute.",
+   "url": "https://en.idi.org.il/articles/46196",
+   "status": "report",
+   "checked": "verified",
+   "note": "Double-envelope ballots rose to 9.6% of the vote by 2021"
+  },
+  {
+   "id": "D2-F09,D6-F22",
+   "group": "Turnout in Israel",
+   "citation": "The Abraham Initiatives (2024, 18 Jan). Ensuring Access to the Right to Vote for the Knesset among Residents of the Unrecognized Bedouin Villages in the Negev. Policy paper to the Knesset Interior Committee.",
+   "url": "https://abrahaminitiatives.org/ensuring-access-to-the-right-to-vote-for-the-knesset-among-residents-of-the-unrecognized-bedouin-villages-in-the-negev/",
+   "status": "report",
+   "checked": "verified",
+   "note": "40,000 Bedouin voters live 5-65 km from their station"
+  },
+  {
+   "id": "D2-F10",
+   "group": "Turnout in Israel",
+   "citation": "Zazim (2019, 22 May). Moving forward together. Zazim Community Action.",
+   "url": "https://www.zazim.org.il/en/moving-forward-together/",
+   "status": "other",
+   "checked": "verified",
+   "note": "NGO account of Bedouin voter transport in April 2019"
+  },
+  {
+   "id": "D2-F10,D2-F24",
+   "group": "Turnout in Israel",
+   "citation": "Darawshe, M. (2019, 27 Nov). The Spring's Back in their Steps: Arab Politics Following the Twenty-second Knesset Elections. Bayan, Moshe Dayan Center, Tel Aviv University.",
+   "url": "https://dayan.org/content/springs-back-their-steps-arab-politics-following-twenty-second-knesset-elections",
+   "status": "report",
+   "checked": "verified",
+   "note": "Why Arab turnout rose from 49% to 59% in September 2019"
+  },
+  {
+   "id": "D2-F14",
+   "group": "Turnout in Israel",
+   "citation": "Ben Meir, Y. (INSS analysis), reported by JNS (2013, 28 Jan). Israeli Population Analysis Reveals Higher Voter Turnout Than Initial Reports. The Algemeiner.",
+   "url": "https://www.algemeiner.com/?p=93224",
+   "status": "press",
+   "checked": "verified",
+   "note": "Citizens living abroad depress official turnout"
+  },
+  {
+   "id": "D2-F23",
+   "group": "Turnout in Israel",
+   "citation": "Finkelstein, A. (2024, 17 Apr). Analysis of the 2024 Local Elections. Israel Democracy Institute.",
+   "url": "https://en.idi.org.il/articles/53620",
+   "status": "report",
+   "checked": "verified",
+   "note": "Local turnout fell most in Arab localities, 2018-2024"
+  },
+  {
+   "id": "D2-F23",
+   "group": "Turnout in Israel",
+   "citation": "Ben-Bassat, A., & Dahan, M. (2012). Social identity and voting behavior. Public Choice 151(1-2): 193-214.",
+   "url": "https://doi.org/10.1007/s11127-010-9742-2",
+   "status": "peer-reviewed",
+   "checked": "partly verified",
+   "note": "Clan structure as a driver of Arab turnout"
+  },
+  {
+   "id": "D2-F25,D6-F26",
+   "group": "Turnout in Israel",
+   "citation": "Maltz, J. (2019, 27 Aug). Inside the grassroots drive to get Israel's Arabs to vote. Haaretz, reposted by The Abraham Initiatives.",
+   "url": "https://abrahaminitiatives.org/inside-the-grassroots-drive-to-get-israels-arabs-to-vote/",
+   "status": "press",
+   "checked": "verified",
+   "note": "Civil-society canvass of 25 low-turnout Arab towns in 2019"
+  },
+  {
+   "id": "D6-F05",
+   "group": "Turnout in Israel",
+   "citation": "Wootliff, R. (2020, 4 Mar). Polls apart: Likud boosted turnout where it needed to as Blue and White stalled. The Times of Israel.",
+   "url": "https://www.timesofisrael.com/polls-apart-likud-boosted-turnout-where-it-needed-to-as-blue-and-white-stalled/",
+   "status": "press",
+   "checked": "verified",
+   "note": "Likud turnout gains in its strongholds, 2019-2020"
+  },
+  {
+   "id": "D6-F06",
+   "group": "Turnout in Israel",
+   "citation": "Israel Hayom staff (2022, 31 Oct). It all boils down to turnout: Parties try to rally base amid gridlocked electorate. Israel Hayom.",
+   "url": "https://www.israelhayom.com/2022/10/31/it-all-boils-down-to-turnout-parties-focus-on-key-strongholds-in-last-day-of-campaign",
+   "status": "press",
+   "checked": "partly verified",
+   "note": "Final-day 2022 push to mobilise strongholds"
+  },
+  {
+   "id": "D6-F23",
+   "group": "Turnout in Israel",
+   "citation": "Times of Israel staff (2019, 16 Sep). Elections panel to send observers with cameras to problematic polling stations. The Times of Israel.",
+   "url": "https://www.timesofisrael.com/elections-panel-to-send-observers-with-cameras-to-problematic-polling-stations/",
+   "status": "press",
+   "checked": "verified",
+   "note": "CEC chair ruling on a plan to bus Bedouin voters"
+  },
+  {
+   "id": "D6-F25",
+   "group": "Turnout in Israel",
+   "citation": "Magid, J. (2019, 8 Aug). 'Operation Moral Standards': Inside Likud's election day Arab surveillance program. The Times of Israel.",
+   "url": "https://www.timesofisrael.com/operation-moral-standards-inside-likuds-election-day-arab-surveillance-program/",
+   "status": "press",
+   "checked": "verified",
+   "note": "Hidden cameras at Arab polling stations in April 2019"
+  },
+  {
+   "id": "D3-F32",
+   "group": "Turnout in Israel",
+   "citation": "Schwartz, Y. (2019, 21 Sep). How Netanyahu's campaign against Israel's Arab citizens backfired. NBC News.",
+   "url": "https://nbcnews.com/news/world/how-netanyahu-s-campaign-against-israel-s-arab-citizens-backfired-n1056826",
+   "status": "press",
+   "checked": "verified",
+   "note": "Low-confidence report that the camera campaign raised Arab turnout"
+  },
+  {
+   "id": "D3-F33",
+   "group": "Turnout in Israel",
+   "citation": "Wikipedia contributors (accessed 2026). Arab voters are streaming in quantity to the polling stations. Wikipedia.",
+   "url": "https://en.wikipedia.org/wiki/Arab_voters_are_streaming_in_quantity_to_the_polling_stations",
+   "status": "other",
+   "checked": "verified",
+   "note": "Low-confidence account of Netanyahu's 2015 election-day video"
+  },
+  {
+   "id": "D3-F01",
+   "group": "Field experiments: turnout",
+   "citation": "Mann, C. B., & Haenschen, K. (2024). A meta-analysis of voter mobilization tactics by electoral salience. Electoral Studies 87: 102729.",
+   "url": "https://research.voteamerica.org/a-meta-analysis-of-voter-mobilization-tactics-by-electoral-salience/",
+   "status": "peer-reviewed",
+   "checked": "verified",
+   "note": "Canvassing worth about 3 points per contact in high-salience races"
+  },
+  {
+   "id": "D3-F02",
+   "group": "Field experiments: turnout",
+   "citation": "Green, D. P., McGrath, M. C., & Aronow, P. M. (2013). Field Experiments and the Study of Voter Turnout. Journal of Elections, Public Opinion & Parties 23(1): 27-48.",
+   "url": "https://doi.org/10.1080/17457289.2012.728223",
+   "status": "peer-reviewed",
+   "checked": "verified",
+   "note": "Pooled turnout effects of canvassing, calls and mail"
+  },
+  {
+   "id": "D3-F03",
+   "group": "Field experiments: turnout",
+   "citation": "Gerber, A. S., & Green, D. P. (2014). Field Experiments on Voter Mobilization: An Overview of a Burgeoning Literature (early draft, 5 April 2014). NBER conference paper.",
+   "url": "https://conference.nber.org/conf_papers/f80841.pdf",
+   "status": "working paper",
+   "checked": "verified",
+   "note": "Canvassing works best at 30-50% baseline turnout"
+  },
+  {
+   "id": "D3-F04,D3-F05,D3-F07,D3-F11,D3-F20",
+   "group": "Field experiments: turnout",
+   "citation": "Gerber, A. S., & Green, D. P. (2017). Field Experiments on Voter Mobilization: An Overview of a Burgeoning Literature. In Handbook of Economic Field Experiments, Vol. 1, pp. 395-438. Elsevier (draft of 12 February 2016).",
+   "url": "https://povertyactionlab.org/sites/default/files/research-paper/Gerber%20Green%20Handbook.pdf",
+   "status": "book/chapter",
+   "checked": "verified",
+   "note": "Mail, phone, email and social-media GOTV effects"
+  },
+  {
+   "id": "D3-F05",
+   "group": "Field experiments: turnout",
+   "citation": "Gerber, A. S., Green, D. P., & Larimer, C. W. (2008). Social Pressure and Voter Turnout: Evidence from a Large-Scale Field Experiment. American Political Science Review 102(1): 33-48.",
+   "url": "https://isps.yale.edu/research/publications/isps08-001",
+   "status": "peer-reviewed",
+   "checked": "verified",
+   "note": "Social-pressure mailers raised turnout up to 8 points"
+  },
+  {
+   "id": "D3-F06",
+   "group": "Field experiments: turnout",
+   "citation": "Nickerson, D. W. (2006). Volunteer Phone Calls Can Increase Turnout: Evidence From Eight Field Experiments. American Politics Research 34(3): 271-292.",
+   "url": "https://sites.temple.edu/nickerson/files/2017/07/Nickerson.APR2005.pdf",
+   "status": "peer-reviewed",
+   "checked": "verified",
+   "note": "Volunteer calls raised turnout about 3.8 points"
+  },
+  {
+   "id": "D3-F08",
+   "group": "Field experiments: turnout",
+   "citation": "Malhotra, N., Michelson, M. R., Rogers, T., & Valenzuela, A. A. (2011). Text Messages as Mobilization Tools: The Conditional Effect of Habitual Voting and Election Salience. American Politics Research 39(4): 664-681.",
+   "url": "https://doi.org/10.1177/1532673X11398438",
+   "status": "peer-reviewed",
+   "checked": "partly verified",
+   "note": "SMS effects depend on voting habit and salience"
+  },
+  {
+   "id": "D3-F08",
+   "group": "Field experiments: turnout",
+   "citation": "Dale, A., & Strauss, A. (2009). Don't Forget to Vote: Text Message Reminders as a Mobilization Tool. American Journal of Political Science 53(4): 787-804.",
+   "url": "https://doi.org/10.1111/j.1540-5907.2009.00401.x",
+   "status": "peer-reviewed",
+   "checked": "verified",
+   "note": "Text reminders raised new registrants' turnout 3 points"
+  },
+  {
+   "id": "D3-F09",
+   "group": "Field experiments: turnout",
+   "citation": "Bhatti, Y., Dahlgaard, J. O., Hansen, J. H., & Hansen, K. M. (2017). Moving the campaign from the front door to the front pocket: field experimental evidence on the effect of phrasing and timing of text messages on voter turnout. Journal of Elections, Public Opinion and Parties 27(3): 291-310.",
+   "url": "https://doi.org/10.1080/17457289.2016.1270288",
+   "status": "peer-reviewed",
+   "checked": "verified",
+   "note": "Danish SMS trials lifted turnout about 0.7 points"
+  },
+  {
+   "id": "D3-F10",
+   "group": "Field experiments: turnout",
+   "citation": "Bhatti, Y., Dahlgaard, J. O., Hansen, J. H., & Hansen, K. M. (2017). How voter mobilization from short text messages travels within households and families: Evidence from two nationwide field experiments. Electoral Studies 50: 39-49.",
+   "url": "https://research-api.cbs.dk/ws/files/57382137/jens_olav_dahlgaard_et_al_how_voter_mobilization_from_short_text_messages_travels_acceptedversion.pdf",
+   "status": "peer-reviewed",
+   "checked": "verified",
+   "note": "About 30% of an SMS effect reaches housemates"
+  },
+  {
+   "id": "D3-F12",
+   "group": "Field experiments: turnout",
+   "citation": "Schein, A., Vafa, K., Sridhar, D., Veitch, V., Quinn, J., Moffet, J., Blei, D. M., & Green, D. P. (2021). Assessing the Effects of Friend-to-Friend Texting on Turnout in the 2018 US Midterm Elections. Proceedings of the Web Conference 2021 (WWW '21): 2025-2036.",
+   "url": "https://doi.org/10.1145/3442381.3449800",
+   "status": "peer-reviewed",
+   "checked": "verified",
+   "note": "Texts from friends lifted turnout about 8 points among compliers"
+  },
+  {
+   "id": "D3-F13",
+   "group": "Field experiments: turnout",
+   "citation": "Addonizio, E. M., Green, D. P., & Glaser, J. M. (2007). Putting the Party Back into Politics: An Experiment Testing Whether Election Day Festivals Increase Voter Turnout. PS: Political Science & Politics 40(4): 721-727.",
+   "url": "https://doi.org/10.1017/S1049096507071168",
+   "status": "peer-reviewed",
+   "checked": "verified",
+   "note": "Polling-place festivals raised precinct turnout"
+  },
+  {
+   "id": "D3-F14",
+   "group": "Field experiments: turnout",
+   "citation": "Nickerson, D. W., & Rogers, T. (2010). Do You Have a Voting Plan? Implementation Intentions, Voter Turnout, and Organic Plan Making. Psychological Science 21(2): 194-199.",
+   "url": "https://marketing.wharton.upenn.edu/wp-content/uploads/2016/10/nickerson20and20rogers_FINAL.pdf",
+   "status": "peer-reviewed",
+   "checked": "verified",
+   "note": "Plan-making calls raised turnout among low-propensity voters"
+  },
+  {
+   "id": "D3-F15,P-F35",
+   "group": "Field experiments: turnout",
+   "citation": "Nickerson, D. W. (2008). Is Voting Contagious? Evidence from Two Field Experiments. American Political Science Review 102(1): 49-57.",
+   "url": "https://doi.org/10.1017/S0003055408080039",
+   "status": "peer-reviewed",
+   "checked": "verified",
+   "note": "60% of a canvass effect reaches the other household voter"
+  },
+  {
+   "id": "D3-F16",
+   "group": "Field experiments: turnout",
+   "citation": "Sinclair, B., McConnell, M., & Green, D. P. (2012). Detecting Spillover Effects: Design and Analysis of Multilevel Experiments. American Journal of Political Science 56(4): 1055-1069.",
+   "url": "https://isps.yale.edu/research/publications/isps12-025",
+   "status": "peer-reviewed",
+   "checked": "verified",
+   "note": "Spillover found within households only"
+  },
+  {
+   "id": "D3-F17",
+   "group": "Field experiments: turnout",
+   "citation": "Foos, F., & de Rooij, E. A. (2017). All in the Family: Partisan Disagreement and Electoral Mobilization in Intimate Networks: A Spillover Experiment. American Journal of Political Science 61(2): 289-304.",
+   "url": "https://doi.org/10.1111/ajps.12270",
+   "status": "peer-reviewed",
+   "checked": "verified",
+   "note": "Mobilisation spreads more in politically mixed households"
+  },
+  {
+   "id": "D3-F18",
+   "group": "Field experiments: turnout",
+   "citation": "Arceneaux, K., & Nickerson, D. W. (2009). Who Is Mobilized to Vote? A Re-Analysis of 11 Field Experiments. American Journal of Political Science 53(1): 1-16.",
+   "url": "https://isps.yale.edu/research/publications/isps09-030",
+   "status": "peer-reviewed",
+   "checked": "verified",
+   "note": "Contact moves voters near the turnout threshold"
+  },
+  {
+   "id": "D3-F19",
+   "group": "Field experiments: turnout",
+   "citation": "Enos, R. D., Fowler, A., & Vavreck, L. (2014). Increasing Inequality: The Effect of GOTV Mobilization on the Composition of the Electorate. Journal of Politics 76(1): 273-288.",
+   "url": "https://doi.org/10.1017/S0022381613001308",
+   "status": "peer-reviewed",
+   "checked": "partly verified",
+   "note": "Standard GOTV draws in high-propensity voters most"
+  },
+  {
+   "id": "D3-F20",
+   "group": "Field experiments: turnout",
+   "citation": "García Bedolla, L., & Michelson, M. R. (2012). Mobilizing Inclusion: Transforming the Electorate through Get-Out-the-Vote Campaigns. Yale University Press.",
+   "url": "https://doi.org/10.12987/yale/9780300166781.001.0001",
+   "status": "book/chapter",
+   "checked": "partly verified",
+   "note": "Personal contact mobilises low-propensity minority voters"
+  },
+  {
+   "id": "D3-F21",
+   "group": "Field experiments: turnout",
+   "citation": "Enos, R. D., & Fowler, A. (2018). Aggregate Effects of Large-Scale Campaigns on Voter Turnout. Political Science Research and Methods 6(4): 733-751 (working paper: The Effects of Large-Scale Campaigns on Voter Turnout: Evidence from 400 Million Voter Contacts).",
+   "url": "https://doi.org/10.1017/psrm.2016.21",
+   "status": "peer-reviewed",
+   "checked": "verified",
+   "note": "Full 2012 ground campaigns raised turnout about 7 points"
+  },
+  {
+   "id": "D3-F22",
+   "group": "Field experiments: turnout",
+   "citation": "Bhatti, Y., Dahlgaard, J. O., Hansen, J. H., & Hansen, K. M. (2019). Is Door-to-Door Canvassing Effective in Europe? Evidence from a Meta-study across Six European Countries. British Journal of Political Science 49(1): 279-290.",
+   "url": "https://kclpure.kcl.ac.uk/ws/files/149696727/Is_Door_to_Door_Canvassing_Effective_DAHLGAARD_Publishedonline19December2016_GOTV_VoR_CC_BY_.pdf",
+   "status": "peer-reviewed",
+   "checked": "verified",
+   "note": "European canvass effect about 0.8 points, a third of the US"
+  },
+  {
+   "id": "D3-F23",
+   "group": "Field experiments: turnout",
+   "citation": "John, P., & Brannan, T. (2008). How Different Are Telephoning and Canvassing? Results from a 'Get Out the Vote' Field Experiment in the British 2005 General Election. British Journal of Political Science 38(3): 565-574.",
+   "url": "https://doi.org/10.1017/S0007123408000288",
+   "status": "peer-reviewed",
+   "checked": "partly verified",
+   "note": "Canvassing raised turnout at a UK general election"
+  },
+  {
+   "id": "D3-F24",
+   "group": "Field experiments: turnout",
+   "citation": "Fieldhouse, E., Cutts, D., Widdop, P., & John, P. (2013). Do impersonal mobilisation methods work? Evidence from a nationwide Get-Out-the-Vote experiment in England. Electoral Studies 32(1): 113-123.",
+   "url": "https://doi.org/10.1016/j.electstud.2012.09.003",
+   "status": "peer-reviewed",
+   "checked": "verified",
+   "note": "Phone and mail worked better than expected in England"
+  },
+  {
+   "id": "D3-F25",
+   "group": "Field experiments: turnout",
+   "citation": "Townsley, J. (2025). Is it worth door-knocking? Evidence from a United Kingdom-based Get Out The Vote (GOTV) field experiment on the effect of party leaflets and canvass visits on voter turnout. Political Science Research and Methods 13(1): 21-35 (online 2018).",
+   "url": "https://doi.org/10.1017/psrm.2018.39",
+   "status": "peer-reviewed",
+   "checked": "verified",
+   "note": "A canvass added little on top of party leaflets"
+  },
+  {
+   "id": "D3-F28",
+   "group": "Field experiments: turnout",
+   "citation": "Giné, X., & Mansuri, G. (2018). Together We Will: Experimental Evidence on Female Voting Behavior in Pakistan. American Economic Journal: Applied Economics 10(1): 207-235.",
+   "url": "https://www.aeaweb.org/articles?id=10.1257/app.20130480",
+   "status": "peer-reviewed",
+   "checked": "verified",
+   "note": "Door-to-door information raised women's turnout, with spillovers"
+  },
+  {
+   "id": "D3-F29",
+   "group": "Field experiments: turnout",
+   "citation": "Panagopoulos, C. (2011). Timing Is Everything? Primacy and Recency Effects in Voter Mobilization Campaigns. Political Behavior 33(1): 79-93.",
+   "url": "https://isps.yale.edu/research/publications/isps10-044",
+   "status": "peer-reviewed",
+   "checked": "verified",
+   "note": "Early calls can also raise turnout"
+  },
+  {
+   "id": "D3-F30",
+   "group": "Field experiments: turnout",
+   "citation": "Coppock, A., & Green, D. P. (2016). Is Voting Habit Forming? New Evidence from Experiments and Regression Discontinuities. American Journal of Political Science 60(4): 1044-1062.",
+   "url": "https://doi.org/10.1111/ajps.12210",
+   "status": "peer-reviewed",
+   "checked": "verified",
+   "note": "Voting once raises later turnout about 10 points"
+  },
+  {
+   "id": "D3-F31",
+   "group": "Field experiments: turnout",
+   "citation": "Enos, R. D. (2016). What the Demolition of Public Housing Teaches Us about the Impact of Racial Threat on Political Behavior. American Journal of Political Science 60(1): 123-142.",
+   "url": "https://ash.harvard.edu/files/enoschicago.pdf",
+   "status": "peer-reviewed",
+   "checked": "verified",
+   "note": "Turnout fell when a nearby outgroup was displaced"
+  },
+  {
+   "id": "D3-F34",
+   "group": "Field experiments: turnout",
+   "citation": "Cantoni, E. (2020). A Precinct Too Far: Turnout and Voting Costs. American Economic Journal: Applied Economics 12(1): 61-85.",
+   "url": "https://www.aeaweb.org/articles?id=10.1257/app.20180306",
+   "status": "peer-reviewed",
+   "checked": "verified",
+   "note": "Longer trips to the polling place cut turnout"
+  },
+  {
+   "id": "D3-F35",
+   "group": "Field experiments: turnout",
+   "citation": "Bhatti, Y., Dahlgaard, J. O., Hansen, J. H., & Hansen, K. M. (2018). Can Governments Use Get Out The Vote Letters to Solve Europe's Turnout Crisis? Evidence from a Field Experiment. West European Politics 41(1): 240-260.",
+   "url": "https://doi.org/10.1080/01402382.2017.1339985",
+   "status": "peer-reviewed",
+   "checked": "verified",
+   "note": "Letters mostly mobilised low-propensity first-time voters"
+  },
+  {
+   "id": "D3-F27,P-F01",
+   "group": "Persuasion and targeting",
+   "citation": "Kalla, J. L., & Broockman, D. E. (2018). The Minimal Persuasive Effects of Campaign Contact in General Elections: Evidence from 49 Field Experiments. American Political Science Review 112(1): 148-166.",
+   "url": "https://doi.org/10.1017/S0003055417000363",
+   "status": "peer-reviewed",
+   "checked": "verified",
+   "note": "Persuasion effects near zero in US general elections"
+  },
+  {
+   "id": "D3-F26,P-F02",
+   "group": "Persuasion and targeting",
+   "citation": "Pons, V. (2018). Will a Five-Minute Discussion Change Your Mind? A Countrywide Experiment on Voter Choice in France. American Economic Review 108(6): 1322-1363.",
+   "url": "https://www.aeaweb.org/articles?id=10.1257/aer.20160524",
+   "status": "peer-reviewed",
+   "checked": "verified",
+   "note": "French canvass raised vote share with no turnout effect"
+  },
+  {
+   "id": "P-F03",
+   "group": "Persuasion and targeting",
+   "citation": "Le Pennec, C., & Pons, V. (2023). How do Campaigns Shape Vote Choice? Multicountry Evidence from 62 Elections and 56 TV Debates. Quarterly Journal of Economics 138(2): 703-767.",
+   "url": "https://doi.org/10.1093/qje/qjad002",
+   "status": "peer-reviewed",
+   "checked": "verified",
+   "note": "Many voters settle their choice in the final two months"
+  },
+  {
+   "id": "P-F04",
+   "group": "Persuasion and targeting",
+   "citation": "Coppock, A., Hill, S. J., & Vavreck, L. (2020). The small effects of political advertising are small regardless of context, message, sender, or receiver: Evidence from 59 real-time randomized experiments. Science Advances 6(36): eabc4046.",
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7467695",
+   "status": "peer-reviewed",
+   "checked": "verified",
+   "note": "Ad effects small across message, sender and audience"
+  },
+  {
+   "id": "P-F05",
+   "group": "Persuasion and targeting",
+   "citation": "Hewitt, L., Broockman, D., Coppock, A., Tappin, B. M., Slezak, J., Coffman, V., Lubin, N., & Hamidian, M. (2024). How Experiments Help Campaigns Persuade Voters: Evidence from a Large Archive of Campaigns' Own Experiments. American Political Science Review 118(4): 2021-2039.",
+   "url": "https://doi.org/10.1017/S0003055423001387",
+   "status": "peer-reviewed",
+   "checked": "verified",
+   "note": "Ad effects vary widely, so pre-testing pays"
+  },
+  {
+   "id": "P-F06",
+   "group": "Persuasion and targeting",
+   "citation": "Gerber, A. S., Gimpel, J. G., Green, D. P., & Shaw, D. R. (2011). How Large and Long-lasting Are the Persuasive Effects of Televised Campaign Ads? Results from a Randomized Field Experiment. American Political Science Review 105(1): 135-150.",
+   "url": "https://doi.org/10.1017/S000305541000047X",
+   "status": "peer-reviewed",
+   "checked": "partly verified",
+   "note": "TV ad effects strong at first, gone within weeks"
+  },
+  {
+   "id": "P-F07",
+   "group": "Persuasion and targeting",
+   "citation": "Hill, S. J., Lo, J., Vavreck, L., & Zaller, J. (2013). How Quickly We Forget: The Duration of Persuasion Effects From Mass Communication. Political Communication 30(4): 521-547.",
+   "url": "https://doi.org/10.1080/10584609.2013.828143",
+   "status": "peer-reviewed",
+   "checked": "verified",
+   "note": "Ad persuasion decays within days"
+  },
+  {
+   "id": "P-F08",
+   "group": "Persuasion and targeting",
+   "citation": "Sides, J., Vavreck, L., & Warshaw, C. (2022). The Effect of Television Advertising in United States Elections. American Political Science Review 116(2): 702-718.",
+   "url": "https://doi.org/10.1017/S000305542100112X",
+   "status": "peer-reviewed",
+   "checked": "verified",
+   "note": "TV ads move vote share, most down-ballot"
+  },
+  {
+   "id": "P-F09",
+   "group": "Persuasion and targeting",
+   "citation": "Kalla, J. L., & Broockman, D. E. (2020). Reducing Exclusionary Attitudes through Interpersonal Conversation: Evidence from Three Field Experiments. American Political Science Review 114(2): 410-425.",
+   "url": "https://doi.org/10.1017/S0003055419000923",
+   "status": "peer-reviewed",
+   "checked": "verified",
+   "note": "Two-way narrative conversations change attitudes durably"
+  },
+  {
+   "id": "P-F10",
+   "group": "Persuasion and targeting",
+   "citation": "People's Action (2020, 15 Sep). With less than two months until the election, People's Action unveils groundbreaking study that charts a path to defeat Trump (press release; evaluation by D. Broockman and J. Kalla).",
+   "url": "https://peoplesaction.org/with-less-than-two-months-until-the-election-peoples-action-unveils-groundbreaking-study-that-charts-a-path-to-defeat-trump/",
+   "status": "other",
+   "checked": "partly verified",
+   "note": "Sponsor press release on deep canvassing, not peer reviewed"
+  },
+  {
+   "id": "P-F11",
+   "group": "Persuasion and targeting",
+   "citation": "Broockman, D. E., & Kalla, J. L. (2023). When and Why Are Campaigns' Persuasive Effects Small? Evidence from the 2020 U.S. Presidential Election. American Journal of Political Science 67(4): 833-849.",
+   "url": "https://doi.org/10.1111/ajps.12724",
+   "status": "peer-reviewed",
+   "checked": "verified",
+   "note": "Persuasion is larger about lesser-known candidates"
+  },
+  {
+   "id": "P-F12",
+   "group": "Persuasion and targeting",
+   "citation": "Tappin, B. M., Berinsky, A. J., & Rand, D. G. (2023). Partisans' receptivity to persuasive messaging is undiminished by countervailing party leader cues. Nature Human Behaviour 7(4): 568-582.",
+   "url": "https://doi.org/10.1038/s41562-023-01551-7",
+   "status": "peer-reviewed",
+   "checked": "verified",
+   "note": "Partisans still respond to arguments against their leader's line"
+  },
+  {
+   "id": "P-F13",
+   "group": "Persuasion and targeting",
+   "citation": "Hillygus, D. S., & Shields, T. G. (2008). The Persuadable Voter: Wedge Issues in Presidential Campaigns. Princeton University Press.",
+   "url": "https://doi.org/10.1515/9781400831593",
+   "status": "book/chapter",
+   "checked": "verified",
+   "note": "Cross-pressured partisans are the most persuadable"
+  },
+  {
+   "id": "P-F14",
+   "group": "Persuasion and targeting",
+   "citation": "Arceneaux, K., & Kolodny, R. (2009). Educating the Least Informed: Group Endorsements in a Grassroots Campaign. American Journal of Political Science 53(4): 755-770.",
+   "url": "https://doi.org/10.1111/j.1540-5907.2009.00399.x",
+   "status": "peer-reviewed",
+   "checked": "verified",
+   "note": "Endorsements from a rival camp's group can backfire"
+  },
+  {
+   "id": "P-F17",
+   "group": "Persuasion and targeting",
+   "citation": "van der Meer, T. W. G., van Elsas, E., Lubbe, R., & van der Brug, W. (2015). Are volatile voters erratic, whimsical or seriously picky? A panel study of 58 waves into the nature of electoral volatility (The Netherlands 2006-2010). Party Politics 21(1): 100-114.",
+   "url": "https://doi.org/10.1177/1354068812472570",
+   "status": "peer-reviewed",
+   "checked": "verified",
+   "note": "Volatile voters mostly switch within one bloc"
+  },
+  {
+   "id": "P-F18",
+   "group": "Persuasion and targeting",
+   "citation": "Cox, G. W., & McCubbins, M. D. (1986). Electoral Politics as a Redistributive Game. Journal of Politics 48(2): 370-389.",
+   "url": "https://doi.org/10.2307/2131098",
+   "status": "peer-reviewed",
+   "checked": "verified",
+   "note": "Theory of targeting core supporters"
+  },
+  {
+   "id": "P-F19",
+   "group": "Persuasion and targeting",
+   "citation": "Dixit, A., & Londregan, J. (1996). The Determinants of Success of Special Interests in Redistributive Politics. Journal of Politics 58(4): 1132-1155.",
+   "url": "https://doi.org/10.2307/2960152",
+   "status": "peer-reviewed",
+   "checked": "verified",
+   "note": "When parties target swing groups and when core groups"
+  },
+  {
+   "id": "P-F20",
+   "group": "Persuasion and targeting",
+   "citation": "Dahlberg, M., & Johansson, E. (2002). On the Vote-Purchasing Behavior of Incumbent Governments. American Political Science Review 96(1): 27-40.",
+   "url": "https://doi.org/10.1017/S0003055402004215",
+   "status": "peer-reviewed",
+   "checked": "verified",
+   "note": "Swedish grants flowed to swing-voter regions"
+  },
+  {
+   "id": "P-F21",
+   "group": "Persuasion and targeting",
+   "citation": "Cox, G. W. (2015). Electoral Rules, Mobilization, and Turnout. Annual Review of Political Science 18: 49-68.",
+   "url": "https://doi.org/10.1146/annurev-polisci-060414-035915",
+   "status": "peer-reviewed",
+   "checked": "verified",
+   "note": "How electoral rules shape where parties mobilise"
+  },
+  {
+   "id": "P-F22",
+   "group": "Persuasion and targeting",
+   "citation": "Darr, J. P., & Levendusky, M. S. (2014). Relying on the Ground Game: The Placement and Effect of Campaign Field Offices. American Politics Research 42(3): 529-548.",
+   "url": "https://doi.org/10.1177/1532673X13500520",
+   "status": "peer-reviewed",
+   "checked": "verified",
+   "note": "A field office added about 1 point of county vote share"
+  },
+  {
+   "id": "P-F23",
+   "group": "Persuasion and targeting",
+   "citation": "Cox, G. W. (1997). Making Votes Count: Strategic Coordination in the World's Electoral Systems. Cambridge University Press.",
+   "url": "https://doi.org/10.1017/CBO9781139174954",
+   "status": "book/chapter",
+   "checked": "verified",
+   "note": "Voters desert non-viable lists in every electoral system"
+  },
+  {
+   "id": "P-F24",
+   "group": "Persuasion and targeting",
+   "citation": "Shikano, S., Herrmann, M., & Thurner, P. W. (2009). Strategic Voting under Proportional Representation: Threshold Insurance in German Elections. West European Politics 32(3): 634-656.",
+   "url": "https://doi.org/10.1080/01402380902779147",
+   "status": "peer-reviewed",
+   "checked": "verified",
+   "note": "Threshold-insurance votes for a junior coalition partner"
+  },
+  {
+   "id": "P-F25",
+   "group": "Persuasion and targeting",
+   "citation": "Fredén, A. (2017). Opinion Polls, Coalition Signals and Strategic Voting: Evidence from a Survey Experiment. Scandinavian Political Studies 40(3): 247-264.",
+   "url": "https://doi.org/10.1111/1467-9477.12087",
+   "status": "peer-reviewed",
+   "checked": "verified",
+   "note": "Insurance voting needs polls just below the threshold"
+  },
+  {
+   "id": "D1-F26",
+   "group": "Persuasion and targeting",
+   "citation": "Kedar, O. (2005). When Moderate Voters Prefer Extreme Parties: Policy Balancing in Parliamentary Elections. American Political Science Review 99(2): 185-199.",
+   "url": "http://web.mit.edu/okedar/www/materials/APSR-05.pdf",
+   "status": "peer-reviewed",
+   "checked": "verified",
+   "note": "Some voters back more extreme parties to balance coalitions"
+  },
+  {
+   "id": "P-F31",
+   "group": "Persuasion and targeting",
+   "citation": "Hameiri, B., Porat, R., Bar-Tal, D., Bieler, A., & Halperin, E. (2014). Paradoxical thinking as a new avenue of intervention to promote peace. PNAS 111(30): 10996-11001.",
+   "url": "https://doi.org/10.1073/pnas.1407055111",
+   "status": "peer-reviewed",
+   "checked": "verified",
+   "note": "Paradoxical messages softened Israeli conflict attitudes"
+  },
+  {
+   "id": "P-F32",
+   "group": "Persuasion and targeting",
+   "citation": "Sheafer, T., & Weimann, G. (2005). Agenda Building, Agenda Setting, Priming, Individual Voting Intentions, and the Aggregate Results: An Analysis of Four Israeli Elections. Journal of Communication 55(2): 347-365.",
+   "url": "https://doi.org/10.1111/j.1460-2466.2005.tb02676.x",
+   "status": "peer-reviewed",
+   "checked": "verified",
+   "note": "Media issue priming moved Israeli vote intentions"
+  },
+  {
+   "id": "P-F33",
+   "group": "Persuasion and targeting",
+   "citation": "Kendall, C., Nannicini, T., & Trebbi, F. (2015). How Do Voters Respond to Information? Evidence from a Randomized Campaign. American Economic Review 105(1): 322-353.",
+   "url": "https://doi.org/10.1257/aer.20131063",
+   "status": "peer-reviewed",
+   "checked": "verified",
+   "note": "Competence messages won more votes than ideology messages"
+  },
+  {
+   "id": "P-F34",
+   "group": "Persuasion and targeting",
+   "citation": "Dunning, T., Grossman, G., Humphreys, M., Hyde, S. D., McIntosh, C., Nellis, G., et al. (2019). Voter information campaigns and political accountability: Cumulative findings from a preregistered meta-analysis of coordinated trials. Science Advances 5(7): eaaw2612.",
+   "url": "https://doi.org/10.1126/sciadv.aaw2612",
+   "status": "peer-reviewed",
+   "checked": "verified",
+   "note": "Incumbent performance information did not change votes"
+  },
+  {
+   "id": "D6-F24",
+   "group": "Persuasion and targeting",
+   "citation": "Times of Israel staff (2020, 10 Feb). In vast breach, Likud campaign leaks ID, phones, addresses of all Israeli adults. The Times of Israel.",
+   "url": "https://www.timesofisrael.com/in-vast-breach-likud-campaign-leaks-id-phones-addresses-of-all-israeli-adults",
+   "status": "press",
+   "checked": "verified",
+   "note": "Parties get the voter register but may not pass it on"
+  },
+  {
+   "id": "D6-F27",
+   "group": "Persuasion and targeting",
+   "citation": "Jaffe-Hoffman, M. (2019, 30 Aug). Center-left voters not deterred by messages that appeal to Arab public (aChord Center survey). The Jerusalem Post, reposted by The Abraham Initiatives.",
+   "url": "https://abrahaminitiatives.org/center-left-voters-not-deterred-by-messages-that-appeal-to-arab-public/",
+   "status": "press",
+   "checked": "verified",
+   "note": "Low-confidence survey on Arab-outreach ads and Jewish support"
+  },
+  {
+   "id": "D2-F19,D5-F01",
+   "group": "2026 campaign reporting",
+   "citation": "Rudnitzky, A. (2026, 14 May). Integration and Influence: Survey of Arab Citizens in Israel. Konrad Adenauer Program, Moshe Dayan Center, Tel Aviv University.",
+   "url": "https://dayan.org/content/integration-and-influence-survey-arab-citizens-israel",
+   "status": "report",
+   "checked": "verified",
+   "note": "Arab turnout 53% with split lists, 67% if reunited"
+  },
+  {
+   "id": "D2-F20",
+   "group": "2026 campaign reporting",
+   "citation": "The Abraham Initiatives (2026, 14 Aug). Young Arab Voter Survey.",
+   "url": "https://abrahaminitiatives.org/young-arab-voter-survey/",
+   "status": "report",
+   "checked": "verified",
+   "note": "Young Arab citizens expect turnout near 60%"
+  },
+  {
+   "id": "D2-F20,D5-F04",
+   "group": "2026 campaign reporting",
+   "citation": "Task Force on Arab Citizens of Israel (2026, 12 Aug). Arab Society and Israel's 2026 Elections: Between Electoral Power and Political Influence.",
+   "url": "https://www.acitaskforce.org/resource/arab-society-and-israels-2026-elections-between-electoral-power-and-political-influence/",
+   "status": "report",
+   "checked": "verified",
+   "note": "Women and young voters are the Arab turnout upside"
+  },
+  {
+   "id": "D2-F21",
+   "group": "2026 campaign reporting",
+   "citation": "Viterbi Family Center for Public Opinion and Policy Research (2026). Israeli Voice Index, August 2026 (data file). Israel Democracy Institute.",
+   "url": "https://en.idi.org.il/media/32364/august-voice-index-data.pdf",
+   "status": "report",
+   "checked": "partly verified",
+   "note": "Arab respondents rarely say they will not vote"
+  },
+  {
+   "id": "D2-F26",
+   "group": "2026 campaign reporting",
+   "citation": "Hoffman, T., & Baron, M. (2026, 17 Jun). First-Time Voters on the Way to the Ballot Box (Hebrew). Israel Democracy Institute.",
+   "url": "https://www.idi.org.il/articles/64725",
+   "status": "report",
+   "checked": "verified",
+   "note": "Most first-time voters say they will vote"
+  },
+  {
+   "id": "D5-F21",
+   "group": "2026 campaign reporting",
+   "citation": "Viterbi Family Center, Israel Democracy Institute (2026, 8 Sep). August 2026 survey: 59% see a high chance of improper attempts by Israeli political actors to skew the election results (Hebrew).",
+   "url": "https://www.idi.org.il/articles/66114",
+   "status": "report",
+   "checked": "verified",
+   "note": "Issues driving Jewish vote choice, by camp"
+  },
+  {
+   "id": "D5-F22",
+   "group": "2026 campaign reporting",
+   "citation": "Jewish People Policy Institute (2026, 14 Sep). JPPI Israeli Society Index, September 2026: Israelis See the Election as Especially Important.",
+   "url": "https://jppi.org.il/en/34481-2/",
+   "status": "report",
+   "checked": "verified",
+   "note": "Centre-left voters call this the most important election"
+  },
+  {
+   "id": "D2-F15",
+   "group": "2026 campaign reporting",
+   "citation": "Sela-Eitam, M. (2026, 3 Aug). Nearly 270,000 citizens left Israel since 2023, new study shows. The Jerusalem Post.",
+   "url": "https://jpost.com/israel-news/article-904446",
+   "status": "press",
+   "checked": "verified",
+   "note": "Emigration since 2023 shrinks the resident electorate"
+  },
+  {
+   "id": "D2-F16",
+   "group": "2026 campaign reporting",
+   "citation": "Hayet, J. (2026, 7 Aug). Inside the effort to bring tens of thousands of expats to Israel to vote. eJewishPhilanthropy.",
+   "url": "https://ejewishphilanthropy.com/inside-the-effort-to-bring-tens-of-thousands-of-expats-to-israel-to-vote/",
+   "status": "press",
+   "checked": "partly verified",
+   "note": "Fly&Vote drive to bring expats home to vote"
+  },
+  {
+   "id": "D2-F17,D5-F28",
+   "group": "2026 campaign reporting",
+   "citation": "Barsky, A. (2026, 20 Sep). Central Elections Committee declares free public transport on election day. The Jerusalem Post.",
+   "url": "https://www.jpost.com/israel-election-2026/article-909148",
+   "status": "press",
+   "checked": "verified",
+   "note": "Free intercity buses and trains from 20:00 on 26 October"
+  },
+  {
+   "id": "D2-F24",
+   "group": "2026 campaign reporting",
+   "citation": "Sharon, J., & Lehmann, N. (2026, 2 Oct). Supreme Court unanimously overturns election panel's ban on Arab parties. The Times of Israel.",
+   "url": "https://www.timesofisrael.com/supreme-court-unanimously-overturns-election-panels-ban-on-arab-parties/",
+   "status": "press",
+   "checked": "verified",
+   "note": "Court puts the Joint List and Ra'am back on the ballot"
+  },
+  {
+   "id": "D5-F02",
+   "group": "2026 campaign reporting",
+   "citation": "Daniel, M. (2026, 18 Jun). Between 17 seats and the risk of collapse: Statnet polls on Arab party unity (Hebrew). Sabra Magazine.",
+   "url": "https://sabra.media/he/articles/%D7%91%D7%99%D7%9F-17-%D7%9E%D7%A0%D7%93%D7%98%D7%99%D7%9D-%D7%9C%D7%A1%D7%9B%D7%A0%D7%AA-%D7%94%D7%AA%D7%A8%D7%A1%D7%A7%D7%95%D7%AA-%D7%94%D7%9E%D7%A4%D7%9C%D7%92%D7%95%D7%AA-%D7%94%D7%A2%D7%A8%D7%91%D7%99%D7%95%D7%AA-%D7%91%D7%A6%D7%95%D7%9E%D7%AA-%D7%94%D7%9B%D7%A8%D7%A2%D7%94",
+   "status": "press",
+   "checked": "verified",
+   "note": "Arab turnout scenarios by list line-up"
+  },
+  {
+   "id": "D5-F03",
+   "group": "2026 campaign reporting",
+   "citation": "Khoury, J. (2026, 15 Jun). From the Jewish Far Right to Violent Crime: What Will Drive Arab Voters in Israel to the Polls? Haaretz.",
+   "url": "https://www.haaretz.com/israel-news/elections/2026-06-15/ty-article-magazine/from-jewish-far-right-to-crime-what-will-drive-arab-voters-to-the-polls/0000019e-c4de-d3a2-a3df-d6fe33440000",
+   "status": "press",
+   "checked": "verified",
+   "note": "Expert Arab turnout ranges and Negev access problems"
+  },
+  {
+   "id": "D5-F05",
+   "group": "2026 campaign reporting",
+   "citation": "Dialog for ynet and Yedioth Ahronoth (2026, 9 Oct). Young voters' seat poll: who is collapsing and who passes the threshold (Hebrew). ynet.",
+   "url": "https://www.ynet.co.il/news/elections2026/article/byvn5fp5zl",
+   "status": "press",
+   "checked": "verified",
+   "note": "Arab youth far less sure to vote than Jewish youth"
+  },
+  {
+   "id": "D5-F06",
+   "group": "2026 campaign reporting",
+   "citation": "Perets, S. (2026, 23 Sep). First-time Jewish voters could account for up to 12 Knesset seats in upcoming election - poll. The Jerusalem Post.",
+   "url": "https://www.jpost.com/israel-election-2026/article-909394",
+   "status": "press",
+   "checked": "verified",
+   "note": "Midgam poll of Jewish first-time voters"
+  },
+  {
+   "id": "D5-F07",
+   "group": "2026 campaign reporting",
+   "citation": "Hadad, O., & Segal, A. (2026, 28 Jul). The 61st seat: who will attract the floating votes? (Hebrew). N12 / mako.",
+   "url": "https://www.mako.co.il/news-israel-elections/2026/Article-2ca203d9875af91026.htm",
+   "status": "press",
+   "checked": "verified",
+   "note": "About 10% undecided, few torn between blocs"
+  },
+  {
+   "id": "D5-F08",
+   "group": "2026 campaign reporting",
+   "citation": "N12 Ulpan Shishi (2026, 9 Oct). 11% still undecided whom to vote for, about 5% don't know which bloc they'll support (Hebrew). N12 / mako.",
+   "url": "https://mako.co.il/news-politics/2026_q4/Article-2497091942121a1026.htm",
+   "status": "press",
+   "checked": "verified",
+   "note": "Only about 0.6% of voters torn between blocs"
+  },
+  {
+   "id": "D5-F09",
+   "group": "2026 campaign reporting",
+   "citation": "Liel, D. (2026, 8 Oct). The change bloc's magic number, and what will tip the scales in the election (Hebrew). N12 Magazine / mako.",
+   "url": "https://www.mako.co.il/news-n12_magazine/eb54fba84b900a10/Article-06343a8a5f411a1026.htm",
+   "status": "press",
+   "checked": "verified",
+   "note": "Change bloc needs over 76% turnout in its core regions"
+  },
+  {
+   "id": "D5-F10",
+   "group": "2026 campaign reporting",
+   "citation": "Hadad, O., with Midgam for N12 (2026, 10 Sep). Channel 12 poll: 16% of Eisenkot voters voted Likud in 2022 (Hebrew). N12 / mako.",
+   "url": "https://www.mako.co.il/news-israel-elections/2026/Article-5d895280a9780a1026.htm",
+   "status": "press",
+   "checked": "partly verified",
+   "note": "Where each list's voters came from in 2022"
+  },
+  {
+   "id": "D5-F11",
+   "group": "2026 campaign reporting",
+   "citation": "Midgam and iPanel for N12 Ulpan Shishi (2026, 8 May). The poll that reveals: only 58% sure they will vote Likud again (Hebrew). N12 / mako.",
+   "url": "https://www.mako.co.il/news-israel-elections/2026/Article-9fd5e990a470e91026.htm",
+   "status": "press",
+   "checked": "verified",
+   "note": "Only 58% of 2022 Likud voters sure to repeat"
+  },
+  {
+   "id": "D5-F12",
+   "group": "2026 campaign reporting",
+   "citation": "Barsky, A. (2026, 4 Oct). Israel Election 2026: Opposition works to flip Likud, moderate Right voters. The Jerusalem Post.",
+   "url": "https://www.jpost.com/israel-election-2026/article-910509",
+   "status": "press",
+   "checked": "verified",
+   "note": "Opposition target pools, including 200,000 soft Likud voters"
+  },
+  {
+   "id": "D5-F13",
+   "group": "2026 campaign reporting",
+   "citation": "Schneider, T. (2026, 1 Jul). Gadi Eisenkot launches a centrist campaign tailored for the commuters of Route 4. The Times of Israel.",
+   "url": "https://www.timesofisrael.com/gadi-eisenkot-launches-a-centrist-campaign-tailored-for-the-commuters-of-route-4/",
+   "status": "press",
+   "checked": "verified",
+   "note": "Yashar's suburban target towns from the Sharon to the Shfela"
+  },
+  {
+   "id": "D5-F14",
+   "group": "2026 campaign reporting",
+   "citation": "Yerushalmi, S. (2026, 21 Aug). Eisenkot threatens to siphon traditional voters away from a panicking Shas. The Times of Israel.",
+   "url": "https://www.timesofisrael.com/eisenkot-threatens-to-siphon-traditional-voters-away-from-a-panicking-shas/",
+   "status": "press",
+   "checked": "verified",
+   "note": "Shas losing traditional voters to Otzma, Likud and Yashar"
+  },
+  {
+   "id": "D5-F15",
+   "group": "2026 campaign reporting",
+   "citation": "Glazer, H. (2026, 11 Jul). Inside Likud Territory, Eisenkot Is Quietly Gaining Ground. Will It Be Enough to Defeat Netanyahu? Haaretz.",
+   "url": "https://www.haaretz.com/israel-news/elections/2026-07-11/ty-article-magazine/.highlight/eisenkot-is-quietly-gaining-ground-in-likud-territory-enough-to-beat-netanyahu/0000019f-4fb6-d9b4-abdf-cfff1db80000",
+   "status": "press",
+   "checked": "verified",
+   "note": "Yashar organising in Likud towns such as Dimona"
+  },
+  {
+   "id": "D5-F16",
+   "group": "2026 campaign reporting",
+   "citation": "Barsky, A. (2026, 24 Sep). Benjamin Netanyahu camp divided on Ofer Winter as Likud focuses on turnout mobilization. The Jerusalem Post.",
+   "url": "https://www.jpost.com/israel-election-2026/article-909559",
+   "status": "press",
+   "checked": "verified",
+   "note": "Likud targets low-turnout stations where it won half the vote"
+  },
+  {
+   "id": "D5-F17",
+   "group": "2026 campaign reporting",
+   "citation": "Yarhi, A. (2026). Elections 2026: Likud's plan to raise turnout, and the exclusion of Ben Gvir (Hebrew). i24NEWS.",
+   "url": "https://www.i24news.tv/he/news/israel-elections-2026/artc-b8f65226",
+   "status": "press",
+   "checked": "verified",
+   "note": "Joint Likud-RZP turnout plan for low-turnout strongholds"
+  },
+  {
+   "id": "D5-F18",
+   "group": "2026 campaign reporting",
+   "citation": "Ettinger, A. (2026, 8 Oct). Who vs whom: the seat-drinking battles within the blocs (Hebrew). ynet.",
+   "url": "https://ynet.co.il/news/elections2026/article/sya36erizl",
+   "status": "press",
+   "checked": "verified",
+   "note": "Most remaining competition is inside each bloc"
+  },
+  {
+   "id": "D5-F19",
+   "group": "2026 campaign reporting",
+   "citation": "Kraus, Y. (2026, 14 Aug). Will Kiryat Shmona vote differently? (Hebrew). ynet.",
+   "url": "https://www.ynet.co.il/news/article/h1nntnoigg",
+   "status": "press",
+   "checked": "verified",
+   "note": "Likud's falling share in Kiryat Shmona since 2020"
+  },
+  {
+   "id": "D5-F20",
+   "group": "2026 campaign reporting",
+   "citation": "Kraft, D. (2026, 8 Sep). As Israel's capital of the north seeks to recover from war, it's too quiet. The Christian Science Monitor.",
+   "url": "https://www.csmonitor.com/World/Middle-East/2026/0908/kiryat-shmona-israel-capital-north-rebuild",
+   "status": "press",
+   "checked": "verified",
+   "note": "Almost 40% of Kiryat Shmona residents not yet back"
+  },
+  {
+   "id": "D5-F23",
+   "group": "2026 campaign reporting",
+   "citation": "Ettinger, A. (2026, 4 Sep). Election poll: whom the national-religious support, and the draft exemption pushed to the margins (Hebrew). ynet.",
+   "url": "https://www.ynet.co.il/news/article/sydameiozg",
+   "status": "press",
+   "checked": "verified",
+   "note": "RZP-Zehut near 30% among national-religious voters, Yashar 4%"
+  },
+  {
+   "id": "D5-F24",
+   "group": "2026 campaign reporting",
+   "citation": "Israel National News (2026). UTJ chairman warns of haredi voter turnout drop. Arutz Sheva.",
+   "url": "https://www.israelnationalnews.com/news/434174",
+   "status": "press",
+   "checked": "partly verified",
+   "note": "UTJ leader fears lower Haredi turnout"
+  },
+  {
+   "id": "D5-F25",
+   "group": "2026 campaign reporting",
+   "citation": "Ben-Nun, S. (2026, 17 Sep). High Court bars parties from reporting who voted at polling stations ahead of election. The Jerusalem Post.",
+   "url": "https://www.jpost.com/israel-election-2026/article-908983",
+   "status": "press",
+   "checked": "verified",
+   "note": "Parties may not report which voters have voted"
+  },
+  {
+   "id": "D5-F26",
+   "group": "2026 campaign reporting",
+   "citation": "Ben-Nun, S. (2026, 16 Aug). Israeli election committee: Parties will see polling station turnout, but not who voted. The Jerusalem Post.",
+   "url": "https://www.jpost.com/israel-election-2026/article-905693",
+   "status": "press",
+   "checked": "verified",
+   "note": "CEC to publish station turnout four times on election day"
+  },
+  {
+   "id": "D5-F27",
+   "group": "2026 campaign reporting",
+   "citation": "i24NEWS (2026). Likud revives 'Arabs are flocking to the polls' campaign, this time targeting opposition voters. i24NEWS.",
+   "url": "https://www.i24news.tv/en/news/israeli-elections/artc-likud-revives-arabs-are-flocking-to-the-polls-campaign-this-time-targeting-opposition-voters",
+   "status": "press",
+   "checked": "verified",
+   "note": "Likud plans to use station turnout data to rally its base"
+  },
+  {
+   "id": "D5-F29",
+   "group": "2026 campaign reporting",
+   "citation": "Maanit, C. (2026, 16 Sep). Likud Seeks to Block Initiative to Fly Israelis From Abroad to Vote in Election. Haaretz.",
+   "url": "https://www.haaretz.com/israel-news/elections/2026-09-16/ty-article/likud-seeks-to-block-initiative-to-fly-israelis-home-to-vote-in-election/000001a0-a9bd-d442-a3a6-bbbf3c930000",
+   "status": "press",
+   "checked": "partly verified",
+   "note": "Fly&Vote targets and Likud's petition against it"
+  },
+  {
+   "id": "D5-F30",
+   "group": "2026 campaign reporting",
+   "citation": "Karmel, A. (2026, 23 Sep). Election panel disqualifies all Arab parties, in move likely to be overturned; Balad leader also barred. The Times of Israel.",
+   "url": "https://www.timesofisrael.com/election-panel-votes-to-bar-balad-chief-abu-shehadeh-over-alleged-support-for-terror/",
+   "status": "press",
+   "checked": "verified",
+   "note": "CEC vote to bar the Arab lists, later overturned"
+  },
+  {
+   "id": "D5-F31",
+   "group": "2026 campaign reporting",
+   "citation": "Hess, S. (2026). Which neighbourhood is most left-wing, most right-wing, and where do people vote least? (Hebrew; Medlan data). ynet.",
+   "url": "https://www.ynet.co.il/news/elections2026/article/bknfevi9gx",
+   "status": "press",
+   "checked": "verified",
+   "note": "2022 results and lowest turnout by urban neighbourhood"
+  },
+  {
+   "id": "D5-F32",
+   "group": "2026 campaign reporting",
+   "citation": "Watad, S. (2026, 24 Jul). Palestinians could decide Israel's election. But their parties are at a stalemate. +972 Magazine.",
+   "url": "https://www.972mag.com/israel-election-palestinian-parties-stalemate/",
+   "status": "press",
+   "checked": "verified",
+   "note": "Arab support for Zionist parties put at 10-12%"
+  },
+  {
+   "id": "D6-F12",
+   "group": "2026 campaign reporting",
+   "citation": "Haas, S. (2026). Which city is 'Israel's Ohio'? New data reveal the country's top bellwether (Madlan data). Ynetnews.",
+   "url": "https://www.ynetnews.com/article/rycb1189oml",
+   "status": "press",
+   "checked": "partly verified",
+   "note": "Rehovot tracks the national result most closely"
+  },
+  {
+   "id": "D6-F21",
+   "group": "2026 campaign reporting",
+   "citation": "Karni, Y. (2026). Kamil Abu Rokon, former Coordinator of Government Activities in the Territories, joins Eisenkot. Ynetnews.",
+   "url": "https://www.ynetnews.com/article/h299quato",
+   "status": "press",
+   "checked": "partly verified",
+   "note": "Druze former general joins Yashar"
+  },
+  {
+   "id": "D6-F34",
+   "group": "2026 campaign reporting",
+   "citation": "N12 Ulpan Shishi, Midgam poll (2026, 10 Apr). Poll of residents of the Haifa and Northern districts (Hebrew). N12 / mako.",
+   "url": "https://www.mako.co.il/news-politics/2026_q2/Article-f44b4b704087d91026.htm",
+   "status": "press",
+   "checked": "verified",
+   "note": "Opposition leads in the north, where residents feel abandoned"
+  },
+  {
+   "id": "D6-F35",
+   "group": "2026 campaign reporting",
+   "citation": "Feuillatre, C. (AFP) (2026, 1 Apr). In Israel's north, war-weary residents feel abandoned by government. Al-Monitor.",
+   "url": "https://www.al-monitor.com/originals/2026/04/israels-north-war-weary-residents-feel-abandoned-government",
+   "status": "press",
+   "checked": "verified",
+   "note": "Fewer than half of Kiryat Shmona's residents back home"
+  },
+  {
+   "id": "D6-F36",
+   "group": "2026 campaign reporting",
+   "citation": "Kipa news staff (2025, 19 Feb). Defeat for Netanyahu in Kiryat Shmona: the Likud candidate came second (Hebrew). Kipa.",
+   "url": "https://www.kipa.co.il/חדשות/1198726-0/",
+   "status": "press",
+   "checked": "verified",
+   "note": "Likud-backed mayoral candidate lost in Kiryat Shmona"
+  },
+  {
+   "id": "D6-F37",
+   "group": "2026 campaign reporting",
+   "citation": "JNS (2025, 18 Sep). 90% of Gaza envelope evacuees have returned home post-Oct. 7. JNS, citing the Tekuma Authority.",
+   "url": "https://www.jns.org/90-of-gaza-envelope-evacuees-have-returned-home-post-oct-7",
+   "status": "press",
+   "checked": "verified",
+   "note": "Most Gaza-border evacuees have returned"
+  },
+  {
+   "id": "D6-F38",
+   "group": "2026 campaign reporting",
+   "citation": "Maariv (2026, 5 Jul). The figure that will change the picture: who will stay home on election day? (Maariv poll, Hebrew). Maariv.",
+   "url": "https://www.maariv.co.il/news/politics/article-1340639",
+   "status": "press",
+   "checked": "verified",
+   "note": "Opposition voters more certain to vote than coalition voters"
+  }
+ ]
+}

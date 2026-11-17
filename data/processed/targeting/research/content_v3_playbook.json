@@ -1,0 +1,816 @@
+{
+ "intro": "This playbook turns the atlas into a plan for the 16 days from Sun 11 Oct to election day on Tue 27 Oct. Field work is a margin lever. A realistic programme of 150,000 to 400,000 completed contacts is worth about 750 to 1,700 net votes for a change-led government, or about 900 to 1,800 under the deny-61 objective. Across the atlas's assumption sets the same plans range from about 400 to 4,300. That adds about +0.04 to +0.09 points to the chance of a change-led government, from an atlas baseline of 18.5%. These totals leave out Arab localities, polling stations where Arab lists lead and, for now, Druze towns. If a check of the filed CEC lists and a Druze poll clear the Druze towns, they would add about 120 to 190 net votes for a change-led government. It still matters: in 2022 the blocs finished about 30,000 votes apart and Meretz missed the threshold by 4,061 votes. The evidence favours three things: identify supporters this week, contact them in person in the final ten days in polling-station areas where extra turnout nets change-bloc votes, and protect the vote on election day. Rescue of votes headed below the threshold runs only through media and insurance messaging launched with the final published polls on Fri 23 Oct, plus calls to identified voters. From Sat 24 Oct no rescue message or call script quotes a poll figure. Persuasion across blocs is small this late: the atlas assumes about 3 switchers per 1,000 conversations or calls with soft Netanyahu-bloc voters. Town lists in this playbook use the default objective, a change-led government.",
+ "timeline": [
+  {
+   "when": "D-16 to D-12",
+   "dates": "Sun 11 to Thu 15 Oct",
+   "title": "Decide, identify supporters, test messages",
+   "actions": [
+    "Leadership decides four things this week: how much weight to give the deny-61 objective, and the Arab-sector policy (through election counsel). It also decides whether to clear Druze towns, after checking the filed CEC lists for Druze candidates in winnable slots and commissioning a Druze poll, and whether the rescue programme targets Reservists voters at all, since rescuing them cuts against the deny-61 objective.",
+    "First map the atlas's 2022 stations to the CEC's 2026 station list and polling-place addresses; where a station cannot be matched, work from the neighbourhood. Cut walk lists only from polling-station areas the atlas scores as positive, never from stations where Arab lists lead, and send door teams only where at least 1,000 contacts are available. Start with the turnout engines (default objective): Tel Aviv-Yafo, Haifa, Ramat Gan, Rishon LeZion, Herzliya, Holon, Rehovot, Kfar Saba and Givatayim.",
+    "Field-check very low-turnout stations before sending teams. Many registered voters live abroad or elsewhere, as in central Eilat and the Netanya hotel strip.",
+    "Count how many identified supporters the four lists already hold in target towns. Then run supporter ID by volunteer phone and door. Record the registered address and polling station, household members, list preference and how sure each supporter is to vote.",
+    "In supporter-list ground under the default objective (Jerusalem, Netanya, Bat Yam, Be'er Sheva, Ashdod and Eilat), identify supporters by phone and relational asks only. Most voters there back the Netanyahu bloc, so the value lies with identified change supporters.",
+    "Split turf between the four lists by each polling station's lead change list. Where the lead list cannot staff a station, the locality's runner-up list takes it. The four field directors agree the station map, including who covers Tel Aviv-Yafo, by Thu 15 Oct (see 'Four lists, one street').",
+    "Build call lists of identified Blue and White and Reservists supporters for the rescue programme. Do not send door teams after them.",
+    "Test Oct 7 accountability, equal burden, cost of living and unity frames on online panels before buying media.",
+    "Aim persuasion at identified soft Netanyahu-bloc voters, with right-credentialed messengers. Under the default objective persuasion value is largest in Rishon LeZion and Petah Tikva, the atlas's only persuasion battleground, then Jerusalem, Holon and Tel Aviv-Yafo.",
+    "Recruit relational organisers. Each volunteer lists 10 to 20 friends and relatives registered in target localities. Recruit through supporters' own friends, family and neighbours, never through IDF units, unit chat groups or employers.",
+    "Ask every young supporter where they are registered, and recruit volunteers on campuses."
+   ],
+   "cites": [
+    "D5-F31",
+    "D2-F14",
+    "D5-F12",
+    "D5-F13",
+    "D6-F16",
+    "P-F05",
+    "P-F14",
+    "D3-F12",
+    "D2-F18"
+   ]
+  },
+  {
+   "when": "D-11",
+   "dates": "Fri 16 Oct",
+   "title": "Surplus-agreement deadline; first ID pass done",
+   "actions": [
+    "Surplus-agreement filings close today. Signed so far: Likud-RZP, Together-Yisrael Beytenu and Yashar-Democrats. Expected: Shas-UTJ, Otzma-Amcha and Joint List-Ra'am. Likud signed with RZP and not with Otzma. The atlas's seat law includes all six pairs.",
+    "This is a leadership and legal task, not a field one. Confirm with election counsel that the change lists' filings are complete.",
+    "Close the first round of message tests and lock the frames for scripts and paid media.",
+    "Finish the first supporter-ID pass in the turnout engines. Shabbat starts this evening, so schedule Saturday-night door shifts."
+   ],
+   "cites": [
+    "D5-F18",
+    "P-F05"
+   ]
+  },
+  {
+   "when": "D-10 to D-5",
+   "dates": "Sat 17 to Thu 22 Oct",
+   "title": "Turnout contact peaks",
+   "actions": [
+    "Switch volunteers from ID to vote plans. Live calls in the final 7 to 10 days work best. In one US test, calls in the first three weeks of a month-long drive had no effect, though another study found early calls can also work.",
+    "Ask the vote-plan questions (when, which polling station, with whom) in every live contact.",
+    "Stack several contacts on identified supporters who are unsure they will vote, in positive-value stations. Give priority where resident turnout was about 30-55%, where the atlas's turnout effect peaks. Effects roughly add up across contacts, with no extra synergy. They spill over within households but not to neighbours, so plan by household.",
+    "In supporter-list ground, call and message identified supporters only.",
+    "Prepare the rescue programme: tested insurance creative for digital and media, and call scripts for identified Blue and White and Reservists supporters. The calls run during the poll ban, so scripts use threshold arithmetic only and quote no poll figures. Have everything ready by Thu 22 Oct. The media push starts with Friday's final polls.",
+    "Start the paid digital persuasion flight around 21 Oct, on tested creative only. Ad effects fade within days.",
+    "Confirm trip plans with students and young adults registered at a parent's address.",
+    "No change-bloc-run, funded or branded turnout work among Arab voters, whether in Arab localities or in stations where Arab lists lead in mixed cities. Arab-sector turnout is a leadership decision. Any support must be independent, transparent and cleared by election counsel in writing."
+   ],
+   "cites": [
+    "D3-F07",
+    "D3-F29",
+    "D3-F14",
+    "D3-F21",
+    "D3-F24",
+    "D3-F15",
+    "D3-F16",
+    "P-F07",
+    "D2-F18"
+   ]
+  },
+  {
+   "when": "D-4",
+   "dates": "Fri 23 Oct",
+   "title": "Final published polls; rescue push starts",
+   "actions": [
+    "This is the last day polls may be published. The publication ban starts at the end of Friday and runs to the close of polls on Tue 27 Oct.",
+    "Launch the rescue and insurance push with digital and media messages as today's final polls are published. Voters desert lists they expect to fall short, and the final polls feed that expectation. Take down or replace any creative that quotes a poll figure before the ban starts at the end of Friday.",
+    "Calls to identified Blue and White and Reservists supporters start on Saturday night after Shabbat and run to Mon 26 Oct. They use threshold arithmetic only (a list under 3.25% elects no one) and quote no poll figures.",
+    "If leadership approved it on 11-15 Oct, and only if Friday's final polls show the Reservists below the line, speak to Reservists voters with respect about threshold arithmetic. About half of published polls since mid-September show them at 4-5 seats. Reservist messengers speak as civilians only: never on duty, in uniform or with IDF insignia.",
+    "Expect late consolidation on the right. In 2015 Likud won 30 seats against 20-23 in the final polls, about 7-10 seats more, consistent with late switching from smaller right-wing lists, though poll error may explain part of it.",
+    "Check allies' threshold odds after the final polls. In the forecast the Democrats pass in 98% of simulations, Yisrael Beytenu in 97% and Together in 99%. If any slips, each list may run its own insurance messaging for it, after its counsel and treasurer clear the spending.",
+    "Shabbat starts this evening. Schedule Saturday-night door shifts in positive-value turf."
+   ],
+   "cites": [
+    "P-F30",
+    "P-F24",
+    "D6-F39",
+    "P-F23",
+    "P-F26",
+    "MODEL-FORECAST"
+   ]
+  },
+  {
+   "when": "D-3 to D-1",
+   "dates": "Sat 24 to Mon 26 Oct",
+   "title": "Blackout weekend: final contacts",
+   "actions": [
+    "No new polls may be published from Sat 24 Oct until the polls close. From now on, rescue messages, ads and call scripts quote no poll figures. Use threshold arithmetic only. Do not publish, post or leak internal polls.",
+    "Send one or two SMS reminders to supporters in this window. In one Danish experiment, texts sent before election day beat texts sent on the day, and extra texts added nothing.",
+    "Release the relational asks. Supporters message their own friends and relatives from their own phones.",
+    "Run door shifts on Saturday night, Sunday and Monday in positive-value turf, and reconfirm each vote plan.",
+    "Expect threat-framed late messages from the Netanyahu bloc about who is voting, as in 2015. Answer with positive reminders to our own supporters, never with messages about other groups' turnout.",
+    "Brief call teams, polling-committee members, observers and lawyers. Intercity buses on routes over 15 km are free from 20:00 on Mon 26 Oct until service ends on election day. Israel Railways is free on election day (ticket from station counters or machines). Confirm Monday-evening trains with the CEC."
+   ],
+   "cites": [
+    "P-F30",
+    "D3-F09",
+    "D3-F12",
+    "D3-F33",
+    "D3-F31",
+    "D5-F28"
+   ]
+  },
+  {
+   "when": "Election day",
+   "dates": "Tue 27 Oct",
+   "title": "Bank the vote early, then chase laggards",
+   "actions": [
+    "Election day is a statutory holiday. In 2022 most polls ran 07:00-22:00 (08:00-20:00 in small communities); confirm the 2026 hours with the CEC.",
+    "Bank identified change-bloc supporters early through private contact (calls, texts, relational asks). Make no public turnout claims.",
+    "Expect the first CEC releases to show high turnout in change-bloc areas, and Likud to use them. Have the counter-message to our own supporters ready before 10:00.",
+    "After each CEC station-turnout release (at least four), rank positive-value target stations by how far they trail and move callers there. Keep calling identified supporters in every other station from the pre-election lists.",
+    "Parties cannot be told who has voted. Callers ask identified supporters in lagging stations whether they have voted yet.",
+    "Committee members and observers go to stations with large change-bloc vote counts, stations where change lists have no committee member, and stations with past irregularity complaints. Lawyers stay on call all day. No organised rides. No gifts or activity near polling stations without clearance from election counsel."
+   ],
+   "cites": [
+    "D2-F17",
+    "D5-F27",
+    "D5-F26",
+    "D5-F25",
+    "D6-F25"
+   ]
+  },
+  {
+   "when": "After the polls close",
+   "dates": "From 22:00 Tue 27 Oct",
+   "title": "Count, double envelopes, evaluation",
+   "actions": [
+    "Regular stations report first. Double-envelope ballots (soldiers, hospital patients, prisoners, diplomats and others) are counted centrally afterwards. There were 462,807 in 2022, close to 10% of votes cast.",
+    "Do not call threshold races on the regular count. Ra'am and RZP-Zehut each pass in about 78% of simulations.",
+    "Keep observers on the count, including the central double-envelope tally where the law allows, and keep lawyers on call until the final result.",
+    "Compare worked and unworked polling stations in the official results, using the 2022-2026 station map, to measure what the field programme did. The forecast gives a repeat election a 41.9% chance, and the next campaign will need these estimates."
+   ],
+   "cites": [
+    "D2-F03",
+    "D3-F26"
+   ]
+  }
+ ],
+ "tactics": [
+  {
+   "tactic": "Supporter ID and list building",
+   "mechanism": "targeting",
+   "effect": "No direct effect on turnout. It makes every list programme possible. In the atlas, calling identified supporters (30% of supporters identified, half of them reached) lifts a 150,000-contact programme from about 750 to about 970 net votes and a 400,000-contact programme from about 1,300 to about 1,700 (change-led government). Those figures assume the lists already exist. The 400,000-contact plan needs files on about 135,000 change supporters, about 50,000 soft Netanyahu-bloc voters and about 32,000 Blue and White or Reservists voters. The ID contacts needed to build them are not counted. Where list calls run, only about 3 voters in 10 back the change bloc, so building 135,000 supporter records from cold calls would take over 400,000 ID conversations, more than the whole budget.",
+   "israel": "Start by counting the identified supporters the four lists already hold in target towns: existing party, member and volunteer files count. Then run ID now, by volunteer phone and door. Parties cannot learn on election day who has voted, so pre-identified supporters are the only basis for chasing. Likud says limits on the Elector app force it into more manual work. Record registered address and station, household, list preference and certainty to vote. In supporter-list ground (Netanyahu-majority towns with many change voters), identify by phone and relational asks only. Phone ID runs on each list's own supporter, member and volunteer files and on relational lists. Any purchased, appended or shared phone data needs written clearance from election counsel.",
+   "verdict": "core",
+   "cites": [
+    "D5-F25",
+    "D5-F16"
+   ]
+  },
+  {
+   "tactic": "Door-to-door canvass (volunteers, supporter households)",
+   "mechanism": "both",
+   "effect": "Atlas value: a 1.5-point turnout lift per completed conversation at the reference baseline. The atlas scales this by resident turnout (x1.5 at 30%, a peak of x1.8 near 42%, x1.2 at 55%, x0.7 at 65%, x0.4 at 75%, x0.22 at 85%), then applies a x1.3 household multiplier. Evidence: US high-salience 3.05 pp [1.20, 4.90] and European pooled 0.78 pp [-0.16, 1.71]. US effects are largest where control-group turnout is 30-50%. In two-voter households about 60% of the effect reaches the second voter. Persuasion add-on: about 0.3% of contacted soft Netanyahu-bloc voters switch. The atlas counts no rescue at the door.",
+   "israel": "Knock only in positive-value station areas, never in stations where Arab lists lead, at no more than 35% of the resident roll, and only where at least 1,000 contacts are available. Send volunteers, not candidates: in Italy volunteers raised turnout 5.0 pp and candidates -0.4. Contact rates behind building intercoms are unknown, so log every attempt and recalibrate weekly. In mixed-bloc households keep the message about voting itself; in a UK phone experiment, partisan mobilisation spread more in politically mixed households. Druze towns score highest per contact, but their 2026 vote depends on which lists placed Druze candidates in winnable slots. They are held out until a check of the filed CEC lists and a Druze poll. Send no outside volunteers there; any work is led by local Druze figures on the lists. The atlas halves capacity in 49 localities within 5 km of Lebanon and 40 within 7 km of Gaza.",
+   "verdict": "core",
+   "cites": [
+    "D3-F01",
+    "D3-F22",
+    "D3-F03",
+    "D3-F15",
+    "D3-F17",
+    "D6-F16"
+   ]
+  },
+  {
+   "tactic": "Volunteer phone banks",
+   "mechanism": "turnout",
+   "effect": "Planning value about 1 pp per completed call. US high-salience estimate 2.28 pp [1.12, 3.43]; eight US volunteer campaigns gave 3.8 pp among those reached. Typically 10-12% of numbers dialled complete. The atlas scores persuasion calls to identified soft Netanyahu-bloc voters at 0.3% switching per completed call, the same rate as at the door. It does not assume the lists can pick out the cross-pressured minority among them.",
+   "israel": "Use it for supporter-list ground and for voters the canvass misses: young people registered at a parent's address, dispersed rural supporters, and Russian speakers through in-language callers from the community. ID calls until 16 Oct, vote-plan calls from 17 Oct, and calls to identified supporters in lagging stations on election day.",
+   "verdict": "core",
+   "cites": [
+    "D3-F01",
+    "D3-F06",
+    "D3-F20",
+    "D2-F18"
+   ]
+  },
+  {
+   "tactic": "Relational (friend-to-friend) contact",
+   "mechanism": "turnout",
+   "effect": "One US trial (2018 midterms) found 8.26 pp [1.2, 15.3] among people messaged because of the treatment and 2.09 pp across everyone targeted, at 76-79% baseline turnout. Fewer than a third of intended targets actually got a message. The same paper's benchmark for automated texts is 0.44 pp.",
+   "israel": "Israel's dense family and WhatsApp networks suit it. Each volunteer and committed supporter lists 10-20 friends and relatives registered in target localities and messages them personally in the final three days. Recruit through supporters' own friends, family and neighbours, never through IDF units, unit chat groups or employers. Parties may receive the voter register but may not pass it to third parties, and in 2020 a flaw in Likud's Elector app exposed the records of about 6.5 million adults. Keep any register matching inside the party and confirm privacy rules with election counsel. The effect rests on one study, so A/B test it internally.",
+   "verdict": "core",
+   "cites": [
+    "D3-F12",
+    "D6-F24"
+   ]
+  },
+  {
+   "tactic": "Vote-plan scripts",
+   "mechanism": "turnout",
+   "effect": "Plan-making raised turnout 4.1 pp among those reached, against -0.2 for a standard call, and the whole effect came from single-voter households (9.1 pp). Replications are mixed: a mailer gave 0.5 pp, and two phone replications were null.",
+   "israel": "Ask when, at which polling station and with whom in every live contact from 17 Oct. Voters can vote only at the station of their registered address. Young singles and older people living alone gain most. Intercity buses on routes over 15 km are free from 20:00 on Mon 26 Oct until service ends on election day. Israel Railways is free on election day (ticket from station counters or machines); confirm Monday-evening trains with the CEC. The announcement does not cover city buses, so plan for local fares.",
+   "verdict": "core",
+   "cites": [
+    "D3-F14",
+    "D2-F18",
+    "D5-F28"
+   ]
+  },
+  {
+   "tactic": "Rescue and insurance messaging (media, digital, calls to identified voters)",
+   "mechanism": "persuasion",
+   "effect": "Atlas assumption, without experimental support: 5% of contacted Blue and White or Reservists voters move to a viable list, 60% to change lists and 40% to Likud. The atlas counts only calls to identified voters, not doors or media. At saturation those calls are worth about 140 net votes for a change-led government and about 450 for change-bloc seats, and close to nothing (26) under the deny-61 objective, where rescuing Reservists voters is negative. Evidence: under PR with a threshold, some voters desert lists they expect to miss the threshold or the coalition, and in Israel in 2003 coalition considerations led about 1 voter in 10 to a party other than their favourite. In 2015 Yachad polled 4-5 seats in the final polls and won none.",
+   "israel": "The forecast puts Blue and White at about 0.6% (pass chance 1%) and the Reservists at about 1.6% (pass chance 20%). Published polls run higher for the Reservists: 16 of 31 polls since mid-September show them at 4-5 seats, so rescue messaging to their voters works only if Friday's final polls show them below the line. An extra vote for either list is worth close to zero for a change-led government, against about 0.5 points per 10,000 votes for Yashar, Together or the Democrats. Rescue voters are about 2% of a station's voters, so use media, digital and calls to identified supporters, not door teams. Launch with the final published polls on Fri 23 Oct. From Sat 24 Oct no rescue message, ad or call script quotes a poll figure: use threshold arithmetic only. Respect both lists, their leaders and reservists' service. See 'Rescue and insurance'.",
+   "verdict": "use selectively",
+   "cites": [
+    "P-F23",
+    "P-F26",
+    "P-F27",
+    "P-F30",
+    "MODEL-FORECAST"
+   ]
+  },
+  {
+   "tactic": "SMS reminders (cold and warm)",
+   "mechanism": "turnout",
+   "effect": "Cold texts 0.22 pp per targeted voter in high-salience US races; warm texts to opted-in supporters 0.68 pp [0.05, 1.41]. Danish pooled 0.74 pp, and extra messages to the same person added nothing. In one of the Danish experiments, texts sent before election day beat texts sent on the day.",
+   "israel": "Send one or two texts to identified supporters in the 1-3 days before 27 Oct. In a higher-salience US election casual voters responded and habitual voters did not, so aim at supporters who are unsure. Check bulk-messaging and privacy rules with election counsel.",
+   "verdict": "use selectively",
+   "cites": [
+    "D3-F01",
+    "D3-F09",
+    "D3-F08"
+   ]
+  },
+  {
+   "tactic": "Paid call centres",
+   "mechanism": "turnout",
+   "effect": "About 0.74 pp per completed call in high-salience US races. Low-quality vendors about 0.2 pp, high-quality ones 0.9-1.4. A chattier script beat a standard one (3.4 vs 1.2 pp) in a US commercial phone test, and in another test only final-week calls worked. Robocalls have no high-salience estimate.",
+   "israel": "Buy only extra capacity for the final week, from a high-quality vendor using a conversational script and the vote-plan questions. Skip robocalls.",
+   "verdict": "use selectively",
+   "cites": [
+    "D3-F01",
+    "D3-F07"
+   ]
+  },
+  {
+   "tactic": "Social-norm and gratitude messages",
+   "mechanism": "turnout",
+   "effect": "US social-pressure mail gave 1.38 pp in high-salience races. Gratitude mailers gave about 2.4-2.5 pp in lower-salience races, about two-thirds of the effect of the mailer showing a voter's own history. A partisan version of that mailer had no effect.",
+   "israel": "Parties cannot be told on election day who has voted. Whether vote-history data may be used before election day is unclear. Send no message that refers to a voter's own past turnout without written clearance from election counsel. Use gentle descriptive norms and thanks, in non-partisan wording, in texts and scripts sent openly in the list's name. No shaming. Check sender-identification and bulk-messaging rules with election counsel.",
+   "verdict": "use selectively",
+   "cites": [
+    "D3-F01",
+    "D3-F05",
+    "D5-F25"
+   ]
+  },
+  {
+   "tactic": "Deep canvassing",
+   "mechanism": "persuasion",
+   "effect": "Peer-reviewed attitude effects are durable but small (d 0.04-0.08), and argument-only conversations had no effect. The only vote-choice estimate (3.1 net votes per 100 conversations) is a sponsor release. Conversations are long, so each one costs more volunteer time than a standard contact.",
+   "israel": "Use trained volunteers with identified soft Netanyahu-bloc voters where the atlas shows persuasion value (default objective): Rishon LeZion and Petah Tikva first (Petah Tikva is the only town where persuasion is the main mechanism), then Jerusalem, Holon and Tel Aviv-Yafo. Listen first. The atlas's persuadable pool, about 88,000 cross-pressured soft Netanyahu-bloc voters or about 2% of voters, is modelled, not measured. It sits at the upper end of the 0.6-1.6% that N12 polls find undecided between blocs, so treat persuasion value as an upper estimate. An Israeli field study found that messages exaggerating hawkish views, without challenging them, made attitudes more conciliatory for up to a year; its vote effect was self-reported. Judge the tactic per volunteer-hour.",
+   "verdict": "use selectively",
+   "cites": [
+    "P-F09",
+    "P-F10",
+    "P-F31",
+    "D5-F08",
+    "D5-F09"
+   ]
+  },
+  {
+   "tactic": "Polling-committee members and observers",
+   "mechanism": "vote protection",
+   "effect": "No turnout effect. It protects the count and helps deal with intimidation.",
+   "israel": "There is one national district, so place people by the votes at stake, not by closeness. Staff every committee seat and observer slot the law allows in stations with large change-bloc vote counts, stations where change lists have no committee member, and stations with past irregularity complaints. Brief them to report disputes and intimidation to election counsel at once. Keep observers on the count, including the central double-envelope tally where the law allows.",
+   "verdict": "core",
+   "cites": [
+    "D6-F25"
+   ]
+  },
+  {
+   "tactic": "Election-day festivals and events near polling stations",
+   "mechanism": "turnout",
+   "effect": "US non-partisan festivals raised turnout 6.5 pp at a 50% baseline in low-salience local elections. There is no high-salience or Israeli estimate.",
+   "israel": "Activity near polling stations is regulated, and anything of monetary value to voters carries legal risk. Hold no events, food or entertainment near stations; check with election counsel before any election-day presence there.",
+   "verdict": "avoid",
+   "cites": [
+    "D3-F13"
+   ]
+  },
+  {
+   "tactic": "Party-organised rides to the polls",
+   "mechanism": "turnout",
+   "effect": "No Israeli causal estimate. In the US, a 1 SD longer trip to the polling place (0.245 mile) cut ballots cast by 2-5%.",
+   "israel": "Election-day transport is regulated. In 2019 the CEC chair held that an NGO's plan to bus voters was politically motivated, and that the group had to register as a body active in the elections. Likud has petitioned against the 2026 expat-flight scheme, alleging bribery and a financing-law breach. Do not organise rides. Help supporters plan the trip with free intercity buses, election-day trains, local transport or a family ride, and check any other transport help with election counsel.",
+   "verdict": "avoid",
+   "cites": [
+    "D3-F34",
+    "D6-F23",
+    "D5-F29",
+    "D5-F28"
+   ]
+  },
+  {
+   "tactic": "Paid persuasion media (online video and digital)",
+   "mechanism": "persuasion",
+   "effect": "Small. In 59 US experiments the average ad moved vote choice about 0.7 pp, not significant. In campaigns' own tests, ads routinely differed by about 50% from the average and theory predicted the winners poorly. Effects fade fast: half-lives of about 4 days in a presidential race and 1-2 days in sub-national races. Ads work through persuasion, not turnout.",
+   "israel": "Spend in 21-26 Oct, after testing, and put 10-13% of the budget into tests. Voters move more on information about less-known figures, such as Eisenkot and Yashar's candidates, than on messages about Netanyahu, whom voters already know well. The rescue and insurance creative runs through this channel too. From Sat 24 Oct no ad quotes a poll figure. Television and radio election broadcasts follow separate election-law rules; check with election counsel before planning any broadcast media.",
+   "verdict": "use selectively",
+   "cites": [
+    "P-F04",
+    "P-F05",
+    "P-F07",
+    "P-F08",
+    "P-F11"
+   ]
+  },
+  {
+   "tactic": "Rallies and leader events",
+   "mechanism": "both",
+   "effect": "No rally-specific estimate exists. The closest evidence: across 56 TV debates there was no detectable effect on vote choice. In Italy, candidates canvassing did worse than volunteers.",
+   "israel": "The party leader was the main reason for about 19% of voters in 2015 (INES). Use events to recruit volunteers and earn media. Send the right-credentialed leaders (Eisenkot, Bennett, Liberman) to persuasion turf, and all leaders to volunteer hubs. Keep visible bloc rallies out of Netanyahu-bloc strongholds, where they can trigger counter-mobilisation.",
+   "verdict": "low value",
+   "cites": [
+    "P-F03",
+    "D3-F22",
+    "D1-F29",
+    "D3-F32",
+    "D3-F31"
+   ]
+  },
+  {
+   "tactic": "Leaflets, mail, email and digital ads (for turnout)",
+   "mechanism": "turnout",
+   "effect": "Partisan leaflets and mail show no positive effect. GOTV-worded mail gave 0.28 pp per piece in high-salience US races and 0.05 in presidential cycles. Campaign email gave 58.7% turnout against 59.7% in the control group, and purchased Facebook ads showed no effect in two large trials.",
+   "israel": "Do not rank turf by the volume of material distributed. Use digital channels to recruit volunteers and relational organisers. Print only a leave-behind with polling-station information.",
+   "verdict": "low value",
+   "cites": [
+    "D3-F02",
+    "D3-F01",
+    "D3-F11"
+   ]
+  }
+ ],
+ "election_day": [
+  {
+   "title": "Chase lagging target stations after each release",
+   "text": "The CEC will publish turnout for every regular polling station at least four times during the day, to all lists at once. Before 07:00, give every call-team lead a fixed list of the atlas's positive-value target stations mapped to 2026 station numbers. After each release, rank those stations by how far they trail their locality's turnout in the same release, and move callers and relational reminders to the bottom fifth. Never run area-wide turnout pushes in stations the atlas scores negative or in stations where Arab lists lead. Identified supporters in negative stations, including supporter-list ground such as Jerusalem, Netanya and Be'er Sheva (default objective), are still chased by private calls and texts.",
+   "cites": [
+    "D5-F26"
+   ]
+  },
+  {
+   "title": "Work from pre-election vote plans",
+   "text": "On 17 September the High Court barred party representatives at polling stations from telling their parties which identifiable voters have voted. Callers therefore work from supporters identified before election day. They ask whether the supporter has voted yet and help them plan the trip by public transport or a family ride. Do not organise rides; check any other transport help with election counsel. The ban hurts machines built on individual tracking most, and Likud has said limits on the Elector app force more manual work.",
+   "cites": [
+    "D5-F25",
+    "D5-F16"
+   ]
+  },
+  {
+   "title": "Arab-sector turnout is a leadership decision",
+   "text": "The model gives opposite answers under the two objectives. Each 10,000 votes for Ra'am raises the chance of denying Netanyahu 61 seats by about 0.8 points, and each 10,000 for the Joint List by about 0.6. Neither helps a change-led government: Ra'am is close to zero (-0.08) and the Joint List works against it (-0.48). The change bloc runs, funds and brands no turnout work among Arab voters, in Arab localities or in stations where Arab lists lead. Any support leadership approves is independent, transparent and cleared by election counsel in writing, with no operational coordination. Arab parties and civil-society groups run their own campaigns.",
+   "cites": [
+    "D6-F23"
+   ]
+  },
+  {
+   "title": "Blunt Likud's use of the releases",
+   "text": "Likud plans to use the station releases to rally its base by pointing to high turnout in change-bloc and Arab areas, echoing its 2015 election-day video. Bank identified change-bloc supporters early through private contact (calls, texts, relational asks), with no public turnout claims. Expect the first releases to show high turnout in our areas, and have the counter-message to our own supporters ready before 10:00: the race is close and every vote counts, without naming any group. Do not publish or celebrate turnout in any area.",
+   "cites": [
+    "D5-F27",
+    "D3-F33",
+    "D3-F31"
+   ]
+  },
+  {
+   "title": "Get students and young adults home",
+   "text": "Voters can vote only at the station of their registered address, and many students and young adults are registered with their parents. Intercity buses on routes over 15 km are free from 20:00 on Mon 26 Oct until service ends on election day. Israel Railways is free on election day (ticket from station counters or machines); confirm Monday-evening trains with the CEC. The announcement does not cover city buses, and Eilat needs advance registration through Egged. Text these supporters the evening before and in the morning with their station address and the last useful bus or train.",
+   "cites": [
+    "D2-F18",
+    "D5-F28"
+   ]
+  },
+  {
+   "title": "Displaced northern and Gaza-border supporters",
+   "text": "Between about 40% and 60% of Kiryat Shmona's residents had not returned by September, depending on the report. In the Gaza envelope most evacuees are back, but Be'eri, Nir Oz and Kfar Aza remain largely displaced. In the February 2025 municipal elections, 83 special stations served evacuees from all northern communities; the research found no arrangement yet for the Knesset vote. Confirm the CEC's rules early, then give displaced supporters a trip plan to their station. The atlas halves canvass capacity in these localities. Do not organise rides; check any other travel help with election counsel.",
+   "cites": [
+    "D5-F19",
+    "D5-F20",
+    "D6-F37",
+    "D6-F36"
+   ]
+  },
+  {
+   "title": "Observers and lawyers in place",
+   "text": "There is one national district, so place committee members and observers by the votes at stake: stations with large change-bloc vote counts, stations where change lists have no committee member, and stations with past irregularity complaints. In April 2019 a Likud contractor placed about 1,200 activists with hidden cameras in Arab polling stations, so prepare for intimidation complaints. Keep election counsel on call for station disputes and for questions about transport or activity near polling places. Keep observers on the count, including the central double-envelope tally where the law allows.",
+   "cites": [
+    "D6-F25"
+   ]
+  }
+ ],
+ "dos": [
+  {
+   "title": "Identify supporters now, contact them in the final ten days",
+   "text": "Use 11-16 Oct for supporter ID, list cutting and message tests. Live contact works best in the last 7 to 10 days. Effects add up across contacts with no extra synergy, so put repeat contacts where each one is worth most: identified supporters in positive-value turf who are unsure they will vote. Send texts in the 1-3 days before the vote.",
+   "cites": [
+    "D3-F07",
+    "D3-F24",
+    "D3-F21",
+    "D3-F09"
+   ]
+  },
+  {
+   "title": "Work only turf where turnout nets change votes",
+   "text": "Extra turnout helps only in proportion to the change bloc's lead among the people mobilised. Walk lists come only from positive-value station areas, never from stations where Arab lists lead. Door value combines turnout and persuasion; rescue runs only through media and calls to identified voters. In supporter-list ground under the default objective (Jerusalem, Netanya, Bat Yam, Be'er Sheva, Ashdod and Eilat) most of the value is in calls and relational asks to identified supporters, not area canvassing. At 400,000 contacts with 30% of supporters identified, Tel Aviv-Yafo alone yields about 520 of the 1,700 net votes.",
+   "cites": [
+    "D5-F16",
+    "P-F21"
+   ]
+  },
+  {
+   "title": "Test before you spend",
+   "text": "Ads routinely differ by about 50% in effect, and theory predicts the winners poorly. Run rapid online tests of the main frames this week and put 10-13% of the media budget into testing. Leave a random set of target polling stations unworked so the official results show what the field programme achieved.",
+   "cites": [
+    "P-F05",
+    "D3-F26"
+   ]
+  },
+  {
+   "title": "Use right-credentialed messengers in soft-right turf",
+   "text": "Left-coded messengers can act as a negative cue for right-leaning voters. In Likud-leaning cities and development towns, put Eisenkot, Bennett, Liberman, reservists and trusted local figures in front. Reservists speak as civilians only: never on duty, in uniform or with IDF insignia. Parties with a Druze candidate in a winnable slot usually win that candidate's home village, so any Druze work runs through Druze figures on the lists, after a check of the filed CEC lists and a Druze poll. Kamil Abu Rokon has joined Yashar; check his slot on the filed CEC list before naming him in field material. The Golan Druze villages and Ghajar are not targeted.",
+   "cites": [
+    "P-F14",
+    "D6-F40",
+    "D6-F16",
+    "D6-F21"
+   ]
+  },
+  {
+   "title": "Lead persuasion with competence and unity",
+   "text": "Campaigns move late deciders by raising the salience of issues they own and by building trust in their leaders. Valence messages beat ideology messages in a field test, and priming cooperation raised tolerance across Israeli party lines. Lead with security record, Oct 7 accountability and equal burden. Keep sharper contrast for mobilising the base.",
+   "cites": [
+    "P-F03",
+    "P-F32",
+    "P-F33",
+    "D1-F07"
+   ]
+  },
+  {
+   "title": "Run rescue as insurance media around the final polls",
+   "text": "Rescue voters are about 2% of a station's voters, so door teams are the wrong channel. Use tested digital and media messages, launched with the final published polls on Fri 23 Oct, plus calls to identified Blue and White and Reservists supporters from Saturday night after Shabbat to Mon 26 Oct. On Friday the ask can point to the final polls and a clear coalition path. From Sat 24 Oct rescue messages and call scripts quote no poll figures and use threshold arithmetic only.",
+   "cites": [
+    "P-F23",
+    "P-F26",
+    "P-F30"
+   ]
+  },
+  {
+   "title": "Watch allies near the threshold",
+   "text": "No change list is near the threshold in the forecast: the Democrats pass in 98% of simulations, Yisrael Beytenu in 97% and Together in 99%. Track this daily. If any falls toward the line, each list may run its own insurance messaging for it, after its counsel and treasurer clear the spending. In 2022 final polls showed Meretz at 4-5 seats, and it fell below the line as votes concentrated on Yesh Atid.",
+   "cites": [
+    "P-F24",
+    "P-F28",
+    "D1-F28"
+   ]
+  },
+  {
+   "title": "Split turf by lead change list",
+   "text": "Assign each polling station (not whole localities) to its lead change list. Where the lead list cannot staff a station, the locality's runner-up list's team takes it. The four field directors agree the station map, including who covers Tel Aviv-Yafo, by Thu 15 Oct, and share daily aggregate counts so no household is knocked twice. See 'Four lists, one street'.",
+   "cites": [
+    "D5-F12",
+    "D5-F13"
+   ]
+  }
+ ],
+ "donts": [
+  {
+   "title": "No untargeted turnout work in Netanyahu-bloc strongholds",
+   "text": "Likud is targeting polling stations where it took about half the vote on about 35% turnout, and values them at 2-3 seats. A joint Likud-RZP programme ranks low-turnout, high-Likud neighbourhoods for door-to-door and phone work. Generic turnout drives there help Likud. Haredi localities turned out at about 75% in 2022, and the atlas projects 92% of their vote to the Netanyahu bloc. The atlas tiers 277 localities as Netanyahu-bloc strongholds. Reach identified supporters there by phone only, and use persuasion in Likud-leaning cities.",
+   "cites": [
+    "D5-F16",
+    "D5-F17"
+   ]
+  },
+  {
+   "title": "No change-bloc-run or branded turnout work among Arab voters",
+   "text": "This covers Arab localities and polling stations where Arab lists lead in mixed cities. Visible campaigns about one group's turnout mobilise the other side. Likud's 2019 camera campaign is widely judged to have helped lift Arab turnout from 49% to 59%, though the Joint List's reunification also contributed and the two effects cannot be separated. Likud plans to use high turnout in change-bloc and Arab areas to rally its base this year. Arab-sector turnout is a leadership decision; any support is independent, transparent and cleared by election counsel.",
+   "cites": [
+    "D3-F32",
+    "D5-F27",
+    "D3-F31"
+   ]
+  },
+  {
+   "title": "Do not attack the voters you want to win",
+   "text": "Coalition voters' support for the judicial overhaul tracked attachment to Netanyahu and hostility to opponents, so attacks that raise hostility harden soft-right voters. Out-group messengers can backfire. Talk to soft Likud voters about competence, repair and fairness, and never mock their 2022 vote.",
+   "cites": [
+    "D1-F06",
+    "P-F14",
+    "D1-F05"
+   ]
+  },
+  {
+   "title": "Do not delegitimise Arab voters",
+   "text": "Most Jewish voters reject a government that relies on Ra'am (57.8% oppose), so in soft-right turf do not build messages around reliance on Ra'am. Lead with competence and a broad government. Never present Arab citizens or their votes as illegitimate. That framing deepens alienation and can depress Arab turnout. The forecast gives the change bloc 61 seats alone in 5.2% of draws, and 18.8% with Ra'am.",
+   "cites": [
+    "D1-F33",
+    "D2-F24",
+    "D5-F04"
+   ]
+  },
+  {
+   "title": "Do not buy impersonal turnout tools",
+   "text": "Robocalls, campaign email, purchased social ads and partisan leaflets show turnout effects near zero. Spend that money on volunteer capacity, relational organising and tested persuasion media.",
+   "cites": [
+    "D3-F11",
+    "D3-F02",
+    "D3-F01"
+   ]
+  },
+  {
+   "title": "Do not run biggest-party appeals against allies",
+   "text": "Moving votes between Yashar, Together, the Democrats and Yisrael Beytenu adds no bloc seats. Even a new vote for an average change list is worth only about 1/61,000 of an expected bloc seat, because a seat gained by one change list is sometimes taken from another. In 2022 votes concentrated on the largest opposition list and Meretz fell below the threshold. Within-bloc competition matters only for who gets the mandate, and it must stop if an ally nears the threshold.",
+   "cites": [
+    "P-F28",
+    "D5-F18",
+    "D1-F25"
+   ]
+  },
+  {
+   "title": "Do not disparage Reservists or Blue and White voters",
+   "text": "Reservists-Economic is a right-of-centre, reservist-branded list. Describe its voters with respect and make the message about threshold arithmetic, not about them. The bloc's equal-burden message depends on reservists: 60% of reservists polled would consider not voting for a party that backs a draft exemption, including 48% of right-wing reservists. Reach reservists as civilians only, never through IDF units, unit chat groups or employers.",
+   "cites": [
+    "D6-F39"
+   ]
+  },
+  {
+   "title": "Do not improvise in legal grey zones",
+   "text": "Several things carry legal risk: party-organised rides, gifts or anything of monetary value, and activity or campaign material near polling stations. So do sharing the voter register or supporter files, bulk texting, publishing or quoting polls during the ban, and messages based on vote history. So do spending by one list that promotes another, and any campaigning through IDF units, bases or employers. The High Court has banned reporting who voted, and the CEC chair treated an NGO's voter-busing plan as election activity. Check with election counsel before any of these.",
+   "cites": [
+    "D5-F25",
+    "D6-F23",
+    "D6-F24",
+    "P-F30"
+   ]
+  }
+ ],
+ "messages": [
+  {
+   "issue": "Security credibility (Eisenkot, Bennett, Liberman)",
+   "who_it_moves": "Soft-right and traditional Jewish voters, reservist communities, and centre-right voters still split on prime minister (Netanyahu 44%, Eisenkot 21%, Bennett 20%). Security narrowly leads for Jewish voters (39% vs 38% for the economy, top-two shares) and clearly leads on the right (47%).",
+   "frame": "Competence and record. Show what the change bloc's leaders did in the army and in office, and what they will do next. Information about less-known leaders persuades more than attacks on Netanyahu, whom voters already know well. Security-first framing suits localities hit by the war, where a panel study suggests views have moved right (low confidence) and the vote can still go to Yashar or Together.",
+   "cites": [
+    "D5-F22",
+    "D5-F21",
+    "P-F33",
+    "P-F11",
+    "D6-F33"
+   ]
+  },
+  {
+   "issue": "Oct 7 accountability and a state commission of inquiry",
+   "who_it_moves": "Soft Likud voters (Oct 7 was the top reason 2022 Likud voters gave for considering a switch, at 37%), secular young voters (decisive for 22%), and the 40% of Netanyahu-bloc voters who say the failures have not been fixed.",
+   "frame": "Responsibility and repair. A state commission of inquiry is a majority position (55%), and more voters trust an Eisenkot-led government to fix the failures (48% against 30% for Netanyahu). Frame it as fixing what failed for the voter's family and community. Never blame voters for their 2022 choice.",
+   "cites": [
+    "D5-F11",
+    "D5-F05",
+    "D5-F08",
+    "D1-F33",
+    "D6-F32"
+   ]
+  },
+  {
+   "issue": "Haredi draft and equal burden",
+   "who_it_moves": "Reservists and their families: in a December 2024 poll of reservists, 77% said exemptions are no longer affordable, and 60% would consider not voting for a party that backs one, including 48% of right-wing reservists. Also voters in the centre (34% rank the draft in their top two), secular youth (decisive for 26%), and traditional Shas voters in towns such as Kiryat Shmona, Shlomi and Or Yehuda.",
+   "frame": "Fairness to those who serve. Equal burden for everyone, said by people who served, speaking as civilians (never in uniform or with IDF insignia). Avoid hostility to haredim as a group. Do not expect it to move national-religious voters, for whom the draft is the top issue for only 15%. This message depends on the reservist constituency, so rescue messaging to Reservists voters must stay respectful.",
+   "cites": [
+    "D6-F39",
+    "D5-F21",
+    "D5-F05",
+    "D5-F14",
+    "D5-F23",
+    "D1-F03"
+   ]
+  },
+  {
+   "issue": "Cost of living",
+   "who_it_moves": "Undecided voters (their top concern, at 25%), voters in the centre (the economy is their leading issue, named by 40.5% in their top two, IDI), including Route 4 commuters, and young voters (25%).",
+   "frame": "Concrete household costs, such as housing, prices and commuting time. Pair it with credibility, since economic attitudes do not line up with Israeli left and right. Its main use is persuasion in Rishon LeZion, Petah Tikva and Holon, and turnout motivation for identified supporters and in positive-value stations, including base towns such as Kfar Saba.",
+   "cites": [
+    "D5-F07",
+    "D5-F21",
+    "D5-F13",
+    "D5-F05",
+    "D1-F02"
+   ]
+  },
+  {
+   "issue": "Unity and less polarisation",
+   "who_it_moves": "Undecided voters. In JPPI's August survey undecided Jewish voters emphasised unity and fewer disputes, and in a July Channel 12 poll they named polarisation their second concern (15%) after cost of living (25%). Voters in the centre, whose top issue was unity (30% in JPPI's September index). Soft-right voters wary of the opposition.",
+   "frame": "A broad government that includes the centre-right. In an Israeli experiment, priming cooperation raised tolerance across party lines, while salient competition raises hostility. Use unity framing in persuasion turf and keep sharper contrast for base mobilisation.",
+   "cites": [
+    "D5-F22",
+    "D5-F07",
+    "D1-F07"
+   ]
+  },
+  {
+   "issue": "Crime and personal safety in Arab society (context; the Democrats' own outreach only)",
+   "who_it_moves": "Arab voters open to voting for the Democrats. This is the Democrats' own vote-seeking, not turnout work. Crime is the leading issue: 53.5% name it in their top two (IDI) and about 80% rank it first (Statnet). More than 140 people were killed in Arab communities by late June 2026.",
+   "frame": "Concrete plans on policing, crime and personal safety. The change bloc does not script messages for Arab lists or civil-society groups and runs no turnout messaging among Arab voters. The Democrats, who are touring Arab towns for votes, can carry this frame in their own campaign, transparently and within counsel's rules.",
+   "cites": [
+    "D5-F21",
+    "D5-F02",
+    "D5-F32"
+   ]
+  },
+  {
+   "issue": "Northern rebuilding and fair treatment of the periphery",
+   "who_it_moves": "Northern Jewish towns such as Kiryat Shmona, Nahariya, Karmiel, Ma'alot, Tiberias and Shlomi. Across the Haifa and Northern districts (Midgam, April 2026), 65% say the state is abandoning the north, and opposition parties lead 38% to 26% with 27% undecided. Druze towns with planning and Nation-State Law grievances.",
+   "frame": "Local and practical. Talk about services, rebuilding and jobs, through trusted local figures. Kiryat Shmona's Likud share fell from 58% in 2020 to 49% in 2022, and the Likud-backed mayoral candidate came second in the first round in 2025. In Druze towns the same frame means planning and zoning relief and equality under the Nation-State Law, using only commitments in the lists' published platforms or cleared by list leadership, and carried by Druze figures on the lists. In Likud-leaning Jewish towns these are persuasion messages, because generic turnout work there helps Likud. Druze towns are held out until a check of the filed CEC lists and a Druze poll, because their 2026 vote depends on which lists placed Druze candidates in winnable slots.",
+   "cites": [
+    "D6-F34",
+    "D5-F19",
+    "D6-F36",
+    "D6-F18",
+    "D6-F40"
+   ]
+  },
+  {
+   "issue": "Threshold insurance",
+   "who_it_moves": "Supporters of Blue and White (forecast about 0.6%) and Reservists (forecast about 1.6%), about 90,000 voters at regular polling stations in the atlas, plus voters weighing other small lists.",
+   "frame": "Make your vote count toward the government you want. In 2022 about 289,000 votes for Meretz and Balad fell below the threshold, Meretz missed by 4,061 votes, and the Netanyahu bloc won 64 seats from a near-tie in votes. On Fri 23 Oct the ask can point to the final published polls and a clear coalition path. From Sat 24 Oct it uses threshold arithmetic only and quotes no poll figure. Respect the list, its leader and reservists' service; the message is about the arithmetic, not the voters.",
+   "cites": [
+    "P-F28",
+    "D1-F28",
+    "P-F23",
+    "P-F26",
+    "P-F30",
+    "DATA-CEC",
+    "MODEL-FORECAST"
+   ]
+  }
+ ],
+ "sections": [
+  {
+   "key": "realistic",
+   "title": "What a realistic field programme buys",
+   "text": "The atlas's planner spends a fixed budget of completed contacts on the best positive-value turf. It leaves out Arab localities, polling stations where Arab lists lead (in mixed cities, Jerusalem and mixed Druze towns), the access-excluded villages and, until a candidate check and a Druze poll, Druze towns. It sends door teams only where at least 1,000 contacts are available. Two budgets bracket a realistic programme, 150,000 and 400,000 completed contacts, each run with no supporter lists and with 30% of supporters identified. On those numbers field work is a margin lever worth roughly 750 to 2,000 net votes, depending on budget and objective. The atlas's baselines are a change-led government in 18.5% of draws, the Netanyahu bloc held below 61 in 79.9%, and about 50.6 expected change-bloc seats. Its seat law carries all six surplus pairs, so these differ slightly from the forecast headline.",
+   "bullets": [
+    "Change-led government: 150,000 contacts buy about 750 net votes with no supporter lists and about 970 with 30% identified. 400,000 contacts buy about 1,300 and 1,700. That is +0.04 to +0.09 points on the chance of a change-led government. Ranges across the atlas's assumption sets: about 410-1,500, 620-2,100, 750-3,200 and 1,000-4,300.",
+    "Deny Netanyahu 61: about 900 and 1,000 net votes at 150,000 contacts, and about 1,600 and 1,800 at 400,000 (+0.05 to +0.10 points). Ranges: about 490-1,600, 590-2,100, 880-3,400 and 1,000-4,300.",
+    "Change-bloc seats: about 830 and 1,300 net votes at 150,000 contacts, and about 1,500 and 2,000 at 400,000, or 0.01 to 0.03 expected seats. Ranges: about 450-1,500, 900-2,200, 860-3,400 and 1,300-4,300. One net vote for an average change list is worth about 1/61,000 of an expected seat.",
+    "Treat the totals as orders of magnitude. The turnout effect drives most of the spread: the low end of each range assumes an effect about half as large, and the high end drops the turnout hump. Rankings of places are steadier than totals: 16 localities stay in the change-led-government top 25 in every sensitivity scenario.",
+    "Druze towns are held out of these totals until a check of the filed CEC lists and a Druze poll, because their 2026 vote depends on which lists placed Druze candidates in winnable slots. If cleared, they would add about 120 to 190 net votes for a change-led government, about 260 to 330 under deny-61 and about 150 to 210 for change-bloc seats, depending on the plan.",
+    "Saturation, meaning every positive station area at 35% of the roll plus every list programme, is a model ceiling of about 3,100 net votes for a change-led government. It needs about 1.1-1.5 million door conversations. Treat it as a ceiling, not a plan.",
+    "Supporter lists pay only if they exist. At the same contact budget, calls to identified supporters add about 220 net votes at 150,000 contacts and about 380 at 400,000 (change-led government), and bring Netanya, Jerusalem, Be'er Sheva, Bat Yam and Eilat in through calls. The 400,000-contact plan assumes files on about 135,000 change supporters already exist. The ID contacts needed to build them are not counted, so first ask how many identified supporters the four lists already hold in these towns.",
+    "Value is concentrated. At 400,000 contacts with 30% identified, Tel Aviv-Yafo yields about 520 net votes, Haifa 120, Ramat Gan 83, Jerusalem 72, Herzliya 70, Rishon LeZion 60 and Netanya 58.",
+    "Kibbutzim and moshavim fall below the 1,000-contact door minimum, so the planner sends no door teams there and most are tiered low yield. Reach supporters there through members' own community networks and texts to identified supporters. That work is not in these totals.",
+    "Why it still matters: in 2022 the Netanyahu bloc finished about 30,000 votes ahead, Meretz missed the threshold by 4,061 votes, and in April 2019 New Right missed it by 1,453. Ra'am and RZP-Zehut each pass in about 78% of simulations. Threshold races are decided by margins of this size.",
+    "What the numbers leave out: polling-committee and observer coverage, paid media, the rescue media programme and relational work in small communities. The effect sizes are borrowed from foreign experiments. European canvassing effects are well below US ones, and no Israeli randomised turnout trial exists."
+   ],
+   "cites": [
+    "D6-F03",
+    "P-F28",
+    "P-F29",
+    "D3-F22",
+    "D6-F16",
+    "DATA-CEC",
+    "MODEL-FORECAST"
+   ]
+  },
+  {
+   "key": "coordination",
+   "title": "Four lists, one street",
+   "text": "Yashar, Together, the Democrats and Yisrael Beytenu will canvass the same streets. Moving a vote from one change list to another adds no bloc seats, and a household knocked by two lists is a duplicated contact. Split turf, share counts and keep the doorstep positive.",
+   "bullets": [
+    "Split turf at polling-station level, not locality level. The atlas gives each station its lead change list (lead_change_list) and each locality a runner-up (second_change_list). Even at station level Yashar leads about 4,600 of the roughly 5,500 positive-value stations under the default objective, the Democrats about 460, Yisrael Beytenu about 400 and Together 3. So staffing decides the rest: where the lead list cannot staff a station, the locality's runner-up list's team takes it.",
+    "The four field directors agree the station map by Thu 15 Oct. Settle Tel Aviv-Yafo first: it is the largest single prize (about 520 net votes in the 400,000-contact plan with lists), Yashar leads about 390 of its positive stations and the Democrats about 200, and Yashar's own campaign has avoided Tel Aviv.",
+    "Yashar leads in most large target localities, with Together the runner-up across much of the Sharon and Gush Dan and the Democrats runner-up in Tel Aviv-Yafo and Givatayim. Yisrael Beytenu leads in places such as Akko, Nof HaGalil, Qiryat Yam, Arad and Ari'el.",
+    "Respect existing splits where they fit the atlas. Yashar is working soft-Likud voters (a pool of about 200,000) and runs a religious-Zionist headquarters covering Gush Etzion, Efrat, Givat Shmuel and Ariel. Yisrael Beytenu has mapped Likud's best stations, including Russian-speaking ex-Likud voters. Yashar launched as a campaign for the Route 4 suburbs.",
+    "Share only aggregates and station maps between lists: the turf map, station assignments and daily counts (doors knocked, supporters identified, vote plans made). Share no voter-level records between lists unless election counsel has cleared the format in writing. Parties may receive the voter register but may not pass it to third parties.",
+    "Each list pays for its own field work. Staff time, volunteers' paid costs, call centres or media that one list funds to promote another need prior written clearance from both lists' election counsel and treasurers (Party Financing Law).",
+    "No list attacks another list's voters on the doorstep. Partisan contact can demobilise a rival's supporters, and in 2022 votes concentrated on Yesh Atid while Meretz fell below the threshold. Keep within-bloc competition, such as Together's bid to win back ex-Yesh Atid voters from Yashar, to paid media and leaders' messages.",
+    "If any ally falls toward the threshold, each list may run its own insurance messaging for it, after its counsel and treasurer clear the spending.",
+    "Druze towns wait for a check of the filed CEC lists and a Druze poll. Any work there then goes to whichever list placed a Druze candidate in a winnable slot, led by that candidate's local figures. The Golan Druze villages and Ghajar are not targeted.",
+    "Set a minimum deployment. Door teams go only where at least 1,000 contacts are available; group small targets into one team-day instead of splitting them between lists."
+   ],
+   "cites": [
+    "D5-F12",
+    "D5-F13",
+    "D5-F18",
+    "D6-F24",
+    "D3-F25",
+    "P-F28",
+    "P-F24",
+    "D6-F16"
+   ]
+  },
+  {
+   "key": "rescue",
+   "title": "Rescue and insurance: a media programme",
+   "text": "Rescue means persuading supporters of lists likely to miss the 3.25% threshold to vote for a list that will pass. The two targets are Blue and White (forecast about 0.6%, pass chance 1%) and Reservists-Economic (forecast about 1.6%, pass chance 20%). Rescue voters are about 2% of a typical station's voters, so door canvassing is the wrong channel, and the atlas counts no rescue at the door. Run rescue as media, digital and insurance messaging launched with the final published polls on Fri 23 Oct, plus calls to identified voters from Saturday night after Shabbat to Mon 26 Oct.",
+   "bullets": [
+    "Channels: tested digital and media creative, and calls and relational asks to identified Blue and White and Reservists supporters. No door teams.",
+    "Timing: build call lists during supporter ID from 11 Oct and creative from 17 Oct, ready by Thu 22 Oct. Launch digital and media messages as the final polls are published on Fri 23 Oct. Run calls to identified voters from Saturday night after Shabbat through Mon 26 Oct, using threshold arithmetic and no poll figures.",
+    "Poll ban: from Sat 24 Oct no rescue message, ad or call script quotes any poll figure. Use threshold arithmetic only: a list under 3.25% elects no one, and in 2022 Meretz missed by 4,061 votes. Take down or replace Friday creative that quotes a poll before the ban starts. Quoting or re-publishing any poll result during the ban needs a written ruling from election counsel.",
+    "Forecast and polls differ. The 0.6% and 1.6% are forecast shares. Blue and White is below the threshold in every published poll since mid-September that lists it (0.3-2.0%), but 16 of 31 polls show the Reservists at 4-5 seats. Rescue messaging to Reservists voters works only if Friday's final polls show them below the line.",
+    "Why the final polls matter: voters desert lists they expect to fall short, and the final polls feed that expectation. In 2015 Yachad polled 4-5 seats in the final polls and won none; in 2022 Jewish Home polled 1.5-2.2% and won 1.19%.",
+    "Size: the atlas counts only the calls, and assumes, without experimental support, that 5% of contacted voters move, 60% to change lists and 40% to Likud. At saturation the calls are worth about 140 net votes for a change-led government and about 450 for change-bloc seats. The media programme is not in the model.",
+    "Trade-off: under the deny-61 objective rescuing Reservists voters is negative. Their votes would partly go right, and while they stay below the threshold they help deny Netanyahu 61. Under deny-61 the calls are worth close to nothing (26 net votes at saturation). Leadership decides whether to target Reservists voters at all; Blue and White voters are the cleaner target.",
+    "Reservists framing: it is a right-of-centre, reservist-branded list. Use reservists as messengers, as civilians only (never on duty, in uniform or with IDF insignia), respect their service and talk about threshold arithmetic. The bloc's equal-burden message depends on this constituency: 60% of reservists polled would consider not voting for a party that backs a draft exemption, including 48% of right-wing reservists.",
+    "Blue and White: a 'withdrawal with honour' is being reported, and the forecast gives it a 0.40 chance. If it happens, offer its voters a respectful next step.",
+    "Allies come first. If the Democrats, Yisrael Beytenu or Together slips toward the threshold, each list may run its own insurance messaging for it, after its counsel and treasurer clear the spending."
+   ],
+   "cites": [
+    "P-F30",
+    "P-F28",
+    "D6-F39",
+    "P-F24",
+    "P-F23",
+    "P-F26",
+    "MODEL-FORECAST"
+   ]
+  },
+  {
+   "key": "young",
+   "title": "Young voters, students and soldiers",
+   "text": "First-time and young voters are numerous, less certain to vote and often not living where they are registered. Every contact with them starts with the registered address.",
+   "bullets": [
+    "Registration address: voters may vote only at the station of their registered address, which is fixed by a Population Registry cut-off well before the vote (54 days before in 2022). Many students and young adults are registered with their parents, so build each one a trip plan to that station.",
+    "Travel: intercity buses on routes over 15 km are free from 20:00 on Mon 26 Oct until service ends on election day. Israel Railways is free on election day (ticket from station counters or machines); confirm Monday-evening trains with the CEC. The announcement does not cover city buses, and Eilat needs advance registration through Egged. Election day is a statutory holiday.",
+    "Size and lean: estimates run from about 550,000 (Midgam) to about 640,000 (CBS, via IDI) first-time voters. Among Jewish first-time voters Midgam found Yashar 16%, Likud 14%, Together 10%, the Democrats 7%, Yisrael Beytenu 6% and 10% undecided, and 74% place themselves right or centre-right.",
+    "Certainty: in a Dialog poll of 18-22-year-olds, 67% were certain to vote, and 14% were undecided on party (20% of young women, 8% of young men). Draft policy was decisive for 26% of secular youth and the Oct 7 inquiry for 22%.",
+    "Campuses: recruit volunteers and relational organisers, run vote-plan conversations and record where each student is registered. Friend-to-friend texting had large turnout effects in a US trial.",
+    "Families: a text to a young voter reaches housemates (about 30% spillover) but not parents living elsewhere, so contact parents separately.",
+    "Soldiers: soldiers away from home vote by double envelope, the largest group of envelope voters, and their ballots are counted centrally after the regular count. Reach soldiers and reservists as civilians only, through family and friends: never through IDF units, unit chat groups, bases, uniforms or insignia, and never through employers. Check with election counsel.",
+    "Why it lasts: voting once raises the chance of voting in a later election by about 10 points, and the forecast gives a repeat election a 41.9% chance."
+   ],
+   "cites": [
+    "D2-F18",
+    "D5-F28",
+    "D2-F17",
+    "D5-F06",
+    "D2-F26",
+    "D5-F05",
+    "D3-F12",
+    "D3-F10",
+    "D2-F03",
+    "D3-F30"
+   ]
+  },
+  {
+   "key": "arab",
+   "title": "The Arab-sector decision for leadership",
+   "text": "Whether the change bloc puts any resources into Arab-sector turnout is a leadership decision, not a field-team one. The model gives opposite answers under the two objectives. Whatever leadership decides, the change bloc runs, funds and brands no turnout work among Arab voters, in Arab localities or in stations where Arab lists lead, and any support is independent, transparent and cleared by election counsel.",
+   "bullets": [
+    "The trade-off: per 10,000 extra votes, Ra'am adds -0.08 points and the Joint List -0.48 points to the chance of a change-led government, but +0.81 and +0.59 points to the chance of denying Netanyahu 61. For deny-61 a Joint List vote is worth about as much as a Yisrael Beytenu vote (+0.57). In the formation model these votes turn Netanyahu-bloc wins into deadlock while diluting change-list seats. The atlas's seat law carries all six surplus pairs, including Joint List-Ra'am and Together-Yisrael Beytenu.",
+    "Under the change-led-government objective the model recommends no investment. Under deny-61 the value lies in Arab voters' own lists, and the atlas makes no field recommendation on where or among whom. That is for leadership, through election counsel.",
+    "Context: the change bloc reaches 61 seats alone in 5.2% of forecast draws and in 18.8% with Ra'am. The Netanyahu bloc reaches 61 in 21.7% of forecast draws; the atlas's seat law, with all six surplus pairs, holds it below 61 in 79.9%.",
+    "Rules: no change-bloc-run, funded or branded turnout work among Arab voters, and no operational coordination with Arab parties or civil-society groups. The change bloc names no messengers and writes no scripts for Arab-sector turnout work. In 2019 the CEC chair held that an NGO's plan to bus about 15,000 voters was politically motivated and required the group to register as a body active in the elections. Coordination with a party could raise party-financing questions as well. Any support leadership approves needs written clearance from election counsel.",
+    "Why branding backfires: Likud's 2019 camera campaign is widely judged to have helped lift Arab turnout from 49% to 59%, though the Joint List's reunification also contributed. Likud plans to use the station turnout releases to point to high turnout in change-bloc and Arab areas.",
+    "Arab lists are independent and are not members of the bloc. The Democrats' own campaign for Arab votes, including tours of Arab towns and Arabic social media, is that list's decision under the same transparent, counsel-cleared rules.",
+    "For leadership's information: Arab turnout was 53.2% in 2022, and scenario polling links the configuration now running (a three-party Joint List and a separate Ra'am) to about 59%. Crime is the leading issue. Rhetoric that paints reliance on Arab parties as illegitimate can depress turnout.",
+    "Language and the atlas: never call Arab or Druze towns change-majority, and never describe Arab towns as change-bloc turf. The atlas tiers Arab localities as Arab-list turf under every objective and publishes no town-level targeting values or ranks for them, only segment totals. The planner never includes Arab localities or polling stations where Arab lists lead in mixed cities, Jerusalem or mixed Druze towns."
+   ],
+   "cites": [
+    "D6-F23",
+    "D3-F32",
+    "D5-F27",
+    "D5-F32",
+    "D2-F07",
+    "D5-F02",
+    "D5-F04",
+    "D2-F24",
+    "MODEL-FORECAST"
+   ]
+  },
+  {
+   "key": "legal",
+   "title": "Legal guardrails",
+   "text": "Election-day transport, gifts, campaign activity near polling stations and the publication of polls are regulated under Israeli election law. The points below are what the research found; they are not legal advice. For anything else, check with election counsel before acting, and keep a written log of clearances.",
+   "bullets": [
+    "Who has voted: on 17 Sep 2026 the High Court barred party representatives at polling stations from telling their parties which identifiable voters have voted, citing election law and privacy law. Parties may still urge people to vote.",
+    "Station turnout: the CEC will publish aggregate turnout for every regular station at least four times on election day, to all lists at once and with no names.",
+    "Voter data and supporter files: parties receive the voter register but may not pass it to third parties. Between lists, share only aggregates and station maps unless election counsel clears a voter-level format in writing; the same applies to outside groups and vendors. Whether vote-history data may be used before election day is unclear, so send no message that refers to a voter's own past turnout without clearance.",
+    "Cross-list activity: staff time, volunteers' paid costs, call centres or media that one list funds to promote another list need prior written clearance from both lists' election counsel and treasurers (Party Financing Law attribution and spending caps).",
+    "Transport: election-day transport is regulated. In 2019 the CEC chair held that an NGO's plan to bus voters was politically motivated and that the group had to register as a body active in the elections. Likud has challenged the 2026 expat-flight scheme as bribery and a financing breach. No organised rides. Help with public transport or a family ride only, and check any other transport help with election counsel.",
+    "Gifts and benefits: anything of monetary value to voters is regulated. Check with election counsel before offering food, travel or any service.",
+    "Near polling stations: campaign propaganda and activity near polling stations are regulated. Clear any presence, material, event or food near stations with counsel, and brief committee members and observers on their role.",
+    "Polls: final polls may be published until the end of Fri 23 Oct. From Sat 24 Oct to the close of polls, publish, post or leak no poll, including internal ones. Confirm the exact cut-off with counsel.",
+    "Poll figures in campaign material: from Sat 24 Oct no rescue message, ad or call script quotes any poll figure; use threshold arithmetic only. Quoting or re-publishing any poll result in campaign material, ads or scripted calls during the ban needs a written ruling from election counsel.",
+    "Soldiers and reservists: reach them as civilians only. Never campaign through IDF units, unit chat groups or bases, never use uniforms or insignia, and never recruit or message through employers.",
+    "Outside groups: joint activity with an NGO or civil-society group may raise election-activity and party-financing questions. Clear it with counsel first.",
+    "Bulk messaging and privacy: check the rules on bulk texts and calls with counsel before the final-week waves."
+   ],
+   "cites": [
+    "D5-F25",
+    "D5-F26",
+    "D6-F24",
+    "D6-F23",
+    "D5-F29",
+    "P-F30"
+   ]
+  }
+ ]
+}

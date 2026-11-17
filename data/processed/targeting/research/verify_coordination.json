@@ -1,0 +1,254 @@
+{
+ "verdicts": [
+  {
+   "id": "D7-F01",
+   "status": "corrected",
+   "note": "Method: internal-model figures were re-run independently on data/processed/targeting/share_draws.parquet (8,000 draws, labels/pairs from share_draws_meta.json) with the project's own seat law (targeting_marginal.allocate: 3.25% threshold, six surplus pairs, Bader-Ofer); official figures were recomputed from the CEC locality files in data/raw/kalpi (expc_19-25). All official numbers match exactly: Apr 2019 4,309,270 / 366,016 / 8.49% (New Right 138,598, Zehut 118,031, Gesher 74,701); Sep 2019 4,436,806 / 126,704 / 2.86% (Otzma 83,609 = 1.88%); 2020 4,590,062 / 36,901 / 0.80% (Otzma 19,402); 2021 4,410,052 / 64,752 / 1.47% (New Economic 34,883 = 0.79%); 2022 4,764,742 / 417,400 / 8.76%. The 2026 totals also replicate: expected waste 5.15% (p10-p90 1.95-8.64%); Netanyahu bloc 3.11 points, P(>2 points) 0.64; Arab lists 0.46; change lists 0.11. Error: the 'unaligned (Blue and White, Reservists) 1.5' figure also counts Unity and Israel First (0.20 points). Blue and White (0.68) plus Reservists (0.59) is 1.27, about 1.3. Related error in the desk summary: the Netanyahu bloc's 3.1 points are not all 'RZP, Amcha and Otzma failures'. RZP 0.93 + Amcha 0.70 + Otzma 0.48 = 2.1 points; Noam (0.44) and The Haredi Public (0.55) fail in essentially every draw and add the other 1.0.",
+   "corrected_claim": "",
+   "corrected_quant": "Official files unchanged. 2026 (share draws, 13 Oct): expected waste 5.2% (10th-90th percentile 2.0-8.6%). By camp: Netanyahu bloc 3.1 points (RZP 0.9, Amcha 0.7, Otzma 0.5, Noam 0.4, Haredi Public 0.6; P(above 2 points) 0.64); Blue and White plus Reservists 1.3; other micro-lists (Unity, Israel First) 0.2; Arab lists 0.5; change lists 0.1.",
+   "corrected_url": ""
+  },
+  {
+   "id": "D7-F02",
+   "status": "corrected",
+   "note": "Independent Bader-Ofer recount of the CEC 2022 file (pairs Likud-RZP, Yesh Atid-National Unity, Shas-UTJ, Labor-Meretz) reproduces the actual seats exactly. The results match: threshold 154,854.1 so 154,855 votes needed; Meretz +4,062 from Yesh Atid gives bloc 62 with the listed seats; Balad +16,784 new votes gives 63; merger at 100/90/80% gives 62/63/63; no agreements gives 63 (Likud 31, Labor 5); Jewish Home to Likud gives 65. Corrections: (1) 'Both pass: 60' only holds if Meretz gets about 4,607 votes from Yesh Atid, not 4,062. Balad's 16,784 new votes lift the threshold to 155,400, so with +4,062 Meretz fails again and the bloc has 63. (2) 'The Likud-RZP agreement alone was worth one seat' is true only against a no-agreement baseline. With the other pairs in place, dropping Likud-RZP leaves the bloc at 64, because Shas-UTJ takes the seat (UTJ 8). Either Netanyahu-bloc pair alone delivered the extra seat. Without the Yesh Atid-National Unity pair the bloc would have had 65. (3) The relevance line 'a merger only beats separate runs if it keeps about 95%' is wrong against the actual outcome. Any Labor-Meretz merger keeping about 55% or more of the two parties' votes (with the rest abstaining) gives the bloc 63 instead of the actual 64. About 100% is needed only to match the counterfactual in which both lists pass separately (62).",
+   "corrected_claim": "Running Bader-Ofer with the actual surplus pairs on the official 2022 totals reproduces the actual seats. Meretz was 4,062 votes short; had those votes come from Yesh Atid, the Netanyahu bloc would have won 62 seats, not 64. If Balad had also passed (16,784 new votes, which also raises the threshold so Meretz then needs about 4,607), the bloc would have won 60. A Labor-Meretz merger would have cut the bloc to 62-63 at any retention from about 55% to 100%. The Netanyahu bloc's agreements together were worth one seat (63 with no agreements, the seat coming from Labor); either Likud-RZP or Shas-UTJ alone would have secured it.",
+   "corrected_quant": "Threshold 154,855 votes. Actual bloc 64. Meretz +4,062 from Yesh Atid: 62 (Likud 30, Yesh Atid 23, Labor 5, Meretz 4, Yisrael Beytenu 5, Hadash-Ta'al 4). Balad +16,784 new votes: 63. Both pass (Meretz +4,607 from Yesh Atid, Balad +16,784 new): 60. Merger 100/90/80%: 62/63/63. No agreements: 63 (Likud 31, Labor 5). Dropping only Likud-RZP: 64 (UTJ 8). Dropping only Yesh Atid-National Unity: 65. Jewish Home to Likud: 65.",
+   "corrected_url": ""
+  },
+  {
+   "id": "D7-F03",
+   "status": "corrected",
+   "note": "CEC K21 file: valid 4,309,270, threshold 3.25% = 140,051.3 (140,052 votes), New Right 138,598. The shortfall is 1,454 votes, not 1,455; Israel Hayom reports the same 140,052 / 1,454, and early ToI/ynet counts said 1,461. With new voters the shortfall is 1,503 (not 1,504). The quoted pair set (Likud-New Right, Blue and White-Yisrael Beytenu) is not the actual April 2019 structure. Reported agreements were Likud-URWP, Shas-UTJ, Labor-Meretz, New Right-Yisrael Beytenu and Hadash-Ta'al-Ra'am-Balad (Jewish Virtual Library; Likud-URWP widely reported). That structure reproduces the actual seats, and a New Right pass (votes from Likud or new) gives the bloc without Yisrael Beytenu 62, so the conclusion stands. 'In all structures 61-63' is not strictly true. Enumerating all 3,600 pair structures consistent with the actual seats (times New Right partner options) gives 60-64, with 61-63 in 98.5% and 62 the mode. The repeat-election inference is reasonable but counterfactual.",
+   "corrected_claim": "New Right missed the April 2019 threshold by 1,454 votes. Under the reported surplus agreements (Likud-URWP, New Right-Yisrael Beytenu, Shas-UTJ, Labor-Meretz, Hadash-Ta'al-Ra'am-Balad), a New Right pass with the votes taken from Likud gives Netanyahu's bloc without Yisrael Beytenu 62 seats instead of 60 (61-63 under almost all pair structures consistent with the result).",
+   "corrected_quant": "Valid 4,309,270; threshold 140,052 votes. New Right 138,598 (3.22%), short by 1,454 at fixed total (1,503 if new votes). Zehut 118,031 (2.74%); Gesher 74,701 (1.73%). Bloc without Yisrael Beytenu: actual 60, counterfactual 62 with the reported pairs (range 60-64 over all 3,600 consistent structures, 61-63 in 98.5%).",
+   "corrected_url": "https://votes21.bechirot.gov.il/ ; https://www.jewishvirtuallibrary.org/israeli-electoral-history-elections-to-the-21st-knesset ; https://israelhayom.com/2019/07/22/in-attempt-to-broaden-voter-appeal-new-right-names-shaked-as-leader"
+  },
+  {
+   "id": "D7-F04",
+   "status": "corrected",
+   "note": "Checked against the IDI 1992 results page and Wikipedia. Correct: valid 2,616,841; Tehiya 31,957 (1.22%); Geulat Yisrael 12,851; Torah VeAretz 3,708 (total 48,516); left bloc 1,260,811 (48.18%) and 61 seats; right 59 seats on 46.8%. The right-bloc total 1,225,041 is correct with Wikipedia's Tzomet figure (166,366); IDI's table prints 165,366, a typo. The recount confirms Tehiya-to-Likud gives 60-60 (Likud 33, ADP 1), with or without agreements. Correction: 1992 did have surplus agreements (Wikipedia: Likud-Tzomet and Tehiya-Moledet). With those pairs, the 1% threshold counterfactual changes. Tehiya's seat comes from the Arab Democratic Party, not Likud, and the blocs tie 60-60. 'Blocs still 61-59' holds only with no agreements. The desk's no-agreement recount reproduces the actual seats, but so do the actual pairs.",
+   "corrected_claim": "",
+   "corrected_quant": "Valid 2,616,841. Tehiya 31,957 (1.22%), Geulat Yisrael 12,851, Torah VeAretz 3,708. Left bloc 1,260,811 votes, 61 seats; right bloc 1,225,041 votes, 59 seats. Tehiya to Likud: 60-60 (Likud 33, ADP 1), with or without the actual Likud-Tzomet and Tehiya-Moledet agreements. Under a 1% threshold: with no agreements Tehiya's seat comes from Likud (61-59); with the actual agreements it comes from ADP (60-60).",
+   "corrected_url": "https://en.idi.org.il/israeli-elections-and-parties/elections/1992/ ; https://en.wikipedia.org/wiki/1992_Israeli_legislative_election"
+  },
+  {
+   "id": "D7-F05",
+   "status": "corrected",
+   "note": "Law checked in the Hebrew Wikisource consolidated text, which includes amendments through 5786 (2026). s.67(a): a list may join only one other list. s.67(b): written notice to the CEC no later than the 11th day before election day, which is 16 Oct 2026. s.67(c): the CEC publishes agreements by day 8. s.82(a): the pair counts as one list for the s.81(d) remainder allocation, provided each partner passes the threshold. s.82(b): joint seats are split by the s.81 method. IDI (Kenig, 7 Nov 2022, en.idi.org.il/articles/46229) confirms that all four Netanyahu-bloc lists were paired, that the opposing side had eight lists (five at risk) with only two agreements, that only Yesh Atid-National Unity was effective, and that the bloc led by about 30,000 votes. One correction to the quant: 'The Likud-RZP pair was worth +1 seat to the bloc' holds only against a no-agreement baseline. Marginally, dropping Likud-RZP alone still leaves the bloc at 64, because Shas-UTJ wins the seat (see D7-F02).",
+   "corrected_claim": "",
+   "corrected_quant": "One partner per list. Notice by day 11 (16 Oct 2026); CEC publication by day 8. 2022: Netanyahu bloc 4 of 4 lists paired. Anti-Netanyahu side: 2 agreements among 8 lists, 1 effective (Yesh Atid-National Unity). The bloc won about 30,000 more votes (under one seat) but 64 seats. The bloc's agreements together added one seat against no agreements (63 to 64); either Likud-RZP or Shas-UTJ alone would have secured it.",
+   "corrected_url": ""
+  },
+  {
+   "id": "D7-F06",
+   "status": "corrected",
+   "note": "Bibliography confirmed via Crossref: Bochsler, Electoral Studies 29(4):617-627 (2010); Janson, Annals of Operations Research 215(1):89-136 (2014, online 2012); Schuster, Pukelsheim, Drton & Draper, Electoral Studies 22(4):651-676 (2003). Both URLs resolve; the Augsburg PDF redirects to /htdocs/. Janson's text (arXiv 1110.6369) says D'Hondt apparentements never lose seats. Example 8.2 says two small parties gain at most 0.5 seats together and large parties gain less. Schuster's Jefferson/D'Hondt constant terms are +5/12, -1/12 and -4/12 (+0.42/-0.08/-0.33). The Bochsler abstract (CEU portal) says large parties gain far more from apparentments, tested on Swiss 1995-2007 data. Errors: (1) Janson does not cite Bochsler 2010. His apparentement section cites Leutgäb & Pukelsheim and Carstairs, so 'Janson 2014, citing Bochsler 2010' is wrong. (2) The 'empirical rule from our simulation', gain = 0.5 x (1 - combined share), is Janson's Theorem 8.1, E(gain) -> (beta - 1/2)(1 - p_i - p_j) with beta = 1 for D'Hondt (no threshold, asymptotic). The desk's own addition is the factor P(both pass), and its simulation confirms the formula (D7-F07). (3) Schuster's biases are for parties ranked by size under uniformly random vote shares, not for fixed shares.",
+   "corrected_claim": "",
+   "corrected_quant": "Expected pair gain = 0.5 x (1 - combined share) under D'Hondt (Janson 2014, Theorem 8.1; at most 0.5 seat). The 2026 run, after multiplying by P(both pass), reproduces it within 0.01-0.02 seats (D7-F07). D'Hondt three-party seat bias (Schuster et al. 2003, constant terms): +5/12, -1/12, -4/12 seats for the largest, middle and smallest party.",
+   "corrected_url": "https://doi.org/10.1016/j.electstud.2010.06.001 ; https://doi.org/10.1007/s10479-012-1141-2 (arXiv: https://arxiv.org/abs/1110.6369) ; https://doi.org/10.1016/S0261-3794(02)00027-6"
+  },
+  {
+   "id": "D7-F07",
+   "status": "verified",
+   "note": "Method: internal-model figures were re-run independently on data/processed/targeting/share_draws.parquet (8,000 draws, labels/pairs from share_draws_meta.json) with the project's own seat law (targeting_marginal.allocate: 3.25% threshold, six surplus pairs, Bader-Ofer); official figures were recomputed from the CEC locality files in data/raw/kalpi (expc_19-25). Every number reproduces: baseline P(NB>=61) 12.41%, change seats 51.29, P(change+Ra'am>=61) 26.26%; without both change pairs 14.06% / 50.73 / 23.52%; no pairs 12.81%. Pair gains: Yashar-Democrats +0.359 (theory 0.376 before x P(both pass)); Together-Yisrael Beytenu +0.407; Shas-UTJ +0.426; Joint List-Ra'am +0.360; Likud-RZP +0.215; Otzma-Amcha +0.103. Changes in P(NB>=61): change pairs -0.86/-0.85 each; Joint List-Ra'am -0.70; Likud-RZP +0.58; Shas-UTJ +0.75; Otzma-Amcha +0.35. One labelling note: the current MODEL_BRIEF_v2.md header ('published 13 Oct') already shows P(NB>=61) 12.4%. 'Newer than the 10 Oct headline in MODEL_BRIEF_v2' therefore refers to the older headline quoted in the task prompt, not to the file. The Joint List-Ra'am pair's status is covered under D7-F28.",
+   "corrected_claim": "",
+   "corrected_quant": "",
+   "corrected_url": ""
+  },
+  {
+   "id": "D7-F08",
+   "status": "corrected",
+   "note": "All shares checked against CEC files (K19-K25) and IDI pages (2009, 2013): 2009 Likud 21.61, Yisrael Beytenu 11.70; 2013 Likud Beiteinu 23.34, Labor 11.39, Hatnua 4.99, Ra'am-Ta'al 3.65, Hadash 2.99, Balad 2.56; 2015 Zionist Union 18.67, Joint List 10.61; Apr 2019 Labor 4.43, Gesher 1.73, New Right 3.22, URWP 3.70, Hadash-Ta'al 4.49, Ra'am-Balad 3.33; Sep 2019 Labor-Gesher 4.80, Democratic Union 4.34, Yamina 5.87, Joint List 10.60; 2020 Labor-Gesher-Meretz 5.83, Joint List 12.67; 2021 Joint List 4.82, Ra'am 3.79, Blue and White 6.63, New Hope 4.74; 2022 National Unity 9.08. All percentage changes are correct, as are the 2026 comparisons (Democrats 7.53 vs 6.85; Joint List 7.42 vs 6.66). Correction: the 'five of six since 2013' count depends on which cases are included. It omits the 2013 Jewish Home-Tkuma (National Union) union, which won 9.12% against 2.87 + 3.34 = 6.21% for its components in 2009 (+47%; Otzma LeYisrael split off and won 1.76%). With that case, two of seven Jewish-sector unions beat the sum of their parts. The cited URL (votes25) covers only 2022. The parameter 'merger retention 0.75' inherits this selection.",
+   "corrected_claim": "We compared each merged list with its components' combined share at the previous election (official CEC shares). Of seven Jewish-sector unions or absorptions from 2013 to 2022, five kept only 64-85% of the combined share, while Zionist Union (2015, +14%) and Jewish Home-Tkuma (2013, +47% against Jewish Home plus National Union in 2009) gained. Arab reunifications gained (Joint List +15% in 2015, +36% in Sep 2019), and the 2021 split lost about a third. Losses were largest when a partner was a personal vehicle or ideologically distant.",
+   "corrected_quant": "",
+   "corrected_url": "https://en.idi.org.il/israeli-elections-and-parties/elections/2013/ ; https://en.idi.org.il/israeli-elections-and-parties/elections/2009/ ; CEC locality files for K20-K25 (votes20-25.bechirot.gov.il)"
+  },
+  {
+   "id": "D7-F09",
+   "status": "corrected",
+   "note": "Citation confirmed (Crossref; EJPR 47(5):556-577, 2008). Full text read (KU Leuven Lirias PDF). Numbers match: n = 1,255; junior partners 131 of 170 loyal (77%); senior 730 of 816 (89%). The four desertion factors and the 2003-2005 adjustment effect are correct, as is Belgium's 5% district threshold adopted in 2003, which produced three cartels (CD&V-N-VA, SP.A-Spirit, VLD-Vivant). Error: the experiment was not 'run during the 2004 regional campaign'. It was run with first-year students in three academic years (2003, 2004, 2005), using the cartels as they appeared on the 2004 regional ballot.",
+   "corrected_claim": "Belgium introduced a 5% district threshold in 2003, which produced three party cartels. In a within-subject ballot experiment run with first-year students in three consecutive academic years (2003-2005), respondents voted once on a ballot of separate parties and once on the 2004 regional ballot with the cartels. 89% of senior-partner supporters stayed with the cartel, against 77% of junior-partner supporters. Desertion rose with dislike of the partner, perceived ideological incongruence, a small initial party and an attractive candidate outside the cartel. Loyalty to cartels grew over 2003-2005.",
+   "corrected_quant": "",
+   "corrected_url": "https://doi.org/10.1111/j.1475-6765.2008.00787.x (open full text: https://lirias.kuleuven.be/retrieve/2ddfbe7b-d8c4-4fcd-b947-3a413aecf350)"
+  },
+  {
+   "id": "D7-F10",
+   "status": "corrected",
+   "note": "The preprint resolves (APSA Preprints, 25 May 2021; later versions doi 10.33774/apsa-2021-h9cln-v2/-v3; still unpublished per OpenAlex). Table 2 matches: PEC on vote share -1.008 (SE 0.180); on seat share -0.491 (0.211); PEC x ideological range -0.728 (0.294) with main effect -0.432 (0.304); N = 8,081; mean 17.31. The text confirms the seat effect is half the vote effect (economies of scale). The relevance overreaches. (1) '-1 point on a 17.3% mean' (about 5.8%) is the average across all coalescing parties. For ideologically close partners the estimate is -0.43 and not significant, so it is not 'a 5-6% penalty for close partners'. (2) These are per-party shares in Finnish open-list municipal electoral alliances, where parties keep separate labels and candidates, not fused national lists like Together. The anchor is directional only.",
+   "corrected_claim": "",
+   "corrected_quant": "Vote share -1.01 points (SE 0.18; mean 17.3%), about 6% of a party's share on average across all PECs. Seat share -0.49 (SE 0.21). With the interaction: PEC x ideological range -0.73 (SE 0.29); main effect, i.e. ideologically similar partners, -0.43 (SE 0.30, not significant). N = 8,081 party-elections.",
+   "corrected_url": "https://doi.org/10.33774/apsa-2021-h9cln-v2"
+  },
+  {
+   "id": "D7-F11",
+   "status": "verified",
+   "note": "Crossref confirms Golder, BJPS 36(2):193-212 (2006), doi 10.1017/S0007123406000123, and Golder, Electoral Studies 24(4):643-663 (2005), doi 10.1016/j.electstud.2005.01.007. The PSU abstract matches: twenty industrialised democracies, 1946-1998; compatible ideology; sizeable but not too large; similar size; polarisation and disproportional rules. The Israeli illustration checks: Hadash 2.99% and Balad 2.56% in 2013. Interpretive caveat: the Democrats (Labor polled 0-1 seats in early 2024) fit the threshold-pressure story. Together is a large-small union (Bennett about 18-19 seats, Yesh Atid about 5.5 in April 2026 polls), so it fits threshold pressure on Yesh Atid but not Golder's similar-size predictor. Its inclusion is loose but not wrong.",
+   "corrected_claim": "",
+   "corrected_quant": "",
+   "corrected_url": ""
+  },
+  {
+   "id": "D7-F12",
+   "status": "verified",
+   "note": "Checked against the Kolot Nodedim matrices stored in data/raw/transfer (all_transfers.json, transfer_24_to_25_abstention.json, generated 11 Jul 2026). The site (kolot-nodedim.netlify.app) and repository (github.com/harelc/elections-vote-transfer, owner Harel Cain, updated 13 Oct 2026) both resolve. Zehut Apr to Sep 2019: Yisrael Beytenu 37.4, Likud 28.6, Labor-Gesher 14.1. Kulanu: Blue and White 45.6, Yisrael Beytenu 21.8, Likud 21.0, Labor-Gesher 12.0. New Hope 2021 to 2022: National Unity 58.2/59.8, Likud 42.3/36.4 (without/with abstention). Yamina with abstention: RZ 43.7, Jewish Home 21.5, Likud 13.0, did not vote 11.1, National Unity 9.3. Blue and White 2021: National Unity 71.4/73.1, Yesh Atid 30.5/29.5. Small note: the matrices used here rest on 9,870 stations (R² 0.93, 2019) and 7,035 (R² 0.88-0.89, 2021-22). The quoted lower bound of 6,049 / R² 0.75 belongs to the unused 2020-21 transition. Ecological caveat as stated.",
+   "corrected_claim": "",
+   "corrected_quant": "",
+   "corrected_url": ""
+  },
+  {
+   "id": "D7-F13",
+   "status": "verified",
+   "note": "ToI 12 Sep 2022 confirms that Lapid offered a reserved slot each on Yesh Atid's slate plus ministries for Labor. Michaeli refused, citing the failed past union and the absence of polls showing a merger would help. Channel 12: 45% of centre-left voters favoured a merger, 35% opposed, 20% undecided. Meretz polled 4-5 seats. ToI 3 Nov 2022 confirms that Galon said she had pushed for a joint run and accused Lapid of 'playing with fire' by growing Yesh Atid at allies' expense, and that Labor fell from 7 to 4. ToI's '3,800 short' was a 99% count; the CEC final file gives Meretz 150,793 (3.16%), 4,062 short, and Labor 175,992 (3.69%).",
+   "corrected_claim": "",
+   "corrected_quant": "",
+   "corrected_url": ""
+  },
+  {
+   "id": "D7-F14",
+   "status": "corrected",
+   "note": "The Kolot Nodedim K24 to K25 abstention matrix (7,035 stations, R² 0.88) matches: Labor 2021 (268,767) 53.4 / Yesh Atid 27.3 / did not vote 19.9; Meretz 2021 (202,218 in the CEC count) 67.0 / Yesh Atid 17.7 / did not vote 11.6; Yisrael Beytenu 73.1 retained / 20.0 did not vote; flows of about 73,300 and 35,900 votes. Correction: '27 times the 4,062 votes Meretz lacked' adds Labor's outflow (73,300), which had no bearing on Meretz's threshold. Meretz's own outflow to Yesh Atid (about 35,900) is about 9 times its shortfall. The same correction applies to the desk summary's '27 times'.",
+   "corrected_claim": "The 2021-to-2022 transition matrix, which includes an abstention category, shows Yesh Atid drawing heavily from its near-threshold allies. It took about 27% of Labor's 2021 voters and 18% of Meretz's, roughly 73,000 and 36,000 votes. Meretz's loss to Yesh Atid alone was about 9 times the 4,062 votes it eventually lacked. A further 20% of Labor's and 12% of Meretz's 2021 voters stayed home.",
+   "corrected_quant": "",
+   "corrected_url": ""
+  },
+  {
+   "id": "D7-F15",
+   "status": "corrected",
+   "note": "The ToI article (29 Aug 2019) confirms the deal (a cabinet role, 'senior economic position', and a medical-cannabis bill). It says the referendum was still pending, so it does not support the 3-to-1 approval. JNS ('Zehut members vote 3 to 1 to accept Likud deal') and Wikipedia confirm approval on 1 Sep 2019 (73-77% reported). Zehut is absent from the official Sep 2019 results. Letter 'ז' in the K22 file is Economic Power (1,193 votes), not Zehut. Likud 26.46% to 25.10% and Kulanu 152,756 (3.54%) are confirmed in the CEC files. Correction: 29 Aug (day 19) was the announcement. The members' approval and effective withdrawal came on 1 Sep, day 16. This also affects D7-F27's 'withdrew at day 19'. The 1 Aug filing deadline is consistent with the then day-47 rule but was not independently confirmed.",
+   "corrected_claim": "Zehut filed its list for the September 2019 election. On 29 August, 19 days before the 17 September vote, Feiglin announced a deal with Netanyahu (a cabinet post and medical-cannabis reform). Members approved it on 1 September (day 16) by about 3 to 1 (73-77%), and Zehut withdrew. It does not appear in the official September results, so a withdrawal at that distance removed the list from the ballot. The deal did not deliver Zehut's voters to Likud (D7-F12). Likud's share fell from 26.5% to 25.1%, even after absorbing Kulanu.",
+   "corrected_quant": "",
+   "corrected_url": "https://www.timesofisrael.com/zehut-bows-out-of-elections-after-netanyahu-promises-feiglin-a-cabinet-post/ ; https://www.jns.org/zehut-members-vote-3-to-1-to-accept-likud-deal/ ; https://en.wikipedia.org/wiki/September_2019_Israeli_legislative_election"
+  },
+  {
+   "id": "D7-F16",
+   "status": "corrected",
+   "note": "Re-ran the project's bias_audit threshold-zone code (latest poll per pollster in the final 21 days) on data/processed/polls.csv. The bins match bias_threshold.csv: 0.5-3.5 seats 44% failed (n=9, mean actual 1.9); 3.5-4.5 22% (n=9, 3.3); 4.5-5.5 0% (n=9); 5.5-7.5 9% (n=22). The case values match: Yachad 4.0 to 0 (2.97%); Zehut 5.56; New Right 6.11; Yisrael Beytenu 2019a 2.5 to 5; Otzma 2019s 2.67; Ra'am 2021 1.71 to 4; Blue and White 2021 6.14 to 8; Meretz 2022 4.43; Labor 2022 5.29 to 4. Also confirmed: Meretz never below 4 seats in 65 polls from 1 Sep 2022; Balad 0 in every 2022 seat poll; Balad 16,238 short; 62.5% of Ra'am's February 2021 polls at 0. Not reproduced: 'Blue and White in mid-February 2021 averaged 2.9 seats with a third of polls at zero'. February 2021 polls average 3.3 seats with 21% at zero (n=24), 3.0 with 29% in a 10-20 Feb window. Every zero comes from one house (Panels Politics). The relevance figure 'Reservists about 2.7 seats earlier' is also not reproduced (see D7-F25).",
+   "corrected_claim": "",
+   "corrected_quant": "Final 21-day average versus result. Polled 0.5-3.5 seats: 44% failed (n=9; mean actual 1.9). 3.5-4.5: 22% failed (n=9; mean 3.3). 4.5-5.5: 0% failed (n=9). 5.5-7.5: 9% failed (n=22). Cases (polled to won): Yachad 2015 4.0 to 0; Zehut 2019a 5.6 to 0; New Right 2019a 6.1 to 0; Yisrael Beytenu 2019a 2.5 to 5; Otzma 2019s 2.7 to 0; Ra'am 2021 1.7 to 4; Blue and White 2021 6.1 to 8 (February 2021 about 3-3.3 seats, 21-29% of polls at zero, all from Panels Politics); Meretz 2022 4.4 to 0; Labor 2022 5.3 to 4.",
+   "corrected_url": ""
+  },
+  {
+   "id": "D7-F17",
+   "status": "corrected",
+   "note": "CEC files confirm Ra'am-Balad Apr 2019 143,666 (3.33%), Ra'am 2021 167,064 (3.79%) and Ra'am 2022 194,047 (4.07%); Wikipedia's 193,916 is a pre-final count. Wikipedia (United Arab List) confirms the CEC voted 18-5 on 23 Sep 2026 to disqualify Ra'am and the Supreme Court unanimously overturned it on 2 Oct. Draw replication: mean 4.65%, P(pass) 0.833, P(NB>=61) 9.6% if Ra'am passes vs 26.4% if it fails. The final-poll average of 1.7 is confirmed via bias_audit. Corrections: (1) '(MODEL_BRIEF_v2: 4.37%, 0.78)' does not match the current MODEL_BRIEF_v2.md, which shows 4.649% and 0.833. 0.78 is the older headline in the task prompt. (2) The Joint List-Ra'am surplus agreement is attributed to D5-F30 and MODEL_BRIEF_v2. D5-F30 is about the disqualification, and the brief lists the pair as 'expected', not signed. A signed agreement is supported by ynet ('Ra'am and Joint List sign surplus vote agreement, pledge clean campaign'; date not shown on the page).",
+   "corrected_claim": "",
+   "corrected_quant": "Ra'am-Balad April 2019: 143,666 (3.33%). Ra'am 2021: 167,064 (3.79%; final-poll average 1.7 seats). Ra'am 2022: 194,047 (4.07%). 2026 (13 Oct draws, the same figures as the current MODEL_BRIEF_v2): mean share 4.65%, P(pass) 0.83; the older 10 Oct headline had pass 0.78. Conditional P(NB>=61): 9.6% if Ra'am passes, 26.4% if it fails (correlational).",
+   "corrected_url": "https://en.wikipedia.org/wiki/United_Arab_List ; https://www.ynetnews.com/article/cttpu7pfv"
+  },
+  {
+   "id": "D7-F18",
+   "status": "verified",
+   "note": "Crossref confirms Fredén, JEPOP 24(4):473-492 (2014), doi 10.1080/17457289.2013.872118. The abstract (Lund University portal) matches the three conditions, conditional logit and insurance votes for the Christian Democrats in the incumbent coalition. The statements that a majority of Christian Democrat voters preferred the Moderates, and that insurance motives stay significant after controls for party identification and left-right position, come from the author's own summary (LSE EUROPP / Democratic Audit, Feb 2015). The paper itself (paywalled) was not opened. No effect size is quoted, which is appropriate.",
+   "corrected_claim": "",
+   "corrected_quant": "",
+   "corrected_url": ""
+  },
+  {
+   "id": "D7-F19",
+   "status": "corrected",
+   "note": "Crossref confirms the citation, and the full text was read (Mannheim author copy). Facts: 280 students (200 eligible voters) in January 2006, embedded in the Baden-Württemberg and Rhineland-Palatinate campaigns (both held 26 March 2006); 24% insincere but only 5% explicitly strategic voters, all under close-poll conditions (7.4%); perceiving 'my party has no chance' raised defection by up to 40 points. Correction: the published article does not find that coalition signals had a 'surprisingly strong effect on apparently strategic voting'. That phrase is from the 2007 working paper. In the article, the manipulated signal had no direct effect on insincere voting (b = 0.72, SE 0.44). Only perceiving the signal raised defection, by up to 8 points (p<0.10), and the signal manipulation mainly raised signal perception (+38 points). Gschwend, Meffert & Stoetzer 2017 (JOP 79(2):642-655, doi 10.1086/688678) is correctly cited. The relevance claim that coalition signals 'move more votes than raw poll numbers' overreaches. In this experiment neither manipulated cue moved votes directly; perceptions did, weakly.",
+   "corrected_claim": "Meffert and Gschwend embedded an information-board experiment in two German state campaigns (Baden-Württemberg and Rhineland-Palatinate, 2006), manipulating polls and coalition signals. Participants formed fairly accurate expectations, but only 5% cast explicitly strategic votes (all under close-poll conditions) against 24% insincere votes. Neither manipulated cue directly changed insincere voting. Believing one's party had no chance raised defection by up to 40 points, and perceiving a coalition signal by up to 8 points (p<0.10). A later survey experiment (Gschwend, Meffert and Stoetzer 2017) finds that coalition signals raise the weight voters give to coalition considerations.",
+   "corrected_quant": "n = 200 eligible participants. Insincere voters 24%; explicitly strategic 5% (7.4% under close polls, 0% otherwise). Perceived 'no chance': up to +40 points defection. Coalition-signal perception: up to +8 points (p<0.10); manipulation: no direct effect.",
+   "corrected_url": "https://doi.org/10.1111/j.1475-6765.2010.01986.x (author copy: https://www.sowi.uni-mannheim.de/media/Lehrstuehle/sowi/Gschwend/Article/MEFFERT_et_al-2011-European_Journal_of_Political_Research.pdf)"
+  },
+  {
+   "id": "D7-F20",
+   "status": "corrected",
+   "note": "Wikipedia confirms the 20 Jan 2013 results: CDU 36.0, SPD 32.6, Greens 13.7, FDP 9.9; SPD+Greens 69 of 137 (a one-seat majority); January FDP polls about 4.5-5%; some CDU officials suggested tactical FDP votes. Corrections: (1) 'Loan votes overshot and cost the senior partner the government' is the desk's causal reading. The source shows the sequence, not the counterfactual, so it should be stated as an interpretation. (2) The relevance line that this 'explains why Likud keeps RZP at arm's length on rescue messaging' is unsupported speculation. Likud has in fact signed a surplus pact with RZP (D7-F28). For loan-vote mechanics see Gschwend, Stoetzer & Zittlau 2016 (missing works).",
+   "corrected_claim": "In the January 2013 Lower Saxony state election, the FDP polled close to the 5% threshold (final January polls about 4.5-5%), and some CDU officials suggested tactical votes for it. The FDP won 9.9%, the CDU 36.0%, and SPD and Greens took a one-seat majority (69 of 137). The result is widely read as insurance votes overshooting at the senior partner's expense, though the source does not establish the counterfactual.",
+   "corrected_quant": "",
+   "corrected_url": ""
+  },
+  {
+   "id": "D7-F21",
+   "status": "verified",
+   "note": "Wikipedia (compiling the Federal Returning Officer's results) confirms FDP 2,083,533 second votes (4.76%), AfD 2,056,985 (4.70%), and the statement that 15.7% of the vote went to parties below 5%. The relevance mirrors D7-F20 and is reasonable as an analogy.",
+   "corrected_claim": "",
+   "corrected_quant": "",
+   "corrected_url": ""
+  },
+  {
+   "id": "D7-F22",
+   "status": "corrected",
+   "note": "Crossref confirms PSRM 3(2):187-204 (published online 22 Dec 2014; issue May 2015), and the full text was read. The effect sizes the desk left unextracted: fuzzy-RD LATE of entering parliament on next-election vote share 2.24 points (SE 0.96) at the IK bandwidth 2.40, and 1.87 (SE 0.78) with country fixed effects. Half-bandwidth estimates are 1.92 and 1.59, not significant; the authors summarise the effect as at least 1.5 points, about 40%. The new-vs-established difference is beta5 = -3.82 (SE 1.58). Overreach: the paper codes Israel as an established democracy, and there the effect of entry 'does not seem to be statistically significant at any conventional level'. The relevance claim that a Reservists entry would likely create a lasting actor is therefore not supported by this paper for Israel.",
+   "corrected_claim": "",
+   "corrected_quant": "Fuzzy RD, all post-war democracies with national thresholds: entering parliament raises next-election vote share by 2.24 points (SE 0.96; 1.87 with country fixed effects), about 40%. The effect is concentrated in new democracies (difference -3.82, SE 1.58) and not significant in established ones, a group that includes Israel.",
+   "corrected_url": "https://doi.org/10.1017/psrm.2014.38"
+  },
+  {
+   "id": "D7-F23",
+   "status": "corrected",
+   "note": "ToI (Lazar Berman, 20 Sep 2026) confirms the conditional pledge ('either I'll go across the threshold or I won't run in the last week'), a Zman Israel poll at 2%, and pressure from senior opposition officials (via Ynet). INN (10 Oct 2026) confirms 'running until the end', 'Anyone who claims I am wasting votes is lying', 'I do not belong to either bloc' and 'at least six seats' worth of voters' (no data given). Wikipedia's 2026 polling table shows Blue and White at 0.4-1.9% from 24 Sep to 12 Oct. Draws: mean 0.73%, median 0.28%, P(pass) 0.0135. Not found: 'Eisenkot has said that lists polling near the threshold must merge or step aside' is not in either cited article, and a search found no such statement. Eisenkot reportedly declined to discuss mergers publicly. Remove it or source it.",
+   "corrected_claim": "On 10 October 2026 Gantz said he is 'running until the end'. He rejected the wasted-vote argument, said he belongs to neither bloc, and claimed at least six seats' worth of potential voters. On 20 September he had told the Times of Israel he would halt his campaign if final-week polls showed Blue and White below the threshold. Polls have the party at about 0.5-2% and below the line in every recent poll. Senior opposition figures have pressed him to quit.",
+   "corrected_quant": "",
+   "corrected_url": ""
+  },
+  {
+   "id": "D7-F24",
+   "status": "corrected",
+   "note": "Method: internal-model figures were re-run independently on data/processed/targeting/share_draws.parquet (8,000 draws, labels/pairs from share_draws_meta.json) with the project's own seat law (targeting_marginal.allocate: 3.25% threshold, six surplus pairs, Bader-Ofer); official figures were recomputed from the CEC locality files in data/raw/kalpi (expc_19-25). With proportional within-camp splits, scenario (c) came out at -0.96 rather than -0.85. Re-running the desk's own scratch script (calc/scen2026.py), which uses unstated within-change splits, reproduces every number: (a) Yashar .36 / Together .15 / Yisrael Beytenu .03 / Likud .26 gives 12.00% (-0.41), +0.21 seats, +0.80 points; (b) .36/.24/Likud .40 gives 12.17% (-0.24), +0.19; (c) .60/.25/Likud .15 gives 11.56% (-0.85), +0.43, +1.93. The quant should state the within-change splits, since results move by about 0.1 point with them. Relevance overreach: 'Each change list gains a few tenths of a seat' is wrong. Per-list effects are Yashar +0.17 to +0.40, Together +0.08 to +0.16, and the Democrats and Yisrael Beytenu -0.03 to -0.07 (remainder and pair effects). The total change-bloc gain is 0.2-0.4 seats.",
+   "corrected_claim": "",
+   "corrected_quant": "Baseline P(NB>=61) 12.4%, change seats 51.3. (a) 54% change (Yashar 36, Together 15, Yisrael Beytenu 3) / 26% Likud / 20% abstain: 12.0% (-0.4), +0.21 seats, P(change+Ra'am>=61) +0.8 points. (b) Model's 60/40 rescue split (Yashar 36, Together 24 / Likud 40): 12.2% (-0.2), +0.19 seats. (c) 85% change (Yashar 60, Together 25) / 15% Likud: 11.6% (-0.85), +0.43 seats, +1.9 points (-0.96 if the change share is split in proportion to list size). Per list: Yashar +0.17 to +0.40, Together +0.08 to +0.16, Democrats and Yisrael Beytenu -0.03 to -0.07.",
+   "corrected_url": ""
+  },
+  {
+   "id": "D7-F25",
+   "status": "corrected",
+   "note": "Wikipedia (The Reservists) confirms founding on 18 Sep 2025, the run with Zelekha's New Economic Party, a centre-right position, no bloc membership, a call for a 'Zionist unity government' without Arab and Haredi parties, and not ruling out Netanyahu or Ben Gvir. INN (12 Oct 2026) confirms 4 seats in both the Channel 14 poll (right bloc 61) and the Channel 12 poll (Amcha 1.8%). JPost (updated 8 Oct) confirms no surplus agreement yet. ToI confirms Hendel's withdrawal on 13 Sep 2022, before the 15 Sep list deadline. CEC 2021: New Economic Party 34,883 (0.79%). Draws: mean 1.69%, median 0.78%, P(pass) 0.218. Not reproduced: 'averaged about 2.7 seats 24 Sep-7 Oct (Channel 13 about 3%, Walla 2.8%, Channel 14 1.8%)'. Wikipedia's 2026 polling table gives Walla 2.8% on 9 Sep (outside the window) and Channel 13 at 2.5% and 2.9%. The list already had 4-5 seats in Maariv (23-24 Sep, 30 Sep-1 Oct, 7-8 Oct), Channel 16 (24, 29 Sep), Kan/Kantar (27 Sep), Zman Yisrael (30 Sep-1 Oct) and Israel Hayom/Kantar (7-8 Oct), and was below the line in Channel 12/13/14, i24 and Kan (4 Oct). Counting sub-threshold polls as 0, the window averages about 2 seats, with a house split rather than a clear upward move. The project's polls.csv has no Reservists rows for this period. Also note MODEL_BRIEF_v2: the list 'says it will not complete a 61 for Netanyahu with the haredim'.",
+   "corrected_claim": "",
+   "corrected_quant": "12 Oct 2026: Channel 14 4 seats (right bloc 61); Channel 12 4 seats (Amcha 1.8%). 24 Sep-8 Oct: 4-5 seats in Maariv, Channel 16, Kantar (Kan 27 Sep; Israel Hayom 7-8 Oct) and Zman Yisrael (30 Sep-1 Oct); below the line in Channel 12 (1.5%), Channel 13 (2.5-2.9%), Channel 14 (1.2-2.1%), i24 (1.6-2.3%) and Kan (2.6%, 4 Oct); about 2 seats on average. Atlas draws (13 Oct): mean 1.69%, median 0.78%, P(pass) 0.22. New Economic Party 2021: 34,883 (0.79%).",
+   "corrected_url": "https://en.wikipedia.org/wiki/The_Reservists_(political_party) ; https://www.israelnationalnews.com/news/434503 ; https://jpost.com/israel-election-2026/article-910758 ; https://en.wikipedia.org/wiki/Opinion_polling_for_the_2026_Israeli_legislative_election ; https://www.timesofisrael.com/minister-hendel-bows-out-of-knesset-race-days-after-zionist-spirit-breakup/"
+  },
+  {
+   "id": "D7-F26",
+   "status": "corrected",
+   "note": "Method: internal-model figures were re-run independently on data/processed/targeting/share_draws.parquet (8,000 draws, labels/pairs from share_draws_meta.json) with the project's own seat law (targeting_marginal.allocate: 3.25% threshold, six surplus pairs, Bader-Ofer); official figures were recomputed from the CEC locality files in data/raw/kalpi (expc_19-25). Conditionals reproduce exactly: passes in 21.85% of draws; P(NB>=61) 6.9 / 13.95; change seats 49.51 / 51.79; P(change>=61) 3.1 / 7.4. Forced to 3.4% (45/25/30): 9.58% (-2.84), 49.22, 15.83% (-10.43). Collapse scenarios reproduce with the desk script's unstated within-change split (Yashar .40 / Together .15 / Yisrael Beytenu .05): 13.25% (+0.84), 52.23, 30.83% (+4.57); 45/35/20: 13.65% (+1.24), 52.08, 30.04% (+3.78). With a split proportional to list size the 60/40 collapse gives +0.78 and +4.45. Error: the 'brief exchange rate' is misquoted. MODEL_BRIEF_v2 gives, per +10,000 Reservists votes, change-led government -0.01 points, blocking Netanyahu (P(NB<61)) +0.14 points and change seats -0.051. It does not give +0.03 and +0.2.",
+   "corrected_claim": "",
+   "corrected_quant": "Conditional on passing / failing: P(NB>=61) 6.9% / 14.0%; change seats 49.5 / 51.8; P(change>=61) 3.1% / 7.4%. Forced above 3.4% (votes taken 45% Yashar, 25% Together, 30% Likud): P(NB>=61) 9.6% (-2.8), change seats 49.2 (-2.1), P(change+Ra'am>=61) 15.8% (-10.4). Collapse 60/40 (change share split Yashar 40, Together 15, Yisrael Beytenu 5): 13.3% (+0.8), 52.2 (+0.9), 30.8% (+4.6). Collapse 45/35 with 20% abstaining: 13.7% (+1.2), 52.1, 30.0% (+3.8). Brief exchange rate per +10,000 Reservists votes: change-led government -0.01 points; blocking Netanyahu +0.14 points; change seats -0.05.",
+   "corrected_url": ""
+  },
+  {
+   "id": "D7-F27",
+   "status": "corrected",
+   "note": "Read in the Hebrew Wikisource consolidated text (amendments through 5786/2026): s.57(i)(1) submission no later than day 49 (22:00); s.63 approval and notice no later than day 30; s.65 publication in Reshumot no later than day 9, with name and letter; s.67(b) surplus notice by day 11 (s.67(c): CEC publication by day 8); s.77(a) ballots are printed for the lists published under s.65; s.77(d) ballots reach polling committees at least two days before election day. No explicit withdrawal provision was found (searches for חזרה, ביטול רשימה and similar). The 2026 dates compute correctly (16, 18 and 25 Oct). Corrections: (1) Zehut's withdrawal took effect after the members' vote on 1 Sep 2019, day 16; 29 Aug (day 19) was the announcement (D7-F15). (2) Currency caveat: the text's source list includes a 26th-Knesset special-provisions law (Sefer HaHukim 5786, pp. 763, 767). That law may set election-specific dates outside these sections, so counsel should check it, as the desk already flags. s.77(a) supports the reading that a list withdrawn before day-9 publication would not be printed.",
+   "corrected_claim": "",
+   "corrected_quant": "Day 49: submission (s.57(i)). Day 30: approval (s.63). Day 11: surplus notice (s.67(b), 16 Oct 2026). Day 9: publication (s.65, 18 Oct 2026); ballots printed only for published lists (s.77(a)). Day 8: CEC publishes surplus agreements (s.67(c)). Day 2: ballots delivered (s.77(d), 25 Oct 2026). Zehut 2019: deal announced day 19, members' approval and withdrawal day 16; absent from results.",
+   "corrected_url": ""
+  },
+  {
+   "id": "D7-F28",
+   "status": "corrected",
+   "note": "JPost (Keshet Neev, 6 Oct 2026, updated 8 Oct) confirms the Likud-RZP agreement; that Yashar-Democrats and B'Yachad-Yisrael Beytenu signed in September; Otzma's claim that Likud refused it to keep Ben-Gvir out of a unity government with Eisenkot; and that the Reservists and Amcha (Ofer Winter) had not signed. Ynet (Amir Ettinger) confirms Otzma's statement. Correction: Joint List-Ra'am is attributed to 'D5-F30, MODEL_BRIEF_v2', but D5-F30 is about the CEC disqualifications and MODEL_BRIEF_v2 lists the pair as 'expected'. The signing is supported by ynet ('Ra'am and Joint List sign surplus vote agreement, pledge clean campaign'), but the month (September) was not confirmed. Shas-UTJ and Otzma-Amcha remain unconfirmed, as the desk says.",
+   "corrected_claim": "Yashar-Democrats and Together-Yisrael Beytenu signed in September. The Joint List and Ra'am have signed (ynet; date not confirmed). Likud and RZP announced their agreement on 6 October. Likud refused to sign with Otzma, which says the refusal is designed to keep it out of a Likud-Eisenkot unity government. As of 8 October the Reservists and Amcha had not signed. Shas-UTJ and Otzma-Amcha are assumed by the model but unconfirmed.",
+   "corrected_quant": "",
+   "corrected_url": "https://jpost.com/israel-election-2026/article-910758 ; https://www.ynetnews.com/article/0ayu8do7a ; https://www.ynetnews.com/article/cttpu7pfv"
+  },
+  {
+   "id": "D7-F29",
+   "status": "verified",
+   "note": "Method: internal-model figures were re-run independently on data/processed/targeting/share_draws.parquet (8,000 draws, labels/pairs from share_draws_meta.json) with the project's own seat law (targeting_marginal.allocate: 3.25% threshold, six surplus pairs, Bader-Ofer); official figures were recomputed from the CEC locality files in data/raw/kalpi (expc_19-25). Reproduced exactly: P(pass) RZP 0.561, Otzma 0.782, Amcha 0.292. P(NB>=61) pass/fail: RZP 18.3/4.8; Otzma 15.2/2.5; Amcha 23.6/7.8. If a change-side list fails: Democrats 44.6 (n=101), Yisrael Beytenu 38.8 (n=196), Together 52.7 (n=55), Joint List 61.0 (n=123). The correlational caveat and low-confidence strategic reading are appropriate.",
+   "corrected_claim": "",
+   "corrected_quant": "",
+   "corrected_url": ""
+  },
+  {
+   "id": "D7-F30",
+   "status": "verified",
+   "note": "The IPF Explains piece (24 Sep 2026, no named author) confirms 7,331,981 registered voters, +2,383 threshold votes per turnout point, about 143,000 at 60% and about 191,000 at 80%. The arithmetic checks (7,331,981 x 0.0325 x 0.6 = 142,974). The Kolot Nodedim K26 estimate in data/raw/transfer/kn26 is 4,823,026 valid votes (66.6% turnout), and 3.25% of that is 156,748. CEC 2022: 154,855. Note: IPF's turnout-to-threshold mapping treats every vote cast as valid and the full roll as resident, so the threshold in votes is slightly lower than stated.",
+   "corrected_claim": "",
+   "corrected_quant": "",
+   "corrected_url": ""
+  }
+ ],
+ "missing_key_works": [
+  "Ibenskas, Raimondas (2016). 'Marriages of Convenience: Explaining Party Mergers in Europe.' Journal of Politics 78(2):343-356. https://doi.org/10.1086/683685. The main comparative study of when party mergers form and how they fare electorally. It is the natural anchor for D7-F08's merger-retention parameter; the Finnish electoral-alliance design in D7-F10 is a weaker analogue.",
+  "Gschwend, Thomas, Lukas F. Stoetzer & Steffen Zittlau (2016). 'What drives rental votes? How coalition signals facilitate strategic coalition voting.' Electoral Studies 44:293-306. https://doi.org/10.1016/j.electstud.2016.06.011. Direct evidence on German 'loan' or insurance votes for a junior partner, the mechanism behind D7-F20/F21. It is not cited in any desk file; only verify_coalition.json mentions it.",
+  "Leutgäb, Patrick & Friedrich Pukelsheim (2009/2013). 'List Apparentements in Local Elections: A Lottery.' In Holler & Nurmi (eds), Power, Voting, and Voting Power: 30 Years After, Springer, pp. 123-135. https://doi.org/10.1007/978-3-642-35929-3_7. The empirical study of apparentement seat gains that Janson (2014) cites, and the right companion to D7-F06's theory.",
+  "Blais, André & Indridi H. Indridason (2007). 'Making Candidates Count: The Logic of Electoral Alliances in Two-Round Legislative Elections.' Journal of Politics 69(1):193-205. https://doi.org/10.1111/j.1468-2508.2007.00504.x. Studies negotiated withdrawals (désistement) and whether voters follow them. This is the comparative evidence for D7-F12/F15/F24 on whether a withdrawn list's voters follow the leader's deal.",
+  "Rahat, Gideon & Reuven Y. Hazan (2005). 'Israel: The Politics of an Extreme Electoral System.' In Gallagher & Mitchell (eds), The Politics of Electoral Systems, Oxford University Press, pp. 333-352. https://doi.org/10.1093/0199257566.003.0016. The standard account of Israel's threshold history, Bader-Ofer and surplus agreements (D7-F04/F05/F27).",
+  "Golder, Sona N. (2006). The Logic of Pre-Electoral Coalition Formation. Ohio State University Press. The book-length treatment behind D7-F11, including electoral-alliance and joint-list forms beyond the BJPS dyad analysis.",
+  "Shikano, Susumu, Michael Herrmann & Paul W. Thurner (2009). 'Strategic Voting under Proportional Representation: Threshold Insurance in German Elections.' West European Politics 32(3):634-656. https://doi.org/10.1080/01402380902779147. The core threshold-insurance study. It is cited in persuasion.json, but D7-F18-F21 rely on Fredén alone and should cross-reference it.",
+  "Bargsted, Matias A. & Orit Kedar (2009). 'Coalition-Targeted Duvergerian Voting: How Expectations Affect Voter Choice under Proportional Representation.' American Journal of Political Science 53(2):307-323. https://doi.org/10.1111/j.1540-5907.2009.00372.x. Uses Israeli (2006) data on desertion of parties expected to be excluded from government. It is cited in persuasion.json and israeli-behaviour.json but not cross-referenced in D7-F19, where it is the most directly Israeli evidence."
+ ]
+}

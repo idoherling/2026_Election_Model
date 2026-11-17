@@ -1,0 +1,320 @@
+{
+ "note": "Confirmed findings from the final adversarial review that touch content. Numbers quoted in these findings predate the model fixes listed in MODEL_BRIEF_v2.md (v3): always take numbers from the brief, not from these findings.",
+ "issues": [
+  {
+   "dimension": "strategy",
+   "id": "C3",
+   "severity": "critical",
+   "where": "site/targeting_app.js:392-394 (#summary 'The top 20 localities', no Arab filter), :944-948 (segment cards 'Top localities by potential' for Arab segments), :775/:783/:842 (Arab locality rank, 'Potential … from door work … per 1,000 contacts', whyText), :410 (map metric 'Blocking value'), :650-652/:661 (Rankings 'Blocking' view); site/targeting_content.json:68 and :1271 ('model favours Ra'am-majority areas'), :67 and :1276 ('women and young … upside'); localities.csv",
+   "problem": "The site publishes ranked Arab-town turnout targets, with per-contact yields, in its most screenshot-prone places. It also gives Arab-sector targeting advice: which party's areas and which demographics to mobilise. This contradicts 'the atlas makes no field recommendation there'. It also breaks the playbook's own rule at content json:1277: 'Keep town-level values for Arab localities out of shareable material'. The site is the shareable material.",
+   "fix": "app.js:392: `const rows = top.filter(i => L.elig[i] >= 1000 && !isArab(i) && !L.excl[i]).slice(0, 20);`. app.js:944: add `&& !isArab(i)` to the `ex` filter, and render no 'Top localities' row for segments starting 'arab'. In renderLocality, for isArab(i), replace the rank block and the Potential tile with 'Not ranked: Arab locality (leadership decision)'. Hide the block_nb 'Blocking' view and the 'block' map metric, or restrict both to non-Arab localities. Drop the Arab rows' potential and rank columns from localities.csv. In content json:68 and :1271, delete 'so if leadership chooses to weight blocking, the model favours Ra'am-majority areas over Joint List areas' and 'If leadership puts weight on blocking, the model favours Ra'am-majority areas over Joint List areas…'. In :67 and :1276, delete 'and women and young voters are the largest source of upside' and 'women and young people are the main upside'.",
+   "verifier_note": "Reproduced. #summary with block_nb shows 15 Arab towns in the top 20: '1 Nazareth … 655 … 30', '3 Umm al-Fahm … 562 … 40', Rahat 270 / 18, Fureidis 40 per 1,000. The Rahat page (#loc-1161) shows 'Rank by potential · Deny Netanyahu 61 #6 of 1,215' and 'Potential 270 … 18 per 1,000 contacts'. The Arab segment cards list 'Top localities by potential' (app.js:946), and content json:68 and :1271 contain the Ra'am-majority-areas advice. This directly breaches the site's own rule at content json:1277, 'Keep town-level values for Arab localities out of shareable material'. The sub-claim that whyText misattributes deny-61 to the formation model is only an imprecision; it is not a separate error."
+  },
+  {
+   "dimension": "strategy",
+   "id": "C5",
+   "severity": "critical",
+   "where": "site/targeting_content.json:599 (D-4: calls 'cite Friday's published numbers'), :618 (D-3 to D-1: 'Rescue messages now rest on Friday's published numbers'), :1221 (Rescue timing: calls through Mon 26 Oct 'citing Friday's published numbers'); route #playbook",
+   "problem": "The playbook tells teams to run rescue messaging that quotes poll results throughout the statutory poll-publication ban (Sat 24 – Tue 27 Oct). Repeating survey results in mass call scripts and in digital or media rescue messages during the ban is very likely a prohibited publication of a survey under Israeli election-propaganda law. At best it is untested and needs a counsel ruling. The same page's legal box says 'publish, post or leak no poll … from Sat 24 Oct', so the advice contradicts itself.",
+   "fix": "In :599, replace 'and cite Friday's published numbers' with 'and use threshold arithmetic only (a list under 3.25% elects no one), quoting no poll figures'. In :618, replace 'Rescue messages now rest on Friday's published numbers.' with 'From now on, rescue messages and call scripts quote no poll figures; use threshold arithmetic only.' In :1221, replace ', citing Friday's published numbers' with ', using threshold arithmetic and no poll figures'. Add to the guardrails at :1302: 'Quoting or re-publishing any poll result in campaign material, ads or scripted calls during the ban needs a written ruling from election counsel.'",
+   "verifier_note": "Confirmed. content json:599 says calls 'start on Saturday night after Shabbat and cite Friday's published numbers'. :618 says 'Rescue messages now rest on Friday's published numbers' during Sat 24–Mon 26 Oct, and :1221 says calls run through Mon 26 Oct 'citing Friday's published numbers'. The same site's legal guardrails (:1302) say 'From Sat 24 Oct to the close of polls, publish, post or leak no poll', and :1060 lists 'publishing polls during the blackout' as a legal grey zone. Scripted mass calls and digital messages that quote poll figures during the ban are, at the least, a publication-ban risk that needs a counsel ruling. The playbook instead instructs it."
+  },
+  {
+   "dimension": "strategy",
+   "id": "C6",
+   "severity": "critical",
+   "where": "site/targeting_app.js:872 (recoHtml 'Supporter-list ground': 'Recruit relational askers through local volunteers, workplaces and reserve units.'); shown on #loc pages for Jerusalem, Netanya, Bat Yam, Be'er Sheva, Hadera, Eilat, Tiberias and Dimona under change_govt",
+   "problem": "The atlas tells field teams to recruit political organisers through IDF reserve units and workplaces. IDF orders bar political activity by serving soldiers, which includes reservists on duty. Campaigning in units and on bases is restricted, and pressure through employers is an election-law risk. A leak saying 'change bloc organises through reserve units' would be a serious scandal. It also contradicts the playbook (content json:1249), which says to treat military bases as off-limits and reach soldiers through family and friends.",
+   "fix": "app.js:872: replace the string with \"Recruit relational askers among supporters' own friends, family and neighbours; never through IDF units, unit chat groups or employers.\" In content json:1225 and the segment messenger fields (:171, :309, :351, :383, :421, :501), add after 'reservists': '(as civilians only: never on duty, in uniform or with IDF insignia)'.",
+   "verifier_note": "Confirmed. app.js:872 (Supporter-list ground) reads 'Recruit relational askers through local volunteers, workplaces and reserve units.' Under change_govt it renders on Dimona, Eilat, Jerusalem, Bat Yam, Hadera, Tiberias, Netanya and Be'er Sheva. It contradicts content json:1249 ('Treat military bases as off-limits for campaigning and reach soldiers through family and friends'). Organising through IDF units is a clear legal and leak risk."
+  },
+  {
+   "dimension": "strategy",
+   "id": "C7",
+   "severity": "major",
+   "where": "site/targeting_app.js:314 (#summary decision 'Split the turf between the four lists': '…shown throughout the atlas, and share supporter files.')",
+   "problem": "The leadership-facing summary tells four separately registered lists to share supporter files, with no condition attached. Those files record individuals' party preference and voting certainty, which is sensitive personal data under the Privacy Protection Law. They are also derived from a voter register the parties may not pass on. The playbook (content json:1198) correctly limits this to aggregates and counsel-cleared formats, but the summary is the page leaders act on.",
+   "fix": "app.js:314: replace 'and share supporter files.' with 'and share the station map and daily aggregate counts; share no voter-level records between lists unless election counsel has cleared the format in writing.'",
+   "verifier_note": "Confirmed. Rendered #summary under every objective: 'Assign each locality and polling station to its lead change list, shown throughout the atlas, and share supporter files.' The playbook (content json:1198) correctly limits sharing to aggregates and counsel-cleared formats, and the guardrail at :1299 requires written clearance for voter-level sharing. Downgraded to major: this is a missing caveat in a one-line summary, and the operational section has the correct rule. It still needs fixing, because the summary is what leaders act on."
+  },
+  {
+   "dimension": "strategy",
+   "id": "M1",
+   "severity": "minor",
+   "where": "site/targeting_app.js:386 ('Treat Druze rankings as provisional until the slates are known'); site/targeting_content.json:109 (Abu Rokon 'list slot … has not been verified'), :953 ('his list slot is unverified'), :40 (Somaya Bashir 'final list slot is unconfirmed'), :530 ('whether to commission a Druze poll or list check')",
+   "problem": "At D-16 the candidate lists are final and public. They were filed with the CEC 47 days before polling day, and the site itself says the CEC's disqualification of the Arab lists was overturned on 2 October. Calling slates 'unknown' or 'unverified' is factually stale and would embarrass the bloc. It also leaves the whole Druze decision open when it could be settled today from public data.",
+   "fix": "app.js:386: change the text to \"Their 2026 vote depends on which lists placed Druze candidates in winnable slots. Check the filed CEC lists and treat Druze rankings as provisional until that check and a Druze poll are done.\" In content :109, :953 and :40, replace 'unverified/unconfirmed' with each candidate's slot taken from the filed CEC lists, or 'check the filed list' if no one does this before publication.",
+   "verifier_note": "Partly valid. app.js:386 says 'Treat Druze rankings as provisional until the slates are known.' That is stale at D-16: lists close 47 days out, and the site itself reports the 23 Sep CEC vote and the 2 Oct Supreme Court ruling on filed lists. Content :109, :953 and :40 report that the research desk could not verify slots ('unverified', 'unconfirmed'). That is accurate about the research, but a lookup now resolves it. Downgraded to minor: the recommended action (check the lists, poll) is right, and no number is affected."
+  },
+  {
+   "dimension": "strategy",
+   "id": "M3",
+   "severity": "major",
+   "where": "site/targeting_app.js:307 and :351 (summary 'Supporter-list ground' finding built from Netanyahu-bloc ≥50%, not from tiers), :315 ('Identify supporters now'); site/targeting_content.json:169 (Jerusalem 'as the tier label says'), :534 (playbook D-16 fixed supporter-list list)",
+   "problem": "Several summary and playbook passages are fixed to the change_govt tiers, so they contradict the page once the objective changes. The brief requires the text to make sense under every objective.",
+   "fix": "app.js:307: `const supPool = ALL.filter(i => tierOf(i) === \"Supporter-list ground\").sort((a, b) => ov(\"list_pot\", b) - ov(\"list_pot\", a));`. Render the Supporter-list finding only `if (supPool.length)`. In the 'Identify supporters now' decision (line 315), use `supTop` built the same way, falling back to 'Netanyahu-majority towns' when it is empty. In content :169, delete ', as the tier label says'. Label the playbook's fixed town lists 'under the default objective (change-led government)'.",
+   "verifier_note": "Reproduced. Under change_seats, 0 localities are 'Supporter-list ground', yet the summary finding lists 'Jerusalem, Netanya, Be'er Sheva, Eilat, Beit Shemesh … door canvassing there nets votes for the other side'. The engines finding two paragraphs earlier lists Jerusalem and Netanya as leading on door potential. Under block_nb, Jerusalem appears in both findings. supPool (app.js:307) is built from pnb≥0.5 instead of from the tier. Content :169 says 'as the tier label says' even though Jerusalem is a Turnout engine under block_nb and change_seats."
+  },
+  {
+   "dimension": "strategy",
+   "id": "M4",
+   "severity": "minor",
+   "where": "site/targeting_app.js:314 ('Assign each locality and polling station to its lead change list'; 'Yashar 24, Democrats 1'); site/targeting_content.json:1195 (station-level split, runner-up staffs), :233 ('Because Yashar's own campaign avoids Tel Aviv')",
+   "problem": "The summary's turf rule assigns whole localities to their lead list. That hands Yashar 24 of the top 25, including Tel Aviv, which is 416 of 935 net votes at 150k contacts. The playbook rejects exactly this rule, and the Tel Aviv segment text says Yashar's own campaign avoids Tel Aviv. Leaders get one rule and field directors another, and the biggest prize goes to the list least willing to work it.",
+   "fix": "app.js:314: replace the sentence with \"Assign each polling station to its lead change list; where that list cannot staff it, the locality's runner-up list's team takes it (Playbook). The four field directors agree the station map, including who covers Tel Aviv-Yafo, by Thu 15 Oct.\" Replace the top-25 locality count with the station-level split of positive stations.",
+   "verifier_note": "Partly valid. The summary (app.js:314) says 'Assign each locality and polling station to its lead change list', which is not a pure locality rule, but it omits the playbook's capacity fallback (content :1195). The fallback matters: even at station level Yashar leads 4,790 of 5,739 positive change_govt stations (76% of value), Democrats 480, YB 466 and Together 3. Without the fallback, the rule hands almost all turf to one list. Downgraded to minor because the operational rule is in the playbook."
+  },
+  {
+   "dimension": "strategy",
+   "id": "M5",
+   "severity": "major",
+   "where": "site/targeting_app.js:315 ('Identify supporters now', through Fri 16 Oct; '+24%'), :323 (headline tile '400,000 contacts, 30% identified'); site/targeting_content.json:1176 and :674 ('Budget the ID contacts … on top')",
+   "problem": "The headline realistic figure and the 'identify now' uplift assume 30% of target voters are already on lists. They do not count the contacts needed to identify them, and a field director cannot build those lists by Fri 16 Oct. The comparison of 1,607 vs 1,995 net votes is not like-for-like.",
+   "fix": "In the app.js:315 decision, add: 'This assumes the lists already exist. Building them costs roughly X ID calls (about identified supporters ÷ local change share ÷ completion rate), on top of the 400,000.' Compute X from the sup contacts in SC[k40] divided by 0.5 and by the weighted L.pch. Make the first tile (line 323) the no-list figure, and turn the decision into: 'How many identified supporters do the four lists already hold in these towns?'",
+   "verifier_note": "Reproduced. At 400k contacts and 30% identified (change_govt), the plan uses 65,424 supporter calls, 7,727 persuasion calls and 2,828 rescue calls. At 50% reach that implies about 131k identified supporters (75k at 150k), in localities about 36% change on supporter-call-weighted average. The first tile and the 'Identify supporters now … lifts the yield from 1,607 to 1,995 (+24%)' decision count none of the identification contacts, while the decision implies the lists are built by Fri 16 Oct. Content :1176 says 'Budget the ID contacts', but the summary does not."
+  },
+  {
+   "dimension": "strategy",
+   "id": "M6",
+   "severity": "major",
+   "where": "site/targeting_app.js:61 and :877 ('Low yield … National media, digital and SMS only'), :178 (planner minArea 1,000 per locality); site/targeting_content.json:195 (kibbutz: relational organising), :349 (moshav: phone and relational)",
+   "problem": "The bloc's most loyal base, 255 kibbutzim and 454 moshavim projected at about 58–80% change bloc, is tiered 'Low yield: national media, digital and SMS only'. Its own segment playbook on the same page calls for relational organising and phone work. The planner can never allocate a contact there: door teams need 1,000 contacts per locality, and list programmes only run in net-negative stations. About 12% of the change-led-government potential is invisible to the summary and planner, and a leaked 'Low yield' label on kibbutzim would embarrass the bloc.",
+   "fix": "app.js:61 and :877: for Low yield, use 'Little to gain per contact from door teams. Use relational asks through community networks and texts to identified supporters; no door teams.' Delete the duplicated recoHtml line, or branch on `L.pch[i] >= 0.5` to give 'Base network: members contact members through community and regional networks.' Optionally add a planner programme for relational contact in small change-majority communities, grouped by regional council.",
+   "verifier_note": "Reproduced. Under change_govt, 250 kibbutzim and 390 moshavim are tiered 'Low yield'. Yagur (88% change) shows 'National media, digital and SMS only' twice (TIER_DESC plus the recoHtml line), followed by a kibbutz playbook that prescribes relational organising. From the planner tranches, 391 of 3,217 non-Arab net votes (moshav 170, kibbutz 164) sit in localities below the 1,000-contact door minimum. Those stations are positive, so no list programme applies either, and the planner can never allocate there. The segment 'role' text does explain the tier, but the tier instruction on the same page still contradicts the playbook."
+  },
+  {
+   "dimension": "strategy",
+   "id": "M8",
+   "severity": "minor",
+   "where": "site/targeting_content.json:1195 (runner-up list's team covers stations), :1200 and :982 (all four lists switch to insurance messaging for an ally), :602; legal guardrails about :1290-1305",
+   "problem": "The playbook runs joint operations across four separately registered lists. One list's teams cover another's stations, and all four spend on insurance messaging for an ally near the threshold. The legal guardrails cover only NGOs and voter data. Spending by one list that promotes another raises Party Financing Law questions: in-kind contribution, attribution to spending caps and reporting. A careful election lawyer would require a guardrail here.",
+   "fix": "Add a bullet at content :1304: \"Cross-list activity: any staff time, volunteers' paid costs, call centres or media that one list funds to promote another list need prior written clearance from both lists' election counsel and treasurers (Party Financing Law attribution and spending caps).\" At :1200, replace with: 'If any ally falls toward the threshold, each list may run its own insurance messaging for it, after counsel clears the spending.'",
+   "verifier_note": "Text confirmed. Content :1200 says 'all four lists switch to insurance messaging for it in its strongest localities', and the guardrails (:1291–1305) mention party-financing questions only for outside groups. The guardrail intro does say 'For anything else, check with election counsel before acting', which partly covers this, so it is downgraded to minor."
+  },
+  {
+   "dimension": "strategy",
+   "id": "M9",
+   "severity": "minor",
+   "where": "site/targeting_content.json:108 (druze.message: 'a freeze on Kaminitz-law enforcement… and an equality clause in the Nation-State Law, stated as concrete commitments'), :1143 (messages table, northern frame)",
+   "problem": "Field teams are told to make specific legislative commitments on behalf of four lists. This includes freezing enforcement against unlicensed building, which is easy to attack in Likud-leaning Jewish swing towns if leaked. A field atlas cannot commit list leaderships to platform positions.",
+   "fix": "Content :108: replace with \"Planning and zoning relief and equality under the Nation-State Law, using only commitments in the lists' published platforms or cleared by list leadership.\" Remove the enforcement-freeze wording from field material (also at :1143 if it is repeated).",
+   "verifier_note": "Text confirmed at content :108: '…a freeze on Kaminitz-law enforcement while zoning plans are approved, and an equality clause in the Nation-State Law, stated as concrete commitments.' The atlas cannot commit four list leaderships. The messengers are Druze candidates, and Druze work is on hold, so this is downgraded to minor."
+  },
+  {
+   "dimension": "strategy",
+   "id": "m4",
+   "severity": "minor",
+   "where": "site/targeting_content.json:644, :796, :918 ('closely contested stations')",
+   "problem": "In a single national district there are no contested stations; the site's own lead finding says so. Vote-protection staff should go where the bloc's votes are concentrated, to guard against invalidation, and where there is a history of irregularities.",
+   "fix": "Replace 'closely contested stations' with 'stations with large change-bloc vote counts, stations where change lists have no committee member, and stations with past irregularity complaints'.",
+   "verifier_note": "Confirmed at content :644 (election day), the observers tactic and the 'Observers and lawyers in place' item. In a single national district, 'closely contested stations' has no meaning for the count. Vote protection belongs where the bloc's votes are concentrated, or where the committee is dominated by the other side."
+  },
+  {
+   "dimension": "content",
+   "id": "CA-01",
+   "severity": "critical",
+   "where": "content_final_playbook.json intro ('about 1,500 to 2,600 under the deny-61 objective') and sections[key=realistic].bullets[1] ('Deny Netanyahu 61: 1,541 and 1,739 ... 2,290 and 2,638'); sections[key=arab].bullets[7] ('leaves them out of the field planner'); root cause src/targeting_model.py:1203-1205 (planner area units include every positive station) and site/targeting_app.js:216 scenEx (excludes only Arab-segment localities)",
+   "problem": "The quoted deny-61 realistic programme values include change-bloc door canvassing of polling stations where Arab lists lead. These are Arab neighbourhoods of Haifa, Akko, Lod, Ramla, Jaffa, East Jerusalem, Nof HaGalil, and Mughar. The playbook forbids this ('Leave Arab neighbourhoods to Arab lists and civil society'; 'no change-bloc-run ... turnout work'), and the site's own station lists hide these stations (targeting_app.js:894-900, 'Stations where Arab lists lead are left out'). Leadership is shown blocking numbers that depend on Arab-sector GOTV run by the bloc, which is both misleading and a legal and leak risk.",
+   "fix": "targeting_model.py ~l.1149: arab_led = kal_out['p26_arab'].values >= 0.5; pos = (kv['area'] > 0) & ~arab_led; neg = kv['area'] <= 0. Arab-led stations then get neither door nor list programmes, which matches the site filter. Rebuild. Intro: 'or about 1,200 to 2,300 under the deny-61 objective'. realistic.bullets[1]: 'Deny Netanyahu 61: 1,237 and 1,476 net votes at 150,000 contacts; 1,909 and 2,267 at 400,000 (+0.07 to +0.14 points).' realistic.text: 'roughly 900 to 2,300 net votes'. arab.bullets[7]: '...and leaves them, and polling stations where Arab lists lead in mixed and Druze towns, out of the field planner by default.'",
+   "verifier_note": "Reproduced with targeting_planner.tranches/allocate on planner_units.pkl. Station area capacity is set by pos = kv['area']>0 (targeting_model.py:1149), so stations where Arab lists lead are included. The site's station view hides them (targeting_app.js:897, d[6]<0.5). Under block_nb, Arab-led stations (p26_arab>=0.5) in non-Arab localities add value in Haifa 91, Jerusalem 84, Mughar 67, Lod 54, Akko 50, Tel Aviv-Yafo 45 and Ramla 31. Removing them gives 1,541->1,237 and 1,739->1,476 at 150k, and 2,291->1,909 and 2,638->2,267 at 400k. change_govt is unchanged (935/1,207/1,606/1,994) and so is change_seats."
+  },
+  {
+   "dimension": "content",
+   "id": "CA-02",
+   "severity": "major",
+   "where": "content_final_playbook.json intro ('900 to 2,000 net votes for a change-led government') and sections[key=realistic].bullets[0],[6]",
+   "problem": "The headline realistic values include Druze towns, which the playbook says to hold until a poll or list check. The disclosure bullet understates the effect: it names three towns as '13% of the 935' and says other Druze towns 'add more', but Druze localities are 26% of the 150k/no-list plan. Leadership is given totals the playbook's own rule makes undeployable.",
+   "fix": "realistic.bullets[6]: 'These totals include Druze towns, which this playbook holds until a poll or list check. They supply 26% of the 935 at 150,000 contacts with no lists (13-20% in the other plans) and up to a third of the deny-61 totals. Without them the same budgets buy about 770 to 1,800 net votes for a change-led government.' In the intro, add after the headline range: '(including Druze towns held pending a candidate check; about 770 to 1,800 without them)'.",
+   "verifier_note": "Reproduced. The Druze share of the planner totals (Arab and excluded localities removed) is 244/935 (26.1%), 238/1,207 (19.7%), 255/1,607 (15.8%) and 253/1,995 (12.7%). Under deny-61 it is 501/1,541 (32.5%) to 509/2,638 (19.3%). Daliyat+Beit Jann+Yirka = 120/935 = 12.8%, so the bullet is literally true but understates the share by half and says nothing about deny-61. Excluding Druze gives change_govt 773/1,070/1,406/1,802. With CA-01 applied too, deny-61 becomes 906/1,156/1,523/1,886."
+  },
+  {
+   "dimension": "content",
+   "id": "CA-03",
+   "severity": "major",
+   "where": "content_final_playbook.json tactics[5].israel ('Blue and White polls about 0.6% (pass chance 1%) and Reservists about 1.6% (20%)'); content_final_segments.json segments[3].message ('Blue and White polls about 0.6%'); same figures in sections[key=rescue].text and messages[7]",
+   "problem": "0.6% and 1.6% are forecast mean shares, not polls. The B&W mean is pulled down by the modelled 0.40 withdrawal probability. Published polls are higher, and the Reservists often show above the threshold. Rescue copy built on 'it polls 1.6%' will collide with the final published polls the playbook says to cite, and it misleads leadership on the Reservists decision.",
+   "fix": "tactics[5].israel: 'The forecast puts Blue and White at about 0.6% (pass chance 1%) and the Reservists at about 1.6% (pass chance 20%), but about half of published polls since mid-September show the Reservists at 4-5 seats, so rescue messaging to them works only if Friday's final polls show them below the line.' segments[3].message: 'since the forecast gives Blue and White about 0.6% and about a 1% chance of passing.' In rescue.text and messages[7], write 'forecast about 0.6%/1.6%'.",
+   "verifier_note": "polls.csv (cycle 2026, fieldwork since 15 Sep): Blue and White has 27 polls at 0.3-2.0% (mean 0.96%). Reservists (zionist_home) have 31 polls; 16 show 4-5 seats (Kantar, Lazar, Maagar Mochot, Midgam/N12, Midgam Project, Tatika) and the rest 1.2-3.2%. 0.573% and 1.591% are mixture_shares.csv forecast means. 'polls about' appears in tactics[5].israel and segments[3].message (Druze card). The rescue text, messages[7] and Summary card use the bare figures, which are correct only if labelled as forecast."
+  },
+  {
+   "dimension": "content",
+   "id": "CA-04",
+   "severity": "major",
+   "where": "src/simulate.py:77-84 SURPLUS_PAIRS; src/bayes_model.py:1261-1263 (comp_of mapping); data/processed/targeting/share_draws_meta.json 'pairs'; content: content_final_playbook.json timeline[1].actions[0]; MODEL_BRIEF 'full seat law (threshold, surplus pairs, Bader-Ofer)'; Method page targeting_app.js:1058",
+   "problem": "The seat law behind the exchange rate does not contain the surplus agreements the content describes. Together-Yisrael Beytenu (signed) is dropped because no component is named 'together' (it is 'bennett_2026+yesh_atid'). The expected Joint List-Ra'am pact is attached to the dead 'Balad (alone)' component, because comp_of['balad'] is overwritten by the later Balad-alone component. The content says marginal values run through the surplus pairs and lists Together-YB as signed.",
+   "fix": "simulate.py:77-84: ('together','yisrael_beytenu') -> ('bennett_2026','yisrael_beytenu'); ('balad','raam') -> ('hadash_taal','raam'). bayes_model.py:1261: build comp_of so a live multi-member component is not overwritten by a later single-member one (keep the component with the larger mean share). Assert that every SURPLUS_PAIRS entry whose members are both registered resolves. Delete share_draws.parquet/meta, rerun targeting_marginal.py, model, sensitivity and build. Update the Joint List/Ra'am figures in arab.bullets[0]. Until then, the Method page should say Together-YB and JL-Ra'am pairs are not modelled.",
+   "verifier_note": "Confirmed. share_draws_meta pairs = [[2,5],[8,1],[6,7],[3,13],[18,4]]. 'together' is not a component (Together = bennett_2026+yesh_atid), so Together-YB is dropped. comp_of['balad'] is overwritten by comp 18, 'Balad (alone)', with share 0, so Ra'am is in effect unpaired. Rerunning the seat law with the corrected pairs: 57.6% of draws change seats. P(NB<61) moves 78.3%->79.9% and change seats 50.44->50.56. Deny-61 marginals change: YB 0.73->0.57 and Joint List 0.75->0.59 pp/10k, so the content's '+0.75' for the Joint List is affected. This bug is in the main forecast (simulate.py/bayes_model.py) too, not only the targeting layer."
+  },
+  {
+   "dimension": "content",
+   "id": "CA-05",
+   "severity": "major",
+   "where": "src/targeting_model.py:298-300 (seg(): rel in ('muslim','other') -> arab_north_triangle); content_final_segments.json segments[2].who ('The segment's 89 Arab localities'); site locality pages via targeting_app.js:842",
+   "problem": "Five Jewish localities with 0% Arab vote are classed in 'Arab - Galilee & Triangle', tiered 'Arab-list turf (partner-led)' and dropped from the planner: kibbutz Ma'agan and moshavim Ammi'oz, Paran, Nizzane Sinay and Kemehin. The content's '89 Arab localities' count is wrong. The site's profile reads, e.g., 'Ma'agan is an Arab locality: Arab lists take about 1% of its projected vote', which contradicts itself.",
+   "fix": "targeting_model.py seg(): replace `rel in (\"muslim\", \"other\")` with `rel == \"muslim\" or (rel == \"other\" and r.religion_cbs != 1)`. Rebuild. segments[2].who: 'The segment's 84 Arab localities (including Ghajar, which is not targeted) in the Galilee and the Triangle hold 670,493 eligible voters'.",
+   "verifier_note": "Confirmed. Ammi'oz, Ma'agan, Paran, Nizzane Sinay and Kemehin all have religion_cbs=1, s_arab=0, census_religion='other' and p26_arab 0-1.6%. All are in arab_north_triangle, tiered 'Arab-list turf (partner-led)', and removed from the planner. whyText (targeting_app.js:842) renders 'Ma'agan is an Arab locality: Arab lists take about 1%'. The true count is 84 (including Ghajar) and 670,493 eligible, not 89 and 671,826."
+  },
+  {
+   "dimension": "content",
+   "id": "CA-06",
+   "severity": "critical",
+   "where": "content_final_playbook.json sections[key=arab].bullets[7] ('Keep town-level values for Arab localities out of shareable material') vs output/targeting/localities.csv, kalpi_targets.csv, Rankings 'Blocking' view (targeting_app.js:661) and locality profiles (targeting_app.js:841-842)",
+   "problem": "The playbook tells leadership to keep town-level Arab values out of shareable material. The site, which is the shareable artifact, publishes them with ranks and door-contact counts in a downloadable CSV and on every Arab locality page. A leaked CSV reads as a change-bloc door plan for Nazareth and Umm al-Fahm.",
+   "fix": "In build_targeting_site.py, blank block_nb__*/change_seats__* potential, contacts and rank (and the area/list contact columns) for Arab-segment rows in localities.csv and kalpi_targets.csv. Drop the block_nb figure from the Arab profile sentence in whyText ('Arab lists take about X% of its projected vote. The atlas makes no field recommendation here...'). Show only the segment total in the Blocking view and map layer, or exclude Arab rows from them.",
+   "verifier_note": "Confirmed, and upgraded because the brief treats leak risk as critical. output/targeting/localities.csv publishes for Nazareth tier_block_nb, block_nb__potential 655.1, block_nb__area_contacts 21,764 and block_nb__rank 1. The map 'Blocking value' layer (js:410), the Rankings 'Blocking' view (js:661) and the Arab locality profiles (js:842) show town-level Arab values. Nothing in the template or app marks the site internal. This contradicts arab.bullets[7] ('Keep town-level values for Arab localities out of shareable material') in a site going to four parties' leadership."
+  },
+  {
+   "dimension": "content",
+   "id": "CA-07",
+   "severity": "minor",
+   "where": "content_final_playbook.json sections[key=arab].bullets[7] ('leaves them out of the field planner'); site/targeting_app.js:993,1007",
+   "problem": "The planner has an 'Include Arab localities' checkbox, so the statement is not literally true. Arab-led stations in mixed and Druze towns are also counted (see CA-01).",
+   "fix": "'The planner leaves Arab localities out by default (including them is a leadership-only switch), and leaves out polling stations where Arab lists lead.'",
+   "verifier_note": "targeting_app.js:993 offers an 'Include Arab localities' checkbox (default off; :1007 excludes only when !plan.arab), so 'leaves them out of the field planner' is true only by default. Arab-led stations in mixed and Druze towns are counted (CA-01)."
+  },
+  {
+   "dimension": "content",
+   "id": "CA-08",
+   "severity": "minor",
+   "where": "content_final_segments.json segments[4].moves ('... though the research desk could not verify the report'); content_final_sources.json D5-F24 (checked 'verified') and D6-F06 (checked 'verified')",
+   "problem": "The citation status contradicts itself. The haredi card says the UTJ recording report is unverified, while the Sources page lists D5-F24 as verified. The article is reachable and supports the claim. D6-F06 is shown as 'verified' although verify_israel-geography.json marks it unverifiable (Israel Hayom 403, still 403 today). Its citation title ('Parties try to rally base amid gridlocked electorate') does not match the URL slug ('parties-focus-on-key-strongholds-in-last-day-of-campaign').",
+   "fix": "segments[4].moves: 'UTJ's chairman was recorded saying he fears lower turnout after the failed draft-exemption law (Kan recordings, reported by Arutz Sheva on 6 Oct).' D6-F06: set checked to 'unverified: publisher blocks access', or remove the entry.",
+   "verifier_note": "verify_context-2026 gives D5-F24 as 'unverifiable', but content_final_sources has checked 'verified'. I fetched the URL today: 'UTJ chairman warns of haredi voter turnout drop', 6 Oct 2026, reporting Kan recordings of Asher. The 'could not verify' clause in segments[4].moves is therefore stale. D6-F06 is 'unverifiable' (Israel Hayom 403, confirmed) but marked verified; it is uncited yet listed on the Sources page."
+  },
+  {
+   "dimension": "content",
+   "id": "CA-09",
+   "severity": "minor",
+   "where": "content_final_playbook.json tactics[9].israel ('Petah Tikva first, then Rishon LeZion, Jerusalem, Holon and Netanya') and timeline[0].actions[8]",
+   "problem": "The ordering does not match the model. Rishon LeZion has the largest persuasion value, not Petah Tikva, and Tel Aviv's exceeds Netanya's. The summary page (JS persTop) lists Rishon, Petah Tikva, Jerusalem, Holon, Tel Aviv, so the two pages disagree.",
+   "fix": "tactics[9].israel: 'Rishon LeZion and Petah Tikva first (Petah Tikva is the only town where persuasion is the main mechanism), then Jerusalem, Holon and Tel Aviv-Yafo.' timeline[0].actions[8]: 'persuasion value is also high in Rishon LeZion, Jerusalem, Holon and Tel Aviv-Yafo.'",
+   "verifier_note": "change_govt__pers_pot: Rishon 43.4, Petah Tikva 35.4, Jerusalem 33.1, Holon 26.5, Tel Aviv 25.5, Netanya 21.8. The Summary persTop (js:345) lists Rishon, PT, Jerusalem, Holon, Tel Aviv. No persuasion measure (area or list) ranks PT first, so the playbook order disagrees with the model and with the Summary page. timeline[0] ('PT is the persuasion battleground') is correct."
+  },
+  {
+   "dimension": "content",
+   "id": "CA-10",
+   "severity": "minor",
+   "where": "content_final_segments.json segments[11].caveat ('almost 40% of Kiryat Shmona's residents had not returned by September 2026') vs content_final_playbook.json election_day[5].text ('Between about 40% and 60% ... depending on the report')",
+   "problem": "The two pages disagree. The segment card gives only one side of conflicting sources (D5-F19 says only about 40% returned; D5-F20 says almost 40% not returned).",
+   "fix": "Caveat: '...and between about 40% and 60% of Kiryat Shmona's residents had not returned by September 2026, depending on the report.' Add 'D5-F19' to segments[11].cites.",
+   "verifier_note": "segments[11].caveat gives only D5-F20 (CSM: almost 40% not returned). election_day[5] gives the 40-60% range, using D5-F19 (ynet: about 40% returned). verify_context-2026 confirms the conflict is real."
+  },
+  {
+   "dimension": "content",
+   "id": "CA-11",
+   "severity": "minor",
+   "where": "content_final_segments.json segments[6].role ('Each is rated low yield on its own')",
+   "problem": "Five kibbutzim are not rated 'Low yield'.",
+   "fix": "'Almost all (250 of 255) are rated low yield on their own, and four religious kibbutzim are Netanyahu-bloc strongholds, so the work runs through members' own networks rather than door teams.'",
+   "verifier_note": "Of 255 kibbutzim, 250 are Low yield (change_govt), 4 are Netanyahu-bloc strongholds (Hafez Hayyim, Sha'alvim, Shomeriyya, Merav) and Tel Yizhaq is a Secondary target. 'A reliable change-bloc base' is also slightly off for those four."
+  },
+  {
+   "dimension": "content",
+   "id": "CA-12",
+   "severity": "minor",
+   "where": "content_final_segments.json segments[3].avoid ('Do not plan rides ... without election counsel'); content_final_playbook.json timeline[5].actions[5] ('No rides ... without clearance'); segments[6].approach ('confirm any organised transport with election counsel')",
+   "problem": "The wording implies organised rides are acceptable once counsel clears them. This contradicts the mandatory rule ('no organised rides') and the playbook's own tactic verdict 'Do not organise rides'.",
+   "fix": "segments[3].avoid: 'Do not organise rides; help supporters plan public transport or a family ride, and check any other transport help with election counsel.' timeline[5].actions[5]: 'No organised rides. No gifts or activity near polling stations without clearance from election counsel.' segments[6].approach: replace 'and confirm any organised transport with election counsel' with 'and do not organise rides'.",
+   "verifier_note": "segments[3].avoid ('Do not plan rides ... without election counsel'), timeline[5].actions[5] ('No rides ... without clearance') and segments[6].approach ('confirm any organised transport with election counsel') imply that rides are allowed once cleared. tactics[12] says 'Do not organise rides', and the mandatory rule is no organised rides."
+  },
+  {
+   "dimension": "content",
+   "id": "CA-13",
+   "severity": "minor",
+   "where": "content_final_playbook.json timeline[4].actions[5], tactics[4].israel, election_day[4].text, sections[key=young].bullets[1] ('all trains are free from 20:00 on 26 Oct')",
+   "problem": "The cited source gives the 20:00 Monday start for the free bus service only. For trains it says Israel Railways is free on election day, with tickets issued at stations. The 20:00 start for trains is an inference, and students told to catch Monday-night trains may pay.",
+   "fix": "Everywhere it appears (timeline[4].actions[5], tactics[4].israel, election_day[4], young.bullets[1], segments[6].approach): 'Intercity buses on routes over 15 km are free from 20:00 on Mon 26 Oct until service ends on election day; Israel Railways is free on election day (ticket from station counters or machines; confirm Monday-evening trains with the CEC).'",
+   "verifier_note": "I fetched JPost article-909148 (Barsky, 20 Sep 2026). The 20:00 Monday start is stated only for the free bus service. Intercity buses over 15 km and Israel Railways are 'free on election day', and train riders get a designated ticket at stations. The earlier verify note treated the 20:00 start as covering rail, which overreads the article."
+  },
+  {
+   "dimension": "content",
+   "id": "CA-14",
+   "severity": "minor",
+   "where": "content_final_segments.json segments[5].role ('rated supporter-list ground'), segments[9].who ('Petah Tikva ... the map's only persuasion battleground'); rendered on #segments by targeting_app.js:950 regardless of OBJ",
+   "problem": "The segment prose hard-codes change_govt tiers but is shown unchanged under the other objectives. The card header switches to the selected objective, so the prose contradicts the tier chips.",
+   "fix": "Above #seg-cards, when OBJ !== 'change_govt', render: 'Tiers and net-vote figures in these playbooks refer to the default objective, a change-led government.'",
+   "verifier_note": "Segment cards (js:946-950) render fixed prose under every objective. Jerusalem is Supporter-list ground only under change_govt; it is a Turnout engine under block_nb and change_seats. Under change_seats the persuasion battlegrounds are Ashkelon and Be'er Sheva, and Petah Tikva is a Turnout engine. The prose's saturation values (Haifa 174 etc.) are also change_govt values."
+  },
+  {
+   "dimension": "content",
+   "id": "CA-15",
+   "severity": "minor",
+   "where": "content_final_sources.json: DATA-CEC.checked, D1-F05.checked, D1-F14.checked, D2-F10.checked, D2-F11.checked, P-F28.note, P-F29.note; MODEL-FORECAST url and citation",
+   "problem": "Internal desk jargon appears on the public Sources page, because targeting_app.js:1177 prints 'checked' whenever it is not 'verified'. Examples: 'D2-F22/D2-F27 are desk calculations ... (cite D2-F05)', 'listed separately (D1-F05b)', 'desk gave 2023', 'DATA-CEC'. MODEL-FORECAST links a private claude.ai artifact and says 'as of 10 October 2026', while the top bar and footer say 'Forecast as of 8 Oct' (share_draws_meta asof 2026-10-08).",
+   "fix": "Rewrite those checked/note fields in reader language with no ids (e.g. DATA-CEC checked: 'verified (dataset); turnout swings are the atlas's own calculations from this file'). MODEL-FORECAST: url '' and citation '...run 10 October 2026 with polls to 8 October (access on request)'. Use the same wording in the top bar: 'Forecast: polls to 8 Oct'.",
+   "verifier_note": "srcItem (js:1177) prints 'checked' whenever it is not 'verified'. DATA-CEC, D1-F05 ('D1-F05b'), D1-F14 ('desk gave 2023'), D2-F10 ('cite D2-F09') and D2-F11 ('desk citation') show desk ids and jargon, and the P-F28/P-F29 notes show 'DATA-CEC'. MODEL-FORECAST links a private claude.ai artifact and says 'as of 10 October 2026', while the top bar and footer use share_draws asof 2026-10-08."
+  },
+  {
+   "dimension": "content",
+   "id": "CA-16",
+   "severity": "minor",
+   "where": "site/targeting_app.js:1107 (Method, displaced flags) cites(['D2-F11','D5-F20'])",
+   "problem": "Wrong citation. D2-F11 is the Druze turnout study (Shanan & Eilat) and says nothing about Lebanon or Gaza border displacement.",
+   "fix": "js:1107: use cites(['D5-F20','D6-F37']) after '...may not be home.', and append cites(['D2-F11']) after '...are flagged <i>low confidence</i>.'",
+   "verifier_note": "js:1107 attaches cites(['D2-F11','D5-F20']) to the displaced-flag sentence. D2-F11 (alias D6-F16) is the Druze turnout study and belongs to the low-confidence Druze sentence that follows. The combined bullet at js:1146 is correctly cited."
+  },
+  {
+   "dimension": "content",
+   "id": "CA-17",
+   "severity": "minor",
+   "where": "site/targeting_app.js:314,316 (Summary decisions) vs content_final_playbook.json sections[key=coordination].bullets[0] and sections[key=rescue].bullets[1]",
+   "problem": "The Summary and Playbook give different deadlines. The turf split is due 'Before Sat 17 Oct' on the Summary but 'by Thu 15 Oct' in the Playbook. Rescue 'Peak 22-23 Oct' on the Summary conflicts with the Playbook's launch on Fri 23 Oct with calls Sat night to Mon 26 Oct.",
+   "fix": "js:314 when: 'By Thu 15 Oct'; text: 'Assign each polling station to its lead change list (the runner-up list takes stations the lead list cannot staff)'. js:316 when: `${fmtDay(S.dates.final_polls)} – ${fmtDay('2026-10-26')}`, adding 'media from Friday's polls, calls after Shabbat'.",
+   "verifier_note": "Summary js:314 says 'Before Sat 17 Oct' but coordination.bullets[0] says 'by Thu 15 Oct'. js:316 says 'Peak Thu 22 Oct - Fri 23 Oct', but rescue.bullets[1] launches Fri 23 Oct with calls from Saturday night to Mon 26 Oct. js:314 also says 'Assign each locality and polling station to its lead change list', against the playbook's 'station level, not locality level'."
+  },
+  {
+   "dimension": "method",
+   "id": "M1",
+   "severity": "critical",
+   "where": "site/targeting_app.js:216-222 (scenEx excludes only Arab/excluded), :321 (#summary 'a realistic programme ... worth about 935–1,995 net votes'), :331-333 (#summary 'The first 150,000 contacts ... best first' table); src/targeting_sensitivity.py:42 (druze_minus20)",
+   "problem": "The headline budget yields and the 'first 150,000 contacts' action table depend heavily on Druze localities. These are flagged low confidence and are not supposed to be headlined, and the playbook says it 'holds work there until a poll or list check'. The only stress test on Druze (a 20-point shift) is milder than the segment's own history.",
+   "fix": "site/targeting_app.js:216, change to `const scenEx = i => isArab(i) || !!L.excl[i] || !!L.lowc[i];`. Then add one conditional line under #sum-scen, e.g. 'If a Druze candidate check clears the eight Druze turnout-engine villages, add about 140–200 net votes (change-led government)'. That is the with-minus-without difference: 162 / 137 / 201 / 193. Update the playbook figures (935/1,207/1,607/1,995 become 773/1,070/1,406/1,802) and the matching effect points. Keep druze_minus20, but add its yield effect to s.11 rather than only rank overlap.",
+   "verifier_note": "Reproduced by running the site's own allocate() (copied verbatim from targeting_app.js) on site_data.json, and by re-running score() with the planner. change_govt: Druze towns supply 244 of 935 net votes (150k contacts, no lists), 238 of 1,207 (150k, 30%, 19.7%, 23,218 contacts), 255 of 1,607 and 253 of 1,995. In the #summary 'first 150,000 contacts' table, 5 of the top 12 rows are Druze: Daliyat al-Karmel 48, Beit Jann 42, Yarka 30, Kisra-Sumei 30, Yanuh-Jat 28. Under block_nb they are 28.8% of the plan and Mughar is #3. Plans that exclude all 18 lowc localities: 773 / 1,070 / 1,406 / 1,802, and block_nb 1,168 / 1,400 / 1,842 / 2,200. The Druze change share history checks out (2015 29%, 2022 68%; Daliyat 31% to 90%). The rows do carry a 'low confidence' chip, and playbook sections[0].bullets[6] admits the totals include Druze towns. But the summary headline range and its action table contradict both the playbook's hold and the summary's own 'Don't headline the Druze numbers'. One correction: druze_minus20 already removes almost all Druze value (935 falls to 773, Druze plan share 0). So a 2015-like scenario is not needed. The real gap is that the yield effect is never reported."
+  },
+  {
+   "dimension": "method",
+   "id": "M2",
+   "severity": "major",
+   "where": "site/targeting_app.js:321-330 (#summary realistic value, tiles, scenario table); targeting_content.json playbook.intro and sections[realistic].bullets ('935 ... 1,207 ... (+0.045 and +0.058 points)')",
+   "problem": "The realistic-budget yields are given as point estimates to the unit, and as probability effects to three decimals, with no uncertainty. The Method page itself says absolute totals are less reliable than rankings.",
+   "fix": "#summary sum-real-sub: 'worth about 900–2,000 net votes (single-assumption range roughly 500–4,500; the turnout-effect size and shape drive most of it)'. Round the tiles and table to 2 significant figures and add a 'Range' column taken from the gotv_low and gotv_flat runs. In playbook sections[0].bullets[0], replace '+0.045 … +0.095 points' with '+0.05 to +0.1 points' and add the same range.",
+   "verifier_note": "Reproduced by re-running score() and tp.allocate under the s.11 scenarios. change_govt at 400k contacts, 30% identified: base 1,995; turnout effect 0.8 gives 1,168; 2.5 gives 3,118; flat hump gives 4,499; persuasion 0 gives 1,794; persuasion x4 gives 2,280. At 150k doors only: 528–1,577 against 935. block_nb at 400k/30%: 1,452–4,862 against 2,638. The site's own s.13 (app.js:1147) says 'rankings are more reliable than absolute totals'. Even so, #summary (app.js:321, tiles :324-327, table :330) and playbook sections[0].bullets[0] give unit-precise votes and three-decimal probability effects with no range."
+  },
+  {
+   "dimension": "method",
+   "id": "M6",
+   "severity": "major",
+   "where": "src/targeting_model.py:971-975,1143 (area value includes area_r); site/targeting_app.js:1091,1101 (#method s.7), :353 and :385 (#summary 'Rescue is a media job ... too thin for door teams', 'Don't drain the Reservists on the doorstep'); targeting_content.json playbook sections[rescue] ('No door teams')",
+   "problem": "The door-conversation value includes a doorstep rescue effect: 5% of contacted Blue and White or Reservists voters are moved at the door. That rescue value counts toward door potential, station selection and planner door tranches, while the playbook and summary tell teams not to do rescue at the door.",
+   "fix": "In unit_values, drop area_r from area: `\"area\": area_g + area_p`. Keep list_resc. Re-run the model, sensitivity, tiers and build, then update the 935/1,207/1,607/1,995 figures and the summary's rescue share. Also remove the rescue line from the s.8 equation and the s.7 'three effects' text. Alternatively, keep the term and change the playbook and summary to allow an insurance ask inside the door conversation. The fix must pick one.",
+   "verifier_note": "Confirmed. unit_values sets area = area_g + area_p + area_r (targeting_model.py:971-975), and s.7 counts rescue as part of the door conversation. The playbook rescue section says 'No door teams', and the summary says 'too thin for door teams' and 'Don't drain the Reservists on the doorstep'. Non-Arab door potential: rescue is 264 of 2,621 for change_govt (153 stations positive only because of it) and 979 of 4,031 for change_seats. I re-ran the model with area_r=0. change_govt plans: 935 to 903, 1,207 to 1,196, 1,607 to 1,507, 1,995 to 1,931. change_seats: 1,100 to 1,002 and 2,214 to 1,988. block_nb rises slightly. Total resc_pot falls from 286 to 24, so the summary's 'rescue is 9% of the potential' is almost all doorstep rescue. The effect on change_govt yields is small (3–6%), but it contradicts the mandatory rescue rule."
+  },
+  {
+   "dimension": "method",
+   "id": "M7",
+   "severity": "major",
+   "where": "src/targeting_model.py:148,969,982 (list_pers = 0.003/0.22 per contact) and 1153; site/targeting_app.js:1103 ('persuasion of identified soft Netanyahu-bloc voters'), :1095 ('switches about 0.3% of them'), :1130; playbook intro ('about 3 switchers per 1,000 conversations')",
+   "problem": "Phone, text or relational persuasion calls are scored at 1.36% switching per contact. That is the per-cross-pressured-voter rate, 4.5x the 0.3% per soft voter the site describes. The model also assumes the campaign can identify 30% of cross-pressured soft Netanyahu-bloc voters, about 2% of the electorate, which has no source. Persuasion calls are the highest-value units in the planner, so they are allocated first.",
+   "fix": "State it in s.7 and the parameter table: 'List persuasion calls assume the campaign can identify cross-pressured soft voters (about 2% of voters); each completed call is scored at 0.3%/0.22 ≈ 1.4% switching.' Better, score list_pers with RHO_PERSUADE*CROSS_PRESSURE (0.3%) on n_pers/CROSS_PRESSURE targets, or apply a phone discount (×0.67). Add both variants to targeting_sensitivity.py.",
+   "verifier_note": "Confirmed. RHO_PERSUADE = 0.003/0.22 = 1.36% is applied per list contact (list_pers, targeting_model.py:982). The list target is n_pers = pool × p × pers_share, i.e. only cross-pressured soft voters. Mean per-contact planner value in non-Arab localities: persuasion calls 22.71 per 1k, door 2.37, supporter calls 4.58. All 7,727 persuasion-call contacts are used in every 30% plan, worth about 175 net votes (14.5% of 1,207). The site describes these as 'persuasion of identified soft Netanyahu-bloc voters' with '0.3% switch' (app.js:1095, 1103, 1130). It never states the 1.36% per-call rate or the assumption that lists hold only the cross-pressured 22%. Phone and text persuasion are also scored at door strength."
+  },
+  {
+   "dimension": "method",
+   "id": "M8",
+   "severity": "major",
+   "where": "site/targeting_app.js:315 (#summary decision 'Identify supporters now ... identifying 30% of change voters lifts the yield from 1,607 to 1,995 net votes (+24%)'), :330",
+   "problem": "The supporter-ID gain is presented 'at the same budget' but leaves out the contacts needed to build the lists.",
+   "fix": "Change app.js:315 to: '…if the lists hold 30% of change voters in Netanyahu-majority areas (about 175,000 people; existing party files count), the same 400,000 contacts yield about 2,000 instead of 1,600 net votes. Building the lists from scratch takes extra ID contacts not counted here.' Or net an ID cost out of the budget, e.g. 2–3 ID contacts per identified supporter, and show the net gain.",
+   "verifier_note": "Confirmed. Tranche capacity is LIST_CONTACT × n (targeting_model.py:1201-1205), so the 30% plans assume 87,372 / 0.5 ≈ 175k identified change supporters, about 15.5k identified cross-pressured soft voters and about 5.7k rescue voters, all in negative non-Arab stations. Summary decision 4 (app.js:315) says 'Identify supporters now … lifts the yield from 1,607 to 1,995 (+24%)', and the tile at :325 says 'Same budget'. Neither counts the ID contacts. The playbook (tactics[0].effect) says 'Budget the ID contacts', but the summary does not."
+  },
+  {
+   "dimension": "method",
+   "id": "M14",
+   "severity": "minor",
+   "where": "site/targeting_app.js:1095 (#method 'times 22% ... That share sits between N12's measured 0.6–1.6% ... and the 5% of Netanyahu-bloc intenders who report switching'), :326 and :352 (#summary '85,257 soft Netanyahu-bloc voters ... open to a change list')",
+   "problem": "The calibration sentence compares the 22% cross-pressure share with figures quoted as shares of all voters. It means the resulting national pool of 2.0% of voters. The upper anchor is also inconsistent: the '5% of NB intenders who say they will switch' (D5-F08) have already switched and sit in the forecast's change share, so they are not a pool still to persuade. Both direct measures of between-bloc undecided voters (0.6% and 1.6%) are below the model's 2.0%. The modelled pool is then shown to the unit as a fact.",
+   "fix": "app.js:1095: 'The resulting national pool, about 2% of projected voters, is at the upper end of N12's measured 0.6–1.6% undecided between blocs (22% is a calibration constant, not a measurement).' Show the tile and finding as 'about 85,000 (modelled)'. Add CROSS_PRESSURE scenarios at 0.07–0.18, i.e. a 0.6–1.6% pool, to the sensitivity runs.",
+   "verifier_note": "Confirmed. In app.js:1095, 'That share' refers to the 22% (a share of soft NB voters), compared against shares of all voters. The resulting pool is 85,257 / 4,231,056 = 2.0% of voters, above both direct between-bloc measures (0.6% in D5-F08, 1.6% in D5-F09). The code comment's 'national persuadable ~2.5%' is also stale. Whether D5-F08's 5% 'switchers' are already in the forecast is open to interpretation, but the wrong referent is a clear error. The summary gives the modelled pool to the unit (app.js:326, 352)."
+  }
+ ]
+}

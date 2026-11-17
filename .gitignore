@@ -26,3 +26,6 @@ data/processed/error_model/*.nc
 data/processed/error_model/*.nc.tmp
 # the same under RECORD_2026=1 (src/record.py)
 data/processed/record9/error_model/
+
+# agent worktree checkouts (Claude Code)
+.claude/worktrees/

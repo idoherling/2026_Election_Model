@@ -1,0 +1,291 @@
+{
+ "verdicts": [
+  {
+   "id": "D6-F01",
+   "status": "corrected",
+   "note": "The chapter exists. OpenAlex lists it as Atmor, Friedberg & Harsgor, 'For Whom the Polls Toll?', in The Elections in Israel 2022 (Routledge), pp. 67-88, published 17 Jan 2025, so the year is 2025, not 2024. The DOI resolves to the Taylor & Francis chapter page. I rebuilt the abstract from the OpenAlex index and it confirms the claim: about 70% national turnout; all 1,215 Jewish and Arab localities; 8 socio-demographic and geographic characteristics; distance from the centre is not significant for Jewish and mixed localities but matters for Arab ones; SES predicts turnout in both types of locality; size is inversely related to turnout; development towns are lower. Wording to fix: the higher-turnout groups are 'localities in Judea and Samaria' and 'those with a high proportion of ultra-Orthodox residents'. 'Settlements' therefore means Judea and Samaria localities.",
+   "corrected_url": "https://www.taylorfrancis.com/chapters/edit/10.4324/9781032633299-5/polls-toll-nir-atmor-chen-friedberg-liran-harsgor",
+   "corrected_quant": "National turnout about 70%; 1,215 localities; 8 predictors; no coefficients in the abstract. Year 2025 (Routledge, pp. 67-88)."
+  },
+  {
+   "id": "D6-F02",
+   "status": "verified",
+   "note": "IDI article by Ella Heller, 16 March 2015. Table 1 cites Afriat & Dahan (2010), updated with 2013 data. Non-ultra-Orthodox Jewish localities, 2013: clusters 8-10 74.5%, clusters 2-4 60.7% (22 localities), clusters 1-2 51.6% (1 locality). 1996: clusters 8-10 86.3%, clusters 2-4 81.8%. Clusters 8-10 have the same values in the all-localities row. Table 2 (said they would not vote): age 18-22 17.7%, 23-49 9.3%, 50-69 9.4%, 70+ 8.8%. 'About 9% over 50' is fair. 'Decades' rests on 1996-2013 data, and the gap widened from about 4.5 to about 14 points.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "D6-F03",
+   "status": "verified",
+   "note": "Ofer Kenig, IDI, 7 Nov 2022. Confirms that turnout surged in right-wing strongholds (development towns, big southern cities, Haredim, Jerusalem) and was the same or slightly lower in Tel Aviv and the kibbutzim. Also confirms: Netanyahu bloc ahead by about 30,000 votes; almost 9% of votes wasted below the threshold; about 300,000 of them for Meretz and Balad; Arab turnout 53.2%.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "D6-F04",
+   "status": "verified",
+   "note": "INSS Insight No. 1664, Ori Wertman and Meir Elran, 1 Dec 2022. Every figure matches: Dimona +6.9, Be'er Sheva +4.6, Ashkelon +3.2, Tel Aviv +0.4, Givatayim +0.3, Herzliya +0.3; national turnout 67.4% to 70.6%; Arab turnout 44.6% to 53.2%; right bloc 48.3% to 49.6%; centre-left 41.5% to 38.3%; Arab votes for Zionist parties 52.3% (1992) and 14.2% (2022).",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "D6-F05",
+   "status": "verified",
+   "note": "Raoul Wootliff, Times of Israel, 4 March 2020. All Likud shares match (Sderot, Kiryat Gat, Ashkelon, Netanya, Beersheba, Ashdod, Rishon LeZion, Rosh HaAyin), as do Blue and White's (Rishon 36.6 to 36.9; Rosh HaAyin 34.7 to 35.1). The low-turnout alarms are confirmed. In April and September 2019 Netanyahu ran them all day. In March 2020 he tweeted an 'emergency update' about two hours before polls closed, naming Eilat, Tiberias, Netanya, Migdal HaEmek, Kiryat Gat and Kiryat Ata. I did not check the 32-to-36 seat figure in the article, but it matches the official results.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "D6-F06",
+   "status": "unverifiable",
+   "note": "Israel Hayom returned HTTP 403 for both the standard and AMP URLs. The session's web-search budget was used up, so I could not look for a syndicated copy. I could not confirm the named towns, Likud's 2021 share there, the byline, or the framing.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "D6-F07",
+   "status": "corrected",
+   "note": "Ariel Finkelstein, IDI. The current page is dated 28 June 2026. It cites his earlier piece 'Voting Patterns by Religious Self-Definition' from 23 Oct 2022, so the original is 2022, not 2023. Sample: 12,322 Jewish adults across 20 surveys, 10,694 voters after exclusions. Confirmed figures: Haredi 97% coalition; national-religious 80% coalition and 10.5% for the other lists (in effect the opposition); traditional 66.5% coalition; secular 74% opposition; traditional non-religious voted Likud 46%, Yesh Atid 17%, National Unity 14%; Likud voters are 57% traditional, 32% secular, 10% national-religious, 1% Haredi.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "D6-F08",
+   "status": "corrected",
+   "note": "Momi Dahan, CESifo Working Paper No. 10857, December 2023; I read the full PDF. Confirmed: 440 small Jewish localities, classified by their three most common surnames (2017); ten elections; 2022 right bloc about 61% in Mizrahi localities vs about 36% in Ashkenazi ones, a gap of about 25 points; the smallest gap was about 5 points in March 2006; the gap disappears or shrinks sharply with education and religiosity controls; the right-bloc share falls with education, income and median age; the education coefficient turned negative in the last six cycles, 2015 onward. Correction to the caveat: Dahan's right bloc follows Berman (2020) and counts only lists above the threshold. In 2022 it was Likud, Religious Zionism, Jewish Home and Yisrael Beytenu. It leaves out Shas and UTJ and includes YB, which is a Change-bloc party in 2026. That is why right-bloc shares look low in Haredi localities. Do not plug his right-bloc numbers straight into Netanyahu-bloc versus Change-bloc maths.",
+   "corrected_url": "https://www.ifo.de/en/cesifo/publications/2023/working-paper/voting-gap-origin",
+   "corrected_quant": "2022: about 61% vs about 36% (gap about 25 points); smallest gap about 5 points (2006). Right bloc = Likud + RZ + Jewish Home + Yisrael Beytenu (Haredi parties excluded)."
+  },
+  {
+   "id": "D6-F09",
+   "status": "verified",
+   "note": "LibRes blog, Reichman University, by Yoav Peled, Professor Emeritus at Tel Aviv University, not Reichman. The post is undated. It is based on his 2025 Nationalism and Ethnic Politics article 'The Ascendance of Ethno-National Populism in Israel, 1977-2022: An Ethno-Class Analysis'. Confirmed: in November 2022 the coalition parties won a majority in cluster 1-7 localities (excluding cluster 3) and the opposition in clusters 8-10; about 72% of clusters 1-7 back the judicial reform and about 54% of clusters 8-10 oppose it. In Smooha's November 2021 survey, 56.3% of self-described 'Bibists' were Mizrahi. The blog says 'socio-economic clusters' and does not name the CBS explicitly.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "D6-F10",
+   "status": "verified",
+   "note": "Simona Weinglass, Times of Israel, 24 April 2019. It covers the April 2019 election only. Confirmed: Likud Dimona 56%, Beit She'an 55%; Blue and White Ramat HaSharon 56%, Hod HaSharon 54%; every cluster 8-10 city preferred Blue and White; Labor Niran 54%, Be'eri 49%; YB Avshalom 35%, Nazareth Illit 21%. YB's fall in Kisra-Sumei is 41% (2015) to 21% (April 2019). Haifa's 50/48 left/right split held in both 2015 and 2019.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "D6-F11",
+   "status": "unverifiable",
+   "note": "The citation is confirmed through OpenAlex and the DOI: Igal Charney and Dan Malkinson, Applied Geography 58: 1-6 (2015). Its keywords are voting behaviour, electoral geography, Tel Aviv, Likud and socio-economic change, which fits the general theme. ScienceDirect returned 403 and no indexed abstract was available, so I could not confirm the specific content: five elections from 1984 to 2013, the direction of change in the south, north and inner city, and the parties tracked.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "D6-F12",
+   "status": "corrected",
+   "note": "Ynetnews, by Saar Haas. The page title is 'Which city is \"Israel's Ohio\"? New data reveal the country's top bellwether'. The article is undated; its images are dated 1 Sept 2026. Madlan analysed 2022 results for cities over 50,000. Confirmed: Rehovot is first (Likud 25.7 vs 23.4 nationally; Yesh Atid 23.1 vs 17.8; mean gap 2.05 points across the 13 largest parties); next are Petah Tikva, Haifa, Hadera, Netanya, Holon and Rosh HaAyin; Tel Aviv is 28th and Jerusalem 29th; Haifa had Yesh Atid 26.3 vs Likud 20.9. The source says the seven 'very different' cities are all Haredi or Arab, with Umm al-Fahm the most different and Modi'in Illit second to last. It does not group in 'mixed or strongly sorted' cities. I could not confirm by name Elad, Bnei Brak and Beitar Illit, or the claim that Haifa is the only top-10 city where Yesh Atid beat Likud.",
+   "corrected_url": "",
+   "corrected_quant": "Rehovot mean gap 2.05 points (13 largest parties). Haifa: Yesh Atid 26.3 vs Likud 20.9. Petah Tikva: Likud 28.4, Yesh Atid 19.7. Least similar: seven Haredi or Arab cities (Umm al-Fahm last, Modi'in Illit second to last)."
+  },
+  {
+   "id": "D6-F13",
+   "status": "verified",
+   "note": "Alex Harris and Sander Eizen, Washington Institute Fikra Forum, 22 Nov 2022. Every figure matches: RZP 22% in all settlements, 59.7% east of the barrier, 22.4% west (31.54% excluding Beitar Illit and Modi'in Illit); five-election range 46.2-63.7% east and 17.9-27.0% west; settlers under 3.5% of eligible voters; about 6% of RZP votes from settlers; 13.7% of RZP votes from double envelopes, mostly soldiers. Caveat: the eligible-voter estimate relies on a settler newspaper's age estimates. A further 7.3% of RZP votes came from Jerusalem residents.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "D6-F14",
+   "status": "corrected",
+   "note": "I extracted the PDF text. It is an appendix titled 'Arab Voting in 25th Knesset elections: Data Segmentation', created 24 Nov 2022. No author name is printed; the Milshtein attribution comes only from the file name. Every mixed-city figure matches exactly (Haifa, Tel Aviv-Jaffa, Ramla, Lod, Acre, Nof HaGalil, each with its Arab population share), and Haifa's Arab neighbourhoods give Hadash-Ta'al 25-45%. The source does NOT support the claim that the Jewish parts of Lod, Ramla and Acre are among the most right-leaning large-city electorates; drop it or source it elsewhere. Ma'alot-Tarshiha does not appear in the source.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "D6-F15",
+   "status": "verified",
+   "note": "Arik Rudnitzky, IDI, 25 Dec 2022. Confirmed: Arab turnout 53.2% (2013-2022 average 55.9%); Umm al-Fahm 38.3%; Sakhnin 68.4%; Maghar 44%; Druze turnout averaged 48.7% in 2021-22 vs 55.9% in 2013-20; Ra'am 73.9% in the Negev and 68.8% in northern Bedouin localities; Christian villages Hadash-Ta'al 39.8%, Balad 24.3%, Meretz 11.7%; Jewish parties 14.3% in Arab localities (28.4% in April 2019); about 90% of the Druze vote went to Zionist lists (National Unity 30.4%, YB 18.3%, Meretz 14%, Likud 10.6%). Caveat on the relevance: National Unity in 2022 included Gantz, whose Blue and White runs outside the Change bloc in 2026. National Unity + YB + Meretz comes to 62.7%, so the '~70% to current Change parties' figure overstates.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "D6-F16",
+   "status": "verified",
+   "note": "Mahmoud Shanan and Omri Eilat, Bayan (Moshe Dayan Center), 18 March 2021. Druze vs national turnout matches: 76.8/79.3 (1996), 78.9/78.7 (1999), 64.2/67.8 (2003), 53.2/69.4 (Sept 2019). Confirmed: Fateen Mulla and Likud in Yarka in April 2019; non-Zionist share 9.58% (1996) and 3.75% (April 2019); Joint List 11.5% (2020). The authors warn these categories are not strictly comparable. The home-village pattern (with Ayub Kara as the exception) and the community-to-individual thesis are also confirmed.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "D6-F17",
+   "status": "corrected",
+   "note": "Salim Brake, Bayan, 27 Nov 2019. Every number matches: turnout 57.7/60.1/54.5; Blue and White 36% to 47.8%; YB 23.8/12.6/18.8; Meretz 2/15.8/3.2; Blue and White 78.1% in Daliyat al-Karmel; Meretz 64.8% in Beit Jann. The framing contradicts the author, though. Brake concludes the Nation-State Law did NOT substantially change Druze voting patterns, and that voters kept favouring parties in or likely to join government and candidates from their own village or family. He links the Sept 2019 turnout drop to disappointment over the law. The party swings were driven mainly by Druze candidates being moved into or out of winnable slots, and by those candidates' public positions on the law. Blue and White pledged to amend the law by adding an equality clause, not to repeal it.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "D6-F18",
+   "status": "verified",
+   "note": "Omri Eilat, Bayan, 24 Aug 2023. Confirmed: the Golan wind-turbine project near Mas'ada was the pretext; the grievances were Kaminitz (spelled 'Kamenitz') law fines and demolitions, worst in Kisra and Isfiya, the planning and housing shortage, and the 2018 Nation-State Law; anger at Ben Gvir; turnout fell from about 80% (1996, 1999) to about 50% (2021, 2022); protesters demanded a five-year freeze on fines and demolitions; Druze votes for right-wing parties dropped sharply after the law.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "D6-F19",
+   "status": "corrected",
+   "note": "OpenAlex confirms: Rami Zeedan, 'The Druze vote in Israel: between ideology, socioeconomic status, kinship, and the Nation-State Basic Law', Democratization 32(3): 738-758, published online 25 Oct 2024. The abstract tests ideological, socio-economic and kinship frameworks on 2003-2022 data. It finds kinship strongest, especially parties including Druze candidates, while all three frameworks add insight. Reframe the claim: kinship and descriptive representation dominate. It is not an even mix.",
+   "corrected_url": "",
+   "corrected_quant": "Elections 2003-2022; kinship (Druze candidates on the list) is the strongest predictor."
+  },
+  {
+   "id": "D6-F20",
+   "status": "verified",
+   "note": "KU News Service release by Rick Hellman, 18 July 2025. The release says Israeli Druze might be more inclined to back Netanyahu after his moves to protect Druze in Suwayda. That line is the release's framing, not a direct Zeedan quote. Zeedan is quoted on a long-term wedge strategy and on Druze increasingly not identifying as Arabs. It is low-confidence expert commentary, as the desk noted.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "D6-F21",
+   "status": "corrected",
+   "note": "The Ynetnews article exists, by Yuval Karni (not 'staff'), and is undated. It reports that the party (rendered 'Yesh! with Eisenkot') announced Kamil Abu Rokon joining. He is a former COGAT and Civil Administration head, described as a respected Druze figure. The article gives no list slot, and I could not verify the winnable-slot pledge.",
+   "corrected_url": "",
+   "corrected_quant": "No list position in the source."
+  },
+  {
+   "id": "D6-F22",
+   "status": "verified",
+   "note": "The Abraham Initiatives, 18 Jan 2024, submitted to the Knesset Internal Affairs and Environment Committee. Confirmed: about 40,000 eligible voters in unrecognised villages; no polling stations there since the mid-1980s; allocation by tribal name regardless of distance; petition of 21 Aug 2022 rejected 23 Aug 2022; Bir al-Bagar 65 km and Abda 60 km from Segev Shalom; turnout 2022 70.63/53.2/56/38 and 2021 67.4/44.6/45.8/32.4. I did not see a 5 km lower bound in the source.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "D6-F23",
+   "status": "corrected",
+   "note": "The September 2019 part is verified: ToI Staff, 16 Sept 2019. On a Likud petition, CEC chair Justice Hanan Melcer ruled that Zazim could not yet bus about 15,000 Bedouin voters and had to register as a body active in the elections, because the motive appeared political. The April 2019 crowdfunded operation (6,000-10,000 voters, 40+ minibuses) is NOT in this article, and I could not verify it; drop it or cite a separate source.",
+   "corrected_url": "",
+   "corrected_quant": "About 15,000 voters (Sept 2019). The April 2019 figures are not supported by this source."
+  },
+  {
+   "id": "D6-F24",
+   "status": "corrected",
+   "note": "ToI Staff, 10 Feb 2020. The article says the database covered about 6.5 million Israeli adults: full name, sex, home address, often a cellphone number, plus responses to Likud's SMS poll (ID numbers per the headline). Elector shows live ground-game data on individual voters, polling stations (including each station's support rate) and regions. Users: Likud, Labor MKs, Yisrael Beytenu, and Shas according to the petition. The rule that parties may receive the register but not pass it to third parties is confirmed. The exact figure 6,453,254 does not appear in this article, and nor does the later Privacy Protection Authority finding; both need separate sourcing.",
+   "corrected_url": "",
+   "corrected_quant": "About 6.5 million adults' records exposed (Feb 2020)."
+  },
+  {
+   "id": "D6-F25",
+   "status": "verified",
+   "note": "Jacob Magid, Times of Israel, 8 Aug 2019. Confirmed: about 40 field coordinators each overseeing about 30 recruits, about 1,200 in total, with hidden body cameras, recruited by Kaizler-Inbar; the firm claimed Arab turnout fell 'below 50%'; IDI figures of 49.2% (April 2019) vs 63.8% (2015) and national 68.5%; the September budget doubled to about NIS 2 million.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "D6-F26",
+   "status": "corrected",
+   "note": "The page reposts a Haaretz article by Judy Maltz, 27 Aug 2019; that is the original author and venue. Confirmed: Coalition 17/9 of 11 Arab civil-society organisations, launched 1 Aug 2019, founded by Samer Swaid; hundreds of volunteers; canvassing, social media, billboards and mock ballots for children; 25 low-turnout towns; an internal poll projected 56%. The source does not mention 'Arabic leaflets'. The 49.2% to 59.2% Arab turnout figures check out against the Reichman appendix.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "D6-F27",
+   "status": "verified",
+   "note": "The article was originally published in the Jerusalem Post (Maayan Jaffe-Hoffman, 30 Aug 2019) and reposted by The Abraham Initiatives. aChord ran it via iPanel, 15-20 Aug 2019, with 707 Jewish voters for Blue and White, Likud, Meretz, Labor, Kulanu or YB in April. Each saw one of four mock Gantz ads in an Arabic newspaper. Support stayed within the margin of error, except the equality and anti-racism ad, linked to an '11% increase'; the source does not say whether that means points or a relative change. Low weight is appropriate.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "D6-F28",
+   "status": "corrected",
+   "note": "The citation is verified through OpenAlex and the DOI: Atmor, Friedberg & Kenig, 'Special votes and voter turnout in Israel's 2022 elections', Israel Affairs 31(2): 198-214 (2025). The abstract says double-envelope use has grown substantially over the decade and the groups using it were previously unknown. The authors obtained the data through a successful petition to the CEC. They find special votes affect turnout disparities across localities and groups. The quant items '>200,000 double-envelope votes (2015-era)' and '2013: Bayit Yehudi, Hatnua, Likud +1 seat each, UAL -1' do not come from this source and I did not verify them. The claim that special votes 'have shifted seats' needs its own citation.",
+   "corrected_url": "",
+   "corrected_quant": "No verified figures; the abstract gives no numbers. Drop the 200,000 and 2013 seat-shift figures unless another source supports them."
+  },
+  {
+   "id": "D6-F29",
+   "status": "verified",
+   "note": "Cambridge Core confirms: Getmansky & Zeitzoff, APSR 108(3): 588-604 (2014). It uses variation in Gaza rocket range since 2001. The abstract says the right-wing vote share is 2-6 percentage points higher in localities within range, and that the threat alone shifts votes.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "D6-F30",
+   "status": "verified",
+   "note": "Cambridge Core confirms: Berrebi & Klor, APSR 102(3): 279-301 (2008). A local attack within three months of an election raises the locality's right-bloc share of the two-bloc vote by 1.35 points. Effects spill beyond the locality and are stronger closer to the election. In left-leaning localities, local fatalities raise right support and fatalities elsewhere raise left support.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "D6-F31",
+   "status": "verified",
+   "note": "RePEc confirms: Yael Elster, 'Rockets and votes', JEBO 166: 767-784 (2019). Elections 1999-2015; property-damage claims used as a severity proxy. Each additional 1,000 claims adds about 4 points to the right-bloc share. Effects are stronger for recent attacks, first exposure and proximity to Gaza, and reflect actual exposure rather than threat.",
+   "corrected_url": "https://ideas.repec.org/a/eee/jeborg/v166y2019icp767-784.html",
+   "corrected_quant": ""
+  },
+  {
+   "id": "D6-F32",
+   "status": "verified",
+   "note": "OpenAlex confirms: Getmansky & Weiss, 'War-Time Military Service Can Affect Partisan Preferences', Comparative Political Studies 56(10): 1475-1505 (online 2022). It uses a regression discontinuity on about 50 years of INES data. Respondents too young to serve in 1973 back Labor more than those just old enough, and the gap persists. The effect is driven by linking the party to security incompetence and is absent for well-managed wars. Counter-evidence to add: Grossman, Manekin & Miodownik (2015) find that combat exposure makes Israeli veterans more hawkish and more likely to vote for hawkish parties (see missing works).",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "D6-F33",
+   "status": "verified",
+   "note": "Bar-Ilan Economics departmental seminar, 11 May 2026: 'The Effect of War on Economic and Political Preferences' by Asaf Zussman (HUJI). Four panel waves of Jewish Israeli adults, early 2023 to late 2025; economic preferences measured with the GPS method. The abstract reports weak, mostly transient economic effects and strong, persistent rightward political shifts in nearly all subgroups, supported by spatial variation in exposure. It gives no magnitudes. This is an unpublished seminar paper.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "D6-F34",
+   "status": "verified",
+   "note": "Mako/N12 'Ulpan Shishi', Midgam poll, published 10 April 2026, fieldwork the previous day (9 April). The article gives 505 respondents 'weighted to 300' adults in the Haifa and Northern districts, without explaining the weighting; margin of error up to 5.7%. Confirmed: 65% say the state abandons the north; 70% give the government a 'poor' grade, including 31% of coalition voters; vote intention opposition 38%, coalition 26%, undecided 27%; the coalition narrowly led in the north in 2022, with no exact figures given.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "D6-F35",
+   "status": "verified",
+   "note": "Al-Monitor (AFP), Cecile Feuillatre, 1 April 2026. Confirmed: Kiryat Shmona had about 25,000 residents before 7 October and fewer than half remain (about 10,000); Mayor Avichai Stern says about one in four depend on social services and accused the government of neglect in a viral video; fighting resumed on 2 March 2026; the city is lower-income, mainly Moroccan-origin, and has almost always voted Likud.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "D6-F36",
+   "status": "corrected",
+   "note": "Kipa News, 19 Feb 2025. Incumbent Avihai Stern came first and Likud's Eli Zafrani second despite Netanyahu's backing. No candidate passed 40%, so the race went to a run-off; I did not check the run-off result here. 5,205 voters cast ballots inside Kiryat Shmona. The 83 special stations served displaced northerners from all communities nationwide (8,255 voters), not only Kiryat Shmona. The 58.08% figure is final turnout for the Northern District / northern communities (36,312 of 70,058 eligible, about 51.8%). It is not Kiryat Shmona's turnout.",
+   "corrected_url": "",
+   "corrected_quant": "Kiryat Shmona: 5,205 in-city voters. Region-wide: 83 special stations with 8,255 voters; northern-communities turnout 58.08% reported (36,312/70,058, about 51.8%). City-specific turnout not given."
+  },
+  {
+   "id": "D6-F37",
+   "status": "verified",
+   "note": "JNS, 18 Sept 2025, citing the Tekuma Authority; the byline did not come through. Confirmed: 90% of evacuees returned; some residents back in 42 of 47 communities; 2,500+ newcomers, mostly to Sderot; about 65,000 residents in the region; Re'im 95% returned; Nahal Oz about one-third of families; Be'eri, Nir Oz and Kfar Aza largely displaced, some until 2027.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "D6-F38",
+   "status": "verified",
+   "note": "Maariv poll, 5 July 2026; the polling firm is not named on the page. Confirmed: certain to vote, opposition 80%, coalition 72%, Arab-party supporters 82%, undecided between blocs 49%; undecided about voting, coalition 8% vs opposition 1%.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "D6-F39",
+   "status": "corrected",
+   "note": "The real headline is 'Poll: Most IDF reservists say draft must include ultra-Orthodox Jews', Jerusalem Post, by Anna Barsky, 19 Dec 2024. Dialogue Institute conducted it for the Shoulder to Shoulder campaign; 800 reservists who fought in the war. Every figure matches: 77%, 71% opposed (18% supported), 60% (48% of right-wing, 35% of religious), 45%, about 20% Bennett, Otzma 7%.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "D6-F40",
+   "status": "verified",
+   "note": "OpenAlex and the DOI confirm: Erez Tzfadia and Oren Yiftachel, Cities 21(1): 41-55 (2004). Publisher keywords: Mizrahim, development towns, political mobilisation, local elections, immigrant absorption. These fit the national-versus-local contrast and the competition with 1990s immigrants. The full abstract text could not be retrieved (ScienceDirect 403), so the finer wording is unconfirmed.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  }
+ ],
+ "missing_key_works": [
+  "Grossman, Guy, Devorah Manekin and Dan Miodownik (2015). 'The Political Legacies of Combat: Attitudes Toward War and Peace Among Israeli Ex-Combatants.' International Organization 69(4): 981-1009. https://doi.org/10.1017/S002081831500020X. A natural experiment using IDF health rankings finds combat exposure makes veterans more hawkish and more likely to vote for hawkish parties. It is the necessary counterweight to Getmansky & Weiss (D6-F32) when weighting reservist-heavy localities.",
+  "Shamir, Michal and Asher Arian (1999). 'Collective Identity and Electoral Competition in Israel.' American Political Science Review 93(2): 265-277. https://doi.org/10.2307/2585395. Using 1969-1996 data, it shows Israel's social-cleavage structure kept its explanatory power because identity issues tie policy positions to social allegiances. This underpins using religiosity and ethnicity as locality covariates, and the view that persuasion headroom is narrow.",
+  "Arian, Asher and Michal Shamir (2008). 'A Decade Later, the World Had Changed, the Cleavage Structure Remained: Israel 1996-2006.' Party Politics 14(6): 685-705. https://doi.org/10.1177/1354068808093406. It argues the Israeli-Palestinian / collective-identity cleavage stayed dominant and uses that to explain Kadima's centrist success in 2006. A useful precedent for how a centrist security-credentialed list (Yashar) can cut across bloc lines.",
+  "Ben-Bassat, Avi and Momi Dahan (2012). 'Social identity and voting behavior.' Public Choice 151(1): 193-214. DOI 10.1007/s11127-010-9742-2. RePEc: https://ideas.repec.org/a/kap/pubcho/v151y2012i1p193-214.html. An Israeli locality-level study linking social identity to voter turnout (keywords: voter turnout, paradox of voting, social identity, local elections). Relevant to the turnout-headroom model: high-identity communities (Haredi, kibbutz, Druze clans) turn out differently. The abstract was not available on RePEc, so I verified only the bibliographic details.",
+  "Berrebi, Claude and Esteban F. Klor (2006). 'On Terrorism and Electoral Outcomes: Theory and Evidence from the Israeli-Palestinian Conflict.' Journal of Conflict Resolution 50(6): 899-925. https://doi.org/10.1177/0022002706293673. A reputation model plus 1990-2003 attack and poll data: support for right-wing parties rises after high-terror periods and falls in calm ones. This is the national-level companion to the locality-level 2008 APSR paper (D6-F30) for late-campaign security-shock scenarios. Note: the web-search budget ran out during this check, so these works were found through direct DOI and RePEc lookups rather than a broad literature search."
+ ]
+}

@@ -1,0 +1,579 @@
+{
+ "intro": "Two weeks out, the 13 October forecast gives the change bloc about 51 seats, a change-led government in about 22% of simulations and a repeat election in about 47%. This page sizes each lever with the forecast's 8,000 simulated elections, run through the seat law and the government-formation model, and then asks whether it can be pulled by Tue 27 Oct, and by whom. The largest levers, voters leaving Likud and tens of thousands of extra change voters, are also the hardest to move in 14 days, and a Blue and White exit depends on Gantz, who says he will run to the end. The levers the bloc fully controls are smaller or are about not losing ground: one closing argument, coalition clarity, the field programme, discipline that does not wake the other side, and protecting the count.",
+ "principles": [
+  {
+   "title": "Seats are won nationally and lost at the threshold",
+   "text": "Israel votes as one national district, so a vote counts the same wherever it is cast. What decides the seats is each bloc's total vote and how much of it is wasted below 3.25%. In 2022 about 8.8% of the vote went to lists that missed the line. Meretz fell about 4,000 votes short, and with Meretz in, the Netanyahu bloc would have won 62 seats instead of 64. This year the expected waste is about 5.2% of the vote: about 3.1 points on the Netanyahu side, 1.3 with Blue and White and the Reservists, 0.5 with the Arab lists and 0.1 with the change lists. The bloc's threshold exposure runs through its unaligned neighbours and Ra'am, not through its own four lists.",
+   "cites": [
+    "P-F21",
+    "D7-F01",
+    "D7-F02",
+    "P-F28"
+   ]
+  },
+  {
+   "title": "Only votes that cross a line move the result",
+   "text": "While all four change lists are safe, a vote moving between them is worth almost nothing. In the model, half a point of the vote moving from Yashar to the Democrats changes the change-led chance by 0.01 points. The votes that count cross the bloc line, the abstention line or the threshold. A voter who leaves Likud for a change list is worth nearly two new change voters, because the vote leaves one side and joins the other. Most voters who move during a multiparty campaign move inside their own bloc, in Israel as in the Netherlands, so the pool of cross-bloc switchers is small.",
+   "cites": [
+    "MODEL-FORECAST",
+    "P-F17",
+    "D1-F08"
+   ]
+  },
+  {
+   "title": "Choose the objective, because some levers disagree",
+   "text": "A change-led government and denying Netanyahu 61 usually move together, but not always. In the model, Arab turnout 5 points higher adds about 2.1 points to the chance of denying Netanyahu 61 but costs about 1.4 points of the change-led chance. A Reservists-Economic exit with 60% of its voters going to change lists does the reverse: about +1.6 on the change-led chance and -0.84 on denying 61. An Amcha exit splits them the same way as Arab turnout: about -1.0 and +0.95. When the Reservists pass, the Netanyahu bloc reaches 61 less often, but the change lists also hold fewer seats. Leadership should say which objective governs these calls before it makes them.",
+   "cites": [
+    "MODEL-FORECAST",
+    "D7-F26"
+   ]
+  },
+  {
+   "title": "Late in the race, the agenda and the signals beat argument",
+   "text": "US field experiments put the persuasive effect of campaign contact in the last two months of a general election at about zero (0.13 points per person contacted, not distinguishable from zero), and ad effects fade within days. Only about 0.6-1.6% of Israeli voters say they are torn between the blocs. Across 62 elections in 10 countries, 17-29% of voters settle in the final two months, and their shifts track which issues they weigh most, not changes in their policy views. Israeli studies find the same agenda effect. In 2003 coalition considerations decided about 1 Israeli vote in 10, and foreign studies find that uncertain coalition prospects cost a party votes. The last fortnight is won by choosing the agenda and making the government on offer clear.",
+   "cites": [
+    "P-F01",
+    "P-F07",
+    "D5-F08",
+    "D5-F09",
+    "P-F03",
+    "P-F32",
+    "P-F27",
+    "D10-F05"
+   ]
+  },
+  {
+   "title": "Every move has a reply",
+   "text": "The Netanyahu bloc has the larger pool of voters who stay home. A 1-point turnout rise across its segments nets it about 10,800 votes, against about 6,800 for the change bloc from the same rise across its own. It has shown it can add votes fast: Likud gained about 239,000 votes between September 2019 and March 2020. Visible campaigns against a group's turnout have woken that group: Arab turnout rose from 49% to 59% after Likud's 2019 camera campaign, though the Joint List's reunion also played a part. In the model, 25,000 extra Netanyahu-bloc votes cost about 1.3 points of the change-led chance, close to the 1.7 that 25,000 extra change votes gain. Judge every visible tactic by the reaction it provokes as well as the votes it wins.",
+   "cites": [
+    "D11-F34",
+    "D11-F28",
+    "D3-F32",
+    "MODEL-FORECAST"
+   ]
+  },
+  {
+   "title": "The election does not end on 27 October",
+   "text": "Neither the Netanyahu bloc nor the change lists with Ra'am reach 61 in about six simulations in ten, and a repeat election is the most likely single outcome, at about 47%. The President tasks whoever has the best chance of forming a government, guided by recommendations and list size, neither of which binds him. In 2009 President Peres passed over the leader of the largest list. If formation fails, the legal timetable points to a new election in April or May 2027. One agreed recommendation, a clear government on offer and supporter lists that can be used again are part of winning, not an afterthought.",
+   "cites": [
+    "MODEL-FORECAST",
+    "D10-F17",
+    "D10-F16"
+   ]
+  }
+ ],
+ "levers": [
+  {
+   "key": "blue-and-white",
+   "group": "agreements",
+   "title": "Blue and White withdraws and endorses",
+   "scenarios": [
+    "bw_withdraws",
+    "bw_plus_pers_0.5"
+   ],
+   "summary": "Blue and White (Gantz) sits at about 0.6% in the forecast and clears the threshold in about 1% of simulations, so almost all of its roughly 31,000 votes are on course to be wasted. If it withdrew and endorsed, and its voters split as in 2022 (60% Yashar, 25% Together, 15% stay home), the model adds about 1.7 points to the change-led chance, 0.91 points to the chance of denying Netanyahu 61 and 0.43 change seats. With half a point of the vote also leaving Likud, the gain is about 4.8 points.",
+   "evidence": "Gantz said on 10 October that he is running until the end. He called the wasted-vote argument a lie, said he belongs to neither bloc and claimed, without data, at least six seats' worth of potential voters. Senior opposition figures had pressed him to quit. On 20 September he had said he would stop if final-week polls showed him below the threshold, and every recent poll has the party at about 0.5-2%. Leaders' deals rarely deliver their voters. After Zehut withdrew in 2019 for a cabinet promise, only about 29% of its voters went to Likud, and only about 21% of Kulanu's voters followed Kahlon into Likud. Mergers fare little better: five of seven Jewish-sector unions since 2013 kept only 64-85% of their parts' combined vote. The model's split sends none of Blue and White's voters to Likud, the favourable end. The coordination desk's runs with about a quarter going to Likud and a fifth staying home roughly halve the gain in change seats, to about 0.2. Timing binds. Lists are published on Sun 18 Oct, ballots are printed only for published lists, and the desk found no clear legal rule for a later withdrawal. Zehut's exit 16 days out took it off the ballot. A list below 1% of the vote gets no state election funding and must repay any advance it drew. In foreign experiments, voters who believe their party has no chance defect far more often, by up to 40 points in one German study.",
+   "cites": [
+    "MODEL-FORECAST",
+    "D7-F23",
+    "D7-F12",
+    "D7-F08",
+    "D7-F24",
+    "D7-F27",
+    "D7-F15",
+    "D12-F03",
+    "D7-F19"
+   ],
+   "feasibility": "low",
+   "feasibility_note": "Low. Gantz has said publicly that he will run to the end, and pressure from senior opposition figures has not moved him. The only clean window is before the lists are published on Sun 18 Oct, five days away, and his own trigger, the final-week polls, comes after the ballots are printed. One private approach by a senior envoy is worth making. A public pressure campaign is not. If he declines, the value moves to rescue: media and calls to identified Blue and White voters around the final published polls on Fri 23 Oct.",
+   "timing": "Approach by Fri 16 Oct. Lists published Sun 18 Oct. Rescue media and calls Fri 23 to Mon 26 Oct.",
+   "owner": "Eisenkot with Bennett and Lapid decide. One senior envoy approaches Gantz. The joint message group runs rescue.",
+   "actions": [
+    "Make one private approach through a single senior envoy by Fri 16 Oct. Offer public credit and a visible role in the campaign, not an ultimatum. Election counsel reviews any written undertaking.",
+    "Ask election counsel now whether a withdrawal after Sun 18 Oct would take the list off the ballot, including under the special-provisions law for this election.",
+    "If Gantz endorses, hold one joint appearance and run a short endorsement ad aimed at his voters. Any joint spending needs both lists' counsel and treasurers.",
+    "Do not ask for or accept Blue and White's voter lists unless election counsel clears it in writing.",
+    "If he stays in, run rescue through media and calls to identified Blue and White voters, built on threshold arithmetic. Friday 23 Oct creative that quotes a poll carries the survey details the law requires and comes down before Sat 24 Oct. From Sat 24 Oct, no poll figures in any material."
+   ],
+   "risks": [
+    "Public pressure can harden Gantz and offend his voters, who are the people the bloc wants.",
+    "An exit after Sun 18 Oct may leave Blue and White's slips in the booth, and votes cast for it would be wasted.",
+    "Voters follow their own views, not the leader's deal. Some will go to Likud or stay home."
+   ]
+  },
+  {
+   "key": "reservists",
+   "group": "agreements",
+   "title": "Reservists-Economic withdraws",
+   "scenarios": [
+    "res_withdraws",
+    "res_withdraws_right"
+   ],
+   "summary": "Reservists-Economic (Hendel and Zelekha) is a right-of-centre, reservist-branded list at about 1.7% in the forecast, clearing the threshold in about 21% of simulations. If it withdrew and 60% of its roughly 80,000 voters went to change lists, the change-led chance would rise about 1.6 points, but the chance of denying Netanyahu 61 would fall about 0.84 points. If most went right (35% to change lists), the change-led chance would fall about 1.0 point and the blocking chance about 3.0 points, so this is not a lever to pull.",
+   "evidence": "The list's success cuts both ways. In the draws where it passes, the Netanyahu bloc reaches 61 in 6.9% against 14.0% where it fails, but the change lists hold about 2.3 fewer seats. Its stated terms fit a change-led or unity government: Hendel wants a Zionist government only, says he will not complete a majority with haredi parties or be the 61st seat of a government that depends on Arab parties, and says Netanyahu should go. Published polls split by house: some give it 4-5 seats, others put it below the line, about 2 seats on average. Final polls are a poor guide near the line. Since 2009, lists averaging 3.5-4.5 seats in the final three weeks failed 22% of the time, and lists averaging 0.5-3.5 seats survived more than half the time. No published data show where its voters came from or would go. Past exits scattered voters by their own views, so for a right-of-centre list the pessimistic split is plausible. Hendel withdrew his previous list in 2022, but before lists closed. A list that wins more than 1% receives one unit of state election funding, about NIS 1.8 million, a reason to stay in. In a 2024 poll of reservists who fought in the war, 77% said Haredi exemptions are no longer affordable, so this constituency overlaps with the bloc's equal-burden message.",
+   "cites": [
+    "MODEL-FORECAST",
+    "D7-F26",
+    "D10-F30",
+    "D7-F25",
+    "D7-F16",
+    "D7-F12",
+    "D12-F03",
+    "D6-F39"
+   ],
+   "feasibility": "low",
+   "feasibility_note": "Low, and not worth trying. The list polls near the line, has a funding reason to stay in, and the choice belongs to its leaders and voters. The model cannot say whether an exit would help or hurt, because that depends on where its voters go, and there are no data on that. What the bloc controls is tone. Its equal-burden message and the Reservists share a constituency, and contempt for either would cost both.",
+   "timing": "Tone from now to Mon 26 Oct. No approach planned. Post-election contact through the coalition track.",
+   "owner": "The four list leaders set the tone. The joint message group enforces it.",
+   "actions": [
+    "Do not campaign for the list's exit and do not attack it. Describe it as a right-of-centre, reservist-branded list, and speak of its voters with respect.",
+    "Under the change-led objective only, calls to identified Reservists voters may use threshold arithmetic around Fri 23 Oct. Under the blocking objective, skip them: in the model they lower the chance of denying Netanyahu 61.",
+    "Treat the list as a possible partner after the vote. Its stated conditions fit a Zionist-only change coalition or a unity government (see the Coalition page).",
+    "Reach reservists as civilians only: never through IDF units, bases, unit chat groups or employers, and never with uniforms or military imagery."
+   ],
+   "risks": [
+    "Pressure on the list could push its voters right, the split that costs both objectives.",
+    "Dismissive language about reservists or about the list would undercut the bloc's own equal-burden message."
+   ]
+  },
+  {
+   "key": "soft-likud",
+   "group": "persuasion",
+   "title": "Move soft Likud voters on the draft and October 7 accountability",
+   "scenarios": [
+    "pers_likud_0.5",
+    "pers_likud_1.0",
+    "pers_likud_2.0"
+   ],
+   "summary": "A vote that leaves Likud for a change list is worth nearly two new change votes. Half a point of the national vote, about 24,000 voters or one Likud voter in 40, adds about 3.1 points to the change-led chance (deny-61 +1.9, +0.67 change seats). One point adds about 6.3 and two points about 13, because each extra half point lands closer to 61.",
+   "evidence": "The pool exists. In May only 58% of 2022 Likud voters said they would definitely vote Likud again, and October 7 (37%) and the draft (23%) were their main reasons to consider switching. About 71% of Jews oppose the law freezing arrests of yeshiva students who do not report for service. Two-thirds of voters say the October 7 failures have not been fixed, and more trust an Eisenkot-led government to fix them than Netanyahu's (48% against 30%). Coalition voters are split: 27% say Netanyahu bears a great deal of responsibility, and 37-52% back a state commission, depending on the survey. Late persuasion is hard. Only about 0.6-1.6% of voters say they are torn between the blocs. US field experiments find that contact in the last two months persuades almost no one, and ad effects fade within days. The French exception: door canvassing in Hollande's 2012 campaign raised his vote share by just under a point where canvassers were sent, without changing turnout. Late deciders move with the issues they weigh, and an issue helps the side seen as best on it only when voters think it matters. In foreign experiments, blaming a rival for poor performance or reframing the issue cut the rival's ownership by about 7 points out of 100, while copying the rival's position did not help and in one case backfired.",
+   "cites": [
+    "MODEL-FORECAST",
+    "D5-F11",
+    "D8-F14",
+    "D5-F08",
+    "D8-F16",
+    "D5-F09",
+    "P-F01",
+    "P-F07",
+    "P-F02",
+    "P-F03",
+    "D8-F04",
+    "D8-F06",
+    "D5-F07",
+    "D12-F28",
+    "P-F05",
+    "D8-F28",
+    "D11-F26",
+    "P-F30",
+    "D1-F08",
+    "D12-F14"
+   ],
+   "feasibility": "low",
+   "feasibility_note": "Low for a full point, possible for less. Even a tenth of the half-point scenario, about 2,400 switchers, would be worth more than twice the whole realistic field programme on the model's rates. The lever is the national campaign's agenda, which is being spent anyway: what the four lists talk about for the last 14 days, and who says it. That needs the four leaders to agree one closing argument this week. A full point or more would probably need an event the campaign does not control.",
+   "timing": "Agree the closing argument by Thu 15 Oct. Broadcast and rally propaganda runs to 19:00 Mon 26 Oct.",
+   "owner": "The four list leaders agree. The joint message group and each list's media team execute.",
+   "actions": [
+    "Close on two issues the bloc can own with soft Likud voters: an equal share of service and accountability for October 7. Keep cost of living for undecided voters, who name it as their first concern.",
+    "Blame performance and reframe. Do not copy Likud's positions. Frame the draft as equal burden, never as contempt for Haredi citizens.",
+    "Choose messengers soft Likud voters trust: former Likud voters, traditional and religious public figures, and reservists speaking as civilians. Campaign volunteers are often unrepresentative of the voters they try to persuade.",
+    "Pretest ads quickly and put the money behind the best ones. Ads vary by about half around the average effect.",
+    "In the field programme, persuasion happens only inside door conversations on positive stations and in calls to identified soft voters (see the Field pages)."
+   ],
+   "risks": [
+    "Messages that sound like contempt for Likud voters push them back. Cues from out-party leaders polarise.",
+    "Persuasive door contact can backfire, as in a US experiment.",
+    "In 2015 Likud's late gains came mostly from inside its own bloc after final-days appeals. Expect a 'gevalt' close."
+   ]
+  },
+  {
+   "key": "traditional-voters",
+   "group": "persuasion",
+   "title": "Win traditional voters who have voted Shas",
+   "scenarios": [
+    "pers_haredi_0.5"
+   ],
+   "summary": "Half a point of the vote moving from Shas and UTJ to change lists is worth about as much as half a point from Likud: about 2.8 points on the change-led chance (deny-61 +2.0, +0.68 change seats). The realistic pool is traditional (masorti) voters who have voted Shas, not Haredi communities, whose vote is cohesive.",
+   "evidence": "Haredi voters stay with their lists: 86% voted for Haredi lists in 2022. Shas, by contrast, has been losing moderately traditional, working-class voters over the draft crisis, to Otzma, Likud and Yashar, and Eisenkot says he meets would-be Shas defectors in Kiryat Shmona, Shlomi and Or Yehuda. About 15% of Otzma's current voters say they voted Shas in 2022. Shas is fighting back by reconciling Deri with Rabbi Yitzhak Yosef and using religious imagery. Yashar already runs local structures in Likud strongholds such as Dimona. A US experiment found that religious coded language reached religious voters without costing support among others. There is no Israeli evidence on persuading Shas voters late in a campaign.",
+   "cites": [
+    "MODEL-FORECAST",
+    "D11-F31",
+    "D5-F14",
+    "D5-F10",
+    "D5-F15",
+    "D8-F30"
+   ],
+   "feasibility": "low",
+   "feasibility_note": "Low. Many traditional voters leaving Shas are going to Otzma or Likud, which does nothing for the bloc, and Shas is fighting to hold them. The bloc can reach this pool only through messengers from it, in the towns where Eisenkot is already meeting them, and without any message that sounds like an attack on Haredi people.",
+   "timing": "Now to 19:00 Mon 26 Oct.",
+   "owner": "Yashar's outreach to traditional voters, with local traditional figures. The joint message group checks tone.",
+   "actions": [
+    "Speak to traditional voters about cost of living, the north and an equal share of service, in their own idiom and with respect for Shas and its rabbis.",
+    "Use local traditional figures as messengers in the periphery towns where the bloc already has a presence.",
+    "Keep this a persuasion effort. Do not send door teams into Netanyahu-bloc strongholds: the model shows door canvassing there nets votes for the other side."
+   ],
+   "risks": [
+    "A draft message heard as contempt for Haredim helps Shas and UTJ mobilise their own voters.",
+    "Most voters who leave Shas may still choose Otzma or Likud."
+   ]
+  },
+  {
+   "key": "national-turnout",
+   "group": "turnout",
+   "title": "Raise change-supporter turnout beyond the field programme",
+   "scenarios": [
+    "ch_turnout_25000",
+    "ch_turnout_50000"
+   ],
+   "summary": "Extra turnout among change supporters, through relational organising and supporters' own networks rather than door teams. 25,000 extra change-list votes, about 1.3% more than the lists' projected vote, add about 1.7 points to the change-led chance (deny-61 +1.0, +0.44 seats), and 50,000 add about 3.4 (deny-61 +2.0, +0.86 seats). That is about 15 to 30 times what a 400,000-contact field programme buys.",
+   "evidence": "Friend-to-friend contact is the one tactic with large measured effects at high baseline turnout: about 8 points per message actually received in a 2018 US trial where the baseline was about 76%. A supervised US 'captain' pilot, in a low-salience election, raised turnout 13 points. Impersonal tools do little when salience is high. Social-pressure mail had no effect on voters above 60% prior propensity, and an $8.9 million US social-media programme had no average effect on turnout. Messages that stress high expected turnout work better than complaints about low turnout. The enthusiasm gap favours the bloc: in October, 86% of opposition supporters were certain to vote, against 81% of coalition supporters. The danger is breadth. A uniform national turnout rise nets the Netanyahu bloc about 3,100 votes per point, so turnout work must reach identified change supporters, not everyone. Students and young voters can vote only at the station where they are registered, and intercity buses and trains are free from 20:00 on Mon 26 Oct. Any message a list sends from its own database counts as direct mail and must carry the notices the privacy rules require.",
+   "cites": [
+    "MODEL-FORECAST",
+    "D3-F12",
+    "D11-F09",
+    "D11-F02",
+    "D9-F01",
+    "D8-F34",
+    "D8-F15",
+    "D11-F34",
+    "D2-F18",
+    "D5-F28",
+    "D12-F24",
+    "D11-F33",
+    "D9-F35"
+   ],
+   "feasibility": "medium",
+   "feasibility_note": "Medium for 25,000, low for 50,000. At the US trial's rate, 25,000 extra votes need roughly 300,000 friend-to-friend messages that actually reach a supporter. That is our arithmetic on one foreign study, so treat it as an order of magnitude. It means about 30,000 volunteers and active supporters each reminding ten people they know, from their own phones, in the final week. The four lists can launch it in days if they start this week, and it works through people's own networks rather than broadcasts that also reach Netanyahu-bloc voters.",
+   "timing": "Recruit from Thu 15 Oct. Personal reminders in the final week, Tue 20 to Tue 27 Oct.",
+   "owner": "The four campaign managers, each through its own volunteers, under one shared rulebook.",
+   "actions": [
+    "Ask every volunteer and active supporter to name about ten people and remind them personally in the final week, from their own phones and contacts.",
+    "Say that people are voting. Do not complain that turnout is low.",
+    "Messages sent from a list's database carry the direct-mail notices. No voter-level data passes between lists without written clearance from election counsel.",
+    "Remind students and young voters where they are registered and that intercity buses and trains are free from 20:00 Mon 26 Oct. The bloc organises no rides.",
+    "Reach soldiers and reservists as civilians, through family and friends, never through IDF units, bases or employers."
+   ],
+   "risks": [
+    "Broad appeals and public turnout counts wake Netanyahu-bloc voters, who are the larger pool.",
+    "Expat flights are a legal and narrative target: Likud's petition ended in a compromise with no ticket subsidies and no new flights. Keep the lists away from any transport or benefit.",
+    "Bulk or automated sending gets WhatsApp accounts blocked."
+   ]
+  },
+  {
+   "key": "raam-threshold",
+   "group": "allies",
+   "title": "Keep Ra'am above the line by doing no harm",
+   "scenarios": [
+    "jl_to_raam_0.5"
+   ],
+   "summary": "Ra'am clears the threshold in about 80% of simulations, and whether it passes is the largest single threshold swing in the forecast. Half a point of the vote moving from the Joint List to Ra'am adds about 1.1 points to the change-led chance (deny-61 +0.40, -0.09 change seats). That movement is the Arab lists' own business, and the bloc's lever is to do nothing that pushes Ra'am down.",
+   "evidence": "Ra'am has finished just above the line in each of its last three runs: 3.33%, 3.79% and 4.07%. The Netanyahu bloc reaches 61 in 9.6% of the draws where Ra'am passes and 26.4% where it fails, a correlation that partly reflects Arab turnout. The election committee's ban on Ra'am was overturned unanimously by the Supreme Court on 2 October, and Ra'am has signed a surplus agreement with the Joint List. Polls are a poor guide near the line: Ra'am averaged 1.7 seats in the final 2021 polls and won 4. Campaigns that paint reliance on Arab parties as illegitimate may depress Arab turnout, and Likud's 2019 camera campaign was followed by a rise in Arab turnout. The constraint runs the other way too: 61% of Jews oppose including Ra'am in the next government.",
+   "cites": [
+    "MODEL-FORECAST",
+    "D7-F17",
+    "D7-F28",
+    "D7-F16",
+    "D5-F04",
+    "D3-F32",
+    "D8-F15"
+   ],
+   "feasibility": "high",
+   "feasibility_note": "High, because it asks for restraint, not action. The four lists control only their own words. They should neither attack Ra'am nor campaign on bringing it in, which most Jewish voters oppose. Whether to support Arab-sector turnout at all is a separate leadership decision (see below).",
+   "timing": "Now to Tue 27 Oct.",
+   "owner": "The four list leaders. The joint message group enforces.",
+   "actions": [
+    "No attacks on Ra'am, or on Arab citizens' right to vote and take part. Answer Likud's 'dependence on Arab parties' line with the bloc's own coalition terms (see the Coalition page), not by denigrating Arab parties.",
+    "A change list's own outreach to Arab voters is its own decision. It should not aim at Ra'am's voters while Ra'am sits near the line."
+   ],
+   "risks": [
+    "Embracing Ra'am publicly costs Jewish votes and feeds Likud's strongest wedge.",
+    "Ra'am's result depends mostly on Arab turnout and the Arab lists' own campaigns, which the bloc does not control."
+   ]
+  },
+  {
+   "key": "within-bloc",
+   "group": "allies",
+   "title": "Stop competing for each other's voters",
+   "scenarios": [
+    "yashar_to_dem_0.5"
+   ],
+   "summary": "While all four change lists are safe, votes moving between them are worth almost nothing: half a point moving from Yashar to the Democrats changes the change-led chance by 0.01 points (deny-61 -0.01). Every change list clears the line in at least 97% of simulations. The value lies in not letting a fight for the largest list push Yisrael Beytenu or the Democrats toward the line, as happened to Meretz in 2022.",
+   "evidence": "In 2022 Yesh Atid took about 18% of Meretz's 2021 voters, roughly 36,000 votes, about nine times the roughly 4,000 votes Meretz lacked. A change list failing is rare but costly: in the draws where the Democrats or Yisrael Beytenu miss, the Netanyahu bloc reaches 61 in 39-45%. The fight is live: Together is trying to win back former Yesh Atid voters who moved to Yashar. Being the largest list does not decide who forms the government, since the President tasks whoever has the best chance and in 2009 passed over the largest list. The two change surplus agreements already add about 0.56 expected change seats. Insurance appeals can overshoot: in Lower Saxony in 2013 the junior partner polled near 5%, won 9.9%, and its senior partner lost power, though the source does not establish the counterfactual. In foreign studies, uncertain coalition prospects cost a party votes.",
+   "cites": [
+    "MODEL-FORECAST",
+    "D7-F14",
+    "D7-F29",
+    "D5-F18",
+    "D10-F17",
+    "D7-F07",
+    "D7-F20",
+    "D10-F05"
+   ],
+   "feasibility": "high",
+   "feasibility_note": "High. It needs the four campaign chiefs to agree a no-poaching rule this week and to hold it after each weekend's polls. Turf is already split by each station's lead change list on the Field pages.",
+   "timing": "Agree by Thu 15 Oct. Review after the polls of Fri 16 and Fri 23 Oct.",
+   "owner": "The four campaign chiefs.",
+   "actions": [
+    "No 'biggest party' appeals aimed at allies' voters, and no attack ads inside the bloc.",
+    "Split field turf by each station's lead change list (Field pages).",
+    "Hold insurance appeals in reserve. Use them only if a change list falls toward the line in the final published polls, and aim them at the bloc's own voters.",
+    "Joint spending needs both lists' counsel and treasurers. Shared voter data needs written clearance from election counsel."
+   ],
+   "risks": [
+    "Over-insurance can starve the list that gives the votes.",
+    "A visible fight inside the bloc tells soft voters the government on offer is unstable."
+   ]
+  },
+  {
+   "key": "coalition-clarity",
+   "group": "coalition",
+   "title": "Show one clear government on offer",
+   "scenarios": [],
+   "summary": "The model has no scenario for this lever, and the Coalition page sets out the paths in detail. On the forecast, the change lists reach 61 alone in about 6.9% of simulations and with Ra'am in about 26%. The formation model gives a change-led government about 22%, a unity government with Likud but without Netanyahu about 11%, and a repeat election about 47%.",
+   "evidence": "Coalition expectations shape Israeli votes. In 2003 coalition considerations decided about 1 vote in 10. In 2006 voters who expected their party to stay out of government deserted it for the least-bad viable partner, and in 2019-20 voters switched to influence who would form the government. In foreign studies, uncertain coalition prospects lower a party's vote, by about 11 points of vote probability between the most and least certain cases, and explicit coalition signals raise the weight voters give to coalition considerations. In a German experiment, strictly strategic voting was a minority behaviour. The constraints are real: 61% of Jews oppose including Ra'am, while 53% of voters support including a haredi party. Shas and UTJ reportedly lean toward recommending nobody and sitting out a year. On the forecast medians, a single change candidate would have about 52 recommendations, against 36 for Netanyahu from Likud, Otzma and RZP, or 53 if Shas and UTJ recommend him. Inoculating voters against an expected attack builds resistance that lasts about two weeks.",
+   "cites": [
+    "MODEL-FORECAST",
+    "P-F27",
+    "P-F26",
+    "D1-F25",
+    "D10-F05",
+    "D10-F04",
+    "D7-F19",
+    "D8-F15",
+    "D10-F29",
+    "D8-F33"
+   ],
+   "feasibility": "medium",
+   "feasibility_note": "Medium. It needs four leaders, two of whom want the premiership, to agree one name for the President and one set of conditions for each partner this week. They do not need to agree everything. An agreed recommendation and agreed conditions would remove most of the uncertainty that costs votes.",
+   "timing": "Agree by Thu 15 Oct. Announce by Sun 18 Oct. Recommendations to the President after the results.",
+   "owner": "Eisenkot, Bennett and Lapid, Golan and Liberman.",
+   "actions": [
+    "Agree one name to recommend to the President.",
+    "State conditions, not bans, for each path to 61: the Reservists, Ra'am inside the coalition or outside it, a haredi party, or a Likud after Netanyahu (see the Coalition page).",
+    "Answer the 'dependence on Arab parties' attack with the bloc's own terms before Likud's final push, not with silence.",
+    "Joint coalition advertising is cross-list spending: both lists' counsel and treasurers sign off."
+   ],
+   "risks": [
+    "Bans announced now may close the only path to 61 later.",
+    "Signals toward Ra'am cost Jewish votes, and signals toward haredi parties blunt the equal-burden message."
+   ]
+  },
+  {
+   "key": "field-programme",
+   "group": "field",
+   "title": "Run the field programme where it nets votes",
+   "scenarios": [
+    "field"
+   ],
+   "summary": "Door conversations in polling-station areas where extra turnout and persuasion net change-bloc votes, plus calls and friend-to-friend asks to identified voters (see the Field pages: Playbook and Planner). A realistic 150,000-400,000 completed contacts is worth about 760-1,700 net votes for a change-led government, roughly 0.05-0.1 points, and about 930-1,800 under the blocking objective. Across the model's assumption sets the same plans range from about 420 to 4,300 net votes.",
+   "evidence": "Personal contact is the best-supported turnout tactic, but its effect shrinks in high-salience elections and outside the US. US canvassing in high-salience races raised turnout about 3 points per completed conversation. Pooled European canvassing is about 0.8 points and not distinguishable from zero. Effects are largest where baseline turnout is 30-50% and near zero above 70%. About 60% of the effect reaches the other voter in a two-voter household. In one US study, only calls made in the final week worked. Small as it is, the field margin can decide a threshold: Meretz missed by 4,061 votes in 2022. Election-day rules bind everyone: no propaganda within 5 metres of a polling place, and party representatives may not tell their parties which voters have voted. Gifts, entertainment and food tied to propaganda are banned.",
+   "cites": [
+    "MODEL-FORECAST",
+    "D3-F01",
+    "D3-F22",
+    "D3-F03",
+    "P-F35",
+    "D3-F07",
+    "P-F28",
+    "D12-F14",
+    "D5-F25",
+    "D12-F09"
+   ],
+   "feasibility": "high",
+   "feasibility_note": "High. The bloc controls it, the planner allocates it, and 14 days is enough to run it. Its value is at the margin: a threshold, a remainder seat, the 61st seat. It should not absorb leaders' time that belongs to the national levers above.",
+   "timing": "Now to Tue 27 Oct, with most contacts in the final ten days.",
+   "owner": "Each list's field director on its own lead-list turf, with one joint field desk running the planner.",
+   "actions": [
+    "Send door teams only to polling-station areas where the model shows positive value. Never canvass Netanyahu-bloc strongholds, where door work nets votes for the other side.",
+    "In supporter-list ground, Netanyahu-majority cities with many change voters, reach identified supporters by calls, texts and friend-to-friend asks, not doors.",
+    "Split turf by each station's lead change list. No voter-level data passes between lists without written clearance from election counsel.",
+    "Persuade only inside door conversations on positive stations and by calls to identified soft Netanyahu-bloc voters. Run rescue by calls and media only.",
+    "Plan nothing in Arab localities or in stations where Arab lists lead. Hold Druze towns out until the candidate check and a Druze poll are done.",
+    "No organised rides, no gifts, no food or entertainment tied to campaigning, and nothing within 5 metres of a polling place on election day."
+   ],
+   "risks": [
+    "Canvassing the wrong turf mobilises the other side.",
+    "Turf disputes between the four lists waste the last week."
+   ]
+  },
+  {
+   "key": "vote-protection",
+   "group": "field",
+   "title": "Protect the count",
+   "scenarios": [],
+   "summary": "The model has no scenario for this lever. In Israel vote protection means accurate counting, valid ballots and documented objections, not watching voters. With RZP-Zehut, Otzma and Ra'am near the line and several seats decided by remainders, a few hundred votes can move a seat.",
+   "evidence": "In April 2019 the final count, with corrections and the double-envelope votes, moved a seat from Likud to UTJ, which had been several hundred ballots short. In September 2019 the committee annulled six stations for apparent tampering, and with other corrections a seat moved from UTJ to Likud. About 0.5-0.7% of ballots are invalid, roughly 30,000 in 2022, and double-envelope ballots are invalid more often (0.88% against 0.59%). Double envelopes were almost a tenth of all ballots in 2022 and are counted centrally after election night. Factions can still name and replace their committee members, and a list with no seat on a committee may send one observer. In foreign studies, observers reduce fraud at the stations they cover but can displace it to others, and announcing that result sheets will be photographed cut tampering in Afghanistan, though the legality of photographing protocols here is an open question. The 2019 hidden cameras in Arab polling stations show what not to do: a Likud contractor claimed credit for low Arab turnout, no effect was established, and Arab turnout rose at the next election.",
+   "cites": [
+    "D12-F18",
+    "D12-F19",
+    "D12-F20",
+    "D2-F03",
+    "D12-F15",
+    "D12-F32",
+    "D12-F33",
+    "D12-F35",
+    "D12-F34",
+    "D6-F25",
+    "D3-F32",
+    "MODEL-FORECAST"
+   ],
+   "feasibility": "high",
+   "feasibility_note": "High. Committee composition was fixed on 17 September, but the factions can still fill and replace their seats. Staffing, training and a count desk can be ready in ten days if the four lists share one staffing map.",
+   "timing": "Staffing map by Thu 22 Oct. Training Sat 24 to Mon 26 Oct. Count desk from 22:00 Tue 27 Oct to the final results.",
+   "owner": "Each list's election-day director and election counsel, through one joint count desk.",
+   "actions": [
+    "Fill every committee seat and alternate the four factions hold, and send observers where a list has no seat.",
+    "Train members on valid-ballot rules and on checking and signing the protocol.",
+    "Reconcile each signed protocol with the published station result, and file objections in writing.",
+    "Ask election counsel before anyone photographs a protocol.",
+    "Follow the double-envelope count after election night.",
+    "Do not film voters, report who has voted, or post anyone to watch a community."
+   ],
+   "risks": [
+    "Observers who act as watchers of voters invite backlash and legal action.",
+    "A thin staffing map leaves the stations that matter uncovered."
+   ]
+  },
+  {
+   "key": "arab-sector",
+   "group": "arab",
+   "title": "Arab-sector turnout: a leadership decision",
+   "scenarios": [
+    "arab_turnout_+5"
+   ],
+   "summary": "Whether the change bloc supports Arab-sector turnout at all is a leadership decision, not a field one. In the model, Arab turnout 5 points higher (about 46,000 more votes for the Joint List and Ra'am) lowers the change-led chance by about 1.4 points but raises the chance of denying Netanyahu 61 by about 2.1 points, and costs the change lists about 0.58 seats. The two objectives point in opposite directions.",
+   "evidence": "Arab turnout was 53.2% in 2022. From 2013 to 2021 it rose only when the Arab parties ran together, though in 2022 it rose despite a three-way split. A May 2026 survey put expected turnout at about 53% with separate lists, and a pollster associates this year's configuration, a three-party Joint List with Ra'am separate, with about 59%. Surveys overstate Arab turnout, so treat these as upper bounds. About 80% of Arab respondents rank crime and violence first. Campaigns that paint reliance on Arab parties as illegitimate may depress Arab turnout, while visible attempts to suppress it were followed by backlash in 2019. Rules bind anyone who acts: a group spending more than about NIS 120,000 on election activity, including election-day transport, must register with the State Comptroller, and a 2019 bus plan for Bedouin voters was allowed only on that condition.",
+   "cites": [
+    "MODEL-FORECAST",
+    "D1-F23",
+    "D2-F07",
+    "D5-F01",
+    "D5-F02",
+    "D2-F21",
+    "D5-F04",
+    "D3-F32",
+    "D12-F05",
+    "D6-F23",
+    "D5-F27"
+   ],
+   "feasibility": "low",
+   "feasibility_note": "Low as a lever. Arab turnout depends mostly on the Arab lists' own campaigns, crime and unity, which the bloc does not control. The bloc runs and brands no turnout work in Arab localities or in polling stations where Arab lists lead, and the atlas publishes no town-level Arab targets. Any support leadership chooses to give is independent, transparent and cleared by election counsel. The model's reverse scenario is context only: the bloc never works to lower anyone's turnout. What it controls in every case is its own language.",
+   "timing": "Leadership decision before Fri 16 Oct.",
+   "owner": "The four list leaders, with election counsel.",
+   "actions": [
+    "Decide at leadership level, with election counsel, which objective governs this question, and record the decision.",
+    "If any support is given, it goes only to independent, transparent, partner-led civic work that is registered as the law requires. Never change-bloc-run or branded activity, never organised rides, never gifts.",
+    "Whatever the decision, speak of Arab citizens and their vote with respect, and never treat their participation as a threat."
+   ],
+   "risks": [
+    "Any change-bloc-branded activity in Arab towns would feed Likud's 'dependence on Arab parties' attack and its election-day turnout alarms.",
+    "Higher Arab turnout dilutes change-list seats and, in the model, lowers the change-led chance."
+   ]
+  },
+  {
+   "key": "counter-mobilisation",
+   "group": "risks",
+   "title": "Do not wake the other side",
+   "scenarios": [
+    "nb_turnout_25000"
+   ],
+   "summary": "Every Netanyahu-bloc voter the campaign wakes cancels much of what a mobilised change voter adds. In the model, 25,000 extra Netanyahu-bloc votes cost about 1.3 points of the change-led chance (deny-61 -1.3, -0.27 change seats), against the 1.7 points that 25,000 extra change votes gain. On the blocking objective the loss is larger than the gain (1.3 against 1.0).",
+   "evidence": "The Netanyahu bloc holds the larger pool of low-turnout voters. A 1-point turnout rise across its segments nets it about 10,800 votes, against about 6,800 for the change bloc from the same rise across its own. On the current budgets, a rise of about 0.07-0.16 points across its segments would cancel the realistic field programme. Likud gained about 239,000 votes between September 2019 and March 2020. It is again targeting low-turnout stations where it wins about half the vote, and it plans to use the committee's election-day station turnout releases, due at least four times during the day, to rally its base by pointing to high turnout in change-bloc areas and Arab communities. Visible opposition mobilisation has repeatedly become a Likud narrative and a legal target, from V15 in 2015 to the 2026 expat flights. In US experiments, threats to a party's standing rouse its strongest identifiers, though negative campaigning in general does not depress turnout. The model's haredi-turnout scenario is context, not a lever. It shows how much rides on a turnout the bloc does not control and must not try to lower: a 10% fall in Shas and UTJ votes would move the change-led chance by about 3.2 points. Paying voters to abstain is a crime, and the committee has already barred one group from offering money to stay home.",
+   "cites": [
+    "MODEL-FORECAST",
+    "D11-F34",
+    "D11-F28",
+    "D5-F16",
+    "D5-F26",
+    "D5-F27",
+    "D11-F33",
+    "D8-F24",
+    "D11-F22",
+    "D12-F10",
+    "D11-F32",
+    "D11-F15",
+    "D3-F33"
+   ],
+   "feasibility": "high",
+   "feasibility_note": "High. This is about the bloc's own conduct, which it fully controls: turnout work aimed at identified supporters, no door teams in Netanyahu-bloc strongholds, no triumphalism and no rhetoric against any community.",
+   "timing": "Now to 22:00 Tue 27 Oct, with an election-day reply plan for each turnout release.",
+   "owner": "The joint message group, with each list's field and digital leads.",
+   "actions": [
+    "Keep turnout work aimed at identified supporters through calls and their own networks.",
+    "Do not publish or amplify turnout figures from change-leaning areas on election day. Expect Likud to use the committee's releases, and have a reply ready that attacks no community.",
+    "No 'we are winning' messages in the final week. They threaten Likud's strongest identifiers and can relax the bloc's own voters.",
+    "Never cast Haredim, Arab citizens or Likud voters as the enemy in any message."
+   ],
+   "risks": [
+    "One viral clip of contempt can undo a week of field work.",
+    "Likud's election-day alarm is a known play. In 2015 an 'Arab voters in droves' message went out on election day, though no causal estimate of its effect exists."
+   ]
+  },
+  {
+   "key": "opponent-consolidation",
+   "group": "risks",
+   "title": "The right consolidates",
+   "scenarios": [
+    "amcha_withdraws"
+   ],
+   "summary": "If Amcha (Ofer Winter) withdrew, with about 100,000 votes moving 80% to Likud and Otzma and 20% to change lists, the change-led chance would fall about 1.0 point. The deny-61 effect has the opposite sign in the model (+0.95 points): the exit removes some narrow Netanyahu majorities, in part because a fifth of Amcha's voters go to change lists. This is model arithmetic, not a forecast.",
+   "evidence": "Amcha clears the line in about 28% of simulations. Winter says he will recommend Netanyahu and join a Netanyahu government only if a national-service law passes first. Its voters come almost entirely from Likud and RZP-Otzma. The Netanyahu bloc's path to 61 runs through its own small lists: it reaches 61 in 23.6% of the draws where Amcha passes against 7.8% where it fails, and the pattern is the same for RZP and Otzma, though these are correlations. Late consolidation is a Likud pattern: in 2015 it won 30 seats after final polls of 20-23, with its gains coming mostly from inside its own bloc. In foreign experiments, insurance votes flow to a small partner when polls show it just below the line.",
+   "cites": [
+    "MODEL-FORECAST",
+    "D10-F30",
+    "D5-F10",
+    "D7-F29",
+    "P-F30",
+    "D1-F08",
+    "P-F25"
+   ],
+   "feasibility": "low",
+   "feasibility_note": "Low. The bloc cannot prevent consolidation on the right and should not try. It can avoid helping it: talking up the right's threshold troubles hands Likud its 'gevalt' argument.",
+   "timing": "Watch through Fri 23 Oct. Have a reply ready for a late 'gevalt' close.",
+   "owner": "The joint message group.",
+   "actions": [
+    "Do not talk in public about the threshold chances of RZP, Otzma or Amcha.",
+    "Prepare a reply to a late Likud 'gevalt' appeal that speaks to soft Likud voters about the draft and October 7, not about the right's arithmetic."
+   ],
+   "risks": [
+    "Consolidation lowers the change-led chance even as it lowers the chance of a Netanyahu 61.",
+    "A late consolidation can make the final polls misleading, as in 2015."
+   ]
+  },
+  {
+   "key": "legal-exposure",
+   "group": "risks",
+   "title": "Stay inside the law and off the petition list",
+   "scenarios": [],
+   "summary": "The model has no scenario for this lever. Petitions, removal orders and data or finance breaches cost assets and news cycles in the last week, and fines and debts later. Likud has already won orders against Yashar and Together material.",
+   "evidence": "The election committee's chair ordered Yashar to remove a video with AI-generated soldiers and ordered Bennett to cut IDF segments from a campaign video, and Likud has petitioned against three Yashar videos about Netanyahu's conduct before October 7. AI-made or altered content must carry a clear disclosure under rules issued on 26 July, and every election ad must name who commissioned it. Published polls must state who commissioned and conducted them, the dates, the sample and the margin of error, and no new poll may be published from the end of Friday 23 October until polls close. Spending by bodies linked to a party counts as party spending. The voter register may be used only for this election, never passed on, and must be deleted afterwards. The Privacy Protection Authority can now fine per person in a database, and targeted messages count as direct mail that must carry notices. In 2022 the State Comptroller found six factions had enriched register data from commercial firms without checking its source. Comptroller fines arrive one and a half to two years after the vote. A single wrongful WhatsApp block can disrupt a whole operation.",
+   "cites": [
+    "D12-F12",
+    "D12-F13",
+    "D12-F07",
+    "D12-F06",
+    "D12-F21",
+    "D12-F22",
+    "D12-F24",
+    "D12-F23",
+    "D12-F04",
+    "D9-F35"
+   ],
+   "feasibility": "high",
+   "feasibility_note": "High. Every item is within the bloc's control. It needs one counsel sign-off rule for all four lists, applied to every ad, message flow and joint activity for the next 14 days.",
+   "timing": "Rules in force now. Poll ban from Sat 24 Oct. Register deletion after the results.",
+   "owner": "Each list's election counsel and treasurer, through one joint compliance channel.",
+   "actions": [
+    "Counsel signs off every ad before it runs: disclosure labels on AI content, the sponsor line, no IDF uniforms or units, and no images of fallen or wounded soldiers without written consent.",
+    "Friday 23 Oct creative that quotes a poll carries the legally required survey details and comes down before Sat 24 Oct. No poll figures in campaign material from Sat 24 Oct.",
+    "Cross-list or joint spending only with both lists' counsel and treasurers.",
+    "No voter-level data between lists without written clearance from election counsel, and no enriched data whose source cannot be shown.",
+    "Avoid bulk or automated WhatsApp sending, and agree a fast escalation route for wrongful blocks."
+   ],
+   "risks": [
+    "A removal order in the final week costs a news cycle at the worst moment.",
+    "Fines and deficits land on the lists long after the campaign has ended."
+   ]
+  }
+ ]
+}

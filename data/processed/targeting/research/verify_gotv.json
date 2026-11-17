@@ -1,0 +1,256 @@
+{
+ "verdicts": [
+  {
+   "id": "D3-F01",
+   "status": "verified",
+   "note": "Checked the Crossref record for doi:10.1016/j.electstud.2023.102729: Mann & Haenschen, 'A meta-analysis of voter mobilization tactics by electoral salience', Electoral Studies 87, article 102729, Feb 2024 issue (licence date Dec 2023). The VoteAmerica republication (10 Feb 2024) confirms 240 US experiments drawn from Green & Gerber 2019, 40 of them in presidential cycles. Every quoted cell matches: canvass 3.05 [1.20, 4.90] n=24 vs 4.58 [2.97, 6.18] n=32; volunteer phone 2.28 vs 3.62; paid phone 0.74 vs 1.66; social-pressure mail 1.38 vs 2.45; standard mail 0.28 vs 0.46, and 0.05 [-0.24, 0.33] in presidential cycles; warm SMS 0.68 [0.05, 1.41], n=8 high-salience only; cold SMS 0.22 vs 0.58; robocalls 0.58 low-salience only. Contact rates match: canvass 25-30%, volunteer phones 10-12%, professional phones 6% in 2018. The per-tactic table gives 33.4-62.1% attenuation, but the authors' own text gives an overall range of 33-76%. Many cells are very small; the authors themselves urge caution. Internal cross-reference error: the 'non-US discount' source is D3-F22 (Bhatti et al., BJPolS), not D3-F24.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "D3-F02",
+   "status": "verified",
+   "note": "Crossref confirms Green, McGrath & Aronow, JEPOP 23(1): 27-48, 2013 (online 30 Oct 2012), doi:10.1080/17457289.2012.728223. Townsley (PSRM) Table 1 matches all four tactic rows: canvassing 2.536 (1.817, 3.255), 71 studies; volunteer calls 1.936 (1.298, 2.575), 37; commercial calls 0.980 (0.504, 1.456), 25; leaflets/mail 0.162 (0.078, 0.247), 110. Townsley's text gives the partisan mail figure of -0.213 (n.s.). The Enos & Fowler working paper gives the ITT averages (canvass 1.0, mail 0.7, phone 0.4); their footnote says the figures came from private correspondence with the authors. Enos & Fowler describe the pool as 'more than 200' experiments; the 'about 294 studies' figure was not confirmed. Internal cross-references are wrong: Townsley is D3-F25 (not F27) and Bhatti et al. BJPolS is D3-F22 (not F24). The ISPS URL refused connections during checking; https://doi.org/10.1080/17457289.2012.728223 is a stable alternative.",
+   "corrected_url": "https://doi.org/10.1080/17457289.2012.728223",
+   "corrected_quant": ""
+  },
+  {
+   "id": "D3-F03",
+   "status": "verified",
+   "note": "Read the NBER PDF directly: Gerber & Green, dated 5 April 2014 and marked 'EARLY DRAFT: NOT FOR CITATION'. Its Table 4 (random effects, by control-group turnout) matches exactly. All canvassing: 4.6 [2.4, 6.9]; 6.2 [4.2, 8.2]; 1.4 [-1.2, 4.0]; 0.6 [-1.5, 2.8]. Non-advocacy: 3.3 [1.4, 5.2]; 6.7 [4.4, 9.0]; 2.1 [0.1, 4.1]; 0.6 [-1.5, 2.8]. Caveat: Table 3 places only two studies in the 'above 70%' bin. The published chapter is Gerber & Green (2017), 'Field Experiments on Voter Mobilization: An Overview of a Burgeoning Literature', Handbook of Economic Field Experiments vol. 1, pp. 395-438, doi:10.1016/bs.hefe.2016.09.002 (Crossref confirms pages and year). Bhatti et al. (BJPolS; this is D3-F22, not F24) find a curvilinear pattern that falls short of significance in European data and is marginally significant in US data.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "D3-F04",
+   "status": "verified",
+   "note": "Downloaded the J-PAL PDF (Gerber & Green draft dated 12 Feb 2016). Table 4 matches: advocacy 0.010 (-0.101, 0.120), 19; non-advocacy 0.523 (0.299, 0.748), 51, falling to 0.366 (0.136, 0.596) without gratitude/norm mailers; social pressure 2.280 (1.259, 3.301), 15; all 0.759 (0.530, 0.988), 85. These are random-effects estimates. The draft also confirms the New Haven 1998 figure of +0.5 pp per mailer (SE 0.3), diminishing returns after six mailings, and García Bedolla & Michelson's 38 minority-mail experiments, 19 positive. The published version is the 2017 Handbook chapter (doi:10.1016/bs.hefe.2016.09.002).",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "D3-F05",
+   "status": "corrected",
+   "note": "The ISPS page confirms Gerber, Green & Larimer, APSR 102(1): 33-48 (2008). The J-PAL handbook draft confirms the rest: control 29.7%; civic duty +1.8, Self +4.9, Neighbors +8.1 pp; 20,000 households per treatment arm and 100,000 controls (about 180,000 total); Table 5 Self replications at 4-36% relative gains, with TX 2010 40.5 to 43.1 and WI 2010 49.0 to 50.8, neither significant; the partisan Self version had no effect (Schwenzfeier 2014); gratitude mailers +2.4, +2.5 and +2.4 pp (Panagopoulos); the Self mailer produced about 1,850 votes plus about 900 over three later primaries. Needs fixing: the statement that Mann (2010) found gentler versions 'worked just as well' is not supported by the cited source. Mann 2010 does exist (Political Behavior 32(3): 387-407, doi:10.1007/s11109-010-9124-y), but its abstract could not be read to confirm the claim. The handbook says gratitude mailers were about two-thirds as effective as Self, and the non-scolding TX/WI versions were weaker. Rewrite as 'gentler versions retain a substantial but smaller effect'.",
+   "corrected_url": "",
+   "corrected_quant": "Gentler alternatives: gratitude about 2.4-2.5 pp, about two-thirds of the Self effect; non-scolding Self in TX/WI 2010 general +2.6 and +1.8 pp (n.s.)."
+  },
+  {
+   "id": "D3-F06",
+   "status": "verified",
+   "note": "Read the Temple PDF directly. Nickerson, 'Volunteer Phone Calls Can Increase Turnout: Evidence From Eight Field Experiments', American Politics Research 34(3): 271-292, May 2006, doi:10.1177/1532673X05275923. Eight volunteer campaigns in six cities, 2000-2001. Pooled effect 3.8 pp (SE 1.4). $26 per vote at 15 contacts/hour and $15/hour. Table 3: canvassing $32, leaflets $23-47, direct mail $69. Gerber-Green professional calls: New Haven -2.0, West Haven -1.3, pooled -1.6 (SE 1.4). The abstract attributes the effect to calls that are 'sufficiently personal'. Add volume, issue and pages to the citation.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "D3-F07",
+   "status": "verified",
+   "note": "The J-PAL 2016 draft text confirms every figure. 2002 nonpartisan calls: 1 vote per 280 contacts. 2004 Illinois: 1 per 55. Ha & Karlan 2009 (NC/MO): 1 per 500. Ha & Karlan 2007: standard script 1.2 pp vs medium-length chatty script 3.4 pp (1 per 30). Mann & Klofstad 2015: low-quality vendors 0.2 pp vs high-quality 0.9 and 1.4 pp. Nickerson 2007: only final-week calls worked (1 vote per 20 contacts); calls in the first three weeks had no effect. Nuance: the 3.4 pp result was for the medium script; the longest 'recruit your friends' script did worse (1 per 69). The primary source for the timing result is Nickerson (2007), 'Quality Is Job One', AJPS 51(2): 269-282.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "D3-F08",
+   "status": "corrected",
+   "note": "Crossref confirms Malhotra, Michelson, Rogers & Valenzuela, APR 39(4): 664-681, 2011. A Semantic Scholar abstract confirms the core pattern: habitual voters responded in the lower-salience election, casual voters in the higher-salience one. Crossref also confirms Dale & Strauss, AJPS 53(4): 787-804 (2009): N=8,053, +3.0 pp. The Harvard DASH URL now hits an AWS human-verification wall and returns HTTP 405 to automated clients, so the subgroup numbers (0.7-0.9 average; +16.2; 1.0 (0.4); 2.3 (0.8)) and the San Mateo detail could not be checked. Correction needed: the peer-reviewed version of Schein et al. at the URL given in D3-F12 gives the automated-texting benchmark as 0.44 pp, citing Haenschen & Mann 2021 'Short but Mighty' (a technical report). It does not cite 0.29 pp from Green & Gerber 2019. Mann & Haenschen 2024 (D3-F01) gives cold SMS 0.22 (high salience) and 0.58 (low).",
+   "corrected_url": "",
+   "corrected_quant": "Automated/organisational texting benchmark per Schein et al. (WWW'21): 0.44 pp (Haenschen & Mann 2021). Subgroup figures from Malhotra et al. not verified."
+  },
+  {
+   "id": "D3-F09",
+   "status": "corrected",
+   "note": "The VIVE page and Crossref confirm Bhatti, Dahlgaard, Hansen & Hansen, JEPOP 27(3): 291-310 (online Jan 2017), doi:10.1080/17457289.2016.1270288. Confirmed: four SMS experiments, more than 300,000 voters, two Danish elections, ITT 0.33-1.82 pp, pooled 0.74 pp, no added effect from multiple messages, no significant wording differences. Correction: the abstract says the before-election-day advantage was found in one experiment only, so it should not be stated as a general finding. The 'no prior relationship' sender detail was not confirmed.",
+   "corrected_url": "https://doi.org/10.1080/17457289.2016.1270288",
+   "corrected_quant": ""
+  },
+  {
+   "id": "D3-F10",
+   "status": "verified",
+   "note": "Read the CBS accepted-manuscript PDF. Bhatti et al. (2017), Electoral Studies 50: 39-49, doi:10.1016/j.electstud.2017.09.003. Confirmed: about 30% of the direct effect spilled over to other household members (30-34% across specifications); direct effect 1.82 pp; spillover to parents not living with the young voter 0.02 pp (SE 0.36); the authors conclude that households matter more than family ties.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "D3-F11",
+   "status": "verified",
+   "note": "The J-PAL 2016 draft confirms all figures. Stollwerk DNC email (NYC 2005): treatment 58.7% (N=41,900) vs control 59.7% (N=10,513). Bond et al. 2012: the information banner had 'precisely zero' effect and the social banner +0.39 pp; the authors note outsiders cannot buy this feature. Collins, Keane & Kalla Rock the Vote ads: 56.5% vs 56.5% in 2012, 14.0% vs 14.6% in 2013. The draft also notes a registrar-sent email had small significant effects (Malhotra et al. 2012), so 'email does nothing' should be limited to emails from campaigns or civic groups.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "D3-F12",
+   "status": "corrected",
+   "note": "Downloaded the URL. Its PDF is the peer-reviewed conference paper: Schein, Vafa, Sridhar, Veitch, Quinn, Moffet, Blei & Green (2021), 'Assessing the Effects of Friend-to-Friend Texting on Turnout in the 2018 US Midterm Elections', Proceedings of the Web Conference 2021 (WWW '21), ACM, doi:10.1145/3442381.3449800. It is not a working paper titled 'A Digital Field Experiment Reveals...'. All numbers match: unadjusted ITT 3.02 (s.e. 1.10) and CACE 11.88 (s.e. 4.37); covariate-adjusted ITT 2.09 (0.91) and CACE 8.26 (SE 3.61), CI (1.2, 15.3); turnout 78.88% treatment vs 75.86% control; fewer than one-third of targets messaged; complier share 25.43%. Correction: the comparison figure in this version is 0.44 pp for automated texting (Haenschen & Mann 2021), not 0.29. Caveat: the estimates come from a refined subpopulation (n=27,464) selected on queue position and voter-file match quality.",
+   "corrected_url": "https://doi.org/10.1145/3442381.3449800",
+   "corrected_quant": "ITT 3.02 (1.10), CACE 11.88 (4.37); adjusted ITT 2.09 (0.91), CACE 8.26 [1.2, 15.3]; automated-text benchmark cited in the paper is 0.44 pp, not 0.29."
+  },
+  {
+   "id": "D3-F13",
+   "status": "verified",
+   "note": "The CIRCLE page (Kiesa, 2011) confirms Addonizio, Green & Glaser (2007), PS: Political Science & Politics 40: 721-727. Confirmed: 14 randomised festival experiments in 2005-06 (five youth- or student-focused); +6.5 pp at an expected 50% baseline, 2.6 pp at a 10% baseline; about $28 per vote. The Hooksett, NH +2-3 pp first-event figure was not on the page and is not verified.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "D3-F14",
+   "status": "corrected",
+   "note": "Read the Wharton PDF directly. Nickerson & Rogers, Psychological Science 21(2): 194-199. Pennsylvania 2008 Democratic primary; sample limited to those with one or fewer primary votes since 2000; N=287,228; contact rates 23.0-26.3%. ITT: standard -0.1, self-prediction +0.5, plan +0.9 (SE 0.4). Among contacted: -0.2, 2.0, 4.1 (SE 1.7). Single-voter households 9.1 pp (SE 2.3); two- or three-voter households -1.5 (n.s.). Correction: the Gerber-Green handbook lists two null phone replications, Cho (2008) and Gerber, Hill & Huber (2015), not one. The 0.5 pp mailer result is Rogers & Ternovski (2015).",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "D3-F15",
+   "status": "verified",
+   "note": "The Cambridge page confirms Nickerson, APSR 102(1): 49-57 (Feb 2008), doi:10.1017/S0003055408080039. The abstract confirms a placebo design (recycling pitch) in two-voter households and that about 60% of the propensity to vote passed to the other member, in both experiments. Denver and Minneapolis 2002 primaries are consistent with the Gerber-Green handbook's canvassing table ('2002P Nickerson -- Denver/Minneapolis').",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "D3-F16",
+   "status": "verified",
+   "note": "Crossref gives the author order Sinclair, McConnell, Green; AJPS 56(4): 1055-1069 (2012). The ISPS abstract confirms the 2009 Chicago social-pressure mailing experiment with multilevel randomisation, 'some evidence of within-household spillovers but no evidence of spillovers across households'. The handbook classifies it as a 2009 special election. The ~64,000 sample size and the exact all/half/none design wording were not confirmed from accessible pages.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "D3-F17",
+   "status": "corrected",
+   "note": "Crossref confirms Foos & de Rooij, AJPS 61(2): 289-304 (2017; online Sept 2016), doi:10.1111/ajps.12270. Abstract and AJPS blog confirm larger mobilisation effects in mixed-party households, growing with message partisanship, and the reading that discussion rather than contagion is the mechanism. Correction to the relevance text: per the AJPS blog this was a 2012 UK experiment in which Labour Party volunteers phoned one voter per household. It was not doorstep canvassing, so the 'at the door' framing should be changed to phone contact. No magnitudes are given on public pages.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "D3-F18",
+   "status": "verified",
+   "note": "Crossref confirms Arceneaux & Nickerson, AJPS 53(1): 1-16 (2009). The abstract confirms a threshold model in which only citizens near the indifference point are mobilised, with the threshold set by election interest, tested on 11 door-to-door experiments. It also states that low-propensity voters can be mobilised effectively only in high-turnout elections.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "D3-F19",
+   "status": "corrected",
+   "note": "Crossref confirms Enos, Fowler & Vavreck, 'Increasing Inequality: The Effect of GOTV Mobilization on the Composition of the Electorate', Journal of Politics 76(1): 273-288 (2014), doi:10.1017/S0022381613001308. The URL given is an LSE Research Online deposit of a USAPP blog post by Enos & Fowler (27 Mar 2014), not the article. Use the DOI instead. The blog confirms 24 GOTV experiments covering about 1.2 million voters, with high-propensity voters responding more; in the Neighbors experiment the effect approached 12 pp for high-propensity voters vs about 2 pp for the lowest. The claim about mobilising those 'with more extreme views' was not confirmed.",
+   "corrected_url": "https://doi.org/10.1017/S0022381613001308",
+   "corrected_quant": "24 experiments, about 1.2 million voters; Neighbors mailer: about 12 pp for high-propensity vs about 2 pp for lowest-propensity voters."
+  },
+  {
+   "id": "D3-F20",
+   "status": "corrected",
+   "note": "The book exists: García Bedolla & Michelson, Mobilizing Inclusion: Transforming the Electorate through Get-Out-the-Vote Campaigns, Yale University Press, 2012 (per the Gerber-Green handbook reference list). The cited ISPS URL (isps.yale.edu/node/20965) returns 404. No publisher page was confirmed, so the corrected URL is the handbook draft, which describes the book secondhand. The handbook confirms the California Votes Initiative 2006-2008: 117 canvassing experiments with treatment above control in 77 (p<0.001); 38 mail experiments with 19 positive; persistence of effects. The total of 268 experiments and the 'follow-up calls up to about 10 pp' figure were not verified.",
+   "corrected_url": "https://povertyactionlab.org/sites/default/files/research-paper/Gerber%20Green%20Handbook.pdf",
+   "corrected_quant": "Canvassing: 117 experiments, treatment > control in 77; mail: 38 experiments, 19 positive. Total of 268 and the ~10 pp follow-up figure unverified."
+  },
+  {
+   "id": "D3-F21",
+   "status": "verified",
+   "note": "Read the Stanford-hosted working paper (Enos & Fowler, 46 pp). Confirmed: about 7 pp in the most heavily targeted states; more than 10 pp in targeted subgroups; 2.6 million additional voters; Romney campaign about 225 million contact attempts; effects roughly additive (10 calls x 0.4 + 2 mail x 0.7 + 2 knocks x 1.0 = 7.4); no detectable TV effect. Published version (Crossref): Enos & Fowler, 'Aggregate Effects of Large-Scale Campaigns on Voter Turnout', Political Science Research and Methods 6(4): 733-751 (2018; online May 2016), doi:10.1017/psrm.2016.21.",
+   "corrected_url": "https://doi.org/10.1017/psrm.2016.21",
+   "corrected_quant": ""
+  },
+  {
+   "id": "D3-F22",
+   "status": "corrected",
+   "note": "Read the KCL PDF (BJPolS, online 19 Dec 2016, doi:10.1017/S0007123416000521). Confirmed: European CACE 0.78 [-0.16, 1.71]; US 2.50 [1.77, 3.22] (Green-McGrath-Aronow data excluding the UK study); both Danish studies null; the largest European CACE came from the only first-past-the-post election; volunteers vs candidates in Italy 5.0 (2.2) vs -0.4 (2.6). All Table 1 values match. Corrections: (1) the pooled estimate is a fixed-effects, precision-weighted average of 8 studies. The Spanish study (Ramiro et al.) is listed but excluded for lack of a CACE, so 'pooling nine ... including Spain' is wrong. (2) Under an alternative compliance assumption the pooled estimate rises to 1.56 (SE 0.78). (3) Nyman's Swedish study was partisan. US data show a very weak negative turnout-effect relationship.",
+   "corrected_url": "",
+   "corrected_quant": "European pooled CACE 0.78 [-0.16, 1.71], fixed-effects, 8 studies (Spain excluded); 1.56 (SE 0.78) under alternative compliance assumptions."
+  },
+  {
+   "id": "D3-F23",
+   "status": "corrected",
+   "note": "The Cambridge page confirms John & Brannan, BJPolS 38(3): 565-574 (2008), doi:10.1017/S0007123408000288; no abstract is available. Bhatti et al. Table 1 confirms the numbers: ITT 3.6, CACE 6.7 (SE 3.7), N=2,510, contact rate 54%, control turnout 46.3%. Not confirmed from accessible text: that telephoning also raised turnout, the attribution to personal contact rather than information, and 'later UK work suggests volunteer phone banks work especially well'. Keep the citation and numbers; soften or drop those qualitative statements unless the full text is checked.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "D3-F24",
+   "status": "verified",
+   "note": "The Bath research portal confirms Fieldhouse, Cutts, Widdop & John, Electoral Studies 32(1): 113-123 (2013), doi:10.1016/j.electstud.2012.09.003. The abstract confirms a nationally representative two-wave English experiment: telephone and mail more effective than earlier studies suggested, size dependent on electoral context, cumulative effects from repeated contact, and no synergy. The relevance note's claim that Israeli voters are saturated with robocalls and SMS is the desk's own conjecture, not from this source.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "D3-F25",
+   "status": "verified",
+   "note": "Cambridge page and PDF confirm Townsley, PSRM 13(1): 21-35 (issue Jan 2025; online Oct 2018), doi:10.1017/psrm.2018.39. N=6,525 in 3,371 households (2017 Suffolk local elections). Abstract figures: leaflets +4.3 and leaflet plus canvass +4.9 (non-postal households); added canvass effect +0.6 (n.s.); any contact +3.6. Caveats: in the full sample the leaflet effect is +2.8 (n.s.) and leaflet plus canvass +4.5; postal-voter households showed negative, non-significant effects; contact rate was 28%. The literature review confirms Foos & de Rooij partisan calls at 2-3 pp, Nyman Sweden at 3.6 pp, and Foos & John (2016) differential mobilisation.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "D3-F26",
+   "status": "corrected",
+   "note": "AEA page confirms Pons, AER 108(6): 1322-63 (2018), doi:10.1257/aer.20160524. The abstract confirms precinct-level randomisation within Hollande's 2012 campaign, no turnout effect, a higher first-round vote share, about one-quarter of the second-round margin, and persistence into later elections. Corrections and unverified items: (1) 'five million doors' is the campaign's total, not the experimental sample. (2) The full text was blocked (403), so +3.2/+2.8 pp, 'half of the first-round lead', 4,674 precincts and the novelty explanation are unverified. (3) Bhatti et al. (BJPolS 2019) Table 1 describes the Pons experiment as covering 2,660 precincts, contradicting the desk's 4,674; resolve this before use.",
+   "corrected_url": "",
+   "corrected_quant": "Verified: no turnout effect; first-round share up; about 1/4 of the second-round margin. Unverified: +3.2/+2.8 pp, 1/2 of the first-round lead, 4,674 precincts (Bhatti et al. cite 2,660)."
+  },
+  {
+   "id": "D3-F27",
+   "status": "verified",
+   "note": "The Cambridge page confirms Kalla & Broockman, APSR 112(1): 148-166 (2018; online Sept 2017), doi:10.1017/S0003055417000363: 40 prior experiments plus 9 new ones, best estimate zero in general elections. The two exceptions match: unusually unpopular candidate positions with heavy targeting of persuadables; early contact measured immediately, which decays.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "D3-F28",
+   "status": "verified",
+   "note": "The AEA article page confirms Giné & Mansuri, AEJ: Applied 10(1): 207-35 (2018), doi:10.1257/app.20130480. Confirmed: both targeted and untargeted women in treated clusters were 11 pp more likely to vote; more independent candidate choice; treating 10 women added about 7 votes at about US$3.10 per vote; a 10% rise in the share of treated women at a polling station cut the winning party's share by about 7%. The working-paper figures (12 pp, $2.3) were not checked. The research-summary URL is fine, but https://www.aeaweb.org/articles?id=10.1257/app.20130480 is the primary page.",
+   "corrected_url": "https://www.aeaweb.org/articles?id=10.1257/app.20130480",
+   "corrected_quant": ""
+  },
+  {
+   "id": "D3-F29",
+   "status": "verified",
+   "note": "The ISPS page confirms Panagopoulos, 'Timing Is Everything? Primacy and Recency Effects in Voter Mobilization Campaigns', Political Behavior 33(1): 79-93 (online 2010, print 2011). Confirmed: nonpartisan commercial calls at different points before the November 2005 Rochester, NY municipal election, responding to Nickerson 2007; the author concludes early calls can also be effective. The ~25,000 sample and the exact 4-week, 2-week and 3-day schedule were not confirmed (Springer page paywalled).",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "D3-F30",
+   "status": "verified",
+   "note": "Coppock's page confirms Coppock & Green, AJPS 60(4): 1044-1062 (2016), doi:10.1111/ajps.12210. The AJPS blog post by the authors states the average effect of voting once on future turnout is about 10 pp, with substantial variation by election type, closeness and state, and applying only to compliers.",
+   "corrected_url": "https://doi.org/10.1111/ajps.12210",
+   "corrected_quant": ""
+  },
+  {
+   "id": "D3-F31",
+   "status": "corrected",
+   "note": "Crossref and the Harvard-hosted PDF confirm Enos, AJPS 60(1): 123-142 (2016; online Feb 2015), doi:10.1111/ajps.12156. Confirmed: more than 25,000 displaced; white turnout fell by more than 10 pp; the effect is 13.4 pp at d*=100 m and 10.7 pp at d*=500 m; some specifications exceed 15 pp even at d*=500 m; proximity is linked to more conservative voting. Unsupported: 'The article has faced research-integrity critiques' has no citation, and none could be located with the tools available. Drop it or add a specific checkable source.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "D3-F32",
+   "status": "verified",
+   "note": "Fetched the article: Yardena Schwartz, NBC News, 21 Sept 2019. Confirmed: Arab turnout 49% in April 2019 (record low) and 59% in September 2019, per Arik Rudnitzky of IDI; Joint List expected at 13 seats, up from 10. MK Miki Zohar told Walla the camera-bill push hurt Likud by waking the Arab sector and lulling right-wing voters. The article covers the failed camera bill and Likud's election-day claim of facial-recognition cameras outside Arab polling stations. Low confidence is appropriate: this is journalism and the Joint List reunification is a confound.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "D3-F33",
+   "status": "verified",
+   "note": "The Wikipedia page confirms the 17 March 2015 election-day video. It reports Nir Hefetz's testimony in the Case 4000 trial (Nov 2021) that the video went by SMS to about 700,000 devices in targeted areas including Likud-heavy neighbourhoods. On 10 Dec 2016 coalition chairman David Bitan said the aim was to raise Jewish turnout. The page notes final polls had the Zionist Union ahead by four seats and contains no causal estimate. The 30 vs 24 result is not on the page but matches the official 20th Knesset results. Wikipedia is a secondary source; cite the underlying press reports or official results for the final deliverable.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  },
+  {
+   "id": "D3-F34",
+   "status": "corrected",
+   "note": "The AEA page confirms Cantoni, 'A Precinct Too Far: Turnout and Voting Costs', AEJ: Applied 12(1): 61-85 (2020), doi:10.1257/app.20180306. Confirmed: precinct-boundary discontinuities in nine Massachusetts and Minnesota municipalities; a 1 SD (0.245 mile) increase in distance cuts ballots cast by about 2-5% across four elections; in non-presidential elections the effect is about three times larger in high-minority areas. The URL given is a Chinese aggregator (SUFE academic newsletter), so replace it with the AEA page. The earlier-version counterfactual (+1.6-4 pp) is not verified.",
+   "corrected_url": "https://www.aeaweb.org/articles?id=10.1257/app.20180306",
+   "corrected_quant": ""
+  },
+  {
+   "id": "D3-F35",
+   "status": "verified",
+   "note": "The CBS portal and Crossref confirm Bhatti, Dahlgaard, Hansen & Hansen, West European Politics 41(1): 240-260 (2018; online 30 Jun 2017), doi:10.1080/01402382.2017.1339985. Confirmed: more than 60,000 first-time voters; eight letter designs based on the calculus of voting and prospect theory; small positive validated-turnout effects with little difference between versions; mostly low-propensity voters mobilised, increasing equality. The authors conclude letters are not a full solution. No magnitudes are on the abstract page.",
+   "corrected_url": "",
+   "corrected_quant": ""
+  }
+ ],
+ "missing_key_works": [
+  "Foos, Florian & Peter John (2018). 'Parties are No Civic Charities: Voter Contact and the Changing Partisan Composition of the Electorate.' Political Science Research and Methods 6(2): 283-298 (online Nov 2016). https://doi.org/10.1017/psrm.2016.48 (verified via Crossref and the Cambridge abstract). Conservative leaflets and door-knocks in a marginal English constituency at the 2014 European and local elections. They shifted the electorate toward the Conservatives without raising total turnout, because rival (especially Labour) identifiers turned out less. Leaflets worked about as well as visits. This is the primary source for the 'differential mobilisation' claim the desk cites only second-hand (D3-F25), and it bears directly on bloc-level net effects of contact in mixed localities.",
+  "Pons, Vincent & Guillaume Liegey (2019). 'Increasing the Electoral Participation of Immigrants: Experimental Evidence from France.' The Economic Journal 129(617): 481-508 (online Dec 2018). https://doi.org/10.1111/ecoj.12584 (verified via Crossref and a Semantic Scholar abstract). About 23,800 citizens were randomised to door-to-door visits before the 2010 French regional elections. Visits raised turnout among immigrants but not non-immigrants, apparently because immigrants started with less political information. The effect faded in later elections. Relevant to immigrant-origin and lower-information Israeli segments (e.g., FSU and Ethiopian-Israeli communities) in a European PR setting.",
+  "Nickerson, David W. (2007). 'Quality Is Job One: Professional and Volunteer Voter Mobilization Calls.' American Journal of Political Science 51(2): 269-282. https://doi.org/10.1111/j.1540-5907.2007.00250.x (verified via Crossref). Primary source for the final-week timing and call-quality findings that D3-F07 and D3-F29 cite only through the Gerber & Green handbook draft. It should be cited directly for the timing weight in the allocation model.",
+  "Gerber, Alan S. & Donald P. Green (2017). 'Field Experiments on Voter Mobilization: An Overview of a Burgeoning Literature.' In Handbook of Economic Field Experiments, vol. 1, pp. 395-438. Elsevier/North-Holland. https://doi.org/10.1016/bs.hefe.2016.09.002 (pages and year verified via Crossref). The published, citable version of the drafts used in D3-F03, F04, F07 and F11. The 2014 NBER draft is marked 'EARLY DRAFT: NOT FOR CITATION', so the deliverable should cite this chapter and check the figures against it.",
+  "Enos, Ryan D. & Anthony Fowler (2018). 'Aggregate Effects of Large-Scale Campaigns on Voter Turnout.' Political Science Research and Methods 6(4): 733-751 (online May 2016). https://doi.org/10.1017/psrm.2016.21 (verified via Crossref). Peer-reviewed version of the working paper in D3-F21, which the desk said it could not verify. It supplies the citable version of the saturation and additivity estimates (about 7 pp in heavily targeted states, more than 10 pp in targeted subgroups)."
+ ]
+}
