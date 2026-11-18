@@ -275,6 +275,28 @@ def test_committed_freeze_and_page(root):
         assert chk.check_js(html) == []
 
 
+def test_final_poll_comparison(root):
+    page = root / "output" / "site" / "scorecard.json"
+    data = json.loads(page.read_text(encoding="utf-8")) if page.exists() else {}
+    if not data.get("result") or not (root / "data" / "processed" / "polls.csv").exists():
+        pytest.skip("no scored 2026 page")
+    pc = sc.poll_comparison(data["frozen"]["payload"], data["result"]["seats"])
+    y, off = pc["result"], data["frozen"]["payload"]["models"][0]
+    model = next(r for r in pc["rows"] if r["kind"] == "model")
+    assert model["seats"] == {k: off["central"].get(k, 0) for k in pc["lists"]}
+    assert model["err"] == sum(abs(model["seats"][k] - y[k]) for k in y)
+    polls = [r for r in pc["rows"] if r["kind"] != "model"]
+    assert len(polls) == pc["n_polls"] and all(sum(r["seats"].values()) == 120 for r in polls)
+    assert [r["err"] for r in pc["rows"]] == sorted(r["err"] for r in pc["rows"])
+    assert all(r["share_mae"] is not None for r in pc["rows"] + [pc["average"]])
+    for k in pc["lists"]:                                   # the reference row averages the polls
+        assert pc["average"]["seats"][k] == pytest.approx(np.mean([r["seats"][k] for r in polls]), abs=0.05)
+    import build_insights as bi                              # the insights page grades them the same way
+    rk = bi.ranking(bi.final_polls(bi._polls()), data)
+    assert sorted(r["err"] for r in rk["rows"]) == [r["err"] for r in pc["rows"]]
+    assert data["polls"]["rows"] == pc["rows"], "rebuild the page: python src/scorecard.py --page"
+
+
 def test_blackout_matches_the_projection_and_pages_are_published():
     import bayes_model as bm
     import pipeline

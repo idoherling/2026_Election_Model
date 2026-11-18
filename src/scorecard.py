@@ -74,6 +74,13 @@ THE SCORES (per model; the rules are frozen with the forecast)
   One election is one draw: twelve-odd correlated lists from a single
   election. A model that ranks first may simply have been lucky; the
   eight-cycle backtest remains the better guide to which model is better.
+
+THE FINAL POLLS (poll_comparison; 2026 pages with a result)
+  The official forecast's central counts beside every outlet's last poll
+  before the blackout (fieldwork from 14 Oct) and their average: seats
+  missed, the Netanyahu-bloc error, threshold calls and the vote-share error
+  per list (src/postmortem_shares.py). Computed at page build, outside the
+  frozen payload, so the fingerprint is unaffected.
 """
 from __future__ import annotations
 
@@ -750,6 +757,74 @@ def score_frozen(payload: dict, seats: dict, government: Optional[str] = None,
             "models": models}
 
 
+# --------------------------------------------------------------- the final polls
+def poll_comparison(payload: dict, seats: dict) -> Optional[dict]:
+    """The frozen official forecast beside every outlet's last poll before the
+    blackout, against the result (2026 only; the page's "final polls"
+    section). Polls publish seat tables, so the model enters with its
+    published central counts. Per forecast, over the scored lists: seats
+    missed (the sum of |forecast - result|), the signed Netanyahu-bloc error,
+    threshold calls (lists put on the wrong side of the threshold) and the
+    vote-share error per list (postmortem_shares, dossier s.74). The polls
+    are build_insights.final_polls (fieldwork from postmortem_shares.SINCE,
+    each outlet's last); a reference row averages their seat tables.
+    Returns None when an input is missing."""
+    if payload.get("cycle") != "2026":
+        return None
+    import build_insights as bi
+    import postmortem_shares as ps
+    try:
+        fin = bi.final_polls(bi._polls())
+        share = ps.table(with_average=True)
+    except (OSError, KeyError, ValueError) as e:
+        print(f"WARNING no final-poll comparison on the page: {e}")
+        return None
+    reg, off = payload["lists"], payload["models"][0]
+    keys = scored_lists(payload, seats)
+    col = {name: pid for pid, name in bi.PID.items()}
+    if any(k not in col for k in keys):
+        print("WARNING no final-poll comparison on the page: no poll column for "
+              + ", ".join(k for k in keys if k not in col))
+        return None
+    y = {k: int(seats.get(k, 0)) for k in keys}
+    nb = [k for k in keys if reg[k]["bloc"] == "nb"]
+    mae = {r.outlet: (round(float(r.mae), 2), r.basis) for r in share.itertuples()}
+
+    def grade(v: dict, exact: bool = True) -> dict:
+        e = [v[k] - y[k] for k in keys]
+        g = {"err": sum(abs(x) for x in e), "nb": sum(v[k] - y[k] for k in nb)}
+        if exact:
+            g["thr"] = int(sum((v[k] > 0) != (y[k] > 0) for k in keys))
+        else:
+            g = {k: round(float(x), 1) for k, x in g.items()}
+            g["thr"] = None
+        return g
+
+    def row(rid, kind, outlet, firm, when, n, v, label):
+        m = mae.get(label)
+        return {"id": rid, "kind": kind, "outlet": outlet, "firm": firm, "date": when, "n": n,
+                "seats": v, **grade(v, kind != "average"),
+                "share_mae": m[0] if m else None, "share_basis": m[1] if m else None}
+
+    rows = []
+    for _, r in fin.iterrows():
+        v = {k: int(r[col[k]]) if col[k] in fin.columns else 0 for k in keys}
+        rows.append(row(f"{r.publisher}|{r.pollster}", "panel" if r.pollster in bi.PANELS else "poll",
+                        r.publisher, r.pollster, r.fieldwork_end.strftime("%Y-%m-%d"),
+                        None if pd.isna(r.sample_size) else int(r.sample_size), v,
+                        f"{r.publisher} ({r.pollster})"))
+    polls = list(rows)
+    rows.append(row("model", "model", None, None, payload["asof"], None,
+                    {k: int(off["central"].get(k, 0)) for k in keys}, "MODEL (frozen forecast)"))
+    rows.sort(key=lambda r: (r["err"], abs(r["nb"])))
+    avg = {k: round(float(np.mean([r["seats"][k] for r in polls])), 1) for k in keys}
+    return {"since": ps.SINCE, "n_polls": len(polls), "lists": sorted(keys, key=lambda k: -y[k]),
+            "result": y, "rows": rows,
+            "average": row("average", "average", None, None, None, None, avg, "AVERAGE (final polls)"),
+            "source": "data/processed/polls.csv; data/processed/postmortem_cec_filings.csv, "
+                      "postmortem_cec_party_pcts.csv (src/postmortem_shares.py)"}
+
+
 # --------------------------------------------------------------- page
 def labels() -> dict:
     return {"pm_he": PM_HE, "pm_en": PM_EN}
@@ -757,10 +832,11 @@ def labels() -> dict:
 
 def page_payload(doc: dict, path: Optional[Path], result: Optional[dict], scores: Optional[dict],
                  mode: str) -> dict:
+    polls = poll_comparison(doc["payload"], result["seats"]) if result and scores else None
     return {"version": 1, "mode": mode, "generated_utc": en.utc_iso(),
             "frozen": {"file": _rel(path) if path else None, "sha256": doc["sha256"],
                        "verified": verify_doc(doc), "payload": doc["payload"]},
-            "result": result, "scores": scores, "labels": labels()}
+            "result": result, "scores": scores, "polls": polls, "labels": labels()}
 
 
 def render(payload: dict) -> str:

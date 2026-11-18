@@ -108,6 +108,19 @@ table.t .mdl{min-width:190px}
 #ordtab td:first-child{min-width:170px} #listtab td:first-child{min-width:120px}
 td.where{min-width:150px;max-width:230px;font-size:13px} .warnt{color:var(--warn)}
 table.t tr.off td{background:color-mix(in srgb,var(--hit) 55%,transparent)}
+/* final polls */
+table.t tr.ref td{border-top:2px solid var(--ink);color:var(--ink2)}
+#polltab td:first-child{min-width:200px}
+table.mat th,table.mat td{text-align:center;white-space:nowrap}
+table.mat th:first-child,table.mat td:first-child{text-align:start;position:sticky;inset-inline-start:0;z-index:1;background:var(--paper);min-width:150px;white-space:normal}
+table.mat th{min-width:62px}
+table.mat td.num{text-align:center}
+table.mat td .sub{font-size:11px}
+table.mat td .sub.big{color:var(--warn);font-weight:700}
+table.mat td .sub.hit{color:var(--ok);font-weight:700}
+table.mat .offc{background:color-mix(in srgb,var(--hit) 55%,transparent)}
+table.mat td.res,table.mat th.res{font-weight:700;border-inline-end:2px solid var(--ink)}
+table.mat tr.tot td{border-top:2px solid var(--ink);border-bottom:0;font-weight:700}
 .chip{display:inline-block;font:600 10px "IBM Plex Mono","IBM Plex Sans Hebrew",monospace;letter-spacing:.06em;text-transform:uppercase;color:var(--ink2);border:1px solid var(--muted);padding:1px 5px;margin-top:3px;white-space:nowrap}
 html[dir="rtl"] .chip{letter-spacing:0}
 .pick{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:0 0 12px;font-size:14px}
@@ -167,6 +180,11 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
     <div class="tiles" id="tiles"></div>
     <div class="sheet" id="sheet" style="margin-top:22px"><div class="shead" id="shead"></div><div id="srows"></div></div>
     <div class="legend" id="legend"></div></section>
+  <section id="polls-sec" aria-labelledby="h-polls" hidden><p class="eyebrow" id="e-polls"></p><h2 id="h-polls"></h2><p class="lede" id="l-polls"></p>
+    <div class="tw"><table class="t" id="polltab"></table></div>
+    <h3 id="h-pmat" style="font-size:17px;margin:22px 0 4px"></h3><p class="note" id="l-pmat"></p>
+    <div class="tw" style="margin-top:10px"><table class="t mat" id="pmat"></table></div>
+    <div id="pnote"></div></section>
   <section id="scores-sec" aria-labelledby="h-scores"><p class="eyebrow" id="e-scores"></p><h2 id="h-scores"></h2><p class="lede" id="l-scores"></p>
     <div class="tw"><table class="t" id="scoretab"></table></div><div id="honest"></div></section>
   <section id="ord-sec" aria-labelledby="h-ord"><p class="eyebrow" id="e-ord"></p><h2 id="h-ord"></h2><p class="lede" id="l-ord"></p>
@@ -232,6 +250,14 @@ const T = HE ? {
     `<b>הרקורד</b> הוא מבחן ערב הבחירות על שמונה מערכות הבחירות של ${N("2009–2022")}. הוא שומר לכל רשימה רק את הממוצע, החציון, רווח ${N("90%")} וההסתברות לעבור, ולכן ציון הלוג, ה־<span class="ltr">CRPS</span> וה־<span class="ltr">PIT</span> שלו מחושבים על התפלגות שנבנתה מחדש מהנתונים האלה: הסתברות לאפס מנדטים, ומעליה התפלגות נורמלית בדידה שמתאימה לממוצע ולרווח. זה קירוב.`,
     `<b>ההקפאה</b>: ${N(esc(d.file))} נשמר ב־git לפני הבחירות עם ההתפלגויות של כל מודל, הכללים והרקורד. טביעת האצבע היא <span class="ltr">sha256</span> של ה־<span class="ltr">JSON</span> של התוכן, במפתחות ממוינים ובלי רווחים; ${N("python src/scorecard.py --verify")} מחשב אותה מחדש.`
   ],
+  ePolls: "הסקרים האחרונים", hPolls: "המודל מול הסקרים האחרונים",
+  lPolls: d => `הסקר האחרון של כל גוף תקשורת לפני האיסור על פרסום סקרים (עבודת שדה מ־${d} ואילך), לצד התחזית שהוקפאה, מול התוצאה הרשמית. הסקרים מפרסמים טבלאות מנדטים, ולכן המודל מושווה כאן לפי הספירה המרכזית שלו: מספר המנדטים שפרסם לכל רשימה. הסדר לפי מספר המנדטים שהוחטאו.`,
+  thFc: "תחזית", thDate: "עבודת שדה", thMiss: "מנדטים שהוחטאו", missSub: "בכל הרשימות", thNbE: "גוש נתניהו", nbSub: "מנדטים; + יותר מדי", thThr: "אחוז החסימה", thrSub: "רשימות בצד הלא נכון", thShare: "שגיאה באחוזי הקולות", shareSub: "נקודות לרשימה",
+  basis: {filing: "מהדיווח לוועדת הבחירות", seats: "מטבלת המנדטים", "forecast shares": "אחוזי הקולות של התחזית", average: "ממוצע אחוזי הקולות של הסקרים"},
+  mdl: "המודל", mdlChip: "התחזית שהוקפאה", avg: n => `ממוצע ${N(n)} הסקרים`, avgShort: "ממוצע הסקרים", avgChip: "לייחוס",
+  hPmat: "מנדטים לפי רשימה", colRes: "תוצאה", tot: "מנדטים שהוחטאו",
+  lPmat: `התוצאה, המודל וכל סקר אחרון. המספר הקטן: התחזית פחות התוצאה (${N("+")} יותר מדי, ${N("−")} פחות מדי); <span class="flag in">✓</span> פגיעה מדויקת; <b class="warnt">כתום</b>: טעות של ${N("3")} מנדטים או יותר.`,
+  pnote: n => `<b>מנדטים שהוחטאו</b> הם סכום הפערים בין התחזית לתוצאה על פני ${N(n)} הרשימות, ולכן מנדט שניתן לרשימה הלא נכונה נספר פעמיים. <b>השגיאה באחוזי הקולות</b> מחשבת מחדש כל תחזית ואת התוצאה על ${N(n)} הרשימות בלבד (יחד ${N("100%")}), ומחשבת את הממוצע של הפער המוחלט לרשימה. סקר נמדד לפי הדיווח שלו לוועדת הבחירות המרכזית כשיש בו אחוזים ארציים, ואחרת לפי האחוזים שטבלת המנדטים שלו מרמזת. <b>המודל אינו בלתי תלוי בסקרים האלה</b>: הוא בנוי עליהם, עם תיקונים שנלמדו מבחירות קודמות. ובחירות אחת הן הגרלה אחת: תחזית שמדורגת ראשונה כאן אולי פשוט הייתה ברת מזל.`,
   footL: "מודל הכנסת · כרטיס הציונים · נבנה על ידי src/scorecard.py", back: "לתחזית המלאה", night: "ליל הבחירות"
 } : {
   title: "Knesset Forecast Scorecard", brand: "The Knesset Model", tagline: "Scorecard · the frozen forecast against the result",
@@ -276,6 +302,14 @@ const T = HE ? {
     `<b>The record</b> is the eve harness on the eight elections of 2009–2022. It keeps only each list's mean, median, 90% interval and chance of passing, so its log scores, CRPS and PITs are computed on a distribution rebuilt from those: a probability of zero seats and, above it, a discretised normal matching the mean and the interval. This is an approximation.`,
     `<b>The freeze</b>: ${N(esc(d.file))} was committed to git before the vote with every model's distributions, the rules and the record. The fingerprint is the sha256 of the content's JSON with sorted keys and no spaces; ${N("python src/scorecard.py --verify")} recomputes it.`
   ],
+  ePolls: "Final polls", hPolls: "The model against the final polls",
+  lPolls: d => `Each media outlet's last poll before the poll blackout (fieldwork from ${d}), beside the frozen forecast, against the official result. Polls publish seat tables, so the model is compared here on its central count: the seats it published for each list. Ordered by seats missed.`,
+  thFc: "Forecast", thDate: "Fieldwork", thMiss: "Seats missed", missSub: "all lists", thNbE: "Netanyahu bloc", nbSub: "seats; + too many", thThr: "Threshold calls", thrSub: "lists on the wrong side", thShare: "Vote-share error", shareSub: "points per list",
+  basis: {filing: "from its CEC filing", seats: "implied by its seat table", "forecast shares": "the forecast's vote shares", average: "mean of the polls' shares"},
+  mdl: "The model", mdlChip: "Frozen forecast", avg: n => `Average of the ${N(n)} polls`, avgShort: "Poll average", avgChip: "Reference",
+  hPmat: "Seats by list", colRes: "Result", tot: "Seats missed",
+  lPmat: `The result, the model and every final poll. Small figure: the forecast minus the result (+ too many, − too few); <span class="flag in">✓</span> exact; <b class="warnt">orange</b>: off by ${N(3)} seats or more.`,
+  pnote: n => `<b>Seats missed</b> is the sum over the ${N(n)} lists of the gap between the forecast and the result, so a seat given to the wrong list counts twice. <b>Vote-share error</b> rescales every forecast and the result to the ${N(n)} lists (summing to ${N("100%")}) and averages the absolute gap per list. A poll is scored on its filing with the Central Elections Committee (CEC) where that has national percentages, and otherwise on the shares its seat table implies. <b>The model is not independent of these polls</b>: it is built on them, with corrections learned from past elections. And one election is one draw: a forecast that ranks first here may have been lucky.`,
   footL: "The Knesset Model · scorecard · built by src/scorecard.py", back: "Full forecast", night: "Election night"
 };
 const $ = id => document.getElementById(id);
@@ -294,7 +328,7 @@ const SC = S ? Object.fromEntries(S.models.map(m => [m.id, m])) : {};
 function renderStatic(){
   document.title = T.title;
   $("brand").textContent = T.brand; $("tagline").textContent = T.tagline; $("skip").textContent = T.skip;
-  for (const k of ["frozen", "said", "scores", "ord", "method"]) {
+  for (const k of ["frozen", "said", "polls", "scores", "ord", "method"]) {
     const e = $("e-" + k); if (e) e.textContent = T["e" + k[0].toUpperCase() + k.slice(1)];
   }
   const set = (id, h) => { $(id).innerHTML = h; };
@@ -384,6 +418,46 @@ function renderSaid(){
   $("legend").innerHTML = `<span><i class="lg-band"></i>${T.lgBand}</span><span><i class="lg-ctr"></i>${T.lgCtr}</span>` + (S ? `<span><i class="lg-dot"></i>${T.lgDot}</span>` : "");
 }
 
+/* the model against the final polls (DATA.polls: scorecard.poll_comparison) */
+const OUT_HE = {"i24 News": "i24NEWS", "Channel 12": "חדשות 12", "Channel 13": "חדשות 13", "Channel 14": "ערוץ 14", "Channel 16": "ערוץ 16",
+  "Kan 11": "כאן 11", "Israel Hayom": "ישראל היום", "Maariv": "מעריב", "Walla": "וואלה", "Zman Yisrael": "זמן ישראל"};
+const FIRM_HE = {"Direct Polls": "דיירקט פולס", "Filber": "פילבר", "Kantar": "קנטאר", "Midgam": "מדגם", "Midgam Project": "פרויקט המדגם",
+  "Tatika": "טאטיקה", "Lazar": "לזר", "Maagar Mochot": "מאגר מוחות"};
+const dfmt = (iso, month) => iso ? "<bdi>" + new Intl.DateTimeFormat(HE ? "he-IL" : "en-GB", {day: "numeric", month: month, timeZone: "UTC"}).format(new Date(iso + "T00:00:00Z")) + "</bdi>" : "–";
+const sgn = (v, d = 0) => v == null ? "–" : N((v > 0 ? "+" : v < 0 ? "−" : "") + Math.abs(v).toFixed(d));
+
+function renderPolls(){
+  const PC = DATA.polls;
+  $("polls-sec").hidden = !PC;
+  if (!PC) return;
+  $("h-polls").innerHTML = T.hPolls; $("l-polls").innerHTML = T.lPolls(dfmt(PC.since, "long"));
+  $("h-pmat").innerHTML = T.hPmat; $("l-pmat").innerHTML = T.lPmat;
+  const isPoll = r => r.kind === "poll" || r.kind === "panel";
+  const outN = r => r.kind === "model" ? T.mdl : r.kind === "average" ? T.avg(PC.n_polls) : esc(HE ? (OUT_HE[r.outlet] || r.outlet) : r.outlet);
+  const firmN = r => r.kind === "model" ? `<span class="chip">${T.mdlChip}</span>` : r.kind === "average" ? `<span class="chip">${T.avgChip}</span>` : esc(HE ? (FIRM_HE[r.firm] || r.firm) : r.firm);
+  const rows = PC.rows, A = PC.average, M = rows.find(r => r.kind === "model");
+  const best = get => Math.min(...rows.map(get).filter(v => v != null));
+  const cell = (r, get, txt) => `<td class="num${r.kind !== "average" && get(r) != null && get(r) === best(get) ? " best" : ""}">${txt}</td>`;
+  const line = r => { const avg = r.kind === "average";
+    return `<tr class="${r.kind === "model" ? "off" : avg ? "ref" : ""}"><td>${outN(r)}<span class="sub">${firmN(r)}</span></td><td class="num">${dfmt(r.date, "short")}</td>` +
+      cell(r, x => x.err, avg ? f(r.err, 1) : N(r.err)) + cell(r, x => Math.abs(x.nb), sgn(r.nb, avg ? 1 : 0)) +
+      cell(r, x => x.thr, r.thr == null ? "–" : N(r.thr)) +
+      cell(r, x => x.share_mae, f(r.share_mae, 2) + (r.share_basis ? `<span class="sub">${esc(T.basis[r.share_basis] || r.share_basis)}</span>` : "")) + "</tr>"; };
+  $("polltab").innerHTML = `<thead><tr><th>${T.thFc}</th><th class="num">${T.thDate}</th><th class="num">${T.thMiss}<span class="sub">${T.missSub}</span></th><th class="num">${T.thNbE}<span class="sub">${T.nbSub}</span></th><th class="num">${T.thThr}<span class="sub">${T.thrSub}</span></th><th class="num">${T.thShare}<span class="sub">${T.shareSub}</span></th></tr></thead><tbody>` +
+    rows.map(line).join("") + line(A) + "</tbody>";
+  const cols = [M, ...rows.filter(isPoll), A];
+  const colN = c => c.kind === "model" ? T.mdl : c.kind === "average" ? T.avgShort : outN(c);
+  const oc = c => c.kind === "model" ? " offc" : "";
+  const val = (c, k) => { const y = PC.result[k], v = c.seats[k], d = v - y, avg = c.kind === "average";
+    const dd = Math.abs(d) < 0.05 ? `<span class="sub hit">✓</span>` : `<span class="sub${Math.abs(d) >= 3 ? " big" : ""}">${sgn(d, avg ? 1 : 0)}</span>`;
+    return `<td class="num${oc(c)}">${N(avg ? v.toFixed(1) : v)}${dd}</td>`; };
+  $("pmat").innerHTML = `<thead><tr><th>${T.colList}</th><th class="res">${T.colRes}</th>` +
+    cols.map(c => `<th class="${oc(c).trim()}">${colN(c)}${isPoll(c) ? `<span class="sub">${firmN(c)}</span>` : ""}</th>`).join("") + "</tr></thead><tbody>" +
+    PC.lists.map(k => `<tr><td>${lname(k)}</td><td class="num res">${N(PC.result[k])}</td>${cols.map(c => val(c, k)).join("")}</tr>`).join("") +
+    `<tr class="tot"><td>${T.tot}</td><td class="num res"></td>${cols.map(c => `<td class="num${oc(c)}">${c.kind === "average" ? f(c.err, 1) : N(c.err)}</td>`).join("")}</tr></tbody>`;
+  $("pnote").innerHTML = `<p class="note">${T.pnote(PC.lists.length)}</p>`;
+}
+
 const status = m => `<span class="chip">${esc(T.status_[m.status] || m.status)}</span>`;
 const own = m => { const e = m.backtest && m.backtest.eve; return e ? e : null; };
 
@@ -451,7 +525,7 @@ function renderMethod(){
   $("methodbox").innerHTML = "<ul>" + T.method({n: n, file: FZ.file || "data/processed/frozen_forecast_<asof>.json"}).map(x => `<li>${x}</li>`).join("") + "</ul>";
 }
 
-renderStatic(); renderBanner(); renderFrozen(); renderSaid(); renderScores(); renderMethod();
+renderStatic(); renderBanner(); renderFrozen(); renderSaid(); renderPolls(); renderScores(); renderMethod();
 </script>
 </body>
 </html>

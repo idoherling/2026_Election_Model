@@ -48,8 +48,10 @@ def _norm(s) -> pd.Series:
     return 100 * s / s.sum()
 
 
-def table() -> pd.DataFrame:
-    """One row per outlet and the model: basis, date, mae, bloc, Netanyahu-bloc and Likud error."""
+def table(with_average: bool = False) -> pd.DataFrame:
+    """One row per outlet and the model: basis, date, mae, bloc, Netanyahu-bloc and Likud error.
+    with_average adds a row for the mean of the outlets' rescaled shares (the scorecard's
+    reference row), "AVERAGE (final polls)"."""
     reg = json.loads((PROCESSED / "frozen_forecast_2026-10-23.json").read_text(encoding="utf-8"))["payload"]["lists"]
     camps = {g: [k for k in MAIN if reg[k]["bloc"] == g] for g in ("nb", "anti", "arab", "una")}
     by_letter = {(v.get("letters") or v.get("letter")): k for k, v in reg.items()}
@@ -82,17 +84,25 @@ def table() -> pd.DataFrame:
         u = sum(zero.values())
         return {k: (seats[k] / 120 * (100 - u) if seats.get(k, 0) > 0 else zero[k]) for k in MAIN}
 
-    rows = []
+    rows, vecs = [], []
     for (pub, firm), g in p.groupby(["publisher", "pollster"]):
         out = f"{pub} ({firm})"
         last = g[g.fieldwork_end == g.fieldwork_end.max()]
         when = last.fieldwork_end.iloc[0]
         filed = raw.get(out, [])
         if filed and (when - filed[-1][0]).days <= 1:
-            rows.append({"outlet": out, "basis": "filing", "date": filed[-1][0], **score(filed[-1][1])})
+            v = filed[-1][1]
+            rows.append({"outlet": out, "basis": "filing", "date": filed[-1][0], **score(v)})
         elif filed or firm == "Midgam Project":
             own = next((v for d, v in filed if abs((d - when).days) <= 1), None)
-            rows.append({"outlet": out, "basis": "seats", "date": when, **score(implied(last, own))})
+            v = implied(last, own)
+            rows.append({"outlet": out, "basis": "seats", "date": when, **score(v)})
+        else:
+            continue
+        vecs.append(_norm(v))
+    if with_average and vecs:
+        rows.append({"outlet": "AVERAGE (final polls)", "basis": "average",
+                     "date": max(r["date"] for r in rows), **score(pd.concat(vecs, axis=1).mean(axis=1))})
     rows.append({"outlet": "MODEL (frozen forecast)", "basis": "forecast shares", "date": pd.Timestamp("2026-10-23"),
                  **score({k: 100 * reg[k]["share"] for k in MAIN})})
     return pd.DataFrame(rows).sort_values("mae").reset_index(drop=True)
