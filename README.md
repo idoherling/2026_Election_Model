@@ -1,9 +1,44 @@
 # The Knesset Model: 2026 Israeli election forecast
 
+## The website: [idoherling.github.io/2026_Election_Model](https://idoherling.github.io/2026_Election_Model/)
+
+| Page | What it is |
+|---|---|
+| **[The forecast](https://idoherling.github.io/2026_Election_Model/)** | every list's seats, each bloc's odds of 61 and the governments that could form; English and Hebrew |
+| [Ten things the forecast learned](https://idoherling.github.io/2026_Election_Model/insights.html) | the result against the forecast and the pollsters, what happens next, and the model for the next election |
+| [Scorecard](https://idoherling.github.io/2026_Election_Model/scorecard.html) | the frozen forecast and ten alternative models, graded on the official result |
+| [Election night](https://idoherling.github.io/2026_Election_Model/election-night.html) | the count as it came in, now the official result |
+| [Decision log](https://idoherling.github.io/2026_Election_Model/decision-log.html) | every modelling decision and its measurements, s.1 to s.76 |
+| [Change Bloc Victory Guide](https://idoherling.github.io/2026_Election_Model/victory-guide/) | the field-targeting model and strategy site built on the forecast |
+
+The pages are the committed files under `output/`, served from the
+`gh-pages` branch (`python src/publish_pages.py`, then `git push origin
+gh-pages`).
+
+## What this is
+
 A probabilistic forecast of the 27 October 2026 election to the 26th Knesset,
 published as a bilingual (English and Hebrew) website. It gives every list's
 seat distribution, the probability that each bloc reaches 61 seats, and the
 odds of each government that could form.
+
+**Status, November 2026.** The election was held and the result is official:
+Netanyahu's bloc 53 seats, the change bloc 48, the Arab lists 19. The
+forecast was frozen on 23 October (sha256 `e9c77a1b...`) and has not been
+changed since. It is graded on the scorecard: all 13 lists inside their 90%
+ranges and a central count of 53 for Netanyahu's bloc. The post-mortem is
+s.74 of the decision log, the post-election formation forecast s.75, and
+the model for the next election s.76 (2026 as the ninth graded election,
+behind `RECORD_2026=1`, with the configuration that passed the shipping
+rule under `MODEL_CONFIG=next`; both are off by default, so the frozen
+forecast still reproduces).
+
+The repository holds two projects:
+
+| Project | Where | Start at |
+|---|---|---|
+| The Knesset Model | `src/`, `site/`, `data/`, `docs/`, `tests/`, `output/site/` | this README |
+| Change Bloc Victory Guide | `src/targeting_*.py`, `src/build_targeting_site.py`, `site/targeting_*`, `data/processed/targeting/`, `output/targeting/` | `output/targeting/index.html` |
 
 The production path is a Bayesian state-space model of every published 2026
 poll and every CEC poll filing (PyMC). Its posterior is projected to election
@@ -429,6 +464,13 @@ src/
   build_decision_log.py    docs/priors_dossier.md -> decision-log.html
   election_night.py        the live count on election night -> election-night.html
   scorecard.py             freeze the forecast; grade every model on the result -> scorecard.html
+  build_insights.py        the result, the post-mortem and the next model -> insights.html
+  formation_tracker.py     the formation tree on the official seats + a dated evidence ledger
+  postmortem_shares.py     final polls ranked on vote shares (CEC filings)
+  record.py                RECORD_2026 / MODEL_CONFIG: 2026 as the ninth graded cycle, and
+                           the configuration for the next election (s.76)
+  regrade9.py              the nine-cycle regrade under the shipping rule -> record9/regrade.json
+  publish_pages.py         the committed sites -> the gh-pages branch (GitHub Pages)
   site_ledger.py           poll ledger + pollster ratings for the site
   site_checks.py           publish checks (also run by tests/test_site.py)
   validate_*.py            harnesses: bayes (eve), horizon, threshold, seat_law,
@@ -439,16 +481,20 @@ src/
   compare_models.py, hierarchical_model.py, workflow_bayes.py, arab_scenarios.py,
   turnout_layer.py, knesset_forecast.py, make_trend_chart.py   benchmark / research
 site/template.html         the bilingual page (payload placeholder __SITE_DATA__)
-site/election_night.html, site/scorecard.html   the election-night and scorecard pages
+site/election_night.html, site/scorecard.html, site/insights.html
+                           the election-night, scorecard and insights pages
 data/
   party_registry.csv, pollster_meta.csv, cec_filings_index.psv,
   cec_final_counts.csv, manual_polls.csv, sector_polls.csv,
   undecided_leans.csv, ran_vote_shares.csv            curated inputs
   forecast_sources.json, forecast_findings.json      evidence registry (built)
+  record_2026/             the 2026 result rows, read only under RECORD_2026=1
   processed/               tidy outputs (committed), forecast_research/ desks;
+                           record9/ holds the nine-cycle tables and the regrade;
                            m3_idata.nc and harness_cache*/ are not committed
   raw/                     scrape caches, CEC PDFs, kalpi files (not committed)
-output/site/               index.html, decision-log.html, site_data.json
+output/site/               index.html, insights.html, scorecard.html, election-night.html,
+                           decision-log.html and their JSON payloads (the hosted site)
 output/figures/            charts
 docs/                      priors_dossier.md (decision log), bayesian_workflow.md,
                            pollsters.md
@@ -456,10 +502,15 @@ tests/                     the fast suite; fixtures/cec/ holds four filing PDFs
 logs/                      pipeline run logs (not committed)
 ```
 
-A separate field-targeting project shares the working tree. Its files are
+A separate field-targeting project (the Change Bloc Victory Guide) shares
+the working tree and is not part of this pipeline. Its files are
 `src/targeting_*.py`, `src/build_targeting_site.py`, `site/targeting_*`,
-`data/processed/targeting/` and `output/targeting/`. They are not part of
-this pipeline.
+`data/processed/targeting/` and `output/targeting/`.
+
+Not in git, by design: the fitted posteriors (`data/processed/m3_idata.nc`,
+90 MB, and about 3 GB of harness caches), the scrape caches in `data/raw/`,
+the run logs and `output/publish/` (a copy of `output/site/`). Every one is
+rebuilt by the commands above.
 
 ## Data sources and terms
 
